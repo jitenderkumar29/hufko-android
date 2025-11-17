@@ -1,0 +1,66 @@
+package com.example.hufko.components.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.example.hufko.components.homescreen.CategoryScreen
+
+@Composable
+fun AppNavGraph(navController: NavHostController) {
+    NavHost(
+        navController = navController,
+        startDestination = "category_screen"
+    ) {
+        // ✅ Home category screen
+        composable("category_screen") {
+            CategoryScreen(
+                onOpenFashion = {
+                    navController.navigate("fashion_screen")
+                }
+            )
+        }
+
+//        // ✅ Fashion section
+//        composable("fashion_screen") {
+//            FashionScreen(
+//                onBack = { navController.popBackStack() },
+//                navController = navController
+//            )
+//        }
+//
+//        // ✅ Fashion categories tab page
+//        composable("fashion_categories") {
+//            CategoriesFashionPage(
+//                onBackClick = { navController.popBackStack() },
+//                navController = navController
+//            )
+//        }
+//
+//        // ✅ NEW: Category detail route
+//        composable(
+//            route = "categoryDetail/{categoryName}/{id}",
+//            arguments = listOf(
+//                navArgument("categoryName") { type = NavType.StringType },
+//                navArgument("id") { type = NavType.IntType }
+//            )
+//        ) { backStackEntry ->
+//            val categoryName = backStackEntry.arguments?.getString("categoryName")
+//            val categoryId = backStackEntry.arguments?.getInt("id")
+//
+//            CategoryDetailScreen(
+//                categoryName = categoryName,
+//                categoryId = categoryId,
+//                onBackClick = { navController.popBackStack() },
+//                onTabSelected = { category ->
+//                    navController.navigate("category/${category.id}")
+//                },
+//                onBanner1Click = { navController.navigate("banner1") },
+//                onBanner2Click = { navController.navigate("banner2") },
+//                onBanner3Click = { navController.navigate("banner3") }
+//            )
+//        }
+    }
+}

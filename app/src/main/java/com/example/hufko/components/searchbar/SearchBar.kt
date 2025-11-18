@@ -1,4 +1,5 @@
 package com.example.hufko.components.searchbar
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -31,6 +32,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
@@ -38,6 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hufko.R
@@ -52,156 +55,171 @@ fun SearchBar(
     onQRCodeScan: () -> Unit = {},
     placeholder: String = "Search or ask a question",
     enabled: Boolean = true,
-    backgroundColor: Color = MaterialTheme.customColors.onPrimary, // Changed to lightAccent
-    textColor: Color = MaterialTheme.colorScheme.scrim, // Changed to onPrimary for better contrast
-    placeholderColor: Color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.7f), // Adjusted for lightAccent
+    backgroundColor: Color = MaterialTheme.customColors.onPrimary,
+    textColor: Color = MaterialTheme.colorScheme.scrim,
+    placeholderColor: Color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.7f),
     elevation: Int = 2,
-    qrIconColor: Color = MaterialTheme.colorScheme.scrim // Changed to onPrimary for better contrast
+    qrIconColor: Color = MaterialTheme.colorScheme.scrim
 ) {
     var isFocused by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
 
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    // Apply gradient background to the entire SearchBar container
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFFC2E1FE),
+                        Color(0xFFEDF6FF)
+                    )
+                )
+            )
+            .padding(horizontal = 0.dp, vertical = 0.dp) // Add padding inside gradient area
     ) {
-        // Search Box
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .height(45.dp)
-                .shadow(
-                    elevation = elevation.dp,
-                    shape = RoundedCornerShape(8.dp),
-                    clip = true
-                )
-                .clip(RoundedCornerShape(8.dp))
-                .background(backgroundColor)
-                .border(
-                    width = 1.dp,
-                    color = if (isFocused) MaterialTheme.colorScheme.primary
-                    else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-                    shape = RoundedCornerShape(8.dp)
-                )
-                .padding(horizontal = 8.dp),
-            contentAlignment = Alignment.CenterStart
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.fillMaxWidth()
+            // Search Box
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(45.dp)
+                    .shadow(
+                        elevation = elevation.dp,
+                        shape = RoundedCornerShape(8.dp),
+                        clip = true
+                    )
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(backgroundColor)
+                    .border(
+                        width = 1.dp,
+                        color = if (isFocused) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .padding(horizontal = 8.dp),
+                contentAlignment = Alignment.CenterStart
             ) {
-                // Search icon
-//                Icon(
-//                    imageVector = Icons.Default.Search,
-//                    contentDescription = "Search",
-//                    tint = if (isFocused) MaterialTheme.colorScheme.primary
-//                    else placeholderColor,
-//                    modifier = Modifier.size(24.dp)
-//                )
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_search_24),
-                    contentDescription = "Search",
-                    tint = qrIconColor,
-                    modifier = Modifier
-                        .size(25.dp)
-                        .clickable { onQRCodeScan() }
-                )
-                // Search text field
-                BasicTextField(
-                    value = query,
-                    onValueChange = onQueryChange,
-                    modifier = Modifier
-                        .weight(1f)
-                        .focusRequester(focusRequester)
-                        .onFocusChanged { isFocused = it.isFocused },
-                    textStyle = TextStyle(
-                        color = textColor,
-                        fontSize = 16.sp,
-                        lineHeight = 24.sp
-                    ),
-                    cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                    keyboardActions = KeyboardActions(
-                        onSearch = {
-                            onSearch(query)
-                            focusManager.clearFocus()
-                        }
-                    ),
-                    singleLine = true,
-                    decorationBox = { innerTextField ->
-                        Box(
-                            modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            if (query.isEmpty()) {
-                                Text(
-                                    text = placeholder,
-                                    color = placeholderColor,
-                                    fontSize = 16.sp,
-                                    lineHeight = 24.sp,
-                                    fontWeight = FontWeight.Medium
-                                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    // Search icon
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_search_24),
+                        contentDescription = "Search",
+                        tint = qrIconColor,
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable { onQRCodeScan() }
+                    )
+
+                    // Search text field
+
+                    BasicTextField(
+                        value = query,
+                        onValueChange = onQueryChange,
+                        modifier = Modifier
+                            .weight(1f)
+                            .focusRequester(focusRequester)
+                            .onFocusChanged { isFocused = it.isFocused },
+                        textStyle = TextStyle(
+                            color = textColor, // This is correct
+                            fontSize = 16.sp, // This is correct
+                            lineHeight = 24.sp, // This is correct
+                        ),
+                        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                        keyboardActions = KeyboardActions(
+                            onSearch = {
+                                onSearch(query)
+                                focusManager.clearFocus()
                             }
-                            innerTextField()
+                        ),
+                        singleLine = true,
+                        decorationBox = { innerTextField ->
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                if (query.isEmpty()) {
+                                    Text(
+                                        text = placeholder,
+                                        color = placeholderColor,
+                                        fontSize = 16.sp,
+                                        lineHeight = 24.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+                                innerTextField()
+                            }
                         }
-                    }
-                )
+                    )
 
-                // camera Icon (inside the search box)
-                Icon(
-                    painter = painterResource(id = R.drawable.outline_photo_camera_24),
-                    contentDescription = "Camera",
-                    tint = qrIconColor,
-                    modifier = Modifier
-                        .size(25.dp)
-                        .clickable { onQRCodeScan() }
-                )
+                    // Camera Icon (inside the search box)
+                    Icon(
+                        painter = painterResource(id = R.drawable.outline_photo_camera_24),
+                        contentDescription = "Camera",
+                        tint = qrIconColor,
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable { onQRCodeScan() }
+                    )
 
-        //      Mic Icon (inside the search box)
-                Icon(
-                    painter = painterResource(id = R.drawable.outline_mic_24),
-                    contentDescription = "Camera",
-                    tint = qrIconColor,
-                    modifier = Modifier
-                        .size(25.dp)
-                        .clickable { onQRCodeScan() }
-                )
+                    // Mic Icon (inside the search box)
+                    Icon(
+                        painter = painterResource(id = R.drawable.outline_mic_24),
+                        contentDescription = "Microphone",
+                        tint = qrIconColor,
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable { onQRCodeScan() }
+                    )
 
-                // Clear button (only shown when there's text)
-                if (query.isNotEmpty()) {
-                    IconButton(
-                        onClick = {
-                            onQueryChange("")
-                            focusRequester.requestFocus()
-                        },
-                        modifier = Modifier.size(25.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Clear search",
-                            tint = placeholderColor
-                        )
+                    // Clear button (only shown when there's text)
+                    if (query.isNotEmpty()) {
+                        IconButton(
+                            onClick = {
+                                onQueryChange("")
+                                focusRequester.requestFocus()
+                            },
+                            modifier = Modifier.size(25.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = "Clear search",
+                                tint = placeholderColor
+                            )
+                        }
                     }
                 }
             }
-        }
 
-        // QR Code Scanner Icon (outside the search box)
-//        Icon(
-//            painter = painterResource(id = R.drawable.outline_qr_code_scanner_24),
-//            contentDescription = "Scan QR Code",
-//            tint = qrIconColor,
-//            modifier = Modifier
-//                .size(35.dp)
-//                .clickable { onQRCodeScan() }
-//        )
+            // QR Code Scanner Icon (outside the search box) - Removed as per your code
+            // If you want to add it back, uncomment below:
+            /*
+            Icon(
+                painter = painterResource(id = R.drawable.outline_qr_code_scanner_24),
+                contentDescription = "Scan QR Code",
+                tint = qrIconColor,
+                modifier = Modifier
+                    .size(35.dp)
+                    .clickable { onQRCodeScan() }
+            )
+            */
+        }
     }
 }
 
-// Preview
+// Preview with gradient background
 @androidx.compose.ui.tooling.preview.Preview(showBackground = true)
 @Composable
 fun SearchBarPreview() {
@@ -209,8 +227,14 @@ fun SearchBarPreview() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
-                .background(MaterialTheme.colorScheme.background)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color(0xFF9BCDFE),
+                            Color(0xFFC2E1FE)
+                        )
+                    )
+                )
         ) {
             var query by remember { mutableStateOf("") }
             SearchBar(

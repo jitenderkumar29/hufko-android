@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -28,6 +29,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -55,25 +57,35 @@ fun CategoryHeader(
     val categories = remember {
         listOf(
             CategoryHeaderClass(
-                1, "Food", R.drawable.food, Color(0xFFD9C898), selectedColor = Color(
+                1, "Food", R.drawable.food, Color(0xFFFFFFFF), selectedColor = Color(
                     0xFFD4AF44
                 )
             ),
             CategoryHeaderClass(
-                2, "Grocery", R.drawable.grocery, Color(0xFFCCF8CF), selectedColor = Color(
+                2, "Dine Out", R.drawable.dine_out, Color(0xFFFFFFFF), selectedColor = Color(
+                    0xFFFF4B33
+                )
+            ),
+        CategoryHeaderClass(
+                3, "Pay", R.drawable.pay_food, Color(0xFFFFFFFF), selectedColor = Color(
+                    0xFF3A81F1
+                )
+            ),
+            CategoryHeaderClass(
+                4, "Grocery", R.drawable.grocery, Color(0xFFFFFFFF), selectedColor = Color(
                     0xFF2DC137
                 )
             ),
             CategoryHeaderClass(
-                3, "Shopping", R.drawable.shopping, Color(0xFFD9A7A7), selectedColor = Color(
+                5, "Shopping", R.drawable.shopping, Color(0xFFFFFFFF), selectedColor = Color(
                     0xFFCA5353
                 )
             ),
             CategoryHeaderClass(
-                4,
+                6,
                 "Flower",
                 R.drawable.flower,
-                Color(0xFFB7EEBB),
+                Color(0xFFFFFFFF),
                 selectedColor = Color(
                     0xFF31BC3B
                 )
@@ -83,84 +95,16 @@ fun CategoryHeader(
 //            )
 //            ),
             CategoryHeaderClass(
-                5, "Care", R.drawable.care, Color(0xFFA6DF95), selectedColor = Color(
+                7, "Care", R.drawable.care, Color(0xFFFFFFFF), selectedColor = Color(
                     0xFF64CD44
                 )
             ),
             CategoryHeaderClass(
-                6, "Pharma", R.drawable.pharma, Color(0xFFF0B7C0), selectedColor = Color(
+                8, "Pharma", R.drawable.pharma, Color(0xFFFFFFFF), selectedColor = Color(
                     0xFFC6374D
                 )
             ),
-//            CategoryHeaderClass(
-//                7,
-//                "Jewellery",
-//                R.drawable.jewellery_category,
-//                Color(0xFFCEC7A5),
-//                selectedColor = Color(
-//                    0xFFC3B364
-//                )
-//            ),
-////            CategoryHeaderClass(7, "Jewellery", R.drawable.jewellery_category, Color(0xFFCBBB6F), selectedColor = Color(
-////                0xFFBAA438
-////            )
-////            ),
-//            CategoryHeaderClass(
-//                8, "Economy", R.drawable.deal_economy, Color(0xFFF1EFDA), selectedColor = Color(
-//                    0xFFDDD373
-//                )
-//            ),
-////            CategoryHeaderClass(7, "Groom", R.drawable.groom_category, Color(0xFFCBBB6F), selectedColor = Color(
-////                0xFFBAA438
-////            )
-////            ),
-//            CategoryHeaderClass(
-//                9, "Airport", R.drawable.airport_category, Color(0xFFAEE9F1), selectedColor = Color(
-//                    0xFF30A8B8
-//                )
-//            ),
-////            CategoryHeaderClass(9, "Electric", R.drawable.electric_category, Color(0xFFB7EEBB), selectedColor = Color(
-////                0xFF31BC3B
-////            )
-////            ),
-//            CategoryHeaderClass(
-//                10,
-//                "Industry",
-//                R.drawable.industry_category,
-//                Color(0xFFB0D0E6),
-//                selectedColor = Color(
-//                    0xFF3182BA
-//                )
-//            ),
-//            CategoryHeaderClass(
-//                11,
-//                "Wholesale",
-//                R.drawable.wholesale_category,
-//                Color(0xFFDFC396),
-//                selectedColor = Color(
-//                    0xFFAE7B2B
-//                )
-//            ),
-//            CategoryHeaderClass(
-//                12, "Sell", R.drawable.sell_category, Color(0xFFCEF0A7), selectedColor = Color(
-//                    0xFF72B526
-//                )
-//            ),
-//            CategoryHeaderClass(
-//                13, "Medical", R.drawable.medical, Color(0xFFDF8592), selectedColor = Color(
-//                    0xFFB6253A
-//                )
-//            ),
-//            CategoryHeaderClass(
-//                14, "Fresh", R.drawable.fresh, Color(0xFF95E69A), selectedColor = Color(
-//                    0xFF24B12D
-//                )
-//            ),
-//            CategoryHeaderClass(
-//                15, "Pay", R.drawable.pay, Color(0xFFCFC76D), selectedColor = Color(
-//                    0xFFE7D532
-//                )
-//            ),
+
         )
     }
 
@@ -170,22 +114,22 @@ fun CategoryHeader(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-//            .background(
-//                brush = Brush.verticalGradient(
-//                    colors = listOf(
-//                        MaterialTheme.customColors.lightAccent,
-//                        Color(0xFF8B2B2D)
-//                    )
-//                )
-//            )
-            .background(MaterialTheme.customColors.lightAccent)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        MaterialTheme.customColors.lightAccent,
+                        Color(0xFF9BCDFE)
+                    )
+                )
+            )
+//            .background(MaterialTheme.customColors.lightAccent)
 
     ) {
         // Fixed height for the LazyRow container to avoid infinite constraints
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(90.dp)
+                .height(85.dp)
                 .padding(horizontal = 12.dp, vertical = 8.dp)
         ) {
             LazyRow(
@@ -217,7 +161,7 @@ fun CategoryItemHeader(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .width(75.dp)
+            .width(90.dp)
             .clickable(onClick = onClick)
             .clip(RoundedCornerShape(12.dp))
             .background(if (isSelected) category.selectedColor else category.backgroundColor)
@@ -230,9 +174,9 @@ fun CategoryItemHeader(
     ) {
         Box(
             modifier = Modifier
-                .height(45.dp)
+                .height(40.dp)
                 .fillMaxWidth()
-                .padding(top = 5.dp)
+                .padding(top = 2.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .background(if (isSelected) category.selectedColor else category.backgroundColor),
             contentAlignment = Alignment.Center
@@ -250,12 +194,13 @@ fun CategoryItemHeader(
             fontSize = 12.sp,
             textAlign = TextAlign.Center,
             color = Color.Black,
-            fontWeight = FontWeight.Medium,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Italic,
             maxLines = 1,
             overflow = TextOverflow.Visible,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 2.dp)
+                .padding(bottom = 0.dp, top = 0.dp)
         )
     }
 }
@@ -312,6 +257,8 @@ fun CategoryScreen(onOpenFashion: () -> Unit) {
         ) {
             when (selectedCategory.value) {
                 "Food" -> FoodScreen()
+                "Dine Out" -> DineOutScreen()
+                "Pay" -> PayScreen()
                 "Grocery" -> GroceryScreen()
                 "Shopping" -> ShoppingScreen()
                 "Flower" -> FlowerScreen()
@@ -415,6 +362,42 @@ fun CategoryScreen(onOpenFashion: () -> Unit) {
 @Composable
 fun FoodScreen() {
     TabNavigationApp()
+}
+@Composable
+fun DineOutScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Dine Out",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.primary
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text("Dine Out!")
+        // Add beauty-specific content
+    }
+}
+@Composable
+fun PayScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Pay",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.primary
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text("Pay!")
+        // Add beauty-specific content
+    }
 }
 
 @Composable

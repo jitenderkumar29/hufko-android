@@ -23,6 +23,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -52,8 +53,14 @@ fun VegNonVegButton(
         modifier = modifier
             .width(80.dp)
             .height(45.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .border(1.dp, Color(0xFFE0E0E0), RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(8.dp))
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+//                else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                shape = RoundedCornerShape(8.dp)
+            )
+//            .border(1.dp, Color(0xFFE0E0E0), RoundedCornerShape(16.dp))
             .background(
                 color = if (isActive) Color(0xFFE8F5E8) else Color.White
             )
@@ -66,17 +73,17 @@ fun VegNonVegButton(
             text = "VEG",
             fontSize = 10.sp,
             fontWeight = FontWeight.SemiBold,
-            color = if (isActive) Color(0xFF2E7D32) else Color(0xFF555555)
+            color = if (isActive) Color(0xFF2E7D32) else Color(0xFF000000)
         )
 
-//        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(0.dp))
 
         // Toggle Switch (Custom) - Shows current state
         Box(
             modifier = Modifier
                 .width(45.dp)
                 .height(22.dp)
-                .clip(RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(8.dp))
                 .background(
                     if (isActive) Color(0xFFD7F3DB) else Color(0xFFE5E5E5)
                 )

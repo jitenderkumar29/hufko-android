@@ -202,7 +202,7 @@ fun LocationAddress(
                         modifier = Modifier.weight(1f)
                     ) {
                         Text(
-                            text = "Delivering to",
+                            text = "Home",
                             style = MaterialTheme.typography.bodySmall,
                             color = Color.Gray
                         )

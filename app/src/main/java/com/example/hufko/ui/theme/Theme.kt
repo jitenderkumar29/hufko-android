@@ -69,6 +69,7 @@ data class CustomColors(
     val scrim: Color,
 
     // Custom accent colors
+    val header: Color,
     val lightAccent: Color,
     val darkAccent: Color,
     val footer: Color,
@@ -146,6 +147,7 @@ val LightCustomColors = CustomColors(
     scrim = Color(0xFF000000),
 
     // Custom accent colors
+    header = Color(0xFF760241),
     lightAccent = Color(0xFF56ACFF),
     darkAccent = Color(0xFF56ACFF),
 //    darkAccent = Color(0xFFF62626),
@@ -230,6 +232,7 @@ val DarkCustomColors = CustomColors(
     scrim = Color(0xFF000000),
 
     // Custom accent colors
+    header = Color(0xFF760241),
     lightAccent = Color(0xFF7B0003),
     darkAccent = Color(0xFFF62626),
     footer = Color(0xFF760241),

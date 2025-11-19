@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hufko.R
+import com.example.hufko.ui.theme.customColors
 import kotlinx.coroutines.delay
 
 @Composable
@@ -59,14 +60,15 @@ fun SplashScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(
-                        MaterialTheme.colorScheme.primary,
-                        MaterialTheme.colorScheme.primaryContainer
-                    )
-                )
-            ),
+            .background(MaterialTheme.customColors.header),
+//            .background(
+//                Brush.verticalGradient(
+//                    colors = listOf(
+//                        MaterialTheme.colorScheme.primary,
+//                        MaterialTheme.colorScheme.primaryContainer
+//                    )
+//                )
+//            ),
         contentAlignment = Alignment.Center
     ) {
         Column(

@@ -66,11 +66,11 @@ fun CategoryHeader(
                     0xFFFF4B33
                 )
             ),
-        CategoryHeaderClass(
-                3, "Pay", R.drawable.pay_food, Color(0xFFFFFFFF), selectedColor = Color(
-                    0xFF3A81F1
-                )
-            ),
+//        CategoryHeaderClass(
+//                3, "Pay", R.drawable.pay_food, Color(0xFFFFFFFF), selectedColor = Color(
+//                    0xFF3A81F1
+//                )
+//            ),
             CategoryHeaderClass(
                 4, "Grocery", R.drawable.grocery, Color(0xFFFFFFFF), selectedColor = Color(
                     0xFF2DC137
@@ -114,15 +114,15 @@ fun CategoryHeader(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        MaterialTheme.customColors.lightAccent,
-                        Color(0xFF9BCDFE)
-                    )
-                )
-            )
-//            .background(MaterialTheme.customColors.lightAccent)
+//            .background(
+//                brush = Brush.verticalGradient(
+//                    colors = listOf(
+//                        MaterialTheme.customColors.lightAccent,
+//                        Color(0xFF9BCDFE)
+//                    )
+//                )
+//            )
+            .background(MaterialTheme.customColors.header)
 
     ) {
         // Fixed height for the LazyRow container to avoid infinite constraints
@@ -191,7 +191,7 @@ fun CategoryItemHeader(
 
         Text(
             text = category.name,
-            fontSize = 12.sp,
+            fontSize = 15.sp,
             textAlign = TextAlign.Center,
             color = Color.Black,
             fontWeight = FontWeight.Bold,

@@ -69,14 +69,15 @@ fun SearchBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFC2E1FE),
-                        Color(0xFFEDF6FF)
-                    )
-                )
-            )
+            .background(MaterialTheme.customColors.header)
+//            .background(
+//                brush = Brush.verticalGradient(
+//                    colors = listOf(
+//                        Color(0xFFC2E1FE),
+//                        Color(0xFFEDF6FF)
+//                    )
+//                )
+//            )
             .padding(horizontal = 0.dp, vertical = 0.dp) // Add padding inside gradient area
     ) {
         Row(

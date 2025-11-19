@@ -46,10 +46,10 @@ fun TabNavigationApp() {
     val tabItems = listOf(
         TabItem.Home,
         TabItem.Explore,
-        TabItem.Favorites,
         TabItem.Profile,
+        TabItem.Favorites,
         TabItem.Settings,
-        TabItem.Notifications
+//        TabItem.Notifications
     )
 
     Scaffold(
@@ -108,12 +108,12 @@ fun TabNavigationApp() {
                                         painter = painterResource(id = item.imageResource),
                                         contentDescription = item.title,
                                         modifier = Modifier.size(28.dp),
-                                        colorFilter = ColorFilter.tint(
-                                            if (selectedTabIndex == index)
-                                                MaterialTheme.customColors.white
-                                            else
-                                                MaterialTheme.customColors.gray
-                                        )
+//                                        colorFilter = ColorFilter.tint(
+//                                            if (selectedTabIndex == index)
+//                                                MaterialTheme.customColors.white
+//                                            else
+//                                                MaterialTheme.customColors.gray
+//                                        )
                                     )
                                 } else {
                                     Icon(

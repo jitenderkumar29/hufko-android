@@ -155,6 +155,7 @@ data class Location(
 //        }
 //    }
 //}
+
 @Composable
 fun LocationSelectionButton(
     selectedLocation: Location,
@@ -164,14 +165,15 @@ fun LocationSelectionButton(
     Card(
         onClick = onLocationClick,
         modifier = modifier
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFF9BCDFE),
-                        Color(0xFFC2E1FE)
-                    )
-                )
-            ),
+            .background(MaterialTheme.customColors.header),
+//            .background(
+//                brush = Brush.verticalGradient(
+//                    colors = listOf(
+//                        Color(0xFF9BCDFE),
+//                        Color(0xFFC2E1FE)
+//                    )
+//                )
+//            ),
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
         ),
@@ -180,48 +182,53 @@ fun LocationSelectionButton(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-//                .background(
-//                    brush = Brush.verticalGradient(
-//                        colors = listOf(
-//                            MaterialTheme.customColors.lightAccent,
-//                            Color(0xFF9BCDFE)
-//                        )
-//                    )
-//                )
-                .padding(horizontal = 12.dp, vertical = 12.dp),
+                .padding(horizontal = 12.dp, vertical = 0.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // ... rest of the Row content remains the same
             Icon(
                 painter = painterResource(id = R.drawable.outline_home_24),
                 contentDescription = "Location",
                 tint = MaterialTheme.customColors.white
             )
-            Spacer(modifier = Modifier.width(4.dp))
-            Row(
-                modifier = Modifier.weight(1f),
-                verticalAlignment = Alignment.CenterVertically
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Column(
+                modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "HOME",
+                    text = "Delivery in 10 minutes",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp,
+                    fontSize = 18.sp,
                     color = MaterialTheme.customColors.white,
                     maxLines = 1
                 )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    text = if (!selectedLocation.isEmpty()) selectedLocation.getDisplayAddress() else "Select location",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 14.sp,
-                    color = if (!selectedLocation.isEmpty()) MaterialTheme.customColors.white else MaterialTheme.customColors.white.copy(alpha = 0.8f),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f)
-                )
+                Spacer(modifier = Modifier.height(0.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "HOME",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        color = MaterialTheme.customColors.white,
+                        maxLines = 1
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = if (!selectedLocation.isEmpty()) selectedLocation.getDisplayAddress() else "Select location",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 14.sp,
+                        color = if (!selectedLocation.isEmpty()) MaterialTheme.customColors.white else MaterialTheme.customColors.white.copy(alpha = 0.8f),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
+
             Spacer(modifier = Modifier.width(8.dp))
             Icon(
                 imageVector = Icons.Default.KeyboardArrowDown,

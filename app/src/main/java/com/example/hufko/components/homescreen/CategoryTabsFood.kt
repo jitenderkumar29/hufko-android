@@ -3,9 +3,13 @@ package com.example.hufko.components.homescreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
@@ -35,18 +39,27 @@ import androidx.compose.ui.text.style.TextAlign
 
 // Sealed class for different category pages
 sealed class CategoryPage(val title: String, val iconRes: Int) {
-    object MasalaBhelpuri : CategoryPage("Masala Bhelpuri", R.drawable.masala_bhelpuri)
-    object DoubleEggSandwich : CategoryPage("Double Egg Sandwich", R.drawable.double_egg_sandwich)
-    object TiramisuOrder : CategoryPage("Tiramisu Order", R.drawable.tiramisu_order)
-    object ChickenPuff : CategoryPage("Chicken Puff", R.drawable.chicken_puff)
-    object VegPuffOrder : CategoryPage("Veg Puff Order", R.drawable.veg_puff_order)
-    object ChocoWalnut : CategoryPage("Choco Walnut", R.drawable.choco_walnut)
-    object MasalaMaggi : CategoryPage("Masala Maggi", R.drawable.masala_maggi)
-    object BullsEyeEgg : CategoryPage("Bull's-eye Egg", R.drawable.bulls_eye_egg)
-    object PlainCurdMatka : CategoryPage("Plain Curd Matka", R.drawable.plain_curd_matka)
-    object MintMojitoFizzyCooler : CategoryPage("Mint Mojito", R.drawable.mint_mojito)
-    object PepperMaggi : CategoryPage("Pepper Maggi", R.drawable.pepper_maggi)
-    object ColdCoffee : CategoryPage("Cold Coffee", R.drawable.cold_coffee)
+    // From the images provided
+    object Pizzas : CategoryPage("Pizzas", R.drawable.pizzas_food)
+    object Cakes : CategoryPage("Cakes", R.drawable.cakes_food)
+    object Momos : CategoryPage("Momos", R.drawable.momos_food)
+    object Rolls : CategoryPage("Rolls", R.drawable.rolls_food)
+    object Burgers : CategoryPage("Burgers", R.drawable.burgers_food)
+    object CholeBhature : CategoryPage("Chole Bhature", R.drawable.chole_bhature_food)
+    object Salad : CategoryPage("Salad", R.drawable.salad_food)
+    object Party : CategoryPage("Patty", R.drawable.patty_food) // Changed from "Patty" to "Party"
+    object Chinese : CategoryPage("Chinese", R.drawable.chinese_food)
+    object IceCream : CategoryPage("Ice Cream", R.drawable.ice_cream_food)
+    object Appam : CategoryPage("Appam", R.drawable.appam_food)
+    object Bath : CategoryPage("Bath", R.drawable.bath_food)
+    object Bonda : CategoryPage("Bonda", R.drawable.bonda_food)
+    object Cutlet : CategoryPage("Cutlet", R.drawable.cutlet_food)
+    object Dessert : CategoryPage("Dessert", R.drawable.dessert_food)
+    object Dhokla : CategoryPage("Dhokla", R.drawable.dhokla_food)
+    object Dosa : CategoryPage("Dosa", R.drawable.dosa_food)
+    object Dholda : CategoryPage("Dholda", R.drawable.dholda_food)
+    object GulabJamun : CategoryPage("Gulab Jamun", R.drawable.gulab_jamun_food)
+    object Idli : CategoryPage("Idli", R.drawable.idli_food)
 }
 
 data class FoodItem(
@@ -57,6 +70,7 @@ data class FoodItem(
     val isVeg: Boolean = true,
     val category: String = "All"
 )
+
 @Composable
 fun CategoryTabsFood(
     onCategorySelected: (CategoryPage) -> Unit = {}
@@ -64,42 +78,52 @@ fun CategoryTabsFood(
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
     val categoryPages = listOf(
-        CategoryPage.MasalaBhelpuri,
-        CategoryPage.DoubleEggSandwich,
-        CategoryPage.TiramisuOrder,
-        CategoryPage.ChickenPuff,
-        CategoryPage.VegPuffOrder,
-        CategoryPage.ChocoWalnut,
-        CategoryPage.MasalaMaggi,
-        CategoryPage.BullsEyeEgg,
-        CategoryPage.PlainCurdMatka,
-        CategoryPage.MintMojitoFizzyCooler,
-        CategoryPage.PepperMaggi,
-        CategoryPage.ColdCoffee
+        CategoryPage.Pizzas,
+        CategoryPage.Cakes,
+        CategoryPage.Momos,
+        CategoryPage.Rolls,
+        CategoryPage.Burgers,
+        CategoryPage.CholeBhature,
+        CategoryPage.Salad,
+        CategoryPage.Party,
+        CategoryPage.Chinese,
+        CategoryPage.IceCream,
+        CategoryPage.Appam,
+        CategoryPage.Bath,
+        CategoryPage.Bonda,
+        CategoryPage.Cutlet,
+        CategoryPage.Dessert,
+        CategoryPage.Dhokla,
+        CategoryPage.Dosa,
+        CategoryPage.Dholda,
+        CategoryPage.GulabJamun,
+        CategoryPage.Idli
     )
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFEDF6FF),
-                        Color(0xFFFDFEFF)
-                    )
-                )
-            )
+            .background(MaterialTheme.customColors.header)
+//            .background(
+//                brush = Brush.verticalGradient(
+//                    colors = listOf(
+//                        Color(0xFFEDF6FF),
+//                        Color(0xFFFDFEFF)
+//                    )
+//                )
+//            )
     ) {
         ScrollableTabRow(
             selectedTabIndex = selectedTabIndex,
-            containerColor = Color.Transparent, // Make transparent to show gradient
+            containerColor = Color.Transparent,
             contentColor = MaterialTheme.customColors.black,
             edgePadding = 0.dp,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
                     modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
                     height = 5.dp,
-                    color = MaterialTheme.customColors.onPrimaryContainer
+                    color = MaterialTheme.customColors.white
+//                    color = MaterialTheme.customColors.onPrimaryContainer
                 )
             }
         ) {
@@ -112,7 +136,7 @@ fun CategoryTabsFood(
                     },
                     modifier = Modifier
                         .padding(horizontal = 4.dp)
-                        .background(Color.Transparent) // Make tab transparent
+                        .background(Color.Transparent)
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -121,18 +145,21 @@ fun CategoryTabsFood(
                         Image(
                             painter = painterResource(id = categoryPage.iconRes),
                             contentDescription = categoryPage.title,
-                            modifier = Modifier.size(24.dp),
-                            contentScale = ContentScale.Crop
+                            modifier = Modifier
+                                .width(75.dp)
+                                .height(55.dp),
+                            contentScale = ContentScale.FillBounds
                         )
 
                         Text(
                             text = categoryPage.title,
-                            fontSize = 12.sp,
+                            fontSize = 15.sp,
                             fontWeight = if (selectedTabIndex == index) FontWeight.Bold else FontWeight.Medium,
                             color = if (selectedTabIndex == index) {
-                                MaterialTheme.customColors.onPrimaryContainer
+                                MaterialTheme.customColors.white
+//                                MaterialTheme.customColors.onPrimaryContainer
                             } else {
-                                MaterialTheme.customColors.black
+                                MaterialTheme.customColors.white
                             },
                             maxLines = 2,
                             textAlign = TextAlign.Center,
@@ -144,7 +171,7 @@ fun CategoryTabsFood(
             }
         }
 
-        // Show content for each tab - also with gradient background
+        // Show content for each tab
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -158,288 +185,381 @@ fun CategoryTabsFood(
                 )
         ) {
             when (selectedTabIndex) {
-                0 -> MasalaBhelpuriCategoryPage()
-                1 -> DoubleEggSandwichCategoryPage()
-                2 -> TiramisuOrderCategoryPage()
-                3 -> ChickenPuffCategoryPage()
-                4 -> VegPuffOrderCategoryPage()
-                5 -> ChocoWalnutCategoryPage()
-                6 -> MasalaMaggiCategoryPage()
-                7 -> BullsEyeEggCategoryPage()
-                8 -> PlainCurdMatkaCategoryPage()
-                9 -> MintMojitoFizzyCoolerCategoryPage()
-                10 -> PepperMaggiCategoryPage()
-                11 -> ColdCoffeeCategoryPage()
-                else -> MasalaBhelpuriCategoryPage()
+                0 -> PizzasCategoryPage()
+                1 -> CakesCategoryPage()
+                2 -> MomosCategoryPage()
+                3 -> RollsCategoryPage()
+                4 -> BurgersCategoryPage()
+                5 -> CholeBhatureCategoryPage()
+                6 -> SaladCategoryPage()
+                7 -> PartyCategoryPage()
+                8 -> ChineseCategoryPage()
+                9 -> IceCreamCategoryPage()
+                10 -> AppamCategoryPage()
+                11 -> BathCategoryPage()
+                12 -> BondaCategoryPage()
+                13 -> CutletCategoryPage()
+                14 -> DessertCategoryPage()
+                15 -> DhoklaCategoryPage()
+                16 -> DosaCategoryPage()
+                17 -> DholdaCategoryPage()
+                18 -> GulabJamunCategoryPage()
+                19 -> IdliCategoryPage()
+                else -> PizzasCategoryPage()
             }
         }
     }
 }
 
-
-// Safe version with fallback handling
+// Category Page Composables for all categories
 @Composable
-fun CategoryTabsFoodSafe(
-    onCategorySelected: (CategoryPage) -> Unit = {}
-) {
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
-
-    val categoryPages = listOf(
-        CategoryPage.MasalaBhelpuri,
-        CategoryPage.DoubleEggSandwich,
-        CategoryPage.TiramisuOrder,
-        CategoryPage.ChickenPuff,
-        CategoryPage.VegPuffOrder,
-        CategoryPage.ChocoWalnut,
-        CategoryPage.MasalaMaggi,
-        CategoryPage.BullsEyeEgg,
-        CategoryPage.PlainCurdMatka,
-        CategoryPage.MintMojitoFizzyCooler,
-        CategoryPage.PepperMaggi,
-        CategoryPage.ColdCoffee
-    )
-
-    Column(modifier = Modifier.fillMaxWidth()) {
-        ScrollableTabRow(
-            selectedTabIndex = selectedTabIndex,
-            containerColor = MaterialTheme.customColors.skyBlue,
-            contentColor = MaterialTheme.customColors.black,
-            edgePadding = 0.dp,
-            indicator = { tabPositions ->
-                TabRowDefaults.Indicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                    height = 5.dp,
-                    color = MaterialTheme.customColors.onPrimaryContainer
-                )
-            }
-        ) {
-            categoryPages.forEachIndexed { index, categoryPage ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = {
-                        selectedTabIndex = index
-                        onCategorySelected(categoryPage)
-                    },
-                    modifier = Modifier.padding(horizontal = 4.dp)
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(vertical = 4.dp)
-                    ) {
-                        // Safe image loading - if the resource doesn't exist, it will show empty space
-                        // but won't crash
-                        Image(
-                            painter = painterResource(id = categoryPage.iconRes),
-                            contentDescription = categoryPage.title,
-                            modifier = Modifier.size(50.dp),
-                            contentScale = ContentScale.Crop
-                        )
-
-                        Text(
-                            text = categoryPage.title,
-                            fontSize = 12.sp,
-                            fontWeight = if (selectedTabIndex == index) FontWeight.Bold else FontWeight.Medium,
-                            color = if (selectedTabIndex == index) {
-                                MaterialTheme.customColors.onPrimaryContainer
-                            } else {
-                                MaterialTheme.customColors.black
-                            },
-                            maxLines = 2,
-                            textAlign = TextAlign.Center,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.padding(top = 4.dp)
-                        )
-                    }
-                }
-            }
-        }
-
-        // Show content for each tab
-        when (selectedTabIndex) {
-            0 -> MasalaBhelpuriCategoryPage()
-            1 -> DoubleEggSandwichCategoryPage()
-            2 -> TiramisuOrderCategoryPage()
-            3 -> ChickenPuffCategoryPage()
-            4 -> VegPuffOrderCategoryPage()
-            5 -> ChocoWalnutCategoryPage()
-            6 -> MasalaMaggiCategoryPage()
-            7 -> BullsEyeEggCategoryPage()
-            8 -> PlainCurdMatkaCategoryPage()
-            9 -> MintMojitoFizzyCoolerCategoryPage()
-            10 -> PepperMaggiCategoryPage()
-            11 -> ColdCoffeeCategoryPage()
-        }
+fun PizzasCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Pizzas Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+        // Add your pizza items here
     }
 }
 
-// Simple version with text-only fallback
 @Composable
-fun CategoryTabsFoodSimple(
-    onCategorySelected: (CategoryPage) -> Unit = {}
-) {
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
-
-    val categoryPages = listOf(
-        CategoryPage.MasalaBhelpuri,
-        CategoryPage.DoubleEggSandwich,
-        CategoryPage.TiramisuOrder,
-        CategoryPage.ChickenPuff,
-        CategoryPage.VegPuffOrder,
-        CategoryPage.ChocoWalnut,
-        CategoryPage.MasalaMaggi,
-        CategoryPage.BullsEyeEgg,
-        CategoryPage.PlainCurdMatka,
-        CategoryPage.MintMojitoFizzyCooler,
-        CategoryPage.PepperMaggi,
-        CategoryPage.ColdCoffee
-    )
-
-    Column(modifier = Modifier.fillMaxWidth()) {
-        ScrollableTabRow(
-            selectedTabIndex = selectedTabIndex,
-            containerColor = MaterialTheme.customColors.skyBlue,
-            contentColor = MaterialTheme.customColors.black,
-            edgePadding = 0.dp,
-            indicator = { tabPositions ->
-                TabRowDefaults.Indicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                    height = 5.dp,
-                    color = MaterialTheme.customColors.onPrimaryContainer
-                )
-            }
-        ) {
-            categoryPages.forEachIndexed { index, categoryPage ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = {
-                        selectedTabIndex = index
-                        onCategorySelected(categoryPage)
-                    },
-                    modifier = Modifier.padding(horizontal = 4.dp)
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    ) {
-                        Text(
-                            text = categoryPage.title,
-                            fontSize = 12.sp,
-                            fontWeight = if (selectedTabIndex == index) FontWeight.Bold else FontWeight.Medium,
-                            color = if (selectedTabIndex == index) {
-                                MaterialTheme.customColors.onPrimaryContainer
-                            } else {
-                                MaterialTheme.customColors.black
-                            },
-                            maxLines = 2,
-                            textAlign = TextAlign.Center,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                }
-            }
-        }
-
-        // Show content for each tab
-        when (selectedTabIndex) {
-            0 -> MasalaBhelpuriCategoryPage()
-            1 -> DoubleEggSandwichCategoryPage()
-            2 -> TiramisuOrderCategoryPage()
-            3 -> ChickenPuffCategoryPage()
-            4 -> VegPuffOrderCategoryPage()
-            5 -> ChocoWalnutCategoryPage()
-            6 -> MasalaMaggiCategoryPage()
-            7 -> BullsEyeEggCategoryPage()
-            8 -> PlainCurdMatkaCategoryPage()
-            9 -> MintMojitoFizzyCoolerCategoryPage()
-            10 -> PepperMaggiCategoryPage()
-            11 -> ColdCoffeeCategoryPage()
-        }
+fun CakesCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Cakes Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
     }
 }
 
-// Add the missing category page composables
-
 @Composable
-fun MasalaBhelpuriCategoryPage() {
-    // Add your content here
-    Text("Masala Bhelpuri Content")
+fun MomosCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Momos Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun DoubleEggSandwichCategoryPage() {
-    Text("Double Egg Sandwich Content")
+fun RollsCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Rolls Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun TiramisuOrderCategoryPage() {
-    Text("Tiramisu Order Content")
+fun BurgersCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Burgers Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun ChickenPuffCategoryPage() {
-    Text("Chicken Puff Content")
+fun CholeBhatureCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Chole Bhature Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun VegPuffOrderCategoryPage() {
-    Text("Veg Puff Order Content")
+fun SaladCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Salad Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun ChocoWalnutCategoryPage() {
-    Text("Choco Walnut Content")
+fun PartyCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Party Food Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun MasalaMaggiCategoryPage() {
-    Text("Masala Maggi Content")
+fun ChineseCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Chinese Food Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun BullsEyeEggCategoryPage() {
-    Text("Bull's Eye Egg Content")
+fun IceCreamCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Ice Cream Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun PlainCurdMatkaCategoryPage() {
-    Text("Plain Curd Matka Content")
+fun AppamCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Appam Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun MintMojitoFizzyCoolerCategoryPage() {
-    Text("Mint Mojito Fizzy Cooler Content")
+fun BathCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Bath Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun PepperMaggiCategoryPage() {
-    Text("Pepper Maggi Content")
+fun BondaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Bonda Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
-fun ColdCoffeeCategoryPage() {
-    Text("Cold Coffee Content")
+fun CutletCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Cutlet Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun DessertCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Dessert Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun DhoklaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Dhokla Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun DosaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Dosa Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun DholdaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Dholda Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun GulabJamunCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Gulab Jamun Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun IdliCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Idli Content",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
 }
 
 @Composable
 fun MainScreen(navController: NavHostController) {
     var currentPage by remember { mutableIntStateOf(0) }
     Column(modifier = Modifier.fillMaxWidth()) {
-        // Use one of these implementations:
         CategoryTabsFood(
             onCategorySelected = { categoryPage ->
                 currentPage = when (categoryPage) {
-                    CategoryPage.MasalaBhelpuri -> 0
-                    CategoryPage.DoubleEggSandwich -> 1
-                    CategoryPage.TiramisuOrder -> 2
-                    CategoryPage.ChickenPuff -> 3
-                    CategoryPage.VegPuffOrder -> 4
-                    CategoryPage.ChocoWalnut -> 5
-                    CategoryPage.MasalaMaggi -> 6
-                    CategoryPage.BullsEyeEgg -> 7
-                    CategoryPage.PlainCurdMatka -> 8
-                    CategoryPage.MintMojitoFizzyCooler -> 9
-                    CategoryPage.PepperMaggi -> 10
-                    CategoryPage.ColdCoffee -> 11
+                    CategoryPage.Pizzas -> 0
+                    CategoryPage.Cakes -> 1
+                    CategoryPage.Momos -> 2
+                    CategoryPage.Rolls -> 3
+                    CategoryPage.Burgers -> 4
+                    CategoryPage.CholeBhature -> 5
+                    CategoryPage.Salad -> 6
+                    CategoryPage.Party -> 7
+                    CategoryPage.Chinese -> 8
+                    CategoryPage.IceCream -> 9
+                    CategoryPage.Appam -> 10
+                    CategoryPage.Bath -> 11
+                    CategoryPage.Bonda -> 12
+                    CategoryPage.Cutlet -> 13
+                    CategoryPage.Dessert -> 14
+                    CategoryPage.Dhokla -> 15
+                    CategoryPage.Dosa -> 16
+                    CategoryPage.Dholda -> 17
+                    CategoryPage.GulabJamun -> 18
+                    CategoryPage.Idli -> 19
                 }
             }
         )

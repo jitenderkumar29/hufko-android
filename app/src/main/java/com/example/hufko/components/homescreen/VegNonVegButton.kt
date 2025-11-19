@@ -51,7 +51,7 @@ fun VegNonVegButton(
     // Toggle button that opens dropdown when clicked
     Column(
         modifier = modifier
-            .width(80.dp)
+            .width(70.dp)
             .height(45.dp)
             .clip(RoundedCornerShape(8.dp))
             .border(

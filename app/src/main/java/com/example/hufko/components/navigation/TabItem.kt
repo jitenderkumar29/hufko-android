@@ -26,37 +26,38 @@ sealed class TabItem(
     )
 
     data object Explore : TabItem(
-        title = "You",
+        title = "Account",
         icon = Icons.Filled.Person,
         imageResource = R.drawable.outline_person_24, // Add this image to your drawable resources
         screen = { ExploreScreen() }
     )
 
-    data object Favorites : TabItem(
-        title = "Wallet",
-        icon = Icons.Filled.Star,
-        imageResource = R.drawable.outline_account_balance_wallet_24, // Add this image to your drawable resources
-        screen = { FavoritesScreen() }
-    )
 
     data object Profile : TabItem(
-        title = "Cart",
+        title = "Pay Bill",
         icon = Icons.Filled.ShoppingCart,
-        imageResource = R.drawable.outline_shopping_cart_24, // Add this image to your drawable resources
+        imageResource = R.drawable.pay_bill, // Add this image to your drawable resources
         screen = { ProfileScreen() }
     )
 
+    data object Favorites : TabItem(
+        title = "Prime",
+        icon = Icons.Filled.Star,
+        imageResource = R.drawable.outline_card_membership_24, // Add this image to your drawable resources
+        screen = { FavoritesScreen() }
+    )
+
     data object Settings : TabItem(
-        title = "Category",
+        title = "Cart",
         icon = Icons.Filled.Menu,
-        imageResource = R.drawable.ic_category_24, // Add this image to your drawable resources
+        imageResource = R.drawable.outline_shopping_cart_24, // Add this image to your drawable resources
         screen = { SettingsScreen() }
     )
 
-    data object Notifications : TabItem(
-        title = "Pay",
-        icon = Icons.Filled.Notifications,
-        imageResource = R.drawable.baseline_payment_24, // Add this image to your drawable resources
-        screen = { NotificationsScreen() }
-    )
+//    data object Notifications : TabItem(
+//        title = "Alert",
+//        icon = Icons.Filled.Notifications,
+//        imageResource = R.drawable.outline_notifications_24, // Add this image to your drawable resources
+//        screen = { NotificationsScreen() }
+//    )
 }

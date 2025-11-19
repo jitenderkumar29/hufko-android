@@ -59,7 +59,8 @@ fun AppContent(window: Window? = null) {
     val statusBarColor: Color = if (showSplash) {
         MaterialTheme.colorScheme.primary
     } else {
-        MaterialTheme.customColors.footer
+        MaterialTheme.customColors.header
+//        MaterialTheme.customColors.footer
     }
 
     val navBarColor: Color = if (showSplash) {

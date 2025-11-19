@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -14,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.hufko.components.searchbar.SearchBar
 import com.example.hufko.ui.theme.customColors
+
 
 @Composable
 fun HomeScreen() {
@@ -34,53 +36,56 @@ fun HomeScreen() {
     }
 
     val lazyListState = rememberLazyListState()
+    var isLocationVisible by remember { mutableStateOf(true) }
+
+    // Track scroll position to hide/show location section
+    LaunchedEffect(lazyListState.firstVisibleItemScrollOffset) {
+        val scrollThreshold = 50 // Adjust this value as needed
+        isLocationVisible = lazyListState.firstVisibleItemScrollOffset < scrollThreshold
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
             state = lazyListState,
-            modifier = Modifier
-                .fillMaxSize()
-
-//                .background(MaterialTheme.colorScheme.background)
+            modifier = Modifier.fillMaxSize()
         ) {
-            // 🟢 Location Section
+            // 🟢 Location Section (hidden when scrolled)
             item {
-                Surface(
-                    color = MaterialTheme.customColors.darkAccent,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    LocationSelectionButton(
-                        selectedLocation = selectedLocation,
-                        onLocationClick = { showLocationDialog = false }
-                    )
+                if (isLocationVisible) {
+                    Surface(
+                        color = MaterialTheme.customColors.header,
+//                        color = MaterialTheme.customColors.darkAccent,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        LocationSelectionButton(
+                            selectedLocation = selectedLocation,
+                            onLocationClick = { showLocationDialog = true }
+                        )
+                    }
+                } else {
+                    // Empty space when location is hidden to maintain layout
+                    Spacer(modifier = Modifier.height(0.dp))
                 }
             }
 
-            // 🔵 Sticky Search Bar (pinned on scroll)
+            // 🔵 Sticky Search Bar (always visible)
             stickyHeader {
                 Surface(
                     color = MaterialTheme.customColors.lightAccent,
                     modifier = Modifier.fillMaxWidth()
-//                        .background(
-//                            brush = Brush.verticalGradient(
-//                                colors = listOf(
-//                                    Color(0xFF9BCDFE),
-//                                    Color(0xFFC2E1FE)
-//                                )
-//                            )
-//                        )
                 ) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        Color(0xFFC2E1FE),
-                                        Color(0xFFEDF6FF)
-                                    )
-                                )
-                            )
+                            .background(MaterialTheme.customColors.header)
+//                            .background(
+//                                brush = Brush.verticalGradient(
+//                                    colors = listOf(
+//                                        Color(0xFFC2E1FE),
+//                                        Color(0xFFEDF6FF)
+//                                    )
+//                                )
+//                            )
                             .padding(horizontal = 12.dp, vertical = 0.dp)
                     ) {
                         Box(
@@ -118,6 +123,21 @@ fun HomeScreen() {
             item {
                 CategoryTabsFood()
             }
+
+            // Add some sample content to enable scrolling
+//            items(20) { index ->
+//                Surface(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(8.dp),
+//                    color = MaterialTheme.colorScheme.surface
+//                ) {
+//                    Text(
+//                        text = "Content item $index",
+//                        modifier = Modifier.padding(16.dp)
+//                    )
+//                }
+//            }
         }
     }
 
@@ -127,7 +147,6 @@ fun HomeScreen() {
             AddressSelection(
                 onDismissRequest = { showLocationDialog = false },
                 onAddressSelected = { location ->
-                    // Update the selected location with the chosen address
                     selectedLocation = location
                     showLocationDialog = false
                 },
@@ -156,7 +175,6 @@ fun HomeScreen() {
                     showLocationDialog = false
                 },
                 onAddNewAddress = {
-                    // Handle add new address
                     showLocationDialog = false
                 }
             )

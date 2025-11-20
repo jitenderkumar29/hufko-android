@@ -182,7 +182,7 @@ fun LocationSelectionButton(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 0.dp),
+                .padding(horizontal = 8.dp, vertical = 0.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
@@ -195,15 +195,15 @@ fun LocationSelectionButton(
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-                Text(
-                    text = "Delivery in 10 minutes",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = MaterialTheme.customColors.white,
-                    maxLines = 1
-                )
-                Spacer(modifier = Modifier.height(0.dp))
+//                Text(
+//                    text = "Delivery in 10 minutes",
+//                    style = MaterialTheme.typography.bodyLarge,
+//                    fontWeight = FontWeight.Bold,
+//                    fontSize = 18.sp,
+//                    color = MaterialTheme.customColors.white,
+//                    maxLines = 1
+//                )
+//                Spacer(modifier = Modifier.height(0.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {

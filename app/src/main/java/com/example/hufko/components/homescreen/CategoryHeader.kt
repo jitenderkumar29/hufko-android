@@ -58,7 +58,8 @@ fun CategoryHeader(
         listOf(
             CategoryHeaderClass(
                 1, "Food", R.drawable.food, Color(0xFFFFFFFF), selectedColor = Color(
-                    0xFFD4AF44
+                    0xFF7D3407
+//                    0xFFD4AF44
                 )
             ),
             CategoryHeaderClass(

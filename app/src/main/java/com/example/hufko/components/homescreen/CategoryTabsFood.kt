@@ -3,6 +3,7 @@ package com.example.hufko.components.homescreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 // Sealed class for different category pages
 sealed class CategoryPage(val title: String, val iconRes: Int) {
     // From the images provided
+    object All : CategoryPage("All", R.drawable.all_food)
     object Pizzas : CategoryPage("Pizzas", R.drawable.pizzas_food)
     object Cakes : CategoryPage("Cakes", R.drawable.cakes_food)
     object Momos : CategoryPage("Momos", R.drawable.momos_food)
@@ -47,7 +49,7 @@ sealed class CategoryPage(val title: String, val iconRes: Int) {
     object Burgers : CategoryPage("Burgers", R.drawable.burgers_food)
     object CholeBhature : CategoryPage("Chole Bhature", R.drawable.chole_bhature_food)
     object Salad : CategoryPage("Salad", R.drawable.salad_food)
-    object Party : CategoryPage("Patty", R.drawable.patty_food) // Changed from "Patty" to "Party"
+    object Party : CategoryPage("Patty", R.drawable.patty_food)
     object Chinese : CategoryPage("Chinese", R.drawable.chinese_food)
     object IceCream : CategoryPage("Ice Cream", R.drawable.ice_cream_food)
     object Appam : CategoryPage("Appam", R.drawable.appam_food)
@@ -60,6 +62,17 @@ sealed class CategoryPage(val title: String, val iconRes: Int) {
     object Dholda : CategoryPage("Dholda", R.drawable.dholda_food)
     object GulabJamun : CategoryPage("Gulab Jamun", R.drawable.gulab_jamun_food)
     object Idli : CategoryPage("Idli", R.drawable.idli_food)
+    object Biryani : CategoryPage("Biryani", R.drawable.biryani_food)
+    object Thali : CategoryPage("Thali", R.drawable.thali_food)
+    object Chicken : CategoryPage("Chicken", R.drawable.chicken_food)
+    object VegMeal : CategoryPage("Veg Meal", R.drawable.veg_meal_food)
+    object NorthIndian : CategoryPage("North Indian", R.drawable.north_indian_food)
+    object Paneer : CategoryPage("Paneer", R.drawable.paneer_food)
+    object FriedRice : CategoryPage("Fried Rice", R.drawable.fried_rice_food)
+    object Noodles : CategoryPage("Noodles", R.drawable.noodles_food)
+    object Paratha : CategoryPage("Paratha", R.drawable.paratha_food)
+    object Shawarma : CategoryPage("Shawarma", R.drawable.shawarma_food)
+    object SeeAll : CategoryPage("See All", R.drawable.see_all_food)
 }
 
 data class FoodItem(
@@ -78,6 +91,7 @@ fun CategoryTabsFood(
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
     val categoryPages = listOf(
+        CategoryPage.All,
         CategoryPage.Pizzas,
         CategoryPage.Cakes,
         CategoryPage.Momos,
@@ -97,21 +111,24 @@ fun CategoryTabsFood(
         CategoryPage.Dosa,
         CategoryPage.Dholda,
         CategoryPage.GulabJamun,
-        CategoryPage.Idli
+        CategoryPage.Idli,
+        CategoryPage.Biryani,
+        CategoryPage.Thali,
+        CategoryPage.Chicken,
+        CategoryPage.VegMeal,
+        CategoryPage.NorthIndian,
+        CategoryPage.Paneer,
+        CategoryPage.FriedRice,
+        CategoryPage.Noodles,
+        CategoryPage.Paratha,
+        CategoryPage.Shawarma,
+        CategoryPage.SeeAll,
     )
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.customColors.header)
-//            .background(
-//                brush = Brush.verticalGradient(
-//                    colors = listOf(
-//                        Color(0xFFEDF6FF),
-//                        Color(0xFFFDFEFF)
-//                    )
-//                )
-//            )
     ) {
         ScrollableTabRow(
             selectedTabIndex = selectedTabIndex,
@@ -123,7 +140,6 @@ fun CategoryTabsFood(
                     modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
                     height = 5.dp,
                     color = MaterialTheme.customColors.white
-//                    color = MaterialTheme.customColors.onPrimaryContainer
                 )
             }
         ) {
@@ -135,7 +151,7 @@ fun CategoryTabsFood(
                         onCategorySelected(categoryPage)
                     },
                     modifier = Modifier
-                        .padding(horizontal = 4.dp)
+                        .padding(horizontal = 2.dp)
                         .background(Color.Transparent)
                 ) {
                     Column(
@@ -146,8 +162,8 @@ fun CategoryTabsFood(
                             painter = painterResource(id = categoryPage.iconRes),
                             contentDescription = categoryPage.title,
                             modifier = Modifier
-                                .width(75.dp)
-                                .height(55.dp),
+                                .width(65.dp)
+                                .height(45.dp),
                             contentScale = ContentScale.FillBounds
                         )
 
@@ -157,7 +173,6 @@ fun CategoryTabsFood(
                             fontWeight = if (selectedTabIndex == index) FontWeight.Bold else FontWeight.Medium,
                             color = if (selectedTabIndex == index) {
                                 MaterialTheme.customColors.white
-//                                MaterialTheme.customColors.onPrimaryContainer
                             } else {
                                 MaterialTheme.customColors.white
                             },
@@ -185,33 +200,239 @@ fun CategoryTabsFood(
                 )
         ) {
             when (selectedTabIndex) {
-                0 -> PizzasCategoryPage()
-                1 -> CakesCategoryPage()
-                2 -> MomosCategoryPage()
-                3 -> RollsCategoryPage()
-                4 -> BurgersCategoryPage()
-                5 -> CholeBhatureCategoryPage()
-                6 -> SaladCategoryPage()
-                7 -> PartyCategoryPage()
-                8 -> ChineseCategoryPage()
-                9 -> IceCreamCategoryPage()
-                10 -> AppamCategoryPage()
-                11 -> BathCategoryPage()
-                12 -> BondaCategoryPage()
-                13 -> CutletCategoryPage()
-                14 -> DessertCategoryPage()
-                15 -> DhoklaCategoryPage()
-                16 -> DosaCategoryPage()
-                17 -> DholdaCategoryPage()
-                18 -> GulabJamunCategoryPage()
-                19 -> IdliCategoryPage()
-                else -> PizzasCategoryPage()
+                0 -> AllCategoryPage()
+                1 -> PizzasCategoryPage()
+                2 -> CakesCategoryPage()
+                3 -> MomosCategoryPage()
+                4 -> RollsCategoryPage()
+                5 -> BurgersCategoryPage()
+                6 -> CholeBhatureCategoryPage()
+                7 -> SaladCategoryPage()
+                8 -> PartyCategoryPage()
+                9 -> ChineseCategoryPage()
+                10 -> IceCreamCategoryPage()
+                11 -> AppamCategoryPage()
+                12 -> BathCategoryPage()
+                13 -> BondaCategoryPage()
+                14 -> CutletCategoryPage()
+                15 -> DessertCategoryPage()
+                16 -> DhoklaCategoryPage()
+                17 -> DosaCategoryPage()
+                18 -> DholdaCategoryPage()
+                19 -> GulabJamunCategoryPage()
+                20 -> IdliCategoryPage()
+                21 -> BiryaniCategoryPage()
+                22 -> ThaliCategoryPage()
+                23 -> ChickenCategoryPage()
+                24 -> VegMealCategoryPage()
+                25 -> NorthIndianCategoryPage()
+                26 -> PaneerCategoryPage()
+                27 -> FriedRiceCategoryPage()
+                28 -> NoodlesCategoryPage()
+                29 -> ParathaCategoryPage()
+                30 -> ShawarmaCategoryPage()
+                31 -> SeeAllCategoryPage()
+                else -> AllCategoryPage()
             }
         }
     }
 }
 
 // Category Page Composables for all categories
+@Composable
+fun AllCategoryPage() {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+//                .padding(20.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 20.dp, bottom = 0.dp, start = 20.dp, end = 20.dp
+                    )
+            )
+            {
+                val bannerImages = listOf(
+                    painterResource(id = R.drawable.all_food_banner1),
+                    painterResource(id = R.drawable.all_food_banner2),
+                    painterResource(id = R.drawable.all_food_banner3),
+                )
+                BannerFood(
+                    images = bannerImages,
+                    onImageClick = { page ->
+                        when (page) {
+                            0 -> onBanner1Click()
+                            1 -> onBanner2Click()
+                            2 -> onBanner3Click()
+                        }
+                    },
+                    autoScrollDelay = 2000,
+                    height = 250.dp,
+                    roundedCornerShape = 20.dp,
+                    contentScale = ContentScale.FillBounds,
+                    dotSize = 8.dp,
+                    modifier = Modifier.padding(bottom = 0.dp)
+                )
+            }
+            FilterButtonFood()
+
+
+// Sample data for preview
+//            val sampleRestaurants = listOf(
+//                Restaurant(
+//                    id = 1,
+//                    imageRes = R.drawable.restaurant_1, // Replace with your image resource
+//                    restaurantName = "Burger King",
+//                    bestIn = "Best In Burger",
+//                    rating = 4.3,
+//                    totalRating = "26K+",
+//                    deliverTime = "30–35 mins",
+//                    categories = "Burgers, American",
+//                    address = "Sector 35",
+//                    distance = "5.0 km",
+//                    isWishlisted = false
+//                ),
+//                Restaurant(
+//                    id = 2,
+//                    imageRes = R.drawable.restaurant_2, // Replace with your image resource
+//                    restaurantName = "Burger Singh(Big Punjabi...)",
+//                    bestIn = "",
+//                    rating = 4.2,
+//                    totalRating = "868",
+//                    deliverTime = "25–30 mins",
+//                    categories = "Burgers, Snacks, Desserts, Beverages",
+//                    address = "DMRC Metro Station",
+//                    distance = "21 km",
+//                    isWishlisted = false
+//                ),
+//                Restaurant(
+//                    id = 3,
+//                    imageRes = R.drawable.restaurant_3, // Replace with your image resource
+//                    restaurantName = "McDonald's",
+//                    bestIn = "Best In Burger",
+//                    rating = 4.4,
+//                    totalRating = "10K+",
+//                    deliverTime = "35–40 mins",
+//                    categories = "American",
+//                    address = "Sector 35",
+//                    distance = "5.0 km",
+//                    isWishlisted = false
+//                )
+//            )
+            val sampleRestaurants = listOf(
+                Restaurant(
+                    id = 1,
+                    imageRes = R.drawable.paratha_corner,
+                    restaurantName = "Paratha corner",
+                    bestIn = "Best In Paratha",
+                    rating = 4.3,
+                    totalRating = "227",
+                    deliverTime = "55–65 mins",
+                    categories = "Indian",
+                    address = "Raj Nagar",
+                    distance = "6.4 km",
+                    isWishlisted = false
+                ),
+                Restaurant(
+                    id = 2,
+                    imageRes = R.drawable.new_rati_masala,
+                    restaurantName = "New Rati Masala",
+                    bestIn = "Best In Spicy",
+                    rating = 4.2,
+                    totalRating = "318",
+                    deliverTime = "50–60 mins",
+                    categories = "Tandoor, Chinese",
+                    address = "Govind Puram",
+                    distance = "6.5 km",
+                    isWishlisted = false
+                ),
+                Restaurant(
+                    id = 3,
+                    imageRes = R.drawable.fauji_dhaba,
+                    restaurantName = "Fauji Dhaba",
+                    bestIn = "Best In All",
+                    rating = 4.4,
+                    totalRating = "249",
+                    deliverTime = "30–35 mins",
+                    categories = "North Indian, Chinese, Tandoor, ...",
+                    address = "Govindpuram",
+                    distance = "6.8 km",
+                    isWishlisted = false,
+                    hasFlatDeal = true,
+                    flatDealText = "FLAT DEAL • ¥200 OFF ABOVE $799",
+                    itemsPrice = "ITEMS AT ¥119"
+                ),
+                Restaurant(
+                    id = 4,
+                    imageRes = R.drawable.indian_tadka,
+                    restaurantName = "Indian Tadka",
+                    bestIn = "Best In Thali",
+                    rating = 4.0,
+                    totalRating = "<3",
+                    deliverTime = "50–60 mins",
+                    categories = "North Indian",
+                    address = "Raj Nagar",
+                    distance = "6.1 km",
+                    isWishlisted = false
+                ),
+                Restaurant(
+                    id = 5,
+                    imageRes = R.drawable.bikanervala,
+                    restaurantName = "Bikanervala",
+                    bestIn = "Best In Mithai",
+                    rating = 4.3,
+                    totalRating = "3.5K+",
+                    deliverTime = "55–65 mins",
+                    categories = "Bakery, Chinese, North Indian, Street Food",
+                    address = "Govind Puram",
+                    distance = "7.7 km",
+                    isWishlisted = false
+                ),
+                Restaurant(
+                    id = 6,
+                    imageRes = R.drawable.restaurant_1,
+                    restaurantName = "Burger King",
+                    bestIn = "Best In Burger",
+                    rating = 4.3,
+                    totalRating = "26K+",
+                    deliverTime = "30–35 mins",
+                    categories = "Burgers, American",
+                    address = "Sector 35",
+                    distance = "5.0 km",
+                    isWishlisted = false
+                )
+            )
+
+            RestaurantList(
+                restaurants = sampleRestaurants,
+                onRestaurantClick = { restaurant ->
+                    // Handle restaurant click
+                    println("Clicked on: ${restaurant.restaurantName}")
+                },
+                onWishlistToggle = { restaurant ->
+                    // Handle wishlist toggle
+                    println("Toggled wishlist for: ${restaurant.restaurantName}")
+                }
+            )
+        }
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(20.dp)
+//    ) {
+//
+//    }
+
+//        Spacer(
+//            modifier = Modifier
+//                .height(2.dp)
+//                .fillMaxWidth()
+//                .background(MaterialTheme.customColors.spacerColor)
+//        )
+
+}
+
 @Composable
 fun PizzasCategoryPage() {
     Column(
@@ -220,7 +441,7 @@ fun PizzasCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Pizzas Content",
+            text = "Pizzas",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -237,7 +458,7 @@ fun CakesCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Cakes Content",
+            text = "Cakes & Pastries",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -253,7 +474,7 @@ fun MomosCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Momos Content",
+            text = "Momos",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -269,7 +490,7 @@ fun RollsCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Rolls Content",
+            text = "Rolls & Wraps",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -285,7 +506,7 @@ fun BurgersCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Burgers Content",
+            text = "Burgers",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -301,7 +522,7 @@ fun CholeBhatureCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Chole Bhature Content",
+            text = "Chole Bhature",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -317,7 +538,7 @@ fun SaladCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Salad Content",
+            text = "Salads",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -333,7 +554,7 @@ fun PartyCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Party Food Content",
+            text = "Party Food",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -349,7 +570,7 @@ fun ChineseCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Chinese Food Content",
+            text = "Chinese Cuisine",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -365,7 +586,7 @@ fun IceCreamCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Ice Cream Content",
+            text = "Ice Cream & Desserts",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -381,7 +602,7 @@ fun AppamCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Appam Content",
+            text = "Appam",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -397,7 +618,7 @@ fun BathCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Bath Content",
+            text = "Bath Specialties",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -413,7 +634,7 @@ fun BondaCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Bonda Content",
+            text = "Bonda",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -429,7 +650,7 @@ fun CutletCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Cutlet Content",
+            text = "Cutlets",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -445,7 +666,7 @@ fun DessertCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Dessert Content",
+            text = "Desserts",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -461,7 +682,7 @@ fun DhoklaCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Dhokla Content",
+            text = "Dhokla",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -477,7 +698,7 @@ fun DosaCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Dosa Content",
+            text = "Dosa",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -493,7 +714,7 @@ fun DholdaCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Dholda Content",
+            text = "Dholda",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -509,7 +730,7 @@ fun GulabJamunCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Gulab Jamun Content",
+            text = "Gulab Jamun",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
@@ -525,11 +746,188 @@ fun IdliCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Idli Content",
+            text = "Idli",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
         )
+    }
+}
+
+@Composable
+fun BiryaniCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Biryani",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun ThaliCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Thali Meals",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun ChickenCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Chicken Dishes",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun VegMealCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Vegetarian Meals",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun NorthIndianCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "North Indian Cuisine",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun PaneerCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Paneer Dishes",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun FriedRiceCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Fried Rice",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun NoodlesCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Noodles",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun ParathaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Paratha",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun ShawarmaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Shawarma",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun SeeAllCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "All Categories",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+        // Add comprehensive list of all food items
     }
 }
 
@@ -540,28 +938,56 @@ fun MainScreen(navController: NavHostController) {
         CategoryTabsFood(
             onCategorySelected = { categoryPage ->
                 currentPage = when (categoryPage) {
-                    CategoryPage.Pizzas -> 0
-                    CategoryPage.Cakes -> 1
-                    CategoryPage.Momos -> 2
-                    CategoryPage.Rolls -> 3
-                    CategoryPage.Burgers -> 4
-                    CategoryPage.CholeBhature -> 5
-                    CategoryPage.Salad -> 6
-                    CategoryPage.Party -> 7
-                    CategoryPage.Chinese -> 8
-                    CategoryPage.IceCream -> 9
-                    CategoryPage.Appam -> 10
-                    CategoryPage.Bath -> 11
-                    CategoryPage.Bonda -> 12
-                    CategoryPage.Cutlet -> 13
-                    CategoryPage.Dessert -> 14
-                    CategoryPage.Dhokla -> 15
-                    CategoryPage.Dosa -> 16
-                    CategoryPage.Dholda -> 17
-                    CategoryPage.GulabJamun -> 18
-                    CategoryPage.Idli -> 19
+                    CategoryPage.All -> 0
+                    CategoryPage.Pizzas -> 1
+                    CategoryPage.Cakes -> 2
+                    CategoryPage.Momos -> 3
+                    CategoryPage.Rolls -> 4
+                    CategoryPage.Burgers -> 5
+                    CategoryPage.CholeBhature -> 6
+                    CategoryPage.Salad -> 7
+                    CategoryPage.Party -> 8
+                    CategoryPage.Chinese -> 9
+                    CategoryPage.IceCream -> 10
+                    CategoryPage.Appam -> 11
+                    CategoryPage.Bath -> 12
+                    CategoryPage.Bonda -> 13
+                    CategoryPage.Cutlet -> 14
+                    CategoryPage.Dessert -> 15
+                    CategoryPage.Dhokla -> 16
+                    CategoryPage.Dosa -> 17
+                    CategoryPage.Dholda -> 18
+                    CategoryPage.GulabJamun -> 19
+                    CategoryPage.Idli -> 20
+                    CategoryPage.Biryani -> 21
+                    CategoryPage.Thali -> 22
+                    CategoryPage.Chicken -> 23
+                    CategoryPage.VegMeal -> 24
+                    CategoryPage.NorthIndian -> 25
+                    CategoryPage.Paneer -> 26
+                    CategoryPage.FriedRice -> 27
+                    CategoryPage.Noodles -> 28
+                    CategoryPage.Paratha -> 29
+                    CategoryPage.Shawarma -> 30
+                    CategoryPage.SeeAll -> 31
                 }
             }
         )
     }
+}
+
+
+private fun onBanner1Click() {
+    // Handle banner 1 click
+    println("Banner 1 clicked")
+}
+
+private fun onBanner2Click() {
+    // Handle banner 2 click
+    println("Banner 2 clicked")
+}
+
+private fun onBanner3Click() {
+    // Handle banner 3 click
+    println("Banner 3 clicked")
 }

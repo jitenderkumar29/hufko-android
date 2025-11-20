@@ -57,10 +57,40 @@ fun HomeScreen() {
 //                        color = MaterialTheme.customColors.darkAccent,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        LocationSelectionButton(
-                            selectedLocation = selectedLocation,
-                            onLocationClick = { showLocationDialog = true }
-                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(MaterialTheme.customColors.header)
+//                            .background(
+//                                brush = Brush.verticalGradient(
+//                                    colors = listOf(
+//                                        Color(0xFFC2E1FE),
+//                                        Color(0xFFEDF6FF)
+//                                    )
+//                                )
+//                            )
+                                .padding(horizontal = 12.dp, vertical = 0.dp)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .weight(0.80f)
+                                    .padding(top = 4.dp, bottom = 8.dp, start = 0.dp, end = 0.dp
+                                    )
+                            ) {
+                                LocationSelectionButton(
+                                    selectedLocation = selectedLocation,
+                                    onLocationClick = { showLocationDialog = true }
+                                )
+                            }
+                            Box(
+                                modifier = Modifier
+                                    .weight(0.20f)
+                                    .padding( top = 12.dp, bottom = 8.dp, start = 0.dp, end = 0.dp
+                                    )
+                            ) {
+                                CashbackButton(amount = "50")
+                            }
+                        }
                     }
                 } else {
                     // Empty space when location is hidden to maintain layout

@@ -147,11 +147,12 @@ val LightCustomColors = CustomColors(
     scrim = Color(0xFF000000),
 
     // Custom accent colors
-    header = Color(0xFF760241),
+    header = Color(0xFF661202),
+//    header = Color(0xFF760241),
     lightAccent = Color(0xFF56ACFF),
     darkAccent = Color(0xFF56ACFF),
 //    darkAccent = Color(0xFFF62626),
-    footer = Color(0xFF56ACFF),
+    footer = Color(0xFF760241),
     orange = Color(0xFFFB5E20),
     skyBlue = Color(0xFFDDE0FF),
 //    lightAccent = Color(0xFFB9DC96),
@@ -232,7 +233,8 @@ val DarkCustomColors = CustomColors(
     scrim = Color(0xFF000000),
 
     // Custom accent colors
-    header = Color(0xFF760241),
+    header = Color(0xFF570F01),
+//    header = Color(0xFF760241),
     lightAccent = Color(0xFF7B0003),
     darkAccent = Color(0xFFF62626),
     footer = Color(0xFF760241),

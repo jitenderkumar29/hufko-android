@@ -74,7 +74,7 @@ fun HomeScreen() {
                             Box(
                                 modifier = Modifier
                                     .weight(0.80f)
-                                    .padding(top = 4.dp, bottom = 8.dp, start = 0.dp, end = 0.dp
+                                    .padding(top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp
                                     )
                             ) {
                                 LocationSelectionButton(
@@ -85,7 +85,7 @@ fun HomeScreen() {
                             Box(
                                 modifier = Modifier
                                     .weight(0.20f)
-                                    .padding( top = 12.dp, bottom = 8.dp, start = 0.dp, end = 0.dp
+                                    .padding( top = 8.dp, bottom = 8.dp, start = 0.dp, end = 0.dp
                                     )
                             ) {
                                 CashbackButton(amount = "50")

@@ -2,6 +2,7 @@ package com.example.hufko.components.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
@@ -37,6 +40,8 @@ import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.hufko.components.homescreen.RestaurantItemFull
 
 // Sealed class for different category pages
 sealed class CategoryPage(val title: String, val iconRes: Int) {
@@ -239,214 +244,505 @@ fun CategoryTabsFood(
 }
 
 // Category Page Composables for all categories
+
+
 @Composable
-fun AllCategoryPage() {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-//                .padding(20.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 20.dp, bottom = 0.dp, start = 20.dp, end = 20.dp
-                    )
-            )
-            {
-                val bannerImages = listOf(
-                    painterResource(id = R.drawable.all_food_banner1),
-                    painterResource(id = R.drawable.all_food_banner2),
-                    painterResource(id = R.drawable.all_food_banner3),
-                )
-                BannerFood(
-                    images = bannerImages,
-                    onImageClick = { page ->
-                        when (page) {
-                            0 -> onBanner1Click()
-                            1 -> onBanner2Click()
-                            2 -> onBanner3Click()
-                        }
-                    },
-                    autoScrollDelay = 2000,
-                    height = 250.dp,
-                    roundedCornerShape = 20.dp,
-                    contentScale = ContentScale.FillBounds,
-                    dotSize = 8.dp,
-                    modifier = Modifier.padding(bottom = 0.dp)
-                )
-            }
-            FilterButtonFood()
-
-
-// Sample data for preview
-//            val sampleRestaurants = listOf(
-//                Restaurant(
-//                    id = 1,
-//                    imageRes = R.drawable.restaurant_1, // Replace with your image resource
-//                    restaurantName = "Burger King",
-//                    bestIn = "Best In Burger",
-//                    rating = 4.3,
-//                    totalRating = "26K+",
-//                    deliverTime = "30–35 mins",
-//                    categories = "Burgers, American",
-//                    address = "Sector 35",
-//                    distance = "5.0 km",
-//                    isWishlisted = false
-//                ),
-//                Restaurant(
-//                    id = 2,
-//                    imageRes = R.drawable.restaurant_2, // Replace with your image resource
-//                    restaurantName = "Burger Singh(Big Punjabi...)",
-//                    bestIn = "",
-//                    rating = 4.2,
-//                    totalRating = "868",
-//                    deliverTime = "25–30 mins",
-//                    categories = "Burgers, Snacks, Desserts, Beverages",
-//                    address = "DMRC Metro Station",
-//                    distance = "21 km",
-//                    isWishlisted = false
-//                ),
-//                Restaurant(
-//                    id = 3,
-//                    imageRes = R.drawable.restaurant_3, // Replace with your image resource
-//                    restaurantName = "McDonald's",
-//                    bestIn = "Best In Burger",
-//                    rating = 4.4,
-//                    totalRating = "10K+",
-//                    deliverTime = "35–40 mins",
-//                    categories = "American",
-//                    address = "Sector 35",
-//                    distance = "5.0 km",
-//                    isWishlisted = false
-//                )
-//            )
-            val sampleRestaurants = listOf(
-                Restaurant(
-                    id = 1,
-                    imageRes = R.drawable.paratha_corner,
-                    restaurantName = "Paratha corner",
-                    bestIn = "Best In Paratha",
-                    rating = 4.3,
-                    totalRating = "227",
-                    deliverTime = "55–65 mins",
-                    categories = "Indian",
-                    address = "Raj Nagar",
-                    distance = "6.4 km",
-                    isWishlisted = false
-                ),
-                Restaurant(
-                    id = 2,
-                    imageRes = R.drawable.new_rati_masala,
-                    restaurantName = "New Rati Masala",
-                    bestIn = "Best In Spicy",
-                    rating = 4.2,
-                    totalRating = "318",
-                    deliverTime = "50–60 mins",
-                    categories = "Tandoor, Chinese",
-                    address = "Govind Puram",
-                    distance = "6.5 km",
-                    isWishlisted = false
-                ),
-                Restaurant(
-                    id = 3,
-                    imageRes = R.drawable.fauji_dhaba,
-                    restaurantName = "Fauji Dhaba",
-                    bestIn = "Best In All",
-                    rating = 4.4,
-                    totalRating = "249",
-                    deliverTime = "30–35 mins",
-                    categories = "North Indian, Chinese, Tandoor, ...",
-                    address = "Govindpuram",
-                    distance = "6.8 km",
-                    isWishlisted = false,
-                    hasFlatDeal = true,
-                    flatDealText = "FLAT DEAL • ¥200 OFF ABOVE $799",
-                    itemsPrice = "ITEMS AT ¥119"
-                ),
-                Restaurant(
-                    id = 4,
-                    imageRes = R.drawable.indian_tadka,
-                    restaurantName = "Indian Tadka",
-                    bestIn = "Best In Thali",
-                    rating = 4.0,
-                    totalRating = "<3",
-                    deliverTime = "50–60 mins",
-                    categories = "North Indian",
-                    address = "Raj Nagar",
-                    distance = "6.1 km",
-                    isWishlisted = false
-                ),
-                Restaurant(
-                    id = 5,
-                    imageRes = R.drawable.bikanervala,
-                    restaurantName = "Bikanervala",
-                    bestIn = "Best In Mithai",
-                    rating = 4.3,
-                    totalRating = "3.5K+",
-                    deliverTime = "55–65 mins",
-                    categories = "Bakery, Chinese, North Indian, Street Food",
-                    address = "Govind Puram",
-                    distance = "7.7 km",
-                    isWishlisted = false
-                ),
-                Restaurant(
-                    id = 6,
-                    imageRes = R.drawable.restaurant_1,
-                    restaurantName = "Burger King",
-                    bestIn = "Best In Burger",
-                    rating = 4.3,
-                    totalRating = "26K+",
-                    deliverTime = "30–35 mins",
-                    categories = "Burgers, American",
-                    address = "Sector 35",
-                    distance = "5.0 km",
-                    isWishlisted = false
-                )
-            )
-
-            RestaurantList(
-                restaurants = sampleRestaurants,
-                onRestaurantClick = { restaurant ->
-                    // Handle restaurant click
-                    println("Clicked on: ${restaurant.restaurantName}")
-                },
-                onWishlistToggle = { restaurant ->
-                    // Handle wishlist toggle
-                    println("Toggled wishlist for: ${restaurant.restaurantName}")
+fun AllCategoryPage(
+    onBanner1Click: () -> Unit = {},
+    onBanner2Click: () -> Unit = {},
+    onBanner3Click: () -> Unit = {}
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
+        // Banner Section
+        BannerFood(
+            images = listOf(
+                painterResource(id = R.drawable.all_food_banner1),
+                painterResource(id = R.drawable.all_food_banner2),
+                painterResource(id = R.drawable.all_food_banner3),
+                painterResource(id = R.drawable.all_food_banner4),
+                painterResource(id = R.drawable.all_food_banner5),
+                painterResource(id = R.drawable.all_food_banner6),
+                painterResource(id = R.drawable.all_food_banner7),
+                painterResource(id = R.drawable.all_food_banner8),
+                painterResource(id = R.drawable.all_food_banner9),
+                painterResource(id = R.drawable.all_food_banner10),
+                painterResource(id = R.drawable.all_food_banner11),
+                painterResource(id = R.drawable.all_food_banner12),
+                painterResource(id = R.drawable.all_food_banner13),
+                painterResource(id = R.drawable.all_food_banner14),
+                painterResource(id = R.drawable.all_food_banner15),
+                painterResource(id = R.drawable.all_food_banner16),
+                painterResource(id = R.drawable.all_food_banner17),
+            ),
+            onImageClick = { page ->
+                when (page) {
+                    0 -> onBanner1Click()
+                    1 -> onBanner2Click()
+                    2 -> onBanner3Click()
                 }
+            },
+            autoScrollDelay = 2000,
+            height = 250.dp,
+            roundedCornerShape = 0.dp,
+            contentScale = ContentScale.FillBounds,
+            dotSize = 8.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+
+        // Filter Button
+        FilterButtonFood()
+
+        val sampleRestaurantList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.restaurant_image,
+                title = "Paneer Delight Momos",
+                price = "159",
+                restaurantName = "Goblins",
+                rating = "4.0",
+                deliveryTime = "30-35 mins",
+                distance = "5.8 km",
+                address = "Givindpuram",
+                discount = "50%",
+                discountAmount = "100"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.restaurant_image,
+                title = "Veg Roll",
+                price = "99",
+                restaurantName = "Roll Hub",
+                rating = "4.3",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                address = "Shastri Nagar",
+                discount = "40%",
+                discountAmount = "80"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.restaurant_image,
+                title = "Chicken Biryani",
+                price = "229",
+                restaurantName = "Biryani House",
+                rating = "4.5",
+                deliveryTime = "35-40 mins",
+                distance = "6.1 km",
+                address = "Rajnagar",
+                discount = "30%",
+                discountAmount = "120"
+            )
+        )
+
+        MaterialTheme {
+            RestaurantListScreen()
+        }
+
+//        LazyColumn {
+//            items(sampleRestaurantList) { item ->
+//                RestaurantItemListFull(
+//                    restaurantItem = item,
+//                    onWishlistClick = { /* handle */ },
+//                    onThreeDotClick = { /* handle */ },
+//                    onItemClick = { /* handle */ }
+//                )
+//            }
+//        }
+//        val sampleRestaurantItem = RestaurantItemFull(
+//            id = 1,
+//            imageRes = R.drawable.restaurant_image, // Use your actual drawable resource
+//            title = "Paneer Delight Momos",
+//            price = "159",
+//            restaurantName = "Goblins",
+//            rating = "4.0",
+//            deliveryTime = "30-35 mins",
+//            distance = "5.8 km",
+//            address = "Givindpuram",
+//            discount = "50%",
+//            discountAmount = "100",
+//            isWishlisted = false
+//        )
+//        RestaurantItemListFull(
+//            restaurantItem = sampleRestaurantItem, // Fixed parameter name
+//            onWishlistClick = { },
+//            onThreeDotClick = { },
+//            onItemClick = { }
+//        )
+    }
+}
+
+
+val sampleRestaurantList = listOf(
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.restaurant_image,
+        title = "Paneer Delight Momos",
+        price = "159",
+        restaurantName = "Goblins",
+        rating = "4.0",
+        deliveryTime = "30-35 mins",
+        distance = "5.8 km",
+        address = "Givindpuram",
+        discount = "50%",
+        discountAmount = "100",
+        isWishlisted = false
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.restaurant_image,
+        title = "Veg Roll",
+        price = "99",
+        restaurantName = "Roll Hub",
+        rating = "4.3",
+        deliveryTime = "25-30 mins",
+        distance = "3.2 km",
+        address = "Shastri Nagar",
+        discount = "40%",
+        discountAmount = "80",
+        isWishlisted = false
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.restaurant_image,
+        title = "Chicken Biryani",
+        price = "229",
+        restaurantName = "Biryani House",
+        rating = "4.5",
+        deliveryTime = "35-40 mins",
+        distance = "6.1 km",
+        address = "Rajnagar",
+        discount = "30%",
+        discountAmount = "120",
+        isWishlisted = false
+    )
+)
+
+@Composable
+fun RestaurantListScreen(
+    restaurants: List<RestaurantItemFull> = sampleRestaurantList,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(vertical = 8.dp),
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+    ) {
+        items(restaurants, key = { it.id }) { item ->
+            // call the composable that accepts RestaurantItemFull
+            RestaurantItemListFull(
+                restaurantItem = item,
+                onWishlistClick = { id -> /* handle wishlist for id */ },
+                onThreeDotClick = { id -> /* handle 3-dot */ },
+                onItemClick = { id -> /* handle item click */ }
             )
         }
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .padding(20.dp)
-//    ) {
-//
-//    }
-
-//        Spacer(
-//            modifier = Modifier
-//                .height(2.dp)
-//                .fillMaxWidth()
-//                .background(MaterialTheme.customColors.spacerColor)
-//        )
-
+    }
 }
+
 
 @Composable
 fun PizzasCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+//                .padding(20.dp)
     ) {
-        Text(
-            text = "Pizzas",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+
+//
+//        val sampleFoodItems = listOf(
+//            FoodItem(
+//                price = "2329",
+//                title = "Classic Chicken Salad",
+//                restaurantName = "Caterspoint",
+//                deliveryTime = "60-65 mins",
+//                rating = "4.5★",
+//                calorieInfo = "576 kcal",
+//                proteinInfo = "42g protein",
+//                additionalInfo1 = "32.9",
+//                additionalInfo2 = "Chick",
+//                additionalInfo3 = "Pret A",
+//                tags = listOf("High", "44%", "Hi"),
+//                imageRes = R.drawable.paratha_corner,
+//            ),
+//            FoodItem(
+//                price = "1899",
+//                title = "Mediterranean Bowl",
+//                restaurantName = "Healthy Eats",
+//                deliveryTime = "45-50 mins",
+//                rating = "4.7★",
+//                calorieInfo = "480 kcal",
+//                proteinInfo = "35g protein",
+//                additionalInfo1 = "28.5",
+//                additionalInfo2 = "Veg",
+//                additionalInfo3 = "Fresh",
+//                tags = listOf("Medium", "38%"),
+//                imageRes = R.drawable.paratha_corner,
+//            ),
+//            FoodItem(
+//                price = "2799",
+//                title = "Protein Power Meal",
+//                restaurantName = "Fit Kitchen",
+//                deliveryTime = "55-60 mins",
+//                rating = "4.8★",
+//                calorieInfo = "650 kcal",
+//                proteinInfo = "55g protein",
+//                additionalInfo1 = "35.2",
+//                additionalInfo2 = "Non-Veg",
+//                additionalInfo3 = "Power",
+//                tags = listOf("High", "52%"),
+//                imageRes = R.drawable.paratha_corner,
+//            )
+//        )
+//
+//        FoodCarousel(foodItems = sampleFoodItems)
+
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 20.dp, bottom = 0.dp, start = 20.dp, end = 20.dp
+                )
         )
-        // Add your pizza items here
+        {
+            val bannerImages = listOf(
+                painterResource(id = R.drawable.all_pizzas_banner1),
+                painterResource(id = R.drawable.all_pizzas_banner2),
+                painterResource(id = R.drawable.all_pizzas_banner3),
+            )
+            BannerFood(
+                images = bannerImages,
+                onImageClick = { page ->
+                    when (page) {
+                        0 -> onBanner1Click()
+                        1 -> onBanner2Click()
+                        2 -> onBanner3Click()
+                    }
+                },
+                autoScrollDelay = 2000,
+                height = 250.dp,
+                roundedCornerShape = 20.dp,
+                contentScale = ContentScale.FillBounds,
+                dotSize = 8.dp,
+                modifier = Modifier.padding(bottom = 0.dp)
+            )
+        }
+        FilterButtonFood()
+
+
+        val sampleRestaurants = listOf(
+            Restaurant(
+                id = 1,
+                imageRes = R.drawable.le_fusion_bakery_pizzas,
+                restaurantName = "LE FUSION BAKERY",
+                bestIn = "",
+                rating = 4.4,
+                totalRating = "3",
+                deliverTime = "40-45 mins",
+                categories = "Snacks, Pizzas, Burgers",
+                address = "Raj Nagar",
+                distance = "6.0 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 2,
+                imageRes = R.drawable.la_pinoz_pizza_pizzas,
+                restaurantName = "La Pino'z Pizza",
+                bestIn =  "",
+                rating = 4.2,
+                totalRating = "10K+",
+                deliverTime = "55-65 mins",
+                categories = "Pizzas, Pastas, Italian, Desserts",
+                address = "Raj Nagar",
+                distance = "10.9 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 3,
+                imageRes = R.drawable.bikanervala_pizzas,
+                restaurantName = "Bikanervala",
+                bestIn = "Best In Mithai",
+                rating = 4.3,
+                totalRating = "3.5K+",
+                deliverTime = "55-65 mins",
+                categories = "Bakery, Chinese, North Indian",
+                address = "Govind Puram",
+                distance = "7.7 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 4,
+                imageRes = R.drawable.rominus_pizza_and_burger_pizzas,
+                restaurantName = "Rominus Pizza And Burger",
+                bestIn =  "",
+                rating = 4.1,
+                totalRating = "3.5K+",
+                deliverTime = "55-65 mins",
+                categories = "Pizzas, Italian-American, American",
+                address = "Raj Nagar",
+                distance = "11.1 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 5,
+                imageRes = R.drawable.bros_pizza_pizzas,
+                restaurantName = "Bros Pizza",
+                bestIn = "",
+                rating = 3.8,
+                totalRating = "227",
+                deliverTime = "45-55 mins",
+                categories = "Pizzas, Burgers, Italian, Beverages",
+                address = "SHASTRI NAGAR",
+                distance = "96 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 6,
+                imageRes = R.drawable.burger_king_pizzas,
+                restaurantName = "Burger King",
+                bestIn = "Best In Burger",
+                rating = 4.4,
+                totalRating = "32K+",
+                deliverTime = "50-60 mins",
+                categories = "Burgers, American",
+                address = "Raj Nagar",
+                distance = "11.2 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 7,
+                imageRes = R.drawable.rockers_pizza_pizzas,
+                restaurantName = "Rockers Pizza",
+                bestIn =  "",
+                rating = 4.0,
+                totalRating = "175",
+                deliverTime = "65-75 mins",
+                categories = "Pizzas, Fast Food",
+                address = "Raj Nagar",
+                distance = "11.7 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 8,
+                imageRes = R.drawable.roms_pizza_pizzas,
+                restaurantName = "Roms Pizza",
+                bestIn = "Pure Veg",
+                rating = 4.3,
+                totalRating = "5.9K+",
+                deliverTime = "48-53 mins",
+                categories = "Pizzas, Burgers, sandwich, Fast Food",
+                address = "Shastri Nagar",
+                distance = "8.1 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 9,
+                imageRes = R.drawable.pizza_4_ever_pizzas,
+                restaurantName = "Pizza 4 Ever",
+                bestIn =  "",
+                rating = 4.4,
+                totalRating = "385",
+                deliverTime = "60-70 mins",
+                categories = "Pizzas, Italian",
+                address = "Raj Nagar",
+                distance = "11.7 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 10,
+                imageRes = R.drawable.the_pizza_cafe_pizzas,
+                restaurantName = "The Pizza Cafe",
+                bestIn =  "",
+                rating = 3.9,
+                totalRating = "8.4K+",
+                deliverTime = "50-60 mins",
+                categories = "Pizzas, Fast Food, Italian, Pastas",
+                address = "Shastri Nagar",
+                distance = "96 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 11,
+                imageRes = R.drawable.madan_sweets_pizzas,
+                restaurantName = "Madan Sweets and Restaurant",
+                bestIn = "Best In Local Gems",
+                rating = 4.4,
+                totalRating = "17K+",
+                deliverTime = "65-75 mins",
+                categories = "North Indian, Indian, Punjabi, Sweets",
+                address = "Nehru Nagar",
+                distance = "12.7 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 12,
+                imageRes = R.drawable.pizza_plus_pizzas,
+                restaurantName = "Pizza Plus",
+                bestIn = "Pure Veg",
+                rating = 3.7,
+                totalRating = "566",
+                deliverTime = "50-60 mins",
+                categories = "Continental, Italian",
+                address = "Raj Nagar",
+                distance = "96 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 13,
+                imageRes = R.drawable.samosa_party_pizzas,
+                restaurantName = "Samosa Party",
+                bestIn =  "",
+                rating = 4.4,
+                totalRating = "439",
+                deliverTime = "60-70 mins",
+                categories = "Fast Food, Snacks, Beverages",
+                address = "Raj Nagar",
+                distance = "12.6 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 14,
+                imageRes = R.drawable.ankur_food_services_pizzas,
+                restaurantName = "Ankur Food Services",
+                bestIn = "Pure Veg",
+                rating = 4.6,
+                totalRating = "66",
+                deliverTime = "60-70 mins",
+                categories = "North Indian, Chinese, Continental",
+                address = "Ashok Nagar",
+                distance = "12.3 km",
+                isWishlisted = false
+            ),
+            Restaurant(
+                id = 15,
+                imageRes = R.drawable.nathus_sweets_pizzas,
+                restaurantName = "Nathu's Sweets",
+                bestIn =  "",
+                rating = 4.4,
+                totalRating = "57K+",
+                deliverTime = "65-75 mins",
+                categories = "Sweets, North Indian, Chinese, Snacks",
+                address = "Raj Nagar",
+                distance = "11.2 km",
+                isWishlisted = false
+            )
+        )
+
+//        RestaurantList(
+//            restaurants = sampleRestaurants,
+//            onRestaurantClick = { restaurant ->
+//                // Handle restaurant click
+//                println("Clicked on: ${restaurant.restaurantName}")
+//            },
+//            onWishlistToggle = { restaurant ->
+//                // Handle wishlist toggle
+//                println("Toggled wishlist for: ${restaurant.restaurantName}")
+//            }
+//        )
     }
 }
 

@@ -268,30 +268,101 @@ val sampleRestaurants = listOf(
         distance = "5.0 km",
         isWishlisted = false
     ),
-    Restaurant(
-        id = 2,
-        imageRes = R.drawable.restaurant_2, // Replace with your image resource
-        restaurantName = "Burger Singh(Big Punjabi...)",
-        bestIn = "",
-        rating = 4.2,
-        totalRating = "868",
-        deliverTime = "25–30 mins",
-        categories = "Burgers, Snacks, Desserts, Beverages",
-        address = "DMRC Metro Station",
-        distance = "21 km",
-        isWishlisted = true
-    ),
-    Restaurant(
-        id = 3,
-        imageRes = R.drawable.restaurant_3, // Replace with your image resource
-        restaurantName = "McDonald's",
-        bestIn = "Best In Burger",
-        rating = 4.4,
-        totalRating = "10K+",
-        deliverTime = "35–40 mins",
-        categories = "American",
-        address = "Sector 35",
-        distance = "5.0 km",
-        isWishlisted = false
-    )
 )
+
+//
+//val sampleRestaurants = listOf(
+//    Restaurant(
+//        id = 1,
+//        imageRes = R.drawable.all_pizzas_banner1,
+//        restaurantName = "Paratha corner",
+//        bestIn = "Best In Paratha",
+//        rating = 4.3,
+//        totalRating = "227",
+//        deliverTime = "55–65 mins",
+//        categories = "Indian",
+//        address = "Raj Nagar",
+//        distance = "6.4 km",
+//        isWishlisted = false
+//    ),
+//    Restaurant(
+//        id = 2,
+//        imageRes = R.drawable.all_pizzas_banner2,
+//        restaurantName = "New Rati Masala",
+//        bestIn = "Best In Spicy",
+//        rating = 4.2,
+//        totalRating = "318",
+//        deliverTime = "50–60 mins",
+//        categories = "Tandoor, Chinese",
+//        address = "Govind Puram",
+//        distance = "6.5 km",
+//        isWishlisted = false
+//    ),
+//    Restaurant(
+//        id = 3,
+//        imageRes = R.drawable.all_pizzas_banner3,
+//        restaurantName = "Fauji Dhaba",
+//        bestIn = "Best In All",
+//        rating = 4.4,
+//        totalRating = "249",
+//        deliverTime = "30–35 mins",
+//        categories = "North Indian, Chinese, Tandoor, ...",
+//        address = "Govindpuram",
+//        distance = "6.8 km",
+//        isWishlisted = false,
+//        hasFlatDeal = true,
+//        flatDealText = "FLAT DEAL • ¥200 OFF ABOVE $799",
+//        itemsPrice = "ITEMS AT ¥119"
+//    ),
+//    Restaurant(
+//        id = 4,
+//        imageRes = R.drawable.indian_tadka,
+//        restaurantName = "Indian Tadka",
+//        bestIn = "Best In Thali",
+//        rating = 4.0,
+//        totalRating = "<3",
+//        deliverTime = "50–60 mins",
+//        categories = "North Indian",
+//        address = "Raj Nagar",
+//        distance = "6.1 km",
+//        isWishlisted = false
+//    ),
+//    Restaurant(
+//        id = 5,
+//        imageRes = R.drawable.bikanervala,
+//        restaurantName = "Bikanervala",
+//        bestIn = "Best In Mithai",
+//        rating = 4.3,
+//        totalRating = "3.5K+",
+//        deliverTime = "55–65 mins",
+//        categories = "Bakery, Chinese, North Indian, Street Food",
+//        address = "Govind Puram",
+//        distance = "7.7 km",
+//        isWishlisted = false
+//    ),
+//    Restaurant(
+//        id = 6,
+//        imageRes = R.drawable.restaurant_1,
+//        restaurantName = "Burger King",
+//        bestIn = "Best In Burger",
+//        rating = 4.3,
+//        totalRating = "26K+",
+//        deliverTime = "30–35 mins",
+//        categories = "Burgers, American",
+//        address = "Sector 35",
+//        distance = "5.0 km",
+//        isWishlisted = false
+//    )
+//)
+//
+//RestaurantList(
+//restaurants = sampleRestaurants,
+//onRestaurantClick = { restaurant ->
+//    // Handle restaurant click
+//    println("Clicked on: ${restaurant.restaurantName}")
+//},
+//onWishlistToggle = { restaurant ->
+//    // Handle wishlist toggle
+//    println("Toggled wishlist for: ${restaurant.restaurantName}")
+//}
+//)

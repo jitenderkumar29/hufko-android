@@ -52,19 +52,19 @@ fun CashbackButton(
                     shape = CircleShape
                 )
                 .background(backgroundColor, CircleShape)
-                .padding(horizontal = 12.dp, vertical = 2.dp)
+                .padding(horizontal = 12.dp, vertical = 0.dp)
         ) {
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(
                     text = "₹",
-                    fontSize = 24.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
                     color = textColor
                 )
                 Spacer(modifier = Modifier.width(0.dp))
                 Text(
                     text = amount,
-                    fontSize = 20.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
                     color = textColor
                 )

@@ -1,16 +1,13 @@
 package com.example.hufko.components.homescreen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -18,7 +15,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hufko.R
-import com.example.hufko.components.searchbar.SearchBar
 import com.example.hufko.ui.theme.customColors
 data class Location(
     val house: String = "",
@@ -155,7 +151,6 @@ data class Location(
 //        }
 //    }
 //}
-
 @Composable
 fun LocationSelectionButton(
     selectedLocation: Location,
@@ -166,14 +161,6 @@ fun LocationSelectionButton(
         onClick = onLocationClick,
         modifier = modifier
             .background(MaterialTheme.customColors.header),
-//            .background(
-//                brush = Brush.verticalGradient(
-//                    colors = listOf(
-//                        Color(0xFF9BCDFE),
-//                        Color(0xFFC2E1FE)
-//                    )
-//                )
-//            ),
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
         ),
@@ -182,28 +169,18 @@ fun LocationSelectionButton(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 8.dp, vertical = 0.dp),
+                .padding(horizontal = 8.dp, vertical = 2.dp), // Reduced vertical padding to 2dp
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.outline_home_24),
                 contentDescription = "Location",
-                tint = MaterialTheme.customColors.white
+                tint = MaterialTheme.customColors.white,
+                modifier = Modifier.size(18.dp)
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(6.dp))
 
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-//                Text(
-//                    text = "Delivery in 10 minutes",
-//                    style = MaterialTheme.typography.bodyLarge,
-//                    fontWeight = FontWeight.Bold,
-//                    fontSize = 18.sp,
-//                    color = MaterialTheme.customColors.white,
-//                    maxLines = 1
-//                )
-//                Spacer(modifier = Modifier.height(0.dp))
+            Column {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -215,7 +192,7 @@ fun LocationSelectionButton(
                         color = MaterialTheme.customColors.white,
                         maxLines = 1
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(3.dp))
                     Text(
                         text = if (!selectedLocation.isEmpty()) selectedLocation.getDisplayAddress() else "Select location",
                         style = MaterialTheme.typography.bodyMedium,
@@ -229,11 +206,12 @@ fun LocationSelectionButton(
                 }
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(6.dp))
             Icon(
                 imageVector = Icons.Default.KeyboardArrowDown,
                 contentDescription = "Change location",
-                tint = MaterialTheme.customColors.white
+                tint = MaterialTheme.customColors.white,
+                modifier = Modifier.size(18.dp)
             )
         }
     }

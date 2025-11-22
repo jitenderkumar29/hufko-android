@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -49,10 +49,17 @@ fun CashbackButton(
                 .border(
                     width = 1.25.dp,
                     color = borderColor,
-                    shape = CircleShape
+                    shape = RoundedCornerShape(8.dp)
+//                    shape = CircleShape
                 )
-                .background(backgroundColor, CircleShape)
-                .padding(horizontal = 12.dp, vertical = 0.dp)
+//                .shadow(
+//                    elevation = 0.dp,
+//                    shape = RoundedCornerShape(8.dp),
+//                    clip = true
+//                )
+                .background(backgroundColor, RoundedCornerShape(8.dp))
+//                .background(backgroundColor, CircleShape)
+                .padding(horizontal = 8.dp, vertical = 4.dp)
         ) {
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(
@@ -71,7 +78,7 @@ fun CashbackButton(
             }
             // Add extra space for the overlapping image
             if (showCoinIcon) {
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(15.dp))
             }
         }
 

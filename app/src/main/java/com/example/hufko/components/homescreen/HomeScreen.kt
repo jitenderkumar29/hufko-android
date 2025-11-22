@@ -4,11 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.FloatingActionButtonDefaults.elevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -60,7 +63,8 @@ fun HomeScreen() {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(MaterialTheme.customColors.header)
+//                                .background(MaterialTheme.customColors.header.copy(alpha = 0.5f))
+//                                .background(MaterialTheme.customColors.header)
 //                            .background(
 //                                brush = Brush.verticalGradient(
 //                                    colors = listOf(
@@ -73,19 +77,28 @@ fun HomeScreen() {
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .weight(0.80f)
-                                    .padding(top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp
+                                    .weight(0.85f)
+                                    .padding(top = 0.dp, bottom = 4.dp, start = 0.dp, end = 0.dp
                                     )
+                                    .shadow(
+                                        elevation = 0.dp,
+                                        shape = RoundedCornerShape(8.dp),
+                                        clip = true
+                                    )
+                                    .background(
+                                        Color(0x56A7A7A7)
+                                    ),
                             ) {
                                 LocationSelectionButton(
                                     selectedLocation = selectedLocation,
                                     onLocationClick = { showLocationDialog = true }
                                 )
                             }
+                            Spacer(modifier = Modifier.width(5.dp))
                             Box(
                                 modifier = Modifier
-                                    .weight(0.20f)
-                                    .padding( top = 8.dp, bottom = 8.dp, start = 0.dp, end = 0.dp
+                                    .weight(0.15f)
+                                    .padding( top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp
                                     )
                             ) {
                                 CashbackButton(amount = "50")

@@ -111,46 +111,6 @@ data class Location(
     }
 }
 
-//@Composable
-//fun HomeScreenHeader(
-//    selectedLocation: Location,
-//    onLocationClick: () -> Unit,
-//    onSearch: (String) -> Unit,
-//    onQRCodeScan: () -> Unit,
-//    modifier: Modifier = Modifier
-//) {
-//    Column(
-//        modifier = modifier
-//            .fillMaxWidth()
-//    ) {
-//        // Location Button
-//        LocationSelectionButton(
-//            selectedLocation = selectedLocation,
-//            onLocationClick = onLocationClick,
-//            modifier = Modifier
-//                .fillMaxWidth()
-//        )
-//
-//        // Search Section with Reduced Gap Above
-//        var query by remember { mutableStateOf("") }
-//
-//        Surface(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(top = 6.dp, bottom = 12.dp)
-//        ) {
-//            SearchBar(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 8.dp, vertical = 8.dp),
-//                query = query,
-//                onQueryChange = { query = it },
-//                onSearch = { onSearch(query) },
-//                onQRCodeScan = onQRCodeScan
-//            )
-//        }
-//    }
-//}
 @Composable
 fun LocationSelectionButton(
     selectedLocation: Location,
@@ -160,58 +120,71 @@ fun LocationSelectionButton(
     Card(
         onClick = onLocationClick,
         modifier = modifier
-            .background(MaterialTheme.customColors.header),
+            .height(30.dp)
+            .background(Color(0x526A2E22)),
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 8.dp, vertical = 2.dp), // Reduced vertical padding to 2dp
+                .padding(horizontal = 6.dp, vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+
             Icon(
                 painter = painterResource(id = R.drawable.outline_home_24),
                 contentDescription = "Location",
                 tint = MaterialTheme.customColors.white,
-                modifier = Modifier.size(18.dp)
+                modifier = Modifier.size(16.dp)
             )
-            Spacer(modifier = Modifier.width(6.dp))
 
-            Column {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+            Spacer(modifier = Modifier.width(4.dp))
+
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(),
+                verticalArrangement = Arrangement.Center
+            ) {
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+
                     Text(
                         text = "HOME",
-                        style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.customColors.white,
                         maxLines = 1
                     )
+
                     Spacer(modifier = Modifier.width(3.dp))
+
                     Text(
-                        text = if (!selectedLocation.isEmpty()) selectedLocation.getDisplayAddress() else "Select location",
-                        style = MaterialTheme.typography.bodyMedium,
+                        text = if (!selectedLocation.isEmpty())
+                            selectedLocation.getDisplayAddress()
+                        else "Select location",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 14.sp,
-                        color = if (!selectedLocation.isEmpty()) MaterialTheme.customColors.white else MaterialTheme.customColors.white.copy(alpha = 0.8f),
+                        fontSize = 12.sp,
+                        color = if (!selectedLocation.isEmpty())
+                            MaterialTheme.customColors.white
+                        else MaterialTheme.customColors.white.copy(alpha = 0.8f),
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.weight(1f)
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.width(6.dp))
+            Spacer(modifier = Modifier.width(4.dp))
+
             Icon(
                 imageVector = Icons.Default.KeyboardArrowDown,
                 contentDescription = "Change location",
                 tint = MaterialTheme.customColors.white,
-                modifier = Modifier.size(18.dp)
+                modifier = Modifier.size(16.dp)
             )
         }
     }

@@ -2,6 +2,7 @@ package com.example.hufko.components.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,8 +18,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -30,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -42,7 +42,7 @@ import com.example.hufko.R
 
 data class RestaurantItemFull(
     val id: Int,
-    val imageRes: Int, // Changed from imageUrl: String to imageRes: Int
+    val imageRes: Int,
     val title: String,
     val price: String,
     val restaurantName: String,
@@ -57,7 +57,7 @@ data class RestaurantItemFull(
 
 @Composable
 fun RestaurantItemListFull(
-    restaurantItem: RestaurantItemFull, // Fixed parameter name
+    restaurantItem: RestaurantItemFull,
     modifier: Modifier = Modifier,
     onWishlistClick: (Int) -> Unit = {},
     onThreeDotClick: (Int) -> Unit = {},
@@ -65,16 +65,23 @@ fun RestaurantItemListFull(
 ) {
     var isWishlisted by remember { mutableStateOf(restaurantItem.isWishlisted) }
 
-    Card(
-        onClick = { onItemClick(restaurantItem.id) },
+    Row(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .background(Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        shape = RoundedCornerShape(12.dp)
+            .shadow(
+                elevation = 4.dp,
+                shape = RoundedCornerShape(12.dp),
+                clip = true
+            )
+            .background(Color.White, RoundedCornerShape(12.dp))
+            .clickable { onItemClick(restaurantItem.id) }
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White, RoundedCornerShape(12.dp))
+        ) {
             // Image section with overlay buttons
             Box(
                 modifier = Modifier
@@ -82,7 +89,7 @@ fun RestaurantItemListFull(
                     .height(220.dp)
             ) {
                 // Restaurant image using local drawable
-                androidx.compose.foundation.Image(
+                Image(
                     painter = painterResource(id = restaurantItem.imageRes),
                     contentDescription = restaurantItem.title,
                     modifier = Modifier
@@ -105,8 +112,7 @@ fun RestaurantItemListFull(
                             isWishlisted = !isWishlisted
                             onWishlistClick(restaurantItem.id)
                         },
-                        modifier = Modifier
-                            .size(32.dp)
+                        modifier = Modifier.size(32.dp)
                     ) {
                         Icon(
                             imageVector = if (isWishlisted) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
@@ -121,8 +127,7 @@ fun RestaurantItemListFull(
                     // Three dot menu button
                     IconButton(
                         onClick = { onThreeDotClick(restaurantItem.id) },
-                        modifier = Modifier
-                            .size(32.dp)
+                        modifier = Modifier.size(32.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.MoreVert,
@@ -168,7 +173,7 @@ fun RestaurantItemListFull(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White)
-                    .padding(16.dp)
+                    .padding(12.dp)
             ) {
                 // Restaurant name and rating row
                 Row(
@@ -178,7 +183,7 @@ fun RestaurantItemListFull(
                 ) {
                     Text(
                         text = restaurantItem.restaurantName,
-                        fontSize = 18.sp,
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black,
                         maxLines = 1,
@@ -191,19 +196,19 @@ fun RestaurantItemListFull(
                     Row(
                         modifier = Modifier
                             .background(Color(0xFF007631), RoundedCornerShape(4.dp))
-                            .padding(horizontal = 4.dp, vertical = 0.dp),
+                            .padding(horizontal = 6.dp, vertical = 3.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = restaurantItem.rating,
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFFFFFFFF)
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = "★",
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFFFFFFFF)
                         )
@@ -219,20 +224,19 @@ fun RestaurantItemListFull(
                     fontWeight = FontWeight.Medium,
                     color = Color.Gray
                 )
+
                 // Discount badge at bottom left
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(
-                    modifier = Modifier
-//                        .padding(horizontal = 4.dp)
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
                         painter = painterResource(R.drawable.ic_percent),
                         contentDescription = restaurantItem.title,
                         modifier = Modifier
-                            .size(22.dp)          // Icon size
-                            .clip(RoundedCornerShape(4.dp)), // Optional small rounding
+                            .size(22.dp)
+                            .clip(RoundedCornerShape(4.dp)),
                         contentScale = ContentScale.Fit
                     )
 
@@ -245,13 +249,31 @@ fun RestaurantItemListFull(
                         fontWeight = FontWeight.Bold
                     )
                 }
-
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = restaurantItem.title,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Gray,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = "₹${restaurantItem.price}",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Gray,
+                    )
+                }
             }
         }
     }
 }
 
-// Updated extension function for local images
+// Extension function for local images
 @Composable
 fun RestaurantItemListFull(
     imageRes: Int,
@@ -297,7 +319,7 @@ fun RestaurantItemListFull(
 // Sample data with local drawable
 val sampleRestaurantItem = RestaurantItemFull(
     id = 1,
-    imageRes = R.drawable.restaurant_image, // Use your actual drawable resource
+    imageRes = R.drawable.restaurant_image_all_food_1,
     title = "Paneer Delight Momos",
     price = "159",
     restaurantName = "Goblins",
@@ -310,12 +332,58 @@ val sampleRestaurantItem = RestaurantItemFull(
     isWishlisted = false
 )
 
+val sampleRestaurantItems = listOf(
+    sampleRestaurantItem,
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.restaurant_image_all_food_2,
+        title = "Veg Biryani",
+        price = "199",
+        restaurantName = "Spice Garden",
+        rating = "4.5",
+        deliveryTime = "25-30 mins",
+        distance = "3.2 km",
+        address = "Main Street",
+        discount = "40%",
+        discountAmount = "80",
+        isWishlisted = true
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.restaurant_image_all_food_3,
+        title = "Butter Chicken",
+        price = "299",
+        restaurantName = "Royal Darbar",
+        rating = "4.2",
+        deliveryTime = "35-40 mins",
+        distance = "7.1 km",
+        address = "City Center",
+        discount = "30%",
+        discountAmount = "120",
+        isWishlisted = false
+    )
+)
 
 @Preview(showBackground = true)
 @Composable
 fun RestaurantItemListFullPreview() {
+    Column {
+        sampleRestaurantItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SingleRestaurantItemListFullPreview() {
     RestaurantItemListFull(
-        restaurantItem = sampleRestaurantItem, // Fixed parameter name
+        restaurantItem = sampleRestaurantItem,
         onWishlistClick = { },
         onThreeDotClick = { },
         onItemClick = { }

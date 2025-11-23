@@ -21,6 +21,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -31,13 +33,18 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.collections.isNotEmpty
 
+enum class DotPosition {
+    OVERLAY,      // Dots overlay on bottom of image
+    BELOW_IMAGE   // Dots below the image
+}
+
 @Composable
 fun BannerFood(
     images: List<Painter>,
     onImageClick: (Int) -> Unit = {},
     modifier: Modifier = Modifier,
     height: Dp = 270.dp,
-    roundedCornerShape: Dp = 16.dp, // New parameter for dynamic rounded corners
+    roundedCornerShape: Dp = 16.dp,
     dotSize: Dp? = null,
     dotPadding: Dp? = null,
     selectedDotColor: Color = MaterialTheme.customColors.linkColor,
@@ -45,7 +52,9 @@ fun BannerFood(
     backgroundColor: Color = Color.White,
     contentScale: ContentScale = ContentScale.FillBounds,
     autoScrollDelay: Long = 5000,
-    autoScrollEnabled: Boolean = true
+    autoScrollEnabled: Boolean = true,
+    dotPosition: DotPosition = DotPosition.BELOW_IMAGE, // New parameter for dot position
+    overlayGradient: Boolean = true // Gradient effect for overlay dots
 ) {
     require(images.isNotEmpty()) { "Images list cannot be empty" }
 
@@ -55,10 +64,9 @@ fun BannerFood(
     )
     val coroutineScope = rememberCoroutineScope()
 
-    // Create rounded corner shape
     val bannerShape = RoundedCornerShape(roundedCornerShape)
 
-    // ✅ Auto-scroll effect with smooth animation
+    // Auto-scroll effect
     LaunchedEffect(autoScrollEnabled) {
         if (!autoScrollEnabled) return@LaunchedEffect
 
@@ -80,40 +88,75 @@ fun BannerFood(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(height)
-                .padding(horizontal = 0.dp) // Add horizontal padding for rounded corners
         ) {
             // Pager with images and rounded corners
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier
                     .fillMaxSize()
-                    .clip(bannerShape) // Apply rounded corners to the pager
+                    .clip(bannerShape)
             ) { page ->
                 Image(
                     painter = images[page],
                     contentDescription = "Banner ${page + 1}",
                     modifier = Modifier
                         .fillMaxSize()
-                        .clip(bannerShape) // Apply rounded corners to each image
+                        .clip(bannerShape)
                         .clickable { onImageClick(page) },
                     contentScale = contentScale
                 )
             }
+
+            // Overlay dots - shown only when dotPosition is OVERLAY
+            if (dotPosition == DotPosition.OVERLAY && (dotSize == null || dotSize > 0.dp)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .then(
+                            if (overlayGradient) {
+                                Modifier.drawWithContent {
+                                    drawContent()
+                                    // Draw gradient overlay for better dot visibility
+                                    drawRect(
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(
+                                                Color.Transparent,
+                                                Color.Black.copy(alpha = 0.3f)
+                                            ),
+                                            startY = size.height * 0.6f,
+                                            endY = size.height
+                                        )
+                                    )
+                                }
+                            } else {
+                                Modifier
+                            }
+                        ),
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    OverlayDotsFashion(
+                        pagerState = pagerState,
+                        imageCount = images.size,
+                        dotSize = dotSize,
+                        dotPadding = dotPadding,
+                        selectedDotColor = Color.White, // White for better visibility on overlay
+                        unselectedDotColor = Color.White.copy(alpha = 0.9f),
+                        indicatorDuration = autoScrollDelay,
+                        modifier = Modifier.padding(bottom = 12.dp) // Padding from bottom
+                    )
+                }
+            }
         }
 
-        Spacer(
-            modifier = Modifier.height(8.dp)
-                .fillMaxWidth()
-                .background(backgroundColor)
-        )
+        // Below-image dots - shown only when dotPosition is BELOW_IMAGE
+        if (dotPosition == DotPosition.BELOW_IMAGE && (dotSize == null || dotSize > 0.dp)) {
+            Column {
+                Spacer(
+                    modifier = Modifier.height(8.dp)
+                        .fillMaxWidth()
+                        .background(backgroundColor)
+                )
 
-        // Show dots only if dotSize is explicitly set to a positive value
-        if (dotSize == null || dotSize > 0.dp) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .padding(bottom = 1.dp)
-            ) {
                 OverlayDotsFashion(
                     pagerState = pagerState,
                     imageCount = images.size,
@@ -123,18 +166,18 @@ fun BannerFood(
                     unselectedDotColor = Color.Gray,
                     indicatorDuration = autoScrollDelay
                 )
+
+                Spacer(
+                    modifier = Modifier.height(3.dp)
+                        .fillMaxWidth()
+                        .background(backgroundColor)
+                )
             }
         }
-
-        Spacer(
-            modifier = Modifier.height(3.dp)
-                .fillMaxWidth()
-                .background(backgroundColor)
-        )
     }
 }
 
-// Dot in Circle shape
+// Enhanced Dot indicator with modifier support
 @Composable
 fun OverlayDotsFashion(
     pagerState: PagerState,
@@ -143,11 +186,11 @@ fun OverlayDotsFashion(
     dotPadding: Dp? = null,
     selectedDotColor: Color = Color.White,
     unselectedDotColor: Color = Color.Gray,
-    indicatorDuration: Long = 3000L
+    indicatorDuration: Long = 3000L,
+    modifier: Modifier = Modifier // Added modifier parameter
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    // Default values when null
     val defaultDotSize = 8.dp
     val defaultDotPadding = 6.dp
 
@@ -155,7 +198,7 @@ fun OverlayDotsFashion(
     val actualDotPadding = dotPadding ?: defaultDotPadding
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 1.dp),
         contentAlignment = Alignment.BottomCenter
@@ -186,7 +229,6 @@ fun OverlayDotsFashion(
                     }
                 }
 
-                // Animate circle slightly bigger when selected
                 val targetSize = if (isSelected) actualDotSize * 1.2f else actualDotSize
                 val animatedSize = animateDpAsState(targetValue = targetSize)
 

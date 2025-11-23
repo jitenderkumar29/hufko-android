@@ -294,6 +294,9 @@ fun AllCategoryPage(
             roundedCornerShape = 0.dp,
             contentScale = ContentScale.FillBounds,
             dotSize = 8.dp,
+            dotPosition = DotPosition.OVERLAY,
+            overlayGradient = true, // Adds gradient for better visibility
+            selectedDotColor = Color.White,
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -369,7 +372,7 @@ fun AllCategoryPage(
         FilterButtonFood()
         Spacer(modifier = Modifier.height(15.dp))
         Text(
-            text = "RESTAURANTS DELIVERING TO YOU",
+            text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -381,7 +384,7 @@ fun AllCategoryPage(
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Featured",
+            text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
@@ -676,36 +679,355 @@ fun PizzasCategoryPage() {
             .fillMaxSize()
 //                .padding(20.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 20.dp, bottom = 0.dp, start = 20.dp, end = 20.dp
-                )
+        Spacer(modifier = Modifier.height(15.dp))
+        // Style Guide 101
+        val styleGuideCategoriesSimple = listOf(
+            CategoryItemF(0, "", R.drawable.ic_pizzas_food_1, ""),
+            CategoryItemF(1, "", R.drawable.ic_pizzas_food_2, ""),
+            CategoryItemF(2, "", R.drawable.ic_pizzas_food_3, ""),
+            CategoryItemF(3, "", R.drawable.ic_pizzas_food_4, ""),
+            CategoryItemF(4, "", R.drawable.ic_pizzas_food_5, ""),
+            CategoryItemF(5, "", R.drawable.ic_pizzas_food_6, ""),
         )
-        {
-            val bannerImages = listOf(
-                painterResource(id = R.drawable.all_pizzas_banner1),
-                painterResource(id = R.drawable.all_pizzas_banner2),
-                painterResource(id = R.drawable.all_pizzas_banner3),
-            )
-            BannerFood(
-                images = bannerImages,
-                onImageClick = { page ->
-                    when (page) {
-                        0 -> onBanner1Click()
-                        1 -> onBanner2Click()
-                        2 -> onBanner3Click()
-                    }
-                },
-                autoScrollDelay = 2000,
-                height = 250.dp,
-                roundedCornerShape = 20.dp,
-                contentScale = ContentScale.FillBounds,
-                dotSize = 8.dp,
-                modifier = Modifier.padding(bottom = 0.dp)
-            )
-        }
+//        Image(
+//            painter = painterResource(R.drawable.ic_style_guide_header_casual_men),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Recommended for you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        CategoryListDoubleF(
+//            items = styleGuideCategoriesSimple,
+//            onItemClick = { item -> println("Selected: ${item.name}") },
+//            showOverlayOnImage = false,
+//            showItemName = false,
+//            itemWidth = 140.dp,
+//            itemHeight = 150.dp,
+//            horizontalSpacing = 12.dp,
+//            verticalPadding = 12.dp,
+//            backgroundColor = Color(0xFFFFFFFF),
+////                        showOverlayOnImage = false,
+////                        overlayBackground = Color.Black.copy(alpha = 0.6f),
+//        )
+        Spacer(modifier = Modifier.height(10.dp))
         FilterButtonFood()
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        // Sample data based on the provided images
+        val sampleRestaurantItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.restaurant_image_pizzas_food_1,
+                title = "Cheese And Paneer Pizza",
+                price = "206",
+                restaurantName = "Gangs Of Goli",
+                rating = "3.9",
+                deliveryTime = "50-55 mins",
+                distance = "8.3 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Main Street, Downtown",
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.restaurant_image_pizzas_food_2,
+                title = "Farm House Chicken Pizza",
+                price = "390",
+                restaurantName = "FFC Express",
+                rating = "5.9",
+                deliveryTime = "55-60 mins",
+                distance = "8.2 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Food Court, Mall Road",
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.restaurant_image_pizzas_food_3,
+                title = "Onion and Capsicum Pizza",
+                price = "264",
+                restaurantName = "Pizza Cafe",
+                rating = "3.4",
+                deliveryTime = "50-55 mins",
+                distance = "6.9 km",
+                discount = "Buy 1 get 1 free",
+                discountAmount = "On all pizzas",
+                address = "Central Plaza",
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.restaurant_image_pizzas_food_4,
+                title = "Farm House Pizza",
+                price = "799",
+                restaurantName = "Eddy's Restaurant",
+                rating = "4.5",
+                deliveryTime = "50-55 mins",
+                distance = "9 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "North End Circle",
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.restaurant_image_pizzas_food_5,
+                title = "Capsicum Paneer Pizza",
+                price = "115",
+                restaurantName = "Aapka Apna Restaurant",
+                rating = "5.43",
+                deliveryTime = "45-50 mins",
+                distance = "6.9 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "South Extension",
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.restaurant_image_pizzas_food_6,
+                title = "Paneer Olives Jalapeno Combo",
+                price = "299",
+                restaurantName = "Pizza Lover's",
+                rating = "4.3",
+                deliveryTime = "40-45 mins",
+                distance = "7.5 km",
+                discount = "Buy 1 get 1 free",
+                discountAmount = "On combo pizzas",
+                address = "West Gate Market",
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.restaurant_image_pizzas_food_7,
+                title = "Country Feast Pizza",
+                price = "199",
+                restaurantName = "Cafe Desilicious",
+                rating = "4.0",
+                deliveryTime = "50-55 mins",
+                distance = "8.3 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "East Side Plaza",
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.restaurant_image_pizzas_food_8,
+                title = "Onion Com Pizza",
+                price = "245",
+                restaurantName = "Pizza House",
+                rating = "3.1",
+                deliveryTime = "45-50 mins",
+                distance = "6.9 km",
+                discount = "Buy 1 get 1 free",
+                discountAmount = "On medium pizzas",
+                address = "City Center",
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.restaurant_image_pizzas_food_9,
+                title = "Paneer and Onion Pizza",
+                price = "100",
+                restaurantName = "Hot Spot Pizza",
+                rating = "4.0",
+                deliveryTime = "50-55 mins",
+                distance = "8.2 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Commercial Street",
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.restaurant_image_pizzas_food_10,
+                title = "Onion and Paneer Pizza",
+                price = "129",
+                restaurantName = "Rockers Pizza",
+                rating = "4.0",
+                deliveryTime = "55-60 mins",
+                distance = "9.1 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Entertainment District",
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.restaurant_image_pizzas_food_11,
+                title = "Exotic Paneer Pizza",
+                price = "170",
+                restaurantName = "New Roi Masala Restaurant",
+                rating = "4.1",
+                deliveryTime = "50-55 mins",
+                distance = "8.2 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Royal Market",
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.restaurant_image_pizzas_food_12,
+                title = "Onion and Paneer Pizza",
+                price = "159",
+                restaurantName = "Roms Pizza",
+                rating = "4.1",
+                deliveryTime = "55-60 mins",
+                distance = "8.6 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Business Park Area",
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.restaurant_image_pizzas_food_13,
+                title = "Veggie Paradise Pizza",
+                price = "299",
+                restaurantName = "Pizza Point",
+                rating = "3.2",
+                deliveryTime = "50-55 mins",
+                distance = "6.9 km",
+                discount = "Buy 1 get 1 free",
+                discountAmount = "On large pizzas",
+                address = "Shopping Complex",
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.restaurant_image_pizzas_food_14,
+                title = "Farmfresh Pizza",
+                price = "240",
+                restaurantName = "Roms Pizza",
+                rating = "4.1",
+                deliveryTime = "40-45 mins",
+                distance = "5.8 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Residential Area",
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.restaurant_image_pizzas_food_15,
+                title = "Paneer And Onion Pizza",
+                price = "115",
+                restaurantName = "Amiche Pizza",
+                rating = "3.7",
+                deliveryTime = "60-65 mins",
+                distance = "8.6 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "University Road",
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.restaurant_image_pizzas_food_16,
+                title = "Cheese & Corn Pizza",
+                price = "145",
+                restaurantName = "Pepper's Pizza",
+                rating = "4.2",
+                deliveryTime = "40-45 mins",
+                distance = "5.8 km",
+                discount = "Flat ₹175 OFF",
+                discountAmount = "above ₹349",
+                address = "Tech Park Zone",
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.restaurant_image_pizzas_food_17,
+                title = "Veg Extravaganza Pizza",
+                price = "350",
+                restaurantName = "SEKAI MISE",
+                rating = "New",
+                deliveryTime = "45-50 mins",
+                distance = "7.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "International Street",
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.restaurant_image_pizzas_food_18,
+                title = "Classic Margherita Pizza",
+                price = "109",
+                restaurantName = "La Peto's Pizza",
+                rating = "4.0",
+                deliveryTime = "40-45 mins",
+                distance = "5.6 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Italian Corner",
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.restaurant_image_pizzas_food_19,
+                title = "Special Veg Platter",
+                price = "350",
+                restaurantName = "Shree Jee Restaurant",
+                rating = "4.4",
+                deliveryTime = "45-50 mins",
+                distance = "7.3 km",
+                discount = "60% OFF",
+                discountAmount = "up to ₹120",
+                address = "Traditional Market",
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.restaurant_image_pizzas_food_20,
+                title = "Rock Special Pizza",
+                price = "275",
+                restaurantName = "Rock's Pizza",
+                rating = "4.2",
+                deliveryTime = "50-55 mins",
+                distance = "9.1 km",
+                discount = "50% OFF",
+                discountAmount = "up to ₹100",
+                address = "Music Street",
+            )
+        )
+
+        Column {
+            sampleRestaurantItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
 
     }
 }

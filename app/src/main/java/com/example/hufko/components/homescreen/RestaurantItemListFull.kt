@@ -219,7 +219,7 @@ fun RestaurantItemListFull(
 
                 // Delivery time and distance
                 Text(
-                    text = "${restaurantItem.deliveryTime},  ${restaurantItem.distance}, ${restaurantItem.address}",
+                    text = "${restaurantItem.deliveryTime}, ${restaurantItem.distance}, ${restaurantItem.address}",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.Gray

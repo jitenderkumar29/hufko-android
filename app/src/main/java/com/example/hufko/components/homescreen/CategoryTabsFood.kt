@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -674,60 +675,175 @@ fun AllCategoryPage(
 
 @Composable
 fun PizzasCategoryPage() {
+    var selectedFilters by remember { mutableStateOf(setOf<String>()) }
+    // Additional helper functions
+    fun filterByDeliveryTime(maxTime: Int) {
+        println("Filter by max delivery time: $maxTime minutes")
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
 //                .padding(20.dp)
     ) {
-        Spacer(modifier = Modifier.height(15.dp))
-        // Style Guide 101
-        val styleGuideCategoriesSimple = listOf(
-            CategoryItemF(0, "", R.drawable.ic_pizzas_food_1, ""),
-            CategoryItemF(1, "", R.drawable.ic_pizzas_food_2, ""),
-            CategoryItemF(2, "", R.drawable.ic_pizzas_food_3, ""),
-            CategoryItemF(3, "", R.drawable.ic_pizzas_food_4, ""),
-            CategoryItemF(4, "", R.drawable.ic_pizzas_food_5, ""),
-            CategoryItemF(5, "", R.drawable.ic_pizzas_food_6, ""),
-        )
-//        Image(
-//            painter = painterResource(R.drawable.ic_style_guide_header_casual_men),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Recommended for you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        CategoryListDoubleF(
-//            items = styleGuideCategoriesSimple,
-//            onItemClick = { item -> println("Selected: ${item.name}") },
-//            showOverlayOnImage = false,
-//            showItemName = false,
-//            itemWidth = 140.dp,
-//            itemHeight = 150.dp,
-//            horizontalSpacing = 12.dp,
-//            verticalPadding = 12.dp,
-//            backgroundColor = Color(0xFFFFFFFF),
-////                        showOverlayOnImage = false,
-////                        overlayBackground = Color.Black.copy(alpha = 0.6f),
-//        )
         Spacer(modifier = Modifier.height(10.dp))
-        FilterButtonFood()
+        FilterButtonFood(
+            onFilterClick = { filterName ->
+                // Toggle filter selection
+                selectedFilters = if (selectedFilters.contains(filterName)) {
+                    selectedFilters - filterName
+                } else {
+                    selectedFilters + filterName
+                }
+
+                // Handle specific filter actions
+                when (filterName) {
+                    "Filters" -> showFilterDialog()
+                    "Cheese Burst" -> filterByCrustType("cheese_burst")
+                    "Farmhouse" -> filterByPizzaType("farmhouse")
+                    "Margherita" -> filterByPizzaType("margherita")
+                    "Multigrain" -> filterByCrustType("multigrain")
+                    "Pan" -> filterByCrustType("pan")
+                    "Under ₹150" -> filterByPrice(150)
+                    "Under 30 mins" -> filterByDeliveryTime(30)
+                    "Rating 4.0+" -> filterByRating(4.0)
+                    "Pure Veg" -> filterByVeg(true)
+                    "Schedule" -> showScheduleDialog()
+                    "Paneer" -> filterByTopping("paneer")
+                    "Pepperoni" -> filterByTopping("pepperoni")
+                }
+
+                // Apply all active filters
+                applyFilters(selectedFilters)
+            },
+            onSortClick = {
+                showSortOptionsDialog()
+            }
+        )
+
+        // Show active filters
+        if (selectedFilters.isNotEmpty()) {
+            Text(
+                text = "Active: ${selectedFilters.joinToString(", ")}",
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+            // Sample data with all fields
+            val completePizzaFoodItems = listOf(
+                FoodItemDoubleF(
+                    id = 1,
+                    imageRes = R.drawable.ic_pizzas_food_1,
+                    title = "Paneer Handi",
+                    price = "180",
+                    restaurantName = "Shree Jee Restaurant",
+                    rating = "4.1",
+                    deliveryTime = "45-50 mins",
+                    distance = "7.3 km",
+                    discount = "60%",
+                    discountAmount = "up to ₹120",
+                    address = "Delhi"
+                ),
+        FoodItemDoubleF(
+            id = 2,
+            imageRes = R.drawable.ic_pizzas_food_2,
+            title = "Butter Chicken",
+            price = "220",
+            restaurantName = "Amiche Pizza",
+            rating = "4.3",
+            deliveryTime = "60-65 mins",
+            distance = "5.2 km",
+            discount = "50%",
+            discountAmount = "up to ₹100",
+            address = "Delhi"
+        ),
+        FoodItemDoubleF(
+            id = 3,
+            imageRes = R.drawable.ic_pizzas_food_3,
+            title = "Vegetable Biryani",
+            price = "150",
+            restaurantName = "Spice Garden",
+            rating = "4.0",
+            deliveryTime = "30-35 mins",
+            distance = "3.8 km",
+            discount = "40%",
+            discountAmount = "up to ₹80",
+            address = "Delhi"
+        ),
+        FoodItemDoubleF(
+            id = 4,
+            imageRes = R.drawable.ic_pizzas_food_4,
+            title = "Margherita Pizza",
+            price = "199",
+            restaurantName = "Amiche Pizza",
+            rating = "4.2",
+            deliveryTime = "25-30 mins",
+            distance = "2.5 km",
+            discount = "30%",
+            discountAmount = "up to ₹60",
+            address = "Delhi"
+        ),
+        FoodItemDoubleF(
+            id = 5,
+            imageRes = R.drawable.ic_pizzas_food_5,
+            title = "Margherita Pizza",
+            price = "199",
+            restaurantName = "Amiche Pizza",
+            rating = "4.2",
+            deliveryTime = "25-30 mins",
+            distance = "2.5 km",
+            discount = "30%",
+            discountAmount = "up to ₹60",
+            address = "Delhi"
+        ),
+        FoodItemDoubleF(
+            id = 6,
+            imageRes = R.drawable.ic_pizzas_food_6,
+            title = "Margherita Pizza",
+            price = "199",
+            restaurantName = "Amiche Pizza",
+            rating = "4.2",
+            deliveryTime = "25-30 mins",
+            distance = "2.5 km",
+            discount = "30%",
+            discountAmount = "up to ₹60",
+            address = "Delhi"
+        )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completePizzaFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
+    }
+//        FilterButtonFood()
 
         Spacer(modifier = Modifier.height(15.dp))
         Text(
@@ -1030,21 +1146,133 @@ fun PizzasCategoryPage() {
         }
 
     }
-}
+
 
 @Composable
 fun CakesCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+//            .padding(16.dp)
     ) {
-        Text(
-            text = "Cakes & Pastries",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+        FilterButtonFood()
+
+        val completeCakesFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.le_fusion_bakery_cakes, // You'll need to add this image
+                title = "Le Fusion Bakery",
+                price = "180",
+                restaurantName = "Le Fusion Bakery",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "7.3 km",
+                discount = "50%",
+                discountAmount = "up to ₹100",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.kavya_bakery_cakes, // You'll need to add this image
+                title = "Kavya Bakery",
+                price = "220",
+                restaurantName = "Kavya Bakery",
+                rating = "3.8",
+                deliveryTime = "35-40 mins",
+                distance = "5.2 km",
+                discount = "50%",
+                discountAmount = "up to ₹100",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.havmor_icecream_cakes, // You'll need to add this image
+                title = "Havmor Icecream",
+                price = "150",
+                restaurantName = "Havmor Icecream",
+                rating = "4.5",
+                deliveryTime = "45-50 mins",
+                distance = "3.8 km",
+                discount = "50%",
+                discountAmount = "up to ₹100",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.cake_for_you_cakes, // You'll need to add this image
+                title = "Cake For You",
+                price = "199",
+                restaurantName = "Cake For You",
+                rating = "3.7",
+                deliveryTime = "40-45 mins",
+                distance = "2.5 km",
+                discount = "60%",
+                discountAmount = "up to ₹120",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.memory_lane_cakes, // You'll need to add this image
+                title = "MemoryLane",
+                price = "199",
+                restaurantName = "MemoryLane",
+                rating = "4.0",
+                deliveryTime = "45-50 mins",
+                distance = "2.5 km",
+                discount = "50%",
+                discountAmount = "up to ₹100",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_delights_food_cakes, // Keep existing or replace
+                title = "Sweet Delights",
+                price = "199",
+                restaurantName = "Sweet Delights",
+                rating = "4.2",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "50%",
+                discountAmount = "up to ₹100",
+                address = "Delhi"
+            )
         )
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeCakesFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
     }
 }
 

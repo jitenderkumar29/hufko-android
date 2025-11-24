@@ -2,6 +2,7 @@ package com.example.hufko.components.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -24,80 +25,152 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
-import kotlin.collections.chunked
-import kotlin.collections.forEach
-import kotlin.collections.isNotEmpty
-import kotlin.let
 
 /**
- * Category list item for double-column layout (two items stacked vertically)
+ * Food item data class with all optional fields
  */
-
-data class CategoryItemF(
-    val id: Int,
-    val name: String,
-    val imageRes: Int,
-    val subtitle: String? = null, // Optional subtitle like "View products"
-    val overlayTitle: String? = null, // Optional title for image overlay
-    val overlaySubtitle: String? = null // Optional subtitle for image overlay
+data class FoodItemDoubleF(
+    val id: Int? = null,
+    val imageRes: Int? = null,
+    val title: String? = null,
+    val price: String? = null,
+    val restaurantName: String? = null,
+    val rating: String? = null,
+    val deliveryTime: String? = null,
+    val distance: String? = null,
+    val discount: String? = null,
+    val discountAmount: String? = null,
+    val address: String? = null
 )
-@Composable
-fun CategoryListItemDoubleF(
-    item: CategoryItemF,
-    onClick: () -> Unit,
-    backgroundColor: Color = MaterialTheme.customColors.white,
-    textColor: Color = Color.Black,
-    showOverlayOnImage: Boolean = false,
-    overlayBackground: Color = Color.Black.copy(alpha = 0.6f),
-    overlayTextColor: Color = Color.White,
-    showItemName: Boolean = true,
-    itemWidth: Dp = 150.dp,
-    itemHeight: Dp = 200.dp
-) {
-    Box(
-        modifier = Modifier
-            .width(itemWidth)
-            .height(itemHeight)
-            .clip(RoundedCornerShape(8.dp))
-            .clickable(onClick = onClick)
-            .background(backgroundColor),
-        contentAlignment = Alignment.BottomStart
-    ) {
-        Image(
-            painter = painterResource(id = item.imageRes),
-            contentDescription = item.name,
-            contentScale = ContentScale.FillBounds,
-//            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(RoundedCornerShape(8.dp))
-        )
 
-        if (showOverlayOnImage) {
-            Box(
+/**
+ * Individual food item card
+ */
+@Composable
+fun FoodItemCard(
+    foodItem: FoodItemDoubleF,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.customColors.white,
+    cardWidth: Dp = 160.dp,
+    cardHeight: Dp = 240.dp,
+    imageHeight: Dp = 120.dp,
+    defaultImageRes: Int = R.drawable.restaurant_1 // Default image if none provided
+) {
+    Column(
+        modifier = modifier
+            .width(cardWidth)
+            .height(cardHeight)
+            .clip(RoundedCornerShape(12.dp))
+            .clickable(onClick = onClick)
+            .background(backgroundColor)
+    ) {
+        // Image section with overlay
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(imageHeight)
+        ) {
+            // Food image
+            Image(
+                painter = painterResource(id = foodItem.imageRes ?: defaultImageRes),
+                contentDescription = foodItem.title ?: "Food item",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(overlayBackground)
+                    .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
             )
+
+            // Discount badge at top-left
+            foodItem.discount?.let { discount ->
+                if (discount.isNotEmpty()) {
+                    // Title and price badge at top left of image
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.TopStart)
+                            .padding(start = 4.dp, top = 4.dp)
+                            .background(Color(0xB146322B), RoundedCornerShape(6.dp))
+                            .padding(horizontal = 4.dp, vertical = 2.dp)
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "₹${discount} OFF up to ₹100",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFFFFFFFF)
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Rating overlay at bottom of image (only if rating or delivery time exists)
+            if (foodItem.rating != null || foodItem.deliveryTime != null) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .background(
+                            color = MaterialTheme.customColors.success,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(horizontal = 4.dp, vertical = 2.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        // Rating
+                        foodItem.rating?.let { rating ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = rating,
+                                    color = Color.White,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    modifier = Modifier.padding(start = 2.dp)
+                                )
+                                Text(
+                                    text = "★",
+                                    color = Color.White,
+                                    fontSize = 14.sp
+                                )
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-        if (showItemName) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        if (showOverlayOnImage) Color.Transparent else backgroundColor.copy(alpha = 0.5f)
-                    )
-                    .padding(horizontal = 10.dp, vertical = 8.dp)
-            ) {
+        // Content section below image
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 4.dp, vertical = 4.dp)
+        ) {
+            // Title
+            foodItem.title?.let { title ->
                 Text(
-                    text = item.name,
+                    text = title,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
-                    color = overlayTextColor,
-                    maxLines = 1,
+                    color = Color.Black,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            // Delivery time
+            foodItem.deliveryTime?.let { deliveryTime ->
+                Text(
+                    text = deliveryTime,
+                    color = Color.Gray,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Medium
                 )
             }
         }
@@ -105,38 +178,45 @@ fun CategoryListItemDoubleF(
 }
 
 /**
- * Category list with horizontal scrolling (2 items per column)
+ * Horizontal scrolling food items list with TWO ROWS
  */
 @Composable
-fun CategoryListDoubleF(
-    items: List<CategoryItemF>,
-    onItemClick: (CategoryItemF) -> Unit,
+fun FoodItemsList(
+    foodItems: List<FoodItemDoubleF>,
+    onItemClick: (FoodItemDoubleF) -> Unit,
     modifier: Modifier = Modifier,
     backgroundColor: Color = MaterialTheme.customColors.white,
-    itemBackgroundColor: Color = MaterialTheme.customColors.white,
-    textColor: Color = Color.Black,
-    showOverlayOnImage: Boolean = false,
-    overlayBackground: Color = Color.Black.copy(alpha = 0.6f),
-    overlayTextColor: Color = Color.White,
-    showItemName: Boolean = true,
-    customListItem: @Composable ((CategoryItemF, () -> Unit) -> Unit)? = null,
-    itemWidth: Dp = 150.dp,
-    itemHeight: Dp = 200.dp,
-    horizontalSpacing: Dp = 16.dp,
+    cardWidth: Dp = 160.dp,
+    cardHeight: Dp = 240.dp,
+    horizontalSpacing: Dp = 12.dp,
     verticalSpacing: Dp = 12.dp,
-    horizontalPadding: Dp = 16.dp,
-    verticalPadding: Dp = 12.dp
+    horizontalPadding: Dp = 16.dp
 ) {
-    require(items.isNotEmpty()) { "Items list cannot be empty" }
+    if (foodItems.isEmpty()) {
+        // Show empty state or return empty box
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(backgroundColor)
+                .padding(horizontal = horizontalPadding)
+        ) {
+            Text(
+                text = "No food items available",
+                color = Color.Gray,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+        return
+    }
 
-    // Split items into pairs for 2 stacked per column
-    val itemPairs = items.chunked(2)
+    // Split items into pairs for two rows
+    val itemPairs = foodItems.chunked(2)
 
     LazyRow(
         modifier = modifier
             .fillMaxWidth()
             .background(backgroundColor)
-            .padding(horizontal = horizontalPadding, vertical = verticalPadding),
+            .padding(horizontal = horizontalPadding),
         horizontalArrangement = Arrangement.spacedBy(horizontalSpacing)
     ) {
         items(itemPairs) { pair ->
@@ -144,23 +224,24 @@ fun CategoryListDoubleF(
                 verticalArrangement = Arrangement.spacedBy(verticalSpacing),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                pair.forEach { item ->
-                    if (customListItem != null) {
-                        customListItem(item) { onItemClick(item) }
-                    } else {
-                        CategoryListItemDoubleF(
-                            item = item,
-                            onClick = { onItemClick(item) },
-                            backgroundColor = itemBackgroundColor,
-                            textColor = textColor,
-                            showOverlayOnImage = showOverlayOnImage,
-                            overlayBackground = overlayBackground,
-                            overlayTextColor = overlayTextColor,
-                            showItemName = showItemName,
-                            itemWidth = itemWidth,
-                            itemHeight = itemHeight
-                        )
-                    }
+                // First item in the pair
+                pair.getOrNull(0)?.let { firstItem ->
+                    FoodItemCard(
+                        foodItem = firstItem,
+                        onClick = { onItemClick(firstItem) },
+                        cardWidth = cardWidth,
+                        cardHeight = cardHeight
+                    )
+                }
+
+                // Second item in the pair
+                pair.getOrNull(1)?.let { secondItem ->
+                    FoodItemCard(
+                        foodItem = secondItem,
+                        onClick = { onItemClick(secondItem) },
+                        cardWidth = cardWidth,
+                        cardHeight = cardHeight
+                    )
                 }
             }
         }
@@ -168,120 +249,198 @@ fun CategoryListDoubleF(
 }
 
 /**
- * Category list with heading and horizontal scroll
- */
-@Composable
-fun CategoryListDoubleFWithHeading(
+ * Food items list with heading and TWO ROWS layout
+ */@Composable
+fun FoodItemsListWithHeading(
     heading: String? = null,
     subtitle: String? = null,
-    items: List<CategoryItemF>,
-    onItemClick: (CategoryItemF) -> Unit,
+    foodItems: List<FoodItemDoubleF>,
+    onItemClick: (FoodItemDoubleF) -> Unit,
     modifier: Modifier = Modifier,
     backgroundColor: Color = MaterialTheme.customColors.white,
-    itemBackgroundColor: Color = MaterialTheme.customColors.white,
-    textColor: Color = Color.Black,
-    showOverlayOnImage: Boolean = false,
-    overlayBackground: Color = Color.Black.copy(alpha = 0.6f),
-    overlayTextColor: Color = Color.White,
-    showItemName: Boolean = true,
-    customListItem: @Composable ((CategoryItemF, () -> Unit) -> Unit)? = null,
-    itemWidth: Dp = 150.dp,
-    itemHeight: Dp = 200.dp,
-    horizontalSpacing: Dp = 16.dp,
+    cardWidth: Dp = 160.dp,
+    cardHeight: Dp = 240.dp,
+    horizontalSpacing: Dp = 12.dp,
     verticalSpacing: Dp = 12.dp,
     horizontalPadding: Dp = 16.dp,
-    verticalPadding: Dp = 12.dp,
+    verticalPadding: Dp = 16.dp,
     headingBottomPadding: Dp = 12.dp
 ) {
-    require(items.isNotEmpty()) { "Items list cannot be empty" }
-
     Column(
         modifier = modifier
             .fillMaxWidth()
             .background(backgroundColor)
     ) {
-        heading?.let {
+        if (heading != null || subtitle != null) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = horizontalPadding)
                     .padding(top = verticalPadding, bottom = headingBottomPadding)
             ) {
-                Text(
-                    text = heading,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = textColor
-                )
+                heading?.let {
+                    Text(
+                        text = heading,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                }
                 subtitle?.let {
                     Text(
                         text = it,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = textColor.copy(alpha = 0.7f),
+                        color = Color.Gray,
                         modifier = Modifier.padding(top = 4.dp)
                     )
                 }
             }
         }
 
-        CategoryListDoubleF(
-            items = items,
+        FoodItemsList(
+            foodItems = foodItems,
             onItemClick = onItemClick,
-            modifier = Modifier,
             backgroundColor = backgroundColor,
-            itemBackgroundColor = itemBackgroundColor,
-            textColor = textColor,
-            showOverlayOnImage = showOverlayOnImage,
-            overlayBackground = overlayBackground,
-            overlayTextColor = overlayTextColor,
-            showItemName = showItemName,
-            customListItem = customListItem,
-            itemWidth = itemWidth,
-            itemHeight = itemHeight,
+            cardWidth = cardWidth,
+            cardHeight = cardHeight,
             horizontalSpacing = horizontalSpacing,
             verticalSpacing = verticalSpacing,
-            horizontalPadding = horizontalPadding,
-            verticalPadding = verticalPadding
+            horizontalPadding = horizontalPadding
         )
     }
 }
 
 /**
- * Example list and preview
+ * Sample data and preview with various optional field combinations
  */
-val roomCategoriesDouble = listOf(
-    CategoryItemF(0, "Kitchen", R.drawable.restaurant_1, "View products"),
-    CategoryItemF(1, "Bathroom", R.drawable.restaurant_1, "View products"),
-    CategoryItemF(2, "Bedroom", R.drawable.restaurant_1, "View products"),
-    CategoryItemF(3, "Living Room", R.drawable.restaurant_1, "View products"),
-    CategoryItemF(4, "Dining Room", R.drawable.restaurant_1, "View products"),
-    CategoryItemF(5, "Home Office", R.drawable.restaurant_1, "View products"),
-    CategoryItemF(6, "Garden", R.drawable.restaurant_1, "View products"),
-    CategoryItemF(7, "Garage", R.drawable.restaurant_1, "View products")
+val sampleFoodItems = listOf(
+    FoodItemDoubleF(
+        id = 20,
+        imageRes = R.drawable.restaurant_image_all_food_20,
+        title = "Paneer Handi",
+        price = "180",
+        restaurantName = "Shree Jee Restaurant",
+        rating = "4.1",
+        deliveryTime = "45-50 mins",
+        distance = "7.3 km",
+        discount = "60%",
+        discountAmount = "up to ₹120",
+        address = "Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 21,
+        imageRes = R.drawable.restaurant_1,
+        title = "Butter Chicken",
+        price = "220",
+        restaurantName = "Amiche Pizza",
+        rating = "4.3",
+        deliveryTime = "60-65 mins"
+    ),
+    FoodItemDoubleF(
+        id = 22,
+        imageRes = R.drawable.restaurant_1,
+        title = "Vegetable Biryani",
+        price = "150",
+        rating = "4.0",
+        deliveryTime = "30-35 mins",
+        discount = "40%"
+    ),
+    FoodItemDoubleF(
+        id = 23,
+        title = "Special Thali",
+        restaurantName = "Spice Garden",
+        deliveryTime = "25-30 mins"
+    ),
+    FoodItemDoubleF(
+        id = 24,
+        imageRes = R.drawable.restaurant_1,
+        title = "Chocolate Brownie",
+        price = "99",
+        discountAmount = "up to ₹50"
+    ),
+    FoodItemDoubleF(
+        id = 25,
+        imageRes = R.drawable.restaurant_1,
+        title = "Masala Dosa",
+        price = "80",
+        restaurantName = "South Indian Delight",
+        rating = "4.5",
+        deliveryTime = "20-25 mins",
+        discount = "20%"
+    ),
+    FoodItemDoubleF(
+        id = 26,
+        imageRes = R.drawable.restaurant_1,
+        title = "Chicken Biryani",
+        price = "250",
+        restaurantName = "Biryani House",
+        rating = "4.2",
+        deliveryTime = "35-40 mins"
+    )
 )
 
 @Preview(showBackground = true)
 @Composable
-fun CategoryListDoubleFPreview() {
+fun FoodItemCardPreview() {
     MaterialTheme {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            CategoryListDoubleFWithHeading(
-                heading = "Shop by Room",
-                subtitle = "Scroll to explore",
-                items = roomCategoriesDouble,
-                onItemClick = { item -> println("Clicked ${item.name}") },
-                showOverlayOnImage = true,
-                showItemName = true,
-                itemWidth = 150.dp,
-                itemHeight = 180.dp,
-                horizontalSpacing = 12.dp,
-                verticalSpacing = 12.dp,
-                backgroundColor = Color.LightGray
+            // Preview with all fields
+            FoodItemCard(
+                foodItem = sampleFoodItems[0],
+                onClick = { println("Clicked ${sampleFoodItems[0].title}") }
+            )
+
+            // Preview with minimal fields
+            FoodItemCard(
+                foodItem = sampleFoodItems[3],
+                onClick = { println("Clicked minimal item") }
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FoodItemsListPreview() {
+    MaterialTheme {
+        FoodItemsListWithHeading(
+            heading = "Popular Dishes",
+            subtitle = "Scroll to explore more",
+            foodItems = sampleFoodItems,
+            onItemClick = { foodItem -> println("Clicked ${foodItem.title}") },
+            backgroundColor = Color.White
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FoodItemsListOddNumberPreview() {
+    MaterialTheme {
+        FoodItemsListWithHeading(
+            heading = "Today's Specials",
+            foodItems = sampleFoodItems.take(5), // Odd number of items
+            onItemClick = { foodItem -> println("Clicked ${foodItem.title}") },
+            backgroundColor = Color.White
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun EmptyFoodItemsListPreview() {
+    MaterialTheme {
+        FoodItemsListWithHeading(
+            heading = "Popular Dishes",
+            foodItems = emptyList(),
+            onItemClick = { },
+            backgroundColor = Color.White
+        )
     }
 }

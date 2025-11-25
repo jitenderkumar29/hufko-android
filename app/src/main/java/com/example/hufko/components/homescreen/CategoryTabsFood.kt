@@ -265,9 +265,9 @@ fun AllCategoryPage(
         // Banner Section
         BannerFood(
             images = listOf(
+                painterResource(id = R.drawable.all_food_banner3),
                 painterResource(id = R.drawable.all_food_banner1),
                 painterResource(id = R.drawable.all_food_banner2),
-                painterResource(id = R.drawable.all_food_banner3),
                 painterResource(id = R.drawable.all_food_banner4),
                 painterResource(id = R.drawable.all_food_banner5),
                 painterResource(id = R.drawable.all_food_banner6),
@@ -1153,7 +1153,6 @@ fun CakesCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-//            .padding(16.dp)
     ) {
         Spacer(modifier = Modifier.height(15.dp))
         // Filter Button
@@ -1273,6 +1272,306 @@ fun CakesCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        // Sample data based on the provided images
+        val sampleRestaurantItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.cake_chocolate_fudge,
+                title = "Chocolate Fudge Cake",
+                price = "450",
+                restaurantName = "Sweet Delights Bakery",
+                rating = "4.5",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹80",
+                address = "Bakery Street, City Center"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.cake_red_velvet,
+                title = "Red Velvet Cake",
+                price = "520",
+                restaurantName = "Cake Paradise",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹75",
+                address = "MG Road, Downtown"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.cake_black_forest,
+                title = "Black Forest Cake",
+                price = "480",
+                restaurantName = "German Bakery House",
+                rating = "4.6",
+                deliveryTime = "40-50 mins",
+                distance = "3.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹120",
+                address = "European Quarter"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.cake_vanilla_cream,
+                title = "Vanilla Cream Cake",
+                price = "380",
+                restaurantName = "Buttercup Cakes",
+                rating = "4.3",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹50",
+                address = "Market Lane, South End"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.cake_strawberry,
+                title = "Fresh Strawberry Cake",
+                price = "550",
+                restaurantName = "Fruit Fantasy",
+                rating = "4.8",
+                deliveryTime = "35-45 mins",
+                distance = "4.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹150",
+                address = "Garden Road, East Side"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.cake_blueberry_cheese,
+                title = "Blueberry Cheesecake",
+                price = "620",
+                restaurantName = "Cheese Cake Factory",
+                rating = "4.9",
+                deliveryTime = "45-55 mins",
+                distance = "5.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹120",
+                address = "Food Court, Mega Mall"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.cake_carrot_walnut,
+                title = "Carrot Walnut Cake",
+                price = "420",
+                restaurantName = "Healthy Bites",
+                rating = "4.4",
+                deliveryTime = "30-40 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹60",
+                address = "Wellness Street"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.cake_coffee_mocha,
+                title = "Coffee Mocha Cake",
+                price = "490",
+                restaurantName = "Brew & Bake",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹100",
+                address = "Cafe District"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.cake_pineapple,
+                title = "Pineapple Upside Down Cake",
+                price = "440",
+                restaurantName = "Tropical Treats",
+                rating = "4.2",
+                deliveryTime = "40-50 mins",
+                distance = "3.7 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹40",
+                address = "Beach Road"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.cake_lemon_drizzle,
+                title = "Lemon Drizzle Cake",
+                price = "390",
+                restaurantName = "Citrus Delights",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹70",
+                address = "Fresh Market"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.cake_rainbow,
+                title = "Rainbow Layer Cake",
+                price = "680",
+                restaurantName = "Colorful Cakes",
+                rating = "4.7",
+                deliveryTime = "50-60 mins",
+                distance = "4.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹100",
+                address = "Art District"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.cake_coconut,
+                title = "Coconut Cream Cake",
+                price = "470",
+                restaurantName = "Island Bakery",
+                rating = "4.3",
+                deliveryTime = "35-45 mins",
+                distance = "3.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹110",
+                address = "Palm Street"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.cake_marble,
+                title = "Chocolate Marble Cake",
+                price = "410",
+                restaurantName = "Classic Confections",
+                rating = "4.4",
+                deliveryTime = "25-35 mins",
+                distance = "2.3 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹40",
+                address = "Heritage Road"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.cake_banana_walnut,
+                title = "Banana Walnut Cake",
+                price = "360",
+                restaurantName = "Homemade Goodness",
+                rating = "4.5",
+                deliveryTime = "30-40 mins",
+                distance = "2.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹70",
+                address = "Residential Area"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.cake_raspberry,
+                title = "Raspberry Delight Cake",
+                price = "580",
+                restaurantName = "Berry Bliss",
+                rating = "4.8",
+                deliveryTime = "40-50 mins",
+                distance = "4.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹160",
+                address = "Orchard Road"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.cake_mango,
+                title = "Mango Mousse Cake",
+                price = "540",
+                restaurantName = "Summer Sweets",
+                rating = "4.6",
+                deliveryTime = "35-45 mins",
+                distance = "3.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹80",
+                address = "Seasonal Market"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.cake_honey,
+                title = "Honey Almond Cake",
+                price = "520",
+                restaurantName = "Nature's Best",
+                rating = "4.4",
+                deliveryTime = "30-40 mins",
+                distance = "2.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹120",
+                address = "Organic Street"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.cake_cinnamon,
+                title = "Cinnamon Spice Cake",
+                price = "430",
+                restaurantName = "Spice Route Bakery",
+                rating = "4.3",
+                deliveryTime = "25-35 mins",
+                distance = "2.4 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹40",
+                address = "Spice Market"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.cake_oreo,
+                title = "Oreo Cookies Cake",
+                price = "590",
+                restaurantName = "Cookie Monster",
+                rating = "4.7",
+                deliveryTime = "40-50 mins",
+                distance = "4.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹110",
+                address = "Kids Zone"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.cake_salted_caramel,
+                title = "Salted Caramel Cake",
+                price = "560",
+                restaurantName = "Gourmet Treats",
+                rating = "4.9",
+                deliveryTime = "45-55 mins",
+                distance = "5.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹80",
+                address = "Luxury Lane"
+            )
+        )
+
+        Column {
+            sampleRestaurantItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -1281,14 +1580,425 @@ fun MomosCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Momos",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+        FilterButtonFood()
+
+        val completeMomoFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.momo_king_momos,
+                title = "Steam Chicken Momos",
+                price = "120",
+                restaurantName = "Momos King",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹60",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.delhi_momo_point_momos,
+                title = "Fried Veg Momos",
+                price = "90",
+                restaurantName = "Delhi Momo Point",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.tibetan_momo_house_momos,
+                title = "Tandoori Momos",
+                price = "150",
+                restaurantName = "Tibetan Momo House",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "4.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹75",
+                address = "Majnu Ka Tila, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.spicy_momo_corner_momos,
+                title = "Cheese Chilli Momos",
+                price = "140",
+                restaurantName = "Spicy Momo Corner",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "3.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.himalayan_momo_zone_momos,
+                title = "Paneer Momos",
+                price = "110",
+                restaurantName = "Himalayan Momo Zone",
+                rating = "4.6",
+                deliveryTime = "35-40 mins",
+                distance = "5.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹80",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.momo_express_momos,
+                title = "Chicken Kothey Momos",
+                price = "130",
+                restaurantName = "Momo Express",
+                rating = "4.2",
+                deliveryTime = "20-25 mins",
+                distance = "2.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹60",
+                address = "Karol Bagh, Delhi"
+            ),
         )
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeMomoFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        // Sample data based on the provided images
+        val sampleMomoItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.momo_steam_chicken,
+                title = "Steam Chicken Momos",
+                price = "120",
+                restaurantName = "Momos King",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.momo_fried_veg,
+                title = "Fried Veg Momos",
+                price = "90",
+                restaurantName = "Delhi Momo Point",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.momo_tandoori,
+                title = "Tandoori Momos",
+                price = "150",
+                restaurantName = "Tibetan Momo House",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "4.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹75",
+                address = "Majnu Ka Tila, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.momo_cheese_chilli,
+                title = "Cheese Chilli Momos",
+                price = "140",
+                restaurantName = "Spicy Momo Corner",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "3.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹50",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.momo_paneer,
+                title = "Paneer Momos",
+                price = "110",
+                restaurantName = "Himalayan Momo Zone",
+                rating = "4.6",
+                deliveryTime = "35-40 mins",
+                distance = "5.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹80",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.momo_kothey,
+                title = "Chicken Kothey Momos",
+                price = "130",
+                restaurantName = "Momo Express",
+                rating = "4.2",
+                deliveryTime = "20-25 mins",
+                distance = "2.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹60",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.momo_schezwan,
+                title = "Schezwan Momos",
+                price = "160",
+                restaurantName = "Dragon Momo",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "4.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹90",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.momo_jhol,
+                title = "Jhol Momos",
+                price = "125",
+                restaurantName = "Momo World",
+                rating = "4.3",
+                deliveryTime = "25-30 mins",
+                distance = "3.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹70",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.momo_buff,
+                title = "Buff Momos",
+                price = "170",
+                restaurantName = "Kathmandu Momo",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "6.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹100",
+                address = "CR Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.momo_afghani,
+                title = "Afghani Momos",
+                price = "145",
+                restaurantName = "Momo Magic",
+                rating = "4.4",
+                deliveryTime = "30-35 mins",
+                distance = "4.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹55",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.momo_crispy,
+                title = "Chicken Crispy Momos",
+                price = "135",
+                restaurantName = "Spice Momo",
+                rating = "4.1",
+                deliveryTime = "25-30 mins",
+                distance = "3.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹65",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.momo_veg_fried,
+                title = "Veg Fried Momos",
+                price = "85",
+                restaurantName = "Momo Factory",
+                rating = "4.0",
+                deliveryTime = "20-25 mins",
+                distance = "2.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹50",
+                address = "Vikas Puri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.momo_chilli_garlic,
+                title = "Chilli Garlic Momos",
+                price = "125",
+                restaurantName = "Hot Momo",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "3.9 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹75",
+                address = "Paschim Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.momo_paneer_fried,
+                title = "Paneer Fried Momos",
+                price = "115",
+                restaurantName = "Momo Love",
+                rating = "4.3",
+                deliveryTime = "25-30 mins",
+                distance = "2.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹60",
+                address = "Patel Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.momo_chicken_steam,
+                title = "Chicken Steam Momos",
+                price = "110",
+                restaurantName = "Quick Momo",
+                rating = "4.2",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹40",
+                address = "Rajendra Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.momo_chicken_cheese,
+                title = "Chicken Cheese Momos",
+                price = "155",
+                restaurantName = "Premium Momo",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "4.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹85",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.momo_veg_steam,
+                title = "Veg Steam Momos",
+                price = "80",
+                restaurantName = "Momo Hut",
+                rating = "4.1",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹45",
+                address = "Shalimar Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.momo_platter,
+                title = "Mix Momos Platter",
+                price = "200",
+                restaurantName = "Momo Paradise",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "3.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹80",
+                address = "Model Town, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.momo_chicken_fried,
+                title = "Chicken Fried Momos",
+                price = "125",
+                restaurantName = "Momo Bite",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "2.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Kirti Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.momo_veg_kothey,
+                title = "Veg Kothey Momos",
+                price = "95",
+                restaurantName = "Fresh Momo",
+                rating = "4.0",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Naraina, Delhi"
+            )
+        )
+
+        Column {
+            sampleMomoItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 

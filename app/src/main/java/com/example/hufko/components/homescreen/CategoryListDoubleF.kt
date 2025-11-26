@@ -96,7 +96,7 @@ fun FoodItemCard(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "₹${discount} OFF up to ₹100",
+                                text = "${discount} OFF up to ₹100",
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color(0xFFFFFFFF)
@@ -307,6 +307,7 @@ fun FoodItemsListWithHeading(
             verticalSpacing = verticalSpacing,
             horizontalPadding = horizontalPadding
         )
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 

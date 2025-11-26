@@ -250,7 +250,6 @@ fun CategoryTabsFood(
 
 // Category Page Composables for all categories
 
-
 @Composable
 fun AllCategoryPage(
     onBanner1Click: () -> Unit = {},
@@ -841,7 +840,6 @@ fun PizzasCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-
     }
 //        FilterButtonFood()
 
@@ -1144,7 +1142,6 @@ fun PizzasCategoryPage() {
                 )
             }
         }
-
     }
 
 
@@ -1271,7 +1268,6 @@ fun CakesCategoryPage() {
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
         )
-
 
         Spacer(modifier = Modifier.height(15.dp))
         Text(
@@ -1699,7 +1695,6 @@ fun MomosCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-
         Spacer(modifier = Modifier.height(15.dp))
         Text(
             text = "Restaurants delivering to you",
@@ -2007,14 +2002,426 @@ fun RollsCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Rolls & Wraps",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        FilterButtonFood()
+
+        val completeRollFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.rolls_king_rolls,
+                title = "Chicken Kathi Roll",
+                price = "110",
+                restaurantName = "Rolls King",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.5 km",
+                discount = "30%",
+                discountAmount = "up to ₹70",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.delhi_roll_point_rolls,
+                title = "Paneer Tikka Roll",
+                price = "95",
+                restaurantName = "Delhi Roll Point",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹45",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.mughlai_roll_house_rolls,
+                title = "Mughlai Chicken Roll",
+                price = "130",
+                restaurantName = "Mughlai Roll House",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹80",
+                address = "Chandni Chowk, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.spicy_roll_corner_rolls,
+                title = "Egg Chicken Roll",
+                price = "120",
+                restaurantName = "Spicy Roll Corner",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹55",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.kolkata_roll_zone_rolls,
+                title = "Kolkata Egg Roll",
+                price = "85",
+                restaurantName = "Kolkata Roll Zone",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "4.1 km",
+                discount = "30%",
+                discountAmount = "up to ₹60",
+                address = "CR Park, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.roll_express_rolls,
+                title = "Mutton Seekh Roll",
+                price = "150",
+                restaurantName = "Roll Express",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "3.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹75",
+                address = "Karol Bagh, Delhi"
+            ),
         )
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeRollFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleRollItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.roll_chicken_kathi,
+                title = "Chicken Kathi Roll",
+                price = "110",
+                restaurantName = "Rolls King",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹70",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.roll_paneer_tikka,
+                title = "Paneer Tikka Roll",
+                price = "95",
+                restaurantName = "Delhi Roll Point",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹45",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.roll_mughlai_chicken,
+                title = "Mughlai Chicken Roll",
+                price = "130",
+                restaurantName = "Mughlai Roll House",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.roll_egg_chicken,
+                title = "Egg Chicken Roll",
+                price = "120",
+                restaurantName = "Spicy Roll Corner",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹55",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.roll_kolkata_egg,
+                title = "Kolkata Egg Roll",
+                price = "85",
+                restaurantName = "Kolkata Roll Zone",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "4.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "CR Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.roll_mutton_seekh,
+                title = "Mutton Seekh Roll",
+                price = "150",
+                restaurantName = "Roll Express",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "3.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹75",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.roll_tandoori_paneer,
+                title = "Tandoori Paneer Roll",
+                price = "105",
+                restaurantName = "Tandoori Roll Factory",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.7 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹65",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.roll_afghani_chicken,
+                title = "Afghani Chicken Roll",
+                price = "140",
+                restaurantName = "Afghani Roll House",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "4.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹85",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.roll_veg_schezwan,
+                title = "Veg Schezwan Roll",
+                price = "90",
+                restaurantName = "Veg Roll Paradise",
+                rating = "4.2",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.roll_double_egg_chicken,
+                title = "Double Egg Chicken Roll",
+                price = "135",
+                restaurantName = "Non-Veg Roll Masters",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "3.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.roll_cheese_chilli,
+                title = "Cheese Chilli Chicken Roll",
+                price = "125",
+                restaurantName = "Cheese Roll Corner",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.4 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹50",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.roll_hyderabadi_chicken,
+                title = "Hyderabadi Chicken Roll",
+                price = "115",
+                restaurantName = "Hyderabadi Roll House",
+                rating = "4.3",
+                deliveryTime = "30-35 mins",
+                distance = "4.6 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹70",
+                address = "Jasola, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.roll_butter_chicken,
+                title = "Butter Chicken Roll",
+                price = "145",
+                restaurantName = "Butter Chicken Roll Shop",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "3.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹75",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.roll_malai_chicken,
+                title = "Malai Chicken Roll",
+                price = "120",
+                restaurantName = "Malai Roll Kitchen",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "2.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹65",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.roll_spicy_mutton,
+                title = "Spicy Mutton Roll",
+                price = "160",
+                restaurantName = "Spicy Mutton Roll House",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "5.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹95",
+                address = "Mehrauli, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.roll_double_egg,
+                title = "Double Egg Roll",
+                price = "75",
+                restaurantName = "Egg Special Rolls",
+                rating = "4.1",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹35",
+                address = "Shahdara, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.roll_chicken_tikka,
+                title = "Chicken Tikka Roll",
+                price = "135",
+                restaurantName = "Chicken Tikka Roll Center",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "3.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Paschim Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.roll_paneer_butter,
+                title = "Paneer Butter Masala Roll",
+                price = "110",
+                restaurantName = "Paneer Roll Specialists",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹45",
+                address = "Patel Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.roll_fish_tikka,
+                title = "Fish Tikka Roll",
+                price = "170",
+                restaurantName = "Fish Roll Experts",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "4.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹100",
+                address = "Mayur Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.roll_mixed_combo,
+                title = "Mixed Combo Roll",
+                price = "155",
+                restaurantName = "Roll Combo House",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "3.7 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹90",
+                address = "Nehru Place, Delhi"
+            )
+        )
+
+        Column {
+            sampleRollItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -2023,13 +2430,124 @@ fun BurgersCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        FilterButtonFood()
+
+        val completeBurgerFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.burger_king_burgers,
+                title = "Classic Chicken Burger",
+                price = "145",
+                restaurantName = "Burger King",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "30%",
+                discountAmount = "up to ₹80",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.mcdonalds_burgers,
+                title = "McAloo Tikki Burger",
+                price = "65",
+                restaurantName = "McDonald's",
+                rating = "4.3",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹30",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.burger_singh_burgers,
+                title = "Butter Chicken Burger",
+                price = "175",
+                restaurantName = "Burger Singh",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "3.1 km",
+                discount = "25%",
+                discountAmount = "up to ₹95",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.wendys_burgers,
+                title = "Bacon Cheeseburger",
+                price = "195",
+                restaurantName = "Wendy's",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "2.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.local_burger_corner_burgers,
+                title = "Veg Supreme Burger",
+                price = "85",
+                restaurantName = "Local Burger Corner",
+                rating = "4.2",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹45",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.premium_burger_house_burgers,
+                title = "Double Cheese Burger",
+                price = "165",
+                restaurantName = "Premium Burger House",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "3.4 km",
+                discount = "20%",
+                discountAmount = "up to ₹75",
+                address = "Greater Kailash, Delhi"
+            )
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Burgers",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeBurgerFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
         )
     }
 }

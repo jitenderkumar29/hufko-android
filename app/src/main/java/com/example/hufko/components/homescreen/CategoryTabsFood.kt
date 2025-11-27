@@ -369,7 +369,105 @@ fun AllCategoryPage(
 
         Spacer(modifier = Modifier.height(15.dp))
         // Filter Button
-        FilterButtonFood()
+
+        val allFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort by",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "cheese_burst",
+                    text = "Cheese Burst",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_cheese_burst
+                ),
+                FilterChip(
+                    id = "farmhouse",
+                    text = "Farmhouse",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_farmhouse
+                ),
+                FilterChip(
+                    id = "margherita",
+                    text = "Margherita",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_margherita
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_multigrain
+                ),
+                FilterChip(
+                    id = "pan",
+                    text = "Pan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_pan
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rating_4",
+                    text = "Rating 4.0+",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pure_veg",
+                    text = "Pure Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Schedule",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_paneer
+                ),
+                FilterChip(
+                    id = "pepperoni",
+                    text = "Pepperoni",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_non_veg_pepperoni
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = allFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
         Spacer(modifier = Modifier.height(15.dp))
         Text(
             text = "Restaurants delivering to you",
@@ -685,39 +783,118 @@ fun PizzasCategoryPage() {
 //                .padding(20.dp)
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+            val pizzaFilters = FilterConfig(
+                filters = listOf(
+                    FilterChip(
+                        id = "filters",
+                        text = "Filters",
+                        type = FilterType.FILTER_DROPDOWN,
+                        icon = R.drawable.ic_filter,
+                        rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                    ),
+                    FilterChip(
+                        id = "sort",
+                        text = "Sort by",
+                        type = FilterType.SORT_DROPDOWN,
+                        rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                    ),
+                    FilterChip(
+                        id = "cheese_burst",
+                        text = "Cheese Burst",
+                        type = FilterType.WITH_LEFT_ICON,
+                        icon = R.drawable.ic_pizza_cheese_burst
+                    ),
+                    FilterChip(
+                        id = "farmhouse",
+                        text = "Farmhouse",
+                        type = FilterType.WITH_LEFT_ICON,
+                        icon = R.drawable.ic_pizza_farmhouse
+                    ),
+                    FilterChip(
+                        id = "margherita",
+                        text = "Margherita",
+                        type = FilterType.WITH_LEFT_ICON,
+                        icon = R.drawable.ic_pizza_margherita
+                    ),
+                    FilterChip(
+                        id = "multigrain",
+                        text = "Multigrain",
+                        type = FilterType.WITH_LEFT_ICON,
+                        icon = R.drawable.ic_pizza_multigrain
+                    ),
+                    FilterChip(
+                        id = "pan",
+                        text = "Pan",
+                        type = FilterType.WITH_LEFT_ICON,
+                        icon = R.drawable.ic_pizza_pan
+                    ),
+                    FilterChip(
+                        id = "under_150",
+                        text = "Under ₹150",
+                        type = FilterType.TEXT_ONLY
+                    ),
+                    FilterChip(
+                        id = "under_30_mins",
+                        text = "Under 30 mins",
+                        type = FilterType.TEXT_ONLY
+                    ),
+                    FilterChip(
+                        id = "rating_4",
+                        text = "Rating 4.0+",
+                        type = FilterType.TEXT_ONLY
+                    ),
+                    FilterChip(
+                        id = "pure_veg",
+                        text = "Pure Veg",
+                        type = FilterType.TEXT_ONLY
+                    ),
+                    FilterChip(
+                        id = "schedule",
+                        text = "Schedule",
+                        type = FilterType.SORT_DROPDOWN,
+                        rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                    ),
+                    FilterChip(
+                        id = "paneer",
+                        text = "Paneer",
+                        type = FilterType.WITH_LEFT_ICON,
+                        icon = R.drawable.ic_veg_paneer
+                    ),
+                    FilterChip(
+                        id = "pepperoni",
+                        text = "Pepperoni",
+                        type = FilterType.WITH_LEFT_ICON,
+                        icon = R.drawable.ic_non_veg_pepperoni
+                    ),
+                ),
+        rows = 1
+        )
         FilterButtonFood(
-            onFilterClick = { filterName ->
-                // Toggle filter selection
-                selectedFilters = if (selectedFilters.contains(filterName)) {
-                    selectedFilters - filterName
-                } else {
-                    selectedFilters + filterName
-                }
-
-                // Handle specific filter actions
-                when (filterName) {
-                    "Filters" -> showFilterDialog()
-                    "Cheese Burst" -> filterByCrustType("cheese_burst")
-                    "Farmhouse" -> filterByPizzaType("farmhouse")
-                    "Margherita" -> filterByPizzaType("margherita")
-                    "Multigrain" -> filterByCrustType("multigrain")
-                    "Pan" -> filterByCrustType("pan")
-                    "Under ₹150" -> filterByPrice(150)
-                    "Under 30 mins" -> filterByDeliveryTime(30)
-                    "Rating 4.0+" -> filterByRating(4.0)
-                    "Pure Veg" -> filterByVeg(true)
-                    "Schedule" -> showScheduleDialog()
-                    "Paneer" -> filterByTopping("paneer")
-                    "Pepperoni" -> filterByTopping("pepperoni")
-                }
-
-                // Apply all active filters
-                applyFilters(selectedFilters)
+            filterConfig = pizzaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
             },
             onSortClick = {
-                showSortOptionsDialog()
+                println("Sort clicked")
+                // Handle sort logic
             }
         )
+//                when (filterName) {
+//                    "Filters" -> showFilterDialog()
+//                    "Cheese Burst" -> filterByCrustType("cheese_burst")
+//                    "Farmhouse" -> filterByPizzaType("farmhouse")
+//                    "Margherita" -> filterByPizzaType("margherita")
+//                    "Multigrain" -> filterByCrustType("multigrain")
+//                    "Pan" -> filterByCrustType("pan")
+//                    "Under ₹150" -> filterByPrice(150)
+//                    "Under 30 mins" -> filterByDeliveryTime(30)
+//                    "Rating 4.0+" -> filterByRating(4.0)
+//                    "Pure Veg" -> filterByVeg(true)
+//                    "Schedule" -> showScheduleDialog()
+//                    "Paneer" -> filterByTopping("paneer")
+//                    "Pepperoni" -> filterByTopping("pepperoni")
+//                }
 
         // Show active filters
         if (selectedFilters.isNotEmpty()) {
@@ -1153,8 +1330,103 @@ fun CakesCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(15.dp))
         // Filter Button
-        FilterButtonFood()
-
+        val allFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort by",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "cheese_burst",
+                    text = "Cheese Burst",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_cheese_burst
+                ),
+                FilterChip(
+                    id = "farmhouse",
+                    text = "Farmhouse",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_farmhouse
+                ),
+                FilterChip(
+                    id = "margherita",
+                    text = "Margherita",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_margherita
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_multigrain
+                ),
+                FilterChip(
+                    id = "pan",
+                    text = "Pan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_pan
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rating_4",
+                    text = "Rating 4.0+",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pure_veg",
+                    text = "Pure Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Schedule",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_paneer
+                ),
+                FilterChip(
+                    id = "pepperoni",
+                    text = "Pepperoni",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_non_veg_pepperoni
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = allFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
         val completeCakesFoodItems = listOf(
             FoodItemDoubleF(
                 id = 1,
@@ -1579,8 +1851,103 @@ fun MomosCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(15.dp))
         // Filter Button
-        FilterButtonFood()
-
+        val allFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort by",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "cheese_burst",
+                    text = "Cheese Burst",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_cheese_burst
+                ),
+                FilterChip(
+                    id = "farmhouse",
+                    text = "Farmhouse",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_farmhouse
+                ),
+                FilterChip(
+                    id = "margherita",
+                    text = "Margherita",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_margherita
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_multigrain
+                ),
+                FilterChip(
+                    id = "pan",
+                    text = "Pan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_pan
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rating_4",
+                    text = "Rating 4.0+",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pure_veg",
+                    text = "Pure Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Schedule",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_paneer
+                ),
+                FilterChip(
+                    id = "pepperoni",
+                    text = "Pepperoni",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_non_veg_pepperoni
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = allFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
         val completeMomoFoodItems = listOf(
             FoodItemDoubleF(
                 id = 1,
@@ -2006,8 +2373,103 @@ fun RollsCategoryPage() {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-        FilterButtonFood()
-
+        val allFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort by",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "cheese_burst",
+                    text = "Cheese Burst",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_cheese_burst
+                ),
+                FilterChip(
+                    id = "farmhouse",
+                    text = "Farmhouse",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_farmhouse
+                ),
+                FilterChip(
+                    id = "margherita",
+                    text = "Margherita",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_margherita
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_multigrain
+                ),
+                FilterChip(
+                    id = "pan",
+                    text = "Pan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_pan
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rating_4",
+                    text = "Rating 4.0+",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pure_veg",
+                    text = "Pure Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Schedule",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_paneer
+                ),
+                FilterChip(
+                    id = "pepperoni",
+                    text = "Pepperoni",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_non_veg_pepperoni
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = allFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
         val completeRollFoodItems = listOf(
             FoodItemDoubleF(
                 id = 1,
@@ -2434,8 +2896,103 @@ fun BurgersCategoryPage() {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-        FilterButtonFood()
-
+        val allFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort by",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "cheese_burst",
+                    text = "Cheese Burst",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_cheese_burst
+                ),
+                FilterChip(
+                    id = "farmhouse",
+                    text = "Farmhouse",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_farmhouse
+                ),
+                FilterChip(
+                    id = "margherita",
+                    text = "Margherita",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_margherita
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_multigrain
+                ),
+                FilterChip(
+                    id = "pan",
+                    text = "Pan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_pan
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rating_4",
+                    text = "Rating 4.0+",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pure_veg",
+                    text = "Pure Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Schedule",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_paneer
+                ),
+                FilterChip(
+                    id = "pepperoni",
+                    text = "Pepperoni",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_non_veg_pepperoni
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = allFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
         val completeBurgerFoodItems = listOf(
             FoodItemDoubleF(
                 id = 1,
@@ -2550,6 +3107,306 @@ fun BurgersCategoryPage() {
             headingBottomPadding = 0.dp
         )
     }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val sampleBurgerItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.burger_classic_chicken,
+            title = "Classic Chicken Burger",
+            price = "120",
+            restaurantName = "Burger King",
+            rating = "4.5",
+            deliveryTime = "20-25 mins",
+            distance = "2.3 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹75",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.burger_cheese_blast,
+            title = "Cheese Blast Burger",
+            price = "135",
+            restaurantName = "Cheese Burger Hub",
+            rating = "4.6",
+            deliveryTime = "15-20 mins",
+            distance = "1.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Lajpat Nagar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.burger_mcspicy_chicken,
+            title = "McSpicy Chicken Burger",
+            price = "110",
+            restaurantName = "McDonald's",
+            rating = "4.4",
+            deliveryTime = "10-15 mins",
+            distance = "1.2 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹65",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.burger_double_pattie,
+            title = "Double Pattie Burger",
+            price = "160",
+            restaurantName = "Double Patty House",
+            rating = "4.7",
+            deliveryTime = "25-30 mins",
+            distance = "3.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹70",
+            address = "Rajouri Garden, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.burger_veg_maharaja,
+            title = "Veg Maharaja Burger",
+            price = "95",
+            restaurantName = "Veg Burger Palace",
+            rating = "4.3",
+            deliveryTime = "20-25 mins",
+            distance = "2.5 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹55",
+            address = "CR Park, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.burger_chicken_tikka,
+            title = "Chicken Tikka Burger",
+            price = "125",
+            restaurantName = "Tikka Burger Point",
+            rating = "4.5",
+            deliveryTime = "18-22 mins",
+            distance = "2.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Karol Bagh, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.burger_bacon_cheese,
+            title = "Bacon Cheese Burger",
+            price = "175",
+            restaurantName = "Bacon Burger Factory",
+            rating = "4.8",
+            deliveryTime = "25-30 mins",
+            distance = "3.4 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹85",
+            address = "Greater Kailash, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.burger_mushroom_swiss,
+            title = "Mushroom Swiss Burger",
+            price = "140",
+            restaurantName = "Gourmet Burger Co.",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "4.2 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹80",
+            address = "Vasant Kunj, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.burger_spicy_veg,
+            title = "Spicy Veg Burger",
+            price = "85",
+            restaurantName = "Spicy Burger Corner",
+            rating = "4.2",
+            deliveryTime = "15-20 mins",
+            distance = "1.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹40",
+            address = "Pitampura, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.burger_triple_cheese,
+            title = "Triple Cheese Burger",
+            price = "150",
+            restaurantName = "Cheese Lovers Burger",
+            rating = "4.7",
+            deliveryTime = "22-27 mins",
+            distance = "2.9 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹75",
+            address = "Rohini, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.burger_crispy_chicken,
+            title = "Crispy Chicken Burger",
+            price = "115",
+            restaurantName = "Crispy Burger Joint",
+            rating = "4.4",
+            deliveryTime = "20-25 mins",
+            distance = "2.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹50",
+            address = "Dwarka, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.burger_bbq_chicken,
+            title = "BBQ Chicken Burger",
+            price = "130",
+            restaurantName = "BBQ Burger House",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "3.3 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹75",
+            address = "Jasola, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.burger_aloo_tikki,
+            title = "Aloo Tikki Burger",
+            price = "70",
+            restaurantName = "Desi Burger Point",
+            rating = "4.1",
+            deliveryTime = "15-20 mins",
+            distance = "1.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹35",
+            address = "Shahdara, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.burger_jalapeno_cheese,
+            title = "Jalapeno Cheese Burger",
+            price = "145",
+            restaurantName = "Jalapeno Burger Co.",
+            rating = "4.6",
+            deliveryTime = "20-25 mins",
+            distance = "2.7 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹70",
+            address = "Janakpuri, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.burger_mutton_pattie,
+            title = "Mutton Pattie Burger",
+            price = "165",
+            restaurantName = "Mutton Burger Specialists",
+            rating = "4.7",
+            deliveryTime = "30-35 mins",
+            distance = "4.5 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹95",
+            address = "Mehrauli, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.burger_fish_fillet,
+            title = "Fish Fillet Burger",
+            price = "155",
+            restaurantName = "Fish Burger Experts",
+            rating = "4.8",
+            deliveryTime = "25-30 mins",
+            distance = "3.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹75",
+            address = "Mayur Vihar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.burger_paneer_tikka,
+            title = "Paneer Tikka Burger",
+            price = "105",
+            restaurantName = "Paneer Burger Center",
+            rating = "4.3",
+            deliveryTime = "20-25 mins",
+            distance = "2.6 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹60",
+            address = "Paschim Vihar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.burger_chicken_premium,
+            title = "Chicken Premium Burger",
+            price = "180",
+            restaurantName = "Premium Burger House",
+            rating = "4.8",
+            deliveryTime = "30-35 mins",
+            distance = "4.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹80",
+            address = "Nehru Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.burger_veg_crunchy,
+            title = "Veg Crunchy Burger",
+            price = "90",
+            restaurantName = "Crunchy Burger Spot",
+            rating = "4.2",
+            deliveryTime = "15-20 mins",
+            distance = "1.9 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹50",
+            address = "Patel Nagar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.burger_combo_special,
+            title = "Combo Special Burger",
+            price = "195",
+            restaurantName = "Burger Combo Masters",
+            rating = "4.6",
+            deliveryTime = "25-30 mins",
+            distance = "3.6 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹95",
+            address = "Dwarka Sector 21, Delhi"
+        )
+    )
+    Column {
+        sampleBurgerItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
@@ -2557,14 +3414,521 @@ fun CholeBhatureCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Chole Bhature",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val allFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort by",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "cheese_burst",
+                    text = "Cheese Burst",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_cheese_burst
+                ),
+                FilterChip(
+                    id = "farmhouse",
+                    text = "Farmhouse",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_farmhouse
+                ),
+                FilterChip(
+                    id = "margherita",
+                    text = "Margherita",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_margherita
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_multigrain
+                ),
+                FilterChip(
+                    id = "pan",
+                    text = "Pan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_pan
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rating_4",
+                    text = "Rating 4.0+",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pure_veg",
+                    text = "Pure Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Schedule",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_paneer
+                ),
+                FilterChip(
+                    id = "pepperoni",
+                    text = "Pepperoni",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_non_veg_pepperoni
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = allFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val completeCholeBhatureFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.sitaram_chole_bhature,
+                title = "Special Chole Bhature",
+                price = "120",
+                restaurantName = "Sitaram Diwan Chand",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹50",
+                address = "Paharganj, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.bille_di_hatti_chole_bhature,
+                title = "Classic Chole Bhature",
+                price = "90",
+                restaurantName = "Bille Di Hatti",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹30",
+                address = "Kamla Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.chache_di_hatti_chole_bhature,
+                title = "Punjabi Chole Bhature",
+                price = "110",
+                restaurantName = "Chache Di Hatti",
+                rating = "4.5",
+                deliveryTime = "15-18 mins",
+                distance = "1.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹55",
+                address = "Shakti Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.nathu_chole_bhature,
+                title = "Deluxe Chole Bhature",
+                price = "150",
+                restaurantName = "Nathu's Sweets",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹75",
+                address = "Bengali Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.bengali_sweet_chole_bhature,
+                title = "Masala Chole Bhature",
+                price = "100",
+                restaurantName = "Bengali Sweet House",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Chandni Chowk, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.premium_chole_bhature,
+                title = "Royal Chole Bhature",
+                price = "180",
+                restaurantName = "Premium Chole Corner",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "4.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "South Extension, Delhi"
+            )
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeCholeBhatureFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleCholeBhatureItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chole_bhature_classic,
+                title = "Classic Chole Bhature",
+                price = "120",
+                restaurantName = "Sitaram Diwan Chand",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Paharganj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chole_bhature_premium,
+                title = "Premium Chole Bhature",
+                price = "150",
+                restaurantName = "Bille Di Hatti",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹45",
+                address = "Kamla Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chole_bhature_punjabi,
+                title = "Punjabi Chole Bhature",
+                price = "110",
+                restaurantName = "Chache Di Hatti",
+                rating = "4.5",
+                deliveryTime = "15-18 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Shakti Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chole_bhature_deluxe,
+                title = "Deluxe Chole Bhature",
+                price = "180",
+                restaurantName = "Nathu's Sweets",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹90",
+                address = "Bengali Market, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chole_bhature_masala,
+                title = "Masala Chole Bhature",
+                price = "100",
+                restaurantName = "Bengali Sweet House",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chole_bhature_royal,
+                title = "Royal Chole Bhature",
+                price = "200",
+                restaurantName = "Premium Chole Corner",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "4.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹60",
+                address = "South Extension, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chole_bhature_spicy,
+                title = "Spicy Chole Bhature",
+                price = "95",
+                restaurantName = "Spicy Chole Point",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹50",
+                address = "Laxmi Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chole_bhature_butter,
+                title = "Butter Chole Bhature",
+                price = "140",
+                restaurantName = "Butter Chole House",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹70",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chole_bhature_amritsari,
+                title = "Amritsari Chole Bhature",
+                price = "130",
+                restaurantName = "Amritsari Kulcha Hut",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "3.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹55",
+                address = "Paschim Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chole_bhature_combo,
+                title = "Chole Bhature Combo",
+                price = "160",
+                restaurantName = "Combo Chole Center",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "2.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹75",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chole_bhature_family,
+                title = "Family Pack Chole Bhature",
+                price = "220",
+                restaurantName = "Family Chole House",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "4.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹110",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chole_bhature_extra,
+                title = "Extra Bhature Chole",
+                price = "135",
+                restaurantName = "Extra Bhature Point",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹40",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chole_bhature_special,
+                title = "Special Chole Bhature",
+                price = "125",
+                restaurantName = "Special Chole Corner",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Patel Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chole_bhature_tandoori,
+                title = "Tandoori Bhature Chole",
+                price = "145",
+                restaurantName = "Tandoori Bhature Co.",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "3.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chole_bhature_cheese,
+                title = "Cheese Chole Bhature",
+                price = "170",
+                restaurantName = "Cheese Chole Specialists",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "4.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹85",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chole_bhature_egg,
+                title = "Egg Chole Bhature",
+                price = "155",
+                restaurantName = "Egg Chole Experts",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "2.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹65",
+                address = "Mayur Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chole_bhature_paneer,
+                title = "Paneer Chole Bhature",
+                price = "165",
+                restaurantName = "Paneer Chole Center",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "3.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chole_bhature_express,
+                title = "Express Chole Bhature",
+                price = "90",
+                restaurantName = "Express Chole Spot",
+                rating = "4.2",
+                deliveryTime = "10-15 mins",
+                distance = "1.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Shahdara, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                    imageRes = R.drawable.chole_bhature_gourmet,
+                title = "Gourmet Chole Bhature",
+                price = "190",
+                restaurantName = "Gourmet Chole Masters",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "4.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹95",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chole_bhature_mega,
+                title = "Mega Chole Bhature",
+                price = "240",
+                restaurantName = "Mega Chole House",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "3.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹120",
+                address = "Saket, Delhi"
+            )
+        )
+        Column {
+            sampleCholeBhatureItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -2576,7 +3940,7 @@ fun SaladCategoryPage() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Salads",
+            text = "Salad Food",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black

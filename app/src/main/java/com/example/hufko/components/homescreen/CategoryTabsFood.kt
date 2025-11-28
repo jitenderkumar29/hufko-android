@@ -2,20 +2,14 @@ package com.example.hufko.components.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -42,8 +36,6 @@ import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.hufko.components.homescreen.RestaurantItemFull
 
 // Sealed class for different category pages
 sealed class CategoryPage(val title: String, val iconRes: Int) {
@@ -380,42 +372,6 @@ fun AllCategoryPage(
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "sort",
-                    text = "Sort by",
-                    type = FilterType.SORT_DROPDOWN,
-                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-                ),
-                FilterChip(
-                    id = "cheese_burst",
-                    text = "Cheese Burst",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_cheese_burst
-                ),
-                FilterChip(
-                    id = "farmhouse",
-                    text = "Farmhouse",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_farmhouse
-                ),
-                FilterChip(
-                    id = "margherita",
-                    text = "Margherita",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_margherita
-                ),
-                FilterChip(
-                    id = "multigrain",
-                    text = "Multigrain",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_multigrain
-                ),
-                FilterChip(
-                    id = "pan",
-                    text = "Pan",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_pan
-                ),
-                FilterChip(
                     id = "under_150",
                     text = "Under ₹150",
                     type = FilterType.TEXT_ONLY
@@ -441,20 +397,8 @@ fun AllCategoryPage(
                     type = FilterType.SORT_DROPDOWN,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
-                FilterChip(
-                    id = "paneer",
-                    text = "Paneer",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_veg_paneer
-                ),
-                FilterChip(
-                    id = "pepperoni",
-                    text = "Pepperoni",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_non_veg_pepperoni
-                ),
             ),
-            rows = 2
+            rows = 1
         )
         FilterButtonFood(
             filterConfig = allFilters,
@@ -793,12 +737,6 @@ fun PizzasCategoryPage() {
                         rightIcon = R.drawable.outline_keyboard_arrow_down_24
                     ),
                     FilterChip(
-                        id = "sort",
-                        text = "Sort by",
-                        type = FilterType.SORT_DROPDOWN,
-                        rightIcon = R.drawable.outline_keyboard_arrow_down_24
-                    ),
-                    FilterChip(
                         id = "cheese_burst",
                         text = "Cheese Burst",
                         type = FilterType.WITH_LEFT_ICON,
@@ -867,7 +805,7 @@ fun PizzasCategoryPage() {
                         icon = R.drawable.ic_non_veg_pepperoni
                     ),
                 ),
-        rows = 1
+        rows = 2
         )
         FilterButtonFood(
             filterConfig = pizzaFilters,
@@ -880,22 +818,6 @@ fun PizzasCategoryPage() {
                 // Handle sort logic
             }
         )
-//                when (filterName) {
-//                    "Filters" -> showFilterDialog()
-//                    "Cheese Burst" -> filterByCrustType("cheese_burst")
-//                    "Farmhouse" -> filterByPizzaType("farmhouse")
-//                    "Margherita" -> filterByPizzaType("margherita")
-//                    "Multigrain" -> filterByCrustType("multigrain")
-//                    "Pan" -> filterByCrustType("pan")
-//                    "Under ₹150" -> filterByPrice(150)
-//                    "Under 30 mins" -> filterByDeliveryTime(30)
-//                    "Rating 4.0+" -> filterByRating(4.0)
-//                    "Pure Veg" -> filterByVeg(true)
-//                    "Schedule" -> showScheduleDialog()
-//                    "Paneer" -> filterByTopping("paneer")
-//                    "Pepperoni" -> filterByTopping("pepperoni")
-//                }
-
         // Show active filters
         if (selectedFilters.isNotEmpty()) {
             Text(
@@ -1330,7 +1252,7 @@ fun CakesCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(15.dp))
         // Filter Button
-        val allFilters = FilterConfig(
+        val cakesFilters = FilterConfig(
             filters = listOf(
                 FilterChip(
                     id = "filters",
@@ -1340,44 +1262,38 @@ fun CakesCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "sort",
-                    text = "Sort by",
-                    type = FilterType.SORT_DROPDOWN,
-                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-                ),
-                FilterChip(
-                    id = "cheese_burst",
-                    text = "Cheese Burst",
+                    id = "zero_spill_guarantee",
+                    text = "Zero-Spill Guarantee",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_cheese_burst
                 ),
                 FilterChip(
-                    id = "farmhouse",
-                    text = "Farmhouse",
+                    id = "hazelnut",
+                    text = "Hazelnut",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_farmhouse
                 ),
                 FilterChip(
-                    id = "margherita",
-                    text = "Margherita",
+                    id = "ice_cream",
+                    text = "Ice Cream",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_margherita
                 ),
                 FilterChip(
-                    id = "multigrain",
-                    text = "Multigrain",
+                    id = "photo",
+                    text = "Photo",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_multigrain
                 ),
                 FilterChip(
-                    id = "pan",
-                    text = "Pan",
+                    id = "pineapple",
+                    text = "Pineapple",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_pan
                 ),
                 FilterChip(
-                    id = "under_150",
-                    text = "Under ₹150",
+                    id = "under_500",
+                    text = "Under ₹500",
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
@@ -1402,14 +1318,20 @@ fun CakesCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "paneer",
-                    text = "Paneer",
+                    id = "kitkat",
+                    text = "Kitkat",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_veg_paneer
                 ),
                 FilterChip(
-                    id = "pepperoni",
-                    text = "Pepperoni",
+                    id = "mango",
+                    text = "Mango",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_non_veg_pepperoni
+                ),
+                FilterChip(
+                    id = "mango",
+                    text = "Flavour: Rasmalai",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_non_veg_pepperoni
                 ),
@@ -1417,7 +1339,7 @@ fun CakesCategoryPage() {
             rows = 2
         )
         FilterButtonFood(
-            filterConfig = allFilters,
+            filterConfig = cakesFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
                 // Handle filter logic
@@ -1851,7 +1773,7 @@ fun MomosCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(15.dp))
         // Filter Button
-        val allFilters = FilterConfig(
+        val momosFilters = FilterConfig(
             filters = listOf(
                 FilterChip(
                     id = "filters",
@@ -1861,38 +1783,32 @@ fun MomosCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "sort",
-                    text = "Sort by",
-                    type = FilterType.SORT_DROPDOWN,
-                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-                ),
-                FilterChip(
-                    id = "cheese_burst",
-                    text = "Cheese Burst",
+                    id = "chicken_momos",
+                    text = "Chicken Momos",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_cheese_burst
                 ),
                 FilterChip(
-                    id = "farmhouse",
-                    text = "Farmhouse",
+                    id = "veg_momos",
+                    text = "Veg Momos",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_farmhouse
                 ),
                 FilterChip(
-                    id = "margherita",
-                    text = "Margherita",
+                    id = "chilli_momos",
+                    text = "Chilli Momos",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_margherita
                 ),
                 FilterChip(
-                    id = "multigrain",
-                    text = "Multigrain",
+                    id = "paneer_momos",
+                    text = "Paneer Momos",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_multigrain
                 ),
                 FilterChip(
-                    id = "pan",
-                    text = "Pan",
+                    id = "afghani_momos",
+                    text = "Afghani Momos",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_pan
                 ),
@@ -1912,25 +1828,20 @@ fun MomosCategoryPage() {
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
-                    id = "pure_veg",
-                    text = "Pure Veg",
-                    type = FilterType.TEXT_ONLY
-                ),
-                FilterChip(
                     id = "schedule",
                     text = "Schedule",
                     type = FilterType.SORT_DROPDOWN,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "paneer",
-                    text = "Paneer",
+                    id = "fried_momos",
+                    text = "Fried Momos",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_veg_paneer
                 ),
                 FilterChip(
-                    id = "pepperoni",
-                    text = "Pepperoni",
+                    id = "steam_momos",
+                    text = "Steam Momos",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_non_veg_pepperoni
                 ),
@@ -1938,7 +1849,7 @@ fun MomosCategoryPage() {
             rows = 2
         )
         FilterButtonFood(
-            filterConfig = allFilters,
+            filterConfig = momosFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
                 // Handle filter logic
@@ -2373,7 +2284,7 @@ fun RollsCategoryPage() {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-        val allFilters = FilterConfig(
+        val rollsFilters = FilterConfig(
             filters = listOf(
                 FilterChip(
                     id = "filters",
@@ -2383,44 +2294,43 @@ fun RollsCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "sort",
-                    text = "Sort by",
-                    type = FilterType.SORT_DROPDOWN,
-                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-                ),
-                FilterChip(
-                    id = "cheese_burst",
-                    text = "Cheese Burst",
+                    id = "chaap",
+                    text = "Chaap",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_cheese_burst
                 ),
                 FilterChip(
-                    id = "farmhouse",
-                    text = "Farmhouse",
+                    id = "thai",
+                    text = "Thai",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_farmhouse
                 ),
                 FilterChip(
-                    id = "margherita",
-                    text = "Margherita",
+                    id = "chicken",
+                    text = "Chicken",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_margherita
                 ),
                 FilterChip(
-                    id = "multigrain",
-                    text = "Multigrain",
+                    id = "frankie",
+                    text = "Frankie",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_multigrain
                 ),
                 FilterChip(
-                    id = "pan",
-                    text = "Pan",
+                    id = "kaathi",
+                    text = "Kaathi",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_pan
                 ),
                 FilterChip(
-                    id = "under_150",
-                    text = "Under ₹150",
+                    id = "base_lachcha",
+                    text = "Base: Lachcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_100",
+                    text = "Under 100",
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
@@ -2451,8 +2361,8 @@ fun RollsCategoryPage() {
                     icon = R.drawable.ic_veg_paneer
                 ),
                 FilterChip(
-                    id = "pepperoni",
-                    text = "Pepperoni",
+                    id = "soya",
+                    text = "Soya",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_non_veg_pepperoni
                 ),
@@ -2460,7 +2370,7 @@ fun RollsCategoryPage() {
             rows = 2
         )
         FilterButtonFood(
-            filterConfig = allFilters,
+            filterConfig = rollsFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
                 // Handle filter logic
@@ -2896,7 +2806,7 @@ fun BurgersCategoryPage() {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-        val allFilters = FilterConfig(
+        val burgersFilters = FilterConfig(
             filters = listOf(
                 FilterChip(
                     id = "filters",
@@ -2906,26 +2816,20 @@ fun BurgersCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "sort",
-                    text = "Sort by",
-                    type = FilterType.SORT_DROPDOWN,
-                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-                ),
-                FilterChip(
-                    id = "cheese_burst",
-                    text = "Cheese Burst",
+                    id = "egg",
+                    text = "Egg",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_cheese_burst
                 ),
                 FilterChip(
-                    id = "farmhouse",
-                    text = "Farmhouse",
+                    id = "fish",
+                    text = "Fish",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_farmhouse
                 ),
                 FilterChip(
                     id = "margherita",
-                    text = "Margherita",
+                    text = "Cheese: Mozzarella",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_margherita
                 ),
@@ -2937,7 +2841,19 @@ fun BurgersCategoryPage() {
                 ),
                 FilterChip(
                     id = "pan",
-                    text = "Pan",
+                    text = "Fried Chicken",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_pan
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pizza_pan
+                ),
+                FilterChip(
+                    id = "dressing_tandoori",
+                    text = "Dressing: Tandoori",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_pizza_pan
                 ),
@@ -2968,14 +2884,14 @@ fun BurgersCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "paneer",
-                    text = "Paneer",
+                    id = "dressing_peri_peri",
+                    text = "Dressing: Peri Peri",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_veg_paneer
                 ),
                 FilterChip(
                     id = "pepperoni",
-                    text = "Pepperoni",
+                    text = "Dressing: Salsa",
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_non_veg_pepperoni
                 ),
@@ -2983,7 +2899,7 @@ fun BurgersCategoryPage() {
             rows = 2
         )
         FilterButtonFood(
-            filterConfig = allFilters,
+            filterConfig = burgersFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
                 // Handle filter logic
@@ -3418,7 +3334,7 @@ fun CholeBhatureCategoryPage() {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-        val allFilters = FilterConfig(
+        val choleBhatureFilters = FilterConfig(
             filters = listOf(
                 FilterChip(
                     id = "filters",
@@ -3428,44 +3344,8 @@ fun CholeBhatureCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
                 FilterChip(
-                    id = "sort",
-                    text = "Sort by",
-                    type = FilterType.SORT_DROPDOWN,
-                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-                ),
-                FilterChip(
-                    id = "cheese_burst",
-                    text = "Cheese Burst",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_cheese_burst
-                ),
-                FilterChip(
-                    id = "farmhouse",
-                    text = "Farmhouse",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_farmhouse
-                ),
-                FilterChip(
-                    id = "margherita",
-                    text = "Margherita",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_margherita
-                ),
-                FilterChip(
-                    id = "multigrain",
-                    text = "Multigrain",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_multigrain
-                ),
-                FilterChip(
-                    id = "pan",
-                    text = "Pan",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pizza_pan
-                ),
-                FilterChip(
-                    id = "under_150",
-                    text = "Under ₹150",
+                    id = "under_100",
+                    text = "Under ₹100",
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
@@ -3489,23 +3369,11 @@ fun CholeBhatureCategoryPage() {
                     type = FilterType.SORT_DROPDOWN,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
-                FilterChip(
-                    id = "paneer",
-                    text = "Paneer",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_veg_paneer
-                ),
-                FilterChip(
-                    id = "pepperoni",
-                    text = "Pepperoni",
-                    type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_non_veg_pepperoni
-                ),
             ),
-            rows = 2
+            rows = 1
         )
         FilterButtonFood(
-            filterConfig = allFilters,
+            filterConfig = choleBhatureFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
                 // Handle filter logic
@@ -3937,14 +3805,483 @@ fun SaladCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Salad Food",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val saladFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein",
+                    text = "High-Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_cal",
+                    text = "Low-Cal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten-Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Schedule",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 1
         )
+        FilterButtonFood(
+            filterConfig = saladFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val completeSaladFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.greek_salad,
+                title = "Classic Greek Salad",
+                price = "320",
+                restaurantName = "Mediterranean Delight",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹80",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.caesar_salad,
+                title = "Chicken Caesar Salad",
+                price = "280",
+                restaurantName = "Fresh Greens Cafe",
+                rating = "4.6",
+                deliveryTime = "12-15 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Hauz Khas, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.quinoa_salad,
+                title = "Protein Quinoa Bowl",
+                price = "350",
+                restaurantName = "Health Hub",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "2.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹90",
+                address = "Greater Kailash, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.fruit_salad,
+                title = "Tropical Fruit Salad",
+                price = "240",
+                restaurantName = "Nature's Basket",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "1.0 km",
+                discount = "30%",
+                discountAmount = "up to ₹75",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.veg_salad,
+                title = "Garden Fresh Salad",
+                price = "190",
+                restaurantName = "Green Leaf Restaurant",
+                rating = "4.4",
+                deliveryTime = "15-18 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.premium_salad,
+                title = "Premium Avocado Salad",
+                price = "420",
+                restaurantName = "Organic Kitchen",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "3.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹65",
+                address = "Vasant Kunj, Delhi"
+            )
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeSaladFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleSaladItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.salad_greek,
+                title = "Greek Salad",
+                price = "180",
+                restaurantName = "Mediterranean Delight",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.salad_caesar,
+                title = "Classic Caesar Salad",
+                price = "220",
+                restaurantName = "Italian Bistro",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹50",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.salad_quinoa,
+                title = "Quinoa Power Salad",
+                price = "250",
+                restaurantName = "Health Hub",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹75",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.salad_fruit,
+                title = "Fresh Fruit Salad",
+                price = "160",
+                restaurantName = "Fruit Paradise",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹35",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.salad_chicken,
+                title = "Grilled Chicken Salad",
+                price = "280",
+                restaurantName = "Protein House",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹60",
+                address = "Defence Colony, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.salad_avocado,
+                title = "Avocado Spinach Salad",
+                price = "240",
+                restaurantName = "Green Garden",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹85",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.salad_thai,
+                title = "Thai Green Papaya Salad",
+                price = "190",
+                restaurantName = "Asian Flavors",
+                rating = "4.4",
+                deliveryTime = "22-27 mins",
+                distance = "3.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹45",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.salad_tuna,
+                title = "Tuna Nicoise Salad",
+                price = "320",
+                restaurantName = "Seafood Specialists",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "3.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹100",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.salad_cobb,
+                title = "Cobb Salad",
+                price = "270",
+                restaurantName = "American Diner",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "2.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹55",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.salad_waldorf,
+                title = "Waldorf Salad",
+                price = "210",
+                restaurantName = "Classic Cuisine",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.salad_caprese,
+                title = "Caprese Salad",
+                price = "230",
+                restaurantName = "Italian Express",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "1.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Chanakyapuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.salad_mexican,
+                title = "Mexican Fiesta Salad",
+                price = "200",
+                restaurantName = "Mexican Grill",
+                rating = "4.6",
+                deliveryTime = "22-28 mins",
+                distance = "3.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹75",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.salad_kale,
+                title = "Kale Caesar Salad",
+                price = "260",
+                restaurantName = "Superfood Cafe",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹65",
+                address = "Lodhi Road, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.salad_beetroot,
+                title = "Beetroot & Feta Salad",
+                price = "195",
+                restaurantName = "Healthy Bites",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Malviya Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.salad_pasta,
+                title = "Pasta Salad",
+                price = "180",
+                restaurantName = "Italian Corner",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.salad_mediterranean,
+                title = "Mediterranean Bowl",
+                price = "290",
+                restaurantName = "Bowl Company",
+                rating = "4.7",
+                deliveryTime = "28-33 mins",
+                distance = "3.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹95",
+                address = "South Extension, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.salad_sprouts,
+                title = "Sprout & Veggie Salad",
+                price = "170",
+                restaurantName = "Sprout Heaven",
+                rating = "4.5",
+                deliveryTime = "12-17 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.salad_egg,
+                title = "Egg & Bacon Salad",
+                price = "240",
+                restaurantName = "Breakfast Club",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹45",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.salad_asian,
+                title = "Asian Chicken Salad",
+                price = "270",
+                restaurantName = "Pan Asian",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "3.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.salad_detox,
+                title = "Detox Green Salad",
+                price = "220",
+                restaurantName = "Detox Kitchen",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "2.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹75",
+                address = "Kailash Colony, Delhi"
+            )
+        )
+        Column {
+            sampleSaladItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 

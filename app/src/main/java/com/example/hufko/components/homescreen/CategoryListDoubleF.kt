@@ -168,7 +168,7 @@ fun FoodItemCard(
             foodItem.deliveryTime?.let { deliveryTime ->
                 Text(
                     text = deliveryTime,
-                    color = Color.Gray,
+                    color = Color.Black,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium
                 )

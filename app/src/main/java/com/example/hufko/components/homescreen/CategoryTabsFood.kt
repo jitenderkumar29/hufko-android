@@ -48,7 +48,7 @@ sealed class CategoryPage(val title: String, val iconRes: Int) {
     object Burgers : CategoryPage("Burgers", R.drawable.burgers_food)
     object CholeBhature : CategoryPage("Chole Bhature", R.drawable.chole_bhature_food)
     object Salad : CategoryPage("Salad", R.drawable.salad_food)
-    object Party : CategoryPage("Patty", R.drawable.patty_food)
+    object Patty : CategoryPage("Patty", R.drawable.patty_food)
     object Chinese : CategoryPage("Chinese", R.drawable.chinese_food)
     object IceCream : CategoryPage("Ice Cream", R.drawable.ice_cream_food)
     object Appam : CategoryPage("Appam", R.drawable.appam_food)
@@ -98,7 +98,7 @@ fun CategoryTabsFood(
         CategoryPage.Burgers,
         CategoryPage.CholeBhature,
         CategoryPage.Salad,
-        CategoryPage.Party,
+        CategoryPage.Patty,
         CategoryPage.Chinese,
         CategoryPage.IceCream,
         CategoryPage.Appam,
@@ -210,7 +210,7 @@ fun CategoryTabsFood(
                 5 -> BurgersCategoryPage()
                 6 -> CholeBhatureCategoryPage()
                 7 -> SaladCategoryPage()
-                8 -> PartyCategoryPage()
+                8 -> PattyCategoryPage()
                 9 -> ChineseCategoryPage()
                 10 -> IceCreamCategoryPage()
                 11 -> AppamCategoryPage()
@@ -4286,18 +4286,488 @@ fun SaladCategoryPage() {
 }
 
 @Composable
-fun PartyCategoryPage() {
+fun PattyCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Party Food",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val pattyFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "beef",
+                    text = "Beef",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chicken",
+                    text = "Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quick",
+                    text = "Quick",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten-Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Schedule",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = pattyFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completePattyFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.classic_beef_patty,
+                title = "Classic Beef Burger",
+                price = "320",
+                restaurantName = "Burger Junction",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹80",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chicken_patty,
+                title = "Grilled Chicken Patty",
+                price = "280",
+                restaurantName = "Chicken Express",
+                rating = "4.6",
+                deliveryTime = "12-15 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Hauz Khas, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.veg_patty,
+                title = "Spicy Veg Patty",
+                price = "190",
+                restaurantName = "Green Bites",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "2.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹90",
+                address = "Greater Kailash, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.cheese_patty,
+                title = "Cheese Stuffed Patty",
+                price = "350",
+                restaurantName = "Cheese Lovers",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "1.0 km",
+                discount = "30%",
+                discountAmount = "up to ₹75",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.turkey_patty,
+                title = "Lean Turkey Burger",
+                price = "310",
+                restaurantName = "Healthy Grill",
+                rating = "4.4",
+                deliveryTime = "15-18 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.premium_patty,
+                title = "Premium Angus Beef",
+                price = "420",
+                restaurantName = "Gourmet Burgers",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "3.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹65",
+                address = "Vasant Kunj, Delhi"
+            )
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completePattyFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val samplePattyItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.patty_classic_beef,
+                title = "Classic Beef Patty",
+                price = "180",
+                restaurantName = "Butcher's Best",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.patty_chicken_grill,
+                title = "Grilled Chicken Patty",
+                price = "220",
+                restaurantName = "Chicken Masters",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹50",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.patty_veg_spicy,
+                title = "Spicy Veg Patty",
+                price = "150",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹75",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.patty_cheese_stuffed,
+                title = "Cheese Stuffed Patty",
+                price = "250",
+                restaurantName = "Cheese Lovers",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹35",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.patty_turkey_lean,
+                title = "Lean Turkey Patty",
+                price = "280",
+                restaurantName = "Healthy Protein",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹60",
+                address = "Defence Colony, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.patty_lamb_herb,
+                title = "Herb Lamb Patty",
+                price = "320",
+                restaurantName = "Middle Eastern Grill",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹85",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.patty_fish_crispy,
+                title = "Crispy Fish Patty",
+                price = "290",
+                restaurantName = "Seafood Express",
+                rating = "4.4",
+                deliveryTime = "22-27 mins",
+                distance = "3.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹45",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.patty_pork_bbq,
+                title = "BBQ Pork Patty",
+                price = "340",
+                restaurantName = "Smoke House",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "3.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹100",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.patty_mushroom_veg,
+                title = "Mushroom Veg Patty",
+                price = "170",
+                restaurantName = "Mushroom Magic",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "2.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹55",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.patty_chicken_tandoori,
+                title = "Tandoori Chicken Patty",
+                price = "240",
+                restaurantName = "Indian Grill",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.patty_beef_pepper,
+                title = "Pepper Beef Patty",
+                price = "260",
+                restaurantName = "Pepper Mill",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "1.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Chanakyapuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.patty_veg_corn,
+                title = "Sweet Corn Patty",
+                price = "130",
+                restaurantName = "Corn Factory",
+                rating = "4.6",
+                deliveryTime = "22-28 mins",
+                distance = "3.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹75",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.patty_chicken_herb,
+                title = "Herb Chicken Patty",
+                price = "230",
+                restaurantName = "Herb Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹65",
+                address = "Lodhi Road, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.patty_paneer_spicy,
+                title = "Spicy Paneer Patty",
+                price = "195",
+                restaurantName = "Paneer Special",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Malviya Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.patty_beef_cheese,
+                title = "Beef Cheese Patty",
+                price = "300",
+                restaurantName = "Cheese & Beef Co.",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.patty_veg_mix,
+                title = "Mixed Veg Patty",
+                price = "140",
+                restaurantName = "Veggie World",
+                rating = "4.7",
+                deliveryTime = "28-33 mins",
+                distance = "3.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹95",
+                address = "South Extension, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.patty_chicken_crunchy,
+                title = "Crunchy Chicken Patty",
+                price = "210",
+                restaurantName = "Crispy Corner",
+                rating = "4.5",
+                deliveryTime = "12-17 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.patty_lamb_spicy,
+                title = "Spicy Lamb Patty",
+                price = "350",
+                restaurantName = "Lamb Experts",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹45",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.patty_fish_herb,
+                title = "Herb Fish Patty",
+                price = "270",
+                restaurantName = "Ocean Fresh",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "3.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.patty_veg_soya,
+                title = "Soya Protein Patty",
+                price = "160",
+                restaurantName = "Protein Plus",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "2.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹75",
+                address = "Kailash Colony, Delhi"
+            )
+        )
+        Column {
+            samplePattyItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -4306,14 +4776,534 @@ fun ChineseCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Chinese Cuisine",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val chineseFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "sichuan",
+                    text = "Sichuan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sichuan
+                ),
+                FilterChip(
+                    id = "cantonese",
+                    text = "Cantonese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hunan",
+                    text = "Hunan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "shanghai",
+                    text = "Shanghai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "beijing",
+                    text = "Beijing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dim_sum",
+                    text = "Dim Sum",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "noodles",
+                    text = "Noodles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rice",
+                    text = "Rice Dishes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "seafood",
+                    text = "Seafood",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soup",
+                    text = "Soups",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quick",
+                    text = "Quick",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "healthy",
+                    text = "Healthy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = chineseFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeChineseFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.kung_pao_chicken_chinese,
+                title = "Kung Pao Chicken",
+                price = "320",
+                restaurantName = "Sichuan Delight",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹80",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.sweet_sour_pork_chinese,
+                title = "Sweet and Sour Pork",
+                price = "280",
+                restaurantName = "Cantonese Express",
+                rating = "4.6",
+                deliveryTime = "12-15 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Hauz Khas, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.vegetable_noodles_chinese,
+                title = "Vegetable Hakka Noodles",
+                price = "190",
+                restaurantName = "Green Wok",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "2.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹90",
+                address = "Greater Kailash, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.peking_duck_chinese,
+                title = "Peking Duck",
+                price = "350",
+                restaurantName = "Beijing Palace",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "1.0 km",
+                discount = "30%",
+                discountAmount = "up to ₹75",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.steamed_fish_with_ginger_chinese,
+                title = "Steamed Fish with Ginger",
+                price = "310",
+                restaurantName = "Healthy Wok",
+                rating = "4.4",
+                deliveryTime = "15-18 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.dim_sum_platter_chinese,
+                title = "Dim Sum Platter",
+                price = "420",
+                restaurantName = "Gourmet Chinese",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "3.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹65",
+                address = "Vasant Kunj, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeChineseFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color =  MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val samplePattyItems = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.patty_classic_beef,
+//                title = "Classic Beef Patty",
+//                price = "180",
+//                restaurantName = "Butcher's Best",
+//                rating = "4.7",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.5 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Hauz Khas, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.patty_chicken_grill,
+//                title = "Grilled Chicken Patty",
+//                price = "220",
+//                restaurantName = "Chicken Masters",
+//                rating = "4.6",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.2 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹50",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.patty_veg_spicy,
+//                title = "Spicy Veg Patty",
+//                price = "150",
+//                restaurantName = "Vegetarian Delight",
+//                rating = "4.8",
+//                deliveryTime = "18-22 mins",
+//                distance = "1.8 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹75",
+//                address = "Vasant Vihar, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.patty_cheese_stuffed,
+//                title = "Cheese Stuffed Patty",
+//                price = "250",
+//                restaurantName = "Cheese Lovers",
+//                rating = "4.5",
+//                deliveryTime = "10-15 mins",
+//                distance = "1.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Green Park, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.patty_turkey_lean,
+//                title = "Lean Turkey Patty",
+//                price = "280",
+//                restaurantName = "Healthy Protein",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.8 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹60",
+//                address = "Defence Colony, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.patty_lamb_herb,
+//                title = "Herb Lamb Patty",
+//                price = "320",
+//                restaurantName = "Middle Eastern Grill",
+//                rating = "4.6",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.1 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹85",
+//                address = "Greater Kailash, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.patty_fish_crispy,
+//                title = "Crispy Fish Patty",
+//                price = "290",
+//                restaurantName = "Seafood Express",
+//                rating = "4.4",
+//                deliveryTime = "22-27 mins",
+//                distance = "3.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹45",
+//                address = "Saket, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.patty_pork_bbq,
+//                title = "BBQ Pork Patty",
+//                price = "340",
+//                restaurantName = "Smoke House",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "3.5 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹100",
+//                address = "Nehru Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.patty_mushroom_veg,
+//                title = "Mushroom Veg Patty",
+//                price = "170",
+//                restaurantName = "Mushroom Magic",
+//                rating = "4.5",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.9 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹55",
+//                address = "Rajouri Garden, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.patty_chicken_tandoori,
+//                title = "Tandoori Chicken Patty",
+//                price = "240",
+//                restaurantName = "Indian Grill",
+//                rating = "4.3",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.4 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹50",
+//                address = "Karol Bagh, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.patty_beef_pepper,
+//                title = "Pepper Beef Patty",
+//                price = "260",
+//                restaurantName = "Pepper Mill",
+//                rating = "4.7",
+//                deliveryTime = "18-23 mins",
+//                distance = "1.9 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹70",
+//                address = "Chanakyapuri, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.patty_veg_corn,
+//                title = "Sweet Corn Patty",
+//                price = "130",
+//                restaurantName = "Corn Factory",
+//                rating = "4.6",
+//                deliveryTime = "22-28 mins",
+//                distance = "3.1 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹75",
+//                address = "Dwarka, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.patty_chicken_herb,
+//                title = "Herb Chicken Patty",
+//                price = "230",
+//                restaurantName = "Herb Kitchen",
+//                rating = "4.8",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.7 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹65",
+//                address = "Lodhi Road, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.patty_paneer_spicy,
+//                title = "Spicy Paneer Patty",
+//                price = "195",
+//                restaurantName = "Paneer Special",
+//                rating = "4.4",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.6 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Malviya Nagar, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.patty_beef_cheese,
+//                title = "Beef Cheese Patty",
+//                price = "300",
+//                restaurantName = "Cheese & Beef Co.",
+//                rating = "4.3",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.3 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹55",
+//                address = "Pitampura, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.patty_veg_mix,
+//                title = "Mixed Veg Patty",
+//                price = "140",
+//                restaurantName = "Veggie World",
+//                rating = "4.7",
+//                deliveryTime = "28-33 mins",
+//                distance = "3.8 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹95",
+//                address = "South Extension, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.patty_chicken_crunchy,
+//                title = "Crunchy Chicken Patty",
+//                price = "210",
+//                restaurantName = "Crispy Corner",
+//                rating = "4.5",
+//                deliveryTime = "12-17 mins",
+//                distance = "1.4 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Lajpat Nagar, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.patty_lamb_spicy,
+//                title = "Spicy Lamb Patty",
+//                price = "350",
+//                restaurantName = "Lamb Experts",
+//                rating = "4.6",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹45",
+//                address = "Rohini, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.patty_fish_herb,
+//                title = "Herb Fish Patty",
+//                price = "270",
+//                restaurantName = "Ocean Fresh",
+//                rating = "4.8",
+//                deliveryTime = "25-30 mins",
+//                distance = "3.3 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹80",
+//                address = "Janakpuri, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.patty_veg_soya,
+//                title = "Soya Protein Patty",
+//                price = "160",
+//                restaurantName = "Protein Plus",
+//                rating = "4.7",
+//                deliveryTime = "18-22 mins",
+//                distance = "2.0 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹75",
+//                address = "Kailash Colony, Delhi"
+//            )
+//        )
+//        Column {
+//            samplePattyItems.forEach { restaurantItem ->
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
     }
 }
 
@@ -4685,7 +5675,7 @@ fun MainScreen(navController: NavHostController) {
                     CategoryPage.Burgers -> 5
                     CategoryPage.CholeBhature -> 6
                     CategoryPage.Salad -> 7
-                    CategoryPage.Party -> 8
+                    CategoryPage.Patty -> 8
                     CategoryPage.Chinese -> 9
                     CategoryPage.IceCream -> 10
                     CategoryPage.Appam -> 11

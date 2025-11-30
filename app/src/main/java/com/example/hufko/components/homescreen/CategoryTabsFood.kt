@@ -5005,6 +5005,544 @@ fun ChineseCategoryPage() {
         )
 
 
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleChineseItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chinese_manchurian,
+                title = "Veg Manchurian",
+                price = "220",
+                restaurantName = "Dragon Wok",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chinese_hakka_noodles,
+                title = "Hakka Noodles",
+                price = "180",
+                restaurantName = "Noodle House",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chinese_schezwan_rice,
+                title = "Schezwan Fried Rice",
+                price = "200",
+                restaurantName = "Spice Garden",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "2.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹60",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chinese_dimsum,
+                title = "Steamed Dimsums",
+                price = "160",
+                restaurantName = "Dimsum Delight",
+                rating = "4.8",
+                deliveryTime = "12-15 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chinese_chilli_chicken,
+                title = "Chilli Chicken",
+                price = "280",
+                restaurantName = "Chicken Express",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹55",
+                address = "Defence Colony, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chinese_spring_rolls,
+                title = "Crispy Spring Rolls",
+                price = "140",
+                restaurantName = "Rolling Wok",
+                rating = "4.4",
+                deliveryTime = "15-18 mins",
+                distance = "1.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹65",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chinese_sweet_sour,
+                title = "Sweet & Sour Vegetables",
+                price = "190",
+                restaurantName = "Wok This Way",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "2.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹45",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chinese_peking_duck,
+                title = "Peking Duck",
+                price = "450",
+                restaurantName = "Peking Palace",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "3.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹120",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chinese_momos,
+                title = "Chicken Momos",
+                price = "120",
+                restaurantName = "Momos Point",
+                rating = "4.3",
+                deliveryTime = "10-15 mins",
+                distance = "0.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹25",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chinese_hot_soup,
+                title = "Hot & Sour Soup",
+                price = "110",
+                restaurantName = "Soup Nation",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chinese_kung_pao,
+                title = "Kung Pao Chicken",
+                price = "320",
+                restaurantName = "Kung Pao Express",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "2.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹85",
+                address = "Chanakyapuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chinese_manchow_soup,
+                title = "Manchow Soup",
+                price = "100",
+                restaurantName = "Soup Delight",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.7 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹40",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chinese_ginger_chicken,
+                title = "Ginger Chicken",
+                price = "270",
+                restaurantName = "Ginger House",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "2.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹60",
+                address = "Lodhi Road, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chinese_paneer_manchurian,
+                title = "Paneer Manchurian",
+                price = "240",
+                restaurantName = "Paneer Wok",
+                rating = "4.5",
+                deliveryTime = "16-21 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹40",
+                address = "Malviya Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chinese_fried_rice,
+                title = "Egg Fried Rice",
+                price = "170",
+                restaurantName = "Rice Bowl",
+                rating = "4.3",
+                deliveryTime = "14-19 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹50",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chinese_american_chopsuey,
+                title = "American Chopsuey",
+                price = "290",
+                restaurantName = "Chopsuey Corner",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.9 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹95",
+                address = "South Extension, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chinese_chicken_lollipop,
+                title = "Chicken Lollipop",
+                price = "330",
+                restaurantName = "Lollipop Express",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹70",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chinese_triple_rice,
+                title = "Triple Schezwan Rice",
+                price = "260",
+                restaurantName = "Triple Dragon",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "2.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹45",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chinese_cantonese,
+                title = "Cantonese Chicken",
+                price = "310",
+                restaurantName = "Canton Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "3.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chinese_veg_noodles,
+                title = "Veg Hakka Noodles",
+                price = "150",
+                restaurantName = "Veggie Wok",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.6 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹55",
+                address = "Kailash Colony, Delhi"
+            )
+        )
+        Column {
+            sampleChineseItems .forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun IceCreamCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val iceCreamFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "chocolate",
+                    text = "Chocolate",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_ice_cream
+                ),
+                FilterChip(
+                    id = "vanilla",
+                    text = "Vanilla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vanilla_ice_cream
+                ),
+                FilterChip(
+                    id = "strawberry",
+                    text = "Strawberry",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_strawberry_ice_cream
+                ),
+                FilterChip(
+                    id = "butterscotch",
+                    text = "Butterscotch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_choco",
+                    text = "Mint Choco",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookie_cream",
+                    text = "Cookie Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit",
+                    text = "Fruit",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fruit_ice_cream
+                ),
+                FilterChip(
+                    id = "nutty",
+                    text = "Nutty",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_nutty_ice_cream
+                ),
+                FilterChip(
+                    id = "cone",
+                    text = "Cone",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cup",
+                    text = "Cup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sugar_free_ice_cream
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegan_ice_cream
+                ),
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quick_delivery",
+                    text = "Quick Delivery",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_quick_ice_cream
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = iceCreamFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeIceCreamItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chocolate_fudge_icecream,
+                title = "Chocolate Fudge Sundae",
+                price = "180",
+                restaurantName = "Cream & Cone",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.vanilla_bean_icecream,
+                title = "Vanilla Bean Delight",
+                price = "150",
+                restaurantName = "Ice Cream Parlor",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹30",
+                address = "Hauz Khas, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.strawberry_blast_icecream,
+                title = "Strawberry Blast",
+                price = "170",
+                restaurantName = "Berry Creamery",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹45",
+                address = "Greater Kailash, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.butterscotch_crunch_icecream,
+                title = "Butterscotch Crunch",
+                price = "190",
+                restaurantName = "Sweet Treats",
+                rating = "4.5",
+                deliveryTime = "8-12 mins",
+                distance = "0.5 km",
+                discount = "30%",
+                discountAmount = "up to ₹60",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.mint_choco_chip_icecream,
+                title = "Mint Chocolate Chip",
+                price = "160",
+                restaurantName = "Chill Factory",
+                rating = "4.4",
+                deliveryTime = "18-22 mins",
+                distance = "2.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹35",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.cookie_cream_icecream,
+                title = "Cookies & Cream Dream",
+                price = "200",
+                restaurantName = "Dream Cream",
+                rating = "4.9",
+                deliveryTime = "14-19 mins",
+                distance = "1.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹35",
+                address = "Vasant Vihar, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeIceCreamItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
 //        Spacer(modifier = Modifier.height(15.dp))
 //        Text(
 //            text = "Restaurants delivering to you",
@@ -5032,270 +5570,270 @@ fun ChineseCategoryPage() {
 //        Spacer(modifier = Modifier.height(5.dp))
 //
 //        // Sample data based on the provided images
-//        val samplePattyItems = listOf(
+//        val sampleChineseItems = listOf(
 //            RestaurantItemFull(
 //                id = 1,
-//                imageRes = R.drawable.patty_classic_beef,
-//                title = "Classic Beef Patty",
-//                price = "180",
-//                restaurantName = "Butcher's Best",
-//                rating = "4.7",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Hauz Khas, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.patty_chicken_grill,
-//                title = "Grilled Chicken Patty",
+//                imageRes = R.drawable.chinese_manchurian,
+//                title = "Veg Manchurian",
 //                price = "220",
-//                restaurantName = "Chicken Masters",
+//                restaurantName = "Dragon Wok",
 //                rating = "4.6",
 //                deliveryTime = "20-25 mins",
-//                distance = "2.2 km",
-//                discount = "15% OFF",
+//                distance = "1.8 km",
+//                discount = "20% OFF",
 //                discountAmount = "up to ₹50",
 //                address = "Connaught Place, Delhi"
 //            ),
 //            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.chinese_hakka_noodles,
+//                title = "Hakka Noodles",
+//                price = "180",
+//                restaurantName = "Noodle House",
+//                rating = "4.5",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.2 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Hauz Khas, Delhi"
+//            ),
+//            RestaurantItemFull(
 //                id = 3,
-//                imageRes = R.drawable.patty_veg_spicy,
-//                title = "Spicy Veg Patty",
-//                price = "150",
-//                restaurantName = "Vegetarian Delight",
-//                rating = "4.8",
+//                imageRes = R.drawable.chinese_schezwan_rice,
+//                title = "Schezwan Fried Rice",
+//                price = "200",
+//                restaurantName = "Spice Garden",
+//                rating = "4.7",
 //                deliveryTime = "18-22 mins",
-//                distance = "1.8 km",
+//                distance = "2.1 km",
 //                discount = "25% OFF",
-//                discountAmount = "up to ₹75",
+//                discountAmount = "up to ₹60",
 //                address = "Vasant Vihar, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 4,
-//                imageRes = R.drawable.patty_cheese_stuffed,
-//                title = "Cheese Stuffed Patty",
-//                price = "250",
-//                restaurantName = "Cheese Lovers",
-//                rating = "4.5",
-//                deliveryTime = "10-15 mins",
-//                distance = "1.2 km",
+//                imageRes = R.drawable.chinese_dimsum,
+//                title = "Steamed Dimsums",
+//                price = "160",
+//                restaurantName = "Dimsum Delight",
+//                rating = "4.8",
+//                deliveryTime = "12-15 mins",
+//                distance = "0.8 km",
 //                discount = "20% OFF",
-//                discountAmount = "up to ₹35",
+//                discountAmount = "up to ₹40",
 //                address = "Green Park, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 5,
-//                imageRes = R.drawable.patty_turkey_lean,
-//                title = "Lean Turkey Patty",
+//                imageRes = R.drawable.chinese_chilli_chicken,
+//                title = "Chilli Chicken",
 //                price = "280",
-//                restaurantName = "Healthy Protein",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.8 km",
+//                restaurantName = "Chicken Express",
+//                rating = "4.6",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.3 km",
 //                discount = "15% OFF",
-//                discountAmount = "up to ₹60",
+//                discountAmount = "up to ₹55",
 //                address = "Defence Colony, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 6,
-//                imageRes = R.drawable.patty_lamb_herb,
-//                title = "Herb Lamb Patty",
-//                price = "320",
-//                restaurantName = "Middle Eastern Grill",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.1 km",
+//                imageRes = R.drawable.chinese_spring_rolls,
+//                title = "Crispy Spring Rolls",
+//                price = "140",
+//                restaurantName = "Rolling Wok",
+//                rating = "4.4",
+//                deliveryTime = "15-18 mins",
+//                distance = "1.5 km",
 //                discount = "30% OFF",
-//                discountAmount = "up to ₹85",
+//                discountAmount = "up to ₹65",
 //                address = "Greater Kailash, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 7,
-//                imageRes = R.drawable.patty_fish_crispy,
-//                title = "Crispy Fish Patty",
-//                price = "290",
-//                restaurantName = "Seafood Express",
-//                rating = "4.4",
+//                imageRes = R.drawable.chinese_sweet_sour,
+//                title = "Sweet & Sour Vegetables",
+//                price = "190",
+//                restaurantName = "Wok This Way",
+//                rating = "4.5",
 //                deliveryTime = "22-27 mins",
-//                distance = "3.2 km",
+//                distance = "2.8 km",
 //                discount = "20% OFF",
 //                discountAmount = "up to ₹45",
 //                address = "Saket, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 8,
-//                imageRes = R.drawable.patty_pork_bbq,
-//                title = "BBQ Pork Patty",
-//                price = "340",
-//                restaurantName = "Smoke House",
+//                imageRes = R.drawable.chinese_peking_duck,
+//                title = "Peking Duck",
+//                price = "450",
+//                restaurantName = "Peking Palace",
 //                rating = "4.8",
 //                deliveryTime = "30-35 mins",
-//                distance = "3.5 km",
+//                distance = "3.2 km",
 //                discount = "25% OFF",
-//                discountAmount = "up to ₹100",
+//                discountAmount = "up to ₹120",
 //                address = "Nehru Place, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 9,
-//                imageRes = R.drawable.patty_mushroom_veg,
-//                title = "Mushroom Veg Patty",
-//                price = "170",
-//                restaurantName = "Mushroom Magic",
-//                rating = "4.5",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.9 km",
+//                imageRes = R.drawable.chinese_momos,
+//                title = "Chicken Momos",
+//                price = "120",
+//                restaurantName = "Momos Point",
+//                rating = "4.3",
+//                deliveryTime = "10-15 mins",
+//                distance = "0.9 km",
 //                discount = "15% OFF",
-//                discountAmount = "up to ₹55",
+//                discountAmount = "up to ₹25",
 //                address = "Rajouri Garden, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 10,
-//                imageRes = R.drawable.patty_chicken_tandoori,
-//                title = "Tandoori Chicken Patty",
-//                price = "240",
-//                restaurantName = "Indian Grill",
-//                rating = "4.3",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.4 km",
+//                imageRes = R.drawable.chinese_hot_soup,
+//                title = "Hot & Sour Soup",
+//                price = "110",
+//                restaurantName = "Soup Nation",
+//                rating = "4.6",
+//                deliveryTime = "12-16 mins",
+//                distance = "1.3 km",
 //                discount = "20% OFF",
-//                discountAmount = "up to ₹50",
+//                discountAmount = "up to ₹30",
 //                address = "Karol Bagh, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 11,
-//                imageRes = R.drawable.patty_beef_pepper,
-//                title = "Pepper Beef Patty",
-//                price = "260",
-//                restaurantName = "Pepper Mill",
+//                imageRes = R.drawable.chinese_kung_pao,
+//                title = "Kung Pao Chicken",
+//                price = "320",
+//                restaurantName = "Kung Pao Express",
 //                rating = "4.7",
 //                deliveryTime = "18-23 mins",
-//                distance = "1.9 km",
+//                distance = "2.0 km",
 //                discount = "25% OFF",
-//                discountAmount = "up to ₹70",
+//                discountAmount = "up to ₹85",
 //                address = "Chanakyapuri, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 12,
-//                imageRes = R.drawable.patty_veg_corn,
-//                title = "Sweet Corn Patty",
-//                price = "130",
-//                restaurantName = "Corn Factory",
-//                rating = "4.6",
-//                deliveryTime = "22-28 mins",
-//                distance = "3.1 km",
+//                imageRes = R.drawable.chinese_manchow_soup,
+//                title = "Manchow Soup",
+//                price = "100",
+//                restaurantName = "Soup Delight",
+//                rating = "4.4",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.7 km",
 //                discount = "30% OFF",
-//                discountAmount = "up to ₹75",
+//                discountAmount = "up to ₹40",
 //                address = "Dwarka, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 13,
-//                imageRes = R.drawable.patty_chicken_herb,
-//                title = "Herb Chicken Patty",
-//                price = "230",
-//                restaurantName = "Herb Kitchen",
+//                imageRes = R.drawable.chinese_ginger_chicken,
+//                title = "Ginger Chicken",
+//                price = "270",
+//                restaurantName = "Ginger House",
 //                rating = "4.8",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.7 km",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.4 km",
 //                discount = "20% OFF",
-//                discountAmount = "up to ₹65",
+//                discountAmount = "up to ₹60",
 //                address = "Lodhi Road, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 14,
-//                imageRes = R.drawable.patty_paneer_spicy,
-//                title = "Spicy Paneer Patty",
-//                price = "195",
-//                restaurantName = "Paneer Special",
-//                rating = "4.4",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.6 km",
+//                imageRes = R.drawable.chinese_paneer_manchurian,
+//                title = "Paneer Manchurian",
+//                price = "240",
+//                restaurantName = "Paneer Wok",
+//                rating = "4.5",
+//                deliveryTime = "16-21 mins",
+//                distance = "1.9 km",
 //                discount = "15% OFF",
-//                discountAmount = "up to ₹35",
+//                discountAmount = "up to ₹40",
 //                address = "Malviya Nagar, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 15,
-//                imageRes = R.drawable.patty_beef_cheese,
-//                title = "Beef Cheese Patty",
-//                price = "300",
-//                restaurantName = "Cheese & Beef Co.",
+//                imageRes = R.drawable.chinese_fried_rice,
+//                title = "Egg Fried Rice",
+//                price = "170",
+//                restaurantName = "Rice Bowl",
 //                rating = "4.3",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.3 km",
+//                deliveryTime = "14-19 mins",
+//                distance = "1.4 km",
 //                discount = "25% OFF",
-//                discountAmount = "up to ₹55",
+//                discountAmount = "up to ₹50",
 //                address = "Pitampura, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 16,
-//                imageRes = R.drawable.patty_veg_mix,
-//                title = "Mixed Veg Patty",
-//                price = "140",
-//                restaurantName = "Veggie World",
+//                imageRes = R.drawable.chinese_american_chopsuey,
+//                title = "American Chopsuey",
+//                price = "290",
+//                restaurantName = "Chopsuey Corner",
 //                rating = "4.7",
-//                deliveryTime = "28-33 mins",
-//                distance = "3.8 km",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.9 km",
 //                discount = "30% OFF",
 //                discountAmount = "up to ₹95",
 //                address = "South Extension, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 17,
-//                imageRes = R.drawable.patty_chicken_crunchy,
-//                title = "Crunchy Chicken Patty",
-//                price = "210",
-//                restaurantName = "Crispy Corner",
-//                rating = "4.5",
-//                deliveryTime = "12-17 mins",
-//                distance = "1.4 km",
+//                imageRes = R.drawable.chinese_chicken_lollipop,
+//                title = "Chicken Lollipop",
+//                price = "330",
+//                restaurantName = "Lollipop Express",
+//                rating = "4.6",
+//                deliveryTime = "18-22 mins",
+//                distance = "2.1 km",
 //                discount = "20% OFF",
-//                discountAmount = "up to ₹40",
+//                discountAmount = "up to ₹70",
 //                address = "Lajpat Nagar, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 18,
-//                imageRes = R.drawable.patty_lamb_spicy,
-//                title = "Spicy Lamb Patty",
-//                price = "350",
-//                restaurantName = "Lamb Experts",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.5 km",
+//                imageRes = R.drawable.chinese_triple_rice,
+//                title = "Triple Schezwan Rice",
+//                price = "260",
+//                restaurantName = "Triple Dragon",
+//                rating = "4.5",
+//                deliveryTime = "22-27 mins",
+//                distance = "2.6 km",
 //                discount = "15% OFF",
 //                discountAmount = "up to ₹45",
 //                address = "Rohini, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 19,
-//                imageRes = R.drawable.patty_fish_herb,
-//                title = "Herb Fish Patty",
-//                price = "270",
-//                restaurantName = "Ocean Fresh",
+//                imageRes = R.drawable.chinese_cantonese,
+//                title = "Cantonese Chicken",
+//                price = "310",
+//                restaurantName = "Canton Kitchen",
 //                rating = "4.8",
 //                deliveryTime = "25-30 mins",
-//                distance = "3.3 km",
+//                distance = "3.1 km",
 //                discount = "25% OFF",
 //                discountAmount = "up to ₹80",
 //                address = "Janakpuri, Delhi"
 //            ),
 //            RestaurantItemFull(
 //                id = 20,
-//                imageRes = R.drawable.patty_veg_soya,
-//                title = "Soya Protein Patty",
-//                price = "160",
-//                restaurantName = "Protein Plus",
-//                rating = "4.7",
-//                deliveryTime = "18-22 mins",
-//                distance = "2.0 km",
+//                imageRes = R.drawable.chinese_veg_noodles,
+//                title = "Veg Hakka Noodles",
+//                price = "150",
+//                restaurantName = "Veggie Wok",
+//                rating = "4.4",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.6 km",
 //                discount = "30% OFF",
-//                discountAmount = "up to ₹75",
+//                discountAmount = "up to ₹55",
 //                address = "Kailash Colony, Delhi"
 //            )
 //        )
 //        Column {
-//            samplePattyItems.forEach { restaurantItem ->
+//            sampleChineseItems .forEach { restaurantItem ->
 //                RestaurantItemListFull(
 //                    restaurantItem = restaurantItem,
 //                    onWishlistClick = { },
@@ -5304,22 +5842,6 @@ fun ChineseCategoryPage() {
 //                )
 //            }
 //        }
-    }
-}
-
-@Composable
-fun IceCreamCategoryPage() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Ice Cream & Desserts",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        )
     }
 }
 

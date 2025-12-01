@@ -5542,306 +5542,305 @@ fun IceCreamCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color =  MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val sampleChineseItems = listOf(
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.chinese_manchurian,
-//                title = "Veg Manchurian",
-//                price = "220",
-//                restaurantName = "Dragon Wok",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.8 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹50",
-//                address = "Connaught Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.chinese_hakka_noodles,
-//                title = "Hakka Noodles",
-//                price = "180",
-//                restaurantName = "Noodle House",
-//                rating = "4.5",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.2 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Hauz Khas, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.chinese_schezwan_rice,
-//                title = "Schezwan Fried Rice",
-//                price = "200",
-//                restaurantName = "Spice Garden",
-//                rating = "4.7",
-//                deliveryTime = "18-22 mins",
-//                distance = "2.1 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹60",
-//                address = "Vasant Vihar, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.chinese_dimsum,
-//                title = "Steamed Dimsums",
-//                price = "160",
-//                restaurantName = "Dimsum Delight",
-//                rating = "4.8",
-//                deliveryTime = "12-15 mins",
-//                distance = "0.8 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Green Park, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.chinese_chilli_chicken,
-//                title = "Chilli Chicken",
-//                price = "280",
-//                restaurantName = "Chicken Express",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.3 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹55",
-//                address = "Defence Colony, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.chinese_spring_rolls,
-//                title = "Crispy Spring Rolls",
-//                price = "140",
-//                restaurantName = "Rolling Wok",
-//                rating = "4.4",
-//                deliveryTime = "15-18 mins",
-//                distance = "1.5 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹65",
-//                address = "Greater Kailash, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.chinese_sweet_sour,
-//                title = "Sweet & Sour Vegetables",
-//                price = "190",
-//                restaurantName = "Wok This Way",
-//                rating = "4.5",
-//                deliveryTime = "22-27 mins",
-//                distance = "2.8 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹45",
-//                address = "Saket, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.chinese_peking_duck,
-//                title = "Peking Duck",
-//                price = "450",
-//                restaurantName = "Peking Palace",
-//                rating = "4.8",
-//                deliveryTime = "30-35 mins",
-//                distance = "3.2 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹120",
-//                address = "Nehru Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.chinese_momos,
-//                title = "Chicken Momos",
-//                price = "120",
-//                restaurantName = "Momos Point",
-//                rating = "4.3",
-//                deliveryTime = "10-15 mins",
-//                distance = "0.9 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Rajouri Garden, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.chinese_hot_soup,
-//                title = "Hot & Sour Soup",
-//                price = "110",
-//                restaurantName = "Soup Nation",
-//                rating = "4.6",
-//                deliveryTime = "12-16 mins",
-//                distance = "1.3 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹30",
-//                address = "Karol Bagh, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.chinese_kung_pao,
-//                title = "Kung Pao Chicken",
-//                price = "320",
-//                restaurantName = "Kung Pao Express",
-//                rating = "4.7",
-//                deliveryTime = "18-23 mins",
-//                distance = "2.0 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹85",
-//                address = "Chanakyapuri, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.chinese_manchow_soup,
-//                title = "Manchow Soup",
-//                price = "100",
-//                restaurantName = "Soup Delight",
-//                rating = "4.4",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.7 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Dwarka, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.chinese_ginger_chicken,
-//                title = "Ginger Chicken",
-//                price = "270",
-//                restaurantName = "Ginger House",
-//                rating = "4.8",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.4 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹60",
-//                address = "Lodhi Road, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.chinese_paneer_manchurian,
-//                title = "Paneer Manchurian",
-//                price = "240",
-//                restaurantName = "Paneer Wok",
-//                rating = "4.5",
-//                deliveryTime = "16-21 mins",
-//                distance = "1.9 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Malviya Nagar, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.chinese_fried_rice,
-//                title = "Egg Fried Rice",
-//                price = "170",
-//                restaurantName = "Rice Bowl",
-//                rating = "4.3",
-//                deliveryTime = "14-19 mins",
-//                distance = "1.4 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹50",
-//                address = "Pitampura, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.chinese_american_chopsuey,
-//                title = "American Chopsuey",
-//                price = "290",
-//                restaurantName = "Chopsuey Corner",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.9 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹95",
-//                address = "South Extension, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.chinese_chicken_lollipop,
-//                title = "Chicken Lollipop",
-//                price = "330",
-//                restaurantName = "Lollipop Express",
-//                rating = "4.6",
-//                deliveryTime = "18-22 mins",
-//                distance = "2.1 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹70",
-//                address = "Lajpat Nagar, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.chinese_triple_rice,
-//                title = "Triple Schezwan Rice",
-//                price = "260",
-//                restaurantName = "Triple Dragon",
-//                rating = "4.5",
-//                deliveryTime = "22-27 mins",
-//                distance = "2.6 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹45",
-//                address = "Rohini, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.chinese_cantonese,
-//                title = "Cantonese Chicken",
-//                price = "310",
-//                restaurantName = "Canton Kitchen",
-//                rating = "4.8",
-//                deliveryTime = "25-30 mins",
-//                distance = "3.1 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹80",
-//                address = "Janakpuri, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.chinese_veg_noodles,
-//                title = "Veg Hakka Noodles",
-//                price = "150",
-//                restaurantName = "Veggie Wok",
-//                rating = "4.4",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.6 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹55",
-//                address = "Kailash Colony, Delhi"
-//            )
-//        )
-//        Column {
-//            sampleChineseItems .forEach { restaurantItem ->
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
+        // Sample data based on the provided images
+        val sampleIceCreamItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.icecream_chocolate,
+                title = "Chocolate Fudge",
+                price = "180",
+                restaurantName = "Cream & Cone",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.icecream_vanilla,
+                title = "Classic Vanilla",
+                price = "150",
+                restaurantName = "Ice Cream Parlor",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.icecream_strawberry,
+                title = "Fresh Strawberry",
+                price = "170",
+                restaurantName = "Berry Delight",
+                rating = "4.6",
+                deliveryTime = "12-17 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹45",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.icecream_mint_choco,
+                title = "Mint Chocolate Chip",
+                price = "190",
+                restaurantName = "Cool Cones",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.icecream_cookies_cream,
+                title = "Cookies & Cream",
+                price = "200",
+                restaurantName = "Cookie Monster",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹65",
+                address = "Defence Colony, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.icecream_butterscotch,
+                title = "Butterscotch Crunch",
+                price = "175",
+                restaurantName = "Sweet Scoops",
+                rating = "4.4",
+                deliveryTime = "14-19 mins",
+                distance = "1.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.icecream_pistachio,
+                title = "Pistachio Almond",
+                price = "220",
+                restaurantName = "Nutty Cones",
+                rating = "4.6",
+                deliveryTime = "16-21 mins",
+                distance = "1.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹60",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.icecream_mango,
+                title = "Mango Tango",
+                price = "160",
+                restaurantName = "Tropical Treats",
+                rating = "4.9",
+                deliveryTime = "13-18 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.icecream_rocky_road,
+                title = "Rocky Road",
+                price = "210",
+                restaurantName = "Rocky's Ice Cream",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "2.8 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹80",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.icecream_coffee,
+                title = "Coffee Caramel",
+                price = "185",
+                restaurantName = "Caffeine Cream",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹45",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.icecream_cotton_candy,
+                title = "Cotton Candy",
+                price = "165",
+                restaurantName = "Candy Land",
+                rating = "4.3",
+                deliveryTime = "11-16 mins",
+                distance = "1.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Chanakyapuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.icecream_salted_caramel,
+                title = "Salted Caramel",
+                price = "195",
+                restaurantName = "Caramel Corner",
+                rating = "4.8",
+                deliveryTime = "19-24 mins",
+                distance = "2.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.icecream_bubblegum,
+                title = "Bubblegum Blast",
+                price = "155",
+                restaurantName = "Fun Flavors",
+                rating = "4.2",
+                deliveryTime = "10-15 mins",
+                distance = "0.9 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹50",
+                address = "Lodhi Road, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.icecream_rainbow_sherbet,
+                title = "Rainbow Sherbet",
+                price = "140",
+                restaurantName = "Colorful Cones",
+                rating = "4.4",
+                deliveryTime = "12-17 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹35",
+                address = "Malviya Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.icecream_chocolate_chip,
+                title = "Chocolate Chip Cookie Dough",
+                price = "205",
+                restaurantName = "Dough & Cream",
+                rating = "4.7",
+                deliveryTime = "21-26 mins",
+                distance = "2.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.icecream_neapolitan,
+                title = "Neapolitan Trio",
+                price = "230",
+                restaurantName = "Triple Scoop",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "South Extension, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.icecream_tiramisu,
+                title = "Tiramisu Gelato",
+                price = "240",
+                restaurantName = "Italian Delights",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "3.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹75",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.icecream_blackberry,
+                title = "Blackberry Swirl",
+                price = "175",
+                restaurantName = "Berry Blast",
+                rating = "4.5",
+                deliveryTime = "14-19 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.icecream_coconut,
+                title = "Coconut Dream",
+                price = "160",
+                restaurantName = "Tropical Paradise",
+                rating = "4.6",
+                deliveryTime = "16-21 mins",
+                distance = "2.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹45",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.icecream_rum_raisin,
+                title = "Rum & Raisin",
+                price = "190",
+                restaurantName = "Adult Scoops",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "2.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹45",
+                address = "Kailash Colony, Delhi"
+            )
+        )
+        Column {
+            sampleIceCreamItems .forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -5850,14 +5849,540 @@ fun AppamCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Appam",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val appamFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "egg_appam",
+                    text = "Egg Appam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_egg_appam
+                ),
+                FilterChip(
+                    id = "plain_appam",
+                    text = "Plain Appam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_appam
+                ),
+                FilterChip(
+                    id = "kerala_style",
+                    text = "Kerala Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tamil_style",
+                    text = "Tamil Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_stew",
+                    text = "With Stew",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stew_appam
+                ),
+                FilterChip(
+                    id = "with_chicken_curry",
+                    text = "Chicken Curry",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_appam
+                ),
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_appam
+                ),
+                FilterChip(
+                    id = "coconut_milk",
+                    text = "Coconut Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rice_appam",
+                    text = "Rice Appam",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "instant_mix",
+                    text = "Instant Mix",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "traditional",
+                    text = "Traditional",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_ishtu",
+                    text = "With Ishtu",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_ishtu_appam
+                ),
+                FilterChip(
+                    id = "egg_roast",
+                    text = "Egg Roast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet_appam",
+                    text = "Sweet Appam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sweet_appam
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hot_fresh",
+                    text = "Hot & Fresh",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_hot_appam
+                ),
+                FilterChip(
+                    id = "schedule",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = appamFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeAppamItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.egg_appam,
+                title = "Egg Appam with Stew",
+                price = "120",
+                restaurantName = "Kerala Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹25",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.plain_appam,
+                title = "Plain Appam with Veg Ishtu",
+                price = "100",
+                restaurantName = "South Spice",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹20",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.sweet_appam,
+                title = "Sweet Coconut Appam",
+                price = "90",
+                restaurantName = "Traditional Tastes",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹25",
+                address = "Malviya Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.appam_chicken_curry,
+                title = "Appam with Chicken Curry",
+                price = "150",
+                restaurantName = "Coastal Delights",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.1 km",
+                discount = "30%",
+                discountAmount = "up to ₹50",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.appam_kadala,
+                title = "Appam with Kadala Curry",
+                price = "110",
+                restaurantName = "Veggie Haven",
+                rating = "4.4",
+                deliveryTime = "12-17 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹25",
+                address = "Green Park, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.instant_mix_appam,
+                title = "Instant Appam Mix",
+                price = "180",
+                restaurantName = "Ready to Eat",
+                rating = "4.3",
+                deliveryTime = "30-40 mins",
+                distance = "3.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹30",
+                address = "Dwarka, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeAppamItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleAppamItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.appam_egg_stew,
+                title = "Egg Appam with Vegetable Stew",
+                price = "140",
+                restaurantName = "Kerala Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.appam_plain_ishtu,
+                title = "Plain Appam with Veg Ishtu",
+                price = "120",
+                restaurantName = "South Spice",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹25",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.appam_sweet_coconut,
+                title = "Sweet Coconut Appam",
+                price = "110",
+                restaurantName = "Traditional Tastes",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Malviya Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.appam_with_chicken_curry,
+                title = "Appam with Chicken Curry",
+                price = "160",
+                restaurantName = "Coastal Delights",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹50",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.appam__with_kadala,
+                title = "Appam with Kadala Curry",
+                price = "130",
+                restaurantName = "Veggie Haven",
+                rating = "4.5",
+                deliveryTime = "12-17 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.appam_fish_molly,
+                title = "Appam with Fish Molee",
+                price = "180",
+                restaurantName = "Seafood Special",
+                rating = "4.7",
+                deliveryTime = "28-33 mins",
+                distance = "2.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹45",
+                address = "Defence Colony, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.appam_mutton_stew,
+                title = "Appam with Mutton Stew",
+                price = "200",
+                restaurantName = "Meat Masters",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "2.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹45",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.appam_prawn_curry,
+                title = "Appam with Prawn Curry",
+                price = "220",
+                restaurantName = "Coastal Flavors",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.appam_egg_roast,
+                title = "Appam with Egg Roast",
+                price = "150",
+                restaurantName = "Egg Station",
+                rating = "4.4",
+                deliveryTime = "18-23 mins",
+                distance = "1.7 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹50",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.appam_veg_kurma,
+                title = "Appam with Vegetable Kurma",
+                price = "125",
+                restaurantName = "Kurma Corner",
+                rating = "4.5",
+                deliveryTime = "16-21 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.appam_mushroom_stew,
+                title = "Appam with Mushroom Stew",
+                price = "145",
+                restaurantName = "Mushroom Magic",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹40",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.appam_paneer_butter,
+                title = "Appam with Paneer Butter Masala",
+                price = "155",
+                restaurantName = "Paneer Palace",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹35",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.appam_banana_jaggery,
+                title = "Banana Appam with Jaggery",
+                price = "95",
+                restaurantName = "Healthy Bites",
+                rating = "4.3",
+                deliveryTime = "14-19 mins",
+                distance = "1.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Chanakyapuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.appam_instant_mix,
+                title = "Instant Appam Mix (500g)",
+                price = "180",
+                restaurantName = "Ready to Eat",
+                rating = "4.4",
+                deliveryTime = "30-40 mins",
+                distance = "3.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.appam_jackfruit,
+                title = "Appam with Jackfruit Curry",
+                price = "135",
+                restaurantName = "Jackfruit Junction",
+                rating = "4.7",
+                deliveryTime = "24-29 mins",
+                distance = "2.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹35",
+                address = "Lodhi Road, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.appam_chettinad_chicken,
+                title = "Appam with Chettinad Chicken",
+                price = "175",
+                restaurantName = "Chettinad Spice",
+                rating = "4.8",
+                deliveryTime = "26-31 mins",
+                distance = "2.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹55",
+                address = "South Extension, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.appam_milk_payasam,
+                title = "Appam with Milk Payasam",
+                price = "115",
+                restaurantName = "Sweet Endings",
+                rating = "4.5",
+                deliveryTime = "19-24 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.appam_ularthiyathu,
+                title = "Appam with Ularthiyathu",
+                price = "190",
+                restaurantName = "Appam Special",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "3.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.appam_godambu,
+                title = "Godambu Appam (Wheat)",
+                price = "105",
+                restaurantName = "Health Kitchen",
+                rating = "4.6",
+                deliveryTime = "17-22 mins",
+                distance = "1.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.appam_combo_meal,
+                title = "Appam Combo Meal (2 pieces with curry)",
+                price = "160",
+                restaurantName = "Combo Meals",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "2.1 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹60",
+                address = "Kailash Colony, Delhi"
+            )
+        )
+        Column {
+            sampleAppamItems .forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 

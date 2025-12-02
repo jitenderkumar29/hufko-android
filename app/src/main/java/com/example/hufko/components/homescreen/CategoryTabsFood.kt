@@ -286,6 +286,7 @@ fun AllCategoryPage(
             roundedCornerShape = 0.dp,
             contentScale = ContentScale.FillBounds,
             dotSize = 8.dp,
+            dotPadding = 4.dp,
             dotPosition = DotPosition.OVERLAY,
             overlayGradient = true, // Adds gradient for better visibility
             selectedDotColor = Color.White,
@@ -6391,14 +6392,548 @@ fun BathCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Bath Specialties",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val bathFoodFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                // Filters WITH left icons
+                FilterChip(
+                    id = "biryani",
+                    text = "Biryani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_biryani_bath
+                ),
+                FilterChip(
+                    id = "fried_rice",
+                    text = "Fried Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fried_rice_bath
+                ),
+                FilterChip(
+                    id = "lemon_rice",
+                    text = "Lemon Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lemon_rice_bath
+                ),
+                FilterChip(
+                    id = "tomato_rice",
+                    text = "Tomato Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tomato_rice_bath
+                ),
+                // Filters WITHOUT left icons (text only)
+                FilterChip(
+                    id = "veg_bath",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "non_veg",
+                    text = "Non-Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_bath",
+                    text = "Egg Bath",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chicken",
+                    text = "Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mutton",
+                    text = "Mutton",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "prawns",
+                    text = "Prawns",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hyderabadi",
+                    text = "Hyderabadi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lucknowi",
+                    text = "Lucknowi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_raita",
+                    text = "With Raita",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_salad",
+                    text = "With Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+         FilterButtonFood(
+            filterConfig = bathFoodFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeBathFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.hyderabadi_biryani,
+                title = "Hyderabadi Chicken Dum Biryani",
+                price = "280",
+                restaurantName = "Hyderabad House",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹75",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.veg_biryani,
+                title = "Vegetable Dum Biryani",
+                price = "190",
+                restaurantName = "Green Garden",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.mutton_biryani,
+                title = "Awadhi Mutton Biryani",
+                price = "350",
+                restaurantName = "Lucknowi Flavours",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "3.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹105",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.egg_biryani,
+                title = "Egg Biryani with Raita",
+                price = "220",
+                restaurantName = "Eggcellent Meals",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹35",
+                address = "Malviya Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.prawn_fried_rice,
+                title = "Prawn Fried Rice",
+                price = "260",
+                restaurantName = "Coastal Spice",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹55",
+                address = "Dwarka, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.lemon_rice,
+                title = "Lemon Rice with Papad",
+                price = "120",
+                restaurantName = "South Indian Delights",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Green Park, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeBathFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleBathItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.bath_egg_stew,
+                title = "Rice Bath with Egg Curry",
+                price = "120",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.bath_chicken,
+                title = "Chicken Bath Biryani",
+                price = "180",
+                restaurantName = "Hyderabadi Spice",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.bath_veg,
+                title = "Vegetable Bath Pulao",
+                price = "110",
+                restaurantName = "Green Leaf",
+                rating = "4.3",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹20",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.bath_mutton,
+                title = "Mutton Bath Biryani",
+                price = "220",
+                restaurantName = "Hyderabadi Spice",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹40",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.bath_fish,
+                title = "Fish Curry Bath",
+                price = "160",
+                restaurantName = "Coastal Flavors",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.bath_prawn,
+                title = "Prawn Bath Curry",
+                price = "200",
+                restaurantName = "Coastal Flavors",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.bath_combo,
+                title = "Bath Combo (Rice + 2 Curries)",
+                price = "150",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.bath_paneer,
+                title = "Paneer Bath Pulao",
+                price = "140",
+                restaurantName = "Green Leaf",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.bath_egg_biryani,
+                title = "Egg Bath Biryani",
+                price = "130",
+                restaurantName = "Hyderabadi Spice",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.bath_mushroom,
+                title = "Mushroom Bath Pulao",
+                price = "135",
+                restaurantName = "Green Leaf",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹25",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.bath_sambar,
+                title = "Sambar Bath",
+                price = "100",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.2",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹20",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.bath_chicken_curry,
+                title = "Chicken Curry Bath",
+                price = "170",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.bath_family_pack,
+                title = "Family Bath Pack (Rice + 3 Curries)",
+                price = "300",
+                restaurantName = "Coastal Flavors",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹60",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.bath_veg_biryani,
+                title = "Veg Bath Biryani",
+                price = "125",
+                restaurantName = "Hyderabadi Spice",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹25",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.bath_fish_fry,
+                title = "Fish Fry Bath",
+                price = "175",
+                restaurantName = "Coastal Flavors",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹35",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.bath_mixed_veg,
+                title = "Mixed Vegetable Bath",
+                price = "115",
+                restaurantName = "Green Leaf",
+                rating = "4.2",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹20",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.bath_chicken_roast,
+                title = "Chicken Roast Bath",
+                price = "190",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹35",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.bath_prawn_fry,
+                title = "Prawn Fry Bath",
+                price = "210",
+                restaurantName = "Coastal Flavors",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹40",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.bath_veg_curry,
+                title = "Vegetable Curry Bath",
+                price = "105",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.3",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹20",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.bath_combo_special,
+                title = "Special Bath Combo (Rice + Curries + Dessert)",
+                price = "180",
+                restaurantName = "Hyderabadi Spice",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹35",
+                address = "Saket, Delhi"
+            )
+        )
+         Column {
+            sampleBathItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -6407,14 +6942,511 @@ fun BondaCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Bonda",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val bondaFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                // Essential Bonda Types WITH left icons
+                FilterChip(
+                    id = "aloo_bonda",
+                    text = "Aloo Bonda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_aloo_bonda
+                ),
+                FilterChip(
+                    id = "onion_bonda",
+                    text = "Onion Bonda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_onion_bonda
+                ),
+                FilterChip(
+                    id = "mixed_veg_bonda",
+                    text = "Mixed Veg",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mixed_veg_bonda
+                ),
+                // Most popular regional style WITH left icon
+                FilterChip(
+                    id = "mysore_bonda",
+                    text = "Mysore Bonda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mysore_bonda
+                ),
+                // Essential Accompaniment WITH left icon
+                FilterChip(
+                    id = "with_chutney",
+                    text = "With Chutney",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chutney_bonda
+                ),
+                // Essential text-only filters
+                FilterChip(
+                    id = "veg",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh",
+                    text = "Fresh",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_30_mins",
+                    text = "Under 30 Mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2  // Single row for minimal look
         )
+        FilterButtonFood(
+            filterConfig = bondaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeBondaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.aloo_bonda,
+                title = "Aloo Bonda with Coconut Chutney",
+                price = "80",
+                restaurantName = "South Indian Delights",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹20",
+                address = "Green Park, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.mysore_bonda,
+                title = "Mysore Bonda with Sambar",
+                price = "95",
+                restaurantName = "Karnataka Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹15",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.onion_bonda,
+                title = "Crispy Onion Bonda with Chutney",
+                price = "85",
+                restaurantName = "Udupi Sagar",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹25",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.mixed_veg_bonda,
+                title = "Mixed Vegetable Bonda Platter",
+                price = "110",
+                restaurantName = "Vegetarian Hub",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹12",
+                address = "Malviya Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.paneer_bonda,
+                title = "Paneer Bonda with Tomato Chutney",
+                price = "120",
+                restaurantName = "Chennai Express",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹40",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.cheese_bonda,
+                title = "Cheese Stuffed Bonda Combo",
+                price = "130",
+                restaurantName = "Fusion Foods",
+                rating = "4.3",
+                deliveryTime = "22-28 mins",
+                distance = "1.9 km",
+                discount = "20%",
+                discountAmount = "up to ₹30",
+                address = "Dwarka, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeBondaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color =  MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val sampleBathItems = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.bath_egg_stew,
+//                title = "Rice Bath with Egg Curry",
+//                price = "120",
+//                restaurantName = "Kerala Bhavan",
+//                rating = "4.5",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.5 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Karol Bagh, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.bath_chicken,
+//                title = "Chicken Bath Biryani",
+//                price = "180",
+//                restaurantName = "Hyderabadi Spice",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.0 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Saket, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.bath_veg,
+//                title = "Vegetable Bath Pulao",
+//                price = "110",
+//                restaurantName = "Green Leaf",
+//                rating = "4.3",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.0 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.bath_mutton,
+//                title = "Mutton Bath Biryani",
+//                price = "220",
+//                restaurantName = "Hyderabadi Spice",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "2.0 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Saket, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.bath_fish,
+//                title = "Fish Curry Bath",
+//                price = "160",
+//                restaurantName = "Coastal Flavors",
+//                rating = "4.6",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.5 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Vasant Kunj, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.bath_prawn,
+//                title = "Prawn Bath Curry",
+//                price = "200",
+//                restaurantName = "Coastal Flavors",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Vasant Kunj, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.bath_combo,
+//                title = "Bath Combo (Rice + 2 Curries)",
+//                price = "150",
+//                restaurantName = "Kerala Bhavan",
+//                rating = "4.5",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.5 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Karol Bagh, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.bath_paneer,
+//                title = "Paneer Bath Pulao",
+//                price = "140",
+//                restaurantName = "Green Leaf",
+//                rating = "4.4",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.bath_egg_biryani,
+//                title = "Egg Bath Biryani",
+//                price = "130",
+//                restaurantName = "Hyderabadi Spice",
+//                rating = "4.4",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Saket, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.bath_mushroom,
+//                title = "Mushroom Bath Pulao",
+//                price = "135",
+//                restaurantName = "Green Leaf",
+//                rating = "4.3",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.0 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.bath_sambar,
+//                title = "Sambar Bath",
+//                price = "100",
+//                restaurantName = "Kerala Bhavan",
+//                rating = "4.2",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.5 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "Karol Bagh, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.bath_chicken_curry,
+//                title = "Chicken Curry Bath",
+//                price = "170",
+//                restaurantName = "Kerala Bhavan",
+//                rating = "4.6",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Karol Bagh, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.bath_family_pack,
+//                title = "Family Bath Pack (Rice + 3 Curries)",
+//                price = "300",
+//                restaurantName = "Coastal Flavors",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "2.5 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹60",
+//                address = "Vasant Kunj, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.bath_veg_biryani,
+//                title = "Veg Bath Biryani",
+//                price = "125",
+//                restaurantName = "Hyderabadi Spice",
+//                rating = "4.3",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.0 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Saket, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.bath_fish_fry,
+//                title = "Fish Fry Bath",
+//                price = "175",
+//                restaurantName = "Coastal Flavors",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.5 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Vasant Kunj, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.bath_mixed_veg,
+//                title = "Mixed Vegetable Bath",
+//                price = "115",
+//                restaurantName = "Green Leaf",
+//                rating = "4.2",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.0 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.bath_chicken_roast,
+//                title = "Chicken Roast Bath",
+//                price = "190",
+//                restaurantName = "Kerala Bhavan",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.5 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Karol Bagh, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.bath_prawn_fry,
+//                title = "Prawn Fry Bath",
+//                price = "210",
+//                restaurantName = "Coastal Flavors",
+//                rating = "4.8",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Vasant Kunj, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.bath_veg_curry,
+//                title = "Vegetable Curry Bath",
+//                price = "105",
+//                restaurantName = "Kerala Bhavan",
+//                rating = "4.3",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.5 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "Karol Bagh, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.bath_combo_special,
+//                title = "Special Bath Combo (Rice + Curries + Dessert)",
+//                price = "180",
+//                restaurantName = "Hyderabadi Spice",
+//                rating = "4.9",
+//                deliveryTime = "30-35 mins",
+//                distance = "2.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Saket, Delhi"
+//            )
+//        )
+//        Column {
+//            sampleBathItems.forEach { restaurantItem ->
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
     }
 }
 

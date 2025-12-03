@@ -7148,305 +7148,305 @@ fun BondaCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color =  MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val sampleBathItems = listOf(
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.bath_egg_stew,
-//                title = "Rice Bath with Egg Curry",
-//                price = "120",
-//                restaurantName = "Kerala Bhavan",
-//                rating = "4.5",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Karol Bagh, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.bath_chicken,
-//                title = "Chicken Bath Biryani",
-//                price = "180",
-//                restaurantName = "Hyderabadi Spice",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.0 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Saket, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.bath_veg,
-//                title = "Vegetable Bath Pulao",
-//                price = "110",
-//                restaurantName = "Green Leaf",
-//                rating = "4.3",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.0 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹20",
-//                address = "Connaught Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.bath_mutton,
-//                title = "Mutton Bath Biryani",
-//                price = "220",
-//                restaurantName = "Hyderabadi Spice",
-//                rating = "4.8",
-//                deliveryTime = "30-35 mins",
-//                distance = "2.0 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Saket, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.bath_fish,
-//                title = "Fish Curry Bath",
-//                price = "160",
-//                restaurantName = "Coastal Flavors",
-//                rating = "4.6",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹30",
-//                address = "Vasant Kunj, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.bath_prawn,
-//                title = "Prawn Bath Curry",
-//                price = "200",
-//                restaurantName = "Coastal Flavors",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.5 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Vasant Kunj, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.bath_combo,
-//                title = "Bath Combo (Rice + 2 Curries)",
-//                price = "150",
-//                restaurantName = "Kerala Bhavan",
-//                rating = "4.5",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.5 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹30",
-//                address = "Karol Bagh, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.bath_paneer,
-//                title = "Paneer Bath Pulao",
-//                price = "140",
-//                restaurantName = "Green Leaf",
-//                rating = "4.4",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Connaught Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.bath_egg_biryani,
-//                title = "Egg Bath Biryani",
-//                price = "130",
-//                restaurantName = "Hyderabadi Spice",
-//                rating = "4.4",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Saket, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.bath_mushroom,
-//                title = "Mushroom Bath Pulao",
-//                price = "135",
-//                restaurantName = "Green Leaf",
-//                rating = "4.3",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.0 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Connaught Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.bath_sambar,
-//                title = "Sambar Bath",
-//                price = "100",
-//                restaurantName = "Kerala Bhavan",
-//                rating = "4.2",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.5 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹20",
-//                address = "Karol Bagh, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.bath_chicken_curry,
-//                title = "Chicken Curry Bath",
-//                price = "170",
-//                restaurantName = "Kerala Bhavan",
-//                rating = "4.6",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.5 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹30",
-//                address = "Karol Bagh, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.bath_family_pack,
-//                title = "Family Bath Pack (Rice + 3 Curries)",
-//                price = "300",
-//                restaurantName = "Coastal Flavors",
-//                rating = "4.8",
-//                deliveryTime = "30-35 mins",
-//                distance = "2.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹60",
-//                address = "Vasant Kunj, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.bath_veg_biryani,
-//                title = "Veg Bath Biryani",
-//                price = "125",
-//                restaurantName = "Hyderabadi Spice",
-//                rating = "4.3",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.0 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Saket, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.bath_fish_fry,
-//                title = "Fish Fry Bath",
-//                price = "175",
-//                restaurantName = "Coastal Flavors",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.5 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Vasant Kunj, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.bath_mixed_veg,
-//                title = "Mixed Vegetable Bath",
-//                price = "115",
-//                restaurantName = "Green Leaf",
-//                rating = "4.2",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.0 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹20",
-//                address = "Connaught Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.bath_chicken_roast,
-//                title = "Chicken Roast Bath",
-//                price = "190",
-//                restaurantName = "Kerala Bhavan",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.5 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Karol Bagh, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.bath_prawn_fry,
-//                title = "Prawn Fry Bath",
-//                price = "210",
-//                restaurantName = "Coastal Flavors",
-//                rating = "4.8",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.5 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Vasant Kunj, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.bath_veg_curry,
-//                title = "Vegetable Curry Bath",
-//                price = "105",
-//                restaurantName = "Kerala Bhavan",
-//                rating = "4.3",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.5 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹20",
-//                address = "Karol Bagh, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.bath_combo_special,
-//                title = "Special Bath Combo (Rice + Curries + Dessert)",
-//                price = "180",
-//                restaurantName = "Hyderabadi Spice",
-//                rating = "4.9",
-//                deliveryTime = "30-35 mins",
-//                distance = "2.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Saket, Delhi"
-//            )
-//        )
-//        Column {
-//            sampleBathItems.forEach { restaurantItem ->
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleBondaItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.bonda_masala,
+                title = "Masala Bonda",
+                price = "60",
+                restaurantName = "Udupi Cafe",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹15",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.bonda_onion,
+                title = "Onion Bonda",
+                price = "65",
+                restaurantName = "Chennai Spices",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.bonda_alu,
+                title = "Alu Bonda",
+                price = "55",
+                restaurantName = "Tamil Nadu Mess",
+                rating = "4.3",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹15",
+                address = "Coimbatore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.bonda_egg,
+                title = "Egg Bonda",
+                price = "75",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹20",
+                address = "Kochi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.bonda_vegetable,
+                title = "Mixed Vegetable Bonda",
+                price = "70",
+                restaurantName = "Udupi Cafe",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹25",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.bonda_chicken,
+                title = "Chicken Bonda",
+                price = "85",
+                restaurantName = "Andhra Spice",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹25",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.bonda_paneer,
+                title = "Paneer Bonda",
+                price = "80",
+                restaurantName = "Udupi Cafe",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.bonda_mushroom,
+                title = "Mushroom Bonda",
+                price = "75",
+                restaurantName = "Chennai Spices",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.bonda_spicy,
+                title = "Spicy Mirchi Bonda",
+                price = "50",
+                restaurantName = "Andhra Spice",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹10",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.bonda_combo,
+                title = "Bonda Combo (4 pieces + chutney)",
+                price = "100",
+                restaurantName = "Tamil Nadu Mess",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹40",
+                address = "Coimbatore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.bonda_sweet,
+                title = "Sweet Bonda (Mysore Bonda)",
+                price = "55",
+                restaurantName = "Udupi Cafe",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹20",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.bonda_mutton,
+                title = "Mutton Bonda",
+                price = "95",
+                restaurantName = "Andhra Spice",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.bonda_cheese,
+                title = "Cheese Bonda",
+                price = "85",
+                restaurantName = "Chennai Spices",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.bonda_family_pack,
+                title = "Family Bonda Pack (12 pieces)",
+                price = "200",
+                restaurantName = "Tamil Nadu Mess",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Coimbatore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.bonda_fish,
+                title = "Fish Bonda",
+                price = "90",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹25",
+                address = "Kochi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.bonda_corn,
+                title = "Corn Bonda",
+                price = "65",
+                restaurantName = "Udupi Cafe",
+                rating = "4.3",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹15",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.bonda_schezwan,
+                title = "Schezwan Bonda",
+                price = "70",
+                restaurantName = "Chennai Spices",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.bonda_prawn,
+                title = "Prawn Bonda",
+                price = "100",
+                restaurantName = "Kerala Bhavan",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Kochi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.bonda_medu,
+                title = "Medu Bonda",
+                price = "60",
+                restaurantName = "Tamil Nadu Mess",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹25",
+                address = "Coimbatore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.bonda_combo_special,
+                title = "Special Bonda Platter (Mixed varieties)",
+                price = "150",
+                restaurantName = "Andhra Spice",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Hyderabad"
+            )
+        )
+        Column {
+            sampleBondaItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -7455,14 +7455,527 @@ fun CutletCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Cutlets",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val cutletFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                // Popular cutlet types WITH left icons
+                FilterChip(
+                    id = "vegetable_cutlet",
+                    text = "Vegetable Cutlet",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable_cutlet
+                ),
+                FilterChip(
+                    id = "chicken_cutlet",
+                    text = "Chicken Cutlet",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_cutlet
+                ),
+                FilterChip(
+                    id = "fish_cutlet",
+                    text = "Fish Cutlet",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fish_cutlet
+                ),
+                FilterChip(
+                    id = "potato_cutlet",
+                    text = "Potato Cutlet",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_cutlet
+                ),
+                // Cooking style WITH left icon
+                FilterChip(
+                    id = "deep_fried",
+                    text = "Deep Fried",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_deep_fried
+                ),
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_air_fried
+                ),
+                FilterChip(
+                    id = "pan_fried",
+                    text = "Pan Fried",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pan_fried
+                ),
+                // Text-only filters (no left icons)
+                FilterChip(
+                    id = "crispy",
+                    text = "Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_sauce",
+                    text = "With Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "served_hot",
+                    text = "Served Hot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ready_in_20",
+                    text = "Ready in 20 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2  // Single row for minimal look
         )
+         FilterButtonFood(
+            filterConfig = cutletFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeCutletItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.vegetable_cutlet,
+                title = "Crispy Vegetable Cutlet with Sauce",
+                price = "80",
+                restaurantName = "Classic Bites",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹20",
+                address = "Green Park, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chicken_cutlet,
+                title = "Spicy Chicken Cutlet Platter",
+                price = "150",
+                restaurantName = "Chicken Specials",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹25",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.fish_cutlet,
+                title = "Fish Cutlet with Lemon Mayo",
+                price = "160",
+                restaurantName = "Sea Delights",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹40",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.potato_cutlet,
+                title = "Potato Cutlet with Chutney",
+                price = "70",
+                restaurantName = "Simple Eats",
+                rating = "4.4",
+                deliveryTime = "12-15 mins",
+                distance = "0.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹10",
+                address = "Malviya Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.gravy_cutlet,
+                title = "Cutlet with Gravy",
+                price = "180",
+                restaurantName = "Premium Grill",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹55",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.cheese_cutlet,
+                title = "Cheese Stuffed Cutlet Combo",
+                price = "130",
+                restaurantName = "Fusion Kitchen",
+                rating = "4.3",
+                deliveryTime = "22-28 mins",
+                distance = "1.9 km",
+                discount = "20%",
+                discountAmount = "up to ₹30",
+                address = "Dwarka, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = completeCutletItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleCutletItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.cutlet_vegetable,
+                title = "Vegetable Cutlet",
+                price = "60",
+                restaurantName = "Classic Bites",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹15",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.cutlet_chicken,
+                title = "Chicken Cutlet",
+                price = "85",
+                restaurantName = "Chicken Specials",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.cutlet_fish,
+                title = "Fish Cutlet",
+                price = "95",
+                restaurantName = "Sea Delights",
+                rating = "4.3",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Coimbatore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.cutlet_potato,
+                title = "Potato Cutlet",
+                price = "55",
+                restaurantName = "Simple Eats",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "0.7 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹10",
+                address = "Kochi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.cutlet_corn,
+                title = "Corn Cutlet",
+                price = "70",
+                restaurantName = "Corn Specials",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹25",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.cutlet_gravy,
+                title = "Gravy Cutlet",
+                price = "110",
+                restaurantName = "Premium Grill",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.cutlet_paneer,
+                title = "Paneer Cutlet",
+                price = "80",
+                restaurantName = "Paneer House",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.cutlet_mushroom,
+                title = "Mushroom Cutlet",
+                price = "75",
+                restaurantName = "Mushroom Magic",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.cutlet_spicy,
+                title = "Spicy Cutlet",
+                price = "65",
+                restaurantName = "Spice Hub",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹12",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.cutlet_combo,
+                title = "Cutlet Combo (4 pieces + sauce)",
+                price = "120",
+                restaurantName = "Combo Meals",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹50",
+                address = "Coimbatore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.cutlet_sweet,
+                title = "Sweet Potato Cutlet",
+                price = "65",
+                restaurantName = "Healthy Bites",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹20",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.cutlet_mutton,
+                title = "Mutton Cutlet",
+                price = "120",
+                restaurantName = "Mutton Specials",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.cutlet_cheese,
+                title = "Cheese Stuffed Cutlet",
+                price = "85",
+                restaurantName = "Cheese Lovers",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.cutlet_family_pack,
+                title = "Family Cutlet Pack (12 pieces)",
+                price = "250",
+                restaurantName = "Family Meals",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹60",
+                address = "Coimbatore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.cutlet_prawn,
+                title = "Prawn Cutlet",
+                price = "105",
+                restaurantName = "Sea Food Hub",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹25",
+                address = "Kochi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.cutlet_breaded,
+                title = "Breaded Cutlet",
+                price = "75",
+                restaurantName = "Crispy Bites",
+                rating = "4.3",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.cutlet_schezwan,
+                title = "Schezwan Cutlet",
+                price = "80",
+                restaurantName = "Chinese Fusion",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.cutlet_egg,
+                title = "Egg Cutlet",
+                price = "70",
+                restaurantName = "Egg Specials",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Kochi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.cutlet_air_fried,
+                title = "Air Fried Cutlet",
+                price = "85",
+                restaurantName = "Healthy Kitchen",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "1.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Coimbatore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.cutlet_combo_special,
+                title = "Special Cutlet Platter (Mixed varieties)",
+                price = "180",
+                restaurantName = "Fusion Restaurant",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Hyderabad"
+            )
+        )
+        Column {
+            sampleCutletItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 

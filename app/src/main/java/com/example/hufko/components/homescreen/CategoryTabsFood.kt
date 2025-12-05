@@ -247,21 +247,100 @@ fun CategoryTabsFood(
 
 @Composable
 fun DietCategoryPage(
-    onBanner1Click: () -> Unit = {},
+    onBanner1Click: () ->
+//        Text(
+//            text = "Diet",
+//            fontSize = 24.sp,
+//            fontWeight = FontWeight.Bold,
+//            color = MaterialTheme.customColors.black
+//        )
+    Unit = {},
     onBanner2Click: () -> Unit = {},
     onBanner3Click: () -> Unit = {}
 ){
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+//            .padding(16.dp)
     ) {
-        Text(
-            text = "Diet",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        val allDietItems = listOf(
+            FoodItemBannerPreNextF(
+                id = 1,
+                imageRes = R.drawable.diet_food_banner1,
+                title = "Grilled Chicken Salad",
+                price = "180",
+                restaurantName = "Fit Feast",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "2.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹40",
+                address = "Rohini, Delhi",
+                calories = "320",
+                protein = "28",
+                isHighProtein = true
+            ),
+            FoodItemBannerPreNextF(
+                id = 2,
+                imageRes = R.drawable.diet_food_banner2,
+                title = "Paneer Quinoa Bowl",
+                price = "160",
+                restaurantName = "Healthy Mash",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "3.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Janakpuri, Delhi",
+                calories = "350",
+                protein = "22",
+                isHighProtein = true
+            ),
+            FoodItemBannerPreNextF(
+                id = 3,
+                imageRes = R.drawable.diet_food_banner3,
+                title = "Oats Peanut Butter Bowl",
+                price = "110",
+                restaurantName = "Muscle Bowl",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "1.4 km",
+                discount = null,
+                discountAmount = null,
+                address = "Paschim Vihar, Delhi",
+                calories = "390",
+                protein = "17",
+                isHighProtein = true
+            ),
         )
+        Image(
+            painter = painterResource(R.drawable.ic_diet_header),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(
+                    min = 100.dp,
+                    max = 300.dp
+                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+            contentScale = ContentScale.FillBounds
+        )
+        BannerPreNextF(
+            foodItems = allDietItems,
+            onItemClick = { foodItem ->
+                println("Clicked on: ${foodItem.title}")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 0.dp),
+            backgroundColor1 = Color(0xFF131709),
+            backgroundColor2 = Color(0xFFFFFFFF) // Dark Purple
+//            backgroundColor2 = Color(0xFFE5E5E3) // Dark Purple
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CategoryDietTabsFood(
+            onCategorySelected= {}
+        )
+
 //        BannerPreNextF(
 //            images = listOf(
 //                painterResource(R.drawable.all_food_banner1),

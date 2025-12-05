@@ -40,7 +40,10 @@ data class FoodItemDoubleF(
     val distance: String? = null,
     val discount: String? = null,
     val discountAmount: String? = null,
-    val address: String? = null
+    val address: String? = null,
+    val calories: String? = null,
+    val protein: String? = null,
+    val isHighProtein: Boolean? = null,
 )
 
 /**

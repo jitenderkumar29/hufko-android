@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -93,19 +94,25 @@ fun CategoryDietTabsFood(
                         onCategorySelected(dietCategoryPage)
                     },
                     modifier = Modifier
-                        .padding(horizontal = 2.dp)
+                        .padding(horizontal = 2.dp, vertical = 5.dp)
+//                        .padding(horizontal = 2.dp)
                         .background(Color.Transparent)
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.padding(vertical = 4.dp)
+                            .background(
+                                color = MaterialTheme.customColors.white,
+                                shape = RoundedCornerShape(10.dp)  // ← Rounded corners applied here
+                            )
+                            .padding(horizontal = 5.dp)
                     ) {
                         Image(
                             painter = painterResource(id = dietCategoryPage.iconRes),
                             contentDescription = dietCategoryPage.title,
                             modifier = Modifier
                                 .width(65.dp)
-                                .height(45.dp),
+                                .height(55.dp),
                             contentScale = ContentScale.FillBounds
                         )
 
@@ -765,7 +772,7 @@ fun SaladDietPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = saladFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
@@ -857,7 +864,7 @@ fun SaladDietPage() {
                 address = "Delhi"
             )
         )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -891,309 +898,307 @@ fun SaladDietPage() {
         )
 
     }
-//        FilterButtonFood()
 //
-//    Spacer(modifier = Modifier.height(15.dp))
-//    Text(
-//        text = "Restaurants delivering to you",
-//        style = MaterialTheme.typography.bodySmall.copy(
-//            fontSize = 20.sp,
-//            fontWeight = FontWeight.Bold,
-//            color =  MaterialTheme.customColors.black
-//        ),
-////            textAlign = TextAlign.Center,
-//        maxLines = 1,
-//        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//    )
-//    Spacer(modifier = Modifier.height(10.dp))
-//    Text(
-//        text = "Featured restaurants",
-//        style = MaterialTheme.typography.bodySmall.copy(
-//            fontSize = 18.sp,
-//            fontWeight = FontWeight.Bold,
-//            color = MaterialTheme.customColors.black
-//        ),
-////            textAlign = TextAlign.Center,
-//        maxLines = 1,
-//        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//    )
-//    Spacer(modifier = Modifier.height(5.dp))
-//    // Sample data based on the provided images
-//    val chickenDietRestaurantItems = listOf(
-//        RestaurantItemFull(
-//            id = 1,
-//            imageRes = R.drawable.restaurant_image_chicken_food_1,
-//            title = "Grilled Chicken Platter",
-//            price = "325",
-//            restaurantName = "Chicken Kingdom",
-//            rating = "4.5",
-//            deliveryTime = "30-35 mins",
-//            distance = "4.2 km",
-//            discount = "30% OFF",
-//            discountAmount = "up to ₹100",
-//            address = "Grill Street, Downtown"
-//        ),
-//        RestaurantItemFull(
-//            id = 2,
-//            imageRes = R.drawable.restaurant_image_chicken_food_2,
-//            title = "Crispy Fried Chicken Bucket",
-//            price = "450",
-//            restaurantName = "Chicken Express",
-//            rating = "4.3",
-//            deliveryTime = "25-30 mins",
-//            distance = "3.5 km",
-//            discount = "25% OFF",
-//            discountAmount = "up to ₹120",
-//            address = "Fast Food Lane"
-//        ),
-//        RestaurantItemFull(
-//            id = 3,
-//            imageRes = R.drawable.restaurant_image_chicken_food_3,
-//            title = "Chicken Butter Masala",
-//            price = "280",
-//            restaurantName = "Spice Hub",
-//            rating = "4.4",
-//            deliveryTime = "40-45 mins",
-//            distance = "5.8 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹80",
-//            address = "Curry Corner"
-//        ),
-//        RestaurantItemFull(
-//            id = 4,
-//            imageRes = R.drawable.restaurant_image_chicken_food_4,
-//            title = "Whole Roast Chicken",
-//            price = "550",
-//            restaurantName = "Royal Chicken",
-//            rating = "4.6",
-//            deliveryTime = "50-55 mins",
-//            distance = "6.3 km",
-//            discount = "15% OFF",
-//            discountAmount = "up to ₹85",
-//            address = "Royal Feast Avenue"
-//        ),
-//        RestaurantItemFull(
-//            id = 5,
-//            imageRes = R.drawable.restaurant_image_chicken_food_5,
-//            title = "Butter Chicken with Naan",
-//            price = "320",
-//            restaurantName = "Dhaba Style",
-//            rating = "4.7",
-//            deliveryTime = "35-40 mins",
-//            distance = "4.7 km",
-//            discount = "40% OFF",
-//            discountAmount = "up to ₹130",
-//            address = "Highway Dhaba"
-//        ),
-//        RestaurantItemFull(
-//            id = 6,
-//            imageRes = R.drawable.restaurant_image_chicken_food_6,
-//            title = "Tandoori Chicken Platter",
-//            price = "380",
-//            restaurantName = "Tandoor Special",
-//            rating = "4.2",
-//            deliveryTime = "30-35 mins",
-//            distance = "3.9 km",
-//            discount = "35% OFF",
-//            discountAmount = "up to ₹135",
-//            address = "Tandoori Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 7,
-//            imageRes = R.drawable.restaurant_image_chicken_food_7,
-//            title = "Chilli Chicken Combo",
-//            price = "290",
-//            restaurantName = "Chinese Wok",
-//            rating = "4.1",
-//            deliveryTime = "20-25 mins",
-//            distance = "2.8 km",
-//            discount = "30% OFF",
-//            discountAmount = "up to ₹90",
-//            address = "Chinatown Plaza"
-//        ),
-//        RestaurantItemFull(
-//            id = 8,
-//            imageRes = R.drawable.restaurant_image_chicken_food_8,
-//            title = "Hyderabadi Chicken Biryani",
-//            price = "260",
-//            restaurantName = "Biryani House",
-//            rating = "4.8",
-//            deliveryTime = "35-40 mins",
-//            distance = "4.5 km",
-//            discount = "50% OFF",
-//            discountAmount = "up to ₹130",
-//            address = "Biryani Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 9,
-//            imageRes = R.drawable.restaurant_image_chicken_food_9,
-//            title = "Chicken Shawarma Platter",
-//            price = "220",
-//            restaurantName = "Arabian Nights",
-//            rating = "4.3",
-//            deliveryTime = "25-30 mins",
-//            distance = "3.2 km",
-//            discount = "25% OFF",
-//            discountAmount = "up to ₹55",
-//            address = "Middle Eastern Quarter"
-//        ),
-//        RestaurantItemFull(
-//            id = 10,
-//            imageRes = R.drawable.restaurant_image_chicken_food_10,
-//            title = "Chicken 65 Special",
-//            price = "240",
-//            restaurantName = "Spicy Corner",
-//            rating = "4.0",
-//            deliveryTime = "30-35 mins",
-//            distance = "4.1 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹50",
-//            address = "Spice Market"
-//        ),
-//        RestaurantItemFull(
-//            id = 11,
-//            imageRes = R.drawable.restaurant_image_chicken_food_11,
-//            title = "Chicken Tikka Masala",
-//            price = "310",
-//            restaurantName = "Tikka Palace",
-//            rating = "4.4",
-//            deliveryTime = "40-45 mins",
-//            distance = "5.2 km",
-//            discount = "30% OFF",
-//            discountAmount = "up to ₹95",
-//            address = "Royal Tikka Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 12,
-//            imageRes = R.drawable.restaurant_image_chicken_food_12,
-//            title = "Chicken Korma Deluxe",
-//            price = "270",
-//            restaurantName = "Mughlai Darbar",
-//            rating = "4.6",
-//            deliveryTime = "45-50 mins",
-//            distance = "6.1 km",
-//            discount = "35% OFF",
-//            discountAmount = "up to ₹95",
-//            address = "Mughlai Avenue"
-//        ),
-//        RestaurantItemFull(
-//            id = 13,
-//            imageRes = R.drawable.restaurant_image_chicken_food_13,
-//            title = "Chicken Lollipop Basket",
-//            price = "290",
-//            restaurantName = "Starters Heaven",
-//            rating = "4.2",
-//            deliveryTime = "25-30 mins",
-//            distance = "3.7 km",
-//            discount = "40% OFF",
-//            discountAmount = "up to ₹120",
-//            address = "Appetizer Lane"
-//        ),
-//        RestaurantItemFull(
-//            id = 14,
-//            imageRes = R.drawable.restaurant_image_chicken_food_14,
-//            title = "Chicken Burger Combo",
-//            price = "199",
-//            restaurantName = "Burger King",
-//            rating = "4.1",
-//            deliveryTime = "20-25 mins",
-//            distance = "2.5 km",
-//            discount = "50% OFF",
-//            discountAmount = "up to ₹100",
-//            address = "Fast Food Court"
-//        ),
-//        RestaurantItemFull(
-//            id = 15,
-//            imageRes = R.drawable.restaurant_image_chicken_food_15,
-//            title = "Chicken Wings Platter",
-//            price = "350",
-//            restaurantName = "Wings World",
-//            rating = "4.3",
-//            deliveryTime = "30-35 mins",
-//            distance = "4.3 km",
-//            discount = "25% OFF",
-//            discountAmount = "up to ₹90",
-//            address = "Wings Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 16,
-//            imageRes = R.drawable.restaurant_image_chicken_food_16,
-//            title = "Chicken Sandwich Meal",
-//            price = "180",
-//            restaurantName = "Subway Delights",
-//            rating = "4.0",
-//            deliveryTime = "15-20 mins",
-//            distance = "1.8 km",
-//            discount = "30% OFF",
-//            discountAmount = "up to ₹55",
-//            address = "Quick Bite Center"
-//        ),
-//        RestaurantItemFull(
-//            id = 17,
-//            imageRes = R.drawable.restaurant_image_chicken_food_17,
-//            title = "Chicken Teriyaki Bowl",
-//            price = "320",
-//            restaurantName = "Tokyo Kitchen",
-//            rating = "4.5",
-//            deliveryTime = "35-40 mins",
-//            distance = "5.5 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹65",
-//            address = "Japanese Quarter"
-//        ),
-//        RestaurantItemFull(
-//            id = 18,
-//            imageRes = R.drawable.restaurant_image_chicken_food_18,
-//            title = "Chicken Popcorn Bucket",
-//            price = "210",
-//            restaurantName = "Movie Munchies",
-//            rating = "4.1",
-//            deliveryTime = "25-30 mins",
-//            distance = "3.4 km",
-//            discount = "Buy 1 get 1 free",
-//            discountAmount = "On large buckets",
-//            address = "Entertainment District"
-//        ),
-//        RestaurantItemFull(
-//            id = 19,
-//            imageRes = R.drawable.restaurant_image_chicken_food_19,
-//            title = "Chicken Pasta Alfredo",
-//            price = "280",
-//            restaurantName = "Italian Bistro",
-//            rating = "4.4",
-//            deliveryTime = "30-35 mins",
-//            distance = "4.6 km",
-//            discount = "25% OFF",
-//            discountAmount = "up to ₹70",
-//            address = "Italian Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 20,
-//            imageRes = R.drawable.restaurant_image_chicken_food_20,
-//            title = "Chicken Salad Bowl",
-//            price = "230",
-//            restaurantName = "Healthy Bites",
-//            rating = "4.2",
-//            deliveryTime = "20-25 mins",
-//            distance = "2.9 km",
-//            discount = "30% OFF",
-//            discountAmount = "up to ₹70",
-//            address = "Wellness Center"
-//        )
-//    )
-//
-//    Column {
-//        chickenDietRestaurantItems.forEach { restaurantItem ->
-//            RestaurantItemListFull(
-//                restaurantItem = restaurantItem,
-//                onWishlistClick = { },
-//                onThreeDotClick = { },
-//                onItemClick = { }
-//            )
-//        }
-//    }
-}
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+    // Sample data based on the provided images
 
+    val saladDietRestaurantItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.restaurant_image_salad_food_1,
+            title = "Mediterranean Quinoa Bowl",
+            price = "285",
+            restaurantName = "Green Leaf Cafe",
+            rating = "4.6",
+            deliveryTime = "20-25 mins",
+            distance = "2.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Health Street, Downtown"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.restaurant_image_salad_food_2,
+            title = "Protein Power Salad",
+            price = "320",
+            restaurantName = "FitFuel Kitchen",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "3.2 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹80",
+            address = "Fitness Hub Lane"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.restaurant_image_salad_food_3,
+            title = "Caesar Salad with Grilled Chicken",
+            price = "250",
+            restaurantName = "Salad Bar Express",
+            rating = "4.4",
+            deliveryTime = "15-20 mins",
+            distance = "1.9 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹75",
+            address = "Quick Bite Corner"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.restaurant_image_salad_food_4,
+            title = "Greek Salad Platter",
+            price = "220",
+            restaurantName = "Mediterranean Delight",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "2.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹35",
+            address = "Olive Oil Avenue"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.restaurant_image_salad_food_5,
+            title = "Rainbow Veggie Bowl",
+            price = "195",
+            restaurantName = "Vegan Vibes",
+            rating = "4.8",
+            deliveryTime = "30-35 mins",
+            distance = "4.1 km",
+            discount = "40% OFF",
+            discountAmount = "up to ₹80",
+            address = "Plant-Based District"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.restaurant_image_salad_food_6,
+            title = "Avocado & Chickpea Salad",
+            price = "240",
+            restaurantName = "Superfood Kitchen",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "3.4 km",
+            discount = "35% OFF",
+            discountAmount = "up to ₹85",
+            address = "Nutrition Street"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.restaurant_image_salad_food_7,
+            title = "Thai Mango Salad",
+            price = "210",
+            restaurantName = "Asian Greens",
+            rating = "4.3",
+            deliveryTime = "30-35 mins",
+            distance = "4.3 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹65",
+            address = "Asian Fusion Plaza"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.restaurant_image_salad_food_8,
+            title = "Kale & Quinoa Super Bowl",
+            price = "275",
+            restaurantName = "Clean Eats",
+            rating = "4.6",
+            deliveryTime = "20-25 mins",
+            distance = "2.7 km",
+            discount = "50% OFF",
+            discountAmount = "up to ₹140",
+            address = "Wellness Center"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.restaurant_image_salad_food_9,
+            title = "Tuna Nicoise Salad",
+            price = "290",
+            restaurantName = "French Bistro",
+            rating = "4.4",
+            deliveryTime = "35-40 mins",
+            distance = "5.1 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹75",
+            address = "European Quarter"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.restaurant_image_salad_food_10,
+            title = "Roasted Veggie & Feta Bowl",
+            price = "230",
+            restaurantName = "Farm to Table",
+            rating = "4.7",
+            deliveryTime = "25-30 mins",
+            distance = "3.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹50",
+            address = "Organic Market"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.restaurant_image_salad_food_11,
+            title = "Spinach & Berry Salad",
+            price = "205",
+            restaurantName = "Berry Fresh",
+            rating = "4.5",
+            deliveryTime = "20-25 mins",
+            distance = "2.9 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹65",
+            address = "Berry Lane"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.restaurant_image_salad_food_12,
+            title = "Mexican Fiesta Bowl",
+            price = "245",
+            restaurantName = "Mexi-Greens",
+            rating = "4.3",
+            deliveryTime = "30-35 mins",
+            distance = "4.2 km",
+            discount = "35% OFF",
+            discountAmount = "up to ₹90",
+            address = "Mexican Street"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.restaurant_image_salad_food_13,
+            title = "Pomegranate & Walnut Salad",
+            price = "225",
+            restaurantName = "Nutrient Hub",
+            rating = "4.6",
+            deliveryTime = "25-30 mins",
+            distance = "3.5 km",
+            discount = "40% OFF",
+            discountAmount = "up to ₹90",
+            address = "Health District"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.restaurant_image_salad_food_14,
+            title = "Detox Green Salad",
+            price = "180",
+            restaurantName = "Juice & Salad Bar",
+            rating = "4.2",
+            deliveryTime = "15-20 mins",
+            distance = "1.7 km",
+            discount = "50% OFF",
+            discountAmount = "up to ₹90",
+            address = "Detox Center"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.restaurant_image_salad_food_15,
+            title = "Warm Lentil & Veggie Bowl",
+            price = "195",
+            restaurantName = "Comfort Greens",
+            rating = "4.4",
+            deliveryTime = "25-30 mins",
+            distance = "3.1 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹50",
+            address = "Comfort Food Lane"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.restaurant_image_salad_food_16,
+            title = "Caprese Salad Platter",
+            price = "235",
+            restaurantName = "Italian Greens",
+            rating = "4.5",
+            deliveryTime = "20-25 mins",
+            distance = "2.6 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹70",
+            address = "Italian Quarter"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.restaurant_image_salad_food_17,
+            title = "Asian Crunch Salad",
+            price = "215",
+            restaurantName = "Tokyo Greens",
+            rating = "4.4",
+            deliveryTime = "30-35 mins",
+            distance = "4.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹45",
+            address = "Asian District"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.restaurant_image_salad_food_18,
+            title = "Beetroot & Goat Cheese Salad",
+            price = "255",
+            restaurantName = "Gourmet Greens",
+            rating = "4.7",
+            deliveryTime = "30-35 mins",
+            distance = "4.0 km",
+            discount = "Buy 1 get 1 free",
+            discountAmount = "On all salads",
+            address = "Gourmet Street"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.restaurant_image_salad_food_19,
+            title = "Southwest Chicken Salad",
+            price = "265",
+            restaurantName = "Grill & Greens",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "3.6 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹70",
+            address = "Grill Avenue"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.restaurant_image_salad_food_20,
+            title = "Moroccan Couscous Salad",
+            price = "240",
+            restaurantName = "Spice & Greens",
+            rating = "4.3",
+            deliveryTime = "35-40 mins",
+            distance = "4.8 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹75",
+            address = "Spice Market Lane"
+        )
+    )
+    Column {
+        saladDietRestaurantItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
+}
 @Composable
 fun MuttonDietPage() {
     Column(

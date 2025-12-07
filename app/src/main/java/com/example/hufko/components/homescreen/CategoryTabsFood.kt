@@ -337,6 +337,7 @@ fun DietCategoryPage(
 //            backgroundColor2 = Color(0xFFE5E5E3) // Dark Purple
         )
         Spacer(modifier = Modifier.height(10.dp))
+
         CategoryDietTabsFood(
             onCategorySelected= {}
         )

@@ -71,7 +71,7 @@ fun CategoryDietTabsFood(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.customColors.skyBlue)
+            .background(MaterialTheme.customColors.orangeLight)
     ) {
         ScrollableTabRow(
             selectedTabIndex = selectedTabIndex,
@@ -101,11 +101,12 @@ fun CategoryDietTabsFood(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.padding(vertical = 4.dp)
+                            .width(80.dp)   // 👈 REQUIRED for ellipsis
                             .background(
                                 color = MaterialTheme.customColors.white,
-                                shape = RoundedCornerShape(10.dp)  // ← Rounded corners applied here
+                                shape = RoundedCornerShape(15.dp)  // ← Rounded corners applied here
                             )
-                            .padding(horizontal = 5.dp)
+                            .padding(horizontal = 5.dp, vertical = 5.dp)
                     ) {
                         Image(
                             painter = painterResource(id = dietCategoryPage.iconRes),
@@ -128,7 +129,7 @@ fun CategoryDietTabsFood(
                             maxLines = 2,
                             textAlign = TextAlign.Center,
                             overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.padding(top = 4.dp)
+                            modifier = Modifier.padding(top = 2.dp)
                         )
                     }
                 }
@@ -1204,14 +1205,531 @@ fun MuttonDietPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val muttonDietFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "mutton_curry",
+                    text = "Mutton Curry",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mutton_curry
+                ),
+                FilterChip(
+                    id = "mutton_biryani",
+                    text = "Mutton Biryani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mutton_biryani
+                ),
+                FilterChip(
+                    id = "mutton_kebabs",
+                    text = "Mutton Kebabs",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mutton_kebab
+                ),
+                FilterChip(
+                    id = "mutton_rogan_josh",
+                    text = "Rogan Josh",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mutton_rogan_josh
+                ),
+                FilterChip(
+                    id = "mutton_keema",
+                    text = "Mutton Keema",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mutton_keema
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bone_in",
+                    text = "Bone-In",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "boneless",
+                    text = "Boneless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_friendly",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_300",
+                    text = "Under ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_500",
+                    text = "Under ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "traditional",
+                    text = "Traditional",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = muttonDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val muttonFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_mutton_biryani_diet,
+                title = "Mutton Biryani",
+                price = "450",
+                restaurantName = "Royal Mughlai",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "4.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹90",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_mutton_korma_diet,
+                title = "Mutton Korma",
+                price = "420",
+                restaurantName = "Darbar Kitchen",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "3.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹63",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_mutton_rogan_josh_diet,
+                title = "Mutton Rogan Josh",
+                price = "480",
+                restaurantName = "Kashmiri Delight",
+                rating = "4.7",
+                deliveryTime = "40-45 mins",
+                distance = "5.1 km",
+                discount = "25%",
+                discountAmount = "up to ₹120",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_mutton_curry_diet,
+                title = "Mutton Curry",
+                price = "380",
+                restaurantName = "Spice Nation",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "2.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹38",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_mutton_kebabs_diet,
+                title = "Mutton Seekh Kebabs",
+                price = "350",
+                restaurantName = "Kebab Junction",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "20%",
+                discountAmount = "up to ₹70",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_mutton_handi_diet,
+                title = "Mutton Handi",
+                price = "550",
+                restaurantName = "Handi House",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "4.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹82",
+                address = "Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Mutton Diet Options",
-            fontSize = 24.sp,
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = muttonFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+    }
+//
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+    // Sample data based on the provided images
+
+    val muttonRestaurantItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.restaurant_image_mutton_food_1,
+            title = "Royal Mughlai Mutton Biryani",
+            price = "450",
+            restaurantName = "Royal Mughlai",
+            rating = "4.8",
+            deliveryTime = "35-40 mins",
+            distance = "4.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹90",
+            address = "Mughlai Street, Old Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.restaurant_image_mutton_food_2,
+            title = "Darbar Kitchen Mutton Korma",
+            price = "420",
+            restaurantName = "Darbar Kitchen",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "3.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹63",
+            address = "Royal Palace Road"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.restaurant_image_mutton_food_3,
+            title = "Kashmiri Rogan Josh",
+            price = "480",
+            restaurantName = "Kashmiri Delight",
+            rating = "4.7",
+            deliveryTime = "40-45 mins",
+            distance = "5.1 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹120",
+            address = "Kashmiri Valley Lane"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.restaurant_image_mutton_food_4,
+            title = "Spice Nation Mutton Curry",
+            price = "380",
+            restaurantName = "Spice Nation",
+            rating = "4.4",
+            deliveryTime = "25-30 mins",
+            distance = "2.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹38",
+            address = "Spice Market Area"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.restaurant_image_mutton_food_5,
+            title = "Kebab Junction Seekh Kebabs",
+            price = "350",
+            restaurantName = "Kebab Junction",
+            rating = "4.5",
+            deliveryTime = "20-25 mins",
+            distance = "2.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹70",
+            address = "Kebab Street Corner"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.restaurant_image_mutton_food_6,
+            title = "Handi House Mutton Handi",
+            price = "550",
+            restaurantName = "Handi House",
+            rating = "4.8",
+            deliveryTime = "35-40 mins",
+            distance = "4.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹82",
+            address = "Handi Special Area"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.restaurant_image_mutton_food_7,
+            title = "Keema Special Mutton Keema",
+            price = "320",
+            restaurantName = "Keema Special",
+            rating = "4.3",
+            deliveryTime = "25-30 mins",
+            distance = "3.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹32",
+            address = "Keema Lane"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.restaurant_image_mutton_food_8,
+            title = "Kadai King Special Mutton",
+            price = "440",
+            restaurantName = "Kadai King",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "3.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹88",
+            address = "Kadai Special Road"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.restaurant_image_mutton_food_9,
+            title = "Pulao Paradise Mutton Pulao",
+            price = "400",
+            restaurantName = "Pulao Paradise",
+            rating = "4.4",
+            deliveryTime = "30-35 mins",
+            distance = "4.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹60",
+            address = "Pulao Street"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.restaurant_image_mutton_food_10,
+            title = "Punjabi Dhaba Mutton Saag",
+            price = "370",
+            restaurantName = "Punjabi Dhaba",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "2.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹37",
+            address = "Highway Dhaba Road"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.restaurant_image_mutton_food_11,
+            title = "Kolhapuri Mutton Special",
+            price = "460",
+            restaurantName = "Maharashtrian Tadka",
+            rating = "4.7",
+            deliveryTime = "35-40 mins",
+            distance = "4.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹92",
+            address = "Maharashtrian Food Street"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.restaurant_image_mutton_food_12,
+            title = "Afghani Mutton Delicacy",
+            price = "520",
+            restaurantName = "Afghan Kitchen",
+            rating = "4.8",
+            deliveryTime = "40-45 mins",
+            distance = "5.3 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹130",
+            address = "Afghan Street"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.restaurant_image_mutton_food_13,
+            title = "Nihari House Special Mutton",
+            price = "490",
+            restaurantName = "Nihari House",
+            rating = "4.9",
+            deliveryTime = "45-50 mins",
+            distance = "5.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹73",
+            address = "Nihari Street, Old Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.restaurant_image_mutton_food_14,
+            title = "Royal BBQ Mutton Raan",
+            price = "750",
+            restaurantName = "Royal BBQ",
+            rating = "4.8",
+            deliveryTime = "50-55 mins",
+            distance = "6.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹150",
+            address = "BBQ Grill Street"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.restaurant_image_mutton_food_15,
+            title = "Souper Bowl Mutton Soup",
+            price = "280",
+            restaurantName = "Souper Bowl",
+            rating = "4.3",
+            deliveryTime = "20-25 mins",
+            distance = "2.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹28",
+            address = "Soup Corner Lane"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.restaurant_image_mutton_food_16,
+            title = "Paya Special Mutton Paya",
+            price = "390",
+            restaurantName = "Paya Special",
+            rating = "4.5",
+            deliveryTime = "40-45 mins",
+            distance = "4.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹58",
+            address = "Paya Street"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.restaurant_image_mutton_food_17,
+            title = "Chop House Mutton Chops",
+            price = "410",
+            restaurantName = "Chop House",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "3.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹82",
+            address = "Chop Grill Road"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.restaurant_image_mutton_food_18,
+            title = "Awadhi Kitchen Rezala",
+            price = "480",
+            restaurantName = "Awadhi Kitchen",
+            rating = "4.7",
+            deliveryTime = "35-40 mins",
+            distance = "4.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹72",
+            address = "Awadhi Street, Lucknowi"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.restaurant_image_mutton_food_19,
+            title = "Pao Bhaji House Keema Pao",
+            price = "340",
+            restaurantName = "Pao Bhaji House",
+            rating = "4.4",
+            deliveryTime = "25-30 mins",
+            distance = "2.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹34",
+            address = "Pao Bhaji Street"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.restaurant_image_mutton_food_20,
+            title = "Kebab Mahal Malai Mutton",
+            price = "430",
+            restaurantName = "Kebab Mahal",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "3.6 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹86",
+            address = "Kebab Mahal Road"
         )
+    )
+    Column {
+        muttonRestaurantItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

@@ -166,21 +166,6 @@ fun HomeScreen() {
             item {
                 CategoryTabsFood()
             }
-
-            // Add some sample content to enable scrolling
-//            items(20) { index ->
-//                Surface(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(8.dp),
-//                    color = MaterialTheme.colorScheme.surface
-//                ) {
-//                    Text(
-//                        text = "Content item $index",
-//                        modifier = Modifier.padding(16.dp)
-//                    )
-//                }
-//            }
         }
     }
 

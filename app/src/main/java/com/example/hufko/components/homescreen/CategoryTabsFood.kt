@@ -341,15 +341,6 @@ fun DietCategoryPage(
         CategoryDietTabsFood(
             onCategorySelected= {}
         )
-
-//        BannerPreNextF(
-//            images = listOf(
-//                painterResource(R.drawable.all_food_banner1),
-//                painterResource(R.drawable.all_food_banner2),
-//                painterResource(R.drawable.all_food_banner3)
-//            ),
-//            onImageClick = { index -> println("Clicked $index") }
-//        )
     }
 }
 @Composable

@@ -52,7 +52,8 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
 
 @Composable
 fun CategoryDietTabsFood(
-    onCategorySelected: (DietCategoryPage) -> Unit = {}
+    onCategorySelected: (DietCategoryPage) -> Unit = {},
+    modifier: Modifier = Modifier
 ) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
@@ -1738,14 +1739,564 @@ fun KebabsDietPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val kebabDietFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                // Kebab types with left icons
+                FilterChip(
+                    id = "seekh_kebab",
+                    text = "Seekh Kebab",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_seekh_kebab
+                ),
+                FilterChip(
+                    id = "shami_kebab",
+                    text = "Shami Kebab",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_shami_kebab
+                ),
+                FilterChip(
+                    id = "chicken_kebab",
+                    text = "Chicken Kebab",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_kebab
+                ),
+                FilterChip(
+                    id = "vegetable_kebab",
+                    text = "Vegetable Kebab",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_kebab
+                ),
+                FilterChip(
+                    id = "fish_kebab",
+                    text = "Fish Kebab",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fish_kebab
+                ),
+                // Cooking style/text-only filters
+                FilterChip(
+                    id = "tandoori",
+                    text = "Tandoori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled",
+                    text = "Grilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fried",
+                    text = "Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "skewered",
+                    text = "Skewered",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "minced",
+                    text = "Minced",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Spice level
+                FilterChip(
+                    id = "mild_spice",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Diet preferences
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_friendly",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Price range
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_400",
+                    text = "Under ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Sort option
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = kebabDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val kebabFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_chicken_seekh_kebab_diet,
+                title = "Chicken Seekh Kebab",
+                price = "280",
+                restaurantName = "Kebab Junction",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "20%",
+                discountAmount = "up to ₹60",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_mutton_galouti_kebab_diet,
+                title = "Mutton Galouti Kebab",
+                price = "350",
+                restaurantName = "Awadhi House",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹90",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_chicken_malai_tikka_diet,
+                title = "Chicken Malai Tikka",
+                price = "320",
+                restaurantName = "Tandoori Nation",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "3.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹48",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_hariyali_chicken_tikka_diet,
+                title = "Hariyali Chicken Tikka",
+                price = "300",
+                restaurantName = "Green Spice Grill",
+                rating = "4.5",
+                deliveryTime = "22-28 mins",
+                distance = "2.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_mutton_boti_kebab_diet,
+                title = "Mutton Boti Kebab",
+                price = "360",
+                restaurantName = "Royal Mughlai",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "4.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹72",
+                address = "Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_chicken_tandoori_tikka_diet,
+                title = "Chicken Tandoori Tikka",
+                price = "330",
+                restaurantName = "Tikka Factory",
+                rating = "4.6",
+                deliveryTime = "25-32 mins",
+                distance = "3.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹55",
+                address = "Delhi"
+            )
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Healthy Kebabs",
-            fontSize = 24.sp,
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = kebabFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+    }
+//
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+    // Sample data based on the provided images
+
+    val kebabRestaurantItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.restaurant_image_kebab_food_1,
+            title = "Kebab Junction Chicken Seekh Kebabs",
+            price = "280",
+            restaurantName = "Kebab Junction",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "2.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹56",
+            address = "Kebab Street Corner"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.restaurant_image_kebab_food_2,
+            title = "Awadhi House Mutton Galouti Kebab",
+            price = "350",
+            restaurantName = "Awadhi House",
+            rating = "4.8",
+            deliveryTime = "25-30 mins",
+            distance = "3.2 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹88",
+            address = "Awadhi Gali, Lucknowi Street"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.restaurant_image_kebab_food_3,
+            title = "Tandoori Nation Chicken Malai Tikka",
+            price = "320",
+            restaurantName = "Tandoori Nation",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "3.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹48",
+            address = "Tandoori Lane"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.restaurant_image_kebab_food_4,
+            title = "Green Spice Hariyali Chicken Tikka",
+            price = "300",
+            restaurantName = "Green Spice Grill",
+            rating = "4.5",
+            deliveryTime = "22-28 mins",
+            distance = "2.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹30",
+            address = "Green Avenue Road"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.restaurant_image_kebab_food_5,
+            title = "Royal Mughlai Mutton Boti Kebab",
+            price = "360",
+            restaurantName = "Royal Mughlai",
+            rating = "4.7",
+            deliveryTime = "35-40 mins",
+            distance = "4.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹72",
+            address = "Mughlai Street, Old Delhi"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.restaurant_image_kebab_food_6,
+            title = "Tikka Factory Chicken Tandoori Tikka",
+            price = "330",
+            restaurantName = "Tikka Factory",
+            rating = "4.6",
+            deliveryTime = "25-32 mins",
+            distance = "3.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹55",
+            address = "Factory Road"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.restaurant_image_kebab_food_7,
+            title = "Sultan’s Grills Afghani Kebab",
+            price = "390",
+            restaurantName = "Sultan’s Grills",
+            rating = "4.7",
+            deliveryTime = "30-35 mins",
+            distance = "3.9 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹78",
+            address = "Afghan Grill Street"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.restaurant_image_kebab_food_8,
+            title = "Mughlai Darbar Shami Kebabs",
+            price = "310",
+            restaurantName = "Mughlai Darbar",
+            rating = "4.4",
+            deliveryTime = "25-30 mins",
+            distance = "2.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹31",
+            address = "Darbar Chowk"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.restaurant_image_kebab_food_9,
+            title = "BBQ Nation Chicken Reshmi Kebab",
+            price = "340",
+            restaurantName = "BBQ Nation",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "3.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹68",
+            address = "BBQ Grill Road"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.restaurant_image_kebab_food_10,
+            title = "Nawabi Kitchen Chicken Tikka Roll",
+            price = "260",
+            restaurantName = "Nawabi Kitchen",
+            rating = "4.3",
+            deliveryTime = "20-25 mins",
+            distance = "1.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹26",
+            address = "Nawabi Corner"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.restaurant_image_kebab_food_11,
+            title = "Spice Hub Tandoori Chicken",
+            price = "350",
+            restaurantName = "Spice Hub",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "2.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹53",
+            address = "Spice Market Road"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.restaurant_image_kebab_food_12,
+            title = "Awadhi Special Galouti Kebab Platter",
+            price = "420",
+            restaurantName = "Awadhi Special",
+            rating = "4.8",
+            deliveryTime = "30-35 mins",
+            distance = "3.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹84",
+            address = "Lucknowi Food Street"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.restaurant_image_kebab_food_13,
+            title = "Royal BBQ Mutton Sheekh Platter",
+            price = "470",
+            restaurantName = "Royal BBQ",
+            rating = "4.7",
+            deliveryTime = "35-40 mins",
+            distance = "4.7 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹118",
+            address = "BBQ Grill Street"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.restaurant_image_kebab_food_14,
+            title = "Kebab Mahal Malai Chicken",
+            price = "310",
+            restaurantName = "Kebab Mahal",
+            rating = "4.6",
+            deliveryTime = "25-30 mins",
+            distance = "3.6 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹62",
+            address = "Kebab Mahal Road"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.restaurant_image_kebab_food_15,
+            title = "Lebanese House Shawarma Chicken",
+            price = "260",
+            restaurantName = "Lebanese House",
+            rating = "4.4",
+            deliveryTime = "20-25 mins",
+            distance = "2.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹26",
+            address = "Lebanese Street"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.restaurant_image_kebab_food_16,
+            title = "Kolkata Rolls Chicken Kebab Roll",
+            price = "230",
+            restaurantName = "Kolkata Rolls",
+            rating = "4.3",
+            deliveryTime = "18-22 mins",
+            distance = "1.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹23",
+            address = "Rolls Gali"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.restaurant_image_kebab_food_17,
+            title = "Biryani Darbar Kebab & Biryani Combo",
+            price = "380",
+            restaurantName = "Biryani Darbar",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "3.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹76",
+            address = "Darbar Road"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.restaurant_image_kebab_food_18,
+            title = "Zaitoon Grill Arabian Kebab Platter",
+            price = "520",
+            restaurantName = "Zaitoon Grill",
+            rating = "4.8",
+            deliveryTime = "40-45 mins",
+            distance = "5.2 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹130",
+            address = "Arabian Food Street"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.restaurant_image_kebab_food_19,
+            title = "Fusion Tadka Peri-Peri Chicken Tikka",
+            price = "340",
+            restaurantName = "Fusion Tadka",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "2.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹34",
+            address = "Fusion Lane"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.restaurant_image_kebab_food_20,
+            title = "Muglai Treat Royal Kebabs Mix",
+            price = "450",
+            restaurantName = "Mughlai Treat",
+            rating = "4.7",
+            deliveryTime = "35-40 mins",
+            distance = "4.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹90",
+            address = "Royal Mughlai Street"
         )
+    )
+
+    Column {
+        kebabRestaurantItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
@@ -1754,15 +2305,567 @@ fun HealthySnacksPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Healthy Snacks",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(10.dp))
+        val healthySnacksFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Healthy snack types WITH icons
+                FilterChip(
+                    id = "nuts_seeds",
+                    text = "Nuts & Seeds",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_nuts_seeds
+                ),
+                FilterChip(
+                    id = "fruit_chips",
+                    text = "Fruit Chips",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fruit_chips
+                ),
+                FilterChip(
+                    id = "protein_bars",
+                    text = "Protein Bars",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_protein_bar
+                ),
+                FilterChip(
+                    id = "yogurt",
+                    text = "Yogurt",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_yogurt
+                ),
+                FilterChip(
+                    id = "granola",
+                    text = "Granola",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_granola
+                ),
+                FilterChip(
+                    id = "rice_cakes",
+                    text = "Rice Cakes",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice_cake
+                ),
+
+                // Diet preferences - TEXT ONLY
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_fiber",
+                    text = "High Fiber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Health benefits - TEXT ONLY
+                FilterChip(
+                    id = "energy_boosting",
+                    text = "Energy Boosting",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "heart_healthy",
+                    text = "Heart Healthy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gut_healthy",
+                    text = "Gut Healthy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Preparation types - TEXT ONLY
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "baked",
+                    text = "Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_preservatives",
+                    text = "No Preservatives",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Price range - TEXT ONLY
+                FilterChip(
+                    id = "under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort option
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = healthySnacksFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val healthySnacksItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_nuts_mix_snack,
+                title = "Premium Mixed Nuts",
+                price = "280",
+                restaurantName = "Nature's Basket",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹56",
+                address = "Health Hub, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_protein_bar_snack,
+                title = "Chocolate Protein Bar",
+                price = "120",
+                restaurantName = "Protein Power",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹18",
+                address = "Fitness Zone, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_fruit_chips_snack,
+                title = "Apple Cinnamon Chips",
+                price = "180",
+                restaurantName = "Fruitful Delights",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "3.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹18",
+                address = "Organic Street, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_greek_yogurt_snack,
+                title = "Greek Yogurt Bowl",
+                price = "220",
+                restaurantName = "Yogurt Culture",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "1.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹55",
+                address = "Wellness Center, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_roasted_chickpeas_snack,
+                title = "Spicy Roasted Chickpeas",
+                price = "160",
+                restaurantName = "Crunchy Munchies",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹32",
+                address = "Healthy Bites, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_granola_bowl_snack,
+                title = "Berry Granola Bowl",
+                price = "240",
+                restaurantName = "Breakfast Club",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "2.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹36",
+                address = "Morning Fresh, Delhi"
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = healthySnacksItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
     }
+//
+//
+//    Spacer(modifier = Modifier.height(15.dp))
+//    Text(
+//        text = "Restaurants delivering to you",
+//        style = MaterialTheme.typography.bodySmall.copy(
+//            fontSize = 20.sp,
+//            fontWeight = FontWeight.Bold,
+//            color =  MaterialTheme.customColors.black
+//        ),
+////            textAlign = TextAlign.Center,
+//        maxLines = 1,
+//        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//    )
+//    Spacer(modifier = Modifier.height(10.dp))
+//    Text(
+//        text = "Featured restaurants",
+//        style = MaterialTheme.typography.bodySmall.copy(
+//            fontSize = 18.sp,
+//            fontWeight = FontWeight.Bold,
+//            color = MaterialTheme.customColors.black
+//        ),
+////            textAlign = TextAlign.Center,
+//        maxLines = 1,
+//        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//    )
+//    Spacer(modifier = Modifier.height(5.dp))
+//    // Sample data based on the provided images
+//
+//    val kebabRestaurantItems = listOf(
+//        RestaurantItemFull(
+//            id = 1,
+//            imageRes = R.drawable.restaurant_image_kebab_food_1,
+//            title = "Kebab Junction Chicken Seekh Kebabs",
+//            price = "280",
+//            restaurantName = "Kebab Junction",
+//            rating = "4.7",
+//            deliveryTime = "20-25 mins",
+//            distance = "2.1 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹56",
+//            address = "Kebab Street Corner"
+//        ),
+//        RestaurantItemFull(
+//            id = 2,
+//            imageRes = R.drawable.restaurant_image_kebab_food_2,
+//            title = "Awadhi House Mutton Galouti Kebab",
+//            price = "350",
+//            restaurantName = "Awadhi House",
+//            rating = "4.8",
+//            deliveryTime = "25-30 mins",
+//            distance = "3.2 km",
+//            discount = "25% OFF",
+//            discountAmount = "up to ₹88",
+//            address = "Awadhi Gali, Lucknowi Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 3,
+//            imageRes = R.drawable.restaurant_image_kebab_food_3,
+//            title = "Tandoori Nation Chicken Malai Tikka",
+//            price = "320",
+//            restaurantName = "Tandoori Nation",
+//            rating = "4.6",
+//            deliveryTime = "30-35 mins",
+//            distance = "3.8 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹48",
+//            address = "Tandoori Lane"
+//        ),
+//        RestaurantItemFull(
+//            id = 4,
+//            imageRes = R.drawable.restaurant_image_kebab_food_4,
+//            title = "Green Spice Hariyali Chicken Tikka",
+//            price = "300",
+//            restaurantName = "Green Spice Grill",
+//            rating = "4.5",
+//            deliveryTime = "22-28 mins",
+//            distance = "2.5 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹30",
+//            address = "Green Avenue Road"
+//        ),
+//        RestaurantItemFull(
+//            id = 5,
+//            imageRes = R.drawable.restaurant_image_kebab_food_5,
+//            title = "Royal Mughlai Mutton Boti Kebab",
+//            price = "360",
+//            restaurantName = "Royal Mughlai",
+//            rating = "4.7",
+//            deliveryTime = "35-40 mins",
+//            distance = "4.0 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹72",
+//            address = "Mughlai Street, Old Delhi"
+//        ),
+//        RestaurantItemFull(
+//            id = 6,
+//            imageRes = R.drawable.restaurant_image_kebab_food_6,
+//            title = "Tikka Factory Chicken Tandoori Tikka",
+//            price = "330",
+//            restaurantName = "Tikka Factory",
+//            rating = "4.6",
+//            deliveryTime = "25-32 mins",
+//            distance = "3.0 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹55",
+//            address = "Factory Road"
+//        ),
+//        RestaurantItemFull(
+//            id = 7,
+//            imageRes = R.drawable.restaurant_image_kebab_food_7,
+//            title = "Sultan’s Grills Afghani Kebab",
+//            price = "390",
+//            restaurantName = "Sultan’s Grills",
+//            rating = "4.7",
+//            deliveryTime = "30-35 mins",
+//            distance = "3.9 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹78",
+//            address = "Afghan Grill Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 8,
+//            imageRes = R.drawable.restaurant_image_kebab_food_8,
+//            title = "Mughlai Darbar Shami Kebabs",
+//            price = "310",
+//            restaurantName = "Mughlai Darbar",
+//            rating = "4.4",
+//            deliveryTime = "25-30 mins",
+//            distance = "2.7 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹31",
+//            address = "Darbar Chowk"
+//        ),
+//        RestaurantItemFull(
+//            id = 9,
+//            imageRes = R.drawable.restaurant_image_kebab_food_9,
+//            title = "BBQ Nation Chicken Reshmi Kebab",
+//            price = "340",
+//            restaurantName = "BBQ Nation",
+//            rating = "4.6",
+//            deliveryTime = "30-35 mins",
+//            distance = "3.5 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹68",
+//            address = "BBQ Grill Road"
+//        ),
+//        RestaurantItemFull(
+//            id = 10,
+//            imageRes = R.drawable.restaurant_image_kebab_food_10,
+//            title = "Nawabi Kitchen Chicken Tikka Roll",
+//            price = "260",
+//            restaurantName = "Nawabi Kitchen",
+//            rating = "4.3",
+//            deliveryTime = "20-25 mins",
+//            distance = "1.9 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹26",
+//            address = "Nawabi Corner"
+//        ),
+//        RestaurantItemFull(
+//            id = 11,
+//            imageRes = R.drawable.restaurant_image_kebab_food_11,
+//            title = "Spice Hub Tandoori Chicken",
+//            price = "350",
+//            restaurantName = "Spice Hub",
+//            rating = "4.5",
+//            deliveryTime = "25-30 mins",
+//            distance = "2.8 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹53",
+//            address = "Spice Market Road"
+//        ),
+//        RestaurantItemFull(
+//            id = 12,
+//            imageRes = R.drawable.restaurant_image_kebab_food_12,
+//            title = "Awadhi Special Galouti Kebab Platter",
+//            price = "420",
+//            restaurantName = "Awadhi Special",
+//            rating = "4.8",
+//            deliveryTime = "30-35 mins",
+//            distance = "3.3 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹84",
+//            address = "Lucknowi Food Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 13,
+//            imageRes = R.drawable.restaurant_image_kebab_food_13,
+//            title = "Royal BBQ Mutton Sheekh Platter",
+//            price = "470",
+//            restaurantName = "Royal BBQ",
+//            rating = "4.7",
+//            deliveryTime = "35-40 mins",
+//            distance = "4.7 km",
+//            discount = "25% OFF",
+//            discountAmount = "up to ₹118",
+//            address = "BBQ Grill Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 14,
+//            imageRes = R.drawable.restaurant_image_kebab_food_14,
+//            title = "Kebab Mahal Malai Chicken",
+//            price = "310",
+//            restaurantName = "Kebab Mahal",
+//            rating = "4.6",
+//            deliveryTime = "25-30 mins",
+//            distance = "3.6 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹62",
+//            address = "Kebab Mahal Road"
+//        ),
+//        RestaurantItemFull(
+//            id = 15,
+//            imageRes = R.drawable.restaurant_image_kebab_food_15,
+//            title = "Lebanese House Shawarma Chicken",
+//            price = "260",
+//            restaurantName = "Lebanese House",
+//            rating = "4.4",
+//            deliveryTime = "20-25 mins",
+//            distance = "2.2 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹26",
+//            address = "Lebanese Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 16,
+//            imageRes = R.drawable.restaurant_image_kebab_food_16,
+//            title = "Kolkata Rolls Chicken Kebab Roll",
+//            price = "230",
+//            restaurantName = "Kolkata Rolls",
+//            rating = "4.3",
+//            deliveryTime = "18-22 mins",
+//            distance = "1.8 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹23",
+//            address = "Rolls Gali"
+//        ),
+//        RestaurantItemFull(
+//            id = 17,
+//            imageRes = R.drawable.restaurant_image_kebab_food_17,
+//            title = "Biryani Darbar Kebab & Biryani Combo",
+//            price = "380",
+//            restaurantName = "Biryani Darbar",
+//            rating = "4.6",
+//            deliveryTime = "30-35 mins",
+//            distance = "3.4 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹76",
+//            address = "Darbar Road"
+//        ),
+//        RestaurantItemFull(
+//            id = 18,
+//            imageRes = R.drawable.restaurant_image_kebab_food_18,
+//            title = "Zaitoon Grill Arabian Kebab Platter",
+//            price = "520",
+//            restaurantName = "Zaitoon Grill",
+//            rating = "4.8",
+//            deliveryTime = "40-45 mins",
+//            distance = "5.2 km",
+//            discount = "25% OFF",
+//            discountAmount = "up to ₹130",
+//            address = "Arabian Food Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 19,
+//            imageRes = R.drawable.restaurant_image_kebab_food_19,
+//            title = "Fusion Tadka Peri-Peri Chicken Tikka",
+//            price = "340",
+//            restaurantName = "Fusion Tadka",
+//            rating = "4.5",
+//            deliveryTime = "25-30 mins",
+//            distance = "2.9 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹34",
+//            address = "Fusion Lane"
+//        ),
+//        RestaurantItemFull(
+//            id = 20,
+//            imageRes = R.drawable.restaurant_image_kebab_food_20,
+//            title = "Muglai Treat Royal Kebabs Mix",
+//            price = "450",
+//            restaurantName = "Mughlai Treat",
+//            rating = "4.7",
+//            deliveryTime = "35-40 mins",
+//            distance = "4.1 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹90",
+//            address = "Royal Mughlai Street"
+//        )
+//    )
+//
+//    Column {
+//        kebabRestaurantItems.forEach { restaurantItem ->
+//            RestaurantItemListFull(
+//                restaurantItem = restaurantItem,
+//                onWishlistClick = { },
+//                onThreeDotClick = { },
+//                onItemClick = { }
+//            )
+//        }
+//    }
 }
 
 @Composable

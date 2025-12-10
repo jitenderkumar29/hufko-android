@@ -166,6 +166,15 @@ fun HomeScreen() {
             item {
                 CategoryTabsFood()
             }
+
+//                stickyHeader {
+//                    Surface(
+//                        color = MaterialTheme.customColors.lightAccent,
+//                        modifier = Modifier.fillMaxWidth()
+//                    ) {
+//                        CategoryTabsFood()
+//                    }
+//                }
         }
     }
 

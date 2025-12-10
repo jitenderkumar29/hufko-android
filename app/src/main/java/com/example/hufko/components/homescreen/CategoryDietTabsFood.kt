@@ -52,6 +52,7 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
 
 @Composable
 fun CategoryDietTabsFood(
+    selectedDietTabIndex: Int = 0,
     onCategorySelected: (DietCategoryPage) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
@@ -2564,308 +2565,306 @@ fun HealthySnacksPage() {
         )
 
     }
-//
-//
-//    Spacer(modifier = Modifier.height(15.dp))
-//    Text(
-//        text = "Restaurants delivering to you",
-//        style = MaterialTheme.typography.bodySmall.copy(
-//            fontSize = 20.sp,
-//            fontWeight = FontWeight.Bold,
-//            color =  MaterialTheme.customColors.black
-//        ),
-////            textAlign = TextAlign.Center,
-//        maxLines = 1,
-//        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//    )
-//    Spacer(modifier = Modifier.height(10.dp))
-//    Text(
-//        text = "Featured restaurants",
-//        style = MaterialTheme.typography.bodySmall.copy(
-//            fontSize = 18.sp,
-//            fontWeight = FontWeight.Bold,
-//            color = MaterialTheme.customColors.black
-//        ),
-////            textAlign = TextAlign.Center,
-//        maxLines = 1,
-//        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//    )
-//    Spacer(modifier = Modifier.height(5.dp))
-//    // Sample data based on the provided images
-//
-//    val kebabRestaurantItems = listOf(
-//        RestaurantItemFull(
-//            id = 1,
-//            imageRes = R.drawable.restaurant_image_kebab_food_1,
-//            title = "Kebab Junction Chicken Seekh Kebabs",
-//            price = "280",
-//            restaurantName = "Kebab Junction",
-//            rating = "4.7",
-//            deliveryTime = "20-25 mins",
-//            distance = "2.1 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹56",
-//            address = "Kebab Street Corner"
-//        ),
-//        RestaurantItemFull(
-//            id = 2,
-//            imageRes = R.drawable.restaurant_image_kebab_food_2,
-//            title = "Awadhi House Mutton Galouti Kebab",
-//            price = "350",
-//            restaurantName = "Awadhi House",
-//            rating = "4.8",
-//            deliveryTime = "25-30 mins",
-//            distance = "3.2 km",
-//            discount = "25% OFF",
-//            discountAmount = "up to ₹88",
-//            address = "Awadhi Gali, Lucknowi Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 3,
-//            imageRes = R.drawable.restaurant_image_kebab_food_3,
-//            title = "Tandoori Nation Chicken Malai Tikka",
-//            price = "320",
-//            restaurantName = "Tandoori Nation",
-//            rating = "4.6",
-//            deliveryTime = "30-35 mins",
-//            distance = "3.8 km",
-//            discount = "15% OFF",
-//            discountAmount = "up to ₹48",
-//            address = "Tandoori Lane"
-//        ),
-//        RestaurantItemFull(
-//            id = 4,
-//            imageRes = R.drawable.restaurant_image_kebab_food_4,
-//            title = "Green Spice Hariyali Chicken Tikka",
-//            price = "300",
-//            restaurantName = "Green Spice Grill",
-//            rating = "4.5",
-//            deliveryTime = "22-28 mins",
-//            distance = "2.5 km",
-//            discount = "10% OFF",
-//            discountAmount = "up to ₹30",
-//            address = "Green Avenue Road"
-//        ),
-//        RestaurantItemFull(
-//            id = 5,
-//            imageRes = R.drawable.restaurant_image_kebab_food_5,
-//            title = "Royal Mughlai Mutton Boti Kebab",
-//            price = "360",
-//            restaurantName = "Royal Mughlai",
-//            rating = "4.7",
-//            deliveryTime = "35-40 mins",
-//            distance = "4.0 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹72",
-//            address = "Mughlai Street, Old Delhi"
-//        ),
-//        RestaurantItemFull(
-//            id = 6,
-//            imageRes = R.drawable.restaurant_image_kebab_food_6,
-//            title = "Tikka Factory Chicken Tandoori Tikka",
-//            price = "330",
-//            restaurantName = "Tikka Factory",
-//            rating = "4.6",
-//            deliveryTime = "25-32 mins",
-//            distance = "3.0 km",
-//            discount = "15% OFF",
-//            discountAmount = "up to ₹55",
-//            address = "Factory Road"
-//        ),
-//        RestaurantItemFull(
-//            id = 7,
-//            imageRes = R.drawable.restaurant_image_kebab_food_7,
-//            title = "Sultan’s Grills Afghani Kebab",
-//            price = "390",
-//            restaurantName = "Sultan’s Grills",
-//            rating = "4.7",
-//            deliveryTime = "30-35 mins",
-//            distance = "3.9 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹78",
-//            address = "Afghan Grill Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 8,
-//            imageRes = R.drawable.restaurant_image_kebab_food_8,
-//            title = "Mughlai Darbar Shami Kebabs",
-//            price = "310",
-//            restaurantName = "Mughlai Darbar",
-//            rating = "4.4",
-//            deliveryTime = "25-30 mins",
-//            distance = "2.7 km",
-//            discount = "10% OFF",
-//            discountAmount = "up to ₹31",
-//            address = "Darbar Chowk"
-//        ),
-//        RestaurantItemFull(
-//            id = 9,
-//            imageRes = R.drawable.restaurant_image_kebab_food_9,
-//            title = "BBQ Nation Chicken Reshmi Kebab",
-//            price = "340",
-//            restaurantName = "BBQ Nation",
-//            rating = "4.6",
-//            deliveryTime = "30-35 mins",
-//            distance = "3.5 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹68",
-//            address = "BBQ Grill Road"
-//        ),
-//        RestaurantItemFull(
-//            id = 10,
-//            imageRes = R.drawable.restaurant_image_kebab_food_10,
-//            title = "Nawabi Kitchen Chicken Tikka Roll",
-//            price = "260",
-//            restaurantName = "Nawabi Kitchen",
-//            rating = "4.3",
-//            deliveryTime = "20-25 mins",
-//            distance = "1.9 km",
-//            discount = "10% OFF",
-//            discountAmount = "up to ₹26",
-//            address = "Nawabi Corner"
-//        ),
-//        RestaurantItemFull(
-//            id = 11,
-//            imageRes = R.drawable.restaurant_image_kebab_food_11,
-//            title = "Spice Hub Tandoori Chicken",
-//            price = "350",
-//            restaurantName = "Spice Hub",
-//            rating = "4.5",
-//            deliveryTime = "25-30 mins",
-//            distance = "2.8 km",
-//            discount = "15% OFF",
-//            discountAmount = "up to ₹53",
-//            address = "Spice Market Road"
-//        ),
-//        RestaurantItemFull(
-//            id = 12,
-//            imageRes = R.drawable.restaurant_image_kebab_food_12,
-//            title = "Awadhi Special Galouti Kebab Platter",
-//            price = "420",
-//            restaurantName = "Awadhi Special",
-//            rating = "4.8",
-//            deliveryTime = "30-35 mins",
-//            distance = "3.3 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹84",
-//            address = "Lucknowi Food Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 13,
-//            imageRes = R.drawable.restaurant_image_kebab_food_13,
-//            title = "Royal BBQ Mutton Sheekh Platter",
-//            price = "470",
-//            restaurantName = "Royal BBQ",
-//            rating = "4.7",
-//            deliveryTime = "35-40 mins",
-//            distance = "4.7 km",
-//            discount = "25% OFF",
-//            discountAmount = "up to ₹118",
-//            address = "BBQ Grill Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 14,
-//            imageRes = R.drawable.restaurant_image_kebab_food_14,
-//            title = "Kebab Mahal Malai Chicken",
-//            price = "310",
-//            restaurantName = "Kebab Mahal",
-//            rating = "4.6",
-//            deliveryTime = "25-30 mins",
-//            distance = "3.6 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹62",
-//            address = "Kebab Mahal Road"
-//        ),
-//        RestaurantItemFull(
-//            id = 15,
-//            imageRes = R.drawable.restaurant_image_kebab_food_15,
-//            title = "Lebanese House Shawarma Chicken",
-//            price = "260",
-//            restaurantName = "Lebanese House",
-//            rating = "4.4",
-//            deliveryTime = "20-25 mins",
-//            distance = "2.2 km",
-//            discount = "10% OFF",
-//            discountAmount = "up to ₹26",
-//            address = "Lebanese Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 16,
-//            imageRes = R.drawable.restaurant_image_kebab_food_16,
-//            title = "Kolkata Rolls Chicken Kebab Roll",
-//            price = "230",
-//            restaurantName = "Kolkata Rolls",
-//            rating = "4.3",
-//            deliveryTime = "18-22 mins",
-//            distance = "1.8 km",
-//            discount = "10% OFF",
-//            discountAmount = "up to ₹23",
-//            address = "Rolls Gali"
-//        ),
-//        RestaurantItemFull(
-//            id = 17,
-//            imageRes = R.drawable.restaurant_image_kebab_food_17,
-//            title = "Biryani Darbar Kebab & Biryani Combo",
-//            price = "380",
-//            restaurantName = "Biryani Darbar",
-//            rating = "4.6",
-//            deliveryTime = "30-35 mins",
-//            distance = "3.4 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹76",
-//            address = "Darbar Road"
-//        ),
-//        RestaurantItemFull(
-//            id = 18,
-//            imageRes = R.drawable.restaurant_image_kebab_food_18,
-//            title = "Zaitoon Grill Arabian Kebab Platter",
-//            price = "520",
-//            restaurantName = "Zaitoon Grill",
-//            rating = "4.8",
-//            deliveryTime = "40-45 mins",
-//            distance = "5.2 km",
-//            discount = "25% OFF",
-//            discountAmount = "up to ₹130",
-//            address = "Arabian Food Street"
-//        ),
-//        RestaurantItemFull(
-//            id = 19,
-//            imageRes = R.drawable.restaurant_image_kebab_food_19,
-//            title = "Fusion Tadka Peri-Peri Chicken Tikka",
-//            price = "340",
-//            restaurantName = "Fusion Tadka",
-//            rating = "4.5",
-//            deliveryTime = "25-30 mins",
-//            distance = "2.9 km",
-//            discount = "10% OFF",
-//            discountAmount = "up to ₹34",
-//            address = "Fusion Lane"
-//        ),
-//        RestaurantItemFull(
-//            id = 20,
-//            imageRes = R.drawable.restaurant_image_kebab_food_20,
-//            title = "Muglai Treat Royal Kebabs Mix",
-//            price = "450",
-//            restaurantName = "Mughlai Treat",
-//            rating = "4.7",
-//            deliveryTime = "35-40 mins",
-//            distance = "4.1 km",
-//            discount = "20% OFF",
-//            discountAmount = "up to ₹90",
-//            address = "Royal Mughlai Street"
-//        )
-//    )
-//
-//    Column {
-//        kebabRestaurantItems.forEach { restaurantItem ->
-//            RestaurantItemListFull(
-//                restaurantItem = restaurantItem,
-//                onWishlistClick = { },
-//                onThreeDotClick = { },
-//                onItemClick = { }
-//            )
-//        }
-//    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val healthySnackItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.snack_image_healthy_snack_1,
+            title = "Green Protein Salad Bowl",
+            price = "220",
+            restaurantName = "Health Hub",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Wellness Street"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.snack_image_healthy_snack_2,
+            title = "Quinoa & Avocado Power Bowl",
+            price = "280",
+            restaurantName = "Organic Kitchen",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "2.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹56",
+            address = "Organic Lane"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.snack_image_healthy_snack_3,
+            title = "Greek Yogurt Berry Parfait",
+            price = "180",
+            restaurantName = "Fit Fuel",
+            rating = "4.6",
+            deliveryTime = "12-18 mins",
+            distance = "1.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Fitness Corner"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.snack_image_healthy_snack_4,
+            title = "Protein Energy Balls (6 pcs)",
+            price = "160",
+            restaurantName = "Nutri Bites",
+            rating = "4.5",
+            deliveryTime = "15-20 mins",
+            distance = "2.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Health Avenue"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.snack_image_healthy_snack_5,
+            title = "Sweet Potato Fries Bowl",
+            price = "190",
+            restaurantName = "Clean Eats",
+            rating = "4.4",
+            deliveryTime = "18-22 mins",
+            distance = "2.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Clean Food Street"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.snack_image_healthy_snack_6,
+            title = "Hummus & Veggie Platter",
+            price = "240",
+            restaurantName = "Mediterranean Fresh",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "2.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹48",
+            address = "Mediterranean Road"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.snack_image_healthy_snack_7,
+            title = "Chia Seed Pudding Bowl",
+            price = "150",
+            restaurantName = "Superfood Station",
+            rating = "4.6",
+            deliveryTime = "10-15 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹23",
+            address = "Superfood Lane"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.snack_image_healthy_snack_8,
+            title = "Sprout Salad with Lemon Dressing",
+            price = "130",
+            restaurantName = "Salad Bar",
+            rating = "4.3",
+            deliveryTime = "12-16 mins",
+            distance = "1.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Salad Street"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.snack_image_healthy_snack_9,
+            title = "Almond Butter & Banana Toast",
+            price = "170",
+            restaurantName = "Toast House",
+            rating = "4.5",
+            deliveryTime = "14-19 mins",
+            distance = "1.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹26",
+            address = "Toast Corner"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.snack_image_healthy_snack_10,
+            title = "Protein Bar (Assorted Flavors)",
+            price = "120",
+            restaurantName = "Energy Boost",
+            rating = "4.4",
+            deliveryTime = "10-14 mins",
+            distance = "1.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Energy Street"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.snack_image_healthy_snack_11,
+            title = "Avocado Toast with Microgreens",
+            price = "210",
+            restaurantName = "Avocado Heaven",
+            rating = "4.7",
+            deliveryTime = "16-21 mins",
+            distance = "2.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹42",
+            address = "Avocado Road"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.snack_image_healthy_snack_12,
+            title = "Veggie Spring Rolls (Baked)",
+            price = "190",
+            restaurantName = "Light Bites",
+            rating = "4.5",
+            deliveryTime = "18-23 mins",
+            distance = "2.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹29",
+            address = "Light Food Street"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.snack_image_healthy_snack_13,
+            title = "Fruit & Nut Trail Mix Bowl",
+            price = "140",
+            restaurantName = "Trail Mix Co.",
+            rating = "4.6",
+            deliveryTime = "11-16 mins",
+            distance = "1.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Trail Mix Lane"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.snack_image_healthy_snack_14,
+            title = "Cottage Cheese Salad Bowl",
+            price = "230",
+            restaurantName = "Protein Palace",
+            rating = "4.7",
+            deliveryTime = "17-22 mins",
+            distance = "2.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹46",
+            address = "Protein Street"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.snack_image_healthy_snack_15,
+            title = "Detox Green Smoothie",
+            price = "160",
+            restaurantName = "Smoothie Bar",
+            rating = "4.5",
+            deliveryTime = "8-12 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Smoothie Corner"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.snack_image_healthy_snack_16,
+            title = "Roasted Chickpea Snack Pack",
+            price = "110",
+            restaurantName = "Crunchy Bites",
+            rating = "4.3",
+            deliveryTime = "13-17 mins",
+            distance = "1.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹11",
+            address = "Crunchy Street"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.snack_image_healthy_snack_17,
+            title = "Mushroom & Spinach Quesadilla",
+            price = "200",
+            restaurantName = "Veggie Delight",
+            rating = "4.6",
+            deliveryTime = "19-24 mins",
+            distance = "2.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹40",
+            address = "Veggie Lane"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.snack_image_healthy_snack_18,
+            title = "Oatmeal with Fresh Fruits",
+            price = "170",
+            restaurantName = "Breakfast Bowls",
+            rating = "4.4",
+            deliveryTime = "14-19 mins",
+            distance = "1.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹26",
+            address = "Breakfast Street"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.snack_image_healthy_snack_19,
+            title = "Zucchini Noodles with Pesto",
+            price = "250",
+            restaurantName = "Zoodle Zone",
+            rating = "4.7",
+            deliveryTime = "21-26 mins",
+            distance = "2.6 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹50",
+            address = "Zoodle Avenue"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.snack_image_healthy_snack_20,
+            title = "Edamame with Himalayan Salt",
+            price = "135",
+            restaurantName = "Soy Special",
+            rating = "4.5",
+            deliveryTime = "15-20 mins",
+            distance = "1.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Soybean Road"
+        )
+    )
+     Column {
+         healthySnackItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
@@ -2873,14 +2872,555 @@ fun LowCaloriePage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val lowCalorieFoodFilters = FilterConfig(
+            filters = listOf(
+
+                // 1. Filters dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. Low Calorie Categories (WITH LEFT ICON)
+                FilterChip(
+                    id = "low_cal_snacks",
+                    text = "Low Cal Snacks",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_low_calorie_food
+                ),
+                FilterChip(
+                    id = "light_meals",
+                    text = "Light Meals",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_light_meal
+                ),
+                FilterChip(
+                    id = "healthy_bars",
+                    text = "Healthy Bars",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_healthy_bar
+                ),
+
+                // 3. Diet Type (MIX of with-left-icon + text-only)
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegan
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sugar_free
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_fiber",
+                    text = "High Fiber",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. Health Benefits (TEXT ONLY)
+                FilterChip(
+                    id = "weight_loss",
+                    text = "Weight Loss",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "heart_healthy",
+                    text = "Heart Healthy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "energy_boosting",
+                    text = "Energy Boosting",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. Preparation Methods (TEXT ONLY)
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "baked",
+                    text = "Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_preservatives",
+                    text = "No Preservatives",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. Price Range (TEXT ONLY)
+                FilterChip(
+                    id = "under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_300",
+                    text = "Under ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+
+        FilterButtonFood(
+            filterConfig = lowCalorieFoodFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val lowCalorieFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_lowcal_mixed_fruits_diet,
+                title = "Fresh Mixed Fruit Bowl",
+                price = "150",
+                restaurantName = "Healthy Harvest",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹22",
+                address = "Green Valley, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_lowcal_greek_yogurt_diet,
+                title = "Low-Fat Greek Yogurt",
+                price = "120",
+                restaurantName = "Yogurt Lab",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "1.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹12",
+                address = "Fitness Hub, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_lowcal_salad_bowl_diet,
+                title = "Cucumber Detox Salad",
+                price = "180",
+                restaurantName = "Fresh Greens",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "2.3 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Wellness Street, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_lowcal_air_fried_chips_diet,
+                title = "Air-Fried Veggie Chips",
+                price = "130",
+                restaurantName = "Crunch Fit",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹13",
+                address = "Healthy Market, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_lowcal_chia_pudding_diet,
+                title = "Chia Seed Pudding",
+                price = "160",
+                restaurantName = "Superfood Café",
+                rating = "4.8",
+                deliveryTime = "22-28 mins",
+                distance = "2.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹19",
+                address = "Organic Square, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_lowcal_oats_bowl_diet,
+                title = "Honey Oats Bowl",
+                price = "140",
+                restaurantName = "Morning Fuel",
+                rating = "4.5",
+                deliveryTime = "16-22 mins",
+                distance = "1.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹21",
+                address = "Breakfast Lane, Delhi"
+            ),
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Low Calorie Options",
-            fontSize = 24.sp,
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+//            heading = "Popular Dishes",
+//            subtitle = "Scroll to see more delicious options",
+            foodItems = lowCalorieFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val lowCalorieFoodItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.lowcal_image_food_1,
+            title = "Fresh Fruit Detox Bowl",
+            price = "150",
+            restaurantName = "Nature Fresh",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Green Valley"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.lowcal_image_food_2,
+            title = "Low-Calorie Greek Yogurt Parfait",
+            price = "180",
+            restaurantName = "Yogurt Culture",
+            rating = "4.7",
+            deliveryTime = "14-20 mins",
+            distance = "1.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Healthy Lane"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.lowcal_image_food_3,
+            title = "Cucumber & Mint Salad",
+            price = "130",
+            restaurantName = "Fresh Greens",
+            rating = "4.5",
+            deliveryTime = "10-16 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Garden Street"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.lowcal_image_food_4,
+            title = "Veggie Air-Fried Chips",
+            price = "140",
+            restaurantName = "Crunch Fit",
+            rating = "4.6",
+            deliveryTime = "16-22 mins",
+            distance = "2.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Fitness Road"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.lowcal_image_food_5,
+            title = "Chia Seed Pudding (Low Sugar)",
+            price = "160",
+            restaurantName = "Superfood Station",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "1.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Wellness Street"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.lowcal_image_food_6,
+            title = "Honey Oats Breakfast Bowl",
+            price = "140",
+            restaurantName = "Morning Fresh",
+            rating = "4.4",
+            deliveryTime = "15-20 mins",
+            distance = "1.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Breakfast Avenue"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.lowcal_image_food_7,
+            title = "Sprouts & Veggie Mix Bowl",
+            price = "125",
+            restaurantName = "Nutri Mix",
+            rating = "4.6",
+            deliveryTime = "10-15 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Nutri Lane"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.lowcal_image_food_8,
+            title = "Baked Multi-Grain Sticks",
+            price = "150",
+            restaurantName = "BakeLite",
+            rating = "4.5",
+            deliveryTime = "16-22 mins",
+            distance = "2.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹23",
+            address = "Baker Street"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.lowcal_image_food_9,
+            title = "Detox Green Smoothie",
+            price = "170",
+            restaurantName = "Smoothie Bar",
+            rating = "4.7",
+            deliveryTime = "8-14 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Smoothie Corner"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.lowcal_image_food_10,
+            title = "Roasted Lemon Chickpeas",
+            price = "120",
+            restaurantName = "Crunchy Bites",
+            rating = "4.4",
+            deliveryTime = "12-16 mins",
+            distance = "1.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Crunch Street"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.lowcal_image_food_11,
+            title = "Fresh Veggie Spring Rolls (Baked)",
+            price = "160",
+            restaurantName = "Light Bites",
+            rating = "4.5",
+            deliveryTime = "18-23 mins",
+            distance = "2.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Light Street"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.lowcal_image_food_12,
+            title = "Avocado Toast (Low Cal)",
+            price = "190",
+            restaurantName = "Avocado Heaven",
+            rating = "4.7",
+            deliveryTime = "14-20 mins",
+            distance = "2.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹38",
+            address = "Avocado Road"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.lowcal_image_food_13,
+            title = "Berry Infused Detox Water",
+            price = "110",
+            restaurantName = "Hydrate+",
+            rating = "4.3",
+            deliveryTime = "8-12 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹11",
+            address = "Hydration Lane"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.lowcal_image_food_14,
+            title = "Zucchini Noodles with Herbs",
+            price = "200",
+            restaurantName = "Zoodle Zone",
+            rating = "4.6",
+            deliveryTime = "20-25 mins",
+            distance = "2.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹40",
+            address = "Zoodle Avenue"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.lowcal_image_food_15,
+            title = "Protein-Rich Lentil Soup",
+            price = "150",
+            restaurantName = "Soup Co.",
+            rating = "4.5",
+            deliveryTime = "15-22 mins",
+            distance = "1.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Soup Street"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.lowcal_image_food_16,
+            title = "Low Calorie Veggie Wrap",
+            price = "180",
+            restaurantName = "Wrap Station",
+            rating = "4.4",
+            deliveryTime = "14-20 mins",
+            distance = "2.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Wrap Lane"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.lowcal_image_food_17,
+            title = "Oatmeal with Berries",
+            price = "160",
+            restaurantName = "Healthy Bowls",
+            rating = "4.6",
+            deliveryTime = "12-18 mins",
+            distance = "1.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Bowl Street"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.lowcal_image_food_18,
+            title = "Quinoa Veggie Salad Bowl",
+            price = "210",
+            restaurantName = "Organic Kitchen",
+            rating = "4.7",
+            deliveryTime = "20-26 mins",
+            distance = "2.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹42",
+            address = "Organic Lane"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.lowcal_image_food_19,
+            title = "Steamed Broccoli with Herbs",
+            price = "130",
+            restaurantName = "Green Plates",
+            rating = "4.4",
+            deliveryTime = "10-15 mins",
+            distance = "1.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Healthy Corner"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.lowcal_image_food_20,
+            title = "Warm Lemon Detox Soup",
+            price = "140",
+            restaurantName = "Detox Kitchen",
+            rating = "4.5",
+            deliveryTime = "15-22 mins",
+            distance = "1.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Detox Avenue"
         )
+    )
+
+    Column {
+        lowCalorieFoodItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

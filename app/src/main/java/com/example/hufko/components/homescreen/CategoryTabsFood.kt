@@ -1,8 +1,13 @@
 package com.example.hufko.components.homescreen
 
+import androidx.benchmark.traceprocessor.Row
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,8 +15,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
@@ -244,7 +254,6 @@ fun CategoryTabsFood(
 }
 
 // Category Page Composables for all categories
-
 @Composable
 fun DietCategoryPage(
     onBanner1Click: () ->
@@ -337,10 +346,22 @@ fun DietCategoryPage(
 //            backgroundColor2 = Color(0xFFE5E5E3) // Dark Purple
         )
         Spacer(modifier = Modifier.height(10.dp))
+        var selectedDietTabIndex by remember { mutableIntStateOf(0) }
 
         CategoryDietTabsFood(
             onCategorySelected= {}
         )
+//        LazyColumn(
+//            modifier = Modifier.fillMaxSize()
+//        ) {
+//            stickyHeader {
+//                CategoryDietTabsFood(
+//                    onCategorySelected = {
+//                        println("Selected Diet tab")
+//                    }
+//                )
+//            }
+//        }
     }
 }
 @Composable

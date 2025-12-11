@@ -22,7 +22,9 @@ sealed class TabItem(
         title = "Home",
         icon = Icons.Filled.Home,
         imageResource = R.drawable.outline_home_24, // Add this image to your drawable resources
-        screen = { HomeScreen() }
+        screen = {
+            HomeScreen()
+        }
     )
 
     data object Explore : TabItem(

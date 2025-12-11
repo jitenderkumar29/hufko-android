@@ -3429,14 +3429,553 @@ fun VeganPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val veganFoodFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown (Trigger)
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. SPECIALIZED FILTERS (WITH ICONS) - Important dietary categories
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegan_diet
+                ),
+                FilterChip(
+                    id = "low_cal_snacks",
+                    text = "Low Cal Snacks",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_low_calorie_food_vegan
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sugar_free_vegan
+                ),
+
+                // 3. DIETARY RESTRICTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_fiber",
+                    text = "High Fiber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_preservatives",
+                    text = "No Preservatives",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. MEAL CATEGORIES (TEXT ONLY)
+                FilterChip(
+                    id = "light_meals",
+                    text = "Light Meals",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "healthy_bars",
+                    text = "Healthy Bars",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. HEALTH BENEFITS (TEXT ONLY)
+                FilterChip(
+                    id = "weight_loss",
+                    text = "Weight Loss",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "heart_healthy",
+                    text = "Heart Healthy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "energy_boosting",
+                    text = "Energy Boosting",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. PREPARATION METHODS (TEXT ONLY)
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "baked",
+                    text = "Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_300",
+                    text = "Under ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. Sort By Dropdown
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = veganFoodFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val veganFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_vegan_buddha_bowl,
+                title = "Rainbow Buddha Bowl",
+                price = "220",
+                restaurantName = "Plant Power Kitchen",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹44",
+                address = "Eco Street, Delhi",
+            ),
+
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_vegan_avocado_toast,
+                title = "Smoked Avocado Toast",
+                price = "180",
+                restaurantName = "Green Leaf Café",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Vegan Hub, Delhi",
+            ),
+
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_vegan_quinoa_salad,
+                title = "Lemon Herb Quinoa Salad",
+                price = "190",
+                restaurantName = "Earth Kitchen",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹19",
+                address = "Organic Square, Delhi",
+            ),
+
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_vegan_chickpea_wrap,
+                title = "Spiced Chickpea Wrap",
+                price = "160",
+                restaurantName = "Vegan Delight",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "up to ₹40",
+                address = "Health Lane, Delhi",
+            ),
+
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_vegan_berry_smoothie,
+                title = "Mixed Berry Protein Smoothie",
+                price = "150",
+                restaurantName = "Smoothie Bar",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "1.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹22",
+                address = "Fitness Corner, Delhi",
+            ),
+
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_vegan_mushroom_tacos,
+                title = "Portobello Mushroom Tacos",
+                price = "210",
+                restaurantName = "Mexican Greens",
+                rating = "4.9",
+                deliveryTime = "22-28 mins",
+                distance = "2.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹42",
+                address = "Global Cuisine Street, Delhi",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Vegan Options",
-            fontSize = 24.sp,
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = veganFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val veganFoodItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.vegan_image_food_1,
+            title = "Rainbow Buddha Bowl",
+            price = "220",
+            restaurantName = "Plant Power Kitchen",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "1.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹44",
+            address = "Vegan Street"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.vegan_image_food_2,
+            title = "Smoked Avocado Toast",
+            price = "180",
+            restaurantName = "Green Leaf Café",
+            rating = "4.7",
+            deliveryTime = "14-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Organic Corner"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.vegan_image_food_3,
+            title = "Lemon Herb Quinoa Salad",
+            price = "190",
+            restaurantName = "Earth Kitchen",
+            rating = "4.8",
+            deliveryTime = "16-22 mins",
+            distance = "1.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Eco Lane"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.vegan_image_food_4,
+            title = "Spiced Chickpea Wrap",
+            price = "160",
+            restaurantName = "Vegan Delight",
+            rating = "4.6",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹40",
+            address = "Plant Avenue"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.vegan_image_food_5,
+            title = "Mixed Berry Protein Smoothie",
+            price = "150",
+            restaurantName = "Smoothie Bar",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Berry Lane"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.vegan_image_food_6,
+            title = "Portobello Mushroom Tacos",
+            price = "210",
+            restaurantName = "Mexican Greens",
+            rating = "4.9",
+            deliveryTime = "20-26 mins",
+            distance = "2.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹42",
+            address = "Global Street"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.vegan_image_food_7,
+            title = "Avocado Chocolate Pudding",
+            price = "140",
+            restaurantName = "Sweet Vegan",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹28",
+            address = "Dessert Lane"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.vegan_image_food_8,
+            title = "Fresh Spring Rolls",
+            price = "170",
+            restaurantName = "Asian Greens",
+            rating = "4.7",
+            deliveryTime = "18-24 mins",
+            distance = "1.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Asian Avenue"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.vegan_image_food_9,
+            title = "Vegan Black Bean Burger",
+            price = "230",
+            restaurantName = "Burger Plant",
+            rating = "4.6",
+            deliveryTime = "22-28 mins",
+            distance = "2.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Burger Street"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.vegan_image_food_10,
+            title = "Coconut Curry Bowl",
+            price = "200",
+            restaurantName = "Curry Leaves",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "2.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Spice Lane"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.vegan_image_food_11,
+            title = "Hummus & Veggie Platter",
+            price = "185",
+            restaurantName = "Mediterranean Bites",
+            rating = "4.7",
+            deliveryTime = "16-22 mins",
+            distance = "1.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Mediterranean Road"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.vegan_image_food_12,
+            title = "Tofu Stir Fry Bowl",
+            price = "195",
+            restaurantName = "Tofu Express",
+            rating = "4.5",
+            deliveryTime = "18-23 mins",
+            distance = "1.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Stir Fry Lane"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.vegan_image_food_13,
+            title = "Vegan Lentil Soup",
+            price = "160",
+            restaurantName = "Soup & Co",
+            rating = "4.6",
+            deliveryTime = "15-20 mins",
+            distance = "1.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Soup Street"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.vegan_image_food_14,
+            title = "Sweet Potato Buddha Bowl",
+            price = "210",
+            restaurantName = "Bowl Co.",
+            rating = "4.8",
+            deliveryTime = "20-26 mins",
+            distance = "2.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹42",
+            address = "Bowl Avenue"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.vegan_image_food_15,
+            title = "Vegan Sushi Rolls",
+            price = "240",
+            restaurantName = "Green Sushi",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "2.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹36",
+            address = "Sushi Lane"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.vegan_image_food_16,
+            title = "Chickpea Salad Sandwich",
+            price = "175",
+            restaurantName = "Sandwich Plant",
+            rating = "4.6",
+            deliveryTime = "14-19 mins",
+            distance = "1.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Sandwich Street"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.vegan_image_food_17,
+            title = "Vegan Pasta Primavera",
+            price = "225",
+            restaurantName = "Pasta Greens",
+            rating = "4.7",
+            deliveryTime = "22-28 mins",
+            distance = "2.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Pasta Avenue"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.vegan_image_food_18,
+            title = "Vegan Chocolate Brownie",
+            price = "130",
+            restaurantName = "Guilt-Free Sweets",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹26",
+            address = "Dessert Corner"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.vegan_image_food_19,
+            title = "Grilled Veggie Skewers",
+            price = "190",
+            restaurantName = "Grill Garden",
+            rating = "4.6",
+            deliveryTime = "18-24 mins",
+            distance = "2.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Grill Street"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.vegan_image_food_20,
+            title = "Vegan Protein Power Bowl",
+            price = "235",
+            restaurantName = "Protein Plant",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "2.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹35",
+            address = "Protein Lane"
         )
+    )
+    Column {
+        veganFoodItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
@@ -3445,15 +3984,563 @@ fun ProteinRichPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val proteinRichFoodFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY PROTEIN FILTERS (WITH ICONS)
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_protein_rich
+                ),
+                FilterChip(
+                    id = "vegan_protein",
+                    text = "Vegan Protein",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegan_protein
+                ),
+                FilterChip(
+                    id = "low_carb",
+                    text = "Low Carb",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_low_carb
+                ),
+
+                // 3. PROTEIN SOURCES (TEXT ONLY)
+                FilterChip(
+                    id = "whey_protein",
+                    text = "Whey Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "plant_protein",
+                    text = "Plant Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_based",
+                    text = "Egg Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. MEAL TYPES (TEXT ONLY)
+                FilterChip(
+                    id = "post_workout",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "muscle_building",
+                    text = "Muscle Building",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "meal_replacement",
+                    text = "Meal Replacement",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. PROTEIN CONTENT (TEXT ONLY)
+                FilterChip(
+                    id = "20g_plus",
+                    text = "20g+ Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "30g_plus",
+                    text = "30g+ Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "complete_protein",
+                    text = "Complete Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DIETARY (TEXT ONLY)
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_300",
+                    text = "Under ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_400",
+                    text = "Under ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. Sort By Dropdown
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = proteinRichFoodFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val proteinRichFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_protein_chicken_grill,
+                title = "Grilled Chicken Breast Bowl",
+                price = "280",
+                restaurantName = "Protein Power",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹42",
+                address = "Fitness Street, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_protein_egg_whites,
+                title = "Egg White Omelette Platter",
+                price = "190",
+                restaurantName = "Eggcelent Protein",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹19",
+                address = "Protein Lane, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_protein_whey_shake,
+                title = "Double Chocolate Whey Shake",
+                price = "220",
+                restaurantName = "Muscle Fuel",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹44",
+                address = "Gym Road, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_protein_tofu_bowl,
+                title = "Tofu & Quinoa Power Bowl",
+                price = "240",
+                restaurantName = "Plant Protein Co.",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹36",
+                address = "Vegan Protein Hub, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_protein_fish_grill,
+                title = "Grilled Salmon with Veggies",
+                price = "320",
+                restaurantName = "Omega Kitchen",
+                rating = "4.8",
+                deliveryTime = "22-28 mins",
+                distance = "2.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹32",
+                address = "Seafood Avenue, Delhi"
+            ),
+
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_protein_paneer_tikka,
+                title = "Protein Paneer Tikka Bowl",
+                price = "260",
+                restaurantName = "Desi Protein",
+                rating = "4.7",
+                deliveryTime = "16-21 mins",
+                distance = "1.6 km",
+                discount = "12%",
+                discountAmount = "up to ₹31",
+                address = "Indian Protein Corner, Delhi"
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Protein Rich Foods",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = proteinRichFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
         )
     }
+
+//    Spacer(modifier = Modifier.height(15.dp))
+//    Text(
+//        text = "Restaurants delivering to you",
+//        style = MaterialTheme.typography.bodySmall.copy(
+//            fontSize = 20.sp,
+//            fontWeight = FontWeight.Bold,
+//            color =  MaterialTheme.customColors.black
+//        ),
+////            textAlign = TextAlign.Center,
+//        maxLines = 1,
+//        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//    )
+//    Spacer(modifier = Modifier.height(10.dp))
+//    Text(
+//        text = "Featured restaurants",
+//        style = MaterialTheme.typography.bodySmall.copy(
+//            fontSize = 18.sp,
+//            fontWeight = FontWeight.Bold,
+//            color = MaterialTheme.customColors.black
+//        ),
+////            textAlign = TextAlign.Center,
+//        maxLines = 1,
+//        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//    )
+//    Spacer(modifier = Modifier.height(5.dp))
+//
+//    // Sample data based on the provided images
+//    val veganFoodItems = listOf(
+//        RestaurantItemFull(
+//            id = 1,
+//            imageRes = R.drawable.vegan_image_food_1,
+//            title = "Rainbow Buddha Bowl",
+//            price = "220",
+//            restaurantName = "Plant Power Kitchen",
+//            rating = "4.9",
+//            deliveryTime = "18-24 mins",
+//            distance = "1.5 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹44",
+//            address = "Vegan Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 2,
+//            imageRes = R.drawable.vegan_image_food_2,
+//            title = "Smoked Avocado Toast",
+//            price = "180",
+//            restaurantName = "Green Leaf Café",
+//            rating = "4.7",
+//            deliveryTime = "14-20 mins",
+//            distance = "1.2 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹27",
+//            address = "Organic Corner"
+//        ),
+//        RestaurantItemFull(
+//            id = 3,
+//            imageRes = R.drawable.vegan_image_food_3,
+//            title = "Lemon Herb Quinoa Salad",
+//            price = "190",
+//            restaurantName = "Earth Kitchen",
+//            rating = "4.8",
+//            deliveryTime = "16-22 mins",
+//            distance = "1.8 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹19",
+//            address = "Eco Lane"
+//        ),
+//        RestaurantItemFull(
+//            id = 4,
+//            imageRes = R.drawable.vegan_image_food_4,
+//            title = "Spiced Chickpea Wrap",
+//            price = "160",
+//            restaurantName = "Vegan Delight",
+//            rating = "4.6",
+//            deliveryTime = "12-18 mins",
+//            distance = "0.9 km",
+//            discount = "25% OFF",
+//            discountAmount = "up to ₹40",
+//            address = "Plant Avenue"
+//        ),
+//        RestaurantItemFull(
+//            id = 5,
+//            imageRes = R.drawable.vegan_image_food_5,
+//            title = "Mixed Berry Protein Smoothie",
+//            price = "150",
+//            restaurantName = "Smoothie Bar",
+//            rating = "4.7",
+//            deliveryTime = "10-15 mins",
+//            distance = "1.0 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹22",
+//            address = "Berry Lane"
+//        ),
+//        RestaurantItemFull(
+//            id = 6,
+//            imageRes = R.drawable.vegan_image_food_6,
+//            title = "Portobello Mushroom Tacos",
+//            price = "210",
+//            restaurantName = "Mexican Greens",
+//            rating = "4.9",
+//            deliveryTime = "20-26 mins",
+//            distance = "2.2 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹42",
+//            address = "Global Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 7,
+//            imageRes = R.drawable.vegan_image_food_7,
+//            title = "Avocado Chocolate Pudding",
+//            price = "140",
+//            restaurantName = "Sweet Vegan",
+//            rating = "4.8",
+//            deliveryTime = "15-20 mins",
+//            distance = "1.3 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹28",
+//            address = "Dessert Lane"
+//        ),
+//        RestaurantItemFull(
+//            id = 8,
+//            imageRes = R.drawable.vegan_image_food_8,
+//            title = "Fresh Spring Rolls",
+//            price = "170",
+//            restaurantName = "Asian Greens",
+//            rating = "4.7",
+//            deliveryTime = "18-24 mins",
+//            distance = "1.7 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹25",
+//            address = "Asian Avenue"
+//        ),
+//        RestaurantItemFull(
+//            id = 9,
+//            imageRes = R.drawable.vegan_image_food_9,
+//            title = "Vegan Black Bean Burger",
+//            price = "230",
+//            restaurantName = "Burger Plant",
+//            rating = "4.6",
+//            deliveryTime = "22-28 mins",
+//            distance = "2.5 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹34",
+//            address = "Burger Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 10,
+//            imageRes = R.drawable.vegan_image_food_10,
+//            title = "Coconut Curry Bowl",
+//            price = "200",
+//            restaurantName = "Curry Leaves",
+//            rating = "4.8",
+//            deliveryTime = "20-25 mins",
+//            distance = "2.0 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹20",
+//            address = "Spice Lane"
+//        ),
+//        RestaurantItemFull(
+//            id = 11,
+//            imageRes = R.drawable.vegan_image_food_11,
+//            title = "Hummus & Veggie Platter",
+//            price = "185",
+//            restaurantName = "Mediterranean Bites",
+//            rating = "4.7",
+//            deliveryTime = "16-22 mins",
+//            distance = "1.6 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹28",
+//            address = "Mediterranean Road"
+//        ),
+//        RestaurantItemFull(
+//            id = 12,
+//            imageRes = R.drawable.vegan_image_food_12,
+//            title = "Tofu Stir Fry Bowl",
+//            price = "195",
+//            restaurantName = "Tofu Express",
+//            rating = "4.5",
+//            deliveryTime = "18-23 mins",
+//            distance = "1.9 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹19",
+//            address = "Stir Fry Lane"
+//        ),
+//        RestaurantItemFull(
+//            id = 13,
+//            imageRes = R.drawable.vegan_image_food_13,
+//            title = "Vegan Lentil Soup",
+//            price = "160",
+//            restaurantName = "Soup & Co",
+//            rating = "4.6",
+//            deliveryTime = "15-20 mins",
+//            distance = "1.4 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹16",
+//            address = "Soup Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 14,
+//            imageRes = R.drawable.vegan_image_food_14,
+//            title = "Sweet Potato Buddha Bowl",
+//            price = "210",
+//            restaurantName = "Bowl Co.",
+//            rating = "4.8",
+//            deliveryTime = "20-26 mins",
+//            distance = "2.3 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹42",
+//            address = "Bowl Avenue"
+//        ),
+//        RestaurantItemFull(
+//            id = 15,
+//            imageRes = R.drawable.vegan_image_food_15,
+//            title = "Vegan Sushi Rolls",
+//            price = "240",
+//            restaurantName = "Green Sushi",
+//            rating = "4.9",
+//            deliveryTime = "25-30 mins",
+//            distance = "2.8 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹36",
+//            address = "Sushi Lane"
+//        ),
+//        RestaurantItemFull(
+//            id = 16,
+//            imageRes = R.drawable.vegan_image_food_16,
+//            title = "Chickpea Salad Sandwich",
+//            price = "175",
+//            restaurantName = "Sandwich Plant",
+//            rating = "4.6",
+//            deliveryTime = "14-19 mins",
+//            distance = "1.3 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹17",
+//            address = "Sandwich Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 17,
+//            imageRes = R.drawable.vegan_image_food_17,
+//            title = "Vegan Pasta Primavera",
+//            price = "225",
+//            restaurantName = "Pasta Greens",
+//            rating = "4.7",
+//            deliveryTime = "22-28 mins",
+//            distance = "2.4 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹34",
+//            address = "Pasta Avenue"
+//        ),
+//        RestaurantItemFull(
+//            id = 18,
+//            imageRes = R.drawable.vegan_image_food_18,
+//            title = "Vegan Chocolate Brownie",
+//            price = "130",
+//            restaurantName = "Guilt-Free Sweets",
+//            rating = "4.8",
+//            deliveryTime = "12-18 mins",
+//            distance = "1.1 km",
+//            discount = "20% OFF",
+//            discountAmount = "up to ₹26",
+//            address = "Dessert Corner"
+//        ),
+//        RestaurantItemFull(
+//            id = 19,
+//            imageRes = R.drawable.vegan_image_food_19,
+//            title = "Grilled Veggie Skewers",
+//            price = "190",
+//            restaurantName = "Grill Garden",
+//            rating = "4.6",
+//            deliveryTime = "18-24 mins",
+//            distance = "2.0 km",
+//            discount = "10% OFF",
+//            discountAmount = "up to ₹19",
+//            address = "Grill Street"
+//        ),
+//        RestaurantItemFull(
+//            id = 20,
+//            imageRes = R.drawable.vegan_image_food_20,
+//            title = "Vegan Protein Power Bowl",
+//            price = "235",
+//            restaurantName = "Protein Plant",
+//            rating = "4.9",
+//            deliveryTime = "20-25 mins",
+//            distance = "2.1 km",
+//            discount = "15% OFF",
+//            discountAmount = "up to ₹35",
+//            address = "Protein Lane"
+//        )
+//    )
+//    Column {
+//        veganFoodItems.forEach { restaurantItem ->
+//            RestaurantItemListFull(
+//                restaurantItem = restaurantItem,
+//                onWishlistClick = { },
+//                onThreeDotClick = { },
+//                onItemClick = { }
+//            )
+//        }
+//    }
 }
 @Composable
 fun SeeAllPage() {

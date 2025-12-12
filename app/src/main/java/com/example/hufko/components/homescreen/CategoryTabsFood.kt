@@ -8896,8 +8896,6 @@ fun DhoklaCategoryPage() {
         FoodItemsListWithHeading(
             heading = null,
             subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
             foodItems = completeDhoklaItems,
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
@@ -8912,6 +8910,576 @@ fun DhoklaCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleDhoklaItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.dhokla_khaman_diet, // You'll need to add this image
+                title = "Khaman Dhokla",
+                price = "₹80",
+                restaurantName = "Gujarati Rasoi",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Gujarat Bhavan, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.dhokla_khatta_diet, // You'll need to add this image
+                title = "Khatta Dhokla",
+                price = "₹75",
+                restaurantName = "Spice of Gujarat",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Vastrapur, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.dhokla_rasawala_diet, // You'll need to add this image
+                title = "Rasawala Dhokla",
+                price = "₹95",
+                restaurantName = "Gujarati Delights",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹40",
+                address = "Maninagar, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.dhokla_sandwich_diet, // You'll need to add this image
+                title = "Sandwich Dhokla",
+                price = "₹110",
+                restaurantName = "Modern Gujarati",
+                rating = "4.4",
+                deliveryTime = "18-22 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹15",
+                address = "Prahlad Nagar, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.dhokla_steamed_diet, // You'll need to add this image
+                title = "Steamed White Dhokla",
+                price = "₹65",
+                restaurantName = "Healthy Snacks",
+                rating = "4.3",
+                deliveryTime = "12-16 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹20",
+                address = "Navrangpura, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.dhokla_buttermilk, // You'll need to add this image
+                title = "Buttermilk Dhokla",
+                price = "₹85",
+                restaurantName = "Traditional Taste",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Satellite, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.dhokla_spicy, // You'll need to add this image
+                title = "Spicy Masala Dhokla",
+                price = "₹90",
+                restaurantName = "Spicy Corner",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Bodakdev, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.dhokla_cheese, // You'll need to add this image
+                title = "Cheese Dhokla",
+                price = "₹120",
+                restaurantName = "Fusion Foods",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "3.0 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹50",
+                address = "SG Highway, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.dhokla_jain_diet, // You'll need to add this image
+                title = "Jain Dhokla (No Onion Garlic)",
+                price = "₹85",
+                restaurantName = "Jain Special",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Thaltej, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.dhokla_paneer, // You'll need to add this image
+                title = "Paneer Dhokla",
+                price = "₹130",
+                restaurantName = "Royal Gujarati",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "3.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹40",
+                address = "Vijay Cross Roads, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.dhokla_family_pack, // You'll need to add this image
+                title = "Dhokla Family Pack",
+                price = "₹180",
+                restaurantName = "Family Special",
+                rating = "4.6",
+                deliveryTime = "28-33 mins",
+                distance = "2.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "Naranpura, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.dhokla_instant, // You'll need to add this image
+                title = "Instant Mix Dhokla",
+                price = "₹70",
+                restaurantName = "Quick Bites",
+                rating = "4.2",
+                deliveryTime = "10-15 mins",
+                distance = "0.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹15",
+                address = "Memnagar, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.dhokla_green, // You'll need to add this image
+                title = "Green Chutney Dhokla",
+                price = "₹95",
+                restaurantName = "Green Kitchen",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹25",
+                address = "Gurukul, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.dhokla_sev_tameta, // You'll need to add this image
+                title = "Sev Tameta Dhokla",
+                price = "₹100",
+                restaurantName = "Sev Special",
+                rating = "4.4",
+                deliveryTime = "22-28 mins",
+                distance = "2.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹35",
+                address = "Sola, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.dhokla_crispy, // You'll need to add this image
+                title = "Crispy Fried Dhokla",
+                price = "₹110",
+                restaurantName = "Crispy Corner",
+                rating = "4.3",
+                deliveryTime = "25-30 mins",
+                distance = "3.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "Ranip, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.dhokla_health_mix, // You'll need to add this image
+                title = "Health Mix Dhokla",
+                price = "₹85",
+                restaurantName = "Health Hub",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.9 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹30",
+                address = "Shilaj, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.dhokla_combo_meal, // You'll need to add this image
+                title = "Dhokla Combo Meal",
+                price = "₹150",
+                restaurantName = "Combo House",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹35",
+                address = "Iscon Circle, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.dhokla_tamarind, // You'll need to add this image
+                title = "Tamarind Dhokla",
+                price = "₹90",
+                restaurantName = "Tamarind Twist",
+                rating = "4.5",
+                deliveryTime = "18-23 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Vasna, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.dhokla_sweet, // You'll need to add this image
+                title = "Sweet Dhokla",
+                price = "₹75",
+                restaurantName = "Sweet Spot",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹15",
+                address = "Navjeevan Press, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.dhokla_special_thali, // You'll need to add this image
+                title = "Dhokla Special Thali",
+                price = "₹200",
+                restaurantName = "Thali House",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "3.8 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹90",
+                address = "Science City, Ahmedabad"
+            )
+        )
+         Column {
+             sampleDhoklaItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun DosaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Dosa",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
+
+@Composable
+fun DholdaCategoryPage() {
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//    ) {
+//        Spacer(modifier = Modifier.height(15.dp))
+//
+//        // Filter Button
+//        val dhoklaFilters = FilterConfig(
+//            filters = listOf(
+//                // Main filter dropdown
+//                FilterChip(
+//                    id = "filters",
+//                    text = "Filters",
+//                    type = FilterType.FILTER_DROPDOWN,
+//                    icon = R.drawable.ic_filter,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//
+//                // Dhokla types WITH left icons (visual categories)
+//                FilterChip(
+//                    id = "khaman",
+//                    text = "Khaman Dhokla",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_khaman_dhokla
+//                ),
+//                FilterChip(
+//                    id = "khatta",
+//                    text = "Khatta Dhokla",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_khatta_dhokla
+//                ),
+//                FilterChip(
+//                    id = "rasawala",
+//                    text = "Rasawala Dhokla",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_rasawala_dhokla
+//                ),
+//                FilterChip(
+//                    id = "sandwich",
+//                    text = "Sandwich Dhokla",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_sandwich_dhokla
+//                ),
+//
+//                // Cooking style WITH left icon
+//                FilterChip(
+//                    id = "steamed",
+//                    text = "Steamed",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_steamed_dhokla
+//                ),
+//
+//                // Dietary preferences WITH left icons
+//                FilterChip(
+//                    id = "veg",
+//                    text = "Vegetarian",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_vegetarian_dhokla
+//                ),
+//                FilterChip(
+//                    id = "jain",
+//                    text = "Jain",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_jain_food_dhokla
+//                ),
+//
+//                // Text-only filters (preparation/serving attributes)
+//                FilterChip(
+//                    id = "instant",
+//                    text = "Instant",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "fermented",
+//                    text = "Fermented",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "spicy",
+//                    text = "Spicy",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "sweet_sour",
+//                    text = "Sweet-Sour",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // Accompaniments as text-only
+//                FilterChip(
+//                    id = "with_chutney",
+//                    text = "With Chutney",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_sev",
+//                    text = "With Sev",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // Time/price text-only filters
+//                FilterChip(
+//                    id = "ready_in_20",
+//                    text = "Ready in 20 mins",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "under_150",
+//                    text = "Under ₹150",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "serves_4",
+//                    text = "Serves 4",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // Sort dropdown
+//                FilterChip(
+//                    id = "sort",
+//                    text = "Sort",
+//                    type = FilterType.SORT_DROPDOWN,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//            ),
+//            rows = 2  // Maintains minimal look
+//        )
+//        FilterButtonFood(
+//            filterConfig = dhoklaFilters,
+//            onFilterClick = { filter ->
+//                println("Filter clicked: ${filter.text}")
+//                // Handle filter logic
+//            },
+//            onSortClick = {
+//                println("Sort clicked")
+//                // Handle sort logic
+//            }
+//        )
+//
+//        val completeDhoklaItems = listOf(
+//            FoodItemDoubleF(
+//                id = 1,
+//                imageRes = R.drawable.dhokla_khaman,
+//                title = "Khaman Dhokla with Green Chutney",
+//                price = "120",
+//                restaurantName = "Gujarati Rasoi",
+//                rating = "4.7",
+//                deliveryTime = "12-15 mins",
+//                distance = "0.9 km",
+//                discount = "20%",
+//                discountAmount = "up to ₹25",
+//                address = "Rajouri Garden, Delhi"
+//            ),
+//            FoodItemDoubleF(
+//                id = 2,
+//                imageRes = R.drawable.dhokla_khatta,
+//                title = "Khatta Dhokla with Tamarind Chutney",
+//                price = "110",
+//                restaurantName = "Spice Street",
+//                rating = "4.5",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.3 km",
+//                discount = "15%",
+//                discountAmount = "up to ₹17",
+//                address = "Janakpuri, Delhi"
+//            ),
+//            FoodItemDoubleF(
+//                id = 3,
+//                imageRes = R.drawable.dhokla_rasawala,
+//                title = "Rasawala Dhokla in Tangy Curry",
+//                price = "150",
+//                restaurantName = "Curry Point",
+//                rating = "4.6",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.0 km",
+//                discount = "25%",
+//                discountAmount = "up to ₹38",
+//                address = "Pitampura, Delhi"
+//            ),
+//            FoodItemDoubleF(
+//                id = 4,
+//                imageRes = R.drawable.dhokla_sandwich,
+//                title = "Sandwich Dhokla with Chutney Layers",
+//                price = "130",
+//                restaurantName = "Innovative Bites",
+//                rating = "4.4",
+//                deliveryTime = "10-15 mins",
+//                distance = "1.1 km",
+//                discount = "10%",
+//                discountAmount = "up to ₹13",
+//                address = "Rohini, Delhi"
+//            ),
+//            FoodItemDoubleF(
+//                id = 5,
+//                imageRes = R.drawable.dhokla_steamed,
+//                title = "Steamed Instant Dhokla with Sev",
+//                price = "100",
+//                restaurantName = "Quick Snacks",
+//                rating = "4.3",
+//                deliveryTime = "8-12 mins",
+//                distance = "0.7 km",
+//                discount = "30%",
+//                discountAmount = "up to ₹30",
+//                address = "Vikas Puri, Delhi"
+//            ),
+//            FoodItemDoubleF(
+//                id = 6,
+//                imageRes = R.drawable.dhokla_jain,
+//                title = "Jain Style Dhokla (No Onion Garlic)",
+//                price = "140",
+//                restaurantName = "Pure Veg Corner",
+//                rating = "4.8",
+//                deliveryTime = "18-22 mins",
+//                distance = "1.8 km",
+//                discount = "20%",
+//                discountAmount = "up to ₹28",
+//                address = "Shalimar Bagh, Delhi"
+//            )
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//        Text(
+//            text = "Recommended for you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//        FoodItemsListWithHeading(
+//            heading = null,
+//            subtitle = null,
+//            foodItems = completeDhoklaItems,
+//            onItemClick = { foodItem ->
+//                println("Food item clicked: ${foodItem.title}")
+//            },
+//            modifier = Modifier.fillMaxWidth(),
+//            backgroundColor = Color.White,
+//            cardWidth = 150.dp,
+//            cardHeight = 170.dp,
+//            horizontalSpacing = 8.dp,
+//            horizontalPadding = 12.dp,
+//            verticalPadding = 0.dp,
+//            headingBottomPadding = 0.dp
+//        )
+//
 //        Spacer(modifier = Modifier.height(15.dp))
 //        Text(
 //            text = "Restaurants delivering to you",
@@ -8939,270 +9507,270 @@ fun DhoklaCategoryPage() {
 //        Spacer(modifier = Modifier.height(5.dp))
 //
 //        // Sample data based on the provided images
-//        val sampleDessertItems = listOf(
+//        val sampleDhoklaItems = listOf(
 //            RestaurantItemFull(
 //                id = 1,
-//                imageRes = R.drawable.dessert_chocolate_lava_cake,
-//                title = "Chocolate Lava Cake",
-//                price = "180",
-//                restaurantName = "Sweet Heaven",
+//                imageRes = R.drawable.dhokla_khaman_diet, // You'll need to add this image
+//                title = "Khaman Dhokla",
+//                price = "₹80",
+//                restaurantName = "Gujarati Rasoi",
 //                rating = "4.6",
 //                deliveryTime = "15-20 mins",
-//                distance = "0.8 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹30",
-//                address = "Bengaluru"
+//                distance = "1.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Gujarat Bhavan, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 2,
-//                imageRes = R.drawable.dessert_new_york_cheesecake,
-//                title = "New York Cheesecake",
-//                price = "220",
-//                restaurantName = "Cheese Delights",
-//                rating = "4.7",
+//                imageRes = R.drawable.dhokla_khatta_diet, // You'll need to add this image
+//                title = "Khatta Dhokla",
+//                price = "₹75",
+//                restaurantName = "Spice of Gujarat",
+//                rating = "4.5",
 //                deliveryTime = "20-25 mins",
-//                distance = "1.2 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Chennai"
+//                distance = "1.8 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "Vastrapur, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 3,
-//                imageRes = R.drawable.dessert_gulab_jamun,
-//                title = "Gulab Jamun (2 pieces)",
-//                price = "90",
-//                restaurantName = "Indian Mithai House",
-//                rating = "4.5",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.9 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹20",
-//                address = "Delhi"
+//                imageRes = R.drawable.dhokla_rasawala_diet, // You'll need to add this image
+//                title = "Rasawala Dhokla",
+//                price = "₹95",
+//                restaurantName = "Gujarati Delights",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.5 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Maninagar, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 4,
-//                imageRes = R.drawable.dessert_tiramisu,
-//                title = "Classic Tiramisu",
-//                price = "250",
-//                restaurantName = "Italian Bistro",
-//                rating = "4.8",
-//                deliveryTime = "25-30 mins",
+//                imageRes = R.drawable.dhokla_sandwich_diet, // You'll need to add this image
+//                title = "Sandwich Dhokla",
+//                price = "₹110",
+//                restaurantName = "Modern Gujarati",
+//                rating = "4.4",
+//                deliveryTime = "18-22 mins",
 //                distance = "1.5 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Mumbai"
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹15",
+//                address = "Prahlad Nagar, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 5,
-//                imageRes = R.drawable.dessert_ice_cream_sundae,
-//                title = "Chocolate Sundae",
-//                price = "150",
-//                restaurantName = "Ice Cream World",
-//                rating = "4.4",
-//                deliveryTime = "12-18 mins",
-//                distance = "0.7 km",
+//                imageRes = R.drawable.dhokla_steamed_diet, // You'll need to add this image
+//                title = "Steamed White Dhokla",
+//                price = "₹65",
+//                restaurantName = "Healthy Snacks",
+//                rating = "4.3",
+//                deliveryTime = "12-16 mins",
+//                distance = "0.9 km",
 //                discount = "25% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Bengaluru"
+//                discountAmount = "up to ₹20",
+//                address = "Navrangpura, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 6,
-//                imageRes = R.drawable.dessert_rasmalai,
-//                title = "Fresh Rasmalai",
-//                price = "120",
-//                restaurantName = "Royal Sweets",
-//                rating = "4.7",
+//                imageRes = R.drawable.dhokla_buttermilk, // You'll need to add this image
+//                title = "Buttermilk Dhokla",
+//                price = "₹85",
+//                restaurantName = "Traditional Taste",
+//                rating = "4.6",
 //                deliveryTime = "20-25 mins",
-//                distance = "1.1 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹15",
-//                address = "Kolkata"
+//                distance = "2.1 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Satellite, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 7,
-//                imageRes = R.drawable.dessert_brownie,
-//                title = "Walnut Brownie with Ice Cream",
-//                price = "190",
-//                restaurantName = "Brownie Factory",
+//                imageRes = R.drawable.dhokla_spicy, // You'll need to add this image
+//                title = "Spicy Masala Dhokla",
+//                price = "₹90",
+//                restaurantName = "Spicy Corner",
 //                rating = "4.5",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.8 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Bengaluru"
+//                deliveryTime = "22-27 mins",
+//                distance = "2.8 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "Bodakdev, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 8,
-//                imageRes = R.drawable.dessert_creme_brulee,
-//                title = "Vanilla Crème Brûlée",
-//                price = "280",
-//                restaurantName = "French Patisserie",
-//                rating = "4.9",
+//                imageRes = R.drawable.dhokla_cheese, // You'll need to add this image
+//                title = "Cheese Dhokla",
+//                price = "₹120",
+//                restaurantName = "Fusion Foods",
+//                rating = "4.8",
 //                deliveryTime = "25-30 mins",
-//                distance = "1.8 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹45",
-//                address = "Pune"
+//                distance = "3.0 km",
+//                discount = "35% OFF",
+//                discountAmount = "up to ₹50",
+//                address = "SG Highway, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 9,
-//                imageRes = R.drawable.dessert_jalebi,
-//                title = "Hot Jalebi with Rabri",
-//                price = "110",
-//                restaurantName = "Street Food Hub",
-//                rating = "4.3",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.9 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹12",
-//                address = "Jaipur"
+//                imageRes = R.drawable.dhokla_jain_diet, // You'll need to add this image
+//                title = "Jain Dhokla (No Onion Garlic)",
+//                price = "₹85",
+//                restaurantName = "Jain Special",
+//                rating = "4.7",
+//                deliveryTime = "18-23 mins",
+//                distance = "1.6 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Thaltej, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 10,
-//                imageRes = R.drawable.dessert_mousse,
-//                title = "Dark Chocolate Mousse",
-//                price = "200",
-//                restaurantName = "Chocolate Studio",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.2 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹65",
-//                address = "Hyderabad"
+//                imageRes = R.drawable.dhokla_paneer, // You'll need to add this image
+//                title = "Paneer Dhokla",
+//                price = "₹130",
+//                restaurantName = "Royal Gujarati",
+//                rating = "4.9",
+//                deliveryTime = "30-35 mins",
+//                distance = "3.5 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Vijay Cross Roads, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 11,
-//                imageRes = R.drawable.dessert_fruit_tart,
-//                title = "Mixed Fruit Tart",
-//                price = "170",
-//                restaurantName = "Fresh Bakes",
-//                rating = "4.5",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.8 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Bengaluru"
+//                imageRes = R.drawable.dhokla_family_pack, // You'll need to add this image
+//                title = "Dhokla Family Pack",
+//                price = "₹180",
+//                restaurantName = "Family Special",
+//                rating = "4.6",
+//                deliveryTime = "28-33 mins",
+//                distance = "2.3 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹60",
+//                address = "Naranpura, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 12,
-//                imageRes = R.drawable.dessert_kulfi,
-//                title = "Malai Kulfi (2 pieces)",
-//                price = "95",
-//                restaurantName = "Traditional Kulfi",
-//                rating = "4.8",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.0 km",
+//                imageRes = R.drawable.dhokla_instant, // You'll need to add this image
+//                title = "Instant Mix Dhokla",
+//                price = "₹70",
+//                restaurantName = "Quick Bites",
+//                rating = "4.2",
+//                deliveryTime = "10-15 mins",
+//                distance = "0.7 km",
 //                discount = "15% OFF",
 //                discountAmount = "up to ₹15",
-//                address = "Lucknow"
+//                address = "Memnagar, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 13,
-//                imageRes = R.drawable.dessert_pancakes,
-//                title = "Berry Pancakes with Maple Syrup",
-//                price = "210",
-//                restaurantName = "Breakfast Cafe",
-//                rating = "4.6",
+//                imageRes = R.drawable.dhokla_green, // You'll need to add this image
+//                title = "Green Chutney Dhokla",
+//                price = "₹95",
+//                restaurantName = "Green Kitchen",
+//                rating = "4.5",
 //                deliveryTime = "20-25 mins",
-//                distance = "1.3 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹55",
-//                address = "Chennai"
+//                distance = "2.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Gurukul, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 14,
-//                imageRes = R.drawable.dessert_rasgulla,
-//                title = "Bengali Rasgulla (4 pieces)",
-//                price = "130",
-//                restaurantName = "Sweet Bengal",
-//                rating = "4.7",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.1 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹30",
-//                address = "Kolkata"
+//                imageRes = R.drawable.dhokla_sev_tameta, // You'll need to add this image
+//                title = "Sev Tameta Dhokla",
+//                price = "₹100",
+//                restaurantName = "Sev Special",
+//                rating = "4.4",
+//                deliveryTime = "22-28 mins",
+//                distance = "2.6 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Sola, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 15,
-//                imageRes = R.drawable.dessert_profiteroles,
-//                title = "Chocolate Profiteroles",
-//                price = "240",
-//                restaurantName = "French Bakery",
-//                rating = "4.8",
+//                imageRes = R.drawable.dhokla_crispy, // You'll need to add this image
+//                title = "Crispy Fried Dhokla",
+//                price = "₹110",
+//                restaurantName = "Crispy Corner",
+//                rating = "4.3",
 //                deliveryTime = "25-30 mins",
-//                distance = "1.6 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Mumbai"
+//                distance = "3.2 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "Ranip, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 16,
-//                imageRes = R.drawable.dessert_halwa,
-//                title = "Gajar Ka Halwa",
-//                price = "140",
-//                restaurantName = "North Indian Kitchen",
-//                rating = "4.4",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.9 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹22",
-//                address = "Delhi"
+//                imageRes = R.drawable.dhokla_health_mix, // You'll need to add this image
+//                title = "Health Mix Dhokla",
+//                price = "₹85",
+//                restaurantName = "Health Hub",
+//                rating = "4.7",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.9 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Shilaj, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 17,
-//                imageRes = R.drawable.dessert_macarons,
-//                title = "Assorted Macarons (6 pieces)",
-//                price = "320",
-//                restaurantName = "Parisian Cafe",
-//                rating = "4.9",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.7 km",
+//                imageRes = R.drawable.dhokla_combo_meal, // You'll need to add this image
+//                title = "Dhokla Combo Meal",
+//                price = "₹150",
+//                restaurantName = "Combo House",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "2.8 km",
 //                discount = "20% OFF",
-//                discountAmount = "up to ₹65",
-//                address = "Goa"
+//                discountAmount = "up to ₹35",
+//                address = "Iscon Circle, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 18,
-//                imageRes = R.drawable.dessert_shrikhand,
-//                title = "Kesar Shrikhand",
-//                price = "125",
-//                restaurantName = "Gujarati Thali",
+//                imageRes = R.drawable.dhokla_tamarind, // You'll need to add this image
+//                title = "Tamarind Dhokla",
+//                price = "₹90",
+//                restaurantName = "Tamarind Twist",
 //                rating = "4.5",
-//                deliveryTime = "18-22 mins",
-//                distance = "1.0 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹20",
-//                address = "Ahmedabad"
+//                deliveryTime = "18-23 mins",
+//                distance = "1.4 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Vasna, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 19,
-//                imageRes = R.drawable.dessert_waffles,
-//                title = "Belgian Waffles with Fruits",
-//                price = "190",
-//                restaurantName = "Waffle House",
-//                rating = "4.7",
+//                imageRes = R.drawable.dhokla_sweet, // You'll need to add this image
+//                title = "Sweet Dhokla",
+//                price = "₹75",
+//                restaurantName = "Sweet Spot",
+//                rating = "4.6",
 //                deliveryTime = "15-20 mins",
-//                distance = "0.8 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹50",
-//                address = "Bengaluru"
+//                distance = "1.1 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹15",
+//                address = "Navjeevan Press, Ahmedabad"
 //            ),
 //            RestaurantItemFull(
 //                id = 20,
-//                imageRes = R.drawable.dessert_combo,
-//                title = "Dessert Platter (Assorted)",
-//                price = "350",
-//                restaurantName = "Grand Sweets",
+//                imageRes = R.drawable.dhokla_special_thali, // You'll need to add this image
+//                title = "Dhokla Special Thali",
+//                price = "₹200",
+//                restaurantName = "Thali House",
 //                rating = "4.9",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹75",
-//                address = "Mumbai"
+//                deliveryTime = "35-40 mins",
+//                distance = "3.8 km",
+//                discount = "40% OFF",
+//                discountAmount = "up to ₹90",
+//                address = "Science City, Ahmedabad"
 //            )
 //        )
 //        Column {
-//            sampleDessertItems.forEach { restaurantItem ->
+//            sampleDhoklaItems.forEach { restaurantItem ->
 //                RestaurantItemListFull(
 //                    restaurantItem = restaurantItem,
 //                    onWishlistClick = { },
@@ -9211,39 +9779,7 @@ fun DhoklaCategoryPage() {
 //                )
 //            }
 //        }
-    }
-}
-
-@Composable
-fun DosaCategoryPage() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Dosa",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        )
-    }
-}
-
-@Composable
-fun DholdaCategoryPage() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Dholda",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        )
-    }
+//    }
 }
 
 @Composable

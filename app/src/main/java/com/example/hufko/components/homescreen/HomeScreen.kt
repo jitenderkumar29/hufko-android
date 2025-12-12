@@ -27,9 +27,9 @@ fun HomeScreen() {
     var selectedLocation by remember {
         mutableStateOf(
             Location(
-                house = "123",
-                street = "Main",
-                apartment = "4B",
+                house = "F 109/B",
+                street = "Block-F",
+                apartment = "5th floor, Gali no 1",
                 city = "Noida",
                 state = "UP",
                 postal = "10001",

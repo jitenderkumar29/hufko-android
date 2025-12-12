@@ -136,7 +136,8 @@ fun LocationSelectionButton(
         ) {
 
             Icon(
-                painter = painterResource(id = R.drawable.outline_home_24),
+                painter = painterResource(id = R.drawable.baseline_location_pin_24),
+//                painter = painterResource(id = R.drawable.outline_home_24),
                 contentDescription = "Location",
                 tint = MaterialTheme.customColors.white,
                 modifier = Modifier.size(16.dp)

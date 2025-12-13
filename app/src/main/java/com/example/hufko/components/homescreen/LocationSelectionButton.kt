@@ -139,7 +139,7 @@ fun LocationSelectionButton(
                 painter = painterResource(id = R.drawable.baseline_location_pin_24),
 //                painter = painterResource(id = R.drawable.outline_home_24),
                 contentDescription = "Location",
-                tint = MaterialTheme.customColors.white,
+                tint = MaterialTheme.customColors.success,
                 modifier = Modifier.size(16.dp)
             )
 
@@ -155,7 +155,7 @@ fun LocationSelectionButton(
                 Row(verticalAlignment = Alignment.CenterVertically) {
 
                     Text(
-                        text = "HOME",
+                        text = "HOME:",
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp,
                         color = MaterialTheme.customColors.white,

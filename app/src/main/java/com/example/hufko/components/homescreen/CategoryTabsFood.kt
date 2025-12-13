@@ -9217,269 +9217,826 @@ fun DosaCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Dosa",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val dosaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Dosa types WITH left icons (visual categories)
+                FilterChip(
+                    id = "masala",
+                    text = "Masala Dosa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_masala_dosa
+                ),
+                FilterChip(
+                    id = "plain",
+                    text = "Plain Dosa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_dosa
+                ),
+                FilterChip(
+                    id = "onion",
+                    text = "Onion Dosa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_onion_dosa
+                ),
+                FilterChip(
+                    id = "rava",
+                    text = "Rava Dosa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rava_dosa
+                ),
+                FilterChip(
+                    id = "set",
+                    text = "Dosa Set",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dosa_set
+                ),
+
+                // Batter type WITH left icon
+                FilterChip(
+                    id = "fermented",
+                    text = "Fermented Batter",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fermented_batter
+                ),
+
+                // Cooking style WITH left icon
+                FilterChip(
+                    id = "ghee_roast",
+                    text = "Ghee Roast",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_ghee_roast
+                ),
+
+                // Dietary preferences WITH left icons
+                FilterChip(
+                    id = "veg",
+                    text = "Vegetarian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetarian
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegan_dosa
+                ),
+
+                // Text-only filters (preparation attributes)
+                FilterChip(
+                    id = "crispy",
+                    text = "Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft",
+                    text = "Soft",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thin",
+                    text = "Thin",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick",
+                    text = "Thick",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Accompaniments as text-only
+                FilterChip(
+                    id = "with_sambar",
+                    text = "With Sambar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chutney",
+                    text = "With Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_podi",
+                    text = "With Podi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Time/price text-only filters
+                FilterChip(
+                    id = "ready_in_15",
+                    text = "Ready in 15 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "serves_2",
+                    text = "Serves 2",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "popular",
+                    text = "Popular",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2  // Maintains minimal look
         )
+        FilterButtonFood(
+            filterConfig = dosaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeDosaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.dosa_masala,
+                title = "Masala Dosa with Sambar & Chutney",
+                price = "180",
+                restaurantName = "Carnatic Cafe",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹45",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.dosa_plain,
+                title = "Plain Crispy Dosa Set",
+                price = "150",
+                restaurantName = "Dosa Factory",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹30",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.dosa_onion,
+                title = "Onion Rava Dosa with Coconut Chutney",
+                price = "200",
+                restaurantName = "Sagar Ratna",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "30%",
+                discountAmount = "up to ₹60",
+                address = "South Ex, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.dosa_paneer,
+                title = "Paneer Masala Dosa",
+                price = "220",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.4",
+                deliveryTime = "18-22 mins",
+                distance = "2.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹33",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.dosa_mysore,
+                title = "Mysore Masala Dosa (Spicy)",
+                price = "190",
+                restaurantName = "Spice Junction",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "1.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹19",
+                address = "Hauz Khas, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.dosa_cheese,
+                title = "Cheese Dosa with Herbs",
+                price = "240",
+                restaurantName = "Fusion Foods",
+                rating = "4.3",
+                deliveryTime = "12-16 mins",
+                distance = "0.9 km",
+                discount = "20%",
+                discountAmount = "up to ₹48",
+                address = "Saket, Delhi"
+            ),
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = completeDosaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleDosaItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.dosa_masala_sambar,
+                title = "Masala Dosa with Sambar & Chutney",
+                price = "₹180",
+                restaurantName = "Carnatic Cafe",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹45",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.dosa_plain_crispy,
+                title = "Plain Crispy Dosa Set",
+                price = "₹150",
+                restaurantName = "Dosa Factory",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.dosa_onion_rava_dosa,
+                title = "Onion Rava Dosa with Coconut Chutney",
+                price = "₹200",
+                restaurantName = "Sagar Ratna",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "South Ex, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.dosa_paneer_masala_dosa,
+                title = "Paneer Masala Dosa",
+                price = "₹220",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.4",
+                deliveryTime = "18-22 mins",
+                distance = "2.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹33",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.dosa_mysore_masala_dosa,
+                title = "Mysore Masala Dosa (Spicy)",
+                price = "₹190",
+                restaurantName = "Spice Junction",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "1.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹19",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.dosa_cheese_dosa,
+                title = "Cheese Dosa with Herbs",
+                price = "₹240",
+                restaurantName = "Fusion Foods",
+                rating = "4.3",
+                deliveryTime = "12-16 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹48",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.dosa_butter_podi,
+                title = "Butter Podi Dosa",
+                price = "₹210",
+                restaurantName = "Madras Cafe",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹53",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.dosa_rava_onion_dosa,
+                title = "Rava Onion Dosa with Sambar",
+                price = "₹175",
+                restaurantName = "Udupi Grand",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹26",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.dosa_set_combo,
+                title = "Dosa Set (3 Types Combo)",
+                price = "₹320",
+                restaurantName = "Combo Kitchen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "3.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹96",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.dosa_egg,
+                title = "Egg Masala Dosa",
+                price = "₹250",
+                restaurantName = "Non-Veg Special",
+                rating = "4.4",
+                deliveryTime = "18-23 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Malviya Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.dosa_chicken,
+                title = "Chicken Dosa Roll",
+                price = "₹280",
+                restaurantName = "Roll King",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.dosa_family,
+                title = "Family Pack Dosa (4 Pieces)",
+                price = "₹380",
+                restaurantName = "Family Restaurant",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "3.2 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹133",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.dosa_paper,
+                title = "Paper Roast Dosa (Extra Crispy)",
+                price = "₹195",
+                restaurantName = "Crispy Corner",
+                rating = "4.7",
+                deliveryTime = "16-21 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹39",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.dosa_schezwan,
+                title = "Schezwan Dosa (Indo-Chinese)",
+                price = "₹230",
+                restaurantName = "Chinese Fusion",
+                rating = "4.3",
+                deliveryTime = "22-28 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Vikas Puri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.dosa_vegan,
+                title = "Vegan Dosa (No Ghee)",
+                price = "₹165",
+                restaurantName = "Vegan Delight",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹17",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.dosa_jain,
+                title = "Jain Dosa (No Onion Garlic)",
+                price = "₹170",
+                restaurantName = "Jain Special",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "1.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹34",
+                address = "Shalimar Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.dosa_instant,
+                title = "Instant Rava Dosa Mix",
+                price = "₹140",
+                restaurantName = "Quick Bites",
+                rating = "4.2",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹35",
+                address = "Laxmi Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.dosa_uttapam,
+                title = "Uttapam Dosa Combo",
+                price = "₹270",
+                restaurantName = "South Indian Hub",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "2.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹81",
+                address = "Mayur Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.dosa_sweet,
+                title = "Sweet Dosa with Jaggery",
+                price = "₹160",
+                restaurantName = "Sweet Corner",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹24",
+                address = "Preet Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.dosa_thali,
+                title = "Dosa Thali (Full Meal)",
+                price = "₹350",
+                restaurantName = "Thali House",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "3.5 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹140",
+                address = "Noida Sector 18, Noida"
+            )
+        )
+        Column {
+            sampleDosaItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
 @Composable
 fun DholdaCategoryPage() {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//    ) {
-//        Spacer(modifier = Modifier.height(15.dp))
-//
-//        // Filter Button
-//        val dhoklaFilters = FilterConfig(
-//            filters = listOf(
-//                // Main filter dropdown
-//                FilterChip(
-//                    id = "filters",
-//                    text = "Filters",
-//                    type = FilterType.FILTER_DROPDOWN,
-//                    icon = R.drawable.ic_filter,
-//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-//                ),
-//
-//                // Dhokla types WITH left icons (visual categories)
-//                FilterChip(
-//                    id = "khaman",
-//                    text = "Khaman Dhokla",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_khaman_dhokla
-//                ),
-//                FilterChip(
-//                    id = "khatta",
-//                    text = "Khatta Dhokla",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_khatta_dhokla
-//                ),
-//                FilterChip(
-//                    id = "rasawala",
-//                    text = "Rasawala Dhokla",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_rasawala_dhokla
-//                ),
-//                FilterChip(
-//                    id = "sandwich",
-//                    text = "Sandwich Dhokla",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_sandwich_dhokla
-//                ),
-//
-//                // Cooking style WITH left icon
-//                FilterChip(
-//                    id = "steamed",
-//                    text = "Steamed",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_steamed_dhokla
-//                ),
-//
-//                // Dietary preferences WITH left icons
-//                FilterChip(
-//                    id = "veg",
-//                    text = "Vegetarian",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_vegetarian_dhokla
-//                ),
-//                FilterChip(
-//                    id = "jain",
-//                    text = "Jain",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_jain_food_dhokla
-//                ),
-//
-//                // Text-only filters (preparation/serving attributes)
-//                FilterChip(
-//                    id = "instant",
-//                    text = "Instant",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "fermented",
-//                    text = "Fermented",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "spicy",
-//                    text = "Spicy",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "sweet_sour",
-//                    text = "Sweet-Sour",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // Accompaniments as text-only
-//                FilterChip(
-//                    id = "with_chutney",
-//                    text = "With Chutney",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "with_sev",
-//                    text = "With Sev",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // Time/price text-only filters
-//                FilterChip(
-//                    id = "ready_in_20",
-//                    text = "Ready in 20 mins",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "under_150",
-//                    text = "Under ₹150",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "serves_4",
-//                    text = "Serves 4",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // Sort dropdown
-//                FilterChip(
-//                    id = "sort",
-//                    text = "Sort",
-//                    type = FilterType.SORT_DROPDOWN,
-//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-//                ),
-//            ),
-//            rows = 2  // Maintains minimal look
-//        )
-//        FilterButtonFood(
-//            filterConfig = dhoklaFilters,
-//            onFilterClick = { filter ->
-//                println("Filter clicked: ${filter.text}")
-//                // Handle filter logic
-//            },
-//            onSortClick = {
-//                println("Sort clicked")
-//                // Handle sort logic
-//            }
-//        )
-//
-//        val completeDhoklaItems = listOf(
-//            FoodItemDoubleF(
-//                id = 1,
-//                imageRes = R.drawable.dhokla_khaman,
-//                title = "Khaman Dhokla with Green Chutney",
-//                price = "120",
-//                restaurantName = "Gujarati Rasoi",
-//                rating = "4.7",
-//                deliveryTime = "12-15 mins",
-//                distance = "0.9 km",
-//                discount = "20%",
-//                discountAmount = "up to ₹25",
-//                address = "Rajouri Garden, Delhi"
-//            ),
-//            FoodItemDoubleF(
-//                id = 2,
-//                imageRes = R.drawable.dhokla_khatta,
-//                title = "Khatta Dhokla with Tamarind Chutney",
-//                price = "110",
-//                restaurantName = "Spice Street",
-//                rating = "4.5",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.3 km",
-//                discount = "15%",
-//                discountAmount = "up to ₹17",
-//                address = "Janakpuri, Delhi"
-//            ),
-//            FoodItemDoubleF(
-//                id = 3,
-//                imageRes = R.drawable.dhokla_rasawala,
-//                title = "Rasawala Dhokla in Tangy Curry",
-//                price = "150",
-//                restaurantName = "Curry Point",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.0 km",
-//                discount = "25%",
-//                discountAmount = "up to ₹38",
-//                address = "Pitampura, Delhi"
-//            ),
-//            FoodItemDoubleF(
-//                id = 4,
-//                imageRes = R.drawable.dhokla_sandwich,
-//                title = "Sandwich Dhokla with Chutney Layers",
-//                price = "130",
-//                restaurantName = "Innovative Bites",
-//                rating = "4.4",
-//                deliveryTime = "10-15 mins",
-//                distance = "1.1 km",
-//                discount = "10%",
-//                discountAmount = "up to ₹13",
-//                address = "Rohini, Delhi"
-//            ),
-//            FoodItemDoubleF(
-//                id = 5,
-//                imageRes = R.drawable.dhokla_steamed,
-//                title = "Steamed Instant Dhokla with Sev",
-//                price = "100",
-//                restaurantName = "Quick Snacks",
-//                rating = "4.3",
-//                deliveryTime = "8-12 mins",
-//                distance = "0.7 km",
-//                discount = "30%",
-//                discountAmount = "up to ₹30",
-//                address = "Vikas Puri, Delhi"
-//            ),
-//            FoodItemDoubleF(
-//                id = 6,
-//                imageRes = R.drawable.dhokla_jain,
-//                title = "Jain Style Dhokla (No Onion Garlic)",
-//                price = "140",
-//                restaurantName = "Pure Veg Corner",
-//                rating = "4.8",
-//                deliveryTime = "18-22 mins",
-//                distance = "1.8 km",
-//                discount = "20%",
-//                discountAmount = "up to ₹28",
-//                address = "Shalimar Bagh, Delhi"
-//            )
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//        Text(
-//            text = "Recommended for you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//
-//        FoodItemsListWithHeading(
-//            heading = null,
-//            subtitle = null,
-//            foodItems = completeDhoklaItems,
-//            onItemClick = { foodItem ->
-//                println("Food item clicked: ${foodItem.title}")
-//            },
-//            modifier = Modifier.fillMaxWidth(),
-//            backgroundColor = Color.White,
-//            cardWidth = 150.dp,
-//            cardHeight = 170.dp,
-//            horizontalSpacing = 8.dp,
-//            horizontalPadding = 12.dp,
-//            verticalPadding = 0.dp,
-//            headingBottomPadding = 0.dp
-//        )
-//
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val dholdaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Dholka types WITH left icons (visual categories - iconic varieties)
+                FilterChip(
+                    id = "masala_dholda",
+                    text = "Masala Dholda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_masala_dholda
+                ),
+                FilterChip(
+                    id = "plain_dholda",
+                    text = "Plain Dholda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_dholka
+                ),
+                FilterChip(
+                    id = "stuffed_dholda",
+                    text = "Stuffed Dholda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stuffed_dholda
+                ),
+
+                // Cooking style WITH left icon
+                FilterChip(
+                    id = "tawa_fried",
+                    text = "Tawa Fried",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tawa_fried
+                ),
+
+                // Special categories WITH left icons
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy_dholda
+                ),
+                FilterChip(
+                    id = "garlic",
+                    text = "Garlic Dholda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_garlic_dholda
+                ),
+
+                // Text-only filters (attributes/details)
+                FilterChip(
+                    id = "crispy",
+                    text = "Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft",
+                    text = "Soft",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chutney",
+                    text = "With Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_dahi",
+                    text = "With Dahi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Accompaniments text-only
+                FilterChip(
+                    id = "with_pickle",
+                    text = "With Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_salad",
+                    text = "With Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Time/price text-only filters
+                FilterChip(
+                    id = "ready_in_15",
+                    text = "Ready in 15 mins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "serves_2",
+                    text = "Serves 2",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = dholdaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeDholdaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.dholda_khaman_green,
+                title = "Khaman Dholda with Green Chutney",
+                price = "120",
+                restaurantName = "Gujarati Rasoi",
+                rating = "4.7",
+                deliveryTime = "12-15 mins",
+                distance = "0.9 km",
+                discount = "20%",
+                discountAmount = "up to ₹25",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.dholda_khatta_tamarind,
+                title = "Khatta Dholda with Tamarind Chutney",
+                price = "110",
+                restaurantName = "Spice Street",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹17",
+                address = "Janakpuri, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.dholda_rasawala_tangy,
+                title = "Rasawala Dholda in Tangy Curry",
+                price = "150",
+                restaurantName = "Curry Point",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "25%",
+                discountAmount = "up to ₹38",
+                address = "Pitampura, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.dholda_sandwich_chutney,
+                title = "Sandwich Dholda with Chutney Layers",
+                price = "130",
+                restaurantName = "Innovative Bites",
+                rating = "4.4",
+                deliveryTime = "10-15 mins",
+                distance = "1.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹13",
+                address = "Rohini, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.dholda_steamed_instant,
+                title = "Steamed Instant Dholda with Sev",
+                price = "100",
+                restaurantName = "Quick Snacks",
+                rating = "4.3",
+                deliveryTime = "8-12 mins",
+                distance = "0.7 km",
+                discount = "30%",
+                discountAmount = "up to ₹30",
+                address = "Vikas Puri, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.dholda_jain_style,
+                title = "Jain Style Dholda (No Onion Garlic)",
+                price = "140",
+                restaurantName = "Pure Veg Corner",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹28",
+                address = "Shalimar Bagh, Delhi"
+            )
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = completeDholdaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
 //        Spacer(modifier = Modifier.height(15.dp))
 //        Text(
 //            text = "Restaurants delivering to you",
@@ -9779,7 +10336,7 @@ fun DholdaCategoryPage() {
 //                )
 //            }
 //        }
-//    }
+    }
 }
 
 @Composable

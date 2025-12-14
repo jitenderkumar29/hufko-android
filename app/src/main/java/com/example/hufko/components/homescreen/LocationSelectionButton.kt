@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 data class Location(
@@ -136,12 +137,18 @@ fun LocationSelectionButton(
         ) {
 
             Icon(
-                painter = painterResource(id = R.drawable.baseline_location_pin_24),
+                painter = painterResource(id = R.drawable.map),
 //                painter = painterResource(id = R.drawable.outline_home_24),
                 contentDescription = "Location",
-                tint = MaterialTheme.customColors.success,
+                tint = Color.Unspecified, // 👈 IMPORTANT
+//                tint = MaterialTheme.customColors.success,
                 modifier = Modifier.size(16.dp)
             )
+//            AsyncImage(
+//                model = R.drawable.location, // your GIF in drawable
+//                contentDescription = "Location",
+//                modifier = Modifier.size(24.dp)
+//            )
 
             Spacer(modifier = Modifier.width(4.dp))
 

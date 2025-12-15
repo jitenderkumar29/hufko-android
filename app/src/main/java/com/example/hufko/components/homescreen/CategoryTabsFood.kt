@@ -10344,14 +10344,577 @@ fun GulabJamunCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Gulab Jamun",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val gulabJamunFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Gulab Jamun types WITH left icons (visual categories)
+                FilterChip(
+                    id = "khoya_mawa",
+                    text = "Khoya/Mawa Jamun",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_khoya_jamun
+                ),
+                FilterChip(
+                    id = "milk_powder",
+                    text = "Milk Powder Jamun",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_milk_powder_jamun
+                ),
+                FilterChip(
+                    id = "stuffed_jamun",
+                    text = "Stuffed Jamun",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stuffed_jamun
+                ),
+
+                // Size/style WITH left icons
+                FilterChip(
+                    id = "mini_jamun",
+                    text = "Mini Jamun",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mini_jamun
+                ),
+                FilterChip(
+                    id = "king_size",
+                    text = "King Size",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_king_size_jamun
+                ),
+
+                // Temperature serving WITH left icon
+                FilterChip(
+                    id = "warm_served",
+                    text = "Warm Served",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_warm_jamun
+                ),
+
+                // Special varieties WITH left icons
+                FilterChip(
+                    id = "kesar_jamun",
+                    text = "Kesar (Saffron) Jamun",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kesar_jamun
+                ),
+                FilterChip(
+                    id = "dry_fruit",
+                    text = "Dry Fruit Jamun",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dry_fruit_jamun
+                ),
+
+                // Syrup type text-only (attributes)
+                FilterChip(
+                    id = "sugar_syrup",
+                    text = "Sugar Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honey_syrup",
+                    text = "Honey Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cardamom_syrup",
+                    text = "Cardamom Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Texture attributes text-only
+                FilterChip(
+                    id = "soft_spongy",
+                    text = "Soft & Spongy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dense_rich",
+                    text = "Dense & Rich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "melt_in_mouth",
+                    text = "Melt-in-Mouth",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Serving suggestions text-only
+                FilterChip(
+                    id = "with_rabri",
+                    text = "With Rabri",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_ice_cream",
+                    text = "With Ice Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_malai",
+                    text = "With Malai",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Practical filters text-only
+                FilterChip(
+                    id = "fresh_made",
+                    text = "Fresh Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ready_to_eat",
+                    text = "Ready to Eat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "serves_4",
+                    text = "Serves 4",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+         FilterButtonFood(
+            filterConfig = gulabJamunFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeGulabJamunItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.gulab_jamun_classic_golden,
+                title = "Classic Golden Gulab Jamun",
+                price = "180",
+                restaurantName = "Sweet Symphony",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Chandni Chowk, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.gulab_jamun_stuffed_dryfruit,
+                title = "Dry Fruit Stuffed Gulab Jamun",
+                price = "240",
+                restaurantName = "Royal Sweets",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹36",
+                address = "Karol Bagh, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.gulab_jamun_mini_basket,
+                title = "Mini Gulab Jamun Basket",
+                price = "160",
+                restaurantName = "Sweet Bites",
+                rating = "4.6",
+                deliveryTime = "12-15 mins",
+                distance = "0.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.gulab_jamun_with_rabri,
+                title = "Gulab Jamun with Rabri",
+                price = "220",
+                restaurantName = "Mathura Sweets",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "1.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹22",
+                address = "Lajpat Nagar, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.gulab_jamun_kesar_saffron,
+                title = "Kesar Pista Gulab Jamun",
+                price = "200",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.5",
+                deliveryTime = "15-18 mins",
+                distance = "1.4 km",
+                discount = "30%",
+                discountAmount = "up to ₹60",
+                address = "Pitampura, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.gulab_jamun_icecream_combo,
+                title = "Gulab Jamun with Vanilla Ice Cream",
+                price = "190",
+                restaurantName = "Fusion Desserts",
+                rating = "4.4",
+                deliveryTime = "10-14 mins",
+                distance = "0.9 km",
+                discount = "20%",
+                discountAmount = "up to ₹38",
+                address = "Vasant Vihar, Delhi",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = completeGulabJamunItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleGulabJamunItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.gulab_jamun_classic_golden_1,
+                title = "Classic Golden Gulab Jamun",
+                price = "₹180",
+                restaurantName = "Sweet Symphony",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.gulab_jamun_stuffed_dryfruit_2,
+                title = "Dry Fruit Stuffed Gulab Jamun",
+                price = "₹240",
+                restaurantName = "Royal Sweets",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹36",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.gulab_jamun_mini_basket_3,
+                title = "Mini Gulab Jamun Basket",
+                price = "₹160",
+                restaurantName = "Sweet Bites",
+                rating = "4.6",
+                deliveryTime = "12-15 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.gulab_jamun_with_rabri_4,
+                title = "Gulab Jamun with Rabri",
+                price = "₹220",
+                restaurantName = "Mathura Sweets",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "1.7 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹22",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.gulab_jamun_kesar_saffron_5,
+                title = "Kesar Pista Gulab Jamun",
+                price = "₹200",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.5",
+                deliveryTime = "15-18 mins",
+                distance = "1.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.gulab_jamun_icecream_combo_6,
+                title = "Gulab Jamun with Vanilla Ice Cream",
+                price = "₹190",
+                restaurantName = "Fusion Desserts",
+                rating = "4.4",
+                deliveryTime = "10-14 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹38",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.gulab_jamun_milk_powder_7,
+                title = "Milk Powder Gulab Jamun",
+                price = "₹150",
+                restaurantName = "Quick Sweets",
+                rating = "4.3",
+                deliveryTime = "8-12 mins",
+                distance = "0.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹23",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.gulab_jamun_chocolate_8,
+                title = "Chocolate Gulab Jamun",
+                price = "₹210",
+                restaurantName = "Innovative Desserts",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹53",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.gulab_jamun_king_size_9,
+                title = "King Size Gulab Jamun",
+                price = "₹250",
+                restaurantName = "Premium Sweets",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "3.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.gulab_jamun_sugar_free_10,
+                title = "Sugar Free Gulab Jamun",
+                price = "₹195",
+                restaurantName = "Healthy Sweets",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "2.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹20",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.gulab_jamun_family_pack_11,
+                title = "Gulab Jamun Family Pack (12pcs)",
+                price = "₹350",
+                restaurantName = "Family Sweets",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "3.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹105",
+                address = "Uttam Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.gulab_jamun_rose_flavor_12,
+                title = "Rose Flavored Gulab Jamun",
+                price = "₹175",
+                restaurantName = "Flavors of India",
+                rating = "4.4",
+                deliveryTime = "18-23 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹35",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.gulab_jamun_stuffed_saffron_13,
+                title = "Saffron Stuffed Gulab Jamun",
+                price = "₹230",
+                restaurantName = "Mughlai Sweets",
+                rating = "4.9",
+                deliveryTime = "28-33 mins",
+                distance = "4.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Old Delhi, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.gulab_jamun_combo_14,
+                title = "Gulab Jamun Combo (4 Varieties)",
+                price = "₹280",
+                restaurantName = "Variety Sweets",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.gulab_jamun_warm_served_15,
+                title = "Warm Served Gulab Jamun",
+                price = "₹165",
+                restaurantName = "Hot N Sweet",
+                rating = "4.5",
+                deliveryTime = "14-18 mins",
+                distance = "1.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹25",
+                address = "Kirti Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.gulab_jamun_instant_mix_16,
+                title = "Instant Mix Gulab Jamun",
+                price = "₹140",
+                restaurantName = "Quick Kitchen",
+                rating = "4.2",
+                deliveryTime = "10-15 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹28",
+                address = "Patel Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.gulab_jamun_with_malai_17,
+                title = "Gulab Jamun with Malai",
+                price = "₹210",
+                restaurantName = "Creamy Delights",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.2 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹21",
+                address = "Shahdara, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.gulab_jamun_cardamom_18,
+                title = "Cardamom Infused Gulab Jamun",
+                price = "₹185",
+                restaurantName = "Spice Sweets",
+                rating = "4.5",
+                deliveryTime = "16-21 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹46",
+                address = "Model Town, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.gulab_jamun_premium_19,
+                title = "Premium Khoya Gulab Jamun",
+                price = "₹260",
+                restaurantName = "Luxury Sweets",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "3.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹52",
+                address = "South Delhi, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.gulab_jamun_thali_20,
+                title = "Sweet Thali with Gulab Jamun",
+                price = "₹320",
+                restaurantName = "Thali Special",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "4.2 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹112",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Column {
+            sampleGulabJamunItems.forEach { restaurantItem ->
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -10360,14 +10923,601 @@ fun IdliCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Idli",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val idliFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Idli types WITH left icons (visual categories)
+                FilterChip(
+                    id = "rava_idli",
+                    text = "Rava Idli",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rava_idli
+                ),
+                FilterChip(
+                    id = "rice_idli",
+                    text = "Rice Idli",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice_idli
+                ),
+                FilterChip(
+                    id = "mini_idli",
+                    text = "Mini Idli",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mini_idli
+                ),
+                FilterChip(
+                    id = "stuffed_idli",
+                    text = "Stuffed Idli",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stuffed_idli
+                ),
+
+                // Accompaniments WITH left icons
+                FilterChip(
+                    id = "sambar",
+                    text = "With Sambar",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sambar
+                ),
+                FilterChip(
+                    id = "chutney",
+                    text = "With Chutney",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chutney
+                ),
+                FilterChip(
+                    id = "gunpowder",
+                    text = "With Gunpowder",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gunpowder
+                ),
+
+                // Special preparations (text-only - attributes)
+                FilterChip(
+                    id = "steamed",
+                    text = "Fresh Steamed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fried_idli",
+                    text = "Fried/Tadka Idli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "masala_idli",
+                    text = "Masala Idli",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Texture attributes (text-only)
+                FilterChip(
+                    id = "soft_fluffy",
+                    text = "Soft & Fluffy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spongy",
+                    text = "Spongy Texture",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "firm_texture",
+                    text = "Firm Texture",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Dietary preferences (text-only)
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oil_free",
+                    text = "Oil Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Regional varieties (text-only)
+                FilterChip(
+                    id = "kanchipuram",
+                    text = "Kanchipuram Idli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "moode_idli",
+                    text = "Moode Idli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thatte_idli",
+                    text = "Thatte Idli",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Serving options (text-only)
+                FilterChip(
+                    id = "breakfast",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tiffin",
+                    text = "Tiffin Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_meal",
+                    text = "Combo Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Practical filters (text-only)
+                FilterChip(
+                    id = "instant_mix",
+                    text = "Instant Mix",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "frozen",
+                    text = "Frozen",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "serves_2",
+                    text = "Serves 2",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = idliFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeIdliItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.idli_classic_sambar,
+                title = "Classic Idli with Sambar & Chutney",
+                price = "120",
+                restaurantName = "South Indian Haven",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹24",
+                address = "Bengaluru, Karnataka",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.idli_rava_medu,
+                title = "Rava Idli Platter",
+                price = "140",
+                restaurantName = "MTR Style Restaurant",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹21",
+                address = "Chennai, Tamil Nadu",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.idli_mini_tiffin,
+                title = "Mini Idli Tiffin Set",
+                price = "160",
+                restaurantName = "Tiffin Express",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "1.1 km",
+                discount = "25%",
+                discountAmount = "up to ₹40",
+                address = "Hyderabad, Telangana",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.idli_tadka_fry,
+                title = "Tadka Idli (Fried Masala Idli)",
+                price = "150",
+                restaurantName = "Spice Fusion Kitchen",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Mumbai, Maharashtra",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.idli_stuffed_masala,
+                title = "Stuffed Masala Idli",
+                price = "130",
+                restaurantName = "Traditional Delights",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "30%",
+                discountAmount = "up to ₹39",
+                address = "Coimbatore, Tamil Nadu",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.idli_combo_meal,
+                title = "Idli-Dosa-Vada Combo",
+                price = "180",
+                restaurantName = "Udupi Restaurant",
+                rating = "4.4",
+                deliveryTime = "14-18 mins",
+                distance = "0.9 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Pune, Maharashtra",
+            ),
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = completeIdliItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color =  MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val sampleGulabJamunItems = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.gulab_jamun_classic_golden_1,
+//                title = "Classic Golden Gulab Jamun",
+//                price = "₹180",
+//                restaurantName = "Sweet Symphony",
+//                rating = "4.8",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹36",
+//                address = "Chandni Chowk, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.gulab_jamun_stuffed_dryfruit_2,
+//                title = "Dry Fruit Stuffed Gulab Jamun",
+//                price = "₹240",
+//                restaurantName = "Royal Sweets",
+//                rating = "4.9",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.1 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹36",
+//                address = "Karol Bagh, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.gulab_jamun_mini_basket_3,
+//                title = "Mini Gulab Jamun Basket",
+//                price = "₹160",
+//                restaurantName = "Sweet Bites",
+//                rating = "4.6",
+//                deliveryTime = "12-15 mins",
+//                distance = "0.8 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Rajouri Garden, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.gulab_jamun_with_rabri_4,
+//                title = "Gulab Jamun with Rabri",
+//                price = "₹220",
+//                restaurantName = "Mathura Sweets",
+//                rating = "4.7",
+//                deliveryTime = "18-22 mins",
+//                distance = "1.7 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹22",
+//                address = "Lajpat Nagar, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.gulab_jamun_kesar_saffron_5,
+//                title = "Kesar Pista Gulab Jamun",
+//                price = "₹200",
+//                restaurantName = "Punjabi Rasoi",
+//                rating = "4.5",
+//                deliveryTime = "15-18 mins",
+//                distance = "1.4 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹60",
+//                address = "Pitampura, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.gulab_jamun_icecream_combo_6,
+//                title = "Gulab Jamun with Vanilla Ice Cream",
+//                price = "₹190",
+//                restaurantName = "Fusion Desserts",
+//                rating = "4.4",
+//                deliveryTime = "10-14 mins",
+//                distance = "0.9 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹38",
+//                address = "Vasant Vihar, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.gulab_jamun_milk_powder_7,
+//                title = "Milk Powder Gulab Jamun",
+//                price = "₹150",
+//                restaurantName = "Quick Sweets",
+//                rating = "4.3",
+//                deliveryTime = "8-12 mins",
+//                distance = "0.6 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹23",
+//                address = "Rohini, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.gulab_jamun_chocolate_8,
+//                title = "Chocolate Gulab Jamun",
+//                price = "₹210",
+//                restaurantName = "Innovative Desserts",
+//                rating = "4.5",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.3 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹53",
+//                address = "Dwarka, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.gulab_jamun_king_size_9,
+//                title = "King Size Gulab Jamun",
+//                price = "₹250",
+//                restaurantName = "Premium Sweets",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "3.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹50",
+//                address = "Saket, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.gulab_jamun_sugar_free_10,
+//                title = "Sugar Free Gulab Jamun",
+//                price = "₹195",
+//                restaurantName = "Healthy Sweets",
+//                rating = "4.6",
+//                deliveryTime = "22-27 mins",
+//                distance = "2.5 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "Green Park, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.gulab_jamun_family_pack_11,
+//                title = "Gulab Jamun Family Pack (12pcs)",
+//                price = "₹350",
+//                restaurantName = "Family Sweets",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "3.5 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹105",
+//                address = "Uttam Nagar, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.gulab_jamun_rose_flavor_12,
+//                title = "Rose Flavored Gulab Jamun",
+//                price = "₹175",
+//                restaurantName = "Flavors of India",
+//                rating = "4.4",
+//                deliveryTime = "18-23 mins",
+//                distance = "2.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Janakpuri, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.gulab_jamun_stuffed_saffron_13,
+//                title = "Saffron Stuffed Gulab Jamun",
+//                price = "₹230",
+//                restaurantName = "Mughlai Sweets",
+//                rating = "4.9",
+//                deliveryTime = "28-33 mins",
+//                distance = "4.0 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Old Delhi, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.gulab_jamun_combo_14,
+//                title = "Gulab Jamun Combo (4 Varieties)",
+//                price = "₹280",
+//                restaurantName = "Variety Sweets",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "2.8 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹70",
+//                address = "Nehru Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.gulab_jamun_warm_served_15,
+//                title = "Warm Served Gulab Jamun",
+//                price = "₹165",
+//                restaurantName = "Hot N Sweet",
+//                rating = "4.5",
+//                deliveryTime = "14-18 mins",
+//                distance = "1.3 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Kirti Nagar, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.gulab_jamun_instant_mix_16,
+//                title = "Instant Mix Gulab Jamun",
+//                price = "₹140",
+//                restaurantName = "Quick Kitchen",
+//                rating = "4.2",
+//                deliveryTime = "10-15 mins",
+//                distance = "0.9 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹28",
+//                address = "Patel Nagar, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.gulab_jamun_with_malai_17,
+//                title = "Gulab Jamun with Malai",
+//                price = "₹210",
+//                restaurantName = "Creamy Delights",
+//                rating = "4.6",
+//                deliveryTime = "20-25 mins",
+//                distance = "2.2 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹21",
+//                address = "Shahdara, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.gulab_jamun_cardamom_18,
+//                title = "Cardamom Infused Gulab Jamun",
+//                price = "₹185",
+//                restaurantName = "Spice Sweets",
+//                rating = "4.5",
+//                deliveryTime = "16-21 mins",
+//                distance = "1.8 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹46",
+//                address = "Model Town, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.gulab_jamun_premium_19,
+//                title = "Premium Khoya Gulab Jamun",
+//                price = "₹260",
+//                restaurantName = "Luxury Sweets",
+//                rating = "4.9",
+//                deliveryTime = "30-35 mins",
+//                distance = "3.8 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹52",
+//                address = "South Delhi, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.gulab_jamun_thali_20,
+//                title = "Sweet Thali with Gulab Jamun",
+//                price = "₹320",
+//                restaurantName = "Thali Special",
+//                rating = "4.7",
+//                deliveryTime = "35-40 mins",
+//                distance = "4.2 km",
+//                discount = "35% OFF",
+//                discountAmount = "up to ₹112",
+//                address = "Connaught Place, Delhi"
+//            )
+//        )
+//        Column {
+//            sampleGulabJamunItems.forEach { restaurantItem ->
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
     }
 }
 

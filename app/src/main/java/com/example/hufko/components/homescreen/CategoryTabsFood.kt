@@ -11219,305 +11219,304 @@ fun IdliCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color =  MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val sampleGulabJamunItems = listOf(
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.gulab_jamun_classic_golden_1,
-//                title = "Classic Golden Gulab Jamun",
-//                price = "₹180",
-//                restaurantName = "Sweet Symphony",
-//                rating = "4.8",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.2 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹36",
-//                address = "Chandni Chowk, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.gulab_jamun_stuffed_dryfruit_2,
-//                title = "Dry Fruit Stuffed Gulab Jamun",
-//                price = "₹240",
-//                restaurantName = "Royal Sweets",
-//                rating = "4.9",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.1 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹36",
-//                address = "Karol Bagh, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.gulab_jamun_mini_basket_3,
-//                title = "Mini Gulab Jamun Basket",
-//                price = "₹160",
-//                restaurantName = "Sweet Bites",
-//                rating = "4.6",
-//                deliveryTime = "12-15 mins",
-//                distance = "0.8 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Rajouri Garden, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.gulab_jamun_with_rabri_4,
-//                title = "Gulab Jamun with Rabri",
-//                price = "₹220",
-//                restaurantName = "Mathura Sweets",
-//                rating = "4.7",
-//                deliveryTime = "18-22 mins",
-//                distance = "1.7 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹22",
-//                address = "Lajpat Nagar, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.gulab_jamun_kesar_saffron_5,
-//                title = "Kesar Pista Gulab Jamun",
-//                price = "₹200",
-//                restaurantName = "Punjabi Rasoi",
-//                rating = "4.5",
-//                deliveryTime = "15-18 mins",
-//                distance = "1.4 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹60",
-//                address = "Pitampura, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.gulab_jamun_icecream_combo_6,
-//                title = "Gulab Jamun with Vanilla Ice Cream",
-//                price = "₹190",
-//                restaurantName = "Fusion Desserts",
-//                rating = "4.4",
-//                deliveryTime = "10-14 mins",
-//                distance = "0.9 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹38",
-//                address = "Vasant Vihar, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.gulab_jamun_milk_powder_7,
-//                title = "Milk Powder Gulab Jamun",
-//                price = "₹150",
-//                restaurantName = "Quick Sweets",
-//                rating = "4.3",
-//                deliveryTime = "8-12 mins",
-//                distance = "0.6 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹23",
-//                address = "Rohini, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.gulab_jamun_chocolate_8,
-//                title = "Chocolate Gulab Jamun",
-//                price = "₹210",
-//                restaurantName = "Innovative Desserts",
-//                rating = "4.5",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.3 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹53",
-//                address = "Dwarka, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.gulab_jamun_king_size_9,
-//                title = "King Size Gulab Jamun",
-//                price = "₹250",
-//                restaurantName = "Premium Sweets",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "3.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹50",
-//                address = "Saket, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.gulab_jamun_sugar_free_10,
-//                title = "Sugar Free Gulab Jamun",
-//                price = "₹195",
-//                restaurantName = "Healthy Sweets",
-//                rating = "4.6",
-//                deliveryTime = "22-27 mins",
-//                distance = "2.5 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹20",
-//                address = "Green Park, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.gulab_jamun_family_pack_11,
-//                title = "Gulab Jamun Family Pack (12pcs)",
-//                price = "₹350",
-//                restaurantName = "Family Sweets",
-//                rating = "4.8",
-//                deliveryTime = "30-35 mins",
-//                distance = "3.5 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹105",
-//                address = "Uttam Nagar, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.gulab_jamun_rose_flavor_12,
-//                title = "Rose Flavored Gulab Jamun",
-//                price = "₹175",
-//                restaurantName = "Flavors of India",
-//                rating = "4.4",
-//                deliveryTime = "18-23 mins",
-//                distance = "2.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Janakpuri, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.gulab_jamun_stuffed_saffron_13,
-//                title = "Saffron Stuffed Gulab Jamun",
-//                price = "₹230",
-//                restaurantName = "Mughlai Sweets",
-//                rating = "4.9",
-//                deliveryTime = "28-33 mins",
-//                distance = "4.0 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹35",
-//                address = "Old Delhi, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.gulab_jamun_combo_14,
-//                title = "Gulab Jamun Combo (4 Varieties)",
-//                price = "₹280",
-//                restaurantName = "Variety Sweets",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "2.8 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹70",
-//                address = "Nehru Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.gulab_jamun_warm_served_15,
-//                title = "Warm Served Gulab Jamun",
-//                price = "₹165",
-//                restaurantName = "Hot N Sweet",
-//                rating = "4.5",
-//                deliveryTime = "14-18 mins",
-//                distance = "1.3 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Kirti Nagar, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.gulab_jamun_instant_mix_16,
-//                title = "Instant Mix Gulab Jamun",
-//                price = "₹140",
-//                restaurantName = "Quick Kitchen",
-//                rating = "4.2",
-//                deliveryTime = "10-15 mins",
-//                distance = "0.9 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹28",
-//                address = "Patel Nagar, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.gulab_jamun_with_malai_17,
-//                title = "Gulab Jamun with Malai",
-//                price = "₹210",
-//                restaurantName = "Creamy Delights",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "2.2 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹21",
-//                address = "Shahdara, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.gulab_jamun_cardamom_18,
-//                title = "Cardamom Infused Gulab Jamun",
-//                price = "₹185",
-//                restaurantName = "Spice Sweets",
-//                rating = "4.5",
-//                deliveryTime = "16-21 mins",
-//                distance = "1.8 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹46",
-//                address = "Model Town, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.gulab_jamun_premium_19,
-//                title = "Premium Khoya Gulab Jamun",
-//                price = "₹260",
-//                restaurantName = "Luxury Sweets",
-//                rating = "4.9",
-//                deliveryTime = "30-35 mins",
-//                distance = "3.8 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹52",
-//                address = "South Delhi, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.gulab_jamun_thali_20,
-//                title = "Sweet Thali with Gulab Jamun",
-//                price = "₹320",
-//                restaurantName = "Thali Special",
-//                rating = "4.7",
-//                deliveryTime = "35-40 mins",
-//                distance = "4.2 km",
-//                discount = "35% OFF",
-//                discountAmount = "up to ₹112",
-//                address = "Connaught Place, Delhi"
-//            )
-//        )
-//        Column {
-//            sampleGulabJamunItems.forEach { restaurantItem ->
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleIdliItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.idli_plain_steamed_1,
+                title = "Plain Steamed Idli",
+                price = "₹80",
+                restaurantName = "South Indian Delights",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹16",
+                address = "Sarojini Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.idli_sambar_chutney_2,
+                title = "Idli with Sambar & Chutney",
+                price = "₹120",
+                restaurantName = "Tamil Nadu Mess",
+                rating = "4.7",
+                deliveryTime = "12-17 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹18",
+                address = "Laxmi Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.idli_rava_semolina_3,
+                title = "Rava Idli (Semolina)",
+                price = "₹110",
+                restaurantName = "MTR Foods",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹28",
+                address = "Rajendra Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.idli_podi_spice_4,
+                title = "Idli with Gunpowder (Podi)",
+                price = "₹130",
+                restaurantName = "Andhra Spice",
+                rating = "4.8",
+                deliveryTime = "18-23 mins",
+                distance = "2.1 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹13",
+                address = "Malviya Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.idli_stuffed_masala_5,
+                title = "Masala Stuffed Idli",
+                price = "₹140",
+                restaurantName = "Chennai Express",
+                rating = "4.4",
+                deliveryTime = "14-19 mins",
+                distance = "1.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹42",
+                address = "Punjabi Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.idli_mini_tiffin_6,
+                title = "Mini Idli Tiffin (12pcs)",
+                price = "₹160",
+                restaurantName = "Madurai Kitchen",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Kalkaji, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.idli_karnataka_style_7,
+                title = "Karnataka Style Thatte Idli",
+                price = "₹150",
+                restaurantName = "Coorg Cafe",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "2.4 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹23",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.idli_chilli_garlic_8,
+                title = "Chilli Garlic Idli",
+                price = "₹135",
+                restaurantName = "Fusion Bites",
+                rating = "4.3",
+                deliveryTime = "16-21 mins",
+                distance = "1.7 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹34",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.idli_fried_tawa_9,
+                title = "Tawa Fried Idli",
+                price = "₹145",
+                restaurantName = "Street Food Hub",
+                rating = "4.6",
+                deliveryTime = "12-17 mins",
+                distance = "1.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹29",
+                address = "Kamla Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.idli_vegetable_10,
+                title = "Vegetable Idli",
+                price = "₹125",
+                restaurantName = "Healthy Kitchen",
+                rating = "4.5",
+                deliveryTime = "18-23 mins",
+                distance = "1.9 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹13",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.idli_combo_meal_11,
+                title = "Idli Combo Meal (4pc + Coffee)",
+                price = "₹180",
+                restaurantName = "Filter Coffee House",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹54",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.idli_medu_soft_12,
+                title = "Medu Idli (Extra Soft)",
+                price = "₹95",
+                restaurantName = "Soft Touch Kitchen",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹19",
+                address = "Paschim Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.idli_curry_leaves_13,
+                title = "Curry Leaves Tempered Idli",
+                price = "₹155",
+                restaurantName = "Traditional Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "2.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹23",
+                address = "Janakpuri, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.idli_breakfast_set_14,
+                title = "South Indian Breakfast Set",
+                price = "₹220",
+                restaurantName = "Morning Delights",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.idli_cheese_melt_15,
+                title = "Cheese Melt Idli",
+                price = "₹170",
+                restaurantName = "Cheesy Bites",
+                rating = "4.5",
+                deliveryTime = "14-19 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹26",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.idli_spicy_schezwan_16,
+                title = "Schezwan Idli",
+                price = "₹165",
+                restaurantName = "Indo-Chinese Fusion",
+                rating = "4.3",
+                deliveryTime = "16-21 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹33",
+                address = "Shahdara, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.idli_coconut_chutney_17,
+                title = "Idli with Coconut Chutney",
+                price = "₹105",
+                restaurantName = "Coastal Kitchen",
+                rating = "4.6",
+                deliveryTime = "12-17 mins",
+                distance = "1.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹11",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.idli_millet_healthy_18,
+                title = "Millet Idli (Healthy)",
+                price = "₹135",
+                restaurantName = "Organic Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "2.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹34",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.idli_instant_mix_19,
+                title = "Instant Idli Mix",
+                price = "₹115",
+                restaurantName = "Quick Kitchen",
+                rating = "4.4",
+                deliveryTime = "10-15 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹23",
+                address = "Patel Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.idli_family_pack_20,
+                title = "Idli Family Pack (20pcs)",
+                price = "₹280",
+                restaurantName = "Family Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "3.2 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹98",
+                address = "Connaught Place, Delhi"
+            )
+        ).forEach { restaurantItem ->
+        Column {
+               RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -11526,14 +11525,628 @@ fun BiryaniCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Biryani",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val biryaniFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Biryani Types WITH left icons (visual categories)
+                FilterChip(
+                    id = "chicken_biryani",
+                    text = "Chicken Biryani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_biryani
+                ),
+                FilterChip(
+                    id = "mutton_biryani",
+                    text = "Mutton Biryani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mutton_biryani_2
+                ),
+                FilterChip(
+                    id = "veg_biryani",
+                    text = "Vegetable Biryani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_biryani
+                ),
+                FilterChip(
+                    id = "prawn_biryani",
+                    text = "Prawn Biryani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_prawn_biryani
+                ),
+                FilterChip(
+                    id = "egg_biryani",
+                    text = "Egg Biryani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_egg_biryani
+                ),
+
+                // Rice Types WITH left icons
+                FilterChip(
+                    id = "basmati",
+                    text = "Basmati Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_basmati_rice
+                ),
+                FilterChip(
+                    id = "jeera_rice",
+                    text = "Jeera Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_jeera_rice
+                ),
+                FilterChip(
+                    id = "scented_rice",
+                    text = "Scented Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_scented_rice
+                ),
+
+                // Cooking Style (text-only - attributes)
+                FilterChip(
+                    id = "dum_biryani",
+                    text = "Dum Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "handi_biryani",
+                    text = "Handi Biryani",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pot_biryani",
+                    text = "Pot Biryani",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Spice Level (text-only)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Regional Varieties (text-only)
+                FilterChip(
+                    id = "hyderabadi",
+                    text = "Hyderabadi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lucknowi",
+                    text = "Lucknowi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kolkata",
+                    text = "Kolkata Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thalassery",
+                    text = "Thalassery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sindhi",
+                    text = "Sindhi Biryani",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Accompaniments (text-only)
+                FilterChip(
+                    id = "with_raita",
+                    text = "With Raita",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_salad",
+                    text = "With Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_mirchi_ka_salan",
+                    text = "With Mirchi Ka Salan",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Dietary Preferences (text-only)
+                FilterChip(
+                    id = "halal",
+                    text = "Halal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_onion_garlic",
+                    text = "No Onion Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Serving Options (text-only)
+                FilterChip(
+                    id = "single_serve",
+                    text = "Single Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_pack",
+                    text = "Party Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Preparation Time (text-only)
+                FilterChip(
+                    id = "quick_prep",
+                    text = "Quick Preparation",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "slow_cooked",
+                    text = "Slow Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = biryaniFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeBiryaniItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.biryani_hyderabadi_chicken,
+                title = "Hyderabadi Chicken Dum Biryani",
+                price = "450",
+                restaurantName = "Paradise Biryani",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.1 km",
+                discount = "20%",
+                discountAmount = "up to ₹90",
+                address = "Hyderabad, Telangana",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.biryani_mutton_handi,
+                title = "Mutton Handi Biryani",
+                price = "550",
+                restaurantName = "Lucknowi Dastarkhwan",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "3.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹82",
+                address = "Lucknow, Uttar Pradesh",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.biryani_veg_dum,
+                title = "Vegetable Dum Biryani",
+                price = "280",
+                restaurantName = "Green Leaf Restaurant",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹70",
+                address = "Bengaluru, Karnataka",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.biryani_prawn_malabar,
+                title = "Malabar Prawn Biryani",
+                price = "420",
+                restaurantName = "Coastal Delicacies",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹42",
+                address = "Kozhikode, Kerala",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.biryani_egg_family,
+                title = "Egg Biryani Family Pack",
+                price = "350",
+                restaurantName = "Kolkata Biryani House",
+                rating = "4.5",
+                deliveryTime = "18-25 mins",
+                distance = "1.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹105",
+                address = "Kolkata, West Bengal",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.biryani_sindhi_spicy,
+                title = "Sindhi Spicy Biryani",
+                price = "380",
+                restaurantName = "Sindhi Rasoi",
+                rating = "4.4",
+                deliveryTime = "22-28 mins",
+                distance = "2.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹76",
+                address = "Mumbai, Maharashtra",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = completeBiryaniItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sampleBiryaniItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.biryani_hyderabadi_chicken_dum,
+                title = "Hyderabadi Chicken Dum Biryani",
+                price = "₹450",
+                restaurantName = "Paradise Biryani",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹90",
+                address = "Hitech City, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.biryani_lucknowi_mutton,
+                title = "Lucknowi Mutton Biryani",
+                price = "₹550",
+                restaurantName = "Dastarkhwan Restaurant",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "3.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹83",
+                address = "Aminabad, Lucknow"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.biryani_vegetable_dum,
+                title = "Vegetable Dum Biryani",
+                price = "₹280",
+                restaurantName = "Green Leaf Restaurant",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Koramangala, Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.biryani_malabar_prawn,
+                title = "Malabar Prawn Biryani",
+                price = "₹420",
+                restaurantName = "Coastal Delicacies",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹42",
+                address = "Calicut, Kerala"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.biryani_kolkata_egg,
+                title = "Kolkata Egg Biryani",
+                price = "₹350",
+                restaurantName = "Kolkata Biryani House",
+                rating = "4.5",
+                deliveryTime = "18-25 mins",
+                distance = "1.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹105",
+                address = "Park Street, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.biryani_sindhi_spicy_2,
+                title = "Sindhi Spicy Biryani",
+                price = "₹380",
+                restaurantName = "Sindhi Rasoi",
+                rating = "4.4",
+                deliveryTime = "22-28 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹76",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.biryani_afghani_chicken,
+                title = "Afghani Chicken Biryani",
+                price = "₹480",
+                restaurantName = "Kabul Darbar",
+                rating = "4.7",
+                deliveryTime = "28-35 mins",
+                distance = "3.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹72",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.biryani_jeera_rice,
+                title = "Jeera Rice Biryani",
+                price = "₹250",
+                restaurantName = "Healthy Bites",
+                rating = "4.3",
+                deliveryTime = "15-22 mins",
+                distance = "0.8 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹100",
+                address = "Koregaon Park, Pune"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.biryani_thalassery_fish,
+                title = "Thalassery Fish Biryani",
+                price = "₹520",
+                restaurantName = "Malabar Coast",
+                rating = "4.9",
+                deliveryTime = "32-40 mins",
+                distance = "4.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹52",
+                address = "Kannur, Kerala"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.biryani_kashmiri_paneer,
+                title = "Kashmiri Paneer Biryani",
+                price = "₹320",
+                restaurantName = "Kashmir Kitchen",
+                rating = "4.6",
+                deliveryTime = "20-27 mins",
+                distance = "1.7 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Dal Lake, Srinagar"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.biryani_bbq_smoked_chicken,
+                title = "BBQ Smoked Chicken Biryani",
+                price = "₹490",
+                restaurantName = "Grill Master",
+                rating = "4.8",
+                deliveryTime = "30-38 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹98",
+                address = "Banjara Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.biryani_kolhapuri_vegetable,
+                title = "Kolhapuri Vegetable Biryani",
+                price = "₹270",
+                restaurantName = "Spicy Maharashtra",
+                rating = "4.4",
+                deliveryTime = "18-24 mins",
+                distance = "1.4 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹95",
+                address = "Shahu Nagar, Kolhapur"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.biryani_chettinad_chicken,
+                title = "Chettinad Chicken Biryani",
+                price = "₹460",
+                restaurantName = "Chettinad Restaurant",
+                rating = "4.7",
+                deliveryTime = "25-32 mins",
+                distance = "2.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹69",
+                address = "Karaikudi, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.biryani_bohri_mutton,
+                title = "Bohri Mutton Biryani",
+                price = "₹580",
+                restaurantName = "Bohri Kitchen",
+                rating = "4.9",
+                deliveryTime = "35-42 mins",
+                distance = "3.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹58",
+                address = "Mumbai Central, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.biryani_tawa_mushroom,
+                title = "Tawa Mushroom Biryani",
+                price = "₹290",
+                restaurantName = "Mushroom Magic",
+                rating = "4.5",
+                deliveryTime = "16-22 mins",
+                distance = "1.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹58",
+                address = "MG Road, Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.biryani_chicken_tikka,
+                title = "Chicken Tikka Biryani",
+                price = "₹440",
+                restaurantName = "Tikka Express",
+                rating = "4.6",
+                deliveryTime = "22-28 mins",
+                distance = "1.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹110",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.biryani_awadhi_vegetable,
+                title = "Awadhi Vegetable Biryani",
+                price = "₹310",
+                restaurantName = "Awadhi Kitchen",
+                rating = "4.7",
+                deliveryTime = "24-30 mins",
+                distance = "2.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹47",
+                address = "Hazratganj, Lucknow"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.biryani_goan_prawn,
+                title = "Goan Prawn Biryani",
+                price = "₹430",
+                restaurantName = "Goan Spice",
+                rating = "4.8",
+                deliveryTime = "26-33 mins",
+                distance = "2.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹86",
+                address = "Panaji, Goa"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.biryani_family_pack,
+                title = "Biryani Family Pack (Serves 4)",
+                price = "₹680",
+                restaurantName = "Family Biryani House",
+                rating = "4.9",
+                deliveryTime = "40-50 mins",
+                distance = "3.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹204",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.biryani_combo_meal,
+                title = "Biryani Combo (Biryani + Raita + Salad)",
+                price = "₹380",
+                restaurantName = "Combo Kitchen",
+                rating = "4.5",
+                deliveryTime = "20-26 mins",
+                distance = "1.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹95",
+                address = "Anna Nagar, Chennai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 

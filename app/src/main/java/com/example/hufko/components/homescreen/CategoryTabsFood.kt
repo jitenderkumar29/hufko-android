@@ -1,13 +1,8 @@
 package com.example.hufko.components.homescreen
 
-import androidx.benchmark.traceprocessor.Row
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,13 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
@@ -13065,304 +13055,304 @@ fun ChickenCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color =  MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val sampleThaliItems = listOf(
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.thali_rajasthani_veg_full,
-//                title = "Royal Rajasthani Veg Thali",
-//                price = "₹450",
-//                restaurantName = "Rajasthan Dhaba",
-//                rating = "4.8",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.1 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹90",
-//                address = "Jaipur, Rajasthan"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.thali_gujarati_veg,
-//                title = "Traditional Gujarati Thali",
-//                price = "₹350",
-//                restaurantName = "Gujarati Rasoi",
-//                rating = "4.7",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.8 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹52",
-//                address = "Ahmedabad, Gujarat"
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.thali_south_indian_veg_2,
-//                title = "South Indian Special Thali",
-//                price = "₹320",
-//                restaurantName = "Udupi Sagar",
-//                rating = "4.6",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.5 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹80",
-//                address = "Chennai, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.thali_punjabi_nonveg_full,
-//                title = "Punjabi Non-Veg Feast Thali",
-//                price = "₹550",
-//                restaurantName = "Punjab Grill",
-//                rating = "4.9",
-//                deliveryTime = "35-45 mins",
-//                distance = "2.8 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹55",
-//                address = "Amritsar, Punjab"
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.thali_mini_veg_lunch,
-//                title = "Mini Vegetarian Lunch Thali",
-//                price = "₹220",
-//                restaurantName = "Home Style Kitchen",
-//                rating = "4.5",
-//                deliveryTime = "15-25 mins",
-//                distance = "0.8 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹66",
-//                address = "Delhi NCR"
-//            ),
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.thali_festive_special_dinner,
-//                title = "Festive Special Dinner Thali",
-//                price = "₹480",
-//                restaurantName = "Grand Restaurant",
-//                rating = "4.7",
-//                deliveryTime = "28-38 mins",
-//                distance = "2.2 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹96",
-//                address = "Mumbai, Maharashtra"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.thali_bengali_fish,
-//                title = "Bengali Fish Thali",
-//                price = "₹420",
-//                restaurantName = "Bengali Kitchen",
-//                rating = "4.6",
-//                deliveryTime = "25-35 mins",
-//                distance = "2.4 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹63",
-//                address = "Kolkata, West Bengal"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.thali_kashmiri_wazwan,
-//                title = "Kashmiri Wazwan Thali",
-//                price = "₹680",
-//                restaurantName = "Kashmiri Wazwan",
-//                rating = "4.9",
-//                deliveryTime = "40-50 mins",
-//                distance = "3.5 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹68",
-//                address = "Srinagar, Kashmir"
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.thali_chettinad_nonveg,
-//                title = "Chettinad Non-Veg Thali",
-//                price = "₹520",
-//                restaurantName = "Chettinad Restaurant",
-//                rating = "4.8",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.9 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹104",
-//                address = "Karaikudi, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.thali_maharashtrian_veg,
-//                title = "Maharashtrian Veg Thali",
-//                price = "₹290",
-//                restaurantName = "Maharashtra Bhojanalay",
-//                rating = "4.5",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.7 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹73",
-//                address = "Pune, Maharashtra"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.thali_awadhi_mughlai,
-//                title = "Awadhi Mughlai Thali",
-//                price = "₹580",
-//                restaurantName = "Awadhi Kitchen",
-//                rating = "4.9",
-//                deliveryTime = "35-45 mins",
-//                distance = "3.2 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹87",
-//                address = "Lucknow, UP"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.thali_sindhi_veg,
-//                title = "Sindhi Veg Thali",
-//                price = "₹340",
-//                restaurantName = "Sindhi Rasoi",
-//                rating = "4.6",
-//                deliveryTime = "22-32 mins",
-//                distance = "2.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹68",
-//                address = "Mumbai, Maharashtra"
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.thali_udupi_special,
-//                title = "Udupi Special Thali",
-//                price = "₹270",
-//                restaurantName = "Udupi Krishna",
-//                rating = "4.7",
-//                deliveryTime = "18-28 mins",
-//                distance = "1.3 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹81",
-//                address = "Udupi, Karnataka"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.thali_hyderabadi_nonveg,
-//                title = "Hyderabadi Non-Veg Thali",
-//                price = "₹620",
-//                restaurantName = "Hyderabadi House",
-//                rating = "4.8",
-//                deliveryTime = "32-42 mins",
-//                distance = "2.6 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹62",
-//                address = "Hyderabad, Telangana"
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.thali_kerala_sadya,
-//                title = "Kerala Sadya Thali",
-//                price = "₹380",
-//                restaurantName = "Kerala Kitchen",
-//                rating = "4.7",
-//                deliveryTime = "25-35 mins",
-//                distance = "2.1 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹95",
-//                address = "Kochi, Kerala"
-//            ),
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.thali_jain_sattvic,
-//                title = "Jain Sattvic Thali",
-//                price = "₹310",
-//                restaurantName = "Jain Bhojanalay",
-//                rating = "4.8",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.4 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹62",
-//                address = "Ahmedabad, Gujarat"
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.thali_family_pack_4,
-//                title = "Family Pack Thali (Serves 4)",
-//                price = "₹850",
-//                restaurantName = "Family Restaurant",
-//                rating = "4.9",
-//                deliveryTime = "45-55 mins",
-//                distance = "3.8 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹255",
-//                address = "Bengaluru, Karnataka"
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.thali_goan_seafood,
-//                title = "Goan Seafood Thali",
-//                price = "₹590",
-//                restaurantName = "Goan Spice House",
-//                rating = "4.7",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.7 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹89",
-//                address = "Panaji, Goa"
-//            ),
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.thali_combo_veg_nonveg,
-//                title = "Combo Thali (Veg + Non-Veg)",
-//                price = "₹480",
-//                restaurantName = "Combo Restaurant",
-//                rating = "4.6",
-//                deliveryTime = "25-35 mins",
-//                distance = "2.3 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹96",
-//                address = "Delhi NCR"
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.thali_unlimited_refill,
-//                title = "Unlimited Thali with Refills",
-//                price = "₹390",
-//                restaurantName = "Unlimited Bhoj",
-//                rating = "4.8",
-//                deliveryTime = "22-32 mins",
-//                distance = "1.9 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹98",
-//                address = "Mumbai, Maharashtra"
-//            )
-//        ).forEach { restaurantItem ->
-//            Column {
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val chickenItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chicken_butter_masala,
+                title = "Chicken Butter Masala",
+                price = "₹320",
+                restaurantName = "Butter Chicken House",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹64",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chicken_biryani_hyderabadi,
+                title = "Hyderabadi Chicken Biryani",
+                price = "₹280",
+                restaurantName = "Biryani Palace",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹42",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chicken_tikka_masala,
+                title = "Chicken Tikka Masala",
+                price = "₹350",
+                restaurantName = "Tandoori Express",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹88",
+                address = "Punjab"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chicken_kebab_platter,
+                title = "Chicken Kebab Platter",
+                price = "₹420",
+                restaurantName = "Kebab Corner",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹42",
+                address = "Lucknow, UP"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chicken_curry_spicy,
+                title = "Spicy Chicken Curry",
+                price = "₹260",
+                restaurantName = "Spice Kitchen",
+                rating = "4.5",
+                deliveryTime = "18-28 mins",
+                distance = "1.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹78",
+                address = "Kolkata, WB"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chicken_rogan_josh,
+                title = "Chicken Rogan Josh",
+                price = "₹380",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹76",
+                address = "Srinagar, Kashmir"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chicken_chettinad,
+                title = "Chicken Chettinad",
+                price = "₹340",
+                restaurantName = "Chettinad Spice",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹51",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chicken_mughlai,
+                title = "Mughlai Chicken",
+                price = "₹450",
+                restaurantName = "Mughlai Darbar",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹45",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chicken_65,
+                title = "Chicken 65",
+                price = "₹220",
+                restaurantName = "Andhra Spice",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chicken_tandoori,
+                title = "Tandoori Chicken",
+                price = "₹390",
+                restaurantName = "Tandoor Special",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹78",
+                address = "Punjab"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chicken_korma,
+                title = "Chicken Korma",
+                price = "₹310",
+                restaurantName = "Awadhi Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹47",
+                address = "Lucknow, UP"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chicken_fry,
+                title = "Crispy Chicken Fry",
+                price = "₹270",
+                restaurantName = "Fry House",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹81",
+                address = "Kerala"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chicken_handi,
+                title = "Chicken Handi",
+                price = "₹360",
+                restaurantName = "Handi House",
+                rating = "4.7",
+                deliveryTime = "28-38 mins",
+                distance = "2.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹72",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chicken_saagwala,
+                title = "Chicken Saagwala",
+                price = "₹330",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹50",
+                address = "Amritsar, Punjab"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chicken_manchurian,
+                title = "Chicken Manchurian",
+                price = "₹290",
+                restaurantName = "Indo-Chinese Corner",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹73",
+                address = "Kolkata, WB"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chicken_afghani,
+                title = "Afghani Chicken",
+                price = "₹410",
+                restaurantName = "Afghani Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.6 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹41",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chicken_keema,
+                title = "Chicken Keema",
+                price = "₹240",
+                restaurantName = "Keema Special",
+                rating = "4.5",
+                deliveryTime = "18-28 mins",
+                distance = "1.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹72",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chicken_lollipop,
+                title = "Chicken Lollipop",
+                price = "₹230",
+                restaurantName = "Appetizer House",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹58",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chicken_curry_combo,
+                title = "Chicken Curry Combo",
+                price = "₹370",
+                restaurantName = "Combo Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹74",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chicken_boneless,
+                title = "Boneless Chicken Special",
+                price = "₹400",
+                restaurantName = "Boneless Kitchen",
+                rating = "4.8",
+                deliveryTime = "28-38 mins",
+                distance = "2.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹60",
+                address = "Pune, Maharashtra"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -13371,14 +13361,522 @@ fun VegMealCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Vegetarian Meals",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val vegMealFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Meal Types WITH left icons (visual categories)
+                FilterChip(
+                    id = "veg_combo",
+                    text = "Vegetarian Combo",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_combo
+                ),
+                FilterChip(
+                    id = "veg_curry",
+                    text = "Veg Curry Meals",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_curry
+                ),
+                FilterChip(
+                    id = "veg_thali",
+                    text = "Veg Thali",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_thali_3
+                ),
+
+                // Cuisine Type WITH left icons
+                FilterChip(
+                    id = "north_indian",
+                    text = "North Indian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_north_indian
+                ),
+                FilterChip(
+                    id = "south_indian",
+                    text = "South Indian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_south_indian
+                ),
+
+                // Dietary Preferences (text-only)
+                FilterChip(
+                    id = "jain",
+                    text = "Jain",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sattvic",
+                    text = "Sattvic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Meal Components (text-only)
+                FilterChip(
+                    id = "with_rice",
+                    text = "With Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_roti",
+                    text = "With Roti",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Price Range (text-only)
+                FilterChip(
+                    id = "budget",
+                    text = "Budget",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = vegMealFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val completeVegThaliItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.thali_veg_rajasthani,
+                title = "Royal Rajasthani Veg Thali",
+                price = "450",
+                restaurantName = "Rajasthan Dhaba",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.1 km",
+                discount = "20%",
+                discountAmount = "up to ₹90",
+                address = "Jaipur, Rajasthan",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.thali_veg_punjabi,
+                title = "Punjabi Special Veg Thali",
+                price = "550",
+                restaurantName = "Punjab Grill",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹82",
+                address = "Amritsar, Punjab",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.thali_veg_south_indian,
+                title = "South Indian Veg Thali",
+                price = "380",
+                restaurantName = "Chettinad Kitchen",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹95",
+                address = "Chennai, Tamil Nadu",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.thali_veg_gujarati,
+                title = "Gujarati Thali",
+                price = "480",
+                restaurantName = "Gujarati Bhojanalay",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹48",
+                address = "Ahmedabad, Gujarat",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.thali_veg_mini,
+                title = "Mini Veg Thali",
+                price = "250",
+                restaurantName = "Quick Bites",
+                rating = "4.3",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "30%",
+                discountAmount = "up to ₹75",
+                address = "Delhi NCR",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.thali_veg_festive,
+                title = "Festive Veg Thali",
+                price = "620",
+                restaurantName = "Udupi Palace",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹124",
+                address = "Bangalore, Karnataka",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = completeVegThaliItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val vegItems = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.paneer_butter_masala,
+                title = "Paneer Butter Masala",
+                price = "₹280",
+                restaurantName = "Paneer Special",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.veg_biryani_2,
+                title = "Hyderabadi Veg Biryani",
+                price = "₹220",
+                restaurantName = "Biryani Palace",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹33",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.palak_paneer,
+                title = "Palak Paneer",
+                price = "₹260",
+                restaurantName = "Tandoori Express",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹65",
+                address = "Punjab"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.veg_kebab_platter,
+                title = "Veg Kebab Platter",
+                price = "₹320",
+                restaurantName = "Kebab Corner",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹32",
+                address = "Lucknow, UP"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chana_masala,
+                title = "Spicy Chana Masala",
+                price = "₹180",
+                restaurantName = "Spice Kitchen",
+                rating = "4.5",
+                deliveryTime = "18-28 mins",
+                distance = "1.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹54",
+                address = "Kolkata, WB"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.dum_aloo,
+                title = "Kashmiri Dum Aloo",
+                price = "₹240",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹48",
+                address = "Srinagar, Kashmir"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.veg_chettinad,
+                title = "Chettinad Veg Curry",
+                price = "₹250",
+                restaurantName = "Chettinad Spice",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹38",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.navratan_korma,
+                title = "Navratan Korma",
+                price = "₹320",
+                restaurantName = "Mughlai Darbar",
+                rating = "4.7",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹32",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.gobi_manchurian,
+                title = "Gobi Manchurian",
+                price = "₹190",
+                restaurantName = "Indo-Chinese Corner",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹48",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.tandoori_paneer,
+                title = "Tandoori Paneer",
+                price = "₹290",
+                restaurantName = "Tandoor Special",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹58",
+                address = "Punjab"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.malai_kofta,
+                title = "Malai Kofta",
+                price = "₹270",
+                restaurantName = "Awadhi Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹41",
+                address = "Lucknow, UP"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.veg_fry,
+                title = "Crispy Veg Fry",
+                price = "₹200",
+                restaurantName = "Fry House",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "Kerala"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.paneer_handi,
+                title = "Paneer Handi",
+                price = "₹280",
+                restaurantName = "Handi House",
+                rating = "4.7",
+                deliveryTime = "28-38 mins",
+                distance = "2.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.sarson_saag,
+                title = "Sarson Ka Saag",
+                price = "₹230",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Amritsar, Punjab"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.veg_manchurian,
+                title = "Veg Manchurian",
+                price = "₹210",
+                restaurantName = "Chinese Delight",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹53",
+                address = "Kolkata, WB"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.kadai_paneer,
+                title = "Kadai Paneer",
+                price = "₹300",
+                restaurantName = "North Indian Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.6 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹30",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.matar_paneer,
+                title = "Matar Paneer",
+                price = "₹220",
+                restaurantName = "Paneer Special",
+                rating = "4.5",
+                deliveryTime = "18-28 mins",
+                distance = "1.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹66",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.veg_cutlet,
+                title = "Veg Cutlet Platter",
+                price = "₹180",
+                restaurantName = "Appetizer House",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹45",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.veg_combo,
+                title = "Veg Curry Combo",
+                price = "₹270",
+                restaurantName = "Combo Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹54",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.mixed_veg,
+                title = "Mixed Vegetable Special",
+                price = "₹250",
+                restaurantName = "Veggie Kitchen",
+                rating = "4.8",
+                deliveryTime = "28-38 mins",
+                distance = "2.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹38",
+                address = "Pune, Maharashtra"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 

@@ -72,6 +72,7 @@ sealed class CategoryPage(val title: String, val iconRes: Int) {
     object Noodles : CategoryPage("Noodles", R.drawable.noodles_food)
     object Paratha : CategoryPage("Paratha", R.drawable.paratha_food)
     object Shawarma : CategoryPage("Shawarma", R.drawable.shawarma_food)
+    object SouthIndian : CategoryPage("South Indian", R.drawable.south_indian_food)
     object SeeAll : CategoryPage("See All", R.drawable.see_all_food)
 }
 
@@ -123,6 +124,7 @@ fun CategoryTabsFood(
         CategoryPage.Noodles,
         CategoryPage.Paratha,
         CategoryPage.Shawarma,
+        CategoryPage.SouthIndian,
         CategoryPage.SeeAll,
     )
 
@@ -236,7 +238,8 @@ fun CategoryTabsFood(
                 29 -> NoodlesCategoryPage()
                 30 -> ParathaCategoryPage()
                 31 -> ShawarmaCategoryPage()
-                32 -> SeeAllCategoryPage()
+                32 -> SouthIndianCategoryPage()
+                33 -> SeeAllCategoryPage()
                 else -> AllCategoryPage()
             }
         }
@@ -13885,14 +13888,541 @@ fun NorthIndianCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "North Indian Cuisine",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val northIndianFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // North Indian Specialties WITH left icons
+                FilterChip(
+                    id = "tandoori",
+                    text = "Tandoori Dishes",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tandoori
+                ),
+                FilterChip(
+                    id = "curry",
+                    text = "Curry Specials",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_curry
+                ),
+                FilterChip(
+                    id = "biryani",
+                    text = "Biryani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_biryani
+                ),
+
+                // Bread Types WITH left icons
+                FilterChip(
+                    id = "naan",
+                    text = "Naan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_naan
+                ),
+                FilterChip(
+                    id = "roti",
+                    text = "Roti",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_roti
+                ),
+
+                // Regional Variations (text-only)
+                FilterChip(
+                    id = "punjabi",
+                    text = "Punjabi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mughlai",
+                    text = "Mughlai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kashmiri",
+                    text = "Kashmiri",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Meal Types (text-only)
+                FilterChip(
+                    id = "thali",
+                    text = "Thali",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo",
+                    text = "Combo Meals",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Spice Level (text-only)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Price Range (text-only)
+                FilterChip(
+                    id = "budget",
+                    text = "Budget",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+         FilterButtonFood(
+            filterConfig = northIndianFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val northIndianFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.north_indian_butter_chicken,
+                title = "Butter Chicken",
+                price = "380",
+                restaurantName = "Punjab Grill",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "20%",
+                discountAmount = "up to ₹76",
+                address = "Chandni Chowk, Delhi",),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.north_indian_paneer_tikka,
+                title = "Paneer Tikka Masala",
+                price = "320",
+                restaurantName = "Kesar Da Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹48",
+                address = "Amritsar, Punjab", ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.north_indian_dal_makhani,
+                title = "Dal Makhani",
+                price = "280",
+                restaurantName = "Bukhara",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "3.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹28",
+                address = "ITC Maurya, Delhi",),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.north_indian_rogan_josh,
+                title = "Rogan Josh",
+                price = "420",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.6",
+                deliveryTime = "35-45 mins",
+                distance = "2.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹105",
+                address = "Srinagar, Kashmir",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.north_indian_naan,
+                title = "Butter Naan Basket",
+                price = "180",
+                restaurantName = "Tandoori Nights",
+                rating = "4.4",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹54",
+                address = "Karol Bagh, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.north_indian_biryani,
+                title = "Chicken Dum Biryani",
+                price = "350",
+                restaurantName = "Biryani Blues",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹70",
+                address = "Lucknow, Uttar Pradesh",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = northIndianFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val northIndianFoodItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.north_butter_chicken,
+                title = "Butter Chicken",
+                price = "₹380",
+                restaurantName = "Punjab Grill",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹76",
+                address = "Chandni Chowk, Delhi",
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.north_paneer_tikka_masala,
+                title = "Paneer Tikka Masala",
+                price = "₹320",
+                restaurantName = "Kesar Da Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹48",
+                address = "Amritsar, Punjab",
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.north_dal_makhani,
+                title = "Dal Makhani",
+                price = "₹280",
+                restaurantName = "Bukhara",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "3.2 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹28",
+                address = "ITC Maurya, Delhi",
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.north_rogan_josh,
+                title = "Rogan Josh",
+                price = "₹420",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.6",
+                deliveryTime = "35-45 mins",
+                distance = "2.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹105",
+                address = "Srinagar, Kashmir",
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.north_butter_naan,
+                title = "Butter Naan Basket",
+                price = "₹180",
+                restaurantName = "Tandoori Nights",
+                rating = "4.4",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹54",
+                address = "Karol Bagh, Delhi",
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.north_chicken_biryani,
+                title = "Chicken Dum Biryani",
+                price = "₹350",
+                restaurantName = "Biryani Blues",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹70",
+                address = "Lucknow, Uttar Pradesh",
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.north_chole_bhature,
+                title = "Chole Bhature",
+                price = "₹220",
+                restaurantName = "Sita Ram Diwan Chand",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹22",
+                address = "Paharganj, Delhi",
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.north_tandoori_chicken,
+                title = "Tandoori Chicken Full",
+                price = "₹450",
+                restaurantName = "Moti Mahal",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "2.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹68",
+                address = "Daryaganj, Delhi",
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.north_palak_paneer,
+                title = "Palak Paneer",
+                price = "₹280",
+                restaurantName = "Bikanervala",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Rajouri Garden, Delhi",
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.north_rajma_chawal,
+                title = "Rajma Chawal Combo",
+                price = "₹190",
+                restaurantName = "Haldiram's",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹48",
+                address = "Connaught Place, Delhi",
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.north_kadhai_paneer,
+                title = "Kadhai Paneer",
+                price = "₹320",
+                restaurantName = "Pind Balluchi",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.8 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹58",
+                address = "Gurgaon, Haryana",
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.north_mutton_korma,
+                title = "Mutton Korma",
+                price = "₹480",
+                restaurantName = "Karim's",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "3.1 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹58",
+                address = "Jama Masjid, Delhi",
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.north_naan_basket,
+                title = "Naan Basket with Dips",
+                price = "₹240",
+                restaurantName = "Tandoor King",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹48",
+                address = "Noida, Uttar Pradesh",
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.north_chicken_korma,
+                title = "Chicken Korma",
+                price = "₹340",
+                restaurantName = "Mughlai Darbar",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹51",
+                address = "Old Delhi",
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.north_matar_paneer,
+                title = "Matar Paneer Special",
+                price = "₹270",
+                restaurantName = "Baba Chicken Corner",
+                rating = "4.5",
+                deliveryTime = "18-28 mins",
+                distance = "1.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹68",
+                address = "Chandigarh, Punjab",
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.north_methi_malai_mutter,
+                title = "Methi Malai Mutter",
+                price = "₹260",
+                restaurantName = "Green Garden",
+                rating = "4.6",
+                deliveryTime = "22-32 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹52",
+                address = "Jaipur, Rajasthan",
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.north_amritsari_fish,
+                title = "Amritsari Fish Fry",
+                price = "₹420",
+                restaurantName = "Fish Fry House",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.7 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹42",
+                address = "Amritsar, Punjab",
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.north_paneer_butter_masala,
+                title = "Paneer Butter Masala",
+                price = "₹310",
+                restaurantName = "Paneer Mahal",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹56",
+                address = "Delhi NCR",
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.north_mutton_biryani,
+                title = "Mutton Biryani",
+                price = "₹380",
+                restaurantName = "Biryani Mahal",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹57",
+                address = "Lucknow, UP",
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.north_mix_veg,
+                title = "Mixed Vegetable Curry",
+                price = "₹220",
+                restaurantName = "Dhaba Express",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹66",
+                address = "Highway Dhaba, Delhi",
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -13901,14 +14431,549 @@ fun PaneerCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Paneer Dishes",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val paneerFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Popular Paneer Dishes WITH left icons
+                FilterChip(
+                    id = "paneer_butter_masala",
+                    text = "Butter Masala",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_butter
+                ),
+                FilterChip(
+                    id = "paneer_tikka",
+                    text = "Paneer Tikka",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_tikka
+                ),
+                FilterChip(
+                    id = "palak_paneer",
+                    text = "Palak Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_palak_paneer
+                ),
+
+                // Paneer Curry Types WITH left icons
+                FilterChip(
+                    id = "kadhai_paneer",
+                    text = "Kadhai Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kadhai_paneer
+                ),
+                FilterChip(
+                    id = "matar_paneer",
+                    text = "Matar Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_matar_paneer
+                ),
+
+                // Cooking Style (text-only)
+                FilterChip(
+                    id = "tandoori",
+                    text = "Tandoori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "curry",
+                    text = "Curry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dry",
+                    text = "Dry Sabzi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Regional Styles (text-only)
+                FilterChip(
+                    id = "punjabi",
+                    text = "Punjabi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mughlai",
+                    text = "Mughlai Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "south_indian",
+                    text = "South Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Preparation Type (text-only)
+                FilterChip(
+                    id = "handi",
+                    text = "Handi Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tawa",
+                    text = "Tawa Fry",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Spice Level (text-only)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = paneerFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val paneerFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.paneer_butter_masala_2,
+                title = "Paneer Butter Masala",
+                price = "320",
+                restaurantName = "Paneer Palace",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹64",
+                address = "Delhi NCR",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.palak_paneer_2,
+                title = "Palak Paneer",
+                price = "280",
+                restaurantName = "Green Garden",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹42",
+                address = "Punjab",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.paneer_tikka,
+                title = "Paneer Tikka",
+                price = "290",
+                restaurantName = "Tandoor Special",
+                rating = "4.6",
+                deliveryTime = "30-40 mins",
+                distance = "2.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹29",
+                address = "Amritsar, Punjab",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.kadhai_paneer,
+                title = "Kadhai Paneer",
+                price = "310",
+                restaurantName = "North Indian Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.6 km",
+                discount = "25%",
+                discountAmount = "up to ₹78",
+                address = "Delhi NCR",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.matar_paneer_2,
+                title = "Matar Paneer",
+                price = "270",
+                restaurantName = "Paneer Special",
+                rating = "4.5",
+                deliveryTime = "18-28 mins",
+                distance = "1.1 km",
+                discount = "30%",
+                discountAmount = "up to ₹81",
+                address = "Mumbai, Maharashtra",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.paneer_kofta,
+                title = "Paneer Kofta Curry",
+                price = "340",
+                restaurantName = "Mughlai Darbar",
+                rating = "4.7",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹68",
+                address = "Lucknow, Uttar Pradesh",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = paneerFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color =  MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val northIndianFoodItemsList = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.north_butter_chicken,
+//                title = "Butter Chicken",
+//                price = "₹380",
+//                restaurantName = "Punjab Grill",
+//                rating = "4.8",
+//                deliveryTime = "25-35 mins",
+//                distance = "2.1 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹76",
+//                address = "Chandni Chowk, Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.north_paneer_tikka_masala,
+//                title = "Paneer Tikka Masala",
+//                price = "₹320",
+//                restaurantName = "Kesar Da Dhaba",
+//                rating = "4.7",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.8 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹48",
+//                address = "Amritsar, Punjab",
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.north_dal_makhani,
+//                title = "Dal Makhani",
+//                price = "₹280",
+//                restaurantName = "Bukhara",
+//                rating = "4.9",
+//                deliveryTime = "30-40 mins",
+//                distance = "3.2 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹28",
+//                address = "ITC Maurya, Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.north_rogan_josh,
+//                title = "Rogan Josh",
+//                price = "₹420",
+//                restaurantName = "Kashmiri Kitchen",
+//                rating = "4.6",
+//                deliveryTime = "35-45 mins",
+//                distance = "2.5 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹105",
+//                address = "Srinagar, Kashmir",
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.north_butter_naan,
+//                title = "Butter Naan Basket",
+//                price = "₹180",
+//                restaurantName = "Tandoori Nights",
+//                rating = "4.4",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.2 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹54",
+//                address = "Karol Bagh, Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.north_chicken_biryani,
+//                title = "Chicken Dum Biryani",
+//                price = "₹350",
+//                restaurantName = "Biryani Blues",
+//                rating = "4.7",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.5 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹70",
+//                address = "Lucknow, Uttar Pradesh",
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.north_chole_bhature,
+//                title = "Chole Bhature",
+//                price = "₹220",
+//                restaurantName = "Sita Ram Diwan Chand",
+//                rating = "4.8",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.8 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹22",
+//                address = "Paharganj, Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.north_tandoori_chicken,
+//                title = "Tandoori Chicken Full",
+//                price = "₹450",
+//                restaurantName = "Moti Mahal",
+//                rating = "4.6",
+//                deliveryTime = "25-35 mins",
+//                distance = "2.3 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹68",
+//                address = "Daryaganj, Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.north_palak_paneer,
+//                title = "Palak Paneer",
+//                price = "₹280",
+//                restaurantName = "Bikanervala",
+//                rating = "4.5",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.7 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹56",
+//                address = "Rajouri Garden, Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.north_rajma_chawal,
+//                title = "Rajma Chawal Combo",
+//                price = "₹190",
+//                restaurantName = "Haldiram's",
+//                rating = "4.4",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.0 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹48",
+//                address = "Connaught Place, Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.north_kadhai_paneer,
+//                title = "Kadhai Paneer",
+//                price = "₹320",
+//                restaurantName = "Pind Balluchi",
+//                rating = "4.7",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.8 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹58",
+//                address = "Gurgaon, Haryana",
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.north_mutton_korma,
+//                title = "Mutton Korma",
+//                price = "₹480",
+//                restaurantName = "Karim's",
+//                rating = "4.9",
+//                deliveryTime = "35-45 mins",
+//                distance = "3.1 km",
+//                discount = "12% OFF",
+//                discountAmount = "up to ₹58",
+//                address = "Jama Masjid, Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.north_naan_basket,
+//                title = "Naan Basket with Dips",
+//                price = "₹240",
+//                restaurantName = "Tandoor King",
+//                rating = "4.6",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.4 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹48",
+//                address = "Noida, Uttar Pradesh",
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.north_chicken_korma,
+//                title = "Chicken Korma",
+//                price = "₹340",
+//                restaurantName = "Mughlai Darbar",
+//                rating = "4.7",
+//                deliveryTime = "25-35 mins",
+//                distance = "2.2 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹51",
+//                address = "Old Delhi",
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.north_matar_paneer,
+//                title = "Matar Paneer Special",
+//                price = "₹270",
+//                restaurantName = "Baba Chicken Corner",
+//                rating = "4.5",
+//                deliveryTime = "18-28 mins",
+//                distance = "1.3 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹68",
+//                address = "Chandigarh, Punjab",
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.north_methi_malai_mutter,
+//                title = "Methi Malai Mutter",
+//                price = "₹260",
+//                restaurantName = "Green Garden",
+//                rating = "4.6",
+//                deliveryTime = "22-32 mins",
+//                distance = "1.9 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹52",
+//                address = "Jaipur, Rajasthan",
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.north_amritsari_fish,
+//                title = "Amritsari Fish Fry",
+//                price = "₹420",
+//                restaurantName = "Fish Fry House",
+//                rating = "4.8",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.7 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹42",
+//                address = "Amritsar, Punjab",
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.north_paneer_butter_masala,
+//                title = "Paneer Butter Masala",
+//                price = "₹310",
+//                restaurantName = "Paneer Mahal",
+//                rating = "4.7",
+//                deliveryTime = "25-35 mins",
+//                distance = "2.0 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹56",
+//                address = "Delhi NCR",
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.north_mutton_biryani,
+//                title = "Mutton Biryani",
+//                price = "₹380",
+//                restaurantName = "Biryani Mahal",
+//                rating = "4.8",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹57",
+//                address = "Lucknow, UP",
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.north_mix_veg,
+//                title = "Mixed Vegetable Curry",
+//                price = "₹220",
+//                restaurantName = "Dhaba Express",
+//                rating = "4.5",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.6 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹66",
+//                address = "Highway Dhaba, Delhi",
+//            )
+//        ).forEach { restaurantItem ->
+//            Column {
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
     }
 }
 
@@ -13975,6 +15040,21 @@ fun ShawarmaCategoryPage() {
         )
     }
 }
+@Composable
+fun SouthIndianCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "South Indian",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        )
+    }
+}
 
 @Composable
 fun SeeAllCategoryPage() {
@@ -14032,7 +15112,8 @@ fun MainScreen(navController: NavHostController) {
                     CategoryPage.Noodles -> 29
                     CategoryPage.Paratha -> 30
                     CategoryPage.Shawarma -> 31
-                    CategoryPage.SeeAll -> 32
+                    CategoryPage.SouthIndian -> 32
+                    CategoryPage.SeeAll -> 33
                 }
             }
         )

@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.hufko.ui.theme.customColors
 import com.example.hufko.R
 import com.example.hufko.components.navigation.TabNavigationApp
@@ -144,7 +145,7 @@ fun CategoryItemHeader(
 // MAIN CATEGORY SCREEN — SMOOTH HEADER HIDE/SHOW
 // ----------------------------------------------------------
 @Composable
-fun CategoryScreen(onOpenFashion: () -> Unit) {
+fun CategoryScreen(navController: NavHostController? = null, onOpenFashion: () -> Unit) {
 
     val selectedCategory = remember { mutableStateOf("Food") }
 

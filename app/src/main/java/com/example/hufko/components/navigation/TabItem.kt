@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.compose.rememberNavController
 import com.example.hufko.R
 import com.example.hufko.components.homescreen.HomeScreen
 
@@ -23,7 +24,9 @@ sealed class TabItem(
         icon = Icons.Filled.Home,
         imageResource = R.drawable.outline_home_24, // Add this image to your drawable resources
         screen = {
-            HomeScreen()
+            val navController = rememberNavController()
+            HomeScreen(navController)
+//            HomeScreen()
         }
     )
 

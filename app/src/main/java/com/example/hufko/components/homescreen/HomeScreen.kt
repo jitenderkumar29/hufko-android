@@ -16,12 +16,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.navigation.NavHostController
 import com.example.hufko.components.searchbar.SearchBar
 import com.example.hufko.ui.theme.customColors
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     var searchQuery by remember { mutableStateOf("") }
     var showLocationDialog by remember { mutableStateOf(false) }
     var selectedLocation by remember {
@@ -164,7 +165,12 @@ fun HomeScreen() {
             }
 
             item {
-                CategoryTabsFood()
+                CategoryTabsFood(
+                    navController = navController,
+                    onCategorySelected = { category ->
+                        // optional
+                    }
+                )
             }
 
 //                stickyHeader {

@@ -93,6 +93,7 @@ data class FoodItem(
 
 @Composable
 fun CategoryTabsFood(
+    navController: NavHostController? = null, // Add this parameter
     onCategorySelected: (CategoryPage) -> Unit = {}
 ) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
@@ -164,9 +165,18 @@ fun CategoryTabsFood(
                 Tab(
                     selected = selectedTabIndex == index,
                     onClick = {
-                        selectedTabIndex = index
-                        onCategorySelected(categoryPage)
+                        // If See All tab clicked → navigate
+                        if (categoryPage is CategoryPage.SeeAll) {
+                            navController?.navigate("category_tabs_f_list")
+                        } else {
+                            selectedTabIndex = index
+                            onCategorySelected(categoryPage)
+                        }
                     },
+//                    onClick = {
+//                        selectedTabIndex = index
+//                        onCategorySelected(categoryPage)
+//                    }
                     modifier = Modifier
                         .padding(horizontal = 2.dp)
                         .background(Color.Transparent)
@@ -257,7 +267,7 @@ fun CategoryTabsFood(
                 36 -> PavBhajiCategoryPage()
                 37 -> SandwichCategoryPage()
                 38 -> ShakeCategoryPage()
-                39 -> SeeAllCategoryPage()
+//                39 -> SeeAllCategoryPage()
                 else -> AllCategoryPage()
             }
         }
@@ -267,14 +277,7 @@ fun CategoryTabsFood(
 // Category Page Composables for all categories
 @Composable
 fun DietCategoryPage(
-    onBanner1Click: () ->
-//        Text(
-//            text = "Diet",
-//            fontSize = 24.sp,
-//            fontWeight = FontWeight.Bold,
-//            color = MaterialTheme.customColors.black
-//        )
-    Unit = {},
+    onBanner1Click: () -> Unit = {},
     onBanner2Click: () -> Unit = {},
     onBanner3Click: () -> Unit = {}
 ){
@@ -15816,304 +15819,304 @@ fun NoodlesCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color =  MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val friedRiceItemsList = listOf(
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.north_veg_fried_rice,
-//                title = "Veg Fried Rice",
-//                price = "₹180",
-//                restaurantName = "Chinese Wok",
-//                rating = "4.5",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹36",
-//                address = "Delhi NCR",
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.north_egg_fried_rice,
-//                title = "Egg Fried Rice",
-//                price = "₹210",
-//                restaurantName = "Dragon House",
-//                rating = "4.7",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.8 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹32",
-//                address = "Kolkata, West Bengal",
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.north_chicken_fried_rice,
-//                title = "Chicken Fried Rice",
-//                price = "₹250",
-//                restaurantName = "Golden Dragon",
-//                rating = "4.8",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.2 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹63",
-//                address = "Mumbai, Maharashtra",
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.north_schezwan_fried_rice,
-//                title = "Schezwan Fried Rice",
-//                price = "₹220",
-//                restaurantName = "Spicy Chinese",
-//                rating = "4.6",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.9 km",
-//                discount = "18% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Bengaluru, Karnataka",
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.north_prawn_fried_rice,
-//                title = "Prawn Fried Rice",
-//                price = "₹280",
-//                restaurantName = "Coastal Chinese",
-//                rating = "4.7",
-//                deliveryTime = "35-45 mins",
-//                distance = "2.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹56",
-//                address = "Chennai, Tamil Nadu",
-//            ),
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.north_paneer_fried_rice,
-//                title = "Paneer Fried Rice",
-//                price = "₹230",
-//                restaurantName = "Veggie Chinese",
-//                rating = "4.5",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.6 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹69",
-//                address = "Ahmedabad, Gujarat",
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.north_mushroom_fried_rice,
-//                title = "Mushroom Fried Rice",
-//                price = "₹200",
-//                restaurantName = "Mushroom Special",
-//                rating = "4.4",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.7 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹50",
-//                address = "Pune, Maharashtra",
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.north_mixed_fried_rice,
-//                title = "Mixed Fried Rice",
-//                price = "₹270",
-//                restaurantName = "Chinese Delight",
-//                rating = "4.7",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.3 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹41",
-//                address = "Hyderabad, Telangana",
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.north_american_fried_rice,
-//                title = "American Fried Rice",
-//                price = "₹290",
-//                restaurantName = "Fusion Kitchen",
-//                rating = "4.6",
-//                deliveryTime = "25-35 mins",
-//                distance = "2.1 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹58",
-//                address = "Goa",
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.north_thai_fried_rice,
-//                title = "Thai Fried Rice",
-//                price = "₹260",
-//                restaurantName = "Thai Corner",
-//                rating = "4.8",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.4 km",
-//                discount = "22% OFF",
-//                discountAmount = "up to ₹57",
-//                address = "Kerala",
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.north_garlic_fried_rice,
-//                title = "Garlic Fried Rice",
-//                price = "₹190",
-//                restaurantName = "Garlic Lovers",
-//                rating = "4.5",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.4 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹57",
-//                address = "Delhi",
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.north_jeera_fried_rice,
-//                title = "Jeera Fried Rice",
-//                price = "₹170",
-//                restaurantName = "Indian Chinese",
-//                rating = "4.3",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.2 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹34",
-//                address = "Jaipur, Rajasthan",
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.north_singapore_fried_rice,
-//                title = "Singapore Fried Rice",
-//                price = "₹240",
-//                restaurantName = "Singapore Kitchen",
-//                rating = "4.6",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.9 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹60",
-//                address = "Singapore Town, Delhi",
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.nourth_yangzhou_fried_rice,
-//                title = "Yangzhou Fried Rice",
-//                price = "₹310",
-//                restaurantName = "Authentic Chinese",
-//                rating = "4.7",
-//                deliveryTime = "35-45 mins",
-//                distance = "2.6 km",
-//                discount = "18% OFF",
-//                discountAmount = "up to ₹56",
-//                address = "Chinatown, Delhi",
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.north_kimchi_fried_rice,
-//                title = "Kimchi Fried Rice",
-//                price = "₹270",
-//                restaurantName = "Korean Fusion",
-//                rating = "4.5",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.3 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹54",
-//                address = "Korean Street, Delhi",
-//            ),
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.north_brown_rice_fried,
-//                title = "Brown Rice Fried Rice",
-//                price = "₹220",
-//                restaurantName = "Healthy Bites",
-//                rating = "4.4",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.8 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹33",
-//                address = "Health Hub, Delhi",
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.nourth_sizzling_fried_rice,
-//                title = "Sizzling Fried Rice",
-//                price = "₹300",
-//                restaurantName = "Sizzler House",
-//                rating = "4.7",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.2 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹75",
-//                address = "Specialty Restaurant",
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.north_malaysian_fried_rice,
-//                title = "Malaysian Fried Rice",
-//                price = "₹260",
-//                restaurantName = "Malaysian Delight",
-//                rating = "4.6",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹52",
-//                address = "Malaysian Street, Delhi",
-//            ),
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.north_hakka_fried_rice,
-//                title = "Hakka Fried Rice",
-//                price = "₹230",
-//                restaurantName = "Hakka Kitchen",
-//                rating = "4.8",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.7 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹69",
-//                address = "Hakka Street, Delhi",
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.nourth_special_fried_rice,
-//                title = "Chef's Special Fried Rice",
-//                price = "₹350",
-//                restaurantName = "Fine Dining Chinese",
-//                rating = "4.9",
-//                deliveryTime = "40-50 mins",
-//                distance = "3.0 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹53",
-//                address = "Luxury Restaurant, Delhi",
-//            )
-//        ).forEach { restaurantItem ->
-//            Column {
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val noodlesItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.north_veg_hakka_noodles,
+                title = "Veg Hakka Noodles",
+                price = "₹160",
+                restaurantName = "Chinese Wok",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.north_chicken_noodles,
+                title = "Chicken Noodles",
+                price = "₹220",
+                restaurantName = "Dragon House",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹33",
+                address = "Kolkata, West Bengal"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.north_schezwan_noodles,
+                title = "Schezwan Noodles",
+                price = "₹190",
+                restaurantName = "Spicy Chinese",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.7 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹34",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.north_egg_noodles,
+                title = "Egg Noodles",
+                price = "₹180",
+                restaurantName = "Golden Dragon",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹45",
+                address = "Bengaluru, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.north_paneer_noodles,
+                title = "Paneer Noodles",
+                price = "₹210",
+                restaurantName = "Veggie Chinese",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "1.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹63",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.north_mushroom_noodles,
+                title = "Mushroom Noodles",
+                price = "₹190",
+                restaurantName = "Mushroom Special",
+                rating = "4.4",
+                deliveryTime = "15-25 mins",
+                distance = "1.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹48",
+                address = "Ahmedabad, Gujarat"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.north_prawn_noodles,
+                title = "Prawn Noodles",
+                price = "₹260",
+                restaurantName = "Coastal Chinese",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹52",
+                address = "Pune, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.north_mixed_noodles,
+                title = "Mixed Noodles",
+                price = "₹240",
+                restaurantName = "Chinese Delight",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹36",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.north_american_chop_suey,
+                title = "American Chop Suey",
+                price = "₹280",
+                restaurantName = "Fusion Kitchen",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Goa"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.north_thai_noodles,
+                title = "Thai Noodles",
+                price = "₹250",
+                restaurantName = "Thai Corner",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.2 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹55",
+                address = "Kerala"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.north_garlic_noodles,
+                title = "Garlic Noodles",
+                price = "₹170",
+                restaurantName = "Garlic Lovers",
+                rating = "4.5",
+                deliveryTime = "10-20 mins",
+                distance = "1.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹51",
+                address = "Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.north_jeera_noodles,
+                title = "Jeera Noodles",
+                price = "₹150",
+                restaurantName = "Indian Chinese",
+                rating = "4.3",
+                deliveryTime = "10-15 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Jaipur, Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.north_singapore_noodles,
+                title = "Singapore Noodles",
+                price = "₹230",
+                restaurantName = "Singapore Kitchen",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.7 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹58",
+                address = "Singapore Town, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.north_chow_mein,
+                title = "Chow Mein",
+                price = "₹200",
+                restaurantName = "Authentic Chinese",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "2.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹36",
+                address = "Chinatown, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.north_korean_noodles,
+                title = "Korean Noodles",
+                price = "₹240",
+                restaurantName = "Korean Fusion",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹48",
+                address = "Korean Street, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.north_wheat_noodles,
+                title = "Whole Wheat Noodles",
+                price = "₹180",
+                restaurantName = "Healthy Bites",
+                rating = "4.4",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹27",
+                address = "Health Hub, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.north_sizzling_noodles,
+                title = "Sizzling Noodles",
+                price = "₹290",
+                restaurantName = "Sizzler House",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹73",
+                address = "Specialty Restaurant"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.north_malaysian_noodles,
+                title = "Malaysian Noodles",
+                price = "₹240",
+                restaurantName = "Malaysian Delight",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹48",
+                address = "Malaysian Street, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.north_ramen_noodles,
+                title = "Japanese Ramen",
+                price = "₹320",
+                restaurantName = "Tokyo Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹96",
+                address = "Japanese Corner, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.north_special_noodles,
+                title = "Chef's Special Noodles",
+                price = "₹340",
+                restaurantName = "Fine Dining Chinese",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹51",
+                address = "Luxury Restaurant, Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -16122,14 +16125,600 @@ fun ParathaCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Paratha",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val parathaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Popular Paratha Types WITH left icons (visually distinct types)
+                FilterChip(
+                    id = "aloo_paratha",
+                    text = "Aloo Paratha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_aloo_paratha
+                ),
+                FilterChip(
+                    id = "gobi_paratha",
+                    text = "Gobi Paratha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gobi_paratha
+                ),
+                FilterChip(
+                    id = "paneer_paratha",
+                    text = "Paneer Paratha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_paratha
+                ),
+                FilterChip(
+                    id = "lachha_paratha",
+                    text = "Lachha Paratha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lachha_paratha
+                ),
+                FilterChip(
+                    id = "missi_paratha",
+                    text = "Missi Paratha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_missi_paratha
+                ),
+
+                // Flour Type (text-only - conceptual categories)
+                FilterChip(
+                    id = "whole_wheat",
+                    text = "Whole Wheat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maida",
+                    text = "Maida (All-purpose)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "atta_maida_mix",
+                    text = "Atta-Maida Mix",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Stuffing Types (text-only)
+                FilterChip(
+                    id = "veg_stuffed",
+                    text = "Veg Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "non_stuffed",
+                    text = "Plain/Non-Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keema_paratha",
+                    text = "Keema (Minced Meat)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_paratha",
+                    text = "Egg Paratha",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Regional Style (text-only)
+                FilterChip(
+                    id = "punjabi",
+                    text = "Punjabi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "muglai",
+                    text = "Mughlai Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bengali",
+                    text = "Bengali Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "south_indian",
+                    text = "South Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Cooking Method (text-only)
+                FilterChip(
+                    id = "tawa_cooked",
+                    text = "Tawa Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tandoori",
+                    text = "Tandoori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "deep_fried",
+                    text = "Deep Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Accompaniments (text-only)
+                FilterChip(
+                    id = "with_curd",
+                    text = "With Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_pickle",
+                    text = "With Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_curry",
+                    text = "With Curry",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Spice Level (text-only)
+                FilterChip(
+                    id = "mild_paratha",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_paratha",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spicy",
+                    text = "Medium Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = parathaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val parathaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.aloo_paratha,
+                title = "Aloo Paratha",
+                price = "120",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹24",
+                address = "Delhi NCR",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.paneer_paratha,
+                title = "Paneer Paratha",
+                price = "180",
+                restaurantName = "Royal Indian Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Punjab",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.lachha_paratha,
+                title = "Lachha Paratha",
+                price = "90",
+                restaurantName = "Mughlai Restaurant",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹23",
+                address = "Lucknow, Uttar Pradesh",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.gobi_paratha,
+                title = "Gobi Paratha",
+                price = "140",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹14",
+                address = "Rajasthan",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.missi_paratha,
+                title = "Missi Paratha",
+                price = "110",
+                restaurantName = "Traditional Rajasthani",
+                rating = "4.4",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹33",
+                address = "Jaipur, Rajasthan",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.keema_paratha,
+                title = "Keema Paratha",
+                price = "200",
+                restaurantName = "Non-Veg Specials",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Hyderabad, Telangana",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = parathaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val parathaItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.paratha_aloo,
+                title = "Aloo Paratha",
+                price = "₹120",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.paratha_paneer,
+                title = "Paneer Paratha",
+                price = "₹180",
+                restaurantName = "Royal Indian Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹27",
+                address = "Punjab"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.paratha_lachha,
+                title = "Lachha Paratha",
+                price = "₹90",
+                restaurantName = "Mughlai Restaurant",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹23",
+                address = "Lucknow, Uttar Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.paratha_gobi,
+                title = "Gobi Paratha",
+                price = "₹140",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹14",
+                address = "Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.paratha_missi,
+                title = "Missi Paratha",
+                price = "₹110",
+                restaurantName = "Traditional Rajasthani",
+                rating = "4.4",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹33",
+                address = "Jaipur, Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.paratha_keema,
+                title = "Keema Paratha",
+                price = "₹200",
+                restaurantName = "Non-Veg Specials",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.paratha_mooli,
+                title = "Mooli Paratha",
+                price = "₹130",
+                restaurantName = "North Indian Kitchen",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹23",
+                address = "Haryana"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.paratha_methi,
+                title = "Methi Paratha",
+                price = "₹115",
+                restaurantName = "Healthy Indian",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹29",
+                address = "Uttarakhand"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.paratha_cheese,
+                title = "Cheese Paratha",
+                price = "₹220",
+                restaurantName = "Fusion Indian",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹44",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.paratha_onion,
+                title = "Onion Paratha",
+                price = "₹100",
+                restaurantName = "Street Food Corner",
+                rating = "4.4",
+                deliveryTime = "10-20 mins",
+                distance = "0.9 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹30",
+                address = "Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.paratha_pyaaz,
+                title = "Pyaaz Paratha",
+                price = "₹105",
+                restaurantName = "Delhi Street Food",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹21",
+                address = "Old Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.paratha_pudina,
+                title = "Pudina Paratha",
+                price = "₹125",
+                restaurantName = "Mint Special",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹19",
+                address = "Bengaluru, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.paratha_mixed,
+                title = "Mixed Veg Paratha",
+                price = "₹150",
+                restaurantName = "Veggie Paradise",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹38",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.paratha_egg,
+                title = "Egg Paratha",
+                price = "₹140",
+                restaurantName = "Egg Lovers",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹31",
+                address = "Kolkata, West Bengal"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.paratha_chicken,
+                title = "Chicken Paratha",
+                price = "₹190",
+                restaurantName = "Chicken Special",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹38",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.paratha_butter,
+                title = "Butter Paratha",
+                price = "₹95",
+                restaurantName = "Butter King",
+                rating = "4.5",
+                deliveryTime = "10-20 mins",
+                distance = "0.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹29",
+                address = "Amritsar, Punjab"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.paratha_ajwain,
+                title = "Ajwain Paratha",
+                price = "₹85",
+                restaurantName = "Digestive Food",
+                rating = "4.3",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹21",
+                address = "Ayurvedic Kitchen"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.paratha_masala,
+                title = "Masala Paratha",
+                price = "₹135",
+                restaurantName = "Spicy Indian",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹27",
+                address = "Spice Hub, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.paratha_garlic,
+                title = "Garlic Paratha",
+                price = "₹110",
+                restaurantName = "Garlic Heaven",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.3 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹20",
+                address = "Garlic Street, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.paratha_special,
+                title = "Chef's Special Paratha",
+                price = "₹250",
+                restaurantName = "Fine Dining Indian",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹38",
+                address = "Luxury Restaurant, Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
@@ -16254,28 +16843,30 @@ fun ShakeCategoryPage() {
     }
 }
 
-@Composable
-fun SeeAllCategoryPage() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "All Categories",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        )
-        // Add comprehensive list of all food items
-    }
-}
+//@Composable
+//fun SeeAllCategoryPage() {
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(16.dp)
+//    ) {
+//        Text(
+//            text = "All Categories",
+//            fontSize = 24.sp,
+//            fontWeight = FontWeight.Bold,
+//            color = MaterialTheme.customColors.black
+//        )
+//        // Add comprehensive list of all food items
+//    }
+//}
 
 @Composable
 fun MainScreen(navController: NavHostController) {
     var currentPage by remember { mutableIntStateOf(0) }
+
     Column(modifier = Modifier.fillMaxWidth()) {
         CategoryTabsFood(
+            navController = navController,
             onCategorySelected = { categoryPage ->
                 currentPage = when (categoryPage) {
                     CategoryPage.All -> 0
@@ -16317,12 +16908,13 @@ fun MainScreen(navController: NavHostController) {
                     CategoryPage.PavBhaji -> 36
                     CategoryPage.Sandwich -> 37
                     CategoryPage.Shake -> 38
-                    CategoryPage.SeeAll -> 39
+                    CategoryPage.SeeAll -> currentPage // ✅ do nothing
                 }
             }
         )
     }
 }
+
 
 
 private fun onBanner1Click() {

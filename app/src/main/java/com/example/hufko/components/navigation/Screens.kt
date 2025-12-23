@@ -19,12 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.hufko.R
 
 // Welcome Screens for each tab
 
 @Composable
-fun ExploreScreen() {
+fun ExploreScreen(navController: NavHostController?) {
     WelcomeScreen(
         title = "You",
         message = "Discover amazing content and features in the Explore section of Qrakon!",
@@ -33,7 +34,7 @@ fun ExploreScreen() {
 }
 
 @Composable
-fun FavoritesScreen() {
+fun FavoritesScreen(navController: NavHostController?) {
     WelcomeScreen(
         title = "Wallet",
         message = "Your saved favorites and bookmarks are safely stored here in Qrakon.",
@@ -42,7 +43,7 @@ fun FavoritesScreen() {
 }
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController: NavHostController?) {
     WelcomeScreen(
         title = "Cart",
         message = "Manage your Qrakon profile, settings, and personal information here.",
@@ -51,7 +52,7 @@ fun ProfileScreen() {
 }
 
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(navController: NavHostController?) {
     WelcomeScreen(
         title = "Category",
         message = "Customize your Qrakon experience with various settings and preferences.",
@@ -60,7 +61,7 @@ fun SettingsScreen() {
 }
 
 @Composable
-fun NotificationsScreen() {
+fun NotificationsScreen(navController: NavHostController?) {
     WelcomeScreen(
         title = "Pay",
         message = "Stay updated with all your Qrakon notifications and alerts.",

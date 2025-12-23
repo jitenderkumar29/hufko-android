@@ -17,6 +17,7 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -90,13 +91,18 @@ data class FoodItem(
     val isVeg: Boolean = true,
     val category: String = "All"
 )
-
 @Composable
 fun CategoryTabsFood(
-    navController: NavHostController? = null, // Add this parameter
-    onCategorySelected: (CategoryPage) -> Unit = {}
+    navController: NavHostController? = null,
+    selectedTabIndex: Int = 0, // 🔴 Parameter from parent
+    onCategorySelected: (CategoryPage) -> Unit = {},
+    onTabIndexChanged: (Int) -> Unit = {} // 🔴 Callback to update parent
 ) {
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    // ❌ REMOVE THIS LINE - it's shadowing the parameter
+    // var selectedTabIndex by remember { mutableIntStateOf(0) }
+
+    // ✅ Use the parameter directly
+    val currentSelectedIndex = selectedTabIndex
 
     val categoryPages = listOf(
         CategoryPage.All,
@@ -145,38 +151,32 @@ fun CategoryTabsFood(
         modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.customColors.skyBlue)
-//            .background(MaterialTheme.customColors.header)
     ) {
-        ScrollableTabRow(  // Active tab bottom color
-            selectedTabIndex = selectedTabIndex,
+        ScrollableTabRow(
+            selectedTabIndex = currentSelectedIndex, // ✅ Use currentSelectedIndex
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.customColors.black,
             edgePadding = 0.dp,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[currentSelectedIndex]), // ✅ Use currentSelectedIndex
                     height = 5.dp,
                     color = MaterialTheme.customColors.header
-//                    color = MaterialTheme.customColors.white
                 )
             }
         ) {
             categoryPages.forEachIndexed { index, categoryPage ->
                 Tab(
-                    selected = selectedTabIndex == index,
+                    selected = currentSelectedIndex == index, // ✅ Use currentSelectedIndex
                     onClick = {
-                        // If See All tab clicked → navigate
                         if (categoryPage is CategoryPage.SeeAll) {
-                            navController?.navigate("category_tabs_f_list")
+                            navController?.navigate("category_tabs_f_list/${currentSelectedIndex}")
                         } else {
-                            selectedTabIndex = index
+                            // ✅ Update parent via callback
+                            onTabIndexChanged(index)
                             onCategorySelected(categoryPage)
                         }
                     },
-//                    onClick = {
-//                        selectedTabIndex = index
-//                        onCategorySelected(categoryPage)
-//                    }
                     modifier = Modifier
                         .padding(horizontal = 2.dp)
                         .background(Color.Transparent)
@@ -197,12 +197,11 @@ fun CategoryTabsFood(
                         Text(
                             text = categoryPage.title,
                             fontSize = 15.sp,
-                            fontWeight = if (selectedTabIndex == index) FontWeight.Bold else FontWeight.Medium,
-                            color = if (selectedTabIndex == index) {
+                            fontWeight = if (currentSelectedIndex == index) FontWeight.Bold else FontWeight.Medium, // ✅ Use currentSelectedIndex
+                            color = if (currentSelectedIndex == index) { // ✅ Use currentSelectedIndex
                                 MaterialTheme.customColors.header
                             } else {
                                 MaterialTheme.customColors.black
-//                                MaterialTheme.customColors.white
                             },
                             maxLines = 2,
                             textAlign = TextAlign.Center,
@@ -227,7 +226,7 @@ fun CategoryTabsFood(
                     )
                 )
         ) {
-            when (selectedTabIndex) {
+            when (currentSelectedIndex) { // ✅ Use currentSelectedIndex
                 0 -> AllCategoryPage()
                 1 -> DietCategoryPage()
                 2 -> PizzasCategoryPage()
@@ -267,13 +266,11 @@ fun CategoryTabsFood(
                 36 -> PavBhajiCategoryPage()
                 37 -> SandwichCategoryPage()
                 38 -> ShakeCategoryPage()
-//                39 -> SeeAllCategoryPage()
                 else -> AllCategoryPage()
             }
         }
     }
 }
-
 // Category Page Composables for all categories
 @Composable
 fun DietCategoryPage(

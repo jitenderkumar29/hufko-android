@@ -5,14 +5,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.FloatingActionButtonDefaults.elevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -20,9 +18,8 @@ import androidx.navigation.NavHostController
 import com.example.hufko.components.searchbar.SearchBar
 import com.example.hufko.ui.theme.customColors
 
-
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(navController: NavHostController?) {
     var searchQuery by remember { mutableStateOf("") }
     var showLocationDialog by remember { mutableStateOf(false) }
     var selectedLocation by remember {
@@ -39,12 +36,32 @@ fun HomeScreen(navController: NavHostController) {
         )
     }
 
+    // 🔴 CRITICAL: Manage selected tab index in HomeScreen
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
+
+    // 🔴 Listen for updates from CategoryTabsFList via SavedStateHandle
+    LaunchedEffect(navController) {
+        navController?.currentBackStackEntry
+            ?.savedStateHandle
+            ?.getStateFlow<Int?>("updatedTabIndex", null)
+            ?.collect { newIndex ->
+                newIndex?.let { index ->
+                    // Update the selected tab index
+                    selectedTabIndex = index
+                    // Clear the saved state
+                    navController.currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.remove<Int>("updatedTabIndex")
+                }
+            }
+    }
+
     val lazyListState = rememberLazyListState()
     var isLocationVisible by remember { mutableStateOf(true) }
 
     // Track scroll position to hide/show location section
     LaunchedEffect(lazyListState.firstVisibleItemScrollOffset) {
-        val scrollThreshold = 50 // Adjust this value as needed
+        val scrollThreshold = 50
         isLocationVisible = lazyListState.firstVisibleItemScrollOffset < scrollThreshold
     }
 
@@ -58,28 +75,21 @@ fun HomeScreen(navController: NavHostController) {
                 if (isLocationVisible) {
                     Surface(
                         color = MaterialTheme.customColors.header,
-//                        color = MaterialTheme.customColors.darkAccent,
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-//                                .background(MaterialTheme.customColors.header.copy(alpha = 0.5f))
-//                                .background(MaterialTheme.customColors.header)
-//                            .background(
-//                                brush = Brush.verticalGradient(
-//                                    colors = listOf(
-//                                        Color(0xFFC2E1FE),
-//                                        Color(0xFFEDF6FF)
-//                                    )
-//                                )
-//                            )
                                 .padding(horizontal = 12.dp, vertical = 0.dp)
                         ) {
                             Box(
                                 modifier = Modifier
                                     .weight(0.85f)
-                                    .padding(top = 0.dp, bottom = 4.dp, start = 0.dp, end = 0.dp
+                                    .padding(
+                                        top = 0.dp,
+                                        bottom = 4.dp,
+                                        start = 0.dp,
+                                        end = 0.dp
                                     )
                                     .shadow(
                                         elevation = 0.dp,
@@ -99,7 +109,11 @@ fun HomeScreen(navController: NavHostController) {
                             Box(
                                 modifier = Modifier
                                     .weight(0.15f)
-                                    .padding( top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp
+                                    .padding(
+                                        top = 0.dp,
+                                        bottom = 0.dp,
+                                        start = 0.dp,
+                                        end = 0.dp
                                     )
                             ) {
                                 CashbackButton(amount = "50")
@@ -107,7 +121,6 @@ fun HomeScreen(navController: NavHostController) {
                         }
                     }
                 } else {
-                    // Empty space when location is hidden to maintain layout
                     Spacer(modifier = Modifier.height(0.dp))
                 }
             }
@@ -122,14 +135,6 @@ fun HomeScreen(navController: NavHostController) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(MaterialTheme.customColors.header)
-//                            .background(
-//                                brush = Brush.verticalGradient(
-//                                    colors = listOf(
-//                                        Color(0xFFC2E1FE),
-//                                        Color(0xFFEDF6FF)
-//                                    )
-//                                )
-//                            )
                             .padding(horizontal = 12.dp, vertical = 0.dp)
                     ) {
                         Box(
@@ -165,22 +170,19 @@ fun HomeScreen(navController: NavHostController) {
             }
 
             item {
+                // 🔴 Pass selectedTabIndex and callback
                 CategoryTabsFood(
                     navController = navController,
+                    selectedTabIndex = selectedTabIndex,
                     onCategorySelected = { category ->
-                        // optional
+                        // Optional: Handle category selection logic
+                    },
+                    onTabIndexChanged = { newIndex ->
+                        // Update the selectedTabIndex
+                        selectedTabIndex = newIndex
                     }
                 )
             }
-
-//                stickyHeader {
-//                    Surface(
-//                        color = MaterialTheme.customColors.lightAccent,
-//                        modifier = Modifier.fillMaxWidth()
-//                    ) {
-//                        CategoryTabsFood()
-//                    }
-//                }
         }
     }
 

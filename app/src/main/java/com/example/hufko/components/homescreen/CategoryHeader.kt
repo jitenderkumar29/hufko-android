@@ -51,6 +51,7 @@ data class CategoryHeaderClass(
 @Composable
 fun CategoryHeader(
     modifier: Modifier = Modifier,
+    navController: NavHostController? = null,
     onCategorySelected: (String) -> Unit = {}
 ) {
     val categories = remember {
@@ -85,6 +86,7 @@ fun CategoryHeader(
                     CategoryItemHeader(
                         category = category,
                         isSelected = category == selectedCategory.value,
+                        navController = navController,
                         onClick = {
                             selectedCategory.value = category
                             onCategorySelected(category.name)
@@ -100,6 +102,7 @@ fun CategoryHeader(
 fun CategoryItemHeader(
     category: CategoryHeaderClass,
     isSelected: Boolean,
+    navController: NavHostController? = null,
     onClick: () -> Unit
 ) {
     Column(
@@ -145,7 +148,8 @@ fun CategoryItemHeader(
 // MAIN CATEGORY SCREEN — SMOOTH HEADER HIDE/SHOW
 // ----------------------------------------------------------
 @Composable
-fun CategoryScreen(navController: NavHostController? = null, onOpenFashion: () -> Unit) {
+fun CategoryScreen(navController: NavHostController? = null,
+                   onOpenFashion: () -> Unit) {
 
     val selectedCategory = remember { mutableStateOf("Food") }
 
@@ -189,6 +193,7 @@ fun CategoryScreen(navController: NavHostController? = null, onOpenFashion: () -
             ) + fadeOut(tween(120))
         ) {
             CategoryHeader(
+                navController = navController,
                 onCategorySelected = { name ->
                     selectedCategory.value = name
                     if (name == "Fashion") onOpenFashion()
@@ -202,14 +207,14 @@ fun CategoryScreen(navController: NavHostController? = null, onOpenFashion: () -
                 .nestedScroll(nestedScrollConnection)
         ) {
             when (selectedCategory.value) {
-                "Food" -> FoodScreen()
-                "Dine Out" -> DineOutScreen()
-                "Pay" -> PayScreen()
-                "Grocery" -> GroceryScreen()
-                "Shopping" -> ShoppingScreen()
-                "Flower" -> FlowerScreen()
-                "Care" -> CareScreen()
-                "Pharma" -> PharmaScreen()
+                "Food" -> FoodScreen(navController = navController)
+                "Dine Out" -> DineOutScreen(navController = navController)
+                "Pay" -> PayScreen(navController = navController)
+                "Grocery" -> GroceryScreen(navController = navController)
+                "Shopping" -> ShoppingScreen(navController = navController)
+                "Flower" -> FlowerScreen(navController = navController)
+                "Care" -> CareScreen(navController = navController)
+                "Pharma" -> PharmaScreen(navController = navController)
             }
         }
     }
@@ -218,39 +223,48 @@ fun CategoryScreen(navController: NavHostController? = null, onOpenFashion: () -
 // ----------------------------------------------------------
 // CATEGORY SCREENS
 // ----------------------------------------------------------
-@Composable fun FoodScreen() { TabNavigationApp() }
-
-@Composable fun DineOutScreen() {
-    ScreenTemplate("Dine Out")
+@Composable fun FoodScreen(navController: NavHostController? = null) {
+    TabNavigationApp(navController = navController)
 }
 
-@Composable fun PayScreen() {
-    ScreenTemplate("Pay")
+@Composable fun DineOutScreen(navController: NavHostController? = null) {
+    ScreenTemplate("Dine Out", navController = navController)
 }
 
-@Composable fun GroceryScreen() {
-    ScreenTemplate("Grocery")
+@Composable fun PayScreen(navController: NavHostController? = null) {
+    ScreenTemplate("Pay", navController = navController)
 }
 
-@Composable fun ShoppingScreen() {
-    ScreenTemplate("Shopping")
+@Composable fun GroceryScreen(navController: NavHostController? = null) {
+    ScreenTemplate("Grocery", navController = navController)
 }
 
-@Composable fun FlowerScreen() {
-    ScreenTemplate("Flower")
+@Composable fun ShoppingScreen(navController: NavHostController? = null) {
+    ScreenTemplate("Shopping", navController = navController)
 }
 
-@Composable fun CareScreen() {
-    ScreenTemplate("Care")
+@Composable fun FlowerScreen(navController: NavHostController? = null) {
+    ScreenTemplate("Flower", navController = navController)
 }
 
-@Composable fun PharmaScreen() {
-    ScreenTemplate("Pharma")
+@Composable fun CareScreen(navController: NavHostController? = null) {
+    ScreenTemplate("Care", navController = navController)
+}
+
+@Composable fun PharmaScreen(navController: NavHostController? = null) {
+    ScreenTemplate("Pharma", navController = navController)
 }
 
 @Composable
-fun ScreenTemplate(title: String) {
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+fun ScreenTemplate(
+    title: String,
+    navController: NavHostController? = null
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
         Text(
             text = title,
             fontSize = 24.sp,
@@ -259,5 +273,14 @@ fun ScreenTemplate(title: String) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text("$title Screen Loaded!")
+
+        // Example of using navController for navigation
+        // You can add navigation buttons here if needed
+        // Example:
+        // Button(
+        //     onClick = { navController?.navigate("someRoute") }
+        // ) {
+        //     Text("Navigate to Details")
+        // }
     }
 }

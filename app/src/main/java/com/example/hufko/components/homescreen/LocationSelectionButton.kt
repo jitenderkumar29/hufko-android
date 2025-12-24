@@ -162,7 +162,7 @@ fun LocationSelectionButton(
                 Row(verticalAlignment = Alignment.CenterVertically) {
 
                     Text(
-                        text = "HOME:",
+                        text = "HOME-",
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp,
                         color = MaterialTheme.customColors.white,

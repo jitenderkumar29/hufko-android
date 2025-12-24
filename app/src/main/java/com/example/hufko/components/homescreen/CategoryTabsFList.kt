@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hufko.R
@@ -221,25 +222,25 @@ fun FoodCategoriesGrid(
         FoodCategory("Dhokla", R.drawable.dhokla_food),
         FoodCategory("Dosa", R.drawable.dosa_food),
         FoodCategory("Dholda", R.drawable.dholda_food),
-//        FoodCategory("Gulab Jamun", R.drawable.gulab_jamun_food),
-//        FoodCategory("Idli", R.drawable.idli_food),
-//        FoodCategory("Biryani", R.drawable.biryani_food),
-//        FoodCategory("Thali", R.drawable.thali_food),
-//        FoodCategory("Chicken", R.drawable.chicken_food),
-//        FoodCategory("Veg Meal", R.drawable.veg_meal_food),
-//        FoodCategory("North Indian", R.drawable.north_indian_food),
-//        FoodCategory("Paneer", R.drawable.paneer_food),
-//        FoodCategory("Fried Rice", R.drawable.fried_rice_food),
-//        FoodCategory("Noodles", R.drawable.noodles_food),
-//        FoodCategory("Paratha", R.drawable.paratha_food),
-//        FoodCategory("Shawarma", R.drawable.shawarma_food),
-//        FoodCategory("South Indian", R.drawable.south_indian_food),
-//        FoodCategory("Aloo Tikki", R.drawable.aloo_tikki_food),
-//        FoodCategory("Pasta", R.drawable.pasta_food),
-//        FoodCategory("Pastry", R.drawable.pastry_food),
-//        FoodCategory("Pav Bhaji", R.drawable.pav_bhaji_food),
-//        FoodCategory("Sandwich", R.drawable.sandwich_food),
-//        FoodCategory("Shake", R.drawable.shake_food),
+        FoodCategory("Gulab Jamun", R.drawable.gulab_jamun_food),
+        FoodCategory("Idli", R.drawable.idli_food),
+        FoodCategory("Biryani", R.drawable.biryani_food),
+        FoodCategory("Thali", R.drawable.thali_food),
+        FoodCategory("Chicken", R.drawable.chicken_food),
+        FoodCategory("Veg Meal", R.drawable.veg_meal_food),
+        FoodCategory("North Indian", R.drawable.north_indian_food),
+        FoodCategory("Paneer", R.drawable.paneer_food),
+        FoodCategory("Fried Rice", R.drawable.fried_rice_food),
+        FoodCategory("Noodles", R.drawable.noodles_food),
+        FoodCategory("Paratha", R.drawable.paratha_food),
+        FoodCategory("Shawarma", R.drawable.shawarma_food),
+        FoodCategory("South Indian", R.drawable.south_indian_food),
+        FoodCategory("Aloo Tikki", R.drawable.aloo_tikki_food),
+        FoodCategory("Pasta", R.drawable.pasta_food),
+        FoodCategory("Pastry", R.drawable.pastry_food),
+        FoodCategory("Pav Bhaji", R.drawable.pav_bhaji_food),
+        FoodCategory("Sandwich", R.drawable.sandwich_food),
+        FoodCategory("Shake", R.drawable.shake_food),
 //        FoodCategory("See All", R.drawable.see_all_food)
     )
 
@@ -276,20 +277,20 @@ fun FoodCategoryItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(4.dp)
-//            .clickable(onClick = onClick)
+            .clickable(onClick = onClick)
     ) {
         Box(
             modifier = Modifier
                 .size(75.dp)
                 .clip(CircleShape)
-//                .background(
-//                    if (isSelected) MaterialTheme.customColors.lightAccent.copy(alpha = 0.2f)
-//                    else Color.Transparent
-//                )
+                .background(
+                    if (isSelected) MaterialTheme.customColors.lightAccent.copy(alpha = 0.2f)
+                    else Color.Transparent
+                )
                 .border(
                     width = if (isSelected) 2.dp else 1.dp,
-                    color = MaterialTheme.customColors.lightAccent.copy(alpha = 0.3f),
-//                    color = if (isSelected) MaterialTheme.customColors.primary
+                    color = if (isSelected) MaterialTheme.customColors.primary
+                    else Color.Transparent,
 //                    else MaterialTheme.customColors.lightAccent.copy(alpha = 0.3f),
                     shape = CircleShape
                 ),
@@ -311,7 +312,8 @@ fun FoodCategoryItem(
             color = if (isSelected) MaterialTheme.customColors.primary
             else MaterialTheme.customColors.black,
             textAlign = TextAlign.Center,
-            maxLines = 2,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier.width(70.dp)
         )
     }

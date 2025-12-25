@@ -10,6 +10,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.hufko.components.homescreen.CategoryDietTabsFList
 import com.example.hufko.components.homescreen.CategoryScreen
 import com.example.hufko.components.homescreen.CategoryTabsFList
 import com.example.hufko.components.homescreen.CategoryTabsFood
@@ -62,6 +63,29 @@ fun AppNavGraph(navController: NavHostController) {
             )
         }
 
+        composable(
+            "category_diet_tabs_list/{selectedDietIndex}",
+            arguments = listOf(navArgument("selectedDietIndex") {
+                type = NavType.IntType
+                defaultValue = 0
+            })
+        ) { backStackEntry ->
+            val selectedDietIndex = backStackEntry.arguments?.getInt("selectedDietIndex") ?: 0
+
+            CategoryDietTabsFList(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onTabIndexChanged = { newIndex ->
+                    // Save the updated index to be read by the home screen
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("updatedDietTabIndex", newIndex)
+                },
+                name = "All Food Categories",
+                initialSelectedIndex = selectedDietIndex
+            )
+        }
         // Add other destinations as needed
     }
 }

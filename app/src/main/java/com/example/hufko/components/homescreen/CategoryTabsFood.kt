@@ -17,11 +17,14 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -91,18 +94,25 @@ data class FoodItem(
     val isVeg: Boolean = true,
     val category: String = "All"
 )
+
 @Composable
 fun CategoryTabsFood(
     navController: NavHostController? = null,
-    selectedTabIndex: Int = 0, // 🔴 Parameter from parent
+    selectedTabIndex: Int = 0,
     onCategorySelected: (CategoryPage) -> Unit = {},
-    onTabIndexChanged: (Int) -> Unit = {} // 🔴 Callback to update parent
+    onTabIndexChanged: (Int) -> Unit = {}
 ) {
-    // ❌ REMOVE THIS LINE - it's shadowing the parameter
-    // var selectedTabIndex by remember { mutableIntStateOf(0) }
+    // ✅ Use LaunchedEffect to sync with parent state
+    var currentSelectedIndex by remember { mutableIntStateOf(selectedTabIndex) }
+    val savedDietTabIndex = remember(navController?.currentBackStackEntry) {
+        navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("dietTabIndex")
+            ?: 0
+    }
 
-    // ✅ Use the parameter directly
-    val currentSelectedIndex = selectedTabIndex
+    // ✅ Update when parent state changes
+    LaunchedEffect(selectedTabIndex) {
+        currentSelectedIndex = selectedTabIndex
+    }
 
     val categoryPages = listOf(
         CategoryPage.All,
@@ -153,13 +163,13 @@ fun CategoryTabsFood(
             .background(MaterialTheme.customColors.skyBlue)
     ) {
         ScrollableTabRow(
-            selectedTabIndex = currentSelectedIndex, // ✅ Use currentSelectedIndex
+            selectedTabIndex = currentSelectedIndex,
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.customColors.black,
             edgePadding = 0.dp,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[currentSelectedIndex]), // ✅ Use currentSelectedIndex
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[currentSelectedIndex]),
                     height = 5.dp,
                     color = MaterialTheme.customColors.header
                 )
@@ -167,12 +177,14 @@ fun CategoryTabsFood(
         ) {
             categoryPages.forEachIndexed { index, categoryPage ->
                 Tab(
-                    selected = currentSelectedIndex == index, // ✅ Use currentSelectedIndex
+                    selected = currentSelectedIndex == index,
                     onClick = {
                         if (categoryPage is CategoryPage.SeeAll) {
                             navController?.navigate("category_tabs_f_list/${currentSelectedIndex}")
                         } else {
-                            // ✅ Update parent via callback
+                            // ✅ Update local state first
+                            currentSelectedIndex = index
+                            // ✅ Then notify parent
                             onTabIndexChanged(index)
                             onCategorySelected(categoryPage)
                         }
@@ -197,8 +209,8 @@ fun CategoryTabsFood(
                         Text(
                             text = categoryPage.title,
                             fontSize = 15.sp,
-                            fontWeight = if (currentSelectedIndex == index) FontWeight.Bold else FontWeight.Medium, // ✅ Use currentSelectedIndex
-                            color = if (currentSelectedIndex == index) { // ✅ Use currentSelectedIndex
+                            fontWeight = if (currentSelectedIndex == index) FontWeight.Bold else FontWeight.Medium,
+                            color = if (currentSelectedIndex == index) {
                                 MaterialTheme.customColors.header
                             } else {
                                 MaterialTheme.customColors.black
@@ -226,9 +238,25 @@ fun CategoryTabsFood(
                     )
                 )
         ) {
-            when (currentSelectedIndex) { // ✅ Use currentSelectedIndex
+            when (currentSelectedIndex) {
                 0 -> AllCategoryPage()
-                1 -> DietCategoryPage()
+                1 -> {
+                    // ✅ Get saved diet tab index from savedStateHandle
+//                    val savedDietTabIndex = remember(navController?.currentBackStackEntry) {
+//                        navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("dietTabIndex")
+//                            ?: 0
+//                    }
+
+                    DietCategoryPage(
+                        navController = navController,
+                        initialDietTabIndex = savedDietTabIndex
+                    )
+                }
+//                1 -> DietCategoryPage(
+//                    navController = navController,
+//                    // ✅ Pass the saved diet tab index
+//                    initialDietTabIndex = rememberSaveable { mutableIntStateOf(0) }.intValue
+//                )
                 2 -> PizzasCategoryPage()
                 3 -> CakesCategoryPage()
                 4 -> MomosCategoryPage()
@@ -271,17 +299,43 @@ fun CategoryTabsFood(
         }
     }
 }
-// Category Page Composables for all categories
 @Composable
 fun DietCategoryPage(
     onBanner1Click: () -> Unit = {},
     onBanner2Click: () -> Unit = {},
-    onBanner3Click: () -> Unit = {}
+    onBanner3Click: () -> Unit = {},
+    navController: NavHostController? = null,
+    initialDietTabIndex: Int = 0 // ✅ Accept initial tab index
 ){
+    // ✅ Use rememberSaveable to persist state across recompositions
+    var selectedDietTabIndex by rememberSaveable { mutableIntStateOf(initialDietTabIndex) }
+
+    // ✅ Also save to a shared state that CategoryTabsFood can access
+    val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
+
+    // ✅ Save state when leaving
+    DisposableEffect(Unit) {
+        onDispose {
+            // Save the current diet tab index when leaving this page
+            savedStateHandle?.set("dietTabIndex", selectedDietTabIndex)
+        }
+    }
+
+    // ✅ Handle returning from the see-all screen
+    LaunchedEffect(navController?.currentBackStackEntry) {
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Int>("updatedDietTabIndex")
+            ?.observeForever { newIndex ->
+                if (newIndex != null) {
+                    selectedDietTabIndex = newIndex
+                    navController.currentBackStackEntry?.savedStateHandle?.remove<Int>("updatedDietTabIndex")
+                }
+            }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-//            .padding(16.dp)
     ) {
         val allDietItems = listOf(
             FoodItemBannerPreNextF(
@@ -333,17 +387,16 @@ fun DietCategoryPage(
                 isHighProtein = true
             ),
         )
+
         Image(
             painter = painterResource(R.drawable.ic_diet_header),
             contentDescription = "Banner",
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(
-                    min = 100.dp,
-                    max = 300.dp
-                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+                .heightIn(min = 100.dp, max = 300.dp),
             contentScale = ContentScale.FillBounds
         )
+
         BannerPreNextF(
             foodItems = allDietItems,
             onItemClick = { foodItem ->
@@ -353,26 +406,35 @@ fun DietCategoryPage(
                 .fillMaxWidth()
                 .padding(vertical = 0.dp),
             backgroundColor1 = Color(0xFF131709),
-            backgroundColor2 = Color(0xFFFFFFFF) // Dark Purple
-//            backgroundColor2 = Color(0xFFE5E5E3) // Dark Purple
+            backgroundColor2 = Color(0xFFFFFFFF)
         )
+
         Spacer(modifier = Modifier.height(10.dp))
-        var selectedDietTabIndex by remember { mutableIntStateOf(0) }
 
         CategoryDietTabsFood(
-            onCategorySelected= {}
+            navController = navController,
+            selectedDietTabIndex = selectedDietTabIndex,
+            onCategorySelected = { dietCategoryPage ->
+                // Update selected index based on category (except See All)
+                if (dietCategoryPage != DietCategoryPage.SeeAll) {
+                    selectedDietTabIndex = when (dietCategoryPage) {
+                        DietCategoryPage.Chicken -> 0
+                        DietCategoryPage.Salad -> 1
+                        DietCategoryPage.Mutton -> 2
+                        DietCategoryPage.Kebabs -> 3
+                        DietCategoryPage.HealthySnacks -> 4
+                        DietCategoryPage.LowCalorie -> 5
+                        DietCategoryPage.Vegan -> 6
+                        DietCategoryPage.ProteinRich -> 7
+                        DietCategoryPage.SeeAll -> 8
+                    }
+                }
+            },
+            onTabIndexChanged = { newIndex ->
+                // ✅ Update local state when tab changes
+                selectedDietTabIndex = newIndex
+            }
         )
-//        LazyColumn(
-//            modifier = Modifier.fillMaxSize()
-//        ) {
-//            stickyHeader {
-//                CategoryDietTabsFood(
-//                    onCategorySelected = {
-//                        println("Selected Diet tab")
-//                    }
-//                )
-//            }
-//        }
     }
 }
 @Composable
@@ -16857,6 +16919,7 @@ fun ShakeCategoryPage() {
 //    }
 //}
 
+
 @Composable
 fun MainScreen(navController: NavHostController) {
     var currentPage by remember { mutableIntStateOf(0) }
@@ -16864,6 +16927,7 @@ fun MainScreen(navController: NavHostController) {
     Column(modifier = Modifier.fillMaxWidth()) {
         CategoryTabsFood(
             navController = navController,
+            selectedTabIndex = currentPage, // ✅ Add this missing parameter
             onCategorySelected = { categoryPage ->
                 currentPage = when (categoryPage) {
                     CategoryPage.All -> 0
@@ -16905,8 +16969,11 @@ fun MainScreen(navController: NavHostController) {
                     CategoryPage.PavBhaji -> 36
                     CategoryPage.Sandwich -> 37
                     CategoryPage.Shake -> 38
-                    CategoryPage.SeeAll -> currentPage // ✅ do nothing
+                    CategoryPage.SeeAll -> currentPage
                 }
+            },
+            onTabIndexChanged = { newIndex: Int -> // ✅ Explicitly specify Int type
+                currentPage = newIndex
             }
         )
     }

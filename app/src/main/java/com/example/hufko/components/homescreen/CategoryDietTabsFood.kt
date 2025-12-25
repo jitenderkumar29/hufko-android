@@ -2,6 +2,7 @@ package com.example.hufko.components.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,7 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -50,14 +52,20 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
     object ProteinRich : DietCategoryPage("Protein Rich", R.drawable.protein_food_diet)
     object SeeAll : DietCategoryPage("See All", R.drawable.see_all_food)
 }
-
 @Composable
 fun CategoryDietTabsFood(
+    navController: NavHostController? = null,
     selectedDietTabIndex: Int = 0,
     onCategorySelected: (DietCategoryPage) -> Unit = {},
+    onTabIndexChanged: (Int) -> Unit = {}, // ✅ Add this callback
     modifier: Modifier = Modifier
 ) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
+
+    // Update when the prop changes
+    LaunchedEffect(selectedDietTabIndex) {
+        selectedTabIndex = selectedDietTabIndex
+    }
 
     val dietCategoryPages = listOf(
         DietCategoryPage.Chicken,
@@ -75,16 +83,6 @@ fun CategoryDietTabsFood(
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp)
-//            .background(
-//                color = MaterialTheme.customColors.orangeLight,
-//                shape = RoundedCornerShape(16.dp)
-//            )
-//            .clip(
-//                RoundedCornerShape(
-//                    bottomStart = 16.dp,
-//                    bottomEnd = 16.dp
-//                )
-//            )
     ) {
         Column(
             modifier = Modifier
@@ -132,6 +130,16 @@ fun CategoryDietTabsFood(
                         onClick = {
                             selectedTabIndex = index
                             onCategorySelected(dietCategoryPage)
+
+                            // 👉 Handle navigation when "See All" is clicked
+                                if (dietCategoryPage is DietCategoryPage.SeeAll) {
+//                            if (dietCategoryPage == DietCategoryPage.SeeAll && navController != null) {
+//                                navController.navigate("category_diet_tabs_list/$selectedTabIndex")
+                                navController?.navigate("category_diet_tabs_list/$selectedTabIndex")
+                            } else {
+                                // ✅ Update parent when regular tab is clicked
+                                onTabIndexChanged(selectedTabIndex)
+                            }
                         },
                         modifier = Modifier
                             .padding(horizontal = 2.dp, vertical = 5.dp)
@@ -196,11 +204,11 @@ fun CategoryDietTabsFood(
                 1 -> SaladDietPage()
                 2 -> MuttonDietPage()
                 3 -> KebabsDietPage()
-                4 -> HealthySnacksPage()  // Fixed: index 4 corresponds to HealthySnacks
-                5 -> LowCaloriePage()     // Fixed: index 5 corresponds to LowCalorie
-                6 -> VeganPage()          // Fixed: index 6 corresponds to Vegan
-                7 -> ProteinRichPage()    // Fixed: index 7 corresponds to ProteinRich
-                8 -> SeeAllPage()    // Fixed: index 8 corresponds to ProteinRich
+                4 -> HealthySnacksPage()
+                5 -> LowCaloriePage()
+                6 -> VeganPage()
+                7 -> ProteinRichPage()
+//                8 -> SeeAllPage()
             }
         }
     }
@@ -4581,18 +4589,29 @@ fun ProteinRichPage() {
         }
     }
 }
+
 @Composable
 fun SeeAllPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "See All Foods",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+            text = "Tap 'See All' tab above to browse all food categories",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+            color = MaterialTheme.customColors.black,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = "This will open the full category selection screen",
+            fontSize = 14.sp,
+            color = MaterialTheme.customColors.black.copy(alpha = 0.6f),
+            textAlign = TextAlign.Center
         )
     }
 }

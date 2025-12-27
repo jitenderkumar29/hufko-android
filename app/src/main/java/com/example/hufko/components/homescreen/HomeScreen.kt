@@ -43,7 +43,7 @@ fun HomeScreen(navController: NavHostController?) {
     LaunchedEffect(navController) {
         navController?.currentBackStackEntry
             ?.savedStateHandle
-            ?.getStateFlow<Int?>("updatedTabIndex", null)
+            ?.getStateFlow<Int?>("currentSelectedIndex", null)
             ?.collect { newIndex ->
                 newIndex?.let { index ->
                     // Update the selected tab index
@@ -51,10 +51,25 @@ fun HomeScreen(navController: NavHostController?) {
                     // Clear the saved state
                     navController.currentBackStackEntry
                         ?.savedStateHandle
-                        ?.remove<Int>("updatedTabIndex")
+                        ?.remove<Int>("currentSelectedIndex")
                 }
             }
     }
+//    LaunchedEffect(navController) {
+//        navController?.currentBackStackEntry
+//            ?.savedStateHandle
+//            ?.getStateFlow<Int?>("updatedTabIndex", null)
+//            ?.collect { newIndex ->
+//                newIndex?.let { index ->
+//                    // Update the selected tab index
+//                    selectedTabIndex = index
+//                    // Clear the saved state
+//                    navController.currentBackStackEntry
+//                        ?.savedStateHandle
+//                        ?.remove<Int>("updatedTabIndex")
+//                }
+//            }
+//    }
 
     val lazyListState = rememberLazyListState()
     var isLocationVisible by remember { mutableStateOf(true) }

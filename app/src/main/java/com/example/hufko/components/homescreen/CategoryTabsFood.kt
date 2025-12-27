@@ -1,5 +1,6 @@
 package com.example.hufko.components.homescreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -98,12 +99,28 @@ data class FoodItem(
 @Composable
 fun CategoryTabsFood(
     navController: NavHostController? = null,
-    selectedTabIndex: Int = 0,
+    selectedTabIndex: Int,
     onCategorySelected: (CategoryPage) -> Unit = {},
     onTabIndexChanged: (Int) -> Unit = {}
 ) {
     // ✅ Use LaunchedEffect to sync with parent state
-    var currentSelectedIndex by remember { mutableIntStateOf(selectedTabIndex) }
+//    var currentSelectedIndex by rememberSaveable { mutableIntStateOf(selectedTabIndex) }
+    // 1. Get current value (your existing code)
+    var currentSelectedIndex by rememberSaveable {
+        mutableIntStateOf(
+            navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("currentSelectedIndex")
+                ?: selectedTabIndex
+        )
+    }
+
+// 2. Save changes back to savedStateHandle
+    LaunchedEffect(currentSelectedIndex) {
+        navController?.currentBackStackEntry?.savedStateHandle?.set(
+            "currentSelectedIndex",
+            currentSelectedIndex
+        )
+    }
+    Log.d("CategoryTabsFood", "currentSelectedIndex in CategoryTabsFood: $currentSelectedIndex")
     val savedDietTabIndex = remember(navController?.currentBackStackEntry) {
         navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("dietTabIndex")
             ?: 0
@@ -249,6 +266,7 @@ fun CategoryTabsFood(
 
                     DietCategoryPage(
                         navController = navController,
+                        currentSelectedIndex  = currentSelectedIndex,
                         initialDietTabIndex = savedDietTabIndex
                     )
                 }
@@ -305,6 +323,7 @@ fun DietCategoryPage(
     onBanner2Click: () -> Unit = {},
     onBanner3Click: () -> Unit = {},
     navController: NavHostController? = null,
+    currentSelectedIndex: Int, // ✅ Added type annotation
     initialDietTabIndex: Int = 0 // ✅ Accept initial tab index
 ){
     // ✅ Use rememberSaveable to persist state across recompositions
@@ -313,6 +332,21 @@ fun DietCategoryPage(
     // ✅ Also save to a shared state that CategoryTabsFood can access
     val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
+    LaunchedEffect(navController) {
+        navController?.currentBackStackEntry
+            ?.savedStateHandle
+            ?.getStateFlow<Int?>("dietTabIndex", null)
+            ?.collect { newIndex ->
+                newIndex?.let { index ->
+                    // Update the selected tab index
+                    selectedDietTabIndex = index
+                    // Clear the saved state
+                    navController.currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.remove<Int>("dietTabIndex")
+                }
+            }
+    }
     // ✅ Save state when leaving
     DisposableEffect(Unit) {
         onDispose {
@@ -413,6 +447,7 @@ fun DietCategoryPage(
 
         CategoryDietTabsFood(
             navController = navController,
+            currentSelectedIndex  = currentSelectedIndex,
             selectedDietTabIndex = selectedDietTabIndex,
             onCategorySelected = { dietCategoryPage ->
                 // Update selected index based on category (except See All)

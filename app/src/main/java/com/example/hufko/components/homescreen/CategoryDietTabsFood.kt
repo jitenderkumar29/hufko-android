@@ -55,7 +55,8 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
 @Composable
 fun CategoryDietTabsFood(
     navController: NavHostController? = null,
-    selectedDietTabIndex: Int = 0,
+    currentSelectedIndex: Int,
+    selectedDietTabIndex: Int,
     onCategorySelected: (DietCategoryPage) -> Unit = {},
     onTabIndexChanged: (Int) -> Unit = {}, // ✅ Add this callback
     modifier: Modifier = Modifier
@@ -4617,29 +4618,29 @@ fun SeeAllPage() {
 }
 
 // Usage in MainScreen - Improved with proper indexing
-@Composable
-fun MainScreenWithDietTabs(navController: NavHostController) {
-    var currentPage by remember { mutableIntStateOf(0) }
-    Column(modifier = Modifier.fillMaxWidth()) {
-        CategoryDietTabsFood(
-            onCategorySelected = { dietCategoryPage ->
-                // The index is already handled by the selectedTabIndex in CategoryDietTabsFood
-                // We just need to update currentPage with the correct index
-                currentPage = when (dietCategoryPage) {
-                    DietCategoryPage.Chicken -> 0
-                    DietCategoryPage.Salad -> 1
-                    DietCategoryPage.Mutton -> 2
-                    DietCategoryPage.Kebabs -> 3
-                    DietCategoryPage.HealthySnacks -> 4
-                    DietCategoryPage.LowCalorie -> 5
-                    DietCategoryPage.Vegan -> 6
-                    DietCategoryPage.ProteinRich -> 7
-                    DietCategoryPage.SeeAll -> 8
-                }
-            }
-        )
-    }
-}
+//@Composable
+//fun MainScreenWithDietTabs(navController: NavHostController) {
+//    var currentPage by remember { mutableIntStateOf(0) }
+//    Column(modifier = Modifier.fillMaxWidth()) {
+//        CategoryDietTabsFood(
+//            onCategorySelected = { dietCategoryPage ->
+//                // The index is already handled by the selectedTabIndex in CategoryDietTabsFood
+//                // We just need to update currentPage with the correct index
+//                currentPage = when (dietCategoryPage) {
+//                    DietCategoryPage.Chicken -> 0
+//                    DietCategoryPage.Salad -> 1
+//                    DietCategoryPage.Mutton -> 2
+//                    DietCategoryPage.Kebabs -> 3
+//                    DietCategoryPage.HealthySnacks -> 4
+//                    DietCategoryPage.LowCalorie -> 5
+//                    DietCategoryPage.Vegan -> 6
+//                    DietCategoryPage.ProteinRich -> 7
+//                    DietCategoryPage.SeeAll -> 8
+//                }
+//            }
+//        )
+//    }
+//}
 
 // Alternative: More robust approach using indexOf
 @Composable
@@ -4658,12 +4659,12 @@ fun MainScreenWithDietTabsImproved(navController: NavHostController) {
         DietCategoryPage.SeeAll
     )
 
-    Column(modifier = Modifier.fillMaxWidth()) {
-        CategoryDietTabsFood(
-            onCategorySelected = { dietCategoryPage ->
-                // Find the index of the selected category in the list
-                currentPage = dietCategoryPages.indexOfFirst { it == dietCategoryPage }
-            }
-        )
-    }
+//    Column(modifier = Modifier.fillMaxWidth()) {
+//        CategoryDietTabsFood(
+//            onCategorySelected = { dietCategoryPage ->
+//                // Find the index of the selected category in the list
+//                currentPage = dietCategoryPages.indexOfFirst { it == dietCategoryPage }
+//            }
+//        )
+//    }
 }

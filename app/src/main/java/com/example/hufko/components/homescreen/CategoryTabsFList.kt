@@ -4,17 +4,34 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -41,30 +58,32 @@ fun CategoryTabsFList(
             .fillMaxSize()
             .background(MaterialTheme.customColors.white)
     ) {
-        // Header Section
+
+        // ---------- HEADER ----------
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.customColors.header)
-                .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)
+                .padding(12.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
+
                 Image(
                     painter = painterResource(id = R.drawable.ic_back),
                     contentDescription = "Back",
                     modifier = Modifier
                         .size(28.dp)
                         .clickable {
-                            // Update the parent with selected index before navigating back
                             onTabIndexChanged(selectedCategoryIndex)
                             onBackClick()
                         }
                 )
 
                 Spacer(modifier = Modifier.width(8.dp))
+
                 Text(
                     text = name,
                     fontSize = 22.sp,
@@ -72,88 +91,25 @@ fun CategoryTabsFList(
                     color = MaterialTheme.customColors.white
                 )
 
-                // Spacer to push the icons to the right
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Search Icon
-                Box(
-                    modifier = Modifier
-                        .size(35.dp)
-                        .shadow(
-                            elevation = 2.dp,
-                            shape = CircleShape,
-                            clip = true
-                        )
-                        .clip(CircleShape)
-                        .background(Color.White)
-                        .border(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f),
-                            shape = CircleShape
-                        ),
-                    contentAlignment = Alignment.Center
-                ) {
+                // Search
+                IconCircle {
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Search",
-                        tint = MaterialTheme.customColors.black,
-                        modifier = Modifier.size(24.dp)
+                        tint = MaterialTheme.customColors.black
                     )
                 }
 
                 Spacer(modifier = Modifier.width(12.dp))
 
-                // Wishlist Icon
-//                Box(
-//                    modifier = Modifier
-//                        .size(35.dp)
-//                        .shadow(
-//                            elevation = 2.dp,
-//                            shape = CircleShape,
-//                            clip = true
-//                        )
-//                        .clip(CircleShape)
-//                        .background(Color.White)
-//                        .border(
-//                            width = 1.dp,
-//                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f),
-//                            shape = CircleShape
-//                        ),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Icon(
-//                        painter = painterResource(id = R.drawable.ic_wishlist_outline),
-//                        contentDescription = "Wishlist",
-//                        tint = MaterialTheme.customColors.black,
-//                        modifier = Modifier.size(20.dp)
-//                    )
-//                }
-
-//                Spacer(modifier = Modifier.width(12.dp))
-
-                // Cart Icon
-                Box(
-                    modifier = Modifier
-                        .size(35.dp)
-                        .shadow(
-                            elevation = 2.dp,
-                            shape = CircleShape,
-                            clip = true
-                        )
-                        .clip(CircleShape)
-                        .background(Color.White)
-                        .border(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f),
-                            shape = CircleShape
-                        ),
-                    contentAlignment = Alignment.Center
-                ) {
+                // Cart
+                IconCircle {
                     Icon(
                         painter = painterResource(id = R.drawable.outline_shopping_bag_24),
                         contentDescription = "Cart",
-                        tint = MaterialTheme.customColors.black,
-                        modifier = Modifier.size(24.dp)
+                        tint = MaterialTheme.customColors.black
                     )
                 }
             }
@@ -164,9 +120,28 @@ fun CategoryTabsFList(
             onCategorySelected = { index ->
                 selectedCategoryIndex = index
                 onTabIndexChanged(index)
-                onBackClick() // Automatically navigate back after selection
+                onBackClick()
             }
         )
+    }
+}
+
+@Composable
+fun IconCircle(content: @Composable () -> Unit) {
+    Box(
+        modifier = Modifier
+            .size(35.dp)
+            .shadow(2.dp, CircleShape, clip = true)
+            .clip(CircleShape)
+            .background(Color.White)
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f),
+                CircleShape
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        content()
     }
 }
 
@@ -180,6 +155,7 @@ fun WelcomeContent(
             .fillMaxSize()
             .padding(16.dp)
     ) {
+
         Text(
             text = "Cuisines and dishes",
             fontSize = 20.sp,
@@ -201,8 +177,8 @@ fun FoodCategoriesGrid(
     selectedCategoryIndex: Int = 0,
     onCategorySelected: (Int) -> Unit = {}
 ) {
+
     val categories = listOf(
-//        FoodCategory("All", R.drawable.all_food),
         FoodCategory("Diet", R.drawable.diet_food),
         FoodCategory("Pizzas", R.drawable.pizzas_food),
         FoodCategory("Cakes", R.drawable.cakes_food),
@@ -334,8 +310,10 @@ fun FoodCategoriesGrid(
         FoodCategory("Bhurji", R.drawable.bhurji_food),
         FoodCategory("Khasta Kachori", R.drawable.khasta_kachori_food),
         FoodCategory("Hot Dog", R.drawable.hot_dog_food)
-//        FoodCategory("See All", R.drawable.see_all_food)
     )
+
+    // Find Shake index dynamically
+    val shakeIndex = categories.indexOfFirst { it.name == "Shake" }
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
@@ -343,12 +321,19 @@ fun FoodCategoriesGrid(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+
         itemsIndexed(categories) { index, category ->
+
+            val isClickable = index <= shakeIndex
+
             FoodCategoryItem(
                 category = category,
                 isSelected = index == selectedCategoryIndex,
+                isClickable = isClickable,
                 onClick = {
-                    onCategorySelected(index+1)
+                    if (isClickable) {
+                        onCategorySelected(index + 1)
+                    }
                 }
             )
         }
@@ -364,30 +349,26 @@ data class FoodCategory(
 fun FoodCategoryItem(
     category: FoodCategory,
     isSelected: Boolean = false,
+    isClickable: Boolean = true,
     onClick: () -> Unit = {}
 ) {
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(4.dp)
-            .clickable(onClick = onClick)
+//            .alpha(if (isClickable) 1f else 0.4f)
+            .then(
+                if (isClickable) Modifier.clickable { onClick() }
+                else Modifier
+            )
     ) {
+
         Box(
             modifier = Modifier
                 .size(75.dp)
                 .clip(CircleShape),
-//                .background(
-//                    if (isSelected) MaterialTheme.customColors.lightAccent.copy(alpha = 0.2f)
-//                    else Color.Transparent
-//                )
-//                .border(
-//                    width = if (isSelected) 2.dp else 1.dp,
-//                    color = if (isSelected) MaterialTheme.customColors.primary
-//                    else Color.Transparent,
-////                    else MaterialTheme.customColors.lightAccent.copy(alpha = 0.3f),
-//                    shape = CircleShape
-//                ),
-                    contentAlignment = Alignment . Center
+            contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = category.iconRes),
@@ -409,67 +390,5 @@ fun FoodCategoryItem(
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.width(70.dp)
         )
-    }
-}
-
-@Composable
-fun FoodItemCard(name: String, price: String, iconRes: Int) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .clickable { /* Handle food item click */ },
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.customColors.lightAccent.copy(alpha = 0.1f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = iconRes),
-                        contentDescription = name,
-                        modifier = Modifier.size(30.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(12.dp))
-
-                Column {
-                    Text(
-                        text = name,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.customColors.black
-                    )
-                    Text(
-                        text = price,
-                        fontSize = 16.sp,
-                        color = MaterialTheme.customColors.primary,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
-
-            IconButton(
-                onClick = { /* Add to cart */ }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.outline_shopping_bag_24),
-                    contentDescription = "Add to Cart",
-                    tint = MaterialTheme.customColors.primary
-                )
-            }
-        }
     }
 }

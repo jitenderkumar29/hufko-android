@@ -16821,14 +16821,594 @@ fun ShawarmaCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Shawarma",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val shawarmaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Popular Shawarma Types WITH left icons (visually distinct types)
+                FilterChip(
+                    id = "chicken_shawarma",
+                    text = "Chicken Shawarma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_shawarma
+                ),
+                FilterChip(
+                    id = "mixed_shawarma",
+                    text = "Mixed Meat",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mixed_shawarma
+                ),
+                FilterChip(
+                    id = "falafel_shawarma",
+                    text = "Falafel",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_falafel_shawarma
+                ),
+                FilterChip(
+                    id = "vegetable_shawarma",
+                    text = "Vegetable",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable_shawarma
+                ),
+
+                // Meat Type (text-only - conceptual categories)
+                FilterChip(
+                    id = "halal",
+                    text = "Halal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled",
+                    text = "Grilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rotisserie",
+                    text = "Rotisserie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_meat",
+                    text = "Spicy Meat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Wrapper/Bread Type (mix of icon and text)
+                FilterChip(
+                    id = "saj",
+                    text = "Saj Bread",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "plate",
+                    text = "Shawarma Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "wrap",
+                    text = "Wrap Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sauces (with icons for popular ones)
+                FilterChip(
+                    id = "spicy_sauce",
+                    text = "Spicy Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_sauce",
+                    text = "Yogurt Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hummus",
+                    text = "Hummus",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Regional Style (text-only)
+                FilterChip(
+                    id = "arabic",
+                    text = "Arabic Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turkish",
+                    text = "Turkish Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lebanese",
+                    text = "Lebanese Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "iranian",
+                    text = "Iranian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Add-ons & Extras (with icons for key ones)
+                FilterChip(
+                    id = "extra_cheese",
+                    text = "Extra Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "salad",
+                    text = "Fresh Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onions_tomatoes",
+                    text = "Onions & Tomatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Spice Level (text-only)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+         FilterButtonFood(
+            filterConfig = shawarmaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val shawarmaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chicken_shawarma,
+                title = "Chicken Shawarma",
+                price = "₹220",
+                restaurantName = "Arabian Nights",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹44",
+                address = "Connaught Place, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.veg_shawarma,
+                title = "Veg Shawarma",
+                price = "₹280",
+                restaurantName = "Beirut Express",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹42",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.falafel_shawarma,
+                title = "Falafel Shawarma",
+                price = "₹180",
+                restaurantName = "Mediterranean Veg",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "up to ₹45",
+                address = "Hauz Khas, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.mixed_shawarma,
+                title = "Mixed Shawarma Platter",
+                price = "₹350",
+                restaurantName = "Shawarma King",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Bandra West, Mumbai",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.spicy_shawarma,
+                title = "Spicy Chicken Shawarma",
+                price = "₹240",
+                restaurantName = "Turkish Delight",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹72",
+                address = "Gurgaon Sector 29",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.cheese_shawarma,
+                title = "Cheese Burst Shawarma",
+                price = "₹260",
+                restaurantName = "Cheesy Bites",
+                rating = "4.4",
+                deliveryTime = "25-35 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹52",
+                address = "Cyber City, Hyderabad",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+                modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = shawarmaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val shawarmaItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.shawarma_chicken,
+                title = "Classic Chicken Shawarma",
+                price = "₹150",
+                restaurantName = "Arabian Nights",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.shawarma_veg,
+                title = "Veg Shawarma",
+                price = "₹180",
+                restaurantName = "Middle East Grill",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹27",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.shawarma_veg_2,
+                title = "Veg Pure Shawarma",
+                price = "₹120",
+                restaurantName = "Green Bites",
+                rating = "4.4",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Pune, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.shawarma_paneer,
+                title = "Paneer Shawarma",
+                price = "₹160",
+                restaurantName = "Punjabi Fusion",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.shawarma_chicken_cheese,
+                title = "Chicken Cheese Shawarma",
+                price = "₹190",
+                restaurantName = "Cheesy Treats",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.7 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹34",
+                address = "Bengaluru, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.shawarma_spicy,
+                title = "Spicy Chicken Shawarma",
+                price = "₹170",
+                restaurantName = "Spice Route",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹37",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.shawarma_mayo,
+                title = "Mayo Chicken Shawarma",
+                price = "₹165",
+                restaurantName = "Creamy Rolls",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹33",
+                address = "Noida, UP"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.shawarma_tandoori,
+                title = "Tandoori Shawarma",
+                price = "₹185",
+                restaurantName = "Tandoor Express",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹28",
+                address = "Jaipur, Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.shawarma_egg,
+                title = "Egg Shawarma",
+                price = "₹130",
+                restaurantName = "Egg Mania",
+                rating = "4.4",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹39",
+                address = "Kolkata, West Bengal"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.shawarma_double_chicken,
+                title = "Double Chicken Shawarma",
+                price = "₹230",
+                restaurantName = "Meat Lovers",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹46",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.shawarma_bbq,
+                title = "BBQ Chicken Shawarma",
+                price = "₹195",
+                restaurantName = "BBQ Nation Street",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹35",
+                address = "Gurgaon, Haryana"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.shawarma_hummus,
+                title = "Hummus Shawarma",
+                price = "₹175",
+                restaurantName = "Healthy Hub",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹26",
+                address = "Ahmedabad, Gujarat"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.shawarma_falafel,
+                title = "Falafel Shawarma",
+                price = "₹145",
+                restaurantName = "Mediterranean Bowl",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹36",
+                address = "Indore, MP"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.shawarma_mixed,
+                title = "Mixed Meat Shawarma",
+                price = "₹240",
+                restaurantName = "Arabian Grill House",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹36",
+                address = "Lucknow, UP"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.shawarma_butter,
+                title = "Butter Chicken Shawarma",
+                price = "₹210",
+                restaurantName = "Butterlicious",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹42",
+                address = "Amritsar, Punjab"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.shawarma_garlic,
+                title = "Garlic Chicken Shawarma",
+                price = "₹170",
+                restaurantName = "Garlic Corner",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹37",
+                address = "Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.shawarma_cheese,
+                title = "Extra Cheese Shawarma",
+                price = "₹200",
+                restaurantName = "Cheese Factory",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.6 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹36",
+                address = "Surat, Gujarat"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.shawarma_roll,
+                title = "Shawarma Roll",
+                price = "₹140",
+                restaurantName = "Street Rolls",
+                rating = "4.4",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹42",
+                address = "Bhopal, MP"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.shawarma_platter,
+                title = "Shawarma Platter",
+                price = "₹280",
+                restaurantName = "Royal Arabian",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹42",
+                address = "Kochi, Kerala"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.shawarma_special,
+                title = "Chef’s Special Shawarma",
+                price = "₹320",
+                restaurantName = "Luxury Shawarma",
+                rating = "5.0",
+                deliveryTime = "40-50 mins",
+                distance = "3.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹32",
+                address = "Dubai Style Kitchen, Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 @Composable

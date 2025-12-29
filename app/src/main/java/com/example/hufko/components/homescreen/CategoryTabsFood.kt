@@ -17416,14 +17416,649 @@ fun SouthIndianCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "South Indian",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val southIndianFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // DOSA Varieties (with icons - visually distinct)
+                FilterChip(
+                    id = "masala_dosa",
+                    text = "Masala Dosa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dosa
+                ),
+                FilterChip(
+                    id = "plain_dosa",
+                    text = "Plain Dosa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_dosa_2
+                ),
+                FilterChip(
+                    id = "rava_dosa",
+                    text = "Rava Dosa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rava_dosa
+                ),
+                FilterChip(
+                    id = "set_dosa",
+                    text = "Set Dosa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_set_dosa
+                ),
+                FilterChip(
+                    id = "ghee_dosa",
+                    text = "Ghee Dosa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paper_dosa",
+                    text = "Paper Dosa",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // IDLI Varieties (with icons for key ones)
+                FilterChip(
+                    id = "plain_idli",
+                    text = "Plain Idli",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_idli
+                ),
+                FilterChip(
+                    id = "rava_idli",
+                    text = "Rava Idli",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rava_idli_2
+                ),
+                FilterChip(
+                    id = "thatte_idli",
+                    text = "Thatte Idli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_idli",
+                    text = "Mini Idli",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // UTAPPAM (with icons)
+                FilterChip(
+                    id = "onion_utappam",
+                    text = "Onion Utappam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_utappam
+                ),
+                FilterChip(
+                    id = "tomato_utappam",
+                    text = "Tomato Utappam",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // RICE Dishes (with icons for popular ones)
+                FilterChip(
+                    id = "bisi_bele_bath",
+                    text = "Bisi Bele Bath",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice
+                ),
+                FilterChip(
+                    id = "lemon_rice",
+                    text = "Lemon Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lemon_rice
+                ),
+                FilterChip(
+                    id = "tamarind_rice",
+                    text = "Tamarind Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_rice",
+                    text = "Coconut Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BREADS (text-only)
+                FilterChip(
+                    id = "poori",
+                    text = "Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chapati",
+                    text = "Chapati",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parotta",
+                    text = "Parotta",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CURRIES & SIDES (text-only categories)
+                FilterChip(
+                    id = "sambar",
+                    text = "Sambar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rasam",
+                    text = "Rasam",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chutney",
+                    text = "Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_chutney",
+                    text = "Coconut Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL SPECIALTIES (with icons for major regions)
+                FilterChip(
+                    id = "andhra",
+                    text = "Andhra Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy
+                ),
+                FilterChip(
+                    id = "karnataka",
+                    text = "Karnataka Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tamil_nadu",
+                    text = "Tamil Nadu Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kerala",
+                    text = "Kerala Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (text-only)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "andhra_spicy",
+                    text = "Andhra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY (text-only)
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+         FilterButtonFood(
+            filterConfig = southIndianFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val southIndianItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.masala_dosa,
+                title = "Masala Dosa",
+                price = "₹150",
+                restaurantName = "Mavalli Tiffin Room",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹23",
+                address = "Lalbagh Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.idli_sambar,
+                title = "Idli Sambar Combo",
+                price = "₹120",
+                restaurantName = "Carnatic Cafe",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹12",
+                address = "Mylapore, Chennai",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.bisi_bele_bath,
+                title = "Bisi Bele Bath",
+                price = "₹180",
+                restaurantName = "Kamat Hotel",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Rajajinagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.pongal,
+                title = "Ven Pongal with Sambar",
+                price = "₹140",
+                restaurantName = "Saravana Bhavan",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "3.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹35",
+                address = "T. Nagar, Chennai",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.rava_dosa,
+                title = "Onion Rava Dosa",
+                price = "₹160",
+                restaurantName = "Udupi Garden",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹48",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.andhra_meals,
+                title = "Andhra Special Meal",
+                price = "₹280",
+                restaurantName = "Nagendra Lunch Home",
+                rating = "4.7",
+                deliveryTime = "35-45 mins",
+                distance = "4.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹42",
+                address = "Ameerpet, Hyderabad",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = southIndianItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val southIndianItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.dosa_masala_south_indian,
+                title = "Masala Dosa",
+                price = "₹120",
+                restaurantName = "Anand Bhavan",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.idli_sambar_south_indian,
+                title = "Idli with Sambar",
+                price = "₹80",
+                restaurantName = "Saravana Bhavan",
+                rating = "4.6",
+                deliveryTime = "10-20 mins",
+                distance = "0.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹12",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.vada_sambar_south_indian,
+                title = "Medu Vada",
+                price = "₹90",
+                restaurantName = "Murugan Idli Shop",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹23",
+                address = "Madurai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.uttapam_south_indian,
+                title = "Onion Uttapam",
+                price = "₹110",
+                restaurantName = "Sangeetha",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹22",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.pongal_south_indian,
+                title = "Ven Pongal",
+                price = "₹100",
+                restaurantName = "A2B - Adyar Ananda Bhavan",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹15",
+                address = "Coimbatore, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.upma_south_indian,
+                title = "Rava Upma",
+                price = "₹85",
+                restaurantName = "MTR - Mavalli Tiffin Room",
+                rating = "4.9",
+                deliveryTime = "10-20 mins",
+                distance = "0.7 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹9",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.appam_stew_south_indian,
+                title = "Appam with Vegetable Stew",
+                price = "₹130",
+                restaurantName = "Kerala House",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹23",
+                address = "Kochi, Kerala"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.pesarattu_south_indian,
+                title = "Pesarattu (Green Gram Dosa)",
+                price = "₹95",
+                restaurantName = "Andhra Spice",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹21",
+                address = "Vijayawada, Andhra Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.bisi_belebath_south_indian,
+                title = "Bisi Bele Bath",
+                price = "₹140",
+                restaurantName = "MTR - Mavalli Tiffin Room",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹21",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.puri_bhaji_south_indian,
+                title = "Puri Bhaji",
+                price = "₹110",
+                restaurantName = "Udupi Sri Krishna Bhavan",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹22",
+                address = "Mangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.kerala_parotta_south_indian,
+                title = "Kerala Parotta with Kurma",
+                price = "₹150",
+                restaurantName = "Kerala Hotel",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹27",
+                address = "Trivandrum, Kerala"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.rasam_rice_south_indian,
+                title = "Rasam Rice",
+                price = "₹75",
+                restaurantName = "Saravana Bhavan",
+                rating = "4.4",
+                deliveryTime = "10-20 mins",
+                distance = "0.7 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹19",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.pongal_vada_south_indian,
+                title = "Pongal with Medu Vada Combo",
+                price = "₹160",
+                restaurantName = "Murugan Idli Shop",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Madurai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.avial_south_indian,
+                title = "Avial with Rice",
+                price = "₹125",
+                restaurantName = "Kerala House",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹19",
+                address = "Kochi, Kerala"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.rava_dosa_south_indian,
+                title = "Rava Dosa",
+                price = "₹135",
+                restaurantName = "Anand Bhavan",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹30",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.puttu_kadala_south_indian,
+                title = "Puttu with Kadala Curry",
+                price = "₹120",
+                restaurantName = "Kerala Hotel",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Trivandrum, Kerala"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.mysore_masala_dosa_south_indian,
+                title = "Mysore Masala Dosa",
+                price = "₹145",
+                restaurantName = "MTR - Mavalli Tiffin Room",
+                rating = "4.9",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹26",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.lemon_rice_south_indian,
+                title = "Lemon Rice",
+                price = "₹85",
+                restaurantName = "Udupi Sri Krishna Bhavan",
+                rating = "4.5",
+                deliveryTime = "10-20 mins",
+                distance = "0.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹21",
+                address = "Mangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chettinad_chicken_south_indian,
+                title = "Chettinad Chicken Curry with Rice",
+                price = "₹220",
+                restaurantName = "Chettinad Restaurant",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹33",
+                address = "Karaikudi, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.south_thali_south_indian,
+                title = "South Indian Thali",
+                price = "₹280",
+                restaurantName = "Sangeetha Grand",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Hyderabad, Telangana"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 @Composable
@@ -17431,14 +18066,658 @@ fun AlooTikkiCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Aloo Tikki",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val alooTikkiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // TIKKI TYPES (with icons for popular variations)
+                FilterChip(
+                    id = "classic_aloo_tikki",
+                    text = "Classic Aloo Tikki",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_aloo_tikki
+                ),
+                FilterChip(
+                    id = "dahi_tikki",
+                    text = "Dahi Tikki",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dahi
+                ),
+                FilterChip(
+                    id = "tikki_chole",
+                    text = "Tikki Chole",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chole
+                ),
+                FilterChip(
+                    id = "cheese_tikki",
+                    text = "Cheese Tikki",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paneer_tikki",
+                    text = "Paneer Tikki",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn_tikki",
+                    text = "Corn Tikki",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLES (with icons for popular ones)
+                FilterChip(
+                    id = "tikki_chaat",
+                    text = "Tikki Chaat",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chaat
+                ),
+                FilterChip(
+                    id = "tikki_burger",
+                    text = "Tikki Burger",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_burger
+                ),
+                FilterChip(
+                    id = "tikki_sandwich",
+                    text = "Tikki Sandwich",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sandwich
+                ),
+                FilterChip(
+                    id = "tikki_platter",
+                    text = "Tikki Platter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tikki_with_bread",
+                    text = "With Bread",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS & SAUCES (icons for main ones)
+                FilterChip(
+                    id = "with_chutneys",
+                    text = "With Chutneys",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chutney_aloo_tikki
+                ),
+                FilterChip(
+                    id = "with_dahi",
+                    text = "With Dahi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_yogurt_2
+                ),
+                FilterChip(
+                    id = "sev_on_top",
+                    text = "Sev on Top",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sev
+                ),
+                FilterChip(
+                    id = "onion_tomato",
+                    text = "Onion & Tomato",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coriander_garnish",
+                    text = "Coriander Garnish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tamatar_chutney",
+                    text = "Tamatar Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEXTURE & COOKING STYLE (text-only)
+                FilterChip(
+                    id = "crispy_tikki",
+                    text = "Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft_tikki",
+                    text = "Soft",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "shallow_fried",
+                    text = "Shallow Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "deep_fried",
+                    text = "Deep Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL VARIATIONS (icons for major styles)
+                FilterChip(
+                    id = "delhi_style",
+                    text = "Delhi Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_delhi
+                ),
+                FilterChip(
+                    id = "punjabi_style",
+                    text = "Punjabi Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_punjab
+                ),
+                FilterChip(
+                    id = "street_style",
+                    text = "Street Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "restaurant_style",
+                    text = "Restaurant Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (text-only)
+                FilterChip(
+                    id = "mild_spice",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES (text-only)
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TYPE (text-only)
+                FilterChip(
+                    id = "snack",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "breakfast",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "evening_snack",
+                    text = "Evening Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+         FilterButtonFood(
+            filterConfig = alooTikkiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val alooTikkiItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.aloo_tikki_classic,
+                title = "Classic Aloo Tikki",
+                price = "₹90",
+                restaurantName = "Delhi Street Food",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹18",
+                address = "Chandni Chowk, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.aloo_tikki_dahi,
+                title = "Dahi Aloo Tikki",
+                price = "₹120",
+                restaurantName = "Haldiram's",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹18",
+                address = "SDA Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.aloo_tikki_chole,
+                title = "Aloo Tikki Chole",
+                price = "₹150",
+                restaurantName = "Baba Chaat Corner",
+                rating = "4.9",
+                deliveryTime = "10-20 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.aloo_tikki_chaat,
+                title = "Aloo Tikki Chaat",
+                price = "₹110",
+                restaurantName = "Bengali Sweet House",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹28",
+                address = "GK-1, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.aloo_tikki_burger,
+                title = "Aloo Tikki Burger",
+                price = "₹80",
+                restaurantName = "McDonald's",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "2.0 km",
+                discount = "30%",
+                discountAmount = "up to ₹24",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.aloo_tikki_platter,
+                title = "Aloo Tikki Platter (4 pcs)",
+                price = "₹200",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = alooTikkiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color =  MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val southIndianItemsList = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.dosa_masala_south_indian,
+//                title = "Masala Dosa",
+//                price = "₹120",
+//                restaurantName = "Anand Bhavan",
+//                rating = "4.8",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.8 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹24",
+//                address = "Chennai, Tamil Nadu"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.idli_sambar_south_indian,
+//                title = "Idli with Sambar",
+//                price = "₹80",
+//                restaurantName = "Saravana Bhavan",
+//                rating = "4.6",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.6 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹12",
+//                address = "Bangalore, Karnataka"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.vada_sambar_south_indian,
+//                title = "Medu Vada",
+//                price = "₹90",
+//                restaurantName = "Murugan Idli Shop",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.0 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹23",
+//                address = "Madurai, Tamil Nadu"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.uttapam_south_indian,
+//                title = "Onion Uttapam",
+//                price = "₹110",
+//                restaurantName = "Sangeetha",
+//                rating = "4.5",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹22",
+//                address = "Hyderabad, Telangana"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.pongal_south_indian,
+//                title = "Ven Pongal",
+//                price = "₹100",
+//                restaurantName = "A2B - Adyar Ananda Bhavan",
+//                rating = "4.8",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.9 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹15",
+//                address = "Coimbatore, Tamil Nadu"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.upma_south_indian,
+//                title = "Rava Upma",
+//                price = "₹85",
+//                restaurantName = "MTR - Mavalli Tiffin Room",
+//                rating = "4.9",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.7 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹9",
+//                address = "Bangalore, Karnataka"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.appam_stew_south_indian,
+//                title = "Appam with Vegetable Stew",
+//                price = "₹130",
+//                restaurantName = "Kerala House",
+//                rating = "4.7",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.3 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹23",
+//                address = "Kochi, Kerala"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.pesarattu_south_indian,
+//                title = "Pesarattu (Green Gram Dosa)",
+//                price = "₹95",
+//                restaurantName = "Andhra Spice",
+//                rating = "4.6",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.1 km",
+//                discount = "22% OFF",
+//                discountAmount = "up to ₹21",
+//                address = "Vijayawada, Andhra Pradesh"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.bisi_belebath_south_indian,
+//                title = "Bisi Bele Bath",
+//                price = "₹140",
+//                restaurantName = "MTR - Mavalli Tiffin Room",
+//                rating = "4.8",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹21",
+//                address = "Bangalore, Karnataka"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.puri_bhaji_south_indian,
+//                title = "Puri Bhaji",
+//                price = "₹110",
+//                restaurantName = "Udupi Sri Krishna Bhavan",
+//                rating = "4.5",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.8 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹22",
+//                address = "Mangalore, Karnataka"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.kerala_parotta_south_indian,
+//                title = "Kerala Parotta with Kurma",
+//                price = "₹150",
+//                restaurantName = "Kerala Hotel",
+//                rating = "4.7",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.4 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹27",
+//                address = "Trivandrum, Kerala"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.rasam_rice_south_indian,
+//                title = "Rasam Rice",
+//                price = "₹75",
+//                restaurantName = "Saravana Bhavan",
+//                rating = "4.4",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.7 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹19",
+//                address = "Chennai, Tamil Nadu"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.pongal_vada_south_indian,
+//                title = "Pongal with Medu Vada Combo",
+//                price = "₹160",
+//                restaurantName = "Murugan Idli Shop",
+//                rating = "4.8",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹32",
+//                address = "Madurai, Tamil Nadu"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.avial_south_indian,
+//                title = "Avial with Rice",
+//                price = "₹125",
+//                restaurantName = "Kerala House",
+//                rating = "4.6",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.3 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹19",
+//                address = "Kochi, Kerala"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.rava_dosa_south_indian,
+//                title = "Rava Dosa",
+//                price = "₹135",
+//                restaurantName = "Anand Bhavan",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.9 km",
+//                discount = "22% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Chennai, Tamil Nadu"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.puttu_kadala_south_indian,
+//                title = "Puttu with Kadala Curry",
+//                price = "₹120",
+//                restaurantName = "Kerala Hotel",
+//                rating = "4.8",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹24",
+//                address = "Trivandrum, Kerala"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.mysore_masala_dosa_south_indian,
+//                title = "Mysore Masala Dosa",
+//                price = "₹145",
+//                restaurantName = "MTR - Mavalli Tiffin Room",
+//                rating = "4.9",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.8 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹26",
+//                address = "Bangalore, Karnataka"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.lemon_rice_south_indian,
+//                title = "Lemon Rice",
+//                price = "₹85",
+//                restaurantName = "Udupi Sri Krishna Bhavan",
+//                rating = "4.5",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.6 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹21",
+//                address = "Mangalore, Karnataka"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.chettinad_chicken_south_indian,
+//                title = "Chettinad Chicken Curry with Rice",
+//                price = "₹220",
+//                restaurantName = "Chettinad Restaurant",
+//                rating = "4.8",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.8 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹33",
+//                address = "Karaikudi, Tamil Nadu"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.south_thali_south_indian,
+//                title = "South Indian Thali",
+//                price = "₹280",
+//                restaurantName = "Sangeetha Grand",
+//                rating = "4.9",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹56",
+//                address = "Hyderabad, Telangana"
+//            )
+//        ).forEach { restaurantItem ->
+//            Column {
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
     }
 }
 @Composable

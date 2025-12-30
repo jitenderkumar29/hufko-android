@@ -18420,304 +18420,304 @@ fun AlooTikkiCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color =  MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val southIndianItemsList = listOf(
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.dosa_masala_south_indian,
-//                title = "Masala Dosa",
-//                price = "₹120",
-//                restaurantName = "Anand Bhavan",
-//                rating = "4.8",
-//                deliveryTime = "15-25 mins",
-//                distance = "0.8 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹24",
-//                address = "Chennai, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.idli_sambar_south_indian,
-//                title = "Idli with Sambar",
-//                price = "₹80",
-//                restaurantName = "Saravana Bhavan",
-//                rating = "4.6",
-//                deliveryTime = "10-20 mins",
-//                distance = "0.6 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹12",
-//                address = "Bangalore, Karnataka"
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.vada_sambar_south_indian,
-//                title = "Medu Vada",
-//                price = "₹90",
-//                restaurantName = "Murugan Idli Shop",
-//                rating = "4.7",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.0 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹23",
-//                address = "Madurai, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.uttapam_south_indian,
-//                title = "Onion Uttapam",
-//                price = "₹110",
-//                restaurantName = "Sangeetha",
-//                rating = "4.5",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.2 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹22",
-//                address = "Hyderabad, Telangana"
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.pongal_south_indian,
-//                title = "Ven Pongal",
-//                price = "₹100",
-//                restaurantName = "A2B - Adyar Ananda Bhavan",
-//                rating = "4.8",
-//                deliveryTime = "15-25 mins",
-//                distance = "0.9 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹15",
-//                address = "Coimbatore, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.upma_south_indian,
-//                title = "Rava Upma",
-//                price = "₹85",
-//                restaurantName = "MTR - Mavalli Tiffin Room",
-//                rating = "4.9",
-//                deliveryTime = "10-20 mins",
-//                distance = "0.7 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹9",
-//                address = "Bangalore, Karnataka"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.appam_stew_south_indian,
-//                title = "Appam with Vegetable Stew",
-//                price = "₹130",
-//                restaurantName = "Kerala House",
-//                rating = "4.7",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.3 km",
-//                discount = "18% OFF",
-//                discountAmount = "up to ₹23",
-//                address = "Kochi, Kerala"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.pesarattu_south_indian,
-//                title = "Pesarattu (Green Gram Dosa)",
-//                price = "₹95",
-//                restaurantName = "Andhra Spice",
-//                rating = "4.6",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.1 km",
-//                discount = "22% OFF",
-//                discountAmount = "up to ₹21",
-//                address = "Vijayawada, Andhra Pradesh"
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.bisi_belebath_south_indian,
-//                title = "Bisi Bele Bath",
-//                price = "₹140",
-//                restaurantName = "MTR - Mavalli Tiffin Room",
-//                rating = "4.8",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.5 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹21",
-//                address = "Bangalore, Karnataka"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.puri_bhaji_south_indian,
-//                title = "Puri Bhaji",
-//                price = "₹110",
-//                restaurantName = "Udupi Sri Krishna Bhavan",
-//                rating = "4.5",
-//                deliveryTime = "15-25 mins",
-//                distance = "0.8 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹22",
-//                address = "Mangalore, Karnataka"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.kerala_parotta_south_indian,
-//                title = "Kerala Parotta with Kurma",
-//                price = "₹150",
-//                restaurantName = "Kerala Hotel",
-//                rating = "4.7",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.4 km",
-//                discount = "18% OFF",
-//                discountAmount = "up to ₹27",
-//                address = "Trivandrum, Kerala"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.rasam_rice_south_indian,
-//                title = "Rasam Rice",
-//                price = "₹75",
-//                restaurantName = "Saravana Bhavan",
-//                rating = "4.4",
-//                deliveryTime = "10-20 mins",
-//                distance = "0.7 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹19",
-//                address = "Chennai, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.pongal_vada_south_indian,
-//                title = "Pongal with Medu Vada Combo",
-//                price = "₹160",
-//                restaurantName = "Murugan Idli Shop",
-//                rating = "4.8",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹32",
-//                address = "Madurai, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.avial_south_indian,
-//                title = "Avial with Rice",
-//                price = "₹125",
-//                restaurantName = "Kerala House",
-//                rating = "4.6",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.3 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹19",
-//                address = "Kochi, Kerala"
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.rava_dosa_south_indian,
-//                title = "Rava Dosa",
-//                price = "₹135",
-//                restaurantName = "Anand Bhavan",
-//                rating = "4.7",
-//                deliveryTime = "15-25 mins",
-//                distance = "0.9 km",
-//                discount = "22% OFF",
-//                discountAmount = "up to ₹30",
-//                address = "Chennai, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.puttu_kadala_south_indian,
-//                title = "Puttu with Kadala Curry",
-//                price = "₹120",
-//                restaurantName = "Kerala Hotel",
-//                rating = "4.8",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.2 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹24",
-//                address = "Trivandrum, Kerala"
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.mysore_masala_dosa_south_indian,
-//                title = "Mysore Masala Dosa",
-//                price = "₹145",
-//                restaurantName = "MTR - Mavalli Tiffin Room",
-//                rating = "4.9",
-//                deliveryTime = "15-25 mins",
-//                distance = "0.8 km",
-//                discount = "18% OFF",
-//                discountAmount = "up to ₹26",
-//                address = "Bangalore, Karnataka"
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.lemon_rice_south_indian,
-//                title = "Lemon Rice",
-//                price = "₹85",
-//                restaurantName = "Udupi Sri Krishna Bhavan",
-//                rating = "4.5",
-//                deliveryTime = "10-20 mins",
-//                distance = "0.6 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹21",
-//                address = "Mangalore, Karnataka"
-//            ),
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.chettinad_chicken_south_indian,
-//                title = "Chettinad Chicken Curry with Rice",
-//                price = "₹220",
-//                restaurantName = "Chettinad Restaurant",
-//                rating = "4.8",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.8 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹33",
-//                address = "Karaikudi, Tamil Nadu"
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.south_thali_south_indian,
-//                title = "South Indian Thali",
-//                price = "₹280",
-//                restaurantName = "Sangeetha Grand",
-//                rating = "4.9",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹56",
-//                address = "Hyderabad, Telangana"
-//            )
-//        ).forEach { restaurantItem ->
-//            Column {
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val alooTikkiItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.aloo_tikki_1,
+                title = "Classic Aloo Tikki",
+                price = "₹60",
+                restaurantName = "Delhi Street Food Corner",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹12",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.aloo_tikki_2,
+                title = "Aloo Tikki Chaat",
+                price = "₹75",
+                restaurantName = "Haldiram's",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹11",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.aloo_tikki_3,
+                title = "Crispy Aloo Tikki Burger",
+                price = "₹90",
+                restaurantName = "Burger King",
+                rating = "4.3",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹27",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.aloo_tikki_4,
+                title = "Aloo Tikki with Dahi & Chutney",
+                price = "₹85",
+                restaurantName = "Bikanervala",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹21",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.aloo_tikki_5,
+                title = "Stuffed Aloo Tikki",
+                price = "₹100",
+                restaurantName = "Nathu's Sweets",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹10",
+                address = "Bengaluru, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.aloo_tikki_6,
+                title = "Aloo Tikki Platter (6 pieces)",
+                price = "₹180",
+                restaurantName = "Sagar Ratna",
+                rating = "4.4",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Pune, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.aloo_tikki_7,
+                title = "Spicy Masala Aloo Tikki",
+                price = "₹70",
+                restaurantName = "Bombay Chat Center",
+                rating = "4.6",
+                deliveryTime = "10-20 mins",
+                distance = "0.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹11",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.aloo_tikki_8,
+                title = "Aloo Tikki Sandwich",
+                price = "₹110",
+                restaurantName = "Subway",
+                rating = "4.2",
+                deliveryTime = "20-30 mins",
+                distance = "1.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹28",
+                address = "Kolkata, West Bengal"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.aloo_tikki_9,
+                title = "Aloo Tikki Basket (4 pieces)",
+                price = "₹140",
+                restaurantName = "McDonald's",
+                rating = "4.3",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹28",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.aloo_tikki_10,
+                title = "Aloo Tikki with Green Chutney",
+                price = "₹65",
+                restaurantName = "Gurukripa",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹20",
+                address = "Jaipur, Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.aloo_tikki_11,
+                title = "Paneer Stuffed Aloo Tikki",
+                price = "₹120",
+                restaurantName = "Bengali Sweet House",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹18",
+                address = "Lucknow, Uttar Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.aloo_tikki_12,
+                title = "Aloo Tikki Wrap",
+                price = "₹95",
+                restaurantName = "Wrap & Roll",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹19",
+                address = "Ahmedabad, Gujarat"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.aloo_tikki_13,
+                title = "Aloo Tikki Combo with Pepsi",
+                price = "₹150",
+                restaurantName = "KFC",
+                rating = "4.4",
+                deliveryTime = "25-35 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹38",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.aloo_tikki_14,
+                title = "Extra Crispy Aloo Tikki",
+                price = "₹80",
+                restaurantName = "Tikki King",
+                rating = "4.9",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹8",
+                address = "Amritsar, Punjab"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.aloo_tikki_15,
+                title = "Aloo Tikki with Sweet Tamarind Chutney",
+                price = "₹85",
+                restaurantName = "Evergreen Sweet House",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹15",
+                address = "Bhopal, Madhya Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.aloo_tikki_16,
+                title = "Aloo Tikki Sliders (3 pieces)",
+                price = "₹160",
+                restaurantName = "Social",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Goa"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.aloo_tikki_17,
+                title = "Aloo Tikki with Sprouts",
+                price = "₹110",
+                restaurantName = "Healthy Bites",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹17",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.aloo_tikki_18,
+                title = "Aloo Tikki Pizza",
+                price = "₹200",
+                restaurantName = "Domino's Pizza",
+                rating = "4.3",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "Nagpur, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.aloo_tikki_19,
+                title = "Aloo Tikki Thali",
+                price = "₹180",
+                restaurantName = "Rajdhani",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Surat, Gujarat"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.aloo_tikki_20,
+                title = "Premium Aloo Tikki with Exotic Chutneys",
+                price = "₹140",
+                restaurantName = "The Big Tikki",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹35",
+                address = "Patna, Bihar"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 @Composable
@@ -18725,14 +18725,641 @@ fun PastaCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Pasta",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val pastaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // PASTA TYPES (with icons for popular types)
+                FilterChip(
+                    id = "penne",
+                    text = "Penne",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_penne
+                ),
+                FilterChip(
+                    id = "spaghetti",
+                    text = "Spaghetti",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spaghetti
+                ),
+                FilterChip(
+                    id = "fusilli",
+                    text = "Fusilli",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fusilli
+                ),
+                FilterChip(
+                    id = "macaroni",
+                    text = "Macaroni",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fettuccine",
+                    text = "Fettuccine",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ravioli",
+                    text = "Ravioli",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SAUCE TYPES (with icons for popular sauces)
+                FilterChip(
+                    id = "alfredo",
+                    text = "Alfredo",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cream_sauce
+                ),
+                FilterChip(
+                    id = "marinara",
+                    text = "Marinara",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tomato_sauce
+                ),
+                FilterChip(
+                    id = "arrabbiata",
+                    text = "Arrabbiata",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carbonara",
+                    text = "Carbonara",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bolognese",
+                    text = "Bolognese",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MAIN INGREDIENTS (with icons for popular options)
+
+                FilterChip(
+                    id = "vegetable_pasta",
+                    text = "Vegetable",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese_pasta",
+                    text = "Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "seafood_pasta",
+                    text = "Seafood",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (text-only)
+                FilterChip(
+                    id = "baked_pasta",
+                    text = "Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "creamy_pasta",
+                    text = "Creamy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_pasta",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_pasta",
+                    text = "Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUISINE STYLE (with icons for major styles)
+                FilterChip(
+                    id = "american_style",
+                    text = "American Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fusion_style",
+                    text = "Fusion Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PASTA FORMS (text-only)
+                FilterChip(
+                    id = "whole_wheat",
+                    text = "Whole Wheat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_pasta",
+                    text = "Egg Pasta",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_pasta",
+                    text = "Fresh Pasta",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TYPE (text-only)
+                FilterChip(
+                    id = "main_course",
+                    text = "Main Course",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "side_dish",
+                    text = "Side Dish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "appetizer",
+                    text = "Appetizer",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES (text-only)
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "non_vegetarian",
+                    text = "Non-Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CHEESE TYPES (text-only)
+                FilterChip(
+                    id = "parmesan",
+                    text = "Parmesan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mozzarella",
+                    text = "Mozzarella",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheddar",
+                    text = "Cheddar",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+         FilterButtonFood(
+            filterConfig = pastaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val pastaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.pasta_penne_alfredo,
+                title = "Creamy Penne Alfredo",
+                price = "₹320",
+                restaurantName = "Italian Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹64",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.pasta_spaghetti_marinara,
+                title = "Spaghetti Marinara",
+                price = "₹280",
+                restaurantName = "Tuscany Gardens",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹42",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.pasta_fusilli_pesto,
+                title = "Fusilli Pesto Pasta",
+                price = "₹350",
+                restaurantName = "Olive Bistro",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.pasta_cheese_macaroni,
+                title = "Cheesy Macaroni Bake",
+                price = "₹240",
+                restaurantName = "Cafe Delhi Heights",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹60",
+                address = "Cyber City, Gurgaon"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.pasta_arrabbiata,
+                title = "Spicy Penne Arrabbiata",
+                price = "₹290",
+                restaurantName = "Little Italy",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.0 km",
+                discount = "18%",
+                discountAmount = "up to ₹52",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.pasta_chicken_alfredo,
+                title = "Chicken Alfredo Pasta",
+                price = "₹380",
+                restaurantName = "Mainland China",
+                rating = "4.8",
+                deliveryTime = "35-45 mins",
+                distance = "2.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹76",
+                address = "Park Street, Kolkata"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pastaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val pastaItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.pasta_1,
+                title = "Creamy Penne Alfredo",
+                price = "₹320",
+                restaurantName = "Italian Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹64",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.pasta_2,
+                title = "Spaghetti Marinara",
+                price = "₹280",
+                restaurantName = "Tuscany Gardens",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹42",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.pasta_3,
+                title = "Fusilli Pesto Pasta",
+                price = "₹350",
+                restaurantName = "Olive Bistro",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹35",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.pasta_4,
+                title = "Cheesy Macaroni Bake",
+                price = "₹240",
+                restaurantName = "Cafe Delhi Heights",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹60",
+                address = "Cyber City, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.pasta_5,
+                title = "Spicy Penne Arrabbiata",
+                price = "₹290",
+                restaurantName = "Little Italy",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹52",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.pasta_6,
+                title = "Chicken Alfredo Pasta",
+                price = "₹380",
+                restaurantName = "Mainland China",
+                rating = "4.8",
+                deliveryTime = "35-45 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹76",
+                address = "Park Street, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.pasta_7,
+                title = "Vegetable Lasagna",
+                price = "₹360",
+                restaurantName = "SodaBottleOpenerWala",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹54",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.pasta_8,
+                title = "Seafood Linguine",
+                price = "₹420",
+                restaurantName = "The Table",
+                rating = "4.9",
+                deliveryTime = "40-50 mins",
+                distance = "3.0 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹50",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.pasta_9,
+                title = "Tomato Basil Pasta",
+                price = "₹270",
+                restaurantName = "Cafe Pascucci",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹68",
+                address = "Sector 17, Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.pasta_10,
+                title = "Mushroom Cream Pasta",
+                price = "₹310",
+                restaurantName = "Big Chill",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹62",
+                address = "Khan Market, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.pasta_11,
+                title = "Spaghetti Aglio Olio",
+                price = "₹260",
+                restaurantName = "Jamjar Diner",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "0.9 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹78",
+                address = "Vashi, Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.pasta_12,
+                title = "Classic Carbonara",
+                price = "₹340",
+                restaurantName = "Senso",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹61",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.pasta_13,
+                title = "Butter Garlic Pasta",
+                price = "₹250",
+                restaurantName = "Cafe Coffee Day",
+                rating = "4.4",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "MG Road, Pune"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.pasta_14,
+                title = "Red Sauce Penne Pasta",
+                price = "₹280",
+                restaurantName = "Pizza Hut",
+                rating = "4.3",
+                deliveryTime = "25-35 mins",
+                distance = "1.7 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Civil Lines, Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.pasta_15,
+                title = "White Sauce Pasta",
+                price = "₹300",
+                restaurantName = "Domino's",
+                rating = "4.2",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹90",
+                address = "Banjara Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.pasta_16,
+                title = "Veg Manchurian Pasta",
+                price = "₹290",
+                restaurantName = "Chinese Wok",
+                rating = "4.6",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹44",
+                address = "Gomti Nagar, Lucknow"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.pasta_17,
+                title = "Tandoori Pasta",
+                price = "₹330",
+                restaurantName = "Barbeque Nation",
+                rating = "4.7",
+                deliveryTime = "35-45 mins",
+                distance = "2.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹66",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.pasta_18,
+                title = "Schezwan Pasta",
+                price = "₹270",
+                restaurantName = "Yo! China",
+                rating = "4.4",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹59",
+                address = "Salt Lake, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.pasta_19,
+                title = "Spaghetti Bolognese",
+                price = "₹400",
+                restaurantName = "JW Kitchen",
+                rating = "4.9",
+                deliveryTime = "40-50 mins",
+                distance = "2.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹60",
+                address = "Aerocity, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.pasta_20,
+                title = "Truffle Pasta",
+                price = "₹480",
+                restaurantName = "Le Cirque",
+                rating = "4.9",
+                deliveryTime = "45-55 mins",
+                distance = "3.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹48",
+                address = "Chanakyapuri, Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 @Composable

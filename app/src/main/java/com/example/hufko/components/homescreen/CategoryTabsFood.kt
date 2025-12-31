@@ -19367,14 +19367,628 @@ fun PastryCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Pastry",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val pastryFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // PASTRY TYPES (with icons for popular types)
+                FilterChip(
+                    id = "croissant",
+                    text = "Croissant",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_croissant
+                ),
+                FilterChip(
+                    id = "danish",
+                    text = "Danish",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_danish
+                ),
+                FilterChip(
+                    id = "eclair",
+                    text = "Éclair",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_eclair
+                ),
+                FilterChip(
+                    id = "tart",
+                    text = "Tart",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tart
+                ),
+                FilterChip(
+                    id = "muffin",
+                    text = "Muffin",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "scone",
+                    text = "Scone",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "puff_pastry",
+                    text = "Puff Pastry",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVORS (with icons for popular flavors)
+                FilterChip(
+                    id = "chocolate",
+                    text = "Chocolate",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate
+                ),
+                FilterChip(
+                    id = "vanilla",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel",
+                    text = "Caramel",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cinnamon",
+                    text = "Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FILLINGS (text-only)
+                FilterChip(
+                    id = "cream_filled",
+                    text = "Cream Filled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jam_filled",
+                    text = "Jam Filled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "custard",
+                    text = "Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nutella",
+                    text = "Nutella",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OCCASIONS (with icons for common occasions)
+                FilterChip(
+                    id = "snack",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "special_occasion",
+                    text = "Special Occasion",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY (with icons for common dietary types)
+
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegan
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEXTURE (text-only)
+                FilterChip(
+                    id = "flaky",
+                    text = "Flaky",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft",
+                    text = "Soft",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crispy",
+                    text = "Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chewy",
+                    text = "Chewy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ORIGIN (with icons for major origins)
+                FilterChip(
+                    id = "american",
+                    text = "American",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "viennese",
+                    text = "Viennese",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE (with icons)
+
+                FilterChip(
+                    id = "room_temp",
+                    text = "Room Temp",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREMIUM CATEGORIES (text-only)
+                FilterChip(
+                    id = "artisan",
+                    text = "Artisan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "seasonal",
+                    text = "Seasonal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
+        FilterButtonFood(
+            filterConfig = pastryFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val pastryItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.pastry_croissant,
+                title = "Butter Croissant",
+                price = "₹120",
+                restaurantName = "French Bakery",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹24",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.pastry_chocolate_danish,
+                title = "Chocolate Danish",
+                price = "₹180",
+                restaurantName = "Copenhagen Bakery",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.pastry_chocolate_eclair,
+                title = "Chocolate Éclair",
+                price = "₹150",
+                restaurantName = "Parisian Patisserie",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.pastry_fruit_tart,
+                title = "Mixed Fruit Tart",
+                price = "₹220",
+                restaurantName = "Sweet Delights",
+                rating = "4.5",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "25%",
+                discountAmount = "up to ₹55",
+                address = "Cyber City, Gurgaon"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.pastry_blueberry_muffin,
+                title = "Blueberry Muffin",
+                price = "₹90",
+                restaurantName = "Morning Bites",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "18%",
+                discountAmount = "up to ₹16",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.pastry_almond_puff,
+                title = "Almond Puff Pastry",
+                price = "₹160",
+                restaurantName = "Viennese Cafe",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "20%",
+                discountAmount = "up to ₹32",
+                address = "Park Street, Kolkata"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pastryItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color =  MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val pastryItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.pastry_1,
+                title = "Butter Croissant",
+                price = "₹120",
+                restaurantName = "French Bakery",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.pastry_2,
+                title = "Chocolate Danish",
+                price = "₹180",
+                restaurantName = "Copenhagen Bakery",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹27",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.pastry_3,
+                title = "Chocolate Éclair",
+                price = "₹150",
+                restaurantName = "Parisian Patisserie",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹15",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.pastry_4,
+                title = "Mixed Fruit Tart",
+                price = "₹220",
+                restaurantName = "Sweet Delights",
+                rating = "4.5",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Cyber City, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.pastry_5,
+                title = "Blueberry Muffin",
+                price = "₹90",
+                restaurantName = "Morning Bites",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹16",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.pastry_6,
+                title = "Almond Puff Pastry",
+                price = "₹160",
+                restaurantName = "Viennese Cafe",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Park Street, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.pastry_7,
+                title = "Apple Turnover",
+                price = "₹140",
+                restaurantName = "Bakery Junction",
+                rating = "4.4",
+                deliveryTime = "25-35 mins",
+                distance = "1.7 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹17",
+                address = "Baner Road, Pune"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.pastry_8,
+                title = "Cinnamon Roll",
+                price = "₹130",
+                restaurantName = "Cinnamon Square",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹20",
+                address = "MG Road, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.pastry_9,
+                title = "Pain au Chocolat",
+                price = "₹170",
+                restaurantName = "French Corner",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.1 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹17",
+                address = "Banjara Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.pastry_10,
+                title = "Cheese Danish",
+                price = "₹190",
+                restaurantName = "Cheese Heaven",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹38",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.pastry_11,
+                title = "Strawberry Tart",
+                price = "₹250",
+                restaurantName = "Berrylicious",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹63",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.pastry_12,
+                title = "Almond Croissant",
+                price = "₹140",
+                restaurantName = "Le Croissant",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹25",
+                address = "Sector 29, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.pastry_13,
+                title = "Raspberry Danish",
+                price = "₹200",
+                restaurantName = "Berry Blossoms",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹30",
+                address = "Salt Lake, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.pastry_14,
+                title = "Chocolate Mousse Cake",
+                price = "₹280",
+                restaurantName = "The Chocolate Room",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Civil Lines, Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.pastry_15,
+                title = "Cream Horn",
+                price = "₹110",
+                restaurantName = "Bakery Express",
+                rating = "4.3",
+                deliveryTime = "15-25 mins",
+                distance = "0.6 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹33",
+                address = "Sadar Bazaar, Nagpur"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.pastry_16,
+                title = "Palmier Cookies",
+                price = "₹95",
+                restaurantName = "Cookie Jar",
+                rating = "4.6",
+                deliveryTime = "10-20 mins",
+                distance = "0.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹14",
+                address = "Camp Area, Pune"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.pastry_17,
+                title = "Tiramisu",
+                price = "₹320",
+                restaurantName = "Italian Delights",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹64",
+                address = "Ballygunge, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.pastry_18,
+                title = "Red Velvet Cupcake",
+                price = "₹85",
+                restaurantName = "Cupcake World",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹19",
+                address = "Sector 17, Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.pastry_19,
+                title = "Mille-Feuille",
+                price = "₹240",
+                restaurantName = "French Patisserie",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹36",
+                address = "Viman Nagar, Pune"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.pastry_20,
+                title = "Opera Cake",
+                price = "₹350",
+                restaurantName = "Le Cordon Bleu",
+                rating = "4.9",
+                deliveryTime = "40-50 mins",
+                distance = "2.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹35",
+                address = "Lodhi Road, Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 @Composable
@@ -19382,15 +19996,649 @@ fun PavBhajiCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        Text(
-            text = "Pav Bhaji",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val pavBhajiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // BHAGI TYPES (with icons for popular types)
+                FilterChip(
+                    id = "classic_pav_bhaji",
+                    text = "Classic",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic
+                ),
+                FilterChip(
+                    id = "cheese_pav_bhaji",
+                    text = "Cheese",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cheese
+                ),
+                FilterChip(
+                    id = "butter_pav_bhaji",
+                    text = "Butter",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_butter
+                ),
+                FilterChip(
+                    id = "paneer_pav_bhaji",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer
+                ),
+                FilterChip(
+                    id = "jain_pav_bhaji",
+                    text = "Jain",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushroom_pav_bhaji",
+                    text = "Mushroom",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "khada_masala_pav_bhaji",
+                    text = "Khada Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for spice levels)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mild
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PAV TYPES (with icons for pav variations)
+                FilterChip(
+                    id = "plain_pav",
+                    text = "Plain Pav",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bun_maska",
+                    text = "Bun Maska",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (text-only)
+                FilterChip(
+                    id = "plate_serving",
+                    text = "Plate Serving",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tawa_serving",
+                    text = "Tawa Serving",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "live_counter",
+                    text = "Live Counter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_meal",
+                    text = "Combo Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (with icons for popular toppings)
+                FilterChip(
+                    id = "lemon",
+                    text = "Lemon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sev",
+                    text = "Sev",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (text-only)
+                FilterChip(
+                    id = "with_salad",
+                    text = "With Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_pickle",
+                    text = "With Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chutney",
+                    text = "With Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_papad",
+                    text = "With Papad",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION STYLE (with icons)
+                FilterChip(
+                    id = "punjabi_style",
+                    text = "Punjabi Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_punjab
+                ),
+                FilterChip(
+                    id = "gujarati_style",
+                    text = "Gujarati Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "street_style",
+                    text = "Street Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TYPE (text-only)
+                FilterChip(
+                    id = "snack",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner",
+                    text = "Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "late_night",
+                    text = "Late Night",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY (text-only)
+                FilterChip(
+                    id = "eggless",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_onion_garlic",
+                    text = "No Onion Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE (with icons)
+                FilterChip(
+                    id = "jumbo",
+                    text = "Jumbo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini",
+                    text = "Mini",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
         )
-    }
+        FilterButtonFood(
+            filterConfig = pavBhajiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val pavBhajiItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.pav_bhaji_1,
+                title = "Classic Mumbai Pav Bhaji",
+                price = "₹180",
+                restaurantName = "Cafe Madras",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Matunga, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.pav_bhaji_2,
+                title = "Butter Pav Bhaji",
+                price = "₹220",
+                restaurantName = "Cannon Pav Bhaji",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹33",
+                address = "Fort, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.pav_bhaji_3,
+                title = "Cheese Pav Bhaji",
+                price = "₹250",
+                restaurantName = "Jumbo King",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.pav_bhaji_4,
+                title = "Paneer Pav Bhaji",
+                price = "₹280",
+                restaurantName = "Haldiram's",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹70",
+                address = "Chandni Chowk, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.pav_bhaji_5,
+                title = "Jain Pav Bhaji",
+                price = "₹200",
+                restaurantName = "Rajdhani",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.1 km",
+                discount = "18%",
+                discountAmount = "up to ₹36",
+                address = "Malad West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.pav_bhaji_6,
+                title = "Khada Masala Pav Bhaji",
+                price = "₹240",
+                restaurantName = "Kailash Parbat",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹48",
+                address = "Powai, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pavBhajiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color =  MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val pastryItemsList = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.pastry_1,
+//                title = "Butter Croissant",
+//                price = "₹120",
+//                restaurantName = "French Bakery",
+//                rating = "4.8",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.8 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹24",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.pastry_2,
+//                title = "Chocolate Danish",
+//                price = "₹180",
+//                restaurantName = "Copenhagen Bakery",
+//                rating = "4.6",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.2 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹27",
+//                address = "Koramangala, Bangalore"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.pastry_3,
+//                title = "Chocolate Éclair",
+//                price = "₹150",
+//                restaurantName = "Parisian Patisserie",
+//                rating = "4.9",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.5 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹15",
+//                address = "Bandra West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.pastry_4,
+//                title = "Mixed Fruit Tart",
+//                price = "₹220",
+//                restaurantName = "Sweet Delights",
+//                rating = "4.5",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.0 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹55",
+//                address = "Cyber City, Gurgaon"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.pastry_5,
+//                title = "Blueberry Muffin",
+//                price = "₹90",
+//                restaurantName = "Morning Bites",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.9 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹16",
+//                address = "Jubilee Hills, Hyderabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.pastry_6,
+//                title = "Almond Puff Pastry",
+//                price = "₹160",
+//                restaurantName = "Viennese Cafe",
+//                rating = "4.8",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.3 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹32",
+//                address = "Park Street, Kolkata"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.pastry_7,
+//                title = "Apple Turnover",
+//                price = "₹140",
+//                restaurantName = "Bakery Junction",
+//                rating = "4.4",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.7 km",
+//                discount = "12% OFF",
+//                discountAmount = "up to ₹17",
+//                address = "Baner Road, Pune"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.pastry_8,
+//                title = "Cinnamon Roll",
+//                price = "₹130",
+//                restaurantName = "Cinnamon Square",
+//                rating = "4.7",
+//                deliveryTime = "15-20 mins",
+//                distance = "0.7 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹20",
+//                address = "MG Road, Ahmedabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.pastry_9,
+//                title = "Pain au Chocolat",
+//                price = "₹170",
+//                restaurantName = "French Corner",
+//                rating = "4.9",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.1 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹17",
+//                address = "Banjara Hills, Hyderabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.pastry_10,
+//                title = "Cheese Danish",
+//                price = "₹190",
+//                restaurantName = "Cheese Heaven",
+//                rating = "4.6",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.8 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹38",
+//                address = "Indiranagar, Bangalore"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.pastry_11,
+//                title = "Strawberry Tart",
+//                price = "₹250",
+//                restaurantName = "Berrylicious",
+//                rating = "4.8",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.2 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹63",
+//                address = "Powai, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.pastry_12,
+//                title = "Almond Croissant",
+//                price = "₹140",
+//                restaurantName = "Le Croissant",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.9 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Sector 29, Gurgaon"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.pastry_13,
+//                title = "Raspberry Danish",
+//                price = "₹200",
+//                restaurantName = "Berry Blossoms",
+//                rating = "4.5",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.4 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Salt Lake, Kolkata"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.pastry_14,
+//                title = "Chocolate Mousse Cake",
+//                price = "₹280",
+//                restaurantName = "The Chocolate Room",
+//                rating = "4.9",
+//                deliveryTime = "35-45 mins",
+//                distance = "2.5 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹56",
+//                address = "Civil Lines, Jaipur"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.pastry_15,
+//                title = "Cream Horn",
+//                price = "₹110",
+//                restaurantName = "Bakery Express",
+//                rating = "4.3",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.6 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹33",
+//                address = "Sadar Bazaar, Nagpur"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.pastry_16,
+//                title = "Palmier Cookies",
+//                price = "₹95",
+//                restaurantName = "Cookie Jar",
+//                rating = "4.6",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹14",
+//                address = "Camp Area, Pune"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.pastry_17,
+//                title = "Tiramisu",
+//                price = "₹320",
+//                restaurantName = "Italian Delights",
+//                rating = "4.8",
+//                deliveryTime = "30-40 mins",
+//                distance = "1.9 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹64",
+//                address = "Ballygunge, Kolkata"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.pastry_18,
+//                title = "Red Velvet Cupcake",
+//                price = "₹85",
+//                restaurantName = "Cupcake World",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.8 km",
+//                discount = "22% OFF",
+//                discountAmount = "up to ₹19",
+//                address = "Sector 17, Chandigarh"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.pastry_19,
+//                title = "Mille-Feuille",
+//                price = "₹240",
+//                restaurantName = "French Patisserie",
+//                rating = "4.9",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.6 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹36",
+//                address = "Viman Nagar, Pune"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.pastry_20,
+//                title = "Opera Cake",
+//                price = "₹350",
+//                restaurantName = "Le Cordon Bleu",
+//                rating = "4.9",
+//                deliveryTime = "40-50 mins",
+//                distance = "2.8 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹35",
+//                address = "Lodhi Road, Delhi"
+//            )
+//        ).forEach { restaurantItem ->
+//            Column {
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+        }
 }
 @Composable
 fun SandwichCategoryPage() {

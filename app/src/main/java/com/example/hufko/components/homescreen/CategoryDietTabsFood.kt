@@ -83,11 +83,12 @@ fun CategoryDietTabsFood(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(0.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 0.dp)
                 .background(
                     color = MaterialTheme.customColors.orangeLight,
                     shape = RoundedCornerShape(16.dp)
@@ -98,7 +99,7 @@ fun CategoryDietTabsFood(
                         bottomEnd = 16.dp
                     )
                 )
-                .padding(horizontal = 12.dp, vertical = 0.dp)
+                .padding(horizontal = 6.dp, vertical = 0.dp)
         ) {
 
             // 👉 Heading
@@ -222,6 +223,7 @@ fun ChickenDietPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+//            .padding(0.dp)
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         val chickenDietFilters = FilterConfig(

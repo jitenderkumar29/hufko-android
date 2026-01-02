@@ -164,7 +164,7 @@ fun LocationSelectionButton(
                     Text(
                         text = "HOME-",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp,
+                        fontSize = 13.sp,
                         color = MaterialTheme.customColors.white,
                         maxLines = 1
                     )
@@ -176,7 +176,7 @@ fun LocationSelectionButton(
                             selectedLocation.getDisplayAddress()
                         else "Select location",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 12.sp,
+                        fontSize = 13.sp,
                         color = if (!selectedLocation.isEmpty())
                             MaterialTheme.customColors.white
                         else MaterialTheme.customColors.white.copy(alpha = 0.8f),

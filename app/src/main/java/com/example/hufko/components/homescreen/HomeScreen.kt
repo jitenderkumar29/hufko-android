@@ -55,21 +55,6 @@ fun HomeScreen(navController: NavHostController?) {
                 }
             }
     }
-//    LaunchedEffect(navController) {
-//        navController?.currentBackStackEntry
-//            ?.savedStateHandle
-//            ?.getStateFlow<Int?>("updatedTabIndex", null)
-//            ?.collect { newIndex ->
-//                newIndex?.let { index ->
-//                    // Update the selected tab index
-//                    selectedTabIndex = index
-//                    // Clear the saved state
-//                    navController.currentBackStackEntry
-//                        ?.savedStateHandle
-//                        ?.remove<Int>("updatedTabIndex")
-//                }
-//            }
-//    }
 
     val lazyListState = rememberLazyListState()
     var isLocationVisible by remember { mutableStateOf(true) }
@@ -92,19 +77,21 @@ fun HomeScreen(navController: NavHostController?) {
                         color = MaterialTheme.customColors.header,
                         modifier = Modifier.fillMaxWidth()
                     ) {
+                        // 🔴 FIXED: Using your existing CashbackButton with proper layout
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 12.dp, vertical = 0.dp)
+//                                .height(48.dp) // Fixed height for consistency
                         ) {
+                            // Location button - takes available space
                             Box(
                                 modifier = Modifier
-                                    .weight(0.85f)
+                                    .weight(1f) // Takes all available space
                                     .padding(
                                         top = 0.dp,
                                         bottom = 4.dp,
-                                        start = 0.dp,
-                                        end = 0.dp
+                                        end = 8.dp // Add spacing between location and cashback
                                     )
                                     .shadow(
                                         elevation = 0.dp,
@@ -120,19 +107,18 @@ fun HomeScreen(navController: NavHostController?) {
                                     onLocationClick = { showLocationDialog = true }
                                 )
                             }
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Box(
+
+                            // CashbackButton with dynamic width
+                            // The width will automatically adjust based on the amount digits
+                            CashbackButton(
+                                amount = "1500", // You can make this dynamic
                                 modifier = Modifier
-                                    .weight(0.15f)
                                     .padding(
                                         top = 0.dp,
-                                        bottom = 0.dp,
-                                        start = 0.dp,
-                                        end = 0.dp
+                                        bottom = 0.dp
                                     )
-                            ) {
-                                CashbackButton(amount = "50")
-                            }
+                                    .wrapContentSize() // Let the button determine its own size
+                            )
                         }
                     }
                 } else {
@@ -140,6 +126,7 @@ fun HomeScreen(navController: NavHostController?) {
                 }
             }
 
+            // 🔵 Sticky Search Bar (always visible)
             // 🔵 Sticky Search Bar (always visible)
             stickyHeader {
                 Surface(
@@ -281,4 +268,17 @@ fun HomeScreen(navController: NavHostController?) {
             )
         }
     }
+}
+
+// Helper function if you need to use different amounts
+@Composable
+fun CashbackButtonWrapper(
+    amount: String = "0",
+    modifier: Modifier = Modifier
+) {
+    // Just wrap your existing CashbackButton
+    CashbackButton(
+        amount = amount,
+        modifier = modifier
+    )
 }

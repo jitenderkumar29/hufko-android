@@ -524,6 +524,183 @@ fun AllCategoryPage(
                 .fillMaxWidth()
         )
 
+        // Use your ₹20 free cash auto applied at checkout
+        Image(
+            painter = painterResource(R.drawable.ic_use_your_free_cash_auto_applied),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(
+                    min = 100.dp,
+                    max = 300.dp
+                ),
+            contentScale = ContentScale.FillBounds
+        )
+        // Healthy Score
+        Image(
+            painter = painterResource(R.drawable.ic_introducing_healthy_score),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp),
+            contentScale = ContentScale.FillBounds
+        )
+        // Badges
+        Image(
+            painter = painterResource(R.drawable.ic_badges_all),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp),
+            contentScale = ContentScale.FillBounds
+        )
+
+        // Feature this week
+        val featureThisWeekCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
+            CategoryItem(1, "", R.drawable.ic_chikki_gajak, "View products"),
+            CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
+        )
+
+        Image(
+            painter = painterResource(R.drawable.ic_feature_this_week),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(
+                    min = 100.dp,
+                    max = 300.dp
+                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+            contentScale = ContentScale.FillBounds
+        )
+        CategoryListSimple(
+            items = featureThisWeekCategoriesSimple,
+            onItemClick = { item -> println("Selected: ${item.name}") },
+            itemWidth = 170.dp,
+            itemHeight = 220.dp,
+            horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFFDFDF1)
+        )
+
+        // Sample data with all fields
+        val completeRestaurantItems = listOf(
+            TopRatedRestaurantItem(
+                id = 1,
+                imageRes = R.drawable.ic_pizzas_food_1,
+                title = "Paneer Handi",
+                price = "180",
+                restaurantName = "Shree Jee Restaurant",
+                rating = "4.1",
+                deliveryTime = "45-50 mins",
+                distance = "7.3 km",
+                discount = "60%",
+                discountAmount = "up to ₹120",
+                address = "Delhi",
+                category = "Burgers"
+            ),
+            TopRatedRestaurantItem(
+                id = 2,
+                imageRes = R.drawable.ic_pizzas_food_2,
+                title = "Butter Chicken",
+                price = "220",
+                restaurantName = "Amiche Pizza",
+                rating = "4.3",
+                deliveryTime = "60-65 mins",
+                distance = "5.2 km",
+                discount = "50%",
+                discountAmount = "up to ₹100",
+                address = "Delhi",
+                category = "Fast Food"
+            ),
+            TopRatedRestaurantItem(
+                id = 3,
+                imageRes = R.drawable.ic_pizzas_food_3,
+                title = "Vegetable Biryani",
+                price = "150",
+                restaurantName = "Spice Garden",
+                rating = "4.0",
+                deliveryTime = "30-35 mins",
+                distance = "3.8 km",
+                discount = "40%",
+                discountAmount = "up to ₹80",
+                address = "Delhi",
+                category = "Pizzas"
+            ),
+            TopRatedRestaurantItem(
+                id = 4,
+                imageRes = R.drawable.ic_pizzas_food_4,
+                title = "Margherita Pizza",
+                price = "199",
+                restaurantName = "Amiche Pizza",
+                rating = "4.2",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "30%",
+                discountAmount = "up to ₹60",
+                address = "Delhi",
+                category = "Burgers"
+            ),
+            TopRatedRestaurantItem(
+                id = 5,
+                imageRes = R.drawable.ic_pizzas_food_5,
+                title = "Margherita Pizza",
+                price = "199",
+                restaurantName = "Amiche Pizza",
+                rating = "4.2",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "30%",
+                discountAmount = "up to ₹60",
+                address = "Delhi",
+                category = "Fast Food"
+            ),
+            TopRatedRestaurantItem(
+                id = 6,
+                imageRes = R.drawable.ic_pizzas_food_6,
+                title = "Margherita Pizza",
+                price = "199",
+                restaurantName = "Amiche Pizza",
+                rating = "4.2",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "30%",
+                discountAmount = "up to ₹60",
+                address = "Delhi",
+                category = "Pizzas"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Top rated near you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        TopRatedRestaurants(
+            heading = null,
+            subtitle = null,
+            restaurantItems = completeRestaurantItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 220.dp,
+            cardHeight = 280.dp,
+            spacing = 20.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
         val sampleProducts = listOf(
             ProductListGrid(
                 name = "Product 1",

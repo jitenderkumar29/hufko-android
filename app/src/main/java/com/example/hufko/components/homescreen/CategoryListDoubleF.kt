@@ -44,6 +44,8 @@ data class FoodItemDoubleF(
     val calories: String? = null,
     val protein: String? = null,
     val isHighProtein: Boolean? = null,
+    val category: String? = null,
+    val isWishlisted: Boolean? = false,
 )
 
 /**

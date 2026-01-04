@@ -91,7 +91,7 @@ fun TopRatedRestaurantCard(
             Image(
                 painter = painterResource(id = restaurantItem.imageRes ?: defaultImageRes),
                 contentDescription = restaurantItem.title ?: "Restaurant",
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
@@ -104,23 +104,23 @@ fun TopRatedRestaurantCard(
                     .padding(4.dp)
             ) {
                 // Discount badge at top-left
-                restaurantItem.discount?.let { discount ->
-                    if (discount.isNotEmpty()) {
-                        Box(
-                            modifier = Modifier
-                                .align(Alignment.TopStart)
-                                .background(Color(0xB146322B), RoundedCornerShape(6.dp))
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
-                        ) {
-                            Text(
-                                text = "$discount% OFF",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                        }
-                    }
-                }
+//                restaurantItem.discount?.let { discount ->
+//                    if (discount.isNotEmpty()) {
+//                        Box(
+//                            modifier = Modifier
+//                                .align(Alignment.TopStart)
+//                                .background(Color(0xB146322B), RoundedCornerShape(6.dp))
+//                                .padding(horizontal = 8.dp, vertical = 4.dp)
+//                        ) {
+//                            Text(
+//                                text = "$discount% OFF",
+//                                fontSize = 12.sp,
+//                                fontWeight = FontWeight.Bold,
+//                                color = Color.White
+//                            )
+//                        }
+//                    }
+//                }
 
                 // Wishlist button at top-right
                 Box(
@@ -142,36 +142,86 @@ fun TopRatedRestaurantCard(
                     }
                 }
 
-                // Rating badge at bottom-left
-                restaurantItem.rating?.let { rating ->
-                    Box(
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(start = 8.dp, bottom = 8.dp) // Add some padding from edges
+                ) {
+                    Column(
                         modifier = Modifier
-                            .align(Alignment.BottomStart)
-                            .padding(start = 0.dp, bottom = 0.dp)
-                            .background(
-                                color = MaterialTheme.customColors.success,
-                                shape = RoundedCornerShape(20.dp)
-                            )
-                            .padding(horizontal = 8.dp, vertical = 4.dp)
+                            .wrapContentSize()
                     ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = rating,
-                                color = Color.White,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Medium,
-                                modifier = Modifier.padding(end = 2.dp)
-                            )
-                            Text(
-                                text = "★",
-                                color = Color.White,
-                                fontSize = 14.sp
-                            )
+                        // Discount Box
+                        restaurantItem.discount?.let { discount ->
+                            if (discount.isNotEmpty()) {
+                                Box(
+                                    modifier = Modifier
+                                        .background(Color(0x7746322B), RoundedCornerShape(6.dp))
+                                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                                ) {
+                                    Text(
+                                        text = "$discount",
+                                        fontSize = 20.sp,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        color = Color.White
+                                    )
+                                }
+                            }
+                        }
+
+                        // Add some spacing between discount and price
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        // Price Box
+                        restaurantItem.price?.let { price ->
+                            if (price.isNotEmpty()) {
+                                Box(
+                                    modifier = Modifier
+                                        .background(Color(0x7746322B), RoundedCornerShape(6.dp))
+                                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                                ) {
+                                    Text(
+                                        text = "AT ₹$price",
+                                        fontSize = 25.sp,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        color = Color.White
+                                    )
+                                }
+                            }
                         }
                     }
                 }
+
+                // Rating badge at bottom-left
+//                restaurantItem.rating?.let { rating ->
+//                    Box(
+//                        modifier = Modifier
+//                            .align(Alignment.BottomStart)
+//                            .padding(start = 0.dp, bottom = 0.dp)
+//                            .background(
+//                                color = MaterialTheme.customColors.success,
+//                                shape = RoundedCornerShape(20.dp)
+//                            )
+//                            .padding(horizontal = 8.dp, vertical = 4.dp)
+//                    ) {
+//                        Row(
+//                            verticalAlignment = Alignment.CenterVertically
+//                        ) {
+//                            Text(
+//                                text = rating,
+//                                color = Color.White,
+//                                fontSize = 14.sp,
+//                                fontWeight = FontWeight.Medium,
+//                                modifier = Modifier.padding(end = 2.dp)
+//                            )
+//                            Text(
+//                                text = "★",
+//                                color = Color.White,
+//                                fontSize = 14.sp
+//                            )
+//                        }
+//                    }
+//                }
             }
         }
 
@@ -203,8 +253,34 @@ fun TopRatedRestaurantCard(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                // Rating
+                restaurantItem.rating?.let { rating ->
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_star_food),
+                        contentDescription = "Restaurant",
+                        contentScale = ContentScale.FillBounds, // Changed from FillBounds to Crop for better appearance
+                        modifier = Modifier
+                            .width(20.dp) // Set width
+                            .height(20.dp) // Set height
+                            .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
+                    )
+                    Spacer(modifier = Modifier.width(5.dp))
+                    Text(
+                        text = restaurantItem.rating,
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Medium,
+                        modifier = Modifier.padding(end = 2.dp)
+                    )
+                }
+
                 // Delivery time (make it more visible)
                 restaurantItem.deliveryTime?.let { deliveryTime ->
+                    Text(
+                        text = " • ",
+                        color = Color.Black,
+                        fontSize = 30.sp
+                    )
                     Text(
                         text = deliveryTime,
                         color = Color.Black, // Green color for better visibility
@@ -214,23 +290,23 @@ fun TopRatedRestaurantCard(
                 }
 
                 // Add a separator dot if both deliveryTime and distance exist
-                if (restaurantItem.deliveryTime != null && restaurantItem.distance != null) {
-                    Text(
-                        text = " • ",
-                        color = Color.Black,
-                        fontSize = 20.sp
-                    )
-                }
+//                if (restaurantItem.deliveryTime != null && restaurantItem.distance != null) {
+//                    Text(
+//                        text = " • ",
+//                        color = Color.Black,
+//                        fontSize = 20.sp
+//                    )
+//                }
 
                 // Distance
-                restaurantItem.distance?.let { distance ->
-                    Text(
-                        text = distance,
-                        color = Color.Black,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Normal
-                    )
-                }
+//                restaurantItem.distance?.let { distance ->
+//                    Text(
+//                        text = distance,
+//                        color = Color.Black,
+//                        fontSize = 20.sp,
+//                        fontWeight = FontWeight.Normal
+//                    )
+//                }
             }
 
             // Category
@@ -238,7 +314,7 @@ fun TopRatedRestaurantCard(
                 Text(
                     text = category,
                     color = Color.Black,
-                    fontSize = 18.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Normal,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis

@@ -562,110 +562,122 @@ fun AllCategoryPage(
             CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
         )
 
-        Image(
-            painter = painterResource(R.drawable.ic_feature_this_week),
-            contentDescription = "Banner",
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(
-                    min = 100.dp,
-                    max = 300.dp
-                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-            contentScale = ContentScale.FillBounds
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Feature This Week",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Spacer(modifier = Modifier.height(10.dp))
+//        Image(
+//            painter = painterResource(R.drawable.ic_feature_this_week),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
         CategoryListSimple(
             items = featureThisWeekCategoriesSimple,
             onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 170.dp,
-            itemHeight = 220.dp,
+            itemWidth = 130.dp,
+            itemHeight = 150.dp,
             horizontalSpacing = 12.dp,
 //                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFDFDF1)
+            backgroundColor = Color(0xFFFFFFFF)
         )
 
         // Sample data with all fields
         val completeRestaurantItems = listOf(
             TopRatedRestaurantItem(
                 id = 1,
-                imageRes = R.drawable.ic_pizzas_food_1,
-                title = "Paneer Handi",
+                imageRes = R.drawable.ic_top_rated_food_1,
+                title = "Burger Supreme",
                 price = "180",
                 restaurantName = "Shree Jee Restaurant",
                 rating = "4.1",
                 deliveryTime = "45-50 mins",
                 distance = "7.3 km",
-                discount = "60%",
+                discount = "ITEMS",
                 discountAmount = "up to ₹120",
                 address = "Delhi",
                 category = "Burgers"
             ),
             TopRatedRestaurantItem(
                 id = 2,
-                imageRes = R.drawable.ic_pizzas_food_2,
-                title = "Butter Chicken",
+                imageRes = R.drawable.ic_top_rated_food_2,
+                title = "Fast Food Combo",
                 price = "220",
                 restaurantName = "Amiche Pizza",
                 rating = "4.3",
                 deliveryTime = "60-65 mins",
                 distance = "5.2 km",
-                discount = "50%",
+                discount = "30% OFF",
                 discountAmount = "up to ₹100",
                 address = "Delhi",
                 category = "Fast Food"
             ),
             TopRatedRestaurantItem(
                 id = 3,
-                imageRes = R.drawable.ic_pizzas_food_3,
-                title = "Vegetable Biryani",
+                imageRes = R.drawable.ic_top_rated_food_3,
+                title = "Pepperoni Pizza",
                 price = "150",
                 restaurantName = "Spice Garden",
                 rating = "4.0",
                 deliveryTime = "30-35 mins",
                 distance = "3.8 km",
-                discount = "40%",
+                discount = "ITEMS",
                 discountAmount = "up to ₹80",
                 address = "Delhi",
                 category = "Pizzas"
             ),
             TopRatedRestaurantItem(
                 id = 4,
-                imageRes = R.drawable.ic_pizzas_food_4,
-                title = "Margherita Pizza",
+                imageRes = R.drawable.ic_top_rated_food_4,
+                title = "Cheeseburger Deluxe",
                 price = "199",
                 restaurantName = "Amiche Pizza",
                 rating = "4.2",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "30%",
+                discount = "30% OFF",
                 discountAmount = "up to ₹60",
                 address = "Delhi",
                 category = "Burgers"
             ),
             TopRatedRestaurantItem(
                 id = 5,
-                imageRes = R.drawable.ic_pizzas_food_5,
-                title = "Margherita Pizza",
+                imageRes = R.drawable.ic_top_rated_food_5,
+                title = "Chicken Nuggets",
                 price = "199",
                 restaurantName = "Amiche Pizza",
                 rating = "4.2",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "30%",
+                discount = "ITEMS",
                 discountAmount = "up to ₹60",
                 address = "Delhi",
                 category = "Fast Food"
             ),
             TopRatedRestaurantItem(
                 id = 6,
-                imageRes = R.drawable.ic_pizzas_food_6,
-                title = "Margherita Pizza",
+                imageRes = R.drawable.ic_top_rated_food_6,
+                title = "Veggie Pizza",
                 price = "199",
                 restaurantName = "Amiche Pizza",
                 rating = "4.2",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "30%",
+                discount = "30% OFF",
                 discountAmount = "up to ₹60",
                 address = "Delhi",
                 category = "Pizzas"
@@ -694,12 +706,130 @@ fun AllCategoryPage(
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
             cardWidth = 220.dp,
-            cardHeight = 280.dp,
+            cardHeight = 300.dp,
             spacing = 20.dp,
             horizontalPadding = 12.dp,
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
         )
+
+        // More on hufko
+        val moreOnHufkoCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_more_on_hufko_1, "View products"),
+            CategoryItem(1, "", R.drawable.ic_more_on_hufko_2, "View products"),
+            CategoryItem(2, "", R.drawable.ic_more_on_hufko_3, "View products"),
+            CategoryItem(3, "", R.drawable.ic_more_on_hufko_4, "View products"),
+            CategoryItem(4, "", R.drawable.ic_more_on_hufko_5, "View products"),
+            CategoryItem(5, "", R.drawable.ic_more_on_hufko_6, "View products"),
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "More On Hufko",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+//        Image(
+//            painter = painterResource(R.drawable.ic_more_on_hufko),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+        CategoryListSimple(
+            items = moreOnHufkoCategoriesSimple,
+            onItemClick = { item -> println("Selected: ${item.name}") },
+            itemWidth = 120.dp,
+            itemHeight = 120.dp,
+            horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFFFFFFF)
+        )
+
+        // Explore More
+        val exploreMoreCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_explore_more_1, "View products"),
+            CategoryItem(1, "", R.drawable.ic_explore_more_2, "View products"),
+            CategoryItem(3, "", R.drawable.ic_explore_more_3, "View products"),
+            CategoryItem(4, "", R.drawable.ic_explore_more_4, "View products"),
+            CategoryItem(5, "", R.drawable.ic_explore_more_5, "View products"),
+            CategoryItem(6, "", R.drawable.ic_explore_more_6, "View products"),
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Explore More",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+//        Image(
+//            painter = painterResource(R.drawable.ic_explore_more),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+        CategoryListSimple(
+            items = exploreMoreCategoriesSimple,
+            onItemClick = { item -> println("Selected: ${item.name}") },
+            itemWidth = 120.dp,
+            itemHeight = 140.dp,
+            horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFFFFFFF)
+        )
+
+//        // Feature this week
+//        val featureThisWeekCategoriesSimple = listOf(
+//            CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
+//            CategoryItem(1, "", R.drawable.ic_chikki_gajak, "View products"),
+//            CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
+//        )
+//
+//        Image(
+//            painter = painterResource(R.drawable.ic_feature_this_week),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+//        CategoryListSimple(
+//            items = featureThisWeekCategoriesSimple,
+//            onItemClick = { item -> println("Selected: ${item.name}") },
+//            itemWidth = 170.dp,
+//            itemHeight = 220.dp,
+//            horizontalSpacing = 12.dp,
+////                        verticalPadding = 8.dp,
+//            horizontalPadding = 12.dp,
+//            backgroundColor = Color(0xFFFDFDF1)
+//        )
+
 
         val sampleProducts = listOf(
             ProductListGrid(
@@ -753,15 +883,69 @@ fun AllCategoryPage(
             contentScale = ContentScale.FillBounds
         )
         // Example 1: Fixed image height (original behavior)
-        CategoryListGridF(
-            products = sampleProducts,
-            columns = 3,
-            gridHeight = 350.dp, // fixed height to avoid crashes
+//        CategoryListGridF(
+//            products = sampleProducts,
+//            columns = 3,
+//            gridHeight = 350.dp, // fixed height to avoid crashes
+//            showName = false,
+//            showPrice = true,   // hide price
+//            imageAspectRatio = 3f / 3f,
+//            defaultCardColor = Color(0xFF023726),
+//            textColor = Color.White,
+//            onItemClick = { product ->
+//                println("Clicked on ${product.name}")
+//            }
+//        )
+
+
+        val sampleProductsD = listOf(
+            ProductListDGrid(
+                name = "Product 1",
+                price = "FLAT 10% OFF",
+                imageRes = R.drawable.popular_chain_1,
+//                backgroundColor = Color(0xFFFFF8E1) // Light amber
+            ),
+            ProductListDGrid(
+                name = "Product 2",
+                price = "FLAT 25% OFF",
+                imageRes = R.drawable.popular_chain_2,
+//                backgroundColor = Color(0xFFE8F5E8) // Light green
+            ),
+            ProductListDGrid(
+                name = "Product 3",
+                price = "FLAT 10% OFF",
+                imageRes = R.drawable.popular_chain_3,
+//                backgroundColor = Color(0xFFE3F2FD) // Light blue
+            ),
+            ProductListDGrid(
+                name = "Product 4",
+                price = "FLAT 20% OFF",
+                imageRes = R.drawable.popular_chain_4
+                // No background color - will use default
+            ),
+            ProductListDGrid(
+                name = "Product 5",
+                price = "FLAT 10% OFF",
+                imageRes = R.drawable.popular_chain_5
+                // No background color - will use default
+            ),
+            ProductListDGrid(
+                name = "Product 6",
+                price = "FLAT 30% OFF",
+                imageRes = R.drawable.popular_chain_6
+                // No background color - will use default
+            )
+        )
+        // Example 1: Square items with fixed width/height
+        CategoryListScrollDF(
+            products = sampleProductsD,
+            itemWidth = 160.dp,
+            itemHeight = 150.dp,
+            backgroundColor = Color(0xFF023726),
             showName = false,
-            showPrice = true,   // hide price
-            imageAspectRatio = 3f / 3f,
-            defaultCardColor = Color(0xFF023726),
-            textColor = Color.White,
+            showPrice = true,
+            imageHeight = 120.dp,
+            itemSpacing = 12.dp,
             onItemClick = { product ->
                 println("Clicked on ${product.name}")
             }

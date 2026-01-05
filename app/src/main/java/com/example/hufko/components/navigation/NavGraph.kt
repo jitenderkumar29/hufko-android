@@ -10,10 +10,18 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.hufko.components.Account.Account
 import com.example.hufko.components.homescreen.CategoryDietTabsFList
 import com.example.hufko.components.homescreen.CategoryScreen
 import com.example.hufko.components.homescreen.CategoryTabsFList
 import com.example.hufko.components.homescreen.CategoryTabsFood
+
+// Define navigation routes in your app
+object Routes {
+    const val HOME = "home"
+    const val ACCOUNT = "account"
+    // Add other routes as needed
+}
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
@@ -85,6 +93,20 @@ fun AppNavGraph(navController: NavHostController) {
                 name = "All Food Categories",
                 initialSelectedIndex = selectedDietIndex
             )
+        }
+
+//        Account
+        composable(Routes.ACCOUNT) {
+            Account(
+                navController = navController,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+            )
+//            AccountScreen(
+//                navController = navController,
+//                onBackClick = { navController.navigateUp() }
+//            )
         }
         // Add other destinations as needed
     }

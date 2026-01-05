@@ -560,6 +560,12 @@ fun AllCategoryPage(
             CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
             CategoryItem(1, "", R.drawable.ic_chikki_gajak, "View products"),
             CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
+            CategoryItem(3, "", R.drawable.ic_thermals, "View products"),
+            CategoryItem(4, "", R.drawable.ic_blankets, "View products"),
+            CategoryItem(5, "", R.drawable.ic_study_forex, "View products"),
+            CategoryItem(6, "", R.drawable.ic_housemaid, "View products"),
+            CategoryItem(7, "", R.drawable.ic_protein_snacks_week, "View products"),
+            CategoryItem(8, "", R.drawable.ic_derma_store_week, "View products"),
         )
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -829,6 +835,49 @@ fun AllCategoryPage(
 //            horizontalPadding = 12.dp,
 //            backgroundColor = Color(0xFFFDFDF1)
 //        )
+
+        // 2026 Resolution
+        val resolutionCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_resolution_1, "View products"),
+            CategoryItem(1, "", R.drawable.ic_resolution_2, "View products"),
+            CategoryItem(2, "", R.drawable.ic_resolution_3, "View products"),
+            CategoryItem(3, "", R.drawable.ic_resolution_4, "View products"),
+            CategoryItem(4, "", R.drawable.ic_resolution_5, "View products"),
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "2026 Resolution",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 24.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Image(
+            painter = painterResource(R.drawable.ic_resolution_header),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(
+                    min = 100.dp,
+                    max = 300.dp
+                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+            contentScale = ContentScale.FillBounds
+        )
+        CategoryListSimple(
+            items = resolutionCategoriesSimple,
+            onItemClick = { item -> println("Selected: ${item.name}") },
+            itemWidth = 130.dp,
+            itemHeight = 150.dp,
+            horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFE3FFC4)
+        )
 
 
         val sampleProducts = listOf(

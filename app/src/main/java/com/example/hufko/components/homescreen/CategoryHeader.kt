@@ -156,6 +156,11 @@ fun CategoryScreen(navController: NavHostController? = null,
     val scrollOffset = remember { mutableStateOf(0f) }
     val isHeaderVisible = remember { mutableStateOf(true) }
 
+    val savedStateHandle =
+        navController?.currentBackStackEntry?.savedStateHandle
+
+    val accountOpen = savedStateHandle?.get<Boolean>("accountOpen") ?: false
+
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {

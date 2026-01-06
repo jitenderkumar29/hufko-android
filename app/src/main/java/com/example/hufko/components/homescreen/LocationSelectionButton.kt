@@ -132,7 +132,7 @@ fun LocationSelectionButton(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 6.dp, vertical = 2.dp),
+                .padding(horizontal = 2.dp, vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -142,7 +142,7 @@ fun LocationSelectionButton(
                 contentDescription = "Location",
                 tint = Color.Unspecified, // 👈 IMPORTANT
 //                tint = MaterialTheme.customColors.success,
-                modifier = Modifier.size(16.dp)
+                modifier = Modifier.size(30.dp)
             )
 //            AsyncImage(
 //                model = R.drawable.location, // your GIF in drawable
@@ -150,7 +150,7 @@ fun LocationSelectionButton(
 //                modifier = Modifier.size(24.dp)
 //            )
 
-            Spacer(modifier = Modifier.width(4.dp))
+            Spacer(modifier = Modifier.width(2.dp))
 
             Column(
                 modifier = Modifier

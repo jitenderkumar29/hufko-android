@@ -536,15 +536,70 @@ fun AllCategoryPage(
                 ),
             contentScale = ContentScale.FillBounds
         )
-        // Healthy Score
+
+        // New Year 2026
+        val newYearCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_new_year_1, "View products"),
+            CategoryItem(1, "", R.drawable.ic_new_year_2, "View products"),
+            CategoryItem(2, "", R.drawable.ic_new_year_3, "View products"),
+        )
+//                Spacer(modifier = Modifier.height(10.dp))
         Image(
-            painter = painterResource(R.drawable.ic_introducing_healthy_score),
+            painter = painterResource(R.drawable.ic_ic_new_year_header),
             contentDescription = "Banner",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(180.dp),
+                .heightIn(
+                    min = 100.dp,
+                    max = 300.dp
+                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
             contentScale = ContentScale.FillBounds
         )
+        CategoryListSimple(
+            items = newYearCategoriesSimple,
+            onItemClick = { item -> println("Selected: ${item.name}") },
+            itemWidth = 120.dp,
+            itemHeight = 110.dp,
+            horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFF041258)
+        )
+
+        // Healthy Score
+        BannerFood(
+            images = listOf(
+                painterResource(id = R.drawable.ic_introducing_healthy_score),
+                painterResource(id = R.drawable.all_eat_right),
+                painterResource(id = R.drawable.all_flat_frre_coke),
+            ),
+            onImageClick = { page ->
+                when (page) {
+                    0 -> onBanner1Click()
+                    1 -> onBanner2Click()
+                    2 -> onBanner3Click()
+                }
+            },
+            autoScrollDelay = 3000,
+            height = 180.dp,
+            roundedCornerShape = 0.dp,
+            contentScale = ContentScale.FillBounds,
+            dotSize = 8.dp,
+            dotPadding = 4.dp,
+            dotPosition = DotPosition.NONE,
+            overlayGradient = false, // Adds gradient for better visibility
+            selectedDotColor = Color.White,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+//        Image(
+//            painter = painterResource(R.drawable.ic_introducing_healthy_score),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(180.dp),
+//            contentScale = ContentScale.FillBounds
+//        )
         // Badges
         Image(
             painter = painterResource(R.drawable.ic_badges_all),
@@ -594,8 +649,8 @@ fun AllCategoryPage(
         CategoryListSimple(
             items = featureThisWeekCategoriesSimple,
             onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 130.dp,
-            itemHeight = 150.dp,
+            itemWidth = 100.dp,
+            itemHeight = 120.dp,
             horizontalSpacing = 12.dp,
 //                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
@@ -711,12 +766,53 @@ fun AllCategoryPage(
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
-            cardWidth = 220.dp,
-            cardHeight = 300.dp,
-            spacing = 20.dp,
+            cardWidth = 100.dp,
+            cardHeight = 210.dp,
+            imageHeight = 100.dp, // Fixed image height
+            spacing = 15.dp,
             horizontalPadding = 12.dp,
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
+        )
+
+        // Housefull Sale
+        val housefullSaleCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_housefull_sale_1, "View products"),
+            CategoryItem(1, "", R.drawable.ic_housefull_sale_2, "View products"),
+            CategoryItem(2, "", R.drawable.ic_housefull_sale_3, "View products"),
+            CategoryItem(4, "", R.drawable.ic_housefull_sale_5, "View products"),
+            CategoryItem(3, "", R.drawable.ic_housefull_sale_4, "View products"),
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+        Image(
+            painter = painterResource(R.drawable.ic_housefull_sale_header),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(
+                    min = 100.dp,
+                    max = 300.dp
+                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+            contentScale = ContentScale.FillBounds
+        )
+        CategoryListSimple(
+            items = housefullSaleCategoriesSimple,
+            onItemClick = { item -> println("Selected: ${item.name}") },
+            itemWidth = 110.dp,
+            itemHeight = 110.dp,
+            horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFFFC653)
+        )
+        Image(
+            painter = painterResource(R.drawable.ic_housefull_sale_footer),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+            contentScale = ContentScale.FillBounds
         )
 
         // More on hufko
@@ -727,6 +823,7 @@ fun AllCategoryPage(
             CategoryItem(3, "", R.drawable.ic_more_on_hufko_4, "View products"),
             CategoryItem(4, "", R.drawable.ic_more_on_hufko_5, "View products"),
             CategoryItem(5, "", R.drawable.ic_more_on_hufko_6, "View products"),
+            CategoryItem(6, "", R.drawable.ic_more_on_hufko_7, "View products"),
         )
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -755,8 +852,8 @@ fun AllCategoryPage(
         CategoryListSimple(
             items = moreOnHufkoCategoriesSimple,
             onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 120.dp,
-            itemHeight = 120.dp,
+            itemWidth = 100.dp,
+            itemHeight = 100.dp,
             horizontalSpacing = 12.dp,
 //                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
@@ -799,8 +896,8 @@ fun AllCategoryPage(
         CategoryListSimple(
             items = exploreMoreCategoriesSimple,
             onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 120.dp,
-            itemHeight = 140.dp,
+            itemWidth = 100.dp,
+            itemHeight = 120.dp,
             horizontalSpacing = 12.dp,
 //                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
@@ -846,17 +943,6 @@ fun AllCategoryPage(
         )
 
         Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "2026 Resolution",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 24.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-        Spacer(modifier = Modifier.height(10.dp))
         Image(
             painter = painterResource(R.drawable.ic_resolution_header),
             contentDescription = "Banner",
@@ -871,14 +957,13 @@ fun AllCategoryPage(
         CategoryListSimple(
             items = resolutionCategoriesSimple,
             onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 130.dp,
-            itemHeight = 150.dp,
+            itemWidth = 100.dp,
+            itemHeight = 120.dp,
             horizontalSpacing = 12.dp,
 //                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
             backgroundColor = Color(0xFFE3FFC4)
         )
-
 
         val sampleProducts = listOf(
             ProductListGrid(
@@ -988,13 +1073,13 @@ fun AllCategoryPage(
         // Example 1: Square items with fixed width/height
         CategoryListScrollDF(
             products = sampleProductsD,
-            itemWidth = 160.dp,
-            itemHeight = 150.dp,
+            itemWidth = 130.dp,
+            itemHeight = 140.dp,
             backgroundColor = Color(0xFF023726),
-            showName = false,
-            showPrice = true,
-            imageHeight = 120.dp,
-            itemSpacing = 12.dp,
+//            showName = false,
+//            showPrice = true,
+//            imageHeight = 100.dp,
+            itemSpacing = 0.dp,
             onItemClick = { product ->
                 println("Clicked on ${product.name}")
             }

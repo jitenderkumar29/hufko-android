@@ -14,6 +14,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -32,10 +33,12 @@ import com.example.hufko.ui.theme.customColors
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.collections.isNotEmpty
+import  com.example.hufko.R
 
 enum class DotPosition {
     OVERLAY,      // Dots overlay on bottom of image
-    BELOW_IMAGE   // Dots below the image
+    BELOW_IMAGE,  // Dots below the image
+    NONE          // No dots indicator
 }
 
 @Composable
@@ -53,8 +56,9 @@ fun BannerFood(
     contentScale: ContentScale = ContentScale.FillBounds,
     autoScrollDelay: Long = 5000,
     autoScrollEnabled: Boolean = true,
-    dotPosition: DotPosition = DotPosition.BELOW_IMAGE, // New parameter for dot position
-    overlayGradient: Boolean = true // Gradient effect for overlay dots
+    dotPosition: DotPosition = DotPosition.BELOW_IMAGE,
+    overlayGradient: Boolean = true,
+    showDots: Boolean = true // New parameter to control dots visibility
 ) {
     require(images.isNotEmpty()) { "Images list cannot be empty" }
 
@@ -67,7 +71,7 @@ fun BannerFood(
     val bannerShape = RoundedCornerShape(roundedCornerShape)
 
     // Auto-scroll effect
-    LaunchedEffect(autoScrollEnabled) {
+    LaunchedEffect(autoScrollEnabled, showDots) {
         if (!autoScrollEnabled) return@LaunchedEffect
 
         while (true) {
@@ -107,8 +111,8 @@ fun BannerFood(
                 )
             }
 
-            // Overlay dots - shown only when dotPosition is OVERLAY
-            if (dotPosition == DotPosition.OVERLAY && (dotSize == null || dotSize > 0.dp)) {
+            // Overlay dots - shown only when dotPosition is OVERLAY and showDots is true
+            if (dotPosition == DotPosition.OVERLAY && showDots && (dotSize == null || dotSize > 0.dp)) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -139,17 +143,17 @@ fun BannerFood(
                         imageCount = images.size,
                         dotSize = dotSize,
                         dotPadding = dotPadding,
-                        selectedDotColor = Color.White, // White for better visibility on overlay
+                        selectedDotColor = Color.White,
                         unselectedDotColor = Color.White.copy(alpha = 0.9f),
                         indicatorDuration = autoScrollDelay,
-                        modifier = Modifier.padding(bottom = 12.dp) // Padding from bottom
+                        modifier = Modifier.padding(bottom = 12.dp)
                     )
                 }
             }
         }
 
-        // Below-image dots - shown only when dotPosition is BELOW_IMAGE
-        if (dotPosition == DotPosition.BELOW_IMAGE && (dotSize == null || dotSize > 0.dp)) {
+        // Below-image dots - shown only when dotPosition is BELOW_IMAGE and showDots is true
+        if (dotPosition == DotPosition.BELOW_IMAGE && showDots && (dotSize == null || dotSize > 0.dp)) {
             Column {
                 Spacer(
                     modifier = Modifier.height(8.dp)
@@ -174,7 +178,48 @@ fun BannerFood(
                 )
             }
         }
+
+        // No dots shown when showDots is false or dotPosition is NONE
     }
+}
+
+// Overloaded version with showDots parameter (for backward compatibility)
+@Composable
+fun BannerFood(
+    images: List<Painter>,
+    onImageClick: (Int) -> Unit = {},
+    modifier: Modifier = Modifier,
+    height: Dp = 270.dp,
+    roundedCornerShape: Dp = 16.dp,
+    dotSize: Dp? = null,
+    dotPadding: Dp? = null,
+    selectedDotColor: Color = MaterialTheme.customColors.linkColor,
+    unselectedDotColor: Color = Color.White.copy(alpha = 0.9f),
+    backgroundColor: Color = Color.White,
+    contentScale: ContentScale = ContentScale.FillBounds,
+    autoScrollDelay: Long = 5000,
+    autoScrollEnabled: Boolean = true,
+    dotPosition: DotPosition = DotPosition.BELOW_IMAGE,
+    overlayGradient: Boolean = true
+) {
+    BannerFood(
+        images = images,
+        onImageClick = onImageClick,
+        modifier = modifier,
+        height = height,
+        roundedCornerShape = roundedCornerShape,
+        dotSize = dotSize,
+        dotPadding = dotPadding,
+        selectedDotColor = selectedDotColor,
+        unselectedDotColor = unselectedDotColor,
+        backgroundColor = backgroundColor,
+        contentScale = contentScale,
+        autoScrollDelay = autoScrollDelay,
+        autoScrollEnabled = autoScrollEnabled,
+        dotPosition = dotPosition,
+        overlayGradient = overlayGradient,
+        showDots = true // Default to showing dots
+    )
 }
 
 // Enhanced Dot indicator with modifier support
@@ -187,7 +232,7 @@ fun OverlayDotsFashion(
     selectedDotColor: Color = Color.White,
     unselectedDotColor: Color = Color.Gray,
     indicatorDuration: Long = 3000L,
-    modifier: Modifier = Modifier // Added modifier parameter
+    modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -248,5 +293,101 @@ fun OverlayDotsFashion(
                 )
             }
         }
+    }
+}
+
+// New composable for banner without dots (simplified API)
+@Composable
+fun BannerFoodWithoutDots(
+    images: List<Painter>,
+    onImageClick: (Int) -> Unit = {},
+    modifier: Modifier = Modifier,
+    height: Dp = 270.dp,
+    roundedCornerShape: Dp = 16.dp,
+    backgroundColor: Color = Color.White,
+    contentScale: ContentScale = ContentScale.FillBounds,
+    autoScrollDelay: Long = 5000,
+    autoScrollEnabled: Boolean = true,
+) {
+    BannerFood(
+        images = images,
+        onImageClick = onImageClick,
+        modifier = modifier,
+        height = height,
+        roundedCornerShape = roundedCornerShape,
+        dotSize = 0.dp, // Set dotSize to 0 to hide dots
+        backgroundColor = backgroundColor,
+        contentScale = contentScale,
+        autoScrollDelay = autoScrollDelay,
+        autoScrollEnabled = autoScrollEnabled,
+        dotPosition = DotPosition.NONE,
+        overlayGradient = false,
+        showDots = false
+    )
+}
+
+// Preview function to demonstrate both versions
+@Composable
+fun BannerFoodPreview() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(16.dp)
+    ) {
+        // 1. Banner with dots (default)
+        Text("Banner with Dots (Default)", modifier = Modifier.padding(bottom = 8.dp))
+        BannerFood(
+            images = listOf(
+                androidx.compose.ui.res.painterResource(R.drawable.restaurant_1),
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_1),
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_2)
+            ),
+            height = 200.dp,
+            autoScrollEnabled = false
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // 2. Banner without dots using showDots parameter
+        Text("Banner without Dots (showDots = false)", modifier = Modifier.padding(bottom = 8.dp))
+        BannerFood(
+            images = listOf(
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_3),
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_4),
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_5)
+            ),
+            height = 180.dp,
+            showDots = false,
+            autoScrollEnabled = false
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // 3. Banner without dots using dotSize = 0.dp
+        Text("Banner without Dots (dotSize = 0.dp)", modifier = Modifier.padding(bottom = 8.dp))
+        BannerFood(
+            images = listOf(
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_6),
+                androidx.compose.ui.res.painterResource(R.drawable.restaurant_1)
+            ),
+            height = 150.dp,
+            dotSize = 0.dp,
+            autoScrollEnabled = false
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // 4. Banner without dots using dedicated function
+        Text("Banner without Dots (BannerFoodWithoutDots)", modifier = Modifier.padding(bottom = 8.dp))
+        BannerFoodWithoutDots(
+            images = listOf(
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_1),
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_2),
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_3)
+            ),
+            height = 160.dp,
+            autoScrollEnabled = false
+        )
     }
 }

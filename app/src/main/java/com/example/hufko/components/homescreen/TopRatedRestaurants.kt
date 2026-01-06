@@ -68,10 +68,18 @@ fun TopRatedRestaurantCard(
     backgroundColor: Color = MaterialTheme.customColors.white,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 240.dp,
-    imageHeight: Dp = 180.dp,
+    imageHeight: Dp? = null, // Make imageHeight optional
+    imageWidth: Dp? = null,  // Add imageWidth parameter
+    imageSizeFraction: Float = 0.75f, // Fraction of card height for image (if imageHeight not specified)
     defaultImageRes: Int = R.drawable.restaurant_1
 ) {
     var isWishlisted by remember { mutableStateOf(restaurantItem.isWishlisted ?: false) }
+
+    // Calculate image height if not provided
+    val calculatedImageHeight = imageHeight ?: (cardHeight * imageSizeFraction)
+
+    // Calculate image width (full width if not specified)
+    val calculatedImageWidth = imageWidth ?: cardWidth
 
     Column(
         modifier = modifier
@@ -84,8 +92,8 @@ fun TopRatedRestaurantCard(
         // Image section with overlay
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(imageHeight)
+                .width(calculatedImageWidth)
+                .height(calculatedImageHeight)
         ) {
             // Restaurant image
             Image(
@@ -94,7 +102,12 @@ fun TopRatedRestaurantCard(
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .fillMaxSize()
-                    .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
+                    .clip(
+                        if (calculatedImageWidth < cardWidth)
+                            RoundedCornerShape(12.dp)
+                        else
+                            RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
+                    )
             )
 
             // Overlay content
@@ -103,25 +116,6 @@ fun TopRatedRestaurantCard(
                     .fillMaxSize()
                     .padding(4.dp)
             ) {
-                // Discount badge at top-left
-//                restaurantItem.discount?.let { discount ->
-//                    if (discount.isNotEmpty()) {
-//                        Box(
-//                            modifier = Modifier
-//                                .align(Alignment.TopStart)
-//                                .background(Color(0xB146322B), RoundedCornerShape(6.dp))
-//                                .padding(horizontal = 8.dp, vertical = 4.dp)
-//                        ) {
-//                            Text(
-//                                text = "$discount% OFF",
-//                                fontSize = 12.sp,
-//                                fontWeight = FontWeight.Bold,
-//                                color = Color.White
-//                            )
-//                        }
-//                    }
-//                }
-
                 // Wishlist button at top-right
                 Box(
                     modifier = Modifier.align(Alignment.TopEnd)
@@ -131,13 +125,13 @@ fun TopRatedRestaurantCard(
                             isWishlisted = !isWishlisted
                             restaurantItem.id?.let { onWishlistClick(it) }
                         },
-                        modifier = Modifier.size(40.dp)
+                        modifier = Modifier.size(24.dp)
                     ) {
                         Icon(
                             imageVector = if (isWishlisted) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                             contentDescription = "Wishlist",
                             tint = if (isWishlisted) Color.Red else Color.White,
-                            modifier = Modifier.size(34.dp)
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                 }
@@ -145,7 +139,7 @@ fun TopRatedRestaurantCard(
                 Box(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
-                        .padding(start = 8.dp, bottom = 8.dp) // Add some padding from edges
+                        .padding(start = 1.dp, bottom = 1.dp) // Add some padding from edges
                 ) {
                     Column(
                         modifier = Modifier
@@ -157,11 +151,11 @@ fun TopRatedRestaurantCard(
                                 Box(
                                     modifier = Modifier
                                         .background(Color(0x7746322B), RoundedCornerShape(6.dp))
-                                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                                        .padding(horizontal = 2.dp, vertical = 1.dp)
                                 ) {
                                     Text(
                                         text = "$discount",
-                                        fontSize = 20.sp,
+                                        fontSize = 10.sp,
                                         fontWeight = FontWeight.ExtraBold,
                                         color = Color.White
                                     )
@@ -170,7 +164,7 @@ fun TopRatedRestaurantCard(
                         }
 
                         // Add some spacing between discount and price
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(1.dp))
 
                         // Price Box
                         restaurantItem.price?.let { price ->
@@ -178,11 +172,11 @@ fun TopRatedRestaurantCard(
                                 Box(
                                     modifier = Modifier
                                         .background(Color(0x7746322B), RoundedCornerShape(6.dp))
-                                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                                        .padding(horizontal = 2.dp, vertical = 1.dp)
                                 ) {
                                     Text(
                                         text = "AT ₹$price",
-                                        fontSize = 25.sp,
+                                        fontSize = 15.sp,
                                         fontWeight = FontWeight.ExtraBold,
                                         color = Color.White
                                     )
@@ -191,37 +185,6 @@ fun TopRatedRestaurantCard(
                         }
                     }
                 }
-
-                // Rating badge at bottom-left
-//                restaurantItem.rating?.let { rating ->
-//                    Box(
-//                        modifier = Modifier
-//                            .align(Alignment.BottomStart)
-//                            .padding(start = 0.dp, bottom = 0.dp)
-//                            .background(
-//                                color = MaterialTheme.customColors.success,
-//                                shape = RoundedCornerShape(20.dp)
-//                            )
-//                            .padding(horizontal = 8.dp, vertical = 4.dp)
-//                    ) {
-//                        Row(
-//                            verticalAlignment = Alignment.CenterVertically
-//                        ) {
-//                            Text(
-//                                text = rating,
-//                                color = Color.White,
-//                                fontSize = 14.sp,
-//                                fontWeight = FontWeight.Medium,
-//                                modifier = Modifier.padding(end = 2.dp)
-//                            )
-//                            Text(
-//                                text = "★",
-//                                color = Color.White,
-//                                fontSize = 14.sp
-//                            )
-//                        }
-//                    }
-//                }
             }
         }
 
@@ -229,13 +192,13 @@ fun TopRatedRestaurantCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .padding(horizontal = 1.dp, vertical = 4.dp)
         ) {
             // Restaurant title
             restaurantItem.title?.let { title ->
                 Text(
                     text = title,
-                    fontSize = 24.sp,
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
                     maxLines = 2,
@@ -244,9 +207,7 @@ fun TopRatedRestaurantCard(
                 )
             }
 
-            Spacer(modifier = Modifier.height(4.dp))
-
-//            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(2.dp))
 
             // Delivery time and distance
             Row(
@@ -258,55 +219,36 @@ fun TopRatedRestaurantCard(
                     Image(
                         painter = painterResource(id = R.drawable.ic_star_food),
                         contentDescription = "Restaurant",
-                        contentScale = ContentScale.FillBounds, // Changed from FillBounds to Crop for better appearance
+                        contentScale = ContentScale.FillBounds,
                         modifier = Modifier
-                            .width(20.dp) // Set width
-                            .height(20.dp) // Set height
+                            .width(10.dp)
+                            .height(10.dp)
                             .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
                     )
-                    Spacer(modifier = Modifier.width(5.dp))
+                    Spacer(modifier = Modifier.width(2.dp))
                     Text(
                         text = restaurantItem.rating,
                         color = Color.Black,
-                        fontSize = 20.sp,
+                        fontSize = 10.sp,
                         fontWeight = FontWeight.Medium,
-                        modifier = Modifier.padding(end = 2.dp)
+//                        modifier = Modifier.padding(end = 2.dp)
                     )
                 }
 
                 // Delivery time (make it more visible)
                 restaurantItem.deliveryTime?.let { deliveryTime ->
                     Text(
-                        text = " • ",
+                        text = "•",
                         color = Color.Black,
-                        fontSize = 30.sp
+                        fontSize = 15.sp
                     )
                     Text(
                         text = deliveryTime,
-                        color = Color.Black, // Green color for better visibility
-                        fontSize = 20.sp,
+                        color = Color.Black,
+                        fontSize = 10.sp,
                         fontWeight = FontWeight.Medium
                     )
                 }
-
-                // Add a separator dot if both deliveryTime and distance exist
-//                if (restaurantItem.deliveryTime != null && restaurantItem.distance != null) {
-//                    Text(
-//                        text = " • ",
-//                        color = Color.Black,
-//                        fontSize = 20.sp
-//                    )
-//                }
-
-                // Distance
-//                restaurantItem.distance?.let { distance ->
-//                    Text(
-//                        text = distance,
-//                        color = Color.Black,
-//                        fontSize = 20.sp,
-//                        fontWeight = FontWeight.Normal
-//                    )
-//                }
             }
 
             // Category
@@ -314,7 +256,7 @@ fun TopRatedRestaurantCard(
                 Text(
                     text = category,
                     color = Color.Black,
-                    fontSize = 20.sp,
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.Normal,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -335,6 +277,9 @@ fun TopRatedRestaurantsList(
     backgroundColor: Color = MaterialTheme.customColors.white,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 240.dp,
+    imageHeight: Dp? = null, // Add imageHeight parameter
+    imageWidth: Dp? = null,  // Add imageWidth parameter
+    imageSizeFraction: Float = 0.75f, // Fraction of card height for image
     spacing: Dp = 12.dp,
     horizontalPadding: Dp = 16.dp
 ) {
@@ -366,7 +311,10 @@ fun TopRatedRestaurantsList(
                 restaurantItem = restaurantItem,
                 onClick = { onItemClick(restaurantItem) },
                 cardWidth = cardWidth,
-                cardHeight = cardHeight
+                cardHeight = cardHeight,
+                imageHeight = imageHeight,
+                imageWidth = imageWidth,
+                imageSizeFraction = imageSizeFraction
             )
         }
     }
@@ -385,6 +333,9 @@ fun TopRatedRestaurants(
     backgroundColor: Color = MaterialTheme.customColors.white,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 240.dp,
+    imageHeight: Dp? = null, // Add imageHeight parameter
+    imageWidth: Dp? = null,  // Add imageWidth parameter
+    imageSizeFraction: Float = 0.75f, // Fraction of card height for image
     spacing: Dp = 12.dp,
     horizontalPadding: Dp = 16.dp,
     verticalPadding: Dp = 16.dp,
@@ -427,6 +378,9 @@ fun TopRatedRestaurants(
             backgroundColor = backgroundColor,
             cardWidth = cardWidth,
             cardHeight = cardHeight,
+            imageHeight = imageHeight,
+            imageWidth = imageWidth,
+            imageSizeFraction = imageSizeFraction,
             spacing = spacing,
             horizontalPadding = horizontalPadding
         )
@@ -514,16 +468,32 @@ fun TopRatedRestaurantCardPreview() {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Preview with all fields
+            // Preview with custom image height (larger image)
             TopRatedRestaurantCard(
                 restaurantItem = sampleTopRatedRestaurants[0],
-                onClick = { println("Clicked ${sampleTopRatedRestaurants[0].title}") }
+                onClick = { println("Clicked ${sampleTopRatedRestaurants[0].title}") },
+                cardWidth = 180.dp,
+                cardHeight = 260.dp,
+                imageHeight = 200.dp
             )
 
-            // Preview with minimal fields
+            // Preview with smaller image height
+            TopRatedRestaurantCard(
+                restaurantItem = sampleTopRatedRestaurants[1],
+                onClick = { println("Clicked ${sampleTopRatedRestaurants[1].title}") },
+                cardWidth = 140.dp,
+                cardHeight = 200.dp,
+                imageHeight = 120.dp
+            )
+
+            // Preview with custom image width (square image)
             TopRatedRestaurantCard(
                 restaurantItem = sampleTopRatedRestaurants[2],
-                onClick = { println("Clicked minimal restaurant") }
+                onClick = { println("Clicked ${sampleTopRatedRestaurants[2].title}") },
+                cardWidth = 160.dp,
+                cardHeight = 240.dp,
+                imageWidth = 140.dp,
+                imageHeight = 140.dp
             )
         }
     }
@@ -545,26 +515,35 @@ fun TopRatedRestaurantsPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun TopRatedRestaurantsOddNumberPreview() {
+fun TopRatedRestaurantsCustomImageSizePreview() {
     MaterialTheme {
         TopRatedRestaurants(
-            heading = "Top Picks",
-            restaurantItems = sampleTopRatedRestaurants.take(5),
+            heading = "Featured Restaurants",
+            subtitle = "With custom image sizes",
+            restaurantItems = sampleTopRatedRestaurants.take(3),
             onItemClick = { restaurant -> println("Clicked ${restaurant.title}") },
-            backgroundColor = Color.White
+            backgroundColor = Color.White,
+            cardWidth = 180.dp,
+            cardHeight = 280.dp,
+            imageHeight = 200.dp, // Fixed image height
+            imageSizeFraction = 0.7f // Override default fraction
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun EmptyTopRatedRestaurantsPreview() {
+fun TopRatedRestaurantsSquareImagesPreview() {
     MaterialTheme {
         TopRatedRestaurants(
-            heading = "Top Rated Restaurants",
-            restaurantItems = emptyList(),
-            onItemClick = { },
-            backgroundColor = Color.White
+            heading = "Square Layout",
+            restaurantItems = sampleTopRatedRestaurants.take(4),
+            onItemClick = { restaurant -> println("Clicked ${restaurant.title}") },
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 220.dp,
+            imageWidth = 150.dp, // Same as card width for full width
+            imageHeight = 150.dp // Square images
         )
     }
 }

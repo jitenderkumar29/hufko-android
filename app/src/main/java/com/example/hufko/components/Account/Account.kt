@@ -444,71 +444,71 @@ fun PastOrdersSection() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-//        Box(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//        ) {
-//            Column(
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//                modifier = Modifier.fillMaxWidth()
-//            ) {
-//                // If you have an image resource, use this:
-//                 Image(
-//                     painter = painterResource(id = R.drawable.hufko_empty_state),
-//                     contentDescription = "No orders",
-//                     modifier = Modifier.size(120.dp)
-//                 )
-//
-//                Spacer(modifier = Modifier.height(16.dp))
-//
-//                Text(
-//                    text = "You haven't Hufko'd yet",
-//                    fontSize = 18.sp,
-//                    color = Color.Black,
-//                    fontWeight = FontWeight.SemiBold
-//                )
-//
-//                Spacer(modifier = Modifier.height(8.dp))
-//
-//                Text(
-//                    text = "From food to groceries and dining\n" +
-//                            "experiences - all in one place!",
-//                    fontSize = 14.sp,
-//                    color = Color.Black,
-//                    lineHeight = 20.sp,
-//                    textAlign = TextAlign.Center
-//                )
-//
-//                Spacer(modifier = Modifier.height(24.dp))
-//
-//                Button(
-//                    onClick = { /* Handle explore action */ },
-//                    colors = ButtonDefaults.buttonColors(
-//                        containerColor = MaterialTheme.customColors.orangeButton, // Hufko orange color
-//                        contentColor = Color.White
-//                    ),
-//                    shape = RoundedCornerShape(12.dp),
-//                    modifier = Modifier
-//                        .height(48.dp)
-//                        .width(200.dp)
-//                ) {
-//                    Text(
-//                        text = "Explore Hufko",
-//                        fontSize = 16.sp,
-//                        fontWeight = FontWeight.Medium
-//                    )
-//                }
-//
-//                Spacer(modifier = Modifier.height(8.dp))
-//
-//                Text(
-//                    text = "App version A990 (1883)",
-//                    fontSize = 12.sp,
-//                    color = Color.Black,
-//                    modifier = Modifier.padding(top = 16.dp)
-//                )
-//            }
-//        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                // If you have an image resource, use this:
+                 Image(
+                     painter = painterResource(id = R.drawable.hufko_empty_state),
+                     contentDescription = "No orders",
+                     modifier = Modifier.size(120.dp)
+                 )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "You haven't Hufko'd yet",
+                    fontSize = 18.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.SemiBold
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "From food to groceries and dining\n" +
+                            "experiences - all in one place!",
+                    fontSize = 14.sp,
+                    color = Color.Black,
+                    lineHeight = 20.sp,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Button(
+                    onClick = { /* Handle explore action */ },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.customColors.orangeButton, // Hufko orange color
+                        contentColor = Color.White
+                    ),
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier
+                        .height(48.dp)
+                        .width(200.dp)
+                ) {
+                    Text(
+                        text = "Explore Hufko",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "App version A990 (1883)",
+                    fontSize = 12.sp,
+                    color = Color.Black,
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+            }
+        }
     }
 }
 

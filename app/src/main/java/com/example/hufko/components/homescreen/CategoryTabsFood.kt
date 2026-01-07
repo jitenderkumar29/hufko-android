@@ -84,6 +84,8 @@ sealed class CategoryPage(val title: String, val iconRes: Int) {
     object PavBhaji : CategoryPage("Pav Bhaji", R.drawable.pav_bhaji_food)
     object Sandwich : CategoryPage("Sandwich", R.drawable.sandwich_food)
     object Shake : CategoryPage("Shake", R.drawable.shake_food)
+    object Samosa : CategoryPage("Samosa", R.drawable.samosa_food)
+    object Poori : CategoryPage("Poori", R.drawable.poori_food)
     object SeeAll : CategoryPage("See All", R.drawable.see_all_food)
 }
 
@@ -171,6 +173,8 @@ fun CategoryTabsFood(
         CategoryPage.PavBhaji,
         CategoryPage.Sandwich,
         CategoryPage.Shake,
+        CategoryPage.Samosa,
+        CategoryPage.Poori,
         CategoryPage.SeeAll,
     )
 
@@ -312,6 +316,8 @@ fun CategoryTabsFood(
                 36 -> PavBhajiCategoryPage()
                 37 -> SandwichCategoryPage()
                 38 -> ShakeCategoryPage()
+                39 -> SamosaCategoryPage()
+                40 -> PooriCategoryPage()
                 else -> AllCategoryPage()
             }
         }
@@ -538,14 +544,232 @@ fun AllCategoryPage(
         )
 
         // New Year 2026
-        val newYearCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_new_year_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_new_year_2, "View products"),
-            CategoryItem(2, "", R.drawable.ic_new_year_3, "View products"),
+//        val newYearCategoriesSimple = listOf(
+//            CategoryItem(0, "", R.drawable.ic_new_year_1, "View products"),
+//            CategoryItem(1, "", R.drawable.ic_new_year_2, "View products"),
+//            CategoryItem(2, "", R.drawable.ic_new_year_3, "View products"),
+//        )
+////                Spacer(modifier = Modifier.height(10.dp))
+//        Image(
+//            painter = painterResource(R.drawable.ic_ic_new_year_header),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+//        CategoryListSimple(
+//            items = newYearCategoriesSimple,
+//            onItemClick = { item -> println("Selected: ${item.name}") },
+//            itemWidth = 113.dp,
+//            itemHeight = 110.dp,
+//            horizontalSpacing = 12.dp,
+////                        verticalPadding = 8.dp,
+//            horizontalPadding = 12.dp,
+//            backgroundColor = Color(0xFF041258)
+//        )
+
+        // New Year 2026
+        val newYearSampleProducts = listOf(
+            ProductListGrid(
+                name = "Product 1",
+                price = "FLAT 10% OFF",
+                imageRes = R.drawable.ic_new_year_1,
+//                backgroundColor = Color(0xFFFFF8E1) // Light amber
+            ),
+            ProductListGrid(
+                name = "Product 2",
+                price = "FLAT 25% OFF",
+                imageRes = R.drawable.ic_new_year_2,
+//                backgroundColor = Color(0xFFE8F5E8) // Light green
+            ),
+            ProductListGrid(
+                name = "Product 3",
+                price = "FLAT 10% OFF",
+                imageRes = R.drawable.ic_new_year_3,
+//                backgroundColor = Color(0xFFE3F2FD) // Light blue
+            )
         )
-//                Spacer(modifier = Modifier.height(10.dp))
+        // New Year 2026 Header
         Image(
             painter = painterResource(R.drawable.ic_ic_new_year_header),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(
+                    min = 100.dp,
+                    max = 300.dp
+                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//                .height(80.dp),
+            contentScale = ContentScale.FillBounds
+        )
+        // header New Year 2026 Grid
+        CategoryListGridF(
+            products = newYearSampleProducts,
+            columns = 3,
+            gridHeight = 145.dp, // fixed height to avoid crashes
+            showName = false,
+            showPrice = false,   // hide price
+            imageAspectRatio = 3f / 3f,
+            defaultCardColor = Color(0xFF041258),
+            textColor = Color.White,
+            onItemClick = { product ->
+                println("Clicked on ${product.name}")
+            }
+        )
+
+
+//        Image(
+//            painter = painterResource(R.drawable.ic_introducing_healthy_score),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(180.dp),
+//            contentScale = ContentScale.FillBounds
+//        )
+        // Badges
+//        Image(
+//            painter = painterResource(R.drawable.ic_badges_all),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(180.dp),
+//            contentScale = ContentScale.FillBounds
+//        )
+
+        // Sample data with all fields
+        val completeRestaurantItems = listOf(
+            TopRatedRestaurantItem(
+                id = 1,
+                imageRes = R.drawable.ic_top_rated_food_1,
+                title = "Burger King",
+                price = "180",
+                restaurantName = "Shree Jee Restaurant",
+                rating = "4.1",
+                deliveryTime = "45-50 mins",
+                distance = "7.3 km",
+                discount = "ITEMS",
+                discountAmount = "up to ₹120",
+                address = "Delhi",
+                category = "Burgers"
+            ),
+            TopRatedRestaurantItem(
+                id = 2,
+                imageRes = R.drawable.ic_top_rated_food_2,
+                title = "Bakingo",
+                price = "220",
+                restaurantName = "Amiche Pizza",
+                rating = "4.3",
+                deliveryTime = "60-65 mins",
+                distance = "5.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹100",
+                address = "Delhi",
+                category = "Fast Food"
+            ),
+            TopRatedRestaurantItem(
+                id = 3,
+                imageRes = R.drawable.ic_top_rated_food_3,
+                title = "Big Bowl",
+                price = "150",
+                restaurantName = "Spice Garden",
+                rating = "4.0",
+                deliveryTime = "30-35 mins",
+                distance = "3.8 km",
+                discount = "ITEMS",
+                discountAmount = "up to ₹80",
+                address = "Delhi",
+                category = "Pizzas"
+            ),
+            TopRatedRestaurantItem(
+                id = 4,
+                imageRes = R.drawable.ic_top_rated_food_4,
+                title = "Peppers Pizza",
+                price = "199",
+                restaurantName = "Amiche Pizza",
+                rating = "4.2",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "Delhi",
+                category = "Burgers"
+            ),
+            TopRatedRestaurantItem(
+                id = 5,
+                imageRes = R.drawable.ic_top_rated_food_5,
+                title = "Zaika Food",
+                price = "199",
+                restaurantName = "Amiche Pizza",
+                rating = "4.2",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "ITEMS",
+                discountAmount = "up to ₹60",
+                address = "Delhi",
+                category = "Fast Food"
+            ),
+            TopRatedRestaurantItem(
+                id = 6,
+                imageRes = R.drawable.ic_top_rated_food_6,
+                title = "Roms Pizza",
+                price = "199",
+                restaurantName = "Amiche Pizza",
+                rating = "4.2",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹60",
+                address = "Delhi",
+                category = "Pizzas"
+            )
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = "Top rated restaurants near you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+
+        TopRatedRestaurants(
+            heading = null,
+            subtitle = null,
+            restaurantItems = completeRestaurantItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 100.dp,
+            cardHeight = 160.dp,
+            imageHeight = 100.dp, // Fixed image height
+            spacing = 15.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        // Housefull Sale
+        val housefullSaleCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_housefull_sale_1, "View products"),
+            CategoryItem(1, "", R.drawable.ic_housefull_sale_2, "View products"),
+            CategoryItem(2, "", R.drawable.ic_housefull_sale_3, "View products"),
+            CategoryItem(4, "", R.drawable.ic_housefull_sale_5, "View products"),
+            CategoryItem(3, "", R.drawable.ic_housefull_sale_4, "View products"),
+        )
+
+//        Spacer(modifier = Modifier.height(10.dp))
+        Image(
+            painter = painterResource(R.drawable.ic_housefull_sale_header),
             contentDescription = "Banner",
             modifier = Modifier
                 .fillMaxWidth()
@@ -556,14 +780,22 @@ fun AllCategoryPage(
             contentScale = ContentScale.FillBounds
         )
         CategoryListSimple(
-            items = newYearCategoriesSimple,
+            items = housefullSaleCategoriesSimple,
             onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 120.dp,
+            itemWidth = 110.dp,
             itemHeight = 110.dp,
             horizontalSpacing = 12.dp,
 //                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFF041258)
+            backgroundColor = Color(0xFFFFC653)
+        )
+        Image(
+            painter = painterResource(R.drawable.ic_housefull_sale_footer),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+            contentScale = ContentScale.FillBounds
         )
 
         // Healthy Score
@@ -572,6 +804,11 @@ fun AllCategoryPage(
                 painterResource(id = R.drawable.ic_introducing_healthy_score),
                 painterResource(id = R.drawable.all_eat_right),
                 painterResource(id = R.drawable.all_flat_frre_coke),
+                painterResource(id = R.drawable.buy_one_get_one),
+                painterResource(id = R.drawable.get_flat_off),
+                painterResource(id = R.drawable.offkfc_bucket),
+                painterResource(id = R.drawable.anupam_restaurant),
+                painterResource(id = R.drawable.bikkgane_biryani),
             ),
             onImageClick = { page ->
                 when (page) {
@@ -582,7 +819,7 @@ fun AllCategoryPage(
             },
             autoScrollDelay = 3000,
             height = 180.dp,
-            roundedCornerShape = 0.dp,
+            roundedCornerShape = 20.dp,
             contentScale = ContentScale.FillBounds,
             dotSize = 8.dp,
             dotPadding = 4.dp,
@@ -590,30 +827,55 @@ fun AllCategoryPage(
             overlayGradient = false, // Adds gradient for better visibility
             selectedDotColor = Color.White,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            padding = BannerPadding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
         )
-//        Image(
-//            painter = painterResource(R.drawable.ic_introducing_healthy_score),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(180.dp),
-//            contentScale = ContentScale.FillBounds
-//        )
-        // Badges
+
+        // Jantastic Bites
+        val jantasticBitesCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_jantastic_bites_1, "View products"),
+            CategoryItem(1, "", R.drawable.ic_jantastic_bites_2, "View products"),
+            CategoryItem(2, "", R.drawable.ic_jantastic_bites_3, "View products"),
+            CategoryItem(3, "", R.drawable.ic_jantastic_bites_4, "View products"),
+            CategoryItem(4, "", R.drawable.ic_jantastic_bites_5, "View products"),
+        )
+        Spacer(modifier = Modifier.height(20.dp))
         Image(
-            painter = painterResource(R.drawable.ic_badges_all),
+            painter = painterResource(R.drawable.ic_jantastic_bites_header),
             contentDescription = "Banner",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(180.dp),
+                .height(150.dp),
+//            .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
             contentScale = ContentScale.FillBounds
         )
+        CategoryListSimple(
+            items = jantasticBitesCategoriesSimple,
+            onItemClick = { item -> println("Selected: ${item.name}") },
+            itemWidth = 113.dp,
+            itemHeight = 110.dp,
+            horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFFF4423)
+        )
+        Image(
+            painter = painterResource(R.drawable.ic_jantastic_bites_footer),
+            contentDescription = "Banner",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+            contentScale = ContentScale.FillBounds
+        )
+        Spacer(modifier = Modifier.height(10.dp))
 
         // Feature this week
         val featureThisWeekCategoriesSimple = listOf(
             CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
-            CategoryItem(1, "", R.drawable.ic_chikki_gajak, "View products"),
+            CategoryItem(1, "", R.drawable.ic_credit_card_week, "View products"),
             CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
             CategoryItem(3, "", R.drawable.ic_thermals, "View products"),
             CategoryItem(4, "", R.drawable.ic_blankets, "View products"),
@@ -657,314 +919,7 @@ fun AllCategoryPage(
             backgroundColor = Color(0xFFFFFFFF)
         )
 
-        // Sample data with all fields
-        val completeRestaurantItems = listOf(
-            TopRatedRestaurantItem(
-                id = 1,
-                imageRes = R.drawable.ic_top_rated_food_1,
-                title = "Burger Supreme",
-                price = "180",
-                restaurantName = "Shree Jee Restaurant",
-                rating = "4.1",
-                deliveryTime = "45-50 mins",
-                distance = "7.3 km",
-                discount = "ITEMS",
-                discountAmount = "up to ₹120",
-                address = "Delhi",
-                category = "Burgers"
-            ),
-            TopRatedRestaurantItem(
-                id = 2,
-                imageRes = R.drawable.ic_top_rated_food_2,
-                title = "Fast Food Combo",
-                price = "220",
-                restaurantName = "Amiche Pizza",
-                rating = "4.3",
-                deliveryTime = "60-65 mins",
-                distance = "5.2 km",
-                discount = "30% OFF",
-                discountAmount = "up to ₹100",
-                address = "Delhi",
-                category = "Fast Food"
-            ),
-            TopRatedRestaurantItem(
-                id = 3,
-                imageRes = R.drawable.ic_top_rated_food_3,
-                title = "Pepperoni Pizza",
-                price = "150",
-                restaurantName = "Spice Garden",
-                rating = "4.0",
-                deliveryTime = "30-35 mins",
-                distance = "3.8 km",
-                discount = "ITEMS",
-                discountAmount = "up to ₹80",
-                address = "Delhi",
-                category = "Pizzas"
-            ),
-            TopRatedRestaurantItem(
-                id = 4,
-                imageRes = R.drawable.ic_top_rated_food_4,
-                title = "Cheeseburger Deluxe",
-                price = "199",
-                restaurantName = "Amiche Pizza",
-                rating = "4.2",
-                deliveryTime = "25-30 mins",
-                distance = "2.5 km",
-                discount = "30% OFF",
-                discountAmount = "up to ₹60",
-                address = "Delhi",
-                category = "Burgers"
-            ),
-            TopRatedRestaurantItem(
-                id = 5,
-                imageRes = R.drawable.ic_top_rated_food_5,
-                title = "Chicken Nuggets",
-                price = "199",
-                restaurantName = "Amiche Pizza",
-                rating = "4.2",
-                deliveryTime = "25-30 mins",
-                distance = "2.5 km",
-                discount = "ITEMS",
-                discountAmount = "up to ₹60",
-                address = "Delhi",
-                category = "Fast Food"
-            ),
-            TopRatedRestaurantItem(
-                id = 6,
-                imageRes = R.drawable.ic_top_rated_food_6,
-                title = "Veggie Pizza",
-                price = "199",
-                restaurantName = "Amiche Pizza",
-                rating = "4.2",
-                deliveryTime = "25-30 mins",
-                distance = "2.5 km",
-                discount = "30% OFF",
-                discountAmount = "up to ₹60",
-                address = "Delhi",
-                category = "Pizzas"
-            )
-        )
-        Spacer(modifier = Modifier.height(5.dp))
-        Text(
-            text = "Top rated near you",
-            style = MaterialTheme.typography.bodySmall.copy(
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.customColors.black
-            ),
-            maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-
-        TopRatedRestaurants(
-            heading = null,
-            subtitle = null,
-            restaurantItems = completeRestaurantItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 100.dp,
-            cardHeight = 210.dp,
-            imageHeight = 100.dp, // Fixed image height
-            spacing = 15.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
-
-        // Housefull Sale
-        val housefullSaleCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_housefull_sale_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_housefull_sale_2, "View products"),
-            CategoryItem(2, "", R.drawable.ic_housefull_sale_3, "View products"),
-            CategoryItem(4, "", R.drawable.ic_housefull_sale_5, "View products"),
-            CategoryItem(3, "", R.drawable.ic_housefull_sale_4, "View products"),
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-        Image(
-            painter = painterResource(R.drawable.ic_housefull_sale_header),
-            contentDescription = "Banner",
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(
-                    min = 100.dp,
-                    max = 300.dp
-                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-            contentScale = ContentScale.FillBounds
-        )
-        CategoryListSimple(
-            items = housefullSaleCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 110.dp,
-            itemHeight = 110.dp,
-            horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
-            horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFFC653)
-        )
-        Image(
-            painter = painterResource(R.drawable.ic_housefull_sale_footer),
-            contentDescription = "Banner",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(20.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-            contentScale = ContentScale.FillBounds
-        )
-
-        // More on hufko
-        val moreOnHufkoCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_more_on_hufko_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_more_on_hufko_2, "View products"),
-            CategoryItem(2, "", R.drawable.ic_more_on_hufko_3, "View products"),
-            CategoryItem(3, "", R.drawable.ic_more_on_hufko_4, "View products"),
-            CategoryItem(4, "", R.drawable.ic_more_on_hufko_5, "View products"),
-            CategoryItem(5, "", R.drawable.ic_more_on_hufko_6, "View products"),
-            CategoryItem(6, "", R.drawable.ic_more_on_hufko_7, "View products"),
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "More On Hufko",
-            style = MaterialTheme.typography.bodySmall.copy(
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.customColors.black
-            ),
-            maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-//        Image(
-//            painter = painterResource(R.drawable.ic_more_on_hufko),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
-        CategoryListSimple(
-            items = moreOnHufkoCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 100.dp,
-            itemHeight = 100.dp,
-            horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
-            horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFFFFFF)
-        )
-
-        // Explore More
-        val exploreMoreCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_explore_more_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_explore_more_2, "View products"),
-            CategoryItem(3, "", R.drawable.ic_explore_more_3, "View products"),
-            CategoryItem(4, "", R.drawable.ic_explore_more_4, "View products"),
-            CategoryItem(5, "", R.drawable.ic_explore_more_5, "View products"),
-            CategoryItem(6, "", R.drawable.ic_explore_more_6, "View products"),
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Explore More",
-            style = MaterialTheme.typography.bodySmall.copy(
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.customColors.black
-            ),
-            maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-//        Image(
-//            painter = painterResource(R.drawable.ic_explore_more),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
-        CategoryListSimple(
-            items = exploreMoreCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 100.dp,
-            itemHeight = 120.dp,
-            horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
-            horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFFFFFF)
-        )
-
-//        // Feature this week
-//        val featureThisWeekCategoriesSimple = listOf(
-//            CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
-//            CategoryItem(1, "", R.drawable.ic_chikki_gajak, "View products"),
-//            CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
-//        )
-//
-//        Image(
-//            painter = painterResource(R.drawable.ic_feature_this_week),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
-//        CategoryListSimple(
-//            items = featureThisWeekCategoriesSimple,
-//            onItemClick = { item -> println("Selected: ${item.name}") },
-//            itemWidth = 170.dp,
-//            itemHeight = 220.dp,
-//            horizontalSpacing = 12.dp,
-////                        verticalPadding = 8.dp,
-//            horizontalPadding = 12.dp,
-//            backgroundColor = Color(0xFFFDFDF1)
-//        )
-
-        // 2026 Resolution
-        val resolutionCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_resolution_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_resolution_2, "View products"),
-            CategoryItem(2, "", R.drawable.ic_resolution_3, "View products"),
-            CategoryItem(3, "", R.drawable.ic_resolution_4, "View products"),
-            CategoryItem(4, "", R.drawable.ic_resolution_5, "View products"),
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-        Image(
-            painter = painterResource(R.drawable.ic_resolution_header),
-            contentDescription = "Banner",
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(
-                    min = 100.dp,
-                    max = 300.dp
-                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-            contentScale = ContentScale.FillBounds
-        )
-        CategoryListSimple(
-            items = resolutionCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 100.dp,
-            itemHeight = 120.dp,
-            horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
-            horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFE3FFC4)
-        )
-
+//        Popular Chain
         val sampleProducts = listOf(
             ProductListGrid(
                 name = "Product 1",
@@ -1031,7 +986,6 @@ fun AllCategoryPage(
 //            }
 //        )
 
-
         val sampleProductsD = listOf(
             ProductListDGrid(
                 name = "Product 1",
@@ -1068,6 +1022,18 @@ fun AllCategoryPage(
                 price = "FLAT 30% OFF",
                 imageRes = R.drawable.popular_chain_6
                 // No background color - will use default
+            ),
+            ProductListDGrid(
+                name = "Product 7",
+                price = "FLAT 20% OFF",
+                imageRes = R.drawable.popular_chain_7
+                // No background color - will use default
+            ),
+            ProductListDGrid(
+                name = "Product 8",
+                price = "FLAT 50% OFF",
+                imageRes = R.drawable.popular_chain_8
+                // No background color - will use default
             )
         )
         // Example 1: Square items with fixed width/height
@@ -1084,6 +1050,147 @@ fun AllCategoryPage(
                 println("Clicked on ${product.name}")
             }
         )
+
+        // More on hufko
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = "More On Hufko",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val moreOnHufkoCategoriesSimple = listOf(
+            CategoryItem(0, "", R.drawable.ic_more_on_hufko_1, "View products"),
+            CategoryItem(1, "", R.drawable.ic_more_on_hufko_2, "View products"),
+            CategoryItem(2, "", R.drawable.ic_more_on_hufko_3, "View products"),
+            CategoryItem(3, "", R.drawable.ic_more_on_hufko_4, "View products"),
+            CategoryItem(4, "", R.drawable.ic_more_on_hufko_5, "View products"),
+            CategoryItem(5, "", R.drawable.ic_more_on_hufko_6, "View products"),
+            CategoryItem(6, "", R.drawable.ic_more_on_hufko_7, "View products"),
+            CategoryItem(7, "", R.drawable.ic_explore_more_4, "View products"),
+            CategoryItem(8, "", R.drawable.ic_explore_more_6, "View products"),
+        )
+        CategoryListSimple(
+            items = moreOnHufkoCategoriesSimple,
+            onItemClick = { item -> println("Selected: ${item.name}") },
+            itemWidth = 100.dp,
+            itemHeight = 100.dp,
+            horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFFFFFFF)
+        )
+
+        // Explore More
+//        val exploreMoreCategoriesSimple = listOf(
+//            CategoryItem(0, "", R.drawable.ic_explore_more_1, "View products"),
+//            CategoryItem(1, "", R.drawable.ic_explore_more_2, "View products"),
+//            CategoryItem(3, "", R.drawable.ic_explore_more_3, "View products"),
+//            CategoryItem(4, "", R.drawable.ic_explore_more_4, "View products"),
+//            CategoryItem(5, "", R.drawable.ic_explore_more_5, "View products"),
+//            CategoryItem(6, "", R.drawable.ic_explore_more_6, "View products"),
+//        )
+//
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Explore More",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 24.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Image(
+//            painter = painterResource(R.drawable.ic_explore_more),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+//        CategoryListSimple(
+//            items = exploreMoreCategoriesSimple,
+//            onItemClick = { item -> println("Selected: ${item.name}") },
+//            itemWidth = 100.dp,
+//            itemHeight = 120.dp,
+//            horizontalSpacing = 12.dp,
+////                        verticalPadding = 8.dp,
+//            horizontalPadding = 12.dp,
+//            backgroundColor = Color(0xFFFFFFFF)
+//        )
+
+//        // Feature this week
+//        val featureThisWeekCategoriesSimple = listOf(
+//            CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
+//            CategoryItem(1, "", R.drawable.ic_chikki_gajak, "View products"),
+//            CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
+//        )
+//
+//        Image(
+//            painter = painterResource(R.drawable.ic_feature_this_week),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+//        CategoryListSimple(
+//            items = featureThisWeekCategoriesSimple,
+//            onItemClick = { item -> println("Selected: ${item.name}") },
+//            itemWidth = 170.dp,
+//            itemHeight = 220.dp,
+//            horizontalSpacing = 12.dp,
+////                        verticalPadding = 8.dp,
+//            horizontalPadding = 12.dp,
+//            backgroundColor = Color(0xFFFDFDF1)
+//        )
+
+//        // 2026 Resolution
+//        val resolutionCategoriesSimple = listOf(
+//            CategoryItem(0, "", R.drawable.ic_resolution_1, "View products"),
+//            CategoryItem(1, "", R.drawable.ic_resolution_2, "View products"),
+//            CategoryItem(2, "", R.drawable.ic_resolution_3, "View products"),
+//            CategoryItem(3, "", R.drawable.ic_resolution_4, "View products"),
+//            CategoryItem(4, "", R.drawable.ic_resolution_5, "View products"),
+//        )
+//
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Image(
+//            painter = painterResource(R.drawable.ic_resolution_header),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+//        CategoryListSimple(
+//            items = resolutionCategoriesSimple,
+//            onItemClick = { item -> println("Selected: ${item.name}") },
+//            itemWidth = 100.dp,
+//            itemHeight = 120.dp,
+//            horizontalSpacing = 12.dp,
+////                        verticalPadding = 8.dp,
+//            horizontalPadding = 12.dp,
+//            backgroundColor = Color(0xFFE3FFC4)
+//        )
 
         Spacer(modifier = Modifier.height(15.dp))
         // Filter Button
@@ -22441,6 +22548,1239 @@ fun ShakeCategoryPage() {
         }
     }
 }
+@Composable
+fun SamosaCategoryPage() {
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//    ) {
+//        Spacer(modifier = Modifier.height(15.dp))
+//
+//        // Filter Button
+//        val shakeFilters = FilterConfig(
+//            filters = listOf(
+//                // Main filter dropdown
+//                FilterChip(
+//                    id = "filters",
+//                    text = "Filters",
+//                    type = FilterType.FILTER_DROPDOWN,
+//                    icon = R.drawable.ic_filter,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//
+//                // MILK TYPE (with icons for milk types)
+//                FilterChip(
+//                    id = "regular_milk",
+//                    text = "Regular Milk",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_milk
+//                ),
+//                FilterChip(
+//                    id = "almond_milk",
+//                    text = "Almond Milk",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_almond_milk
+//                ),
+//                FilterChip(
+//                    id = "soy_milk",
+//                    text = "Soy Milk",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "oat_milk",
+//                    text = "Oat Milk",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "skimmed_milk",
+//                    text = "Skimmed Milk",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // FRUIT SHAKES (with icons for popular fruits)
+//                FilterChip(
+//                    id = "strawberry_shake",
+//                    text = "Strawberry",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_strawberry
+//                ),
+//                FilterChip(
+//                    id = "banana_shake",
+//                    text = "Banana",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_banana
+//                ),
+//                FilterChip(
+//                    id = "mango_shake",
+//                    text = "Mango",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_mango
+//                ),
+//                FilterChip(
+//                    id = "chikoo_shake",
+//                    text = "Chikoo",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "mixed_fruit_shake",
+//                    text = "Mixed Fruit",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // DESSERT SHAKES (with icons for popular desserts)
+//                FilterChip(
+//                    id = "butterscotch_shake",
+//                    text = "Butterscotch",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "caramel_shake",
+//                    text = "Caramel",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "cookies_cream_shake",
+//                    text = "Cookies & Cream",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // HEALTH & NUTRITION (with icons for healthy options)
+//                FilterChip(
+//                    id = "low_calorie_shake",
+//                    text = "Low Calorie",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "sugar_free",
+//                    text = "Sugar Free",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "vegan_shake",
+//                    text = "Vegan",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SPECIAL INGREDIENTS (text-only)
+//                FilterChip(
+//                    id = "with_ice_cream",
+//                    text = "With Ice Cream",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_whipped_cream",
+//                    text = "Whipped Cream",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_sprinkles",
+//                    text = "With Sprinkles",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_nuts",
+//                    text = "With Nuts",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // TEMPERATURE (with icons for temperature)
+//                FilterChip(
+//                    id = "room_temperature",
+//                    text = "Room Temp",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SEASONAL SPECIALS (text-only)
+//                FilterChip(
+//                    id = "seasonal",
+//                    text = "Seasonal",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "festival_special",
+//                    text = "Festival Special",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SIZE OPTIONS (with icons for sizes)
+//                FilterChip(
+//                    id = "large_size",
+//                    text = "Large",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "king_size",
+//                    text = "King Size",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SPECIAL FEATURES (text-only)
+//                FilterChip(
+//                    id = "customizable",
+//                    text = "Customizable",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "signature_shake",
+//                    text = "Signature",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "new_arrival",
+//                    text = "New Arrival",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // Sort dropdown
+//                FilterChip(
+//                    id = "sort",
+//                    text = "Sort",
+//                    type = FilterType.SORT_DROPDOWN,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//            ),
+//            rows = 2
+//        )
+//         FilterButtonFood(
+//            filterConfig = shakeFilters,
+//            onFilterClick = { filter ->
+//                println("Filter clicked: ${filter.text}")
+//                // Handle filter logic
+//            },
+//            onSortClick = {
+//                println("Sort clicked")
+//                // Handle sort logic
+//            }
+//        )
+//
+//        val shakeItems = listOf(
+//            FoodItemDoubleF(
+//                id = 1,
+//                imageRes = R.drawable.chocolate_shake_1,
+//                title = "Classic Chocolate Shake",
+//                price = "₹199",
+//                restaurantName = "Keventers",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.2 km",
+//                discount = "20%",
+//                discountAmount = "up to ₹40",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            FoodItemDoubleF(
+//                id = 2,
+//                imageRes = R.drawable.strawberry_shake_2,
+//                title = "Fresh Strawberry Shake",
+//                price = "₹219",
+//                restaurantName = "Natural's Ice Cream",
+//                rating = "4.8",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.5 km",
+//                discount = "15%",
+//                discountAmount = "up to ₹33",
+//                address = "Juhu, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 3,
+//                imageRes = R.drawable.oreo_shake_3,
+//                title = "Oreo Cookies & Cream Shake",
+//                price = "₹249",
+//                restaurantName = "Cream Stone",
+//                rating = "4.9",
+//                deliveryTime = "25-35 mins",
+//                distance = "2.0 km",
+//                discount = "10%",
+//                discountAmount = "up to ₹25",
+//                address = "Koramangala, Bangalore"
+//            ),
+//            FoodItemDoubleF(
+//                id = 4,
+//                imageRes = R.drawable.protein_shake_4,
+//                title = "Protein Power Shake",
+//                price = "₹299",
+//                restaurantName = "CureFit",
+//                rating = "4.6",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.8 km",
+//                discount = "25%",
+//                discountAmount = "up to ₹75",
+//                address = "Hitech City, Hyderabad"
+//            ),
+//            FoodItemDoubleF(
+//                id = 5,
+//                imageRes = R.drawable.mango_shake_5,
+//                title = "Alphonso Mango Shake",
+//                price = "₹279",
+//                restaurantName = "Häagen-Dazs",
+//                rating = "4.7",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.5 km",
+//                discount = "18%",
+//                discountAmount = "up to ₹50",
+//                address = "Phoenix Marketcity, Chennai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 6,
+//                imageRes = R.drawable.mixed_fruit_shake_6,
+//                title = "Mixed Fruit & Nut Shake",
+//                price = "₹229",
+//                restaurantName = "FreshMenu",
+//                rating = "4.5",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.0 km",
+//                discount = "20%",
+//                discountAmount = "up to ₹46",
+//                address = "Magarpatta, Pune"
+//            )
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//        Text(
+//            text = "Recommended for you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//        FoodItemsListWithHeading(
+//            heading = null,
+//            subtitle = null,
+//            foodItems = shakeItems,
+//            onItemClick = { foodItem ->
+//                println("Food item clicked: ${foodItem.title}")
+//            },
+//            modifier = Modifier.fillMaxWidth(),
+//            backgroundColor = Color.White,
+//            cardWidth = 150.dp,
+//            cardHeight = 170.dp,
+//            horizontalSpacing = 8.dp,
+//            horizontalPadding = 12.dp,
+//            verticalPadding = 0.dp,
+//            headingBottomPadding = 0.dp
+//        )
+//
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val shakeItemsList = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.shake_1,
+//                title = "Classic Chocolate Shake",
+//                price = "₹199",
+//                restaurantName = "Keventers",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.shake_2,
+//                title = "Fresh Strawberry Shake",
+//                price = "₹219",
+//                restaurantName = "Natural's Ice Cream",
+//                rating = "4.8",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹33",
+//                address = "Juhu, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.shake_3,
+//                title = "Oreo Cookies & Cream Shake",
+//                price = "₹249",
+//                restaurantName = "Cream Stone",
+//                rating = "4.9",
+//                deliveryTime = "25-35 mins",
+//                distance = "2.0 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Koramangala, Bangalore"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.shake_4,
+//                title = "Protein Power Shake",
+//                price = "₹299",
+//                restaurantName = "CureFit",
+//                rating = "4.6",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.8 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹75",
+//                address = "Hitech City, Hyderabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.shake_5,
+//                title = "Alphonso Mango Shake",
+//                price = "₹279",
+//                restaurantName = "Häagen-Dazs",
+//                rating = "4.7",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.5 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹50",
+//                address = "Phoenix Marketcity, Chennai"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.shake_6,
+//                title = "Mixed Fruit & Nut Shake",
+//                price = "₹229",
+//                restaurantName = "FreshMenu",
+//                rating = "4.5",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹46",
+//                address = "Magarpatta, Pune"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.shake_7,
+//                title = "Banana Peanut Butter Shake",
+//                price = "₹189",
+//                restaurantName = "Third Wave Coffee",
+//                rating = "4.7",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.1 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹28",
+//                address = "Indiranagar, Bangalore"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.shake_8,
+//                title = "Butterscotch Caramel Shake",
+//                price = "₹259",
+//                restaurantName = "Baskin Robbins",
+//                rating = "4.6",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.8 km",
+//                discount = "12% OFF",
+//                discountAmount = "up to ₹31",
+//                address = "Hauz Khas, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.shake_9,
+//                title = "Cold Coffee Shake",
+//                price = "₹169",
+//                restaurantName = "Starbucks",
+//                rating = "4.8",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹34",
+//                address = "Bandra West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.shake_10,
+//                title = "Vanilla Almond Shake",
+//                price = "₹239",
+//                restaurantName = "Amul Ice Cream",
+//                rating = "4.4",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.9 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹60",
+//                address = "Manjalpur, Vadodara"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.shake_11,
+//                title = "Kesar Pista Shake",
+//                price = "₹229",
+//                restaurantName = "Kwality Walls",
+//                rating = "4.5",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.3 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹34",
+//                address = "Sector 22, Chandigarh"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.shake_12,
+//                title = "Red Velvet Shake",
+//                price = "₹269",
+//                restaurantName = "The Belgian Waffle",
+//                rating = "4.8",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.9 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹27",
+//                address = "Jubilee Hills, Hyderabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.shake_13,
+//                title = "Chikoo Shake",
+//                price = "₹179",
+//                restaurantName = "Fruit N Shake",
+//                rating = "4.3",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.7 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹36",
+//                address = "Koregaon Park, Pune"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.shake_14,
+//                title = "KitKat Crunch Shake",
+//                price = "₹289",
+//                restaurantName = "Nestlé Shake House",
+//                rating = "4.7",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.3 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹52",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.shake_15,
+//                title = "Sugar-Free Chocolate Shake",
+//                price = "₹249",
+//                restaurantName = "Health Forever",
+//                rating = "4.6",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.0 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹37",
+//                address = "Hitech City, Hyderabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.shake_16,
+//                title = "Papaya Pineapple Shake",
+//                price = "₹199",
+//                restaurantName = "Juice Junction",
+//                rating = "4.4",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.4 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹50",
+//                address = "Salt Lake, Kolkata"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.shake_17,
+//                title = "Salted Caramel Shake",
+//                price = "₹279",
+//                restaurantName = "Cold Stone Creamery",
+//                rating = "4.8",
+//                deliveryTime = "35-45 mins",
+//                distance = "2.5 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹56",
+//                address = "Linking Road, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.shake_18,
+//                title = "Family Pack Berry Shake",
+//                price = "₹399",
+//                restaurantName = "Frozen Bottle",
+//                rating = "4.5",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.7 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹120",
+//                address = "Cyber City, Gurgaon"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.shake_19,
+//                title = "Avocado Spinach Shake",
+//                price = "₹329",
+//                restaurantName = "Wellness Cafe",
+//                rating = "4.6",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.2 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹49",
+//                address = "Powai, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.shake_20,
+//                title = "Nutella Hazelnut Shake",
+//                price = "₹299",
+//                restaurantName = "Dessert Delight",
+//                rating = "4.9",
+//                deliveryTime = "40-50 mins",
+//                distance = "2.8 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Rajouri Garden, Delhi"
+//            )
+//        ).forEach { restaurantItem ->
+//            Column {
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
+//    }
+}
+
+@Composable
+fun PooriCategoryPage() {
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//    ) {
+//        Spacer(modifier = Modifier.height(15.dp))
+//
+//        // Filter Button
+//        val shakeFilters = FilterConfig(
+//            filters = listOf(
+//                // Main filter dropdown
+//                FilterChip(
+//                    id = "filters",
+//                    text = "Filters",
+//                    type = FilterType.FILTER_DROPDOWN,
+//                    icon = R.drawable.ic_filter,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//
+//                // MILK TYPE (with icons for milk types)
+//                FilterChip(
+//                    id = "regular_milk",
+//                    text = "Regular Milk",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_milk
+//                ),
+//                FilterChip(
+//                    id = "almond_milk",
+//                    text = "Almond Milk",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_almond_milk
+//                ),
+//                FilterChip(
+//                    id = "soy_milk",
+//                    text = "Soy Milk",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "oat_milk",
+//                    text = "Oat Milk",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "skimmed_milk",
+//                    text = "Skimmed Milk",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // FRUIT SHAKES (with icons for popular fruits)
+//                FilterChip(
+//                    id = "strawberry_shake",
+//                    text = "Strawberry",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_strawberry
+//                ),
+//                FilterChip(
+//                    id = "banana_shake",
+//                    text = "Banana",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_banana
+//                ),
+//                FilterChip(
+//                    id = "mango_shake",
+//                    text = "Mango",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_mango
+//                ),
+//                FilterChip(
+//                    id = "chikoo_shake",
+//                    text = "Chikoo",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "mixed_fruit_shake",
+//                    text = "Mixed Fruit",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // DESSERT SHAKES (with icons for popular desserts)
+//                FilterChip(
+//                    id = "butterscotch_shake",
+//                    text = "Butterscotch",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "caramel_shake",
+//                    text = "Caramel",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "cookies_cream_shake",
+//                    text = "Cookies & Cream",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // HEALTH & NUTRITION (with icons for healthy options)
+//                FilterChip(
+//                    id = "low_calorie_shake",
+//                    text = "Low Calorie",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "sugar_free",
+//                    text = "Sugar Free",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "vegan_shake",
+//                    text = "Vegan",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SPECIAL INGREDIENTS (text-only)
+//                FilterChip(
+//                    id = "with_ice_cream",
+//                    text = "With Ice Cream",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_whipped_cream",
+//                    text = "Whipped Cream",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_sprinkles",
+//                    text = "With Sprinkles",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_nuts",
+//                    text = "With Nuts",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // TEMPERATURE (with icons for temperature)
+//                FilterChip(
+//                    id = "room_temperature",
+//                    text = "Room Temp",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SEASONAL SPECIALS (text-only)
+//                FilterChip(
+//                    id = "seasonal",
+//                    text = "Seasonal",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "festival_special",
+//                    text = "Festival Special",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SIZE OPTIONS (with icons for sizes)
+//                FilterChip(
+//                    id = "large_size",
+//                    text = "Large",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "king_size",
+//                    text = "King Size",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SPECIAL FEATURES (text-only)
+//                FilterChip(
+//                    id = "customizable",
+//                    text = "Customizable",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "signature_shake",
+//                    text = "Signature",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "new_arrival",
+//                    text = "New Arrival",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // Sort dropdown
+//                FilterChip(
+//                    id = "sort",
+//                    text = "Sort",
+//                    type = FilterType.SORT_DROPDOWN,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//            ),
+//            rows = 2
+//        )
+//         FilterButtonFood(
+//            filterConfig = shakeFilters,
+//            onFilterClick = { filter ->
+//                println("Filter clicked: ${filter.text}")
+//                // Handle filter logic
+//            },
+//            onSortClick = {
+//                println("Sort clicked")
+//                // Handle sort logic
+//            }
+//        )
+//
+//        val shakeItems = listOf(
+//            FoodItemDoubleF(
+//                id = 1,
+//                imageRes = R.drawable.chocolate_shake_1,
+//                title = "Classic Chocolate Shake",
+//                price = "₹199",
+//                restaurantName = "Keventers",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.2 km",
+//                discount = "20%",
+//                discountAmount = "up to ₹40",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            FoodItemDoubleF(
+//                id = 2,
+//                imageRes = R.drawable.strawberry_shake_2,
+//                title = "Fresh Strawberry Shake",
+//                price = "₹219",
+//                restaurantName = "Natural's Ice Cream",
+//                rating = "4.8",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.5 km",
+//                discount = "15%",
+//                discountAmount = "up to ₹33",
+//                address = "Juhu, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 3,
+//                imageRes = R.drawable.oreo_shake_3,
+//                title = "Oreo Cookies & Cream Shake",
+//                price = "₹249",
+//                restaurantName = "Cream Stone",
+//                rating = "4.9",
+//                deliveryTime = "25-35 mins",
+//                distance = "2.0 km",
+//                discount = "10%",
+//                discountAmount = "up to ₹25",
+//                address = "Koramangala, Bangalore"
+//            ),
+//            FoodItemDoubleF(
+//                id = 4,
+//                imageRes = R.drawable.protein_shake_4,
+//                title = "Protein Power Shake",
+//                price = "₹299",
+//                restaurantName = "CureFit",
+//                rating = "4.6",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.8 km",
+//                discount = "25%",
+//                discountAmount = "up to ₹75",
+//                address = "Hitech City, Hyderabad"
+//            ),
+//            FoodItemDoubleF(
+//                id = 5,
+//                imageRes = R.drawable.mango_shake_5,
+//                title = "Alphonso Mango Shake",
+//                price = "₹279",
+//                restaurantName = "Häagen-Dazs",
+//                rating = "4.7",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.5 km",
+//                discount = "18%",
+//                discountAmount = "up to ₹50",
+//                address = "Phoenix Marketcity, Chennai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 6,
+//                imageRes = R.drawable.mixed_fruit_shake_6,
+//                title = "Mixed Fruit & Nut Shake",
+//                price = "₹229",
+//                restaurantName = "FreshMenu",
+//                rating = "4.5",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.0 km",
+//                discount = "20%",
+//                discountAmount = "up to ₹46",
+//                address = "Magarpatta, Pune"
+//            )
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//        Text(
+//            text = "Recommended for you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//        FoodItemsListWithHeading(
+//            heading = null,
+//            subtitle = null,
+//            foodItems = shakeItems,
+//            onItemClick = { foodItem ->
+//                println("Food item clicked: ${foodItem.title}")
+//            },
+//            modifier = Modifier.fillMaxWidth(),
+//            backgroundColor = Color.White,
+//            cardWidth = 150.dp,
+//            cardHeight = 170.dp,
+//            horizontalSpacing = 8.dp,
+//            horizontalPadding = 12.dp,
+//            verticalPadding = 0.dp,
+//            headingBottomPadding = 0.dp
+//        )
+
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val shakeItemsList = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.shake_1,
+//                title = "Classic Chocolate Shake",
+//                price = "₹199",
+//                restaurantName = "Keventers",
+//                rating = "4.7",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹40",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.shake_2,
+//                title = "Fresh Strawberry Shake",
+//                price = "₹219",
+//                restaurantName = "Natural's Ice Cream",
+//                rating = "4.8",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.5 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹33",
+//                address = "Juhu, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.shake_3,
+//                title = "Oreo Cookies & Cream Shake",
+//                price = "₹249",
+//                restaurantName = "Cream Stone",
+//                rating = "4.9",
+//                deliveryTime = "25-35 mins",
+//                distance = "2.0 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹25",
+//                address = "Koramangala, Bangalore"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.shake_4,
+//                title = "Protein Power Shake",
+//                price = "₹299",
+//                restaurantName = "CureFit",
+//                rating = "4.6",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.8 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹75",
+//                address = "Hitech City, Hyderabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.shake_5,
+//                title = "Alphonso Mango Shake",
+//                price = "₹279",
+//                restaurantName = "Häagen-Dazs",
+//                rating = "4.7",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.5 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹50",
+//                address = "Phoenix Marketcity, Chennai"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.shake_6,
+//                title = "Mixed Fruit & Nut Shake",
+//                price = "₹229",
+//                restaurantName = "FreshMenu",
+//                rating = "4.5",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.0 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹46",
+//                address = "Magarpatta, Pune"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.shake_7,
+//                title = "Banana Peanut Butter Shake",
+//                price = "₹189",
+//                restaurantName = "Third Wave Coffee",
+//                rating = "4.7",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.1 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹28",
+//                address = "Indiranagar, Bangalore"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.shake_8,
+//                title = "Butterscotch Caramel Shake",
+//                price = "₹259",
+//                restaurantName = "Baskin Robbins",
+//                rating = "4.6",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.8 km",
+//                discount = "12% OFF",
+//                discountAmount = "up to ₹31",
+//                address = "Hauz Khas, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.shake_9,
+//                title = "Cold Coffee Shake",
+//                price = "₹169",
+//                restaurantName = "Starbucks",
+//                rating = "4.8",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.2 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹34",
+//                address = "Bandra West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.shake_10,
+//                title = "Vanilla Almond Shake",
+//                price = "₹239",
+//                restaurantName = "Amul Ice Cream",
+//                rating = "4.4",
+//                deliveryTime = "15-25 mins",
+//                distance = "0.9 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹60",
+//                address = "Manjalpur, Vadodara"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.shake_11,
+//                title = "Kesar Pista Shake",
+//                price = "₹229",
+//                restaurantName = "Kwality Walls",
+//                rating = "4.5",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.3 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹34",
+//                address = "Sector 22, Chandigarh"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.shake_12,
+//                title = "Red Velvet Shake",
+//                price = "₹269",
+//                restaurantName = "The Belgian Waffle",
+//                rating = "4.8",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.9 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹27",
+//                address = "Jubilee Hills, Hyderabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.shake_13,
+//                title = "Chikoo Shake",
+//                price = "₹179",
+//                restaurantName = "Fruit N Shake",
+//                rating = "4.3",
+//                deliveryTime = "10-20 mins",
+//                distance = "0.7 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹36",
+//                address = "Koregaon Park, Pune"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.shake_14,
+//                title = "KitKat Crunch Shake",
+//                price = "₹289",
+//                restaurantName = "Nestlé Shake House",
+//                rating = "4.7",
+//                deliveryTime = "30-40 mins",
+//                distance = "2.3 km",
+//                discount = "18% OFF",
+//                discountAmount = "up to ₹52",
+//                address = "Connaught Place, Delhi"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.shake_15,
+//                title = "Sugar-Free Chocolate Shake",
+//                price = "₹249",
+//                restaurantName = "Health Forever",
+//                rating = "4.6",
+//                deliveryTime = "15-25 mins",
+//                distance = "1.0 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹37",
+//                address = "Hitech City, Hyderabad"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.shake_16,
+//                title = "Papaya Pineapple Shake",
+//                price = "₹199",
+//                restaurantName = "Juice Junction",
+//                rating = "4.4",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.4 km",
+//                discount = "25% OFF",
+//                discountAmount = "up to ₹50",
+//                address = "Salt Lake, Kolkata"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.shake_17,
+//                title = "Salted Caramel Shake",
+//                price = "₹279",
+//                restaurantName = "Cold Stone Creamery",
+//                rating = "4.8",
+//                deliveryTime = "35-45 mins",
+//                distance = "2.5 km",
+//                discount = "20% OFF",
+//                discountAmount = "up to ₹56",
+//                address = "Linking Road, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.shake_18,
+//                title = "Family Pack Berry Shake",
+//                price = "₹399",
+//                restaurantName = "Frozen Bottle",
+//                rating = "4.5",
+//                deliveryTime = "25-35 mins",
+//                distance = "1.7 km",
+//                discount = "30% OFF",
+//                discountAmount = "up to ₹120",
+//                address = "Cyber City, Gurgaon"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.shake_19,
+//                title = "Avocado Spinach Shake",
+//                price = "₹329",
+//                restaurantName = "Wellness Cafe",
+//                rating = "4.6",
+//                deliveryTime = "20-30 mins",
+//                distance = "1.2 km",
+//                discount = "15% OFF",
+//                discountAmount = "up to ₹49",
+//                address = "Powai, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.shake_20,
+//                title = "Nutella Hazelnut Shake",
+//                price = "₹299",
+//                restaurantName = "Dessert Delight",
+//                rating = "4.9",
+//                deliveryTime = "40-50 mins",
+//                distance = "2.8 km",
+//                discount = "10% OFF",
+//                discountAmount = "up to ₹30",
+//                address = "Rajouri Garden, Delhi"
+//            )
+//        ).forEach { restaurantItem ->
+//            Column {
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
+//    }
+}
 
 //@Composable
 //fun SeeAllCategoryPage() {
@@ -22509,6 +23849,8 @@ fun MainScreen(navController: NavHostController) {
                     CategoryPage.PavBhaji -> 36
                     CategoryPage.Sandwich -> 37
                     CategoryPage.Shake -> 38
+                    CategoryPage.Samosa -> 39
+                    CategoryPage.Poori -> 40
                     CategoryPage.SeeAll -> currentPage
                 }
             },

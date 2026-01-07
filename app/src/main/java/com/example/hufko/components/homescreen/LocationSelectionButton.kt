@@ -142,7 +142,7 @@ fun LocationSelectionButton(
                 contentDescription = "Location",
                 tint = Color.Unspecified, // 👈 IMPORTANT
 //                tint = MaterialTheme.customColors.success,
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier.size(20.dp)
             )
 //            AsyncImage(
 //                model = R.drawable.location, // your GIF in drawable

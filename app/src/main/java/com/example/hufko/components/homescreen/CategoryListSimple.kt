@@ -366,7 +366,7 @@ fun SimpleRoomCategories(
 ) {
     val roomCategoriesSimple = listOf(
         CategoryItem(0, "Kitchen", R.drawable.ic_newly_launched, "View products"),
-        CategoryItem(1, "Bathroom", R.drawable.ic_chikki_gajak, "View products"),
+        CategoryItem(1, "Bathroom", R.drawable.ic_credit_card_week, "View products"),
         CategoryItem(2, "Bedroom", R.drawable.ic_price_drop, "View products"),
     )
     val items = roomCategoriesSimple
@@ -487,6 +487,6 @@ fun CategoryListSimplePreview() {
 // Keep your existing roomCategoriesSimple list
 val roomCategoriesSimple = listOf(
     CategoryItem(0, "Kitchen", R.drawable.ic_newly_launched, "View products"),
-    CategoryItem(1, "Bathroom", R.drawable.ic_chikki_gajak, "View products"),
+    CategoryItem(1, "Bathroom", R.drawable.ic_credit_card_week, "View products"),
     CategoryItem(2, "Bedroom", R.drawable.ic_price_drop, "View products"),
 )

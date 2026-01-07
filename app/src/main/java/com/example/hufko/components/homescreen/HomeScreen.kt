@@ -222,7 +222,9 @@ fun HomeScreen(navController: NavHostController?) {
                             CategoryPage.PavBhaji -> 36
                             CategoryPage.Sandwich -> 37
                             CategoryPage.Shake -> 38
-                            CategoryPage.SeeAll -> 39
+                            CategoryPage.Samosa -> 39
+                            CategoryPage.Poori -> 40
+                            CategoryPage.SeeAll -> 41
                         }
                     },
                     onTabIndexChanged = { newIndex ->

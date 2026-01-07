@@ -41,6 +41,26 @@ enum class DotPosition {
     NONE          // No dots indicator
 }
 
+data class BannerPadding(
+    val start: Dp = 0.dp,
+    val top: Dp = 0.dp,
+    val end: Dp = 0.dp,
+    val bottom: Dp = 0.dp,
+) {
+    companion object {
+        val Zero = BannerPadding(0.dp, 0.dp, 0.dp, 0.dp)
+
+        fun all(padding: Dp) = BannerPadding(padding, padding, padding, padding)
+
+        fun horizontal(horizontal: Dp) = BannerPadding(start = horizontal, end = horizontal)
+
+        fun vertical(vertical: Dp) = BannerPadding(top = vertical, bottom = vertical)
+
+        fun symmetric(horizontal: Dp = 0.dp, vertical: Dp = 0.dp) =
+            BannerPadding(start = horizontal, top = vertical, end = horizontal, bottom = vertical)
+    }
+}
+
 @Composable
 fun BannerFood(
     images: List<Painter>,
@@ -58,7 +78,8 @@ fun BannerFood(
     autoScrollEnabled: Boolean = true,
     dotPosition: DotPosition = DotPosition.BELOW_IMAGE,
     overlayGradient: Boolean = true,
-    showDots: Boolean = true // New parameter to control dots visibility
+    showDots: Boolean = true, // New parameter to control dots visibility
+    padding: BannerPadding = BannerPadding.Zero // New padding parameter
 ) {
     require(images.isNotEmpty()) { "Images list cannot be empty" }
 
@@ -85,7 +106,13 @@ fun BannerFood(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .background(backgroundColor),
+            .background(backgroundColor)
+            .padding(
+                start = padding.start,
+                top = padding.top,
+                end = padding.end,
+                bottom = padding.bottom
+            ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
@@ -218,7 +245,49 @@ fun BannerFood(
         autoScrollEnabled = autoScrollEnabled,
         dotPosition = dotPosition,
         overlayGradient = overlayGradient,
-        showDots = true // Default to showing dots
+        showDots = true, // Default to showing dots
+        padding = BannerPadding.Zero // Default to no padding
+    )
+}
+
+// New overload with padding but without showDots parameter
+@Composable
+fun BannerFood(
+    images: List<Painter>,
+    onImageClick: (Int) -> Unit = {},
+    modifier: Modifier = Modifier,
+    height: Dp = 270.dp,
+    roundedCornerShape: Dp = 16.dp,
+    dotSize: Dp? = null,
+    dotPadding: Dp? = null,
+    selectedDotColor: Color = MaterialTheme.customColors.linkColor,
+    unselectedDotColor: Color = Color.White.copy(alpha = 0.9f),
+    backgroundColor: Color = Color.White,
+    contentScale: ContentScale = ContentScale.FillBounds,
+    autoScrollDelay: Long = 5000,
+    autoScrollEnabled: Boolean = true,
+    dotPosition: DotPosition = DotPosition.BELOW_IMAGE,
+    overlayGradient: Boolean = true,
+    padding: BannerPadding // New overload with padding parameter
+) {
+    BannerFood(
+        images = images,
+        onImageClick = onImageClick,
+        modifier = modifier,
+        height = height,
+        roundedCornerShape = roundedCornerShape,
+        dotSize = dotSize,
+        dotPadding = dotPadding,
+        selectedDotColor = selectedDotColor,
+        unselectedDotColor = unselectedDotColor,
+        backgroundColor = backgroundColor,
+        contentScale = contentScale,
+        autoScrollDelay = autoScrollDelay,
+        autoScrollEnabled = autoScrollEnabled,
+        dotPosition = dotPosition,
+        overlayGradient = overlayGradient,
+        showDots = true, // Default to showing dots
+        padding = padding // Use provided padding
     )
 }
 
@@ -308,6 +377,7 @@ fun BannerFoodWithoutDots(
     contentScale: ContentScale = ContentScale.FillBounds,
     autoScrollDelay: Long = 5000,
     autoScrollEnabled: Boolean = true,
+    padding: BannerPadding = BannerPadding.Zero // Added padding parameter
 ) {
     BannerFood(
         images = images,
@@ -322,7 +392,8 @@ fun BannerFoodWithoutDots(
         autoScrollEnabled = autoScrollEnabled,
         dotPosition = DotPosition.NONE,
         overlayGradient = false,
-        showDots = false
+        showDots = false,
+        padding = padding // Pass padding
     )
 }
 
@@ -332,62 +403,110 @@ fun BannerFoodPreview() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(Color.LightGray)
             .padding(16.dp)
     ) {
-        // 1. Banner with dots (default)
-        Text("Banner with Dots (Default)", modifier = Modifier.padding(bottom = 8.dp))
+        // 1. Banner with all-around padding
+        Text("Banner with All-Around Padding", modifier = Modifier.padding(bottom = 8.dp))
         BannerFood(
             images = listOf(
                 androidx.compose.ui.res.painterResource(R.drawable.restaurant_1),
                 androidx.compose.ui.res.painterResource(R.drawable.popular_chain_1),
                 androidx.compose.ui.res.painterResource(R.drawable.popular_chain_2)
             ),
-            height = 200.dp,
-            autoScrollEnabled = false
+            height = 150.dp,
+            autoScrollEnabled = false,
+            padding = BannerPadding.all(8.dp)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // 2. Banner without dots using showDots parameter
-        Text("Banner without Dots (showDots = false)", modifier = Modifier.padding(bottom = 8.dp))
+        // 2. Banner with horizontal padding only
+        Text("Banner with Horizontal Padding", modifier = Modifier.padding(bottom = 8.dp))
         BannerFood(
             images = listOf(
                 androidx.compose.ui.res.painterResource(R.drawable.popular_chain_3),
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_4),
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_5)
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_4)
             ),
-            height = 180.dp,
+            height = 140.dp,
             showDots = false,
-            autoScrollEnabled = false
+            autoScrollEnabled = false,
+            padding = BannerPadding.horizontal(16.dp)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // 3. Banner without dots using dotSize = 0.dp
-        Text("Banner without Dots (dotSize = 0.dp)", modifier = Modifier.padding(bottom = 8.dp))
+        // 3. Banner with symmetric padding
+        Text("Banner with Symmetric Padding", modifier = Modifier.padding(bottom = 8.dp))
         BannerFood(
             images = listOf(
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_6),
-                androidx.compose.ui.res.painterResource(R.drawable.restaurant_1)
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_5),
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_6)
             ),
-            height = 150.dp,
-            dotSize = 0.dp,
-            autoScrollEnabled = false
+            height = 130.dp,
+            autoScrollEnabled = false,
+            padding = BannerPadding.symmetric(horizontal = 24.dp, vertical = 8.dp)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // 4. Banner without dots using dedicated function
-        Text("Banner without Dots (BannerFoodWithoutDots)", modifier = Modifier.padding(bottom = 8.dp))
+        // 4. Banner with custom padding
+        Text("Banner with Custom Padding", modifier = Modifier.padding(bottom = 8.dp))
         BannerFoodWithoutDots(
             images = listOf(
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_1),
+                androidx.compose.ui.res.painterResource(R.drawable.restaurant_1),
+                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_1)
+            ),
+            height = 120.dp,
+            autoScrollEnabled = false,
+            padding = BannerPadding(start = 32.dp, top = 4.dp, end = 32.dp, bottom = 4.dp)
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // 5. Banner with no padding (default)
+        Text("Banner with No Padding (Default)", modifier = Modifier.padding(bottom = 8.dp))
+        BannerFood(
+            images = listOf(
                 androidx.compose.ui.res.painterResource(R.drawable.popular_chain_2),
                 androidx.compose.ui.res.painterResource(R.drawable.popular_chain_3)
             ),
-            height = 160.dp,
+            height = 110.dp,
             autoScrollEnabled = false
         )
     }
+}
+
+// Example usage in your app:
+@Composable
+fun ExampleUsageBanner() {
+    // Example 1: With all-around padding
+    BannerFood(
+        images = listOf(/* your images */),
+        padding = BannerPadding.all(16.dp)
+    )
+
+    // Example 2: With horizontal padding only
+    BannerFood(
+        images = listOf(/* your images */),
+        padding = BannerPadding.horizontal(24.dp)
+    )
+
+    // Example 3: With symmetric padding
+    BannerFood(
+        images = listOf(/* your images */),
+        padding = BannerPadding.symmetric(horizontal = 16.dp, vertical = 8.dp)
+    )
+
+    // Example 4: With custom padding
+    BannerFood(
+        images = listOf(/* your images */),
+        padding = BannerPadding(start = 20.dp, top = 10.dp, end = 20.dp, bottom = 10.dp)
+    )
+
+    // Example 5: Without dots with padding
+    BannerFoodWithoutDots(
+        images = listOf(/* your images */),
+        padding = BannerPadding.all(12.dp)
+    )
 }

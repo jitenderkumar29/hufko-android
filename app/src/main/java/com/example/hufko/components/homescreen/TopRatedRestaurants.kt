@@ -34,6 +34,17 @@ import androidx.compose.ui.unit.sp
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+
 /**
  * Food item data class for Top Rated Restaurants
  */
@@ -187,66 +198,85 @@ fun TopRatedRestaurantCard(
                 }
             }
         }
-
+        Spacer(modifier = Modifier.height(4.dp))
         // Content section below image
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 1.dp, vertical = 4.dp)
+                .padding(horizontal = 1.dp)
         ) {
             // Restaurant title
             restaurantItem.title?.let { title ->
                 Text(
                     text = title,
-                    fontSize = 15.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
-                    maxLines = 2,
+                    maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    lineHeight = 13.sp,
+                    style = TextStyle(
+                        platformStyle = PlatformTextStyle(
+                            includeFontPadding = false
+                        )
+                    )
                 )
             }
 
-            Spacer(modifier = Modifier.height(2.dp))
-
-            // Delivery time and distance
+            // Rating + delivery time
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
             ) {
-                // Rating
                 restaurantItem.rating?.let { rating ->
                     Image(
                         painter = painterResource(id = R.drawable.ic_star_food),
-                        contentDescription = "Restaurant",
+                        contentDescription = null,
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
-                            .width(10.dp)
-                            .height(10.dp)
-                            .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
+                            .size(10.dp)
                     )
-                    Spacer(modifier = Modifier.width(2.dp))
+
+                    Spacer(modifier = Modifier.width(3.dp))
+
                     Text(
-                        text = restaurantItem.rating,
-                        color = Color.Black,
+                        text = rating,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Medium,
-//                        modifier = Modifier.padding(end = 2.dp)
+                        color = Color.Black,
+                        lineHeight = 10.sp,
+                        style = TextStyle(
+                            platformStyle = PlatformTextStyle(
+                                includeFontPadding = false
+                            )
+                        )
                     )
                 }
 
-                // Delivery time (make it more visible)
                 restaurantItem.deliveryTime?.let { deliveryTime ->
+                    Spacer(modifier = Modifier.width(4.dp))
+
                     Text(
                         text = "•",
-                        color = Color.Black,
-                        fontSize = 15.sp
+                        fontSize = 10.sp,
+                        color = Color.Black
                     )
+
+                    Spacer(modifier = Modifier.width(4.dp))
+
                     Text(
                         text = deliveryTime,
-                        color = Color.Black,
                         fontSize = 10.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = Color.Black,
+                        lineHeight = 10.sp,
+                        style = TextStyle(
+                            platformStyle = PlatformTextStyle(
+                                includeFontPadding = false
+                            )
+                        )
                     )
                 }
             }
@@ -255,14 +285,20 @@ fun TopRatedRestaurantCard(
             restaurantItem.category?.let { category ->
                 Text(
                     text = category,
+                    fontSize = 13.sp,
                     color = Color.Black,
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Normal,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    lineHeight = 12.sp,
+                    style = TextStyle(
+                        platformStyle = PlatformTextStyle(
+                            includeFontPadding = false
+                        )
+                    )
                 )
             }
         }
+
     }
 }
 

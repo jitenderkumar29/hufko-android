@@ -42,8 +42,8 @@ fun CategoryListScrollDF(
     modifier: Modifier = Modifier,
     itemWidth: Dp = 140.dp,
     itemHeight: Dp = 120.dp,
-    rowSpacing: Dp = 12.dp,
-    itemSpacing: Dp = 12.dp,
+    rowSpacing: Dp = 0.dp,
+    itemSpacing: Dp = 0.dp,
     backgroundColor: Color = Color.White,
     defaultCardColor: Color = Color.White,
     onItemClick: (ProductListDGrid) -> Unit = {}

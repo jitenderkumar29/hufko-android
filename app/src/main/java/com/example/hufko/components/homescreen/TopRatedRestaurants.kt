@@ -25,6 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,17 +35,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
-
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Text
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.PlatformTextStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-
 
 /**
  * Food item data class for Top Rated Restaurants
@@ -79,9 +70,10 @@ fun TopRatedRestaurantCard(
     backgroundColor: Color = MaterialTheme.customColors.white,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 240.dp,
-    imageHeight: Dp? = null, // Make imageHeight optional
-    imageWidth: Dp? = null,  // Add imageWidth parameter
-    imageSizeFraction: Float = 0.75f, // Fraction of card height for image (if imageHeight not specified)
+    imageHeight: Dp? = null,
+    imageWidth: Dp? = null,
+    imageSizeFraction: Float = 0.75f,
+    imageCornerRadius: Dp = 12.dp,
     defaultImageRes: Int = R.drawable.restaurant_1
 ) {
     var isWishlisted by remember { mutableStateOf(restaurantItem.isWishlisted ?: false) }
@@ -91,6 +83,20 @@ fun TopRatedRestaurantCard(
 
     // Calculate image width (full width if not specified)
     val calculatedImageWidth = imageWidth ?: cardWidth
+
+    // Calculate dynamic corner radius for image
+    val imageCornerShape = if (calculatedImageWidth < cardWidth) {
+        // If image is narrower than card, apply all corners
+        RoundedCornerShape(imageCornerRadius)
+    } else {
+        // If image is full width, apply only top corners
+        RoundedCornerShape(
+            topStart = imageCornerRadius,
+            topEnd = imageCornerRadius,
+            bottomStart = imageCornerRadius,
+            bottomEnd = imageCornerRadius
+        )
+    }
 
     Column(
         modifier = modifier
@@ -113,12 +119,7 @@ fun TopRatedRestaurantCard(
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .fillMaxSize()
-                    .clip(
-                        if (calculatedImageWidth < cardWidth)
-                            RoundedCornerShape(12.dp)
-                        else
-                            RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
-                    )
+                    .clip(imageCornerShape)
             )
 
             // Overlay content
@@ -150,29 +151,29 @@ fun TopRatedRestaurantCard(
                 Box(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
-                        .padding(start = 1.dp, bottom = 1.dp) // Add some padding from edges
+                        .padding(start = 1.dp, bottom = 1.dp)
                 ) {
                     Column(
                         modifier = Modifier
                             .wrapContentSize()
                     ) {
                         // Discount Box
-                        restaurantItem.discount?.let { discount ->
-                            if (discount.isNotEmpty()) {
-                                Box(
-                                    modifier = Modifier
-                                        .background(Color(0x7746322B), RoundedCornerShape(6.dp))
-                                        .padding(horizontal = 2.dp, vertical = 1.dp)
-                                ) {
-                                    Text(
-                                        text = "$discount",
-                                        fontSize = 10.sp,
-                                        fontWeight = FontWeight.ExtraBold,
-                                        color = Color.White
-                                    )
-                                }
-                            }
-                        }
+//                        restaurantItem.discount?.let { discount ->
+//                            if (discount.isNotEmpty()) {
+//                                Box(
+//                                    modifier = Modifier
+//                                        .background(Color(0x7746322B), RoundedCornerShape(6.dp))
+//                                        .padding(horizontal = 2.dp, vertical = 1.dp)
+//                                ) {
+//                                    Text(
+//                                        text = "$discount",
+//                                        fontSize = 10.sp,
+//                                        fontWeight = FontWeight.ExtraBold,
+//                                        color = Color.White
+//                                    )
+//                                }
+//                            }
+//                        }
 
                         // Add some spacing between discount and price
                         Spacer(modifier = Modifier.height(1.dp))
@@ -198,7 +199,9 @@ fun TopRatedRestaurantCard(
                 }
             }
         }
+
         Spacer(modifier = Modifier.height(4.dp))
+
         // Content section below image
         Column(
             modifier = Modifier
@@ -298,7 +301,6 @@ fun TopRatedRestaurantCard(
                 )
             }
         }
-
     }
 }
 
@@ -313,9 +315,10 @@ fun TopRatedRestaurantsList(
     backgroundColor: Color = MaterialTheme.customColors.white,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 240.dp,
-    imageHeight: Dp? = null, // Add imageHeight parameter
-    imageWidth: Dp? = null,  // Add imageWidth parameter
-    imageSizeFraction: Float = 0.75f, // Fraction of card height for image
+    imageHeight: Dp? = null,
+    imageWidth: Dp? = null,
+    imageSizeFraction: Float = 0.75f,
+    imageCornerRadius: Dp = 12.dp,
     spacing: Dp = 12.dp,
     horizontalPadding: Dp = 16.dp
 ) {
@@ -350,7 +353,8 @@ fun TopRatedRestaurantsList(
                 cardHeight = cardHeight,
                 imageHeight = imageHeight,
                 imageWidth = imageWidth,
-                imageSizeFraction = imageSizeFraction
+                imageSizeFraction = imageSizeFraction,
+                imageCornerRadius = imageCornerRadius
             )
         }
     }
@@ -369,9 +373,10 @@ fun TopRatedRestaurants(
     backgroundColor: Color = MaterialTheme.customColors.white,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 240.dp,
-    imageHeight: Dp? = null, // Add imageHeight parameter
-    imageWidth: Dp? = null,  // Add imageWidth parameter
-    imageSizeFraction: Float = 0.75f, // Fraction of card height for image
+    imageHeight: Dp? = null,
+    imageWidth: Dp? = null,
+    imageSizeFraction: Float = 0.75f,
+    imageCornerRadius: Dp = 12.dp,
     spacing: Dp = 12.dp,
     horizontalPadding: Dp = 16.dp,
     verticalPadding: Dp = 16.dp,
@@ -417,6 +422,7 @@ fun TopRatedRestaurants(
             imageHeight = imageHeight,
             imageWidth = imageWidth,
             imageSizeFraction = imageSizeFraction,
+            imageCornerRadius = imageCornerRadius,
             spacing = spacing,
             horizontalPadding = horizontalPadding
         )
@@ -561,8 +567,9 @@ fun TopRatedRestaurantsCustomImageSizePreview() {
             backgroundColor = Color.White,
             cardWidth = 180.dp,
             cardHeight = 280.dp,
-            imageHeight = 200.dp, // Fixed image height
-            imageSizeFraction = 0.7f // Override default fraction
+            imageHeight = 200.dp,
+            imageSizeFraction = 0.7f,
+            imageCornerRadius = 16.dp
         )
     }
 }
@@ -578,8 +585,56 @@ fun TopRatedRestaurantsSquareImagesPreview() {
             backgroundColor = Color.White,
             cardWidth = 150.dp,
             cardHeight = 220.dp,
-            imageWidth = 150.dp, // Same as card width for full width
-            imageHeight = 150.dp // Square images
+            imageWidth = 150.dp,
+            imageHeight = 150.dp,
+            imageCornerRadius = 8.dp
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TopRatedRestaurantDynamicCornersPreview() {
+    MaterialTheme {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Full width image (rounded top corners only)
+            TopRatedRestaurantCard(
+                restaurantItem = sampleTopRatedRestaurants[0],
+                onClick = { println("Clicked ${sampleTopRatedRestaurants[0].title}") },
+                cardWidth = 180.dp,
+                cardHeight = 260.dp,
+                imageWidth = 180.dp,
+                imageHeight = 180.dp,
+                imageCornerRadius = 16.dp
+            )
+
+            // Narrower image (all corners rounded)
+            TopRatedRestaurantCard(
+                restaurantItem = sampleTopRatedRestaurants[1],
+                onClick = { println("Clicked ${sampleTopRatedRestaurants[1].title}") },
+                cardWidth = 180.dp,
+                cardHeight = 260.dp,
+                imageWidth = 160.dp,
+                imageHeight = 180.dp,
+                imageCornerRadius = 8.dp
+            )
+
+            // Square image with custom corner radius
+            TopRatedRestaurantCard(
+                restaurantItem = sampleTopRatedRestaurants[2],
+                onClick = { println("Clicked ${sampleTopRatedRestaurants[2].title}") },
+                cardWidth = 160.dp,
+                cardHeight = 240.dp,
+                imageWidth = 160.dp,
+                imageHeight = 160.dp,
+                imageCornerRadius = 20.dp
+            )
+        }
     }
 }

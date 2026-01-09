@@ -41,6 +41,8 @@ import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 import androidx.compose.ui.text.style.TextAlign
+import com.example.hufko.components.homescreen.CategoryItemBgImg
+import kotlin.Int
 
 // Sealed class for different category pages
 sealed class CategoryPage(val title: String, val iconRes: Int) {
@@ -552,26 +554,71 @@ fun AllCategoryPage(
             CategoryItem(4, "", R.drawable.ic_new_year_5, "View products"),
         )
 //                Spacer(modifier = Modifier.height(10.dp))
-        Image(
-            painter = painterResource(R.drawable.ic_ic_new_year_header),
-            contentDescription = "Banner",
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(
-                    min = 100.dp,
-                    max = 300.dp
-                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-            contentScale = ContentScale.FillBounds
+//        Image(
+//            painter = painterResource(R.drawable.ic_ic_new_year_header),
+//            contentDescription = "Banner",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .heightIn(
+//                    min = 100.dp,
+//                    max = 300.dp
+//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+//            contentScale = ContentScale.FillBounds
+//        )
+//        CategoryListSimple(
+//            items = newYearCategoriesSimple,
+//            onItemClick = { item -> println("Selected: ${item.name}") },
+//            itemWidth = 113.dp,
+//            itemHeight = 110.dp,
+//            horizontalSpacing = 12.dp,
+////                        verticalPadding = 8.dp,
+//            horizontalPadding = 12.dp,
+//            backgroundColor = Color(0xFF041258)
+//        )
+
+
+
+
+        val items = listOf(
+            CategoryItemBgImg(
+                id = 1,
+                name = "",
+                imageRes = R.drawable.ic_new_year_1
+            ),
+            CategoryItemBgImg(
+                id = 2,
+                name = "",
+                imageRes = R.drawable.ic_new_year_2
+            ),
+            CategoryItemBgImg(
+                id = 3,
+                name = "",
+                imageRes = R.drawable.ic_new_year_3
+            ),
+            CategoryItemBgImg(
+                id = 4,
+                name = "",
+                imageRes = R.drawable.ic_new_year_4
+            ),
+            CategoryItemBgImg(
+                id = 5,
+                name = "",
+                imageRes = R.drawable.ic_new_year_5
+            )
         )
-        CategoryListSimple(
-            items = newYearCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 113.dp,
-            itemHeight = 110.dp,
-            horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
-            horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFF041258)
+
+        CategoryListBgImg(
+            backgroundImageRes = R.drawable.ic_happy_lohri,
+            items = items,
+            onItemClick = { },
+            backgroundImageHeight = 250.dp,
+            listItemWidth = 140.dp,
+            listItemHeight = 140.dp,
+            overlayItemSize = 100.dp,
+            overlayTextSize = 12.sp,
+            backgroundOverlay = Color.Black.copy(alpha = 0.3f),
+            title = null,
+            showHorizontalList = false
         )
 
 //        // New Year 2026
@@ -796,7 +843,7 @@ fun AllCategoryPage(
             contentDescription = "Banner",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(35.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+                .height(20.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
             contentScale = ContentScale.FillBounds
         )
 
@@ -830,7 +877,7 @@ fun AllCategoryPage(
             selectedDotColor = Color.White,
             modifier = Modifier
                 .fillMaxWidth(),
-            padding = BannerPadding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
+            padding = BannerPadding(start = 10.dp, top = 15.dp, end = 10.dp, bottom = 15.dp)
         )
 
         // Jantastic Bites
@@ -867,11 +914,11 @@ fun AllCategoryPage(
             backgroundColor = Color(0xFFFF4423)
         )
         Image(
-            painter = painterResource(R.drawable.ic_jantastic_bites_footer),
+            painter = painterResource(R.drawable.ic_jantastic_bites_footer_2),
             contentDescription = "Banner",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(20.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+                .height(35.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
             contentScale = ContentScale.FillBounds
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -23179,619 +23226,621 @@ fun SamosaCategoryPage() {
 
 @Composable
 fun PooriCategoryPage() {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//    ) {
-//        Spacer(modifier = Modifier.height(15.dp))
-//
-//        // Filter Button
-//        val shakeFilters = FilterConfig(
-//            filters = listOf(
-//                // Main filter dropdown
-//                FilterChip(
-//                    id = "filters",
-//                    text = "Filters",
-//                    type = FilterType.FILTER_DROPDOWN,
-//                    icon = R.drawable.ic_filter,
-//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-//                ),
-//
-//                // MILK TYPE (with icons for milk types)
-//                FilterChip(
-//                    id = "regular_milk",
-//                    text = "Regular Milk",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_milk
-//                ),
-//                FilterChip(
-//                    id = "almond_milk",
-//                    text = "Almond Milk",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_almond_milk
-//                ),
-//                FilterChip(
-//                    id = "soy_milk",
-//                    text = "Soy Milk",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "oat_milk",
-//                    text = "Oat Milk",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "skimmed_milk",
-//                    text = "Skimmed Milk",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // FRUIT SHAKES (with icons for popular fruits)
-//                FilterChip(
-//                    id = "strawberry_shake",
-//                    text = "Strawberry",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_strawberry
-//                ),
-//                FilterChip(
-//                    id = "banana_shake",
-//                    text = "Banana",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_banana
-//                ),
-//                FilterChip(
-//                    id = "mango_shake",
-//                    text = "Mango",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_mango
-//                ),
-//                FilterChip(
-//                    id = "chikoo_shake",
-//                    text = "Chikoo",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "mixed_fruit_shake",
-//                    text = "Mixed Fruit",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // DESSERT SHAKES (with icons for popular desserts)
-//                FilterChip(
-//                    id = "butterscotch_shake",
-//                    text = "Butterscotch",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "caramel_shake",
-//                    text = "Caramel",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "cookies_cream_shake",
-//                    text = "Cookies & Cream",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // HEALTH & NUTRITION (with icons for healthy options)
-//                FilterChip(
-//                    id = "low_calorie_shake",
-//                    text = "Low Calorie",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "sugar_free",
-//                    text = "Sugar Free",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "vegan_shake",
-//                    text = "Vegan",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // SPECIAL INGREDIENTS (text-only)
-//                FilterChip(
-//                    id = "with_ice_cream",
-//                    text = "With Ice Cream",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "with_whipped_cream",
-//                    text = "Whipped Cream",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "with_sprinkles",
-//                    text = "With Sprinkles",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "with_nuts",
-//                    text = "With Nuts",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // TEMPERATURE (with icons for temperature)
-//                FilterChip(
-//                    id = "room_temperature",
-//                    text = "Room Temp",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // SEASONAL SPECIALS (text-only)
-//                FilterChip(
-//                    id = "seasonal",
-//                    text = "Seasonal",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "festival_special",
-//                    text = "Festival Special",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // SIZE OPTIONS (with icons for sizes)
-//                FilterChip(
-//                    id = "large_size",
-//                    text = "Large",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "king_size",
-//                    text = "King Size",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // SPECIAL FEATURES (text-only)
-//                FilterChip(
-//                    id = "customizable",
-//                    text = "Customizable",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "signature_shake",
-//                    text = "Signature",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "new_arrival",
-//                    text = "New Arrival",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // Sort dropdown
-//                FilterChip(
-//                    id = "sort",
-//                    text = "Sort",
-//                    type = FilterType.SORT_DROPDOWN,
-//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-//                ),
-//            ),
-//            rows = 2
-//        )
-//         FilterButtonFood(
-//            filterConfig = shakeFilters,
-//            onFilterClick = { filter ->
-//                println("Filter clicked: ${filter.text}")
-//                // Handle filter logic
-//            },
-//            onSortClick = {
-//                println("Sort clicked")
-//                // Handle sort logic
-//            }
-//        )
-//
-//        val shakeItems = listOf(
-//            FoodItemDoubleF(
-//                id = 1,
-//                imageRes = R.drawable.chocolate_shake_1,
-//                title = "Classic Chocolate Shake",
-//                price = "₹199",
-//                restaurantName = "Keventers",
-//                rating = "4.7",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.2 km",
-//                discount = "20%",
-//                discountAmount = "up to ₹40",
-//                address = "Connaught Place, Delhi"
-//            ),
-//            FoodItemDoubleF(
-//                id = 2,
-//                imageRes = R.drawable.strawberry_shake_2,
-//                title = "Fresh Strawberry Shake",
-//                price = "₹219",
-//                restaurantName = "Natural's Ice Cream",
-//                rating = "4.8",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.5 km",
-//                discount = "15%",
-//                discountAmount = "up to ₹33",
-//                address = "Juhu, Mumbai"
-//            ),
-//            FoodItemDoubleF(
-//                id = 3,
-//                imageRes = R.drawable.oreo_shake_3,
-//                title = "Oreo Cookies & Cream Shake",
-//                price = "₹249",
-//                restaurantName = "Cream Stone",
-//                rating = "4.9",
-//                deliveryTime = "25-35 mins",
-//                distance = "2.0 km",
-//                discount = "10%",
-//                discountAmount = "up to ₹25",
-//                address = "Koramangala, Bangalore"
-//            ),
-//            FoodItemDoubleF(
-//                id = 4,
-//                imageRes = R.drawable.protein_shake_4,
-//                title = "Protein Power Shake",
-//                price = "₹299",
-//                restaurantName = "CureFit",
-//                rating = "4.6",
-//                deliveryTime = "10-20 mins",
-//                distance = "0.8 km",
-//                discount = "25%",
-//                discountAmount = "up to ₹75",
-//                address = "Hitech City, Hyderabad"
-//            ),
-//            FoodItemDoubleF(
-//                id = 5,
-//                imageRes = R.drawable.mango_shake_5,
-//                title = "Alphonso Mango Shake",
-//                price = "₹279",
-//                restaurantName = "Häagen-Dazs",
-//                rating = "4.7",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.5 km",
-//                discount = "18%",
-//                discountAmount = "up to ₹50",
-//                address = "Phoenix Marketcity, Chennai"
-//            ),
-//            FoodItemDoubleF(
-//                id = 6,
-//                imageRes = R.drawable.mixed_fruit_shake_6,
-//                title = "Mixed Fruit & Nut Shake",
-//                price = "₹229",
-//                restaurantName = "FreshMenu",
-//                rating = "4.5",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.0 km",
-//                discount = "20%",
-//                discountAmount = "up to ₹46",
-//                address = "Magarpatta, Pune"
-//            )
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//        Text(
-//            text = "Recommended for you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//
-//        FoodItemsListWithHeading(
-//            heading = null,
-//            subtitle = null,
-//            foodItems = shakeItems,
-//            onItemClick = { foodItem ->
-//                println("Food item clicked: ${foodItem.title}")
-//            },
-//            modifier = Modifier.fillMaxWidth(),
-//            backgroundColor = Color.White,
-//            cardWidth = 150.dp,
-//            cardHeight = 170.dp,
-//            horizontalSpacing = 8.dp,
-//            horizontalPadding = 12.dp,
-//            verticalPadding = 0.dp,
-//            headingBottomPadding = 0.dp
-//        )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val shakeItemsList = listOf(
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.shake_1,
-//                title = "Classic Chocolate Shake",
-//                price = "₹199",
-//                restaurantName = "Keventers",
-//                rating = "4.7",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.2 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹40",
-//                address = "Connaught Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.shake_2,
-//                title = "Fresh Strawberry Shake",
-//                price = "₹219",
-//                restaurantName = "Natural's Ice Cream",
-//                rating = "4.8",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.5 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹33",
-//                address = "Juhu, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.shake_3,
-//                title = "Oreo Cookies & Cream Shake",
-//                price = "₹249",
-//                restaurantName = "Cream Stone",
-//                rating = "4.9",
-//                deliveryTime = "25-35 mins",
-//                distance = "2.0 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹25",
-//                address = "Koramangala, Bangalore"
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.shake_4,
-//                title = "Protein Power Shake",
-//                price = "₹299",
-//                restaurantName = "CureFit",
-//                rating = "4.6",
-//                deliveryTime = "10-20 mins",
-//                distance = "0.8 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹75",
-//                address = "Hitech City, Hyderabad"
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.shake_5,
-//                title = "Alphonso Mango Shake",
-//                price = "₹279",
-//                restaurantName = "Häagen-Dazs",
-//                rating = "4.7",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.5 km",
-//                discount = "18% OFF",
-//                discountAmount = "up to ₹50",
-//                address = "Phoenix Marketcity, Chennai"
-//            ),
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.shake_6,
-//                title = "Mixed Fruit & Nut Shake",
-//                price = "₹229",
-//                restaurantName = "FreshMenu",
-//                rating = "4.5",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.0 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹46",
-//                address = "Magarpatta, Pune"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.shake_7,
-//                title = "Banana Peanut Butter Shake",
-//                price = "₹189",
-//                restaurantName = "Third Wave Coffee",
-//                rating = "4.7",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.1 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹28",
-//                address = "Indiranagar, Bangalore"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.shake_8,
-//                title = "Butterscotch Caramel Shake",
-//                price = "₹259",
-//                restaurantName = "Baskin Robbins",
-//                rating = "4.6",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.8 km",
-//                discount = "12% OFF",
-//                discountAmount = "up to ₹31",
-//                address = "Hauz Khas, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.shake_9,
-//                title = "Cold Coffee Shake",
-//                price = "₹169",
-//                restaurantName = "Starbucks",
-//                rating = "4.8",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.2 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹34",
-//                address = "Bandra West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.shake_10,
-//                title = "Vanilla Almond Shake",
-//                price = "₹239",
-//                restaurantName = "Amul Ice Cream",
-//                rating = "4.4",
-//                deliveryTime = "15-25 mins",
-//                distance = "0.9 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹60",
-//                address = "Manjalpur, Vadodara"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.shake_11,
-//                title = "Kesar Pista Shake",
-//                price = "₹229",
-//                restaurantName = "Kwality Walls",
-//                rating = "4.5",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.3 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹34",
-//                address = "Sector 22, Chandigarh"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.shake_12,
-//                title = "Red Velvet Shake",
-//                price = "₹269",
-//                restaurantName = "The Belgian Waffle",
-//                rating = "4.8",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.9 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹27",
-//                address = "Jubilee Hills, Hyderabad"
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.shake_13,
-//                title = "Chikoo Shake",
-//                price = "₹179",
-//                restaurantName = "Fruit N Shake",
-//                rating = "4.3",
-//                deliveryTime = "10-20 mins",
-//                distance = "0.7 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹36",
-//                address = "Koregaon Park, Pune"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.shake_14,
-//                title = "KitKat Crunch Shake",
-//                price = "₹289",
-//                restaurantName = "Nestlé Shake House",
-//                rating = "4.7",
-//                deliveryTime = "30-40 mins",
-//                distance = "2.3 km",
-//                discount = "18% OFF",
-//                discountAmount = "up to ₹52",
-//                address = "Connaught Place, Delhi"
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.shake_15,
-//                title = "Sugar-Free Chocolate Shake",
-//                price = "₹249",
-//                restaurantName = "Health Forever",
-//                rating = "4.6",
-//                deliveryTime = "15-25 mins",
-//                distance = "1.0 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹37",
-//                address = "Hitech City, Hyderabad"
-//            ),
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.shake_16,
-//                title = "Papaya Pineapple Shake",
-//                price = "₹199",
-//                restaurantName = "Juice Junction",
-//                rating = "4.4",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.4 km",
-//                discount = "25% OFF",
-//                discountAmount = "up to ₹50",
-//                address = "Salt Lake, Kolkata"
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.shake_17,
-//                title = "Salted Caramel Shake",
-//                price = "₹279",
-//                restaurantName = "Cold Stone Creamery",
-//                rating = "4.8",
-//                deliveryTime = "35-45 mins",
-//                distance = "2.5 km",
-//                discount = "20% OFF",
-//                discountAmount = "up to ₹56",
-//                address = "Linking Road, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.shake_18,
-//                title = "Family Pack Berry Shake",
-//                price = "₹399",
-//                restaurantName = "Frozen Bottle",
-//                rating = "4.5",
-//                deliveryTime = "25-35 mins",
-//                distance = "1.7 km",
-//                discount = "30% OFF",
-//                discountAmount = "up to ₹120",
-//                address = "Cyber City, Gurgaon"
-//            ),
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.shake_19,
-//                title = "Avocado Spinach Shake",
-//                price = "₹329",
-//                restaurantName = "Wellness Cafe",
-//                rating = "4.6",
-//                deliveryTime = "20-30 mins",
-//                distance = "1.2 km",
-//                discount = "15% OFF",
-//                discountAmount = "up to ₹49",
-//                address = "Powai, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.shake_20,
-//                title = "Nutella Hazelnut Shake",
-//                price = "₹299",
-//                restaurantName = "Dessert Delight",
-//                rating = "4.9",
-//                deliveryTime = "40-50 mins",
-//                distance = "2.8 km",
-//                discount = "10% OFF",
-//                discountAmount = "up to ₹30",
-//                address = "Rajouri Garden, Delhi"
-//            )
-//        ).forEach { restaurantItem ->
-//            Column {
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
-//    }
+        // Filter Button
+        val pooriFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // POORI TYPE (with icons for popular poori varieties)
+                FilterChip(
+                    id = "masala_poori",
+                    text = "Masala Poori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spices
+                ),
+                FilterChip(
+                    id = "aloo_poori",
+                    text = "Aloo Poori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato
+                ),
+                FilterChip(
+                    id = "paneer_poori",
+                    text = "Paneer Poori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_poori
+                ),
+                FilterChip(
+                    id = "missal_poori",
+                    text = "Missal Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "curry_poori",
+                    text = "Curry Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icons for main accompaniments)
+                FilterChip(
+                    id = "with_aloo_sabzi",
+                    text = "With Aloo Sabzi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_poori
+                ),
+                FilterChip(
+                    id = "with_chole",
+                    text = "With Chole",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chickpea
+                ),
+                FilterChip(
+                    id = "with_rasam",
+                    text = "With Rasam",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_curd",
+                    text = "With Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE & COUNT (with icons for quantity)
+                FilterChip(
+                    id = "six_poori",
+                    text = "6 Pooris",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jumbo_poori",
+                    text = "Jumbo Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL POORI (with icons for special varieties)
+                FilterChip(
+                    id = "methi_poori",
+                    text = "Methi Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "palak_poori",
+                    text = "Palak Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE (with icon for hot)
+                FilterChip(
+                    id = "room_temperature",
+                    text = "Room Temp",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH OPTIONS (text-only)
+                FilterChip(
+                    id = "low_oil",
+                    text = "Low Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole_wheat",
+                    text = "Whole Wheat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADD-ONS & EXTRAS (text-only)
+                FilterChip(
+                    id = "extra_pickle",
+                    text = "Extra Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_chutney",
+                    text = "Extra Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "papad_on_side",
+                    text = "With Papad",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TYPE (text-only)
+                FilterChip(
+                    id = "breakfast",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snack",
+                    text = "Evening Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL SPECIALS (with icon for popular regional)
+                FilterChip(
+                    id = "south_indian",
+                    text = "South Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maharashtrian",
+                    text = "Maharashtrian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL FEATURES (text-only)
+                FilterChip(
+                    id = "festival_special",
+                    text = "Festival Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chef_special",
+                    text = "Chef Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quick_serve",
+                    text = "Quick Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = pooriFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val pooriItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.poori_aloo_1,
+                title = "Masala Aloo Poori",
+                price = "₹120",
+                restaurantName = "Saravana Bhavan",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹24",
+                address = "T Nagar, Chennai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.poori_chole_2,
+                title = "Chole Poori",
+                price = "₹140",
+                restaurantName = "Bikanervala",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹21",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.poori_sabzi_3,
+                title = "Punjabi Aloo Sabzi Poori",
+                price = "₹130",
+                restaurantName = "Punjabi Angithi",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹13",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.poori_masala_4,
+                title = "Masala Poori with Sambar",
+                price = "₹150",
+                restaurantName = "Mavalli Tiffin Room",
+                rating = "4.6",
+                deliveryTime = "10-20 mins",
+                distance = "0.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹38",
+                address = "Lalbagh Road, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.poori_methi_5,
+                title = "Methi Poori with Rasam",
+                price = "₹135",
+                restaurantName = "A2B - Adyar Ananda Bhavan",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "18%",
+                discountAmount = "up to ₹24",
+                address = "Adyar, Chennai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.poori_curry_6,
+                title = "Missal Poori - Maharashtrian Style",
+                price = "₹160",
+                restaurantName = "Shree Datta Snacks",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹32",
+                address = "Shivaji Park, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pooriItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val pooriItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.poori_1,
+                title = "Masala Aloo Poori",
+                price = "₹120",
+                restaurantName = "Saravana Bhavan",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "T Nagar, Chennai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.poori_2,
+                title = "Chole Poori",
+                price = "₹140",
+                restaurantName = "Bikanervala",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹21",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.poori_3,
+                title = "Punjabi Aloo Sabzi Poori",
+                price = "₹130",
+                restaurantName = "Punjabi Angithi",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹13",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.poori_4,
+                title = "Masala Poori with Sambar",
+                price = "₹150",
+                restaurantName = "Mavalli Tiffin Room",
+                rating = "4.6",
+                deliveryTime = "10-20 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹38",
+                address = "Lalbagh Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.poori_5,
+                title = "Methi Poori with Rasam",
+                price = "₹135",
+                restaurantName = "A2B - Adyar Ananda Bhavan",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹24",
+                address = "Adyar, Chennai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.poori_6,
+                title = "Maharashtrian Missal Poori",
+                price = "₹160",
+                restaurantName = "Shree Datta Snacks",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Shivaji Park, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.poori_7,
+                title = "Paneer Masala Poori",
+                price = "₹170",
+                restaurantName = "Haldiram's",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹26",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.poori_8,
+                title = "Udupi Style Poori Sagu",
+                price = "₹125",
+                restaurantName = "Udupi Garden",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "2.2 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹13",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.poori_9,
+                title = "Kashmiri Dum Aloo Poori",
+                price = "₹180",
+                restaurantName = "Kashmir Food Valley",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.poori_10,
+                title = "Bengaluru Style Poori",
+                price = "₹145",
+                restaurantName = "Vidyarthi Bhavan",
+                rating = "4.9",
+                deliveryTime = "15-25 mins",
+                distance = "1.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹36",
+                address = "Gandhi Bazaar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.poori_11,
+                title = "Gujarati Kadhi Poori",
+                price = "₹155",
+                restaurantName = "Gujarat Bhavan",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹23",
+                address = "Navrangpura, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.poori_12,
+                title = "Andhra Style Avakaya Poori",
+                price = "₹165",
+                restaurantName = "Andhra Spice",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹30",
+                address = "Banjara Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.poori_13,
+                title = "Palak Poori with Matar",
+                price = "₹140",
+                restaurantName = "Sattvik",
+                rating = "4.4",
+                deliveryTime = "10-20 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹28",
+                address = "Koregaon Park, Pune"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.poori_14,
+                title = "Chef Special Masala Poori",
+                price = "₹190",
+                restaurantName = "Rajdhani Thali",
+                rating = "4.7",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹48",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.poori_15,
+                title = "Low Oil Healthy Poori",
+                price = "₹135",
+                restaurantName = "Health Kitchen",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹14",
+                address = "Hitech City, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.poori_16,
+                title = "Puran Poli Style Poori",
+                price = "₹150",
+                restaurantName = "Maharashtra Lunch Home",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Fort, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.poori_17,
+                title = "Royal Rajasthani Poori",
+                price = "₹175",
+                restaurantName = "Chokhi Dhani",
+                rating = "4.8",
+                deliveryTime = "40-50 mins",
+                distance = "3.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹26",
+                address = "Sitapura, Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.poori_18,
+                title = "Family Pack Poori Platter",
+                price = "₹350",
+                restaurantName = "Nandhini Deluxe",
+                rating = "4.6",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹105",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.poori_19,
+                title = "Multi-grain Health Poori",
+                price = "₹160",
+                restaurantName = "Soul Fuel",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.poori_20,
+                title = "Festival Special Poori",
+                price = "₹200",
+                restaurantName = "Traditional Foods",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.7 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹20",
+                address = "Mylapore, Chennai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 //@Composable

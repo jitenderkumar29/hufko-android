@@ -1,5 +1,6 @@
 package com.example.hufko.components.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,6 +16,7 @@ import com.example.hufko.components.homescreen.CategoryDietTabsFList
 import com.example.hufko.components.homescreen.CategoryScreen
 import com.example.hufko.components.homescreen.CategoryTabsFList
 import com.example.hufko.components.homescreen.CategoryTabsFood
+import com.example.hufko.components.homescreen.CategoryTabsFullListScreen
 
 // Define navigation routes in your app
 object Routes {
@@ -107,6 +109,28 @@ fun AppNavGraph(navController: NavHostController) {
 //                navController = navController,
 //                onBackClick = { navController.navigateUp() }
 //            )
+        }
+
+        // Add this to your navigation graph:
+// composable("category_tabs_f_list_screen") {
+//     CategoryTabsFullListScreen(
+//         navController = navController,
+//         onCategorySelected = { category, index ->
+//             // Handle category selection from "See All" page
+//         }
+//     )
+// }
+
+        // In your NavHost setup:
+        composable("category_tabs_f_list_screen") {
+            CategoryTabsFullListScreen(
+                navController = navController,
+                onCategorySelected = { category, index ->
+                    // This will be called when a category is selected from "See All" page
+                    // The index will be passed back to CategoryTabsFood via savedStateHandle
+                    Log.d("Navigation", "Selected category from See All: ${category.title} at index $index")
+                }
+            )
         }
         // Add other destinations as needed
     }

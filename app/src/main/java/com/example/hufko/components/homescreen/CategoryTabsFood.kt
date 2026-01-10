@@ -41,8 +41,19 @@ import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 import androidx.compose.ui.text.style.TextAlign
-import com.example.hufko.components.homescreen.CategoryItemBgImg
 import kotlin.Int
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.ui.draw.clip
+//import androidx.compose.ui.Arrangement
 
 // Sealed class for different category pages
 sealed class CategoryPage(val title: String, val iconRes: Int) {
@@ -88,6 +99,100 @@ sealed class CategoryPage(val title: String, val iconRes: Int) {
     object Shake : CategoryPage("Shake", R.drawable.shake_food)
     object Samosa : CategoryPage("Samosa", R.drawable.samosa_food)
     object Poori : CategoryPage("Poori", R.drawable.poori_food)
+    object Bowl : CategoryPage("Bowl", R.drawable.bowl_food)
+    object Poha : CategoryPage("Poha", R.drawable.poha_food)
+
+    // New categories from the list
+    object Sweets : CategoryPage("Sweets", R.drawable.sweets_food)
+    object CholePoori : CategoryPage("Chole Poori", R.drawable.chole_poori_food)
+    object Khichdi : CategoryPage("Khichdi", R.drawable.khichdi_food)
+    object ChilliChicken : CategoryPage("Chilli Chicken", R.drawable.chilli_chicken_food)
+    object Tea : CategoryPage("Tea", R.drawable.tea_food)
+    object VadaPav : CategoryPage("Vada Pav", R.drawable.vada_pav_food)
+    object MasalaMaggi : CategoryPage("Masala Maggi", R.drawable.masala_maggi_food)
+    object Kulche : CategoryPage("Kulche", R.drawable.kulche_food)
+    object Wings : CategoryPage("Wings", R.drawable.wings_food)
+    object AlooPoori : CategoryPage("Aloo Poori", R.drawable.aloo_poori_food)
+    object Omelette : CategoryPage("Omelette", R.drawable.omelette_food)
+    object NonVegMeal : CategoryPage("Non Veg Meal", R.drawable.non_veg_meal_food)
+    object BreadPakoda : CategoryPage("Bread Pakoda", R.drawable.bread_pakoda_food)
+    object Coffee : CategoryPage("Coffee", R.drawable.coffee_food)
+    object PooriBhaji : CategoryPage("Poori Bhaji", R.drawable.poori_bhaji_food)
+    object Pulao : CategoryPage("Pulao", R.drawable.pulao_food)
+    object ChurChurNaan : CategoryPage("Chur Chur Naan", R.drawable.chur_chur_naan_food)
+    object Kebabs : CategoryPage("Kebabs", R.drawable.kebabs_food)
+    object Panipuri : CategoryPage("Panipuri", R.drawable.panipuri_food)
+    object Rasmalai : CategoryPage("Rasmalai", R.drawable.rasmalai_food)
+    object Mutton : CategoryPage("Mutton", R.drawable.mutton_food)
+    object Fish : CategoryPage("Fish", R.drawable.fish_food)
+    object Pakoda : CategoryPage("Pakoda", R.drawable.pakoda_food)
+    object Halwa : CategoryPage("Halwa", R.drawable.halwa_food)
+    object ChopSuey : CategoryPage("Chop Suey", R.drawable.chop_suey_food)
+    object Korma : CategoryPage("Korma", R.drawable.korma_food)
+    object Namkeen : CategoryPage("Namkeen", R.drawable.namkeen_food)
+    object Mushrooms : CategoryPage("Mushrooms", R.drawable.mushrooms_food)
+    object Keema : CategoryPage("Keema", R.drawable.keema_food)
+    object Sundae : CategoryPage("Sundae", R.drawable.sundae_food)
+    object Rasgulla : CategoryPage("Rasgulla", R.drawable.rasgulla_food)
+    object ButterChicken : CategoryPage("Butter Chicken", R.drawable.butter_chicken_food)
+    object RajKachori : CategoryPage("Raj Kachori", R.drawable.raj_kachori_food)
+    object Chaat : CategoryPage("Chaat", R.drawable.chaat_food)
+    object Uttapam : CategoryPage("Uttapam", R.drawable.uttapam_food)
+    object Doughnut : CategoryPage("Doughnut", R.drawable.doughnut_food)
+    object Juice : CategoryPage("Juice", R.drawable.juice_food)
+    object Lassi : CategoryPage("Lassi", R.drawable.lassi_food)
+    object MalaiKofta : CategoryPage("Malai Kofta", R.drawable.malai_kofta_food)
+    object DahiBalle : CategoryPage("Dahi Balle", R.drawable.dahi_balle_food)
+    object Rajma : CategoryPage("Rajma", R.drawable.rajma_food)
+    object ChickenHandi : CategoryPage("Chicken Handi", R.drawable.chicken_handi_food)
+    object Cupcake : CategoryPage("Cupcake", R.drawable.cupcake_food)
+    object Bhel : CategoryPage("Bhel", R.drawable.bhel_food)
+    object Muffin : CategoryPage("Muffin", R.drawable.muffin_food)
+    object Cookies : CategoryPage("Cookies", R.drawable.cookies_food)
+    object ChickenCha : CategoryPage("Chicken Cha", R.drawable.chicken_cha_food)
+    object PaneerKulche : CategoryPage("Paneer Kulche", R.drawable.paneer_kulche_food)
+    object Chaach : CategoryPage("Chaach", R.drawable.chaach_food)
+    object VegLollipop : CategoryPage("Veg Lollipop", R.drawable.veg_lollipop_food)
+    object Sub : CategoryPage("Sub", R.drawable.sub_food)
+    object Pancake : CategoryPage("Pancake", R.drawable.pancake_food)
+    object Nihari : CategoryPage("Nihari", R.drawable.nihari_food)
+    object Tacos : CategoryPage("Tacos", R.drawable.tacos_food)
+    object Thepla : CategoryPage("Thepla", R.drawable.thepla_food)
+    object Fafda : CategoryPage("Fafda", R.drawable.fafda_food)
+    object Chocolate : CategoryPage("Chocolate", R.drawable.chocolate_food)
+    object CurdRice : CategoryPage("Curd Rice", R.drawable.curd_rice_food)
+    object Pudding : CategoryPage("Pudding", R.drawable.pudding_food)
+    object Croissant : CategoryPage("Croissant", R.drawable.croissant_food)
+    object Khandvi : CategoryPage("Khandvi", R.drawable.khandvi_food)
+    object Gajak : CategoryPage("Gajak", R.drawable.gajak_food)
+    object SambarRice : CategoryPage("Sambar Rice", R.drawable.sambar_rice_food)
+    object Tart : CategoryPage("Tart", R.drawable.tart_food)
+    object Tiramisu : CategoryPage("Tiramisu", R.drawable.tiramisu_food)
+    object Pie : CategoryPage("Pie", R.drawable.pie_food)
+    object Custard : CategoryPage("Custard", R.drawable.custard_food)
+    object SevPoori : CategoryPage("Sev Poori", R.drawable.sev_poori_food)
+    object Mousse : CategoryPage("Mousse", R.drawable.mousse_food)
+    object DalKachori : CategoryPage("Dal Kachori", R.drawable.dal_kachori_food)
+    object Jalebi : CategoryPage("Jalebi", R.drawable.jalebi_food)
+    object PyaajKachori : CategoryPage("Pyaaj Kachori", R.drawable.pyaaj_kachori_food)
+    object RajmaRice : CategoryPage("Rajma Rice", R.drawable.rajma_rice_food)
+    object Upma : CategoryPage("Upma", R.drawable.upma_food)
+    object Manchurian : CategoryPage("Manchurian", R.drawable.manchurian_food)
+    object PaneerPakoda : CategoryPage("Paneer Pakoda", R.drawable.paneer_pakoda_food)
+    object Cheesecake : CategoryPage("Cheesecake", R.drawable.cheesecake_food)
+    object Brownie : CategoryPage("Brownie", R.drawable.brownie_food)
+    object Chaap : CategoryPage("Chaap", R.drawable.chaap_food)
+    object Dal : CategoryPage("Dal", R.drawable.dal_food)
+    object Waffles : CategoryPage("Waffles", R.drawable.waffles_food)
+    object AlooKachori : CategoryPage("Aloo Kachori", R.drawable.aloo_kachori_food)
+    object CholeKulche : CategoryPage("Chole Kulche", R.drawable.chole_kulche_food)
+    object Fries : CategoryPage("Fries", R.drawable.fries_food)
+    object ColdCoffee : CategoryPage("Cold Coffee", R.drawable.cold_coffee_food)
+    object Soup : CategoryPage("Soup", R.drawable.soup_food)
+    object Bhurji : CategoryPage("Bhurji", R.drawable.bhurji_food)
+    object KhastaKachori : CategoryPage("Khasta Kachori", R.drawable.khasta_kachori_food)
+    object HotDog : CategoryPage("Hot Dog", R.drawable.hot_dog_food)
+
     object SeeAll : CategoryPage("See All", R.drawable.see_all_food)
 }
 
@@ -99,7 +204,6 @@ data class FoodItem(
     val isVeg: Boolean = true,
     val category: String = "All"
 )
-
 @Composable
 fun CategoryTabsFood(
     navController: NavHostController? = null,
@@ -107,9 +211,7 @@ fun CategoryTabsFood(
     onCategorySelected: (CategoryPage) -> Unit = {},
     onTabIndexChanged: (Int) -> Unit = {}
 ) {
-    // ✅ Use LaunchedEffect to sync with parent state
-//    var currentSelectedIndex by rememberSaveable { mutableIntStateOf(selectedTabIndex) }
-    // 1. Get current value (your existing code)
+    // Get current value
     var currentSelectedIndex by rememberSaveable {
         mutableIntStateOf(
             navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("currentSelectedIndex")
@@ -117,25 +219,32 @@ fun CategoryTabsFood(
         )
     }
 
-// 2. Save changes back to savedStateHandle
+    // Track recently selected tabs from "See All" page
+    var recentlySelectedTabs by rememberSaveable { mutableStateOf(listOf<Int>()) }
+
+    // Save changes back to savedStateHandle
     LaunchedEffect(currentSelectedIndex) {
         navController?.currentBackStackEntry?.savedStateHandle?.set(
             "currentSelectedIndex",
             currentSelectedIndex
         )
     }
+
     Log.d("CategoryTabsFood", "currentSelectedIndex in CategoryTabsFood: $currentSelectedIndex")
+
     val savedDietTabIndex = remember(navController?.currentBackStackEntry) {
         navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("dietTabIndex")
             ?: 0
     }
 
-    // ✅ Update when parent state changes
+    // Update when parent state changes
     LaunchedEffect(selectedTabIndex) {
         currentSelectedIndex = selectedTabIndex
     }
 
-    val categoryPages = listOf(
+    // All category pages
+    // Update this section in CategoryTabsFood function
+    val allCategoryPages = listOf(
         CategoryPage.All,
         CategoryPage.Diet,
         CategoryPage.Pizzas,
@@ -177,8 +286,154 @@ fun CategoryTabsFood(
         CategoryPage.Shake,
         CategoryPage.Samosa,
         CategoryPage.Poori,
-        CategoryPage.SeeAll,
+        CategoryPage.Bowl,
+        CategoryPage.Poha,
+        // Add all new categories
+        CategoryPage.Sweets,
+        CategoryPage.CholePoori,
+        CategoryPage.Khichdi,
+        CategoryPage.ChilliChicken,
+        CategoryPage.Tea,
+        CategoryPage.VadaPav,
+        CategoryPage.MasalaMaggi,
+        CategoryPage.Kulche,
+        CategoryPage.Wings,
+        CategoryPage.AlooPoori,
+        CategoryPage.Omelette,
+        CategoryPage.NonVegMeal,
+        CategoryPage.BreadPakoda,
+        CategoryPage.Coffee,
+        CategoryPage.PooriBhaji,
+        CategoryPage.Pulao,
+        CategoryPage.ChurChurNaan,
+        CategoryPage.Kebabs,
+        CategoryPage.Panipuri,
+        CategoryPage.Rasmalai,
+        CategoryPage.Mutton,
+        CategoryPage.Fish,
+        CategoryPage.Pakoda,
+        CategoryPage.Halwa,
+        CategoryPage.ChopSuey,
+        CategoryPage.Korma,
+        CategoryPage.Namkeen,
+        CategoryPage.Mushrooms,
+        CategoryPage.Keema,
+        CategoryPage.Sundae,
+        CategoryPage.Rasgulla,
+        CategoryPage.ButterChicken,
+        CategoryPage.RajKachori,
+        CategoryPage.Chaat,
+        CategoryPage.Uttapam,
+        CategoryPage.Doughnut,
+        CategoryPage.Juice,
+        CategoryPage.Lassi,
+        CategoryPage.MalaiKofta,
+        CategoryPage.DahiBalle,
+        CategoryPage.Rajma,
+        CategoryPage.ChickenHandi,
+        CategoryPage.Cupcake,
+        CategoryPage.Bhel,
+        CategoryPage.Muffin,
+        CategoryPage.Cookies,
+        CategoryPage.ChickenCha,
+        CategoryPage.PaneerKulche,
+        CategoryPage.Chaach,
+        CategoryPage.VegLollipop,
+        CategoryPage.Sub,
+        CategoryPage.Pancake,
+        CategoryPage.Nihari,
+        CategoryPage.Tacos,
+        CategoryPage.Thepla,
+        CategoryPage.Fafda,
+        CategoryPage.Chocolate,
+        CategoryPage.CurdRice,
+        CategoryPage.Pudding,
+        CategoryPage.Croissant,
+        CategoryPage.Khandvi,
+        CategoryPage.Gajak,
+        CategoryPage.SambarRice,
+        CategoryPage.Tart,
+        CategoryPage.Tiramisu,
+        CategoryPage.Pie,
+        CategoryPage.Custard,
+        CategoryPage.SevPoori,
+        CategoryPage.Mousse,
+        CategoryPage.DalKachori,
+        CategoryPage.Jalebi,
+        CategoryPage.PyaajKachori,
+        CategoryPage.RajmaRice,
+        CategoryPage.Upma,
+        CategoryPage.Manchurian,
+        CategoryPage.PaneerPakoda,
+        CategoryPage.Cheesecake,
+        CategoryPage.Brownie,
+        CategoryPage.Chaap,
+        CategoryPage.Dal,
+        CategoryPage.Waffles,
+        CategoryPage.AlooKachori,
+        CategoryPage.CholeKulche,
+        CategoryPage.Fries,
+        CategoryPage.ColdCoffee,
+        CategoryPage.Soup,
+        CategoryPage.Bhurji,
+        CategoryPage.KhastaKachori,
+        CategoryPage.HotDog,
     )
+
+    // Initial visible tabs (first 19 + recently selected + "See All")
+    val initialVisibleCount = 19
+    val seeAllIndex = initialVisibleCount + recentlySelectedTabs.size
+
+    // Build visible tabs: initial 19 + recently selected + "See All"
+    val visibleTabs = buildList<CategoryPage> {
+        // Add first 19 tabs
+        addAll(allCategoryPages.take(initialVisibleCount))
+
+        // Add recently selected tabs (if any)
+        recentlySelectedTabs.forEach { index ->
+            if (index >= initialVisibleCount) {
+                allCategoryPages.getOrNull(index)?.let { add(it) }
+            }
+        }
+
+        // Add "See All" at the end
+        add(CategoryPage.SeeAll)
+    }
+
+    // Handle back navigation with selected index
+    LaunchedEffect(navController) {
+        navController?.currentBackStackEntry?.savedStateHandle?.getLiveData<Int>("selectedTabFromSeeAll")
+            ?.observeForever { newIndex ->
+                if (newIndex != null) {
+                    // Add to recently selected tabs if not already there
+                    if (newIndex >= initialVisibleCount && newIndex !in recentlySelectedTabs) {
+                        recentlySelectedTabs = recentlySelectedTabs + newIndex
+                    }
+
+                    currentSelectedIndex = newIndex
+                    onTabIndexChanged(newIndex)
+                    onCategorySelected(allCategoryPages[newIndex])
+
+                    // Clear the value to prevent repeated updates
+                    navController.currentBackStackEntry?.savedStateHandle?.remove<Int>("selectedTabFromSeeAll")
+                }
+            }
+    }
+
+    // Find the index in visibleTabs for a given allCategories index
+    fun getVisibleTabIndex(allCategoriesIndex: Int): Int {
+        return when {
+            allCategoriesIndex < initialVisibleCount -> allCategoriesIndex
+            allCategoriesIndex in recentlySelectedTabs -> {
+                // Calculate position in visibleTabs
+                val recentIndex = recentlySelectedTabs.indexOf(allCategoriesIndex)
+                initialVisibleCount + recentIndex
+            }
+            else -> seeAllIndex // "See All" tab
+        }
+    }
+
+    val selectedVisibleIndex = getVisibleTabIndex(currentSelectedIndex)
 
     Column(
         modifier = Modifier
@@ -186,29 +441,54 @@ fun CategoryTabsFood(
             .background(MaterialTheme.customColors.skyBlue)
     ) {
         ScrollableTabRow(
-            selectedTabIndex = currentSelectedIndex,
+            selectedTabIndex = selectedVisibleIndex,
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.customColors.black,
             edgePadding = 0.dp,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[currentSelectedIndex]),
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedVisibleIndex]),
                     height = 5.dp,
                     color = MaterialTheme.customColors.header
                 )
             }
         ) {
-            categoryPages.forEachIndexed { index, categoryPage ->
+            visibleTabs.forEachIndexed { index, categoryPage ->
+                val isSeeAllTab = categoryPage is CategoryPage.SeeAll
+                val allCategoriesIndex = when {
+                    index < initialVisibleCount -> index
+                    isSeeAllTab -> -1
+                    else -> {
+                        // Find which allCategories index this corresponds to
+                        val recentIndex = index - initialVisibleCount
+                        if (recentIndex < recentlySelectedTabs.size) {
+                            recentlySelectedTabs[recentIndex]
+                        } else -1
+                    }
+                }
+
+                val isSelected = currentSelectedIndex == allCategoriesIndex
+
                 Tab(
-                    selected = currentSelectedIndex == index,
+                    selected = isSelected,
                     onClick = {
-                        if (categoryPage is CategoryPage.SeeAll) {
-                            navController?.navigate("category_tabs_f_list/${currentSelectedIndex}")
+                        if (isSeeAllTab) {
+                            // Navigate to the "See All" page
+                            navController?.navigate("category_tabs_f_list_screen") {
+                                // Pass all categories and current index as arguments
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    "allCategories",
+                                    allCategoryPages
+                                )
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    "currentMainTabIndex",
+                                    currentSelectedIndex
+                                )
+                            }
                         } else {
-                            // ✅ Update local state first
-                            currentSelectedIndex = index
-                            // ✅ Then notify parent
-                            onTabIndexChanged(index)
+                            // For regular tabs
+                            currentSelectedIndex = allCategoriesIndex
+                            onTabIndexChanged(allCategoriesIndex)
                             onCategorySelected(categoryPage)
                         }
                     },
@@ -232,8 +512,8 @@ fun CategoryTabsFood(
                         Text(
                             text = categoryPage.title,
                             fontSize = 15.sp,
-                            fontWeight = if (currentSelectedIndex == index) FontWeight.Bold else FontWeight.Medium,
-                            color = if (currentSelectedIndex == index) {
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                            color = if (isSelected) {
                                 MaterialTheme.customColors.header
                             } else {
                                 MaterialTheme.customColors.black
@@ -243,6 +523,17 @@ fun CategoryTabsFood(
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier.padding(top = 4.dp)
                         )
+
+                        // Show a small indicator for recently added tabs
+                        if (!isSeeAllTab && allCategoriesIndex >= initialVisibleCount) {
+                            Box(
+                                modifier = Modifier
+                                    .padding(top = 2.dp)
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(MaterialTheme.customColors.header.copy(alpha = 0.6f))
+                            )
+                        }
                     }
                 }
             }
@@ -261,70 +552,179 @@ fun CategoryTabsFood(
                     )
                 )
         ) {
-            when (currentSelectedIndex) {
-                0 -> AllCategoryPage()
-                1 -> {
-                    // ✅ Get saved diet tab index from savedStateHandle
-//                    val savedDietTabIndex = remember(navController?.currentBackStackEntry) {
-//                        navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("dietTabIndex")
-//                            ?: 0
-//                    }
+            // Get the actual category based on currentSelectedIndex
+            val actualCategory = allCategoryPages.getOrNull(currentSelectedIndex)
 
+            // Show content based on the actual category
+            when (actualCategory) {
+                CategoryPage.All -> AllCategoryPage()
+                CategoryPage.Diet -> {
                     DietCategoryPage(
                         navController = navController,
-                        currentSelectedIndex  = currentSelectedIndex,
+                        currentSelectedIndex = currentSelectedIndex,
                         initialDietTabIndex = savedDietTabIndex
                     )
                 }
-//                1 -> DietCategoryPage(
-//                    navController = navController,
-//                    // ✅ Pass the saved diet tab index
-//                    initialDietTabIndex = rememberSaveable { mutableIntStateOf(0) }.intValue
-//                )
-                2 -> PizzasCategoryPage()
-                3 -> CakesCategoryPage()
-                4 -> MomosCategoryPage()
-                5 -> RollsCategoryPage()
-                6 -> BurgersCategoryPage()
-                7 -> CholeBhatureCategoryPage()
-                8 -> SaladCategoryPage()
-                9 -> PattyCategoryPage()
-                10 -> ChineseCategoryPage()
-                11 -> IceCreamCategoryPage()
-                12 -> AppamCategoryPage()
-                13 -> BathCategoryPage()
-                14 -> BondaCategoryPage()
-                15 -> CutletCategoryPage()
-                16 -> DessertCategoryPage()
-                17 -> DhoklaCategoryPage()
-                18 -> DosaCategoryPage()
-                19 -> DholdaCategoryPage()
-                20 -> GulabJamunCategoryPage()
-                21 -> IdliCategoryPage()
-                22 -> BiryaniCategoryPage()
-                23 -> ThaliCategoryPage()
-                24 -> ChickenCategoryPage()
-                25 -> VegMealCategoryPage()
-                26 -> NorthIndianCategoryPage()
-                27 -> PaneerCategoryPage()
-                28 -> FriedRiceCategoryPage()
-                29 -> NoodlesCategoryPage()
-                30 -> ParathaCategoryPage()
-                31 -> ShawarmaCategoryPage()
-                32 -> SouthIndianCategoryPage()
-                33 -> AlooTikkiCategoryPage()
-                34 -> PastaCategoryPage()
-                35 -> PastryCategoryPage()
-                36 -> PavBhajiCategoryPage()
-                37 -> SandwichCategoryPage()
-                38 -> ShakeCategoryPage()
-                39 -> SamosaCategoryPage()
-                40 -> PooriCategoryPage()
+                CategoryPage.Pizzas -> PizzasCategoryPage()
+                CategoryPage.Cakes -> CakesCategoryPage()
+                CategoryPage.Momos -> MomosCategoryPage()
+                CategoryPage.Rolls -> RollsCategoryPage()
+                CategoryPage.Burgers -> BurgersCategoryPage()
+                CategoryPage.CholeBhature -> CholeBhatureCategoryPage()
+                CategoryPage.Salad -> SaladCategoryPage()
+                CategoryPage.Patty -> PattyCategoryPage()
+                CategoryPage.Chinese -> ChineseCategoryPage()
+                CategoryPage.IceCream -> IceCreamCategoryPage()
+                CategoryPage.Appam -> AppamCategoryPage()
+                CategoryPage.Bath -> BathCategoryPage()
+                CategoryPage.Bonda -> BondaCategoryPage()
+                CategoryPage.Cutlet -> CutletCategoryPage()
+                CategoryPage.Dessert -> DessertCategoryPage()
+                CategoryPage.Dhokla -> DhoklaCategoryPage()
+                CategoryPage.Dosa -> DosaCategoryPage()
+                CategoryPage.Dholda -> DholdaCategoryPage()
+                CategoryPage.GulabJamun -> GulabJamunCategoryPage()
+                CategoryPage.Idli -> IdliCategoryPage()
+                CategoryPage.Biryani -> BiryaniCategoryPage()
+                CategoryPage.Thali -> ThaliCategoryPage()
+                CategoryPage.Chicken -> ChickenCategoryPage()
+                CategoryPage.VegMeal -> VegMealCategoryPage()
+                CategoryPage.NorthIndian -> NorthIndianCategoryPage()
+                CategoryPage.Paneer -> PaneerCategoryPage()
+                CategoryPage.FriedRice -> FriedRiceCategoryPage()
+                CategoryPage.Noodles -> NoodlesCategoryPage()
+                CategoryPage.Paratha -> ParathaCategoryPage()
+                CategoryPage.Shawarma -> ShawarmaCategoryPage()
+                CategoryPage.SouthIndian -> SouthIndianCategoryPage()
+                CategoryPage.AlooTikki -> AlooTikkiCategoryPage()
+                CategoryPage.Pasta -> PastaCategoryPage()
+                CategoryPage.Pastry -> PastryCategoryPage()
+                CategoryPage.PavBhaji -> PavBhajiCategoryPage()
+                CategoryPage.Sandwich -> SandwichCategoryPage()
+                CategoryPage.Shake -> ShakeCategoryPage()
+                CategoryPage.Samosa -> SamosaCategoryPage()
+                CategoryPage.Poori -> PooriCategoryPage()
+                CategoryPage.Bowl -> BowlCategoryPage()
+                CategoryPage.Poha -> PohaCategoryPage()
+                CategoryPage.Sweets -> SweetsCategoryPage()
+                CategoryPage.CholePoori -> CholePooriCategoryPage()
+                CategoryPage.Khichdi -> KhichdiCategoryPage()
+                CategoryPage.ChilliChicken -> ChilliChickenCategoryPage()
+                CategoryPage.Tea -> TeaCategoryPage()
+                CategoryPage.VadaPav -> VadaPavCategoryPage()
+                CategoryPage.MasalaMaggi -> MasalaMaggiCategoryPage()
+                CategoryPage.Kulche -> KulcheCategoryPage()
+                CategoryPage.Wings -> WingsCategoryPage()
+                CategoryPage.AlooPoori -> AlooPooriCategoryPage()
+                CategoryPage.Omelette -> OmeletteCategoryPage()
+                CategoryPage.NonVegMeal -> NonVegMealCategoryPage()
+                CategoryPage.BreadPakoda -> BreadPakodaCategoryPage()
+                CategoryPage.Coffee -> CoffeeCategoryPage()
+                CategoryPage.PooriBhaji -> PooriBhajiCategoryPage()
+                CategoryPage.Pulao -> PulaoCategoryPage()
+                CategoryPage.ChurChurNaan -> ChurChurNaanCategoryPage()
+                CategoryPage.Kebabs -> KebabsCategoryPage()
+                CategoryPage.Panipuri -> PanipuriCategoryPage()
+                CategoryPage.Rasmalai -> RasmalaiCategoryPage()
+                CategoryPage.Mutton -> MuttonCategoryPage()
+                CategoryPage.Fish -> FishCategoryPage()
+                CategoryPage.Pakoda -> PakodaCategoryPage()
+                CategoryPage.Halwa -> HalwaCategoryPage()
+                CategoryPage.ChopSuey -> ChopSueyCategoryPage()
+                CategoryPage.Korma -> KormaCategoryPage()
+                CategoryPage.Namkeen -> NamkeenCategoryPage()
+                CategoryPage.Mushrooms -> MushroomsCategoryPage()
+                CategoryPage.Keema -> KeemaCategoryPage()
+                CategoryPage.Sundae -> SundaeCategoryPage()
+                CategoryPage.Rasgulla -> RasgullaCategoryPage()
+                CategoryPage.ButterChicken -> ButterChickenCategoryPage()
+                CategoryPage.RajKachori -> RajKachoriCategoryPage()
+                CategoryPage.Chaat -> ChaatCategoryPage()
+                CategoryPage.Uttapam -> UttapamCategoryPage()
+                CategoryPage.Doughnut -> DoughnutCategoryPage()
+                CategoryPage.Juice -> JuiceCategoryPage()
+                CategoryPage.Lassi -> LassiCategoryPage()
+                CategoryPage.MalaiKofta -> MalaiKoftaCategoryPage()
+                CategoryPage.DahiBalle -> DahiBalleCategoryPage()
+                CategoryPage.Rajma -> RajmaCategoryPage()
+                CategoryPage.ChickenHandi -> ChickenHandiCategoryPage()
+                CategoryPage.Cupcake -> CupcakeCategoryPage()
+                CategoryPage.Bhel -> BhelCategoryPage()
+                CategoryPage.Muffin -> MuffinCategoryPage()
+                CategoryPage.Cookies -> CookiesCategoryPage()
+                CategoryPage.ChickenCha -> ChickenChaCategoryPage()
+                CategoryPage.PaneerKulche -> PaneerKulcheCategoryPage()
+                CategoryPage.Chaach -> ChaachCategoryPage()
+                CategoryPage.VegLollipop -> VegLollipopCategoryPage()
+                CategoryPage.Sub -> SubCategoryPage()
+                CategoryPage.Pancake -> PancakeCategoryPage()
+                CategoryPage.Nihari -> NihariCategoryPage()
+                CategoryPage.Tacos -> TacosCategoryPage()
+                CategoryPage.Thepla -> TheplaCategoryPage()
+                CategoryPage.Fafda -> FafdaCategoryPage()
+                CategoryPage.Chocolate -> ChocolateCategoryPage()
+                CategoryPage.CurdRice -> CurdRiceCategoryPage()
+                CategoryPage.Pudding -> PuddingCategoryPage()
+                CategoryPage.Croissant -> CroissantCategoryPage()
+                CategoryPage.Khandvi -> KhandviCategoryPage()
+                CategoryPage.Gajak -> GajakCategoryPage()
+                CategoryPage.SambarRice -> SambarRiceCategoryPage()
+                CategoryPage.Tart -> TartCategoryPage()
+                CategoryPage.Tiramisu -> TiramisuCategoryPage()
+                CategoryPage.Pie -> PieCategoryPage()
+                CategoryPage.Custard -> CustardCategoryPage()
+                CategoryPage.SevPoori -> SevPooriCategoryPage()
+                CategoryPage.Mousse -> MousseCategoryPage()
+                CategoryPage.DalKachori -> DalKachoriCategoryPage()
+                CategoryPage.Jalebi -> JalebiCategoryPage()
+                CategoryPage.PyaajKachori -> PyaajKachoriCategoryPage()
+                CategoryPage.RajmaRice -> RajmaRiceCategoryPage()
+                CategoryPage.Upma -> UpmaCategoryPage()
+                CategoryPage.Manchurian -> ManchurianCategoryPage()
+                CategoryPage.PaneerPakoda -> PaneerPakodaCategoryPage()
+                CategoryPage.Cheesecake -> CheesecakeCategoryPage()
+                CategoryPage.Brownie -> BrownieCategoryPage()
+                CategoryPage.Chaap -> ChaapCategoryPage()
+                CategoryPage.Dal -> DalCategoryPage()
+                CategoryPage.Waffles -> WafflesCategoryPage()
+                CategoryPage.AlooKachori -> AlooKachoriCategoryPage()
+                CategoryPage.CholeKulche -> CholeKulcheCategoryPage()
+                CategoryPage.Fries -> FriesCategoryPage()
+                CategoryPage.ColdCoffee -> ColdCoffeeCategoryPage()
+                CategoryPage.Soup -> SoupCategoryPage()
+                CategoryPage.Bhurji -> BhurjiCategoryPage()
+                CategoryPage.KhastaKachori -> KhastaKachoriCategoryPage()
+                CategoryPage.HotDog -> HotDogCategoryPage()
+                null -> {
+                    // Show empty state for "See All" tab or invalid index
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Select a category",
+                            color = MaterialTheme.customColors.gray,
+                            fontSize = 16.sp
+                        )
+                    }
+                }
                 else -> AllCategoryPage()
             }
         }
     }
 }
+
+// Add this to your navigation graph:
+// composable("category_tabs_f_list") {
+//     CategoryTabsFullListScreen(
+//         navController = navController,
+//         onCategorySelected = { category, index ->
+//             // Handle category selection from "See All" page
+//         }
+//     )
+// }
 @Composable
 fun DietCategoryPage(
     onBanner1Click: () -> Unit = {},
@@ -2139,7 +2539,6 @@ fun PizzasCategoryPage() {
             }
         }
     }
-
 
 @Composable
 fun CakesCategoryPage() {
@@ -23842,7 +24241,1718 @@ fun PooriCategoryPage() {
         }
     }
 }
+@Composable
+fun BowlCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
 
+        // Filter Button
+        val bowlFoodFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // BOWL TYPE (with icons for popular bowl types)
+                FilterChip(
+                    id = "buddha_bowl",
+                    text = "Buddha Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bowl
+                ),
+                FilterChip(
+                    id = "grain_bowl",
+                    text = "Grain Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_grains
+                ),
+                FilterChip(
+                    id = "poke_bowl",
+                    text = "Poke Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fish
+                ),
+                FilterChip(
+                    id = "salad_bowl",
+                    text = "Salad Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "warm_bowl",
+                    text = "Warm Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PROTEIN SOURCE (with icons for protein types)
+                FilterChip(
+                    id = "chicken",
+                    text = "Chicken",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken
+                ),
+                FilterChip(
+                    id = "tofu",
+                    text = "Tofu",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tofu
+                ),
+                FilterChip(
+                    id = "beans",
+                    text = "Beans/Legumes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "falafel",
+                    text = "Falafel",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BASE/GRAINS (with icons for main grains)
+                FilterChip(
+                    id = "couscous",
+                    text = "Couscous",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cauliflower_rice",
+                    text = "Cauliflower Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUISINE STYLE (with icons for popular cuisines)
+                FilterChip(
+                    id = "indian",
+                    text = "Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "middle_eastern",
+                    text = "Middle Eastern",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY (with icons for dietary restrictions)
+                FilterChip(
+                    id = "keto",
+                    text = "Keto",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SAUCE/DRESSING (text-only)
+                FilterChip(
+                    id = "tahini",
+                    text = "Tahini Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_sesame",
+                    text = "Ginger Sesame",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chipotle",
+                    text = "Chipotle Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yuzu",
+                    text = "Yuzu Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE (with icon)
+                FilterChip(
+                    id = "served_cold",
+                    text = "Served Cold",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (with icons for popular toppings)
+                FilterChip(
+                    id = "pickled_veg",
+                    text = "Pickled Vegetables",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nuts_seeds",
+                    text = "Nuts & Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE (text-only)
+                FilterChip(
+                    id = "regular",
+                    text = "Regular",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large",
+                    text = "Large",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_bowl",
+                    text = "Mini Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL FEATURES (text-only)
+                FilterChip(
+                    id = "meal_prep",
+                    text = "Meal Prep Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "build_your_own",
+                    text = "Build Your Own",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chef_special",
+                    text = "Chef's Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = bowlFoodFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val bowlFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.bowl_buddha_1,
+                title = "Rainbow Buddha Bowl",
+                price = "₹380",
+                restaurantName = "Greenr Cafe",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹57",
+                address = "Khan Market, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.bowl_poke_2,
+                title = "Hawaiian Poke Bowl",
+                price = "₹450",
+                restaurantName = "Ocean's Bounty",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "2.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹45",
+                address = "Bandra West, Mumbai",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.bowl_mediterranean_3,
+                title = "Mediterranean Grain Bowl",
+                price = "₹350",
+                restaurantName = "Olive Tree",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹70",
+                address = "Jubilee Hills, Hyderabad",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.bowl_mexican_4,
+                title = "Mexican Fiesta Bowl",
+                price = "₹320",
+                restaurantName = "Amigos Cantina",
+                rating = "4.6",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹80",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.bowl_asian_5,
+                title = "Asian Tofu Bowl",
+                price = "₹280",
+                restaurantName = "Zen Garden",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.0 km",
+                discount = "18%",
+                discountAmount = "up to ₹50",
+                address = "Koregaon Park, Pune",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.bowl_keto_6,
+                title = "Keto Power Bowl",
+                price = "₹420",
+                restaurantName = "Fit Kitchen",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹126",
+                address = "Gurgaon Sector 29",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = bowlFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val bowlFoodItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.bowl_1,
+                title = "Rainbow Buddha Bowl",
+                price = "₹380",
+                restaurantName = "Greenr Cafe",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹57",
+                address = "Khan Market, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.bowl_2,
+                title = "Hawaiian Poke Bowl",
+                price = "₹450",
+                restaurantName = "Ocean's Bounty",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "2.2 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹45",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.bowl_3,
+                title = "Mediterranean Grain Bowl",
+                price = "₹350",
+                restaurantName = "Olive Tree",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹70",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.bowl_4,
+                title = "Mexican Fiesta Bowl",
+                price = "₹320",
+                restaurantName = "Amigos Cantina",
+                rating = "4.6",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.bowl_5,
+                title = "Asian Tofu Power Bowl",
+                price = "₹280",
+                restaurantName = "Zen Garden",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹50",
+                address = "Koregaon Park, Pune"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.bowl_6,
+                title = "Keto Power Bowl",
+                price = "₹420",
+                restaurantName = "Fit Kitchen",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "0.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹126",
+                address = "Gurgaon Sector 29"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.bowl_7,
+                title = "Thai Green Curry Bowl",
+                price = "₹360",
+                restaurantName = "Bangkok Street",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹54",
+                address = "GK-1, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.bowl_8,
+                title = "Korean Bibimbap Bowl",
+                price = "₹390",
+                restaurantName = "Seoul Kitchen",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹78",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.bowl_9,
+                title = "Protein Power Chicken Bowl",
+                price = "₹340",
+                restaurantName = "Muscle Maker",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹85",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.bowl_10,
+                title = "Vegan Harvest Bowl",
+                price = "₹310",
+                restaurantName = "Plant Paradise",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹31",
+                address = "JP Nagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.bowl_11,
+                title = "Japanese Donburi Bowl",
+                price = "₹410",
+                restaurantName = "Tokyo Express",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.7 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹74",
+                address = "Salt Lake, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.bowl_12,
+                title = "Middle Eastern Falafel Bowl",
+                price = "₹290",
+                restaurantName = "Arabian Nights",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹58",
+                address = "Banjara Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.bowl_13,
+                title = "Breakfast Acai Bowl",
+                price = "₹270",
+                restaurantName = "Morning Glory",
+                rating = "4.6",
+                deliveryTime = "10-20 mins",
+                distance = "0.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹41",
+                address = "Viman Nagar, Pune"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.bowl_14,
+                title = "Chef's Special Seafood Bowl",
+                price = "₹480",
+                restaurantName = "Coastal Delights",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹144",
+                address = "Marine Drive, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.bowl_15,
+                title = "Gluten-Free Quinoa Bowl",
+                price = "₹330",
+                restaurantName = "Health Hub",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹83",
+                address = "Bandra Kurla Complex"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.bowl_16,
+                title = "Spicy Korean Gochujang Bowl",
+                price = "₹370",
+                restaurantName = "Kimchi House",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹74",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.bowl_17,
+                title = "Teriyaki Salmon Bowl",
+                price = "₹440",
+                restaurantName = "Pacific Rim",
+                rating = "4.9",
+                deliveryTime = "30-40 mins",
+                distance = "2.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹66",
+                address = "Hitech City, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.bowl_18,
+                title = "Family Feast Bowl Platter",
+                price = "₹650",
+                restaurantName = "Bowl & Roll",
+                rating = "4.7",
+                deliveryTime = "40-50 mins",
+                distance = "2.5 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹228",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.bowl_19,
+                title = "Paleo Power Bowl",
+                price = "₹400",
+                restaurantName = "Caveman Kitchen",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹80",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.bowl_20,
+                title = "Fusion Indo-Asian Bowl",
+                price = "₹350",
+                restaurantName = "Spice Route",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹35",
+                address = "Connaught Place, Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
+}
+@Composable
+fun PohaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val pohaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // POHA TYPE (with icons for popular varieties)
+                FilterChip(
+                    id = "indori_poha",
+                    text = "Indori Poha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spices_poha
+                ),
+                FilterChip(
+                    id = "kanda_poha",
+                    text = "Kanda Poha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_onion
+                ),
+                FilterChip(
+                    id = "batata_poha",
+                    text = "Batata Poha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_poha
+                ),
+                FilterChip(
+                    id = "nagpur_poha",
+                    text = "Nagpur Poha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maharashtrian_poha",
+                    text = "Maharashtrian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOAST LEVEL (with icons for crispiness)
+                FilterChip(
+                    id = "soft_poha",
+                    text = "Soft Texture",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_soft
+                ),
+                FilterChip(
+                    id = "crispy_poha",
+                    text = "Crispy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_crispy
+                ),
+                FilterChip(
+                    id = "medium_roast",
+                    text = "Medium Roast",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS & ADDITIONS (with icons for popular toppings)
+                FilterChip(
+                    id = "with_lemon",
+                    text = "With Lemon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_coriander",
+                    text = "With Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for spice)
+                FilterChip(
+                    id = "medium_spicy",
+                    text = "Medium Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icons for sides)
+                FilterChip(
+                    id = "with_chai",
+                    text = "With Chai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_coffee",
+                    text = "With Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TYPE (with icon for breakfast)
+                FilterChip(
+                    id = "evening_snack",
+                    text = "Evening Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // POHA VARIETIES (with icons for special varieties)
+                FilterChip(
+                    id = "kolkata_poha",
+                    text = "Kolkata Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "upwas_poha",
+                    text = "Upwas Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH OPTIONS (text-only)
+                FilterChip(
+                    id = "low_oil",
+                    text = "Low Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE
+                FilterChip(
+                    id = "warm",
+                    text = "Warm",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE (text-only)
+                FilterChip(
+                    id = "single_serve",
+                    text = "Single Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jumbo_serve",
+                    text = "Jumbo Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL SPECIALS (with icon for popular regional)
+                FilterChip(
+                    id = "gujarati_style",
+                    text = "Gujarati Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "south_indian",
+                    text = "South Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL FEATURES (text-only)
+                FilterChip(
+                    id = "street_style",
+                    text = "Street Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "home_style",
+                    text = "Home Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quick_serve",
+                    text = "Quick Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = pohaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val pohaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.poha_indori_1,
+                title = "Indori Poha with Jalebi",
+                price = "₹80",
+                restaurantName = "Indore Bazaar",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹16",
+                address = "Sarafa Bazaar, Indore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.poha_kanda_2,
+                title = "Kanda Batata Poha",
+                price = "₹75",
+                restaurantName = "Maharashtra Snacks",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹11",
+                address = "Shivaji Park, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.poha_nagpur_3,
+                title = "Nagpur Special Poha",
+                price = "₹85",
+                restaurantName = "Orange City Foods",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹9",
+                address = "Sitabuldi, Nagpur"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.poha_matar_4,
+                title = "Matar Poha with Sev",
+                price = "₹90",
+                restaurantName = "Uttar Pradesh Bhojnalaya",
+                rating = "4.6",
+                deliveryTime = "10-20 mins",
+                distance = "0.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹23",
+                address = "Hazratganj, Lucknow"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.poha_dahi_5,
+                title = "Dahi Poha - Breakfast Special",
+                price = "₹95",
+                restaurantName = "Madhya Pradesh Dhaba",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "18%",
+                discountAmount = "up to ₹17",
+                address = "New Market, Bhopal"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.poha_upwas_6,
+                title = "Upwas Special Poha",
+                price = "₹100",
+                restaurantName = "Shree Krishna Snacks",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹20",
+                address = "Dadar, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pohaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val pohaItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.poha_1,
+                title = "Indori Poha with Jalebi",
+                price = "₹80",
+                restaurantName = "Indore Bazaar",
+                rating = "4.7",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹16",
+                address = "Sarafa Bazaar, Indore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.poha_2,
+                title = "Kanda Batata Poha",
+                price = "₹75",
+                restaurantName = "Maharashtra Snacks",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹11",
+                address = "Shivaji Park, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.poha_3,
+                title = "Nagpur Special Poha",
+                price = "₹85",
+                restaurantName = "Orange City Foods",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹9",
+                address = "Sitabuldi, Nagpur"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.poha_4,
+                title = "Matar Poha with Sev",
+                price = "₹90",
+                restaurantName = "Uttar Pradesh Bhojnalaya",
+                rating = "4.6",
+                deliveryTime = "10-20 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹23",
+                address = "Hazratganj, Lucknow"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.poha_5,
+                title = "Dahi Poha - Breakfast Special",
+                price = "₹95",
+                restaurantName = "Madhya Pradesh Dhaba",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹17",
+                address = "New Market, Bhopal"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.poha_6,
+                title = "Upwas Special Poha",
+                price = "₹100",
+                restaurantName = "Shree Krishna Snacks",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹20",
+                address = "Dadar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.poha_7,
+                title = "Bombay Street Style Poha",
+                price = "₹85",
+                restaurantName = "Bombay Sandwich House",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹13",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.poha_8,
+                title = "Kolkata Poha with Aloo",
+                price = "₹88",
+                restaurantName = "Bengali Breakfast Hub",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "2.2 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹9",
+                address = "Park Street, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.poha_9,
+                title = "Gujarati Style Poha",
+                price = "₹82",
+                restaurantName = "Gujarat Ni Rasoi",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹16",
+                address = "Law Garden, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.poha_10,
+                title = "Spicy Kolhapuri Poha",
+                price = "₹95",
+                restaurantName = "Kolhapur Tadka",
+                rating = "4.9",
+                deliveryTime = "15-25 mins",
+                distance = "1.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹24",
+                address = "Rajaram Road, Kolhapur"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.poha_11,
+                title = "Goan Coconut Poha",
+                price = "₹98",
+                restaurantName = "Goan Delights",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹15",
+                address = "Calangute, Goa"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.poha_12,
+                title = "Punjabi Poha with Aloo",
+                price = "₹92",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹17",
+                address = "Model Town, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.poha_13,
+                title = "Low Oil Healthy Poha",
+                price = "₹105",
+                restaurantName = "Health Cafe",
+                rating = "4.4",
+                deliveryTime = "10-20 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹21",
+                address = "Koregaon Park, Pune"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.poha_14,
+                title = "Chef Special Masala Poha",
+                price = "₹110",
+                restaurantName = "Royal Snacks",
+                rating = "4.7",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹28",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.poha_15,
+                title = "Organic Red Poha",
+                price = "₹120",
+                restaurantName = "Organic Kitchen",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹12",
+                address = "Hitech City, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.poha_16,
+                title = "Family Pack Poha Platter",
+                price = "₹250",
+                restaurantName = "Maharashtra Lunch Home",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Fort, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.poha_17,
+                title = "Rajasthani Pyaaz Poha",
+                price = "₹88",
+                restaurantName = "Rajasthan Bhojanalaya",
+                rating = "4.8",
+                deliveryTime = "40-50 mins",
+                distance = "3.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹13",
+                address = "MI Road, Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.poha_18,
+                title = "South Indian Avalakki",
+                price = "₹78",
+                restaurantName = "Udupi Sagar",
+                rating = "4.6",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹23",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.poha_19,
+                title = "Breakfast Combo Poha",
+                price = "₹150",
+                restaurantName = "Morning Delight",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.poha_20,
+                title = "Festival Special Poha",
+                price = "₹125",
+                restaurantName = "Traditional Foods",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.7 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹13",
+                address = "Mylapore, Chennai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
+}
+
+// All Category Page Composables
+
+@Composable
+fun SweetsCategoryPage() {
+    CategoryContentPage("Sweets")
+}
+
+@Composable
+fun CholePooriCategoryPage() {
+    CategoryContentPage("Chole Poori")
+}
+
+@Composable
+fun KhichdiCategoryPage() {
+    CategoryContentPage("Khichdi")
+}
+
+@Composable
+fun ChilliChickenCategoryPage() {
+    CategoryContentPage("Chilli Chicken")
+}
+
+@Composable
+fun TeaCategoryPage() {
+    CategoryContentPage("Tea")
+}
+
+@Composable
+fun VadaPavCategoryPage() {
+    CategoryContentPage("Vada Pav")
+}
+
+@Composable
+fun MasalaMaggiCategoryPage() {
+    CategoryContentPage("Masala Maggi")
+}
+
+@Composable
+fun KulcheCategoryPage() {
+    CategoryContentPage("Kulche")
+}
+
+@Composable
+fun WingsCategoryPage() {
+    CategoryContentPage("Wings")
+}
+
+@Composable
+fun AlooPooriCategoryPage() {
+    CategoryContentPage("Aloo Poori")
+}
+
+@Composable
+fun OmeletteCategoryPage() {
+    CategoryContentPage("Omelette")
+}
+
+@Composable
+fun NonVegMealCategoryPage() {
+    CategoryContentPage("Non Veg Meal")
+}
+
+@Composable
+fun BreadPakodaCategoryPage() {
+    CategoryContentPage("Bread Pakoda")
+}
+
+@Composable
+fun CoffeeCategoryPage() {
+    CategoryContentPage("Coffee")
+}
+
+@Composable
+fun PooriBhajiCategoryPage() {
+    CategoryContentPage("Poori Bhaji")
+}
+
+@Composable
+fun PulaoCategoryPage() {
+    CategoryContentPage("Pulao")
+}
+
+@Composable
+fun ChurChurNaanCategoryPage() {
+    CategoryContentPage("Chur Chur Naan")
+}
+
+@Composable
+fun KebabsCategoryPage() {
+    CategoryContentPage("Kebabs")
+}
+
+@Composable
+fun PanipuriCategoryPage() {
+    CategoryContentPage("Panipuri")
+}
+
+@Composable
+fun RasmalaiCategoryPage() {
+    CategoryContentPage("Rasmalai")
+}
+
+@Composable
+fun MuttonCategoryPage() {
+    CategoryContentPage("Mutton")
+}
+
+@Composable
+fun FishCategoryPage() {
+    CategoryContentPage("Fish")
+}
+
+@Composable
+fun PakodaCategoryPage() {
+    CategoryContentPage("Pakoda")
+}
+
+@Composable
+fun HalwaCategoryPage() {
+    CategoryContentPage("Halwa")
+}
+
+@Composable
+fun ChopSueyCategoryPage() {
+    CategoryContentPage("Chop Suey")
+}
+
+@Composable
+fun KormaCategoryPage() {
+    CategoryContentPage("Korma")
+}
+
+@Composable
+fun NamkeenCategoryPage() {
+    CategoryContentPage("Namkeen")
+}
+
+@Composable
+fun MushroomsCategoryPage() {
+    CategoryContentPage("Mushrooms")
+}
+
+@Composable
+fun KeemaCategoryPage() {
+    CategoryContentPage("Keema")
+}
+
+@Composable
+fun SundaeCategoryPage() {
+    CategoryContentPage("Sundae")
+}
+
+@Composable
+fun RasgullaCategoryPage() {
+    CategoryContentPage("Rasgulla")
+}
+
+@Composable
+fun ButterChickenCategoryPage() {
+    CategoryContentPage("Butter Chicken")
+}
+
+@Composable
+fun RajKachoriCategoryPage() {
+    CategoryContentPage("Raj Kachori")
+}
+
+@Composable
+fun ChaatCategoryPage() {
+    CategoryContentPage("Chaat")
+}
+
+@Composable
+fun UttapamCategoryPage() {
+    CategoryContentPage("Uttapam")
+}
+
+@Composable
+fun DoughnutCategoryPage() {
+    CategoryContentPage("Doughnut")
+}
+
+@Composable
+fun JuiceCategoryPage() {
+    CategoryContentPage("Juice")
+}
+
+@Composable
+fun LassiCategoryPage() {
+    CategoryContentPage("Lassi")
+}
+
+@Composable
+fun MalaiKoftaCategoryPage() {
+    CategoryContentPage("Malai Kofta")
+}
+
+@Composable
+fun DahiBalleCategoryPage() {
+    CategoryContentPage("Dahi Balle")
+}
+
+@Composable
+fun RajmaCategoryPage() {
+    CategoryContentPage("Rajma")
+}
+
+@Composable
+fun ChickenHandiCategoryPage() {
+    CategoryContentPage("Chicken Handi")
+}
+
+@Composable
+fun CupcakeCategoryPage() {
+    CategoryContentPage("Cupcake")
+}
+
+@Composable
+fun BhelCategoryPage() {
+    CategoryContentPage("Bhel")
+}
+
+@Composable
+fun MuffinCategoryPage() {
+    CategoryContentPage("Muffin")
+}
+
+@Composable
+fun CookiesCategoryPage() {
+    CategoryContentPage("Cookies")
+}
+
+@Composable
+fun ChickenChaCategoryPage() {
+    CategoryContentPage("Chicken Cha")
+}
+
+@Composable
+fun PaneerKulcheCategoryPage() {
+    CategoryContentPage("Paneer Kulche")
+}
+
+@Composable
+fun ChaachCategoryPage() {
+    CategoryContentPage("Chaach")
+}
+
+@Composable
+fun VegLollipopCategoryPage() {
+    CategoryContentPage("Veg Lollipop")
+}
+
+@Composable
+fun SubCategoryPage() {
+    CategoryContentPage("Sub")
+}
+
+@Composable
+fun PancakeCategoryPage() {
+    CategoryContentPage("Pancake")
+}
+
+@Composable
+fun NihariCategoryPage() {
+    CategoryContentPage("Nihari")
+}
+
+@Composable
+fun TacosCategoryPage() {
+    CategoryContentPage("Tacos")
+}
+
+@Composable
+fun TheplaCategoryPage() {
+    CategoryContentPage("Thepla")
+}
+
+@Composable
+fun FafdaCategoryPage() {
+    CategoryContentPage("Fafda")
+}
+
+@Composable
+fun ChocolateCategoryPage() {
+    CategoryContentPage("Chocolate")
+}
+
+@Composable
+fun CurdRiceCategoryPage() {
+    CategoryContentPage("Curd Rice")
+}
+
+@Composable
+fun PuddingCategoryPage() {
+    CategoryContentPage("Pudding")
+}
+
+@Composable
+fun CroissantCategoryPage() {
+    CategoryContentPage("Croissant")
+}
+
+@Composable
+fun KhandviCategoryPage() {
+    CategoryContentPage("Khandvi")
+}
+
+@Composable
+fun GajakCategoryPage() {
+    CategoryContentPage("Gajak")
+}
+
+@Composable
+fun SambarRiceCategoryPage() {
+    CategoryContentPage("Sambar Rice")
+}
+
+@Composable
+fun TartCategoryPage() {
+    CategoryContentPage("Tart")
+}
+
+@Composable
+fun TiramisuCategoryPage() {
+    CategoryContentPage("Tiramisu")
+}
+
+@Composable
+fun PieCategoryPage() {
+    CategoryContentPage("Pie")
+}
+
+@Composable
+fun CustardCategoryPage() {
+    CategoryContentPage("Custard")
+}
+
+@Composable
+fun SevPooriCategoryPage() {
+    CategoryContentPage("Sev Poori")
+}
+
+@Composable
+fun MousseCategoryPage() {
+    CategoryContentPage("Mousse")
+}
+
+@Composable
+fun DalKachoriCategoryPage() {
+    CategoryContentPage("Dal Kachori")
+}
+
+@Composable
+fun JalebiCategoryPage() {
+    CategoryContentPage("Jalebi")
+}
+
+@Composable
+fun PyaajKachoriCategoryPage() {
+    CategoryContentPage("Pyaaj Kachori")
+}
+
+@Composable
+fun RajmaRiceCategoryPage() {
+    CategoryContentPage("Rajma Rice")
+}
+
+@Composable
+fun UpmaCategoryPage() {
+    CategoryContentPage("Upma")
+}
+
+@Composable
+fun ManchurianCategoryPage() {
+    CategoryContentPage("Manchurian")
+}
+
+@Composable
+fun PaneerPakodaCategoryPage() {
+    CategoryContentPage("Paneer Pakoda")
+}
+
+@Composable
+fun CheesecakeCategoryPage() {
+    CategoryContentPage("Cheesecake")
+}
+
+@Composable
+fun BrownieCategoryPage() {
+    CategoryContentPage("Brownie")
+}
+
+@Composable
+fun ChaapCategoryPage() {
+    CategoryContentPage("Chaap")
+}
+
+@Composable
+fun DalCategoryPage() {
+    CategoryContentPage("Dal")
+}
+
+@Composable
+fun WafflesCategoryPage() {
+    CategoryContentPage("Waffles")
+}
+
+@Composable
+fun AlooKachoriCategoryPage() {
+    CategoryContentPage("Aloo Kachori")
+}
+
+@Composable
+fun CholeKulcheCategoryPage() {
+    CategoryContentPage("Chole Kulche")
+}
+
+@Composable
+fun FriesCategoryPage() {
+    CategoryContentPage("Fries")
+}
+
+@Composable
+fun ColdCoffeeCategoryPage() {
+    CategoryContentPage("Cold Coffee")
+}
+
+@Composable
+fun SoupCategoryPage() {
+    CategoryContentPage("Soup")
+}
+
+@Composable
+fun BhurjiCategoryPage() {
+    CategoryContentPage("Bhurji")
+}
+
+@Composable
+fun KhastaKachoriCategoryPage() {
+    CategoryContentPage("Khasta Kachori")
+}
+
+@Composable
+fun HotDogCategoryPage() {
+    CategoryContentPage("Hot Dog")
+}
+
+// Generic Category Content Page with sample food items
+@Composable
+fun CategoryContentPage(categoryName: String) {
+    Text(
+        text = "$categoryName",
+        style = MaterialTheme.typography.headlineMedium,
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        fontWeight = FontWeight.Bold,
+        color = MaterialTheme.customColors.header
+    )
+}
+
+
+// Sample Food Item Card (You can customize this based on your design)
 //@Composable
 //fun SeeAllCategoryPage() {
 //    Column(
@@ -23861,6 +25971,7 @@ fun PooriCategoryPage() {
 //}
 
 
+
 @Composable
 fun MainScreen(navController: NavHostController) {
     var currentPage by remember { mutableIntStateOf(0) }
@@ -23868,7 +25979,7 @@ fun MainScreen(navController: NavHostController) {
     Column(modifier = Modifier.fillMaxWidth()) {
         CategoryTabsFood(
             navController = navController,
-            selectedTabIndex = currentPage, // ✅ Add this missing parameter
+            selectedTabIndex = currentPage,
             onCategorySelected = { categoryPage ->
                 currentPage = when (categoryPage) {
                     CategoryPage.All -> 0
@@ -23912,17 +26023,107 @@ fun MainScreen(navController: NavHostController) {
                     CategoryPage.Shake -> 38
                     CategoryPage.Samosa -> 39
                     CategoryPage.Poori -> 40
+                    CategoryPage.Bowl -> 41
+                    CategoryPage.Poha -> 42
+                    // Add mappings for new categories
+                    CategoryPage.Sweets -> 43
+                    CategoryPage.CholePoori -> 44
+                    CategoryPage.Khichdi -> 45
+                    CategoryPage.ChilliChicken -> 46
+                    CategoryPage.Tea -> 47
+                    CategoryPage.VadaPav -> 48
+                    CategoryPage.MasalaMaggi -> 49
+                    CategoryPage.Kulche -> 50
+                    CategoryPage.Wings -> 51
+                    CategoryPage.AlooPoori -> 52
+                    CategoryPage.Omelette -> 53
+                    CategoryPage.NonVegMeal -> 54
+                    CategoryPage.BreadPakoda -> 55
+                    CategoryPage.Coffee -> 56
+                    CategoryPage.PooriBhaji -> 57
+                    CategoryPage.Pulao -> 58
+                    CategoryPage.ChurChurNaan -> 59
+                    CategoryPage.Kebabs -> 60
+                    CategoryPage.Panipuri -> 61
+                    CategoryPage.Rasmalai -> 62
+                    CategoryPage.Mutton -> 63
+                    CategoryPage.Fish -> 64
+                    CategoryPage.Pakoda -> 65
+                    CategoryPage.Halwa -> 66
+                    CategoryPage.ChopSuey -> 67
+                    CategoryPage.Korma -> 68
+                    CategoryPage.Namkeen -> 69
+                    CategoryPage.Mushrooms -> 70
+                    CategoryPage.Keema -> 71
+                    CategoryPage.Sundae -> 72
+                    CategoryPage.Rasgulla -> 73
+                    CategoryPage.ButterChicken -> 74
+                    CategoryPage.RajKachori -> 75
+                    CategoryPage.Chaat -> 76
+                    CategoryPage.Uttapam -> 77
+                    CategoryPage.Doughnut -> 78
+                    CategoryPage.Juice -> 79
+                    CategoryPage.Lassi -> 80
+                    CategoryPage.MalaiKofta -> 81
+                    CategoryPage.DahiBalle -> 82
+                    CategoryPage.Rajma -> 83
+                    CategoryPage.ChickenHandi -> 84
+                    CategoryPage.Cupcake -> 85
+                    CategoryPage.Bhel -> 86
+                    CategoryPage.Muffin -> 87
+                    CategoryPage.Cookies -> 88
+                    CategoryPage.ChickenCha -> 89
+                    CategoryPage.PaneerKulche -> 90
+                    CategoryPage.Chaach -> 91
+                    CategoryPage.VegLollipop -> 92
+                    CategoryPage.Sub -> 93
+                    CategoryPage.Pancake -> 94
+                    CategoryPage.Nihari -> 95
+                    CategoryPage.Tacos -> 96
+                    CategoryPage.Thepla -> 97
+                    CategoryPage.Fafda -> 98
+                    CategoryPage.Chocolate -> 99
+                    CategoryPage.CurdRice -> 100
+                    CategoryPage.Pudding -> 101
+                    CategoryPage.Croissant -> 102
+                    CategoryPage.Khandvi -> 103
+                    CategoryPage.Gajak -> 104
+                    CategoryPage.SambarRice -> 105
+                    CategoryPage.Tart -> 106
+                    CategoryPage.Tiramisu -> 107
+                    CategoryPage.Pie -> 108
+                    CategoryPage.Custard -> 109
+                    CategoryPage.SevPoori -> 110
+                    CategoryPage.Mousse -> 111
+                    CategoryPage.DalKachori -> 112
+                    CategoryPage.Jalebi -> 113
+                    CategoryPage.PyaajKachori -> 114
+                    CategoryPage.RajmaRice -> 115
+                    CategoryPage.Upma -> 116
+                    CategoryPage.Manchurian -> 117
+                    CategoryPage.PaneerPakoda -> 118
+                    CategoryPage.Cheesecake -> 119
+                    CategoryPage.Brownie -> 120
+                    CategoryPage.Chaap -> 121
+                    CategoryPage.Dal -> 122
+                    CategoryPage.Waffles -> 123
+                    CategoryPage.AlooKachori -> 124
+                    CategoryPage.CholeKulche -> 125
+                    CategoryPage.Fries -> 126
+                    CategoryPage.ColdCoffee -> 127
+                    CategoryPage.Soup -> 128
+                    CategoryPage.Bhurji -> 129
+                    CategoryPage.KhastaKachori -> 130
+                    CategoryPage.HotDog -> 131
                     CategoryPage.SeeAll -> currentPage
                 }
             },
-            onTabIndexChanged = { newIndex: Int -> // ✅ Explicitly specify Int type
+            onTabIndexChanged = { newIndex: Int ->
                 currentPage = newIndex
             }
         )
     }
 }
-
-
 
 private fun onBanner1Click() {
     // Handle banner 1 click

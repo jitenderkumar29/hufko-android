@@ -1,5 +1,6 @@
 package com.example.hufko.components.homescreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -180,52 +181,9 @@ fun HomeScreen(navController: NavHostController?) {
                 CategoryTabsFood(
                     navController = navController,
                     selectedTabIndex = selectedTabIndex,
-                    onCategorySelected = { categoryPage ->
-                        // Update selected index when a category is selected
-                        selectedTabIndex = when (categoryPage) {
-                            CategoryPage.All -> 0
-                            CategoryPage.Diet -> 1
-                            CategoryPage.Pizzas -> 2
-                            CategoryPage.Cakes -> 3
-                            CategoryPage.Momos -> 4
-                            CategoryPage.Rolls -> 5
-                            CategoryPage.Burgers -> 6
-                            CategoryPage.CholeBhature -> 7
-                            CategoryPage.Salad -> 8
-                            CategoryPage.Patty -> 9
-                            CategoryPage.Chinese -> 10
-                            CategoryPage.IceCream -> 11
-                            CategoryPage.Appam -> 12
-                            CategoryPage.Bath -> 13
-                            CategoryPage.Bonda -> 14
-                            CategoryPage.Cutlet -> 15
-                            CategoryPage.Dessert -> 16
-                            CategoryPage.Dhokla -> 17
-                            CategoryPage.Dosa -> 18
-                            CategoryPage.Dholda -> 19
-                            CategoryPage.GulabJamun -> 20
-                            CategoryPage.Idli -> 21
-                            CategoryPage.Biryani -> 22
-                            CategoryPage.Thali -> 23
-                            CategoryPage.Chicken -> 24
-                            CategoryPage.VegMeal -> 25
-                            CategoryPage.NorthIndian -> 26
-                            CategoryPage.Paneer -> 27
-                            CategoryPage.FriedRice -> 28
-                            CategoryPage.Noodles -> 29
-                            CategoryPage.Paratha -> 30
-                            CategoryPage.Shawarma -> 31
-                            CategoryPage.SouthIndian -> 32
-                            CategoryPage.AlooTikki -> 33
-                            CategoryPage.Pasta -> 34
-                            CategoryPage.Pastry -> 35
-                            CategoryPage.PavBhaji -> 36
-                            CategoryPage.Sandwich -> 37
-                            CategoryPage.Shake -> 38
-                            CategoryPage.Samosa -> 39
-                            CategoryPage.Poori -> 40
-                            CategoryPage.SeeAll -> 41
-                        }
+                    onCategorySelected = { category ->
+                        // Handle category selection
+                        Log.d("HomeScreen", "Selected category: ${category.title}")
                     },
                     onTabIndexChanged = { newIndex ->
                         selectedTabIndex = newIndex

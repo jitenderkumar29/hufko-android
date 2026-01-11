@@ -25496,7 +25496,638 @@ fun PohaCategoryPage() {
 
 @Composable
 fun SweetsCategoryPage() {
-    CategoryContentPage("Sweets")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val sweetsFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // POPULAR SWEETS (with icons for famous ones)
+                FilterChip(
+                    id = "gulab_jamun",
+                    text = "Gulab Jamun",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gulab_jamun
+                ),
+                FilterChip(
+                    id = "rasgulla",
+                    text = "Rasgulla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rasgulla
+                ),
+                FilterChip(
+                    id = "jalebi",
+                    text = "Jalebi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_jalebi
+                ),
+                FilterChip(
+                    id = "rasmalai",
+                    text = "Rasmalai",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rasmalai
+                ),
+                FilterChip(
+                    id = "barfi",
+                    text = "Barfi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CATEGORIES (with icons for main categories)
+                FilterChip(
+                    id = "milk_based",
+                    text = "Milk Based",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_milk_sweets
+                ),
+                FilterChip(
+                    id = "dry_sweets",
+                    text = "Dry Sweets",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "syrup_based",
+                    text = "Syrup Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL SPECIALTIES (with icons for famous regional)
+                FilterChip(
+                    id = "gujarati_sweets",
+                    text = "Gujarati",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "punjabi_sweets",
+                    text = "Punjabi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "south_indian_sweets",
+                    text = "South Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVORS (with icons for primary flavors)
+                FilterChip(
+                    id = "cardamom",
+                    text = "Cardamom",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rose",
+                    text = "Rose",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pista",
+                    text = "Pistachio",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY (text-only)
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FESTIVAL SPECIALS (with icons for festivals)
+                FilterChip(
+                    id = "eid_special",
+                    text = "Eid",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "holi_special",
+                    text = "Holi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING TYPE (text-only)
+                FilterChip(
+                    id = "fresh",
+                    text = "Fresh",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "packaged",
+                    text = "Packaged",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "homemade",
+                    text = "Homemade",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE (text-only)
+                FilterChip(
+                    id = "budget",
+                    text = "Budget",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "luxury",
+                    text = "Luxury",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // NUTS & ADDONS (with icons for common nuts)
+                FilterChip(
+                    id = "with_cashews",
+                    text = "With Cashews",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE
+                FilterChip(
+                    id = "hot",
+                    text = "Hot Served",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold",
+                    text = "Chilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // POPULAR ADDITIONAL (text-only)
+                FilterChip(
+                    id = "kaju_katli",
+                    text = "Kaju Katli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peda",
+                    text = "Peda",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "laddu",
+                    text = "Laddu",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = sweetsFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val sweetsItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.sweets_gulab_jamun_1,
+                title = "Gulab Jamun (2 Pieces)",
+                price = "₹120",
+                restaurantName = "Bengali Sweets Corner",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹24",
+                address = "Park Street, Kolkata"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.sweets_rasgulla_2,
+                title = "Fresh Rasgulla (4 Pieces)",
+                price = "₹110",
+                restaurantName = "KC Das Sweets",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹17",
+                address = "Esplanade, Kolkata"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.sweets_jalebi_3,
+                title = "Hot Crispy Jalebi (250g)",
+                price = "₹100",
+                restaurantName = "Jalebi Wala",
+                rating = "4.7",
+                deliveryTime = "10-20 mins",
+                distance = "0.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹30",
+                address = "Chandni Chowk, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.sweets_rasmalai_4,
+                title = "Premium Rasmalai",
+                price = "₹150",
+                restaurantName = "Bikanervala",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.sweets_kaju_katli_5,
+                title = "Kaju Katli (200g)",
+                price = "₹250",
+                restaurantName = "Haldiram's",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹63",
+                address = "Nagpur Central"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.sweets_barfi_6,
+                title = "Pista Barfi Mix (300g)",
+                price = "₹180",
+                restaurantName = "Gujarat Sweets House",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Law Garden, Ahmedabad"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = sweetsItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sweetsItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.sweets_1,
+                title = "Gulab Jamun (2 Pieces)",
+                price = "₹120",
+                restaurantName = "Bengali Sweets Corner",
+                rating = "4.8",
+                deliveryTime = "15-25 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Park Street, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.sweets_2,
+                title = "Fresh Rasgulla (4 Pieces)",
+                price = "₹110",
+                restaurantName = "KC Das Sweets",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹17",
+                address = "Esplanade, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.sweets_3,
+                title = "Hot Crispy Jalebi (250g)",
+                price = "₹100",
+                restaurantName = "Jalebi Wala",
+                rating = "4.7",
+                deliveryTime = "10-20 mins",
+                distance = "0.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹30",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.sweets_4,
+                title = "Premium Rasmalai",
+                price = "₹150",
+                restaurantName = "Bikanervala",
+                rating = "4.8",
+                deliveryTime = "25-35 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹15",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.sweets_5,
+                title = "Kaju Katli (200g)",
+                price = "₹250",
+                restaurantName = "Haldiram's",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹63",
+                address = "Nagpur Central"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.sweets_6,
+                title = "Pista Barfi Mix (300g)",
+                price = "₹180",
+                restaurantName = "Gujarat Sweets House",
+                rating = "4.5",
+                deliveryTime = "15-25 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Law Garden, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.sweets_7,
+                title = "Moti Choor Laddu (2 Pieces)",
+                price = "₹90",
+                restaurantName = "Tirupati Sweets",
+                rating = "4.4",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹14",
+                address = "T Nagar, Chennai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.sweets_8,
+                title = "Mathura Peda (6 Pieces)",
+                price = "₹140",
+                restaurantName = "Brijwasi Sweets",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹14",
+                address = "Mathura"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.sweets_9,
+                title = "Nolen Gurer Sandesh",
+                price = "₹160",
+                restaurantName = "Balaram Mullick",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Bhawanipur, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.sweets_10,
+                title = "Gajar Ka Halwa (Seasonal)",
+                price = "₹130",
+                restaurantName = "Punjab Sweet House",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹33",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.sweets_11,
+                title = "Badam Milk Sweet",
+                price = "₹170",
+                restaurantName = "Mumbai Mithaiwala",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹26",
+                address = "Marine Lines, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.sweets_12,
+                title = "Coconut Burfi (250g)",
+                price = "₹120",
+                restaurantName = "Kerala Sweet Mart",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Fort Kochi, Kerala"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.sweets_13,
+                title = "Sugar Free Mysore Pak",
+                price = "₹140",
+                restaurantName = "Health First Sweets",
+                rating = "4.3",
+                deliveryTime = "30-40 mins",
+                distance = "2.3 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹14",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.sweets_14,
+                title = "Royal Bengali Sweet Box",
+                price = "₹400",
+                restaurantName = "Royal Sweets",
+                rating = "4.8",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹100",
+                address = "Salt Lake, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.sweets_15,
+                title = "Dry Fruit Anjeer Roll",
+                price = "₹220",
+                restaurantName = "Premium Sweets",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹40",
+                address = "Bandra, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.sweets_16,
+                title = "Diwali Special Gift Pack",
+                price = "₹500",
+                restaurantName = "Festival Sweets",
+                rating = "4.7",
+                deliveryTime = "40-50 mins",
+                distance = "3.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹150",
+                address = "Sadar Bazaar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.sweets_17,
+                title = "Malai Sandwich (4 Pieces)",
+                price = "₹110",
+                restaurantName = "Nawabi Sweets",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹17",
+                address = "Hazratganj, Lucknow"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.sweets_18,
+                title = "Bebinca - Goan Layered Sweet",
+                price = "₹280",
+                restaurantName = "Goan Delicacies",
+                rating = "4.4",
+                deliveryTime = "35-45 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Panaji, Goa"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.sweets_19,
+                title = "Balushahi (6 Pieces)",
+                price = "₹95",
+                restaurantName = "Traditional Mithai",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹10",
+                address = "Jaipur Sweet House"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.sweets_20,
+                title = "Kalakand (250g)",
+                price = "₹135",
+                restaurantName = "Alwar Sweet Centre",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹34",
+                address = "Alwar, Rajasthan"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

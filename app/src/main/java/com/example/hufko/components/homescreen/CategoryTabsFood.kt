@@ -26132,12 +26132,1260 @@ fun SweetsCategoryPage() {
 
 @Composable
 fun CholePooriCategoryPage() {
-    CategoryContentPage("Chole Poori")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val cholePooriFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                // DISH VARIATIONS (with icons for main variations)
+                FilterChip(
+                    id = "classic_chole_poori",
+                    text = "Classic",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chole_poori
+                ),
+                FilterChip(
+                    id = "chole_bhature",
+                    text = "Chole Bhature",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bhature
+                ),
+                FilterChip(
+                    id = "chole_kulche",
+                    text = "Chole Kulche",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chole_rice",
+                    text = "Chole Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // POORI/BREAD TYPE (with icons for bread types)
+                FilterChip(
+                    id = "masala_poori",
+                    text = "Masala Poori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_poori
+                ),
+                FilterChip(
+                    id = "tandoori_kulcha",
+                    text = "Tandoori Kulcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stuffed_kulcha",
+                    text = "Stuffed Kulcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "laccha_paratha",
+                    text = "Laccha Paratha",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for spice levels)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mild_spice
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_medium_spice
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icons for popular sides)
+                FilterChip(
+                    id = "with_onions",
+                    text = "With Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_lassi",
+                    text = "With Lassi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CHOLE TYPE
+                FilterChip(
+                    id = "white_chole",
+                    text = "White Chole",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_chole",
+                    text = "Black Chole",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kashmiri_chole",
+                    text = "Kashmiri Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "punjabi_chole",
+                    text = "Punjabi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // GARNISH (with icons for main garnishes)
+                FilterChip(
+                    id = "with_ginger",
+                    text = "With Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE (with icons for portion types)
+                FilterChip(
+                    id = "jumbo",
+                    text = "Jumbo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES
+                FilterChip(
+                    id = "jain",
+                    text = "Jain",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_onion_garlic",
+                    text = "No Onion Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE
+                FilterChip(
+                    id = "homestyle",
+                    text = "Homestyle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dhaba_style",
+                    text = "Dhaba Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "restaurant_style",
+                    text = "Restaurant Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget",
+                    text = "Budget",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = cholePooriFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val cholePooriItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chole_poori_1,
+                title = "Classic Chole Poori",
+                price = "₹120",
+                restaurantName = "Delhi Dhaba",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹24",
+                address = "Karol Bagh, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chole_poori_2,
+                title = "Chole Bhature Combo",
+                price = "₹180",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Majnu Ka Tila, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.chole_poori_3,
+                title = "Jain Chole Kulche",
+                price = "₹150",
+                restaurantName = "Jain Specials",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹45",
+                address = "Marine Lines, Mumbai",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.chole_poori_4,
+                title = "Family Pack Chole Poori",
+                price = "₹350",
+                restaurantName = "Kolkata Street Food",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Park Street, Kolkata",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.chole_poori_5,
+                title = "Dhaba Style Chole Poori",
+                price = "₹140",
+                restaurantName = "Highway Dhaba",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "25%",
+                discountAmount = "up to ₹35",
+                address = "NH-8, Gurgaon",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.chole_poori_6,
+                title = "Special Chole Rice Combo",
+                price = "₹200",
+                restaurantName = "North Indian Kitchen",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Indiranagar, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = cholePooriItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val cholePooriItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chole_poori1_1,
+                title = "Classic Punjabi Chole Poori",
+                price = "₹120",
+                restaurantName = "Delhi Dhaba",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chole_poori1_2,
+                title = "Chole Bhature Combo",
+                price = "₹180",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹27",
+                address = "Majnu Ka Tila, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chole_poori1_3,
+                title = "Jain Chole Kulche (No Onion Garlic)",
+                price = "₹150",
+                restaurantName = "Jain Specials",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹45",
+                address = "Marine Lines, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chole_poori1_4,
+                title = "Family Pack Chole Poori (Serves 4)",
+                price = "₹350",
+                restaurantName = "Kolkata Street Food",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹35",
+                address = "Park Street, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chole_poori1_5,
+                title = "Highway Dhaba Style Chole Poori",
+                price = "₹140",
+                restaurantName = "Highway Dhaba",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹35",
+                address = "NH-8, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chole_poori1_6,
+                title = "Chole Rice Combo Meal",
+                price = "₹200",
+                restaurantName = "North Indian Kitchen",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chole_poori_7,
+                title = "Amritsari Chole Poori",
+                price = "₹160",
+                restaurantName = "Golden Temple Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹24",
+                address = "Amritsar"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chole_poori_8,
+                title = "Stuffed Kulcha with Chole",
+                price = "₹190",
+                restaurantName = "Kulcha King",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹19",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chole_poori_9,
+                title = "White Chole Poori",
+                price = "₹130",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹26",
+                address = "Srinagar"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chole_poori_10,
+                title = "Chole Masala Poori",
+                price = "₹145",
+                restaurantName = "Spice Route",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹36",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chole_poori_11,
+                title = "Chole with Laccha Paratha",
+                price = "₹170",
+                restaurantName = "Paratha Point",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹26",
+                address = "Old Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chole_poori_12,
+                title = "Chole Aloo Poori Combo",
+                price = "₹135",
+                restaurantName = "Maharaja Bhog",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹27",
+                address = "Udaipur"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chole_poori_13,
+                title = "Extra Spicy Chole Poori",
+                price = "₹125",
+                restaurantName = "Fire & Spice",
+                rating = "4.3",
+                deliveryTime = "30-40 mins",
+                distance = "2.3 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹13",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chole_poori_14,
+                title = "Royal Chole Poori Thali",
+                price = "₹280",
+                restaurantName = "Royal Punjab Dhaba",
+                rating = "4.8",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Ludhiana"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chole_poori_15,
+                title = "Chole Poori Breakfast Special",
+                price = "₹110",
+                restaurantName = "Morning Delights",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹20",
+                address = "Pune"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chole_poori_16,
+                title = "Chole Poori Party Pack (Serves 6)",
+                price = "₹450",
+                restaurantName = "Catering Express",
+                rating = "4.7",
+                deliveryTime = "40-50 mins",
+                distance = "3.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹135",
+                address = "Noida"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chole_poori_17,
+                title = "Peshawari Chole with Naan",
+                price = "₹195",
+                restaurantName = "Khyber Restaurant",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹29",
+                address = "Peshawar Road"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chole_poori_18,
+                title = "Low Oil Healthy Chole Poori",
+                price = "₹150",
+                restaurantName = "Fit Food Kitchen",
+                rating = "4.4",
+                deliveryTime = "35-45 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "South Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chole_poori_19,
+                title = "Chole with Tandoori Roti",
+                price = "₹140",
+                restaurantName = "Tandoor Magic",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹14",
+                address = "Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chole_poori_20,
+                title = "Chole Poori Street Style",
+                price = "₹95",
+                restaurantName = "Street Food Corner",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹24",
+                address = "Lucknow"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun KhichdiCategoryPage() {
-    CategoryContentPage("Khichdi")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val khichdiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // KHICHDI TYPES (with icons for main types)
+                FilterChip(
+                    id = "masala_khichdi",
+                    text = "Masala Khichdi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_masala_khichdi
+                ),
+                FilterChip(
+                    id = "simple_khichdi",
+                    text = "Simple Khichdi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_simple_khichdi
+                ),
+                FilterChip(
+                    id = "biryani_khichdi",
+                    text = "Biryani Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tadka_khichdi",
+                    text = "Tadka Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // RICE TYPE (with icons for rice varieties)
+                FilterChip(
+                    id = "basmati_khichdi",
+                    text = "Basmati",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_basmati_rice_khichdi
+                ),
+                FilterChip(
+                    id = "brown_rice_khichdi",
+                    text = "Brown Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jeera_rice_khichdi",
+                    text = "Jeera Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "moong_dal_khichdi",
+                    text = "Moong Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // VEGETABLE ADDITIONS (with icons for popular veggies)
+                FilterChip(
+                    id = "with_potato",
+                    text = "With Potato",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_khichdi
+                ),
+                FilterChip(
+                    id = "with_carrot",
+                    text = "With Carrot",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_carrot
+                ),
+                FilterChip(
+                    id = "with_peas",
+                    text = "With Peas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_cauliflower",
+                    text = "With Cauliflower",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH & DIET (with icons for health benefits)
+                FilterChip(
+                    id = "light_meal",
+                    text = "Light Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL STYLES (with icons for famous regional)
+                FilterChip(
+                    id = "bengali_khichdi",
+                    text = "Bengali Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "south_indian_khichdi",
+                    text = "South Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "punjabi_khichdi",
+                    text = "Punjabi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (with icons for accompaniments)
+                FilterChip(
+                    id = "with_papad",
+                    text = "With Papad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_curd",
+                    text = "With Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for spice levels)
+                FilterChip(
+                    id = "mild_spice",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TIME (with icons for meal times)
+                FilterChip(
+                    id = "lunch_khichdi",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner_khichdi",
+                    text = "Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OIL/GHEE TYPE
+                FilterChip(
+                    id = "ghee_khichdi",
+                    text = "Ghee Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oil_free",
+                    text = "Oil Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE
+                FilterChip(
+                    id = "single_serve",
+                    text = "Single Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY
+                FilterChip(
+                    id = "baby_food",
+                    text = "Baby Food",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout",
+                    text = "Post Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fasting_food",
+                    text = "Fasting Food",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = khichdiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val khichdiItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.khichdi_1,
+                title = "Classic Masala Khichdi",
+                price = "₹90",
+                restaurantName = "Gujarati Thali House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹18",
+                address = "Law Garden, Ahmedabad"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.khichdi_2,
+                title = "Simple Moong Dal Khichdi",
+                price = "₹75",
+                restaurantName = "Healthy Bites",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹11",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.khichdi_3,
+                title = "Biryani Style Khichdi",
+                price = "₹120",
+                restaurantName = "Royal Kitchen",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹36",
+                address = "Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.khichdi_4,
+                title = "Tadka Khichdi with Vegetables",
+                price = "₹110",
+                restaurantName = "North Indian Delights",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹11",
+                address = "Chandigarh"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.khichdi_5,
+                title = "Basmati Rice Khichdi with Kadhi",
+                price = "₹140",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹35",
+                address = "Punjab"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.khichdi_6,
+                title = "Brown Rice Diet Khichdi",
+                price = "₹95",
+                restaurantName = "Fit & Fine",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹19",
+                address = "Bandra, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = khichdiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val khichdiItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.khichdi1_1,
+                title = "Classic Masala Khichdi",
+                price = "₹90",
+                restaurantName = "Gujarati Thali House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹18",
+                address = "Law Garden, Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.khichdi1_2,
+                title = "Simple Moong Dal Khichdi",
+                price = "₹75",
+                restaurantName = "Healthy Bites",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹11",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.khichdi1_3,
+                title = "Biryani Style Khichdi",
+                price = "₹120",
+                restaurantName = "Royal Kitchen",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹36",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.khichdi1_4,
+                title = "Tadka Khichdi with Vegetables",
+                price = "₹110",
+                restaurantName = "North Indian Delights",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹11",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.khichdi1_5,
+                title = "Basmati Rice Khichdi with Kadhi",
+                price = "₹140",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹35",
+                address = "Punjab"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.khichdi1_6,
+                title = "Brown Rice Diet Khichdi",
+                price = "₹95",
+                restaurantName = "Fit & Fine",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹19",
+                address = "Bandra, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.khichdi_7,
+                title = "Ghee Khichdi (Homemade Style)",
+                price = "₹85",
+                restaurantName = "Mom's Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-40 mins",
+                distance = "2.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹13",
+                address = "Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.khichdi_8,
+                title = "Khichdi with Papad & Pickle",
+                price = "₹100",
+                restaurantName = "Traditional Foods",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "1.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹10",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.khichdi_9,
+                title = "Jeera Rice Khichdi",
+                price = "₹80",
+                restaurantName = "Spice Magic",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹16",
+                address = "Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.khichdi_10,
+                title = "Vegetable Khichdi Combo",
+                price = "₹115",
+                restaurantName = "Healthy Delights",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹29",
+                address = "Pune"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.khichdi_11,
+                title = "Sick Food Khichdi (Light)",
+                price = "₹70",
+                restaurantName = "Wellness Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹11",
+                address = "Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.khichdi_12,
+                title = "Khichdi with Curd & Salad",
+                price = "₹105",
+                restaurantName = "Balanced Meals",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹21",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.khichdi_13,
+                title = "Extra Spicy Masala Khichdi",
+                price = "₹95",
+                restaurantName = "Spice Lovers",
+                rating = "4.3",
+                deliveryTime = "30-40 mins",
+                distance = "2.3 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹10",
+                address = "Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.khichdi_14,
+                title = "Royal Khichdi Thali",
+                price = "₹180",
+                restaurantName = "Royal Gujarati",
+                rating = "4.8",
+                deliveryTime = "35-45 mins",
+                distance = "2.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹45",
+                address = "Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.khichdi_15,
+                title = "Khichdi Breakfast Special",
+                price = "₹65",
+                restaurantName = "Morning Comfort",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.4 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹12",
+                address = "Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.khichdi_16,
+                title = "Family Pack Khichdi (Serves 4)",
+                price = "₹250",
+                restaurantName = "Family Kitchen",
+                rating = "4.7",
+                deliveryTime = "40-50 mins",
+                distance = "3.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹75",
+                address = "Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.khichdi_17,
+                title = "Low Oil Healthy Khichdi",
+                price = "₹85",
+                restaurantName = "Diet Care",
+                rating = "4.5",
+                deliveryTime = "25-35 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹13",
+                address = "Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.khichdi_18,
+                title = "Khichdi with Potato & Peas",
+                price = "₹100",
+                restaurantName = "Comfort Food",
+                rating = "4.4",
+                deliveryTime = "35-45 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹20",
+                address = "Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.khichdi_19,
+                title = "Oil-Free Diet Khichdi",
+                price = "₹75",
+                restaurantName = "Health First",
+                rating = "4.6",
+                deliveryTime = "15-25 mins",
+                distance = "1.1 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹8",
+                address = "Pune"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.khichdi_20,
+                title = "Street Style Tadka Khichdi",
+                price = "₹80",
+                restaurantName = "Street Food Delights",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹20",
+                address = "Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

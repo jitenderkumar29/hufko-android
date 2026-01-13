@@ -1318,7 +1318,7 @@ fun AllCategoryPage(
             contentDescription = "Banner",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(35.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+                .height(25.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
             contentScale = ContentScale.FillBounds
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -26986,7 +26986,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹18",
                 address = "Law Garden, Ahmedabad"
             ),
@@ -26999,7 +26999,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹11",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -27012,7 +27012,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹36",
                 address = "Hyderabad"
             ),
@@ -27025,7 +27025,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹11",
                 address = "Chandigarh"
             ),
@@ -27038,7 +27038,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "Punjab"
             ),
@@ -27051,7 +27051,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹19",
                 address = "Bandra, Mumbai"
             )
@@ -27390,12 +27390,1302 @@ fun KhichdiCategoryPage() {
 
 @Composable
 fun ChilliChickenCategoryPage() {
-    CategoryContentPage("Chilli Chicken")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val chilliChickenFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // COOKING STYLE (with icons for main styles)
+                FilterChip(
+                    id = "dry_chilli_chicken",
+                    text = "Dry Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dry_chilli_chicken
+                ),
+                FilterChip(
+                    id = "gravy_chilli_chicken",
+                    text = "Gravy Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gravy_chicken
+                ),
+                FilterChip(
+                    id = "semi_gravy",
+                    text = "Semi Gravy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "starter_style",
+                    text = "Starter Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CHICKEN TYPE (with icons for meat types)
+                FilterChip(
+                    id = "boneless_chilli",
+                    text = "Boneless",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_boneless_chicken
+                ),
+                FilterChip(
+                    id = "bone_in_chilli",
+                    text = "Bone-in",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bone_in_chicken
+                ),
+                FilterChip(
+                    id = "chicken_breast",
+                    text = "Chicken Breast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chicken_thighs",
+                    text = "Chicken Thighs",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUISINE TYPE (with icons for cuisines)
+                FilterChip(
+                    id = "indo_chinese",
+                    text = "Indo-Chinese",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_indo_chinese
+                ),
+                FilterChip(
+                    id = "hakka_style",
+                    text = "Hakka Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "american_chinese",
+                    text = "American Chinese",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for spice levels)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "adjustable_spice",
+                    text = "Adjustable Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // VEGETABLE ADDITIONS (with icons for key vegetables)
+                FilterChip(
+                    id = "with_spring_onion",
+                    text = "Spring Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_bell_peppers",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SAUCE TYPE
+                FilterChip(
+                    id = "soy_sauce_base",
+                    text = "Soy Sauce Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tomato_sauce_base",
+                    text = "Tomato Sauce Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schezwan_sauce",
+                    text = "Schezwan Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "with_noodles",
+                    text = "With Noodles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_fried_rice",
+                    text = "With Fried Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_manchurian",
+                    text = "With Manchurian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING METHOD
+                FilterChip(
+                    id = "deep_fried",
+                    text = "Deep Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "shallow_fried",
+                    text = "Shallow Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sauteed",
+                    text = "Sauteed",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL ADDITIONS
+                FilterChip(
+                    id = "with_cashew",
+                    text = "With Cashew",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sesame_garnish",
+                    text = "Sesame Garnish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_garlic",
+                    text = "Extra Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE
+                FilterChip(
+                    id = "appetizer_size",
+                    text = "Appetizer Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "main_course",
+                    text = "Main Course",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_meal",
+                    text = "Combo Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCE
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = chilliChickenFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val chilliChickenItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chilli_chicken_items_1,
+                title = "Dry Chilli Chicken",
+                price = "₹220",
+                restaurantName = "Chinese Wok",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹33",
+                address = "Park Street, Kolkata"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chilli_chicken_items_2,
+                title = "Gravy Chilli Chicken",
+                price = "₹250",
+                restaurantName = "Golden Dragon",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹50",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.chilli_chicken_items_3,
+                title = "Sichuan Style Chilli Chicken",
+                price = "₹280",
+                restaurantName = "Spice Garden",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹28",
+                address = "Lalbagh, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.chilli_chicken_items_4,
+                title = "Boneless Chilli Chicken",
+                price = "₹300",
+                restaurantName = "Oriental Express",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "25%",
+                discountAmount = "up to ₹75",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.chilli_chicken_items_5,
+                title = "Extra Spicy Chilli Chicken",
+                price = "₹240",
+                restaurantName = "Fire & Spice",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹72",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.chilli_chicken_items_6,
+                title = "Hakka Style Chilli Chicken",
+                price = "₹260",
+                restaurantName = "Mainland China",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "18%",
+                discountAmount = "up to ₹47",
+                address = "Salt Lake, Kolkata"
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = chilliChickenItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val chilliChickenItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chilli_chicken_1,
+                title = "Dry Chilli Chicken",
+                price = "₹220",
+                restaurantName = "Chinese Wok",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹33",
+                address = "Park Street, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chilli_chicken_2,
+                title = "Gravy Chilli Chicken",
+                price = "₹250",
+                restaurantName = "Golden Dragon",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹50",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chilli_chicken_3,
+                title = "Sichuan Style Chilli Chicken",
+                price = "₹280",
+                restaurantName = "Spice Garden",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹28",
+                address = "Lalbagh, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chilli_chicken_4,
+                title = "Boneless Chilli Chicken",
+                price = "₹300",
+                restaurantName = "Oriental Express",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹75",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chilli_chicken_5,
+                title = "Extra Spicy Chilli Chicken",
+                price = "₹240",
+                restaurantName = "Fire & Spice",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹72",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chilli_chicken_6,
+                title = "Hakka Style Chilli Chicken",
+                price = "₹260",
+                restaurantName = "Mainland China",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.5 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹47",
+                address = "Salt Lake, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chilli_chicken_7,
+                title = "Chilli Chicken with Noodles",
+                price = "₹320",
+                restaurantName = "Noodle House",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹64",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chilli_chicken_8,
+                title = "Chilli Chicken with Fried Rice",
+                price = "₹350",
+                restaurantName = "Rice Bowl",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "2.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹53",
+                address = "Hinjewadi, Pune"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chilli_chicken_9,
+                title = "Mild Chilli Chicken",
+                price = "₹210",
+                restaurantName = "Kid Friendly Kitchen",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹21",
+                address = "Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chilli_chicken_10,
+                title = "Chilli Chicken with Cashew",
+                price = "₹290",
+                restaurantName = "Royal Chinese",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹73",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chilli_chicken_11,
+                title = "Street Style Chilli Chicken",
+                price = "₹180",
+                restaurantName = "Street Food Corner",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Sarojini Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chilli_chicken_12,
+                title = "Chilli Chicken with Capsicum",
+                price = "₹230",
+                restaurantName = "Veggie Mix",
+                rating = "4.5",
+                deliveryTime = "20-30 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chilli_chicken_13,
+                title = "American Chinese Chilli Chicken",
+                price = "₹270",
+                restaurantName = "US Wok",
+                rating = "4.4",
+                deliveryTime = "35-45 mins",
+                distance = "3.0 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹32",
+                address = "Bandra, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chilli_chicken_14,
+                title = "Chilli Chicken with Spring Onion",
+                price = "₹240",
+                restaurantName = "Green Garden",
+                rating = "4.7",
+                deliveryTime = "25-35 mins",
+                distance = "2.1 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹43",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chilli_chicken_15,
+                title = "Schezwan Chilli Chicken",
+                price = "₹260",
+                restaurantName = "Schezwan Palace",
+                rating = "4.8",
+                deliveryTime = "20-30 mins",
+                distance = "1.9 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹57",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chilli_chicken_16,
+                title = "Family Pack Chilli Chicken",
+                price = "₹500",
+                restaurantName = "Family Feast",
+                rating = "4.6",
+                deliveryTime = "40-50 mins",
+                distance = "2.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹150",
+                address = "Noida"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chilli_chicken_17,
+                title = "Chilli Chicken Starter",
+                price = "₹190",
+                restaurantName = "Appetizer Hub",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹38",
+                address = "Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chilli_chicken_18,
+                title = "Low Oil Chilli Chicken",
+                price = "₹230",
+                restaurantName = "Healthy Chinese",
+                rating = "4.3",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹35",
+                address = "Pune"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chilli_chicken_19,
+                title = "Chilli Chicken with Gravy & Rice",
+                price = "₹380",
+                restaurantName = "Combo King",
+                rating = "4.7",
+                deliveryTime = "30-40 mins",
+                distance = "2.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹95",
+                address = "Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chilli_chicken_20,
+                title = "Premium Bone-in Chilli Chicken",
+                price = "₹320",
+                restaurantName = "Authentic Chinese",
+                rating = "4.9",
+                deliveryTime = "35-45 mins",
+                distance = "2.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹64",
+                address = "Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun TeaCategoryPage() {
-    CategoryContentPage("Tea")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val teaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // TEA TYPE (with icons for popular types)
+                FilterChip(
+                    id = "black_tea",
+                    text = "Black Tea",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_black_tea
+                ),
+                FilterChip(
+                    id = "green_tea",
+                    text = "Green Tea",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_green_tea
+                ),
+                FilterChip(
+                    id = "oolong_tea",
+                    text = "Oolong Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "white_tea",
+                    text = "White Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "herbal_tea",
+                    text = "Herbal Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BREWING METHOD (with icons for common methods)
+                FilterChip(
+                    id = "loose_leaf",
+                    text = "Loose Leaf",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_loose_leaf
+                ),
+                FilterChip(
+                    id = "tea_bags",
+                    text = "Tea Bags",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tea_bag
+                ),
+                FilterChip(
+                    id = "powdered",
+                    text = "Powdered",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVOR PROFILES (with icons for key flavors)
+                FilterChip(
+                    id = "earthy",
+                    text = "Earthy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_earthy
+                ),
+                FilterChip(
+                    id = "fruity",
+                    text = "Fruity",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "minty",
+                    text = "Minty",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CAFFEINE LEVEL
+                FilterChip(
+                    id = "high_caffeine",
+                    text = "High Caffeine",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_caffeine",
+                    text = "Medium Caffeine",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_caffeine",
+                    text = "Low Caffeine",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caffeine_free",
+                    text = "Caffeine Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL STYLES (with icons for popular regions)
+                FilterChip(
+                    id = "japanese_matcha",
+                    text = "Japanese Matcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chinese_oolong",
+                    text = "Chinese Oolong",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SWEETNESS LEVEL
+                FilterChip(
+                    id = "unsweetened",
+                    text = "Unsweetened",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lightly_sweet",
+                    text = "Lightly Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet",
+                    text = "Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MILK OPTIONS (with icon for milk-based teas)
+                FilterChip(
+                    id = "without_milk",
+                    text = "Without Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "alternative_milk",
+                    text = "Almond/Soy Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING TEMPERATURE
+                FilterChip(
+                    id = "hot_tea",
+                    text = "Hot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "iced_tea",
+                    text = "Iced",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "room_temp",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH BENEFITS
+                FilterChip(
+                    id = "antioxidant_rich",
+                    text = "Antioxidant Rich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "digestive_aid",
+                    text = "Digestive Aid",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "relaxing",
+                    text = "Relaxing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "energizing",
+                    text = "Energizing",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADDITIVES & INGREDIENTS
+                FilterChip(
+                    id = "with_ginger",
+                    text = "With Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_lemon",
+                    text = "With Lemon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_honey",
+                    text = "With Honey",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_spices",
+                    text = "With Spices",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEA GRADE
+                FilterChip(
+                    id = "premium_grade",
+                    text = "Premium Grade",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "everyday_grade",
+                    text = "Everyday Grade",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = teaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val teaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.tea_items_1,
+                title = "Masala Chai",
+                price = "₹25",
+                restaurantName = "Chai Point",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹5",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.tea_items_2,
+                title = "Kashmiri Kahwa",
+                price = "₹35",
+                restaurantName = "Kashmir Tea House",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹10",
+                address = "Lal Chowk, Srinagar"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.tea_items_3,
+                title = "Darjeeling First Flush",
+                price = "₹45",
+                restaurantName = "Tea Trove",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹15",
+                address = "Park Street, Kolkata"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.tea_items_4,
+                title = "Green Tea with Jasmine",
+                price = "₹30",
+                restaurantName = "Zen Garden",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "1.0 km",
+                discount = "25%",
+                discountAmount = "up to ₹12",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.tea_items_5,
+                title = "Assam Black Tea",
+                price = "₹28",
+                restaurantName = "Brahmaputra Tea Co.",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹16",
+                address = "Guwahati, Assam"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.tea_items_6,
+                title = "Tulsi Ginger Tea",
+                price = "₹32",
+                restaurantName = "Ayurvedic Brews",
+                rating = "4.9",
+                deliveryTime = "10-15 mins",
+                distance = "0.9 km",
+                discount = "18%",
+                discountAmount = "up to ₹11",
+                address = "MG Road, Bangalore"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = teaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val teaItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.tea_1,
+                title = "Masala Chai",
+                price = "₹25",
+                restaurantName = "Chai Point",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹5",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.tea_2,
+                title = "Kashmiri Kahwa",
+                price = "₹35",
+                restaurantName = "Kashmir Tea House",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹10",
+                address = "Lal Chowk, Srinagar"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.tea_3,
+                title = "Darjeeling First Flush",
+                price = "₹45",
+                restaurantName = "Tea Trove",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹15",
+                address = "Park Street, Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.tea_4,
+                title = "Green Tea with Jasmine",
+                price = "₹30",
+                restaurantName = "Zen Garden",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "1.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹12",
+                address = "Koregaon Park, Pune"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.tea_5,
+                title = "Assam Black Tea",
+                price = "₹28",
+                restaurantName = "Brahmaputra Tea Co.",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹16",
+                address = "Guwahati, Assam"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.tea_6,
+                title = "Tulsi Ginger Tea",
+                price = "₹32",
+                restaurantName = "Ayurvedic Brews",
+                rating = "4.9",
+                deliveryTime = "10-15 mins",
+                distance = "0.9 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹11",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.tea_7,
+                title = "Butter Tea (Gur Gur Cha)",
+                price = "₹40",
+                restaurantName = "Himalayan Brews",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.2 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹9",
+                address = "Leh, Ladakh"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.tea_8,
+                title = "Matcha Latte",
+                price = "₹55",
+                restaurantName = "Tokyo Tea House",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "2.5 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹24",
+                address = "South Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.tea_9,
+                title = "Lemongrass Ginger Tea",
+                price = "₹38",
+                restaurantName = "Herbal Haven",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹11",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.tea_10,
+                title = "Earl Grey Tea",
+                price = "₹42",
+                restaurantName = "British Tea Room",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹16",
+                address = "Civil Lines, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.tea_11,
+                title = "Iced Peach Tea",
+                price = "₹48",
+                restaurantName = "Summer Sips",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹24",
+                address = "Bandra, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.tea_12,
+                title = "Oolong Tea",
+                price = "₹50",
+                restaurantName = "Taiwan Tea Garden",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹18",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.tea_13,
+                title = "Masala Chai with Bun Maska",
+                price = "₹65",
+                restaurantName = "Irani Café",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹39",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.tea_14,
+                title = "Chamomile Tea",
+                price = "₹35",
+                restaurantName = "Sleep Well Teas",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹10",
+                address = "Pune"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.tea_15,
+                title = "Mint Tea",
+                price = "₹28",
+                restaurantName = "Refreshment Corner",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹11",
+                address = "Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.tea_16,
+                title = "Rose Tea",
+                price = "₹45",
+                restaurantName = "Floral Tea House",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "1.9 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹19",
+                address = "Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.tea_17,
+                title = "Lemon Tea with Honey",
+                price = "₹32",
+                restaurantName = "Immunity Boosters",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹7",
+                address = "Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.tea_18,
+                title = "Cardamom Tea",
+                price = "₹30",
+                restaurantName = "Spice Brew",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "1.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹10",
+                address = "Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.tea_19,
+                title = "White Tea",
+                price = "₹60",
+                restaurantName = "Premium Tea Lounge",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.tea_20,
+                title = "Hibiscus Tea",
+                price = "₹40",
+                restaurantName = "Wellness Teas",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹16",
+                address = "Noida"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

@@ -28690,12 +28690,1233 @@ fun TeaCategoryPage() {
 
 @Composable
 fun VadaPavCategoryPage() {
-    CategoryContentPage("Vada Pav")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val vadaPavFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // VADA TYPE (with icons for visual distinction)
+                FilterChip(
+                    id = "classic_vada",
+                    text = "Classic Batata Vada",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_vada
+                ),
+                FilterChip(
+                    id = "spicy_vada",
+                    text = "Spicy Masala Vada",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy_vada
+                ),
+                FilterChip(
+                    id = "cheese_vada",
+                    text = "Cheese Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paneer_vada",
+                    text = "Paneer Vada",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PAV/BUN TYPE (icons for main types)
+                FilterChip(
+                    id = "soft_pav",
+                    text = "Soft Ladi Pav",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bread_vada
+                ),
+                FilterChip(
+                    id = "butter_pav",
+                    text = "Butter Toasted",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_butter_vada
+                ),
+                FilterChip(
+                    id = "garlic_pav",
+                    text = "Garlic Bread Pav",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "burger_bun",
+                    text = "Burger Bun",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CHUTNEY VARIATIONS (icons for popular chutneys)
+                FilterChip(
+                    id = "green_chutney",
+                    text = "Green Chutney",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chutney_vada
+                ),
+                FilterChip(
+                    id = "dry_chutney",
+                    text = "Dry Garlic Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "all_chutneys",
+                    text = "All Chutneys",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL
+                FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADD-ONS & EXTRAS
+                FilterChip(
+                    id = "double_vada",
+                    text = "Double Vada",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese_layer",
+                    text = "Extra Cheese Layer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onion_tomato",
+                    text = "Onion & Tomato",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "plated",
+                    text = "Plated Serving",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo",
+                    text = "With Chai/Soda",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION TYPE
+                FilterChip(
+                    id = "pre_fried",
+                    text = "Quick Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL VARIATIONS
+                FilterChip(
+                    id = "mumbai_style",
+                    text = "Mumbai Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pune_style",
+                    text = "Pune Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nashik_style",
+                    text = "Nashik Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE/VOLUME
+                FilterChip(
+                    id = "regular",
+                    text = "Regular",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jumbo",
+                    text = "Jumbo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_vada_pav",
+                    text = "Mini Sliders",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = vadaPavFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val vadaPavItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.vadapav_items_1,
+                title = "Classic Mumbai Vada Pav",
+                price = "₹25",
+                restaurantName = "Ashok Vada Pav",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹8",
+                address = "Dadar Station, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.vadapav_items_2,
+                title = "Spicy Cheese Vada Pav",
+                price = "₹45",
+                restaurantName = "Jumbo King",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹12",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.vadapav_items_3,
+                title = "Butter Garlic Vada Pav",
+                price = "₹35",
+                restaurantName = "Gurukripa",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹7",
+                address = "Sion Circle, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.vadapav_items_4,
+                title = "Double Vada Pav Special",
+                price = "₹50",
+                restaurantName = "Shiv Sagar",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "25%",
+                discountAmount = "up to ₹20",
+                address = "Vile Parle, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.vadapav_items_5,
+                title = "Paneer Tikka Vada Pav",
+                price = "₹55",
+                restaurantName = "Cafe Madras",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹25",
+                address = "Matunga, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.vadapav_items_6,
+                title = "Schezwan Vada Pav",
+                price = "₹40",
+                restaurantName = "Chinese Wok",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "18%",
+                discountAmount = "up to ₹15",
+                address = "Powai, Mumbai"
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = vadaPavItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val vadaPavItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.vadapav_1,
+                title = "Classic Mumbai Vada Pav",
+                price = "₹25",
+                restaurantName = "Ashok Vada Pav",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹8",
+                address = "Dadar Station, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.vadapav_2,
+                title = "Spicy Cheese Vada Pav",
+                price = "₹45",
+                restaurantName = "Jumbo King",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹12",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.vadapav_3,
+                title = "Butter Garlic Vada Pav",
+                price = "₹35",
+                restaurantName = "Gurukripa",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹7",
+                address = "Sion Circle, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.vadapav_4,
+                title = "Double Vada Pav Special",
+                price = "₹50",
+                restaurantName = "Shiv Sagar",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹20",
+                address = "Vile Parle, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.vadapav_5,
+                title = "Paneer Tikka Vada Pav",
+                price = "₹55",
+                restaurantName = "Cafe Madras",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹25",
+                address = "Matunga, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.vadapav_6,
+                title = "Schezwan Vada Pav",
+                price = "₹40",
+                restaurantName = "Chinese Wok",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹15",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.vadapav_7,
+                title = "Jain Vada Pav (No Onion Garlic)",
+                price = "₹30",
+                restaurantName = "Shree Vada Pav",
+                rating = "4.7",
+                deliveryTime = "12-15 mins",
+                distance = "0.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹9",
+                address = "Borivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.vadapav_8,
+                title = "Chole Vada Pav",
+                price = "₹60",
+                restaurantName = "Punjabi Tadka",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.vadapav_9,
+                title = "Masala Vada Pav with Fried Mirchi",
+                price = "₹40",
+                restaurantName = "Spicy Corner",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "1.1 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹17",
+                address = "Thane, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.vadapav_10,
+                title = "Chutney Vada Pav (5 Types)",
+                price = "₹48",
+                restaurantName = "Chutney King",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.4 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹24",
+                address = "Pune"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.vadapav_11,
+                title = "Bombay Grill Vada Pav",
+                price = "₹65",
+                restaurantName = "Bombay Grill",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹39",
+                address = "South Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.vadapav_12,
+                title = "Mini Vada Pav Platter (6 pcs)",
+                price = "₹120",
+                restaurantName = "Vada Pav Factory",
+                rating = "4.6",
+                deliveryTime = "22-28 mins",
+                distance = "1.9 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹43",
+                address = "Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.vadapav_13,
+                title = "Cheese Corn Vada Pav",
+                price = "₹50",
+                restaurantName = "Fusion Foods",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹15",
+                address = "Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.vadapav_14,
+                title = "Mumbai Street Style Combo",
+                price = "₹80",
+                restaurantName = "Mumbai Street Food",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.vadapav_15,
+                title = "Garlic Mayo Vada Pav",
+                price = "₹55",
+                restaurantName = "Burger Singh",
+                rating = "4.5",
+                deliveryTime = "18-24 mins",
+                distance = "1.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹27",
+                address = "Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.vadapav_16,
+                title = "Tandoori Vada Pav",
+                price = "₹70",
+                restaurantName = "Tandoori Nights",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹30",
+                address = "Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.vadapav_17,
+                title = "Vada Pav with Samosa",
+                price = "₹75",
+                restaurantName = "Maha Snacks",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹18",
+                address = "Nagpur"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.vadapav_18,
+                title = "Extra Crispy Vada Pav",
+                price = "₹35",
+                restaurantName = "Crispy Corner",
+                rating = "4.3",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹12",
+                address = "Surat"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.vadapav_19,
+                title = "Jumbo Vada Pav with Coleslaw",
+                price = "₹85",
+                restaurantName = "American Diner",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "2.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹42",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.vadapav_20,
+                title = "Vada Pav with Cutting Chai",
+                price = "₹55",
+                restaurantName = "Chai & Vada Pav",
+                rating = "4.9",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹22",
+                address = "Kolkata"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun MasalaMaggiCategoryPage() {
-    CategoryContentPage("Masala Maggi")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val masalaMaggiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // MAGGI TYPE (with icons for visual distinction)
+                FilterChip(
+                    id = "masala_maggi",
+                    text = "Classic Masala Maggi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_maggie_bowl
+                ),
+                FilterChip(
+                    id = "butter_maggi",
+                    text = "Butter Maggi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_butter_maggi
+                ),
+                FilterChip(
+                    id = "cheese_maggi",
+                    text = "Cheese Maggi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_maggi",
+                    text = "Egg Maggi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "veg_maggi",
+                    text = "Veg Maggi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (icons for common levels)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mild_spice_maggi
+                ),
+                FilterChip(
+                    id = "medium_spicy",
+                    text = "Medium Spicy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spice_maggi
+                ),
+                FilterChip(
+                    id = "extra_spicy_maggi",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADD-ONS (icons for popular add-ons)
+                FilterChip(
+                    id = "extra_veggies",
+                    text = "Extra Vegetables",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veggies
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn",
+                    text = "Sweet Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushroom",
+                    text = "Mushroom",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE
+                FilterChip(
+                    id = "dry_maggi",
+                    text = "Dry Maggi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soupy_maggi",
+                    text = "Soupy Maggi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tadka_maggi",
+                    text = "Tadka Maggi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING SIZE
+                FilterChip(
+                    id = "single_pack",
+                    text = "Single Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "double_pack",
+                    text = "Double Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jumbo_serving",
+                    text = "Jumbo Serving",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "in_plate",
+                    text = "Served in Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "in_bowl",
+                    text = "Served in Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "in_kadhai",
+                    text = "Served in Kadhai",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (icons for popular combos)
+                FilterChip(
+                    id = "with_salad",
+                    text = "With Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chai",
+                    text = "With Masala Chai",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION TIME
+                FilterChip(
+                    id = "quick_serve",
+                    text = "Quick Serve (5 mins)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "special_prep",
+                    text = "Special Preparation",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL VERSIONS
+                FilterChip(
+                    id = "college_style",
+                    text = "College Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dhaba_style",
+                    text = "Dhaba Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gourmet",
+                    text = "Gourmet Maggi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH OPTIONS
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole_wheat",
+                    text = "Whole Wheat Maggi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = masalaMaggiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val masalaMaggiItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.maggi_items_1,
+                title = "Classic Masala Maggi",
+                price = "₹50",
+                restaurantName = "Maggi Point",
+                rating = "4.7",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹12",
+                address = "Colaba Causeway, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.maggi_items_2,
+                title = "Butter Cheese Maggi",
+                price = "₹75",
+                restaurantName = "Cafe Delhi Heights",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "20%",
+                discountAmount = "up to ₹30",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.maggi_items_3,
+                title = "Egg Maggi Special",
+                price = "₹65",
+                restaurantName = "Egg Factory",
+                rating = "4.8",
+                deliveryTime = "12-15 mins",
+                distance = "0.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹13",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.maggi_items_4,
+                title = "Veggie Loaded Maggi",
+                price = "₹60",
+                restaurantName = "Health Kitchen",
+                rating = "4.6",
+                deliveryTime = "10-14 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "up to ₹30",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.maggi_items_5,
+                title = "Paneer Tikka Maggi",
+                price = "₹85",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.4",
+                deliveryTime = "18-22 mins",
+                distance = "1.3 km",
+                discount = "30%",
+                discountAmount = "up to ₹51",
+                address = "Chandigarh"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.maggi_items_6,
+                title = "Tandoori Maggi",
+                price = "₹90",
+                restaurantName = "Barbecue Nation",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "18%",
+                discountAmount = "up to ₹32",
+                address = "Juhu, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = masalaMaggiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val masalaMaggiRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.maggi_1,
+                title = "Classic Masala Maggi",
+                price = "₹50",
+                restaurantName = "Maggi Point",
+                rating = "4.7",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹20",
+                address = "Colaba Causeway, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.maggi_2,
+                title = "Butter Cheese Maggi",
+                price = "₹75",
+                restaurantName = "Cafe Delhi Heights",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹22",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.maggi_3,
+                title = "Egg Maggi Special",
+                price = "₹65",
+                restaurantName = "Egg Factory",
+                rating = "4.8",
+                deliveryTime = "12-15 mins",
+                distance = "0.7 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹13",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.maggi_4,
+                title = "Veggie Loaded Maggi",
+                price = "₹60",
+                restaurantName = "Health Kitchen",
+                rating = "4.6",
+                deliveryTime = "10-14 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹30",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.maggi_5,
+                title = "Paneer Tikka Maggi",
+                price = "₹85",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.4",
+                deliveryTime = "18-22 mins",
+                distance = "1.3 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹51",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.maggi_6,
+                title = "Tandoori Maggi",
+                price = "₹90",
+                restaurantName = "Barbecue Nation",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹32",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.maggi_7,
+                title = "Schezwan Maggi",
+                price = "₹70",
+                restaurantName = "Chinese Wok",
+                rating = "4.3",
+                deliveryTime = "12-16 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹28",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.maggi_8,
+                title = "Masala Maggi with Garlic Bread",
+                price = "₹95",
+                restaurantName = "Italian Bistro",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹28",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.maggi_9,
+                title = "Chicken Maggi",
+                price = "₹80",
+                restaurantName = "Non-Veg Hub",
+                rating = "4.7",
+                deliveryTime = "15-18 mins",
+                distance = "1.0 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹35",
+                address = "Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.maggi_10,
+                title = "Double Cheese Maggi",
+                price = "₹85",
+                restaurantName = "Cheese Factory",
+                rating = "4.5",
+                deliveryTime = "14-18 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹42",
+                address = "Pune"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.maggi_11,
+                title = "Mushroom Maggi",
+                price = "₹75",
+                restaurantName = "Mushroom Magic",
+                rating = "4.4",
+                deliveryTime = "16-20 mins",
+                distance = "1.4 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹18",
+                address = "Ooty, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.maggi_12,
+                title = "College Style Maggi",
+                price = "₹40",
+                restaurantName = "Campus Canteen",
+                rating = "4.8",
+                deliveryTime = "10-12 mins",
+                distance = "0.3 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹8",
+                address = "DU North Campus, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.maggi_13,
+                title = "Corn Capsicum Maggi",
+                price = "₹65",
+                restaurantName = "Veg Delight",
+                rating = "4.6",
+                deliveryTime = "12-15 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹26",
+                address = "Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.maggi_14,
+                title = "Maggi Noodles with Soup",
+                price = "₹95",
+                restaurantName = "Soup & Noodles",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "1.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹28",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.maggi_15,
+                title = "Extra Spicy Maggi",
+                price = "₹55",
+                restaurantName = "Spicy Corner",
+                rating = "4.3",
+                deliveryTime = "11-14 mins",
+                distance = "0.6 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹19",
+                address = "Nagpur"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.maggi_16,
+                title = "Maggi with Fried Rice",
+                price = "₹120",
+                restaurantName = "Combo Meals",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹60",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.maggi_17,
+                title = "Italian Herbs Maggi",
+                price = "₹85",
+                restaurantName = "Fusion Kitchen",
+                rating = "4.6",
+                deliveryTime = "17-21 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹34",
+                address = "Goa"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.maggi_18,
+                title = "Jain Maggi (No Onion Garlic)",
+                price = "₹60",
+                restaurantName = "Jain Special",
+                rating = "4.8",
+                deliveryTime = "13-16 mins",
+                distance = "0.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹18",
+                address = "Surat"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.maggi_19,
+                title = "Maggi Burger Combo",
+                price = "₹110",
+                restaurantName = "Burger King",
+                rating = "4.4",
+                deliveryTime = "22-28 mins",
+                distance = "2.1 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹66",
+                address = "Noida"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.maggi_20,
+                title = "Maggi with Cold Coffee",
+                price = "₹105",
+                restaurantName = "Cafe Coffee Day",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹37",
+                address = "Lucknow"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

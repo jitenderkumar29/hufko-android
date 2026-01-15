@@ -29921,12 +29921,1249 @@ fun MasalaMaggiCategoryPage() {
 
 @Composable
 fun KulcheCategoryPage() {
-    CategoryContentPage("Kulche")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val kulcheFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // KULCHE TYPE (with icons for main variants)
+                FilterChip(
+                    id = "plain_kulcha",
+                    text = "Plain Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kulcha_plain
+                ),
+                FilterChip(
+                    id = "paneer_kulcha",
+                    text = "Paneer Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_kulcha
+                ),
+                FilterChip(
+                    id = "aloo_kulcha",
+                    text = "Aloo Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_aloo_kulcha
+                ),
+                FilterChip(
+                    id = "onion_kulcha",
+                    text = "Onion Kulcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_kulcha",
+                    text = "Mint Kulcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "butter_kulcha",
+                    text = "Butter Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_butter_kulcha
+                ),
+
+                // STUFFING TYPE (icons for popular stuffings)
+                FilterChip(
+                    id = "extra_stuffed",
+                    text = "Extra Stuffed",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stuffed
+                ),
+                FilterChip(
+                    id = "medium_stuffed",
+                    text = "Medium Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "light_stuffed",
+                    text = "Lightly Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (icons for different preparations)
+                FilterChip(
+                    id = "tawa_kulcha",
+                    text = "Tawa Kulcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tandoor_tawa",
+                    text = "Tandoor + Tawa",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE VARIATIONS
+                FilterChip(
+                    id = "regular_size",
+                    text = "Regular (2 pieces)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_kulchas",
+                    text = "Mini Kulchas (4 pieces)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (icons for popular combinations)
+                FilterChip(
+                    id = "with_rajma",
+                    text = "With Rajma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_kadai_paneer",
+                    text = "With Kadai Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_curd",
+                    text = "With Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS & GARNISH
+                FilterChip(
+                    id = "corainder_garnish",
+                    text = "Coriander Garnish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onion_rings",
+                    text = "Onion Rings",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_wedge",
+                    text = "Lemon Wedge",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL
+                FilterChip(
+                    id = "mild_spice",
+                    text = "Mild Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL VARIATIONS
+                FilterChip(
+                    id = "dilli_style",
+                    text = "Dilli Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keema_kulcha",
+                    text = "Keema Kulcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH OPTIONS
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain Kulcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole_wheat",
+                    text = "Whole Wheat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "open_serve",
+                    text = "Open Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "plated_serve",
+                    text = "Plated Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = kulcheFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val kulcheItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.kulche_items_1,
+                title = "Amritsari Paneer Kulcha",
+                price = "₹180",
+                restaurantName = "Kulcha King",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.kulche_items_2,
+                title = "Butter Kulcha with Chole",
+                price = "₹160",
+                restaurantName = "Chawla's",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹24",
+                address = "Punjabi Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.kulche_items_3,
+                title = "Aloo Kulcha Platter",
+                price = "₹140",
+                restaurantName = "Bittu Tikki Wala",
+                rating = "4.7",
+                deliveryTime = "10-14 mins",
+                distance = "0.6 km",
+                discount = "25%",
+                discountAmount = "up to ₹35",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.kulche_items_4,
+                title = "Cheese Burst Kulcha",
+                price = "₹220",
+                restaurantName = "Kulche Junction",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹66",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.kulche_items_5,
+                title = "Keema Kulcha Special",
+                price = "₹250",
+                restaurantName = "Mughlai Nights",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Old Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.kulche_items_6,
+                title = "Jumbo Tandoori Kulcha",
+                price = "₹200",
+                restaurantName = "Tandoor Express",
+                rating = "4.4",
+                deliveryTime = "16-20 mins",
+                distance = "1.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = kulcheItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val kulcheRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.kulche_1,
+                title = "Amritsari Paneer Kulcha",
+                price = "₹180",
+                restaurantName = "Kulcha King",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.kulche_2,
+                title = "Butter Kulcha with Chole",
+                price = "₹160",
+                restaurantName = "Chawla's",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "0.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹24",
+                address = "Punjabi Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.kulche_3,
+                title = "Aloo Kulcha Platter",
+                price = "₹140",
+                restaurantName = "Bittu Tikki Wala",
+                rating = "4.7",
+                deliveryTime = "10-14 mins",
+                distance = "0.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹35",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.kulche_4,
+                title = "Cheese Burst Kulcha",
+                price = "₹220",
+                restaurantName = "Kulche Junction",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹66",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.kulche_5,
+                title = "Keema Kulcha Special",
+                price = "₹250",
+                restaurantName = "Mughlai Nights",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹25",
+                address = "Old Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.kulche_6,
+                title = "Jumbo Tandoori Kulcha",
+                price = "₹200",
+                restaurantName = "Tandoor Express",
+                rating = "4.4",
+                deliveryTime = "16-20 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.kulche_7,
+                title = "Onion Kulcha with Dal Makhani",
+                price = "₹190",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "1.3 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹28",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.kulche_8,
+                title = "Mint Coriander Kulcha",
+                price = "₹150",
+                restaurantName = "Green Leaf",
+                rating = "4.6",
+                deliveryTime = "14-18 mins",
+                distance = "0.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹30",
+                address = "Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.kulche_9,
+                title = "Mix Veg Kulcha Combo",
+                price = "₹175",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.5",
+                deliveryTime = "15-19 mins",
+                distance = "1.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹43",
+                address = "Noida"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.kulche_10,
+                title = "Extra Butter Kulcha",
+                price = "₹170",
+                restaurantName = "Butter House",
+                rating = "4.8",
+                deliveryTime = "13-17 mins",
+                distance = "0.7 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹30",
+                address = "South Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.kulche_11,
+                title = "Gobhi Kulcha Special",
+                price = "₹155",
+                restaurantName = "Cauliflower Magic",
+                rating = "4.3",
+                deliveryTime = "16-20 mins",
+                distance = "1.4 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹34",
+                address = "Faridabad"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.kulche_12,
+                title = "Mini Kulcha Platter (6 pcs)",
+                price = "₹210",
+                restaurantName = "Kulcha Bites",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹63",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.kulche_13,
+                title = "Chole Kulcha Thali",
+                price = "₹240",
+                restaurantName = "Dhaba Style",
+                rating = "4.9",
+                deliveryTime = "22-28 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹36",
+                address = "Highway Dhaba"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.kulche_14,
+                title = "Paneer Tikka Kulcha",
+                price = "₹230",
+                restaurantName = "Tikka King",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹46",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.kulche_15,
+                title = "Spicy Masala Kulcha",
+                price = "₹165",
+                restaurantName = "Spice Route",
+                rating = "4.4",
+                deliveryTime = "14-18 mins",
+                distance = "1.0 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹19",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.kulche_16,
+                title = "Plain Tandoori Kulcha",
+                price = "₹120",
+                restaurantName = "Simple Eats",
+                rating = "4.5",
+                deliveryTime = "10-14 mins",
+                distance = "0.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹12",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.kulche_17,
+                title = "Corn Cheese Kulcha",
+                price = "₹195",
+                restaurantName = "Cheese & Corn",
+                rating = "4.7",
+                deliveryTime = "17-21 mins",
+                distance = "1.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹48",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.kulche_18,
+                title = "Rajma Chawal with Kulcha",
+                price = "₹225",
+                restaurantName = "Punjabi Tadka",
+                rating = "4.8",
+                deliveryTime = "19-24 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹45",
+                address = "Greater Noida"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.kulche_19,
+                title = "Kulcha with Lassi Combo",
+                price = "₹210",
+                restaurantName = "Punjabi Culture",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹31",
+                address = "Amritsar"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.kulche_20,
+                title = "Family Kulcha Pack (4 pcs)",
+                price = "₹350",
+                restaurantName = "Family Kitchen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹105",
+                address = "Saket, Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun WingsCategoryPage() {
-    CategoryContentPage("Wings")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val wingsFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // WING STYLES (with icons)
+                FilterChip(
+                    id = "bone_in",
+                    text = "Bone-in",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bone_in_wings
+                ),
+                FilterChip(
+                    id = "boneless",
+                    text = "Boneless",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_boneless_wings
+                ),
+                FilterChip(
+                    id = "drumettes",
+                    text = "Drumettes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole_wings",
+                    text = "Whole Wings",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVORS/SAUCES (with icons for popular ones)
+                FilterChip(
+                    id = "buffalo",
+                    text = "Buffalo",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_buffalo_sauce
+                ),
+                FilterChip(
+                    id = "bbq",
+                    text = "BBQ",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bbq_sauce
+                ),
+                FilterChip(
+                    id = "garlic_parmesan",
+                    text = "Garlic Parmesan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_garlic_parmesan
+                ),
+                FilterChip(
+                    id = "teriyaki",
+                    text = "Teriyaki",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honey_mustard",
+                    text = "Honey Mustard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_pepper",
+                    text = "Lemon Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_habanero",
+                    text = "Mango Habanero",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEAT LEVEL (with icons)
+                FilterChip(
+                    id = "extra_hot",
+                    text = "Extra Hot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "atomic",
+                    text = "Atomic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE
+                FilterChip(
+                    id = "grilled",
+                    text = "Grilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smoked",
+                    text = "Smoked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZES/QUANTITIES
+                FilterChip(
+                    id = "6_piece",
+                    text = "6 Piece",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "10_piece",
+                    text = "10 Piece",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "20_piece",
+                    text = "20 Piece",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CRISPINESS LEVEL
+                FilterChip(
+                    id = "extra_crispy",
+                    text = "Extra Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "traditional",
+                    text = "Traditional",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tender",
+                    text = "Tender",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIDES/ADD-ONS (with icons for popular sides)
+                FilterChip(
+                    id = "with_coleslaw",
+                    text = "With Coleslaw",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_blue_cheese",
+                    text = "Blue Cheese Dip",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "celery_carrots",
+                    text = "Celery & Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIALTY WINGS
+                FilterChip(
+                    id = "dry_rub",
+                    text = "Dry Rub",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "asian_zinger",
+                    text = "Asian Zinger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cajun",
+                    text = "Cajun Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH/DIETARY
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb",
+                    text = "Low Carb Option",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
+        FilterButtonFood(
+            filterConfig = wingsFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val wingsItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.wings_items_1,
+                title = "Classic Buffalo Wings",
+                price = "₹480",
+                restaurantName = "Wingstop India",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹72",
+                address = "Connaught Place, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.wings_items_2,
+                title = "BBQ Boneless Platter",
+                price = "₹420",
+                restaurantName = "Smoky Grill",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹84",
+                address = "Saket, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.wings_items_3,
+                title = "Garlic Parmesan Deluxe",
+                price = "₹550",
+                restaurantName = "Italian Bistro",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹55",
+                address = "Cyber City, Gurgaon",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.wings_items_4,
+                title = "Atomic Spicy Combo",
+                price = "₹650",
+                restaurantName = "Firehouse Wings",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "up to ₹162",
+                address = "Rajouri Garden, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.wings_items_5,
+                title = "Teriyaki Glazed Wings",
+                price = "₹380",
+                restaurantName = "Asian Fusion",
+                rating = "4.5",
+                deliveryTime = "22-28 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹114",
+                address = "Greater Kailash, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.wings_items_6,
+                title = "Honey Mustard Bucket",
+                price = "₹520",
+                restaurantName = "Wing Masters",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "50% off",
+                address = "Vasant Kunj, Delhi",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = wingsItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val wingsRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.wings_1,
+                title = "Classic Buffalo Wings",
+                price = "₹480",
+                restaurantName = "Wingstop India",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹72",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.wings_2,
+                title = "BBQ Boneless Platter",
+                price = "₹420",
+                restaurantName = "Smoky Grill",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹84",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.wings_3,
+                title = "Garlic Parmesan Deluxe",
+                price = "₹550",
+                restaurantName = "Italian Bistro",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹55",
+                address = "Cyber City, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.wings_4,
+                title = "Atomic Spicy Combo",
+                price = "₹650",
+                restaurantName = "Firehouse Wings",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹162",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.wings_5,
+                title = "Teriyaki Glazed Wings",
+                price = "₹380",
+                restaurantName = "Asian Fusion",
+                rating = "4.5",
+                deliveryTime = "22-28 mins",
+                distance = "1.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹114",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.wings_6,
+                title = "Honey Mustard Bucket",
+                price = "₹520",
+                restaurantName = "Wing Masters",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "BOGO OFF",
+                discountAmount = "50% off",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.wings_7,
+                title = "Lemon Pepper Dry Rub",
+                price = "₹460",
+                restaurantName = "Zesty Grill",
+                rating = "4.6",
+                deliveryTime = "17-22 mins",
+                distance = "1.1 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹82",
+                address = "Punjabi Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.wings_8,
+                title = "Mango Habanero Wings",
+                price = "₹490",
+                restaurantName = "Tropical Heat",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "1.3 km",
+                discount = "22% OFF",
+                discountAmount = "up to ₹107",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.wings_9,
+                title = "Korean Fried Wings",
+                price = "₹540",
+                restaurantName = "Seoul Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹81",
+                address = "Defence Colony, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.wings_10,
+                title = "Cajun Spice Wings",
+                price = "₹430",
+                restaurantName = "Louisiana Grill",
+                rating = "4.5",
+                deliveryTime = "16-20 mins",
+                distance = "1.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹86",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.wings_11,
+                title = "Sichuan Chilli Wings",
+                price = "₹470",
+                restaurantName = "Dragon Chinese",
+                rating = "4.7",
+                deliveryTime = "21-26 mins",
+                distance = "1.6 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹117",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.wings_12,
+                title = "Peri Peri Flaming Wings",
+                price = "₹510",
+                restaurantName = "Nando's India",
+                rating = "4.9",
+                deliveryTime = "24-29 mins",
+                distance = "2.1 km",
+                discount = "12% OFF",
+                discountAmount = "up to ₹61",
+                address = "Select Citywalk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.wings_13,
+                title = "Air Fried Healthy Wings",
+                price = "₹390",
+                restaurantName = "Fit Kitchen",
+                rating = "4.4",
+                deliveryTime = "18-23 mins",
+                distance = "1.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹117",
+                address = "Golf Course Road, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.wings_14,
+                title = "Drumsticks Only Bucket",
+                price = "₹580",
+                restaurantName = "Chicken Lovers",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹87",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.wings_15,
+                title = "Smoked BBQ Wings",
+                price = "₹620",
+                restaurantName = "Smokehouse Grill",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹124",
+                address = "DLF Phase 4, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.wings_16,
+                title = "Spicy Ranch Wings",
+                price = "₹440",
+                restaurantName = "American Diner",
+                rating = "4.5",
+                deliveryTime = "14-19 mins",
+                distance = "0.9 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹79",
+                address = "Cyber Hub, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.wings_17,
+                title = "Thai Sweet Chilli Wings",
+                price = "₹500",
+                restaurantName = "Bangkok Street",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.7 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹125",
+                address = "Malviya Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.wings_18,
+                title = "Family Feast Wings Combo",
+                price = "₹750",
+                restaurantName = "Wing Republic",
+                rating = "4.9",
+                deliveryTime = "26-32 mins",
+                distance = "2.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹225",
+                address = "Noida Sector 18"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.wings_19,
+                title = "Butter Chicken Wings",
+                price = "₹530",
+                restaurantName = "Indian Fusion",
+                rating = "4.6",
+                deliveryTime = "19-24 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹106",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.wings_20,
+                title = "Jalapeño Cheese Wings",
+                price = "₹570",
+                restaurantName = "Mexican Fiesta",
+                rating = "4.8",
+                deliveryTime = "23-28 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹85",
+                address = "Hauz Khas, Delhi"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

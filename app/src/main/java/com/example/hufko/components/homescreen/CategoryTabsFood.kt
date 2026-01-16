@@ -31168,12 +31168,1211 @@ fun WingsCategoryPage() {
 
 @Composable
 fun AlooPooriCategoryPage() {
-    CategoryContentPage("Aloo Poori")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val alooPooriFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // POORI STYLES & TYPES (with icons where relevant)
+                FilterChip(
+                    id = "whole_wheat",
+                    text = "Whole Wheat Poori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_wheat_grain
+                ),
+                FilterChip(
+                    id = "plain_maida",
+                    text = "Plain Flour Poori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_flour
+                ),
+                FilterChip(
+                    id = "multi_grain",
+                    text = "Multi-Grain Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stuffed_poori",
+                    text = "Stuffed Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ALOO BHAJI TYPES (with icons for popular types)
+                FilterChip(
+                    id = "dry_aloo",
+                    text = "Dry Aloo Bhaji",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_dry
+                ),
+                FilterChip(
+                    id = "gravy_aloo",
+                    text = "Gravy Aloo Bhaji",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gravy
+                ),
+                FilterChip(
+                    id = "masala_aloo",
+                    text = "Spicy Masala Aloo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "simple_aloo",
+                    text = "Simple Aloo Bhaji",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sukha_aloo",
+                    text = "Sukha Aloo",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mild_spice_aloo_poori
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADDITIONAL ITEMS/COMBO (with icons)
+                FilterChip(
+                    id = "with_papad",
+                    text = "With Papad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chutney",
+                    text = "With Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING OIL/TYPE
+                FilterChip(
+                    id = "oil_free",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mustard_oil",
+                    text = "Mustard Oil Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "jain_style",
+                    text = "Jain Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "punjabi_style",
+                    text = "Punjabi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "south_indian_style",
+                    text = "South Indian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH/DIETARY
+                FilterChip(
+                    id = "no_onion_garlic",
+                    text = "No Onion Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan Option",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // QUANTITY/SERVINGS
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION STYLE
+                FilterChip(
+                    id = "homestyle",
+                    text = "Home-style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "restaurant_style",
+                    text = "Restaurant Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = alooPooriFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val alooPooriItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.aloo_poori_1,
+                title = "Punjabi Style Aloo Poori",
+                price = "₹180",
+                restaurantName = "Baba Ka Dhaba",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Chandni Chowk, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.aloo_poori_2,
+                title = "Special Masala Aloo Poori",
+                price = "₹220",
+                restaurantName = "Sagar Ratna",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹33",
+                address = "Karol Bagh, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.aloo_poori_3,
+                title = "Gravy Aloo with Poori",
+                price = "₹200",
+                restaurantName = "Haldiram's",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹20",
+                address = "Connaught Place, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.aloo_poori_4,
+                title = "Sukha Aloo Poori Combo",
+                price = "₹250",
+                restaurantName = "Saravana Bhavan",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "25%",
+                discountAmount = "up to ₹62",
+                address = "MG Road, Gurgaon",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.aloo_poori_5,
+                title = "Jain Style Aloo Poori",
+                price = "₹210",
+                restaurantName = "Rajdhani",
+                rating = "4.4",
+                deliveryTime = "22-28 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹63",
+                address = "Noida Sector 18",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.aloo_poori_6,
+                title = "Homestyle Poori Bhaji",
+                price = "₹170",
+                restaurantName = "Moti Mahal",
+                rating = "4.9",
+                deliveryTime = "12-15 mins",
+                distance = "0.5 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "Free Curd",
+                address = "Old Delhi",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = alooPooriItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val alooPooriRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.aloo_poori1_1,
+                title = "Punjabi Aloo Poori",
+                price = "₹180",
+                restaurantName = "Baba Ka Dhaba",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.aloo_poori1_2,
+                title = "Masala Aloo Poori",
+                price = "₹220",
+                restaurantName = "Sagar Ratna",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹33",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.aloo_poori1_3,
+                title = "Gravy Aloo Poori",
+                price = "₹200",
+                restaurantName = "Haldiram's",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹20",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.aloo_poori1_4,
+                title = "Sukha Aloo Poori Combo",
+                price = "₹250",
+                restaurantName = "Saravana Bhavan",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹62",
+                address = "MG Road, Gurgaon"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.aloo_poori1_5,
+                title = "Jain Style Aloo Poori",
+                price = "₹210",
+                restaurantName = "Rajdhani",
+                rating = "4.4",
+                deliveryTime = "22-28 mins",
+                distance = "1.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹63",
+                address = "Noida Sector 18"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.aloo_poori1_6,
+                title = "Homestyle Poori Bhaji",
+                price = "₹170",
+                restaurantName = "Moti Mahal",
+                rating = "4.9",
+                deliveryTime = "12-15 mins",
+                distance = "0.5 km",
+                discount = "BOGO OFF",
+                discountAmount = "Free Curd",
+                address = "Old Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.aloo_poori_7,
+                title = "Whole Wheat Aloo Poori",
+                price = "₹190",
+                restaurantName = "Giani's",
+                rating = "4.3",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹38",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.aloo_poori_8,
+                title = "Aloo Poori Thali",
+                price = "₹280",
+                restaurantName = "Bikanervala",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "COMBO OFF",
+                discountAmount = "Papad & Pickle",
+                address = "Nehru Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.aloo_poori_9,
+                title = "Mini Poori Chaat",
+                price = "₹150",
+                restaurantName = "Kuremal",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹60",
+                address = "Chawri Bazar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.aloo_poori_10,
+                title = "Family Pack Aloo Poori",
+                price = "₹450",
+                restaurantName = "Nathu's",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Extra Pooris",
+                address = "Bengaluru"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.aloo_poori_11,
+                title = "Spicy South Aloo Poori",
+                price = "₹230",
+                restaurantName = "Murugan Idli",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.6 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹41",
+                address = "Chennai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.aloo_poori_12,
+                title = "Royal Aloo Poori",
+                price = "₹320",
+                restaurantName = "Udupi Palace",
+                rating = "4.8",
+                deliveryTime = "24-29 mins",
+                distance = "2.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.aloo_poori_13,
+                title = "Healthy Aloo Poori",
+                price = "₹240",
+                restaurantName = "Diet Kitchen",
+                rating = "4.4",
+                deliveryTime = "18-23 mins",
+                distance = "1.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹72",
+                address = "Pune"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.aloo_poori_14,
+                title = "Extra Poori Special",
+                price = "₹290",
+                restaurantName = "Shree Thaker Bhoj",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹43",
+                address = "Ahmedabad"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.aloo_poori_15,
+                title = "Deluxe Poori Bhaji",
+                price = "₹350",
+                restaurantName = "Maharaja Bhog",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹70",
+                address = "Hyderabad"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.aloo_poori_16,
+                title = "Ghee Aloo Poori",
+                price = "₹270",
+                restaurantName = "Shree Ram Bhoj",
+                rating = "4.5",
+                deliveryTime = "14-19 mins",
+                distance = "0.9 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹48",
+                address = "Jaipur"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.aloo_poori_17,
+                title = "Street Style Aloo Poori",
+                price = "₹160",
+                restaurantName = "Chaat Corner",
+                rating = "4.7",
+                deliveryTime = "12-17 mins",
+                distance = "0.7 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹56",
+                address = "Kolkata"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.aloo_poori_18,
+                title = "Mega Aloo Poori Feast",
+                price = "₹550",
+                restaurantName = "Grand Restaurant",
+                rating = "4.9",
+                deliveryTime = "26-32 mins",
+                distance = "2.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹165",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.aloo_poori_19,
+                title = "Garlic Aloo Poori",
+                price = "₹260",
+                restaurantName = "Spice Kitchen",
+                rating = "4.6",
+                deliveryTime = "19-24 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹52",
+                address = "Lucknow"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.aloo_poori_20,
+                title = "Special Sunday Poori",
+                price = "₹310",
+                restaurantName = "Sunday Brunch",
+                rating = "4.8",
+                deliveryTime = "23-28 mins",
+                distance = "1.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹46",
+                address = "Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun OmeletteCategoryPage() {
-    CategoryContentPage("Omelette")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val omeletteFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // OMELETTE STYLES & TYPES (with icons)
+                FilterChip(
+                    id = "plain_omelette",
+                    text = "Plain Omelette",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_egg
+                ),
+                FilterChip(
+                    id = "masala_omelette",
+                    text = "Masala Omelette",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spices_omelette
+                ),
+                FilterChip(
+                    id = "cheese_omelette",
+                    text = "Cheese Omelette",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cheese_omelette
+                ),
+                FilterChip(
+                    id = "egg_white",
+                    text = "Egg White Omelette",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "double_egg",
+                    text = "Double Egg Omelette",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADD-ONS & FILLINGS (with icons)
+                FilterChip(
+                    id = "with_onion",
+                    text = "With Onion",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_onion_omelette
+                ),
+                FilterChip(
+                    id = "with_tomato",
+                    text = "With Tomato",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tomato_omelette
+                ),
+                FilterChip(
+                    id = "with_mushroom",
+                    text = "With Mushroom",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_paneer",
+                    text = "With Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chicken",
+                    text = "With Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_sausage",
+                    text = "With Sausage",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons)
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (with icons)
+                FilterChip(
+                    id = "oil",
+                    text = "Oil Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled",
+                    text = "Grilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fluffy",
+                    text = "Fluffy Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BREAD/ACCOMPANIMENTS (with icons)
+                FilterChip(
+                    id = "with_bread",
+                    text = "With Bread",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_bun",
+                    text = "With Bun",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIALTY OMELETTES
+                FilterChip(
+                    id = "spanish",
+                    text = "Spanish Omelette",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "french",
+                    text = "French Omelette",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "american",
+                    text = "American Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "desi",
+                    text = "Desi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH/DIETARY (with icons)
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_friendly",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "roll",
+                    text = "Omelette Roll",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "folded",
+                    text = "Folded",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "open_face",
+                    text = "Open Face",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // QUANTITY/SERVINGS (with icons)
+                FilterChip(
+                    id = "combo",
+                    text = "Combo Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = omeletteFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val omeletteItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.omelette_items_1,
+                title = "Masala Cheese Omelette",
+                price = "₹120",
+                restaurantName = "Egg Factory",
+                rating = "4.7",
+                deliveryTime = "12-15 mins",
+                distance = "0.6 km",
+                discount = "20%",
+                discountAmount = "up to ₹24",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.omelette_items_2,
+                title = "Double Egg Onion Omelette",
+                price = "₹90",
+                restaurantName = "Sri Udupi Park",
+                rating = "4.5",
+                deliveryTime = "10-13 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹13",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.omelette_items_3,
+                title = "Egg White Veg Omelette",
+                price = "₹140",
+                restaurantName = "Healthy Bites",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "1.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹14",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.omelette_items_4,
+                title = "Paneer Masala Omelette",
+                price = "₹160",
+                restaurantName = "Eggspresso",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.3 km",
+                discount = "25%",
+                discountAmount = "up to ₹40",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.omelette_items_5,
+                title = "Chicken Sausage Omelette",
+                price = "₹180",
+                restaurantName = "Eggitarian",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "30%",
+                discountAmount = "up to ₹54",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.omelette_items_6,
+                title = "Mushroom Spinach Omelette",
+                price = "₹150",
+                restaurantName = "The Breakfast Club",
+                rating = "4.9",
+                deliveryTime = "14-17 mins",
+                distance = "0.7 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "Free Toast",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = omeletteItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val omeletteRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.omelette_1,
+                title = "Masala Cheese Omelette",
+                price = "₹120",
+                restaurantName = "Egg Factory",
+                rating = "4.7",
+                deliveryTime = "12-15 mins",
+                distance = "0.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹24",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.omelette_2,
+                title = "Double Egg Onion Omelette",
+                price = "₹90",
+                restaurantName = "Sri Udupi Park",
+                rating = "4.5",
+                deliveryTime = "10-13 mins",
+                distance = "0.4 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹13",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.omelette_3,
+                title = "Egg White Veg Omelette",
+                price = "₹140",
+                restaurantName = "Healthy Bites",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "1.0 km",
+                discount = "10% OFF",
+                discountAmount = "up to ₹14",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.omelette_4,
+                title = "Paneer Masala Omelette",
+                price = "₹160",
+                restaurantName = "Eggspresso",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.3 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹40",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.omelette_5,
+                title = "Chicken Sausage Omelette",
+                price = "₹180",
+                restaurantName = "Eggitarian",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹54",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.omelette_6,
+                title = "Mushroom Spinach Omelette",
+                price = "₹150",
+                restaurantName = "The Breakfast Club",
+                rating = "4.9",
+                deliveryTime = "14-17 mins",
+                distance = "0.7 km",
+                discount = "BOGO OFF",
+                discountAmount = "Free Toast",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.omelette_7,
+                title = "Spanish Potato Omelette",
+                price = "₹190",
+                restaurantName = "Cafe Noir",
+                rating = "4.6",
+                deliveryTime = "22-28 mins",
+                distance = "1.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹38",
+                address = "Church Street, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.omelette_8,
+                title = "Keto Egg Omelette",
+                price = "₹200",
+                restaurantName = "Keto Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.1 km",
+                discount = "COMBO OFF",
+                discountAmount = "With Avocado",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.omelette_9,
+                title = "Farm Fresh Omelette",
+                price = "₹130",
+                restaurantName = "Naturally Yours",
+                rating = "4.5",
+                deliveryTime = "16-20 mins",
+                distance = "1.2 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹52",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.omelette_10,
+                title = "Tandoori Omelette Roll",
+                price = "₹170",
+                restaurantName = "Roll Express",
+                rating = "4.8",
+                deliveryTime = "13-16 mins",
+                distance = "0.9 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Extra Cheese",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.omelette_11,
+                title = "French Herb Omelette",
+                price = "₹210",
+                restaurantName = "Le French Cafe",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹37",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.omelette_12,
+                title = "Protein Power Omelette",
+                price = "₹220",
+                restaurantName = "Muscle Factory",
+                rating = "4.8",
+                deliveryTime = "24-29 mins",
+                distance = "2.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹55",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.omelette_13,
+                title = "Butter Garlic Omelette",
+                price = "₹135",
+                restaurantName = "Butter & Bread",
+                rating = "4.4",
+                deliveryTime = "17-22 mins",
+                distance = "1.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹40",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.omelette_14,
+                title = "Triple Egg Omelette",
+                price = "₹165",
+                restaurantName = "Eggs Unlimited",
+                rating = "4.6",
+                deliveryTime = "19-24 mins",
+                distance = "1.1 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹24",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.omelette_15,
+                title = "Italian Omelette",
+                price = "₹185",
+                restaurantName = "Little Italy",
+                rating = "4.8",
+                deliveryTime = "26-32 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹37",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.omelette_16,
+                title = "Desi Anda Omelette",
+                price = "₹110",
+                restaurantName = "Dhaba Express",
+                rating = "4.5",
+                deliveryTime = "14-19 mins",
+                distance = "0.8 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹19",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.omelette_17,
+                title = "Breakfast Special Omelette",
+                price = "₹145",
+                restaurantName = "Sunrise Cafe",
+                rating = "4.7",
+                deliveryTime = "11-16 mins",
+                distance = "0.7 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹50",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.omelette_18,
+                title = "Omelette Platter",
+                price = "₹280",
+                restaurantName = "Grand Egg Cafe",
+                rating = "4.9",
+                deliveryTime = "23-28 mins",
+                distance = "2.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹84",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.omelette_19,
+                title = "Chili Cheese Omelette",
+                price = "₹155",
+                restaurantName = "Spice & Egg",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "1.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹31",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.omelette_20,
+                title = "Sunday Brunch Omelette",
+                price = "₹195",
+                restaurantName = "Brunch & Munch",
+                rating = "4.8",
+                deliveryTime = "21-26 mins",
+                distance = "1.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹29",
+                address = "Hebbal, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

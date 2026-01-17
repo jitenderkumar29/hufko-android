@@ -32377,12 +32377,1241 @@ fun OmeletteCategoryPage() {
 
 @Composable
 fun NonVegMealCategoryPage() {
-    CategoryContentPage("Non Veg Meal")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val nonVegMealFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // MEAT TYPES (with icons)
+                FilterChip(
+                    id = "chicken",
+                    text = "Chicken",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_non_veg
+                ),
+                FilterChip(
+                    id = "mutton",
+                    text = "Mutton",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mutton_non_veg
+                ),
+                FilterChip(
+                    id = "fish",
+                    text = "Fish",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fish_non_veg
+                ),
+                FilterChip(
+                    id = "prawns",
+                    text = "Prawns",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_prawns_non_veg
+                ),
+                FilterChip(
+                    id = "beef",
+                    text = "Beef",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pork",
+                    text = "Pork",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "duck",
+                    text = "Duck",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION STYLE (mix of icons and text)
+                FilterChip(
+                    id = "grilled",
+                    text = "Grilled",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_grilled_non_veg
+                ),
+                FilterChip(
+                    id = "biryani",
+                    text = "Biryani",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "roast",
+                    text = "Roast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bbq",
+                    text = "BBQ",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed",
+                    text = "Steamed",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUISINE TYPE (some with icons)
+                FilterChip(
+                    id = "continental",
+                    text = "Continental",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mexican",
+                    text = "Mexican",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "arabic",
+                    text = "Arabic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (some with icons)
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TYPE/COMBOS
+                FilterChip(
+                    id = "thali",
+                    text = "Thali/Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "single_curry",
+                    text = "Single Curry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_meal",
+                    text = "Combo Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY
+                FilterChip(
+                    id = "keto",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING MEDIUM
+                FilterChip(
+                    id = "butter",
+                    text = "Butter Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oil_free",
+                    text = "Oil Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL SPECIALTIES
+                FilterChip(
+                    id = "kerala",
+                    text = "Kerala Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "punjabi",
+                    text = "Punjabi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bengali",
+                    text = "Bengali Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BONE TYPE
+                FilterChip(
+                    id = "boneless",
+                    text = "Boneless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_bone",
+                    text = "With Bone",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = nonVegMealFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val nonVegMealItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.nonveg_meal_1,
+                title = "Chicken Biryani Meal",
+                price = "₹280",
+                restaurantName = "Hyderabadi Spice",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹70",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.nonveg_meal_2,
+                title = "Butter Chicken Thali",
+                price = "₹320",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹64",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.nonveg_meal_3,
+                title = "Fish Curry Meal",
+                price = "₹240",
+                restaurantName = "Coastal Flavours",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹36",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.nonveg_meal_4,
+                title = "Mutton Rogan Josh Combo",
+                price = "₹350",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.8 km",
+                discount = "30%",
+                discountAmount = "up to ₹105",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.nonveg_meal_5,
+                title = "Prawns Masala Meal",
+                price = "₹290",
+                restaurantName = "Seafood Express",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "1.1 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "Free Drinks",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.nonveg_meal_6,
+                title = "Grilled Chicken Platter",
+                price = "₹380",
+                restaurantName = "BBQ Nation",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "Combo Offer",
+                discountAmount = "Free Dessert",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = nonVegMealItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val nonVegMealRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.nonveg_1,
+                title = "Chicken Biryani Meal",
+                price = "₹280",
+                restaurantName = "Hyderabadi Spice",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹70",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.nonveg_2,
+                title = "Butter Chicken Thali",
+                price = "₹320",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹64",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.nonveg_3,
+                title = "Fish Curry Meal",
+                price = "₹240",
+                restaurantName = "Coastal Flavours",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹36",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.nonveg_4,
+                title = "Mutton Rogan Josh Combo",
+                price = "₹350",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.8 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹105",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.nonveg_5,
+                title = "Prawns Masala Meal",
+                price = "₹290",
+                restaurantName = "Seafood Express",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "1.1 km",
+                discount = "BOGO OFF",
+                discountAmount = "Free Drinks",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.nonveg_6,
+                title = "Grilled Chicken Platter",
+                price = "₹380",
+                restaurantName = "BBQ Nation",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "COMBO OFF",
+                discountAmount = "Free Dessert",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.nonveg_7,
+                title = "Chicken Tikka Meal",
+                price = "₹260",
+                restaurantName = "Tandoori Nights",
+                rating = "4.7",
+                deliveryTime = "23-28 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹52",
+                address = "Church Street, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.nonveg_8,
+                title = "Mutton Biryani Family Pack",
+                price = "₹420",
+                restaurantName = "Biryani Blues",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Extra Raita",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.nonveg_9,
+                title = "Fish Fry Meal",
+                price = "₹220",
+                restaurantName = "Mangalorean Bites",
+                rating = "4.6",
+                deliveryTime = "19-24 mins",
+                distance = "1.3 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹88",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.nonveg_10,
+                title = "Chicken Shawarma Platter",
+                price = "₹270",
+                restaurantName = "Arabian Nights",
+                rating = "4.7",
+                deliveryTime = "16-21 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹81",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.nonveg_11,
+                title = "Egg Curry Thali",
+                price = "₹180",
+                restaurantName = "Desi Dhaba",
+                rating = "4.5",
+                deliveryTime = "14-19 mins",
+                distance = "0.7 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹32",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.nonveg_12,
+                title = "High Protein Chicken Meal",
+                price = "₹320",
+                restaurantName = "Protein House",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "2.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹80",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.nonveg_13,
+                title = "Pork Vindaloo Meal",
+                price = "₹310",
+                restaurantName = "Goan Kitchen",
+                rating = "4.6",
+                deliveryTime = "31-36 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹62",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.nonveg_14,
+                title = "Chicken Kebab Platter",
+                price = "₹340",
+                restaurantName = "Kebab Corner",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹51",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.nonveg_15,
+                title = "Butter Prawns Meal",
+                price = "₹360",
+                restaurantName = "Butter Prawn Specials",
+                rating = "4.8",
+                deliveryTime = "26-31 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹72",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.nonveg_16,
+                title = "Mutton Curry Combo",
+                price = "₹300",
+                restaurantName = "Curry House",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹54",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.nonveg_17,
+                title = "Chicken 65 Meal",
+                price = "₹250",
+                restaurantName = "Spicy Hub",
+                rating = "4.6",
+                deliveryTime = "17-22 mins",
+                distance = "0.9 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹87",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.nonveg_18,
+                title = "Seafood Platter",
+                price = "₹450",
+                restaurantName = "Ocean's Delight",
+                rating = "4.9",
+                deliveryTime = "33-38 mins",
+                distance = "2.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹135",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.nonveg_19,
+                title = "Chicken Chettinad Meal",
+                price = "₹290",
+                restaurantName = "Chettinad Spice",
+                rating = "4.7",
+                deliveryTime = "24-29 mins",
+                distance = "1.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹58",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.nonveg_20,
+                title = "Mughlai Chicken Meal",
+                price = "₹330",
+                restaurantName = "Mughlai Palace",
+                rating = "4.8",
+                deliveryTime = "27-32 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹49",
+                address = "Hebbal, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun BreadPakodaCategoryPage() {
-    CategoryContentPage("Bread Pakoda")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val breadPakodaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // BREAD TYPE (with icons for common types)
+                FilterChip(
+                    id = "white_bread",
+                    text = "White Bread",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bread_pakoda  // or ic_bread
+                ),
+                FilterChip(
+                    id = "brown_bread",
+                    text = "Brown Bread",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bread_pakoda_brown
+                ),
+                FilterChip(
+                    id = "sandwich_bread",
+                    text = "Sandwich Bread",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "masala_bread",
+                    text = "Masala Bread",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FILLING TYPE (with icons for popular fillings)
+                FilterChip(
+                    id = "potato_masala",
+                    text = "Potato Masala",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_brown
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_brown
+                ),
+                FilterChip(
+                    id = "cheese",
+                    text = "Cheese",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cheese_brown
+                ),
+                FilterChip(
+                    id = "mixed_veg",
+                    text = "Mixed Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn",
+                    text = "Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_filling",
+                    text = "No Filling",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BATTER TYPE (icon for special batter)
+                FilterChip(
+                    id = "cornflour_batter",
+                    text = "Cornflour Batter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rice_flour_batter",
+                    text = "Rice Flour Batter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mixed_batter",
+                    text = "Mixed Flour Batter",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (icon for popular style)
+                FilterChip(
+                    id = "shallow_fried",
+                    text = "Shallow Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SAUCE/CHUTNEY
+                FilterChip(
+                    id = "no_sauce",
+                    text = "No Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TYPE VARIATIONS
+                FilterChip(
+                    id = "triangle_cut",
+                    text = "Triangle Cut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rectangle_cut",
+                    text = "Rectangle Cut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stuffed",
+                    text = "Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "open_sandwich",
+                    text = "Open Sandwich Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // QUANTITY/PACKS
+                FilterChip(
+                    id = "single_piece",
+                    text = "Single Piece",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_pack",
+                    text = "Combo Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY
+                FilterChip(
+                    id = "jain",
+                    text = "Jain Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless",
+                    text = "Eggless Batter",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = breadPakodaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val breadPakodaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.bread_pakoda_items_1,
+                title = "Classic Potato Bread Pakoda",
+                price = "₹60",
+                restaurantName = "Mumbai Street Cafe",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹12",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.bread_pakoda_items_2,
+                title = "Cheese Stuffed Bread Pakoda",
+                price = "₹85",
+                restaurantName = "Delhi Chaat Corner",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.3 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "Free Chutney",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.bread_pakoda_items_3,
+                title = "Paneer Masala Bread Pakoda",
+                price = "₹75",
+                restaurantName = "Punjabi Nashta House",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹11",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.bread_pakoda_items_4,
+                title = "Spicy Masala Bread Pakoda",
+                price = "₹55",
+                restaurantName = "South Indian Tiffin",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.4 km",
+                discount = "30%",
+                discountAmount = "up to ₹16",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.bread_pakoda_items_5,
+                title = "Brown Bread Healthy Pakoda",
+                price = "₹70",
+                restaurantName = "Healthy Bites Cafe",
+                rating = "4.4",
+                deliveryTime = "18-22 mins",
+                distance = "1.0 km",
+                discount = "Oil-Free Option",
+                discountAmount = "₹10 Extra",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.bread_pakoda_items_6,
+                title = "Jain Special Bread Pakoda",
+                price = "₹65",
+                restaurantName = "Pure Veg Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "No Onion Garlic",
+                discountAmount = "Special Jain",
+                address = "MG Road, Bangalore",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = breadPakodaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val breadPakodaRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.bread_pakoda_1,
+                title = "Classic Potato Bread Pakoda",
+                price = "₹60",
+                restaurantName = "Mumbai Street Cafe",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹12",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.bread_pakoda_2,
+                title = "Cheese Stuffed Bread Pakoda",
+                price = "₹85",
+                restaurantName = "Delhi Chaat Corner",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.3 km",
+                discount = "BOGO OFF",
+                discountAmount = "Free Chutney",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.bread_pakoda_3,
+                title = "Paneer Masala Bread Pakoda",
+                price = "₹75",
+                restaurantName = "Punjabi Nashta House",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹11",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.bread_pakoda_4,
+                title = "Spicy Masala Bread Pakoda",
+                price = "₹55",
+                restaurantName = "South Indian Tiffin",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹16",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.bread_pakoda_5,
+                title = "Brown Bread Healthy Pakoda",
+                price = "₹70",
+                restaurantName = "Healthy Bites Cafe",
+                rating = "4.4",
+                deliveryTime = "18-22 mins",
+                distance = "1.0 km",
+                discount = "HEALTH OFF",
+                discountAmount = "Oil-Free",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.bread_pakoda_6,
+                title = "Jain Special Bread Pakoda",
+                price = "₹65",
+                restaurantName = "Pure Veg Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "JAIN OFF",
+                discountAmount = "No Onion Garlic",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.bread_pakoda_7,
+                title = "Double Cheese Bread Pakoda",
+                price = "₹95",
+                restaurantName = "Cheese Lovers Cafe",
+                rating = "4.7",
+                deliveryTime = "23-28 mins",
+                distance = "1.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹19",
+                address = "Church Street, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.bread_pakoda_8,
+                title = "Family Pack Bread Pakoda",
+                price = "₹220",
+                restaurantName = "Pakoda Paradise",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Extra Chutney",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.bread_pakoda_9,
+                title = "Crispy Corn Bread Pakoda",
+                price = "₹80",
+                restaurantName = "Corn Specialists",
+                rating = "4.6",
+                deliveryTime = "19-24 mins",
+                distance = "1.3 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹32",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.bread_pakoda_10,
+                title = "Schezwan Bread Pakoda",
+                price = "₹90",
+                restaurantName = "Indo-Chinese Hub",
+                rating = "4.7",
+                deliveryTime = "16-21 mins",
+                distance = "1.0 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹27",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.bread_pakoda_11,
+                title = "Plain Bread Pakoda",
+                price = "₹50",
+                restaurantName = "Simple Snacks",
+                rating = "4.5",
+                deliveryTime = "14-19 mins",
+                distance = "0.7 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹9",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.bread_pakoda_12,
+                title = "Mix Veg Bread Pakoda",
+                price = "₹75",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "2.1 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹18",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.bread_pakoda_13,
+                title = "Goan Style Bread Pakoda",
+                price = "₹85",
+                restaurantName = "Goan Snack House",
+                rating = "4.6",
+                deliveryTime = "31-36 mins",
+                distance = "2.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹17",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.bread_pakoda_14,
+                title = "Spicy Chilli Bread Pakoda",
+                price = "₹70",
+                restaurantName = "Chilli Factory",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.6 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹10",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.bread_pakoda_15,
+                title = "Butter Masala Bread Pakoda",
+                price = "₹95",
+                restaurantName = "Butter Specials",
+                rating = "4.8",
+                deliveryTime = "26-31 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹19",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.bread_pakoda_16,
+                title = "Combo Pack Bread Pakoda",
+                price = "₹180",
+                restaurantName = "Snack House",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹32",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.bread_pakoda_17,
+                title = "Extra Crispy Bread Pakoda",
+                price = "₹65",
+                restaurantName = "Crispy Corner",
+                rating = "4.6",
+                deliveryTime = "17-22 mins",
+                distance = "0.9 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹22",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.bread_pakoda_18,
+                title = "Deluxe Bread Pakoda Platter",
+                price = "₹250",
+                restaurantName = "Snack Paradise",
+                rating = "4.9",
+                deliveryTime = "33-38 mins",
+                distance = "2.4 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹75",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.bread_pakoda_19,
+                title = "Chatpata Bread Pakoda",
+                price = "₹80",
+                restaurantName = "Street Food Hub",
+                rating = "4.7",
+                deliveryTime = "24-29 mins",
+                distance = "1.7 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹16",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.bread_pakoda_20,
+                title = "Premium Bread Pakoda",
+                price = "₹120",
+                restaurantName = "Gourmet Snacks",
+                rating = "4.8",
+                deliveryTime = "27-32 mins",
+                distance = "2.0 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹18",
+                address = "Hebbal, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

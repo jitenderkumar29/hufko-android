@@ -33616,7 +33616,624 @@ fun BreadPakodaCategoryPage() {
 
 @Composable
 fun CoffeeCategoryPage() {
-    CategoryContentPage("Coffee")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val coffeeFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // COFFEE TYPE (with icons for main types)
+                FilterChip(
+                    id = "espresso",
+                    text = "Espresso",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_espresso_coffee
+                ),
+                FilterChip(
+                    id = "cappuccino",
+                    text = "Cappuccino",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cappuccino_coffee
+                ),
+                FilterChip(
+                    id = "latte",
+                    text = "Latte",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_latte_coffee
+                ),
+                FilterChip(
+                    id = "americano",
+                    text = "Americano",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mocha",
+                    text = "Mocha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "macchiato",
+                    text = "Macchiato",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "filter_coffee",
+                    text = "Filter Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BEAN TYPE (icon for popular beans)
+                FilterChip(
+                    id = "arabica",
+                    text = "Arabica",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_coffee_bean_coffee
+                ),
+                FilterChip(
+                    id = "robusta",
+                    text = "Robusta",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blend",
+                    text = "House Blend",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ROAST LEVEL (icon for dark roast as most common)
+                FilterChip(
+                    id = "light_roast",
+                    text = "Light Roast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_roast",
+                    text = "Medium Roast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dark_roast",
+                    text = "Dark Roast",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dark_roast_coffee
+                ),
+
+                // MILK TYPE (icons for common milk types)
+                FilterChip(
+                    id = "skimmed_milk",
+                    text = "Skimmed Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soy_milk",
+                    text = "Soy Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_milk",
+                    text = "Black",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE
+                FilterChip(
+                    id = "cold",
+                    text = "Cold",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "iced",
+                    text = "Iced",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SWEETNESS LEVEL
+                FilterChip(
+                    id = "unsweetened",
+                    text = "Unsweetened",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "less_sugar",
+                    text = "Less Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "normal_sugar",
+                    text = "Normal Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_sugar",
+                    text = "Extra Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE (icon for popular size)
+                FilterChip(
+                    id = "small",
+                    text = "Small (8oz)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large",
+                    text = "Large (16oz)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADD-ONS & TOPPINGS (icons for popular ones)
+                FilterChip(
+                    id = "whipped_cream",
+                    text = "Whipped Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_sprinkles",
+                    text = "Chocolate Sprinkles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_drizzle",
+                    text = "Caramel Drizzle",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIALTY (icon for decaf as distinct)
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "single_origin",
+                    text = "Single Origin",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = coffeeFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val coffeeItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.coffee_items_1,
+                title = "Classic Espresso Shot",
+                price = "₹120",
+                restaurantName = "Artisan Coffee Roasters",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.3 km",
+                discount = "50%",
+                discountAmount = "above ₹200",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.coffee_items_2,
+                title = "Signature Cappuccino",
+                price = "₹180",
+                restaurantName = "Third Wave Coffee",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.coffee_items_3,
+                title = "Caramel Macchiato",
+                price = "₹220",
+                restaurantName = "Starbucks Reserve",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "40%",
+                discountAmount = "on Lattes",
+                address = "MG Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.coffee_items_4,
+                title = "Iced Americano",
+                price = "₹160",
+                restaurantName = "Blue Tokai Coffee",
+                rating = "4.6",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "20%",
+                discountAmount = "up to ₹32",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.coffee_items_5,
+                title = "Oat Milk Latte",
+                price = "₹240",
+                restaurantName = "The Coffee House",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "20%",
+                discountAmount = "₹20",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.coffee_items_6,
+                title = "South Indian Filter Coffee",
+                price = "₹90",
+                restaurantName = "Dravidian Cafe",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.1 km",
+                discount = "30%",
+                discountAmount = "Steel Tumbler",
+                address = "Basavanagudi, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = coffeeItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val coffeeRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.coffee_1,
+                title = "Classic Espresso Shot",
+                price = "₹120",
+                restaurantName = "Artisan Coffee Roasters",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.3 km",
+                discount = "FREE DEL",
+                discountAmount = "above ₹200",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.coffee_2,
+                title = "Signature Cappuccino",
+                price = "₹180",
+                restaurantName = "Third Wave Coffee",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.5 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹27",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.coffee_3,
+                title = "Caramel Macchiato",
+                price = "₹220",
+                restaurantName = "Starbucks Reserve",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "BOGO OFF",
+                discountAmount = "on Lattes",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.coffee_4,
+                title = "Iced Americano",
+                price = "₹160",
+                restaurantName = "Blue Tokai Coffee",
+                rating = "4.6",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹32",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.coffee_5,
+                title = "Oat Milk Latte",
+                price = "₹240",
+                restaurantName = "The Coffee House",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "VEGAN OFF",
+                discountAmount = "₹20 off",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.coffee_6,
+                title = "South Indian Filter Coffee",
+                price = "₹90",
+                restaurantName = "Dravidian Cafe",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.1 km",
+                discount = "TRADITION",
+                discountAmount = "Steel Tumbler",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.coffee_7,
+                title = "Mocha Frappuccino",
+                price = "₹250",
+                restaurantName = "Cafe Coffee Day",
+                rating = "4.6",
+                deliveryTime = "14-19 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹62",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.coffee_8,
+                title = "Cold Brew Coffee",
+                price = "₹200",
+                restaurantName = "Brew & Bean",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.3 km",
+                discount = "BREW OFF",
+                discountAmount = "Extra Shot",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.coffee_9,
+                title = "Hazelnut Latte",
+                price = "₹210",
+                restaurantName = "Nescafe Lounge",
+                rating = "4.4",
+                deliveryTime = "16-21 mins",
+                distance = "0.6 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹84",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.coffee_10,
+                title = "Turkish Coffee",
+                price = "₹180",
+                restaurantName = "Middle Eastern Cafe",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹54",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.coffee_11,
+                title = "Black Coffee",
+                price = "₹100",
+                restaurantName = "Simple Brews",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹18",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.coffee_12,
+                title = "Vanilla Cappuccino",
+                price = "₹190",
+                restaurantName = "Vanilla Sky Cafe",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "1.2 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹47",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.coffee_13,
+                title = "Irish Coffee",
+                price = "₹280",
+                restaurantName = "Pub & Grub",
+                rating = "4.6",
+                deliveryTime = "28-33 mins",
+                distance = "2.0 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.coffee_14,
+                title = "Spanish Latte",
+                price = "₹230",
+                restaurantName = "European Cafe",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹34",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.coffee_15,
+                title = "Butterscotch Coffee",
+                price = "₹240",
+                restaurantName = "Sweet Tooth Cafe",
+                rating = "4.9",
+                deliveryTime = "23-28 mins",
+                distance = "1.6 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹48",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.coffee_16,
+                title = "Coffee Combo Pack",
+                price = "₹350",
+                restaurantName = "Cafe Central",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "18% OFF",
+                discountAmount = "up to ₹63",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.coffee_17,
+                title = "Decaf Coffee",
+                price = "₹170",
+                restaurantName = "Health Brew",
+                rating = "4.6",
+                deliveryTime = "17-22 mins",
+                distance = "1.0 km",
+                discount = "35% OFF",
+                discountAmount = "up to ₹59",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.coffee_18,
+                title = "Coffee Platter",
+                price = "₹450",
+                restaurantName = "Coffee Paradise",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "30% OFF",
+                discountAmount = "up to ₹135",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.coffee_19,
+                title = "Vietnamese Coffee",
+                price = "₹210",
+                restaurantName = "Asian Brews",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "1.9 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹42",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.coffee_20,
+                title = "Premium Arabica",
+                price = "₹300",
+                restaurantName = "Gourmet Coffee",
+                rating = "4.8",
+                deliveryTime = "24-29 mins",
+                distance = "1.7 km",
+                discount = "15% OFF",
+                discountAmount = "up to ₹45",
+                address = "Hebbal, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

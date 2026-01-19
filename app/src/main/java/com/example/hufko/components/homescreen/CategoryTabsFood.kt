@@ -34238,12 +34238,1223 @@ fun CoffeeCategoryPage() {
 
 @Composable
 fun PooriBhajiCategoryPage() {
-    CategoryContentPage("Poori Bhaji")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val pooriBhajiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // POORI TYPE (with icons for main types)
+                FilterChip(
+                    id = "masala_poori",
+                    text = "Masala Poori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy_poori
+                ),
+                FilterChip(
+                    id = "plain_poori",
+                    text = "Plain Poori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_poori
+                ),
+                FilterChip(
+                    id = "stuffed_poori",
+                    text = "Stuffed Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_poori",
+                    text = "Mini Poori",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BHAJI TYPE (with icons for popular bhaji)
+                FilterChip(
+                    id = "aloo_bhaji",
+                    text = "Aloo Bhaji",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_bhaji
+                ),
+                FilterChip(
+                    id = "batata_bhaji",
+                    text = "Batata Bhaji",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "matar_bhaji",
+                    text = "Matar Bhaji",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mixed_veg",
+                    text = "Mixed Vegetable",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (icon for medium as standard)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spice_medium
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (icon for traditional style)
+                FilterChip(
+                    id = "traditional",
+                    text = "Traditional",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_traditional_cooking
+                ),
+                FilterChip(
+                    id = "home_style",
+                    text = "Home Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "restaurant_style",
+                    text = "Restaurant Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OIL TYPE (icon for refined oil as common)
+                FilterChip(
+                    id = "mustard_oil",
+                    text = "Mustard Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_oil",
+                    text = "Coconut Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ghee",
+                    text = "Ghee",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (icon for thali as popular)
+                FilterChip(
+                    id = "combo",
+                    text = "Combo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ala_carte",
+                    text = "À la Carte",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (icon for pickle as common)
+                FilterChip(
+                    id = "with_chutney",
+                    text = "With Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_curd",
+                    text = "With Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_papad",
+                    text = "With Papad",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // QUANTITY (icon for standard serving)
+                FilterChip(
+                    id = "large",
+                    text = "Large (4 Poori)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family",
+                    text = "Family (8 Poori)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL (icon for fresh as important)
+                FilterChip(
+                    id = "jain",
+                    text = "Jain",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = pooriBhajiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val pooriBhajiItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.poori_bhaji_items_1,
+                title = "Classic Aloo Poori Bhaji",
+                price = "₹160",
+                restaurantName = "Mumbai Tiffin House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.4 km",
+                discount = "30%",
+                discountAmount = "above ₹300",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.poori_bhaji_items_2,
+                title = "Spicy Batata Puri Thali",
+                price = "₹220",
+                restaurantName = "Gujarati Rasoi",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "0.6 km",
+                discount = "40%",
+                discountAmount = "on Thali",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.poori_bhaji_items_3,
+                title = "South Indian Masala Puri",
+                price = "₹140",
+                restaurantName = "Madrasi Mess",
+                rating = "4.7",
+                deliveryTime = "12-16 mins",
+                distance = "0.3 km",
+                discount = "20%",
+                discountAmount = "up to ₹28",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.poori_bhaji_items_4,
+                title = "Maharaja Poori Bhaji Combo",
+                price = "₹280",
+                restaurantName = "Royal Punjab Dhaba",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹42",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.poori_bhaji_items_5,
+                title = "Jain Aloo Puri (No Onion Garlic)",
+                price = "₹180",
+                restaurantName = "Sattvik Kitchen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "₹18",
+                address = "Basavanagudi, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.poori_bhaji_items_6,
+                title = "Street-Style Mumbai Puri Bhaji",
+                price = "₹120",
+                restaurantName = "Bombay Street Food",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "25%",
+                discountAmount = "on first order",
+                address = "MG Road, Bangalore",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pooriBhajiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val pooriBhajiRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.poori_bhaji_1,
+                title = "Classic Aloo Poori Bhaji",
+                price = "₹160",
+                restaurantName = "Mumbai Tiffin House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.4 km",
+                discount = "FREE DEL",
+                discountAmount = "above ₹300",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.poori_bhaji_2,
+                title = "Spicy Batata Puri Thali",
+                price = "₹220",
+                restaurantName = "Gujarati Rasoi",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "0.6 km",
+                discount = "THALI OFF",
+                discountAmount = "Kadhi + Pickle",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.poori_bhaji_3,
+                title = "South Indian Masala Puri",
+                price = "₹140",
+                restaurantName = "Madrasi Mess",
+                rating = "4.7",
+                deliveryTime = "12-16 mins",
+                distance = "0.3 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹28",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.poori_bhaji_4,
+                title = "Maharaja Poori Bhaji Combo",
+                price = "₹280",
+                restaurantName = "Royal Punjab Dhaba",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "COMBO OFF",
+                discountAmount = "Free Lassi",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.poori_bhaji_5,
+                title = "Jain Aloo Puri (No Onion Garlic)",
+                price = "₹180",
+                restaurantName = "Sattvik Kitchen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "JAIN OFF",
+                discountAmount = "10% off",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.poori_bhaji_6,
+                title = "Street-Style Mumbai Puri Bhaji",
+                price = "₹120",
+                restaurantName = "Bombay Street Food",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "STREET OFF",
+                discountAmount = "₹30 off",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.poori_bhaji_7,
+                title = "Udupi Style Poori Saagu",
+                price = "₹150",
+                restaurantName = "Udupi Krishna Bhavan",
+                rating = "4.6",
+                deliveryTime = "14-19 mins",
+                distance = "0.8 km",
+                discount = "25% OFF",
+                discountAmount = "up to ₹37",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.poori_bhaji_8,
+                title = "Bengali Luchi Aloor Dom",
+                price = "₹190",
+                restaurantName = "Kolkata Kitchen",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.3 km",
+                discount = "BENGALI OFF",
+                discountAmount = "Free Mishti",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.poori_bhaji_9,
+                title = "Masala Puri with Chole",
+                price = "₹200",
+                restaurantName = "North Indian Dhaba",
+                rating = "4.4",
+                deliveryTime = "16-21 mins",
+                distance = "0.6 km",
+                discount = "40% OFF",
+                discountAmount = "up to ₹80",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.poori_bhaji_10,
+                title = "Mini Poori Platter (24 pcs)",
+                price = "₹320",
+                restaurantName = "Party Special Caterers",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "PARTY OFF",
+                discountAmount = "Free Chutney",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.poori_bhaji_11,
+                title = "Cheese Poori Bhaji",
+                price = "₹240",
+                restaurantName = "Fusion Kitchen",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "FUSION OFF",
+                discountAmount = "Extra Cheese",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.poori_bhaji_12,
+                title = "Poori Bhaji Family Pack",
+                price = "₹450",
+                restaurantName = "Home Style Kitchen",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "1.2 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.poori_bhaji_13,
+                title = "Stuffed Poori (Paneer/Aloo)",
+                price = "₹220",
+                restaurantName = "Specialty Restaurant",
+                rating = "4.6",
+                deliveryTime = "28-33 mins",
+                distance = "2.0 km",
+                discount = "STUFFED OFF",
+                discountAmount = "2+1 Offer",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.poori_bhaji_14,
+                title = "Poori Bhaji Breakfast Combo",
+                price = "₹180",
+                restaurantName = "Morning Delight Cafe",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "BREAKFAST",
+                discountAmount = "Tea/Coffee Free",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.poori_bhaji_15,
+                title = "Spicy Andhra Poori Koora",
+                price = "₹170",
+                restaurantName = "Andhra Spice House",
+                rating = "4.9",
+                deliveryTime = "23-28 mins",
+                distance = "1.6 km",
+                discount = "ANDHRA OFF",
+                discountAmount = "Extra Spicy",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.poori_bhaji_16,
+                title = "Maharashtrian Puran Poli Bhaji",
+                price = "₹210",
+                restaurantName = "Pune Kitchen",
+                rating = "4.5",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "MAHARASHTRIAN",
+                discountAmount = "Free Solkadhi",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.poori_bhaji_17,
+                title = "Low Oil Healthy Poori Bhaji",
+                price = "₹190",
+                restaurantName = "Fit Food Kitchen",
+                rating = "4.6",
+                deliveryTime = "17-22 mins",
+                distance = "1.0 km",
+                discount = "HEALTHY OFF",
+                discountAmount = "15% off",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.poori_bhaji_18,
+                title = "Festival Special Poori Bhaji",
+                price = "₹280",
+                restaurantName = "Festival Foods",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "FESTIVAL OFF",
+                discountAmount = "Sweet Included",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.poori_bhaji_19,
+                title = "Goan Style Poori Bhaji",
+                price = "₹230",
+                restaurantName = "Goan Coastal Kitchen",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "1.9 km",
+                discount = "GOAN OFF",
+                discountAmount = "Coconut Based",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.poori_bhaji_20,
+                title = "Premium Ghee Poori Bhaji",
+                price = "₹350",
+                restaurantName = "Premium Kitchen",
+                rating = "4.8",
+                deliveryTime = "24-29 mins",
+                distance = "1.7 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Pure Ghee",
+                address = "Hebbal, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun PulaoCategoryPage() {
-    CategoryContentPage("Pulao")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val pulaoFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // PULAO TYPE (with icons for main types)
+                FilterChip(
+                    id = "veg_pulao",
+                    text = "Vegetable Pulao",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_pulao
+                ),
+                FilterChip(
+                    id = "chicken_pulao",
+                    text = "Chicken Pulao",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_pulao
+                ),
+                FilterChip(
+                    id = "mutton_pulao",
+                    text = "Mutton Pulao",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_pulao",
+                    text = "Egg Pulao",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paneer_pulao",
+                    text = "Paneer Pulao",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schezwan_pulao",
+                    text = "Schezwan Pulao",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // RICE TYPE (icon for basmati as standard)
+                FilterChip(
+                    id = "basmati",
+                    text = "Basmati Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_basmati_rice_pulao
+                ),
+                FilterChip(
+                    id = "jeera_rice",
+                    text = "Jeera Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_rice",
+                    text = "Brown Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (icon for dum cooking)
+                FilterChip(
+                    id = "dum_pulao",
+                    text = "Dum Pulao",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dum_cooking_pulao
+                ),
+                FilterChip(
+                    id = "hyderabadi",
+                    text = "Hyderabadi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "awadhi",
+                    text = "Awadhi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "biryani_style",
+                    text = "Biryani Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (icon for medium as standard)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // VEGETABLE INCLUSIONS (icon for mixed vegetables)
+                FilterChip(
+                    id = "peas_carrot",
+                    text = "Peas & Carrot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cauliflower",
+                    text = "Cauliflower",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "beans_corn",
+                    text = "Beans & Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (icon for raita as common)
+                FilterChip(
+                    id = "with_salad",
+                    text = "With Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_papad",
+                    text = "With Papad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_curry",
+                    text = "With Curry",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // QUANTITY (icon for single serving)
+                FilterChip(
+                    id = "full",
+                    text = "Full Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL FEATURES (icon for premium)
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "homemade",
+                    text = "Homemade Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quick_delivery",
+                    text = "Quick Delivery",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = pulaoFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val pulaoItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.pulao_items_1,
+                title = "Classic Vegetable Pulao",
+                price = "₹180",
+                restaurantName = "Delhi Darbar",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "0.4 km",
+                discount = "30%",
+                discountAmount = "above ₹350",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.pulao_items_2,
+                title = "Chicken Dum Pulao",
+                price = "₹280",
+                restaurantName = "Hyderabadi Kitchen",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "25%",
+                discountAmount = "on Biryani Style",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.pulao_items_3,
+                title = "Paneer Pulao",
+                price = "₹220",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹44",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.pulao_items_4,
+                title = "Mutton Yakhni Pulao",
+                price = "₹320",
+                restaurantName = "Kashmiri Wazwan",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹48",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.pulao_items_5,
+                title = "Egg Pulao Special",
+                price = "₹190",
+                restaurantName = "Street Food Hub",
+                rating = "4.5",
+                deliveryTime = "12-16 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "₹19",
+                address = "MG Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.pulao_items_6,
+                title = "Schezwan Veg Pulao",
+                price = "₹200",
+                restaurantName = "Chinese Fusion",
+                rating = "4.4",
+                deliveryTime = "14-18 mins",
+                distance = "0.6 km",
+                discount = "40%",
+                discountAmount = "on Chinese Combos",
+                address = "HSR Layout, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pulaoItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val pulaoRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.pulao_1,
+                title = "Classic Vegetable Pulao",
+                price = "₹180",
+                restaurantName = "Delhi Darbar",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "0.4 km",
+                discount = "FREE DEL",
+                discountAmount = "above ₹400",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.pulao_2,
+                title = "Chicken Dum Pulao",
+                price = "₹280",
+                restaurantName = "Hyderabadi Kitchen",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "DUM OFF",
+                discountAmount = "Saffron Infused",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.pulao_3,
+                title = "Paneer Pulao Special",
+                price = "₹220",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹44",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.pulao_4,
+                title = "Mutton Yakhni Pulao",
+                price = "₹320",
+                restaurantName = "Kashmiri Wazwan",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "KASHMIRI OFF",
+                discountAmount = "Free Raita",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.pulao_5,
+                title = "Egg Pulao Street Style",
+                price = "₹190",
+                restaurantName = "Mumbai Street Food",
+                rating = "4.5",
+                deliveryTime = "12-16 mins",
+                distance = "0.3 km",
+                discount = "EGG OFF",
+                discountAmount = "2 Eggs Free",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.pulao_6,
+                title = "Schezwan Veg Pulao",
+                price = "₹200",
+                restaurantName = "Chinese Fusion Hub",
+                rating = "4.4",
+                deliveryTime = "14-18 mins",
+                distance = "0.6 km",
+                discount = "FUSION OFF",
+                discountAmount = "Extra Spicy",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.pulao_7,
+                title = "Awadhi Veg Pulao",
+                price = "₹240",
+                restaurantName = "Lucknowi Dastarkhwan",
+                rating = "4.8",
+                deliveryTime = "22-27 mins",
+                distance = "0.9 km",
+                discount = "AWADHI OFF",
+                discountAmount = "Premium Basmati",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.pulao_8,
+                title = "Prawn Pulao Coastal Style",
+                price = "₹350",
+                restaurantName = "Coastal Delights",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.3 km",
+                discount = "SEAFOOD OFF",
+                discountAmount = "Fresh Prawns",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.pulao_9,
+                title = "Brown Rice Pulao (Healthy)",
+                price = "₹210",
+                restaurantName = "Health First Kitchen",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "HEALTHY OFF",
+                discountAmount = "15% off",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.pulao_10,
+                title = "Family Pack Veg Pulao",
+                price = "₹450",
+                restaurantName = "Home Style Kitchen",
+                rating = "4.7",
+                deliveryTime = "28-33 mins",
+                distance = "1.5 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4-5",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.pulao_11,
+                title = "Jeera Rice with Pulao Masala",
+                price = "₹170",
+                restaurantName = "Simple Indian Kitchen",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "JEERA OFF",
+                discountAmount = "Extra Jeera",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.pulao_12,
+                title = "Chicken Tikka Pulao",
+                price = "₹300",
+                restaurantName = "Tandoor Special",
+                rating = "4.8",
+                deliveryTime = "24-29 mins",
+                distance = "1.2 km",
+                discount = "TIKKA OFF",
+                discountAmount = "Grilled Chicken",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.pulao_13,
+                title = "Mughlai Pulao with Nuts",
+                price = "₹280",
+                restaurantName = "Royal Mughlai",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "MUGHLAI OFF",
+                discountAmount = "Dry Fruits",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.pulao_14,
+                title = "Matar Pulao with Aloo",
+                price = "₹160",
+                restaurantName = "North Indian Dhaba",
+                rating = "4.5",
+                deliveryTime = "18-23 mins",
+                distance = "1.4 km",
+                discount = "MATAR OFF",
+                discountAmount = "Fresh Peas",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.pulao_15,
+                title = "Andhra Chicken Pulao",
+                price = "₹270",
+                restaurantName = "Andhra Spice House",
+                rating = "4.9",
+                deliveryTime = "26-31 mins",
+                distance = "1.6 km",
+                discount = "ANDHRA OFF",
+                discountAmount = "Extra Spicy",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.pulao_16,
+                title = "Malabar Vegetable Pulao",
+                price = "₹230",
+                restaurantName = "Kerala Kitchen",
+                rating = "4.6",
+                deliveryTime = "29-34 mins",
+                distance = "1.8 km",
+                discount = "MALABAR OFF",
+                discountAmount = "Coconut Flavored",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.pulao_17,
+                title = "Party Pulao Platter",
+                price = "₹550",
+                restaurantName = "Party Caterers",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "PARTY OFF",
+                discountAmount = "Serves 8",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.pulao_18,
+                title = "Mushroom Pulao",
+                price = "₹240",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.7",
+                deliveryTime = "21-26 mins",
+                distance = "1.0 km",
+                discount = "MUSHROOM OFF",
+                discountAmount = "Fresh Mushrooms",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.pulao_19,
+                title = "Kashmiri Pulao with Fruits",
+                price = "₹290",
+                restaurantName = "Kashmir Valley",
+                rating = "4.9",
+                deliveryTime = "27-32 mins",
+                distance = "1.9 km",
+                discount = "FRUITY OFF",
+                discountAmount = "Mixed Fruits",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.pulao_20,
+                title = "Premium Saffron Pulao",
+                price = "₹380",
+                restaurantName = "Fine Dining Restaurant",
+                rating = "4.8",
+                deliveryTime = "32-37 mins",
+                distance = "1.7 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Real Saffron",
+                address = "Whitefield, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

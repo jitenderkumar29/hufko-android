@@ -35459,12 +35459,1226 @@ fun PulaoCategoryPage() {
 
 @Composable
 fun ChurChurNaanCategoryPage() {
-    CategoryContentPage("Chur Chur Naan")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val churChurNaanFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // NAAN TYPE (with icons for popular variants)
+                FilterChip(
+                    id = "plain_chur_chur",
+                    text = "Plain Chur Chur Naan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_naan
+                ),
+                FilterChip(
+                    id = "butter_chur_chur",
+                    text = "Butter Chur Chur Naan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_butter_naan
+                ),
+                FilterChip(
+                    id = "garlic_chur_chur",
+                    text = "Garlic Chur Chur Naan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stuffed_chur_chur",
+                    text = "Stuffed Chur Chur Naan",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // STUFFING OPTIONS (icon for paneer as popular)
+                FilterChip(
+                    id = "paneer_stuffed",
+                    text = "Paneer Stuffed",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_naan
+                ),
+                FilterChip(
+                    id = "aloo_stuffed",
+                    text = "Aloo Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keema_stuffed",
+                    text = "Keema Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mix_veg_stuffed",
+                    text = "Mix Veg Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE (icon for regular as standard)
+                FilterChip(
+                    id = "regular_size",
+                    text = "Regular",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_naan_regular
+                ),
+                FilterChip(
+                    id = "jumbo_size",
+                    text = "Jumbo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_size",
+                    text = "Mini (4 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CRISPINESS LEVEL (icon for extra crispy as signature)
+                FilterChip(
+                    id = "extra_crispy",
+                    text = "Extra Crispy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_crispy_naan
+                ),
+                FilterChip(
+                    id = "medium_crispy",
+                    text = "Medium Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft_chewy",
+                    text = "Soft & Chewy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (icon for butter as common)
+                FilterChip(
+                    id = "kalonji_seeds",
+                    text = "Kalonji Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sesame_seeds",
+                    text = "Sesame Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "herbs_topping",
+                    text = "Fresh Herbs",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (icon for curry as classic combo)
+                FilterChip(
+                    id = "with_dal",
+                    text = "With Dal Makhani",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_raita",
+                    text = "With Raita",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_pickle",
+                    text = "With Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (icon for tandoor as traditional)
+                FilterChip(
+                    id = "tawa_made",
+                    text = "Tawa Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oven_baked",
+                    text = "Oven Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL FEATURES
+                FilterChip(
+                    id = "freshly_made",
+                    text = "Freshly Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_masala",
+                    text = "Spicy Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = churChurNaanFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val churChurNaanItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chur_chur_naan_items_1,
+                title = "Classic Butter Chur Chur Naan",
+                price = "₹120",
+                restaurantName = "Delhi Darbar",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.4 km",
+                discount = "30%",
+                discountAmount = "above ₹350",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chur_chur_naan_items_2,
+                title = "Garlic & Herbs Chur Chur Naan",
+                price = "₹140",
+                restaurantName = "Tandoori Nights",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "0.7 km",
+                discount = "25%",
+                discountAmount = "on Tandoor Combos",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.chur_chur_naan_items_3,
+                title = "Paneer Stuffed Chur Chur Naan",
+                price = "₹180",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.chur_chur_naan_items_4,
+                title = "Keema Special Chur Chur Naan",
+                price = "₹220",
+                restaurantName = "Mughlai Hub",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "1.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹33",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.chur_chur_naan_items_5,
+                title = "Extra Crispy Plain Chur Chur Naan",
+                price = "₹100",
+                restaurantName = "Street Food Hub",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "₹10",
+                address = "MG Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.chur_chur_naan_items_6,
+                title = "Jumbo Butter Garlic Chur Chur Naan",
+                price = "₹160",
+                restaurantName = "Foodie's Paradise",
+                rating = "4.4",
+                deliveryTime = "16-21 mins",
+                distance = "0.6 km",
+                discount = "40%",
+                discountAmount = "on Family Combos",
+                address = "HSR Layout, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = churChurNaanItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val churChurNaanRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chur_naan_1,
+                title = "Classic Butter Chur Chur Naan",
+                price = "₹120",
+                restaurantName = "Delhi Darbar",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.4 km",
+                discount = "FREE DEL",
+                discountAmount = "above ₹400",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chur_naan_2,
+                title = "Garlic & Herb Chur Chur Naan",
+                price = "₹140",
+                restaurantName = "Tandoori Nights",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "0.7 km",
+                discount = "TANDOOR OFF",
+                discountAmount = "Fresh Herbs",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chur_naan_3,
+                title = "Paneer Stuffed Chur Chur Naan",
+                price = "₹180",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹36",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chur_naan_4,
+                title = "Keema Special Chur Chur Naan",
+                price = "₹220",
+                restaurantName = "Mughlai Hub",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "1.0 km",
+                discount = "KEEMA OFF",
+                discountAmount = "Spiced Mince",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chur_naan_5,
+                title = "Extra Crispy Plain Chur Chur",
+                price = "₹100",
+                restaurantName = "Street Food Hub",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.3 km",
+                discount = "CRISPY OFF",
+                discountAmount = "Extra Flaky",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chur_naan_6,
+                title = "Jumbo Butter Garlic Chur Chur",
+                price = "₹160",
+                restaurantName = "Foodie's Paradise",
+                rating = "4.4",
+                deliveryTime = "16-21 mins",
+                distance = "0.6 km",
+                discount = "JUMBO OFF",
+                discountAmount = "Family Size",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chur_naan_7,
+                title = "Aloo Stuffed Chur Chur Naan",
+                price = "₹150",
+                restaurantName = "North Indian Dhaba",
+                rating = "4.8",
+                deliveryTime = "19-24 mins",
+                distance = "0.9 km",
+                discount = "ALOO OFF",
+                discountAmount = "Spiced Potato",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chur_naan_8,
+                title = "Cheese Chur Chur Naan",
+                price = "₹200",
+                restaurantName = "Cheese Lovers",
+                rating = "4.7",
+                deliveryTime = "21-26 mins",
+                distance = "1.3 km",
+                discount = "CHEESE OFF",
+                discountAmount = "Mozzarella",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chur_naan_9,
+                title = "Healthy Multigrain Chur Chur",
+                price = "₹130",
+                restaurantName = "Health First Kitchen",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "0.8 km",
+                discount = "HEALTHY OFF",
+                discountAmount = "15% off",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chur_naan_10,
+                title = "Family Pack Chur Chur Naan",
+                price = "₹350",
+                restaurantName = "Home Style Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4-5",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chur_naan_11,
+                title = "Kalonji Chur Chur Naan",
+                price = "₹110",
+                restaurantName = "Simple Indian Kitchen",
+                rating = "4.5",
+                deliveryTime = "13-18 mins",
+                distance = "0.5 km",
+                discount = "KALONJI OFF",
+                discountAmount = "Nigella Seeds",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chur_naan_12,
+                title = "Chicken Tikka Chur Chur Naan",
+                price = "₹240",
+                restaurantName = "Tandoor Special",
+                rating = "4.8",
+                deliveryTime = "22-27 mins",
+                distance = "1.2 km",
+                discount = "TIKKA OFF",
+                discountAmount = "Grilled Chicken",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chur_naan_13,
+                title = "Mughlai Chur Chur Naan",
+                price = "₹190",
+                restaurantName = "Royal Mughlai",
+                rating = "4.7",
+                deliveryTime = "28-33 mins",
+                distance = "2.0 km",
+                discount = "MUGHLAI OFF",
+                discountAmount = "Rich Flavors",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chur_naan_14,
+                title = "Mix Veg Stuffed Chur Chur",
+                price = "₹170",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "VEGGIE OFF",
+                discountAmount = "Fresh Vegetables",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chur_naan_15,
+                title = "Andhra Spicy Chur Chur Naan",
+                price = "₹160",
+                restaurantName = "Andhra Spice House",
+                rating = "4.9",
+                deliveryTime = "24-29 mins",
+                distance = "1.6 km",
+                discount = "ANDHRA OFF",
+                discountAmount = "Extra Spicy",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chur_naan_16,
+                title = "Malabar Chur Chur Naan",
+                price = "₹145",
+                restaurantName = "Kerala Kitchen",
+                rating = "4.6",
+                deliveryTime = "27-32 mins",
+                distance = "1.8 km",
+                discount = "MALABAR OFF",
+                discountAmount = "Coconut Touch",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chur_naan_17,
+                title = "Party Chur Chur Naan Platter",
+                price = "₹450",
+                restaurantName = "Party Caterers",
+                rating = "4.8",
+                deliveryTime = "32-37 mins",
+                distance = "2.2 km",
+                discount = "PARTY OFF",
+                discountAmount = "Assorted Flavors",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chur_naan_18,
+                title = "Mushroom Chur Chur Naan",
+                price = "₹190",
+                restaurantName = "Exotic Kitchen",
+                rating = "4.7",
+                deliveryTime = "23-28 mins",
+                distance = "1.0 km",
+                discount = "MUSHROOM OFF",
+                discountAmount = "Button Mushrooms",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chur_naan_19,
+                title = "Kashmiri Chur Chur Naan",
+                price = "₹175",
+                restaurantName = "Kashmir Valley",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "KASHMIRI OFF",
+                discountAmount = "Saffron Infused",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chur_naan_20,
+                title = "Premium Chur Chur Naan",
+                price = "₹250",
+                restaurantName = "Fine Dining Restaurant",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.7 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Truffle Oil",
+                address = "Whitefield, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun KebabsCategoryPage() {
-    CategoryContentPage("Kebabs")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val kebabFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // KEBAB TYPE (with icons for popular variants)
+                FilterChip(
+                    id = "chicken_tikka",
+                    text = "Chicken Tikka",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_tikka_kebab
+                ),
+                FilterChip(
+                    id = "seekh_kebab",
+                    text = "Seekh Kebab",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_seekh_kebab_kebab
+                ),
+                FilterChip(
+                    id = "reshmi_kebab",
+                    text = "Reshmi Kebab",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tangdi_kebab",
+                    text = "Tangdi Kebab",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "shami_kebab",
+                    text = "Shami Kebab",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAT TYPE (icon for chicken as most popular)
+                FilterChip(
+                    id = "chicken",
+                    text = "Chicken",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_kebab_2
+                ),
+                FilterChip(
+                    id = "mutton",
+                    text = "Mutton",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish",
+                    text = "Fish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "prawn",
+                    text = "Prawn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING METHOD (icon for tandoor as traditional)
+                FilterChip(
+                    id = "tandoor",
+                    text = "Tandoor",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tandoor_kebab
+                ),
+                FilterChip(
+                    id = "grilled",
+                    text = "Grilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pan_fried",
+                    text = "Pan Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "deep_fried",
+                    text = "Deep Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (icon for medium as standard)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mild_spice_kebab
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (icon for platter as popular)
+                FilterChip(
+                    id = "full_plate",
+                    text = "Full Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "half_plate",
+                    text = "Half Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo",
+                    text = "Combo",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (icon for mint chutney as classic)
+                FilterChip(
+                    id = "onion_salad",
+                    text = "Onion Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_wedge",
+                    text = "Lemon Wedge",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raita",
+                    text = "Raita",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREMIUM FEATURES (icon for charcoal smoked)
+                FilterChip(
+                    id = "marinated_24hrs",
+                    text = "24hr Marinated",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tender",
+                    text = "Tender",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "juicy",
+                    text = "Juicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL STYLES (icon for Awadhi as premium)
+                FilterChip(
+                    id = "hyderabadi",
+                    text = "Hyderabadi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kashmiri",
+                    text = "Kashmiri Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "persian",
+                    text = "Persian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = kebabFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val kebabItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.kebab_items_1,
+                title = "Chicken Tikka Kebab",
+                price = "₹240",
+                restaurantName = "Delhi Darbar",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "0.4 km",
+                discount = "30%",
+                discountAmount = "above ₹400",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.kebab_items_2,
+                title = "Mutton Seekh Kebab",
+                price = "₹320",
+                restaurantName = "Mughlai Nights",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "25%",
+                discountAmount = "on Mughlai Combos",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.kebab_items_3,
+                title = "Reshmi Kebab Platter",
+                price = "₹280",
+                restaurantName = "Awadhi Kitchen",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹56",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.kebab_items_4,
+                title = "Tangdi Kebab (Drumsticks)",
+                price = "₹260",
+                restaurantName = "Tandoor Special",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹39",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.kebab_items_5,
+                title = "Veg Shami Kebab",
+                price = "₹180",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "₹18",
+                address = "MG Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.kebab_items_6,
+                title = "Fish Tikka Kebab",
+                price = "₹300",
+                restaurantName = "Coastal Grill",
+                rating = "4.4",
+                deliveryTime = "24-29 mins",
+                distance = "0.6 km",
+                discount = "40%",
+                discountAmount = "on Seafood Combos",
+                address = "HSR Layout, Bangalore",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = kebabItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val kebabRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.kebab_1,
+                title = "Chicken Tikka Kebab",
+                price = "₹240",
+                restaurantName = "Delhi Darbar",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "0.4 km",
+                discount = "FREE DEL",
+                discountAmount = "above ₹500",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.kebab_2,
+                title = "Mutton Seekh Kebab",
+                price = "₹320",
+                restaurantName = "Mughlai Nights",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "SEEKH OFF",
+                discountAmount = "Spiced Minced",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.kebab_3,
+                title = "Reshmi Kebab Platter",
+                price = "₹280",
+                restaurantName = "Awadhi Kitchen",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "0.5 km",
+                discount = "20% OFF",
+                discountAmount = "up to ₹56",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.kebab_4,
+                title = "Tangdi Kebab (Drumsticks)",
+                price = "₹260",
+                restaurantName = "Tandoor Special",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "TANDOOR OFF",
+                discountAmount = "Charcoal Grilled",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.kebab_5,
+                title = "Veg Shami Kebab",
+                price = "₹180",
+                restaurantName = "Vegetarian Delight",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.3 km",
+                discount = "SHAMI OFF",
+                discountAmount = "Lentil Based",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.kebab_6,
+                title = "Fish Tikka Kebab",
+                price = "₹300",
+                restaurantName = "Coastal Grill",
+                rating = "4.4",
+                deliveryTime = "24-29 mins",
+                distance = "0.6 km",
+                discount = "SEAFOOD OFF",
+                discountAmount = "Fresh Fish",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.kebab_7,
+                title = "Chicken Malai Kebab",
+                price = "₹270",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.8",
+                deliveryTime = "21-26 mins",
+                distance = "0.9 km",
+                discount = "MALAI OFF",
+                discountAmount = "Creamy Marinade",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.kebab_8,
+                title = "Prawn Kebab",
+                price = "₹350",
+                restaurantName = "Seafood Paradise",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "1.3 km",
+                discount = "PRAWN OFF",
+                discountAmount = "Jumbo Prawns",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.kebab_9,
+                title = "Hariyali Chicken Kebab",
+                price = "₹250",
+                restaurantName = "Green Garden",
+                rating = "4.6",
+                deliveryTime = "19-24 mins",
+                distance = "0.8 km",
+                discount = "HARIYALI OFF",
+                discountAmount = "Green Marinade",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.kebab_10,
+                title = "Kebab Platter for 2",
+                price = "₹550",
+                restaurantName = "Royal Feast",
+                rating = "4.7",
+                deliveryTime = "28-33 mins",
+                distance = "1.5 km",
+                discount = "PLATTER OFF",
+                discountAmount = "Assorted Kebabs",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.kebab_11,
+                title = "Paneer Tikka Kebab",
+                price = "₹220",
+                restaurantName = "Paneer House",
+                rating = "4.5",
+                deliveryTime = "16-21 mins",
+                distance = "0.5 km",
+                discount = "PANEER OFF",
+                discountAmount = "Cottage Cheese",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.kebab_12,
+                title = "Mutton Galouti Kebab",
+                price = "₹380",
+                restaurantName = "Lucknowi Dastarkhwan",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.2 km",
+                discount = "GALOUTI OFF",
+                discountAmount = "Melt in Mouth",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.kebab_13,
+                title = "Chicken Boti Kebab",
+                price = "₹290",
+                restaurantName = "BBQ Masters",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "BOTI OFF",
+                discountAmount = "Boneless Pieces",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.kebab_14,
+                title = "Afghani Chicken Kebab",
+                price = "₹310",
+                restaurantName = "Afghan Grill",
+                rating = "4.5",
+                deliveryTime = "27-32 mins",
+                distance = "1.4 km",
+                discount = "AFGHANI OFF",
+                discountAmount = "Yogurt Marinade",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.kebab_15,
+                title = "Andhra Chicken Kebab",
+                price = "₹260",
+                restaurantName = "Andhra Spice House",
+                rating = "4.9",
+                deliveryTime = "29-34 mins",
+                distance = "1.6 km",
+                discount = "ANDHRA OFF",
+                discountAmount = "Fiery Spices",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.kebab_16,
+                title = "Kashmiri Lamb Kebab",
+                price = "₹340",
+                restaurantName = "Kashmir Valley",
+                rating = "4.6",
+                deliveryTime = "32-37 mins",
+                distance = "1.8 km",
+                discount = "KASHMIRI OFF",
+                discountAmount = "Aromatic Spices",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.kebab_17,
+                title = "Party Kebab Platter",
+                price = "₹850",
+                restaurantName = "Grand Caterers",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "PARTY OFF",
+                discountAmount = "Serves 6-8",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.kebab_18,
+                title = "Mushroom Kebab",
+                price = "₹210",
+                restaurantName = "Exotic Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "MUSHROOM OFF",
+                discountAmount = "Button Mushrooms",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.kebab_19,
+                title = "Tandoori Chicken Kebab",
+                price = "₹230",
+                restaurantName = "Classic Tandoor",
+                rating = "4.9",
+                deliveryTime = "23-28 mins",
+                distance = "1.9 km",
+                discount = "TANDOORI OFF",
+                discountAmount = "Traditional Style",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.kebab_20,
+                title = "Premium Kebab Selection",
+                price = "₹450",
+                restaurantName = "Fine Dining Restaurant",
+                rating = "4.8",
+                deliveryTime = "33-38 mins",
+                distance = "1.7 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Gourmet Selection",
+                address = "Whitefield, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

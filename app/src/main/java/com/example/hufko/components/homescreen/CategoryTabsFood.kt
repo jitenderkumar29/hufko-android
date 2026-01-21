@@ -36683,12 +36683,1335 @@ fun KebabsCategoryPage() {
 
 @Composable
 fun PanipuriCategoryPage() {
-    CategoryContentPage("Panipuri")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val panipuriFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // PANIPURI TYPE (with icons for popular variants)
+                FilterChip(
+                    id = "masala_pani",
+                    text = "Masala Pani",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_masala_panipuri
+                ),
+                FilterChip(
+                    id = "meetha_pani",
+                    text = "Meetha Pani",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "khatta_pani",
+                    text = "Khatta Pani",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_pani",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "special_masala",
+                    text = "Special Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FILLINGS (with icon for classic potato filling)
+                FilterChip(
+                    id = "alu_stuffing",
+                    text = "Potato Filling",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_stuffing_panipuri
+                ),
+                FilterChip(
+                    id = "ragda",
+                    text = "Ragda",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "moong_dal",
+                    text = "Moong Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sprouts",
+                    text = "Sprouts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dahi_puri",
+                    text = "Dahi Puri",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dahi_panipuri
+                ),
+
+                // PURIS TYPE (with icon for classic puris)
+                FilterChip(
+                    id = "crispy_puris",
+                    text = "Crispy Puris",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_crispy_panipuri
+                ),
+                FilterChip(
+                    id = "soft_puris",
+                    text = "Soft Puris",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "small_puris",
+                    text = "Small Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "big_puris",
+                    text = "Big Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "homemade_puris",
+                    text = "Homemade",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (with icon for sev as essential topping)
+                FilterChip(
+                    id = "sev",
+                    text = "Sev",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sev_topping_panipuri
+                ),
+                FilterChip(
+                    id = "onions",
+                    text = "Chopped Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coriander",
+                    text = "Fresh Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pomegranate",
+                    text = "Pomegranate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "boondi",
+                    text = "Boondi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CHUTNEYS (with icon for green chutney)
+                FilterChip(
+                    id = "tamarind_chutney",
+                    text = "Tamarind Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_chutney",
+                    text = "Garlic Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_chutney",
+                    text = "Mint Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (with icon for classic street style)
+                FilterChip(
+                    id = "plated",
+                    text = "Plated Serving",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bucket",
+                    text = "Bucket Serving",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "refillable_pani",
+                    text = "Refillable Pani",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL STYLES (with icon for Mumbai style)
+                FilterChip(
+                    id = "delhi_style",
+                    text = "Delhi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kolkata_style",
+                    text = "Kolkata Puchka",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lucknow_style",
+                    text = "Lucknow Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hyderabad_style",
+                    text = "Hyderabad Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIALTIES (with icon for cheese panipuri)
+                FilterChip(
+                    id = "fruit_pani",
+                    text = "Fruit Panipuri",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_pani",
+                    text = "Chocolate Panipuri",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fusion_pani",
+                    text = "Fusion Flavors",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = panipuriFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        val panipuriItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.panipuri_items_1,
+                title = "Masala Pani Puri",
+                price = "₹80",
+                restaurantName = "Mumbai Street Food",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.3 km",
+                discount = "20%",
+                discountAmount = "on 2 plates",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.panipuri_items_2,
+                title = "Dahi Puri Special",
+                price = "₹100",
+                restaurantName = "Chaat House",
+                rating = "4.9",
+                deliveryTime = "12-17 mins",
+                distance = "0.4 km",
+                discount = "30%",
+                discountAmount = "above ₹200",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.panipuri_items_3,
+                title = "Kolkata Puchka Platter",
+                price = "₹120",
+                restaurantName = "Eastern Delights",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "0.7 km",
+                discount = "25%",
+                discountAmount = "on combo orders",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.panipuri_items_4,
+                title = "Extra Spicy Panipuri",
+                price = "₹90",
+                restaurantName = "Spicy Street Bites",
+                rating = "4.6",
+                deliveryTime = "14-19 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹14",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.panipuri_items_5,
+                title = "Cheese Panipuri",
+                price = "₹150",
+                restaurantName = "Fusion Chaat Cafe",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "10%",
+                discountAmount = "on first order",
+                address = "MG Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.panipuri_items_6,
+                title = "Meetha Pani Golgappa",
+                price = "₹85",
+                restaurantName = "North Indian Chaat",
+                rating = "4.4",
+                deliveryTime = "16-21 mins",
+                distance = "0.6 km",
+                discount = "20%",
+                discountAmount = "on weekends",
+                address = "HSR Layout, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = panipuriItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val panipuriRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.panipuri_1,
+                title = "Classic Masala Pani Puri",
+                price = "₹80",
+                restaurantName = "Mumbai Street Food",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.3 km",
+                discount = "MASALA OFF",
+                discountAmount = "Spiced Potato",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.panipuri_2,
+                title = "Dahi Puri Delight",
+                price = "₹100",
+                restaurantName = "Chaat House",
+                rating = "4.9",
+                deliveryTime = "12-17 mins",
+                distance = "0.4 km",
+                discount = "DAHI OFF",
+                discountAmount = "Creamy Yogurt",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.panipuri_3,
+                title = "Kolkata Puchka Special",
+                price = "₹120",
+                restaurantName = "Eastern Delights",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "0.7 km",
+                discount = "PUCHKA OFF",
+                discountAmount = "Tangy Tamarind",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.panipuri_4,
+                title = "Extra Spicy Fire Puri",
+                price = "₹90",
+                restaurantName = "Spicy Street Bites",
+                rating = "4.6",
+                deliveryTime = "14-19 mins",
+                distance = "0.5 km",
+                discount = "SPICY OFF",
+                discountAmount = "Fiery Green Chili",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.panipuri_5,
+                title = "Cheese Fusion Panipuri",
+                price = "₹150",
+                restaurantName = "Fusion Chaat Cafe",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "CHEESE OFF",
+                discountAmount = "Mozzarella Cheese",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.panipuri_6,
+                title = "Meetha Pani Golgappa",
+                price = "₹85",
+                restaurantName = "North Indian Chaat",
+                rating = "4.4",
+                deliveryTime = "16-21 mins",
+                distance = "0.6 km",
+                discount = "MEETHA OFF",
+                discountAmount = "Sweet Water",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.panipuri_7,
+                title = "Ragda Puri Platter",
+                price = "₹130",
+                restaurantName = "Gujarati Chaat Corner",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "0.9 km",
+                discount = "RAGDA OFF",
+                discountAmount = "White Peas Curry",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.panipuri_8,
+                title = "Masala Puri with Sprouts",
+                price = "₹110",
+                restaurantName = "Healthy Chaat Hub",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "SPROUT OFF",
+                discountAmount = "Fresh Moong Sprouts",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.panipuri_9,
+                title = "Papdi Chaat Panipuri",
+                price = "₹95",
+                restaurantName = "Chaat Express",
+                rating = "4.6",
+                deliveryTime = "13-18 mins",
+                distance = "0.4 km",
+                discount = "PAPDI OFF",
+                discountAmount = "Crispy Papdi",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.panipuri_10,
+                title = "Family Panipuri Platter",
+                price = "₹250",
+                restaurantName = "Chaat Paradise",
+                rating = "4.9",
+                deliveryTime = "22-27 mins",
+                distance = "1.2 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4-5",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.panipuri_11,
+                title = "Lucknowi Golgappa",
+                price = "₹140",
+                restaurantName = "Awadhi Chaat House",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "0.9 km",
+                discount = "LUCKNOW OFF",
+                discountAmount = "Royal Recipe",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.panipuri_12,
+                title = "Hyderabadi Pani Puri",
+                price = "₹125",
+                restaurantName = "Nizami Chaat",
+                rating = "4.8",
+                deliveryTime = "21-26 mins",
+                distance = "1.1 km",
+                discount = "HYDERABADI OFF",
+                discountAmount = "Spicy & Tangy",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.panipuri_13,
+                title = "Chocolate Panipuri",
+                price = "₹160",
+                restaurantName = "Dessert Chaat",
+                rating = "4.5",
+                deliveryTime = "17-22 mins",
+                distance = "0.8 km",
+                discount = "CHOCO OFF",
+                discountAmount = "Chocolate Sauce",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.panipuri_14,
+                title = "Butter Panipuri",
+                price = "₹175",
+                restaurantName = "Rich Bites",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "BUTTER OFF",
+                discountAmount = "Creamy Butter",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.panipuri_15,
+                title = "Veg Hakka Panipuri",
+                price = "₹145",
+                restaurantName = "Indo-Chinese Fusion",
+                rating = "4.7",
+                deliveryTime = "23-28 mins",
+                distance = "1.4 km",
+                discount = "HAKKA OFF",
+                discountAmount = "Chinese Flavors",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.panipuri_16,
+                title = "Chatpata Aloo Puri",
+                price = "₹85",
+                restaurantName = "Street Food Junction",
+                rating = "4.8",
+                deliveryTime = "14-19 mins",
+                distance = "0.5 km",
+                discount = "CHATPATA OFF",
+                discountAmount = "Tangy & Spicy",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.panipuri_17,
+                title = "Party Panipuri Bucket",
+                price = "₹350",
+                restaurantName = "Chaat Caterers",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.8 km",
+                discount = "PARTY OFF",
+                discountAmount = "50+ Puris",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.panipuri_18,
+                title = "Fruit Chaat Panipuri",
+                price = "₹180",
+                restaurantName = "Exotic Fruits Chaat",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "1.0 km",
+                discount = "FRUIT OFF",
+                discountAmount = "Seasonal Fruits",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.panipuri_19,
+                title = "Traditional Golgappa Set",
+                price = "₹110",
+                restaurantName = "Heritage Chaat",
+                rating = "4.8",
+                deliveryTime = "16-21 mins",
+                distance = "0.7 km",
+                discount = "TRADITIONAL OFF",
+                discountAmount = "Grandma's Recipe",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.panipuri_20,
+                title = "Premium Panipuri Selection",
+                price = "₹280",
+                restaurantName = "Fine Dining Chaat",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Gourmet Varieties",
+                address = "Whitefield, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun RasmalaiCategoryPage() {
-    CategoryContentPage("Rasmalai")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val rasmalaiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // RASMALAI TYPE (with icons for classic variants)
+                FilterChip(
+                    id = "classic_rasmalai",
+                    text = "Classic Rasmalai",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_rasmalai
+                ),
+                FilterChip(
+                    id = "kesar_rasmalai",
+                    text = "Kesar Rasmalai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pista_rasmalai",
+                    text = "Pista Rasmalai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "badam_rasmalai",
+                    text = "Badam Rasmalai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "malai_paneer_rasmalai",
+                    text = "Malai Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_malai_paneer_rasmalai
+                ),
+
+                // MILK TYPE (with icon for full cream milk)
+                FilterChip(
+                    id = "full_cream_milk",
+                    text = "Full Cream Milk",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_full_cream_milk
+                ),
+                FilterChip(
+                    id = "buffalo_milk",
+                    text = "Buffalo Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "toned_milk",
+                    text = "Toned Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_milk",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "a2_milk",
+                    text = "A2 Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SWEETNESS LEVEL (with icon for medium as standard)
+                FilterChip(
+                    id = "less_sweet",
+                    text = "Less Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_sweet",
+                    text = "Medium Sweet",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_medium_sweet_rasmalai
+                ),
+                FilterChip(
+                    id = "extra_sweet",
+                    text = "Extra Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jaggery_sweet",
+                    text = "Jaggery Sweetened",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PANEER TYPE (with icon for soft paneer)
+                FilterChip(
+                    id = "soft_paneer",
+                    text = "Soft Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_soft_paneer_rasmalai
+                ),
+                FilterChip(
+                    id = "spongy_paneer",
+                    text = "Spongy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "firm_paneer",
+                    text = "Firm",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "homemade_paneer",
+                    text = "Homemade Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_paneer",
+                    text = "Fresh Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // GARNISH (with icon for saffron garnish)
+                FilterChip(
+                    id = "pista_garnish",
+                    text = "Pista Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almond_garnish",
+                    text = "Almond Slivers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "charoli_garnish",
+                    text = "Charoli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "edible_silver",
+                    text = "Edible Silver",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING TEMPERATURE (with icon for chilled)
+                FilterChip(
+                    id = "room_temp",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "warm",
+                    text = "Warm",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "frozen",
+                    text = "Frozen",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (with icon for single serving)
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_tray",
+                    text = "Party Tray",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_rasmalai",
+                    text = "Mini Rasmalai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jumbo_rasmalai",
+                    text = "Jumbo Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREMIUM FEATURES (with icon for homemade)
+                FilterChip(
+                    id = "traditional_method",
+                    text = "Traditional Method",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "slow_cooked",
+                    text = "Slow Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "freshly_made",
+                    text = "Freshly Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL STYLES (with icon for Bengali style)
+                FilterChip(
+                    id = "punjabi_style",
+                    text = "Punjabi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "odisha_style",
+                    text = "Odisha Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lucknowi_style",
+                    text = "Lucknowi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gujarati_style",
+                    text = "Gujarati Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL VARIATIONS (with icon for chocolate rasmalai)
+                FilterChip(
+                    id = "fruit_rasmalai",
+                    text = "Fruit Rasmalai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dry_fruit_rasmalai",
+                    text = "Dry Fruit Rasmalai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rose_rasmalai",
+                    text = "Rose Flavored",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cardamom_rasmalai",
+                    text = "Cardamom Flavored",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = rasmalaiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+         val rasmalaiItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.rasmalai_items_1,
+                title = "Classic Bengali Rasmalai",
+                price = "₹180",
+                restaurantName = "Sweet Bengal",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "on 2 boxes",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.rasmalai_items_2,
+                title = "Kesar Pista Rasmalai",
+                price = "₹220",
+                restaurantName = "Royal Sweets",
+                rating = "4.9",
+                deliveryTime = "18-23 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "above ₹400",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.rasmalai_items_3,
+                title = "Malai Paneer Rasmalai",
+                price = "₹250",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "0.7 km",
+                discount = "25%",
+                discountAmount = "on family pack",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.rasmalai_items_4,
+                title = "Dry Fruit Rasmalai",
+                price = "₹280",
+                restaurantName = "Premium Sweets",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "0.9 km",
+                discount = "30%",
+                discountAmount = "up to ₹84",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.rasmalai_items_5,
+                title = "Chocolate Rasmalai",
+                price = "₹200",
+                restaurantName = "Fusion Desserts",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "on first order",
+                address = "MG Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.rasmalai_items_6,
+                title = "Sugar Free Rasmalai",
+                price = "₹210",
+                restaurantName = "Healthy Sweets",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "0.6 km",
+                discount = "20%",
+                discountAmount = "for diabetics",
+                address = "HSR Layout, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = rasmalaiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val rasmalaiRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.rasmalai_1,
+                title = "Classic Bengali Rasmalai",
+                price = "₹180",
+                restaurantName = "Sweet Bengal",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.4 km",
+                discount = "CLASSIC OFF",
+                discountAmount = "Soft Paneer",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.rasmalai_2,
+                title = "Kesar Pista Rasmalai",
+                price = "₹220",
+                restaurantName = "Royal Sweets",
+                rating = "4.9",
+                deliveryTime = "18-23 mins",
+                distance = "0.5 km",
+                discount = "KESAR OFF",
+                discountAmount = "Saffron Flavored",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.rasmalai_3,
+                title = "Malai Paneer Rasmalai",
+                price = "₹250",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "0.7 km",
+                discount = "MALAI OFF",
+                discountAmount = "Creamy Paneer",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.rasmalai_4,
+                title = "Dry Fruit Rasmalai",
+                price = "₹280",
+                restaurantName = "Premium Sweets",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "0.9 km",
+                discount = "DRYFRUIT OFF",
+                discountAmount = "Nuts & Raisins",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.rasmalai_5,
+                title = "Chocolate Rasmalai",
+                price = "₹200",
+                restaurantName = "Fusion Desserts",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.3 km",
+                discount = "CHOCO OFF",
+                discountAmount = "Chocolate Sauce",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.rasmalai_6,
+                title = "Sugar Free Rasmalai",
+                price = "₹210",
+                restaurantName = "Healthy Sweets",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "0.6 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Diabetic Friendly",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.rasmalai_7,
+                title = "Badam Pista Rasmalai",
+                price = "₹240",
+                restaurantName = "Nutty Delights",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "0.8 km",
+                discount = "BADAM OFF",
+                discountAmount = "Almond Flavored",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.rasmalai_8,
+                title = "Rose Rasmalai",
+                price = "₹190",
+                restaurantName = "Floral Desserts",
+                rating = "4.8",
+                deliveryTime = "17-22 mins",
+                distance = "0.6 km",
+                discount = "ROSE OFF",
+                discountAmount = "Rose Essence",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.rasmalai_9,
+                title = "Cardamom Rasmalai",
+                price = "₹195",
+                restaurantName = "Spiced Sweets",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "0.5 km",
+                discount = "CARDAMOM OFF",
+                discountAmount = "Elaichi Flavored",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.rasmalai_10,
+                title = "Family Pack Rasmalai",
+                price = "₹400",
+                restaurantName = "Sweet Family",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.1 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 5-6",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.rasmalai_11,
+                title = "Lucknowi Malai Rasmalai",
+                price = "₹260",
+                restaurantName = "Awadhi Sweets",
+                rating = "4.7",
+                deliveryTime = "24-29 mins",
+                distance = "0.9 km",
+                discount = "LUCKNOWI OFF",
+                discountAmount = "Royal Recipe",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.rasmalai_12,
+                title = "Coconut Rasmalai",
+                price = "₹230",
+                restaurantName = "Coastal Sweets",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "COCONUT OFF",
+                discountAmount = "Coconut Milk",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.rasmalai_13,
+                title = "Saffron Elaichi Rasmalai",
+                price = "₹270",
+                restaurantName = "Royal Mughlai",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "0.8 km",
+                discount = "SAFFRON OFF",
+                discountAmount = "Premium Saffron",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.rasmalai_14,
+                title = "Mini Rasmalai Bites",
+                price = "₹150",
+                restaurantName = "Bite Size Sweets",
+                rating = "4.6",
+                deliveryTime = "16-21 mins",
+                distance = "0.7 km",
+                discount = "MINI OFF",
+                discountAmount = "Small Pieces",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.rasmalai_15,
+                title = "Jumbo Rasmalai",
+                price = "₹320",
+                restaurantName = "Big Bite Sweets",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "1.3 km",
+                discount = "JUMBO OFF",
+                discountAmount = "Extra Large",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.rasmalai_16,
+                title = "Homemade Rasmalai",
+                price = "₹290",
+                restaurantName = "Grandma's Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.2 km",
+                discount = "HOMEMADE OFF",
+                discountAmount = "Traditional Method",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.rasmalai_17,
+                title = "Party Rasmalai Tray",
+                price = "₹600",
+                restaurantName = "Celebration Sweets",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "PARTY OFF",
+                discountAmount = "Serves 10-12",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.rasmalai_18,
+                title = "Frozen Rasmalai Pack",
+                price = "₹350",
+                restaurantName = "Freeze & Enjoy",
+                rating = "4.6",
+                deliveryTime = "28-33 mins",
+                distance = "1.1 km",
+                discount = "FROZEN OFF",
+                discountAmount = "Long Lasting",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.rasmalai_19,
+                title = "A2 Milk Rasmalai",
+                price = "₹310",
+                restaurantName = "Organic Sweets",
+                rating = "4.8",
+                deliveryTime = "24-29 mins",
+                distance = "1.4 km",
+                discount = "A2 OFF",
+                discountAmount = "A2 Cow Milk",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.rasmalai_20,
+                title = "Premium Gold Rasmalai",
+                price = "₹450",
+                restaurantName = "Luxury Desserts",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.6 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Edible Gold Leaf",
+                address = "Whitefield, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

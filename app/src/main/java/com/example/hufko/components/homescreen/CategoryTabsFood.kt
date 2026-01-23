@@ -39904,12 +39904,1296 @@ fun PakodaCategoryPage() {
 
 @Composable
 fun HalwaCategoryPage() {
-    CategoryContentPage("Halwa")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val halwaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                // HALWA TYPES (with icons for popular/classic variants)
+                FilterChip(
+                    id = "gajar_halwa",
+                    text = "Gajar Halwa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gajar_halwa
+                ),
+                FilterChip(
+                    id = "sooji_halwa",
+                    text = "Sooji Halwa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sooji_halwa
+                ),
+                FilterChip(
+                    id = "atta_halwa",
+                    text = "Atta Halwa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "moong_dal_halwa",
+                    text = "Moong Dal Halwa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_moong_dal_halwa
+                ),
+                FilterChip(
+                    id = "badam_halwa",
+                    text = "Badam Halwa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pista_halwa",
+                    text = "Pista Halwa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lauki_halwa",
+                    text = "Lauki Halwa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kaddu_halwa",
+                    text = "Kaddu Halwa",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL STYLES (with icon for North Indian)
+                FilterChip(
+                    id = "punjabi_style",
+                    text = "Punjabi Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_punjabi_halwa
+                ),
+                FilterChip(
+                    id = "south_indian",
+                    text = "South Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rajasthani",
+                    text = "Rajasthani",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bengali",
+                    text = "Bengali",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gujarati",
+                    text = "Gujarati",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SWEETNESS LEVEL (with icon for medium sweet)
+                FilterChip(
+                    id = "less_sweet",
+                    text = "Less Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_sweet",
+                    text = "Medium Sweet",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_medium_sweet
+                ),
+                FilterChip(
+                    id = "extra_sweet",
+                    text = "Extra Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // GHEE LEVEL (with icon for loaded ghee)
+                FilterChip(
+                    id = "less_ghee",
+                    text = "Less Ghee",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "moderate_ghee",
+                    text = "Moderate Ghee",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DRY FRUITS (with icon for nuts loaded)
+                FilterChip(
+                    id = "without_dry_fruits",
+                    text = "Without Dry Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_nuts",
+                    text = "Extra Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING TEMPERATURE (with icon for hot serving)
+                FilterChip(
+                    id = "warm",
+                    text = "Warm",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "room_temp",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chilled",
+                    text = "Chilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PACKAGING (with icon for premium)
+                FilterChip(
+                    id = "freshly_made",
+                    text = "Freshly Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ready_to_eat",
+                    text = "Ready to Eat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "homemade_style",
+                    text = "Homemade Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icon for poori)
+                FilterChip(
+                    id = "with_paratha",
+                    text = "With Paratha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_milk",
+                    text = "With Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_ice_cream",
+                    text = "With Ice Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FESTIVAL SPECIAL (with icon for diwali)
+                FilterChip(
+                    id = "eid_special",
+                    text = "Eid Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "holi_special",
+                    text = "Holi Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "wedding_special",
+                    text = "Wedding Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY (with icon for vegetarian)
+                FilterChip(
+                    id = "vegan_option",
+                    text = "Vegan Option",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jain_friendly",
+                    text = "Jain Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE (with icon for premium)
+                FilterChip(
+                    id = "budget",
+                    text = "Budget (₹50-150)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "luxury",
+                    text = "Luxury (₹300+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = halwaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val halwaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.halwa_item_1,
+                title = "Gajar Halwa Special",
+                price = "₹180",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.halwa_item_2,
+                title = "Premium Badam Halwa",
+                price = "₹280",
+                restaurantName = "Royal Sweets",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "10%",
+                discountAmount = "above ₹500",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.halwa_item_3,
+                title = "Moong Dal Halwa with Dry Fruits",
+                price = "₹220",
+                restaurantName = "Rajasthani Flavors",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "festival special",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.halwa_item_4,
+                title = "Sooji Halwa with Poori Combo",
+                price = "₹150",
+                restaurantName = "South Indian Delights",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "0.8 km",
+                discount = "25%",
+                discountAmount = "breakfast combo",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.halwa_item_5,
+                title = "Diwali Special Ghee Halwa",
+                price = "₹320",
+                restaurantName = "Festive Sweets",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "30%",
+                discountAmount = "Diwali offer",
+                address = "MG Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.halwa_item_6,
+                title = "Sugar Free Atta Halwa",
+                price = "₹190",
+                restaurantName = "Healthy Desserts",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "1.3 km",
+                discount = "15%",
+                discountAmount = "health special",
+                address = "HSR Layout, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = halwaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val halwaRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.halwa_1,
+                title = "Gajar Halwa Special",
+                price = "₹180",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "GAJAR OFF",
+                discountAmount = "Carrot Halwa",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.halwa_2,
+                title = "Premium Badam Halwa",
+                price = "₹280",
+                restaurantName = "Royal Sweets",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "BADAM OFF",
+                discountAmount = "Almond Delight",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.halwa_3,
+                title = "Moong Dal Halwa with Dry Fruits",
+                price = "₹220",
+                restaurantName = "Rajasthani Flavors",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "MOONG OFF",
+                discountAmount = "Lentil Sweet",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.halwa_4,
+                title = "Sooji Halwa with Poori Combo",
+                price = "₹150",
+                restaurantName = "South Indian Delights",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "0.8 km",
+                discount = "SOOJI OFF",
+                discountAmount = "Semolina Halwa",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.halwa_5,
+                title = "Diwali Special Ghee Halwa",
+                price = "₹320",
+                restaurantName = "Festive Sweets",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "DIWALI OFF",
+                discountAmount = "Festival Special",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.halwa_6,
+                title = "Sugar Free Atta Halwa",
+                price = "₹190",
+                restaurantName = "Healthy Desserts",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "1.3 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Healthy Option",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.halwa_7,
+                title = "Kaddu Halwa Traditional",
+                price = "₹160",
+                restaurantName = "North Indian Kitchen",
+                rating = "4.4",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "KADDU OFF",
+                discountAmount = "Pumpkin Sweet",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.halwa_8,
+                title = "Pista Halwa Deluxe",
+                price = "₹350",
+                restaurantName = "Premium Nuts Cafe",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "PISTA OFF",
+                discountAmount = "Pistachio Treat",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.halwa_9,
+                title = "Lauki Halwa Healthy",
+                price = "₹170",
+                restaurantName = "Weight Watchers",
+                rating = "4.3",
+                deliveryTime = "28-33 mins",
+                distance = "1.8 km",
+                discount = "LAUKI OFF",
+                discountAmount = "Bottle Gourd Halwa",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.halwa_10,
+                title = "Kesar Badam Pista Halwa",
+                price = "₹380",
+                restaurantName = "Royal Mithai House",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "KESAR OFF",
+                discountAmount = "Saffron Infused",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.halwa_11,
+                title = "Dudhi Halwa with Nuts",
+                price = "₹165",
+                restaurantName = "Gujarati Kitchen",
+                rating = "4.6",
+                deliveryTime = "24-29 mins",
+                distance = "1.7 km",
+                discount = "DUDHI OFF",
+                discountAmount = "White Pumpkin",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.halwa_12,
+                title = "Royal Dry Fruit Halwa",
+                price = "₹420",
+                restaurantName = "Luxury Desserts",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "ROYAL OFF",
+                discountAmount = "Premium Mix",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.halwa_13,
+                title = "Chana Dal Halwa",
+                price = "₹200",
+                restaurantName = "Bengali Sweets",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "2.0 km",
+                discount = "CHANA OFF",
+                discountAmount = "Bengali Special",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.halwa_14,
+                title = "Apple Halwa Healthy",
+                price = "₹210",
+                restaurantName = "Fruit Dessert Cafe",
+                rating = "4.5",
+                deliveryTime = "22-27 mins",
+                distance = "1.9 km",
+                discount = "APPLE OFF",
+                discountAmount = "Fruit Based",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.halwa_15,
+                title = "Coconut Halwa South Style",
+                price = "₹185",
+                restaurantName = "Kerala Sweet House",
+                rating = "4.6",
+                deliveryTime = "32-37 mins",
+                distance = "2.8 km",
+                discount = "COCONUT OFF",
+                discountAmount = "Kerala Special",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.halwa_16,
+                title = "Makhana Halwa Diet",
+                price = "₹230",
+                restaurantName = "Healthy Living Cafe",
+                rating = "4.4",
+                deliveryTime = "29-34 mins",
+                distance = "2.1 km",
+                discount = "MAKHANA OFF",
+                discountAmount = "Fox Nuts Halwa",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.halwa_17,
+                title = "Dates Halwa Natural",
+                price = "₹195",
+                restaurantName = "Organic Sweets",
+                rating = "4.7",
+                deliveryTime = "27-32 mins",
+                distance = "2.3 km",
+                discount = "DATES OFF",
+                discountAmount = "Natural Sweetener",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.halwa_18,
+                title = "Mango Halwa Seasonal",
+                price = "₹240",
+                restaurantName = "Seasonal Fruits",
+                rating = "4.8",
+                deliveryTime = "31-36 mins",
+                distance = "2.4 km",
+                discount = "MANGO OFF",
+                discountAmount = "Summer Special",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.halwa_19,
+                title = "Sabudana Halwa Fasting",
+                price = "₹175",
+                restaurantName = "Fasting Food Corner",
+                rating = "4.5",
+                deliveryTime = "23-28 mins",
+                distance = "1.9 km",
+                discount = "SABUDANA OFF",
+                discountAmount = "Vrat Special",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.halwa_20,
+                title = "Royal Wedding Halwa Platter",
+                price = "₹550",
+                restaurantName = "Wedding Caterers",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "3.0 km",
+                discount = "WEDDING OFF",
+                discountAmount = "Grand Platter",
+                address = "Brigade Road, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun ChopSueyCategoryPage() {
-    CategoryContentPage("Chop Suey")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val chopSueyFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // CHOP SUEY VARIETIES (with icons for popular types)
+                FilterChip(
+                    id = "american_chinese",
+                    text = "American Chinese",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_american_flag
+                ),
+                FilterChip(
+                    id = "filipino",
+                    text = "Filipino Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_philippines_flag
+                ),
+                FilterChip(
+                    id = "indonesian",
+                    text = "Indonesian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetable",
+                    text = "Vegetable",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable_chop_suey
+                ),
+                FilterChip(
+                    id = "chicken",
+                    text = "Chicken",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_chop_suey
+                ),
+                FilterChip(
+                    id = "shrimp",
+                    text = "Shrimp",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_shrimp_chop_suey
+                ),
+                FilterChip(
+                    id = "beef",
+                    text = "Beef",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pork",
+                    text = "Pork",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (with icon for crispy)
+                FilterChip(
+                    id = "soft_noodles",
+                    text = "Soft Noodles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rice_based",
+                    text = "Rice Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SAUCE TYPE (with icon for classic sauce)
+                FilterChip(
+                    id = "white_sauce",
+                    text = "White Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oyster_sauce",
+                    text = "Oyster Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet_sour",
+                    text = "Sweet & Sour",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // VEGETABLE MIX (with icon for classic mix)
+                FilterChip(
+                    id = "extra_bamboo",
+                    text = "Extra Bamboo Shoots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "water_chestnuts",
+                    text = "Water Chestnuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bean_sprouts",
+                    text = "Bean Sprouts",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icon for medium)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (with icon for family style)
+                FilterChip(
+                    id = "individual",
+                    text = "Individual Portion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch_special",
+                    text = "Lunch Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // NOODLE TYPE (with icon for egg noodles)
+                FilterChip(
+                    id = "rice_noodles",
+                    text = "Rice Noodles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "udon",
+                    text = "Udon Noodles",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY (with icon for vegetarian)
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "msg_free",
+                    text = "No MSG",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION TIME (with icon for quick)
+                FilterChip(
+                    id = "made_to_order",
+                    text = "Made to Order",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // RESTAURANT TYPE (with icon for authentic)
+                FilterChip(
+                    id = "fusion",
+                    text = "Fusion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "street_food",
+                    text = "Street Food Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = chopSueyFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val chopSueyItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chop_suey_item_1,
+                title = "Classic American Chop Suey",
+                price = "₹220",
+                restaurantName = "American-Chinese Bistro",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.1 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chop_suey_item_2,
+                title = "Filipino Style Chop Suey",
+                price = "₹260",
+                restaurantName = "Manila Flavors",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "15%",
+                discountAmount = "combo offer",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.chop_suey_item_3,
+                title = "Vegetable Chop Suey with Crispy Noodles",
+                price = "₹190",
+                restaurantName = "Veggie Delight",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "0.7 km",
+                discount = "25%",
+                discountAmount = "vegetarian special",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.chop_suey_item_4,
+                title = "Chicken Chop Suey with Brown Sauce",
+                price = "₹280",
+                restaurantName = "Oriental Express",
+                rating = "4.9",
+                deliveryTime = "22-27 mins",
+                distance = "1.6 km",
+                discount = "10%",
+                discountAmount = "above ₹500",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.chop_suey_item_5,
+                title = "Shrimp Chop Suey with Oyster Sauce",
+                price = "₹320",
+                restaurantName = "Seafood Palace",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "18%",
+                discountAmount = "seafood festival",
+                address = "MG Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.chop_suey_item_6,
+                title = "Spicy Beef Chop Suey",
+                price = "₹300",
+                restaurantName = "Asian Grill",
+                rating = "4.7",
+                deliveryTime = "20-24 mins",
+                distance = "1.2 km",
+                discount = "30%",
+                discountAmount = "lunch special",
+                address = "HSR Layout, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = chopSueyItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val chopSueyRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chop_suey_1,
+                title = "Classic American Chop Suey",
+                price = "₹220",
+                restaurantName = "American-Chinese Bistro",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.1 km",
+                discount = "AMERICAN OFF",
+                discountAmount = "Classic Style",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chop_suey_2,
+                title = "Filipino Style Chop Suey",
+                price = "₹260",
+                restaurantName = "Manila Flavors",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "FILIPINO OFF",
+                discountAmount = "Manila Style",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chop_suey_3,
+                title = "Vegetable Chop Suey with Crispy Noodles",
+                price = "₹190",
+                restaurantName = "Veggie Delight",
+                rating = "4.6",
+                deliveryTime = "15-18 mins",
+                distance = "0.7 km",
+                discount = "VEGGIE OFF",
+                discountAmount = "Crispy Noodles",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chop_suey_4,
+                title = "Chicken Chop Suey with Brown Sauce",
+                price = "₹280",
+                restaurantName = "Oriental Express",
+                rating = "4.9",
+                deliveryTime = "22-27 mins",
+                distance = "1.6 km",
+                discount = "CHICKEN OFF",
+                discountAmount = "Brown Sauce",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chop_suey_5,
+                title = "Shrimp Chop Suey with Oyster Sauce",
+                price = "₹320",
+                restaurantName = "Seafood Palace",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "SHRIMP OFF",
+                discountAmount = "Oyster Sauce",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chop_suey_6,
+                title = "Spicy Beef Chop Suey",
+                price = "₹300",
+                restaurantName = "Asian Grill",
+                rating = "4.7",
+                deliveryTime = "20-24 mins",
+                distance = "1.2 km",
+                discount = "BEEF OFF",
+                discountAmount = "Spicy Version",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chop_suey_7,
+                title = "Pork Chop Suey Cantonese Style",
+                price = "₹290",
+                restaurantName = "Cantonese Kitchen",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "PORK OFF",
+                discountAmount = "Cantonese Style",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chop_suey_8,
+                title = "Singapore Style Chop Suey",
+                price = "₹340",
+                restaurantName = "Singapore Flavors",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "2.1 km",
+                discount = "SINGAPORE OFF",
+                discountAmount = "SE Asian Style",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chop_suey_9,
+                title = "Mushroom Chop Suey Vegan",
+                price = "₹210",
+                restaurantName = "Vegan Asian",
+                rating = "4.5",
+                deliveryTime = "18-23 mins",
+                distance = "1.3 km",
+                discount = "MUSHROOM OFF",
+                discountAmount = "Vegan Option",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chop_suey_10,
+                title = "Luxury Seafood Chop Suey Mix",
+                price = "₹450",
+                restaurantName = "Ocean Delight",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.5 km",
+                discount = "SEAFOOD OFF",
+                discountAmount = "Premium Mix",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chop_suey_11,
+                title = "Tofu Chop Suey Healthy",
+                price = "₹230",
+                restaurantName = "Healthy Asian",
+                rating = "4.4",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "TOFU OFF",
+                discountAmount = "Protein Rich",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chop_suey_12,
+                title = "Crispy Noodle Chicken Chop Suey",
+                price = "₹270",
+                restaurantName = "Crispy Kitchen",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.4 km",
+                discount = "CRISPY OFF",
+                discountAmount = "Textured Noodles",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chop_suey_13,
+                title = "Indonesian Style Chop Suey",
+                price = "₹250",
+                restaurantName = "Indonesian Taste",
+                rating = "4.6",
+                deliveryTime = "26-31 mins",
+                distance = "2.0 km",
+                discount = "INDONESIA OFF",
+                discountAmount = "Jakarta Style",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chop_suey_14,
+                title = "Sweet & Sour Pork Chop Suey",
+                price = "₹310",
+                restaurantName = "Sweet Sour House",
+                rating = "4.7",
+                deliveryTime = "24-29 mins",
+                distance = "1.8 km",
+                discount = "SWEETSOUR OFF",
+                discountAmount = "Balanced Flavor",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chop_suey_15,
+                title = "Thai Inspired Chop Suey",
+                price = "₹330",
+                restaurantName = "Thai Fusion",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.3 km",
+                discount = "THAI OFF",
+                discountAmount = "Lemongrass Touch",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chop_suey_16,
+                title = "Family Platter Chop Suey",
+                price = "₹580",
+                restaurantName = "Family Asian",
+                rating = "4.9",
+                deliveryTime = "32-37 mins",
+                distance = "2.2 km",
+                discount = "FAMILY OFF",
+                discountAmount = "4-5 Portions",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chop_suey_17,
+                title = "Spicy Szechuan Chop Suey",
+                price = "₹290",
+                restaurantName = "Szechuan Palace",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "SZECHUAN OFF",
+                discountAmount = "Extra Spicy",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chop_suey_18,
+                title = "Lunch Special Chop Suey Combo",
+                price = "₹350",
+                restaurantName = "Lunch Express",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "LUNCH OFF",
+                discountAmount = "Complete Meal",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chop_suey_19,
+                title = "Vegetable & Tofu Chop Suey Mix",
+                price = "₹240",
+                restaurantName = "Mix Veg Asian",
+                rating = "4.6",
+                deliveryTime = "21-26 mins",
+                distance = "1.5 km",
+                discount = "MIXVEG OFF",
+                discountAmount = "Balanced Meal",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chop_suey_20,
+                title = "Premium Mixed Meat Chop Suey",
+                price = "₹420",
+                restaurantName = "Meat Lovers Asian",
+                rating = "4.9",
+                deliveryTime = "28-33 mins",
+                distance = "2.0 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Meat Variety",
+                address = "Brigade Road, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

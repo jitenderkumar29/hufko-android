@@ -41198,12 +41198,1262 @@ fun ChopSueyCategoryPage() {
 
 @Composable
 fun KormaCategoryPage() {
-    CategoryContentPage("Korma")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val kormaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // KORMA VARIETIES (with icons for popular types)
+                FilterChip(
+                    id = "navratan_korma",
+                    text = "Navratan Korma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_navratan_korma
+                ),
+                FilterChip(
+                    id = "chicken_korma",
+                    text = "Chicken Korma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_korma
+                ),
+                FilterChip(
+                    id = "lamb_korma",
+                    text = "Lamb Korma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lamb_korma
+                ),
+                FilterChip(
+                    id = "vegetable_korma",
+                    text = "Vegetable Korma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable_korma
+                ),
+                FilterChip(
+                    id = "paneer_korma",
+                    text = "Paneer Korma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "goat_korma",
+                    text = "Goat Korma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_korma",
+                    text = "Fish Korma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_korma",
+                    text = "Egg Korma",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL STYLES (with icon for Mughlai)
+                FilterChip(
+                    id = "mughlai",
+                    text = "Mughlai Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mughlai_korma
+                ),
+                FilterChip(
+                    id = "kashmiri",
+                    text = "Kashmiri Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "awadhi",
+                    text = "Awadhi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hyderabadi",
+                    text = "Hyderabadi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icon for medium)
+                FilterChip(
+                    id = "medium",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // NUT BASE (with icon for cashew)
+                FilterChip(
+                    id = "almond_base",
+                    text = "Almond Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_base",
+                    text = "Coconut Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "poppy_seed",
+                    text = "Poppy Seed",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING METHOD (with icon for dum)
+                FilterChip(
+                    id = "handi",
+                    text = "Handi Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kadhai",
+                    text = "Kadhai Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL INGREDIENTS (with icon for saffron)
+                FilterChip(
+                    id = "cream",
+                    text = "Extra Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dry_fruits",
+                    text = "Dry Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rose_water",
+                    text = "Rose Water",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY (with icon for vegetarian)
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OIL BASE (with icon for ghee)
+                FilterChip(
+                    id = "mustard_oil",
+                    text = "Mustard Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetable_oil",
+                    text = "Vegetable Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (with icon for family)
+                FilterChip(
+                    id = "individual",
+                    text = "Individual",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thali",
+                    text = "Part of Thali",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icon for naan)
+                FilterChip(
+                    id = "with_rice",
+                    text = "With Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_roti",
+                    text = "With Roti",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = kormaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val kormaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.korma_item_1,
+                title = "Royal Mughlai Chicken Korma",
+                price = "₹380",
+                restaurantName = "Mughal Darbar",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.korma_item_2,
+                title = "Navratan Vegetable Korma",
+                price = "₹290",
+                restaurantName = "Pure Veg Paradise",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "vegetarian special",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.korma_item_3,
+                title = "Awadhi Lamb Korma with Saffron",
+                price = "₹450",
+                restaurantName = "Lucknowi Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.1 km",
+                discount = "15%",
+                discountAmount = "festival offer",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.korma_item_4,
+                title = "Paneer Korma with Cashew Cream",
+                price = "₹320",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "10%",
+                discountAmount = "above ₹500",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.korma_item_5,
+                title = "Kashmiri Rogan Josh Korma",
+                price = "₹420",
+                restaurantName = "Kashmir Flavours",
+                rating = "4.9",
+                deliveryTime = "28-33 mins",
+                distance = "1.9 km",
+                discount = "18%",
+                discountAmount = "combo offer",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.korma_item_6,
+                title = "Hyderabadi Goat Korma",
+                price = "₹480",
+                restaurantName = "Nawabi Restaurant",
+                rating = "4.8",
+                deliveryTime = "32-38 mins",
+                distance = "2.4 km",
+                discount = "30%",
+                discountAmount = "lunch special",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = kormaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val kormaRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.korma_1,
+                title = "Royal Mughlai Chicken Korma",
+                price = "₹380",
+                restaurantName = "Mughal Darbar",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "MUGHAL OFF",
+                discountAmount = "Royal Preparation",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.korma_2,
+                title = "Navratan Vegetable Korma",
+                price = "₹290",
+                restaurantName = "Pure Veg Paradise",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "NAVRATAN OFF",
+                discountAmount = "Nine Jewels Mix",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.korma_3,
+                title = "Awadhi Lamb Korma with Saffron",
+                price = "₹450",
+                restaurantName = "Lucknowi Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.1 km",
+                discount = "AWADHI OFF",
+                discountAmount = "Saffron Infused",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.korma_4,
+                title = "Paneer Korma with Cashew Cream",
+                price = "₹320",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "PANEER OFF",
+                discountAmount = "Cashew Cream",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.korma_5,
+                title = "Kashmiri Rogan Josh Korma",
+                price = "₹420",
+                restaurantName = "Kashmir Flavours",
+                rating = "4.9",
+                deliveryTime = "28-33 mins",
+                distance = "1.9 km",
+                discount = "KASHMIRI OFF",
+                discountAmount = "Rogan Josh Style",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.korma_6,
+                title = "Hyderabadi Goat Korma",
+                price = "₹480",
+                restaurantName = "Nawabi Restaurant",
+                rating = "4.8",
+                deliveryTime = "32-38 mins",
+                distance = "2.4 km",
+                discount = "HYDERABADI OFF",
+                discountAmount = "Nawabi Style",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.korma_7,
+                title = "Malabar Fish Korma",
+                price = "₹360",
+                restaurantName = "Coastal Delights",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "1.7 km",
+                discount = "MALABAR OFF",
+                discountAmount = "Coastal Style",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.korma_8,
+                title = "Egg Korma Masala",
+                price = "₹260",
+                restaurantName = "Egg Specialists",
+                rating = "4.5",
+                deliveryTime = "18-23 mins",
+                distance = "0.8 km",
+                discount = "EGG OFF",
+                discountAmount = "Protein Rich",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.korma_9,
+                title = "Vegan Cashew Korma",
+                price = "₹280",
+                restaurantName = "Vegan Darbar",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "1.4 km",
+                discount = "VEGAN OFF",
+                discountAmount = "Dairy Free",
+                address = "Electronic City, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.korma_10,
+                title = "Premium Mixed Korma Platter",
+                price = "₹520",
+                restaurantName = "Royal Feast",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.3 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Three Varieties",
+                address = "Sarjapur Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.korma_11,
+                title = "Mushroom & Peas Korma",
+                price = "₹240",
+                restaurantName = "Mushroom Magic",
+                rating = "4.4",
+                deliveryTime = "19-24 mins",
+                distance = "1.1 km",
+                discount = "MUSHROOM OFF",
+                discountAmount = "Earthly Flavors",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.korma_12,
+                title = "Butter Chicken Korma Style",
+                price = "₹340",
+                restaurantName = "Butter Chicken Co.",
+                rating = "4.8",
+                deliveryTime = "24-29 mins",
+                distance = "1.6 km",
+                discount = "BUTTER OFF",
+                discountAmount = "Creamy Texture",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.korma_13,
+                title = "Bengali Prawn Korma",
+                price = "₹410",
+                restaurantName = "Bengali Kitchen",
+                rating = "4.7",
+                deliveryTime = "27-32 mins",
+                distance = "2.0 km",
+                discount = "BENGALI OFF",
+                discountAmount = "Mustard Flavored",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.korma_14,
+                title = "Sweet Paneer Korma",
+                price = "₹310",
+                restaurantName = "Sweet Savories",
+                rating = "4.6",
+                deliveryTime = "21-26 mins",
+                distance = "1.5 km",
+                discount = "SWEET OFF",
+                discountAmount = "Mild & Sweet",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.korma_15,
+                title = "Thai Inspired Coconut Korma",
+                price = "₹330",
+                restaurantName = "Thai-Indian Fusion",
+                rating = "4.7",
+                deliveryTime = "29-34 mins",
+                distance = "2.2 km",
+                discount = "COCONUT OFF",
+                discountAmount = "Thai Fusion",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.korma_16,
+                title = "Family Korma Feast",
+                price = "₹620",
+                restaurantName = "Family Darbar",
+                rating = "4.9",
+                deliveryTime = "33-38 mins",
+                distance = "2.1 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4-5",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.korma_17,
+                title = "Spicy Andhra Chicken Korma",
+                price = "₹370",
+                restaurantName = "Andhra Spice",
+                rating = "4.8",
+                deliveryTime = "26-31 mins",
+                distance = "1.8 km",
+                discount = "ANDHRA OFF",
+                discountAmount = "Extra Spicy",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.korma_18,
+                title = "Lunch Special Korma Thali",
+                price = "₹390",
+                restaurantName = "Lunch Darbar",
+                rating = "4.6",
+                deliveryTime = "16-21 mins",
+                distance = "0.7 km",
+                discount = "LUNCH OFF",
+                discountAmount = "Complete Thali",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.korma_19,
+                title = "Mixed Vegetable Korma",
+                price = "₹270",
+                restaurantName = "Veggie Korma House",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "MIXVEG OFF",
+                discountAmount = "Seasonal Veggies",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.korma_20,
+                title = "Premium Lamb & Chicken Korma Combo",
+                price = "₹580",
+                restaurantName = "Meat Darbar",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "COMBO OFF",
+                discountAmount = "Dual Meat",
+                address = "Brigade Road, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun NamkeenCategoryPage() {
-    CategoryContentPage("Namkeen")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val namkeenFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // NAMKEEN TYPES (with icons for popular varieties)
+                FilterChip(
+                    id = "bhujia",
+                    text = "Bhujia",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bhujia_namkeen
+                ),
+                FilterChip(
+                    id = "sev",
+                    text = "Sev",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sev_namkeen
+                ),
+                FilterChip(
+                    id = "mixture",
+                    text = "Mixture",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mixture_namkeen
+                ),
+                FilterChip(
+                    id = "chakli",
+                    text = "Chakli",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chakli_namkeen
+                ),
+                FilterChip(
+                    id = "namkeen_mathri",
+                    text = "Mathri",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "farsan",
+                    text = "Farsan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "khatta_meetha",
+                    text = "Khatta Meetha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dal_moth",
+                    text = "Dal Moth",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL SPECIALTIES (with icon for popular ones)
+                FilterChip(
+                    id = "bikaneri_bhujia",
+                    text = "Bikaneri Bhujia",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bikaneri_namkeen
+                ),
+                FilterChip(
+                    id = "gujarati_farsan",
+                    text = "Gujarati Farsan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "punjabi_mixture",
+                    text = "Punjabi Mixture",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MAIN INGREDIENT BASE (with icons for key bases)
+                FilterChip(
+                    id = "rice_flour",
+                    text = "Rice Flour",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "moong_dal",
+                    text = "Moong Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "urad_dal",
+                    text = "Urad Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icon for medium)
+                FilterChip(
+                    id = "medium_spicy",
+                    text = "Medium Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEXTURE (with icon for crunchy)
+                FilterChip(
+                    id = "crispy",
+                    text = "Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft",
+                    text = "Soft Texture",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL ADDITIONS (with icon for nuts)
+                FilterChip(
+                    id = "with_dry_fruits",
+                    text = "With Dry Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "masala_coated",
+                    text = "Masala Coated",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVOR PROFILE (with icon for tangy)
+                FilterChip(
+                    id = "savoury",
+                    text = "Savoury",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemony",
+                    text = "Lemony",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PACKAGING/FORM (with icon for loose)
+                FilterChip(
+                    id = "packaged",
+                    text = "Packaged",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "airtight",
+                    text = "Airtight Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY (with icon for vegetarian)
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OIL TYPE (with icon for peanut oil)
+                FilterChip(
+                    id = "mustard_oil",
+                    text = "Mustard Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sunflower_oil",
+                    text = "Sunflower Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FRESHNESS (with icon for fresh)
+                FilterChip(
+                    id = "homemade_style",
+                    text = "Homemade Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = namkeenFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val namkeenItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.namkeen_item_1,
+                title = "Premium Bikaneri Bhujia",
+                price = "₹180",
+                restaurantName = "Bikaner Namkeen House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.namkeen_item_2,
+                title = "Special Indore Sev Mix",
+                price = "₹220",
+                restaurantName = "MP Namkeen Corner",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "combo offer",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.namkeen_item_3,
+                title = "Crunchy Chakli Assortment",
+                price = "₹250",
+                restaurantName = "Gujarati Farsan",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "above ₹400",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.namkeen_item_4,
+                title = "Masala Mathri & Nimki",
+                price = "₹150",
+                restaurantName = "Delhi Namkeen Wala",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "family pack",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.namkeen_item_5,
+                title = "Spicy Mixture with Nuts",
+                price = "₹280",
+                restaurantName = "Punjabi Namkeen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "18%",
+                discountAmount = "evening special",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.namkeen_item_6,
+                title = "Tangy Khatta Meetha",
+                price = "₹190",
+                restaurantName = "Rajasthan Namkeen",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.5 km",
+                discount = "30%",
+                discountAmount = "weekend offer",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = namkeenItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val namkeenRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.namkeen_1,
+                title = "Classic Bikaneri Bhujia",
+                price = "₹180",
+                restaurantName = "Bikaner Bhujia House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "BIKANERI OFF",
+                discountAmount = "Original Recipe",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.namkeen_2,
+                title = "Indore Special Sev",
+                price = "₹220",
+                restaurantName = "MP Sev Bhandar",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "0.5 km",
+                discount = "INDORE OFF",
+                discountAmount = "Thin & Crispy",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.namkeen_3,
+                title = "Gujarati Farsan Platter",
+                price = "₹320",
+                restaurantName = "Gujarat Farsan Mart",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "FARSAN OFF",
+                discountAmount = "Assorted Mix",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.namkeen_4,
+                title = "Delhi Style Masala Mathri",
+                price = "₹150",
+                restaurantName = "Delhi Namkeen Hub",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "MATHRI OFF",
+                discountAmount = "Flaky & Crisp",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.namkeen_5,
+                title = "Punjabi Mixture with Nuts",
+                price = "₹280",
+                restaurantName = "Punjab Namkeen Co.",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "MIXTURE OFF",
+                discountAmount = "Nutty Crunch",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.namkeen_6,
+                title = "Rajasthani Khatta Meetha",
+                price = "₹190",
+                restaurantName = "Rajasthan Snacks",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.5 km",
+                discount = "KHATTA OFF",
+                discountAmount = "Sweet & Sour",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.namkeen_7,
+                title = "Spicy Dal Moth Mix",
+                price = "₹210",
+                restaurantName = "Healthy Namkeen",
+                rating = "4.4",
+                deliveryTime = "16-21 mins",
+                distance = "1.1 km",
+                discount = "DALMOTH OFF",
+                discountAmount = "Protein Rich",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.namkeen_8,
+                title = "Chakli & Murukku Assortment",
+                price = "₹250",
+                restaurantName = "South Indian Snacks",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.3 km",
+                discount = "CHAKLI OFF",
+                discountAmount = "Spiral Crisps",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.namkeen_9,
+                title = "Street Style Masala Peanuts",
+                price = "₹120",
+                restaurantName = "Street Food Corner",
+                rating = "4.3",
+                deliveryTime = "10-15 mins",
+                distance = "0.4 km",
+                discount = "PEANUT OFF",
+                discountAmount = "Street Style",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.namkeen_10,
+                title = "Premium Dry Fruits Namkeen",
+                price = "₹420",
+                restaurantName = "Royal Dry Fruits",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.8 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Luxury Mix",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.namkeen_11,
+                title = "Masala Corn Flakes Mix",
+                price = "₹170",
+                restaurantName = "Innovative Snacks",
+                rating = "4.5",
+                deliveryTime = "19-24 mins",
+                distance = "1.1 km",
+                discount = "CORN OFF",
+                discountAmount = "Crunchy Corn",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.namkeen_12,
+                title = "Butter Sev & Nankhatai",
+                price = "₹230",
+                restaurantName = "Butter Namkeen",
+                rating = "4.7",
+                deliveryTime = "24-29 mins",
+                distance = "1.6 km",
+                discount = "BUTTER OFF",
+                discountAmount = "Rich & Buttery",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.namkeen_13,
+                title = "Bengali Jhal Muri Mix",
+                price = "₹140",
+                restaurantName = "Bengali Snacks",
+                rating = "4.6",
+                deliveryTime = "17-22 mins",
+                distance = "1.3 km",
+                discount = "JHAL OFF",
+                discountAmount = "Tangy & Spicy",
+                address = "Malleshwaram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.namkeen_14,
+                title = "Sweet Boondi & Gathiya",
+                price = "₹160",
+                restaurantName = "Sweet Namkeen",
+                rating = "4.5",
+                deliveryTime = "21-26 mins",
+                distance = "1.5 km",
+                discount = "SWEET OFF",
+                discountAmount = "Sugar Coated",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.namkeen_15,
+                title = "Masala Puffed Rice Mix",
+                price = "₹130",
+                restaurantName = "Light Snacks",
+                rating = "4.4",
+                deliveryTime = "14-19 mins",
+                distance = "0.8 km",
+                discount = "PUFFED OFF",
+                discountAmount = "Light & Crisp",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.namkeen_16,
+                title = "Family Namkeen Pack",
+                price = "₹380",
+                restaurantName = "Family Snacks",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "FAMILY OFF",
+                discountAmount = "5 Varieties",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.namkeen_17,
+                title = "Spicy Andhra Mixture",
+                price = "₹240",
+                restaurantName = "Andhra Snacks",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "1.8 km",
+                discount = "ANDHRA OFF",
+                discountAmount = "Extra Hot",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.namkeen_18,
+                title = "Office Snacks Combo",
+                price = "₹290",
+                restaurantName = "Office Snacks",
+                rating = "4.6",
+                deliveryTime = "16-21 mins",
+                distance = "0.7 km",
+                discount = "OFFICE OFF",
+                discountAmount = "Tea Time",
+                address = "KR Puram, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.namkeen_19,
+                title = "Mixed Chivda & Flakes",
+                price = "₹200",
+                restaurantName = "Chivda Specialists",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "CHIVDA OFF",
+                discountAmount = "Savory Mix",
+                address = "Yelahanka, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.namkeen_20,
+                title = "Premium Snacks Hamper",
+                price = "₹550",
+                restaurantName = "Gift Hamper Co.",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "HAMPER OFF",
+                discountAmount = "Gift Pack",
+                address = "Brigade Road, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

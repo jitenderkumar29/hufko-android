@@ -42458,7 +42458,589 @@ fun NamkeenCategoryPage() {
 
 @Composable
 fun MushroomsCategoryPage() {
-    CategoryContentPage("Mushrooms")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val mushroomFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // MUSHROOM TYPES (with icons for popular varieties)
+                FilterChip(
+                    id = "button_mushrooms",
+                    text = "Button Mushrooms",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_button_mushrooms
+                ),
+                FilterChip(
+                    id = "oyster_mushrooms",
+                    text = "Oyster Mushrooms",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_oyster_mushrooms
+                ),
+                FilterChip(
+                    id = "shiitake",
+                    text = "Shiitake",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_shiitake_mushrooms
+                ),
+                FilterChip(
+                    id = "portobello",
+                    text = "Portobello",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cremini",
+                    text = "Cremini",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "enoki",
+                    text = "Enoki",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FORM (with icons for fresh and dried)
+                FilterChip(
+                    id = "fresh",
+                    text = "Fresh",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fresh_produce
+                ),
+                FilterChip(
+                    id = "dried",
+                    text = "Dried",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dried_mushrooms
+                ),
+                FilterChip(
+                    id = "canned",
+                    text = "Canned",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sliced",
+                    text = "Pre-sliced",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // WILD vs CULTIVATED
+                FilterChip(
+                    id = "cultivated",
+                    text = "Cultivated",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ORGANIC & QUALITY
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "locally_grown",
+                    text = "Locally Grown",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PACKAGING (with icon for whole)
+                FilterChip(
+                    id = "packaged",
+                    text = "Packaged",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bulk",
+                    text = "Bulk",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE (with icon for jumbo)
+                FilterChip(
+                    id = "small",
+                    text = "Small",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // USAGE (with icon for gourmet)
+                FilterChip(
+                    id = "culinary",
+                    text = "Culinary Use",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medicinal",
+                    text = "Medicinal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FRESHNESS INDICATOR
+                FilterChip(
+                    id = "very_fresh",
+                    text = "Very Fresh",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "firm_texture",
+                    text = "Firm Texture",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget",
+                    text = "Budget Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = mushroomFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val mushroomItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.mushroom_item_1,
+                title = "Fresh White Button Mushrooms",
+                price = "₹120",
+                restaurantName = "Organic Greens",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.mushroom_item_2,
+                title = "Premium Oyster Mushrooms",
+                price = "₹180",
+                restaurantName = "Gourmet Fungi",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "combo offer",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.mushroom_item_3,
+                title = "Japanese Shiitake Mushrooms",
+                price = "₹250",
+                restaurantName = "Asian Exotics",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "above ₹500",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.mushroom_item_4,
+                title = "Portobello Mushrooms - Jumbo",
+                price = "₹220",
+                restaurantName = "Urban Farms",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.0 km",
+                discount = "25%",
+                discountAmount = "family pack",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.mushroom_item_5,
+                title = "Dried Morel Mushrooms",
+                price = "₹450",
+                restaurantName = "Wild Harvest",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "18%",
+                discountAmount = "premium offer",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.mushroom_item_6,
+                title = "Cremini Mushrooms - Fresh Pack",
+                price = "₹150",
+                restaurantName = "Farm to Table",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.7 km",
+                discount = "30%",
+                discountAmount = "weekend special",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = mushroomItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val mushroomRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.mushroom_1,
+                title = "Fresh White Button Mushrooms",
+                price = "₹120",
+                restaurantName = "Organic Greens Farm",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "BUTTON OFF",
+                discountAmount = "Fresh Harvest",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.mushroom_2,
+                title = "Premium Oyster Mushrooms",
+                price = "₹180",
+                restaurantName = "Gourmet Fungi Farm",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "OYSTER OFF",
+                discountAmount = "Velvet Texture",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.mushroom_3,
+                title = "Japanese Shiitake Mushrooms",
+                price = "₹250",
+                restaurantName = "Asian Exotics Hub",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "SHIITAKE OFF",
+                discountAmount = "Umami Rich",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.mushroom_4,
+                title = "Portobello Mushrooms - Jumbo",
+                price = "₹220",
+                restaurantName = "Urban Farms Supply",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.0 km",
+                discount = "PORTOBELLO OFF",
+                discountAmount = "Grill Ready",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.mushroom_5,
+                title = "Dried Morel Mushrooms",
+                price = "₹450",
+                restaurantName = "Wild Harvest Co.",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "MOREL OFF",
+                discountAmount = "Gourmet Grade",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.mushroom_6,
+                title = "Cremini Mushrooms - Fresh Pack",
+                price = "₹150",
+                restaurantName = "Farm to Table Fresh",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.7 km",
+                discount = "CREMINI OFF",
+                discountAmount = "Baby Portobello",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.mushroom_7,
+                title = "Enoki Mushrooms Cluster",
+                price = "₹190",
+                restaurantName = "Japanese Import Store",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "ENOKI OFF",
+                discountAmount = "Fine Strands",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.mushroom_8,
+                title = "King Trumpet Mushrooms",
+                price = "₹280",
+                restaurantName = "Royal Mushroom Co.",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.4 km",
+                discount = "TRUMPET OFF",
+                discountAmount = "Meaty Texture",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.mushroom_9,
+                title = "Maitake Mushrooms (Hen of Woods)",
+                price = "₹320",
+                restaurantName = "Medicinal Mushrooms",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "MAITAKE OFF",
+                discountAmount = "Health Benefits",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.mushroom_10,
+                title = "Lion's Mane Mushrooms",
+                price = "₹380",
+                restaurantName = "Premium Fungi",
+                rating = "4.9",
+                deliveryTime = "28-33 mins",
+                distance = "1.9 km",
+                discount = "LION OFF",
+                discountAmount = "Brain Health",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.mushroom_11,
+                title = "Mixed Mushroom Basket",
+                price = "₹270",
+                restaurantName = "Mushroom Mix Co.",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "MIXED OFF",
+                discountAmount = "5 Varieties",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.mushroom_12,
+                title = "Chanterelle Mushrooms",
+                price = "₹420",
+                restaurantName = "European Mushrooms",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "CHANTERELLE OFF",
+                discountAmount = "Golden Harvest",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.mushroom_13,
+                title = "Organic Mushroom Medley",
+                price = "₹230",
+                restaurantName = "Organic Harvest",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "1.1 km",
+                discount = "ORGANIC OFF",
+                discountAmount = "Certified Organic",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.mushroom_14,
+                title = "Dried Porcini Mushrooms",
+                price = "₹350",
+                restaurantName = "Italian Delights",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "1.6 km",
+                discount = "PORCINI OFF",
+                discountAmount = "Italian Import",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.mushroom_15,
+                title = "Sliced White Mushrooms",
+                price = "₹140",
+                restaurantName = "Ready-to-Cook",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "SLICED OFF",
+                discountAmount = "Convenient",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.mushroom_16,
+                title = "Wild Forest Mushrooms",
+                price = "₹310",
+                restaurantName = "Wilderness Harvest",
+                rating = "4.8",
+                deliveryTime = "32-37 mins",
+                distance = "2.1 km",
+                discount = "WILD OFF",
+                discountAmount = "Natural Foraging",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.mushroom_17,
+                title = "Mini Button Mushrooms",
+                price = "₹130",
+                restaurantName = "Petite Mushrooms",
+                rating = "4.6",
+                deliveryTime = "14-19 mins",
+                distance = "0.8 km",
+                discount = "MINI OFF",
+                discountAmount = "Bite-sized",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.mushroom_18,
+                title = "Mushroom Growing",
+                price = "₹290",
+                restaurantName = "Home Grow",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "GROW OFF",
+                discountAmount = "DIY Kit",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.mushroom_19,
+                title = "Seasonal Mushroom",
+                price = "₹260",
+                restaurantName = "Seasonal Produce",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "1.5 km",
+                discount = "SEASONAL OFF",
+                discountAmount = "Monthly Special",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.mushroom_20,
+                title = "Premium Mushroom Gift Hamper",
+                price = "₹520",
+                restaurantName = "Gourmet Gifts",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "HAMPER OFF",
+                discountAmount = "Luxury Selection",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

@@ -43045,12 +43045,1190 @@ fun MushroomsCategoryPage() {
 
 @Composable
 fun KeemaCategoryPage() {
-    CategoryContentPage("Keema")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val keemaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // MEAT TYPES (with icons for common keema types)
+                FilterChip(
+                    id = "chicken_keema",
+                    text = "Chicken Keema",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_meat
+                ),
+                FilterChip(
+                    id = "mutton_keema",
+                    text = "Mutton Keema",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mutton_meat
+                ),
+                FilterChip(
+                    id = "mix_keema",
+                    text = "Mix Keema",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mix_meat
+                ),
+                FilterChip(
+                    id = "lamb_keema",
+                    text = "Lamb Keema",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turkey_keema",
+                    text = "Turkey Keema",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_keema",
+                    text = "Fish Keema",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // VEGETARIAN OPTIONS (with icon for plant-based)
+                FilterChip(
+                    id = "soya_keema",
+                    text = "Soya Keema",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plant_based
+                ),
+                FilterChip(
+                    id = "vegetable_keema",
+                    text = "Vegetable Keema",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION STATE (with icons for relevant states)
+                FilterChip(
+                    id = "fresh_minced",
+                    text = "Fresh Minced",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fresh_meat
+                ),
+                FilterChip(
+                    id = "ready_to_cook",
+                    text = "Ready to Cook",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "marinated",
+                    text = "Marinated",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FAT CONTENT (with icon for lean option)
+                FilterChip(
+                    id = "regular",
+                    text = "Regular Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ORIGIN & QUALITY
+                FilterChip(
+                    id = "halal",
+                    text = "Halal Certified",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic_keema",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grass_fed",
+                    text = "Grass-Fed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "free_range",
+                    text = "Free Range",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PACKAGING SIZE (with icon for family pack)
+                FilterChip(
+                    id = "single_serve",
+                    text = "Single Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bulk_keema",
+                    text = "Bulk",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget_keema",
+                    text = "Budget Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_keema",
+                    text = "Premium Quality",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUISINE STYLE
+                FilterChip(
+                    id = "indian_style",
+                    text = "Indian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "middle_eastern",
+                    text = "Middle Eastern",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "for_curries",
+                    text = "For Curries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "for_kebabs",
+                    text = "For Kebabs",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = keemaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val keemaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.keema_item_1,
+                title = "Chicken Keema - Premium Minced",
+                price = "₹180",
+                restaurantName = "Spice Kitchen",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.keema_item_2,
+                title = "Mutton Keema - Extra Lean",
+                price = "₹320",
+                restaurantName = "Royal Mughlai",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "combo offer",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.keema_item_3,
+                title = "Beef Keema - Fresh Minced",
+                price = "₹280",
+                restaurantName = "Beef Specialists",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "above ₹500",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.keema_item_4,
+                title = "Soya Keema - Vegetarian",
+                price = "₹160",
+                restaurantName = "Plant Based Delights",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "healthy choice",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.keema_item_5,
+                title = "Keema Sampler - 3 Meat Mix",
+                price = "₹450",
+                restaurantName = "Gourmet Butchers",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "18%",
+                discountAmount = "family pack",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.keema_item_6,
+                title = "Marinated Chicken Keema",
+                price = "₹200",
+                restaurantName = "Ready to Cook Kitchen",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "0.6 km",
+                discount = "30%",
+                discountAmount = "weekend special",
+                address = "MG Road, Bangalore",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = keemaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val keemaRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.keema_1,
+                title = "Classic Chicken Keema",
+                price = "₹180",
+                restaurantName = "Spice Kitchen",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "KEEMA OFF",
+                discountAmount = "Fresh Minced",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.keema_2,
+                title = "Mughlai Mutton Keema",
+                price = "₹320",
+                restaurantName = "Royal Mughlai",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "MUTTON OFF",
+                discountAmount = "Extra Lean",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.keema_3,
+                title = "Keema Masala",
+                price = "₹280",
+                restaurantName = "Specialists",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "OFF",
+                discountAmount = "Spicy Masala",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.keema_4,
+                title = "Soya Keema Vegan",
+                price = "₹160",
+                restaurantName = "Plant Based Delights",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "SOYA OFF",
+                discountAmount = "Plant Protein",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.keema_5,
+                title = "Keema Sampler Pack",
+                price = "₹450",
+                restaurantName = "Gourmet Butchers",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "SAMPLER OFF",
+                discountAmount = "3 Meat Mix",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.keema_6,
+                title = "Marinated Chicken Keema",
+                price = "₹200",
+                restaurantName = "Ready to Cook Kitchen",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "0.6 km",
+                discount = "MARINATED OFF",
+                discountAmount = "Ready to Cook",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.keema_7,
+                title = "Keema Paratha Stuffing",
+                price = "₹190",
+                restaurantName = "Paratha Specialists",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "PARATHA OFF",
+                discountAmount = "Perfect Filling",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.keema_8,
+                title = "Lamb Keema Kebab Mix",
+                price = "₹350",
+                restaurantName = "Kebab Masters",
+                rating = "4.8",
+                deliveryTime = "22-27 mins",
+                distance = "1.4 km",
+                discount = "LAMB OFF",
+                discountAmount = "Kebab Ready",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.keema_9,
+                title = "Turkey Keema Lean",
+                price = "₹270",
+                restaurantName = "Health Kitchen",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "TURKEY OFF",
+                discountAmount = "Low Fat",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.keema_10,
+                title = "Keema Pav Filling",
+                price = "₹220",
+                restaurantName = "Mumbai Street Food",
+                rating = "4.7",
+                deliveryTime = "28-33 mins",
+                distance = "1.9 km",
+                discount = "PAV OFF",
+                discountAmount = "Street Style",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.keema_11,
+                title = "Fish Keema Bengali Style",
+                price = "₹240",
+                restaurantName = "Bengali Delicacies",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "FISH OFF",
+                discountAmount = "Bengali Spices",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.keema_12,
+                title = "Keema Biryani Mix",
+                price = "₹290",
+                restaurantName = "Biryani House",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "BIRYANI OFF",
+                discountAmount = "Ready Mix",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.keema_13,
+                title = "Organic Chicken Keema",
+                price = "₹250",
+                restaurantName = "Organic Meat Co.",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "1.1 km",
+                discount = "ORGANIC OFF",
+                discountAmount = "Free Range",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.keema_14,
+                title = "Keema Pulao Mix",
+                price = "₹210",
+                restaurantName = "Rice Delights",
+                rating = "4.7",
+                deliveryTime = "26-31 mins",
+                distance = "1.6 km",
+                discount = "PULAO OFF",
+                discountAmount = "Instant Mix",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.keema_15,
+                title = "Keema Matar Mix",
+                price = "₹230",
+                restaurantName = "Classic Curries",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "MATAR OFF",
+                discountAmount = "Peas Added",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.keema_16,
+                title = "Halal Mutton Keema",
+                price = "₹330",
+                restaurantName = "Halal Certified",
+                rating = "4.8",
+                deliveryTime = "32-37 mins",
+                distance = "2.1 km",
+                discount = "HALAL OFF",
+                discountAmount = "Certified",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.keema_17,
+                title = "Keema Momo Filling",
+                price = "₹170",
+                restaurantName = "Momos & More",
+                rating = "4.6",
+                deliveryTime = "14-19 mins",
+                distance = "0.8 km",
+                discount = "MOMO OFF",
+                discountAmount = "Perfect Filling",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.keema_18,
+                title = "Keema Pav Bhaji Mix",
+                price = "₹200",
+                restaurantName = "Pav Bhaji Corner",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "BHAJI OFF",
+                discountAmount = "Spicy Mix",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.keema_19,
+                title = "Keema Kofta Mix",
+                price = "₹260",
+                restaurantName = "Kofta Specialists",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "1.5 km",
+                discount = "KOFFTA OFF",
+                discountAmount = "Ready Mix",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.keema_20,
+                title = "Premium Keema Hamper",
+                price = "₹580",
+                restaurantName = "Gourmet Meat Co.",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "HAMPER OFF",
+                discountAmount = "Luxury Selection",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun SundaeCategoryPage() {
-    CategoryContentPage("Sundae")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val sundaeFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // ICE CREAM BASE (with icons for main types)
+                FilterChip(
+                    id = "vanilla_base",
+                    text = "Vanilla Base",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vanilla_ice_cream_sundae
+                ),
+                FilterChip(
+                    id = "chocolate_base",
+                    text = "Chocolate Base",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_ice_cream_sundae
+                ),
+                FilterChip(
+                    id = "strawberry_base",
+                    text = "Strawberry Base",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_strawberry_ice_cream_sundae
+                ),
+                FilterChip(
+                    id = "mint_chocolate",
+                    text = "Mint Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookies_cream",
+                    text = "Cookies & Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (with icons for popular toppings)
+                FilterChip(
+                    id = "chocolate_sauce",
+                    text = "Chocolate Sauce",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_sauce_sundae
+                ),
+                FilterChip(
+                    id = "caramel_sauce",
+                    text = "Caramel Sauce",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_caramel_sauce_sundae
+                ),
+                FilterChip(
+                    id = "sprinkles",
+                    text = "Sprinkles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whipped_cream",
+                    text = "Whipped Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cherry_on_top",
+                    text = "Cherry on Top",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_chips",
+                    text = "Chocolate Chips",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIALTY SUNDAES (with icons for signature items)
+                FilterChip(
+                    id = "brownie_sundae",
+                    text = "Brownie Sundae",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "affogato_style",
+                    text = "Affogato Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY OPTIONS (with icon for dietary restrictions)
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE & SERVING (with icon for large size)
+                FilterChip(
+                    id = "family_size",
+                    text = "Family Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_sundae",
+                    text = "Mini Sundae",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget_friendly",
+                    text = "Budget Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_sundae",
+                    text = "Premium Sundae",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_alcohol",
+                    text = "With Alcohol",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL FEATURES
+                FilterChip(
+                    id = "customizable",
+                    text = "Customizable",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "seasonal_special",
+                    text = "Seasonal Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "signature_sundae",
+                    text = "Signature Sundae",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = sundaeFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val sundaeItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.sundae_item_1,
+                title = "Classic Hot Fudge Sundae",
+                price = "₹180",
+                restaurantName = "Sweet Delights",
+                rating = "4.8",
+                deliveryTime = "12-15 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.sundae_item_2,
+                title = "Premium Chocolate Volcano",
+                price = "₹320",
+                restaurantName = "Choco Paradise",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "combo offer",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.sundae_item_3,
+                title = "Strawberry Dream Sundae",
+                price = "₹250",
+                restaurantName = "Berrylicious",
+                rating = "4.7",
+                deliveryTime = "10-14 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "above ₹500",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.sundae_item_4,
+                title = "Vegan Caramel Swirl",
+                price = "₹220",
+                restaurantName = "Plant Based Sweets",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.1 km",
+                discount = "25%",
+                discountAmount = "healthy choice",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.sundae_item_5,
+                title = "Family Size Banana Split",
+                price = "₹450",
+                restaurantName = "Ice Cream Factory",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "18%",
+                discountAmount = "family pack",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.sundae_item_6,
+                title = "Premium Brownie Sundae",
+                price = "₹280",
+                restaurantName = "Choco Lovers",
+                rating = "4.9",
+                deliveryTime = "14-18 mins",
+                distance = "0.7 km",
+                discount = "30%",
+                discountAmount = "weekend special",
+                address = "MG Road, Bangalore",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = sundaeItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sundaeRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.sundae_1,
+                title = "Classic Hot Fudge Sundae",
+                price = "₹180",
+                restaurantName = "Sweet Delights",
+                rating = "4.7",
+                deliveryTime = "12-15 mins",
+                distance = "0.5 km",
+                discount = "FUDGE OFF",
+                discountAmount = "Classic Favorite",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.sundae_2,
+                title = "Premium Chocolate Volcano",
+                price = "₹320",
+                restaurantName = "Choco Paradise",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "CHOCO OFF",
+                discountAmount = "Chocolate Lover",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.sundae_3,
+                title = "Strawberry Dream Sundae",
+                price = "₹250",
+                restaurantName = "Berrylicious",
+                rating = "4.7",
+                deliveryTime = "10-14 mins",
+                distance = "0.6 km",
+                discount = "BERRY OFF",
+                discountAmount = "Fresh Strawberries",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.sundae_4,
+                title = "Vegan Caramel Swirl",
+                price = "₹220",
+                restaurantName = "Plant Based Sweets",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.1 km",
+                discount = "VEGAN OFF",
+                discountAmount = "Dairy Free",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.sundae_5,
+                title = "Family Size Banana Split",
+                price = "₹450",
+                restaurantName = "Ice Cream Factory",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "BANANA OFF",
+                discountAmount = "Family Favorite",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.sundae_6,
+                title = "Premium Brownie Sundae",
+                price = "₹280",
+                restaurantName = "Choco Lovers",
+                rating = "4.8",
+                deliveryTime = "14-18 mins",
+                distance = "0.7 km",
+                discount = "BROWNIE OFF",
+                discountAmount = "Brownie Chunks",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.sundae_7,
+                title = "Nutty Caramel Crunch",
+                price = "₹190",
+                restaurantName = "Nutty Delights",
+                rating = "4.6",
+                deliveryTime = "16-20 mins",
+                distance = "0.9 km",
+                discount = "NUTTY OFF",
+                discountAmount = "Extra Nuts",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.sundae_8,
+                title = "Cookies & Cream Sundae",
+                price = "₹210",
+                restaurantName = "Cookie Monster",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "1.0 km",
+                discount = "COOKIE OFF",
+                discountAmount = "Crushed Oreos",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.sundae_9,
+                title = "Mint Chocolate Sundae",
+                price = "₹240",
+                restaurantName = "Fresh Mint Cafe",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "0.8 km",
+                discount = "MINT OFF",
+                discountAmount = "Refreshing Mint",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.sundae_10,
+                title = "Salted Caramel Sundae",
+                price = "₹260",
+                restaurantName = "Salt & Sweet",
+                rating = "4.8",
+                deliveryTime = "15-19 mins",
+                distance = "1.2 km",
+                discount = "SALTED OFF",
+                discountAmount = "Sweet & Salty",
+                address = "Bellandur, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.sundae_11,
+                title = "Affogato Style Sundae",
+                price = "₹290",
+                restaurantName = "Coffee & Cream",
+                rating = "4.7",
+                deliveryTime = "14-18 mins",
+                distance = "1.0 km",
+                discount = "AFFOGATO OFF",
+                discountAmount = "Coffee Infused",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.sundae_12,
+                title = "Rainbow Sprinkles Sundae",
+                price = "₹170",
+                restaurantName = "Colorful Treats",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "RAINBOW OFF",
+                discountAmount = "Colorful Fun",
+                address = "Brigade Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.sundae_13,
+                title = "Peanut Butter Sundae",
+                price = "₹230",
+                restaurantName = "Nut Butter Heaven",
+                rating = "4.7",
+                deliveryTime = "16-20 mins",
+                distance = "1.1 km",
+                discount = "PB OFF",
+                discountAmount = "Peanut Butter Swirl",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.sundae_14,
+                title = "Tiramisu Sundae",
+                price = "₹270",
+                restaurantName = "Italian Delights",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "TIRAMISU OFF",
+                discountAmount = "Coffee Flavor",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.sundae_15,
+                title = "Mango Sundae Special",
+                price = "₹200",
+                restaurantName = "Tropical Treats",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "0.7 km",
+                discount = "MANGO OFF",
+                discountAmount = "Seasonal Mango",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.sundae_16,
+                title = "Rocky Road Sundae",
+                price = "₹310",
+                restaurantName = "Rocky Road Cafe",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "ROCKY OFF",
+                discountAmount = "Marshmallow & Nuts",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.sundae_17,
+                title = "Sugar Free Sundae",
+                price = "₹240",
+                restaurantName = "Healthy Sweets",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Diabetic Friendly",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.sundae_18,
+                title = "Birthday Cake Sundae",
+                price = "₹280",
+                restaurantName = "Celebration Treats",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "BIRTHDAY OFF",
+                discountAmount = "Celebration Special",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.sundae_19,
+                title = "Caramel Popcorn Sundae",
+                price = "₹220",
+                restaurantName = "Movie Night Cafe",
+                rating = "4.6",
+                deliveryTime = "14-19 mins",
+                distance = "1.0 km",
+                discount = "POPCORN OFF",
+                discountAmount = "Caramel Popcorn",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.sundae_20,
+                title = "Ultimate Sundae Hamper",
+                price = "₹580",
+                restaurantName = "Gourmet Desserts",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "HAMPER OFF",
+                discountAmount = "Premium Selection",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

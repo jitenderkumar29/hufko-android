@@ -44233,12 +44233,1167 @@ fun SundaeCategoryPage() {
 
 @Composable
 fun RasgullaCategoryPage() {
-    CategoryContentPage("Rasgulla")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val rasgullaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // RASGULLA TYPE (with icons for main varieties)
+                FilterChip(
+                    id = "classic_white",
+                    text = "Classic White",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_rasgulla
+                ),
+                FilterChip(
+                    id = "milk_rasgulla",
+                    text = "Milk Rasgulla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_milk_rasgulla
+                ),
+                FilterChip(
+                    id = "brown_rasgulla",
+                    text = "Brown Rasgulla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_brown_rasgulla
+                ),
+                FilterChip(
+                    id = "chocolate_rasgulla",
+                    text = "Chocolate Flavored",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_rasgulla
+                ),
+                FilterChip(
+                    id = "stuffed_rasgulla",
+                    text = "Stuffed Rasgulla",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SYRUP BASE (with icons for syrup types)
+                FilterChip(
+                    id = "sugar_syrup",
+                    text = "Sugar Syrup",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sugar_syrup
+                ),
+                FilterChip(
+                    id = "cardamom",
+                    text = "Cardamom Flavored",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE & PACKAGING
+                FilterChip(
+                    id = "single_piece",
+                    text = "Single Piece",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "half_kg",
+                    text = "Half Kg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "full_kg",
+                    text = "1 Kg Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES
+                FilterChip(
+                    id = "homemade_style",
+                    text = "Homemade Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "without_preservatives",
+                    text = "No Preservatives",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ORIGIN/BRAND (with icon for famous brands)
+                FilterChip(
+                    id = "famous_brands",
+                    text = "Famous Brands",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING TEMPERATURE
+                FilterChip(
+                    id = "room_temp",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL OCCASIONS
+                FilterChip(
+                    id = "festival_special",
+                    text = "Festival Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gift_packed",
+                    text = "Gift Packed",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "premium_quality",
+                    text = "Premium Quality",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "budget_friendly",
+                    text = "Budget Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = rasgullaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val rasgullaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.rasgulla_item_1,
+                title = "Classic White Rasgulla",
+                price = "₹120/dozen",
+                restaurantName = "Sweet Bengal",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Kolkata Sweet House, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.rasgulla_item_2,
+                title = "Kesar Rasgulla (Saffron)",
+                price = "₹180/dozen",
+                restaurantName = "Royal Sweets",
+                rating = "4.8",
+                deliveryTime = "12-16 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "above ₹300",
+                address = "Rajmahal Road, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.rasgulla_item_3,
+                title = "Milk Rasgulla (Rasmalai Style)",
+                price = "₹220/dozen",
+                restaurantName = "Mithai Dham",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "combo offer",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.rasgulla_item_4,
+                title = "Chocolate Flavored Rasgulla",
+                price = "₹150/dozen",
+                restaurantName = "Fusion Sweets",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "festival special",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.rasgulla_item_5,
+                title = "Brown Caramel Rasgulla",
+                price = "₹200/dozen",
+                restaurantName = "Odisha Sweets Corner",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "18%",
+                discountAmount = "regional special",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.rasgulla_item_6,
+                title = "Rose Flavored Rasgulla",
+                price = "₹160/dozen",
+                restaurantName = "Pista House Sweets",
+                rating = "4.7",
+                deliveryTime = "14-18 mins",
+                distance = "0.8 km",
+                discount = "30%",
+                discountAmount = "weekend special",
+                address = "HSR Layout, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = rasgullaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val rasgullaRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.rasgulla_1,
+                title = "Classic Bengali Rasgulla",
+                price = "₹120/dozen",
+                restaurantName = "Sweet Bengal",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "BENGAL OFF",
+                discountAmount = "Traditional Recipe",
+                address = "Kolkata Sweet House, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.rasgulla_2,
+                title = "Premium Kesar Rasgulla",
+                price = "₹180/dozen",
+                restaurantName = "Royal Sweets",
+                rating = "4.8",
+                deliveryTime = "12-16 mins",
+                distance = "0.5 km",
+                discount = "KESAR OFF",
+                discountAmount = "Saffron Infused",
+                address = "Rajmahal Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.rasgulla_3,
+                title = "Milk Rasgulla (Rasmalai)",
+                price = "₹220/dozen",
+                restaurantName = "Mithai Dham",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "MILK OFF",
+                discountAmount = "Creamy Delight",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.rasgulla_4,
+                title = "Chocolate Flavored Rasgulla",
+                price = "₹150/dozen",
+                restaurantName = "Fusion Sweets",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "CHOCO OFF",
+                discountAmount = "Chocolate Twist",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.rasgulla_5,
+                title = "Odisha Style Brown Rasgulla",
+                price = "₹200/dozen",
+                restaurantName = "Odisha Sweets Corner",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "ODISHA OFF",
+                discountAmount = "Regional Special",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.rasgulla_6,
+                title = "Rose Flavored Rasgulla",
+                price = "₹160/dozen",
+                restaurantName = "Pista House Sweets",
+                rating = "4.7",
+                deliveryTime = "14-18 mins",
+                distance = "0.8 km",
+                discount = "ROSE OFF",
+                discountAmount = "Rose Essence",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.rasgulla_7,
+                title = "Dry Fruit Stuffed Rasgulla",
+                price = "₹280/dozen",
+                restaurantName = "Premium Mithai",
+                rating = "4.9",
+                deliveryTime = "22-28 mins",
+                distance = "1.3 km",
+                discount = "DRYFRUIT OFF",
+                discountAmount = "Nutty Filling",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.rasgulla_8,
+                title = "Mini Rasgulla Combo Pack",
+                price = "₹190/40 pcs",
+                restaurantName = "Family Sweets",
+                rating = "4.6",
+                deliveryTime = "16-20 mins",
+                distance = "0.7 km",
+                discount = "MINI OFF",
+                discountAmount = "Party Pack",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.rasgulla_9,
+                title = "Sugar-Free Rasgulla",
+                price = "₹250/dozen",
+                restaurantName = "Health First Sweets",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Diabetic Friendly",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.rasgulla_10,
+                title = "Assorted Rasgulla Combo",
+                price = "₹350/combo",
+                restaurantName = "Sweet Variety",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.1 km",
+                discount = "COMBO OFF",
+                discountAmount = "Mixed Flavors",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.rasgulla_11,
+                title = "Cardamom Flavored Rasgulla",
+                price = "₹140/dozen",
+                restaurantName = "Spice Aroma Sweets",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "CARDAMOM OFF",
+                discountAmount = "Aromatic Spice",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.rasgulla_12,
+                title = "Pista Rasgulla",
+                price = "₹210/dozen",
+                restaurantName = "Nutty Sweets",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "PISTA OFF",
+                discountAmount = "Pistachio Flavored",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.rasgulla_13,
+                title = "Freshly Made Rasgulla",
+                price = "₹130/dozen",
+                restaurantName = "Daily Fresh Sweets",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "FRESH OFF",
+                discountAmount = "Made Daily",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.rasgulla_14,
+                title = "Premium Cottage Cheese Rasgulla",
+                price = "₹240/dozen",
+                restaurantName = "Organic Sweets",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.4 km",
+                discount = "ORGANIC OFF",
+                discountAmount = "Farm Fresh Paneer",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.rasgulla_15,
+                title = "Festival Special Rasgulla",
+                price = "₹300/dozen",
+                restaurantName = "Festival Mithai",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "FESTIVAL OFF",
+                discountAmount = "Celebration Pack",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.rasgulla_16,
+                title = "Mango Flavored Rasgulla",
+                price = "₹170/dozen",
+                restaurantName = "Seasonal Sweets",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "MANGO OFF",
+                discountAmount = "Seasonal Special",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.rasgulla_17,
+                title = "Honey Sweetened Rasgulla",
+                price = "₹260/dozen",
+                restaurantName = "Natural Sweets",
+                rating = "4.5",
+                deliveryTime = "28-33 mins",
+                distance = "1.7 km",
+                discount = "HONEY OFF",
+                discountAmount = "Natural Sweetener",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.rasgulla_18,
+                title = "Gift Packed Rasgulla Box",
+                price = "₹420/gift box",
+                restaurantName = "Gourmet Gifts",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.8 km",
+                discount = "GIFT OFF",
+                discountAmount = "Premium Packaging",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.rasgulla_19,
+                title = "Coconut Flavored Rasgulla",
+                price = "₹190/dozen",
+                restaurantName = "Tropical Sweets",
+                rating = "4.6",
+                deliveryTime = "17-22 mins",
+                distance = "1.0 km",
+                discount = "COCONUT OFF",
+                discountAmount = "Coconut Essence",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.rasgulla_20,
+                title = "Ultimate Rasgulla Hamper",
+                price = "₹550/hamper",
+                restaurantName = "Premium Dessert Hub",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "HAMPER OFF",
+                discountAmount = "Luxury Collection",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun ButterChickenCategoryPage() {
-    CategoryContentPage("Butter Chicken")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val butterChickenFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // BUTTER CHICKEN TYPE (with icons for main varieties)
+                FilterChip(
+                    id = "classic_delhi_style",
+                    text = "Classic Delhi Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_butter_chicken
+                ),
+                FilterChip(
+                    id = "creamy_punjabi",
+                    text = "Creamy Punjabi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_creamy_butter_chicken
+                ),
+                FilterChip(
+                    id = "smokey_tandoori",
+                    text = "Smokey Tandoori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tandoori_butter_chicken
+                ),
+                FilterChip(
+                    id = "boneless_only",
+                    text = "Boneless Only",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_boneless_butter_chicken
+                ),
+                FilterChip(
+                    id = "mild_spice",
+                    text = "Mild Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icons for popular sides)
+                FilterChip(
+                    id = "with_naan",
+                    text = "With Naan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_butter_naan_chicken
+                ),
+                FilterChip(
+                    id = "extra_gravy",
+                    text = "Extra Gravy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING SIZE (with icons for portion types)
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jumbo_size",
+                    text = "Jumbo Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES
+                FilterChip(
+                    id = "less_butter",
+                    text = "Less Butter/Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_cream",
+                    text = "Fresh Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cashew_paste",
+                    text = "With Cashew Paste",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // RESTAURANT TYPE
+                FilterChip(
+                    id = "fine_dining",
+                    text = "Fine Dining",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dhaba_style",
+                    text = "Dhaba Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "home_kitchen",
+                    text = "Home Kitchen",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION STYLE
+                FilterChip(
+                    id = "clay_oven",
+                    text = "Clay Oven Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "freshly_prepared",
+                    text = "Freshly Prepared",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DELIVERY OPTIONS
+                FilterChip(
+                    id = "express_delivery",
+                    text = "Express Delivery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hot_serving",
+                    text = "Hot Serving",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget_meal",
+                    text = "Budget Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_dish",
+                    text = "Premium Dish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "luxury_premium",
+                    text = "Luxury Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = butterChickenFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val butterChickenItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.butter_chicken_item_1,
+                title = "Classic Butter Chicken",
+                price = "₹280",
+                restaurantName = "Delhi Darbar",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.butter_chicken_item_2,
+                title = "Creamy Punjabi Butter Chicken",
+                price = "₹320",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "above ₹500",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.butter_chicken_item_3,
+                title = "Smokey Tandoori Butter Chicken",
+                price = "₹350",
+                restaurantName = "Tandoor Magic",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "combo offer",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.butter_chicken_item_4,
+                title = "Boneless Butter Chicken",
+                price = "₹300",
+                restaurantName = "Urban Spice",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "0.7 km",
+                discount = "25%",
+                discountAmount = "weekday special",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.butter_chicken_item_5,
+                title = "Family Pack Butter Chicken",
+                price = "₹550",
+                restaurantName = "Dhaba Express",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "18%",
+                discountAmount = "family meal",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.butter_chicken_item_6,
+                title = "Premium Cashew Butter Chicken",
+                price = "₹380",
+                restaurantName = "Royal Kitchen",
+                rating = "4.9",
+                deliveryTime = "22-28 mins",
+                distance = "1.3 km",
+                discount = "30%",
+                discountAmount = "luxury dining",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = butterChickenItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val butterChickenRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.butter_chicken_1,
+                title = "Classic Butter Chicken",
+                price = "₹280",
+                restaurantName = "Delhi Darbar",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "CLASSIC OFF",
+                discountAmount = "Traditional Recipe",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.butter_chicken_2,
+                title = "Creamy Punjabi Butter Chicken",
+                price = "₹320",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "CREAMY OFF",
+                discountAmount = "Rich & Creamy",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.butter_chicken_3,
+                title = "Smokey Tandoori Butter Chicken",
+                price = "₹350",
+                restaurantName = "Tandoor Magic",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "TANDOORI OFF",
+                discountAmount = "Clay Oven Smoked",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.butter_chicken_4,
+                title = "Boneless Butter Chicken",
+                price = "₹300",
+                restaurantName = "Urban Spice",
+                rating = "4.6",
+                deliveryTime = "12-16 mins",
+                distance = "0.7 km",
+                discount = "BONELESS OFF",
+                discountAmount = "Easy Eating",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.butter_chicken_5,
+                title = "Family Pack Butter Chicken",
+                price = "₹550",
+                restaurantName = "Dhaba Express",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "FAMILY OFF",
+                discountAmount = "4-5 People",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.butter_chicken_6,
+                title = "Premium Cashew Butter Chicken",
+                price = "₹380",
+                restaurantName = "Royal Kitchen",
+                rating = "4.9",
+                deliveryTime = "22-28 mins",
+                distance = "1.3 km",
+                discount = "CASHEW OFF",
+                discountAmount = "Cashew Rich",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.butter_chicken_7,
+                title = "Spicy Butter Chicken",
+                price = "₹270",
+                restaurantName = "Spice Junction",
+                rating = "4.7",
+                deliveryTime = "16-20 mins",
+                distance = "0.9 km",
+                discount = "SPICY OFF",
+                discountAmount = "Extra Hot",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.butter_chicken_8,
+                title = "Mild Butter Chicken",
+                price = "₹260",
+                restaurantName = "Family Kitchen",
+                rating = "4.6",
+                deliveryTime = "14-18 mins",
+                distance = "0.6 km",
+                discount = "MILD OFF",
+                discountAmount = "Kid Friendly",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.butter_chicken_9,
+                title = "Butter Chicken with Naan",
+                price = "₹340",
+                restaurantName = "Tandoori Nights",
+                rating = "4.8",
+                deliveryTime = "19-24 mins",
+                distance = "1.1 km",
+                discount = "NAAN OFF",
+                discountAmount = "Butter Naan Included",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.butter_chicken_10,
+                title = "Butter Chicken with Rice",
+                price = "₹320",
+                restaurantName = "Rice Bowl",
+                rating = "4.7",
+                deliveryTime = "17-22 mins",
+                distance = "1.0 km",
+                discount = "RICE OFF",
+                discountAmount = "Basmati Rice Included",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.butter_chicken_11,
+                title = "Combo Meal - Butter Chicken",
+                price = "₹420",
+                restaurantName = "Meal Masters",
+                rating = "4.8",
+                deliveryTime = "21-26 mins",
+                distance = "1.4 km",
+                discount = "COMBO OFF",
+                discountAmount = "Full Meal Deal",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.butter_chicken_12,
+                title = "Restaurant Style Butter Chicken",
+                price = "₹390",
+                restaurantName = "Fine Dining Indian",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "RESTAURANT OFF",
+                discountAmount = "Fine Dining Experience",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.butter_chicken_13,
+                title = "Dhaba Style Butter Chicken",
+                price = "₹240",
+                restaurantName = "Highway Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "DHABA OFF",
+                discountAmount = "Authentic Dhaba Taste",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.butter_chicken_14,
+                title = "Butter Chicken with Extra Gravy",
+                price = "₹310",
+                restaurantName = "Gravy Masters",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "1.1 km",
+                discount = "GRAVY OFF",
+                discountAmount = "Extra Rich Gravy",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.butter_chicken_15,
+                title = "Butter Chicken with Salad",
+                price = "₹330",
+                restaurantName = "Healthy Indian",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.5 km",
+                discount = "SALAD OFF",
+                discountAmount = "Fresh Salad Included",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.butter_chicken_16,
+                title = "Butter Chicken - Half Plate",
+                price = "₹180",
+                restaurantName = "Single Serve Cafe",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "HALF OFF",
+                discountAmount = "Single Serving",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.butter_chicken_17,
+                title = "Butter Chicken - Jumbo Size",
+                price = "₹480",
+                restaurantName = "Big Bite Restaurant",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "JUMBO OFF",
+                discountAmount = "Extra Large Portion",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.butter_chicken_18,
+                title = "Butter Chicken Party Pack",
+                price = "₹680",
+                restaurantName = "Party Specials",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.1 km",
+                discount = "PARTY OFF",
+                discountAmount = "6-8 People",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.butter_chicken_19,
+                title = "Butter Chicken Lunch Box",
+                price = "₹290",
+                restaurantName = "Office Lunch Hub",
+                rating = "4.6",
+                deliveryTime = "13-18 mins",
+                distance = "0.8 km",
+                discount = "LUNCH OFF",
+                discountAmount = "Perfect Office Lunch",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.butter_chicken_20,
+                title = "Ultimate Butter Chicken Feast",
+                price = "₹750",
+                restaurantName = "Gourmet Indian",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.5 km",
+                discount = "FEAST OFF",
+                discountAmount = "Premium Dining Experience",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {1111111
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

@@ -46591,12 +46591,1184 @@ fun ChaatCategoryPage() {
 
 @Composable
 fun UttapamCategoryPage() {
-    CategoryContentPage("Uttapam")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val uttapamFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // UTTAPAM TYPES (with icons for popular varieties)
+                FilterChip(
+                    id = "plain_uttapam",
+                    text = "Plain Uttapam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_uttapam_plain
+                ),
+                FilterChip(
+                    id = "onion_uttapam",
+                    text = "Onion Uttapam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_uttapam_onion
+                ),
+                FilterChip(
+                    id = "tomato_uttapam",
+                    text = "Tomato Uttapam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_uttapam_tomato
+                ),
+                FilterChip(
+                    id = "mixed_uttapam",
+                    text = "Mixed Veg Uttapam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_uttapam_mixed
+                ),
+                FilterChip(
+                    id = "cheese_uttapam",
+                    text = "Cheese Uttapam",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_uttapam_cheese
+                ),
+
+                // BATTER TYPE
+                FilterChip(
+                    id = "dosa_batter",
+                    text = "Dosa Batter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "special_uttapam_batter",
+                    text = "Special Uttapam Batter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fermented_batter",
+                    text = "Well Fermented",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (key toppings with icons)
+                FilterChip(
+                    id = "with_ginger",
+                    text = "With Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_green_chilies",
+                    text = "With Green Chilies",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (with icons)
+                FilterChip(
+                    id = "thick_uttapam",
+                    text = "Thick Uttapam",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thin_uttapam",
+                    text = "Thin Uttapam",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icons for key items)
+                FilterChip(
+                    id = "with_tomato_chutney",
+                    text = "With Tomato Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES
+                FilterChip(
+                    id = "less_oil",
+                    text = "Less Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_onion",
+                    text = "No Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE & SERVING
+                FilterChip(
+                    id = "single_serve",
+                    text = "Single Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_size",
+                    text = "Family Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget_uttapam",
+                    text = "Budget (Under ₹80)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mid_range_uttapam",
+                    text = "Mid Range (₹80-₹150)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_uttapam",
+                    text = "Premium (Above ₹150)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = uttapamFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val uttapamItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.uttapam_item_1,
+                title = "Onion Uttapam with Coconut Chutney",
+                price = "₹120",
+                restaurantName = "South Indian Delight",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.uttapam_item_2,
+                title = "Mixed Vegetable Uttapam",
+                price = "₹140",
+                restaurantName = "Udupi Sagar",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "above ₹300",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.uttapam_item_3,
+                title = "Cheese Uttapam Combo",
+                price = "₹180",
+                restaurantName = "Cheese Corner",
+                rating = "4.9",
+                deliveryTime = "8-12 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "combo offer",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.uttapam_item_4,
+                title = "Plain Uttapam with Sambar",
+                price = "₹90",
+                restaurantName = "Traditional Tiffins",
+                rating = "4.6",
+                deliveryTime = "6-10 mins",
+                distance = "0.4 km",
+                discount = "25%",
+                discountAmount = "weekday special",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.uttapam_item_5,
+                title = "Family Uttapam Platter",
+                price = "₹350",
+                restaurantName = "Uttapam House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "18%",
+                discountAmount = "family meal",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.uttapam_item_6,
+                title = "Premium Tomato Uttapam",
+                price = "₹160",
+                restaurantName = "Premium South Indian",
+                rating = "4.9",
+                deliveryTime = "12-16 mins",
+                distance = "0.9 km",
+                discount = "30%",
+                discountAmount = "premium offer",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = uttapamItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val uttapamRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.uttapam_1,
+                title = "Classic Onion Uttapam with Sambar",
+                price = "₹110",
+                restaurantName = "South Indian Delight",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "ONION OFF",
+                discountAmount = "Crispy Onion Topping",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.uttapam_2,
+                title = "Mixed Vegetable Uttapam Special",
+                price = "₹130",
+                restaurantName = "Udupi Sagar",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.7 km",
+                discount = "VEGGIE OFF",
+                discountAmount = "Assorted Vegetables",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.uttapam_3,
+                title = "Cheese Melt Uttapam",
+                price = "₹160",
+                restaurantName = "Cheese Corner",
+                rating = "4.9",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "CHEESE OFF",
+                discountAmount = "Mozzarella Cheese",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.uttapam_4,
+                title = "Plain Uttapam with Coconut Chutney",
+                price = "₹85",
+                restaurantName = "Traditional Tiffins",
+                rating = "4.6",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "PLAIN OFF",
+                discountAmount = "Authentic Taste",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.uttapam_5,
+                title = "Tomato Onion Uttapam Combo",
+                price = "₹125",
+                restaurantName = "Uttapam House",
+                rating = "4.8",
+                deliveryTime = "14-19 mins",
+                distance = "1.0 km",
+                discount = "COMBO OFF",
+                discountAmount = "With Both Chutneys",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.uttapam_6,
+                title = "Paneer Uttapam with Green Chutney",
+                price = "₹150",
+                restaurantName = "Premium South Indian",
+                rating = "4.9",
+                deliveryTime = "11-16 mins",
+                distance = "0.8 km",
+                discount = "PANEER OFF",
+                discountAmount = "Fresh Cottage Cheese",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.uttapam_7,
+                title = "Capsicum Corn Uttapam Special",
+                price = "₹140",
+                restaurantName = "Healthy Uttapam Corner",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "CORN OFF",
+                discountAmount = "Sweet Corn Kernels",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.uttapam_8,
+                title = "Masala Uttapam with Potato",
+                price = "₹120",
+                restaurantName = "Masala Uttapam House",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "1.2 km",
+                discount = "MASALA OFF",
+                discountAmount = "Spicy Potato Mix",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.uttapam_9,
+                title = "Uttapam Family Platter",
+                price = "₹280",
+                restaurantName = "Uttapam Combo Hub",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.1 km",
+                discount = "FAMILY OFF",
+                discountAmount = "3 Uttapam Types",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.uttapam_10,
+                title = "Mini Uttapam Sampler Platter",
+                price = "₹200",
+                restaurantName = "Mini Uttapam Cafe",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.3 km",
+                discount = "SAMPLER OFF",
+                discountAmount = "5 Mini Uttapams",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.uttapam_11,
+                title = "Kid's Uttapam with Less Spice",
+                price = "₹95",
+                restaurantName = "Kid Friendly Tiffins",
+                rating = "4.5",
+                deliveryTime = "9-14 mins",
+                distance = "0.5 km",
+                discount = "KIDS OFF",
+                discountAmount = "Mild Flavors",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.uttapam_12,
+                title = "Spicy Chili Uttapam Special",
+                price = "₹135",
+                restaurantName = "Spicy Uttapam House",
+                rating = "4.8",
+                deliveryTime = "16-21 mins",
+                distance = "0.9 km",
+                discount = "SPICY OFF",
+                discountAmount = "Extra Green Chilies",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.uttapam_13,
+                title = "Traditional Dosa Hut Uttapam",
+                price = "₹90",
+                restaurantName = "Dosa Hut Classic",
+                rating = "4.6",
+                deliveryTime = "7-11 mins",
+                distance = "0.4 km",
+                discount = "TRADITIONAL OFF",
+                discountAmount = "Authentic Recipe",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.uttapam_14,
+                title = "Gourmet Uttapam with Truffle Oil",
+                price = "₹220",
+                restaurantName = "Gourmet South Indian",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "GOURMET OFF",
+                discountAmount = "Truffle Infused",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.uttapam_15,
+                title = "Spinach Corn Uttapam Healthy",
+                price = "₹145",
+                restaurantName = "Healthy Uttapam Corner",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "1.1 km",
+                discount = "HEALTHY OFF",
+                discountAmount = "With Spinach",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.uttapam_16,
+                title = "Mini Rava Uttapam Crispy",
+                price = "₹110",
+                restaurantName = "Rava Uttapam Special",
+                rating = "4.6",
+                deliveryTime = "13-18 mins",
+                distance = "0.7 km",
+                discount = "RAVA OFF",
+                discountAmount = "Semolina Batter",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.uttapam_17,
+                title = "Jumbo Family Uttapam",
+                price = "₹300",
+                restaurantName = "Big Uttapam Restaurant",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "1.7 km",
+                discount = "JUMBO OFF",
+                discountAmount = "Extra Large Size",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.uttapam_18,
+                title = "Party Uttapam Platter",
+                price = "₹500",
+                restaurantName = "Party Uttapam Specials",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.0 km",
+                discount = "PARTY OFF",
+                discountAmount = "For 10-12 People",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.uttapam_19,
+                title = "Office Lunch Uttapam Box",
+                price = "₹170",
+                restaurantName = "Office Tiffin Hub",
+                rating = "4.7",
+                deliveryTime = "12-17 mins",
+                distance = "0.6 km",
+                discount = "LUNCH OFF",
+                discountAmount = "Perfect Office Meal",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.uttapam_20,
+                title = "Ultimate Uttapam Festival Platter",
+                price = "₹420",
+                restaurantName = "Uttapam Festival House",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "FESTIVAL OFF",
+                discountAmount = "5 Premium Varieties",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun DoughnutCategoryPage() {
-    CategoryContentPage("Doughnut")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val doughnutFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // DOUGHNUT TYPES (with icons for popular varieties)
+                FilterChip(
+                    id = "glazed_doughnut",
+                    text = "Glazed Doughnut",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_doughnut_glazed
+                ),
+                FilterChip(
+                    id = "chocolate_doughnut",
+                    text = "Chocolate Doughnut",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_doughnut_chocolate
+                ),
+                FilterChip(
+                    id = "sprinkles_doughnut",
+                    text = "Sprinkles Doughnut",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_doughnut_sprinkles
+                ),
+                FilterChip(
+                    id = "jelly_filled_doughnut",
+                    text = "Jelly Filled",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_doughnut_jelly
+                ),
+                FilterChip(
+                    id = "boston_cream_doughnut",
+                    text = "Boston Cream",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_doughnut_boston
+                ),
+
+                // BASE TYPE
+                FilterChip(
+                    id = "yeast_doughnut",
+                    text = "Yeast Doughnut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cake_doughnut",
+                    text = "Cake Doughnut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "baked_doughnut",
+                    text = "Baked (Not Fried)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVORS & FILLINGS (key ones with icons)
+                FilterChip(
+                    id = "vanilla_flavor",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "matcha_flavor",
+                    text = "Matcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS & DECORATIONS (with icons for key toppings)
+                FilterChip(
+                    id = "with_caramel_drizzle",
+                    text = "With Caramel",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SWEETNESS LEVEL
+                FilterChip(
+                    id = "less_sweet",
+                    text = "Less Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_sweetness",
+                    text = "Regular Sweetness",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_sweet",
+                    text = "Extra Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY
+                FilterChip(
+                    id = "vegan_doughnut",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_doughnut",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "single_doughnut",
+                    text = "Single Doughnut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "doughnut_box",
+                    text = "Box of 6/12",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "doughnut_holes",
+                    text = "Doughnut Holes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FRESHNESS
+                FilterChip(
+                    id = "freshly_made",
+                    text = "Freshly Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "day_old_discount",
+                    text = "Day Old (Discounted)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget_doughnut",
+                    text = "Budget (Under ₹60)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mid_range_doughnut",
+                    text = "Mid Range (₹60-₹120)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_doughnut",
+                    text = "Premium (Above ₹120)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = doughnutFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val doughnutItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.doughnut_item_1,
+                title = "Classic Glazed Doughnut",
+                price = "₹80",
+                restaurantName = "Glazed Delights",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.doughnut_item_2,
+                title = "Chocolate Sprinkles Doughnut",
+                price = "₹100",
+                restaurantName = "Chocolate Heaven",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "above ₹250",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.doughnut_item_3,
+                title = "Strawberry Jelly Filled Doughnut",
+                price = "₹120",
+                restaurantName = "Berry Sweet Cafe",
+                rating = "4.9",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "combo offer",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.doughnut_item_4,
+                title = "Boston Cream Doughnut",
+                price = "₹110",
+                restaurantName = "Creamy Delights",
+                rating = "4.6",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "25%",
+                discountAmount = "weekend special",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.doughnut_item_5,
+                title = "Assorted Doughnut Box (6 pcs)",
+                price = "₹350",
+                restaurantName = "Doughnut Box Cafe",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "18%",
+                discountAmount = "family pack",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.doughnut_item_6,
+                title = "Premium Matcha Glazed Doughnut",
+                price = "₹150",
+                restaurantName = "Premium Doughnut Shop",
+                rating = "4.9",
+                deliveryTime = "12-16 mins",
+                distance = "0.9 km",
+                discount = "30%",
+                discountAmount = "premium offer",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = doughnutItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val doughnutRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.doughnut_1,
+                title = "Classic Glazed Ring Doughnut",
+                price = "₹80",
+                restaurantName = "Glazed Delights",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "GLAZED OFF",
+                discountAmount = "Signature Glaze",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.doughnut_2,
+                title = "Chocolate Frosted Doughnut",
+                price = "₹100",
+                restaurantName = "Chocolate Heaven",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "CHOCO OFF",
+                discountAmount = "Rich Chocolate",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.doughnut_3,
+                title = "Strawberry Jelly Filled Doughnut",
+                price = "₹120",
+                restaurantName = "Berry Sweet Cafe",
+                rating = "4.9",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "STRAWBERRY OFF",
+                discountAmount = "Fresh Strawberry Jam",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.doughnut_4,
+                title = "Boston Cream Doughnut Special",
+                price = "₹110",
+                restaurantName = "Creamy Delights",
+                rating = "4.6",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "BOSTON OFF",
+                discountAmount = "Custard Filling",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.doughnut_5,
+                title = "Rainbow Sprinkles Doughnut",
+                price = "₹95",
+                restaurantName = "Colorful Doughnuts",
+                rating = "4.8",
+                deliveryTime = "14-19 mins",
+                distance = "1.0 km",
+                discount = "SPRINKLES OFF",
+                discountAmount = "Colorful Toppings",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.doughnut_6,
+                title = "Premium Matcha Glazed Doughnut",
+                price = "₹150",
+                restaurantName = "Premium Doughnut Shop",
+                rating = "4.9",
+                deliveryTime = "11-16 mins",
+                distance = "0.8 km",
+                discount = "MATCHA OFF",
+                discountAmount = "Japanese Green Tea",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.doughnut_7,
+                title = "Cinnamon Sugar Doughnut Bites",
+                price = "₹130",
+                restaurantName = "Cinnamon Spice Cafe",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "CINNAMON OFF",
+                discountAmount = "Warm Spice Coating",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.doughnut_8,
+                title = "Red Velvet Cream Cheese Doughnut",
+                price = "₹140",
+                restaurantName = "Velvet Doughnut House",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "1.2 km",
+                discount = "VELVET OFF",
+                discountAmount = "Cream Cheese Frosting",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.doughnut_9,
+                title = "Assorted Doughnut Box (6 pieces)",
+                price = "₹300",
+                restaurantName = "Doughnut Box Cafe",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.1 km",
+                discount = "ASSORTED OFF",
+                discountAmount = "6 Varieties",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.doughnut_10,
+                title = "Doughnut Hole Sampler Pack",
+                price = "₹180",
+                restaurantName = "Mini Bites Cafe",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.3 km",
+                discount = "HOLES OFF",
+                discountAmount = "Bite-sized Treats",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.doughnut_11,
+                title = "Kid's Sprinkle Doughnut Pack",
+                price = "₹90",
+                restaurantName = "Kid Friendly Bakery",
+                rating = "4.5",
+                deliveryTime = "9-14 mins",
+                distance = "0.5 km",
+                discount = "KIDS OFF",
+                discountAmount = "Fun Colors",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.doughnut_12,
+                title = "Double Chocolate Doughnut",
+                price = "₹125",
+                restaurantName = "Chocoholic's Paradise",
+                rating = "4.8",
+                deliveryTime = "16-21 mins",
+                distance = "0.9 km",
+                discount = "DOUBLE CHOCO OFF",
+                discountAmount = "Extra Chocolate",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.doughnut_13,
+                title = "Traditional Old-Fashioned Doughnut",
+                price = "₹85",
+                restaurantName = "Classic Bakery",
+                rating = "4.6",
+                deliveryTime = "7-11 mins",
+                distance = "0.4 km",
+                discount = "CLASSIC OFF",
+                discountAmount = "Traditional Recipe",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.doughnut_14,
+                title = "Gourmet Salted Caramel Doughnut",
+                price = "₹160",
+                restaurantName = "Gourmet Bakery",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "CARAMEL OFF",
+                discountAmount = "Sea Salt Topping",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.doughnut_15,
+                title = "Healthy Baked Doughnut",
+                price = "₹135",
+                restaurantName = "Healthy Bakery Corner",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "1.1 km",
+                discount = "BAKED OFF",
+                discountAmount = "Not Fried",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.doughnut_16,
+                title = "Coffee Glazed Doughnut",
+                price = "₹115",
+                restaurantName = "Coffee Doughnut Cafe",
+                rating = "4.6",
+                deliveryTime = "13-18 mins",
+                distance = "0.7 km",
+                discount = "COFFEE OFF",
+                discountAmount = "Coffee Infused",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.doughnut_17,
+                title = "Jumbo Party Doughnut Cake",
+                price = "₹450",
+                restaurantName = "Party Doughnut Shop",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "1.7 km",
+                discount = "JUMBO OFF",
+                discountAmount = "Giant Size",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.doughnut_18,
+                title = "Birthday Doughnut Platter",
+                price = "₹550",
+                restaurantName = "Celebration Bakery",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.0 km",
+                discount = "BIRTHDAY OFF",
+                discountAmount = "Custom Decorations",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.doughnut_19,
+                title = "Office Meeting Doughnut Box",
+                price = "₹250",
+                restaurantName = "Office Treats Bakery",
+                rating = "4.7",
+                deliveryTime = "12-17 mins",
+                distance = "0.6 km",
+                discount = "OFFICE OFF",
+                discountAmount = "Perfect for Meetings",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.doughnut_20,
+                title = "Ultimate Doughnut Festival Pack",
+                price = "₹400",
+                restaurantName = "Festival Doughnut House",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "FESTIVAL OFF",
+                discountAmount = "12 Premium Varieties",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

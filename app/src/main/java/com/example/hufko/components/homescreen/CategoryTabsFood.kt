@@ -47773,12 +47773,1320 @@ fun DoughnutCategoryPage() {
 
 @Composable
 fun JuiceCategoryPage() {
-    CategoryContentPage("Juice")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val juiceFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // JUICE TYPES (with icons for popular varieties)
+                FilterChip(
+                    id = "orange_juice",
+                    text = "Orange Juice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_juice_orange
+                ),
+                FilterChip(
+                    id = "apple_juice",
+                    text = "Apple Juice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_juice_apple
+                ),
+                FilterChip(
+                    id = "watermelon_juice",
+                    text = "Watermelon Juice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_juice_watermelon
+                ),
+                FilterChip(
+                    id = "mango_juice",
+                    text = "Mango Juice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_juice_mango
+                ),
+                FilterChip(
+                    id = "pineapple_juice",
+                    text = "Pineapple Juice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_juice_pineapple
+                ),
+
+                // JUICE STYLE
+                FilterChip(
+                    id = "freshly_squeezed",
+                    text = "Freshly Squeezed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold_pressed",
+                    text = "Cold Pressed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blended_juice",
+                    text = "Blended",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "packaged_juice",
+                    text = "Packaged",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // WITH/WITHOUT
+                FilterChip(
+                    id = "with_pulp",
+                    text = "With Pulp",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "without_pulp",
+                    text = "Without Pulp",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_ginger",
+                    text = "With Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_mint",
+                    text = "With Mint",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE
+                FilterChip(
+                    id = "chilled_juice",
+                    text = "Chilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "room_temp",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "warm_juice",
+                    text = "Warm Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SUGAR LEVEL
+                FilterChip(
+                    id = "no_sugar",
+                    text = "No Added Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "less_sugar",
+                    text = "Less Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_sugar",
+                    text = "Regular Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE/VOLUME
+                FilterChip(
+                    id = "small_juice",
+                    text = "Small (250ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_juice",
+                    text = "Medium (500ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_juice",
+                    text = "Large (1L)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack (2L)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY
+                FilterChip(
+                    id = "detox_juice",
+                    text = "Detox Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "immune_booster",
+                    text = "Immune Booster",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic_juice",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COMBO/JUICE PACKS
+                FilterChip(
+                    id = "juice_combo",
+                    text = "Juice Combo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "juice_cleanse",
+                    text = "Juice Cleanse Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget_juice",
+                    text = "Budget (Under ₹80)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mid_range_juice",
+                    text = "Mid Range (₹80-₹200)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_juice",
+                    text = "Premium (Above ₹200)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = juiceFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val juiceItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.juice_item_1,
+                title = "Fresh Orange Juice",
+                price = "₹120",
+                restaurantName = "Fresh Juice Bar",
+                rating = "4.7",
+                deliveryTime = "8-12 mins",
+                distance = "0.3 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.juice_item_2,
+                title = "Mixed Fruit Juice Combo",
+                price = "₹180",
+                restaurantName = "Fruit Paradise",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "above ₹300",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.juice_item_3,
+                title = "Watermelon Mint Cooler",
+                price = "₹100",
+                restaurantName = "Juice Junction",
+                rating = "4.6",
+                deliveryTime = "6-10 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "summer special",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.juice_item_4,
+                title = "Cold Pressed Detox Juice",
+                price = "₹220",
+                restaurantName = "Health Hub",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "25%",
+                discountAmount = "health package",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.juice_item_5,
+                title = "Mango Lassi (1L Family Pack)",
+                price = "₹250",
+                restaurantName = "Desi Juice Corner",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "18%",
+                discountAmount = "family offer",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.juice_item_6,
+                title = "Premium Pomegranate Juice",
+                price = "₹200",
+                restaurantName = "Premium Juice Shop",
+                rating = "4.9",
+                deliveryTime = "10-14 mins",
+                distance = "0.7 km",
+                discount = "30%",
+                discountAmount = "premium offer",
+                address = "MG Road, Bangalore",
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = juiceItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val juiceRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.juice_1,
+                title = "Classic Fresh Orange Juice",
+                price = "₹120",
+                restaurantName = "Fresh Juice Bar",
+                rating = "4.8",
+                deliveryTime = "8-12 mins",
+                distance = "0.5 km",
+                discount = "ORANGE OFF",
+                discountAmount = "Freshly Squeezed",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.juice_2,
+                title = "Cold Pressed Green Detox Juice",
+                price = "₹200",
+                restaurantName = "Health Hub",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "DETOX OFF",
+                discountAmount = "Spinach & Kale",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.juice_3,
+                title = "Refreshing Watermelon Mint Juice",
+                price = "₹100",
+                restaurantName = "Juice Junction",
+                rating = "4.9",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "WATERMELON OFF",
+                discountAmount = "Summer Special",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.juice_4,
+                title = "Premium Pomegranate Juice",
+                price = "₹180",
+                restaurantName = "Premium Juice Shop",
+                rating = "4.6",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "POMEGRANATE OFF",
+                discountAmount = "Antioxidant Rich",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.juice_5,
+                title = "Tropical Mixed Fruit Juice",
+                price = "₹150",
+                restaurantName = "Tropical Juice Bar",
+                rating = "4.8",
+                deliveryTime = "14-19 mins",
+                distance = "1.0 km",
+                discount = "TROPICAL OFF",
+                discountAmount = "3 Fruits Combo",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.juice_6,
+                title = "Carrot Beetroot Apple Juice",
+                price = "₹160",
+                restaurantName = "Healthy Roots",
+                rating = "4.9",
+                deliveryTime = "11-16 mins",
+                distance = "0.8 km",
+                discount = "ROOTS OFF",
+                discountAmount = "Immunity Booster",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.juice_7,
+                title = "Fresh Sugarcane Juice",
+                price = "₹80",
+                restaurantName = "Desi Juice Corner",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "SUGARCANE OFF",
+                discountAmount = "Freshly Crushed",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.juice_8,
+                title = "Mango Lassi (Yogurt Drink)",
+                price = "₹130",
+                restaurantName = "Mango Delights",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "1.2 km",
+                discount = "MANGO OFF",
+                discountAmount = "Seasonal Special",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.juice_9,
+                title = "Juice Cleanse Pack (3 Days)",
+                price = "₹750",
+                restaurantName = "Juice Cleanse Center",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.1 km",
+                discount = "CLEANSE OFF",
+                discountAmount = "3-Day Program",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.juice_10,
+                title = "Berry Blast Smoothie Bowl",
+                price = "₹220",
+                restaurantName = "Smoothie Bowl Cafe",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.3 km",
+                discount = "BERRY OFF",
+                discountAmount = "Loaded with Berries",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.juice_11,
+                title = "Kids Fruit Juice Combo",
+                price = "₹110",
+                restaurantName = "Kid Friendly Juice Bar",
+                rating = "4.5",
+                deliveryTime = "9-14 mins",
+                distance = "0.5 km",
+                discount = "KIDS OFF",
+                discountAmount = "Fun Flavors",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.juice_12,
+                title = "Double Apple Ginger Shot",
+                price = "₹140",
+                restaurantName = "Immunity Shot Bar",
+                rating = "4.8",
+                deliveryTime = "16-21 mins",
+                distance = "0.9 km",
+                discount = "GINGER OFF",
+                discountAmount = "Spicy & Healthy",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.juice_13,
+                title = "Traditional Mosambi Juice",
+                price = "₹90",
+                restaurantName = "Classic Juice Center",
+                rating = "4.6",
+                deliveryTime = "7-11 mins",
+                distance = "0.4 km",
+                discount = "MOSAMBI OFF",
+                discountAmount = "Sweet Lime Fresh",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.juice_14,
+                title = "Gourmet Aloe Vera Juice",
+                price = "₹190",
+                restaurantName = "Gourmet Juice House",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "ALOE OFF",
+                discountAmount = "Skin Health",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.juice_15,
+                title = "No Sugar Added Orange Juice",
+                price = "₹160",
+                restaurantName = "Sugar Free Juice Bar",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "1.1 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Diabetic Friendly",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.juice_16,
+                title = "Coffee Infused Date Shake",
+                price = "₹170",
+                restaurantName = "Coffee Juice Fusion",
+                rating = "4.6",
+                deliveryTime = "13-18 mins",
+                distance = "0.7 km",
+                discount = "COFFEE OFF",
+                discountAmount = "Energy Booster",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.juice_17,
+                title = "Jumbo Party Juice Jar (5L)",
+                price = "₹550",
+                restaurantName = "Party Juice Shop",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "1.7 km",
+                discount = "JUMBO OFF",
+                discountAmount = "Party Size",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.juice_18,
+                title = "Birthday Fresh Juice Platter",
+                price = "₹650",
+                restaurantName = "Celebration Juice Bar",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.0 km",
+                discount = "BIRTHDAY OFF",
+                discountAmount = "6 Varieties",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.juice_19,
+                title = "Office Meeting Juice Pack",
+                price = "₹350",
+                restaurantName = "Office Refreshments",
+                rating = "4.7",
+                deliveryTime = "12-17 mins",
+                distance = "0.6 km",
+                discount = "OFFICE OFF",
+                discountAmount = "10 Servings",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.juice_20,
+                title = "Ultimate Juice Festival Combo",
+                price = "₹500",
+                restaurantName = "Festival Juice House",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "FESTIVAL OFF",
+                discountAmount = "8 Premium Juices",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun LassiCategoryPage() {
-    CategoryContentPage("Lassi")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val lassiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // LASSI TYPES (with icons for popular varieties)
+                FilterChip(
+                    id = "sweet_lassi",
+                    text = "Sweet Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lassi_sweet
+                ),
+                FilterChip(
+                    id = "mango_lassi",
+                    text = "Mango Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lassi_mango
+                ),
+                FilterChip(
+                    id = "salted_lassi",
+                    text = "Salted Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lassi_salted
+                ),
+                FilterChip(
+                    id = "rose_lassi",
+                    text = "Rose Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lassi_rose
+                ),
+                FilterChip(
+                    id = "kesar_lassi",
+                    text = "Kesar Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lassi_kesar
+                ),
+
+                // LASSI STYLE/PREPARATION
+                FilterChip(
+                    id = "traditional_lassi",
+                    text = "Traditional",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick_lassi",
+                    text = "Thick & Creamy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "light_lassi",
+                    text = "Light & Frothy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "buttermilk",
+                    text = "Chaas/Buttermilk",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SWEETNESS LEVEL
+                FilterChip(
+                    id = "low_sugar",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_sweet",
+                    text = "Medium Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_sweet",
+                    text = "Extra Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_sugar",
+                    text = "No Added Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADD-ONS & TOPPINGS
+                FilterChip(
+                    id = "with_dry_fruits",
+                    text = "With Dry Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_cream",
+                    text = "With Fresh Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_cardamom",
+                    text = "With Cardamom",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_saffron",
+                    text = "With Saffron Strands",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE
+                FilterChip(
+                    id = "chilled_lassi",
+                    text = "Chilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "room_temp_lassi",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "frozen_lassi",
+                    text = "Frozen/Lassi Freeze",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // YOGURT TYPE
+                FilterChip(
+                    id = "curd_based",
+                    text = "Curd Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_based",
+                    text = "Yogurt Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "full_cream",
+                    text = "Full Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE/VOLUME
+                FilterChip(
+                    id = "small_lassi",
+                    text = "Small (300ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_lassi",
+                    text = "Medium (500ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_lassi",
+                    text = "Large (750ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_lassi",
+                    text = "Family (1.5L)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "probiotic",
+                    text = "Probiotic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "digestive",
+                    text = "Digestive Aid",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "summer_cooler",
+                    text = "Summer Cooler",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "kulhad_lassi",
+                    text = "In Kulhad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "glass_lassi",
+                    text = "In Glass",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "takeaway_lassi",
+                    text = "Takeaway Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COMBO/PACKS
+                FilterChip(
+                    id = "lassi_combo",
+                    text = "Lassi Combo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_pack",
+                    text = "Party Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget_lassi",
+                    text = "Budget (Under ₹60)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mid_range_lassi",
+                    text = "Mid Range (₹60-₹120)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_lassi",
+                    text = "Premium (Above ₹120)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = lassiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val lassiItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.lassi_item_1,
+                title = "Classic Sweet Lassi",
+                price = "₹80",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.4 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.lassi_item_2,
+                title = "Mango Lassi",
+                price = "₹120",
+                restaurantName = "Mango Delights",
+                rating = "4.8",
+                deliveryTime = "12-18 mins",
+                distance = "0.7 km",
+                discount = "15%",
+                discountAmount = "above ₹200",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.lassi_item_3,
+                title = "Rose Flavored Lassi",
+                price = "₹100",
+                restaurantName = "Royal Lassi House",
+                rating = "4.6",
+                deliveryTime = "8-12 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "summer special",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.lassi_item_4,
+                title = "Kesar Pista Lassi",
+                price = "₹150",
+                restaurantName = "Premium Lassi Corner",
+                rating = "4.9",
+                deliveryTime = "14-20 mins",
+                distance = "0.9 km",
+                discount = "25%",
+                discountAmount = "premium offer",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.lassi_item_5,
+                title = "Family Pack Lassi (1.5L)",
+                price = "₹220",
+                restaurantName = "Family Lassi Center",
+                rating = "4.7",
+                deliveryTime = "16-22 mins",
+                distance = "1.1 km",
+                discount = "18%",
+                discountAmount = "family offer",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.lassi_item_6,
+                title = "Salted Lassi (Chaas)",
+                price = "₹70",
+                restaurantName = "Traditional Dhaba",
+                rating = "4.8",
+                deliveryTime = "9-14 mins",
+                distance = "0.6 km",
+                discount = "30%",
+                discountAmount = "digestive special",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = lassiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val lassiRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.lassi_1,
+                title = "Classic Sweet Lassi",
+                price = "₹80",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "SWEET OFF",
+                discountAmount = "Creamy Yogurt",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.lassi_2,
+                title = "Mango Lassi Special",
+                price = "₹120",
+                restaurantName = "Mango Delights",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "MANGO OFF",
+                discountAmount = "Fresh Mango Pulp",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.lassi_3,
+                title = "Rose Flavored Lassi",
+                price = "₹100",
+                restaurantName = "Royal Lassi House",
+                rating = "4.9",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "ROSE OFF",
+                discountAmount = "Rose Petal Essence",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.lassi_4,
+                title = "Kesar Pista Lassi",
+                price = "₹150",
+                restaurantName = "Premium Lassi Corner",
+                rating = "4.6",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "KESAR OFF",
+                discountAmount = "Saffron Infused",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.lassi_5,
+                title = "Banana Honey Lassi",
+                price = "₹110",
+                restaurantName = "Fruit Lassi Hub",
+                rating = "4.8",
+                deliveryTime = "14-19 mins",
+                distance = "1.0 km",
+                discount = "BANANA OFF",
+                discountAmount = "Natural Sweetener",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.lassi_6,
+                title = "Salted Lassi (Chaas)",
+                price = "₹70",
+                restaurantName = "Traditional Dhaba",
+                rating = "4.9",
+                deliveryTime = "11-16 mins",
+                distance = "0.8 km",
+                discount = "CHAAS OFF",
+                discountAmount = "Digestive Aid",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.lassi_7,
+                title = "Strawberry Cream Lassi",
+                price = "₹130",
+                restaurantName = "Berry Lassi Cafe",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "STRAWBERRY OFF",
+                discountAmount = "Fresh Strawberries",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.lassi_8,
+                title = "Cardamom Elaichi Lassi",
+                price = "₹90",
+                restaurantName = "Spice Lassi Corner",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "1.2 km",
+                discount = "ELAICHI OFF",
+                discountAmount = "Aromatic Spice",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.lassi_9,
+                title = "Family Pack Lassi (1.5L)",
+                price = "₹220",
+                restaurantName = "Family Lassi Center",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.1 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Sharing Size",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.lassi_10,
+                title = "Dry Fruit Lassi",
+                price = "₹180",
+                restaurantName = "Nutty Lassi House",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.3 km",
+                discount = "DRYFRUIT OFF",
+                discountAmount = "Loaded with Nuts",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.lassi_11,
+                title = "Kids Special Lassi",
+                price = "₹85",
+                restaurantName = "Kid Friendly Lassi Shop",
+                rating = "4.5",
+                deliveryTime = "9-14 mins",
+                distance = "0.5 km",
+                discount = "KIDS OFF",
+                discountAmount = "Fun & Frothy",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.lassi_12,
+                title = "Sugar Free Lassi",
+                price = "₹95",
+                restaurantName = "Healthy Lassi Bar",
+                rating = "4.8",
+                deliveryTime = "16-21 mins",
+                distance = "0.9 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Diabetic Friendly",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.lassi_13,
+                title = "Traditional Matka Lassi",
+                price = "₹140",
+                restaurantName = "Matka Lassi House",
+                rating = "4.6",
+                deliveryTime = "7-11 mins",
+                distance = "0.4 km",
+                discount = "MATKA OFF",
+                discountAmount = "In Clay Pot",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.lassi_14,
+                title = "Gourmet Saffron Lassi",
+                price = "₹200",
+                restaurantName = "Gourmet Lassi Shop",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "SAFFRON OFF",
+                discountAmount = "Premium Quality",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.lassi_15,
+                title = "Butterscotch Lassi",
+                price = "₹160",
+                restaurantName = "Fusion Lassi Cafe",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "1.1 km",
+                discount = "BUTTERSCOTCH OFF",
+                discountAmount = "Caramel Flavor",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.lassi_16,
+                title = "Rose & Kesar Lassi Combo",
+                price = "₹170",
+                restaurantName = "Royal Combo Lassi",
+                rating = "4.6",
+                deliveryTime = "13-18 mins",
+                distance = "0.7 km",
+                discount = "COMBO OFF",
+                discountAmount = "2 Premium Flavors",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.lassi_17,
+                title = "Jumbo Party Lassi Jar",
+                price = "₹350",
+                restaurantName = "Party Lassi Shop",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "1.7 km",
+                discount = "JUMBO OFF",
+                discountAmount = "Party Size (3L)",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.lassi_18,
+                title = "Wedding Special Lassi Platter",
+                price = "₹450",
+                restaurantName = "Celebration Lassi House",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.0 km",
+                discount = "WEDDING OFF",
+                discountAmount = "6 Varieties",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.lassi_19,
+                title = "Office Meeting Lassi Pack",
+                price = "₹300",
+                restaurantName = "Corporate Lassi Center",
+                rating = "4.7",
+                deliveryTime = "12-17 mins",
+                distance = "0.6 km",
+                discount = "OFFICE OFF",
+                discountAmount = "15 Servings",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.lassi_20,
+                title = "Ultimate Lassi Festival Combo",
+                price = "₹400",
+                restaurantName = "Festival Lassi House",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "FESTIVAL OFF",
+                discountAmount = "8 Premium Lassi",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

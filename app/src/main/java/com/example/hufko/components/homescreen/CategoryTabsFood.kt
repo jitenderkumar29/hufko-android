@@ -49091,12 +49091,1239 @@ fun LassiCategoryPage() {
 
 @Composable
 fun MalaiKoftaCategoryPage() {
-    CategoryContentPage("Malai Kofta")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val malaiKoftaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // KOFTA TYPES (with icons)
+                FilterChip(
+                    id = "paneer_kofta",
+                    text = "Paneer Kofta",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_kofta
+                ),
+                FilterChip(
+                    id = "mixed_vegetable_kofta",
+                    text = "Mixed Vegetable",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mixed_veg
+                ),
+                FilterChip(
+                    id = "khoya_kofta",
+                    text = "Khoya Stuffed",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_khoya_stuffed
+                ),
+                FilterChip(
+                    id = "cashew_kofta",
+                    text = "Cashew Kofta",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cashew
+                ),
+
+                // GRAVY CONSISTENCY (with icons)
+                FilterChip(
+                    id = "creamy_gravy",
+                    text = "Creamy Gravy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_creamy
+                ),
+
+                // SPICE LEVEL (text only)
+                FilterChip(
+                    id = "mild_spice",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // NUTS & DRY FRUITS (with icons for some)
+                FilterChip(
+                    id = "with_raisins",
+                    text = "With Raisins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_pistachios",
+                    text = "With Pistachios",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CREAM & MILK CONTENT (with icons)
+                FilterChip(
+                    id = "low_cream",
+                    text = "Low Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (text only)
+                FilterChip(
+                    id = "with_naan",
+                    text = "With Naan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_jeera_rice",
+                    text = "With Jeera Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_paratha",
+                    text = "With Paratha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_meal",
+                    text = "Combo Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES (text only)
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nut_free",
+                    text = "Nut Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING METHOD (with icons)
+                FilterChip(
+                    id = "baked_kofta",
+                    text = "Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE (text only)
+                FilterChip(
+                    id = "single_serve",
+                    text = "Single Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_tray",
+                    text = "Party Tray",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE (with icons for premium)
+                FilterChip(
+                    id = "budget",
+                    text = "Budget",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = malaiKoftaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val malaiKoftaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.malai_kofta_item_1,
+                title = "Classic Malai Kofta",
+                price = "₹240",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.8",
+                deliveryTime = "18-25 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Indiranagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.malai_kofta_item_2,
+                title = "Paneer Malai Kofta",
+                price = "₹280",
+                restaurantName = "Dum Pukht",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "above ₹500",
+                address = "Koramangala, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.malai_kofta_item_3,
+                title = "Khoya Stuffed Malai Kofta",
+                price = "₹320",
+                restaurantName = "Royal Kitchen",
+                rating = "4.7",
+                deliveryTime = "15-22 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "premium special",
+                address = "Jayanagar, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.malai_kofta_item_4,
+                title = "Cashew Malai Kofta",
+                price = "₹350",
+                restaurantName = "Nawabi Delights",
+                rating = "4.8",
+                deliveryTime = "22-28 mins",
+                distance = "1.2 km",
+                discount = "25%",
+                discountAmount = "combo offer",
+                address = "HSR Layout, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.malai_kofta_item_5,
+                title = "Family Pack Malai Kofta (4 pcs)",
+                price = "₹420",
+                restaurantName = "Family Feast",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "18%",
+                discountAmount = "family deal",
+                address = "Whitefield, Bangalore",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.malai_kofta_item_6,
+                title = "Tandoori Malai Kofta",
+                price = "₹300",
+                restaurantName = "Tandoor Magic",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "30%",
+                discountAmount = "tandoor special",
+                address = "MG Road, Bangalore",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = malaiKoftaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val malaiKoftaRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.malai_kofta_1,
+                title = "Classic Malai Kofta",
+                price = "₹240",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.8",
+                deliveryTime = "18-25 mins",
+                distance = "0.5 km",
+                discount = "CLASSIC OFF",
+                discountAmount = "Creamy Tomato Gravy",
+                address = "Indiranagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.malai_kofta_2,
+                title = "Paneer Malai Kofta",
+                price = "₹280",
+                restaurantName = "Dum Pukht",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "0.8 km",
+                discount = "PANEER OFF",
+                discountAmount = "Fresh Paneer Kofta",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.malai_kofta_3,
+                title = "Khoya Stuffed Malai Kofta",
+                price = "₹320",
+                restaurantName = "Royal Kitchen",
+                rating = "4.7",
+                deliveryTime = "15-22 mins",
+                distance = "0.6 km",
+                discount = "KHOYA OFF",
+                discountAmount = "Rich Khoya Filling",
+                address = "Jayanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.malai_kofta_4,
+                title = "Cashew Malai Kofta",
+                price = "₹350",
+                restaurantName = "Nawabi Delights",
+                rating = "4.8",
+                deliveryTime = "22-28 mins",
+                distance = "1.2 km",
+                discount = "CASHEW OFF",
+                discountAmount = "Loaded with Cashews",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.malai_kofta_5,
+                title = "Family Pack Malai Kofta (4 pcs)",
+                price = "₹420",
+                restaurantName = "Family Feast",
+                rating = "4.6",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Sharing Size",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.malai_kofta_6,
+                title = "Tandoori Malai Kofta",
+                price = "₹300",
+                restaurantName = "Tandoor Magic",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "TANDOOR OFF",
+                discountAmount = "Clay Oven Baked",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.malai_kofta_7,
+                title = "Butter Malai Kofta",
+                price = "₹380",
+                restaurantName = "Butter Kitchen",
+                rating = "4.8",
+                deliveryTime = "18-23 mins",
+                distance = "0.9 km",
+                discount = "BUTTER OFF",
+                discountAmount = "Extra Butter Gravy",
+                address = "Bannerghatta Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.malai_kofta_8,
+                title = "Nawabi Malai Kofta",
+                price = "₹450",
+                restaurantName = "Royal Nawab",
+                rating = "4.9",
+                deliveryTime = "28-35 mins",
+                distance = "1.8 km",
+                discount = "NAWABI OFF",
+                discountAmount = "Royal Preparation",
+                address = "BTM Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.malai_kofta_9,
+                title = "Spicy Malai Kofta",
+                price = "₹270",
+                restaurantName = "Spice Garden",
+                rating = "4.6",
+                deliveryTime = "16-21 mins",
+                distance = "0.8 km",
+                discount = "SPICY OFF",
+                discountAmount = "Extra Spicy Gravy",
+                address = "Basavanagudi, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.malai_kofta_10,
+                title = "Dry Fruit Malai Kofta",
+                price = "₹420",
+                restaurantName = "Nutty Delights",
+                rating = "4.7",
+                deliveryTime = "24-30 mins",
+                distance = "1.3 km",
+                discount = "DRYFRUIT OFF",
+                discountAmount = "Rich Dry Fruits",
+                address = "Richmond Town, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.malai_kofta_11,
+                title = "Matar Malai Kofta",
+                price = "₹290",
+                restaurantName = "Green Garden",
+                rating = "4.5",
+                deliveryTime = "14-19 mins",
+                distance = "0.5 km",
+                discount = "MATAR OFF",
+                discountAmount = "With Green Peas",
+                address = "Sadashivanagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.malai_kofta_12,
+                title = "Mughlai Malai Kofta",
+                price = "₹480",
+                restaurantName = "Mughlai Kitchen",
+                rating = "4.8",
+                deliveryTime = "26-32 mins",
+                distance = "1.6 km",
+                discount = "MUGHLAI OFF",
+                discountAmount = "Royal Mughlai Style",
+                address = "Lavelle Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.malai_kofta_13,
+                title = "Kid-Friendly Malai Kofta",
+                price = "₹260",
+                restaurantName = "Kid's Corner",
+                rating = "4.6",
+                deliveryTime = "12-17 mins",
+                distance = "0.4 km",
+                discount = "KIDS OFF",
+                discountAmount = "Mild & Creamy",
+                address = "Marathahalli, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.malai_kofta_14,
+                title = "Saffron Malai Kofta",
+                price = "₹520",
+                restaurantName = "Saffron Dreams",
+                rating = "4.9",
+                deliveryTime = "30-38 mins",
+                distance = "1.9 km",
+                discount = "SAFFRON OFF",
+                discountAmount = "Premium Saffron",
+                address = "Hebbal, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.malai_kofta_15,
+                title = "Party Malai Kofta Platter",
+                price = "₹550",
+                restaurantName = "Party Special",
+                rating = "4.7",
+                deliveryTime = "32-40 mins",
+                distance = "2.1 km",
+                discount = "PARTY OFF",
+                discountAmount = "8 Koftas with Naan",
+                address = "Rajajinagar, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.malai_kofta_16,
+                title = "Combo Malai Kofta Meal",
+                price = "₹380",
+                restaurantName = "Combo King",
+                rating = "4.6",
+                deliveryTime = "20-26 mins",
+                distance = "1.1 km",
+                discount = "COMBO OFF",
+                discountAmount = "Kofta + Rice + Naan",
+                address = "HSR Layout, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.malai_kofta_17,
+                title = "Jumbo Malai Kofta Bucket",
+                price = "₹680",
+                restaurantName = "Jumbo Feast",
+                rating = "4.8",
+                deliveryTime = "35-42 mins",
+                distance = "2.3 km",
+                discount = "JUMBO OFF",
+                discountAmount = "12 Koftas with Gravy",
+                address = "Koramangala, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.malai_kofta_18,
+                title = "Wedding Malai Kofta Special",
+                price = "₹850",
+                restaurantName = "Wedding Caterers",
+                rating = "4.9",
+                deliveryTime = "40-50 mins",
+                distance = "2.8 km",
+                discount = "WEDDING OFF",
+                discountAmount = "24 Koftas Tray",
+                address = "Whitefield, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.malai_kofta_19,
+                title = "Corporate Malai Kofta Pack",
+                price = "₹720",
+                restaurantName = "Corporate Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-32 mins",
+                distance = "1.4 km",
+                discount = "OFFICE OFF",
+                discountAmount = "15 Lunch Boxes",
+                address = "MG Road, Bangalore"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.malai_kofta_20,
+                title = "Festival Malai Kofta Thali",
+                price = "₹620",
+                restaurantName = "Festival Specials",
+                rating = "4.9",
+                deliveryTime = "28-35 mins",
+                distance = "1.7 km",
+                discount = "FESTIVAL OFF",
+                discountAmount = "Complete Thali",
+                address = "Indiranagar, Bangalore"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun DahiBalleCategoryPage() {
-    CategoryContentPage("Dahi Balle")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val dahiBalleFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // CHAAT TYPE (with icons for distinctive ones)
+                FilterChip(
+                    id = "traditional_dahi_bhalle",
+                    text = "Traditional Dahi Bhalle",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_traditional
+                ),
+                FilterChip(
+                    id = "papdi_dahi_bhalle",
+                    text = "Papdi Dahi Bhalle",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_papdi
+                ),
+                FilterChip(
+                    id = "aloo_dahi_bhalle",
+                    text = "Aloo Dahi Bhalle",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_dahi_bhalle
+                ),
+                FilterChip(
+                    id = "ragda_dahi_bhalle",
+                    text = "Ragda Dahi Bhalle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet_dahi_bhalle",
+                    text = "Sweet Dahi Bhalle",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // BHALLA/VADA TYPE (with icons)
+                FilterChip(
+                    id = "moong_dal_bhalla",
+                    text = "Moong Dal Bhalla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_moong_dal
+                ),
+                FilterChip(
+                    id = "urad_dal_bhalla",
+                    text = "Urad Dal Bhalla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_urad_dal
+                ),
+                FilterChip(
+                    id = "mixed_dal_bhalla",
+                    text = "Mixed Dal Bhalla",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CURD/YOGURT TYPE (with icons)
+                FilterChip(
+                    id = "sour_curd",
+                    text = "Sour Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweetened_curd",
+                    text = "Sweetened Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_curd",
+                    text = "Low Fat Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (with icons for key toppings)
+                FilterChip(
+                    id = "with_imli_chutney",
+                    text = "With Imli Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_mint_chutney",
+                    text = "With Mint Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_spices",
+                    text = "Extra Spices",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (text only - common attribute)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SWEETNESS LEVEL (text only)
+                FilterChip(
+                    id = "less_sweet",
+                    text = "Less Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "normal_sweet",
+                    text = "Normal Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_sweet",
+                    text = "Extra Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (with icons for distinctive ones)
+                FilterChip(
+                    id = "takeaway_box",
+                    text = "Takeaway Box",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_with_golgappe",
+                    text = "Combo with Golgappe",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION STYLE (text only)
+                FilterChip(
+                    id = "fried_bhalle",
+                    text = "Fried Bhalle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed_bhalle",
+                    text = "Steamed Bhalle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE (with icons)
+                FilterChip(
+                    id = "room_temperature",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY (text only)
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE (text only)
+                FilterChip(
+                    id = "single_plate",
+                    text = "Single Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_platter",
+                    text = "Party Platter",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL VARIATIONS (with icons for famous ones)
+                FilterChip(
+                    id = "lucknowi_style",
+                    text = "Lucknowi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = dahiBalleFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val dahiBalleItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.dahi_bhalle_item_1,
+                title = "Classic Dahi Bhalle",
+                price = "₹120",
+                restaurantName = "Delhi Chaat Corner",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.4 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Chandni Chowk, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.dahi_bhalle_item_2,
+                title = "Papdi Dahi Bhalle",
+                price = "₹150",
+                restaurantName = "Punjabi Chaat House",
+                rating = "4.8",
+                deliveryTime = "18-25 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "above ₹300",
+                address = "Karol Bagh, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.dahi_bhalle_item_3,
+                title = "Moong Dal Dahi Bhalle",
+                price = "₹140",
+                restaurantName = "Gujarati Swad",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "0.8 km",
+                discount = "10%",
+                discountAmount = "healthy choice",
+                address = "Rajkot, Gujarat",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.dahi_bhalle_item_4,
+                title = "Special Dahi Bhalle with Pomegranate",
+                price = "₹180",
+                restaurantName = "Royal Chaat Palace",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "1.2 km",
+                discount = "25%",
+                discountAmount = "premium combo",
+                address = "Lucknow, Uttar Pradesh",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.dahi_bhalle_item_5,
+                title = "Family Pack Dahi Bhalle (8 pcs)",
+                price = "₹280",
+                restaurantName = "Family Chaat Hub",
+                rating = "4.5",
+                deliveryTime = "30-40 mins",
+                distance = "1.5 km",
+                discount = "18%",
+                discountAmount = "family deal",
+                address = "Mumbai, Maharashtra",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.dahi_bhalle_item_6,
+                title = "Sweet Dahi Bhalle",
+                price = "₹160",
+                restaurantName = "Mathura Sweets",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "0.9 km",
+                discount = "30%",
+                discountAmount = "festival special",
+                address = "Mathura, Uttar Pradesh",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = dahiBalleItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val dahiBalleRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.dahi_bhalle_1,
+                title = "Classic Dahi Bhalle",
+                price = "₹120",
+                restaurantName = "Delhi Chaat Corner",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.4 km",
+                discount = "CLASSIC OFF",
+                discountAmount = "Traditional Recipe",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.dahi_bhalle_2,
+                title = "Papdi Dahi Bhalle",
+                price = "₹150",
+                restaurantName = "Punjabi Chaat House",
+                rating = "4.8",
+                deliveryTime = "18-25 mins",
+                distance = "0.6 km",
+                discount = "PAPDI OFF",
+                discountAmount = "Extra Crispy Papdi",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.dahi_bhalle_3,
+                title = "Moong Dal Dahi Bhalle",
+                price = "₹140",
+                restaurantName = "Gujarati Swad",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "0.8 km",
+                discount = "MOONG OFF",
+                discountAmount = "Healthy Moong Dal",
+                address = "Rajkot, Gujarat"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.dahi_bhalle_4,
+                title = "Pomegranate Dahi Bhalle",
+                price = "₹180",
+                restaurantName = "Royal Chaat Palace",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "1.2 km",
+                discount = "POMEGRANATE OFF",
+                discountAmount = "Fresh Pomegranate Topping",
+                address = "Lucknow, Uttar Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.dahi_bhalle_5,
+                title = "Family Pack Dahi Bhalle (8 pcs)",
+                price = "₹280",
+                restaurantName = "Family Chaat Hub",
+                rating = "4.5",
+                deliveryTime = "30-40 mins",
+                distance = "1.5 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Sharing Size",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.dahi_bhalle_6,
+                title = "Sweet Dahi Bhalle",
+                price = "₹160",
+                restaurantName = "Mathura Sweets",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "0.9 km",
+                discount = "SWEET OFF",
+                discountAmount = "Less Spicy, More Sweet",
+                address = "Mathura, Uttar Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.dahi_bhalle_7,
+                title = "Boondi Dahi Bhalle",
+                price = "₹135",
+                restaurantName = "Rajasthani Chaat",
+                rating = "4.6",
+                deliveryTime = "16-22 mins",
+                distance = "0.5 km",
+                discount = "BOONDI OFF",
+                discountAmount = "Loaded with Boondi",
+                address = "Jaipur, Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.dahi_bhalle_8,
+                title = "Nawabi Dahi Bhalle",
+                price = "₹220",
+                restaurantName = "Royal Nawab",
+                rating = "4.8",
+                deliveryTime = "28-35 mins",
+                distance = "1.8 km",
+                discount = "NAWABI OFF",
+                discountAmount = "Premium Dry Fruits",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.dahi_bhalle_9,
+                title = "Spicy Dahi Bhalle",
+                price = "₹145",
+                restaurantName = "Spice Garden",
+                rating = "4.5",
+                deliveryTime = "14-20 mins",
+                distance = "0.7 km",
+                discount = "SPICY OFF",
+                discountAmount = "Extra Green Chutney",
+                address = "Kolkata, West Bengal"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.dahi_bhalle_10,
+                title = "Sev Dahi Bhalle",
+                price = "₹155",
+                restaurantName = "Mumbai Street Food",
+                rating = "4.7",
+                deliveryTime = "19-25 mins",
+                distance = "1.1 km",
+                discount = "SEV OFF",
+                discountAmount = "Crispy Sev Topping",
+                address = "Andheri, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.dahi_bhalle_11,
+                title = "Low Fat Dahi Bhalle",
+                price = "₹130",
+                restaurantName = "Healthy Bites",
+                rating = "4.4",
+                deliveryTime = "21-27 mins",
+                distance = "0.9 km",
+                discount = "HEALTH OFF",
+                discountAmount = "Low Fat Yogurt",
+                address = "Pune, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.dahi_bhalle_12,
+                title = "Lucknowi Dahi Bhalle",
+                price = "₹195",
+                restaurantName = "Awadhi Delights",
+                rating = "4.8",
+                deliveryTime = "26-32 mins",
+                distance = "1.6 km",
+                discount = "LUCKNOWI OFF",
+                discountAmount = "Awadhi Special Recipe",
+                address = "Lucknow, Uttar Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.dahi_bhalle_13,
+                title = "Kid-Friendly Dahi Bhalle",
+                price = "₹125",
+                restaurantName = "Kid's Corner",
+                rating = "4.6",
+                deliveryTime = "12-18 mins",
+                distance = "0.4 km",
+                discount = "KIDS OFF",
+                discountAmount = "Mild & Creamy",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.dahi_bhalle_14,
+                title = "Saffron Dahi Bhalle",
+                price = "₹250",
+                restaurantName = "Saffron Dreams",
+                rating = "4.9",
+                deliveryTime = "30-38 mins",
+                distance = "1.9 km",
+                discount = "SAFFRON OFF",
+                discountAmount = "Premium Saffron Yogurt",
+                address = "Amritsar, Punjab"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.dahi_bhalle_15,
+                title = "Party Dahi Bhalle Platter",
+                price = "₹350",
+                restaurantName = "Party Special",
+                rating = "4.7",
+                deliveryTime = "32-40 mins",
+                distance = "2.1 km",
+                discount = "PARTY OFF",
+                discountAmount = "20 Pieces Platter",
+                address = "Ahmedabad, Gujarat"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.dahi_bhalle_16,
+                title = "Combo Dahi Bhalle Meal",
+                price = "₹280",
+                restaurantName = "Combo King",
+                rating = "4.6",
+                deliveryTime = "20-26 mins",
+                distance = "1.1 km",
+                discount = "COMBO OFF",
+                discountAmount = "Bhalle + Golgappe + Drink",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.dahi_bhalle_17,
+                title = "Jumbo Dahi Bhalle Bucket",
+                price = "₹480",
+                restaurantName = "Jumbo Feast",
+                rating = "4.8",
+                deliveryTime = "35-42 mins",
+                distance = "2.3 km",
+                discount = "JUMBO OFF",
+                discountAmount = "30 Pieces Bucket",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.dahi_bhalle_18,
+                title = "Wedding Dahi Bhalle Special",
+                price = "₹650",
+                restaurantName = "Wedding Caterers",
+                rating = "4.9",
+                deliveryTime = "40-50 mins",
+                distance = "2.8 km",
+                discount = "WEDDING OFF",
+                discountAmount = "50 Pieces Tray",
+                address = "Udaipur, Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.dahi_bhalle_19,
+                title = "Corporate Dahi Bhalle Pack",
+                price = "₹520",
+                restaurantName = "Corporate Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-32 mins",
+                distance = "1.4 km",
+                discount = "OFFICE OFF",
+                discountAmount = "25 Lunch Boxes",
+                address = "Gurgaon, Haryana"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.dahi_bhalle_20,
+                title = "Festival Dahi Bhalle Thali",
+                price = "₹320",
+                restaurantName = "Festival Specials",
+                rating = "4.9",
+                deliveryTime = "28-35 mins",
+                distance = "1.7 km",
+                discount = "FESTIVAL OFF",
+                discountAmount = "Complete Chaat Thali",
+                address = "Varanasi, Uttar Pradesh"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

@@ -50328,7 +50328,665 @@ fun DahiBalleCategoryPage() {
 
 @Composable
 fun RajmaCategoryPage() {
-    CategoryContentPage("Rajma")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val rajmaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // RAJMA VARIETY (with icons for distinctive types)
+                FilterChip(
+                    id = "kashmiri_rajma",
+                    text = "Kashmiri Rajma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kashmiri_rajma
+                ),
+                FilterChip(
+                    id = "jammu_rajma",
+                    text = "Jammu Rajma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_jammu_rajma
+                ),
+                FilterChip(
+                    id = "chitra_rajma",
+                    text = "Chitra Rajma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_rajma",
+                    text = "Red Rajma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_rajma",
+                    text = "Black Rajma",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING STYLE (icons for regional specialties)
+                FilterChip(
+                    id = "punjabi_rajma",
+                    text = "Punjabi Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_punjabi_rajma
+                ),
+                FilterChip(
+                    id = "kashmiri_style",
+                    text = "Kashmiri Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kashmir_rajma
+                ),
+                FilterChip(
+                    id = "dhaba_style",
+                    text = "Dhaba Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "homestyle",
+                    text = "Homestyle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "restaurant_style",
+                    text = "Restaurant Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // GRAVY CONSISTENCY
+                FilterChip(
+                    id = "thick_gravy",
+                    text = "Thick Gravy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_gravy",
+                    text = "Medium Gravy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "semi_dry",
+                    text = "Semi Dry",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING METHOD (icon for traditional method)
+                FilterChip(
+                    id = "pressure_cooked",
+                    text = "Pressure Cooked",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pressure_cooker_rajma
+                ),
+                FilterChip(
+                    id = "handi_cooked",
+                    text = "Handi Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "slow_cooked",
+                    text = "Slow Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // KEY INGREDIENTS (icons for distinguishing ingredients)
+                FilterChip(
+                    id = "with_onion_garlic",
+                    text = "With Onion Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "without_onion_garlic",
+                    text = "Without Onion Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (icon for popular combo)
+                FilterChip(
+                    id = "with_chawal",
+                    text = "With Plain Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_naan",
+                    text = "With Naan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_roti",
+                    text = "With Roti",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES
+                FilterChip(
+                    id = "vegetarian",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE
+                FilterChip(
+                    id = "single_serve",
+                    text = "Single Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jumbo_pack",
+                    text = "Jumbo Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION TIME
+                FilterChip(
+                    id = "quick_prep",
+                    text = "Quick Prep",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "traditional_prep",
+                    text = "Traditional Prep",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FRESHNESS/READY TO EAT
+                FilterChip(
+                    id = "ready_to_eat",
+                    text = "Ready to Eat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL CATEGORIES (icon for festive special)
+                FilterChip(
+                    id = "winter_special",
+                    text = "Winter Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sunday_special",
+                    text = "Sunday Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = rajmaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val rajmaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.rajma_item_1,
+                title = "Punjabi Rajma Masala",
+                price = "₹180",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Chandigarh Road, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.rajma_item_2,
+                title = "Kashmiri Rajma",
+                price = "₹220",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "above ₹400",
+                address = "Srinagar Colony, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.rajma_item_3,
+                title = "Rajma Chawal Combo",
+                price = "₹250",
+                restaurantName = "Comfort Food Hub",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "0.6 km",
+                discount = "25%",
+                discountAmount = "combo special",
+                address = "Karol Bagh, Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.rajma_item_4,
+                title = "Handi Rajma",
+                price = "₹280",
+                restaurantName = "Royal Clay Pots",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "handi special",
+                address = "Old Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.rajma_item_5,
+                title = "Family Pack Rajma (Serves 4)",
+                price = "₹450",
+                restaurantName = "Family Feast",
+                rating = "4.6",
+                deliveryTime = "35-40 mins",
+                distance = "1.5 km",
+                discount = "18%",
+                discountAmount = "family deal",
+                address = "South Delhi",
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.rajma_item_6,
+                title = "Dhaba Style Rajma",
+                price = "₹200",
+                restaurantName = "Highway Dhaba",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.0 km",
+                discount = "30%",
+                discountAmount = "weekend special",
+                address = "GT Karnal Road, Delhi",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = rajmaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val rajmaRestaurantsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.rajma_1,
+                title = "Classic Punjabi Rajma",
+                price = "₹180",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.5 km",
+                discount = "PUNJABI OFF",
+                discountAmount = "Traditional Recipe",
+                address = "Chandigarh Road, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.rajma_2,
+                title = "Kashmiri Rajma",
+                price = "₹220",
+                restaurantName = "Kashmiri Kitchen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "0.8 km",
+                discount = "KASHMIRI OFF",
+                discountAmount = "Special Dry Ginger",
+                address = "Srinagar Colony, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.rajma_3,
+                title = "Rajma Chawal Combo",
+                price = "₹250",
+                restaurantName = "Comfort Food Hub",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "0.6 km",
+                discount = "COMBO OFF",
+                discountAmount = "Rice Included",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.rajma_4,
+                title = "Handi Rajma",
+                price = "₹280",
+                restaurantName = "Royal Clay Pots",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.2 km",
+                discount = "HANDI OFF",
+                discountAmount = "Clay Pot Cooked",
+                address = "Old Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.rajma_5,
+                title = "Family Pack Rajma",
+                price = "₹450",
+                restaurantName = "Family Feast",
+                rating = "4.6",
+                deliveryTime = "35-40 mins",
+                distance = "1.5 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4",
+                address = "South Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.rajma_6,
+                title = "Dhaba Style Rajma",
+                price = "₹200",
+                restaurantName = "Highway Dhaba",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.0 km",
+                discount = "DHABA OFF",
+                discountAmount = "Extra Butter",
+                address = "GT Karnal Road, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.rajma_7,
+                title = "Jammu Rajma Masala",
+                price = "₹240",
+                restaurantName = "Jammu Special",
+                rating = "4.8",
+                deliveryTime = "26-32 mins",
+                distance = "1.3 km",
+                discount = "JAMMU OFF",
+                discountAmount = "Mountain Spices",
+                address = "Jammu, Jammu & Kashmir"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.rajma_8,
+                title = "Black Rajma Curry",
+                price = "₹210",
+                restaurantName = "South Indian Delights",
+                rating = "4.7",
+                deliveryTime = "19-24 mins",
+                distance = "0.9 km",
+                discount = "BLACK OFF",
+                discountAmount = "Black Kidney Beans",
+                address = "Chennai, Tamil Nadu"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.rajma_9,
+                title = "Chitra Rajma",
+                price = "₹195",
+                restaurantName = "Rajma Specialists",
+                rating = "4.6",
+                deliveryTime = "21-27 mins",
+                distance = "0.7 km",
+                discount = "CHITRA OFF",
+                discountAmount = "Speckled Beans",
+                address = "Pune, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.rajma_10,
+                title = "Rajma with Cream",
+                price = "₹260",
+                restaurantName = "Creamy Kitchen",
+                rating = "4.8",
+                deliveryTime = "24-30 mins",
+                distance = "1.1 km",
+                discount = "CREAM OFF",
+                discountAmount = "Fresh Cream Added",
+                address = "Mumbai, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.rajma_11,
+                title = "Garlic Rajma",
+                price = "₹190",
+                restaurantName = "Garlic Lovers",
+                rating = "4.5",
+                deliveryTime = "17-23 mins",
+                distance = "0.8 km",
+                discount = "GARLIC OFF",
+                discountAmount = "Extra Garlic Flavor",
+                address = "Lucknow, Uttar Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.rajma_12,
+                title = "Low Oil Rajma",
+                price = "₹175",
+                restaurantName = "Healthy Kitchen",
+                rating = "4.4",
+                deliveryTime = "20-26 mins",
+                distance = "0.9 km",
+                discount = "HEALTH OFF",
+                discountAmount = "Low Oil Recipe",
+                address = "Bangalore, Karnataka"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.rajma_13,
+                title = "Rajma Paratha Combo",
+                price = "₹230",
+                restaurantName = "Punjabi Paratha House",
+                rating = "4.7",
+                deliveryTime = "25-31 mins",
+                distance = "1.2 km",
+                discount = "PARATHA OFF",
+                discountAmount = "With 2 Parathas",
+                address = "Amritsar, Punjab"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.rajma_14,
+                title = "Sundays Special Rajma",
+                price = "₹270",
+                restaurantName = "Sunday Kitchen",
+                rating = "4.9",
+                deliveryTime = "28-34 mins",
+                distance = "1.6 km",
+                discount = "SUNDAY OFF",
+                discountAmount = "Weekend Special",
+                address = "Chandigarh"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.rajma_15,
+                title = "Extra Spicy Rajma",
+                price = "₹185",
+                restaurantName = "Spice Factory",
+                rating = "4.6",
+                deliveryTime = "16-21 mins",
+                distance = "0.5 km",
+                discount = "SPICY OFF",
+                discountAmount = "Hot & Spicy",
+                address = "Hyderabad, Telangana"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.rajma_16,
+                title = "Slow Cooked Rajma",
+                price = "₹290",
+                restaurantName = "Slow Kitchen",
+                rating = "4.8",
+                deliveryTime = "35-42 mins",
+                distance = "1.8 km",
+                discount = "SLOW OFF",
+                discountAmount = "8 Hours Cooking",
+                address = "Udaipur, Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.rajma_17,
+                title = "Rajma Biryani",
+                price = "₹320",
+                restaurantName = "Fusion Kitchen",
+                rating = "4.7",
+                deliveryTime = "30-38 mins",
+                distance = "2.1 km",
+                discount = "BIRYANI OFF",
+                discountAmount = "Rajma Rice Fusion",
+                address = "Delhi NCR"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.rajma_18,
+                title = "Corporate Rajma Lunch",
+                price = "₹420",
+                restaurantName = "Office Caterers",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "1.4 km",
+                discount = "OFFICE OFF",
+                discountAmount = "10 Lunch Boxes",
+                address = "Gurgaon, Haryana"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.rajma_19,
+                title = "Wedding Rajma Special",
+                price = "₹680",
+                restaurantName = "Wedding Food Services",
+                rating = "4.9",
+                deliveryTime = "45-55 mins",
+                distance = "2.5 km",
+                discount = "WEDDING OFF",
+                discountAmount = "50 Person Batch",
+                address = "Jaipur, Rajasthan"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.rajma_20,
+                title = "Jumbo Party Rajma",
+                price = "₹520",
+                restaurantName = "Party Catering",
+                rating = "4.8",
+                deliveryTime = "38-45 mins",
+                distance = "2.2 km",
+                discount = "PARTY OFF",
+                discountAmount = "25 Person Pack",
+                address = "Ahmedabad, Gujarat"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

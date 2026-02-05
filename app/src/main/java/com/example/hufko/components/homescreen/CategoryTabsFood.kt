@@ -54625,12 +54625,1180 @@ fun ChickenChaCategoryPage() {
 
 @Composable
 fun PaneerKulcheCategoryPage() {
-    CategoryContentPage("Paneer Kulche")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val paneerKulcheFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // PREPARATION STYLES (with icons for key styles)
+                FilterChip(
+                    id = "tandoor",
+                    text = "Tandoor Baked",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tandoor_paneer_kulche
+                ),
+                FilterChip(
+                    id = "stuffed",
+                    text = "Stuffed Kulche",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stuffed_paneer_kulche
+                ),
+                FilterChip(
+                    id = "plain",
+                    text = "Plain Kulche",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_bread_paneer_kulche
+                ),
+                FilterChip(
+                    id = "butter",
+                    text = "Butter Roasted",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "masala",
+                    text = "Masala Kulche",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PANEER VARIATIONS (with icons for main types)
+                FilterChip(
+                    id = "spicy_paneer",
+                    text = "Spicy Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy_paneer_kulche
+                ),
+                FilterChip(
+                    id = "paneer_tikka",
+                    text = "Paneer Tikka",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tikka_paneer_kulche
+                ),
+                FilterChip(
+                    id = "plain_paneer",
+                    text = "Plain Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "matar_paneer",
+                    text = "Matar Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icons for popular sides)
+                FilterChip(
+                    id = "pickle",
+                    text = "With Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onions",
+                    text = "With Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "salad",
+                    text = "With Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for heat levels)
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION TIME
+                FilterChip(
+                    id = "quick",
+                    text = "Quick (<15 min)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh",
+                    text = "Fresh Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TYPE
+                FilterChip(
+                    id = "breakfast",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner",
+                    text = "Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snack",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget",
+                    text = "Budget",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo",
+                    text = "Combo Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = paneerKulcheFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val paneerKulcheItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.paneer_kulche_1,
+                title = "Paneer Tikka Kulche Special",
+                price = "190",
+                restaurantName = "Kulche King",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Chandni Chowk, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.paneer_kulche_2,
+                title = "Amritsari Paneer Kulche",
+                price = "160",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "on weekdays",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.paneer_kulche_3,
+                title = "Butter Paneer Stuffed Kulche",
+                price = "220",
+                restaurantName = "Butter Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "with chole combo",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.paneer_kulche_4,
+                title = "Spicy Masala Paneer Kulche",
+                price = "175",
+                restaurantName = "Spicy Street Food",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "family pack",
+                address = "Karol Bagh, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.paneer_kulche_5,
+                title = "Paneer Bhurji Kulche Combo",
+                price = "200",
+                restaurantName = "Mughlai Express",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "25%",
+                discountAmount = "combo with raita & salad",
+                address = "Old Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.paneer_kulche_6,
+                title = "Tandoori Paneer Kulche Platter",
+                price = "240",
+                restaurantName = "Tandoor Hut",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "0.9 km",
+                discount = "30%",
+                discountAmount = "weekend special",
+                address = "South Extension, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = paneerKulcheItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val paneerKulcheItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.paneer_kulche_items_1,
+                title = "Classic Paneer Tikka Kulche",
+                price = "190",
+                restaurantName = "Kulche King",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "TIKKA OFF",
+                discountAmount = "Charcoal Grilled Paneer",
+                address = "Chandni Chowk, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.paneer_kulche_items_2,
+                title = "Amritsari Paneer Kulche Special",
+                price = "180",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "AMRITSARI OFF",
+                discountAmount = "Authentic Amritsari Masala",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.paneer_kulche_items_3,
+                title = "Butter Paneer Stuffed Kulche",
+                price = "220",
+                restaurantName = "Butter Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "BUTTER OFF",
+                discountAmount = "Rich Creamy Butter Gravy",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.paneer_kulche_items_4,
+                title = "Spicy Masala Paneer Kulche",
+                price = "175",
+                restaurantName = "Spicy Street Food",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.3 km",
+                discount = "SPICY OFF",
+                discountAmount = "Extra Hot Green Chilies",
+                address = "Karol Bagh, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.paneer_kulche_items_5,
+                title = "Paneer Bhurji Kulche Combo",
+                price = "210",
+                restaurantName = "Mughlai Express",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "BHURJI OFF",
+                discountAmount = "Scrambled Paneer Spices",
+                address = "Old Delhi"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.paneer_kulche_items_6,
+                title = "Tandoori Paneer Kulche Platter",
+                price = "240",
+                restaurantName = "Tandoor Hut",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "0.9 km",
+                discount = "TANDOOR OFF",
+                discountAmount = "Clay Oven Roasted Flavor",
+                address = "South Extension, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.paneer_kulche_items_7,
+                title = "Cheese Stuffed Paneer Kulche",
+                price = "250",
+                restaurantName = "Cheese Lovers",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.1 km",
+                discount = "CHEESE OFF",
+                discountAmount = "Mozzarella & Cheddar Blend",
+                address = "Greater Kailash, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.paneer_kulche_items_8,
+                title = "Paneer Malai Kulche Deluxe",
+                price = "230",
+                restaurantName = "Royal Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.3 km",
+                discount = "MALAI OFF",
+                discountAmount = "Fresh Cream & Cashew Paste",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.paneer_kulche_items_9,
+                title = "Matar Paneer Kulche Special",
+                price = "195",
+                restaurantName = "Green Garden",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "MATAR OFF",
+                discountAmount = "Fresh Green Peas Curry",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.paneer_kulche_items_10,
+                title = "Paneer Chilli Kulche Fusion",
+                price = "205",
+                restaurantName = "Fusion Food Hub",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "0.9 km",
+                discount = "FUSION OFF",
+                discountAmount = "Indo-Chinese Style Gravy",
+                address = "Vasant Kunj, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.paneer_kulche_items_11,
+                title = "Paneer Butter Masala Kulche",
+                price = "225",
+                restaurantName = "Masala House",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "MASALA OFF",
+                discountAmount = "Aromatic Indian Spices",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.paneer_kulche_items_12,
+                title = "Paneer Kulche Family Pack (4 pcs)",
+                price = "680",
+                restaurantName = "Family Restaurant",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.2 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4-5 People",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.paneer_kulche_items_13,
+                title = "Paneer Tikka Masala Kulche",
+                price = "215",
+                restaurantName = "Tikka Masters",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "TIKKA MASALA OFF",
+                discountAmount = "Tangy Tomato Gravy",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.paneer_kulche_items_14,
+                title = "Paneer Hariyali Kulche",
+                price = "200",
+                restaurantName = "Healthy Bites",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "0.6 km",
+                discount = "HARIYALI OFF",
+                discountAmount = "Fresh Coriander & Mint",
+                address = "Khan Market, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.paneer_kulche_items_15,
+                title = "Paneer Achari Kulche",
+                price = "195",
+                restaurantName = "Pickle Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.1 km",
+                discount = "ACHARI OFF",
+                discountAmount = "Tangy Pickle Flavored",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.paneer_kulche_items_16,
+                title = "Paneer Kadai Kulche Special",
+                price = "210",
+                restaurantName = "Kadai King",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.4 km",
+                discount = "KADAI OFF",
+                discountAmount = "Bell Peppers & Onions",
+                address = "Rohini, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.paneer_kulche_items_17,
+                title = "Paneer Makhani Kulche",
+                price = "230",
+                restaurantName = "Makhani Palace",
+                rating = "4.9",
+                deliveryTime = "28-33 mins",
+                distance = "1.0 km",
+                discount = "MAKHANI OFF",
+                discountAmount = "Buttery Tomato Gravy",
+                address = "Defence Colony, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.paneer_kulche_items_18,
+                title = "Paneer Lababdar Kulche",
+                price = "245",
+                restaurantName = "Royal Mughlai",
+                rating = "4.8",
+                deliveryTime = "32-37 mins",
+                distance = "1.6 km",
+                discount = "LABABDAR OFF",
+                discountAmount = "Rich Cream & Cashew Sauce",
+                address = "Noida, Uttar Pradesh"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.paneer_kulche_items_19,
+                title = "Paneer Kulche Party Pack (10 pcs)",
+                price = "1,650",
+                restaurantName = "Party Caterers",
+                rating = "4.9",
+                deliveryTime = "45-50 mins",
+                distance = "2.0 km",
+                discount = "PARTY OFF",
+                discountAmount = "Perfect for 10-12 Guests",
+                address = "Gurgaon, Haryana"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.paneer_kulche_items_20,
+                title = "Paneer Kulche Corporate Lunch",
+                price = "1,800",
+                restaurantName = "Corporate Catering Co.",
+                rating = "4.8",
+                deliveryTime = "50-55 mins",
+                distance = "2.5 km",
+                discount = "CORPORATE OFF",
+                discountAmount = "20+ Portions Minimum",
+                address = "Faridabad, Haryana"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun ChaachCategoryPage() {
-    CategoryContentPage("Chaach")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val chaachFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // CHAACH TYPES (with icons for popular varieties)
+                FilterChip(
+                    id = "plain_chaach",
+                    text = "Plain Chaach",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_chaach
+                ),
+                FilterChip(
+                    id = "masala_chaach",
+                    text = "Masala Chaach",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_masala_chaach
+                ),
+                FilterChip(
+                    id = "mint_chaach",
+                    text = "Mint Chaach",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mint_chaach
+                ),
+                FilterChip(
+                    id = "jeera_chaach",
+                    text = "Jeera Chaach",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_jeera_chaach
+                ),
+                FilterChip(
+                    id = "sweet_chaach",
+                    text = "Sweet Chaach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_chaach",
+                    text = "Spicy Chaach",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLES (with icons for serving methods)
+                FilterChip(
+                    id = "earthen_pot",
+                    text = "Earthen Pot",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_earthen_pot_chaach
+                ),
+                FilterChip(
+                    id = "matka",
+                    text = "Matka Chaach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bottle",
+                    text = "Bottled",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MILK TYPE
+                FilterChip(
+                    id = "cow_milk",
+                    text = "Cow Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "buffalo_milk",
+                    text = "Buffalo Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "full_cream",
+                    text = "Full Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE (with icons for temperature)
+                FilterChip(
+                    id = "ice_cubes",
+                    text = "With Ice Cubes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // QUANTITY/SIZE
+                FilterChip(
+                    id = "single_glass",
+                    text = "Single Glass",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jug",
+                    text = "Family Jug",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "liter",
+                    text = "1 Liter Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icons for popular combos)
+                FilterChip(
+                    id = "standalone",
+                    text = "Standalone Drink",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_snacks",
+                    text = "With Snacks",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEALTH BENEFITS
+                FilterChip(
+                    id = "digestive",
+                    text = "Digestive",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "probiotic",
+                    text = "Probiotic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "summer_cooler",
+                    text = "Summer Cooler",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget",
+                    text = "Budget (₹20-50)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium (₹50-100)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = chaachFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val chaachItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chaach_1,
+                title = "Traditional Masala Chaach",
+                price = "40",
+                restaurantName = "Gujarati Thali",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "20%",
+                discountAmount = "on first order",
+                address = "Sion, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chaach_2,
+                title = "Jeera Pudina Chaach",
+                price = "45",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "weekday special",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.chaach_3,
+                title = "Matka Chaach (Earthen Pot)",
+                price = "60",
+                restaurantName = "Rajasthani Dhaba",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "with thali combo",
+                address = "Bandra, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.chaach_4,
+                title = "Chilled Spicy Chaach",
+                price = "35",
+                restaurantName = "Street Food Corner",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "above ₹200 order",
+                address = "Ghatkopar, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.chaach_5,
+                title = "Chaach Family Pack (1L)",
+                price = "120",
+                restaurantName = "Home Kitchen",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "25%",
+                discountAmount = "weekend family offer",
+                address = "Powai, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.chaach_6,
+                title = "Premium Probiotic Chaach",
+                price = "80",
+                restaurantName = "Organic Kitchen",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "30%",
+                discountAmount = "healthy drinks combo",
+                address = "Juhu, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = chaachItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val chaachItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chaach_items_1,
+                title = "Traditional Masala Chaach",
+                price = "40",
+                restaurantName = "Gujarati Thali House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "MASALA OFF",
+                discountAmount = "Authentic Gujarati Spices",
+                address = "Sion, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chaach_items_2,
+                title = "Jeera Pudina Chaach Special",
+                price = "45",
+                restaurantName = "Punjabi Rasoi",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "JEERA OFF",
+                discountAmount = "Fresh Cumin & Mint",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chaach_items_3,
+                title = "Matka Chaach in Earthen Pot",
+                price = "60",
+                restaurantName = "Rajasthani Dhaba",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "MATKA OFF",
+                discountAmount = "Traditional Earthen Pot Serving",
+                address = "Bandra, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chaach_items_4,
+                title = "Chilled Spicy Chaach",
+                price = "35",
+                restaurantName = "Street Food Corner",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "CHILLED OFF",
+                discountAmount = "Perfect Summer Cooler",
+                address = "Ghatkopar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chaach_items_5,
+                title = "Chaach Family Pack (1 Liter)",
+                price = "120",
+                restaurantName = "Home Kitchen",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4-5 People",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chaach_items_6,
+                title = "Premium Probiotic Chaach",
+                price = "80",
+                restaurantName = "Organic Kitchen",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "PROBIOTIC OFF",
+                discountAmount = "Natural Gut Health Booster",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chaach_items_7,
+                title = "Adrak (Ginger) Chaach",
+                price = "50",
+                restaurantName = "Ayurvedic Kitchen",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.1 km",
+                discount = "ADRACK OFF",
+                discountAmount = "Fresh Ginger for Digestion",
+                address = "Vile Parle, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chaach_items_8,
+                title = "Sweet Chaach with Jaggery",
+                price = "55",
+                restaurantName = "Maharashtrian Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.3 km",
+                discount = "SWEET OFF",
+                discountAmount = "Organic Jaggery Sweetened",
+                address = "Dadar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chaach_items_9,
+                title = "Spicy Green Chilli Chaach",
+                price = "42",
+                restaurantName = "Spicy Delights",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "SPICY OFF",
+                discountAmount = "Extra Hot Green Chillies",
+                address = "Borivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chaach_items_10,
+                title = "Chaach Combo with Snacks",
+                price = "150",
+                restaurantName = "Fusion Food Hub",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "0.9 km",
+                discount = "COMBO OFF",
+                discountAmount = "With Samosa & Pakora",
+                address = "Malad, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chaach_items_11,
+                title = "Low Fat Diet Chaach",
+                price = "48",
+                restaurantName = "Healthy Bites",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "DIET OFF",
+                discountAmount = "Low Calorie Healthy Option",
+                address = "Santacruz, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chaach_items_12,
+                title = "Chaach Party Pack (5 Liters)",
+                price = "450",
+                restaurantName = "Party Caterers",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.2 km",
+                discount = "PARTY OFF",
+                discountAmount = "Perfect for 20-25 Guests",
+                address = "Thane, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chaach_items_13,
+                title = "Rose Flavored Chaach",
+                price = "65",
+                restaurantName = "Royal Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "ROSE OFF",
+                discountAmount = "Delicate Rose Petal Flavor",
+                address = "Worli, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chaach_items_14,
+                title = "Ajwain (Carom) Chaach",
+                price = "52",
+                restaurantName = "Digestive Kitchen",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "0.6 km",
+                discount = "AJWAIN OFF",
+                discountAmount = "Carom Seeds for Digestion",
+                address = "Chembur, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chaach_items_15,
+                title = "Bottled Ready-to-Drink Chaach",
+                price = "70",
+                restaurantName = "Modern Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.1 km",
+                discount = "BOTTLED OFF",
+                discountAmount = "500ml Sealed Bottle",
+                address = "Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chaach_items_16,
+                title = "Kashmiri Kahwa Chaach Fusion",
+                price = "85",
+                restaurantName = "Fusion Specials",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.4 km",
+                discount = "KASHMIRI OFF",
+                discountAmount = "Kahwa Tea Infused Chaach",
+                address = "Kharghar, Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chaach_items_17,
+                title = "Chaach with Thandai Masala",
+                price = "75",
+                restaurantName = "Festive Kitchen",
+                rating = "4.9",
+                deliveryTime = "28-33 mins",
+                distance = "1.0 km",
+                discount = "THANDAI OFF",
+                discountAmount = "Festival Special Thandai Mix",
+                address = "Kalyan, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chaach_items_18,
+                title = "Chaach Corporate Delivery Pack",
+                price = "800",
+                restaurantName = "Corporate Catering",
+                rating = "4.8",
+                deliveryTime = "32-37 mins",
+                distance = "1.6 km",
+                discount = "CORPORATE OFF",
+                discountAmount = "10 Liters Office Delivery",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chaach_items_19,
+                title = "Chaach Wedding Package",
+                price = "2,500",
+                restaurantName = "Wedding Caterers",
+                rating = "4.9",
+                deliveryTime = "45-50 mins",
+                distance = "2.0 km",
+                discount = "WEDDING OFF",
+                discountAmount = "50 Liters Bulk Order",
+                address = "Panvel, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chaach_items_20,
+                title = "Gourmet Saffron Chaach",
+                price = "120",
+                restaurantName = "Luxury Kitchen",
+                rating = "4.8",
+                deliveryTime = "50-55 mins",
+                distance = "2.5 km",
+                discount = "SAFFRON OFF",
+                discountAmount = "Premium Kashmiri Saffron",
+                address = "Lonavala, Maharashtra"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

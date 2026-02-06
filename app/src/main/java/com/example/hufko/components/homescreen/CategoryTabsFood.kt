@@ -55803,18 +55803,1850 @@ fun ChaachCategoryPage() {
 
 @Composable
 fun VegLollipopCategoryPage() {
-    CategoryContentPage("Veg Lollipop")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val vegLollipopFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // VEG LOLLIPOP TYPES (with icons for popular varieties)
+                FilterChip(
+                    id = "soya_lollipop",
+                    text = "Soya Lollipop",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_soya_lollipop
+                ),
+                FilterChip(
+                    id = "paneer_lollipop",
+                    text = "Paneer Lollipop",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_lollipop
+                ),
+                FilterChip(
+                    id = "potato_lollipop",
+                    text = "Potato Lollipop",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_potato_lollipop
+                ),
+                FilterChip(
+                    id = "corn_lollipop",
+                    text = "Corn Lollipop",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_corn_lollipop
+                ),
+                FilterChip(
+                    id = "mixed_veg_lollipop",
+                    text = "Mixed Veg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese_stuffed",
+                    text = "Cheese Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COATING/CRISPNESS (with icons for coating types)
+                FilterChip(
+                    id = "bread_crumbs",
+                    text = "Bread Crumbs",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bread_crumbs
+                ),
+                FilterChip(
+                    id = "rice_flakes",
+                    text = "Rice Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tempura",
+                    text = "Tempura Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SAUCES & DIPS (with icons for popular sauces)
+                FilterChip(
+                    id = "tomato_sauce",
+                    text = "Tomato Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese_sauce",
+                    text = "Cheese Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for spice indicators)
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE (with icons for serving methods)
+                FilterChip(
+                    id = "party_platter",
+                    text = "Party Platter",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // QUANTITY/SERVING SIZE
+                FilterChip(
+                    id = "4_pieces",
+                    text = "4 Pieces",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "6_pieces",
+                    text = "6 Pieces",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "12_pieces",
+                    text = "12 Pieces",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dozen",
+                    text = "Dozen",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS
+                FilterChip(
+                    id = "with_salad",
+                    text = "With Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_fries",
+                    text = "With Fries",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FRYING STYLE (with icons for cooking methods)
+                FilterChip(
+                    id = "oven_baked",
+                    text = "Oven Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget",
+                    text = "Budget (₹100-200)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium (₹200-400)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_pack",
+                    text = "Party Pack (₹400+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = vegLollipopFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val vegLollipopItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.veg_lollipop_1,
+                title = "Crispy Soya Lollipop",
+                price = "180",
+                restaurantName = "Sizzling Veggies",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "on 6 pieces",
+                address = "Andheri East, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.veg_lollipop_2,
+                title = "Cheese Stuffed Paneer Lollipop",
+                price = "220",
+                restaurantName = "Paneer Special",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "cheese lovers offer",
+                address = "Bandra, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.veg_lollipop_3,
+                title = "Spicy Corn Flakes Lollipop",
+                price = "160",
+                restaurantName = "Street Snacks Hub",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "20%",
+                discountAmount = "weekday special",
+                address = "Ghatkopar, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.veg_lollipop_4,
+                title = "Schezwan Veg Lollipop (12 pcs)",
+                price = "280",
+                restaurantName = "Chinese Wok",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "25%",
+                discountAmount = "party pack offer",
+                address = "Powai, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.veg_lollipop_5,
+                title = "Air Fried Healthy Lollipop",
+                price = "200",
+                restaurantName = "Fit Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "30%",
+                discountAmount = "health combo",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.veg_lollipop_6,
+                title = "Mixed Veg Lollipop Platter",
+                price = "320",
+                restaurantName = "Veg Feast",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "Free Salad",
+                discountAmount = "with every order",
+                address = "Sion, Mumbai"
+            )
+        )
+         Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = vegLollipopItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val vegLollipopItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.veg_lollipop_items_1,
+                title = "Crispy Soya Lollipop",
+                price = "180",
+                restaurantName = "Sizzling Veggies",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "SOYA OFF",
+                discountAmount = "High Protein Soybean Base",
+                address = "Andheri East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.veg_lollipop_items_2,
+                title = "Cheese Stuffed Paneer Lollipop",
+                price = "220",
+                restaurantName = "Paneer Special",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "CHEESE OFF",
+                discountAmount = "Mozzarella & Cheddar Stuffing",
+                address = "Bandra, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.veg_lollipop_items_3,
+                title = "Spicy Corn Flakes Lollipop",
+                price = "160",
+                restaurantName = "Street Snacks Hub",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "CORN OFF",
+                discountAmount = "Crispy Corn Flakes Coating",
+                address = "Ghatkopar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.veg_lollipop_items_4,
+                title = "Schezwan Veg Lollipop (12 pcs)",
+                price = "280",
+                restaurantName = "Chinese Wok",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "SCHEZWAN OFF",
+                discountAmount = "Authentic Indo-Chinese Sauce",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.veg_lollipop_items_5,
+                title = "Air Fried Healthy Lollipop",
+                price = "200",
+                restaurantName = "Fit Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "HEALTHY OFF",
+                discountAmount = "95% Less Oil Air Fried",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.veg_lollipop_items_6,
+                title = "Mixed Veg Lollipop Platter",
+                price = "320",
+                restaurantName = "Veg Feast",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "MIXED OFF",
+                discountAmount = "5 Vegetable Variety Platter",
+                address = "Sion, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.veg_lollipop_items_7,
+                title = "Tandoori Potato Lollipop",
+                price = "150",
+                restaurantName = "Tandoor Magic",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "0.9 km",
+                discount = "TANDOOR OFF",
+                discountAmount = "Clay Oven Smoked Flavor",
+                address = "Santacruz, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.veg_lollipop_items_8,
+                title = "Bread Crumb Crispy Lollipop",
+                price = "170",
+                restaurantName = "Crispy Corner",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "BREAD OFF",
+                discountAmount = "Japanese Panko Bread Crumbs",
+                address = "Malad, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.veg_lollipop_items_9,
+                title = "Family Pack (24 pcs)",
+                price = "450",
+                restaurantName = "Family Kitchen",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.0 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Serves 4-6 Family Members",
+                address = "Borivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.veg_lollipop_items_10,
+                title = "Premium Veg Lollipop",
+                price = "250",
+                restaurantName = "Fine Veg Dining",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.4 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Gourmet Plating & Serving",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.veg_lollipop_items_11,
+                title = "Hot & Spicy Lollipop",
+                price = "190",
+                restaurantName = "Spice Nation",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.1 km",
+                discount = "HOT OFF",
+                discountAmount = "Extra Green Chillies & Spices",
+                address = "Dadar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.veg_lollipop_items_12,
+                title = "Mild Creamy Lollipop",
+                price = "210",
+                restaurantName = "Cream & Crunch",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "CREAMY OFF",
+                discountAmount = "Rich Creamy Cashew Base",
+                address = "Kandivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.veg_lollipop_items_13,
+                title = "Beetroot & Sweet Potato Lollipop",
+                price = "230",
+                restaurantName = "Healthy Bites",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "1.2 km",
+                discount = "BEETROOT OFF",
+                discountAmount = "Natural Color & Nutrients",
+                address = "Vile Parle, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.veg_lollipop_items_14,
+                title = "Thai Style Veg Lollipop",
+                price = "270",
+                restaurantName = "Asian Fusion",
+                rating = "4.7",
+                deliveryTime = "32-37 mins",
+                distance = "1.5 km",
+                discount = "THAI OFF",
+                discountAmount = "Lemongrass & Thai Basil Flavor",
+                address = "Worli, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.veg_lollipop_items_15,
+                title = "Italian Herb Crusted Lollipop",
+                price = "290",
+                restaurantName = "Italian Kitchen",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "ITALIAN OFF",
+                discountAmount = "Oregano, Basil & Thyme Crust",
+                address = "Chembur, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.veg_lollipop_items_16,
+                title = "Kid-Friendly Lollipop Pack",
+                price = "340",
+                restaurantName = "Kids Kitchen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "KIDS OFF",
+                discountAmount = "Fun Shapes & Mild Flavors",
+                address = "Thane, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.veg_lollipop_items_17,
+                title = "Party Platter (36 pcs)",
+                price = "680",
+                restaurantName = "Party Specials",
+                rating = "4.8",
+                deliveryTime = "45-50 mins",
+                distance = "2.2 km",
+                discount = "PARTY OFF",
+                discountAmount = "Perfect for 10-12 Guests",
+                address = "Panvel, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.veg_lollipop_items_18,
+                title = "Corporate Office Pack (50 pcs)",
+                price = "950",
+                restaurantName = "Corporate Catering",
+                rating = "4.8",
+                deliveryTime = "50-55 mins",
+                distance = "2.5 km",
+                discount = "CORPORATE OFF",
+                discountAmount = "Office Meetings & Events",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.veg_lollipop_items_19,
+                title = "Wedding Catering Platter",
+                price = "2,500",
+                restaurantName = "Wedding Caterers",
+                rating = "4.9",
+                deliveryTime = "55-60 mins",
+                distance = "3.0 km",
+                discount = "WEDDING OFF",
+                discountAmount = "Bulk Order for 50+ Guests",
+                address = "Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.veg_lollipop_items_20,
+                title = "Gourmet Truffle Lollipop",
+                price = "380",
+                restaurantName = "Luxury Kitchen",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.8 km",
+                discount = "TRUFFLE OFF",
+                discountAmount = "Premium Black Truffle Infused",
+                address = "Alibaug, Maharashtra"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun SubCategoryPage() {
-    CategoryContentPage("Sub")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val subSandwichFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // BREAD TYPES (with icons for popular breads)
+                FilterChip(
+                    id = "italian_bread",
+                    text = "Italian Bread",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_italian_bread
+                ),
+                FilterChip(
+                    id = "whole_wheat",
+                    text = "Whole Wheat",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_wheat_bread
+                ),
+                FilterChip(
+                    id = "multigrain",
+                    text = "Multigrain",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ciabatta",
+                    text = "Ciabatta",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PROTEINS (with icons for popular proteins)
+                FilterChip(
+                    id = "chicken_tikka",
+                    text = "Chicken Tikka",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_sandwich
+                ),
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_sandwich
+                ),
+                FilterChip(
+                    id = "veg_patty",
+                    text = "Veg Patty",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_patty
+                ),
+                FilterChip(
+                    id = "roasted_chicken",
+                    text = "Roasted Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turkey",
+                    text = "Turkey",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna",
+                    text = "Tuna",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "falafel",
+                    text = "Falafel",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CHEESE TYPES (with icon for popular cheese)
+                FilterChip(
+                    id = "provolone",
+                    text = "Provolone",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "swiss",
+                    text = "Swiss",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // VEGETABLES (with icon for lettuce as it's most common)
+                FilterChip(
+                    id = "tomatoes",
+                    text = "Tomatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onions",
+                    text = "Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_peppers",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "olives",
+                    text = "Olives",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalapenos",
+                    text = "Jalapeños",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cucumber",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SAUCES & SPREADS (with icons for popular sauces)
+                FilterChip(
+                    id = "chipotle",
+                    text = "Chipotle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pesto",
+                    text = "Pesto",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ranch",
+                    text = "Ranch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hummus",
+                    text = "Hummus",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE/FOOTLONG OPTION (with icon for footlong)
+                FilterChip(
+                    id = "six_inch",
+                    text = "6-inch",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // HEAT LEVEL (with icon for spicy)
+                FilterChip(
+                    id = "medium_spicy",
+                    text = "Medium Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COMBO OPTIONS (with icon for combo meal)
+                FilterChip(
+                    id = "with_soup",
+                    text = "With Soup",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget",
+                    text = "Budget (₹150-250)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium (₹250-400)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_deal",
+                    text = "Combo Deal (₹400+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = subSandwichFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val subSandwichItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.sub_sandwich_1,
+                title = "Classic Italian Chicken Sub",
+                price = "320",
+                restaurantName = "Sub Heaven",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "on footlong",
+                address = "Bandra, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.sub_sandwich_2,
+                title = "Paneer Tikka Sub with Extra Cheese",
+                price = "280",
+                restaurantName = "Veggie Delight",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "cheese lovers special",
+                address = "Andheri East, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.sub_sandwich_3,
+                title = "Spicy Chicken Tikka Footlong",
+                price = "350",
+                restaurantName = "Tikka Masters",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "footlong combo",
+                address = "Powai, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.sub_sandwich_4,
+                title = "Mediterranean Veggie Sub",
+                price = "260",
+                restaurantName = "Global Bites",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "Free Garlic Bread",
+                discountAmount = "with every sub",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.sub_sandwich_5,
+                title = "Roasted Chicken & Avocado",
+                price = "380",
+                restaurantName = "Healthy Subs",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.6 km",
+                discount = "30%",
+                discountAmount = "health conscious offer",
+                address = "Ghatkopar, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.sub_sandwich_6,
+                title = "Ultimate Triple Cheese Sub",
+                price = "300",
+                restaurantName = "Cheese Factory",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "Extra Cheese Free",
+                discountAmount = "cheese overload",
+                address = "Sion, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = subSandwichItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val subSandwichItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.sub_sandwich_items_1,
+                title = "Classic Italian Chicken Sub",
+                price = "320",
+                restaurantName = "Sub Heaven",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "ITALIAN OFF",
+                discountAmount = "Authentic Italian Herb Bread",
+                address = "Bandra, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.sub_sandwich_items_2,
+                title = "Paneer Tikka Sub with Extra Cheese",
+                price = "280",
+                restaurantName = "Veggie Delight",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "PAN OFF",
+                discountAmount = "Tandoori Marinated Paneer",
+                address = "Andheri East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.sub_sandwich_items_3,
+                title = "Spicy Chicken Tikka Footlong",
+                price = "350",
+                restaurantName = "Tikka Masters",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "FOOTLONG OFF",
+                discountAmount = "12-inch Extra Large Sub",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.sub_sandwich_items_4,
+                title = "Mediterranean Veggie Sub",
+                price = "260",
+                restaurantName = "Global Bites",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.0 km",
+                discount = "MEDITERRANEAN OFF",
+                discountAmount = "Olives, Feta & Hummus",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.sub_sandwich_items_5,
+                title = "Roasted Chicken & Avocado",
+                price = "380",
+                restaurantName = "Healthy Subs",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.6 km",
+                discount = "AVOCADO OFF",
+                discountAmount = "Fresh Hass Avocado Slices",
+                address = "Ghatkopar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.sub_sandwich_items_6,
+                title = "Ultimate Triple Cheese Sub",
+                price = "300",
+                restaurantName = "Cheese Factory",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "CHEESE OFF",
+                discountAmount = "Mozzarella, Cheddar & Parmesan",
+                address = "Sion, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.sub_sandwich_items_7,
+                title = "Turkey & Cranberry Sub",
+                price = "330",
+                restaurantName = "Thanksgiving Kitchen",
+                rating = "4.7",
+                deliveryTime = "28-33 mins",
+                distance = "1.3 km",
+                discount = "TURKEY OFF",
+                discountAmount = "Smoked Turkey Breast",
+                address = "Santacruz, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.sub_sandwich_items_8,
+                title = "BBQ Pulled Chicken Sub",
+                price = "340",
+                restaurantName = "BBQ Masters",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.4 km",
+                discount = "BBQ OFF",
+                discountAmount = "House-made BBQ Sauce",
+                address = "Malad, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.sub_sandwich_items_9,
+                title = "Family Combo Pack (3 Subs)",
+                price = "850",
+                restaurantName = "Family Kitchen",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Perfect for Family of 3-4",
+                address = "Borivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.sub_sandwich_items_10,
+                title = "Premium Steak Sandwich",
+                price = "420",
+                restaurantName = "Steak House",
+                rating = "4.9",
+                deliveryTime = "32-37 mins",
+                distance = "1.7 km",
+                discount = "STEAK OFF",
+                discountAmount = "Grilled Angus Beef Steak",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.sub_sandwich_items_11,
+                title = "Spicy Mexican Sub",
+                price = "290",
+                restaurantName = "Mexican Fiesta",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.1 km",
+                discount = "MEXICAN OFF",
+                discountAmount = "Jalapeños & Chipotle Sauce",
+                address = "Dadar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.sub_sandwich_items_12,
+                title = "Creamy Mushroom & Swiss Sub",
+                price = "310",
+                restaurantName = "Mushroom Magic",
+                rating = "4.6",
+                deliveryTime = "22-27 mins",
+                distance = "0.9 km",
+                discount = "MUSHROOM OFF",
+                discountAmount = "Sautéed Button Mushrooms",
+                address = "Kandivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.sub_sandwich_items_13,
+                title = "Tuna Mayo Sub",
+                price = "270",
+                restaurantName = "Seafood Specials",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.4 km",
+                discount = "TUNA OFF",
+                discountAmount = "Fresh Tuna with Mayonnaise",
+                address = "Vile Parle, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.sub_sandwich_items_14,
+                title = "Vegan Falafel Sub",
+                price = "240",
+                restaurantName = "Vegan Delights",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "0.7 km",
+                discount = "VEGAN OFF",
+                discountAmount = "100% Plant-based Ingredients",
+                address = "Worli, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.sub_sandwich_items_sub_15,
+                title = "Italian Club Sandwich",
+                price = "360",
+                restaurantName = "Italian Kitchen",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "1.2 km",
+                discount = "CLUB OFF",
+                discountAmount = "Triple Layer Premium Sub",
+                address = "Chembur, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.sub_sandwich_items_16,
+                title = "Kids Mini Sub Pack",
+                price = "280",
+                restaurantName = "Kids Kitchen",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "0.8 km",
+                discount = "KIDS OFF",
+                discountAmount = "3 Mini Subs for Kids",
+                address = "Thane, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.sub_sandwich_items_17,
+                title = "Office Party Platter (10 Subs)",
+                price = "2,200",
+                restaurantName = "Corporate Catering",
+                rating = "4.8",
+                deliveryTime = "45-50 mins",
+                distance = "2.0 km",
+                discount = "OFFICE OFF",
+                discountAmount = "Perfect for Office Meetings",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.sub_sandwich_items_18,
+                title = "Gluten-Free Veg Sub",
+                price = "300",
+                restaurantName = "Gluten-Free Kitchen",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "GLUTEN OFF",
+                discountAmount = "Certified Gluten-Free Bread",
+                address = "Panvel, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.sub_sandwich_items_19,
+                title = "Wedding Catering Sub Platter",
+                price = "3,500",
+                restaurantName = "Wedding Caterers",
+                rating = "4.9",
+                deliveryTime = "55-60 mins",
+                distance = "2.8 km",
+                discount = "WEDDING OFF",
+                discountAmount = "Bulk Order for 50+ Guests",
+                address = "Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.sub_sandwich_items_20,
+                title = "Gourmet Truffle Chicken Sub",
+                price = "450",
+                restaurantName = "Luxury Kitchen",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "TRUFFLE OFF",
+                discountAmount = "Premium Black Truffle Oil",
+                address = "Alibaug, Maharashtra"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun PancakeCategoryPage() {
     CategoryContentPage("Pancake")
 }
+//{
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//    ) {
+//        Spacer(modifier = Modifier.height(15.dp))
+//
+//        // Filter Button
+//        val pancakeFilters = FilterConfig(
+//            filters = listOf(
+//                // Main filter dropdown
+//                FilterChip(
+//                    id = "filters",
+//                    text = "Filters",
+//                    type = FilterType.FILTER_DROPDOWN,
+//                    icon = R.drawable.ic_filter,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//
+//                // PANCAKE TYPES (with icons for popular types)
+//                FilterChip(
+//                    id = "classic_buttermilk",
+//                    text = "Classic Buttermilk",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_classic_pancake
+//                ),
+//                FilterChip(
+//                    id = "chocolate_chip",
+//                    text = "Chocolate Chip",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_chocolate_pancake
+//                ),
+//                FilterChip(
+//                    id = "blueberry",
+//                    text = "Blueberry",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_blueberry_pancake
+//                ),
+//                FilterChip(
+//                    id = "banana_nut",
+//                    text = "Banana Nut",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "red_velvet",
+//                    text = "Red Velvet",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "protein_pancake",
+//                    text = "Protein Pancake",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "vegan",
+//                    text = "Vegan",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "gluten_free",
+//                    text = "Gluten Free",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // TOPPINGS (with icons for popular toppings)
+//                FilterChip(
+//                    id = "maple_syrup",
+//                    text = "Maple Syrup",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_syrup
+//                ),
+//                FilterChip(
+//                    id = "whipped_cream",
+//                    text = "Whipped Cream",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_whipped_cream
+//                ),
+//                FilterChip(
+//                    id = "nutella",
+//                    text = "Nutella",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "ice_cream",
+//                    text = "Ice Cream",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "bacon",
+//                    text = "Bacon",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "caramel",
+//                    text = "Caramel",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SERVING STYLE (with icon for popular style)
+//                FilterChip(
+//                    id = "single_large",
+//                    text = "Single Large",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "mini_pancakes",
+//                    text = "Mini Pancakes",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // MEAL TYPE (with icon for breakfast)
+//                FilterChip(
+//                    id = "brunch",
+//                    text = "Brunch",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "dessert",
+//                    text = "Dessert",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SIDES (with icon for popular side)
+//                FilterChip(
+//                    id = "with_sausage",
+//                    text = "With Sausage",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_coffee",
+//                    text = "With Coffee",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_juice",
+//                    text = "With Juice",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // HEALTH OPTIONS (with icon for healthy)
+//                FilterChip(
+//                    id = "low_calorie",
+//                    text = "Low Calorie",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "whole_grain",
+//                    text = "Whole Grain",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // PRICE RANGE
+//                FilterChip(
+//                    id = "budget",
+//                    text = "Budget (₹100-200)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "standard",
+//                    text = "Standard (₹200-350)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "premium",
+//                    text = "Premium (₹350-500)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // PORTION SIZE
+//                FilterChip(
+//                    id = "single_serve",
+//                    text = "Single Serve",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "sharing_portion",
+//                    text = "Sharing Portion",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "family_pack",
+//                    text = "Family Pack",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // Sort dropdown
+//                FilterChip(
+//                    id = "sort",
+//                    text = "Sort",
+//                    type = FilterType.SORT_DROPDOWN,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//            ),
+//            rows = 2
+//        )
+//         FilterButtonFood(
+//            filterConfig = pancakeFilters,
+//            onFilterClick = { filter ->
+//                println("Filter clicked: ${filter.text}")
+//                // Handle filter logic
+//            },
+//            onSortClick = {
+//                println("Sort clicked")
+//                // Handle sort logic
+//            }
+//        )
+//
+//        val pancakeItems = listOf(
+//            FoodItemDoubleF(
+//                id = 1,
+//                imageRes = R.drawable.pancake_1,
+//                title = "Classic Buttermilk Pancake Stack",
+//                price = "220",
+//                restaurantName = "Pancake House",
+//                rating = "4.8",
+//                deliveryTime = "15-20 mins",
+//                distance = "0.8 km",
+//                discount = "20%",
+//                discountAmount = "breakfast special",
+//                address = "Bandra, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 2,
+//                imageRes = R.drawable.pancake_2,
+//                title = "Chocolate Chip Pancakes",
+//                price = "250",
+//                restaurantName = "Sweet Tooth Cafe",
+//                rating = "4.7",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.0 km",
+//                discount = "Buy 1 Get 1",
+//                discountAmount = "chocolate lovers deal",
+//                address = "Andheri West, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 3,
+//                imageRes = R.drawable.pancake_3,
+//                title = "Blueberry Pancake with Maple Syrup",
+//                price = "280",
+//                restaurantName = "Berry Delight",
+//                rating = "4.9",
+//                deliveryTime = "18-23 mins",
+//                distance = "0.7 km",
+//                discount = "Free Berries",
+//                discountAmount = "extra blueberry topping",
+//                address = "Juhu, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 4,
+//                imageRes = R.drawable.pancake_4,
+//                title = "Protein Pancake with Fruits",
+//                price = "300",
+//                restaurantName = "Fit Kitchen",
+//                rating = "4.6",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.2 km",
+//                discount = "30%",
+//                discountAmount = "healthy breakfast offer",
+//                address = "Powai, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 5,
+//                imageRes = R.drawable.pancake_5,
+//                title = "Red Velvet Pancake Stack",
+//                price = "320",
+//                restaurantName = "Dessert Paradise",
+//                rating = "4.8",
+//                deliveryTime = "22-27 mins",
+//                distance = "0.9 km",
+//                discount = "25%",
+//                discountAmount = "dessert pancake combo",
+//                address = "Sion, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 6,
+//                imageRes = R.drawable.pancake_6,
+//                title = "Banana Nut Pancakes with Honey",
+//                price = "270",
+//                restaurantName = "Nature's Kitchen",
+//                rating = "4.7",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.1 km",
+//                discount = "Free Walnuts",
+//                discountAmount = "extra crunchy nuts",
+//                address = "Ghatkopar, Mumbai"
+//            )
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//        Text(
+//            text = "Recommended for you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//        FoodItemsListWithHeading(
+//            heading = null,
+//            subtitle = null,
+//            foodItems = pancakeItems,
+//            onItemClick = { foodItem ->
+//                println("Food item clicked: ${foodItem.title}")
+//            },
+//            modifier = Modifier.fillMaxWidth(),
+//            backgroundColor = Color.White,
+//            cardWidth = 150.dp,
+//            cardHeight = 170.dp,
+//            horizontalSpacing = 8.dp,
+//            horizontalPadding = 12.dp,
+//            verticalPadding = 0.dp,
+//            headingBottomPadding = 0.dp
+//        )
+//
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val pancakeItemsList = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.pancake_items_1,
+//                title = "Classic Buttermilk Pancake Stack",
+//                price = "220",
+//                restaurantName = "Pancake House",
+//                rating = "4.8",
+//                deliveryTime = "15-20 mins",
+//                distance = "0.8 km",
+//                discount = "CLASSIC OFF",
+//                discountAmount = "Traditional Fluffy Buttermilk Pancakes",
+//                address = "Bandra, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.pancake_items_2,
+//                title = "Chocolate Chip Pancakes",
+//                price = "250",
+//                restaurantName = "Sweet Tooth Cafe",
+//                rating = "4.7",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.0 km",
+//                discount = "CHOCOLATE OFF",
+//                discountAmount = "Rich Dark Chocolate Chips",
+//                address = "Andheri West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.pancake_items_3,
+//                title = "Blueberry Pancake with Maple Syrup",
+//                price = "280",
+//                restaurantName = "Berry Delight",
+//                rating = "4.9",
+//                deliveryTime = "18-23 mins",
+//                distance = "0.7 km",
+//                discount = "BLUEBERRY OFF",
+//                discountAmount = "Fresh Canadian Blueberries",
+//                address = "Juhu, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.pancake_items_4,
+//                title = "Protein Pancake with Fruits",
+//                price = "300",
+//                restaurantName = "Fit Kitchen",
+//                rating = "4.6",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.2 km",
+//                discount = "PROTEIN OFF",
+//                discountAmount = "25g Protein per Serving",
+//                address = "Powai, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.pancake_items_5,
+//                title = "Red Velvet Pancake Stack",
+//                price = "320",
+//                restaurantName = "Dessert Paradise",
+//                rating = "4.8",
+//                deliveryTime = "22-27 mins",
+//                distance = "0.9 km",
+//                discount = "RED VELVET OFF",
+//                discountAmount = "Cream Cheese Frosting Drizzle",
+//                address = "Sion, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.pancake_items_6,
+//                title = "Banana Nut Pancakes with Honey",
+//                price = "270",
+//                restaurantName = "Nature's Kitchen",
+//                rating = "4.7",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.1 km",
+//                discount = "BANANA OFF",
+//                discountAmount = "Ripe Bananas & Crushed Walnuts",
+//                address = "Ghatkopar, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.pancake_items_7,
+//                title = "Apple Cinnamon Pancakes",
+//                price = "260",
+//                restaurantName = "Autumn Kitchen",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.3 km",
+//                discount = "APPLE OFF",
+//                discountAmount = "Caramelized Apple Slices",
+//                address = "Santacruz, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.pancake_items_8,
+//                title = "Nutella Stuffed Pancakes",
+//                price = "340",
+//                restaurantName = "Chocolate Heaven",
+//                rating = "4.9",
+//                deliveryTime = "20-25 mins",
+//                distance = "0.9 km",
+//                discount = "NUTELLA OFF",
+//                discountAmount = "Premium Nutella Filling",
+//                address = "Malad, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.pancake_items_9,
+//                title = "Family Pancake Breakfast",
+//                price = "650",
+//                restaurantName = "Family Kitchen",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.5 km",
+//                discount = "FAMILY OFF",
+//                discountAmount = "4 Varieties for Family of 4",
+//                address = "Borivali, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.pancake_items_10,
+//                title = "Lemon Ricotta Pancakes",
+//                price = "310",
+//                restaurantName = "Italian Cafe",
+//                rating = "4.8",
+//                deliveryTime = "28-33 mins",
+//                distance = "1.4 km",
+//                discount = "LEMON OFF",
+//                discountAmount = "Fresh Lemon Zest & Ricotta",
+//                address = "Colaba, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.pancake_items_11,
+//                title = "Vegan Pancakes with Berries",
+//                price = "230",
+//                restaurantName = "Vegan Delights",
+//                rating = "4.7",
+//                deliveryTime = "22-27 mins",
+//                distance = "1.0 km",
+//                discount = "VEGAN OFF",
+//                discountAmount = "100% Plant-based Ingredients",
+//                address = "Dadar, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.pancake_items_12,
+//                title = "Gluten-Free Pancake Stack",
+//                price = "290",
+//                restaurantName = "Healthy Bites",
+//                rating = "4.6",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.2 km",
+//                discount = "GLUTEN OFF",
+//                discountAmount = "Certified Gluten-Free Flour",
+//                address = "Kandivali, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.pancake_items_13,
+//                title = "Coconut & Pineapple Pancakes",
+//                price = "280",
+//                restaurantName = "Tropical Treats",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.6 km",
+//                discount = "TROPICAL OFF",
+//                discountAmount = "Fresh Pineapple & Coconut Shavings",
+//                address = "Vile Parle, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.pancake_items_14,
+//                title = "Biscoff Pancakes with Cream",
+//                price = "350",
+//                restaurantName = "Dessert Cafe",
+//                rating = "4.9",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.1 km",
+//                discount = "BISCOFF OFF",
+//                discountAmount = "Lotus Biscoff Spread & Crumbs",
+//                address = "Worli, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.pancake_items_15,
+//                title = "Strawberry Cheesecake Pancakes",
+//                price = "330",
+//                restaurantName = "Cheesecake Factory",
+//                rating = "4.8",
+//                deliveryTime = "28-33 mins",
+//                distance = "1.3 km",
+//                discount = "CHEESECAKE OFF",
+//                discountAmount = "Strawberry Compote & Cream Cheese",
+//                address = "Chembur, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.pancake_items_16,
+//                title = "Kids Animal Shape Pancakes",
+//                price = "210",
+//                restaurantName = "Kids Cafe",
+//                rating = "4.7",
+//                deliveryTime = "18-23 mins",
+//                distance = "0.8 km",
+//                discount = "KIDS OFF",
+//                discountAmount = "Fun Animal Shapes & Colors",
+//                address = "Thane, Maharashtra"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.pancake_items_17,
+//                title = "Brunch Pancake Platter",
+//                price = "780",
+//                restaurantName = "Brunch Specials",
+//                rating = "4.8",
+//                deliveryTime = "35-40 mins",
+//                distance = "1.8 km",
+//                discount = "BRUNCH OFF",
+//                discountAmount = "Complete Brunch for 3-4 People",
+//                address = "Panvel, Maharashtra"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.pancake_items_18,
+//                title = "Matcha Green Tea Pancakes",
+//                price = "310",
+//                restaurantName = "Asian Fusion",
+//                rating = "4.7",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.5 km",
+//                discount = "MATCHA OFF",
+//                discountAmount = "Premium Japanese Matcha Powder",
+//                address = "BKC, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.pancake_items_19,
+//                title = "Birthday Party Pancake Pack",
+//                price = "1,200",
+//                restaurantName = "Party Specials",
+//                rating = "4.8",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.0 km",
+//                discount = "BIRTHDAY OFF",
+//                discountAmount = "Special Decoration for Birthdays",
+//                address = "Navi Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.pancake_items_20,
+//                title = "Gold Leaf Pancakes with Caviar",
+//                price = "1,500",
+//                restaurantName = "Luxury Brunch",
+//                rating = "4.9",
+//                deliveryTime = "35-40 mins",
+//                distance = "2.5 km",
+//                discount = "GOLD OFF",
+//                discountAmount = "Edible Gold Leaf & Premium Toppings",
+//                address = "Alibaug, Maharashtra"
+//            )
+//        ).forEach { restaurantItem ->
+//            Column {
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
+//    }
+//}
 
 @Composable
 fun NihariCategoryPage() {

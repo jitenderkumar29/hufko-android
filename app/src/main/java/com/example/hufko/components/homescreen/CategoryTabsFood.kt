@@ -58287,13 +58287,1273 @@ fun NihariCategoryPage() {
 
 @Composable
 fun TacosCategoryPage() {
-    CategoryContentPage("Tacos")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val tacosFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // TACO TYPES (with icons for popular types)
+                FilterChip(
+                    id = "veg_tacos",
+                    text = "Veg Tacos",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_taco
+                ),
+                FilterChip(
+                    id = "chicken_tacos",
+                    text = "Chicken Tacos",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_taco
+                ),
+                FilterChip(
+                    id = "fish_tacos",
+                    text = "Fish Tacos",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fish_taco
+                ),
+                FilterChip(
+                    id = "vegetarian_tacos",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_tacos",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pork_tacos",
+                    text = "Al Pastor",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "shrimp_tacos",
+                    text = "Shrimp",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TACO STYLE (with icons for key styles)
+                FilterChip(
+                    id = "soft_tacos",
+                    text = "Soft Shell",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_soft_taco
+                ),
+                FilterChip(
+                    id = "crispy_tacos",
+                    text = "Crispy Shell",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_crispy_taco
+                ),
+                FilterChip(
+                    id = "breakfast_tacos",
+                    text = "Breakfast Tacos",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for common levels)
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (with icons for popular toppings)
+                FilterChip(
+                    id = "pico_de_gallo",
+                    text = "Pico de Gallo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese",
+                    text = "Extra Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalapenos",
+                    text = "Jalapeños",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cilantro_onions",
+                    text = "Cilantro & Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SAUCES
+                FilterChip(
+                    id = "salsa_verde",
+                    text = "Salsa Verde",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "salsa_roja",
+                    text = "Salsa Roja",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chipotle_sauce",
+                    text = "Chipotle Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING SIZE
+                FilterChip(
+                    id = "single_taco",
+                    text = "Single Taco",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "two_tacos",
+                    text = "2 Tacos",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "three_tacos",
+                    text = "3 Tacos",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "taco_platter",
+                    text = "Taco Platter (4+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget",
+                    text = "Budget (₹100-200)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "standard",
+                    text = "Standard (₹200-350)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium (₹350+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TIME
+                FilterChip(
+                    id = "lunch",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner",
+                    text = "Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "late_night",
+                    text = "Late Night",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = tacosFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val tacoItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.taco_1,
+                title = "Carne Asada Street Tacos",
+                price = "280",
+                restaurantName = "Taco Maria",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "weekend fiesta",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.taco_2,
+                title = "Al Pastor with Pineapple",
+                price = "260",
+                restaurantName = "El Taco Loco",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "Free Guacamole",
+                discountAmount = "with 3 tacos",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.taco_3,
+                title = "Baja Fish Tacos",
+                price = "320",
+                restaurantName = "Taco del Mar",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "combo deal",
+                address = "Powai, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.taco_4,
+                title = "Spicy Chicken Tinga Tacos",
+                price = "240",
+                restaurantName = "Los Tacos Hermanos",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "Buy 2 Get 1",
+                discountAmount = "spicy lovers offer",
+                address = "Khar, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.taco_5,
+                title = "Vegetarian Alambre Tacos",
+                price = "220",
+                restaurantName = "Green Tacos",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.0 km",
+                discount = "30%",
+                discountAmount = "healthy eating",
+                address = "Santacruz West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.taco_6,
+                title = "Breakfast Tacos with Chorizo",
+                price = "200",
+                restaurantName = "Desayuno Tacos",
+                rating = "4.4",
+                deliveryTime = "12-15 mins",
+                distance = "0.4 km",
+                discount = "Free Coffee",
+                discountAmount = "breakfast combo",
+                address = "Lower Parel, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = tacoItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val tacoItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.taco_items_1,
+                title = "Carne Asada Street Tacos",
+                price = "280",
+                restaurantName = "Taco Maria",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "CARNE OFF",
+                discountAmount = "Grilled Skirt Steak with Fresh Lime",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.taco_items_2,
+                title = "Al Pastor with Pineapple",
+                price = "260",
+                restaurantName = "El Taco Loco",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "AL PASTOR OFF",
+                discountAmount = "Spit-Grilled Pork with Pineapple",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.taco_items_3,
+                title = "Baja Fish Tacos",
+                price = "320",
+                restaurantName = "Taco del Mar",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "BAJA OFF",
+                discountAmount = "Beer-Battered Fish with Cabbage Slaw",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.taco_items_4,
+                title = "Spicy Chicken Tinga Tacos",
+                price = "240",
+                restaurantName = "Los Tacos Hermanos",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "TINGA OFF",
+                discountAmount = "Shredded Chicken in Chipotle Sauce",
+                address = "Khar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.taco_items_5,
+                title = "Vegetarian Alambre Tacos",
+                price = "220",
+                restaurantName = "Green Tacos",
+                rating = "4.5",
+                deliveryTime = "18-22 mins",
+                distance = "1.0 km",
+                discount = "VEGETARIAN OFF",
+                discountAmount = "Grilled Veggies with Melted Cheese",
+                address = "Santacruz West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.taco_items_6,
+                title = "Breakfast Tacos with Chorizo",
+                price = "200",
+                restaurantName = "Desayuno Tacos",
+                rating = "4.4",
+                deliveryTime = "12-15 mins",
+                distance = "0.4 km",
+                discount = "BREAKFAST OFF",
+                discountAmount = "Scrambled Eggs with Spicy Chorizo",
+                address = "Lower Parel, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.taco_items_7,
+                title = "Carnitas Street Tacos",
+                price = "270",
+                restaurantName = "Taco Truck",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.3 km",
+                discount = "CARNITAS OFF",
+                discountAmount = "Slow-Cooked Pulled Pork",
+                address = "Worli, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.taco_items_8,
+                title = "Shrimp Diablo Tacos",
+                price = "350",
+                restaurantName = "Mariscos El Rey",
+                rating = "4.8",
+                deliveryTime = "28-33 mins",
+                distance = "1.7 km",
+                discount = "SHRIMP OFF",
+                discountAmount = "Spicy Garlic Shrimp with Avocado",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.taco_items_9,
+                title = "Barbacoa Beef Tacos",
+                price = "310",
+                restaurantName = "Barbacoa Kings",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "2.1 km",
+                discount = "BARBACOA OFF",
+                discountAmount = "Slow-Cooked Beef Cheek",
+                address = "Byculla, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.taco_items_10,
+                title = "Lengua (Beef Tongue) Tacos",
+                price = "330",
+                restaurantName = "Authentic Mexican",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.8 km",
+                discount = "LENGUA OFF",
+                discountAmount = "Tender Braised Beef Tongue",
+                address = "Kemps Corner, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.taco_items_11,
+                title = "Vegan Jackfruit Tacos",
+                price = "230",
+                restaurantName = "Vegan Taco Bar",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "0.9 km",
+                discount = "VEGAN OFF",
+                discountAmount = "Pulled Jackfruit with Mango Salsa",
+                address = "Mahim, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.taco_items_12,
+                title = "Taco Sampler Platter",
+                price = "650",
+                restaurantName = "Taco Fiesta",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "SAMPLER OFF",
+                discountAmount = "6 Different Tacos with 3 Sauces",
+                address = "Ghatkopar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.taco_items_13,
+                title = "Birria Tacos with Consomme",
+                price = "380",
+                restaurantName = "Birria Queen",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.4 km",
+                discount = "BIRRIA OFF",
+                discountAmount = "Dipped Tacos with Beef Broth",
+                address = "Andheri East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.taco_items_14,
+                title = "Fish Taco Tuesday Special",
+                price = "290",
+                restaurantName = "Tuesday Tacos",
+                rating = "4.7",
+                deliveryTime = "22-27 mins",
+                distance = "1.1 km",
+                discount = "TUESDAY OFF",
+                discountAmount = "3 Fish Tacos for Price of 2",
+                address = "Santacruz, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.taco_items_15,
+                title = "Lamb Barbacoa Tacos",
+                price = "410",
+                restaurantName = "Lamb Lovers",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "2.3 km",
+                discount = "LAMB OFF",
+                discountAmount = "Slow-Cooked Lamb Shoulder",
+                address = "Borivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.taco_items_16,
+                title = "Loaded Nacho Tacos",
+                price = "340",
+                restaurantName = "Nacho Taco",
+                rating = "4.6",
+                deliveryTime = "18-23 mins",
+                distance = "0.7 km",
+                discount = "NACHO OFF",
+                discountAmount = "Tacos with Nacho Cheese & Jalapeños",
+                address = "Malad, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.taco_items_17,
+                title = "Korean BBQ Fusion Tacos",
+                price = "370",
+                restaurantName = "Fusion Street",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "KOREAN OFF",
+                discountAmount = "Bulgogi Beef with Kimchi",
+                address = "Dadar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.taco_items_18,
+                title = "Breakfast Burrito Taco Hybrid",
+                price = "250",
+                restaurantName = "Breakfast Club",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "HYBRID OFF",
+                discountAmount = "Burrito Fillings in Taco Shell",
+                address = "Vile Parle, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.taco_items_19,
+                title = "Party Taco Bar Package",
+                price = "1,200",
+                restaurantName = "Party Tacos",
+                rating = "4.8",
+                deliveryTime = "45-50 mins",
+                distance = "2.8 km",
+                discount = "PARTY OFF",
+                discountAmount = "20 Tacos with All Toppings",
+                address = "Thane, Maharashtra"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.taco_items_20,
+                title = "Gold Leaf Wagyu Tacos",
+                price = "1,800",
+                restaurantName = "Luxury Tacos",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "3.2 km",
+                discount = "GOLD OFF",
+                discountAmount = "Wagyu Beef with Edible Gold Leaf",
+                address = "Juhu, Mumbai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
-fun TheplaCategoryPage() {
+fun TheplaCategoryPage(){
     CategoryContentPage("Thepla")
 }
+//{
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//    ) {
+//        Spacer(modifier = Modifier.height(15.dp))
+//
+//        // Filter Button
+//        val nihariFilters = FilterConfig(
+//            filters = listOf(
+//                // Main filter dropdown
+//                FilterChip(
+//                    id = "filters",
+//                    text = "Filters",
+//                    type = FilterType.FILTER_DROPDOWN,
+//                    icon = R.drawable.ic_filter,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//
+//                // NIHARI TYPES (with icons for popular types)
+//                FilterChip(
+//                    id = "veg_nihari",
+//                    text = "Veg Nihari",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_veg_nihari
+//                ),
+//                FilterChip(
+//                    id = "mutton_nihari",
+//                    text = "Mutton Nihari",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_mutton_nihari
+//                ),
+//                FilterChip(
+//                    id = "chicken_nihari",
+//                    text = "Chicken Nihari",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_chicken_nihari
+//                ),
+//                FilterChip(
+//                    id = "bone_marrow_nihari",
+//                    text = "Bone Marrow Nihari",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "vegetable_nihari",
+//                    text = "Vegetable Nihari",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "goat_nihari",
+//                    text = "Goat Nihari",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SPICE LEVEL (with icons for common levels)
+//                FilterChip(
+//                    id = "mild",
+//                    text = "Mild",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_mild_spice_nihari
+//                ),
+//                FilterChip(
+//                    id = "medium_spicy",
+//                    text = "Medium Spicy",
+//                    type = FilterType.WITH_LEFT_ICON,
+//                    icon = R.drawable.ic_medium_spice_nihari
+//                ),
+//                FilterChip(
+//                    id = "extra_spicy",
+//                    text = "Extra Spicy",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "custom_spice",
+//                    text = "Custom Spice Level",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // COOKING STYLE (with icons for traditional styles)
+//                FilterChip(
+//                    id = "handi_nihari",
+//                    text = "Handi Style",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "dum_cooked",
+//                    text = "Dum Cooked",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // GRAVY CONSISTENCY
+//                FilterChip(
+//                    id = "thick_gravy",
+//                    text = "Thick Gravy",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "medium_gravy",
+//                    text = "Medium Gravy",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "extra_gravy",
+//                    text = "Extra Gravy",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                FilterChip(
+//                    id = "with_khamiri_roti",
+//                    text = "With Khamiri Roti",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_tandoori_roti",
+//                    text = "With Tandoori Roti",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "with_rice",
+//                    text = "With Rice",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // GARNISHES (with icons for key garnishes)
+//                FilterChip(
+//                    id = "lemon_wedges",
+//                    text = "Lemon Wedges",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "fried_onions",
+//                    text = "Fried Onions",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "fresh_coriander",
+//                    text = "Fresh Coriander",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SERVING SIZE
+//                FilterChip(
+//                    id = "single_serving",
+//                    text = "Single Serving",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "family_pack",
+//                    text = "Family Pack (4-6)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "party_pack",
+//                    text = "Party Pack (8-10)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // COOKING TIME
+//                FilterChip(
+//                    id = "traditional_8hr",
+//                    text = "Traditional (8+ hours)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "express_4hr",
+//                    text = "Express (4 hours)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // PRICE RANGE
+//                FilterChip(
+//                    id = "budget_nihari",
+//                    text = "Budget (₹200-350)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "premium_nihari",
+//                    text = "Premium (₹350-500)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "luxury_nihari",
+//                    text = "Luxury (₹500+)",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // MEAL TIME
+//                FilterChip(
+//                    id = "lunch",
+//                    text = "Lunch",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//                FilterChip(
+//                    id = "dinner",
+//                    text = "Dinner",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // SPECIAL DIETARY
+//                FilterChip(
+//                    id = "no_preservatives",
+//                    text = "No Preservatives",
+//                    type = FilterType.TEXT_ONLY
+//                ),
+//
+//                // Sort dropdown
+//                FilterChip(
+//                    id = "sort",
+//                    text = "Sort",
+//                    type = FilterType.SORT_DROPDOWN,
+//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+//                ),
+//            ),
+//            rows = 2
+//        )
+//        FilterButtonFood(
+//            filterConfig = nihariFilters,
+//            onFilterClick = { filter ->
+//                println("Filter clicked: ${filter.text}")
+//                // Handle filter logic
+//            },
+//            onSortClick = {
+//                println("Sort clicked")
+//                // Handle sort logic
+//            }
+//        )
+//
+//        val nihariItems = listOf(
+//            FoodItemDoubleF(
+//                id = 1,
+//                imageRes = R.drawable.nihari_1,
+//                title = "Royal Beef Nihari",
+//                price = "350",
+//                restaurantName = "Karachi Nihari House",
+//                rating = "4.9",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.5 km",
+//                discount = "20%",
+//                discountAmount = "weekend special",
+//                address = "Mohammed Ali Road, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 2,
+//                imageRes = R.drawable.nihari_2,
+//                title = "Mughlai Mutton Nihari",
+//                price = "420",
+//                restaurantName = "Al-Noor Restaurant",
+//                rating = "4.8",
+//                deliveryTime = "35-40 mins",
+//                distance = "2.0 km",
+//                discount = "Free Naan",
+//                discountAmount = "with 2 naan",
+//                address = "Bhendi Bazaar, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 3,
+//                imageRes = R.drawable.nihari_3,
+//                title = "Chicken Nihari with Bone Marrow",
+//                price = "380",
+//                restaurantName = "Delhi Darbar",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.2 km",
+//                discount = "15%",
+//                discountAmount = "family pack deal",
+//                address = "Kurla, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 4,
+//                imageRes = R.drawable.nihari_4,
+//                title = "Extra Spicy Goat Nihari",
+//                price = "450",
+//                restaurantName = "Bohri Kitchen",
+//                rating = "4.9",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.5 km",
+//                discount = "Buy 1 Get 1",
+//                discountAmount = "spicy lovers offer",
+//                address = "Byculla, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 5,
+//                imageRes = R.drawable.nihari_5,
+//                title = "Traditional Beef Nihari with Khamiri Roti",
+//                price = "320",
+//                restaurantName = "Bade Miyan",
+//                rating = "4.6",
+//                deliveryTime = "20-25 mins",
+//                distance = "0.8 km",
+//                discount = "30%",
+//                discountAmount = "breakfast combo",
+//                address = "Colaba, Mumbai"
+//            ),
+//            FoodItemDoubleF(
+//                id = 6,
+//                imageRes = R.drawable.nihari_6,
+//                title = "Vegetable Nihari Special",
+//                price = "280",
+//                restaurantName = "Pure Veg Nihari Corner",
+//                rating = "4.5",
+//                deliveryTime = "15-20 mins",
+//                distance = "0.5 km",
+//                discount = "Free Ginger",
+//                discountAmount = "extra garnish",
+//                address = "Sion, Mumbai"
+//            )
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//        Text(
+//            text = "Recommended for you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//        FoodItemsListWithHeading(
+//            heading = null,
+//            subtitle = null,
+//            foodItems = nihariItems,
+//            onItemClick = { foodItem ->
+//                println("Food item clicked: ${foodItem.title}")
+//            },
+//            modifier = Modifier.fillMaxWidth(),
+//            backgroundColor = Color.White,
+//            cardWidth = 150.dp,
+//            cardHeight = 170.dp,
+//            horizontalSpacing = 8.dp,
+//            horizontalPadding = 12.dp,
+//            verticalPadding = 0.dp,
+//            headingBottomPadding = 0.dp
+//        )
+//
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val nihariItemsList = listOf(
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.nihari_items_1,
+//                title = "Royal Beef Nihari",
+//                price = "350",
+//                restaurantName = "Karachi Nihari House",
+//                rating = "4.9",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.5 km",
+//                discount = "ROYAL OFF",
+//                discountAmount = "Slow Cooked for 8 Hours",
+//                address = "Mohammed Ali Road, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.nihari_items_2,
+//                title = "Mughlai Mutton Nihari",
+//                price = "420",
+//                restaurantName = "Al-Noor Restaurant",
+//                rating = "4.8",
+//                deliveryTime = "35-40 mins",
+//                distance = "2.0 km",
+//                discount = "MUGHLAI OFF",
+//                discountAmount = "Secret Mughlai Spices Blend",
+//                address = "Bhendi Bazaar, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.nihari_items_3,
+//                title = "Chicken Nihari with Bone Marrow",
+//                price = "380",
+//                restaurantName = "Delhi Darbar",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.2 km",
+//                discount = "BONE MARROW OFF",
+//                discountAmount = "Rich Bone Marrow Gravy",
+//                address = "Kurla, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.nihari_items_4,
+//                title = "Extra Spicy Goat Nihari",
+//                price = "450",
+//                restaurantName = "Bohri Kitchen",
+//                rating = "4.9",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.5 km",
+//                discount = "SPICY OFF",
+//                discountAmount = "Special 10 Spice Blend",
+//                address = "Byculla, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.nihari_items_5,
+//                title = "Traditional Beef Nihari",
+//                price = "320",
+//                restaurantName = "Bade Miyan",
+//                rating = "4.6",
+//                deliveryTime = "20-25 mins",
+//                distance = "0.8 km",
+//                discount = "TRADITIONAL OFF",
+//                discountAmount = "Original Delhi Style Recipe",
+//                address = "Colaba, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.nihari_items_6,
+//                title = "Vegetable Nihari Special",
+//                price = "280",
+//                restaurantName = "Pure Veg Nihari Corner",
+//                rating = "4.5",
+//                deliveryTime = "15-20 mins",
+//                distance = "0.5 km",
+//                discount = "VEG OFF",
+//                discountAmount = "7 Winter Vegetables Cooked Slow",
+//                address = "Sion, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.nihari_items_7,
+//                title = "Family Nihari Combo",
+//                price = "850",
+//                restaurantName = "Nihari Family Restaurant",
+//                rating = "4.8",
+//                deliveryTime = "35-40 mins",
+//                distance = "1.8 km",
+//                discount = "FAMILY OFF",
+//                discountAmount = "Feeds 4-5 People with Naan",
+//                address = "Andheri East, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.nihari_items_8,
+//                title = "Lamb Shank Nihari",
+//                price = "520",
+//                restaurantName = "Royal Mughal",
+//                rating = "4.9",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.2 km",
+//                discount = "LAMB OFF",
+//                discountAmount = "Whole Lamb Shank Slow Cooked",
+//                address = "Kemps Corner, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.nihari_items_9,
+//                title = "Awadhi Nihari Handi",
+//                price = "480",
+//                restaurantName = "Lucknowi Kitchen",
+//                rating = "4.7",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.6 km",
+//                discount = "AWADHI OFF",
+//                discountAmount = "Original Handi Cooking Style",
+//                address = "Marine Lines, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.nihari_items_10,
+//                title = "Nalli Nihari Special",
+//                price = "550",
+//                restaurantName = "Nalli House",
+//                rating = "4.9",
+//                deliveryTime = "45-50 mins",
+//                distance = "3.0 km",
+//                discount = "NALLI OFF",
+//                discountAmount = "Bone-in Meat with Rich Marrow",
+//                address = "Nagpada, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.nihari_items_11,
+//                title = "Dum Nihari with Sheermal",
+//                price = "380",
+//                restaurantName = "Hyderabadi Kitchen",
+//                rating = "4.7",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.1 km",
+//                discount = "DUM OFF",
+//                discountAmount = "Sealed Dum Cooking Technique",
+//                address = "Santacruz, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.nihari_items_12,
+//                title = "Egg Nihari Breakfast Special",
+//                price = "240",
+//                restaurantName = "Morning Delights",
+//                rating = "4.6",
+//                deliveryTime = "15-20 mins",
+//                distance = "0.7 km",
+//                discount = "EGG OFF",
+//                discountAmount = "2 Boiled Eggs with Rich Gravy",
+//                address = "Ghatkopar, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.nihari_items_13,
+//                title = "Shahi Nihari with Khamiri Roti",
+//                price = "410",
+//                restaurantName = "Shahi Dastarkhwan",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.4 km",
+//                discount = "SHAHI OFF",
+//                discountAmount = "Royal Recipe with Saffron",
+//                address = "Mahim, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.nihari_items_14,
+//                title = "Butter Chicken Nihari Fusion",
+//                price = "430",
+//                restaurantName = "Fusion Kitchen",
+//                rating = "4.7",
+//                deliveryTime = "28-33 mins",
+//                distance = "1.3 km",
+//                discount = "FUSION OFF",
+//                discountAmount = "Butter Chicken Meets Nihari",
+//                address = "Powai, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.nihari_items_15,
+//                title = "Party Nihari Pack",
+//                price = "1,200",
+//                restaurantName = "Party Specials",
+//                rating = "4.8",
+//                deliveryTime = "45-50 mins",
+//                distance = "2.5 km",
+//                discount = "PARTY OFF",
+//                discountAmount = "Feeds 8-10 People Complete Meal",
+//                address = "Borivali, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.nihari_items_16,
+//                title = "Nihari Biryani Combo",
+//                price = "650",
+//                restaurantName = "Combo Kitchen",
+//                rating = "4.7",
+//                deliveryTime = "35-40 mins",
+//                distance = "1.9 km",
+//                discount = "COMBO OFF",
+//                discountAmount = "Nihari with Biryani & Raita",
+//                address = "Malad, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.nihari_items_17,
+//                title = "Kolkata Style Nihari",
+//                price = "370",
+//                restaurantName = "Kolkata Kitchen",
+//                rating = "4.6",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.7 km",
+//                discount = "KOLKATA OFF",
+//                discountAmount = "East Indian Style with Mustard Oil",
+//                address = "Dadar, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.nihari_items_18,
+//                title = "Healthy Nihari - Low Oil",
+//                price = "290",
+//                restaurantName = "Healthy Kitchen",
+//                rating = "4.5",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.0 km",
+//                discount = "HEALTHY OFF",
+//                discountAmount = "70% Less Oil, Same Taste",
+//                address = "Vile Parle, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.nihari_items_19,
+//                title = "Wedding Style Nihari",
+//                price = "1,500",
+//                restaurantName = "Wedding Caterers",
+//                rating = "4.9",
+//                deliveryTime = "60-70 mins",
+//                distance = "3.5 km",
+//                discount = "WEDDING OFF",
+//                discountAmount = "Traditional Wedding Recipe for 15",
+//                address = "Thane, Maharashtra"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.nihari_items_20,
+//                title = "Gold Leaf Nihari",
+//                price = "2,000",
+//                restaurantName = "Luxury Dining",
+//                rating = "4.9",
+//                deliveryTime = "50-55 mins",
+//                distance = "4.0 km",
+//                discount = "GOLD OFF",
+//                discountAmount = "Edible Gold Leaf & Premium Spices",
+//                address = "Juhu, Mumbai"
+//            )
+//        ).forEach { restaurantItem ->
+//            Column {
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
+//    }
+//}
 
 @Composable
 fun FafdaCategoryPage() {

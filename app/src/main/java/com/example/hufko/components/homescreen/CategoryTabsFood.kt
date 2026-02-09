@@ -58913,347 +58913,1595 @@ fun TacosCategoryPage() {
 }
 
 @Composable
-fun TheplaCategoryPage(){
-    CategoryContentPage("Thepla")
+fun TheplaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val theplaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // THEPLA TYPES (with icons for popular types)
+                FilterChip(
+                    id = "methi_thepla",
+                    text = "Methi Thepla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_methi_thepla
+                ),
+                FilterChip(
+                    id = "muli_thepla",
+                    text = "Muli Thepla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_muli_thepla
+                ),
+                FilterChip(
+                    id = "garlic_thepla",
+                    text = "Garlic Thepla",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_garlic_thepla
+                ),
+                FilterChip(
+                    id = "palak_thepla",
+                    text = "Palak Thepla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mixed_vegetable_thepla",
+                    text = "Mixed Vegetable",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pudina_thepla",
+                    text = "Pudina Thepla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jowar_thepla",
+                    text = "Jowar Thepla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bajra_thepla",
+                    text = "Bajra Thepla",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icons for spice indicators)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mild_spice_thepla
+                ),
+                FilterChip(
+                    id = "medium_spicy",
+                    text = "Medium Spicy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_medium_spice_thepla
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // THICKNESS/STYLE
+                FilterChip(
+                    id = "thin_crispy",
+                    text = "Thin & Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft_roti",
+                    text = "Soft Roti Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick_masaladar",
+                    text = "Thick & Masaledar",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OIL CONTENT (with icon for oil-free)
+                FilterChip(
+                    id = "oil_free",
+                    text = "Oil Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ghee_roasted",
+                    text = "Ghee Roasted",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PACK SIZES
+                FilterChip(
+                    id = "pack_4",
+                    text = "Pack of 4",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pack_8",
+                    text = "Pack of 8",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pack_12",
+                    text = "Pack of 12",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack_20",
+                    text = "Family Pack (20+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SHELF LIFE (with icon for fresh)
+                FilterChip(
+                    id = "long_life_15days",
+                    text = "Long Shelf (15 days)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "frozen_1month",
+                    text = "Frozen (1 month)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY (with icon for diet options)
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_preservatives",
+                    text = "No Preservatives",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TIME
+                FilterChip(
+                    id = "breakfast",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner",
+                    text = "Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "travel_snack",
+                    text = "Travel Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS
+                FilterChip(
+                    id = "with_pickle",
+                    text = "With Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chunda",
+                    text = "With Chunda",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_curd",
+                    text = "With Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_tea_coffee",
+                    text = "With Tea/Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget_50_100",
+                    text = "Budget (₹50-100)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_100_200",
+                    text = "Premium (₹100-200)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gourmet_200plus",
+                    text = "Gourmet (₹200+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = theplaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val theplaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.thepla_1,
+                title = "Fresh Methi Thepla",
+                price = "120",
+                restaurantName = "Gujarati Kitchen",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "fresh herbs special",
+                address = "Borivali West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.thepla_2,
+                title = "Muli Thepla Combo",
+                price = "150",
+                restaurantName = "Saurashtra Snacks",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "Free Pickle",
+                discountAmount = "with 6 pieces",
+                address = "Malad East, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.thepla_3,
+                title = "Garlic Thepla Family Pack",
+                price = "180",
+                restaurantName = "Rajwadi Thali",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "15%",
+                discountAmount = "family deal",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.thepla_4,
+                title = "Palak Thepla with Chunda",
+                price = "140",
+                restaurantName = "Healthy Bites",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "Buy 1 Get 1",
+                discountAmount = "health combo",
+                address = "Santacruz West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.thepla_5,
+                title = "Mixed Vegetable Thepla",
+                price = "160",
+                restaurantName = "Veggie Delight",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "Free Tea",
+                discountAmount = "breakfast offer",
+                address = "Kandivali East, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.thepla_6,
+                title = "Jowar Thepla Diet Pack",
+                price = "200",
+                restaurantName = "Gluten Free Hub",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "3.0 km",
+                discount = "30%",
+                discountAmount = "diet special",
+                address = "Powai, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = theplaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val theplaItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.thepla_items_1,
+                title = "Fresh Methi Thepla",
+                price = "120",
+                restaurantName = "Gujarati Kitchen",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "METHI OFF",
+                discountAmount = "Fresh Fenugreek Leaves Daily",
+                address = "Borivali West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.thepla_items_2,
+                title = "Muli Thepla Combo",
+                price = "150",
+                restaurantName = "Saurashtra Snacks",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "MULI OFF",
+                discountAmount = "Seasonal White Radish Special",
+                address = "Malad East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.thepla_items_3,
+                title = "Garlic Thepla Family Pack",
+                price = "180",
+                restaurantName = "Rajwadi Thali",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "GARLIC OFF",
+                discountAmount = "Extra Garlic for Health Benefits",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.thepla_items_4,
+                title = "Palak Thepla with Chunda",
+                price = "140",
+                restaurantName = "Healthy Bites",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "PALAK OFF",
+                discountAmount = "Spinach Rich in Iron",
+                address = "Santacruz West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.thepla_items_5,
+                title = "Mixed Vegetable Thepla",
+                price = "160",
+                restaurantName = "Veggie Delight",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "MIXED OFF",
+                discountAmount = "5 Different Vegetables Blend",
+                address = "Kandivali East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.thepla_items_6,
+                title = "Jowar Thepla Diet Pack",
+                price = "200",
+                restaurantName = "Gluten Free Hub",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "3.0 km",
+                discount = "JOWAR OFF",
+                discountAmount = "100% Gluten-Free Sorghum Flour",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.thepla_items_7,
+                title = "Bajra Thepla Winter Special",
+                price = "170",
+                restaurantName = "Winter Warmers",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "BAJRA OFF",
+                discountAmount = "Pearl Millet for Winter Warmth",
+                address = "Goregaon West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.thepla_items_8,
+                title = "Pudina Thepla Refresh Pack",
+                price = "130",
+                restaurantName = "Fresh Mint Kitchen",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "PUDINA OFF",
+                discountAmount = "Fresh Mint Cooling Effect",
+                address = "Dahisar East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.thepla_items_9,
+                title = "Lasaniya Thepla (Garlic Chilli)",
+                price = "145",
+                restaurantName = "Spicy Gujarat",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "LASANIYA OFF",
+                discountAmount = "Extra Garlic & Green Chillies",
+                address = "Mira Road, Thane"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.thepla_items_10,
+                title = "Beetroot Thepla Healthy Choice",
+                price = "155",
+                restaurantName = "Colorful Kitchen",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "BEETROOT OFF",
+                discountAmount = "Natural Pink Color & Nutrients",
+                address = "Vasai West, Palghar"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.thepla_items_11,
+                title = "Thepla Travel Pack (30 pcs)",
+                price = "350",
+                restaurantName = "Travel Foods",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.8 km",
+                discount = "TRAVEL OFF",
+                discountAmount = "Stays Fresh for 10 Days",
+                address = "Bhayandar East, Thane"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.thepla_items_12,
+                title = "Gobi Thepla Cauliflower Special",
+                price = "135",
+                restaurantName = "Winter Vegetables",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "GOBI OFF",
+                discountAmount = "Fresh Cauliflower Florets",
+                address = "Nallasopara West, Palghar"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.thepla_items_13,
+                title = "Moong Dal Thepla Protein Rich",
+                price = "165",
+                restaurantName = "Protein Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "MOONG OFF",
+                discountAmount = "Yellow Lentil Protein Boost",
+                address = "Virar West, Palghar"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.thepla_items_14,
+                title = "Ajwain Thepla Digestion Aid",
+                price = "125",
+                restaurantName = "Digestive Foods",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "AJWAIN OFF",
+                discountAmount = "Carom Seeds for Digestion",
+                address = "Ulhasnagar, Thane"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.thepla_items_15,
+                title = "Dabeli Thepla Fusion",
+                price = "140",
+                restaurantName = "Fusion Snacks",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "DABELI OFF",
+                discountAmount = "Thepla with Dabeli Masala",
+                address = "Kalyan West, Thane"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.thepla_items_16,
+                title = "Thepla Thali Complete Meal",
+                price = "220",
+                restaurantName = "Gujarati Thali House",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.9 km",
+                discount = "THALI OFF",
+                discountAmount = "4 Thepla with Curry & Buttermilk",
+                address = "Dombivli East, Thane"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.thepla_items_17,
+                title = "Sugar-Free Diabetic Thepla",
+                price = "190",
+                restaurantName = "Diabetic Kitchen",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Zero Sugar, Diabetic Friendly",
+                address = "Badlapur East, Thane"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.thepla_items_18,
+                title = "Oil-Free Thepla Diet Special",
+                price = "175",
+                restaurantName = "Diet Kitchen",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "OILFREE OFF",
+                discountAmount = "Cooked on Tawa Without Oil",
+                address = "Ambernath East, Thane"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.thepla_items_19,
+                title = "Party Thepla Pack (50 pcs)",
+                price = "600",
+                restaurantName = "Party Caterers",
+                rating = "4.8",
+                deliveryTime = "45-50 mins",
+                distance = "3.5 km",
+                discount = "PARTY OFF",
+                discountAmount = "Variety of 5 Different Theplas",
+                address = "Navi Mumbai, Panvel"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.thepla_items_20,
+                title = "Gold Leaf Thepla Luxury",
+                price = "500",
+                restaurantName = "Luxury Gujarati",
+                rating = "4.9",
+                deliveryTime = "50-55 mins",
+                distance = "4.0 km",
+                discount = "GOLD OFF",
+                discountAmount = "Edible Gold Leaf & Premium Spices",
+                address = "South Mumbai, Colaba"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
-//{
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//    ) {
-//        Spacer(modifier = Modifier.height(15.dp))
-//
-//        // Filter Button
-//        val nihariFilters = FilterConfig(
-//            filters = listOf(
-//                // Main filter dropdown
-//                FilterChip(
-//                    id = "filters",
-//                    text = "Filters",
-//                    type = FilterType.FILTER_DROPDOWN,
-//                    icon = R.drawable.ic_filter,
-//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-//                ),
-//
-//                // NIHARI TYPES (with icons for popular types)
-//                FilterChip(
-//                    id = "veg_nihari",
-//                    text = "Veg Nihari",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_veg_nihari
-//                ),
-//                FilterChip(
-//                    id = "mutton_nihari",
-//                    text = "Mutton Nihari",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_mutton_nihari
-//                ),
-//                FilterChip(
-//                    id = "chicken_nihari",
-//                    text = "Chicken Nihari",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_chicken_nihari
-//                ),
-//                FilterChip(
-//                    id = "bone_marrow_nihari",
-//                    text = "Bone Marrow Nihari",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "vegetable_nihari",
-//                    text = "Vegetable Nihari",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "goat_nihari",
-//                    text = "Goat Nihari",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // SPICE LEVEL (with icons for common levels)
-//                FilterChip(
-//                    id = "mild",
-//                    text = "Mild",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_mild_spice_nihari
-//                ),
-//                FilterChip(
-//                    id = "medium_spicy",
-//                    text = "Medium Spicy",
-//                    type = FilterType.WITH_LEFT_ICON,
-//                    icon = R.drawable.ic_medium_spice_nihari
-//                ),
-//                FilterChip(
-//                    id = "extra_spicy",
-//                    text = "Extra Spicy",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "custom_spice",
-//                    text = "Custom Spice Level",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // COOKING STYLE (with icons for traditional styles)
-//                FilterChip(
-//                    id = "handi_nihari",
-//                    text = "Handi Style",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "dum_cooked",
-//                    text = "Dum Cooked",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // GRAVY CONSISTENCY
-//                FilterChip(
-//                    id = "thick_gravy",
-//                    text = "Thick Gravy",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "medium_gravy",
-//                    text = "Medium Gravy",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "extra_gravy",
-//                    text = "Extra Gravy",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                FilterChip(
-//                    id = "with_khamiri_roti",
-//                    text = "With Khamiri Roti",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "with_tandoori_roti",
-//                    text = "With Tandoori Roti",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "with_rice",
-//                    text = "With Rice",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // GARNISHES (with icons for key garnishes)
-//                FilterChip(
-//                    id = "lemon_wedges",
-//                    text = "Lemon Wedges",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "fried_onions",
-//                    text = "Fried Onions",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "fresh_coriander",
-//                    text = "Fresh Coriander",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // SERVING SIZE
-//                FilterChip(
-//                    id = "single_serving",
-//                    text = "Single Serving",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "family_pack",
-//                    text = "Family Pack (4-6)",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "party_pack",
-//                    text = "Party Pack (8-10)",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // COOKING TIME
-//                FilterChip(
-//                    id = "traditional_8hr",
-//                    text = "Traditional (8+ hours)",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "express_4hr",
-//                    text = "Express (4 hours)",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // PRICE RANGE
-//                FilterChip(
-//                    id = "budget_nihari",
-//                    text = "Budget (₹200-350)",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "premium_nihari",
-//                    text = "Premium (₹350-500)",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "luxury_nihari",
-//                    text = "Luxury (₹500+)",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // MEAL TIME
-//                FilterChip(
-//                    id = "lunch",
-//                    text = "Lunch",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//                FilterChip(
-//                    id = "dinner",
-//                    text = "Dinner",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // SPECIAL DIETARY
-//                FilterChip(
-//                    id = "no_preservatives",
-//                    text = "No Preservatives",
-//                    type = FilterType.TEXT_ONLY
-//                ),
-//
-//                // Sort dropdown
-//                FilterChip(
-//                    id = "sort",
-//                    text = "Sort",
-//                    type = FilterType.SORT_DROPDOWN,
-//                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
-//                ),
-//            ),
-//            rows = 2
-//        )
-//        FilterButtonFood(
-//            filterConfig = nihariFilters,
-//            onFilterClick = { filter ->
-//                println("Filter clicked: ${filter.text}")
-//                // Handle filter logic
-//            },
-//            onSortClick = {
-//                println("Sort clicked")
-//                // Handle sort logic
-//            }
-//        )
-//
-//        val nihariItems = listOf(
-//            FoodItemDoubleF(
-//                id = 1,
-//                imageRes = R.drawable.nihari_1,
-//                title = "Royal Beef Nihari",
-//                price = "350",
-//                restaurantName = "Karachi Nihari House",
-//                rating = "4.9",
-//                deliveryTime = "30-35 mins",
-//                distance = "1.5 km",
-//                discount = "20%",
-//                discountAmount = "weekend special",
-//                address = "Mohammed Ali Road, Mumbai"
-//            ),
-//            FoodItemDoubleF(
-//                id = 2,
-//                imageRes = R.drawable.nihari_2,
-//                title = "Mughlai Mutton Nihari",
-//                price = "420",
-//                restaurantName = "Al-Noor Restaurant",
-//                rating = "4.8",
-//                deliveryTime = "35-40 mins",
-//                distance = "2.0 km",
-//                discount = "Free Naan",
-//                discountAmount = "with 2 naan",
-//                address = "Bhendi Bazaar, Mumbai"
-//            ),
-//            FoodItemDoubleF(
-//                id = 3,
-//                imageRes = R.drawable.nihari_3,
-//                title = "Chicken Nihari with Bone Marrow",
-//                price = "380",
-//                restaurantName = "Delhi Darbar",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.2 km",
-//                discount = "15%",
-//                discountAmount = "family pack deal",
-//                address = "Kurla, Mumbai"
-//            ),
-//            FoodItemDoubleF(
-//                id = 4,
-//                imageRes = R.drawable.nihari_4,
-//                title = "Extra Spicy Goat Nihari",
-//                price = "450",
-//                restaurantName = "Bohri Kitchen",
-//                rating = "4.9",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.5 km",
-//                discount = "Buy 1 Get 1",
-//                discountAmount = "spicy lovers offer",
-//                address = "Byculla, Mumbai"
-//            ),
-//            FoodItemDoubleF(
-//                id = 5,
-//                imageRes = R.drawable.nihari_5,
-//                title = "Traditional Beef Nihari with Khamiri Roti",
-//                price = "320",
-//                restaurantName = "Bade Miyan",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "0.8 km",
-//                discount = "30%",
-//                discountAmount = "breakfast combo",
-//                address = "Colaba, Mumbai"
-//            ),
-//            FoodItemDoubleF(
-//                id = 6,
-//                imageRes = R.drawable.nihari_6,
-//                title = "Vegetable Nihari Special",
-//                price = "280",
-//                restaurantName = "Pure Veg Nihari Corner",
-//                rating = "4.5",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.5 km",
-//                discount = "Free Ginger",
-//                discountAmount = "extra garnish",
-//                address = "Sion, Mumbai"
-//            )
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//        Text(
-//            text = "Recommended for you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//
-//        FoodItemsListWithHeading(
-//            heading = null,
-//            subtitle = null,
-//            foodItems = nihariItems,
-//            onItemClick = { foodItem ->
-//                println("Food item clicked: ${foodItem.title}")
-//            },
-//            modifier = Modifier.fillMaxWidth(),
-//            backgroundColor = Color.White,
-//            cardWidth = 150.dp,
-//            cardHeight = 170.dp,
-//            horizontalSpacing = 8.dp,
-//            horizontalPadding = 12.dp,
-//            verticalPadding = 0.dp,
-//            headingBottomPadding = 0.dp
-//        )
-//
+
+@Composable
+fun FafdaCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val fafdaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // FAFDA TYPES (with icons for popular types)
+                FilterChip(
+                    id = "plain_fafda",
+                    text = "Plain Fafda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_fafda
+                ),
+                FilterChip(
+                    id = "masala_fafda",
+                    text = "Masala Fafda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_masala_fafda
+                ),
+                FilterChip(
+                    id = "spicy_fafda",
+                    text = "Spicy Fafda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy_fafda
+                ),
+                FilterChip(
+                    id = "garlic_fafda",
+                    text = "Garlic Fafda",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jeera_fafda",
+                    text = "Jeera Fafda",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chatpata_fafda",
+                    text = "Chatpata Fafda",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // THICKNESS/CRISPINESS (with icon for classic crispy)
+                FilterChip(
+                    id = "thin_crispy",
+                    text = "Thin & Crispy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_thin_crispy_fafda
+                ),
+                FilterChip(
+                    id = "thick_crunchy",
+                    text = "Thick & Crunchy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft_chewy",
+                    text = "Soft & Chewy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPICE LEVEL (with icon for medium spice)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spicy",
+                    text = "Medium Spicy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_medium_spice
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OIL TYPE (with icon for traditional oil)
+                FilterChip(
+                    id = "groundnut_oil",
+                    text = "Groundnut Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sunflower_oil",
+                    text = "Sunflower Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PACK SIZES
+                FilterChip(
+                    id = "small_pack",
+                    text = "Small Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_pack",
+                    text = "Medium Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "festival_pack",
+                    text = "Festival Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FRESHNESS (with icon for fresh)
+                FilterChip(
+                    id = "long_shelf",
+                    text = "Long Shelf Life",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ACCOMPANIMENTS (with icons for popular combinations)
+                FilterChip(
+                    id = "with_sev",
+                    text = "With Sev",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_green_chutney",
+                    text = "With Green Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_tomato_sauce",
+                    text = "With Tomato Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL OCCASIONS (with icon for festivals)
+                FilterChip(
+                    id = "everyday_snack",
+                    text = "Everyday Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_snack",
+                    text = "Party Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE (with icon for budget option)
+                FilterChip(
+                    id = "premium",
+                    text = "Premium Quality",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gourmet",
+                    text = "Gourmet",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = fafdaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val fafdaItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.fafda_1,
+                title = "Classic Gujarati Fafda",
+                price = "80",
+                restaurantName = "Ahmedabad Farsan",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "With Papaya Chutney",
+                discountAmount = "traditional combo",
+                address = "Borivali West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.fafda_2,
+                title = "Spicy Masala Fafda",
+                price = "90",
+                restaurantName = "Surati Farsan House",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "Extra 5 Pieces",
+                discountAmount = "spicy special",
+                address = "Malad East, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.fafda_3,
+                title = "Fafda-Jalebi Combo",
+                price = "120",
+                restaurantName = "Rajwadi Farsan",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "Festival Offer",
+                discountAmount = "sweet & savory",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.fafda_4,
+                title = "Crispy Garlic Fafda",
+                price = "95",
+                restaurantName = "Gujju Tadka",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "Free Green Chutney",
+                discountAmount = "garlic lover's pick",
+                address = "Santacruz West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.fafda_5,
+                title = "Family Pack Fafda",
+                price = "180",
+                restaurantName = "Saurashtra Snacks",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "20% OFF",
+                discountAmount = "family deal",
+                address = "Kandivali East, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.fafda_6,
+                title = "Premium Thin Fafda",
+                price = "110",
+                restaurantName = "Farsan Express",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "3.0 km",
+                discount = "With 2 Chutneys",
+                discountAmount = "premium experience",
+                address = "Powai, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = fafdaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val fafdaItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.fafda_items_1,
+                title = "Classic Gujarati Fafda",
+                price = "80",
+                restaurantName = "Ahmedabad Farsan",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "TRADITION OFF",
+                discountAmount = "Authentic Recipe from Gujarat",
+                address = "Borivali West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.fafda_items_2,
+                title = "Spicy Masala Fafda",
+                price = "90",
+                restaurantName = "Surati Farsan House",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "SPICY OFF",
+                discountAmount = "Extra Red Chilli Powder & Masala",
+                address = "Malad East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.fafda_items_3,
+                title = "Fafda-Jalebi Festival Combo",
+                price = "120",
+                restaurantName = "Rajwadi Farsan",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "COMBO OFF",
+                discountAmount = "Perfect Dussehra & Diwali Combo",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.fafda_items_4,
+                title = "Crispy Garlic Fafda",
+                price = "95",
+                restaurantName = "Gujju Tadka",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "GARLIC OFF",
+                discountAmount = "Fresh Garlic & Ginger Paste",
+                address = "Santacruz West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.fafda_items_5,
+                title = "Family Pack Fafda (25 pcs)",
+                price = "180",
+                restaurantName = "Saurashtra Snacks",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Perfect for Family Gatherings",
+                address = "Kandivali East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.fafda_items_6,
+                title = "Premium Thin Fafda",
+                price = "110",
+                restaurantName = "Farsan Express",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "3.0 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Extra Thin & Crispy Texture",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.fafda_items_7,
+                title = "Jeera Fafda Cumin Special",
+                price = "85",
+                restaurantName = "Cumin Kitchen",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "JEERA OFF",
+                discountAmount = "Loaded with Roasted Cumin Seeds",
+                address = "Goregaon West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.fafda_items_8,
+                title = "Chatpata Fafda Street Style",
+                price = "75",
+                restaurantName = "Street Food Corner",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "CHATPATA OFF",
+                discountAmount = "Tangy & Spicy Street Flavor",
+                address = "Dahisar East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.fafda_items_9,
+                title = "Ajwain Fafda Digestion Aid",
+                price = "88",
+                restaurantName = "Healthy Farsan",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "AJWAIN OFF",
+                discountAmount = "Carom Seeds for Better Digestion",
+                address = "Mira Road, Thane"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.fafda_items_10,
+                title = "Fafda with Papaya Chutney",
+                price = "100",
+                restaurantName = "Traditional Gujarati",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "CHUTNEY OFF",
+                discountAmount = "Fresh Raw Papaya Chutney Included",
+                address = "Vasai West, Palghar"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.fafda_items_11,
+                title = "Oil-Free Diet Fafda",
+                price = "95",
+                restaurantName = "Diet Farsan",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.8 km",
+                discount = "OILFREE OFF",
+                discountAmount = "Baked Instead of Fried",
+                address = "Bhayandar East, Thane"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.fafda_items_12,
+                title = "Fafda with Sambharo",
+                price = "105",
+                restaurantName = "Kathiawadi Special",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "SAMBHARO OFF",
+                discountAmount = "Served with Spicy Cabbage Sambharo",
+                address = "Nallasopara West, Palghar"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.fafda_items_13,
+                title = "Fafda with Kadhi Combo",
+                price = "130",
+                restaurantName = "Gujarati Combo House",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "KADHI OFF",
+                discountAmount = "Complete Meal with Sweet Kadhi",
+                address = "Virar West, Palghar"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.fafda_items_14,
+                title = "Besan Fafda Gram Flour Special",
+                price = "82",
+                restaurantName = "Gram Flour Kitchen",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "BESAN OFF",
+                discountAmount = "Fresh Gram Flour with Spices",
+                address = "Ulhasnagar, Thane"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.fafda_items_15,
+                title = "Party Fafda Pack (50 pcs)",
+                price = "350",
+                restaurantName = "Party Farsan",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "PARTY OFF",
+                discountAmount = "Perfect for Weddings & Functions",
+                address = "Kalyan West, Thane"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.fafda_items_16,
+                title = "Fafda Thali Complete Meal",
+                price = "150",
+                restaurantName = "Gujarati Thali House",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.9 km",
+                discount = "THALI OFF",
+                discountAmount = "Fafda with 3 Chutneys & Tea",
+                address = "Dombivli East, Thane"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.fafda_items_17,
+                title = "Low-Salt Fafda Healthy",
+                price = "87",
+                restaurantName = "Healthy Heart Kitchen",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "LOWSALT OFF",
+                discountAmount = "60% Less Salt for BP Patients",
+                address = "Badlapur East, Thane"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.fafda_items_18,
+                title = "Fafda with Green Chutney",
+                price = "92",
+                restaurantName = "Chutney Special",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "GREEN OFF",
+                discountAmount = "Fresh Coriander & Mint Chutney",
+                address = "Ambernath East, Thane"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.fafda_items_19,
+                title = "Fafda with Curd Combo",
+                price = "115",
+                restaurantName = "Cool Combo House",
+                rating = "4.8",
+                deliveryTime = "45-50 mins",
+                distance = "3.5 km",
+                discount = "CURD OFF",
+                discountAmount = "Served with Fresh Curd",
+                address = "Navi Mumbai, Panvel"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.fafda_items_20,
+                title = "Premium Gold Fafda Luxury",
+                price = "250",
+                restaurantName = "Luxury Gujarati Farsan",
+                rating = "4.9",
+                deliveryTime = "50-55 mins",
+                distance = "4.0 km",
+                discount = "GOLD OFF",
+                discountAmount = "Saffron Infused with Premium Spices",
+                address = "South Mumbai, Colaba"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun ChocolateCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val chocolateFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // CHOCOLATE TYPES (with icons for popular types)
+                FilterChip(
+                    id = "dark_chocolate",
+                    text = "Dark Chocolate",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dark_chocolate
+                ),
+                FilterChip(
+                    id = "milk_chocolate",
+                    text = "Milk Chocolate",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_milk_chocolate
+                ),
+                FilterChip(
+                    id = "white_chocolate",
+                    text = "White Chocolate",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_white_chocolate
+                ),
+                FilterChip(
+                    id = "ruby_chocolate",
+                    text = "Ruby Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CACAO PERCENTAGE (with icon for popular percentage)
+                FilterChip(
+                    id = "70_percent",
+                    text = "70% Cacao",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cacao_percent
+                ),
+                FilterChip(
+                    id = "50_60_percent",
+                    text = "50-60% Cacao",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "80_plus_percent",
+                    text = "80%+ Cacao",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVORS & ADDITIONS (with icons for popular flavors)
+                FilterChip(
+                    id = "hazelnut",
+                    text = "Hazelnut",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_hazelnut
+                ),
+                FilterChip(
+                    id = "caramel",
+                    text = "Caramel",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sea_salt",
+                    text = "Sea Salt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "orange",
+                    text = "Orange",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint",
+                    text = "Mint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberry",
+                    text = "Strawberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FORM/STYLE (with icon for popular forms)
+                FilterChip(
+                    id = "truffles",
+                    text = "Truffles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_chips",
+                    text = "Chocolate Chips",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_spread",
+                    text = "Chocolate Spread",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hot_chocolate",
+                    text = "Hot Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ORIGIN/BRAND TYPE (with icon for Belgian)
+                FilterChip(
+                    id = "swiss",
+                    text = "Swiss",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "artisan",
+                    text = "Artisan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "local",
+                    text = "Local",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES (with icon for vegan)
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lactose_free",
+                    text = "Lactose Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kosher",
+                    text = "Kosher",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OCCASION (with icon for gifts)
+                FilterChip(
+                    id = "everyday",
+                    text = "Everyday",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_gift",
+                    text = "Premium Gift",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party",
+                    text = "Party",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE (with icon for affordable)
+                FilterChip(
+                    id = "mid_range",
+                    text = "Mid Range",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "luxury",
+                    text = "Luxury",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = chocolateFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val chocolateItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chocolate_1,
+                title = "Belgian Dark Chocolate Bar",
+                price = "250",
+                restaurantName = "Chocolate Heaven",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "70% Cacao",
+                discountAmount = "rich & intense",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chocolate_2,
+                title = "Swiss Milk Chocolate Truffles",
+                price = "350",
+                restaurantName = "Sweet Swiss Delights",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "12 Piece Box",
+                discountAmount = "premium gift",
+                address = "Colaba, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.chocolate_3,
+                title = "Hazelnut Praline Chocolate",
+                price = "180",
+                restaurantName = "Nutty Chocolates",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "Extra Hazelnuts",
+                discountAmount = "crunchy delight",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.chocolate_4,
+                title = "Organic Dark Chocolate",
+                price = "320",
+                restaurantName = "Organic Treats",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "Sugar-Free",
+                discountAmount = "healthy choice",
+                address = "Powai, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.chocolate_5,
+                title = "Chocolate Gift Hamper",
+                price = "500",
+                restaurantName = "Gift Chocolate Co.",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "3.0 km",
+                discount = "Free Wrapping",
+                discountAmount = "perfect present",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.chocolate_6,
+                title = "Hot Chocolate Mix Jar",
+                price = "280",
+                restaurantName = "Warm Winter Treats",
+                rating = "4.5",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "1 Month Supply",
+                discountAmount = "cozy drink",
+                address = "Santacruz West, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = chocolateItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
 //        Spacer(modifier = Modifier.height(15.dp))
 //        Text(
 //            text = "Restaurants delivering to you",
@@ -59281,266 +60529,266 @@ fun TheplaCategoryPage(){
 //        Spacer(modifier = Modifier.height(5.dp))
 //
 //        // Sample data based on the provided images
-//        val nihariItemsList = listOf(
+//        val fafdaItemsList = listOf(
 //            RestaurantItemFull(
 //                id = 1,
-//                imageRes = R.drawable.nihari_items_1,
-//                title = "Royal Beef Nihari",
-//                price = "350",
-//                restaurantName = "Karachi Nihari House",
-//                rating = "4.9",
-//                deliveryTime = "30-35 mins",
-//                distance = "1.5 km",
-//                discount = "ROYAL OFF",
-//                discountAmount = "Slow Cooked for 8 Hours",
-//                address = "Mohammed Ali Road, Mumbai"
+//                imageRes = R.drawable.fafda_items_1,
+//                title = "Classic Gujarati Fafda",
+//                price = "80",
+//                restaurantName = "Ahmedabad Farsan",
+//                rating = "4.8",
+//                deliveryTime = "15-20 mins",
+//                distance = "0.8 km",
+//                discount = "TRADITION OFF",
+//                discountAmount = "Authentic Recipe from Gujarat",
+//                address = "Borivali West, Mumbai"
 //            ),
 //            RestaurantItemFull(
 //                id = 2,
-//                imageRes = R.drawable.nihari_items_2,
-//                title = "Mughlai Mutton Nihari",
-//                price = "420",
-//                restaurantName = "Al-Noor Restaurant",
-//                rating = "4.8",
-//                deliveryTime = "35-40 mins",
-//                distance = "2.0 km",
-//                discount = "MUGHLAI OFF",
-//                discountAmount = "Secret Mughlai Spices Blend",
-//                address = "Bhendi Bazaar, Mumbai"
+//                imageRes = R.drawable.fafda_items_2,
+//                title = "Spicy Masala Fafda",
+//                price = "90",
+//                restaurantName = "Surati Farsan House",
+//                rating = "4.7",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.2 km",
+//                discount = "SPICY OFF",
+//                discountAmount = "Extra Red Chilli Powder & Masala",
+//                address = "Malad East, Mumbai"
 //            ),
 //            RestaurantItemFull(
 //                id = 3,
-//                imageRes = R.drawable.nihari_items_3,
-//                title = "Chicken Nihari with Bone Marrow",
-//                price = "380",
-//                restaurantName = "Delhi Darbar",
-//                rating = "4.7",
+//                imageRes = R.drawable.fafda_items_3,
+//                title = "Fafda-Jalebi Festival Combo",
+//                price = "120",
+//                restaurantName = "Rajwadi Farsan",
+//                rating = "4.9",
 //                deliveryTime = "25-30 mins",
-//                distance = "1.2 km",
-//                discount = "BONE MARROW OFF",
-//                discountAmount = "Rich Bone Marrow Gravy",
-//                address = "Kurla, Mumbai"
+//                distance = "1.8 km",
+//                discount = "COMBO OFF",
+//                discountAmount = "Perfect Dussehra & Diwali Combo",
+//                address = "Andheri West, Mumbai"
 //            ),
 //            RestaurantItemFull(
 //                id = 4,
-//                imageRes = R.drawable.nihari_items_4,
-//                title = "Extra Spicy Goat Nihari",
-//                price = "450",
-//                restaurantName = "Bohri Kitchen",
-//                rating = "4.9",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.5 km",
-//                discount = "SPICY OFF",
-//                discountAmount = "Special 10 Spice Blend",
-//                address = "Byculla, Mumbai"
+//                imageRes = R.drawable.fafda_items_4,
+//                title = "Crispy Garlic Fafda",
+//                price = "95",
+//                restaurantName = "Gujju Tadka",
+//                rating = "4.6",
+//                deliveryTime = "10-15 mins",
+//                distance = "0.5 km",
+//                discount = "GARLIC OFF",
+//                discountAmount = "Fresh Garlic & Ginger Paste",
+//                address = "Santacruz West, Mumbai"
 //            ),
 //            RestaurantItemFull(
 //                id = 5,
-//                imageRes = R.drawable.nihari_items_5,
-//                title = "Traditional Beef Nihari",
-//                price = "320",
-//                restaurantName = "Bade Miyan",
-//                rating = "4.6",
-//                deliveryTime = "20-25 mins",
-//                distance = "0.8 km",
-//                discount = "TRADITIONAL OFF",
-//                discountAmount = "Original Delhi Style Recipe",
-//                address = "Colaba, Mumbai"
+//                imageRes = R.drawable.fafda_items_5,
+//                title = "Family Pack Fafda (25 pcs)",
+//                price = "180",
+//                restaurantName = "Saurashtra Snacks",
+//                rating = "4.5",
+//                deliveryTime = "30-35 mins",
+//                distance = "2.5 km",
+//                discount = "FAMILY OFF",
+//                discountAmount = "Perfect for Family Gatherings",
+//                address = "Kandivali East, Mumbai"
 //            ),
 //            RestaurantItemFull(
 //                id = 6,
-//                imageRes = R.drawable.nihari_items_6,
-//                title = "Vegetable Nihari Special",
-//                price = "280",
-//                restaurantName = "Pure Veg Nihari Corner",
-//                rating = "4.5",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.5 km",
-//                discount = "VEG OFF",
-//                discountAmount = "7 Winter Vegetables Cooked Slow",
-//                address = "Sion, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.nihari_items_7,
-//                title = "Family Nihari Combo",
-//                price = "850",
-//                restaurantName = "Nihari Family Restaurant",
-//                rating = "4.8",
+//                imageRes = R.drawable.fafda_items_6,
+//                title = "Premium Thin Fafda",
+//                price = "110",
+//                restaurantName = "Farsan Express",
+//                rating = "4.7",
 //                deliveryTime = "35-40 mins",
-//                distance = "1.8 km",
-//                discount = "FAMILY OFF",
-//                discountAmount = "Feeds 4-5 People with Naan",
-//                address = "Andheri East, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.nihari_items_8,
-//                title = "Lamb Shank Nihari",
-//                price = "520",
-//                restaurantName = "Royal Mughal",
-//                rating = "4.9",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.2 km",
-//                discount = "LAMB OFF",
-//                discountAmount = "Whole Lamb Shank Slow Cooked",
-//                address = "Kemps Corner, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.nihari_items_9,
-//                title = "Awadhi Nihari Handi",
-//                price = "480",
-//                restaurantName = "Lucknowi Kitchen",
-//                rating = "4.7",
-//                deliveryTime = "30-35 mins",
-//                distance = "1.6 km",
-//                discount = "AWADHI OFF",
-//                discountAmount = "Original Handi Cooking Style",
-//                address = "Marine Lines, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.nihari_items_10,
-//                title = "Nalli Nihari Special",
-//                price = "550",
-//                restaurantName = "Nalli House",
-//                rating = "4.9",
-//                deliveryTime = "45-50 mins",
 //                distance = "3.0 km",
-//                discount = "NALLI OFF",
-//                discountAmount = "Bone-in Meat with Rich Marrow",
-//                address = "Nagpada, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.nihari_items_11,
-//                title = "Dum Nihari with Sheermal",
-//                price = "380",
-//                restaurantName = "Hyderabadi Kitchen",
-//                rating = "4.7",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.1 km",
-//                discount = "DUM OFF",
-//                discountAmount = "Sealed Dum Cooking Technique",
-//                address = "Santacruz, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.nihari_items_12,
-//                title = "Egg Nihari Breakfast Special",
-//                price = "240",
-//                restaurantName = "Morning Delights",
-//                rating = "4.6",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.7 km",
-//                discount = "EGG OFF",
-//                discountAmount = "2 Boiled Eggs with Rich Gravy",
-//                address = "Ghatkopar, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.nihari_items_13,
-//                title = "Shahi Nihari with Khamiri Roti",
-//                price = "410",
-//                restaurantName = "Shahi Dastarkhwan",
-//                rating = "4.8",
-//                deliveryTime = "30-35 mins",
-//                distance = "1.4 km",
-//                discount = "SHAHI OFF",
-//                discountAmount = "Royal Recipe with Saffron",
-//                address = "Mahim, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.nihari_items_14,
-//                title = "Butter Chicken Nihari Fusion",
-//                price = "430",
-//                restaurantName = "Fusion Kitchen",
-//                rating = "4.7",
-//                deliveryTime = "28-33 mins",
-//                distance = "1.3 km",
-//                discount = "FUSION OFF",
-//                discountAmount = "Butter Chicken Meets Nihari",
+//                discount = "PREMIUM OFF",
+//                discountAmount = "Extra Thin & Crispy Texture",
 //                address = "Powai, Mumbai"
 //            ),
 //            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.nihari_items_15,
-//                title = "Party Nihari Pack",
-//                price = "1,200",
-//                restaurantName = "Party Specials",
+//                id = 7,
+//                imageRes = R.drawable.fafda_items_7,
+//                title = "Jeera Fafda Cumin Special",
+//                price = "85",
+//                restaurantName = "Cumin Kitchen",
+//                rating = "4.6",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.8 km",
+//                discount = "JEERA OFF",
+//                discountAmount = "Loaded with Roasted Cumin Seeds",
+//                address = "Goregaon West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.fafda_items_8,
+//                title = "Chatpata Fafda Street Style",
+//                price = "75",
+//                restaurantName = "Street Food Corner",
 //                rating = "4.8",
-//                deliveryTime = "45-50 mins",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.2 km",
+//                discount = "CHATPATA OFF",
+//                discountAmount = "Tangy & Spicy Street Flavor",
+//                address = "Dahisar East, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.fafda_items_9,
+//                title = "Ajwain Fafda Digestion Aid",
+//                price = "88",
+//                restaurantName = "Healthy Farsan",
+//                rating = "4.7",
+//                deliveryTime = "15-20 mins",
+//                distance = "0.9 km",
+//                discount = "AJWAIN OFF",
+//                discountAmount = "Carom Seeds for Better Digestion",
+//                address = "Mira Road, Thane"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.fafda_items_10,
+//                title = "Fafda with Papaya Chutney",
+//                price = "100",
+//                restaurantName = "Traditional Gujarati",
+//                rating = "4.5",
+//                deliveryTime = "30-35 mins",
+//                distance = "2.2 km",
+//                discount = "CHUTNEY OFF",
+//                discountAmount = "Fresh Raw Papaya Chutney Included",
+//                address = "Vasai West, Palghar"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.fafda_items_11,
+//                title = "Oil-Free Diet Fafda",
+//                price = "95",
+//                restaurantName = "Diet Farsan",
+//                rating = "4.8",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.8 km",
+//                discount = "OILFREE OFF",
+//                discountAmount = "Baked Instead of Fried",
+//                address = "Bhayandar East, Thane"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.fafda_items_12,
+//                title = "Fafda with Sambharo",
+//                price = "105",
+//                restaurantName = "Kathiawadi Special",
+//                rating = "4.6",
+//                deliveryTime = "25-30 mins",
+//                distance = "1.6 km",
+//                discount = "SAMBHARO OFF",
+//                discountAmount = "Served with Spicy Cabbage Sambharo",
+//                address = "Nallasopara West, Palghar"
+//            ),
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.fafda_items_13,
+//                title = "Fafda with Kadhi Combo",
+//                price = "130",
+//                restaurantName = "Gujarati Combo House",
+//                rating = "4.7",
+//                deliveryTime = "20-25 mins",
+//                distance = "1.4 km",
+//                discount = "KADHI OFF",
+//                discountAmount = "Complete Meal with Sweet Kadhi",
+//                address = "Virar West, Palghar"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.fafda_items_14,
+//                title = "Besan Fafda Gram Flour Special",
+//                price = "82",
+//                restaurantName = "Gram Flour Kitchen",
+//                rating = "4.5",
+//                deliveryTime = "15-20 mins",
+//                distance = "1.1 km",
+//                discount = "BESAN OFF",
+//                discountAmount = "Fresh Gram Flour with Spices",
+//                address = "Ulhasnagar, Thane"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.fafda_items_15,
+//                title = "Party Fafda Pack (50 pcs)",
+//                price = "350",
+//                restaurantName = "Party Farsan",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
 //                distance = "2.5 km",
 //                discount = "PARTY OFF",
-//                discountAmount = "Feeds 8-10 People Complete Meal",
-//                address = "Borivali, Mumbai"
+//                discountAmount = "Perfect for Weddings & Functions",
+//                address = "Kalyan West, Thane"
 //            ),
 //            RestaurantItemFull(
 //                id = 16,
-//                imageRes = R.drawable.nihari_items_16,
-//                title = "Nihari Biryani Combo",
-//                price = "650",
-//                restaurantName = "Combo Kitchen",
-//                rating = "4.7",
+//                imageRes = R.drawable.fafda_items_16,
+//                title = "Fafda Thali Complete Meal",
+//                price = "150",
+//                restaurantName = "Gujarati Thali House",
+//                rating = "4.9",
 //                deliveryTime = "35-40 mins",
 //                distance = "1.9 km",
-//                discount = "COMBO OFF",
-//                discountAmount = "Nihari with Biryani & Raita",
-//                address = "Malad, Mumbai"
+//                discount = "THALI OFF",
+//                discountAmount = "Fafda with 3 Chutneys & Tea",
+//                address = "Dombivli East, Thane"
 //            ),
 //            RestaurantItemFull(
 //                id = 17,
-//                imageRes = R.drawable.nihari_items_17,
-//                title = "Kolkata Style Nihari",
-//                price = "370",
-//                restaurantName = "Kolkata Kitchen",
+//                imageRes = R.drawable.fafda_items_17,
+//                title = "Low-Salt Fafda Healthy",
+//                price = "87",
+//                restaurantName = "Healthy Heart Kitchen",
 //                rating = "4.6",
-//                deliveryTime = "30-35 mins",
+//                deliveryTime = "25-30 mins",
 //                distance = "1.7 km",
-//                discount = "KOLKATA OFF",
-//                discountAmount = "East Indian Style with Mustard Oil",
-//                address = "Dadar, Mumbai"
+//                discount = "LOWSALT OFF",
+//                discountAmount = "60% Less Salt for BP Patients",
+//                address = "Badlapur East, Thane"
 //            ),
 //            RestaurantItemFull(
 //                id = 18,
-//                imageRes = R.drawable.nihari_items_18,
-//                title = "Healthy Nihari - Low Oil",
-//                price = "290",
-//                restaurantName = "Healthy Kitchen",
+//                imageRes = R.drawable.fafda_items_18,
+//                title = "Fafda with Green Chutney",
+//                price = "92",
+//                restaurantName = "Chutney Special",
 //                rating = "4.5",
 //                deliveryTime = "20-25 mins",
 //                distance = "1.0 km",
-//                discount = "HEALTHY OFF",
-//                discountAmount = "70% Less Oil, Same Taste",
-//                address = "Vile Parle, Mumbai"
+//                discount = "GREEN OFF",
+//                discountAmount = "Fresh Coriander & Mint Chutney",
+//                address = "Ambernath East, Thane"
 //            ),
 //            RestaurantItemFull(
 //                id = 19,
-//                imageRes = R.drawable.nihari_items_19,
-//                title = "Wedding Style Nihari",
-//                price = "1,500",
-//                restaurantName = "Wedding Caterers",
-//                rating = "4.9",
-//                deliveryTime = "60-70 mins",
+//                imageRes = R.drawable.fafda_items_19,
+//                title = "Fafda with Curd Combo",
+//                price = "115",
+//                restaurantName = "Cool Combo House",
+//                rating = "4.8",
+//                deliveryTime = "45-50 mins",
 //                distance = "3.5 km",
-//                discount = "WEDDING OFF",
-//                discountAmount = "Traditional Wedding Recipe for 15",
-//                address = "Thane, Maharashtra"
+//                discount = "CURD OFF",
+//                discountAmount = "Served with Fresh Curd",
+//                address = "Navi Mumbai, Panvel"
 //            ),
 //            RestaurantItemFull(
 //                id = 20,
-//                imageRes = R.drawable.nihari_items_20,
-//                title = "Gold Leaf Nihari",
-//                price = "2,000",
-//                restaurantName = "Luxury Dining",
+//                imageRes = R.drawable.fafda_items_20,
+//                title = "Premium Gold Fafda Luxury",
+//                price = "250",
+//                restaurantName = "Luxury Gujarati Farsan",
 //                rating = "4.9",
 //                deliveryTime = "50-55 mins",
 //                distance = "4.0 km",
 //                discount = "GOLD OFF",
-//                discountAmount = "Edible Gold Leaf & Premium Spices",
-//                address = "Juhu, Mumbai"
+//                discountAmount = "Saffron Infused with Premium Spices",
+//                address = "South Mumbai, Colaba"
 //            )
 //        ).forEach { restaurantItem ->
 //            Column {
@@ -59552,17 +60800,7 @@ fun TheplaCategoryPage(){
 //                )
 //            }
 //        }
-//    }
-//}
-
-@Composable
-fun FafdaCategoryPage() {
-    CategoryContentPage("Fafda")
-}
-
-@Composable
-fun ChocolateCategoryPage() {
-    CategoryContentPage("Chocolate")
+    }
 }
 
 @Composable

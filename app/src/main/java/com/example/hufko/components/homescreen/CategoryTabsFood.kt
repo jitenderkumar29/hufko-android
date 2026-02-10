@@ -60502,315 +60502,1511 @@ fun ChocolateCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val fafdaItemsList = listOf(
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.fafda_items_1,
-//                title = "Classic Gujarati Fafda",
-//                price = "80",
-//                restaurantName = "Ahmedabad Farsan",
-//                rating = "4.8",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.8 km",
-//                discount = "TRADITION OFF",
-//                discountAmount = "Authentic Recipe from Gujarat",
-//                address = "Borivali West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.fafda_items_2,
-//                title = "Spicy Masala Fafda",
-//                price = "90",
-//                restaurantName = "Surati Farsan House",
-//                rating = "4.7",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.2 km",
-//                discount = "SPICY OFF",
-//                discountAmount = "Extra Red Chilli Powder & Masala",
-//                address = "Malad East, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.fafda_items_3,
-//                title = "Fafda-Jalebi Festival Combo",
-//                price = "120",
-//                restaurantName = "Rajwadi Farsan",
-//                rating = "4.9",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.8 km",
-//                discount = "COMBO OFF",
-//                discountAmount = "Perfect Dussehra & Diwali Combo",
-//                address = "Andheri West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.fafda_items_4,
-//                title = "Crispy Garlic Fafda",
-//                price = "95",
-//                restaurantName = "Gujju Tadka",
-//                rating = "4.6",
-//                deliveryTime = "10-15 mins",
-//                distance = "0.5 km",
-//                discount = "GARLIC OFF",
-//                discountAmount = "Fresh Garlic & Ginger Paste",
-//                address = "Santacruz West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.fafda_items_5,
-//                title = "Family Pack Fafda (25 pcs)",
-//                price = "180",
-//                restaurantName = "Saurashtra Snacks",
-//                rating = "4.5",
-//                deliveryTime = "30-35 mins",
-//                distance = "2.5 km",
-//                discount = "FAMILY OFF",
-//                discountAmount = "Perfect for Family Gatherings",
-//                address = "Kandivali East, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.fafda_items_6,
-//                title = "Premium Thin Fafda",
-//                price = "110",
-//                restaurantName = "Farsan Express",
-//                rating = "4.7",
-//                deliveryTime = "35-40 mins",
-//                distance = "3.0 km",
-//                discount = "PREMIUM OFF",
-//                discountAmount = "Extra Thin & Crispy Texture",
-//                address = "Powai, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.fafda_items_7,
-//                title = "Jeera Fafda Cumin Special",
-//                price = "85",
-//                restaurantName = "Cumin Kitchen",
-//                rating = "4.6",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.8 km",
-//                discount = "JEERA OFF",
-//                discountAmount = "Loaded with Roasted Cumin Seeds",
-//                address = "Goregaon West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.fafda_items_8,
-//                title = "Chatpata Fafda Street Style",
-//                price = "75",
-//                restaurantName = "Street Food Corner",
-//                rating = "4.8",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.2 km",
-//                discount = "CHATPATA OFF",
-//                discountAmount = "Tangy & Spicy Street Flavor",
-//                address = "Dahisar East, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.fafda_items_9,
-//                title = "Ajwain Fafda Digestion Aid",
-//                price = "88",
-//                restaurantName = "Healthy Farsan",
-//                rating = "4.7",
-//                deliveryTime = "15-20 mins",
-//                distance = "0.9 km",
-//                discount = "AJWAIN OFF",
-//                discountAmount = "Carom Seeds for Better Digestion",
-//                address = "Mira Road, Thane"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.fafda_items_10,
-//                title = "Fafda with Papaya Chutney",
-//                price = "100",
-//                restaurantName = "Traditional Gujarati",
-//                rating = "4.5",
-//                deliveryTime = "30-35 mins",
-//                distance = "2.2 km",
-//                discount = "CHUTNEY OFF",
-//                discountAmount = "Fresh Raw Papaya Chutney Included",
-//                address = "Vasai West, Palghar"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.fafda_items_11,
-//                title = "Oil-Free Diet Fafda",
-//                price = "95",
-//                restaurantName = "Diet Farsan",
-//                rating = "4.8",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.8 km",
-//                discount = "OILFREE OFF",
-//                discountAmount = "Baked Instead of Fried",
-//                address = "Bhayandar East, Thane"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.fafda_items_12,
-//                title = "Fafda with Sambharo",
-//                price = "105",
-//                restaurantName = "Kathiawadi Special",
-//                rating = "4.6",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.6 km",
-//                discount = "SAMBHARO OFF",
-//                discountAmount = "Served with Spicy Cabbage Sambharo",
-//                address = "Nallasopara West, Palghar"
-//            ),
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.fafda_items_13,
-//                title = "Fafda with Kadhi Combo",
-//                price = "130",
-//                restaurantName = "Gujarati Combo House",
-//                rating = "4.7",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.4 km",
-//                discount = "KADHI OFF",
-//                discountAmount = "Complete Meal with Sweet Kadhi",
-//                address = "Virar West, Palghar"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.fafda_items_14,
-//                title = "Besan Fafda Gram Flour Special",
-//                price = "82",
-//                restaurantName = "Gram Flour Kitchen",
-//                rating = "4.5",
-//                deliveryTime = "15-20 mins",
-//                distance = "1.1 km",
-//                discount = "BESAN OFF",
-//                discountAmount = "Fresh Gram Flour with Spices",
-//                address = "Ulhasnagar, Thane"
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.fafda_items_15,
-//                title = "Party Fafda Pack (50 pcs)",
-//                price = "350",
-//                restaurantName = "Party Farsan",
-//                rating = "4.8",
-//                deliveryTime = "30-35 mins",
-//                distance = "2.5 km",
-//                discount = "PARTY OFF",
-//                discountAmount = "Perfect for Weddings & Functions",
-//                address = "Kalyan West, Thane"
-//            ),
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.fafda_items_16,
-//                title = "Fafda Thali Complete Meal",
-//                price = "150",
-//                restaurantName = "Gujarati Thali House",
-//                rating = "4.9",
-//                deliveryTime = "35-40 mins",
-//                distance = "1.9 km",
-//                discount = "THALI OFF",
-//                discountAmount = "Fafda with 3 Chutneys & Tea",
-//                address = "Dombivli East, Thane"
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.fafda_items_17,
-//                title = "Low-Salt Fafda Healthy",
-//                price = "87",
-//                restaurantName = "Healthy Heart Kitchen",
-//                rating = "4.6",
-//                deliveryTime = "25-30 mins",
-//                distance = "1.7 km",
-//                discount = "LOWSALT OFF",
-//                discountAmount = "60% Less Salt for BP Patients",
-//                address = "Badlapur East, Thane"
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.fafda_items_18,
-//                title = "Fafda with Green Chutney",
-//                price = "92",
-//                restaurantName = "Chutney Special",
-//                rating = "4.5",
-//                deliveryTime = "20-25 mins",
-//                distance = "1.0 km",
-//                discount = "GREEN OFF",
-//                discountAmount = "Fresh Coriander & Mint Chutney",
-//                address = "Ambernath East, Thane"
-//            ),
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.fafda_items_19,
-//                title = "Fafda with Curd Combo",
-//                price = "115",
-//                restaurantName = "Cool Combo House",
-//                rating = "4.8",
-//                deliveryTime = "45-50 mins",
-//                distance = "3.5 km",
-//                discount = "CURD OFF",
-//                discountAmount = "Served with Fresh Curd",
-//                address = "Navi Mumbai, Panvel"
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.fafda_items_20,
-//                title = "Premium Gold Fafda Luxury",
-//                price = "250",
-//                restaurantName = "Luxury Gujarati Farsan",
-//                rating = "4.9",
-//                deliveryTime = "50-55 mins",
-//                distance = "4.0 km",
-//                discount = "GOLD OFF",
-//                discountAmount = "Saffron Infused with Premium Spices",
-//                address = "South Mumbai, Colaba"
-//            )
-//        ).forEach { restaurantItem ->
-//            Column {
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val chocolateItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chocolate_items_1,
+                title = "Belgian Dark Chocolate (70%)",
+                price = "250",
+                restaurantName = "Belgian Chocolatier",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "BELGIAN OFF",
+                discountAmount = "Authentic Belgian Cocoa Beans",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chocolate_items_2,
+                title = "Swiss Milk Chocolate Bar",
+                price = "180",
+                restaurantName = "Swiss Delights",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "SWISS OFF",
+                discountAmount = "Creamy Swiss Milk Chocolate",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chocolate_items_3,
+                title = "Artisan Dark Chocolate Truffles (6pcs)",
+                price = "350",
+                restaurantName = "Artisan Chocolate Studio",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "TRUFFLE OFF",
+                discountAmount = "Handcrafted Gourmet Truffles",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chocolate_items_4,
+                title = "White Chocolate with Almonds",
+                price = "220",
+                restaurantName = "White Chocolate Heaven",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "WHITE OFF",
+                discountAmount = "Premium White Chocolate & Almonds",
+                address = "Santacruz, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chocolate_items_5,
+                title = "Ruby Chocolate Bar Pink",
+                price = "320",
+                restaurantName = "Ruby Chocolate Co.",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "RUBY OFF",
+                discountAmount = "Rare Natural Ruby Cocoa",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chocolate_items_6,
+                title = "Hazelnut Praline Chocolate",
+                price = "280",
+                restaurantName = "Nutty Chocolate House",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "HAZELNUT OFF",
+                discountAmount = "Creamy Hazelnut Praline Center",
+                address = "Malad, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chocolate_items_7,
+                title = "Sea Salt Dark Chocolate",
+                price = "210",
+                restaurantName = "Salt & Cocoa",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "SALT OFF",
+                discountAmount = "Himalayan Pink Salt Flakes",
+                address = "Khar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chocolate_items_8,
+                title = "Orange Zest Dark Chocolate",
+                price = "190",
+                restaurantName = "Citrus Chocolate",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "ORANGE OFF",
+                discountAmount = "Candied Orange Peel Infused",
+                address = "Dadar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chocolate_items_9,
+                title = "Sugar-Free Dark Chocolate",
+                price = "240",
+                restaurantName = "Healthy Chocolate Co.",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Sweetened with Stevia",
+                address = "Goregaon, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chocolate_items_10,
+                title = "Chocolate Gift Box Premium",
+                price = "500",
+                restaurantName = "Gift Chocolate Studio",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "GIFT OFF",
+                discountAmount = "Elegant Packaging & Assorted Chocolates",
+                address = "Worli, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chocolate_items_11,
+                title = "Caramel Milk Chocolate Bar",
+                price = "170",
+                restaurantName = "Caramel Delights",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "CARAMEL OFF",
+                discountAmount = "Gooey Caramel Center",
+                address = "Bandra East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chocolate_items_12,
+                title = "Mint Dark Chocolate",
+                price = "195",
+                restaurantName = "Mint Fresh Chocolate",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "MINT OFF",
+                discountAmount = "Fresh Peppermint Oil Infused",
+                address = "Vile Parle, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chocolate_items_13,
+                title = "Chocolate Spread Jar (500g)",
+                price = "320",
+                restaurantName = "Spread Masters",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "SPREAD OFF",
+                discountAmount = "Creamy Chocolate Hazelnut Spread",
+                address = "Thane, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chocolate_items_14,
+                title = "Organic Dark Chocolate (85%)",
+                price = "290",
+                restaurantName = "Organic Chocolate Co.",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "ORGANIC OFF",
+                discountAmount = "Certified Organic Cocoa Beans",
+                address = "Andheri East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chocolate_items_15,
+                title = "Chocolate Baking Chips (200g)",
+                price = "150",
+                restaurantName = "Baking Chocolate Store",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "BAKING OFF",
+                discountAmount = "Perfect for Cookies & Desserts",
+                address = "Chembur, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chocolate_items_16,
+                title = "Gourmet Hot Chocolate Mix",
+                price = "280",
+                restaurantName = "Hot Chocolate Bar",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "HOT OFF",
+                discountAmount = "Premium Drinking Chocolate",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chocolate_items_17,
+                title = "Vegan Dark Chocolate Bar",
+                price = "260",
+                restaurantName = "Vegan Chocolate Co.",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "2.3 km",
+                discount = "VEGAN OFF",
+                discountAmount = "Dairy-Free, Plant-Based",
+                address = "Lower Parel, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chocolate_items_18,
+                title = "Chocolate with Coffee Beans",
+                price = "230",
+                restaurantName = "Coffee Chocolate Fusion",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "COFFEE OFF",
+                discountAmount = "Arabica Coffee Beans Embedded",
+                address = "Fort, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chocolate_items_19,
+                title = "Chocolate Dipped Strawberries (8pcs)",
+                price = "380",
+                restaurantName = "Fruit Chocolate Art",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "STRAWBERRY OFF",
+                discountAmount = "Fresh Strawberries Dipped in Dark Chocolate",
+                address = "Peddar Road, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chocolate_items_20,
+                title = "Luxury Gold Leaf Chocolate",
+                price = "650",
+                restaurantName = "Luxury Chocolate Boutique",
+                rating = "4.9",
+                deliveryTime = "45-50 mins",
+                distance = "3.5 km",
+                discount = "GOLD OFF",
+                discountAmount = "Edible Gold Leaf & Premium Ingredients",
+                address = "South Mumbai, Mumbai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
 @Composable
 fun CurdRiceCategoryPage() {
-    CategoryContentPage("Curd Rice")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val curdRiceFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // RICE TYPE (with icons for common types)
+                FilterChip(
+                    id = "white_rice",
+                    text = "White Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice_grain
+                ),
+                FilterChip(
+                    id = "brown_rice",
+                    text = "Brown Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_brown_rice
+                ),
+                FilterChip(
+                    id = "basmati_rice",
+                    text = "Basmati Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jeera_rice",
+                    text = "Jeera Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CURD TYPE & CONSISTENCY
+                FilterChip(
+                    id = "thick_curd",
+                    text = "Thick Curd",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_thick_yogurt
+                ),
+                FilterChip(
+                    id = "homemade_curd",
+                    text = "Homemade Curd",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_homemade
+                ),
+                FilterChip(
+                    id = "sour_curd",
+                    text = "Sour Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_curd",
+                    text = "Fresh Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERING & ADDITIONS
+                FilterChip(
+                    id = "mustard_tempering",
+                    text = "Mustard Tempering",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mustard_seeds
+                ),
+                FilterChip(
+                    id = "ginger",
+                    text = "Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_chili",
+                    text = "Green Chili",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "asafoetida",
+                    text = "Asafoetida",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // GARNISHES & ADD-ONS
+                FilterChip(
+                    id = "grapes",
+                    text = "Grapes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coriander",
+                    text = "Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grated_carrot",
+                    text = "Grated Carrot",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEXTURE & STYLE
+                FilterChip(
+                    id = "simple",
+                    text = "Simple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tempered",
+                    text = "Tempered",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MEAL TIME & OCCASION
+                FilterChip(
+                    id = "lunch_box",
+                    text = "Lunch Box",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "festive",
+                    text = "Festive",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quick_meal",
+                    text = "Quick Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_onion_garlic",
+                    text = "No Onion Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // REGIONAL VARIATIONS
+                FilterChip(
+                    id = "tamil_style",
+                    text = "Tamil Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "andhra_style",
+                    text = "Andhra Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING METHOD
+                FilterChip(
+                    id = "freshly_made",
+                    text = "Freshly Made",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = curdRiceFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val curdRiceItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.curd_rice_1,
+                title = "Classic South Indian Curd Rice",
+                price = "120",
+                restaurantName = "Traditional Kitchen",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "Tempered",
+                discountAmount = "mustard seeds",
+                address = "Matunga, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.curd_rice_2,
+                title = "Curd Rice with Pomegranate",
+                price = "150",
+                restaurantName = "Fruit Fusion Foods",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "Fresh Fruits",
+                discountAmount = "vibrant flavor",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.curd_rice_3,
+                title = "Spicy Andhra Curd Rice",
+                price = "130",
+                restaurantName = "Andhra Spice House",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "2.2 km",
+                discount = "Extra Green Chilies",
+                discountAmount = "tangy twist",
+                address = "Chembur, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.curd_rice_4,
+                title = "Healthy Brown Rice Curd Rice",
+                price = "160",
+                restaurantName = "Healthy Bites",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "Whole Grain",
+                discountAmount = "nutritious meal",
+                address = "Powai, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.curd_rice_5,
+                title = "Curd Rice Thali Combo",
+                price = "180",
+                restaurantName = "South Indian Thali",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "3.0 km",
+                discount = "Full Meal",
+                discountAmount = "with pickle papad",
+                address = "Dadar, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.curd_rice_6,
+                title = "Premium Gourmet Curd Rice",
+                price = "200",
+                restaurantName = "Gourmet Kitchen",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "3.5 km",
+                discount = "Cashew Garnish",
+                discountAmount = "luxury touch",
+                address = "Worli, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = curdRiceItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val curdRiceItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.curd_rice_items_1,
+                title = "Classic South Indian Curd Rice",
+                price = "120",
+                restaurantName = "Anand Bhavan",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "TRADITION OFF",
+                discountAmount = "Authentic Tamil Nadu Style",
+                address = "Matunga, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.curd_rice_items_2,
+                title = "Curd Rice with Pomegranate",
+                price = "140",
+                restaurantName = "Fruitful Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "FRUITY OFF",
+                discountAmount = "Loaded with Fresh Pomegranate Seeds",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.curd_rice_items_3,
+                title = "Jeera Curd Rice",
+                price = "110",
+                restaurantName = "Cumin Special",
+                rating = "4.6",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "JEERA OFF",
+                discountAmount = "Roasted Cumin Seeds Infused",
+                address = "Santacruz, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.curd_rice_items_4,
+                title = "Tempered Curd Rice with Curry Leaves",
+                price = "130",
+                restaurantName = "Tadka House",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "TADKA OFF",
+                discountAmount = "Mustard & Curry Leaves Tempering",
+                address = "Dadar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.curd_rice_items_5,
+                title = "Curd Rice Thali",
+                price = "180",
+                restaurantName = "South Indian Thali",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "THALI OFF",
+                discountAmount = "With Pickle, Papad & Chutney",
+                address = "Malad, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.curd_rice_items_6,
+                title = "Summer Cooler Curd Rice",
+                price = "125",
+                restaurantName = "Summer Special Kitchen",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "SUMMER OFF",
+                discountAmount = "Perfect for Hot Summer Days",
+                address = "Borivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.curd_rice_items_7,
+                title = "Ginger Curd Rice",
+                price = "135",
+                restaurantName = "Ginger Zing",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "GINGER OFF",
+                discountAmount = "Fresh Ginger Grated Finely",
+                address = "Kandivali, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.curd_rice_items_8,
+                title = "Lunch Box Curd Rice",
+                price = "115",
+                restaurantName = "Lunch Box Special",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.7 km",
+                discount = "LUNCH OFF",
+                discountAmount = "Perfectly Packed for Office Lunch",
+                address = "Goregaon, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.curd_rice_items_9,
+                title = "Carrot & Coriander Curd Rice",
+                price = "145",
+                restaurantName = "Veggie Delight",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "VEGGIE OFF",
+                discountAmount = "Grated Carrot & Fresh Coriander",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.curd_rice_items_10,
+                title = "Festive Curd Rice",
+                price = "160",
+                restaurantName = "Festival Special",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.8 km",
+                discount = "FESTIVE OFF",
+                discountAmount = "Special Pongal & Diwali Recipe",
+                address = "Thane, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.curd_rice_items_11,
+                title = "Mint Curd Rice",
+                price = "125",
+                restaurantName = "Mint Fresh Kitchen",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "MINT OFF",
+                discountAmount = "Fresh Mint Leaves Infused",
+                address = "Vashi, Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.curd_rice_items_12,
+                title = "Curd Rice with Grapes",
+                price = "150",
+                restaurantName = "Fruit Fusion",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "GRAPES OFF",
+                discountAmount = "Sweet Green Grapes Added",
+                address = "Panvel, Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.curd_rice_items_13,
+                title = "Spicy Andhra Curd Rice",
+                price = "140",
+                restaurantName = "Andhra Spice",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "ANDHRA OFF",
+                discountAmount = "Extra Green Chilies & Spices",
+                address = "Chembur, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.curd_rice_items_14,
+                title = "Oil-Free Healthy Curd Rice",
+                price = "130",
+                restaurantName = "Healthy Bites",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "HEALTHY OFF",
+                discountAmount = "No Oil, Low Calorie Version",
+                address = "Dombivli, Thane"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.curd_rice_items_15,
+                title = "Party Pack Curd Rice (Family)",
+                price = "220",
+                restaurantName = "Party Special",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "3.0 km",
+                discount = "PARTY OFF",
+                discountAmount = "Serves 4-5 People",
+                address = "Kalyan, Thane"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.curd_rice_items_16,
+                title = "Curd Rice with Mango Pickle",
+                price = "135",
+                restaurantName = "Pickle House",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "PICKLE OFF",
+                discountAmount = "Served with Homemade Mango Pickle",
+                address = "Ulhasnagar, Thane"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.curd_rice_items_17,
+                title = "Brown Rice Curd Rice",
+                price = "155",
+                restaurantName = "Healthy Grains",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "2.5 km",
+                discount = "BROWN OFF",
+                discountAmount = "Made with Organic Brown Rice",
+                address = "Bhayandar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.curd_rice_items_18,
+                title = "Curd Rice with Cashew Tempering",
+                price = "170",
+                restaurantName = "Nutty Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "CASHEW OFF",
+                discountAmount = "Golden Fried Cashew Nuts",
+                address = "Virar, Palghar"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.curd_rice_items_19,
+                title = "Kids Special Sweet Curd Rice",
+                price = "120",
+                restaurantName = "Kids Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "KIDS OFF",
+                discountAmount = "Mildly Sweet, Less Spicy",
+                address = "Mira Road, Thane"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.curd_rice_items_20,
+                title = "Premium Gourmet Curd Rice",
+                price = "200",
+                restaurantName = "Gourmet South Indian",
+                rating = "4.9",
+                deliveryTime = "45-50 mins",
+                distance = "3.5 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Saffron Infused with Dry Fruits",
+                address = "Colaba, South Mumbai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun PuddingCategoryPage() {
-    CategoryContentPage("Pudding")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val puddingFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // PUDDING TYPE (with icons for common types)
+                FilterChip(
+                    id = "bread_pudding",
+                    text = "Bread Pudding",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bread_pudding
+                ),
+                FilterChip(
+                    id = "rice_pudding",
+                    text = "Rice Pudding",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice_pudding
+                ),
+                FilterChip(
+                    id = "chocolate_pudding",
+                    text = "Chocolate Pudding",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_pudding
+                ),
+                FilterChip(
+                    id = "vanilla_pudding",
+                    text = "Vanilla Pudding",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_pudding",
+                    text = "Caramel Pudding",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // MILK & DAIRY BASE
+                FilterChip(
+                    id = "whole_milk",
+                    text = "Whole Milk",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_milk_pudding
+                ),
+                FilterChip(
+                    id = "condensed_milk",
+                    text = "Condensed Milk",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_condensed_milk_pudding
+                ),
+                FilterChip(
+                    id = "coconut_milk",
+                    text = "Coconut Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almond_milk",
+                    text = "Almond Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEXTURE & CONSISTENCY
+                FilterChip(
+                    id = "firm",
+                    text = "Firm",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft_set",
+                    text = "Soft Set",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SWEETENERS
+                FilterChip(
+                    id = "jaggery",
+                    text = "Jaggery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honey",
+                    text = "Honey",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ADD-INS & TOPPINGS
+                FilterChip(
+                    id = "raisins",
+                    text = "Raisins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dry_fruits",
+                    text = "Dry Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_chips",
+                    text = "Chocolate Chips",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "room_temp",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL DIETARY
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OCCASION & SEASONAL
+                FilterChip(
+                    id = "winter_special",
+                    text = "Winter Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "summer_cooler",
+                    text = "Summer Cooler",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // COOKING METHOD
+                FilterChip(
+                    id = "steamed",
+                    text = "Steamed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stovetop",
+                    text = "Stovetop",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PORTION SIZE
+                FilterChip(
+                    id = "single_serve",
+                    text = "Single Serve",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = puddingFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val puddingItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.pudding_1,
+                title = "Classic Bread Pudding",
+                price = "180",
+                restaurantName = "Grandma's Kitchen",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "Homemade",
+                discountAmount = "with raisins & nuts",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.pudding_2,
+                title = "Chocolate Fudge Pudding",
+                price = "220",
+                restaurantName = "Choco Heaven",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "Rich & Creamy",
+                discountAmount = "decadent dessert",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.pudding_3,
+                title = "Caramel Custard Pudding",
+                price = "160",
+                restaurantName = "Dessert Delight",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "Caramel Topping",
+                discountAmount = "silky smooth texture",
+                address = "Khar, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.pudding_4,
+                title = "Rice Kheer Pudding",
+                price = "140",
+                restaurantName = "Traditional Sweets",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "Saffron Infused",
+                discountAmount = "with dry fruits",
+                address = "Matunga, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.pudding_5,
+                title = "Vegan Coconut Pudding",
+                price = "190",
+                restaurantName = "Plant Based Kitchen",
+                rating = "4.5",
+                deliveryTime = "35-40 mins",
+                distance = "2.5 km",
+                discount = "Dairy Free",
+                discountAmount = "coconut milk base",
+                address = "Lower Parel, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.pudding_6,
+                title = "Baked Eggless Pudding",
+                price = "200",
+                restaurantName = "Bakery Fresh",
+                rating = "4.7",
+                deliveryTime = "40-45 mins",
+                distance = "3.0 km",
+                discount = "Freshly Baked",
+                discountAmount = "warm & comforting",
+                address = "Malad West, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = puddingItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val puddingItemsList = listOf(
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.pudding_items_1,
+                title = "Classic Bread Pudding",
+                price = "180",
+                restaurantName = "Grandma's Kitchen",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "BREAD OFF",
+                discountAmount = "Homemade with Raisins & Nuts",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.pudding_items_2,
+                title = "Chocolate Fudge Pudding",
+                price = "220",
+                restaurantName = "Choco Heaven",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "CHOCO OFF",
+                discountAmount = "Rich & Decadent Chocolate Dessert",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.pudding_items_3,
+                title = "Caramel Custard Pudding",
+                price = "160",
+                restaurantName = "Dessert Delight",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "CARAMEL OFF",
+                discountAmount = "Silky Smooth with Caramel Topping",
+                address = "Khar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.pudding_items_4,
+                title = "Traditional Rice Kheer",
+                price = "140",
+                restaurantName = "Traditional Sweets",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.0 km",
+                discount = "KHEER OFF",
+                discountAmount = "Saffron Infused with Dry Fruits",
+                address = "Matunga, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.pudding_items_5,
+                title = "Vegan Coconut Pudding",
+                price = "190",
+                restaurantName = "Plant Based Kitchen",
+                rating = "4.5",
+                deliveryTime = "35-40 mins",
+                distance = "2.5 km",
+                discount = "VEGAN OFF",
+                discountAmount = "Dairy Free Coconut Milk Base",
+                address = "Lower Parel, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.pudding_items_6,
+                title = "Baked Eggless Pudding",
+                price = "200",
+                restaurantName = "Bakery Fresh",
+                rating = "4.7",
+                deliveryTime = "40-45 mins",
+                distance = "3.0 km",
+                discount = "EGGLESS OFF",
+                discountAmount = "Freshly Baked & Warm",
+                address = "Malad West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.pudding_items_7,
+                title = "Tapioca Pearl Pudding",
+                price = "170",
+                restaurantName = "Asian Fusion",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "TAPIOCA OFF",
+                discountAmount = "Chewy Pearls in Coconut Milk",
+                address = "Vile Parle, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.pudding_items_8,
+                title = "Fruit Custard Pudding",
+                price = "185",
+                restaurantName = "Fruit Fantasy",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "FRUIT OFF",
+                discountAmount = "Mixed Fresh Fruits in Custard",
+                address = "Santacruz, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.pudding_items_9,
+                title = "Sticky Toffee Pudding",
+                price = "210",
+                restaurantName = "British Bakery",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "TOFFEE OFF",
+                discountAmount = "British Classic with Date Sauce",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.pudding_items_10,
+                title = "Festive Phirni Pudding",
+                price = "165",
+                restaurantName = "Festival Special",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.8 km",
+                discount = "FESTIVE OFF",
+                discountAmount = "Ground Rice Pudding for Celebrations",
+                address = "Thane, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.pudding_items_11,
+                title = "Mango Pudding",
+                price = "195",
+                restaurantName = "Mango Mania",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "MANGO OFF",
+                discountAmount = "Seasonal Alphonso Mango Puree",
+                address = "Vashi, Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.pudding_items_12,
+                title = "Semolina Pudding",
+                price = "145",
+                restaurantName = "Healthy Treats",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.7 km",
+                discount = "SEMOLINA OFF",
+                discountAmount = "Healthy Sooji Pudding with Nuts",
+                address = "Panvel, Navi Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.pudding_items_13,
+                title = "Chilled Chocolate Pudding",
+                price = "175",
+                restaurantName = "Ice Cream World",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "CHILLED OFF",
+                discountAmount = "Perfect Summer Chocolate Dessert",
+                address = "Chembur, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.pudding_items_14,
+                title = "Sugar-Free Pudding",
+                price = "160",
+                restaurantName = "Healthy Bites",
+                rating = "4.5",
+                deliveryTime = "30-35 mins",
+                distance = "2.1 km",
+                discount = "SUGARFREE OFF",
+                discountAmount = "Sweetened with Stevia & Dates",
+                address = "Dombivli, Thane"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.pudding_items_15,
+                title = "Party Pudding Platter",
+                price = "350",
+                restaurantName = "Party Special",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "3.0 km",
+                discount = "PARTY OFF",
+                discountAmount = "Assorted Puddings for 6-8 People",
+                address = "Kalyan, Thane"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.pudding_items_16,
+                title = "Creamy Vanilla Pudding",
+                price = "155",
+                restaurantName = "Vanilla Valley",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "VANILLA OFF",
+                discountAmount = "Pure Madagascar Vanilla Beans",
+                address = "Ulhasnagar, Thane"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.pudding_items_17,
+                title = "Brown Rice Pudding",
+                price = "180",
+                restaurantName = "Organic Kitchen",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "2.3 km",
+                discount = "ORGANIC OFF",
+                discountAmount = "Made with Organic Brown Rice",
+                address = "Bhayandar, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.pudding_items_18,
+                title = "Dry Fruit Pudding",
+                price = "240",
+                restaurantName = "Nutty Delights",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "DRYFRUIT OFF",
+                discountAmount = "Loaded with Almonds, Cashews & Pistachios",
+                address = "Virar, Palghar"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.pudding_items_19,
+                title = "Kids Special Pudding",
+                price = "135",
+                restaurantName = "Kids Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "KIDS OFF",
+                discountAmount = "Colorful & Fun Pudding for Children",
+                address = "Mira Road, Thane"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.pudding_items_20,
+                title = "Premium Tiramisu Pudding",
+                price = "280",
+                restaurantName = "Italian Gourmet",
+                rating = "4.9",
+                deliveryTime = "45-50 mins",
+                distance = "3.5 km",
+                discount = "PREMIUM OFF",
+                discountAmount = "Coffee Liqueur Infused Italian Dessert",
+                address = "South Mumbai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

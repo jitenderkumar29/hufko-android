@@ -64970,17 +64970,1963 @@ fun TartCategoryPage() {
 
 @Composable
 fun TiramisuCategoryPage() {
-    CategoryContentPage("Tiramisu")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val tiramisuFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // BASE / LAYER TYPE (with icons)
+                FilterChip(
+                    id = "ladyfingers",
+                    text = "Ladyfingers (Savoiardi)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_ladyfingers_tiramisu  // or create this icon
+                ),
+                FilterChip(
+                    id = "sponge_cake",
+                    text = "Sponge Cake Base",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sponge_cake_tiramisu
+                ),
+                FilterChip(
+                    id = "gluten_free_base",
+                    text = "Gluten-Free Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_base",
+                    text = "Chocolate Base",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_tiramisu
+                ),
+
+                // COFFEE TYPE (with icons)
+                FilterChip(
+                    id = "espresso",
+                    text = "Espresso",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_espresso_tiramisu
+                ),
+                FilterChip(
+                    id = "decaf",
+                    text = "Decaf",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold_brew",
+                    text = "Cold Brew",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cold_brew_tiramisu
+                ),
+
+                // CREAM / MASCARPONE STYLE
+                FilterChip(
+                    id = "light_cream",
+                    text = "Light Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_cream",
+                    text = "Vegan Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVOR VARIATIONS (with icons)
+                FilterChip(
+                    id = "salted_caramel",
+                    text = "Salted Caramel",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hazelnut",
+                    text = "Hazelnut",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // LIQUEUR/SPIRITS (with selective icons)
+                FilterChip(
+                    id = "alcohol_free",
+                    text = "Alcohol-Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS & DECOR (with icons)
+                FilterChip(
+                    id = "chocolate_curls",
+                    text = "Chocolate Curls",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cocoa_nibs",
+                    text = "Cocoa Nibs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dusting",
+                    text = "Dusting (Cinnamon/Nutmeg)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES (selective icons)
+                FilterChip(
+                    id = "eggless",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto",
+                    text = "Keto-Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE / PORTION
+                FilterChip(
+                    id = "mini_tiramisu",
+                    text = "Mini (4\" )",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "small",
+                    text = "Small (6\")",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium (8\")",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large",
+                    text = "Large (10\")",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_size",
+                    text = "Party Size (12\"+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OCCASION (icons for special ones)
+                FilterChip(
+                    id = "anniversary",
+                    text = "Anniversary",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner_party",
+                    text = "Dinner Party",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "valentines",
+                    text = "Valentine's Day",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREMIUM FEATURES
+                FilterChip(
+                    id = "single_origin",
+                    text = "Single Origin Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "imported_mascarpone",
+                    text = "Imported Mascarpone",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "standard_tiramisu",
+                    text = "Standard (₹300-500)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_tiramisu",
+                    text = "Premium (₹500-800)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = tiramisuFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val tiramisuItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.tiramisu_1,  // Create/use appropriate drawable
+                title = "tiramisu_",
+                price = "₹380",
+                restaurantName = "Dolce Vita",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "15%",
+                discountAmount = "ladyfingers soaked in espresso, mascarpone cream, cocoa dusting",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.tiramisu_2,
+                title = "Chocolate Hazelnut Tiramisu",
+                price = "₹450",
+                restaurantName = "Nutella House",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.3 km",
+                discount = "10%",
+                discountAmount = "chocolate-soaked ladyfingers, hazelnut mascarpone, gianduja shavings",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.tiramisu_3,
+                title = "Strawberry Tiramisu",
+                price = "₹420",
+                restaurantName = "Berry & Bean",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "1.9 km",
+                discount = "12%",
+                discountAmount = "strawberry-infused ladyfingers, berry mascarpone, fresh strawberry garnish",
+                address = "Khar West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.tiramisu_4,
+                title = "Matcha Tiramisu",
+                price = "₹440",
+                restaurantName = "Tokyo Patisserie",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.1 km",
+                discount = "10%",
+                discountAmount = "ceremonial matcha-soaked sponge, white chocolate mascarpone, matcha dust",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.tiramisu_5,
+                title = "Salted Caramel Tiramisu",
+                price = "₹430",
+                restaurantName = "Caramel & Co",
+                rating = "4.8",
+                deliveryTime = "45-50 mins",
+                distance = "2.5 km",
+                discount = "15%",
+                discountAmount = "caramel-soaked ladyfingers, salted caramel mascarpone, caramel drizzle",
+                address = "Lower Parel, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.tiramisu_6,
+                title = "Vegan Tiramisu",
+                price = "₹410",
+                restaurantName = "Green Cravings",
+                rating = "4.7",
+                deliveryTime = "40-45 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "almond ladyfingers, oat milk mascarpone, date caramel, cacao dust",
+                address = "Worli, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = tiramisuItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val tiramisuItemsList = listOf(
+            // CLASSIC VARIATIONS (1-5)
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.tiramisu_items_1,
+                title = "Classic Italian Tiramisu",
+                price = "₹380",
+                restaurantName = "Dolce Vita",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "NONNA'S OFF",
+                discountAmount = "Savoiardi Ladyfingers, Espresso Soak, Mascarpone Cream, Cocoa Dust",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.tiramisu_items_2,
+                title = "Marsala Wine Tiramisu",
+                price = "₹420",
+                restaurantName = "Sicilian Kitchen",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.2 km",
+                discount = "MARSALA OFF",
+                discountAmount = "Marsala-Infused Ladyfingers, Velvety Mascarpone, Dark Cocoa",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.tiramisu_items_3,
+                title = "Dark Rum Tiramisu",
+                price = "₹440",
+                restaurantName = "Spiced Italian",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.3 km",
+                discount = "RUM OFF",
+                discountAmount = "Jamaican Rum Soak, Espresso Mascarpone, Chocolate Shavings",
+                address = "Khar West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.tiramisu_items_4,
+                title = "Alcohol-Free Tiramisu",
+                price = "₹360",
+                restaurantName = "Family Recipe",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.6 km",
+                discount = "FAMILY OFF",
+                discountAmount = "Espresso Syrup, Classic Mascarpone, Cocoa Powder",
+                address = "Dadar West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.tiramisu_items_5,
+                title = "Artisanal Single Origin Tiramisu",
+                price = "₹520",
+                restaurantName = "Caffè Speciale",
+                rating = "4.9",
+                deliveryTime = "45-50 mins",
+                distance = "2.5 km",
+                discount = "ARTISAN OFF",
+                discountAmount = "Colombian Single-Origin Espresso, Imported Mascarpone, Gold Dusting",
+                address = "Lower Parel, Mumbai"
+            ),
+
+            // CHOCOLATE VARIATIONS (6-8)
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.tiramisu_items_6,
+                title = "Double Chocolate Tiramisu",
+                price = "₹450",
+                restaurantName = "Chocolateria",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.0 km",
+                discount = "CHOCOLATE OFF",
+                discountAmount = "Chocolate-Soaked Sponge, Dark Chocolate Mascarpone, Cocoa Nibs",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.tiramisu_items_7,
+                title = "Gianduja Hazelnut Tiramisu",
+                price = "₹480",
+                restaurantName = "Piedmont Patisserie",
+                rating = "4.9",
+                deliveryTime = "45-50 mins",
+                distance = "2.4 km",
+                discount = "GIANDUJA OFF",
+                discountAmount = "Hazelnut Praline, Chocolate-Hazelnut Mascarpone, Crushed Hazelnuts",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.tiramisu_items_8,
+                title = "White Chocolate & Raspberry Tiramisu",
+                price = "₹460",
+                restaurantName = "Ruby Patisserie",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.1 km",
+                discount = "RUBY OFF",
+                discountAmount = "White Chocolate Ganache, Raspberry Coulis, Vanilla Mascarpone",
+                address = "Powai, Mumbai"
+            ),
+
+            // FRUIT VARIATIONS (9-12)
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.tiramisu_items_9,
+                title = "Strawberry Tiramisu",
+                price = "₹430",
+                restaurantName = "Berrylicious",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.9 km",
+                discount = "BERRY OFF",
+                discountAmount = "Strawberry-Infused Ladyfingers, Berry Mascarpone, Fresh Strawberries",
+                address = "Santacruz West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.tiramisu_items_10,
+                title = "Bronte Pistachio Tiramisu",
+                price = "₹520",
+                restaurantName = "Sicilian Delights",
+                rating = "4.9",
+                deliveryTime = "45-50 mins",
+                distance = "2.6 km",
+                discount = "PISTACHIO OFF",
+                discountAmount = "Bronte Pistachio Cream, Pistachio Sponge, Crushed Pistachios",
+                address = "Worli, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.tiramisu_items_11,
+                title = "Ceremonial Matcha Tiramisu",
+                price = "₹490",
+                restaurantName = "Tokyo Patisserie",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.3 km",
+                discount = "MATCHA OFF",
+                discountAmount = "Uji Matcha Sponge, White Chocolate Mascarpone, Matcha Dust",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.tiramisu_items_12,
+                title = "Alphonso Mango Tiramisu",
+                price = "₹470",
+                restaurantName = "Mango House",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.7 km",
+                discount = "MANGO OFF",
+                discountAmount = "Mango Purée Soak, Mango Mascarpone, Fresh Mango Cubes",
+                address = "Vile Parle West, Mumbai"
+            ),
+
+            // CARAMEL & NUT VARIATIONS (13-15)
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.tiramisu_items_13,
+                title = "Salted Caramel Tiramisu",
+                price = "₹440",
+                restaurantName = "Caramel & Co",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.2 km",
+                discount = "CARAMEL OFF",
+                discountAmount = "Caramel-Soaked Ladyfingers, Salted Caramel Mascarpone, Caramel Drizzle",
+                address = "Goregaon West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.tiramisu_items_14,
+                title = "Pecan Praline Tiramisu",
+                price = "₹460",
+                restaurantName = "Southern Comfort",
+                rating = "4.7",
+                deliveryTime = "45-50 mins",
+                distance = "2.5 km",
+                discount = "PECAN OFF",
+                discountAmount = "Pecan Praline Layer, Bourbon-Vanilla Mascarpone, Toasted Pecans",
+                address = "Malad West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.tiramisu_items_15,
+                title = "Amaretto Almond Tiramisu",
+                price = "₹450",
+                restaurantName = "Italian Spirit",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.1 km",
+                discount = "AMARETTO OFF",
+                discountAmount = "Amaretto-Soaked Ladyfingers, Almond Mascarpone, Toasted Almonds",
+                address = "Prabhadevi, Mumbai"
+            ),
+
+            // DIETARY & SPECIALTY (16-18)
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.tiramisu_items_16,
+                title = "Vegan Tiramisu",
+                price = "₹410",
+                restaurantName = "Plant Based Italian",
+                rating = "4.8",
+                deliveryTime = "45-50 mins",
+                distance = "2.4 km",
+                discount = "VEGAN OFF",
+                discountAmount = "Almond Ladyfingers, Cashew Mascarpone, Date Caramel, Cacao",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.tiramisu_items_17,
+                title = "Gluten-Free Tiramisu",
+                price = "₹430",
+                restaurantName = "Free From",
+                rating = "4.7",
+                deliveryTime = "40-45 mins",
+                distance = "2.0 km",
+                discount = "GF OFF",
+                discountAmount = "GF Almond Sponge, Espresso Soak, Classic Mascarpone",
+                address = "Santacruz East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.tiramisu_items_18,
+                title = "Keto Tiramisu",
+                price = "₹490",
+                restaurantName = "Keto Kitchen",
+                rating = "4.7",
+                deliveryTime = "45-50 mins",
+                distance = "2.3 km",
+                discount = "KETO OFF",
+                discountAmount = "Almond Flour Layers, Sugar-Free Mascarpone, Stevia Espresso",
+                address = "Andheri East, Mumbai"
+            ),
+
+            // PORTION VARIATIONS (19-20)
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.tiramisu_items_19,
+                title = "Mini Tiramisu Cups (Set of 6)",
+                price = "₹590",
+                restaurantName = "Petite Dolce",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.5 km",
+                discount = "MINI OFF",
+                discountAmount = "Assorted: Classic, Chocolate, Strawberry, Pistachio, Salted Caramel, Matcha",
+                address = "Fort, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.tiramisu_items_20,
+                title = "Party Size Tiramisu (12 servings)",
+                price = "₹1,290",
+                restaurantName = "Celebration Cakes",
+                rating = "4.9",
+                deliveryTime = "55-60 mins",
+                distance = "3.0 km",
+                discount = "PARTY OFF",
+                discountAmount = "Large Format Tiramisu, Custom Message Available, Serves 12-14",
+                address = "Lower Parel, Mumbai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun PieCategoryPage() {
-    CategoryContentPage("Pie")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val pieFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // CRUST TYPES (with icons)
+                FilterChip(
+                    id = "traditional_crust",
+                    text = "Traditional Pie Crust",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_traditional_crust_pie  // classic pie crust look
+                ),
+                FilterChip(
+                    id = "graham_cracker",
+                    text = "Graham Cracker Crust",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_graham_crust_pie  // crumb crust texture
+                ),
+                FilterChip(
+                    id = "shortbread",
+                    text = "Shortbread Crust",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "phyllo",
+                    text = "Phyllo Crust",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_crust",
+                    text = "Gluten-Free Crust",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PIE TYPES / FILLINGS (with selective icons)
+                FilterChip(
+                    id = "apple_pie",
+                    text = "Apple Pie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_apple_pie  // apple icon or slice
+                ),
+                FilterChip(
+                    id = "pumpkin_pie",
+                    text = "Pumpkin Pie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pumpkin_pie  // pumpkin icon
+                ),
+                FilterChip(
+                    id = "pecan_pie",
+                    text = "Pecan Pie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pecan_pie  // pecan nut icon
+                ),
+                FilterChip(
+                    id = "lemeringue",
+                    text = "Lemon Meringue",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_cream",
+                    text = "Chocolate Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_cream",
+                    text = "Coconut Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "banana_cream",
+                    text = "Banana Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pecan_chocolate",
+                    text = "Chocolate Pecan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet_potato",
+                    text = "Sweet Potato Pie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chess_pie",
+                    text = "Chess Pie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_cream",
+                    text = "Sugar Cream Pie",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS (with selective icons)]
+                FilterChip(
+                    id = "meringue",
+                    text = "Meringue Topping",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crumb_topping",
+                    text = "Crumb Topping",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lattice_crust",
+                    text = "Lattice Top",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES (icons for most relevant)]
+                FilterChip(
+                    id = "nut_free",
+                    text = "Nut-Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar_pie",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_pie",
+                    text = "Keto-Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SIZE / PORTION
+                FilterChip(
+                    id = "mini_pie",
+                    text = "Mini (4\" individual)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "small_pie",
+                    text = "Small (6\")",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_pie",
+                    text = "Medium (8\")",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_pie",
+                    text = "Large (10\")",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fourth_july",
+                    text = "4th of July",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "potluck",
+                    text = "Potluck Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SPECIAL FEATURES
+                FilterChip(
+                    id = "deep_dish",
+                    text = "Deep Dish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "galette",
+                    text = "Galette (Rustic)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tart",
+                    text = "Tart Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "standard_pie",
+                    text = "Standard (₹400-700)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_pie",
+                    text = "Premium (₹700-1000+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = pieFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        val pieItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.pie_1,  // Classic apple pie
+                title = "Classic Apple Pie",
+                price = "₹420",
+                restaurantName = "Pie & Co.",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "fresh granny smith apples, cinnamon-spiced filling, buttery lattice crust, served warm",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.pie_2,  // Pumpkin pie
+                title = "Spiced Pumpkin Pie",
+                price = "₹450",
+                restaurantName = "Autumn Bakes",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "10%",
+                discountAmount = "organic pumpkin purée, warm autumn spices, flaky butter crust, whipped cream on side",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.pie_3,  // Pecan pie
+                title = "Southern Pecan Pie",
+                price = "₹480",
+                restaurantName = "Southern Comfort",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.8 km",
+                discount = "12%",
+                discountAmount = "toasted pecans, rich bourbon-caramel filling, shortbread crust, vanilla bean garnish",
+                address = "Khar West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.pie_4,  // Key lime pie
+                title = "Key Lime Pie",
+                price = "₹410",
+                restaurantName = "Tropical Treats",
+                rating = "4.7",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "10%",
+                discountAmount = "fresh key lime juice, sweetened condensed milk, graham cracker crust, toasted meringue topping",
+                address = "Andheri West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.pie_5,  // Chocolate cream pie
+                title = "Triple Chocolate Cream Pie",
+                price = "₹440",
+                restaurantName = "Chocolate Room",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "2.0 km",
+                discount = "15%",
+                discountAmount = "dark chocolate pudding, milk chocolate mousse, white chocolate shavings, oreo crust",
+                address = "Lower Parel, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.pie_6,  // Mixed berry pie
+                title = "Summer Berry Pie",
+                price = "₹430",
+                restaurantName = "Berrylicious",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.7 km",
+                discount = "12%",
+                discountAmount = "mixed berries (blueberry, raspberry, blackberry), lemon zest, butter lattice top, vanilla ice cream on side",
+                address = "Worli, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pieItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val pieItemsList = listOf(
+            // CLASSIC VARIATIONS (1-5)
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.pie_items_1,
+                title = "Classic Apple Pie",
+                price = "₹420",
+                restaurantName = "Pie & Co.",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "GRANNY'S OFF",
+                discountAmount = "Granny Smith Apples, Cinnamon Spice, Lattice Crust, Served Warm",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.pie_items_2,
+                title = "Traditional Pumpkin Pie",
+                price = "₹450",
+                restaurantName = "Autumn Bakes",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.2 km",
+                discount = "FALL OFF",
+                discountAmount = "Organic Pumpkin, Warm Autumn Spices, Flaky Butter Crust, Whipped Cream",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.pie_items_3,
+                title = "Southern Pecan Pie",
+                price = "₹480",
+                restaurantName = "Southern Comfort",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.8 km",
+                discount = "PECAN OFF",
+                discountAmount = "Toasted Pecans, Rich Bourbon-Caramel, Shortbread Crust",
+                address = "Khar West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.pie_items_4,
+                title = "Key Lime Pie",
+                price = "₹410",
+                restaurantName = "Tropical Treats",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "KEY OFF",
+                discountAmount = "Fresh Key Lime Juice, Condensed Milk, Graham Crust, Meringue",
+                address = "Dadar West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.pie_items_5,
+                title = "Cherry Pie",
+                price = "₹440",
+                restaurantName = "Cherry Lane",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "CHERRY OFF",
+                discountAmount = "Bing Cherries, Almond Extract, Lattice Crust, Vanilla Bean",
+                address = "Lower Parel, Mumbai"
+            ),
+
+            // CREAM PIES (6-8)
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.pie_items_6,
+                title = "Banana Cream Pie",
+                price = "₹430",
+                restaurantName = "Cream & Sugar",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.7 km",
+                discount = "BANANA OFF",
+                discountAmount = "Fresh Bananas, Vanilla Pastry Cream, Whipped Topping, Graham Crust",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.pie_items_7,
+                title = "Coconut Cream Pie",
+                price = "₹440",
+                restaurantName = "Island Bakes",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.3 km",
+                discount = "COCONUT OFF",
+                discountAmount = "Toasted Coconut, Coconut Pastry Cream, Whipped Cream, Flaky Crust",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.pie_items_8,
+                title = "Chocolate Cream Pie",
+                price = "₹450",
+                restaurantName = "Chocolate Room",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "2.0 km",
+                discount = "CHOCOLATE OFF",
+                discountAmount = "Dark Chocolate Pudding, Chocolate Whipped Cream, Oreo Crust",
+                address = "Powai, Mumbai"
+            ),
+
+            // FRUIT VARIATIONS (9-12)
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.pie_items_9,
+                title = "Blueberry Pie",
+                price = "₹440",
+                restaurantName = "Berrylicious",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.6 km",
+                discount = "BERRY OFF",
+                discountAmount = "Wild Blueberries, Lemon Zest, Butter Lattice Crust",
+                address = "Santacruz West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.pie_items_10,
+                title = "Peach Pie",
+                price = "₹450",
+                restaurantName = "Georgia Peach",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "2.1 km",
+                discount = "PEACH OFF",
+                discountAmount = "Ripe Peaches, Cinnamon Streusel, Vanilla Glaze",
+                address = "Worli, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.pie_items_11,
+                title = "Strawberry Rhubarb Pie",
+                price = "₹460",
+                restaurantName = "Farmhouse Pies",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.4 km",
+                discount = "FARM OFF",
+                discountAmount = "Strawberries, Rhubarb, Orange Zest, Lattice Crust",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.pie_items_12,
+                title = "Mixed Berry Pie",
+                price = "₹470",
+                restaurantName = "Berry Basket",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.9 km",
+                discount = "BASKET OFF",
+                discountAmount = "Raspberry, Blueberry, Blackberry, Lemon Sugar Crust",
+                address = "Vile Parle West, Mumbai"
+            ),
+
+            // NUT & CARAMEL VARIATIONS (13-15)
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.pie_items_13,
+                title = "Pecan Bourbon Pie",
+                price = "₹490",
+                restaurantName = "Bourbon House",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.5 km",
+                discount = "BOURBON OFF",
+                discountAmount = "Kentucky Bourbon, Toasted Pecans, Chocolate Drizzle",
+                address = "Goregaon West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.pie_items_14,
+                title = "Maple Walnut Pie",
+                price = "₹470",
+                restaurantName = "Maple House",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.3 km",
+                discount = "MAPLE OFF",
+                discountAmount = "Grade A Maple Syrup, Toasted Walnuts, Butter Crust",
+                address = "Malad West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.pie_items_15,
+                title = "Salted Caramel Apple Pie",
+                price = "₹460",
+                restaurantName = "Caramel Kitchen",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "2.0 km",
+                discount = "CARAMEL OFF",
+                discountAmount = "Honeycrisp Apples, Salted Caramel, Streusel Topping",
+                address = "Prabhadevi, Mumbai"
+            ),
+
+            // CITRUS & MERINGUE (16-18)
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.pie_items_16,
+                title = "Lemon Meringue Pie",
+                price = "₹420",
+                restaurantName = "Citrus Dreams",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "LEMON OFF",
+                discountAmount = "Tangy Lemon Curd, Toasted Meringue, Buttery Crust",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.pie_items_17,
+                title = "Chocolate Meringue Pie",
+                price = "₹450",
+                restaurantName = "Meringue & Co",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.2 km",
+                discount = "MERINGUE OFF",
+                discountAmount = "Dark Chocolate Filling, Swiss Meringue, Chocolate Crust",
+                address = "Santacruz East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.pie_items_18,
+                title = "Orange Creamsicle Pie",
+                price = "₹430",
+                restaurantName = "Citrus & Cream",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "1.9 km",
+                discount = "CREAM OFF",
+                discountAmount = "Orange Curd, Vanilla Cream, Graham Crust, Orange Zest",
+                address = "Andheri East, Mumbai"
+            ),
+
+            // SPECIALTY PIES (19-20)
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.pie_items_19,
+                title = "Mini Pie Sampler (Set of 6)",
+                price = "₹650",
+                restaurantName = "Petite Pies",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "1.7 km",
+                discount = "SAMPLER OFF",
+                discountAmount = "Assorted: Apple, Pecan, Pumpkin, Cherry, Lemon, Chocolate Cream",
+                address = "Fort, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.pie_items_20,
+                title = "Party Size Apple Pie (12 servings)",
+                price = "₹1,150",
+                restaurantName = "Celebration Pies",
+                rating = "4.9",
+                deliveryTime = "50-55 mins",
+                distance = "3.2 km",
+                discount = "PARTY OFF",
+                discountAmount = "Extra Large Deep Dish Apple Pie, Serves 12-14, Cinnamon Ice Cream on Side",
+                address = "Lower Parel, Mumbai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun CustardCategoryPage() {
-    CategoryContentPage("Custard")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val custardFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // BASE / CUSTARD TYPES (with icons)
+                FilterChip(
+                    id = "classic_custard",
+                    text = "Classic Egg Custard",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_custard  // custard cup or ramekin
+                ),
+                FilterChip(
+                    id = "baked_custard",
+                    text = "Baked Custard",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_baked_custard  // oven-safe dish
+                ),
+                FilterChip(
+                    id = "stirred_custard",
+                    text = "Stirred Custard (Crème Anglaise)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stirred_custard  // whisk in pot
+                ),
+                FilterChip(
+                    id = "steamed_custard",
+                    text = "Steamed Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless_custard",
+                    text = "Eggless Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_custard",
+                    text = "Vegan Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CLASSIC CUSTARD DESSERTS (with selective icons)
+                FilterChip(
+                    id = "creme_brulee",
+                    text = "Crème Brûlée",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_creme_brulee  // ramekin with caramelized top
+                ),
+                FilterChip(
+                    id = "creme_caramel",
+                    text = "Crème Caramel (Flan)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_creme_caramel  // flan with caramel
+                ),
+                FilterChip(
+                    id = "flan",
+                    text = "Flan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "clafoutis",
+                    text = "Clafoutis",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fool",
+                    text = "Fruit Fool",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "trifle",
+                    text = "Trifle",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FLAVOR VARIATIONS (with icons for popular ones)
+                FilterChip(
+                    id = "coffee_custard",
+                    text = "Coffee Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "matcha_custard",
+                    text = "Matcha Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_custard",
+                    text = "Lemon Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_custard",
+                    text = "Coconut Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pistachio_custard",
+                    text = "Pistachio Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "saffron_custard",
+                    text = "Saffron Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rose_custard",
+                    text = "Rose Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // FRUIT CUSTARDS (with icons)
+                FilterChip(
+                    id = "banana_custard",
+                    text = "Banana Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "passionfruit_custard",
+                    text = "Passion Fruit Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TOPPINGS & ACCOMPANIMENTS (with selective icons)
+                FilterChip(
+                    id = "berry_compote",
+                    text = "Berry Compote",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_sauce",
+                    text = "Chocolate Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nuts",
+                    text = "Nut Topping",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookie_crumb",
+                    text = "Cookie Crumb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whipped_cream_custard",
+                    text = "Whipped Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES (icons for most relevant)
+                FilterChip(
+                    id = "low_sugar_custard",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_custard",
+                    text = "Keto-Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // SERVING STYLE
+                FilterChip(
+                    id = "family_size",
+                    text = "Family Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sharing_dish",
+                    text = "Sharing Dish",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // TEMPERATURE
+                FilterChip(
+                    id = "room_temp",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // OCCASION
+                FilterChip(
+                    id = "date_night",
+                    text = "Date Night",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner_party_custard",
+                    text = "Dinner Party",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "holiday_dessert",
+                    text = "Holiday Dessert",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "standard_custard",
+                    text = "Standard (₹150-350)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_custard",
+                    text = "Premium (₹350-600)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = custardFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+            val custardItems = listOf(
+        FoodItemDoubleF(
+            id = 1,
+            imageRes = R.drawable.custard_1,  // Classic Crème Brûlée
+            title = "Classic Crème Brûlée",
+            price = "₹320",
+            restaurantName = "La Douceur",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "1.2 km",
+            discount = "15%",
+            discountAmount = "Madagascar vanilla bean custard, caramelized sugar crust, fresh berries on side",
+            address = "Bandra West, Mumbai"
+        ),
+        FoodItemDoubleF(
+            id = 2,
+            imageRes = R.drawable.custard_2,  // Spanish Flan
+            title = "Spanish Caramel Flan",
+            price = "₹280",
+            restaurantName = "Tapas & Sweets",
+            rating = "4.8",
+            deliveryTime = "30-35 mins",
+            distance = "1.8 km",
+            discount = "10%",
+            discountAmount = "silky egg custard, golden caramel sauce, hint of citrus zest, chilled",
+            address = "Juhu, Mumbai"
+        ),
+        FoodItemDoubleF(
+            id = 3,
+            imageRes = R.drawable.custard_3,  // Panna Cotta
+            title = "Vanilla Bean Panna Cotta",
+            price = "₹290",
+            restaurantName = "Italian Delights",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "1.5 km",
+            discount = "12%",
+            discountAmount = "Italian cream custard, real vanilla bean, berry compote, pistachio crumble",
+            address = "Khar West, Mumbai"
+        ),
+        FoodItemDoubleF(
+            id = 4,
+            imageRes = R.drawable.custard_4,  // Chocolate Pot de Crème
+            title = "French Chocolate Pot de Crème",
+            price = "₹350",
+            restaurantName = "Le Chocolatier",
+            rating = "4.9",
+            deliveryTime = "30-35 mins",
+            distance = "2.0 km",
+            discount = "10%",
+            discountAmount = "Valrhona dark chocolate, silky French custard, sea salt, whipped cream",
+            address = "Andheri West, Mumbai"
+        ),
+        FoodItemDoubleF(
+            id = 5,
+            imageRes = R.drawable.custard_5,  // Mango Custard
+            title = "Alphonso Mango Custard",
+            price = "₹310",
+            restaurantName = "Mango House",
+            rating = "4.8",
+            deliveryTime = "25-30 mins",
+            distance = "1.4 km",
+            discount = "15%",
+            discountAmount = "fresh Alphonso mango purée, light egg custard, mango slices, saffron garnish",
+            address = "Lower Parel, Mumbai"
+        ),
+        FoodItemDoubleF(
+            id = 6,
+            imageRes = R.drawable.custard_6,  // Butterscotch Custard
+            title = "Salted Butterscotch Custard",
+            price = "₹300",
+            restaurantName = "Butter & Sugar",
+            rating = "4.8",
+            deliveryTime = "30-35 mins",
+            distance = "1.6 km",
+            discount = "12%",
+            discountAmount = "brown sugar custard, butterscotch chips, salted caramel swirl, shortbread crumble",
+            address = "Worli, Mumbai"
+        )
+    )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = custardItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            text = "Restaurants delivering to you",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Featured restaurants",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 18.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+////            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Spacer(modifier = Modifier.height(5.dp))
+//
+//        // Sample data based on the provided images
+//        val pieItemsList = listOf(
+//            // CLASSIC VARIATIONS (1-5)
+//            RestaurantItemFull(
+//                id = 1,
+//                imageRes = R.drawable.pie_items_1,
+//                title = "Classic Apple Pie",
+//                price = "₹420",
+//                restaurantName = "Pie & Co.",
+//                rating = "4.9",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.5 km",
+//                discount = "GRANNY'S OFF",
+//                discountAmount = "Granny Smith Apples, Cinnamon Spice, Lattice Crust, Served Warm",
+//                address = "Bandra West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 2,
+//                imageRes = R.drawable.pie_items_2,
+//                title = "Traditional Pumpkin Pie",
+//                price = "₹450",
+//                restaurantName = "Autumn Bakes",
+//                rating = "4.9",
+//                deliveryTime = "35-40 mins",
+//                distance = "2.2 km",
+//                discount = "FALL OFF",
+//                discountAmount = "Organic Pumpkin, Warm Autumn Spices, Flaky Butter Crust, Whipped Cream",
+//                address = "Juhu, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 3,
+//                imageRes = R.drawable.pie_items_3,
+//                title = "Southern Pecan Pie",
+//                price = "₹480",
+//                restaurantName = "Southern Comfort",
+//                rating = "4.8",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.8 km",
+//                discount = "PECAN OFF",
+//                discountAmount = "Toasted Pecans, Rich Bourbon-Caramel, Shortbread Crust",
+//                address = "Khar West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 4,
+//                imageRes = R.drawable.pie_items_4,
+//                title = "Key Lime Pie",
+//                price = "₹410",
+//                restaurantName = "Tropical Treats",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.9 km",
+//                discount = "KEY OFF",
+//                discountAmount = "Fresh Key Lime Juice, Condensed Milk, Graham Crust, Meringue",
+//                address = "Dadar West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 5,
+//                imageRes = R.drawable.pie_items_5,
+//                title = "Cherry Pie",
+//                price = "₹440",
+//                restaurantName = "Cherry Lane",
+//                rating = "4.9",
+//                deliveryTime = "35-40 mins",
+//                distance = "1.8 km",
+//                discount = "CHERRY OFF",
+//                discountAmount = "Bing Cherries, Almond Extract, Lattice Crust, Vanilla Bean",
+//                address = "Lower Parel, Mumbai"
+//            ),
+//
+//            // CREAM PIES (6-8)
+//            RestaurantItemFull(
+//                id = 6,
+//                imageRes = R.drawable.pie_items_6,
+//                title = "Banana Cream Pie",
+//                price = "₹430",
+//                restaurantName = "Cream & Sugar",
+//                rating = "4.8",
+//                deliveryTime = "35-40 mins",
+//                distance = "1.7 km",
+//                discount = "BANANA OFF",
+//                discountAmount = "Fresh Bananas, Vanilla Pastry Cream, Whipped Topping, Graham Crust",
+//                address = "Andheri West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 7,
+//                imageRes = R.drawable.pie_items_7,
+//                title = "Coconut Cream Pie",
+//                price = "₹440",
+//                restaurantName = "Island Bakes",
+//                rating = "4.8",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.3 km",
+//                discount = "COCONUT OFF",
+//                discountAmount = "Toasted Coconut, Coconut Pastry Cream, Whipped Cream, Flaky Crust",
+//                address = "BKC, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 8,
+//                imageRes = R.drawable.pie_items_8,
+//                title = "Chocolate Cream Pie",
+//                price = "₹450",
+//                restaurantName = "Chocolate Room",
+//                rating = "4.9",
+//                deliveryTime = "35-40 mins",
+//                distance = "2.0 km",
+//                discount = "CHOCOLATE OFF",
+//                discountAmount = "Dark Chocolate Pudding, Chocolate Whipped Cream, Oreo Crust",
+//                address = "Powai, Mumbai"
+//            ),
+//
+//            // FRUIT VARIATIONS (9-12)
+//            RestaurantItemFull(
+//                id = 9,
+//                imageRes = R.drawable.pie_items_9,
+//                title = "Blueberry Pie",
+//                price = "₹440",
+//                restaurantName = "Berrylicious",
+//                rating = "4.8",
+//                deliveryTime = "30-35 mins",
+//                distance = "1.6 km",
+//                discount = "BERRY OFF",
+//                discountAmount = "Wild Blueberries, Lemon Zest, Butter Lattice Crust",
+//                address = "Santacruz West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 10,
+//                imageRes = R.drawable.pie_items_10,
+//                title = "Peach Pie",
+//                price = "₹450",
+//                restaurantName = "Georgia Peach",
+//                rating = "4.8",
+//                deliveryTime = "35-40 mins",
+//                distance = "2.1 km",
+//                discount = "PEACH OFF",
+//                discountAmount = "Ripe Peaches, Cinnamon Streusel, Vanilla Glaze",
+//                address = "Worli, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 11,
+//                imageRes = R.drawable.pie_items_11,
+//                title = "Strawberry Rhubarb Pie",
+//                price = "₹460",
+//                restaurantName = "Farmhouse Pies",
+//                rating = "4.9",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.4 km",
+//                discount = "FARM OFF",
+//                discountAmount = "Strawberries, Rhubarb, Orange Zest, Lattice Crust",
+//                address = "BKC, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 12,
+//                imageRes = R.drawable.pie_items_12,
+//                title = "Mixed Berry Pie",
+//                price = "₹470",
+//                restaurantName = "Berry Basket",
+//                rating = "4.8",
+//                deliveryTime = "35-40 mins",
+//                distance = "1.9 km",
+//                discount = "BASKET OFF",
+//                discountAmount = "Raspberry, Blueberry, Blackberry, Lemon Sugar Crust",
+//                address = "Vile Parle West, Mumbai"
+//            ),
+//
+//            // NUT & CARAMEL VARIATIONS (13-15)
+//            RestaurantItemFull(
+//                id = 13,
+//                imageRes = R.drawable.pie_items_13,
+//                title = "Pecan Bourbon Pie",
+//                price = "₹490",
+//                restaurantName = "Bourbon House",
+//                rating = "4.9",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.5 km",
+//                discount = "BOURBON OFF",
+//                discountAmount = "Kentucky Bourbon, Toasted Pecans, Chocolate Drizzle",
+//                address = "Goregaon West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 14,
+//                imageRes = R.drawable.pie_items_14,
+//                title = "Maple Walnut Pie",
+//                price = "₹470",
+//                restaurantName = "Maple House",
+//                rating = "4.8",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.3 km",
+//                discount = "MAPLE OFF",
+//                discountAmount = "Grade A Maple Syrup, Toasted Walnuts, Butter Crust",
+//                address = "Malad West, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 15,
+//                imageRes = R.drawable.pie_items_15,
+//                title = "Salted Caramel Apple Pie",
+//                price = "₹460",
+//                restaurantName = "Caramel Kitchen",
+//                rating = "4.8",
+//                deliveryTime = "35-40 mins",
+//                distance = "2.0 km",
+//                discount = "CARAMEL OFF",
+//                discountAmount = "Honeycrisp Apples, Salted Caramel, Streusel Topping",
+//                address = "Prabhadevi, Mumbai"
+//            ),
+//
+//            // CITRUS & MERINGUE (16-18)
+//            RestaurantItemFull(
+//                id = 16,
+//                imageRes = R.drawable.pie_items_16,
+//                title = "Lemon Meringue Pie",
+//                price = "₹420",
+//                restaurantName = "Citrus Dreams",
+//                rating = "4.9",
+//                deliveryTime = "35-40 mins",
+//                distance = "1.8 km",
+//                discount = "LEMON OFF",
+//                discountAmount = "Tangy Lemon Curd, Toasted Meringue, Buttery Crust",
+//                address = "Colaba, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 17,
+//                imageRes = R.drawable.pie_items_17,
+//                title = "Chocolate Meringue Pie",
+//                price = "₹450",
+//                restaurantName = "Meringue & Co",
+//                rating = "4.8",
+//                deliveryTime = "40-45 mins",
+//                distance = "2.2 km",
+//                discount = "MERINGUE OFF",
+//                discountAmount = "Dark Chocolate Filling, Swiss Meringue, Chocolate Crust",
+//                address = "Santacruz East, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 18,
+//                imageRes = R.drawable.pie_items_18,
+//                title = "Orange Creamsicle Pie",
+//                price = "₹430",
+//                restaurantName = "Citrus & Cream",
+//                rating = "4.7",
+//                deliveryTime = "35-40 mins",
+//                distance = "1.9 km",
+//                discount = "CREAM OFF",
+//                discountAmount = "Orange Curd, Vanilla Cream, Graham Crust, Orange Zest",
+//                address = "Andheri East, Mumbai"
+//            ),
+//
+//            // SPECIALTY PIES (19-20)
+//            RestaurantItemFull(
+//                id = 19,
+//                imageRes = R.drawable.pie_items_19,
+//                title = "Mini Pie Sampler (Set of 6)",
+//                price = "₹650",
+//                restaurantName = "Petite Pies",
+//                rating = "4.9",
+//                deliveryTime = "40-45 mins",
+//                distance = "1.7 km",
+//                discount = "SAMPLER OFF",
+//                discountAmount = "Assorted: Apple, Pecan, Pumpkin, Cherry, Lemon, Chocolate Cream",
+//                address = "Fort, Mumbai"
+//            ),
+//            RestaurantItemFull(
+//                id = 20,
+//                imageRes = R.drawable.pie_items_20,
+//                title = "Party Size Apple Pie (12 servings)",
+//                price = "₹1,150",
+//                restaurantName = "Celebration Pies",
+//                rating = "4.9",
+//                deliveryTime = "50-55 mins",
+//                distance = "3.2 km",
+//                discount = "PARTY OFF",
+//                discountAmount = "Extra Large Deep Dish Apple Pie, Serves 12-14, Cinnamon Ice Cream on Side",
+//                address = "Lower Parel, Mumbai"
+//            )
+//        ).forEach { restaurantItem ->
+//            Column {
+//                RestaurantItemListFull(
+//                    restaurantItem = restaurantItem,
+//                    onWishlistClick = { },
+//                    onThreeDotClick = { },
+//                    onItemClick = { }
+//                )
+//            }
+//        }
+    }
 }
 
 @Composable

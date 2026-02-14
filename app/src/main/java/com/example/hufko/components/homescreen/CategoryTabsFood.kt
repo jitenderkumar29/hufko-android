@@ -66617,327 +66617,1577 @@ fun CustardCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-//        Spacer(modifier = Modifier.height(15.dp))
-//        Text(
-//            text = "Restaurants delivering to you",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Featured restaurants",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 18.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-////            textAlign = TextAlign.Center,
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(5.dp))
-//
-//        // Sample data based on the provided images
-//        val pieItemsList = listOf(
-//            // CLASSIC VARIATIONS (1-5)
-//            RestaurantItemFull(
-//                id = 1,
-//                imageRes = R.drawable.pie_items_1,
-//                title = "Classic Apple Pie",
-//                price = "₹420",
-//                restaurantName = "Pie & Co.",
-//                rating = "4.9",
-//                deliveryTime = "30-35 mins",
-//                distance = "1.5 km",
-//                discount = "GRANNY'S OFF",
-//                discountAmount = "Granny Smith Apples, Cinnamon Spice, Lattice Crust, Served Warm",
-//                address = "Bandra West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 2,
-//                imageRes = R.drawable.pie_items_2,
-//                title = "Traditional Pumpkin Pie",
-//                price = "₹450",
-//                restaurantName = "Autumn Bakes",
-//                rating = "4.9",
-//                deliveryTime = "35-40 mins",
-//                distance = "2.2 km",
-//                discount = "FALL OFF",
-//                discountAmount = "Organic Pumpkin, Warm Autumn Spices, Flaky Butter Crust, Whipped Cream",
-//                address = "Juhu, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 3,
-//                imageRes = R.drawable.pie_items_3,
-//                title = "Southern Pecan Pie",
-//                price = "₹480",
-//                restaurantName = "Southern Comfort",
-//                rating = "4.8",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.8 km",
-//                discount = "PECAN OFF",
-//                discountAmount = "Toasted Pecans, Rich Bourbon-Caramel, Shortbread Crust",
-//                address = "Khar West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 4,
-//                imageRes = R.drawable.pie_items_4,
-//                title = "Key Lime Pie",
-//                price = "₹410",
-//                restaurantName = "Tropical Treats",
-//                rating = "4.8",
-//                deliveryTime = "30-35 mins",
-//                distance = "1.9 km",
-//                discount = "KEY OFF",
-//                discountAmount = "Fresh Key Lime Juice, Condensed Milk, Graham Crust, Meringue",
-//                address = "Dadar West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 5,
-//                imageRes = R.drawable.pie_items_5,
-//                title = "Cherry Pie",
-//                price = "₹440",
-//                restaurantName = "Cherry Lane",
-//                rating = "4.9",
-//                deliveryTime = "35-40 mins",
-//                distance = "1.8 km",
-//                discount = "CHERRY OFF",
-//                discountAmount = "Bing Cherries, Almond Extract, Lattice Crust, Vanilla Bean",
-//                address = "Lower Parel, Mumbai"
-//            ),
-//
-//            // CREAM PIES (6-8)
-//            RestaurantItemFull(
-//                id = 6,
-//                imageRes = R.drawable.pie_items_6,
-//                title = "Banana Cream Pie",
-//                price = "₹430",
-//                restaurantName = "Cream & Sugar",
-//                rating = "4.8",
-//                deliveryTime = "35-40 mins",
-//                distance = "1.7 km",
-//                discount = "BANANA OFF",
-//                discountAmount = "Fresh Bananas, Vanilla Pastry Cream, Whipped Topping, Graham Crust",
-//                address = "Andheri West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 7,
-//                imageRes = R.drawable.pie_items_7,
-//                title = "Coconut Cream Pie",
-//                price = "₹440",
-//                restaurantName = "Island Bakes",
-//                rating = "4.8",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.3 km",
-//                discount = "COCONUT OFF",
-//                discountAmount = "Toasted Coconut, Coconut Pastry Cream, Whipped Cream, Flaky Crust",
-//                address = "BKC, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 8,
-//                imageRes = R.drawable.pie_items_8,
-//                title = "Chocolate Cream Pie",
-//                price = "₹450",
-//                restaurantName = "Chocolate Room",
-//                rating = "4.9",
-//                deliveryTime = "35-40 mins",
-//                distance = "2.0 km",
-//                discount = "CHOCOLATE OFF",
-//                discountAmount = "Dark Chocolate Pudding, Chocolate Whipped Cream, Oreo Crust",
-//                address = "Powai, Mumbai"
-//            ),
-//
-//            // FRUIT VARIATIONS (9-12)
-//            RestaurantItemFull(
-//                id = 9,
-//                imageRes = R.drawable.pie_items_9,
-//                title = "Blueberry Pie",
-//                price = "₹440",
-//                restaurantName = "Berrylicious",
-//                rating = "4.8",
-//                deliveryTime = "30-35 mins",
-//                distance = "1.6 km",
-//                discount = "BERRY OFF",
-//                discountAmount = "Wild Blueberries, Lemon Zest, Butter Lattice Crust",
-//                address = "Santacruz West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 10,
-//                imageRes = R.drawable.pie_items_10,
-//                title = "Peach Pie",
-//                price = "₹450",
-//                restaurantName = "Georgia Peach",
-//                rating = "4.8",
-//                deliveryTime = "35-40 mins",
-//                distance = "2.1 km",
-//                discount = "PEACH OFF",
-//                discountAmount = "Ripe Peaches, Cinnamon Streusel, Vanilla Glaze",
-//                address = "Worli, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 11,
-//                imageRes = R.drawable.pie_items_11,
-//                title = "Strawberry Rhubarb Pie",
-//                price = "₹460",
-//                restaurantName = "Farmhouse Pies",
-//                rating = "4.9",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.4 km",
-//                discount = "FARM OFF",
-//                discountAmount = "Strawberries, Rhubarb, Orange Zest, Lattice Crust",
-//                address = "BKC, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 12,
-//                imageRes = R.drawable.pie_items_12,
-//                title = "Mixed Berry Pie",
-//                price = "₹470",
-//                restaurantName = "Berry Basket",
-//                rating = "4.8",
-//                deliveryTime = "35-40 mins",
-//                distance = "1.9 km",
-//                discount = "BASKET OFF",
-//                discountAmount = "Raspberry, Blueberry, Blackberry, Lemon Sugar Crust",
-//                address = "Vile Parle West, Mumbai"
-//            ),
-//
-//            // NUT & CARAMEL VARIATIONS (13-15)
-//            RestaurantItemFull(
-//                id = 13,
-//                imageRes = R.drawable.pie_items_13,
-//                title = "Pecan Bourbon Pie",
-//                price = "₹490",
-//                restaurantName = "Bourbon House",
-//                rating = "4.9",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.5 km",
-//                discount = "BOURBON OFF",
-//                discountAmount = "Kentucky Bourbon, Toasted Pecans, Chocolate Drizzle",
-//                address = "Goregaon West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 14,
-//                imageRes = R.drawable.pie_items_14,
-//                title = "Maple Walnut Pie",
-//                price = "₹470",
-//                restaurantName = "Maple House",
-//                rating = "4.8",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.3 km",
-//                discount = "MAPLE OFF",
-//                discountAmount = "Grade A Maple Syrup, Toasted Walnuts, Butter Crust",
-//                address = "Malad West, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 15,
-//                imageRes = R.drawable.pie_items_15,
-//                title = "Salted Caramel Apple Pie",
-//                price = "₹460",
-//                restaurantName = "Caramel Kitchen",
-//                rating = "4.8",
-//                deliveryTime = "35-40 mins",
-//                distance = "2.0 km",
-//                discount = "CARAMEL OFF",
-//                discountAmount = "Honeycrisp Apples, Salted Caramel, Streusel Topping",
-//                address = "Prabhadevi, Mumbai"
-//            ),
-//
-//            // CITRUS & MERINGUE (16-18)
-//            RestaurantItemFull(
-//                id = 16,
-//                imageRes = R.drawable.pie_items_16,
-//                title = "Lemon Meringue Pie",
-//                price = "₹420",
-//                restaurantName = "Citrus Dreams",
-//                rating = "4.9",
-//                deliveryTime = "35-40 mins",
-//                distance = "1.8 km",
-//                discount = "LEMON OFF",
-//                discountAmount = "Tangy Lemon Curd, Toasted Meringue, Buttery Crust",
-//                address = "Colaba, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 17,
-//                imageRes = R.drawable.pie_items_17,
-//                title = "Chocolate Meringue Pie",
-//                price = "₹450",
-//                restaurantName = "Meringue & Co",
-//                rating = "4.8",
-//                deliveryTime = "40-45 mins",
-//                distance = "2.2 km",
-//                discount = "MERINGUE OFF",
-//                discountAmount = "Dark Chocolate Filling, Swiss Meringue, Chocolate Crust",
-//                address = "Santacruz East, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 18,
-//                imageRes = R.drawable.pie_items_18,
-//                title = "Orange Creamsicle Pie",
-//                price = "₹430",
-//                restaurantName = "Citrus & Cream",
-//                rating = "4.7",
-//                deliveryTime = "35-40 mins",
-//                distance = "1.9 km",
-//                discount = "CREAM OFF",
-//                discountAmount = "Orange Curd, Vanilla Cream, Graham Crust, Orange Zest",
-//                address = "Andheri East, Mumbai"
-//            ),
-//
-//            // SPECIALTY PIES (19-20)
-//            RestaurantItemFull(
-//                id = 19,
-//                imageRes = R.drawable.pie_items_19,
-//                title = "Mini Pie Sampler (Set of 6)",
-//                price = "₹650",
-//                restaurantName = "Petite Pies",
-//                rating = "4.9",
-//                deliveryTime = "40-45 mins",
-//                distance = "1.7 km",
-//                discount = "SAMPLER OFF",
-//                discountAmount = "Assorted: Apple, Pecan, Pumpkin, Cherry, Lemon, Chocolate Cream",
-//                address = "Fort, Mumbai"
-//            ),
-//            RestaurantItemFull(
-//                id = 20,
-//                imageRes = R.drawable.pie_items_20,
-//                title = "Party Size Apple Pie (12 servings)",
-//                price = "₹1,150",
-//                restaurantName = "Celebration Pies",
-//                rating = "4.9",
-//                deliveryTime = "50-55 mins",
-//                distance = "3.2 km",
-//                discount = "PARTY OFF",
-//                discountAmount = "Extra Large Deep Dish Apple Pie, Serves 12-14, Cinnamon Ice Cream on Side",
-//                address = "Lower Parel, Mumbai"
-//            )
-//        ).forEach { restaurantItem ->
-//            Column {
-//                RestaurantItemListFull(
-//                    restaurantItem = restaurantItem,
-//                    onWishlistClick = { },
-//                    onThreeDotClick = { },
-//                    onItemClick = { }
-//                )
-//            }
-//        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val custardPieItemsList = listOf(
+            // CLASSIC CUSTARD PIES (1-5)
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.custard_items_1,
+                title = "Classic Vanilla Custard Pie",
+                price = "₹390",
+                restaurantName = "Custard House",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.2 km",
+                discount = "VANILLA OFF",
+                discountAmount = "Madagascar Vanilla Bean Custard, Nutmeg Dusted, Buttery Pastry Shell",
+                address = "Bandra West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.custard_items_2,
+                title = "Old-Fashioned Baked Custard",
+                price = "₹370",
+                restaurantName = "Grandma's Kitchen",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.8 km",
+                discount = "GRANDMA OFF",
+                discountAmount = "Farm-Fresh Eggs, Creamy Texture, Caramelized Top, Served Chilled",
+                address = "Juhu, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.custard_items_3,
+                title = "Caramel Custard Flan",
+                price = "₹420",
+                restaurantName = "Flan Fantasy",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.5 km",
+                discount = "FLAN OFF",
+                discountAmount = "Silky Custard, Golden Caramel Sauce, Silicone Smooth Finish",
+                address = "Khar West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.custard_items_4,
+                title = "Coconut Custard Pie",
+                price = "₹410",
+                restaurantName = "Island Delights",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "2.0 km",
+                discount = "ISLAND OFF",
+                discountAmount = "Toasted Coconut Flakes, Creamy Coconut Custard, Flaky Crust",
+                address = "Dadar West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.custard_items_5,
+                title = "Butterscotch Custard Pie",
+                price = "₹440",
+                restaurantName = "Butter & Sugar",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.7 km",
+                discount = "BUTTER OFF",
+                discountAmount = "Rich Butterscotch Custard, Brown Sugar Streusel, Sea Salt Finish",
+                address = "Lower Parel, Mumbai"
+            ),
+
+            // FRUIT INFUSED CUSTARDS (6-9)
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.custard_items_6,
+                title = "Mango Custard Pie",
+                price = "₹430",
+                restaurantName = "Mango Mania",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.3 km",
+                discount = "MANGO OFF",
+                discountAmount = "Alphonso Mango Pulp, Silky Custard, Shortbread Crust, Saffron Garnish",
+                address = "Andheri West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.custard_items_7,
+                title = "Banana Custard Pie",
+                price = "₹400",
+                restaurantName = "Banana Stand",
+                rating = "4.7",
+                deliveryTime = "35-40 mins",
+                distance = "1.9 km",
+                discount = "BANANA OFF",
+                discountAmount = "Fresh Banana Slices, Vanilla Custard, Nilla Wafer Crust",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.custard_items_8,
+                title = "Strawberry Custard Pie",
+                price = "₹440",
+                restaurantName = "Strawberry Fields",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "1.4 km",
+                discount = "BERRY OFF",
+                discountAmount = "Fresh Strawberry Purée, Creamy Custard, Graham Cracker Crust",
+                address = "Powai, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.custard_items_9,
+                title = "Lemon Custard Pie",
+                price = "₹410",
+                restaurantName = "Citrus Kitchen",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.6 km",
+                discount = "CITRUS OFF",
+                discountAmount = "Tangy Lemon Custard, Toasted Meringue Topping, Butter Crust",
+                address = "Santacruz West, Mumbai"
+            ),
+
+            // SPICED & SEASONAL CUSTARDS (10-12)
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.custard_items_10,
+                title = "Pumpkin Spice Custard Pie",
+                price = "₹450",
+                restaurantName = "Autumn Spice",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.2 km",
+                discount = "SPICE OFF",
+                discountAmount = "Pumpkin Purée, Cinnamon-Nutmeg Custard, Whipped Cream Rosettes",
+                address = "Worli, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.custard_items_11,
+                title = "Cardamom Rose Custard Pie",
+                price = "₹460",
+                restaurantName = "Spice & Rose",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.3 km",
+                discount = "ROSE OFF",
+                discountAmount = "Green Cardamom Infused Custard, Rose Water Drizzle, Pistachio Crust",
+                address = "BKC, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.custard_items_12,
+                title = "Saffron Pistachio Custard Pie",
+                price = "₹480",
+                restaurantName = "Royal Treats",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "2.1 km",
+                discount = "ROYAL OFF",
+                discountAmount = "Kesar Saffron Custard, Crushed Pistachios, Almond Flour Crust",
+                address = "Vile Parle West, Mumbai"
+            ),
+
+            // CHOCOLATE CUSTARD VARIATIONS (13-15)
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.custard_items_13,
+                title = "Dark Chocolate Custard Pie",
+                price = "₹450",
+                restaurantName = "Cocoa House",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.5 km",
+                discount = "COCOA OFF",
+                discountAmount = "Belgian Dark Chocolate Custard, Chocolate Shavings, Oreo Crust",
+                address = "Goregaon West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.custard_items_14,
+                title = "Milk Chocolate Hazelnut Custard",
+                price = "₹470",
+                restaurantName = "Nutty Chocolate",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "1.8 km",
+                discount = "NUTTY OFF",
+                discountAmount = "Milk Chocolate Custard, Toasted Hazelnuts, Gianduja Swirl",
+                address = "Malad West, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.custard_items_15,
+                title = "White Chocolate Raspberry Custard",
+                price = "₹490",
+                restaurantName = "White Magic",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.7 km",
+                discount = "MAGIC OFF",
+                discountAmount = "Creamy White Chocolate Custard, Raspberry Coulis Swirl, Shortbread Crust",
+                address = "Prabhadevi, Mumbai"
+            ),
+
+            // INTERNATIONAL CUSTARD PIES (16-18)
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.custard_items_16,
+                title = "Portuguese Pastel de Nata Style",
+                price = "₹420",
+                restaurantName = "Lisbon Bakes",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "LISBON OFF",
+                discountAmount = "Egg Custard Tarts, Cinnamon Dusted, Flaky Puff Pastry, Served Warm",
+                address = "Colaba, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.custard_items_17,
+                title = "French Vanilla Custard Tart",
+                price = "₹460",
+                restaurantName = "Patisserie Paris",
+                rating = "4.8",
+                deliveryTime = "40-45 mins",
+                distance = "2.0 km",
+                discount = "PARIS OFF",
+                discountAmount = "Crème Pâtissière, Fresh Berries, Glazed Fruit Topping, Pâte Sucrée",
+                address = "Santacruz East, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.custard_items_18,
+                title = "Brazilian Pudim de Leite",
+                price = "₹430",
+                restaurantName = "Rio Sweets",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.9 km",
+                discount = "RIO OFF",
+                discountAmount = "Condensed Milk Custard, Caramel Topping, Silky Smooth Texture",
+                address = "Andheri East, Mumbai"
+            ),
+
+            // MODERN & SPECIALTY CUSTARDS (19-20)
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.custard_items_19,
+                title = "Matcha Green Tea Custard Pie",
+                price = "₹480",
+                restaurantName = "Zen Desserts",
+                rating = "4.8",
+                deliveryTime = "35-40 mins",
+                distance = "1.6 km",
+                discount = "ZEN OFF",
+                discountAmount = "Ceremonial Matcha Custard, White Chocolate Ganache, Black Sesame Crust",
+                address = "Fort, Mumbai"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.custard_items_20,
+                title = "Salted Caramel Custard Sampler (Set of 4)",
+                price = "₹620",
+                restaurantName = "Custard Collective",
+                rating = "4.9",
+                deliveryTime = "40-45 mins",
+                distance = "1.8 km",
+                discount = "COLLECT OFF",
+                discountAmount = "Mini Sampler: Vanilla, Chocolate, Mango, Salted Caramel Custard Pies",
+                address = "Lower Parel, Mumbai"
+            )
+        ).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
 @Composable
-fun SevPooriCategoryPage() {
-    CategoryContentPage("Sev Poori")
-}
+fun SevPooriCategoryPage() Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+val sevPuriFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // BASE / PURI TYPES (with icons)
+        FilterChip(
+            id = "regular_puri",
+            text = "Regular Puri",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_regular_puri  // round crispy puri
+        ),
+        FilterChip(
+            id = "mini_puri",
+            text = "Mini Puri (Party Size)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_mini_puri  // small bite-sized puri
+        ),
+        FilterChip(
+            id = "whole_wheat_puri",
+            text = "Whole Wheat Puri",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "baked_puri",
+            text = "Baked Puri (Low Oil)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // POTATO BASE VARIATIONS (with icons)
+        FilterChip(
+            id = "classic_aloo",
+            text = "Classic Masala Aloo",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_mashed_potato  // mashed potato icon
+        ),
+        FilterChip(
+            id = "spicy_aloo",
+            text = "Spicy Green Chilli Aloo",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "jeera_aloo",
+            text = "Jeera (Cumin) Aloo",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dahi_aloo",
+            text = "Dahi Aloo (with Yogurt)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // CHUTNEY VARIETIES (with icons for popular ones)
+        FilterChip(
+            id = "tamarind_chutney",
+            text = "Imli (Tamarind) Chutney",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_tamarind  // tamarind pod or sauce
+        ),
+        FilterChip(
+            id = "green_chutney",
+            text = "Green Coriander-Mint Chutney",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_green_chutney  // green sauce
+        ),
+        FilterChip(
+            id = "date_chutney",
+            text = "Date & Jaggery Chutney",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "spicy_dry_chutney",
+            text = "Spicy Dry Garlic Chutney",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SEV TOPPINGS (with icons)
+        FilterChip(
+            id = "masala_sev",
+            text = "Masala Sev (Spicy)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "bhujia_sev",
+            text = "Bhujia Sev",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pomegranate_sev",
+            text = "Anar (Pomegranate) Sev",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ADDITIONAL TOPPINGS (selective icons)
+        FilterChip(
+            id = "grated_coconut",
+            text = "Fresh Grated Coconut",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pomegranate_arils",
+            text = "Pomegranate Arils",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "sev_puri_chaat_masala",
+            text = "Extra Chaat Masala",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "lemon_juice",
+            text = "Lemon Juice",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DAHI (YOGURT) VARIATIONS (with icon)
+        FilterChip(
+            id = "hung_curd",
+            text = "Hung Curd (Thick Yogurt)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "sweet_dahi",
+            text = "Sweetened Yogurt",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPECIALTY VARIATIONS (with icons)
+        FilterChip(
+            id = "cheese_sev_puri",
+            text = "Cheese Sev Puri",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "paneer_sev_puri",
+            text = "Paneer Sev Puri",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mumbai_sev_puri",
+            text = "Mumbai Style (Extra Chutney)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "delhi_sev_puri",
+            text = "Delhi Style (More Sev)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PORTION SIZE (with icons)
+        FilterChip(
+            id = "sev_puri_family",
+            text = "Family Pack (24 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS
+        FilterChip(
+            id = "vegan_sev_puri",
+            text = "Vegan",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "gluten_free_puri",
+            text = "Gluten-Free",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = sevPuriFilters ,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+            val sevPuriItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.sev_puri_1,  // Classic Sev Puri
+        title = "Classic Mumbai Sev Puri",
+        price = "₹120",
+        restaurantName = "Mumbai Chaat House",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "0.8 km",
+        discount = "20%",
+        discountAmount = "crispy puris, mashed spiced potatoes, imli chutney, green chutney, nylon sev, fresh coriander",
+        address = "Bandra West, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.sev_puri_2,  // Dahi Sev Puri
+        title = "Dahi Sev Puri (with Yogurt)",
+        price = "₹140",
+        restaurantName = "Shreeji Chaat",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "15%",
+        discountAmount = "crispy puris, chilled whipped dahi, sweet tamarind chutney, spicy green chutney, fine sev, pomegranate",
+        address = "Juhu, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.sev_puri_3,  // Special Sev Puri
+        title = "Special Cheese Sev Puri",
+        price = "₹180",
+        restaurantName = "The Chaat Room",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "10%",
+        discountAmount = "grated mozzarella cheese, spiced potatoes, garlic chutney, date chutney, bhujia sev, fresh tomatoes",
+        address = "Khar West, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.sev_puri_4,  // Dry Fruit Sev Puri
+        title = "Dry Fruit Sev Puri",
+        price = "₹200",
+        restaurantName = "Royal Chaat",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "12%",
+        discountAmount = "crispy puris, masala aloo, chopped almonds, cashews, raisins, silvered pistachios, sweet chutney",
+        address = "Andheri West, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.sev_puri_5,  // Paneer Sev Puri
+        title = "Paneer Tikka Sev Puri",
+        price = "₹190",
+        restaurantName = "Punjabi Chaat",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.3 km",
+        discount = "15%",
+        discountAmount = "crispy puris, spiced paneer cubes, mint chutney, imli chutney, masala sev, onion, bell peppers",
+        address = "Lower Parel, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.sev_puri_6,  // Party Platter Sev Puri
+        title = "Sev Puri Party Platter (12 pcs)",
+        price = "₹350",
+        restaurantName = "Chaat Galli",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.0 km",
+        discount = "25%",
+        discountAmount = "assorted puris with 3 toppings: classic aloo, dahi, cheese, all chutneys, mixed sev, fresh garnishes",
+        address = "Worli, Mumbai"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = sevPuriItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+        val sevPooriItemsList = listOf(
+    // CLASSIC SEV POORI VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.sev_poori_1,
+        title = "Classic Mumbai Sev Puri",
+        price = "₹120",
+        restaurantName = "Mumbai Chaat House",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "CHAAT OFF",
+        discountAmount = "Crispy Puris, Diced Potatoes, Onions, Tomatoes, 3 Chutneys, Fine Sev",
+        address = "Dadar West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.sev_poori_2,
+        title = "Dahi Sev Puri",
+        price = "₹140",
+        restaurantName = "Shree Dahi Bhandar",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "DAHI OFF",
+        discountAmount = "Crispy Puris, Whipped Dahi, Sweet Chutney, Green Chutney, Fine Sev, Pomegranate",
+        address = "Matunga East, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.sev_poori_3,
+        title = "Masala Sev Puri",
+        price = "₹130",
+        restaurantName = "Masala Chaat",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "MASALA OFF",
+        discountAmount = "Extra Spicy Chaat Masala, Chopped Onions, Green Chilies, Mint Chutney, Thick Sev",
+        address = "Ghatkopar West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.sev_poori_4,
+        title = "Cheese Sev Puri",
+        price = "₹160",
+        restaurantName = "Cheesy Chaat",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "CHEESE OFF",
+        discountAmount = "Grated Amul Cheese, Classic Sev Puri Toppings, Green Chutney, Sweet Chutney",
+        address = "Mulund West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.sev_poori_5,
+        title = "Ragda Sev Puri",
+        price = "₹150",
+        restaurantName = "Ragda Junction",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "RAGDA OFF",
+        discountAmount = "White Pea Curry Base, Puris Topped With Ragda, Onions, Sev, Chutneys",
+        address = "Vile Parle West, Mumbai"
+    ),
+
+    // SPICY & TANGY VARIETIES (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.sev_poori_6,
+        title = "Spicy Tandoori Sev Puri",
+        price = "₹140",
+        restaurantName = "Tandoori Chaat",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "TANDOORI OFF",
+        discountAmount = "Tandoori Mayo, Spiced Potatoes, Onions, Mint Chutney, Crunchy Sev",
+        address = "Andheri West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.sev_poori_7,
+        title = "Chaat Sev Poori",
+        price = "₹130",
+        restaurantName = "Delhi Chaat Wala",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "DELHI OFF",
+        discountAmount = "North Indian Style, Chickpeas, Potatoes, Imli Chutney, Garlic Chutney, Sev",
+        address = "Borivali West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.sev_poori_8,
+        title = "Green Chutney Sev Puri",
+        price = "₹130",
+        restaurantName = "Hari Mirch",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "GREEN OFF",
+        discountAmount = "Extra Pudina Chutney, Coriander Garnish, Green Chilies, Fresh Sev",
+        address = "Kandivali West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.sev_poori_9,
+        title = "Imli Ki Sev Puri",
+        price = "₹140",
+        restaurantName = "Khatta Meetha",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.7 km",
+        discount = "IMLI OFF",
+        discountAmount = "Sweet & Tangy Imli Chutney, Date Pulp, Spiced Potatoes, Thin Sev",
+        address = "Malad West, Mumbai"
+    ),
+
+    // SPECIALITY SEV POORI (10-12)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.sev_poori_10,
+        title = "Paneer Sev Puri",
+        price = "₹170",
+        restaurantName = "Paneer Special",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.9 km",
+        discount = "PANEER OFF",
+        discountAmount = "Cottage Cheese Cubes, Spiced Potatoes, Green Chutney, Grated Sev",
+        address = "Powai, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.sev_poori_11,
+        title = "Corn & Cheese Sev Puri",
+        price = "₹160",
+        restaurantName = "Corn Fusion",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "CORN OFF",
+        discountAmount = "Sweet Corn Kernels, Cheese Sauce, Classic Toppings, Crispy Sev",
+        address = "BKC, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.sev_poori_12,
+        title = "Mumbai Railway Sev Puri",
+        price = "₹120",
+        restaurantName = "Station Chaat",
+        rating = "4.6",
+        deliveryTime = "15-20 mins",
+        distance = "0.8 km",
+        discount = "RAILWAY OFF",
+        discountAmount = "Quick Style, Extra Crunchy Puris, Onion-Sev Mix, 2 Chutneys",
+        address = "Santacruz Station, Mumbai"
+    ),
+
+    // HEALTHIER OPTIONS (13-15)
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.sev_poori_13,
+        title = "Whole Wheat Sev Puri",
+        price = "₹140",
+        restaurantName = "Healthy Chaat",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "HEALTHY OFF",
+        discountAmount = "Brown Puris, Low-Oil Sev, Fresh Veggies, Green Chutney",
+        address = "Juhu, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.sev_poori_14,
+        title = "Sprouts Sev Puri",
+        price = "₹150",
+        restaurantName = "Sprout House",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "SPROUT OFF",
+        discountAmount = "Healthy Moong Sprouts, Chopped Veggies, Lemon Juice, Bhujia Sev",
+        address = "Versova, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.sev_poori_15,
+        title = "Protein Rich Sev Puri",
+        price = "₹170",
+        restaurantName = "Fit Chaat",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "2.0 km",
+        discount = "FIT OFF",
+        discountAmount = "Chickpea & Paneer Topping, Multigrain Puris, Protein Sev, Mint Chutney",
+        address = "Lower Parel, Mumbai"
+    ),
+
+    // FUSION SEV POORI (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.sev_poori_16,
+        title = "Mexican Sev Puri",
+        price = "₹160",
+        restaurantName = "Mexican Chaat",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "MEXICAN OFF",
+        discountAmount = "Salsa, Refried Beans, Cheese, Sour Cream, Sev, Jalapeños",
+        address = "Andheri East, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.sev_poori_17,
+        title = "Thai Style Sev Puri",
+        price = "₹170",
+        restaurantName = "Thai Fusion",
+        rating = "4.7",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "THAI OFF",
+        discountAmount = "Thai Sweet Chilli Sauce, Peanuts, Fresh Herbs, Crispy Onions, Sev",
+        address = "Prabhadevi, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.sev_poori_18,
+        title = "Peri Peri Sev Puri",
+        price = "₹150",
+        restaurantName = "Spice Fusion",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "PERI OFF",
+        discountAmount = "Peri Peri Spiced Potatoes, Onions, Garlic Chutney, Flavored Sev",
+        address = "Goregaon West, Mumbai"
+    ),
+
+    // PARTY & SAMPLER PACKS (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.sev_poori_19,
+        title = "Sev Puri Party Pack (12 pcs)",
+        price = "₹350",
+        restaurantName = "Party Chaat",
+        rating = "4.9",
+        deliveryTime = "35-40 mins",
+        distance = "2.2 km",
+        discount = "PARTY OFF",
+        discountAmount = "Assorted 12 Pieces: 3 Classic, 3 Dahi, 3 Spicy, 3 Cheese Sev Puri",
+        address = "Worli, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.sev_poori_20,
+        title = "Sev Puri Sampler (4 Varieties)",
+        price = "₹220",
+        restaurantName = "Taste Lab",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "1.7 km",
+        discount = "SAMPLE OFF",
+        discountAmount = "Trial Box: Classic, Dahi, Masala & Cheese Sev Puri (2 pcs each)",
+        address = "Fort, Mumbai"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 
 @Composable
-fun MousseCategoryPage() {
-    CategoryContentPage("Mousse")
-}
+fun MousseCategoryPage()Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+    val mousseFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // BASE FLAVOR CATEGORIES (with icons)
+        FilterChip(
+            id = "chocolate_mousse",
+            text = "Chocolate",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_chocolate_mousse  // chocolate bar or cocoa
+        ),
+        FilterChip(
+            id = "fruit_mousse",
+            text = "Fruit Based",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_fruit_bowl_mousse  // mixed fruits
+        ),
+        FilterChip(
+            id = "nuts_caramel",
+            text = "Nuts & Caramel",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_nuts_mousse  // hazelnut or almond
+        ),
+        FilterChip(
+            id = "coffee_tea",
+            text = "Coffee & Tea",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // CHOCOLATE VARIATIONS (with icons)
+        FilterChip(
+            id = "dark_chocolate",
+            text = "Dark Chocolate (70%)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_dark_chocolate_mousse  // dark chocolate square
+        ),
+        FilterChip(
+            id = "milk_chocolate",
+            text = "Milk Chocolate",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "white_chocolate",
+            text = "White Chocolate",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "belgian_chocolate",
+            text = "Belgian Chocolate",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // FRUIT MOUSSE VARIETIES (with icons for popular ones)
+        FilterChip(
+            id = "mango_mousse",
+            text = "Mango",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_mango_mousse  // mango fruit
+        ),
+        FilterChip(
+            id = "raspberry_mousse",
+            text = "Raspberry",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "passion_fruit",
+            text = "Passion Fruit",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "lemon_mousse",
+            text = "Lemon",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // NUT & CARAMEL VARIETIES (with icons)
+        FilterChip(
+            id = "hazelnut_mousse",
+            text = "Hazelnut",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "almond_mousse",
+            text = "Almond",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // COFFEE & TEA VARIETIES
+        FilterChip(
+            id = "espresso_mousse",
+            text = "Espresso",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "matcha_mousse",
+            text = "Matcha Green Tea",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TEXTURE VARIATIONS (with icons)
+        FilterChip(
+            id = "airy_mousse",
+            text = "Light & Airy",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dense_mousse",
+            text = "Rich & Dense",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "layered_mousse",
+            text = "Layered (Multiple Flavors)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ADD-INS & TOPPINGS
+        FilterChip(
+            id = "chocolate_shavings",
+            text = "Chocolate Shavings",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "crunchy_pearls",
+            text = "Chocolate Pearls",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "nut_bits",
+            text = "Crushed Nuts",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PRESENTATION STYLES (with icons)
+        FilterChip(
+            id = "jar_mousse",
+            text = "Mason Jar",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "plated_mousse",
+            text = "Plated (Fine Dining)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS (with icons)
+        FilterChip(
+            id = "vegan_mousse",
+            text = "Vegan (Plant Based)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "gluten_free_mousse",
+            text = "Gluten Free",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "sugar_free",
+            text = "Sugar Free",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // OCCASION SPECIALS (with icons)
+        FilterChip(
+            id = "valentine_special",
+            text = "Valentine's Special",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PORTION SIZES
+        FilterChip(
+            id = "single_serving",
+            text = "Single Serving",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = mousseFilters ,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+ val mousseItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.mousse_1,  // Classic Dark Chocolate Mousse
+        title = "Belgian Dark Chocolate Mousse",
+        price = "₹250",
+        restaurantName = "The Chocolate Room",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "70% belgian dark chocolate, aerated silky texture, cocoa dusted, whipped cream swirl, chocolate shavings",
+        address = "Bandra West, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.mousse_2,  // Mango Mousse
+        title = "Alphonso Mango Mousse",
+        price = "₹220",
+        restaurantName = "Mango Masala",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "10%",
+        discountAmount = "fresh alphonso mango pulp, light & creamy texture, mango coulis swirl, pistachio crumble, mint sprig",
+        address = "Juhu, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.mousse_3,  // Salted Caramel Mousse
+        title = "Salted Caramel Crunch Mousse",
+        price = "₹280",
+        restaurantName = "Caramel & Co.",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "20%",
+        discountAmount = "rich caramel mousse, sea salt finish, crunchy caramel pearls, butterscotch drizzle, whipped cream",
+        address = "Khar West, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.mousse_4,  // Strawberry Mousse
+        title = "Fresh Strawberry Cream Mousse",
+        price = "₹240",
+        restaurantName = "Berry Bliss",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "12%",
+        discountAmount = "fresh strawberry purée, vanilla bean infused, strawberry gel center, white chocolate curls, fresh berry topping",
+        address = "Andheri West, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.mousse_5,  // Triple Layer Mousse
+        title = "Triple Layer Chocolate Mousse",
+        price = "₹320",
+        restaurantName = "Layered Desserts",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.8 km",
+        discount = "15%",
+        discountAmount = "three layers: dark, milk & white chocolate mousse, chocolate ganache drip, gold dust, chocolate pearls",
+        address = "Lower Parel, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.mousse_6,  // Assorted Mousse Box
+        title = "Mousse Sampler Box (4 Flavors)",
+        price = "₹450",
+        restaurantName = "Mousse Museum",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.1 km",
+        discount = "25%",
+        discountAmount = "mini cups: dark chocolate, mango, salted caramel, strawberry, assorted toppings, tasting spoon included",
+        address = "Worli, Mumbai"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = mousseItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+      val mousseItemsList = listOf(
+    // CLASSIC CHOCOLATE MOUSSE VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.mousse_items_1,
+        title = "Belgian Dark Chocolate Mousse",
+        price = "₹290",
+        restaurantName = "Cocoa House",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.3 km",
+        discount = "COCOA OFF",
+        discountAmount = "70% Belgian Dark Chocolate, Aerated Silky Texture, Cocoa Dusted, Chocolate Shavings",
+        address = "Bandra West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.mousse_items_2,
+        title = "Milk Chocolate Hazelnut Mousse",
+        price = "₹270",
+        restaurantName = "Nutty Chocolate",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "NUTTY OFF",
+        discountAmount = "Smooth Milk Chocolate, Toasted Hazelnut Crunch, Gianduja Swirl, Whipped Cream",
+        address = "Juhu, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.mousse_items_3,
+        title = "White Chocolate Raspberry Mousse",
+        price = "₹280",
+        restaurantName = "White Magic",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.7 km",
+        discount = "MAGIC OFF",
+        discountAmount = "Creamy White Chocolate, Raspberry Coulis Swirl, Fresh Berry Topping, Shortbread Crumb",
+        address = "Khar West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.mousse_items_4,
+        title = "Triple Chocolate Mousse",
+        price = "₹320",
+        restaurantName = "Layered Desserts",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "LAYER OFF",
+        discountAmount = "Three Layers: Dark, Milk & White Chocolate, Chocolate Ganache Drip, Gold Dust",
+        address = "Lower Parel, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.mousse_items_5,
+        title = "Salted Caramel Chocolate Mousse",
+        price = "₹300",
+        restaurantName = "Caramel & Co.",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "CARAMEL OFF",
+        discountAmount = "Dark Chocolate Mousse, Salted Caramel Core, Caramelized Almonds, Sea Salt Finish",
+        address = "Andheri West, Mumbai"
+    ),
+
+    // FRUIT MOUSSE VARIETIES (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.mousse_items_6,
+        title = "Alphonso Mango Mousse",
+        price = "₹260",
+        restaurantName = "Mango Mania",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "MANGO OFF",
+        discountAmount = "Fresh Alphonso Mango Pulp, Light & Creamy Texture, Mango Coulis, Pistachio Crumble",
+        address = "Vile Parle West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.mousse_items_7,
+        title = "Fresh Strawberry Mousse",
+        price = "₹250",
+        restaurantName = "Berry Bliss",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "BERRY OFF",
+        discountAmount = "Fresh Strawberry Purée, Vanilla Bean Infused, Strawberry Gel Center, White Chocolate Curls",
+        address = "Santacruz West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.mousse_items_8,
+        title = "Passion Fruit Mousse",
+        price = "₹270",
+        restaurantName = "Tropical Treats",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "PASSION OFF",
+        discountAmount = "Tangy Passion Fruit Curd, Light Mousse, Coconut Cream Layer, Toasted Coconut Flakes",
+        address = "Dadar West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.mousse_items_9,
+        title = "Mixed Berry Mousse",
+        price = "₹280",
+        restaurantName = "Berry Farms",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "MIXBERRY OFF",
+        discountAmount = "Strawberry, Blueberry & Raspberry Swirl, Creamy Vanilla Base, Fresh Berry Compote",
+        address = "Powai, Mumbai"
+    ),
+
+    // NUT & CARAMEL MOUSSE (10-12)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.mousse_items_10,
+        title = "Pistachio Rose Mousse",
+        price = "₹310",
+        restaurantName = "Rose & Pistachio",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.8 km",
+        discount = "ROSEPIST OFF",
+        discountAmount = "Ground Pistachio Mousse, Rose Water Infusion, Crushed Pistachios, Edible Rose Petals",
+        address = "BKC, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.mousse_items_11,
+        title = "Hazelnut Praline Mousse",
+        price = "₹320",
+        restaurantName = "Praline Heaven",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "PRALINE OFF",
+        discountAmount = "Hazelnut Praline Mousse, Gianduja Layer, Crushed HazelNuts, Chocolate Feather",
+        address = "Worli, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.mousse_items_12,
+        title = "Salted Caramel Pecan Mousse",
+        price = "₹300",
+        restaurantName = "Caramel Kitchen",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "PECAN OFF",
+        discountAmount = "Salted Caramel Mousse, Candied Pecans, Dulce de Leche Swirl, Caramel Drizzle",
+        address = "Malad West, Mumbai"
+    ),
+
+    // COFFEE & TEA MOUSSE (13-15)
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.mousse_items_13,
+        title = "Tiramisu Mousse",
+        price = "₹290",
+        restaurantName = "Italian Desserts",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.3 km",
+        discount = "TIRAMISU OFF",
+        discountAmount = "Coffee-Infused Mascarpone Mousse, Ladyfinger Crumb, Cocoa Dusted, Espresso Gel",
+        address = "Colaba, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.mousse_items_14,
+        title = "Matcha Green Tea Mousse",
+        price = "₹300",
+        restaurantName = "Zen Desserts",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "MATCHA OFF",
+        discountAmount = "Ceremonial Matcha, White Chocolate Base, Red Bean Swirl, Black Sesame Crumble",
+        address = "Fort, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.mousse_items_15,
+        title = "Espresso Coffee Mousse",
+        price = "₹270",
+        restaurantName = "Coffee Culture",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "ESPRESSO OFF",
+        discountAmount = "Brewed Espresso Mousse, Coffee Gel Center, Chocolate Coffee Beans, Whipped Cream",
+        address = "Goregaon West, Mumbai"
+    ),
+
+    // EXOTIC & PREMIUM MOUSSE (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.mousse_items_16,
+        title = "Champagne & Strawberry Mousse",
+        price = "₹380",
+        restaurantName = "Celebration Desserts",
+        rating = "4.9",
+        deliveryTime = "35-40 mins",
+        distance = "2.1 km",
+        discount = "CHAMPAGNE OFF",
+        discountAmount = "Champagne-Infused Mousse, Strawberry Gelee, Gold Leaf Garnish, Premium Glass",
+        address = "Prabhadevi, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.mousse_items_17,
+        title = "Saffron Cardamom Mousse",
+        price = "₹350",
+        restaurantName = "Royal Treats",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "SAFFRON OFF",
+        discountAmount = "Kesar Saffron Mousse, Green Cardamom Infusion, Crushed Almonds, Silver Leaf",
+        address = "Andheri East, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.mousse_items_18,
+        title = "Blueberry Lavender Mousse",
+        price = "₹320",
+        restaurantName = "Botanical Desserts",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "1.7 km",
+        discount = "LAVENDER OFF",
+        discountAmount = "Lavender Infused Mousse, Blueberry Compote Core, Honey Lavender Glaze, Edible Flowers",
+        address = "Juhu, Mumbai"
+    ),
+
+    // MINIATURE & SAMPLER PACKS (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.mousse_items_19,
+        title = "Mousse Shot Sampler (Set of 6)",
+        price = "₹420",
+        restaurantName = "Mini Desserts",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.8 km",
+        discount = "SHOT OFF",
+        discountAmount = "Mini Shots: Dark Choc, Mango, Strawberry, Salted Caramel, Pistachio, White Choc",
+        address = "Lower Parel, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.mousse_items_20,
+        title = "Mousse Gift Box (4 Premium Flavors)",
+        price = "₹550",
+        restaurantName = "Luxury Mousse",
+        rating = "4.9",
+        deliveryTime = "35-40 mins",
+        distance = "2.2 km",
+        discount = "GIFT OFF",
+        discountAmount = "Gift Box: Belgian Dark, Alphonso Mango, Champagne Strawberry, Saffron Pistachio",
+        address = "BKC, Mumbai"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 
 @Composable
 fun DalKachoriCategoryPage() {

@@ -66930,7 +66930,8 @@ fun CustardCategoryPage() {
 }
 
 @Composable
-fun SevPooriCategoryPage() Column(
+fun SevPooriCategoryPage(){
+Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
@@ -67554,9 +67555,11 @@ val sevPuriFilters = FilterConfig(
             }
         }
     }
+}
 
 @Composable
-fun MousseCategoryPage()Column(
+fun MousseCategoryPage(){
+Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
@@ -68188,10 +68191,598 @@ fun MousseCategoryPage()Column(
             }
         }
     }
+}
 
 @Composable
 fun DalKachoriCategoryPage() {
-    CategoryContentPage("Dal Kachori")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+    val kachoriFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // MAIN KACHORI TYPES (with icons)
+        FilterChip(
+            id = "dal_kachori",
+            text = "Dal Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_dal_kachori  // whole kachori with filling visible
+        ),
+        FilterChip(
+            id = "moong_dal_kachori",
+            text = "Moong Dal Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_moong_dal_kachori  // moong dal grains
+        ),
+        FilterChip(
+            id = "masala_kachori",
+            text = "Masala Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_masala_kachori  // spicy kachori with red spots
+        ),
+        FilterChip(
+            id = "pyaaz_kachori",
+            text = "Pyaz Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_onion_kachori  // onion slices
+        ),
+
+        // REGIONAL VARIETIES (with icons for popular ones)
+        FilterChip(
+            id = "jodhpuri_kachori",
+            text = "Jodhpuri Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_jodhpuri_kachori  // Rajasthani style
+        ),
+        FilterChip(
+            id = "kolkata_kachori",
+            text = "Kolkata Style (Radhaballavi)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "indori_kachori",
+            text = "Indori Kachori",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // FILLING VARIATIONS (with icons)
+        FilterChip(
+            id = "urad_dal_filling",
+            text = "Urad Dal Filling",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chana_dal_filling",
+            text = "Chana Dal Filling",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mix_dal_filling",
+            text = "Mixed Dal Filling",
+            type = FilterType.TEXT_ONLY
+        ),
+        // SPICE LEVELS (with icons)
+        FilterChip(
+            id = "mild_spice",
+            text = "Mild Spice",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "medium_spice",
+            text = "Medium Spice",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ACCOMPANIMENTS (with icons)
+        FilterChip(
+            id = "garlic_chutney",
+            text = "Garlic Chutney (Lehsun)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "sweet_chutney",
+            text = "Sweet Date Chutney (Khajur)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SERVING STYLES (with icons)
+        FilterChip(
+            id = "plate_kachori",
+            text = "Plate (with Chutneys)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SIZE OPTIONS
+        FilterChip(
+            id = "mini_kachori",
+            text = "Mini Kachoris",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "regular_size",
+            text = "Regular Size",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS (with icons)
+        FilterChip(
+            id = "vegan_kachori",
+            text = "Vegan (Oil based)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPECIALTY
+        FilterChip(
+            id = "stuffed_kachori",
+            text = "Extra Stuffed",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "crispy_kachori",
+            text = "Extra Crispy",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "flaky_layers",
+            text = "Flaky Layered (Kachori)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = kachoriFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+ val kachoriItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.kachori_1,  // Classic Dal Kachori
+        title = "Rajasthani Moong Dal Kachori",
+        price = "₹120",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.2 km",
+        discount = "20%",
+        discountAmount = "crispy flaky exterior, spiced moong dal filling, served with imli chutney & green chutney, fresh coriander",
+        address = "Jodhpur Cross Road, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.kachori_2,  // Pyaz Kachori
+        title = "Pyaz Kachori (Onion Stuffed)",
+        price = "₹140",
+        restaurantName = "Shree Bikaner Mishthan Bhandar",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "10%",
+        discountAmount = "golden fried kachori, spicy onion filling, fennel seeds, served with aloo sabzi & sweet boondi, crunchy texture",
+        address = "Bapu Bazar, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.kachori_3,  // Jodhpuri Kachori
+        title = "Jodhpuri Mawa Kachori",
+        price = "₹160",
+        restaurantName = "Jodhpur Sweets",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "15%",
+        discountAmount = "sweet & spicy fusion, khoya mawa filling, dry fruits, cardamom flavor, served with rabri, silver leaf garnish",
+        address = "Sardarpura, Jodhpur"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.kachori_4,  // Dahi Kachori Chaat
+        title = "Dahi Kachori Chaat",
+        price = "₹110",
+        restaurantName = "Chaat Galli",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "0.8 km",
+        discount = "25%",
+        discountAmount = "crispy kachoris topped with whipped dahi, sweet tamarind chutney, green chutney, roasted cumin, pomegranate, sev",
+        address = "C Scheme, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.kachori_5,  // Masala Kachori
+        title = "Teekha Masala Kachori",
+        price = "₹130",
+        restaurantName = "Spice Route",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "12%",
+        discountAmount = "extra spicy filling, crushed peppercorns, red chili powder, hing, served with aloo sabzi & garlic chutney, crispy layers",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.kachori_6,  // Mini Kachori Platter
+        title = "Mini Kachori Platter (6 pcs)",
+        price = "₹200",
+        restaurantName = "Traditional Tastes",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.9 km",
+        discount = "30%",
+        discountAmount = "assorted mini kachoris: 2 moong dal, 2 pyaz, 2 masala, served with 3 chutneys (imli, mint, garlic), onion rings, lemon wedge",
+        address = "Malviya Nagar, Jaipur"
+    )
+)
+
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = kachoriItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+     val kachoriItemsList = listOf(
+    // CLASSIC DAL KACHORI VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.kachori_items_1,
+        title = "Rajasthani Moong Dal Kachori",
+        price = "₹120",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.2 km",
+        discount = "RAJASTHAN OFF",
+        discountAmount = "Crispy Flaky Exterior, Spiced Moong Dal Filling, Imli Chutney, Green Chutney, Fresh Coriander",
+        address = "C Scheme, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.kachori_items_2,
+        title = "Pyaz Kachori (Onion Stuffed)",
+        price = "₹130",
+        restaurantName = "Shree Bikaner Mishthan Bhandar",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "PYAZ OFF",
+        discountAmount = "Golden Fried Kachori, Spicy Onion Filling, Fennel Seeds, Aloo Sabzi, Sweet Boondi",
+        address = "Bapu Bazar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.kachori_items_3,
+        title = "Jodhpuri Mawa Kachori",
+        price = "₹160",
+        restaurantName = "Jodhpur Sweets",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "MAWA OFF",
+        discountAmount = "Sweet & Spicy Fusion, Khoya Mawa Filling, Dry Fruits, Cardamom Flavor, Rabri, Silver Leaf",
+        address = "Sardarpura, Jodhpur"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.kachori_items_4,
+        title = "Bikaneri Kachori",
+        price = "₹140",
+        restaurantName = "Bikaner Mishthan Bhandar",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.3 km",
+        discount = "BIKANER OFF",
+        discountAmount = "Famous Bikaneri Style, Crunchy Layers, Spiced Dal Filling, Hing, Saunf, Served with Aloo Sabzi",
+        address = "Wani, Bikaner"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.kachori_items_5,
+        title = "Masala Kachori (Teekha)",
+        price = "₹130",
+        restaurantName = "Spice Route",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "TEETHA OFF",
+        discountAmount = "Extra Spicy Filling, Crushed Peppercorns, Red Chili Powder, Hing, Garlic Chutney, Crispy Layers",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+
+    // REGIONAL KACHORI VARIETIES (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.kachori_items_6,
+        title = "Kolkata Radhaballavi",
+        price = "₹150",
+        restaurantName = "Bengali Sweets",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "BENGAL OFF",
+        discountAmount = "Large Flaky Kachori, Urad Dal Filling, Bengali Style Spices, Aloo Dom, Cholar Dal",
+        address = "Salt Lake, Kolkata"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.kachori_items_7,
+        title = "Indori Kachori",
+        price = "₹140",
+        restaurantName = "Indore Chaat House",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "INDORE OFF",
+        discountAmount = "Indori Style, Thin & Crispy, Moong Dal Filling, Imli Chutney, Sev, Pomegranate",
+        address = "Rajwada, Indore"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.kachori_items_8,
+        title = "Khasta Kachori (Agra Style)",
+        price = "₹120",
+        restaurantName = "Agra Sweets",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "KHASTA OFF",
+        discountAmount = "Extra Flaky & Crispy, Moong Dal Filling, Mild Spices, Aloo Sabzi, Imli Chutney",
+        address = "Tajganj, Agra"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.kachori_items_9,
+        title = "Lucknowi Kachori",
+        price = "₹150",
+        restaurantName = "Lucknowi Zaika",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "NAWABI OFF",
+        discountAmount = "Awadhi Style, Mawa & Paneer Filling, Saffron Infused, Dry Fruits, Silver Leaf",
+        address = "Hazratganj, Lucknow"
+    ),
+
+    // CHAAT VARIETIES (10-12)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.kachori_items_10,
+        title = "Dahi Kachori Chaat",
+        price = "₹110",
+        restaurantName = "Chaat Galli",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "0.8 km",
+        discount = "DAHI OFF",
+        discountAmount = "Crispy Kachoris, Whipped Dahi, Sweet Imli Chutney, Green Chutney, Roasted Cumin, Pomegranate, Sev",
+        address = "C Scheme, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.kachori_items_11,
+        title = "Kachori Chaat Special",
+        price = "₹130",
+        restaurantName = "Chaat House",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.0 km",
+        discount = "CHAAT OFF",
+        discountAmount = "Crushed Kachoris, Yogurt, Tamarind Chutney, Mint Chutney, Onion, Tomato, Sev, Fresh Coriander",
+        address = "MI Road, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.kachori_items_12,
+        title = "Kachori Tikka",
+        price = "₹140",
+        restaurantName = "Street Food Junction",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "TIKKA OFF",
+        discountAmount = "Grilled Kachoris, Spiced Yogurt, Mint Chutney, Onion Rings, Green Chilies, Chaat Masala",
+        address = "Sodala, Jaipur"
+    ),
+
+    // FILLING VARIATIONS (13-15)
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.kachori_items_13,
+        title = "Urad Dal Kachori",
+        price = "₹130",
+        restaurantName = "Dal Bati House",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "URAD OFF",
+        discountAmount = "Black Gram Filling, Whole Spices, Ginger Garlic Paste, Flaky Layers, Aloo Sabzi",
+        address = "Pratap Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.kachori_items_14,
+        title = "Mixed Dal Kachori",
+        price = "₹140",
+        restaurantName = "Traditional Tastes",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "MIX DAL OFF",
+        discountAmount = "5 Dals Mix: Moong, Urad, Chana, Masoor, Toor, Perfect Spice Balance, Flaky Texture",
+        address = "Malviya Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.kachori_items_15,
+        title = "Aloo Stuffed Kachori",
+        price = "₹120",
+        restaurantName = "Aloo Wala",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "ALOO OFF",
+        discountAmount = "Spiced Potato Filling, Cumin Seeds, Green Chilies, Fresh Coriander, Served with Green Chutney",
+        address = "Tonk Road, Jaipur"
+    ),
+
+    // PREMIUM & SPECIALTY KACHORIS (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.kachori_items_16,
+        title = "Dry Fruit Kachori",
+        price = "₹200",
+        restaurantName = "Royal Rajasthan",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "DRYFRUIT OFF",
+        discountAmount = "Premium Kachori, Cashews, Almonds, Raisins, Pistachios, Cardamom, Silver Leaf, Saffron",
+        address = "Civil Lines, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.kachori_items_17,
+        title = "Paneer Kachori",
+        price = "₹180",
+        restaurantName = "Paneer Point",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "PANEER OFF",
+        discountAmount = "Fresh Paneer Filling, Mild Spices, Kasuri Methi, Creamy Texture, Mint Chutney",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.kachori_items_18,
+        title = "Hara Bhara Kachori",
+        price = "₹150",
+        restaurantName = "Green Kitchen",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "HARA OFF",
+        discountAmount = "Spinach & Peas Filling, Mint, Coriander, Green Chili, Healthy Twist, Lightly Spiced",
+        address = "Jawahar Nagar, Jaipur"
+    ),
+
+    // MINIATURE & PLATTERS (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.kachori_items_19,
+        title = "Mini Kachori Platter (12 pcs)",
+        price = "₹280",
+        restaurantName = "Kachori Hub",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "PLATTER OFF",
+        discountAmount = "Assorted Mini Kachoris: 4 Moong Dal, 4 Pyaz, 4 Masala, 3 Chutneys, Onion Rings, Green Chilies",
+        address = "Raja Park, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.kachori_items_20,
+        title = "Kachori Gift Box (Deluxe)",
+        price = "₹450",
+        restaurantName = "Rajasthan Delights",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.0 km",
+        discount = "GIFT BOX OFF",
+        discountAmount = "Premium Gift Box: Jodhpuri Mawa, Dry Fruit, Paneer, Lucknowi Kachori, Silver Leaf, Rabri, Saffron",
+        address = "Ajmer Road, Jaipur"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

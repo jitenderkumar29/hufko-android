@@ -679,7 +679,7 @@ fun CategoryTabsFood(
                 CategoryPage.Jalebi -> JalebiCategoryPage()
                 CategoryPage.PyaajKachori -> PyaajKachoriCategoryPage()
                 CategoryPage.RajmaRice -> RajmaRiceCategoryPage()
-                CategoryPage.Upma -> UpmaCategoryPage()
+                CategoryPage.Upma ->  UpmaCategoryPage()
                 CategoryPage.Manchurian -> ManchurianCategoryPage()
                 CategoryPage.PaneerPakoda -> PaneerPakodaCategoryPage()
                 CategoryPage.Cheesecake -> CheesecakeCategoryPage()
@@ -68787,17 +68787,1475 @@ Column(
 
 @Composable
 fun JalebiCategoryPage() {
-    CategoryContentPage("Jalebi")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val jalebiFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // MAIN JALEBI TYPES (with icons showing visual differences)
+        FilterChip(
+            id = "traditional_jalebi",
+            text = "Traditional Jalebi",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_traditional_jalebi  // orange/yellow spiral coils
+        ),
+        FilterChip(
+            id = "imarti_jalebi",
+            text = "Imarti / Jhangora Jalebi",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_imarti  // reddish-brown, more intricate spirals
+        ),
+        FilterChip(
+            id = "mini_jalebi",
+            text = "Mini Jalebis (Kadhai Jalebi)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_mini_jalebi  // small bite-sized spirals
+        ),
+
+        // REGIONAL VARIETIES (icons for distinctive ones)
+        FilterChip(
+            id = "punjabi_jalebi",
+            text = "Punjabi Style",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_punjabi_jalebi  // thicker, more syrup
+        ),
+        FilterChip(
+            id = "south_indian_jalebi",
+            text = "South Indian (Jilebi)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "kolkata_jalebi",
+            text = "Kolkata Style",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "delhi_jalebi",
+            text = "Delhi Style (Old Delhi)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TEXTURE VARIATIONS (with icons)
+        FilterChip(
+            id = "crispy_jalebi",
+            text = "Extra Crispy",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_crispy_jalebi  // shattered/broken jalebi piece
+        ),
+        FilterChip(
+            id = "soft_jalebi",
+            text = "Soft & Juicy",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "crunchy_jalebi",
+            text = "Crunchy Outside, Soft Inside",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SYRUP TYPES (with icons)
+        FilterChip(
+            id = "thick_syrup",
+            text = "Thick Syrup (Thick Chashni)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "cardamom_syrup",
+            text = "Cardamom Infused",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SHAPE VARIATIONS (with icons)
+        FilterChip(
+            id = "twisted_jalebi",
+            text = "Twisted Shape",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "circle_jalebi",
+            text = "Perfect Circle",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pretzel_jalebi",
+            text = "Pretzel Style",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SIZE OPTIONS
+        FilterChip(
+            id = "medium_jalebi",
+            text = "Medium Size",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "bite_size",
+            text = "Bite Size",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SERVING STYLES (with icons)
+        FilterChip(
+            id = "room_temp_jalebi",
+            text = "Room Temperature",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "jalebi_with_curd",
+            text = "With Fresh Curd",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "jalebi_with_milk",
+            text = "With Hot Milk",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPECIALTY VARIATIONS
+        FilterChip(
+            id = "maida_jalebi",
+            text = "Maida Based",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "orange_jalebi",
+            text = "Orange Colored",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "natural_color_jalebi",
+            text = "Natural Color (Kesar/Kumkuma)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // FESTIVAL SPECIALS (with icons)
+        FilterChip(
+            id = "ramadan_jalebi",
+            text = "Ramadan Special",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TOPPINGS/GARNISH (with icons)
+        FilterChip(
+            id = "almond_jalebi",
+            text = "Almond Topped",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS
+        FilterChip(
+            id = "oil_jalebi",
+            text = "Made in Oil",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = jalebiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val jalebiItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.jalebi_1,  // Traditional Orange Jalebis
+        title = "Traditional Crispy Jalebi",
+        price = "₹100/kg",
+        restaurantName = "Shree Bikaner Mishthan Bhandar",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹80",
+        address = "Bapu Bazar, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.jalebi_2,  // Imarti (reddish-brown)
+        title = "Imarti (Jhangora Jalebi)",
+        price = "₹120/kg",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹65",
+        address = "C Scheme, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.jalebi_3,  // Jalebi with Rabri
+        title = "Jalebi with Rabri (Malai)",
+        price = "₹180/plate",
+        restaurantName = "Jodhpur Sweets",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "20%",
+        discountAmount = "up to ₹90",
+        address = "Sardarpura, Jodhpur"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.jalebi_4,  // Mini Jalebis
+        title = "Mini Kadhai Jalebi (12 pcs)",
+        price = "₹90/plate",
+        restaurantName = "Chaat Galli",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "0.9 km",
+        discount = "25%",
+        discountAmount = "up to ₹45",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.jalebi_5,  // Kesar Jalebi
+        title = "Kesar (Saffron) Special Jalebi",
+        price = "₹150/kg",
+        restaurantName = "Traditional Tastes",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.1 km",
+        discount = "12%",
+        discountAmount = "up to ₹70",
+        address = "Malviya Nagar, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.jalebi_6,  // Jalebi Chaat
+        title = "Jalebi Chaat (Innovative)",
+        price = "₹140/plate",
+        restaurantName = "Spice Route",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "18%",
+        discountAmount = "up to ₹60",
+        address = "Mansarovar, Jaipur"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = jalebiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+    val jalebiItemsList = listOf(
+    // CLASSIC JALEBI VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.jalebi_items_1,
+        title = "Traditional Crispy Jalebi",
+        price = "₹100/kg",
+        restaurantName = "Shree Bikaner Mishthan Bhandar",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "JALEBI OFF",
+        discountAmount = "up to ₹80",
+        address = "Bapu Bazar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.jalebi_items_2,
+        title = "Imarti (Jhangora Jalebi)",
+        price = "₹120/kg",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "IMARTI OFF",
+        discountAmount = "up to ₹65",
+        address = "C Scheme, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.jalebi_items_3,
+        title = "Mini Kadhai Jalebi (12 pcs)",
+        price = "₹90/plate",
+        restaurantName = "Chaat Galli",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "0.9 km",
+        discount = "MINI OFF",
+        discountAmount = "up to ₹45",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.jalebi_items_4,
+        title = "Kesar (Saffron) Special Jalebi",
+        price = "₹150/kg",
+        restaurantName = "Traditional Tastes",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.1 km",
+        discount = "KESAR OFF",
+        discountAmount = "up to ₹70",
+        address = "Malviya Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.jalebi_items_5,
+        title = "Jalebi with Rabri (Malai)",
+        price = "₹180/plate",
+        restaurantName = "Jodhpur Sweets",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "RABRI OFF",
+        discountAmount = "up to ₹90",
+        address = "Sardarpura, Jodhpur"
+    ),
+
+    // REGIONAL JALEBI VARIETIES (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.jalebi_items_6,
+        title = "Punjabi Style Jalebi",
+        price = "₹110/kg",
+        restaurantName = "Amritsari Sweets",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "PUNJAB OFF",
+        discountAmount = "up to ₹55",
+        address = "Amritsar, Punjab"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.jalebi_items_7,
+        title = "Kolkata Jalebi (Bengali Style)",
+        price = "₹130/kg",
+        restaurantName = "Bengali Sweets",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "BENGAL OFF",
+        discountAmount = "up to ₹60",
+        address = "Salt Lake, Kolkata"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.jalebi_items_8,
+        title = "South Indian Jilebi",
+        price = "₹100/kg",
+        restaurantName = "Madras Sweets",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "SOUTH OFF",
+        discountAmount = "up to ₹50",
+        address = "T Nagar, Chennai"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.jalebi_items_9,
+        title = "Delhi Old City Jalebi",
+        price = "₹140/kg",
+        restaurantName = "Chandni Chowk Sweets",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "DILLI OFF",
+        discountAmount = "up to ₹75",
+        address = "Chandni Chowk, Delhi"
+    ),
+
+    // FUSION & INNOVATIVE JALEBI (10-12)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.jalebi_items_10,
+        title = "Jalebi Chaat (Innovative)",
+        price = "₹140/plate",
+        restaurantName = "Spice Route",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "CHAAT OFF",
+        discountAmount = "up to ₹60",
+        address = "Mansarovar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.jalebi_items_11,
+        title = "Jalebi Ice Cream Sundae",
+        price = "₹220/plate",
+        restaurantName = "Dessert Factory",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "DESSERT OFF",
+        discountAmount = "up to ₹110",
+        address = "C Scheme, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.jalebi_items_12,
+        title = "Jalebi Falooda",
+        price = "₹180/glass",
+        restaurantName = "Royal Falooda",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "FALOODA OFF",
+        discountAmount = "up to ₹85",
+        address = "MI Road, Jaipur"
+    ),
+
+    // PREMIUM & SPECIALTY JALEBI (13-15)
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.jalebi_items_13,
+        title = "Dry Fruit Jalebi",
+        price = "₹250/kg",
+        restaurantName = "Royal Rajasthan",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "PREMIUM OFF",
+        discountAmount = "up to ₹125",
+        address = "Civil Lines, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.jalebi_items_14,
+        title = "Rose Flavored Jalebi",
+        price = "₹160/kg",
+        restaurantName = "Gulab Sweets",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "ROSE OFF",
+        discountAmount = "up to ₹80",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.jalebi_items_15,
+        title = "Cardamom Infused Jalebi",
+        price = "₹140/kg",
+        restaurantName = "Traditional Tastes",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "ELAICHI OFF",
+        discountAmount = "up to ₹70",
+        address = "Malviya Nagar, Jaipur"
+    ),
+
+    // SIZE & TEXTURE VARIATIONS (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.jalebi_items_16,
+        title = "Extra Crispy Jalebi",
+        price = "₹120/kg",
+        restaurantName = "Crispy Corner",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "CRISPY OFF",
+        discountAmount = "up to ₹60",
+        address = "Tonk Road, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.jalebi_items_17,
+        title = "Soft & Juicy Jalebi",
+        price = "₹130/kg",
+        restaurantName = "Juicy Junction",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "SOFT OFF",
+        discountAmount = "up to ₹65",
+        address = "Pratap Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.jalebi_items_18,
+        title = "Jumbo Size Jalebi (Single)",
+        price = "₹80/piece",
+        restaurantName = "Giant Sweets",
+        rating = "4.6",
+        deliveryTime = "15-20 mins",
+        distance = "1.0 km",
+        discount = "JUMBO OFF",
+        discountAmount = "up to ₹40",
+        address = "Raja Park, Jaipur"
+    ),
+
+    // FESTIVAL SPECIAL & GIFT BOXES (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.jalebi_items_19,
+        title = "Diwali Special Jalebi Box",
+        price = "₹350/kg",
+        restaurantName = "Festival Sweets",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.8 km",
+        discount = "DIWALI OFF",
+        discountAmount = "up to ₹175",
+        address = "Ajmer Road, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.jalebi_items_20,
+        title = "Assorted Jalebi Gift Pack",
+        price = "₹400/box",
+        restaurantName = "Rajasthan Delights",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.0 km",
+        discount = "GIFT OFF",
+        discountAmount = "up to ₹200",
+        address = "Civil Lines, Jaipur"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun PyaajKachoriCategoryPage() {
-    CategoryContentPage("Pyaaj Kachori")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val pyaajKachoriFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // MAIN KACHORI TYPES (with icons showing visual differences)
+        FilterChip(
+            id = "pyaaj_kachori_classic",
+            text = "Classic Pyaaj Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_kachori_classic  // golden brown round kachori
+        ),
+        FilterChip(
+            id = "pyaaj_kachori_mathura",
+            text = "Mathura Style",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_kachori_mathura  // slightly flattened, spicier
+        ),
+        FilterChip(
+            id = "pyaaj_kachori_jodhpuri",
+            text = "Jodhpuri Style",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_kachori_jodhpur  // larger, extra crispy
+        ),
+        FilterChip(
+            id = "pyaaj_kachori_kolkata",
+            text = "Kolkata Style",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_kacholi_kolkata  // smaller, darker
+        ),
+
+        // REGIONAL VARIETIES (icons for distinctive ones)
+        FilterChip(
+            id = "pyaaj_kachori_rajasthani",
+            text = "Rajasthani Special",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_kachori_rajasthani  // with imli chutney drizzle
+        ),
+        FilterChip(
+            id = "pyaaj_kachori_mumbai",
+            text = "Mumbai Style",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pyaaj_kachori_indore",
+            text = "Indori Style",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pyaaj_kachori_banarasi",
+            text = "Banarasi Style",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // STUFFING/FILLING VARIATIONS (with icons)
+        FilterChip(
+            id = "medium_spice_kachori",
+            text = "Medium Spice",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mild_kachori",
+            text = "Mild (Khatta-Meetha)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TEXTURE VARIATIONS (with icons)
+        FilterChip(
+            id = "soft_kachori",
+            text = "Soft Inside",
+            type = FilterType.TEXT_ONLY
+        ),
+        // SERVING STYLES (with icons)
+        FilterChip(
+            id = "kachori_with_tea",
+            text = "Evening Tea Special",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // FLOUR/DOUGH VARIATIONS
+        FilterChip(
+            id = "maida_kachori",
+            text = "Maida Dough",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "wheat_kachori",
+            text = "Whole Wheat (Atta)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mix_flour_kachori",
+            text = "Mixed Flour",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPECIALTY VARIATIONS
+        FilterChip(
+            id = "pyaaj_meethi_kachori",
+            text = "Meethi Pyaaj Kachori",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pyaaj_moong_kachori",
+            text = "With Moong Dal",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS
+        FilterChip(
+            id = "oil_fried_kachori",
+            text = "Fried in Oil",
+            type = FilterType.TEXT_ONLY
+        ),
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = pyaajKachoriFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val pyaajKachoriItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.pyaaj_kachori_1,  // Classic Rajasthani Pyaaj Kachori
+        title = "Classic Pyaaj Kachori",
+        price = "₹25/piece",
+        restaurantName = "Shree Bikaner Mishthan Bhandar",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹80",
+        address = "Bapu Bazar, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.pyaaj_kachori_2,  // Dahi Kachori with onions
+        title = "Dahi Pyaaj Kachori",
+        price = "₹60/plate (2 pcs)",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹65",
+        address = "C Scheme, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.pyaaj_kachori_3,  // Extra spicy version
+        title = "Teekhi Pyaaj Kachori (Extra Spicy)",
+        price = "₹28/piece",
+        restaurantName = "Jodhpur Sweets",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "20%",
+        discountAmount = "up to ₹90",
+        address = "Sardarpura, Jodhpur"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.pyaaj_kachori_4,  // Mini Pyaaj Kachoris
+        title = "Mini Pyaaj Kachori (6 pcs)",
+        price = "₹40/plate",
+        restaurantName = "Chaat Galli",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "0.9 km",
+        discount = "25%",
+        discountAmount = "up to ₹45",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.pyaaj_kachori_5,  // Pyaaj Kachori with aloo sabzi
+        title = "Pyaaj Kachori with Aloo Sabzi",
+        price = "₹65/plate",
+        restaurantName = "Traditional Tastes",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.1 km",
+        discount = "12%",
+        discountAmount = "up to ₹70",
+        address = "Malviya Nagar, Jaipur"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.pyaaj_kachori_6,  // Mathura style
+        title = "Mathura Special Pyaaj Kachori",
+        price = "₹30/piece",
+        restaurantName = "Spice Route",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "18%",
+        discountAmount = "up to ₹60",
+        address = "Mansarovar, Jaipur"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = pyaajKachoriItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+    val pyaajKachoriItemsList = listOf(
+    // CLASSIC PYAAJ KACHORI VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.pyaaj_kachori_items_1,
+        title = "Classic Pyaaj Kachori",
+        price = "₹25/piece",
+        restaurantName = "Shree Bikaner Mishthan Bhandar",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "PYAAJ OFF",
+        discountAmount = "up to ₹80",
+        address = "Bapu Bazar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.pyaaj_kachori_items_2,
+        title = "Teekhi Pyaaj Kachori (Extra Spicy)",
+        price = "₹28/piece",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "TEekha OFF",
+        discountAmount = "up to ₹65",
+        address = "C Scheme, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.pyaaj_kachori_items_3,
+        title = "Mini Pyaaj Kachori (6 pcs)",
+        price = "₹40/plate",
+        restaurantName = "Chaat Galli",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "0.9 km",
+        discount = "MINI OFF",
+        discountAmount = "up to ₹45",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.pyaaj_kachori_items_4,
+        title = "Pyaaj Kachori with Aloo Sabzi",
+        price = "₹65/plate",
+        restaurantName = "Traditional Tastes",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.1 km",
+        discount = "ALOO OFF",
+        discountAmount = "up to ₹70",
+        address = "Malviya Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.pyaaj_kachori_items_5,
+        title = "Dahi Pyaaj Kachori (2 pcs)",
+        price = "₹60/plate",
+        restaurantName = "Jodhpur Sweets",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "DAHI OFF",
+        discountAmount = "up to ₹90",
+        address = "Sardarpura, Jodhpur"
+    ),
+
+    // REGIONAL PYAAJ KACHORI VARIETIES (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.pyaaj_kachori_items_6,
+        title = "Mathura Special Pyaaj Kachori",
+        price = "₹30/piece",
+        restaurantName = "Mathura Sweets",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "MATHURA OFF",
+        discountAmount = "up to ₹55",
+        address = "Mathura, UP"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.pyaaj_kachori_items_7,
+        title = "Jodhpuri Pyaaj Kachori",
+        price = "₹32/piece",
+        restaurantName = "Jodhpur Bawarchi",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "JODHPUR OFF",
+        discountAmount = "up to ₹60",
+        address = "Jodhpur, Rajasthan"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.pyaaj_kachori_items_8,
+        title = "Indori Pyaaj Kachori",
+        price = "₹28/piece",
+        restaurantName = "Indore Chaat House",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "INDORE OFF",
+        discountAmount = "up to ₹50",
+        address = "Indore, MP"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.pyaaj_kachori_items_9,
+        title = "Banarasi Pyaaj Kachori",
+        price = "₹35/piece",
+        restaurantName = "Kashi Chat Bhandar",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "BANARAS OFF",
+        discountAmount = "up to ₹75",
+        address = "Varanasi, UP"
+    ),
+
+    // PYAAJ KACHORI WITH CHUTNEYS (10-12)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.pyaaj_kachori_items_10,
+        title = "Pyaaj Kachori with Imli Chutney",
+        price = "₹30/piece",
+        restaurantName = "Spice Route",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "IMLI OFF",
+        discountAmount = "up to ₹60",
+        address = "Mansarovar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.pyaaj_kachori_items_11,
+        title = "Pyaaj Kachori with Pudina Chutney",
+        price = "₹30/piece",
+        restaurantName = "Fresh Tastes",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "PUDINA OFF",
+        discountAmount = "up to ₹110",
+        address = "C Scheme, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.pyaaj_kachori_items_12,
+        title = "Pyaaj Kachori with Both Chutneys",
+        price = "₹70/plate",
+        restaurantName = "Royal Chaat",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "COMBO OFF",
+        discountAmount = "up to ₹85",
+        address = "MI Road, Jaipur"
+    ),
+
+    // STUFFING VARIATIONS (13-15)
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.pyaaj_kachori_items_13,
+        title = "Extra Onion Pyaaj Kachori",
+        price = "₹35/piece",
+        restaurantName = "Royal Rajasthan",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "ONION OFF",
+        discountAmount = "up to ₹125",
+        address = "Civil Lines, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.pyaaj_kachori_items_14,
+        title = "Pyaaj-Moong Dal Kachori",
+        price = "₹32/piece",
+        restaurantName = "Gulab Sweets",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "MOONG OFF",
+        discountAmount = "up to ₹80",
+        address = "Vaishali Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.pyaaj_kachori_items_15,
+        title = "Pyaaj-Masala Kachori",
+        price = "₹30/piece",
+        restaurantName = "Traditional Tastes",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "MASALA OFF",
+        discountAmount = "up to ₹70",
+        address = "Malviya Nagar, Jaipur"
+    ),
+
+    // TEXTURE VARIATIONS (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.pyaaj_kachori_items_16,
+        title = "Laccha Pyaaj Kachori (Flaky)",
+        price = "₹30/piece",
+        restaurantName = "Crispy Corner",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "LACCHA OFF",
+        discountAmount = "up to ₹60",
+        address = "Tonk Road, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.pyaaj_kachori_items_17,
+        title = "Extra Crispy Pyaaj Kachori",
+        price = "₹28/piece",
+        restaurantName = "Crispy Junction",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "CRISPY OFF",
+        discountAmount = "up to ₹65",
+        address = "Pratap Nagar, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.pyaaj_kachori_items_18,
+        title = "Jumbo Size Pyaaj Kachori",
+        price = "₹50/piece",
+        restaurantName = "Giant Sweets",
+        rating = "4.6",
+        deliveryTime = "15-20 mins",
+        distance = "1.0 km",
+        discount = "JUMBO OFF",
+        discountAmount = "up to ₹40",
+        address = "Raja Park, Jaipur"
+    ),
+
+    // FLOUR VARIATIONS & FUSION (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.pyaaj_kachori_items_19,
+        title = "Atta (Wheat) Pyaaj Kachori",
+        price = "₹30/piece",
+        restaurantName = "Healthy Bites",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.8 km",
+        discount = "ATTA OFF",
+        discountAmount = "up to ₹175",
+        address = "Ajmer Road, Jaipur"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.pyaaj_kachori_items_20,
+        title = "Assorted Pyaaj Kachori Gift Pack",
+        price = "₹350/box (12 pcs)",
+        restaurantName = "Rajasthan Delights",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.0 km",
+        discount = "GIFT OFF",
+        discountAmount = "up to ₹200",
+        address = "Civil Lines, Jaipur"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun RajmaRiceCategoryPage() {
-    CategoryContentPage("Rajma Rice")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val rajmaRiceFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // MAIN RAJMA TYPES (with icons showing visual differences)
+        FilterChip(
+            id = "rajma_kashmiri",
+            text = "Kashmiri Rajma",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_rajma_kashmiri  // light red gravy, whole spices
+        ),
+        FilterChip(
+            id = "rajma_punjabi",
+            text = "Punjabi Rajma",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_rajma_punjabi  // thick, dark red gravy
+        ),
+        FilterChip(
+            id = "rajma_chawal",
+            text = "Rajma Chawal (Combo)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_rajma_chawal  // rajma served with rice
+        ),
+        FilterChip(
+            id = "rajma_dry",
+            text = "Dry Rajma (No Gravy)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_rajma_dry  // dry kidney beans
+        ),
+
+        // REGIONAL VARIETIES (icons for distinctive ones)
+        FilterChip(
+            id = "rajma_himachali",
+            text = "Himachali Rajma",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_rajma_himachali  // with curd based gravy
+        ),
+        FilterChip(
+            id = "rajma_delhi",
+            text = "Delhi Style",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "rajma_banarasi",
+            text = "Banarasi Style",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // RICE VARIETIES (with icons)
+        FilterChip(
+            id = "steamed_rice",
+            text = "Plain Steamed Rice",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "brown_rice",
+            text = "Brown Rice",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPICE LEVELS (with icons)
+        FilterChip(
+            id = "medium_spice_rajma",
+            text = "Medium Spice",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mild_rajma",
+            text = "Mild (Less Masala)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TEXTURE VARIATIONS (with icons)
+        FilterChip(
+            id = "mashed_rajma",
+            text = "Partially Mashed",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // BEAN VARIETIES (with icons)
+        FilterChip(
+            id = "mixed_beans",
+            text = "Mixed Beans",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ACCOMPANIMENTS (with icons)
+        FilterChip(
+            id = "rajma_with_salad",
+            text = "With Green Salad",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // COOKING METHOD (with icons)
+        FilterChip(
+            id = "pressure_cooker",
+            text = "Pressure Cooker Style",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPECIALTY VARIATIONS
+        FilterChip(
+            id = "rajma_masala",
+            text = "Extra Masala",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS
+        FilterChip(
+            id = "oil_rajma",
+            text = "Made in Oil",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "low_oil_rajma",
+            text = "Low Oil",
+            type = FilterType.TEXT_ONLY
+        ),
+        // QUANTITY OPTIONS
+        FilterChip(
+            id = "full_plate",
+            text = "Full Plate",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "half_plate",
+            text = "Half Plate",
+            type = FilterType.TEXT_ONLY
+        ),
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = rajmaRiceFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val rajmaRiceItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.rajma_rice_1,  // Classic Punjabi Rajma Rice
+        title = "Punjabi Rajma Rice (Full Plate)",
+        price = "₹180/plate",
+        restaurantName = "Punjabi Dhaba",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹80",
+        address = "Model Town, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.rajma_rice_2,  // Kashmiri Rajma
+        title = "Kashmiri Rajma Chawal",
+        price = "₹220/plate",
+        restaurantName = "Kashmir Darbar",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹65",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.rajma_rice_3,  // Rajma Rice Thali
+        title = "Rajma Rice Thali (Complete Meal)",
+        price = "₹280/thali",
+        restaurantName = "Bikaner Bhavan",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.8 km",
+        discount = "20%",
+        discountAmount = "up to ₹90",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.rajma_rice_4,  // Dry Rajma with Jeera Rice
+        title = "Dry Rajma with Jeera Rice",
+        price = "₹160/plate",
+        restaurantName = "Spice Kitchen",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "0.9 km",
+        discount = "25%",
+        discountAmount = "up to ₹45",
+        address = "Green Park, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.rajma_rice_5,  // Himachali Rajma
+        title = "Himachali Rajma Madra",
+        price = "₹240/plate",
+        restaurantName = "Hill Tastes",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "2.1 km",
+        discount = "12%",
+        discountAmount = "up to ₹70",
+        address = "Hauz Khas, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.rajma_rice_6,  // Butter Rajma with Brown Rice
+        title = "Butter Rajma with Brown Rice",
+        price = "₹260/plate",
+        restaurantName = "Healthy Tastes",
+        rating = "4.6",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "18%",
+        discountAmount = "up to ₹60",
+        address = "Saket, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = rajmaRiceItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
 }
 
 @Composable

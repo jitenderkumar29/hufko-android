@@ -70255,17 +70255,1582 @@ val rajmaRiceItems = listOf(
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
         )
+           Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+    val rajmaRiceItemsList = listOf(
+    // CLASSIC RAJMA RICE VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.rajma_rice_items_1,
+        title = "Classic Rajma Rice",
+        price = "₹120/plate",
+        restaurantName = "Punjabi Dhaba",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.2 km",
+        discount = "RAJMA OFF",
+        discountAmount = "up to ₹80",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.rajma_rice_items_2,
+        title = "Butter Rajma Rice",
+        price = "₹150/plate",
+        restaurantName = "Amritsari Bhavan",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.8 km",
+        discount = "BUTTER OFF",
+        discountAmount = "up to ₹100",
+        address = "Sector 17, Chandigarh"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.rajma_rice_items_3,
+        title = "Kashmiri Rajma Rice",
+        price = "₹180/plate",
+        restaurantName = "Kashmir Darbar",
+        rating = "4.7",
+        deliveryTime = "35-40 mins",
+        distance = "2.3 km",
+        discount = "KASHMIR OFF",
+        discountAmount = "up to ₹120",
+        address = "Srinagar, J&K"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.rajma_rice_items_4,
+        title = "Rajma Rice with Chur Chur Naan",
+        price = "₹220/plate",
+        restaurantName = "Tandoori Nights",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "NAAN OFF",
+        discountAmount = "up to ₹90",
+        address = "South Extension, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.rajma_rice_items_5,
+        title = "Mini Rajma Rice Bowl",
+        price = "₹90/bowl",
+        restaurantName = "Quick Bites",
+        rating = "4.5",
+        deliveryTime = "15-20 mins",
+        distance = "0.8 km",
+        discount = "MINI OFF",
+        discountAmount = "up to ₹40",
+        address = "Lajpat Nagar, Delhi"
+    ),
+
+    // REGIONAL VARIETIES (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.rajma_rice_items_6,
+        title = "Himachali Rajma Rice",
+        price = "₹160/plate",
+        restaurantName = "Hill Station Cafe",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "2.0 km",
+        discount = "HILL OFF",
+        discountAmount = "up to ₹85",
+        address = "Shimla, HP"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.rajma_rice_items_7,
+        title = "Garhwali Rajma Rice",
+        price = "₹140/plate",
+        restaurantName = "Uttarakhand Bhojnalaya",
+        rating = "4.7",
+        deliveryTime = "30-35 mins",
+        distance = "2.2 km",
+        discount = "GARHWAL OFF",
+        discountAmount = "up to ₹70",
+        address = "Dehradun, UK"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.rajma_rice_items_8,
+        title = "Maharashtrian Rajma Rice",
+        price = "₹130/plate",
+        restaurantName = "Kolhapur Bhavan",
+        rating = "4.6",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "MAHA OFF",
+        discountAmount = "up to ₹60",
+        address = "Pune, Maharashtra"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.rajma_rice_items_9,
+        title = "Bengali Rajma Rice",
+        price = "₹125/plate",
+        restaurantName = "Kolkata Cafe",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "BENGAL OFF",
+        discountAmount = "up to ₹75",
+        address = "Salt Lake, Kolkata"
+    ),
+
+    // ACCOMPANIMENTS VARIATIONS (10-12)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.rajma_rice_items_10,
+        title = "Rajma Rice with Pickle & Papad",
+        price = "₹160/plate",
+        restaurantName = "Traditional Tadka",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.3 km",
+        discount = "COMBO OFF",
+        discountAmount = "up to ₹95",
+        address = "Model Town, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.rajma_rice_items_11,
+        title = "Rajma Rice with Raita",
+        price = "₹170/plate",
+        restaurantName = "Dairy Fresh",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "RAITA OFF",
+        discountAmount = "up to ₹80",
+        address = "Rajouri Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.rajma_rice_items_12,
+        title = "Rajma Rice with Salad",
+        price = "₹140/plate",
+        restaurantName = "Green Bowl",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "SALAD OFF",
+        discountAmount = "up to ₹55",
+        address = "GK II, Delhi"
+    ),
+
+    // STYLE VARIATIONS (13-15)
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.rajma_rice_items_13,
+        title = "Khatti Meethi Rajma Rice",
+        price = "₹150/plate",
+        restaurantName = "Sweet & Sour",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "SWEET OFF",
+        discountAmount = "up to ₹85",
+        address = "Janakpuri, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.rajma_rice_items_14,
+        title = "Garlic Tadka Rajma Rice",
+        price = "₹145/plate",
+        restaurantName = "Garlic House",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "GARLIC OFF",
+        discountAmount = "up to ₹70",
+        address = "Patel Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.rajma_rice_items_15,
+        title = "Smoked Rajma Rice",
+        price = "₹200/plate",
+        restaurantName = "Smokehouse Grill",
+        rating = "4.9",
+        deliveryTime = "35-40 mins",
+        distance = "2.4 km",
+        discount = "SMOKE OFF",
+        discountAmount = "up to ₹150",
+        address = "Cyber City, Gurgaon"
+    ),
+
+    // RICE VARIATIONS (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.rajma_rice_items_16,
+        title = "Brown Rice Rajma",
+        price = "₹180/plate",
+        restaurantName = "Healthy Kitchen",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.3 km",
+        discount = "HEALTH OFF",
+        discountAmount = "up to ₹110",
+        address = "Green Park, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.rajma_rice_items_17,
+        title = "Jeera Rice Rajma",
+        price = "₹155/plate",
+        restaurantName = "Spice Hub",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.0 km",
+        discount = "JEERA OFF",
+        discountAmount = "up to ₹75",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.rajma_rice_items_18,
+        title = "Basmati Rajma Rice",
+        price = "₹165/plate",
+        restaurantName = "Royal Kitchen",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "BASMATI OFF",
+        discountAmount = "up to ₹90",
+        address = "Vasant Vihar, Delhi"
+    ),
+
+    // FUSION & SPECIALS (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.rajma_rice_items_19,
+        title = "Rajma Rice Bowl with Cheese",
+        price = "₹190/plate",
+        restaurantName = "Fusion Kitchen",
+        rating = "4.6",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "CHEESE OFF",
+        discountAmount = "up to ₹95",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.rajma_rice_items_20,
+        title = "Rajma Rice Thali (Unlimited)",
+        price = "₹280/thali",
+        restaurantName = "Bharat Bhojnalaya",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "THALI OFF",
+        discountAmount = "up to ₹180",
+        address = "Chandni Chowk, Delhi"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
 @Composable
 fun UpmaCategoryPage() {
-    CategoryContentPage("Upma")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val upmaFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // BASE VARIETIES (with icons showing visual differences)
+        FilterChip(
+            id = "rava_upma",
+            text = "Rava Upma (Classic)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_rava_upma  // fine semolina, light color
+        ),
+        FilterChip(
+            id = "bombay_rava",
+            text = "Bombay Rava Upma",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_bombay_rava  // coarse semolina, grainy texture
+        ),
+        FilterChip(
+            id = "broken_wheat",
+            text = "Broken Wheat Upma (Godhumai)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_broken_wheat  // brownish, wheat grains
+        ),
+        FilterChip(
+            id = "vermicelli_upma",
+            text = "Vermicelli Upma (Semiya)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_vermicelli_upma  // thin noodles style
+        ),
+
+        // GRAIN VARIETIES (with icons)
+        FilterChip(
+            id = "oats_upma",
+            text = "Oats Upma (Healthy)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_oats_upma  // rolled oats texture
+        ),
+        FilterChip(
+            id = "rice_rava",
+            text = "Rice Rava Upma (Akki Tari)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "ragi_upma",
+            text = "Ragi Upma (Finger Millet)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // REGIONAL STYLES (with icons for distinctive ones)
+        FilterChip(
+            id = "tamil_upma",
+            text = "Tamil Nadu Style",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "andhra_upma",
+            text = "Andhra Style (Spicy)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "kerala_upma",
+            text = "Kerala Style",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // VEGETABLE ADDITIONS (with icons)
+        FilterChip(
+            id = "onion_upma",
+            text = "Onion Upma (Ulli)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "peas_upma",
+            text = "Peas Upma",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "tomato_upma",
+            text = "Tomato Upma",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "cabbage_upma",
+            text = "Cabbage Upma",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "carrot_beans",
+            text = "Carrot & Beans Upma",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TEMPERING VARIATIONS (with icons)
+        FilterChip(
+            id = "coconut_upma",
+            text = "With Grated Coconut",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "peanut_upma",
+            text = "With Roasted Peanuts",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "cashew_upma",
+            text = "With Cashews",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "ginger_upma",
+            text = "Extra Ginger",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "green_chilli",
+            text = "Extra Green Chillies",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPICE LEVELS (with icons)
+        FilterChip(
+            id = "medium_spice_upma",
+            text = "Medium Spice",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TEXTURE VARIATIONS (with icons)
+        FilterChip(
+            id = "grainy_upma",
+            text = "Grainy & Dry",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "crispy_upma",
+            text = "Crispy (Roasted Rava)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ACCOMPANIMENTS (with icons)
+        FilterChip(
+            id = "upma_with_sambar",
+            text = "With Sambar",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "upma_with_pickle",
+            text = "With Pickle",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "upma_with_curd",
+            text = "With Curd (Thayir)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TOPPINGS (with icons)
+        FilterChip(
+            id = "lemon_upma",
+            text = "Squeezed Lemon",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "coriander_upma",
+            text = "Fresh Coriander",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pomegranate",
+            text = "Pomegranate Seeds",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS (with icons)
+        FilterChip(
+            id = "jain_upma",
+            text = "Jain (No Onion/Garlic)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "low_oil_upma",
+            text = "Low Oil",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "gluten_free_upma",
+            text = "Gluten Free",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // QUANTITY OPTIONS
+        FilterChip(
+            id = "full_plate_upma",
+            text = "Full Plate",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "half_plate_upma",
+            text = "Half Plate",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mini_upma",
+            text = "Mini Bowl (Kids)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2 // Increased rows to accommodate more filter options
+)
+        FilterButtonFood(
+            filterConfig = upmaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val upmaItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.upma_1,  // Classic Rava Upma with tempering
+        title = "Classic Rava Upma (South Indian Style)",
+        price = "₹90/plate",
+        restaurantName = "Madras Cafe",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "T. Nagar, Chennai"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.upma_2,  // Vegetable Upma with carrots, peas, beans
+        title = "Mixed Vegetable Upma",
+        price = "₹120/plate",
+        restaurantName = "Udupi Garden",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "15%",
+        discountAmount = "up to ₹40",
+        address = "Indiranagar, Bangalore"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.upma_3,  // Brownish colored, healthy option
+        title = "Broken Wheat Upma (Godhumai)",
+        price = "₹110/plate",
+        restaurantName = "Healthy Kitchen",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹30",
+        address = "Jayanagar, Bangalore"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.upma_4,  // Vermicelli upma with nuts
+        title = "Semiya Upma (Vermicelli)",
+        price = "₹100/plate",
+        restaurantName = "Saravana Bhavan",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "0.9 km",
+        discount = "10%",
+        discountAmount = "up to ₹20",
+        address = "Mylapore, Chennai"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.upma_5,  // Yellow-orange Karnataka style upma
+        title = "Karnataka Style Khara Bath",
+        price = "₹95/plate",
+        restaurantName = "Kamat Hotel",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.3 km",
+        discount = "20%",
+        discountAmount = "up to ₹35",
+        address = "Malleshwaram, Bangalore"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.upma_6,  // Oats upma with vegetables
+        title = "Oats Upma (Healthy Breakfast)",
+        price = "₹130/plate",
+        restaurantName = "Fit Food Cafe",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "15%",
+        discountAmount = "up to ₹45",
+        address = "Koramangala, Bangalore"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = upmaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+           Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+    val upmaItemsList = listOf(
+    // CLASSIC SOUTH INDIAN VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.upma_items_1,
+        title = "Classic Rava Upma",
+        price = "₹70/plate",
+        restaurantName = "Madras Cafe",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "0.9 km",
+        discount = "UPMA OFF",
+        discountAmount = "up to ₹40",
+        address = "Mylapore, Chennai"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.upma_items_2,
+        title = "Vegetable Upma",
+        price = "₹90/plate",
+        restaurantName = "Udupi Garden",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "VEG OFF",
+        discountAmount = "up to ₹50",
+        address = "Indiranagar, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.upma_items_3,
+        title = "Onion Upma",
+        price = "₹75/plate",
+        restaurantName = "Swati Snacks",
+        rating = "4.6",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "ONION OFF",
+        discountAmount = "up to ₹35",
+        address = "T Nagar, Chennai"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.upma_items_4,
+        title = "Ghee Upma",
+        price = "₹95/plate",
+        restaurantName = "A2B - Adyar Ananda Bhavan",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "GHEE OFF",
+        discountAmount = "up to ₹60",
+        address = "Adyar, Chennai"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.upma_items_5,
+        title = "Mini Upma Bowl",
+        price = "₹50/bowl",
+        restaurantName = "Quick Snacks",
+        rating = "4.5",
+        deliveryTime = "10-15 mins",
+        distance = "0.6 km",
+        discount = "MINI OFF",
+        discountAmount = "up to ₹25",
+        address = "Koramangala, Bangalore"
+    ),
+
+    // REGIONAL VARIETIES (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.upma_items_6,
+        title = "Kerala Style Upma",
+        price = "₹85/plate",
+        restaurantName = "Kerala Kitchen",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.7 km",
+        discount = "KERALA OFF",
+        discountAmount = "up to ₹45",
+        address = "Fort Kochi, Kerala"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.upma_items_7,
+        title = "Andhra Special Upma",
+        price = "₹80/plate",
+        restaurantName = "Andhra Mess",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "ANDHRA OFF",
+        discountAmount = "up to ₹40",
+        address = "Gachibowli, Hyderabad"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.upma_items_8,
+        title = "Karnataka Khara Upma",
+        price = "₹75/plate",
+        restaurantName = "Karnataka Bhavan",
+        rating = "4.6",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "KARNATAKA OFF",
+        discountAmount = "up to ₹35",
+        address = "Malleshwaram, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.upma_items_9,
+        title = "Chettinad Upma",
+        price = "₹95/plate",
+        restaurantName = "Chettinad Mess",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "2.0 km",
+        discount = "CHETTINAD OFF",
+        discountAmount = "up to ₹55",
+        address = "Chettinad, Tamil Nadu"
+    ),
+
+    // INGREDIENT VARIATIONS (10-13)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.upma_items_10,
+        title = "Broken Wheat Upma",
+        price = "₹85/plate",
+        restaurantName = "Healthy Bites",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "WHEAT OFF",
+        discountAmount = "up to ₹45",
+        address = "Jayanagar, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.upma_items_11,
+        title = "Vermicelli Upma (Semiya)",
+        price = "₹80/plate",
+        restaurantName = "Coastal Foods",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.0 km",
+        discount = "SEMIYA OFF",
+        discountAmount = "up to ₹40",
+        address = "Mangalore, Karnataka"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.upma_items_12,
+        title = "Oats Upma",
+        price = "₹90/plate",
+        restaurantName = "Fit Food Cafe",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "OATS OFF",
+        discountAmount = "up to ₹50",
+        address = "Whitefield, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.upma_items_13,
+        title = "Ragi Upma",
+        price = "₹95/plate",
+        restaurantName = "Millet Magic",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "RAGI OFF",
+        discountAmount = "up to ₹55",
+        address = "Electronic City, Bangalore"
+    ),
+
+    // ACCOMPANIMENTS VARIATIONS (14-16)
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.upma_items_14,
+        title = "Upma with Sambar",
+        price = "₹100/plate",
+        restaurantName = "Sambar Sadam",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "SAMBAR OFF",
+        discountAmount = "up to ₹60",
+        address = "Velachery, Chennai"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.upma_items_15,
+        title = "Upma with Coconut Chutney",
+        price = "₹85/plate",
+        restaurantName = "Coconut Grove",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "0.9 km",
+        discount = "CHUTNEY OFF",
+        discountAmount = "up to ₹45",
+        address = "Banashankari, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.upma_items_16,
+        title = "Upma with Poriyal",
+        price = "₹95/plate",
+        restaurantName = "Tamil Nadu Mess",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "PORIYAL OFF",
+        discountAmount = "up to ₹50",
+        address = "Tambaram, Chennai"
+    ),
+
+    // SPECIAL & FUSION VARIETIES (17-20)
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.upma_items_17,
+        title = "Masala Upma",
+        price = "₹90/plate",
+        restaurantName = "Spice Route",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "MASALA OFF",
+        discountAmount = "up to ₹45",
+        address = "MG Road, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.upma_items_18,
+        title = "Curry Leaf Upma",
+        price = "₹85/plate",
+        restaurantName = "Heritage Foods",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "CURRY OFF",
+        discountAmount = "up to ₹40",
+        address = "Basavanagudi, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.upma_items_19,
+        title = "Peanut Upma",
+        price = "₹95/plate",
+        restaurantName = "Nutty Chef",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "PEANUT OFF",
+        discountAmount = "up to ₹50",
+        address = "HBR Layout, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.upma_items_20,
+        title = "Navratna Upma (9 Vegetables)",
+        price = "₹110/plate",
+        restaurantName = "Royal South",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "NAVRATNA OFF",
+        discountAmount = "up to ₹70",
+        address = "Banjara Hills, Hyderabad"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun ManchurianCategoryPage() {
-    CategoryContentPage("Manchurian")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val manchurianFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // BASE TYPES (with icons showing visual differences)
+        FilterChip(
+            id = "gobi_manchurian",
+            text = "Gobi Manchurian (Cauliflower)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_gobi_manchurian  // cauliflower florets
+        ),
+        FilterChip(
+            id = "chicken_manchurian",
+            text = "Chicken Manchurian",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_chicken_manchurian  // chicken pieces
+        ),
+        FilterChip(
+            id = "paneer_manchurian",
+            text = "Paneer Manchurian",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_paneer_manchurian  // paneer cubes
+        ),
+        FilterChip(
+            id = "mushroom_manchurian",
+            text = "Mushroom Manchurian",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_mushroom_manchurian  // mushroom caps
+        ),
+        FilterChip(
+            id = "babycorn_manchurian",
+            text = "Babycorn Manchurian",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_babycorn_manchurian  // babycorn pieces
+        ),
+
+        // VEGETABLE VARIETIES (with icons for key ones)
+        FilterChip(
+            id = "capsicum_manchurian",
+            text = "Capsicum Manchurian",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "carrot_manchurian",
+            text = "Carrot Manchurian",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "cabbage_manchurian",
+            text = "Cabbage Manchurian",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SAUCE STYLES (with icons)
+        FilterChip(
+            id = "semi_dry_manchurian",
+            text = "Semi-Dry Manchurian",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // FLAVOR VARIATIONS (with icons)
+        FilterChip(
+            id = "ginger_manchurian",
+            text = "Ginger Manchurian",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPICE LEVELS (with icons)
+        FilterChip(
+            id = "mild_spice_manchurian",
+            text = "Mild Spice",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "medium_spice_manchurian",
+            text = "Medium Spice",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PREPARATION STYLES
+        FilterChip(
+            id = "fried_manchurian",
+            text = "Deep Fried",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "air_fried_manchurian",
+            text = "Air Fried (Healthy)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ACCOMPANIMENTS (with icons)
+        FilterChip(
+            id = "manchurian_combo",
+            text = "Combo (Rice + Noodles)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ONION VARIATIONS
+        FilterChip(
+            id = "spring_onion_manchurian",
+            text = "With Spring Onions",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "fried_onion_manchurian",
+            text = "With Fried Onions",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SAUCE PREFERENCES
+        FilterChip(
+            id = "red_sauce_manchurian",
+            text = "Red Sauce Base",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "white_sauce_manchurian",
+            text = "White Sauce Base",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPECIAL DIETS (with icons)
+        FilterChip(
+            id = "vegan_manchurian",
+            text = "Vegan",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "low_oil_manchurian",
+            text = "Low Oil",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // QUANTITY OPTIONS
+        FilterChip(
+            id = "half_manchurian",
+            text = "Half Plate",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "full_manchurian",
+            text = "Full Plate",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = manchurianFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val manchurianItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.manchurian_1,  // Classic Gobi Manchurian - dry, cauliflower florets coated in sauce
+        title = "Classic Gobi Manchurian (Dry)",
+        price = "₹140/plate",
+        restaurantName = "Chinese Wok",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "15%",
+        discountAmount = "up to ₹45",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.manchurian_2,  // Chicken Manchurian - gravy version with red sauce
+        title = "Chicken Manchurian (Gravy)",
+        price = "₹220/plate",
+        restaurantName = "Mainland China",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "20%",
+        discountAmount = "up to ₹80",
+        address = "Salt Lake, Kolkata"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.manchurian_3,  // Paneer Manchurian - semi-dry with capsicum, onions
+        title = "Paneer Manchurian (Semi-Dry)",
+        price = "₹180/plate",
+        restaurantName = "Taste of China",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Koramangala, Bangalore"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.manchurian_4,  // Schezwan Gobi Manchurian - spicy red, schezwan sauce based
+        title = "Schezwan Gobi Manchurian (Spicy)",
+        price = "₹160/plate",
+        restaurantName = "Spicy Wok",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹40",
+        address = "Banjara Hills, Hyderabad"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.manchurian_5,  // Mushroom Manchurian - with spring onions
+        title = "Mushroom Manchurian",
+        price = "₹170/plate",
+        restaurantName = "Shanghai Cafe",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "15%",
+        discountAmount = "up to ₹50",
+        address = "Andheri West, Mumbai"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.manchurian_6,  // Mixed Veg Manchurian - assorted vegetables
+        title = "Mixed Vegetable Manchurian",
+        price = "₹150/plate",
+        restaurantName = "Hot Wok",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "MG Road, Pune"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = manchurianItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+           Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+    val manchurianItemsList = listOf(
+    // CLASSIC BASE VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.manchurian_items_1,
+        title = "Classic Gobi Manchurian",
+        price = "₹140/plate",
+        restaurantName = "Chinese Wok",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "GOBI OFF",
+        discountAmount = "up to ₹45",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.manchurian_items_2,
+        title = "Chicken Manchurian",
+        price = "₹220/plate",
+        restaurantName = "Mainland China",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "CHICKEN OFF",
+        discountAmount = "up to ₹80",
+        address = "Salt Lake, Kolkata"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.manchurian_items_3,
+        title = "Paneer Manchurian",
+        price = "₹180/plate",
+        restaurantName = "Taste of China",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "PANEER OFF",
+        discountAmount = "up to ₹55",
+        address = "Koramangala, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.manchurian_items_4,
+        title = "Mushroom Manchurian",
+        price = "₹170/plate",
+        restaurantName = "Shanghai Cafe",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "MUSHROOM OFF",
+        discountAmount = "up to ₹50",
+        address = "Andheri West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.manchurian_items_5,
+        title = "Babycorn Manchurian",
+        price = "₹160/plate",
+        restaurantName = "Hong Kong Bistro",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "BABYCORN OFF",
+        discountAmount = "up to ₹45",
+        address = "Jubilee Hills, Hyderabad"
+    ),
+
+    // SAUCE STYLE VARIATIONS (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.manchurian_items_6,
+        title = "Dry Gobi Manchurian",
+        price = "₹150/plate",
+        restaurantName = "Dragon House",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "DRY OFF",
+        discountAmount = "up to ₹40",
+        address = "MG Road, Pune"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.manchurian_items_7,
+        title = "Gravy Chicken Manchurian",
+        price = "₹240/plate",
+        restaurantName = "Nanking Restaurant",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "2.0 km",
+        discount = "GRAVY OFF",
+        discountAmount = "up to ₹90",
+        address = "Park Street, Kolkata"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.manchurian_items_8,
+        title = "Semi-Dry Veg Manchurian",
+        price = "₹155/plate",
+        restaurantName = "Green Wok",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "SEMI OFF",
+        discountAmount = "up to ₹45",
+        address = "Indiranagar, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.manchurian_items_9,
+        title = "Schezwan Gobi Manchurian",
+        price = "₹165/plate",
+        restaurantName = "Spicy Wok",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "SCHEZWAN OFF",
+        discountAmount = "up to ₹50",
+        address = "Banjara Hills, Hyderabad"
+    ),
+
+    // VEGETABLE MIX VARIETIES (10-13)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.manchurian_items_10,
+        title = "Mixed Vegetable Manchurian",
+        price = "₹150/plate",
+        restaurantName = "Hot Wok",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "MIXVEG OFF",
+        discountAmount = "up to ₹40",
+        address = "Shivaji Nagar, Pune"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.manchurian_items_11,
+        title = "Capsicum Manchurian",
+        price = "₹145/plate",
+        restaurantName = "Veg China Town",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "CAPSICUM OFF",
+        discountAmount = "up to ₹35",
+        address = "Civil Lines, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.manchurian_items_12,
+        title = "Cabbage Manchurian",
+        price = "₹135/plate",
+        restaurantName = "Budget Bites",
+        rating = "4.5",
+        deliveryTime = "15-20 mins",
+        distance = "0.9 km",
+        discount = "CABBAGE OFF",
+        discountAmount = "up to ₹30",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.manchurian_items_13,
+        title = "Carrot Manchurian",
+        price = "₹140/plate",
+        restaurantName = "Healthy Chinese",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "CARROT OFF",
+        discountAmount = "up to ₹35",
+        address = "Jayanagar, Bangalore"
+    ),
+
+    // FLAVOR VARIATIONS (14-17)
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.manchurian_items_14,
+        title = "Garlic Gobi Manchurian",
+        price = "₹155/plate",
+        restaurantName = "Garlic House",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "GARLIC OFF",
+        discountAmount = "up to ₹45",
+        address = "Patel Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.manchurian_items_15,
+        title = "Ginger Chicken Manchurian",
+        price = "₹230/plate",
+        restaurantName = "Ginger Wok",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "GINGER OFF",
+        discountAmount = "up to ₹75",
+        address = "Koregaon Park, Pune"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.manchurian_items_16,
+        title = "Chilli Paneer Manchurian",
+        price = "₹190/plate",
+        restaurantName = "Chilli Junction",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "CHILLI OFF",
+        discountAmount = "up to ₹60",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.manchurian_items_17,
+        title = "Honey Chicken Manchurian",
+        price = "₹250/plate",
+        restaurantName = "Honey Bee Chinese",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.9 km",
+        discount = "HONEY OFF",
+        discountAmount = "up to ₹100",
+        address = "Bandra West, Mumbai"
+    ),
+
+    // PREPARATION STYLE VARIATIONS (18-20)
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.manchurian_items_18,
+        title = "Tandoori Gobi Manchurian",
+        price = "₹175/plate",
+        restaurantName = "Tandoori Wok",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "TANDOORI OFF",
+        discountAmount = "up to ₹55",
+        address = "Civil Lines, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.manchurian_items_19,
+        title = "Air Fried Veg Manchurian",
+        price = "₹165/plate",
+        restaurantName = "Fit Food Chinese",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "AIRFRY OFF",
+        discountAmount = "up to ₹50",
+        address = "Whitefield, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.manchurian_items_20,
+        title = "Family Pack Manchurian Combo",
+        price = "₹450/family pack",
+        restaurantName = "Family Wok",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.2 km",
+        discount = "FAMILY OFF",
+        discountAmount = "up to ₹150",
+        address = "GK II, Delhi"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

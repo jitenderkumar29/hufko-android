@@ -71835,17 +71835,1420 @@ val manchurianItems = listOf(
 
 @Composable
 fun PaneerPakodaCategoryPage() {
-    CategoryContentPage("Paneer Pakoda")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val paneerPakodaFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // BASE TYPES (with icons showing visual differences)
+        FilterChip(
+            id = "classic_paneer_pakoda",
+            text = "Classic Paneer Pakoda",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_classic_pakoda  // traditional pakoda shape
+        ),
+        FilterChip(
+            id = "stuffed_paneer_pakoda",
+            text = "Stuffed Paneer Pakoda",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_stuffed_pakoda  // pakoda with visible filling
+        ),
+        FilterChip(
+            id = "masala_paneer_pakoda",
+            text = "Masala Paneer Pakoda",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_masala_pakoda  // spiced version icon
+        ),
+
+        // BATTER VARIETIES (with icons for key ones)
+        FilterChip(
+            id = "besan_pakoda",
+            text = "Besan (Gram Flour)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_besan_masala_pakoda  // gram flour icon
+        ),
+        FilterChip(
+            id = "rice_flour_pakoda",
+            text = "Rice Flour (Crispy)",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_rice_flour  // rice flour icon
+        ),
+        FilterChip(
+            id = "cornflour_pakoda",
+            text = "Cornflour Coating",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "semolina_pakoda",
+            text = "Semolina (Rava)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // STUFFING OPTIONS (with icons)
+        FilterChip(
+            id = "spinach_stuffed_pakoda",
+            text = "Spinach Stuffed",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mint_stuffed_pakoda",
+            text = "Mint Chutney Stuffed",
+            type = FilterType.TEXT_ONLY
+        ),
+        // ADDED FLAVORS (with icons)
+        FilterChip(
+            id = "ginger_garlic_pakoda",
+            text = "Ginger-Garlic Paste",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chaat_masala_pakoda",
+            text = "Chaat Masala Sprinkle",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PREPARATION STYLES (with icons)
+        FilterChip(
+            id = "shallow_fried_pakoda",
+            text = "Shallow Fried (Less Oil)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ACCOMPANIMENTS (with icons)
+        FilterChip(
+            id = "with_tomato_ketchup",
+            text = "Tomato Ketchup",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "with_yogurt_dip",
+            text = "Yogurt Dip",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ONION VARIATIONS
+        FilterChip(
+            id = "with_chopped_onions",
+            text = "Chopped Onions",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // QUANTITY OPTIONS
+        FilterChip(
+            id = "half_plate_pakoda",
+            text = "Half Plate (6 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "full_plate_pakoda",
+            text = "Full Plate (12 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS (with icons)
+
+        FilterChip(
+            id = "low_oil_pakoda",
+            text = "Low Oil",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = paneerPakodaFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val paneerPakodaItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.paneer_pakoda_1,  // Classic Besan Paneer Pakoda - golden brown, crispy besan coating
+        title = "Classic Besan Paneer Pakoda",
+        price = "₹120/plate (6 pcs)",
+        restaurantName = "Pakoda House",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Chandni Chowk, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.paneer_pakoda_2,  // Stuffed Chili Paneer Pakoda - green chili visible inside, crispy coating
+        title = "Stuffed Chili Paneer Pakoda",
+        price = "₹140/plate (6 pcs)",
+        restaurantName = "Spicy Fritters",
+        rating = "4.8",
+        deliveryTime = "18-22 mins",
+        distance = "1.5 km",
+        discount = "15%",
+        discountAmount = "up to ₹40",
+        address = "CP, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.paneer_pakoda_3,  // Cheese Burst Paneer Pakoda - melted cheese oozing out
+        title = "Cheese Burst Paneer Pakoda",
+        price = "₹180/plate (6 pcs)",
+        restaurantName = "Cheese Lovers",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "20%",
+        discountAmount = "up to ₹70",
+        address = "South Extension, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.paneer_pakoda_4,  // Crispy Rice Flour Paneer Pakoda - extra crispy, light golden coating
+        title = "Crispy Rice Flour Paneer Pakoda",
+        price = "₹130/plate (6 pcs)",
+        restaurantName = "Crispy Corner",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Karol Bagh, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.paneer_pakoda_5,  // Masala Paneer Pakoda - spiced coating with visible masala specs
+        title = "Masala Paneer Pakoda",
+        price = "₹135/plate (6 pcs)",
+        restaurantName = "Masala Magic",
+        rating = "4.8",
+        deliveryTime = "18-22 mins",
+        distance = "1.4 km",
+        discount = "12%",
+        discountAmount = "up to ₹35",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.paneer_pakoda_6,  // Healthy Air Fried Paneer Pakoda - less oil, golden baked appearance
+        title = "Healthy Air Fried Paneer Pakoda",
+        price = "₹150/plate (6 pcs)",
+        restaurantName = "Healthy Bites",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.6 km",
+        discount = "15%",
+        discountAmount = "up to ₹45",
+        address = "Dwarka, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = paneerPakodaItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+           Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+   val paneerPakodaItemsList = listOf(
+    // CLASSIC BASE VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.paneer_pakoda_items_1,
+        title = "Classic Besan Paneer Pakoda",
+        price = "₹120/plate (6 pcs)",
+        restaurantName = "Pakoda House",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "PAKODA OFF",
+        discountAmount = "up to ₹25",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.paneer_pakoda_items_2,
+        title = "Stuffed Chili Paneer Pakoda",
+        price = "₹140/plate (6 pcs)",
+        restaurantName = "Spicy Fritters",
+        rating = "4.8",
+        deliveryTime = "18-22 mins",
+        distance = "1.5 km",
+        discount = "CHILI OFF",
+        discountAmount = "up to ₹40",
+        address = "CP, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.paneer_pakoda_items_3,
+        title = "Cheese Burst Paneer Pakoda",
+        price = "₹180/plate (6 pcs)",
+        restaurantName = "Cheese Lovers",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "CHEESE OFF",
+        discountAmount = "up to ₹70",
+        address = "South Extension, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.paneer_pakoda_items_4,
+        title = "Crispy Rice Flour Paneer Pakoda",
+        price = "₹130/plate (6 pcs)",
+        restaurantName = "Crispy Corner",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "CRISPY OFF",
+        discountAmount = "up to ₹30",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.paneer_pakoda_items_5,
+        title = "Masala Paneer Pakoda",
+        price = "₹135/plate (6 pcs)",
+        restaurantName = "Masala Magic",
+        rating = "4.8",
+        deliveryTime = "18-22 mins",
+        distance = "1.4 km",
+        discount = "MASALA OFF",
+        discountAmount = "up to ₹35",
+        address = "Rajouri Garden, Delhi"
+    ),
+
+    // BATTER VARIETIES (6-9)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.paneer_pakoda_items_6,
+        title = "Besan & Semolina Paneer Pakoda",
+        price = "₹140/plate (6 pcs)",
+        restaurantName = "Fusion Pakoda",
+        rating = "4.8",
+        deliveryTime = "18-22 mins",
+        distance = "1.3 km",
+        discount = "BESAN OFF",
+        discountAmount = "up to ₹35",
+        address = "Jayanagar, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.paneer_pakoda_items_7,
+        title = "Cornflour Coated Paneer Pakoda",
+        price = "₹145/plate (6 pcs)",
+        restaurantName = "Crispy Wok",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.6 km",
+        discount = "CORN OFF",
+        discountAmount = "up to ₹40",
+        address = "Koregaon Park, Pune"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.paneer_pakoda_items_8,
+        title = "Rava (Semolina) Paneer Pakoda",
+        price = "₹135/plate (6 pcs)",
+        restaurantName = "South Indian Pakoda",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "RAVA OFF",
+        discountAmount = "up to ₹30",
+        address = "Mylapore, Chennai"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.paneer_pakoda_items_9,
+        title = "Gluten-Free Paneer Pakoda",
+        price = "₹160/plate (6 pcs)",
+        restaurantName = "Healthy Bites",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "GLUTEN OFF",
+        discountAmount = "up to ₹50",
+        address = "Indiranagar, Bangalore"
+    ),
+
+    // STUFFING VARIATIONS (10-13)
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.paneer_pakoda_items_10,
+        title = "Green Chili Stuffed Paneer Pakoda",
+        price = "₹145/plate (6 pcs)",
+        restaurantName = "Spice Route",
+        rating = "4.9",
+        deliveryTime = "18-22 mins",
+        distance = "1.4 km",
+        discount = "GREEN OFF",
+        discountAmount = "up to ₹40",
+        address = "Banjara Hills, Hyderabad"
+    ),
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.paneer_pakoda_items_11,
+        title = "Cheese & Jalapeño Stuffed Pakoda",
+        price = "₹190/plate (6 pcs)",
+        restaurantName = "Fusion Kitchen",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.7 km",
+        discount = "JALAPENO OFF",
+        discountAmount = "up to ₹70",
+        address = "Bandra West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.paneer_pakoda_items_12,
+        title = "Spinach & Corn Stuffed Pakoda",
+        price = "₹155/plate (6 pcs)",
+        restaurantName = "Green Wok",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "SPINACH OFF",
+        discountAmount = "up to ₹45",
+        address = "Shivaji Nagar, Pune"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.paneer_pakoda_items_13,
+        title = "Mint & Coriander Stuffed Pakoda",
+        price = "₹150/plate (6 pcs)",
+        restaurantName = "Heritage Flavors",
+        rating = "4.8",
+        deliveryTime = "18-22 mins",
+        distance = "1.2 km",
+        discount = "MINT OFF",
+        discountAmount = "up to ₹40",
+        address = "Civil Lines, Delhi"
+    ),
+
+    // FLAVOR VARIATIONS (14-17)
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.paneer_pakoda_items_14,
+        title = "Ajwani Paneer Pakoda",
+        price = "₹135/plate (6 pcs)",
+        restaurantName = "Flavors of India",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "AJWANI OFF",
+        discountAmount = "up to ₹30",
+        address = "Sadar Bazaar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.paneer_pakoda_items_15,
+        title = "Ginger-Garlic Paneer Pakoda",
+        price = "₹140/plate (6 pcs)",
+        restaurantName = "Garlic House",
+        rating = "4.9",
+        deliveryTime = "18-22 mins",
+        distance = "1.4 km",
+        discount = "GINGER OFF",
+        discountAmount = "up to ₹35",
+        address = "Patel Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.paneer_pakoda_items_16,
+        title = "Chaat Masala Paneer Pakoda",
+        price = "₹145/plate (6 pcs)",
+        restaurantName = "Street Food King",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.0 km",
+        discount = "CHAAT OFF",
+        discountAmount = "up to ₹40",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.paneer_pakoda_items_17,
+        title = "Schezwan Paneer Pakoda",
+        price = "₹155/plate (6 pcs)",
+        restaurantName = "Spicy Wok",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "SCHEZWAN OFF",
+        discountAmount = "up to ₹45",
+        address = "Jubilee Hills, Hyderabad"
+    ),
+
+    // PREPARATION STYLE VARIATIONS (18-20)
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.paneer_pakoda_items_18,
+        title = "Deep Fried Paneer Pakoda",
+        price = "₹125/plate (6 pcs)",
+        restaurantName = "Traditional Pakoda",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "DEEP OFF",
+        discountAmount = "up to ₹25",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.paneer_pakoda_items_19,
+        title = "Air Fried Healthy Paneer Pakoda",
+        price = "₹160/plate (6 pcs)",
+        restaurantName = "Fit Food",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.6 km",
+        discount = "AIRFRY OFF",
+        discountAmount = "up to ₹50",
+        address = "Whitefield, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.paneer_pakoda_items_20,
+        title = "Family Feast Paneer Pakoda Platter",
+        price = "₹450/platter (24 pcs)",
+        restaurantName = "Pakoda Junction Family",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.0 km",
+        discount = "FAMILY OFF",
+        discountAmount = "up to ₹150",
+        address = "GK II, Delhi"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun CheesecakeCategoryPage() {
-    CategoryContentPage("Cheesecake")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val cheeseCakeFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // BASE/STYLE CATEGORIES (with icons showing visual differences)
+        FilterChip(
+            id = "new_york_cheesecake",
+            text = "New York Style",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_new_york_cheesecake  // classic tall, dense cheesecake
+        ),
+        FilterChip(
+            id = "japanese_cheesecake",
+            text = "Japanese Cotton",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_japanese_cheesecake  // fluffy, jiggly texture
+        ),
+        FilterChip(
+            id = "no_bake_cheesecake",
+            text = "No-Bake",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_no_bake_cheesecake  // chilled, set cheesecake
+        ),
+        FilterChip(
+            id = "vegan_cheesecake",
+            text = "Vegan",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_vegan_cheesecake  // plant-based ingredients
+        ),
+
+        // CRUST TYPES (with icons for key ones)
+        FilterChip(
+            id = "graham_cracker_crust",
+            text = "Graham Cracker",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_graham_cracker_crust  // classic brown crust
+        ),
+        FilterChip(
+            id = "biscuit_crust",
+            text = "Biscuit Base",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TOPPINGS & FLAVORS (with icons for popular ones)
+        FilterChip(
+            id = "lemon_cheesecake",
+            text = "Lemon",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "raspberry_cheesecake",
+            text = "Raspberry",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mango_cheesecake",
+            text = "Mango",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPECIAL DIETARY (with icons)
+        FilterChip(
+            id = "eggless_cheesecake",
+            text = "Eggless",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SIZE OPTIONS
+        FilterChip(
+            id = "mini_cheesecake",
+            text = "Mini (Individual)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "personal_cheesecake",
+            text = "Personal (4-inch)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "standard_cheesecake",
+            text = "Standard (6-inch)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "large_cheesecake",
+            text = "Large (8-inch)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "sheet_cheesecake",
+            text = "Sheet Cake",
+            type = FilterType.TEXT_ONLY
+        ),
+        // ADD-ONS & ACCOMPANIMENTS
+        FilterChip(
+            id = "with_whipped_cream",
+            text = "Whipped Cream",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "with_berry_compote",
+            text = "Berry Compote",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "with_chocolate_sauce",
+            text = "Chocolate Sauce",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "with_fresh_fruits",
+            text = "Fresh Fruits",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TEMPERATURE PREFERENCE
+        FilterChip(
+            id = "chilled_cheesecake",
+            text = "Chilled",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "room_temp_cheesecake",
+            text = "Room Temperature",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = cheeseCakeFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val cheeseCakeItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.cheesecake_1,  // Classic New York Style - tall, dense with smooth top and graham cracker crust
+        title = "Classic New York Cheesecake",
+        price = "₹250/slice | ₹1800/whole (6-inch)",
+        restaurantName = "The Cheesecake Factory",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "2.1 km",
+        discount = "15%",
+        discountAmount = "up to ₹300",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.cheesecake_2,  // Japanese Cotton Cheesecake - fluffy, jiggly, golden brown top
+        title = "Japanese Cotton Cheesecake",
+        price = "₹220/slice | ₹1600/whole (6-inch)",
+        restaurantName = "Tokyo Bakes",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹200",
+        address = "Saket, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.cheesecake_3,  // Strawberry Swirl Cheesecake - pink swirls throughout, fresh strawberries on top
+        title = "Strawberry Swirl Cheesecake",
+        price = "₹280/slice | ₹2000/whole (6-inch)",
+        restaurantName = "Berry Bliss",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.3 km",
+        discount = "20%",
+        discountAmount = "up to ₹400",
+        address = "Vasant Kunj, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.cheesecake_4,  // Oreo Cookie Crust Cheesecake - dark chocolate base, cookie chunks visible
+        title = "Oreo Overload Cheesecake",
+        price = "₹300/slice | ₹2200/whole (6-inch)",
+        restaurantName = "Cookie Dream",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹350",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.cheesecake_5,  // No-Bake Mango Cheesecake - bright yellow, chilled set, mango glaze top
+        title = "No-Bake Mango Cheesecake",
+        price = "₹260/slice | ₹1900/whole (6-inch)",
+        restaurantName = "Mango Mania",
+        rating = "4.7",
+        deliveryTime = "20-30 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹280",
+        address = "Greater Kailash, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.cheesecake_6,  // Triple Chocolate Cheesecake - dark, milk, white chocolate layers
+        title = "Triple Chocolate Cheesecake",
+        price = "₹320/slice | ₹2400/whole (6-inch)",
+        restaurantName = "Chocolate Heaven",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.0 km",
+        discount = "18%",
+        discountAmount = "up to ₹500",
+        address = "Hauz Khas, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = cheeseCakeItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+           Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+   val cheeseCakeItemsList = listOf(
+    // CLASSIC & INTERNATIONAL STYLES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.cheesecake_items_1,
+        title = "Classic New York Cheesecake",
+        price = "₹250/slice | ₹1800/whole",
+        restaurantName = "The Cheesecake Factory",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "2.1 km",
+        discount = "NYC OFF",
+        discountAmount = "up to ₹300",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.cheesecake_items_2,
+        title = "Japanese Cotton Cheesecake",
+        price = "₹220/slice | ₹1600/whole",
+        restaurantName = "Tokyo Bakes",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.8 km",
+        discount = "JAPAN OFF",
+        discountAmount = "up to ₹250",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.cheesecake_items_3,
+        title = "Italian Ricotta Cheesecake",
+        price = "₹280/slice | ₹2000/whole",
+        restaurantName = "Bella Italia",
+        rating = "4.7",
+        deliveryTime = "35-45 mins",
+        distance = "2.3 km",
+        discount = "ITALY OFF",
+        discountAmount = "up to ₹350",
+        address = "Vasant Kunj, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.cheesecake_items_4,
+        title = "German Käsekuchen",
+        price = "₹260/slice | ₹1900/whole",
+        restaurantName = "German Bakery",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.9 km",
+        discount = "GERMAN OFF",
+        discountAmount = "up to ₹300",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.cheesecake_items_5,
+        title = "French Fromage Blanc Cheesecake",
+        price = "₹300/slice | ₹2200/whole",
+        restaurantName = "Le Délice",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.2 km",
+        discount = "FRENCH OFF",
+        discountAmount = "up to ₹400",
+        address = "Hauz Khas, Delhi"
+    ),
+    // FRUIT TOPPINGS & SWIRLS (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.cheesecake_items_6,
+        title = "Strawberry Swirl Cheesecake",
+        price = "₹280/slice | ₹2000/whole",
+        restaurantName = "Berry Bliss",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "2.0 km",
+        discount = "BERRY OFF",
+        discountAmount = "up to ₹350",
+        address = "Greater Kailash, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.cheesecake_items_7,
+        title = "Blueberry Cheesecake",
+        price = "₹280/slice | ₹2000/whole",
+        restaurantName = "Blueberry Farms",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.7 km",
+        discount = "BLUE OFF",
+        discountAmount = "up to ₹350",
+        address = "Indiranagar, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.cheesecake_items_8,
+        title = "Raspberry Rose Cheesecake",
+        price = "₹300/slice | ₹2200/whole",
+        restaurantName = "Floral Bakes",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.1 km",
+        discount = "ROSE OFF",
+        discountAmount = "up to ₹400",
+        address = "Koregaon Park, Pune"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.cheesecake_items_9,
+        title = "Mango Passionfruit Cheesecake",
+        price = "₹290/slice | ₹2100/whole",
+        restaurantName = "Tropical Delights",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.8 km",
+        discount = "MANGO OFF",
+        discountAmount = "up to ₹380",
+        address = "Bandra West, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.cheesecake_items_10,
+        title = "Mixed Berry Compote Cheesecake",
+        price = "₹310/slice | ₹2300/whole",
+        restaurantName = "Berrylicious",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.2 km",
+        discount = "MIXBERRY OFF",
+        discountAmount = "up to ₹450",
+        address = "Jubilee Hills, Hyderabad"
+    ),
+
+    // CHOCOLATE & INDULGENT VARIETIES (11-14)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.cheesecake_items_11,
+        title = "Triple Chocolate Cheesecake",
+        price = "₹320/slice | ₹2400/whole",
+        restaurantName = "Chocolate Heaven",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.3 km",
+        discount = "CHOC OFF",
+        discountAmount = "up to ₹500",
+        address = "Hauz Khas, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.cheesecake_items_12,
+        title = "Salted Caramel Cheesecake",
+        price = "₹300/slice | ₹2200/whole",
+        restaurantName = "Caramel House",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.9 km",
+        discount = "CARAMEL OFF",
+        discountAmount = "up to ₹400",
+        address = "South Extension, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.cheesecake_items_13,
+        title = "Oreo Cookie Crust Cheesecake",
+        price = "₹290/slice | ₹2100/whole",
+        restaurantName = "Cookie Dream",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.6 km",
+        discount = "OREO OFF",
+        discountAmount = "up to ₹380",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.cheesecake_items_14,
+        title = "Nutella Swirl Cheesecake",
+        price = "₹330/slice | ₹2500/whole",
+        restaurantName = "Nutella House",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.0 km",
+        discount = "NUTELLA OFF",
+        discountAmount = "up to ₹550",
+        address = "Banjara Hills, Hyderabad"
+    ),
+
+    // PREMIUM & SPECIALTY FLAVORS (15-17)
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.cheesecake_items_15,
+        title = "Matcha Green Tea Cheesecake",
+        price = "₹310/slice | ₹2300/whole",
+        restaurantName = "Matcha Magic",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.7 km",
+        discount = "MATCHA OFF",
+        discountAmount = "up to ₹450",
+        address = "Whitefield, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.cheesecake_items_16,
+        title = "Tiramisu Cheesecake",
+        price = "₹320/slice | ₹2400/whole",
+        restaurantName = "Italian Delight",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.1 km",
+        discount = "TIRAMISU OFF",
+        discountAmount = "up to ₹500",
+        address = "CP, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.cheesecake_items_17,
+        title = "Lemon Blueberry Cheesecake",
+        price = "₹280/slice | ₹2000/whole",
+        restaurantName = "Citrus Bakes",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.5 km",
+        discount = "LEMON OFF",
+        discountAmount = "up to ₹350",
+        address = "Karol Bagh, Delhi"
+    ),
+
+    // DIETARY & HEALTH-CONSCIOUS OPTIONS (18-19)
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.cheesecake_items_18,
+        title = "Keto-Friendly Cheesecake",
+        price = "₹350/slice | ₹2600/whole",
+        restaurantName = "Keto Kitchen",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.9 km",
+        discount = "KETO OFF",
+        discountAmount = "up to ₹600",
+        address = "Dwarka, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.cheesecake_items_19,
+        title = "Vegan Cashew Cheesecake",
+        price = "₹340/slice | ₹2500/whole",
+        restaurantName = "Green Delights",
+        rating = "4.7",
+        deliveryTime = "35-45 mins",
+        distance = "2.0 km",
+        discount = "VEGAN OFF",
+        discountAmount = "up to ₹550",
+        address = "Koregaon Park, Pune"
+    ),
+
+    // FAMILY & CELEBRATION SIZE (20)
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.cheesecake_items_20,
+        title = "Celebration Cheesecake Platter",
+        price = "₹1200/platter (4 varieties, 16 slices)",
+        restaurantName = "Cake Celebration",
+        rating = "4.9",
+        deliveryTime = "45-50 mins",
+        distance = "2.5 km",
+        discount = "PARTY OFF",
+        discountAmount = "up to ₹300",
+        address = "GK II, Delhi"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun BrownieCategoryPage() {
-    CategoryContentPage("Brownie")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val brownieFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // BASE TEXTURE CATEGORIES (with icons showing visual differences)
+        FilterChip(
+            id = "fudgy_brownie",
+            text = "Fudgy Brownie",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_fudgy_brownie  // dense, moist, gooey interior
+        ),
+        FilterChip(
+            id = "cakey_brownie",
+            text = "Cakey Brownie",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_cakey_brownie  // fluffy, airy texture
+        ),
+        FilterChip(
+            id = "chewy_brownie",
+            text = "Chewy Brownie",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_chewy_brownie  // dense but chewy texture
+        ),
+        FilterChip(
+            id = "crusty_top_brownie",
+            text = "Crusty Top",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_crusty_top_brownie  // crackly, shiny crust
+        ),
+
+        // CHOCOLATE TYPES (with icons for key ones)
+        FilterChip(
+            id = "dark_chocolate_brownie",
+            text = "Dark Chocolate",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_dark_chocolate_brownie  // rich dark chocolate piece
+        ),
+        // ADD-INS & MIX-INS (with icons for popular ones)
+        FilterChip(
+            id = "hazelnut_brownie",
+            text = "Hazelnuts",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chocolate_chip_brownie",
+            text = "Chocolate Chips",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "caramel_swirl_brownie",
+            text = "Caramel Swirl",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "peanut_butter_swirl_brownie",
+            text = "Peanut Butter Swirl",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // FLAVOR VARIATIONS (with icons for distinct ones)
+        FilterChip(
+            id = "orange_zest_brownie",
+            text = "Orange Zest",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "raspberry_brownie",
+            text = "Raspberry Swirl",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chili_chocolate_brownie",
+            text = "Chili Chocolate",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TOPPINGS & FROSTINGS (with icons)
+        FilterChip(
+            id = "powdered_sugar_brownie",
+            text = "Powdered Sugar Dusted",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "ice_cream_topped_brownie",
+            text = "With Ice Cream",
+            type = FilterType.TEXT_ONLY
+        ),
+        // SIZE OPTIONS
+        FilterChip(
+            id = "mini_brownie",
+            text = "Mini (Bite-sized)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "regular_brownie",
+            text = "Regular (2x2 inch)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "large_brownie",
+            text = "Large (4x4 inch)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "brownie_tray",
+            text = "Tray (9x9 inch)",
+            type = FilterType.TEXT_ONLY
+        ),
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = brownieFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val brownieItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.brownie_1,  // Classic Fudgy Brownie - dense, rich, crackly top with powdered sugar dusting
+        title = "Classic Fudgy Walnut Brownie",
+        price = "₹180/piece | ₹650/box (4 pcs)",
+        restaurantName = "Brownie House",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "15%",
+        discountAmount = "up to ₹100",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.brownie_2,  // Triple Chocolate Brownie - dark, milk, white chocolate chunks visible
+        title = "Triple Chocolate Chunk Brownie",
+        price = "₹220/piece | ₹800/box (4 pcs)",
+        restaurantName = "Chocolate Heaven",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "2.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹150",
+        address = "Saket, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.brownie_3,  // Salted Caramel Brownie - caramel swirls, sea salt sprinkle on top
+        title = "Salted Caramel Swirl Brownie",
+        price = "₹240/piece | ₹900/box (4 pcs)",
+        restaurantName = "Caramel Delight",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.3 km",
+        discount = "20%",
+        discountAmount = "up to ₹200",
+        address = "Vasant Kunj, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.brownie_4,  // Peanut Butter Brownie - peanut butter swirls, chopped peanuts on top
+        title = "Peanut Butter Explosion Brownie",
+        price = "₹230/piece | ₹850/box (4 pcs)",
+        restaurantName = "Nutty Baker",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹180",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.brownie_5,  // Cheesecake Swirl Brownie - marbled with cream cheese
+        title = "Cheesecake Marble Brownie",
+        price = "₹250/piece | ₹950/box (4 pcs)",
+        restaurantName = "Swirl Factory",
+        rating = "4.7",
+        deliveryTime = "30-35 mins",
+        distance = "1.9 km",
+        discount = "15%",
+        discountAmount = "up to ₹220",
+        address = "Greater Kailash, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.brownie_6,  // Brownie Sundae - warm brownie with ice cream, chocolate sauce
+        title = "Ultimate Brownie Sundae",
+        price = "₹320/serving (with ice cream)",
+        restaurantName = "Dessert Paradise",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "18%",
+        discountAmount = "up to ₹250",
+        address = "Hauz Khas, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = brownieItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+    }
 }
 
 @Composable

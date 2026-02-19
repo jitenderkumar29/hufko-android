@@ -73248,17 +73248,1538 @@ val brownieItems = listOf(
             headingBottomPadding = 0.dp
         )
 
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+ val brownieItemsList = listOf(
+    // CLASSIC BROWNIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.brownie_items_1,
+        title = "Classic Fudge Brownie",
+        price = "₹120/pc | ₹650/dozen",
+        restaurantName = "Brownie Point",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.5 km",
+        discount = "BROWNIE20",
+        discountAmount = "up to ₹150",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.brownie_items_2,
+        title = "Belgian Chocolate Brownie",
+        price = "₹150/pc | ₹800/dozen",
+        restaurantName = "Choco Lair",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "2.0 km",
+        discount = "BELGIAN25",
+        discountAmount = "up to ₹200",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.brownie_items_3,
+        title = "Walnut Crunch Brownie",
+        price = "₹130/pc | ₹700/dozen",
+        restaurantName = "Nutty Bakes",
+        rating = "4.7",
+        deliveryTime = "20-30 mins",
+        distance = "1.2 km",
+        discount = "WALNUT15",
+        discountAmount = "up to ₹120",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.brownie_items_4,
+        title = "Dairy Milk Brownie",
+        price = "₹140/pc | ₹750/dozen",
+        restaurantName = "Cadbury Cafe",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.8 km",
+        discount = "DAIRY20",
+        discountAmount = "up to ₹180",
+        address = "Vasant Kunj, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.brownie_items_5,
+        title = "Dark Chocolate Brownie",
+        price = "₹160/pc | ₹850/dozen",
+        restaurantName = "Dark Delights",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "2.1 km",
+        discount = "DARK30",
+        discountAmount = "up to ₹250",
+        address = "Hauz Khas, Delhi"
+    ),
+
+    // NUTTY & CARAMEL BROWNIES (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.brownie_items_6,
+        title = "Salted Caramel Brownie",
+        price = "₹170/pc | ₹900/dozen",
+        restaurantName = "Caramel House",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.9 km",
+        discount = "CARAMEL20",
+        discountAmount = "up to ₹220",
+        address = "South Extension, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.brownie_items_7,
+        title = "Peanut Butter Swirl Brownie",
+        price = "₹160/pc | ₹850/dozen",
+        restaurantName = "PB & Co.",
+        rating = "4.9",
+        deliveryTime = "25-35 mins",
+        distance = "1.6 km",
+        discount = "PEANUT25",
+        discountAmount = "up to ₹200",
+        address = "Greater Kailash, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.brownie_items_8,
+        title = "Almond Brownie",
+        price = "₹150/pc | ₹800/dozen",
+        restaurantName = "Almond House",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.4 km",
+        discount = "ALMOND15",
+        discountAmount = "up to ₹180",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.brownie_items_9,
+        title = "Hazelnut Praline Brownie",
+        price = "₹180/pc | ₹950/dozen",
+        restaurantName = "Nutella House",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.2 km",
+        discount = "PRALINE30",
+        discountAmount = "up to ₹280",
+        address = "Banjara Hills, Hyderabad"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.brownie_items_10,
+        title = "Macadamia Nut Brownie",
+        price = "₹190/pc | ₹1000/dozen",
+        restaurantName = "Premium Bakes",
+        rating = "4.8",
+        deliveryTime = "35-45 mins",
+        distance = "2.3 km",
+        discount = "MACADAMIA25",
+        discountAmount = "up to ₹300",
+        address = "Jubilee Hills, Hyderabad"
+    ),
+
+    // FILLED & LAYERED BROWNIES (11-14)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.brownie_items_11,
+        title = "Cheesecake Swirl Brownie",
+        price = "₹180/pc | ₹950/dozen",
+        restaurantName = "Swirl Cafe",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "1.8 km",
+        discount = "SWIRL25",
+        discountAmount = "up to ₹250",
+        address = "Indiranagar, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.brownie_items_12,
+        title = "Red Velvet Brownie",
+        price = "₹160/pc | ₹850/dozen",
+        restaurantName = "Red Velvet Bakery",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.5 km",
+        discount = "RED20",
+        discountAmount = "up to ₹200",
+        address = "Whitefield, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.brownie_items_13,
+        title = "Mint Chocolate Brownie",
+        price = "₹150/pc | ₹800/dozen",
+        restaurantName = "Minty Fresh",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.7 km",
+        discount = "MINT15",
+        discountAmount = "up to ₹180",
+        address = "Koregaon Park, Pune"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.brownie_items_14,
+        title = "Coffee Brownie",
+        price = "₹140/pc | ₹750/dozen",
+        restaurantName = "Coffee & Cake",
+        rating = "4.8",
+        deliveryTime = "20-30 mins",
+        distance = "1.3 km",
+        discount = "COFFEE20",
+        discountAmount = "up to ₹160",
+        address = "Bandra West, Mumbai"
+    ),
+
+    // FRUIT & SPECIALTY BROWNIES (15-17)
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.brownie_items_15,
+        title = "Orange Zest Brownie",
+        price = "₹150/pc | ₹800/dozen",
+        restaurantName = "Citrus Delights",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.6 km",
+        discount = "ORANGE15",
+        discountAmount = "up to ₹180",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.brownie_items_16,
+        title = "Raspberry Brownie",
+        price = "₹170/pc | ₹900/dozen",
+        restaurantName = "Berry Bliss",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.9 km",
+        discount = "RASPBERRY20",
+        discountAmount = "up to ₹220",
+        address = "GK II, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.brownie_items_17,
+        title = "Chili Chocolate Brownie",
+        price = "₹160/pc | ₹850/dozen",
+        restaurantName = "Spice & Sweet",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "2.0 km",
+        discount = "CHILI25",
+        discountAmount = "up to ₹200",
+        address = "CP, Delhi"
+    ),
+
+    // DIETARY OPTIONS (18-19)
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.brownie_items_18,
+        title = "Gluten-Free Brownie",
+        price = "₹190/pc | ₹1000/dozen",
+        restaurantName = "Gluten Free Kitchen",
+        rating = "4.8",
+        deliveryTime = "35-45 mins",
+        distance = "2.1 km",
+        discount = "GLUTEN25",
+        discountAmount = "up to ₹300",
+        address = "Dwarka, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.brownie_items_19,
+        title = "Vegan Brownie",
+        price = "₹180/pc | ₹950/dozen",
+        restaurantName = "Green Delights",
+        rating = "4.7",
+        deliveryTime = "35-45 mins",
+        distance = "2.0 km",
+        discount = "VEGAN20",
+        discountAmount = "up to ₹280",
+        address = "Koregaon Park, Pune"
+    ),
+
+    // CELEBRATION PACK (20)
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.brownie_items_20,
+        title = "Brownie Gift Hamper",
+        price = "₹999/hamper (12 assorted)",
+        restaurantName = "Gift Bakes",
+        rating = "4.9",
+        deliveryTime = "40-50 mins",
+        distance = "2.4 km",
+        discount = "GIFT30",
+        discountAmount = "up to ₹350",
+        address = "Hauz Khas, Delhi"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
     }
 }
 
 @Composable
 fun ChaapCategoryPage() {
-    CategoryContentPage("Chaap")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val chaapFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // CHAAP BASE TYPES (with icons showing the chaap variety)
+        FilterChip(
+            id = "soy_chaap",
+            text = "Soy Chaap",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_soy_chaap  // soy-based rolled chaap
+        ),
+        FilterChip(
+            id = "malai_chaap",
+            text = "Malai Chaap",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_malai_chaap  // creamy white chaap
+        ),
+        FilterChip(
+            id = "hariyali_chaap",
+            text = "Hariyali Chaap",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_hariyali_chaap  // green marinated chaap
+        ),
+        FilterChip(
+            id = "tandoori_chaap",
+            text = "Tandoori Chaap",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_tandoori_chaap  // red/orange tandoori style
+        ),
+        FilterChip(
+            id = "afghani_chaap",
+            text = "Afghani Chaap",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_afghani_chaap  // creamy white with kasuri methi
+        ),
+
+        // GRAVY STYLES (with icons for popular ones)
+        FilterChip(
+            id = "dry_chaap",
+            text = "Dry Chaap",
+            type = FilterType.TEXT_ONLY
+        ),
+        // REGIONAL STYLES (with icons)
+        FilterChip(
+            id = "lucknowi_chaap",
+            text = "Lucknowi Chaap",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mughlai_chaap",
+            text = "Mughlai Chaap",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPICE LEVELS (with icons for heat levels)
+        FilterChip(
+            id = "mild_spice_chaap",
+            text = "Mild",
+            type = FilterType.TEXT_ONLY
+        ),
+        // ACCOMPANIMENTS (with icons)
+        FilterChip(
+            id = "chaap_with_naan",
+            text = "Served with Naan",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chaap_with_rice",
+            text = "Served with Rice",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chaap_with_salad",
+            text = "With Salad",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chaap_with_onion",
+            text = "With Onion Rings",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PREPARATION STYLES (with icon for key one)
+        FilterChip(
+            id = "fried_chaap",
+            text = "Fried",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "smoked_chaap",
+            text = "Smoked",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PORTION SIZES
+        FilterChip(
+            id = "half_plate_chaap",
+            text = "Half Plate",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "full_plate_chaap",
+            text = "Full Plate",
+            type = FilterType.TEXT_ONLY
+        ),
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = chaapFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val chaapItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.chaap_1,  // Tandoori Chaap - red/orange marinated chaap with charred edges, served with onion rings and mint chutney
+        title = "Tandoori Chaap",
+        price = "₹280/half plate | ₹520/full plate",
+        restaurantName = "Punjabi Chaap Corner",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.1 km",
+        discount = "20%",
+        discountAmount = "up to ₹150",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.chaap_2,  // Malai Chaap - creamy white chaap with kasuri methi, mild creamy gravy
+        title = "Afghani Malai Chaap",
+        price = "₹300/half plate | ₹550/full plate",
+        restaurantName = "Afghani Darbar",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "1.8 km",
+        discount = "15%",
+        discountAmount = "up to ₹120",
+        address = "Saket, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.chaap_3,  // Hariyali Chaap - vibrant green marinated chaap with coriander and mint, grilled
+        title = "Hariyali Chaap",
+        price = "₹290/half plate | ₹540/full plate",
+        restaurantName = "Green Bites",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "18%",
+        discountAmount = "up to ₹130",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.chaap_4,  // Butter Chaap - rich, creamy orange gravy with chaap pieces, garnished with butter
+        title = "Butter Chaap Masala",
+        price = "₹320/half plate | ₹590/full plate",
+        restaurantName = "Butter Point",
+        rating = "4.9",
+        deliveryTime = "35-40 mins",
+        distance = "2.3 km",
+        discount = "22%",
+        discountAmount = "up to ₹200",
+        address = "Vasant Kunj, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.chaap_5,  // Dry Chaap - spicy dry chaap with onions and capsicum, perfect as appetizer
+        title = "Punjabi Dry Chaap",
+        price = "₹260/half plate | ₹490/full plate",
+        restaurantName = "Punjabi Rasoi",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.6 km",
+        discount = "12%",
+        discountAmount = "up to ₹100",
+        address = "Karol Bagh, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.chaap_6,  // Chaap Biryani - layered biryani with chaap pieces, fried onions, served with raita
+        title = "Chaap Biryani",
+        price = "₹350/half plate | ₹650/full plate",
+        restaurantName = "Biryani Wala",
+        rating = "4.8",
+        deliveryTime = "35-40 mins",
+        distance = "2.0 km",
+        discount = "25%",
+        discountAmount = "up to ₹250",
+        address = "Hauz Khas, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = chaapItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+ val chaapItemsList = listOf(
+    // TANDOORI & GRILLED CHAAP (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.chaap_items_1,
+        title = "Tandoori Chaap",
+        price = "₹130/plate | ₹240/half | ₹450/full",
+        restaurantName = "Tandoori Junction",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "2.0 km",
+        discount = "TANDOORI20",
+        discountAmount = "up to ₹180",
+        address = "GTB Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.chaap_items_2,
+        title = "Afghani Chaap",
+        price = "₹150/plate | ₹280/half | ₹520/full",
+        restaurantName = "Afghani Darbar",
+        rating = "4.8",
+        deliveryTime = "35-45 mins",
+        distance = "2.5 km",
+        discount = "AFGHANI25",
+        discountAmount = "up to ₹220",
+        address = "Rohini, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.chaap_items_3,
+        title = "Malai Chaap",
+        price = "₹140/plate | ₹260/half | ₹480/full",
+        restaurantName = "Creamy Bites",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "2.2 km",
+        discount = "MALAI25",
+        discountAmount = "up to ₹200",
+        address = "Green Park, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.chaap_items_4,
+        title = "Tangdi Chaap",
+        price = "₹160/plate | ₹300/half | ₹550/full",
+        restaurantName = "Tangdi House",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.3 km",
+        discount = "TANGDI30",
+        discountAmount = "up to ₹250",
+        address = "Rajouri Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.chaap_items_5,
+        title = "Reshmi Chaap",
+        price = "₹150/plate | ₹280/half | ₹520/full",
+        restaurantName = "Reshmi Restaurant",
+        rating = "4.7",
+        deliveryTime = "30-40 mins",
+        distance = "2.1 km",
+        discount = "RESHMI20",
+        discountAmount = "up to ₹200",
+        address = "Janakpuri, Delhi"
+    ),
+
+    // SPICY & MASALA CHAAP (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.chaap_items_6,
+        title = "Achari Chaap",
+        price = "₹120/plate | ₹220/half | ₹420/full",
+        restaurantName = "Achari Zaika",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.8 km",
+        discount = "ACHARI20",
+        discountAmount = "up to ₹150",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.chaap_items_7,
+        title = "Masala Chaap",
+        price = "₹130/plate | ₹240/half | ₹450/full",
+        restaurantName = "Spice Factory",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.9 km",
+        discount = "MASALA15",
+        discountAmount = "up to ₹160",
+        address = "Kamla Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.chaap_items_8,
+        title = "Kali Mirch Chaap",
+        price = "₹140/plate | ₹260/half | ₹480/full",
+        restaurantName = "Pepper Pot",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "2.0 km",
+        discount = "PEPPER25",
+        discountAmount = "up to ₹190",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.chaap_items_9,
+        title = "Hyderabadi Chaap",
+        price = "₹150/plate | ₹280/half | ₹520/full",
+        restaurantName = "Nizam's Kitchen",
+        rating = "4.8",
+        deliveryTime = "35-45 mins",
+        distance = "2.4 km",
+        discount = "HYDERABADI25",
+        discountAmount = "up to ₹210",
+        address = "Banjara Hills, Hyderabad"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.chaap_items_10,
+        title = "Kolhapuri Chaap",
+        price = "₹140/plate | ₹260/half | ₹480/full",
+        restaurantName = "Spice Route",
+        rating = "4.7",
+        deliveryTime = "30-40 mins",
+        distance = "2.2 km",
+        discount = "KOLHAPURI20",
+        discountAmount = "up to ₹180",
+        address = "Koregaon Park, Pune"
+    ),
+
+    // CREAMY & BUTTERY CHAAP (11-14)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.chaap_items_11,
+        title = "Butter Chaap",
+        price = "₹160/plate | ₹300/half | ₹550/full",
+        restaurantName = "Butter House",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "1.8 km",
+        discount = "BUTTER25",
+        discountAmount = "up to ₹230",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.chaap_items_12,
+        title = "Creamy Mushroom Chaap",
+        price = "₹170/plate | ₹320/half | ₹580/full",
+        restaurantName = "Mushroom Magic",
+        rating = "4.8",
+        deliveryTime = "35-45 mins",
+        distance = "2.1 km",
+        discount = "MUSHROOM20",
+        discountAmount = "up to ₹240",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.chaap_items_13,
+        title = "Kadhai Chaap",
+        price = "₹140/plate | ₹260/half | ₹480/full",
+        restaurantName = "Kadhai Point",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.7 km",
+        discount = "KADHAI15",
+        discountAmount = "up to ₹170",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.chaap_items_14,
+        title = "Bhuna Chaap",
+        price = "₹150/plate | ₹280/half | ₹520/full",
+        restaurantName = "Bhuna Junction",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "1.9 km",
+        discount = "BHUNA20",
+        discountAmount = "up to ₹200",
+        address = "Pitampura, Delhi"
+    ),
+
+    // DRY & SPECIALTY CHAAP (15-17)
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.chaap_items_15,
+        title = "Dry Chilli Chaap",
+        price = "₹140/plate | ₹260/half | ₹480/full",
+        restaurantName = "Chilli Wok",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.6 km",
+        discount = "CHILLI15",
+        discountAmount = "up to ₹180",
+        address = "GTB Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.chaap_items_16,
+        title = "Hara Bhara Chaap",
+        price = "₹130/plate | ₹240/half | ₹450/full",
+        restaurantName = "Green Delight",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.7 km",
+        discount = "HARABHARA20",
+        discountAmount = "up to ₹160",
+        address = "Indirapuram, Ghaziabad"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.chaap_items_17,
+        title = "Stuffed Chaap",
+        price = "₹180/plate | ₹340/half | ₹620/full",
+        restaurantName = "Stuffed Special",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.3 km",
+        discount = "STUFFED25",
+        discountAmount = "up to ₹280",
+        address = "Hauz Khas, Delhi"
+    ),
+
+    // REGIONAL VARIETIES (18-19)
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.chaap_items_18,
+        title = "Lucknowi Chaap",
+        price = "₹160/plate | ₹300/half | ₹550/full",
+        restaurantName = "Lucknowi Kitchen",
+        rating = "4.8",
+        deliveryTime = "35-45 mins",
+        distance = "2.2 km",
+        discount = "LUCKNOWI25",
+        discountAmount = "up to ₹250",
+        address = "Civil Lines, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.chaap_items_19,
+        title = "Mughlai Chaap",
+        price = "₹170/plate | ₹320/half | ₹580/full",
+        restaurantName = "Mughlai Darbar",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.4 km",
+        discount = "MUGHLAI30",
+        discountAmount = "up to ₹280",
+        address = "Old Delhi, Delhi"
+    ),
+
+    // COMBO & FEAST PACK (20)
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.chaap_items_20,
+        title = "Chaap Feast Platter",
+        price = "₹599/platter (4 varieties, 16 pcs)",
+        restaurantName = "Chaap Express",
+        rating = "4.9",
+        deliveryTime = "40-50 mins",
+        distance = "2.5 km",
+        discount = "FEAST30",
+        discountAmount = "up to ₹400",
+        address = "Noida Sector 18, Noida"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun DalCategoryPage() {
-    CategoryContentPage("Dal")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val dalFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // DAL TYPES (with icons showing the dal variety)
+        FilterChip(
+            id = "dal_makhani",
+            text = "Dal Makhani",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_dal_makhani  // creamy black dal with butter
+        ),
+        FilterChip(
+            id = "dal_tadka",
+            text = "Dal Tadka",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_dal_tadka  // yellow dal with tempering
+        ),
+        FilterChip(
+            id = "dal_fry",
+            text = "Dal Fry",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_dal_fry  // simple tempered dal
+        ),
+        FilterChip(
+            id = "chana_dal",
+            text = "Chana Dal",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_chana_dal  // split bengal gram dal
+        ),
+        FilterChip(
+            id = "toor_dal",
+            text = "Toor Dal",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_toor_dal  // pigeon pea dal
+        ),
+        // REGIONAL SPECIALITIES (text only)
+        FilterChip(
+            id = "gujarati_dal",
+            text = "Gujarati Dal",
+            type = FilterType.TEXT_ONLY  // sweet and sour
+        ),
+        FilterChip(
+            id = "punjabi_dal",
+            text = "Punjabi Dal",
+            type = FilterType.TEXT_ONLY  // rich and buttery
+        ),
+        FilterChip(
+            id = "rajasthani_dal",
+            text = "Rajasthani Dal",
+            type = FilterType.TEXT_ONLY  // spicy with red chilies
+        ),
+        FilterChip(
+            id = "bengali_dal",
+            text = "Bengali Dal",
+            type = FilterType.TEXT_ONLY  // with panch phoron
+        ),
+        FilterChip(
+            id = "sindhi_dal",
+            text = "Sindhi Dal",
+            type = FilterType.TEXT_ONLY  // with kokum
+        ),
+        FilterChip(
+            id = "maharashtrian_dal",
+            text = "Maharashtrian Dal",
+            type = FilterType.TEXT_ONLY  // with goda masala
+        ),
+        FilterChip(
+            id = "south_indian_dal",
+            text = "South Indian Dal",
+            type = FilterType.TEXT_ONLY  // sambar style
+        ),
+
+        // DAL PREPARATIONS (text only)
+        FilterChip(
+            id = "dal_palakkad",
+            text = "Palakkad Dal",
+            type = FilterType.TEXT_ONLY  // Kerala style with coconut
+        ),
+        FilterChip(
+            id = "dal_pithod",
+            text = "Dal Pithod",
+            type = FilterType.TEXT_ONLY  // Rajasthani specialty
+        ),
+        FilterChip(
+            id = "dal_bati",
+            text = "Dal Baati",
+            type = FilterType.TEXT_ONLY  // with baked wheat balls
+        ),
+        FilterChip(
+            id = "dal_pakwan",
+            text = "Dal Pakwan",
+            type = FilterType.TEXT_ONLY  // Sindhi breakfast
+        ),
+
+        // ACCOMPANIMENTS (text only)
+        FilterChip(
+            id = "dal_with_naan",
+            text = "Dal with Naan",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dal_with_roti",
+            text = "Dal with Roti",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dal_with_jeera_rice",
+            text = "Dal with Jeera Rice",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dal_with_steamed_rice",
+            text = "Dal with Steamed Rice",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dal_with_butter",
+            text = "Dal with Butter",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dal_with_ghee",
+            text = "Dal with Ghee",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PREPARATION STYLES (text only)
+        FilterChip(
+            id = "dal_soup_style",
+            text = "Soup Style Dal",
+            type = FilterType.TEXT_ONLY  // watery consistency
+        ),
+        FilterChip(
+            id = "dal_thick",
+            text = "Thick Dal",
+            type = FilterType.TEXT_ONLY  // gravy style
+        ),
+        FilterChip(
+            id = "dal_with_tadka",
+            text = "With Tadka",
+            type = FilterType.TEXT_ONLY  // tempered
+        ),
+        FilterChip(
+            id = "dal_without_tadka",
+            text = "Without Tadka",
+            type = FilterType.TEXT_ONLY  // plain
+        ),
+        FilterChip(
+            id = "dal_smoked",
+            text = "Smoked Dal",
+            type = FilterType.TEXT_ONLY  // dhungar method
+        ),
+
+        // HEALTH & DIETARY (text only)
+        FilterChip(
+            id = "high_protein_dal",
+            text = "High Protein Dal",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "low_fat_dal",
+            text = "Low Fat Dal",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "no_onion_garlic_dal",
+            text = "No Onion-Garlic",
+            type = FilterType.TEXT_ONLY  // for fasting/jain
+        ),
+        FilterChip(
+            id = "gluten_free_dal",
+            text = "Gluten Free",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PORTION SIZES (text only)
+        FilterChip(
+            id = "dal_small_bowl",
+            text = "Small Bowl",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dal_medium_bowl",
+            text = "Medium Bowl",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dal_large_bowl",
+            text = "Large Bowl",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dal_family_pack",
+            text = "Family Pack",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = dalFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val dalItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.dal_1,  // Dal Makhani - creamy black dal with butter, slow-cooked overnight, garnished with cream
+        title = "Dal Makhani",
+        price = "₹220/half bowl | ₹420/full bowl",
+        restaurantName = "Punjabi Dhaba",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "15%",
+        discountAmount = "up to ₹120",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.dal_2,  // Dal Tadka - yellow dal with tempered spices, garlic, red chilies, garnished with coriander
+        title = "Dal Tadka",
+        price = "₹180/half bowl | ₹350/full bowl",
+        restaurantName = "Tadka House",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹80",
+        address = "Saket, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.dal_3,  // Panchmel Dal - Rajasthani five-lentil dal with rich spices, traditional clay pot style
+        title = "Panchmel Dal",
+        price = "₹200/half bowl | ₹380/full bowl",
+        restaurantName = "Rajasthani Bhojnalaya",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "2.0 km",
+        discount = "12%",
+        discountAmount = "up to ₹100",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.dal_4,  // Gujarati Dal - sweet and sour dal with peanuts, curry leaves, and jaggery
+        title = "Gujarati Kadhi",
+        price = "₹160/half bowl | ₹300/full bowl",
+        restaurantName = "Gujarat Bhavan",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.6 km",
+        discount = "10%",
+        discountAmount = "up to ₹70",
+        address = "Karol Bagh, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.dal_5,  // Dal Fry - simple tempered dal with onion, tomato, and cumin seeds
+        title = "Dal Fry",
+        price = "₹150/half bowl | ₹280/full bowl",
+        restaurantName = "South Indian Cafe",
+        rating = "4.6",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "5%",
+        discountAmount = "up to ₹40",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.dal_6,  // Dal Baati - traditional Rajasthani dal with baked wheat baati, served with ghee
+        title = "Dal Baati Churma",
+        price = "₹320/half plate | ₹600/full plate",
+        restaurantName = "Rajasthani Zaika",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.2 km",
+        discount = "20%",
+        discountAmount = "up to ₹250",
+        address = "Pitampura, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = dalItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+ val dalItemsList = listOf(
+    // CREAMY & BUTTERY DALS (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.dal_items_1,
+        title = "Dal Makhani",
+        price = "₹180/bowl | ₹320/half | ₹600/full",
+        restaurantName = "Punjabi Dhaba",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "1.8 km",
+        discount = "MAKHANI25",
+        discountAmount = "up to ₹250",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.dal_items_2,
+        title = "Butter Dal",
+        price = "₹160/bowl | ₹280/half | ₹520/full",
+        restaurantName = "Butter Point",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.6 km",
+        discount = "BUTTER20",
+        discountAmount = "up to ₹180",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.dal_items_3,
+        title = "Dal Tadka",
+        price = "₹140/bowl | ₹240/half | ₹450/full",
+        restaurantName = "Tadka House",
+        rating = "4.8",
+        deliveryTime = "20-30 mins",
+        distance = "1.2 km",
+        discount = "TADKA15",
+        discountAmount = "up to ₹150",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.dal_items_4,
+        title = "Dal Fry",
+        price = "₹120/bowl | ₹220/half | ₹400/full",
+        restaurantName = "South Indian Cafe",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "FRY10",
+        discountAmount = "up to ₹100",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.dal_items_5,
+        title = "Dal Palak",
+        price = "₹130/bowl | ₹230/half | ₹420/full",
+        restaurantName = "Green Kitchen",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "PALAK15",
+        discountAmount = "up to ₹120",
+        address = "GTB Nagar, Delhi"
+    ),
+
+    // REGIONAL DAL SPECIALITIES (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.dal_items_6,
+        title = "Panchmel Dal",
+        price = "₹150/bowl | ₹260/half | ₹480/full",
+        restaurantName = "Rajasthani Bhojnalaya",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "2.0 km",
+        discount = "PANCHMEL20",
+        discountAmount = "up to ₹200",
+        address = "Rajouri Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.dal_items_7,
+        title = "Gujarati Dal",
+        price = "₹130/bowl | ₹230/half | ₹420/full",
+        restaurantName = "Gujarat Bhavan",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.9 km",
+        discount = "GUJARATI15",
+        discountAmount = "up to ₹150",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.dal_items_8,
+        title = "Bengali Dal",
+        price = "₹120/bowl | ₹220/half | ₹400/full",
+        restaurantName = "Bengali Sweet House",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "BENGALI10",
+        discountAmount = "up to ₹120",
+        address = "Chittaranjan Park, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.dal_items_9,
+        title = "Maharashtrian Dal",
+        price = "₹130/bowl | ₹240/half | ₹440/full",
+        restaurantName = "Maharashtra Bhojan",
+        rating = "4.7",
+        deliveryTime = "30-35 mins",
+        distance = "2.1 km",
+        discount = "MAHA15",
+        discountAmount = "up to ₹140",
+        address = "Vashi, Mumbai"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.dal_items_10,
+        title = "Hyderabadi Dal",
+        price = "₹140/bowl | ₹250/half | ₹460/full",
+        restaurantName = "Hyderabadi Kitchen",
+        rating = "4.8",
+        deliveryTime = "30-40 mins",
+        distance = "2.2 km",
+        discount = "HYDERABADI20",
+        discountAmount = "up to ₹180",
+        address = "Banjara Hills, Hyderabad"
+    ),
+
+    // LENTIL VARIETIES (11-14)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.dal_items_11,
+        title = "Chana Dal",
+        price = "₹120/bowl | ₹210/half | ₹380/full",
+        restaurantName = "Chana House",
+        rating = "4.6",
+        deliveryTime = "20-30 mins",
+        distance = "1.5 km",
+        discount = "CHANA10",
+        discountAmount = "up to ₹100",
+        address = "Kamla Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.dal_items_12,
+        title = "Toor Dal",
+        price = "₹110/bowl | ₹200/half | ₹360/full",
+        restaurantName = "South Indian Tiffin",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.3 km",
+        discount = "TOOR10",
+        discountAmount = "up to ₹90",
+        address = "Malleswaram, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.dal_items_13,
+        title = "Moong Dal",
+        price = "₹110/bowl | ₹200/half | ₹360/full",
+        restaurantName = "Moong Delight",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "MOONG10",
+        discountAmount = "up to ₹80",
+        address = "Indiranagar, Bangalore"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.dal_items_14,
+        title = "Masoor Dal",
+        price = "₹100/bowl | ₹180/half | ₹340/full",
+        restaurantName = "Masoor Kitchen",
+        rating = "4.5",
+        deliveryTime = "20-30 mins",
+        distance = "1.6 km",
+        discount = "MASOOR5",
+        discountAmount = "up to ₹60",
+        address = "Koregaon Park, Pune"
+    ),
+
+    // SPECIALTY & FUSION DALS (15-17)
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.dal_items_15,
+        title = "Dal Baati",
+        price = "₹280/plate | ₹520/full (with baati)",
+        restaurantName = "Rajasthani Zaika",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.3 km",
+        discount = "BAATI25",
+        discountAmount = "up to ₹300",
+        address = "Pitampura, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.dal_items_16,
+        title = "Dal Pakwan",
+        price = "₹150/plate",
+        restaurantName = "Sindhi Sweets",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.7 km",
+        discount = "PAKWAN15",
+        discountAmount = "up to ₹120",
+        address = "Rajouri Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.dal_items_17,
+        title = "Dal Dhokli",
+        price = "₹180/bowl",
+        restaurantName = "Gujarat Kitchen",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "2.0 km",
+        discount = "DHOKLI20",
+        discountAmount = "up to ₹150",
+        address = "Borivali, Mumbai"
+    ),
+
+    // HEALTHY & DIETARY DALS (18-19)
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.dal_items_18,
+        title = "High Protein Dal",
+        price = "₹160/bowl | ₹280/half | ₹520/full",
+        restaurantName = "Fit Kitchen",
+        rating = "4.7",
+        deliveryTime = "25-35 mins",
+        distance = "1.9 km",
+        discount = "PROTEIN20",
+        discountAmount = "up to ₹200",
+        address = "Dwarka, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.dal_items_19,
+        title = "Jain Dal",
+        price = "₹140/bowl | ₹250/half | ₹460/full",
+        restaurantName = "Jain Bhojanalay",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "JAIN15",
+        discountAmount = "up to ₹150",
+        address = "Borivali, Mumbai"
+    ),
+
+    // DAL COMBO & FEAST (20)
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.dal_items_20,
+        title = "Dal Combo Feast",
+        price = "₹449/combo (3 dal varieties + roti/rice)",
+        restaurantName = "Dal Express",
+        rating = "4.9",
+        deliveryTime = "35-45 mins",
+        distance = "2.4 km",
+        discount = "DALFEAST25",
+        discountAmount = "up to ₹350",
+        address = "Hauz Khas, Delhi"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable

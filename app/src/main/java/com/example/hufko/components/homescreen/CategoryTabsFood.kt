@@ -73846,7 +73846,7 @@ val chaapItems = listOf(
         id = 1,
         imageRes = R.drawable.chaap_items_1,
         title = "Tandoori Chaap",
-        price = "₹130/plate | ₹240/half | ₹450/full",
+        price = "₹130/plate",
         restaurantName = "Tandoori Junction",
         rating = "4.9",
         deliveryTime = "30-40 mins",
@@ -73859,7 +73859,7 @@ val chaapItems = listOf(
         id = 2,
         imageRes = R.drawable.chaap_items_2,
         title = "Afghani Chaap",
-        price = "₹150/plate | ₹280/half | ₹520/full",
+        price = "₹150/plate",
         restaurantName = "Afghani Darbar",
         rating = "4.8",
         deliveryTime = "35-45 mins",
@@ -73872,7 +73872,7 @@ val chaapItems = listOf(
         id = 3,
         imageRes = R.drawable.chaap_items_3,
         title = "Malai Chaap",
-        price = "₹140/plate | ₹260/half | ₹480/full",
+        price = "₹140/plate",
         restaurantName = "Creamy Bites",
         rating = "4.8",
         deliveryTime = "30-40 mins",
@@ -73885,7 +73885,7 @@ val chaapItems = listOf(
         id = 4,
         imageRes = R.drawable.chaap_items_4,
         title = "Tangdi Chaap",
-        price = "₹160/plate | ₹300/half | ₹550/full",
+        price = "₹160/plate",
         restaurantName = "Tangdi House",
         rating = "4.9",
         deliveryTime = "35-45 mins",
@@ -73898,7 +73898,7 @@ val chaapItems = listOf(
         id = 5,
         imageRes = R.drawable.chaap_items_5,
         title = "Reshmi Chaap",
-        price = "₹150/plate | ₹280/half | ₹520/full",
+        price = "₹150/plate",
         restaurantName = "Reshmi Restaurant",
         rating = "4.7",
         deliveryTime = "30-40 mins",
@@ -73913,7 +73913,7 @@ val chaapItems = listOf(
         id = 6,
         imageRes = R.drawable.chaap_items_6,
         title = "Achari Chaap",
-        price = "₹120/plate | ₹220/half | ₹420/full",
+        price = "₹120/plate",
         restaurantName = "Achari Zaika",
         rating = "4.7",
         deliveryTime = "25-35 mins",
@@ -73926,7 +73926,7 @@ val chaapItems = listOf(
         id = 7,
         imageRes = R.drawable.chaap_items_7,
         title = "Masala Chaap",
-        price = "₹130/plate | ₹240/half | ₹450/full",
+        price = "₹130/plate",
         restaurantName = "Spice Factory",
         rating = "4.7",
         deliveryTime = "25-35 mins",
@@ -73939,7 +73939,7 @@ val chaapItems = listOf(
         id = 8,
         imageRes = R.drawable.chaap_items_8,
         title = "Kali Mirch Chaap",
-        price = "₹140/plate | ₹260/half | ₹480/full",
+        price = "₹140/plate",
         restaurantName = "Pepper Pot",
         rating = "4.8",
         deliveryTime = "30-40 mins",
@@ -73952,7 +73952,7 @@ val chaapItems = listOf(
         id = 9,
         imageRes = R.drawable.chaap_items_9,
         title = "Hyderabadi Chaap",
-        price = "₹150/plate | ₹280/half | ₹520/full",
+        price = "₹150/plate",
         restaurantName = "Nizam's Kitchen",
         rating = "4.8",
         deliveryTime = "35-45 mins",
@@ -73965,7 +73965,7 @@ val chaapItems = listOf(
         id = 10,
         imageRes = R.drawable.chaap_items_10,
         title = "Kolhapuri Chaap",
-        price = "₹140/plate | ₹260/half | ₹480/full",
+        price = "₹140/plate",
         restaurantName = "Spice Route",
         rating = "4.7",
         deliveryTime = "30-40 mins",
@@ -73980,7 +73980,7 @@ val chaapItems = listOf(
         id = 11,
         imageRes = R.drawable.chaap_items_11,
         title = "Butter Chaap",
-        price = "₹160/plate | ₹300/half | ₹550/full",
+        price = "₹160/plate",
         restaurantName = "Butter House",
         rating = "4.9",
         deliveryTime = "30-40 mins",
@@ -73993,7 +73993,7 @@ val chaapItems = listOf(
         id = 12,
         imageRes = R.drawable.chaap_items_12,
         title = "Creamy Mushroom Chaap",
-        price = "₹170/plate | ₹320/half | ₹580/full",
+        price = "₹170/plate",
         restaurantName = "Mushroom Magic",
         rating = "4.8",
         deliveryTime = "35-45 mins",
@@ -74006,7 +74006,7 @@ val chaapItems = listOf(
         id = 13,
         imageRes = R.drawable.chaap_items_13,
         title = "Kadhai Chaap",
-        price = "₹140/plate | ₹260/half | ₹480/full",
+        price = "₹140/plate",
         restaurantName = "Kadhai Point",
         rating = "4.7",
         deliveryTime = "25-35 mins",
@@ -74019,7 +74019,7 @@ val chaapItems = listOf(
         id = 14,
         imageRes = R.drawable.chaap_items_14,
         title = "Bhuna Chaap",
-        price = "₹150/plate | ₹280/half | ₹520/full",
+        price = "₹150/plate",
         restaurantName = "Bhuna Junction",
         rating = "4.8",
         deliveryTime = "30-40 mins",
@@ -74034,7 +74034,7 @@ val chaapItems = listOf(
         id = 15,
         imageRes = R.drawable.chaap_items_15,
         title = "Dry Chilli Chaap",
-        price = "₹140/plate | ₹260/half | ₹480/full",
+        price = "₹140/plate",
         restaurantName = "Chilli Wok",
         rating = "4.7",
         deliveryTime = "25-35 mins",
@@ -74047,7 +74047,7 @@ val chaapItems = listOf(
         id = 16,
         imageRes = R.drawable.chaap_items_16,
         title = "Hara Bhara Chaap",
-        price = "₹130/plate | ₹240/half | ₹450/full",
+        price = "₹130/plate",
         restaurantName = "Green Delight",
         rating = "4.8",
         deliveryTime = "25-35 mins",
@@ -74060,7 +74060,7 @@ val chaapItems = listOf(
         id = 17,
         imageRes = R.drawable.chaap_items_17,
         title = "Stuffed Chaap",
-        price = "₹180/plate | ₹340/half | ₹620/full",
+        price = "₹180/plate",
         restaurantName = "Stuffed Special",
         rating = "4.9",
         deliveryTime = "35-45 mins",
@@ -74075,7 +74075,7 @@ val chaapItems = listOf(
         id = 18,
         imageRes = R.drawable.chaap_items_18,
         title = "Lucknowi Chaap",
-        price = "₹160/plate | ₹300/half | ₹550/full",
+        price = "₹160/plate",
         restaurantName = "Lucknowi Kitchen",
         rating = "4.8",
         deliveryTime = "35-45 mins",
@@ -74088,7 +74088,7 @@ val chaapItems = listOf(
         id = 19,
         imageRes = R.drawable.chaap_items_19,
         title = "Mughlai Chaap",
-        price = "₹170/plate | ₹320/half | ₹580/full",
+        price = "₹170/plate",
         restaurantName = "Mughlai Darbar",
         rating = "4.9",
         deliveryTime = "35-45 mins",
@@ -74103,7 +74103,7 @@ val chaapItems = listOf(
         id = 20,
         imageRes = R.drawable.chaap_items_20,
         title = "Chaap Feast Platter",
-        price = "₹599/platter (4 varieties, 16 pcs)",
+        price = "₹599/platter",
         restaurantName = "Chaap Express",
         rating = "4.9",
         deliveryTime = "40-50 mins",
@@ -74364,7 +74364,7 @@ val dalItems = listOf(
         id = 1,
         imageRes = R.drawable.dal_1,  // Dal Makhani - creamy black dal with butter, slow-cooked overnight, garnished with cream
         title = "Dal Makhani",
-        price = "₹220/half bowl | ₹420/full bowl",
+        price = "₹220/half bowl",
         restaurantName = "Punjabi Dhaba",
         rating = "4.9",
         deliveryTime = "25-30 mins",
@@ -74377,7 +74377,7 @@ val dalItems = listOf(
         id = 2,
         imageRes = R.drawable.dal_2,  // Dal Tadka - yellow dal with tempered spices, garlic, red chilies, garnished with coriander
         title = "Dal Tadka",
-        price = "₹180/half bowl | ₹350/full bowl",
+        price = "₹180/half bowl",
         restaurantName = "Tadka House",
         rating = "4.8",
         deliveryTime = "20-25 mins",
@@ -74390,7 +74390,7 @@ val dalItems = listOf(
         id = 3,
         imageRes = R.drawable.dal_3,  // Panchmel Dal - Rajasthani five-lentil dal with rich spices, traditional clay pot style
         title = "Panchmel Dal",
-        price = "₹200/half bowl | ₹380/full bowl",
+        price = "₹200/half bowl",
         restaurantName = "Rajasthani Bhojnalaya",
         rating = "4.7",
         deliveryTime = "25-30 mins",
@@ -74403,7 +74403,7 @@ val dalItems = listOf(
         id = 4,
         imageRes = R.drawable.dal_4,  // Gujarati Dal - sweet and sour dal with peanuts, curry leaves, and jaggery
         title = "Gujarati Kadhi",
-        price = "₹160/half bowl | ₹300/full bowl",
+        price = "₹160/half bowl",
         restaurantName = "Gujarat Bhavan",
         rating = "4.8",
         deliveryTime = "20-25 mins",
@@ -74416,7 +74416,7 @@ val dalItems = listOf(
         id = 5,
         imageRes = R.drawable.dal_5,  // Dal Fry - simple tempered dal with onion, tomato, and cumin seeds
         title = "Dal Fry",
-        price = "₹150/half bowl | ₹280/full bowl",
+        price = "₹150/half bowl",
         restaurantName = "South Indian Cafe",
         rating = "4.6",
         deliveryTime = "15-20 mins",
@@ -74429,7 +74429,7 @@ val dalItems = listOf(
         id = 6,
         imageRes = R.drawable.dal_6,  // Dal Baati - traditional Rajasthani dal with baked wheat baati, served with ghee
         title = "Dal Baati Churma",
-        price = "₹320/half plate | ₹600/full plate",
+        price = "₹320/half plate",
         restaurantName = "Rajasthani Zaika",
         rating = "4.9",
         deliveryTime = "30-35 mins",
@@ -74503,7 +74503,7 @@ val dalItems = listOf(
         id = 1,
         imageRes = R.drawable.dal_items_1,
         title = "Dal Makhani",
-        price = "₹180/bowl | ₹320/half | ₹600/full",
+        price = "₹180/bowl",
         restaurantName = "Punjabi Dhaba",
         rating = "4.9",
         deliveryTime = "30-40 mins",
@@ -74516,7 +74516,7 @@ val dalItems = listOf(
         id = 2,
         imageRes = R.drawable.dal_items_2,
         title = "Butter Dal",
-        price = "₹160/bowl | ₹280/half | ₹520/full",
+        price = "₹160/bowl",
         restaurantName = "Butter Point",
         rating = "4.8",
         deliveryTime = "25-35 mins",
@@ -74529,7 +74529,7 @@ val dalItems = listOf(
         id = 3,
         imageRes = R.drawable.dal_items_3,
         title = "Dal Tadka",
-        price = "₹140/bowl | ₹240/half | ₹450/full",
+        price = "₹140/bowl",
         restaurantName = "Tadka House",
         rating = "4.8",
         deliveryTime = "20-30 mins",
@@ -74542,7 +74542,7 @@ val dalItems = listOf(
         id = 4,
         imageRes = R.drawable.dal_items_4,
         title = "Dal Fry",
-        price = "₹120/bowl | ₹220/half | ₹400/full",
+        price = "₹120/bowl",
         restaurantName = "South Indian Cafe",
         rating = "4.7",
         deliveryTime = "20-25 mins",
@@ -74555,7 +74555,7 @@ val dalItems = listOf(
         id = 5,
         imageRes = R.drawable.dal_items_5,
         title = "Dal Palak",
-        price = "₹130/bowl | ₹230/half | ₹420/full",
+        price = "₹130/bowl",
         restaurantName = "Green Kitchen",
         rating = "4.7",
         deliveryTime = "25-30 mins",
@@ -74570,7 +74570,7 @@ val dalItems = listOf(
         id = 6,
         imageRes = R.drawable.dal_items_6,
         title = "Panchmel Dal",
-        price = "₹150/bowl | ₹260/half | ₹480/full",
+        price = "₹150/bowl",
         restaurantName = "Rajasthani Bhojnalaya",
         rating = "4.8",
         deliveryTime = "30-40 mins",
@@ -74583,7 +74583,7 @@ val dalItems = listOf(
         id = 7,
         imageRes = R.drawable.dal_items_7,
         title = "Gujarati Dal",
-        price = "₹130/bowl | ₹230/half | ₹420/full",
+        price = "₹130/bowl",
         restaurantName = "Gujarat Bhavan",
         rating = "4.8",
         deliveryTime = "25-35 mins",
@@ -74596,7 +74596,7 @@ val dalItems = listOf(
         id = 8,
         imageRes = R.drawable.dal_items_8,
         title = "Bengali Dal",
-        price = "₹120/bowl | ₹220/half | ₹400/full",
+        price = "₹120/bowl",
         restaurantName = "Bengali Sweet House",
         rating = "4.7",
         deliveryTime = "25-30 mins",
@@ -74609,7 +74609,7 @@ val dalItems = listOf(
         id = 9,
         imageRes = R.drawable.dal_items_9,
         title = "Maharashtrian Dal",
-        price = "₹130/bowl | ₹240/half | ₹440/full",
+        price = "₹130/bowl",
         restaurantName = "Maharashtra Bhojan",
         rating = "4.7",
         deliveryTime = "30-35 mins",
@@ -74622,7 +74622,7 @@ val dalItems = listOf(
         id = 10,
         imageRes = R.drawable.dal_items_10,
         title = "Hyderabadi Dal",
-        price = "₹140/bowl | ₹250/half | ₹460/full",
+        price = "₹140/bowl",
         restaurantName = "Hyderabadi Kitchen",
         rating = "4.8",
         deliveryTime = "30-40 mins",
@@ -74637,7 +74637,7 @@ val dalItems = listOf(
         id = 11,
         imageRes = R.drawable.dal_items_11,
         title = "Chana Dal",
-        price = "₹120/bowl | ₹210/half | ₹380/full",
+        price = "₹120/bowl",
         restaurantName = "Chana House",
         rating = "4.6",
         deliveryTime = "20-30 mins",
@@ -74650,7 +74650,7 @@ val dalItems = listOf(
         id = 12,
         imageRes = R.drawable.dal_items_12,
         title = "Toor Dal",
-        price = "₹110/bowl | ₹200/half | ₹360/full",
+        price = "₹110/bowl",
         restaurantName = "South Indian Tiffin",
         rating = "4.6",
         deliveryTime = "20-25 mins",
@@ -74663,7 +74663,7 @@ val dalItems = listOf(
         id = 13,
         imageRes = R.drawable.dal_items_13,
         title = "Moong Dal",
-        price = "₹110/bowl | ₹200/half | ₹360/full",
+        price = "₹110/bowl",
         restaurantName = "Moong Delight",
         rating = "4.7",
         deliveryTime = "20-25 mins",
@@ -74676,7 +74676,7 @@ val dalItems = listOf(
         id = 14,
         imageRes = R.drawable.dal_items_14,
         title = "Masoor Dal",
-        price = "₹100/bowl | ₹180/half | ₹340/full",
+        price = "₹100/bowl",
         restaurantName = "Masoor Kitchen",
         rating = "4.5",
         deliveryTime = "20-30 mins",
@@ -74691,7 +74691,7 @@ val dalItems = listOf(
         id = 15,
         imageRes = R.drawable.dal_items_15,
         title = "Dal Baati",
-        price = "₹280/plate | ₹520/full (with baati)",
+        price = "₹280/plate",
         restaurantName = "Rajasthani Zaika",
         rating = "4.9",
         deliveryTime = "35-45 mins",
@@ -74732,7 +74732,7 @@ val dalItems = listOf(
         id = 18,
         imageRes = R.drawable.dal_items_18,
         title = "High Protein Dal",
-        price = "₹160/bowl | ₹280/half | ₹520/full",
+        price = "₹160/bowl",
         restaurantName = "Fit Kitchen",
         rating = "4.7",
         deliveryTime = "25-35 mins",
@@ -74745,7 +74745,7 @@ val dalItems = listOf(
         id = 19,
         imageRes = R.drawable.dal_items_19,
         title = "Jain Dal",
-        price = "₹140/bowl | ₹250/half | ₹460/full",
+        price = "₹140/bowl",
         restaurantName = "Jain Bhojanalay",
         rating = "4.8",
         deliveryTime = "25-30 mins",
@@ -74760,7 +74760,7 @@ val dalItems = listOf(
         id = 20,
         imageRes = R.drawable.dal_items_20,
         title = "Dal Combo Feast",
-        price = "₹449/combo (3 dal varieties + roti/rice)",
+        price = "₹449/combo",
         restaurantName = "Dal Express",
         rating = "4.9",
         deliveryTime = "35-45 mins",
@@ -74784,17 +74784,1486 @@ val dalItems = listOf(
 
 @Composable
 fun WafflesCategoryPage() {
-    CategoryContentPage("Waffles")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val waffleFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // WAFFLE TYPES (with icons showing the waffle variety)
+        FilterChip(
+            id = "belgian_waffle",
+            text = "Belgian Waffle",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_belgian_waffle  // classic deep grid waffle
+        ),
+        FilterChip(
+            id = "brussels_waffle",
+            text = "Brussels Waffle",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_brussels_waffle  // light and airy with deeper pockets
+        ),
+        FilterChip(
+            id = "liege_waffle",
+            text = "Liège Waffle",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_liege_waffle  // caramelized pearl sugar, uneven shape
+        ),
+        FilterChip(
+            id = "american_waffle",
+            text = "American Waffle",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_american_waffle  // thin, crisp, even grid
+        ),
+        FilterChip(
+            id = "chicken_waffle",
+            text = "Chicken & Waffle",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_chicken_waffle  // waffle with fried chicken
+        ),
+
+        // TOPPINGS (text only)
+        FilterChip(
+            id = "fresh_fruits",
+            text = "Fresh Fruits",
+            type = FilterType.TEXT_ONLY  // strawberries, blueberries, bananas
+        ),
+        FilterChip(
+            id = "whipped_cream",
+            text = "Whipped Cream",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "ice_cream",
+            text = "Ice Cream",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "nutella",
+            text = "Nutella",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "peanut_butter",
+            text = "Peanut Butter",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "caramel_sauce",
+            text = "Caramel Sauce",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chocolate_sauce",
+            text = "Chocolate Sauce",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SYRUPS (text only)
+        FilterChip(
+            id = "maple_syrup",
+            text = "Maple Syrup",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "berry_syrup",
+            text = "Berry Syrup",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chocolate_syrup",
+            text = "Chocolate Syrup",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "honey",
+            text = "Honey",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ADD-INS (text only)
+        FilterChip(
+            id = "chocolate_chips",
+            text = "Chocolate Chips",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "nuts",
+            text = "Nuts",
+            type = FilterType.TEXT_ONLY  // almonds, walnuts, pecans
+        ),
+        FilterChip(
+            id = "sprinkles",
+            text = "Sprinkles",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "coconut",
+            text = "Coconut",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS (text only)
+        FilterChip(
+            id = "gluten_free_waffle",
+            text = "Gluten Free",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "vegan_waffle",
+            text = "Vegan",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "keto_waffle",
+            text = "Keto Friendly",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "protein_waffle",
+            text = "High Protein",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "low_sugar_waffle",
+            text = "Low Sugar",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dairy_free_waffle",
+            text = "Dairy Free",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // MEAL STYLES (text only)
+        FilterChip(
+            id = "breakfast_waffle",
+            text = "Breakfast",
+            type = FilterType.TEXT_ONLY  // with eggs, bacon
+        ),
+        FilterChip(
+            id = "dessert_waffle",
+            text = "Dessert",
+            type = FilterType.TEXT_ONLY  // with ice cream, chocolate
+        ),
+        FilterChip(
+            id = "savory_waffle",
+            text = "Savory",
+            type = FilterType.TEXT_ONLY  // with cheese, herbs
+        ),
+
+        // PORTION SIZES (text only)
+        FilterChip(
+            id = "single_waffle",
+            text = "Single Waffle",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "double_waffle",
+            text = "Double Waffle",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "waffle_stack",
+            text = "Waffle Stack",
+            type = FilterType.TEXT_ONLY  // 2-3 waffles stacked
+        ),
+        FilterChip(
+            id = "mini_waffles",
+            text = "Mini Waffles",
+            type = FilterType.TEXT_ONLY  // small bite-sized
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = waffleFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val waffleItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.waffle_1,  // Belgian Waffle - classic deep grid waffle with pearl sugar, golden brown, crispy outside, fluffy inside
+        title = "Belgian Waffle",
+        price = "₹220/single",
+        restaurantName = "Waffle House",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹120",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.waffle_2,  // Nutella Waffle - warm Belgian waffle topped with generous spread of Nutella, fresh strawberries, and powdered sugar
+        title = "Nutella Waffle",
+        price = "₹280/single",
+        restaurantName = "Waffle House",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹80",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.waffle_3,  // Chicken & Waffle - crispy fried chicken served on a fluffy buttermilk waffle, drizzled with honey butter
+        title = "Chicken & Waffle",
+        price = "₹350/plate",
+        restaurantName = "The Breakfast Club",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.8 km",
+        discount = "12%",
+        discountAmount = "up to ₹100",
+        address = "Saket, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.waffle_4,  // Red Velvet Waffle - rich cocoa waffle with red food coloring, topped with cream cheese frosting and white chocolate shavings
+        title = "Red Velvet Waffle",
+        price = "₹260/single",
+        restaurantName = "Dessert Heaven",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹90",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.waffle_5,  // Ice Cream Waffle Sandwich - two warm waffles sandwiching two scoops of vanilla ice cream, drizzled with chocolate syrup
+        title = "Ice Cream Waffle Sandwich",
+        price = "₹190/single",
+        restaurantName = "Dessert Heaven",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.5 km",
+        discount = "5%",
+        discountAmount = "up to ₹40",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.waffle_6,  // Liege Waffle - traditional Belgian waffle with caramelized pearl sugar, irregular shape, served warm with dusting of cinnamon
+        title = "Liège Waffle",
+        price = "₹240/single",
+        restaurantName = "Belgian Waffle Co.",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "2.0 km",
+        discount = "20%",
+        discountAmount = "up to ₹150",
+        address = "Pitampura, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = waffleItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+val waffleItemsList = listOf(
+    // CLASSIC WAFFLES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.waffle_items_1,
+        title = "Belgian Waffle",
+        price = "₹180/single",
+        restaurantName = "Waffle House",
+        rating = "4.9",
+        deliveryTime = "20-30 mins",
+        distance = "1.2 km",
+        discount = "BELGIAN25",
+        discountAmount = "up to ₹250",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.waffle_items_2,
+        title = "Brussels Waffle",
+        price = "₹190/single",
+        restaurantName = "Belgian Waffle Co.",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.5 km",
+        discount = "BRUSSELS20",
+        discountAmount = "up to ₹200",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.waffle_items_3,
+        title = "Liège Waffle",
+        price = "₹200/single",
+        restaurantName = "Belgian Waffle Co.",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "LIEGE20",
+        discountAmount = "up to ₹220",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.waffle_items_4,
+        title = "American Waffle",
+        price = "₹160/single",
+        restaurantName = "The Breakfast Club",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "AMERICAN15",
+        discountAmount = "up to ₹150",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.waffle_items_5,
+        title = "Buttermilk Waffle",
+        price = "₹170/single",
+        restaurantName = "The Breakfast Club",
+        rating = "4.7",
+        deliveryTime = "20-30 mins",
+        distance = "1.8 km",
+        discount = "BUTTERMILK15",
+        discountAmount = "up to ₹160",
+        address = "Lajpat Nagar, Delhi"
+    ),
+
+    // CHOCOLATE & DESSERT WAFFLES (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.waffle_items_6,
+        title = "Nutella Waffle",
+        price = "₹220/single",
+        restaurantName = "Dessert Heaven",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.3 km",
+        discount = "NUTELLA25",
+        discountAmount = "up to ₹300",
+        address = "Rajouri Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.waffle_items_7,
+        title = "Chocolate Waffle",
+        price = "₹190/single",
+        restaurantName = "Dessert Heaven",
+        rating = "4.8",
+        deliveryTime = "20-30 mins",
+        distance = "1.3 km",
+        discount = "CHOCO20",
+        discountAmount = "up to ₹200",
+        address = "Rajouri Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.waffle_items_8,
+        title = "Red Velvet Waffle",
+        price = "₹210/single",
+        restaurantName = "Red Velvet Cafe",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.7 km",
+        discount = "REDVELVET20",
+        discountAmount = "up to ₹240",
+        address = "GTB Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.waffle_items_9,
+        title = "Ice Cream Waffle",
+        price = "₹200/single",
+        restaurantName = "Gelato Waffle",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.4 km",
+        discount = "GELATO15",
+        discountAmount = "up to ₹180",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.waffle_items_10,
+        title = "Brownie Waffle",
+        price = "₹230/single",
+        restaurantName = "Dessert Heaven",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.3 km",
+        discount = "BROWNIE25",
+        discountAmount = "up to ₹280",
+        address = "Rajouri Garden, Delhi"
+    ),
+
+    // FRUIT & BERRY WAFFLES (11-14)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.waffle_items_11,
+        title = "Strawberry Waffle",
+        price = "₹200/single",
+        restaurantName = "Berry Bliss",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.6 km",
+        discount = "BERRY20",
+        discountAmount = "up to ₹200",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.waffle_items_12,
+        title = "Banana Nutella Waffle",
+        price = "₹240/single",
+        restaurantName = "Berry Bliss",
+        rating = "4.9",
+        deliveryTime = "20-30 mins",
+        distance = "1.6 km",
+        discount = "BANANA25",
+        discountAmount = "up to ₹300",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.waffle_items_13,
+        title = "Blueberry Waffle",
+        price = "₹210/single",
+        restaurantName = "Berry Bliss",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.6 km",
+        discount = "BLUEBERRY20",
+        discountAmount = "up to ₹220",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.waffle_items_14,
+        title = "Mixed Fruit Waffle",
+        price = "₹220/single",
+        restaurantName = "Fruit Bowl Cafe",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "1.9 km",
+        discount = "FRUIT15",
+        discountAmount = "up to ₹200",
+        address = "Dwarka, Delhi"
+    ),
+
+    // SAVORY WAFFLES (15-17)
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.waffle_items_15,
+        title = "Chicken & Waffle",
+        price = "₹320/plate",
+        restaurantName = "Southern Kitchen",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "2.2 km",
+        discount = "CHICKEN25",
+        discountAmount = "up to ₹350",
+        address = "Pitampura, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.waffle_items_16,
+        title = "Bacon & Egg Waffle",
+        price = "₹280/plate",
+        restaurantName = "The Breakfast Club",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "1.8 km",
+        discount = "BACON20",
+        discountAmount = "up to ₹250",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.waffle_items_17,
+        title = "Cheese Waffle",
+        price = "₹190/single",
+        restaurantName = "Cheese Factory",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "CHEESE15",
+        discountAmount = "up to ₹150",
+        address = "Kamla Nagar, Delhi"
+    ),
+
+    // SPECIALTY & FUSION WAFFLES (18-19)
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.waffle_items_18,
+        title = "Matcha Waffle",
+        price = "₹220/single",
+        restaurantName = "Tokyo Cafe",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.0 km",
+        discount = "MATCHA20",
+        discountAmount = "up to ₹240",
+        address = "Hauz Khas, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.waffle_items_19,
+        title = "Pumpkin Spice Waffle",
+        price = "₹210/single",
+        restaurantName = "Seasonal Treats",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.1 km",
+        discount = "PUMPKIN20",
+        discountAmount = "up to ₹220",
+        address = "Greater Kailash, Delhi"
+    ),
+
+    // WAFFLE COMBO & FEAST (20)
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.waffle_items_20,
+        title = "Waffle Feast Combo",
+        price = "₹499/combo",
+        restaurantName = "Waffle Express",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "2.3 km",
+        discount = "WAFFLEFEAST25",
+        discountAmount = "up to ₹350",
+        address = "Cyber City, Gurgaon"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun AlooKachoriCategoryPage() {
-    CategoryContentPage("Aloo Kachori")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val alooKachoriFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // KACHORI TYPES (with icons showing the variety)
+        FilterChip(
+            id = "classic_aloo_kachori",
+            text = "Classic Aloo Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_classic_kachori  // traditional round, golden kachori
+        ),
+        FilterChip(
+            id = "dal_kachori",
+            text = "Dal Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_dal_kachori_1  // lentil-filled variation
+        ),
+        FilterChip(
+            id = "moong_dal_kachori",
+            text = "Moong Dal Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_moong_kachori  // moong dal special
+        ),
+        FilterChip(
+            id = "mini_kachori",
+            text = "Mini Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_mini_kachori  // bite-sized kachoris
+        ),
+        FilterChip(
+            id = "baked_kachori",
+            text = "Baked Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_baked_kachori  // healthier baked version
+        ),
+        // ACCOMPANIMENTS (text only - these are additional items)
+        FilterChip(
+            id = "tamarind_chutney",
+            text = "Tamarind Chutney",
+            type = FilterType.TEXT_ONLY  // imli chutney
+        ),
+        FilterChip(
+            id = "mint_chutney",
+            text = "Mint Chutney",
+            type = FilterType.TEXT_ONLY  // pudina chutney
+        ),
+        FilterChip(
+            id = "sweet_chutney",
+            text = "Sweet Chutney",
+            type = FilterType.TEXT_ONLY  // meethi chutney
+        ),
+        FilterChip(
+            id = "garlic_chutney",
+            text = "Garlic Chutney",
+            type = FilterType.TEXT_ONLY  // lehsun ki chutney
+        ),
+
+        // CHAAT VARIATIONS (text only)
+        FilterChip(
+            id = "kachori_chaat",
+            text = "Kachori Chaat",
+            type = FilterType.TEXT_ONLY  // with curd and chutneys
+        ),
+        FilterChip(
+            id = "dahi_kachori",
+            text = "Dahi Kachori",
+            type = FilterType.TEXT_ONLY  // with yogurt
+        ),
+        FilterChip(
+            id = "tikki_chaat",
+            text = "Tikki Chaat",
+            type = FilterType.TEXT_ONLY  // aloo tikki style
+        ),
+
+        // SIZE OPTIONS (text only)
+        FilterChip(
+            id = "regular_kachori",
+            text = "Regular (2 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "family_pack",
+            text = "Family Pack (6 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "party_pack",
+            text = "Party Pack (12 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS (text only)
+        FilterChip(
+            id = "vegan_kachori",
+            text = "Vegan",
+            type = FilterType.TEXT_ONLY  // oil-based, no ghee
+        ),
+        FilterChip(
+            id = "gluten_free_kachori",
+            text = "Gluten Free",
+            type = FilterType.TEXT_ONLY  // alternative flour
+        ),
+        FilterChip(
+            id = "low_oil_kachori",
+            text = "Low Oil",
+            type = FilterType.TEXT_ONLY  // less oil fried/baked
+        ),
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = alooKachoriFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val alooKachoriItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.aloo_kachori_1,  // Classic Aloo Kachori - golden fried, crispy exterior, stuffed with spicy mashed potatoes and aromatic Indian spices
+        title = "Classic Aloo Kachori",
+        price = "₹60 (2 pcs)",
+        restaurantName = "Sharma Chaat Bhandar",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "Chandni Chowk, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.aloo_kachori_2,  // Dahi Kachori - crispy kachoris served chilled with sweetened yogurt, topped with tamarind chutney, mint chutney, and spicy boondi
+        title = "Dahi Kachori",
+        price = "₹80 (3 pcs)",
+        restaurantName = "Sharma Chaat Bhandar",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "15%",
+        discountAmount = "up to ₹50",
+        address = "Chandni Chowk, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.aloo_kachori_3,  // Dal Kachori - flaky, crispy kachori stuffed with spiced moong dal, served with tangy tamarind chutney and green chutney
+        title = "Dal Kachori",
+        price = "₹70 (2 pcs)",
+        restaurantName = "Bikaner Sweets",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "2.3 km",
+        discount = "12%",
+        discountAmount = "up to ₹40",
+        address = "Karol Bagh, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.aloo_kachori_4,  // Kachori Chaat - crushed kachoris topped with spiced chickpeas, yogurt, chutneys, finely chopped onions, tomatoes, and sev
+        title = "Kachori Chaat",
+        price = "₹90 (regular)",
+        restaurantName = "Chaat Junction",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.7 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Kamla Nagar, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.aloo_kachori_5,  // Mini Kachori Platter - assortment of bite-sized kachoris with different fillings (aloo, dal, masala), served with three types of chutneys
+        title = "Mini Kachori Platter",
+        price = "₹120 (6 pcs)",
+        restaurantName = "Street Food Express",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "20%",
+        discountAmount = "up to ₹70",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.aloo_kachori_6,  // Special Khasta Kachori - extra crispy, flaky layered kachori with spicy aloo filling, served with aloo sabzi and chutneys
+        title = "Special Khasta Kachori",
+        price = "₹85 (2 pcs with sabzi)",
+        restaurantName = "Kachori Wala",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "0.9 km",
+        discount = "15%",
+        discountAmount = "up to ₹45",
+        address = "Model Town, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = alooKachoriItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Sample data based on the provided images
+val alooKachoriItemsList = listOf(
+    // CLASSIC KACHORIS (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.aloo_kachori_items_1,
+        title = "Classic Aloo Kachori",
+        price = "₹60/plate (2 pcs)",
+        restaurantName = "Sharma Chaat Bhandar",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.1 km",
+        discount = "ALOO25",
+        discountAmount = "up to ₹80",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.aloo_kachori_items_2,
+        title = "Khasta Kachori",
+        price = "₹70/plate (2 pcs)",
+        restaurantName = "Kachori Wala",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "0.9 km",
+        discount = "KHASTA20",
+        discountAmount = "up to ₹70",
+        address = "Model Town, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.aloo_kachori_items_3,
+        title = "Pyaz Kachori",
+        price = "₹65/plate (2 pcs)",
+        restaurantName = "Sharma Chaat Bhandar",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.1 km",
+        discount = "PYAZ20",
+        discountAmount = "up to ₹65",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.aloo_kachori_items_4,
+        title = "Dal Kachori",
+        price = "₹70/plate (2 pcs)",
+        restaurantName = "Bikaner Sweets",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "2.3 km",
+        discount = "DAL25",
+        discountAmount = "up to ₹75",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.aloo_kachori_items_5,
+        title = "Moong Dal Kachori",
+        price = "₹75/plate (2 pcs)",
+        restaurantName = "Bikaner Sweets",
+        rating = "4.8",
+        deliveryTime = "25-35 mins",
+        distance = "2.3 km",
+        discount = "MOONG20",
+        discountAmount = "up to ₹80",
+        address = "Karol Bagh, Delhi"
+    ),
+
+    // KACHORI CHAAT VARIETIES (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.aloo_kachori_items_6,
+        title = "Dahi Kachori",
+        price = "₹80/plate (3 pcs)",
+        restaurantName = "Sharma Chaat Bhandar",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.1 km",
+        discount = "DAHI25",
+        discountAmount = "up to ₹90",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.aloo_kachori_items_7,
+        title = "Kachori Chaat",
+        price = "₹90/plate",
+        restaurantName = "Chaat Junction",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.7 km",
+        discount = "CHAAT20",
+        discountAmount = "up to ₹85",
+        address = "Kamla Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.aloo_kachori_items_8,
+        title = "Dahi Bhalla Kachori",
+        price = "₹100/plate",
+        restaurantName = "Sharma Chaat Bhandar",
+        rating = "4.9",
+        deliveryTime = "20-30 mins",
+        distance = "1.1 km",
+        discount = "BHALLA25",
+        discountAmount = "up to ₹100",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.aloo_kachori_items_9,
+        title = "Aloo Kachori Chaat",
+        price = "₹95/plate",
+        restaurantName = "Street Food Express",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "ALOOCHAAT20",
+        discountAmount = "up to ₹90",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.aloo_kachori_items_10,
+        title = "Special Chaat Platter",
+        price = "₹220/platte",
+        restaurantName = "Chaat Junction",
+        rating = "4.9",
+        deliveryTime = "25-35 mins",
+        distance = "1.7 km",
+        discount = "PLATTER25",
+        discountAmount = "up to ₹150",
+        address = "Kamla Nagar, Delhi"
+    ),
+
+    // REGIONAL SPECIALTIES (11-14)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.aloo_kachori_items_11,
+        title = "Rajasthani Kachori",
+        price = "₹80/plate (2 pcs)",
+        restaurantName = "Rajasthani Bhojnalaya",
+        rating = "4.8",
+        deliveryTime = "30-35 mins",
+        distance = "2.5 km",
+        discount = "RAJASTHAN20",
+        discountAmount = "up to ₹100",
+        address = "Raja Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.aloo_kachori_items_12,
+        title = "Jodhpuri Kachori",
+        price = "₹85/plate (2 pcs)",
+        restaurantName = "Rajasthani Bhojnalaya",
+        rating = "4.9",
+        deliveryTime = "30-35 mins",
+        distance = "2.5 km",
+        discount = "JODHPUR25",
+        discountAmount = "up to ₹110",
+        address = "Raja Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.aloo_kachori_items_13,
+        title = "Indori Kachori",
+        price = "₹75/plate (2 pcs)",
+        restaurantName = "Indori Zaika",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "2.0 km",
+        discount = "INDORI20",
+        discountAmount = "up to ₹85",
+        address = "Janakpuri, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.aloo_kachori_items_14,
+        title = "Bikaneri Kachori",
+        price = "₹80/plate (2 pcs)",
+        restaurantName = "Bikaner Sweets",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.3 km",
+        discount = "BIKANER20",
+        discountAmount = "up to ₹95",
+        address = "Karol Bagh, Delhi"
+    ),
+
+    // STREET STYLE SPECIALS (15-17)
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.aloo_kachori_items_15,
+        title = "Delhi Style Kachori",
+        price = "₹65/plate (2 pcs)",
+        restaurantName = "Street Food Express",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.4 km",
+        discount = "DELHI20",
+        discountAmount = "up to ₹70",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.aloo_kachori_items_16,
+        title = "Old Delhi Kachori",
+        price = "₹70/plate (2 pcs)",
+        restaurantName = "Sharma Chaat Bhandar",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.1 km",
+        discount = "OLDDELHI25",
+        discountAmount = "up to ₹85",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.aloo_kachori_items_17,
+        title = "Kachori with Aloo Sabzi",
+        price = "₹90/plate (2 pcs with sabzi)",
+        restaurantName = "Kachori Wala",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "0.9 km",
+        discount = "SABZI25",
+        discountAmount = "up to ₹95",
+        address = "Model Town, Delhi"
+    ),
+
+    // MINI & BITE-SIZED (18-19)
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.aloo_kachori_items_18,
+        title = "Mini Kachori Platter",
+        price = "₹120/platter (6 pcs)",
+        restaurantName = "Street Food Express",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.4 km",
+        discount = "MINI25",
+        discountAmount = "up to ₹120",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.aloo_kachori_items_19,
+        title = "Party Kachori Pack",
+        price = "₹350/pack (24 pcs)",
+        restaurantName = "Bikaner Sweets",
+        rating = "4.8",
+        deliveryTime = "35-40 mins",
+        distance = "2.3 km",
+        discount = "PARTY20",
+        discountAmount = "up to ₹200",
+        address = "Karol Bagh, Delhi"
+    ),
+
+    // KACHORI FEAST (20)
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.aloo_kachori_items_20,
+        title = "Kachori Feast Combo",
+        price = "₹299/combo",
+        restaurantName = "Chaat Junction",
+        rating = "4.9",
+        deliveryTime = "30-40 mins",
+        distance = "1.7 km",
+        discount = "FEAST25",
+        discountAmount = "up to ₹180",
+        address = "Kamla Nagar, Delhi"
+    )
+).forEach { restaurantItem ->
+            Column {
+                RestaurantItemListFull(
+                    restaurantItem = restaurantItem,
+                    onWishlistClick = { },
+                    onThreeDotClick = { },
+                    onItemClick = { }
+                )
+            }
+        }
+    }
 }
 
 @Composable
 fun CholeKulcheCategoryPage() {
-    CategoryContentPage("Chole Kulche")
+Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        // Filter Button
+val choleKulcheFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // KULCHE TYPES (with icons showing bread variety)
+        FilterChip(
+            id = "stuffed_kulcha",
+            text = "Stuffed Kulcha",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_stuffed_kulcha  // kulcha with filling visible
+        ),
+        FilterChip(
+            id = "amritsari_kulcha",
+            text = "Amritsari Kulcha",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_amritsari_kulcha  // famous Amritsar style with topping
+        ),
+        FilterChip(
+            id = "plain_kulcha",
+            text = "Plain Kulcha",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_plain_kulcha  // simple tandoor baked kulcha
+        ),
+        FilterChip(
+            id = "butter_kulcha",
+            text = "Butter Kulcha",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_butter_kulcha_1  // kulcha with butter melting on top
+        ),
+        FilterChip(
+            id = "lachha_kulcha",
+            text = "Lachha Kulcha",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_lachha_kulcha  // layered kulcha
+        ),
+        // ACCOMPANIMENTS (text only)
+        FilterChip(
+            id = "onion_salad",
+            text = "Onion Salad",
+            type = FilterType.TEXT_ONLY  // sliced onions with lemon
+        ),
+        FilterChip(
+            id = "green_chutney",
+            text = "Green Chutney",
+            type = FilterType.TEXT_ONLY  // mint-coriander chutney
+        ),
+        FilterChip(
+            id = "tamarind_chutney",
+            text = "Tamarind Chutney",
+            type = FilterType.TEXT_ONLY  // imli chutney
+        ),
+        FilterChip(
+            id = "pickle",
+            text = "Pickle",
+            type = FilterType.TEXT_ONLY  // mango pickle on side
+        ),
+        FilterChip(
+            id = "dahi",
+            text = "Yogurt (Dahi)",
+            type = FilterType.TEXT_ONLY  // fresh curd on side
+        ),
+
+        // TOPPINGS (text only)
+        FilterChip(
+            id = "butter_topping",
+            text = "Extra Butter",
+            type = FilterType.TEXT_ONLY  // dollop of butter
+        ),
+        FilterChip(
+            id = "cream_topping",
+            text = "Fresh Cream",
+            type = FilterType.TEXT_ONLY  // malai topping
+        ),
+        FilterChip(
+            id = "chaat_masala",
+            text = "Chaat Masala",
+            type = FilterType.TEXT_ONLY  // sprinkle of chaat masala
+        ),
+
+        // SIZE OPTIONS (text only)
+        FilterChip(
+            id = "regular_meal",
+            text = "Regular (1 kulcha + chole)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "double_kulcha",
+            text = "Double Kulcha (2 kulchas + chole)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "family_thali",
+            text = "Family Thali (4 kulchas + chole + sides)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "combo_meal",
+            text = "Combo Meal (2 kulchas + chole + drink)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS (text only)
+        FilterChip(
+            id = "vegan_kulcha",
+            text = "Vegan",
+            type = FilterType.TEXT_ONLY  // no butter/ghee
+        ),
+        FilterChip(
+            id = "low_oil_kulcha",
+            text = "Low Oil",
+            type = FilterType.TEXT_ONLY  // less oil preparation
+        ),
+        FilterChip(
+            id = "high_protein",
+            text = "High Protein",
+            type = FilterType.TEXT_ONLY  // extra chole, less kulcha
+        ),
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = choleKulcheFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+val choleKulcheItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.chole_kulche_1,  // Amritsari Chole Kulche - soft, fluffy Amritsari kulcha served with spicy chickpea curry, topped with butter and served with pickled onions
+        title = "Amritsari Chole Kulche",
+        price = "₹120 (2 pcs)",
+        restaurantName = "Amritsari Kulcha Point",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹50",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.chole_kulche_2,  // Stuffed Aloo Kulcha - tandoor-baked kulcha stuffed with spiced mashed potatoes, served with rich chole, fresh butter, and green chutney
+        title = "Stuffed Aloo Kulcha",
+        price = "₹140 (2 pcs)",
+        restaurantName = "Punjabi Dhaba",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹40",
+        address = "Pitampura, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.chole_kulche_3,  // Paneer Stuffed Kulcha - soft kulcha stuffed with spiced paneer filling, served with flavorful chole, onion salad, and mint chutney
+        title = "Paneer Stuffed Kulcha",
+        price = "₹160 (2 pcs)",
+        restaurantName = "Punjabi Dhaba",
+        rating = "4.9",
+        deliveryTime = "20-30 mins",
+        distance = "1.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹55",
+        address = "Pitampura, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.chole_kulche_4,  // Lachha Kulcha with Chole - multi-layered, flaky laccha kulcha straight from tandoor, served with delicious chole and dollop of butter
+        title = "Lachha Kulcha",
+        price = "₹130 (2 pcs)",
+        restaurantName = "Bharat Dhaba",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Kamla Nagar, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.chole_kulche_5,  // Butter Kulcha - soft tandoori kulcha loaded with butter, served with spicy chole, fresh salad, and tangy chutneys
+        title = "Butter Kulcha",
+        price = "₹110 (2 pcs)",
+        restaurantName = "Amritsari Kulcha Point",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹45",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.chole_kulche_6,  // Special Chole Kulche Thali - complete meal with 2 kulchas, generous serving of chole, onion salad, pickle, and two chutneys
+        title = "Special Kulcha Thali",
+        price = "₹190 (thali)",
+        restaurantName = "Punjabi Dhaba",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "1.5 km",
+        discount = "20%",
+        discountAmount = "up to ₹80",
+        address = "Pitampura, Delhi"
+    )
+)
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = choleKulcheItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
+    }
 }
 
 @Composable

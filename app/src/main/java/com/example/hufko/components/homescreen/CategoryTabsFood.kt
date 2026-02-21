@@ -75996,149 +75996,151 @@ val alooKachoriItemsList = listOf(
         }
     }
 }
-
 @Composable
 fun CholeKulcheCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val choleKulcheFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val choleKulcheFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // KULCHE TYPES (with icons showing bread variety)
-        FilterChip(
-            id = "stuffed_kulcha",
-            text = "Stuffed Kulcha",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_stuffed_kulcha  // kulcha with filling visible
-        ),
-        FilterChip(
-            id = "amritsari_kulcha",
-            text = "Amritsari Kulcha",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_amritsari_kulcha  // famous Amritsar style with topping
-        ),
-        FilterChip(
-            id = "plain_kulcha",
-            text = "Plain Kulcha",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_plain_kulcha  // simple tandoor baked kulcha
-        ),
-        FilterChip(
-            id = "butter_kulcha",
-            text = "Butter Kulcha",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_butter_kulcha_1  // kulcha with butter melting on top
-        ),
-        FilterChip(
-            id = "lachha_kulcha",
-            text = "Lachha Kulcha",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_lachha_kulcha  // layered kulcha
-        ),
-        // ACCOMPANIMENTS (text only)
-        FilterChip(
-            id = "onion_salad",
-            text = "Onion Salad",
-            type = FilterType.TEXT_ONLY  // sliced onions with lemon
-        ),
-        FilterChip(
-            id = "green_chutney",
-            text = "Green Chutney",
-            type = FilterType.TEXT_ONLY  // mint-coriander chutney
-        ),
-        FilterChip(
-            id = "tamarind_chutney",
-            text = "Tamarind Chutney",
-            type = FilterType.TEXT_ONLY  // imli chutney
-        ),
-        FilterChip(
-            id = "pickle",
-            text = "Pickle",
-            type = FilterType.TEXT_ONLY  // mango pickle on side
-        ),
-        FilterChip(
-            id = "dahi",
-            text = "Yogurt (Dahi)",
-            type = FilterType.TEXT_ONLY  // fresh curd on side
-        ),
+                // KULCHE TYPES (with icons showing bread variety)
+                FilterChip(
+                    id = "stuffed_kulcha",
+                    text = "Stuffed Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stuffed_kulcha
+                ),
+                FilterChip(
+                    id = "amritsari_kulcha",
+                    text = "Amritsari Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_amritsari_kulcha
+                ),
+                FilterChip(
+                    id = "plain_kulcha",
+                    text = "Plain Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_kulcha
+                ),
+                FilterChip(
+                    id = "butter_kulcha",
+                    text = "Butter Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_butter_kulcha_1
+                ),
+                FilterChip(
+                    id = "lachha_kulcha",
+                    text = "Lachha Kulcha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lachha_kulcha
+                ),
 
-        // TOPPINGS (text only)
-        FilterChip(
-            id = "butter_topping",
-            text = "Extra Butter",
-            type = FilterType.TEXT_ONLY  // dollop of butter
-        ),
-        FilterChip(
-            id = "cream_topping",
-            text = "Fresh Cream",
-            type = FilterType.TEXT_ONLY  // malai topping
-        ),
-        FilterChip(
-            id = "chaat_masala",
-            text = "Chaat Masala",
-            type = FilterType.TEXT_ONLY  // sprinkle of chaat masala
-        ),
+                // ACCOMPANIMENTS (text only)
+                FilterChip(
+                    id = "onion_salad",
+                    text = "Onion Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_chutney",
+                    text = "Green Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tamarind_chutney",
+                    text = "Tamarind Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pickle",
+                    text = "Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dahi",
+                    text = "Yogurt (Dahi)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIZE OPTIONS (text only)
-        FilterChip(
-            id = "regular_meal",
-            text = "Regular (1 kulcha + chole)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "double_kulcha",
-            text = "Double Kulcha (2 kulchas + chole)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "family_thali",
-            text = "Family Thali (4 kulchas + chole + sides)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "combo_meal",
-            text = "Combo Meal (2 kulchas + chole + drink)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS (text only)
+                FilterChip(
+                    id = "butter_topping",
+                    text = "Extra Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cream_topping",
+                    text = "Fresh Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chaat_masala",
+                    text = "Chaat Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS (text only)
-        FilterChip(
-            id = "vegan_kulcha",
-            text = "Vegan",
-            type = FilterType.TEXT_ONLY  // no butter/ghee
-        ),
-        FilterChip(
-            id = "low_oil_kulcha",
-            text = "Low Oil",
-            type = FilterType.TEXT_ONLY  // less oil preparation
-        ),
-        FilterChip(
-            id = "high_protein",
-            text = "High Protein",
-            type = FilterType.TEXT_ONLY  // extra chole, less kulcha
-        ),
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // SIZE OPTIONS (text only)
+                FilterChip(
+                    id = "regular_meal",
+                    text = "Regular (1 kulcha + chole)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "double_kulcha",
+                    text = "Double Kulcha (2 kulchas + chole)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_thali",
+                    text = "Family Thali (4 kulchas + chole + sides)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_meal",
+                    text = "Combo Meal (2 kulchas + chole + drink)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY OPTIONS (text only)
+                FilterChip(
+                    id = "vegan_kulcha",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_oil_kulcha",
+                    text = "Low Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = choleKulcheFilters,
             onFilterClick = { filter ->
@@ -76151,87 +76153,8 @@ val choleKulcheFilters = FilterConfig(
             }
         )
 
-val choleKulcheItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.chole_kulche_1,  // Amritsari Chole Kulche - soft, fluffy Amritsari kulcha served with spicy chickpea curry, topped with butter and served with pickled onions
-        title = "Amritsari Chole Kulche",
-        price = "₹120 (2 pcs)",
-        restaurantName = "Amritsari Kulcha Point",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "up to ₹50",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.chole_kulche_2,  // Stuffed Aloo Kulcha - tandoor-baked kulcha stuffed with spiced mashed potatoes, served with rich chole, fresh butter, and green chutney
-        title = "Stuffed Aloo Kulcha",
-        price = "₹140 (2 pcs)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "up to ₹40",
-        address = "Pitampura, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.chole_kulche_3,  // Paneer Stuffed Kulcha - soft kulcha stuffed with spiced paneer filling, served with flavorful chole, onion salad, and mint chutney
-        title = "Paneer Stuffed Kulcha",
-        price = "₹160 (2 pcs)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.9",
-        deliveryTime = "20-30 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "up to ₹55",
-        address = "Pitampura, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.chole_kulche_4,  // Lachha Kulcha with Chole - multi-layered, flaky laccha kulcha straight from tandoor, served with delicious chole and dollop of butter
-        title = "Lachha Kulcha",
-        price = "₹130 (2 pcs)",
-        restaurantName = "Bharat Dhaba",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Kamla Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.chole_kulche_5,  // Butter Kulcha - soft tandoori kulcha loaded with butter, served with spicy chole, fresh salad, and tangy chutneys
-        title = "Butter Kulcha",
-        price = "₹110 (2 pcs)",
-        restaurantName = "Amritsari Kulcha Point",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "up to ₹45",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.chole_kulche_6,  // Special Chole Kulche Thali - complete meal with 2 kulchas, generous serving of chole, onion salad, pickle, and two chutneys
-        title = "Special Kulcha Thali",
-        price = "₹190 (thali)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "up to ₹80",
-        address = "Pitampura, Delhi"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -76239,16 +76162,99 @@ val choleKulcheItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(10.dp))
 
+        // Recommended items section
+        val recommendedItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.chole_kulche_1,
+                title = "Amritsari Chole Kulche",
+                price = "₹120 (2 pcs)",
+                restaurantName = "Amritsari Kulcha Point",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.chole_kulche_2,
+                title = "Stuffed Aloo Kulcha",
+                price = "₹140 (2 pcs)",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹40",
+                address = "Pitampura, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.chole_kulche_3,
+                title = "Paneer Stuffed Kulcha",
+                price = "₹160 (2 pcs)",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹55",
+                address = "Pitampura, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.chole_kulche_4,
+                title = "Lachha Kulcha",
+                price = "₹130 (2 pcs)",
+                restaurantName = "Bharat Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Kamla Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.chole_kulche_5,
+                title = "Butter Kulcha",
+                price = "₹110 (2 pcs)",
+                restaurantName = "Amritsari Kulcha Point",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹45",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.chole_kulche_6,
+                title = "Special Kulcha Thali",
+                price = "₹190 (thali)",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹80",
+                address = "Pitampura, Delhi"
+            )
+        )
+
+        // Horizontal scroll section for recommended items
         FoodItemsListWithHeading(
             heading = null,
             subtitle = null,
-            foodItems = choleKulcheItems,
+            foodItems = recommendedItems,
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
             },
@@ -76261,7 +76267,9 @@ val choleKulcheItems = listOf(
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
         )
-Spacer(modifier = Modifier.height(15.dp))
+
+        Spacer(modifier = Modifier.height(15.dp))
+
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -76269,11 +76277,12 @@ Spacer(modifier = Modifier.height(15.dp))
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(10.dp))
+
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -76281,478 +76290,483 @@ Spacer(modifier = Modifier.height(15.dp))
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-val choleKulcheItemsList = listOf(
-    // CLASSIC KULCHE VARIETIES (1-5)
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.chole_kulche_items_1,  // Amritsari Chole Kulche - soft, fluffy Amritsari kulcha served with spicy chickpea curry, topped with butter and served with pickled onions
-        title = "Amritsari Chole Kulche",
-        price = "₹120 (2 pcs)",
-        restaurantName = "Amritsari Kulcha Point",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "up to ₹50",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.chole_kulche_items_2,  // Stuffed Aloo Kulcha - tandoor-baked kulcha stuffed with spiced mashed potatoes, served with rich chole, fresh butter, and green chutney
-        title = "Stuffed Aloo Kulcha",
-        price = "₹140 (2 pcs)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "up to ₹40",
-        address = "Pitampura, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.chole_kulche_items_3,  // Paneer Stuffed Kulcha - soft kulcha stuffed with spiced paneer filling, served with flavorful chole, onion salad, and mint chutney
-        title = "Paneer Stuffed Kulcha",
-        price = "₹160 (2 pcs)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.9",
-        deliveryTime = "20-30 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "up to ₹55",
-        address = "Pitampura, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.chole_kulche_items_4,  // Lachha Kulcha - multi-layered, flaky laccha kulcha straight from tandoor, served with delicious chole and dollop of butter
-        title = "Lachha Kulcha",
-        price = "₹130 (2 pcs)",
-        restaurantName = "Bharat Dhaba",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Kamla Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.chole_kulche_items_5,  // Butter Kulcha - soft tandoori kulcha loaded with butter, served with spicy chole, fresh salad, and tangy chutneys
-        title = "Butter Kulcha",
-        price = "₹110 (2 pcs)",
-        restaurantName = "Amritsari Kulcha Point",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "up to ₹45",
-        address = "Rajouri Garden, Delhi"
-    ),
+        // Complete list of all Chole Kulche items (1-20)
+        val choleKulcheItemsList = listOf(
+            // CLASSIC KULCHE VARIETIES (1-5)
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.chole_kulche_items_1,
+                title = "Amritsari Chole Kulche",
+                price = "₹120 (2 pcs)",
+                restaurantName = "Amritsari Kulcha Point",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.chole_kulche_items_2,
+                title = "Stuffed Aloo Kulcha",
+                price = "₹140 (2 pcs)",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹40",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.chole_kulche_items_3,
+                title = "Paneer Stuffed Kulcha",
+                price = "₹160 (2 pcs)",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹55",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.chole_kulche_items_4,
+                title = "Lachha Kulcha",
+                price = "₹130 (2 pcs)",
+                restaurantName = "Bharat Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Kamla Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.chole_kulche_items_5,
+                title = "Butter Kulcha",
+                price = "₹110 (2 pcs)",
+                restaurantName = "Amritsari Kulcha Point",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹45",
+                address = "Rajouri Garden, Delhi"
+            ),
 
-    // STUFFED KULCHA VARIETIES (6-10)
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.chole_kulche_items_6,  // Onion Stuffed Kulcha - kulcha stuffed with spiced onion mixture, baked to perfection, served with hot chole and mint chutney
-        title = "Onion Stuffed Kulcha",
-        price = "₹135 (2 pcs)",
-        restaurantName = "Stuffed Kulcha House",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.9 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 7,
-        imageRes = R.drawable.chole_kulche_items_7,  // Mix Stuffed Kulcha - combination of aloo, paneer and onion stuffed in soft kulcha, served with special chole
-        title = "Mix Stuffed Kulcha",
-        price = "₹155 (2 pcs)",
-        restaurantName = "Stuffed Kulcha House",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.9 km",
-        discount = "12%",
-        discountAmount = "up to ₹50",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 8,
-        imageRes = R.drawable.chole_kulche_items_8,  // Gobhi Stuffed Kulcha - cauliflower stuffed kulcha with Punjabi spices, served with chole and fresh butter
-        title = "Gobhi Stuffed Kulcha",
-        price = "₹140 (2 pcs)",
-        restaurantName = "Stuffed Kulcha House",
-        rating = "4.6",
-        deliveryTime = "20-30 mins",
-        distance = "1.9 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 9,
-        imageRes = R.drawable.chole_kulche_items_9,  // Keema Stuffed Kulcha - minced lamb stuffed kulcha, tandoor baked, served with rich chole and onion salad
-        title = "Keema Stuffed Kulcha",
-        price = "₹190 (2 pcs)",
-        restaurantName = "Non-Veg Point",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "2.2 km",
-        discount = "15%",
-        discountAmount = "up to ₹70",
-        address = "Green Park, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 10,
-        imageRes = R.drawable.chole_kulche_items_10,  // Cheese Stuffed Kulcha - fusion kulcha stuffed with mozzarella cheese, served with mildly spiced chole
-        title = "Cheese Stuffed Kulcha",
-        price = "₹175 (2 pcs)",
-        restaurantName = "Fusion Dhaba",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.6 km",
-        discount = "10%",
-        discountAmount = "up to ₹45",
-        address = "Hauz Khas, Delhi"
-    ),
+            // STUFFED KULCHA VARIETIES (6-10)
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.chole_kulche_items_6,
+                title = "Onion Stuffed Kulcha",
+                price = "₹135 (2 pcs)",
+                restaurantName = "Stuffed Kulcha House",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.9 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.chole_kulche_items_7,
+                title = "Mix Stuffed Kulcha",
+                price = "₹155 (2 pcs)",
+                restaurantName = "Stuffed Kulcha House",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "12%",
+                discountAmount = "up to ₹50",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.chole_kulche_items_8,
+                title = "Gobhi Stuffed Kulcha",
+                price = "₹140 (2 pcs)",
+                restaurantName = "Stuffed Kulcha House",
+                rating = "4.6",
+                deliveryTime = "20-30 mins",
+                distance = "1.9 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Lajpat Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.chole_kulche_items_9,
+                title = "Keema Stuffed Kulcha",
+                price = "₹190 (2 pcs)",
+                restaurantName = "Non-Veg Point",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹70",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.chole_kulche_items_10,
+                title = "Cheese Stuffed Kulcha",
+                price = "₹175 (2 pcs)",
+                restaurantName = "Fusion Dhaba",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹45",
+                address = "Hauz Khas, Delhi"
+            ),
 
-    // SPECIALTY KULCHE (11-14)
-    FoodItemDoubleF(
-        id = 11,
-        imageRes = R.drawable.chole_kulche_items_11,  // Tandoori Kulcha - classic tandoor-baked plain kulcha with charred edges, served with signature chole
-        title = "Tandoori Kulcha",
-        price = "₹100 (2 pcs)",
-        restaurantName = "Bharat Dhaba",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "up to ₹25",
-        address = "Kamla Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 12,
-        imageRes = R.drawable.chole_kulche_items_12,  // Garlic Kulcha - kulcha topped with fresh garlic and coriander, served with spicy chole
-        title = "Garlic Kulcha",
-        price = "₹125 (2 pcs)",
-        restaurantName = "Amritsari Kulcha Point",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "up to ₹40",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 13,
-        imageRes = R.drawable.chole_kulche_items_13,  // Methi Kulcha - fenugreek flavored kulcha, healthy and tasty, served with chole
-        title = "Methi Kulcha",
-        price = "₹130 (2 pcs)",
-        restaurantName = "Healthy Bites",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "2.0 km",
-        discount = "10%",
-        discountAmount = "up to ₹30",
-        address = "Dwarka, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 14,
-        imageRes = R.drawable.chole_kulche_items_14,  // Ajwaini Kulcha - carom seed flavored kulcha, digestive and flavorful, served with chole
-        title = "Ajwaini Kulcha",
-        price = "₹120 (2 pcs)",
-        restaurantName = "Healthy Bites",
-        rating = "4.5",
-        deliveryTime = "20-25 mins",
-        distance = "2.0 km",
-        discount = "10%",
-        discountAmount = "up to ₹25",
-        address = "Dwarka, Delhi"
-    ),
+            // SPECIALTY KULCHE (11-14)
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.chole_kulche_items_11,
+                title = "Tandoori Kulcha",
+                price = "₹100 (2 pcs)",
+                restaurantName = "Bharat Dhaba",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Kamla Nagar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.chole_kulche_items_12,
+                title = "Garlic Kulcha",
+                price = "₹125 (2 pcs)",
+                restaurantName = "Amritsari Kulcha Point",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹40",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.chole_kulche_items_13,
+                title = "Methi Kulcha",
+                price = "₹130 (2 pcs)",
+                restaurantName = "Healthy Bites",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Dwarka, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.chole_kulche_items_14,
+                title = "Ajwaini Kulcha",
+                price = "₹120 (2 pcs)",
+                restaurantName = "Healthy Bites",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "2.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Dwarka, Delhi"
+            ),
 
-    // CHOLE VARIATIONS (15-17)
-    FoodItemDoubleF(
-        id = 15,
-        imageRes = R.drawable.chole_kulche_items_15,  // Dry Chole Kulche - thick, dry chole with less gravy, served with butter kulcha
-        title = "Dry Chole Kulche",
-        price = "₹125 (2 pcs)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "up to ₹40",
-        address = "Pitampura, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 16,
-        imageRes = R.drawable.chole_kulche_items_16,  // Gravy Chole Kulche - rich, thick gravy chole served with stuffed aloo kulcha
-        title = "Gravy Chole Kulche",
-        price = "₹145 (2 pcs)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.9",
-        deliveryTime = "20-30 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "up to ₹55",
-        address = "Pitampura, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 17,
-        imageRes = R.drawable.chole_kulche_items_17,  // Spicy Chole Kulche - extra spicy chole made with special masala, served with plain tandoori kulcha
-        title = "Spicy Chole Kulche",
-        price = "₹130 (2 pcs)",
-        restaurantName = "Bharat Dhaba",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "12%",
-        discountAmount = "up to ₹40",
-        address = "Kamla Nagar, Delhi"
-    ),
+            // CHOLE VARIATIONS (15-17)
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.chole_kulche_items_15,
+                title = "Dry Chole Kulche",
+                price = "₹125 (2 pcs)",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹40",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.chole_kulche_items_16,
+                title = "Gravy Chole Kulche",
+                price = "₹145 (2 pcs)",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.9",
+                deliveryTime = "20-30 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹55",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.chole_kulche_items_17,
+                title = "Spicy Chole Kulche",
+                price = "₹130 (2 pcs)",
+                restaurantName = "Bharat Dhaba",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "12%",
+                discountAmount = "up to ₹40",
+                address = "Kamla Nagar, Delhi"
+            ),
 
-    // COMBO & THALI (18-20)
-    FoodItemDoubleF(
-        id = 18,
-        imageRes = R.drawable.chole_kulche_items_18,  // Chole Kulche Combo - 2 kulchas + chole + onion salad + green chutney + sweet drink
-        title = "Chole Kulche Combo",
-        price = "₹220 (combo)",
-        restaurantName = "Amritsari Kulcha Point",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "up to ₹100",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 19,
-        imageRes = R.drawable.chole_kulche_items_19,  // Special Kulcha Thali - 2 stuffed kulchas + chole + dahi + salad + pickle + 2 chutneys
-        title = "Special Kulcha Thali",
-        price = "₹260 (thali)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.9",
-        deliveryTime = "25-35 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "up to ₹90",
-        address = "Pitampura, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 20,
-        imageRes = R.drawable.chole_kulche_items_20,  // Family Kulcha Pack - 6 assorted kulchas + large chole + all sides + 4 chutneys
-        title = "Family Kulcha Pack",
-        price = "₹550 (family pack)",
-        restaurantName = "Amritsari Kulcha Point",
-        rating = "4.9",
-        deliveryTime = "35-40 mins",
-        distance = "1.2 km",
-        discount = "25%",
-        discountAmount = "up to ₹200",
-        address = "Rajouri Garden, Delhi"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
-            }
+            // COMBO & THALI (18-20)
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.chole_kulche_items_18,
+                title = "Chole Kulche Combo",
+                price = "₹220 (combo)",
+                restaurantName = "Amritsari Kulcha Point",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹100",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.chole_kulche_items_19,
+                title = "Special Kulcha Thali",
+                price = "₹260 (thali)",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.9",
+                deliveryTime = "25-35 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹90",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.chole_kulche_items_20,
+                title = "Family Kulcha Pack",
+                price = "₹550 (family pack)",
+                restaurantName = "Amritsari Kulcha Point",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹200",
+                address = "Rajouri Garden, Delhi"
+            )
+        )
+
+        // Display all restaurant items vertically
+        choleKulcheItemsList.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
         }
     }
 }
 
+
 @Composable
 fun FriesCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val friesFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val friesFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // FRY CUT TYPES (with icons showing fry shape)
-        FilterChip(
-            id = "classic_fries",
-            text = "Classic Fries",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_classic_fries  // standard straight-cut fries
-        ),
-        FilterChip(
-            id = "curly_fries",
-            text = "Curly Fries",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_curly_fries  // spiral/curly cut fries
-        ),
-        FilterChip(
-            id = "waffle_fries",
-            text = "Waffle Fries",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_waffle_fries  // lattice/grid cut fries
-        ),
-        FilterChip(
-            id = "steak_fries",
-            text = "Steak Fries",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_steak_fries  // thick-cut wedges
-        ),
-        FilterChip(
-            id = "sweet_potato_fries",
-            text = "Sweet Potato Fries",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_sweet_potato_fries  // orange/ sweet potato variety
-        ),
-        // DIPPING SAUCES (text only)
-        FilterChip(
-            id = "ketchup",
-            text = "Ketchup",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mayonnaise",
-            text = "Mayonnaise",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chipotle_sauce",
-            text = "Chipotle Mayo",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cheese_sauce",
-            text = "Cheese Sauce",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "garlic_sauce",
-            text = "Garlic Sauce",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "sriracha",
-            text = "Sriracha",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "tartar_sauce",
-            text = "Tartar Sauce",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "ranch",
-            text = "Ranch",
-            type = FilterType.TEXT_ONLY
-        ),
+                // FRY CUT TYPES (with icons showing fry shape)
+                FilterChip(
+                    id = "classic_fries",
+                    text = "Classic Fries",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_fries
+                ),
+                FilterChip(
+                    id = "curly_fries",
+                    text = "Curly Fries",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_curly_fries
+                ),
+                FilterChip(
+                    id = "waffle_fries",
+                    text = "Waffle Fries",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_waffle_fries
+                ),
+                FilterChip(
+                    id = "steak_fries",
+                    text = "Steak Fries",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_steak_fries
+                ),
+                FilterChip(
+                    id = "sweet_potato_fries",
+                    text = "Sweet Potato Fries",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sweet_potato_fries
+                ),
 
-        // TOPPINGS & ADD-ONS (text only)
-        FilterChip(
-            id = "cheese_topping",
-            text = "Cheese",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "bacon_bits",
-            text = "Bacon Bits",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "jalapenos",
-            text = "Jalapeños",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chili_con_carne",
-            text = "Chili Con Carne",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pulled_pork",
-            text = "Pulled Pork",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "gravy",
-            text = "Gravy",
-            type = FilterType.TEXT_ONLY  // for poutine style
-        ),
+                // DIPPING SAUCES (text only)
+                FilterChip(
+                    id = "ketchup",
+                    text = "Ketchup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mayonnaise",
+                    text = "Mayonnaise",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chipotle_sauce",
+                    text = "Chipotle Mayo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese_sauce",
+                    text = "Cheese Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_sauce",
+                    text = "Garlic Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sriracha",
+                    text = "Sriracha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tartar_sauce",
+                    text = "Tartar Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ranch",
+                    text = "Ranch",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIZE OPTIONS (text only)
-        FilterChip(
-            id = "small_fries",
-            text = "Small",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "medium_fries",
-            text = "Medium",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "large_fries",
-            text = "Large",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "family_fries",
-            text = "Family Size",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "bucket_fries",
-            text = "Bucket",
-            type = FilterType.TEXT_ONLY  // party bucket
-        ),
+                // TOPPINGS & ADD-ONS (text only)
+                FilterChip(
+                    id = "cheese_topping",
+                    text = "Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bacon_bits",
+                    text = "Bacon Bits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalapenos",
+                    text = "Jalapeños",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chili_con_carne",
+                    text = "Chili Con Carne",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pulled_pork",
+                    text = "Pulled Pork",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gravy",
+                    text = "Gravy",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS (text only)
-        FilterChip(
-            id = "vegan_fries",
-            text = "Vegan",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "gluten_free_fries",
-            text = "Gluten Free",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "air_fried",
-            text = "Air Fried",
-            type = FilterType.TEXT_ONLY  // healthier option
-        ),
-        FilterChip(
-            id = "low_sodium",
-            text = "Low Sodium",
-            type = FilterType.TEXT_ONLY
-        ),
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // SIZE OPTIONS (text only)
+                FilterChip(
+                    id = "small_fries",
+                    text = "Small",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_fries",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_fries",
+                    text = "Large",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_fries",
+                    text = "Family Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bucket_fries",
+                    text = "Bucket",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY OPTIONS (text only)
+                FilterChip(
+                    id = "vegan_fries",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_fries",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "air_fried",
+                    text = "Air Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sodium",
+                    text = "Low Sodium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = friesFilters,
             onFilterClick = { filter ->
@@ -76765,87 +76779,8 @@ val friesFilters = FilterConfig(
             }
         )
 
-val friesItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.fries_1,  // Classic Salted Fries - golden crispy potato fries, perfectly salted, served hot and fresh
-        title = "Classic Salted Fries",
-        price = "₹99 (regular)",
-        restaurantName = "Fries & Co.",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "10%",
-        discountAmount = "up to ₹25",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.fries_2,  // Peri Peri Fries - crispy fries tossed in spicy peri peri seasoning, served with peri mayo dip
-        title = "Peri Peri Fries",
-        price = "₹129 (regular)",
-        restaurantName = "Fries & Co.",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "12%",
-        discountAmount = "up to ₹35",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.fries_3,  // Cheesy Fries - crispy fries smothered in warm cheddar cheese sauce, topped with spring onions
-        title = "Cheesy Fries",
-        price = "₹159 (regular)",
-        restaurantName = "The Fries Shop",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "15%",
-        discountAmount = "up to ₹50",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.fries_4,  // Curly Fries - spiral cut fries with crispy texture, seasoned with smoky paprika
-        title = "Curly Fries",
-        price = "₹139 (regular)",
-        restaurantName = "The Fries Shop",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "10%",
-        discountAmount = "up to ₹30",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.fries_5,  // Loaded Fries - crispy fries topped with melted cheese, bacon bits, sour cream, and spring onions
-        title = "Loaded Fries",
-        price = "₹199 (regular)",
-        restaurantName = "Fries & Co.",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.1 km",
-        discount = "15%",
-        discountAmount = "up to ₹60",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.fries_6,  // Sweet Potato Fries - oven-baked sweet potato fries, lightly salted, served with chipotle mayo
-        title = "Sweet Potato Fries",
-        price = "₹149 (regular)",
-        restaurantName = "Healthy Bites",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Saket, Delhi"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -76853,16 +76788,99 @@ val friesItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(10.dp))
 
+        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
+        val recommendedItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.fries_1,
+                title = "Classic Salted Fries",
+                price = "₹99 (regular)",
+                restaurantName = "Fries & Co.",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.fries_2,
+                title = "Peri Peri Fries",
+                price = "₹129 (regular)",
+                restaurantName = "Fries & Co.",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "12%",
+                discountAmount = "up to ₹35",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.fries_3,
+                title = "Cheesy Fries",
+                price = "₹159 (regular)",
+                restaurantName = "The Fries Shop",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.fries_4,
+                title = "Curly Fries",
+                price = "₹139 (regular)",
+                restaurantName = "The Fries Shop",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Rajouri Garden, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.fries_5,
+                title = "Loaded Fries",
+                price = "₹199 (regular)",
+                restaurantName = "Fries & Co.",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.fries_6,
+                title = "Sweet Potato Fries",
+                price = "₹149 (regular)",
+                restaurantName = "Healthy Bites",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Saket, Delhi"
+            )
+        )
+
+        // Horizontal scroll section for recommended items
         FoodItemsListWithHeading(
             heading = null,
             subtitle = null,
-            foodItems = friesItems,
+            foodItems = recommendedItems,
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
             },
@@ -76875,7 +76893,9 @@ val friesItems = listOf(
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
         )
+
         Spacer(modifier = Modifier.height(15.dp))
+
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -76883,11 +76903,12 @@ val friesItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(10.dp))
+
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -76895,516 +76916,519 @@ val friesItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-val friesItemsList = listOf(
-    // CLASSIC FRIES VARIETIES (1-5)
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.fries_items_1,  // Classic Salted Fries - crispy golden fries lightly sprinkled with sea salt, served with ketchup
-        title = "Classic Salted Fries",
-        price = "₹99 (regular)",
-        restaurantName = "Fries & Co.",
-        rating = "4.5",
-        deliveryTime = "15-20 mins",
-        distance = "1.0 km",
-        discount = "10%",
-        discountAmount = "up to ₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.fries_items_2,  // Peri Peri Fries - crispy fries tossed in spicy peri peri seasoning, served with peri peri mayo
-        title = "Peri Peri Fries",
-        price = "₹129 (regular)",
-        restaurantName = "Fries & Co.",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.0 km",
-        discount = "10%",
-        discountAmount = "up to ₹25",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.fries_items_3,  // Cheese Fries - crispy fries loaded with melted cheddar cheese sauce
-        title = "Cheese Fries",
-        price = "₹149 (regular)",
-        restaurantName = "The Fry House",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "15%",
-        discountAmount = "up to ₹40",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.fries_items_4,  // Loaded Cheese Fries - crispy fries topped with cheese sauce, sour cream, bacon bits and spring onions
-        title = "Loaded Cheese Fries",
-        price = "₹199 (regular)",
-        restaurantName = "The Fry House",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "15%",
-        discountAmount = "up to ₹60",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.fries_items_5,  // Garlic Parmesan Fries - crispy fries tossed in garlic butter and grated parmesan cheese
-        title = "Garlic Parmesan Fries",
-        price = "₹169 (regular)",
-        restaurantName = "Fries & Co.",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.0 km",
-        discount = "12%",
-        discountAmount = "up to ₹45",
-        address = "Connaught Place, Delhi"
-    ),
+        // Complete list of all Fries items (1-20) using RestaurantItemFull for vertical list
+        val friesItemsList = listOf(
+            // CLASSIC FRIES VARIETIES (1-5)
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.fries_items_1,
+                title = "Classic Salted Fries",
+                price = "₹99 (regular)",
+                restaurantName = "Fries & Co.",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹20",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.fries_items_2,
+                title = "Peri Peri Fries",
+                price = "₹129 (regular)",
+                restaurantName = "Fries & Co.",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.fries_items_3,
+                title = "Cheese Fries",
+                price = "₹149 (regular)",
+                restaurantName = "The Fry House",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹40",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.fries_items_4,
+                title = "Loaded Cheese Fries",
+                price = "₹199 (regular)",
+                restaurantName = "The Fry House",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.fries_items_5,
+                title = "Garlic Parmesan Fries",
+                price = "₹169 (regular)",
+                restaurantName = "Fries & Co.",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "12%",
+                discountAmount = "up to ₹45",
+                address = "Connaught Place, Delhi"
+            ),
 
-    // SPICY & SEASONED VARIETIES (6-10)
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.fries_items_6,  // Mexican Fries - fries topped with spicy mexican salsa, cheese sauce, jalapeños and sour cream
-        title = "Mexican Fries",
-        price = "₹189 (regular)",
-        restaurantName = "Mexican Kitchen",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.7 km",
-        discount = "10%",
-        discountAmount = "up to ₹40",
-        address = "Hauz Khas, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 7,
-        imageRes = R.drawable.fries_items_7,  // BBQ Fries - crispy fries tossed in smoky BBQ seasoning, served with BBQ mayo
-        title = "BBQ Fries",
-        price = "₹139 (regular)",
-        restaurantName = "Fries & Co.",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.0 km",
-        discount = "10%",
-        discountAmount = "up to ₹30",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 8,
-        imageRes = R.drawable.fries_items_8,  // Chilli Garlic Fries - fries tossed in spicy chilli garlic sauce with fresh garlic bits
-        title = "Chilli Garlic Fries",
-        price = "₹149 (regular)",
-        restaurantName = "The Fry House",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "12%",
-        discountAmount = "up to ₹35",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 9,
-        imageRes = R.drawable.fries_items_9,  // Tandoori Fries - fusion fries tossed in tandoori masala, served with mint chutney
-        title = "Tandoori Fries",
-        price = "₹159 (regular)",
-        restaurantName = "Curry & Fries",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "up to ₹50",
-        address = "Pitampura, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 10,
-        imageRes = R.drawable.fries_items_10,  // Masala Fries - Indian style fries tossed with chaat masala, red chilli powder and cumin
-        title = "Masala Fries",
-        price = "₹119 (regular)",
-        restaurantName = "Curry & Fries",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "up to ₹25",
-        address = "Pitampura, Delhi"
-    ),
+            // SPICY & SEASONED VARIETIES (6-10)
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.fries_items_6,
+                title = "Mexican Fries",
+                price = "₹189 (regular)",
+                restaurantName = "Mexican Kitchen",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹40",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.fries_items_7,
+                title = "BBQ Fries",
+                price = "₹139 (regular)",
+                restaurantName = "Fries & Co.",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.fries_items_8,
+                title = "Chilli Garlic Fries",
+                price = "₹149 (regular)",
+                restaurantName = "The Fry House",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "12%",
+                discountAmount = "up to ₹35",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.fries_items_9,
+                title = "Tandoori Fries",
+                price = "₹159 (regular)",
+                restaurantName = "Curry & Fries",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Pitampura, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.fries_items_10,
+                title = "Masala Fries",
+                price = "₹119 (regular)",
+                restaurantName = "Curry & Fries",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Pitampura, Delhi"
+            ),
 
-    // GOURMET & PREMIUM VARIETIES (11-15)
-    FoodItemDoubleF(
-        id = 11,
-        imageRes = R.drawable.fries_items_11,  // Truffle Fries - crispy fries drizzled with truffle oil, topped with parmesan and parsley
-        title = "Truffle Fries",
-        price = "₹249 (regular)",
-        restaurantName = "Gourmet Bites",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "2.0 km",
-        discount = "15%",
-        discountAmount = "up to ₹80",
-        address = "Vasant Vihar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 12,
-        imageRes = R.drawable.fries_items_12,  // Rosemary & Sea Salt Fries - gourmet fries with fresh rosemary and flaky sea salt
-        title = "Rosemary & Sea Salt Fries",
-        price = "₹179 (regular)",
-        restaurantName = "Gourmet Bites",
-        rating = "4.7",
-        deliveryTime = "25-30 mins",
-        distance = "2.0 km",
-        discount = "12%",
-        discountAmount = "up to ₹45",
-        address = "Vasant Vihar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 13,
-        imageRes = R.drawable.fries_items_13,  // Smoked Paprika Fries - crispy fries with smoky paprika seasoning and lime zest
-        title = "Smoked Paprika Fries",
-        price = "₹149 (regular)",
-        restaurantName = "The Fry House",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "10%",
-        discountAmount = "up to ₹30",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 14,
-        imageRes = R.drawable.fries_items_14,  // Buffalo Wings Fries - fries topped with buffalo sauce, blue cheese crumbles and celery bits
-        title = "Buffalo Wings Fries",
-        price = "₹209 (regular)",
-        restaurantName = "Wings & Fries",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.9 km",
-        discount = "15%",
-        discountAmount = "up to ₹70",
-        address = "Green Park, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 15,
-        imageRes = R.drawable.fries_items_15,  // Sweet Potato Fries - healthy baked sweet potato fries with cinnamon sugar or sea salt
-        title = "Sweet Potato Fries",
-        price = "₹169 (regular)",
-        restaurantName = "Healthy Bites",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "2.2 km",
-        discount = "12%",
-        discountAmount = "up to ₹40",
-        address = "Dwarka, Delhi"
-    ),
+            // GOURMET & PREMIUM VARIETIES (11-15)
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.fries_items_11,
+                title = "Truffle Fries",
+                price = "₹249 (regular)",
+                restaurantName = "Gourmet Bites",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹80",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.fries_items_12,
+                title = "Rosemary & Sea Salt Fries",
+                price = "₹179 (regular)",
+                restaurantName = "Gourmet Bites",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.0 km",
+                discount = "12%",
+                discountAmount = "up to ₹45",
+                address = "Vasant Vihar, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.fries_items_13,
+                title = "Smoked Paprika Fries",
+                price = "₹149 (regular)",
+                restaurantName = "The Fry House",
+                rating = "4.6",
+                deliveryTime = "20-25 mins",
+                distance = "1.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.fries_items_14,
+                title = "Buffalo Wings Fries",
+                price = "₹209 (regular)",
+                restaurantName = "Wings & Fries",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹70",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.fries_items_15,
+                title = "Sweet Potato Fries",
+                price = "₹169 (regular)",
+                restaurantName = "Healthy Bites",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "2.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹40",
+                address = "Dwarka, Delhi"
+            ),
 
-    // LOADED & SPECIALTY FRIES (16-18)
-    FoodItemDoubleF(
-        id = 16,
-        imageRes = R.drawable.fries_items_16,  // Pulled Pork Fries - loaded fries with slow-cooked pulled pork, BBQ sauce and cheese
-        title = "Pulled Pork Fries",
-        price = "₹299 (regular)",
-        restaurantName = "Wings & Fries",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "1.9 km",
-        discount = "15%",
-        discountAmount = "up to ₹90",
-        address = "Green Park, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 17,
-        imageRes = R.drawable.fries_items_17,  // Chili Cheese Fries - loaded fries with spicy beef chili and melted cheese
-        title = "Chili Cheese Fries",
-        price = "₹229 (regular)",
-        restaurantName = "Wings & Fries",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.9 km",
-        discount = "15%",
-        discountAmount = "up to ₹75",
-        address = "Green Park, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 18,
-        imageRes = R.drawable.fries_items_18,  // Poutine - Canadian classic fries topped with cheese curds and hot gravy
-        title = "Poutine",
-        price = "₹219 (regular)",
-        restaurantName = "International Flavors",
-        rating = "4.7",
-        deliveryTime = "25-30 mins",
-        distance = "2.4 km",
-        discount = "10%",
-        discountAmount = "up to ₹45",
-        address = "Greater Kailash, Delhi"
-    ),
+            // LOADED & SPECIALTY FRIES (16-18)
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.fries_items_16,
+                title = "Pulled Pork Fries",
+                price = "₹299 (regular)",
+                restaurantName = "Wings & Fries",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "1.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹90",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.fries_items_17,
+                title = "Chili Cheese Fries",
+                price = "₹229 (regular)",
+                restaurantName = "Wings & Fries",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹75",
+                address = "Green Park, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.fries_items_18,
+                title = "Poutine",
+                price = "₹219 (regular)",
+                restaurantName = "International Flavors",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "2.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹45",
+                address = "Greater Kailash, Delhi"
+            ),
 
-    // COMBO & FAMILY PACKS (19-20)
-    FoodItemDoubleF(
-        id = 19,
-        imageRes = R.drawable.fries_items_19,  // Fries Feast Combo - 2 regular fries (any flavor) + 2 dips + 2 cold drinks
-        title = "Fries Feast Combo",
-        price = "₹349 (combo)",
-        restaurantName = "Fries & Co.",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.0 km",
-        discount = "20%",
-        discountAmount = "up to ₹120",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 20,
-        imageRes = R.drawable.fries_items_20,  // Party Fries Pack - 4 large loaded fries (choice of toppings) + 5 dips + 4 cold drinks
-        title = "Party Fries Pack",
-        price = "₹649 (family pack)",
-        restaurantName = "The Fry House",
-        rating = "4.9",
-        deliveryTime = "35-40 mins",
-        distance = "1.3 km",
-        discount = "25%",
-        discountAmount = "up to ₹250",
-        address = "Saket, Delhi"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
-            }
+            // COMBO & FAMILY PACKS (19-20)
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.fries_items_19,
+                title = "Fries Feast Combo",
+                price = "₹349 (combo)",
+                restaurantName = "Fries & Co.",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "20%",
+                discountAmount = "up to ₹120",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.fries_items_20,
+                title = "Party Fries Pack",
+                price = "₹649 (family pack)",
+                restaurantName = "The Fry House",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "1.3 km",
+                discount = "25%",
+                discountAmount = "up to ₹250",
+                address = "Saket, Delhi"
+            )
+        )
+
+        // Display all restaurant items vertically
+        friesItemsList.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
         }
     }
 }
 
 @Composable
 fun ColdCoffeeCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val coldCoffeeFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val coldCoffeeFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // COFFEE BASE TYPES (with coffee cup icons showing style)
-        FilterChip(
-            id = "classic_cold_coffee",
-            text = "Classic Cold Coffee",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_classic_coffee  // standard coffee cup with straw
-        ),
-        FilterChip(
-            id = "frappe",
-            text = "Frappe",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_frappe  // blended/frothy coffee cup
-        ),
-        FilterChip(
-            id = "cold_brew",
-            text = "Cold Brew",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_cold_brew  // dark coffee with ice
-        ),
-        FilterChip(
-            id = "iced_latte",
-            text = "Iced Latte",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_iced_latte  // layered coffee-milk drink
-        ),
-        FilterChip(
-            id = "iced_mocha",
-            text = "Iced Mocha",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_iced_mocha  // coffee with chocolate
-        ),
-        // MILK & CREAM OPTIONS (text only)
-        FilterChip(
-            id = "dairy_milk",
-            text = "Dairy Milk",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "oat_milk",
-            text = "Oat Milk",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "almond_milk",
-            text = "Almond Milk",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "soy_milk",
-            text = "Soy Milk",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "coconut_milk",
-            text = "Coconut Milk",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "whipped_cream",
-            text = "Whipped Cream",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "ice_cream",
-            text = "Ice Cream",
-            type = FilterType.TEXT_ONLY
-        ),
+                // COFFEE BASE TYPES (with coffee cup icons showing style)
+                FilterChip(
+                    id = "classic_cold_coffee",
+                    text = "Classic Cold Coffee",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_coffee
+                ),
+                FilterChip(
+                    id = "frappe",
+                    text = "Frappe",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_frappe
+                ),
+                FilterChip(
+                    id = "cold_brew",
+                    text = "Cold Brew",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cold_brew
+                ),
+                FilterChip(
+                    id = "iced_latte",
+                    text = "Iced Latte",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_iced_latte
+                ),
+                FilterChip(
+                    id = "iced_mocha",
+                    text = "Iced Mocha",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_iced_mocha
+                ),
 
-        // FLAVOR SYRUPS (text only)
-        FilterChip(
-            id = "vanilla_syrup",
-            text = "Vanilla",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "caramel_syrup",
-            text = "Caramel",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "hazelnut_syrup",
-            text = "Hazelnut",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chocolate_syrup",
-            text = "Chocolate",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "french_vanilla",
-            text = "French Vanilla",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "irish_cream",
-            text = "Irish Cream",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "peppermint",
-            text = "Peppermint",
-            type = FilterType.TEXT_ONLY
-        ),
+                // MILK & CREAM OPTIONS (text only)
+                FilterChip(
+                    id = "dairy_milk",
+                    text = "Dairy Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oat_milk",
+                    text = "Oat Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almond_milk",
+                    text = "Almond Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soy_milk",
+                    text = "Soy Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_milk",
+                    text = "Coconut Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whipped_cream",
+                    text = "Whipped Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ice_cream",
+                    text = "Ice Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS & ADD-ONS (text only)
-        FilterChip(
-            id = "chocolate_shavings",
-            text = "Chocolate Shavings",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cocoa_powder",
-            text = "Cocoa Powder",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cinnamon",
-            text = "Cinnamon",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "caramel_drizzle",
-            text = "Caramel Drizzle",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chocolate_drizzle",
-            text = "Chocolate Drizzle",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "nuts",
-            text = "Nuts",
-            type = FilterType.TEXT_ONLY  // almonds, hazelnuts, etc.
-        ),
+                // FLAVOR SYRUPS (text only)
+                FilterChip(
+                    id = "vanilla_syrup",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_syrup",
+                    text = "Caramel",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hazelnut_syrup",
+                    text = "Hazelnut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_syrup",
+                    text = "Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "french_vanilla",
+                    text = "French Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "irish_cream",
+                    text = "Irish Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peppermint",
+                    text = "Peppermint",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIZE OPTIONS (text only)
-        FilterChip(
-            id = "small_cold_coffee",
-            text = "Small",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "regular_cold_coffee",
-            text = "Regular",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "large_cold_coffee",
-            text = "Large",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "extra_large",
-            text = "Extra Large",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS & ADD-ONS (text only)
+                FilterChip(
+                    id = "chocolate_shavings",
+                    text = "Chocolate Shavings",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cocoa_powder",
+                    text = "Cocoa Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cinnamon",
+                    text = "Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_drizzle",
+                    text = "Caramel Drizzle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_drizzle",
+                    text = "Chocolate Drizzle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nuts",
+                    text = "Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY & SPECIAL OPTIONS (text only)
-        FilterChip(
-            id = "sugar_free",
-            text = "Sugar Free",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "low_fat",
-            text = "Low Fat",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "vegan",
-            text = "Vegan",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "keto",
-            text = "Keto",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "extra_caffeine",
-            text = "Extra Caffeine",
-            type = FilterType.TEXT_ONLY  // extra shot of espresso
-        ),
-        FilterChip(
-            id = "decaf",
-            text = "Decaf",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SIZE OPTIONS (text only)
+                FilterChip(
+                    id = "small_cold_coffee",
+                    text = "Small",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_cold_coffee",
+                    text = "Regular",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_cold_coffee",
+                    text = "Large",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_large",
+                    text = "Extra Large",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // DIETARY & SPECIAL OPTIONS (text only)
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto",
+                    text = "Keto",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_caffeine",
+                    text = "Extra Caffeine",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "decaf",
+                    text = "Decaf",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = coldCoffeeFilters,
             onFilterClick = { filter ->
@@ -77417,87 +77441,8 @@ val coldCoffeeFilters = FilterConfig(
             }
         )
 
-val coldCoffeeItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.cold_coffee_1,  // Classic Cold Coffee - creamy chilled coffee blended with milk and sugar, topped with whipped cream
-        title = "Classic Cold Coffee",
-        price = "₹149 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "up to ₹30",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.cold_coffee_2,  // Cold Brew - smooth slow-steeped cold brew coffee served chilled, less acidic and naturally sweet
-        title = "Cold Brew",
-        price = "₹169 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "up to ₹40",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.cold_coffee_3,  // Iced Latte - espresso mixed with chilled milk and ice, smooth and refreshing
-        title = "Iced Latte",
-        price = "₹159 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.cold_coffee_4,  // Frappe - blended frozen coffee drink with milk, sugar, and ice, topped with whipped cream and chocolate syrup
-        title = "Frappe",
-        price = "₹189 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "up to ₹55",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.cold_coffee_5,  // Iced Mocha - rich chocolate and espresso combined with chilled milk, topped with whipped cream and chocolate drizzle
-        title = "Iced Mocha",
-        price = "₹179 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "up to ₹45",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.cold_coffee_6,  // Iced Americano - espresso shots diluted with chilled water and ice, bold and refreshing
-        title = "Iced Americano",
-        price = "₹139 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "up to ₹25",
-        address = "Saket, Delhi"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -77505,16 +77450,99 @@ val coldCoffeeItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(10.dp))
 
+        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
+        val recommendedItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.cold_coffee_1,
+                title = "Classic Cold Coffee",
+                price = "₹149 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.cold_coffee_2,
+                title = "Cold Brew",
+                price = "₹169 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹40",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.cold_coffee_3,
+                title = "Iced Latte",
+                price = "₹159 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.cold_coffee_4,
+                title = "Frappe",
+                price = "₹189 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹55",
+                address = "Saket, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.cold_coffee_5,
+                title = "Iced Mocha",
+                price = "₹179 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹45",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.cold_coffee_6,
+                title = "Iced Americano",
+                price = "₹139 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Saket, Delhi"
+            )
+        )
+
+        // Horizontal scroll section for recommended items
         FoodItemsListWithHeading(
             heading = null,
             subtitle = null,
-            foodItems = coldCoffeeItems,
+            foodItems = recommendedItems,
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
             },
@@ -77527,7 +77555,9 @@ val coldCoffeeItems = listOf(
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
         )
+
         Spacer(modifier = Modifier.height(15.dp))
+
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -77535,11 +77565,12 @@ val coldCoffeeItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(10.dp))
+
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -77547,292 +77578,293 @@ val coldCoffeeItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-val coldCoffeeItemsList = listOf(
-    // CLASSIC COLD COFFEE VARIETIES (1-5)
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.cold_coffee_items_1,  // Classic Cold Coffee - creamy chilled coffee blended with milk and sugar, topped with whipped cream and chocolate syrup
-        title = "Classic Cold Coffee",
-        price = "₹149 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "up to ₹30",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.cold_coffee_items_2,  // Vanilla Cold Coffee - classic cold coffee with a hint of vanilla syrup, topped with whipped cream
-        title = "Vanilla Cold Coffee",
-        price = "₹159 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.cold_coffee_items_3,  // Caramel Cold Coffee - smooth cold coffee blended with caramel syrup, topped with caramel drizzle
-        title = "Caramel Cold Coffee",
-        price = "₹169 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "up to ₹40",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.cold_coffee_items_4,  // Hazelnut Cold Coffee - rich cold coffee with nutty hazelnut flavor, served chilled
-        title = "Hazelnut Cold Coffee",
-        price = "₹169 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "up to ₹40",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.cold_coffee_items_5,  // French Vanilla Cold Coffee - premium cold coffee with rich french vanilla flavor
-        title = "French Vanilla Cold Coffee",
-        price = "₹179 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "up to ₹50",
-        address = "Connaught Place, Delhi"
-    ),
+        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
+        val coldCoffeeItemsList = listOf(
+            // CLASSIC COLD COFFEE VARIETIES (1-5)
+            RestaurantItemFull(
+                id = 1,
+                imageRes = R.drawable.cold_coffee_items_1,
+                title = "Classic Cold Coffee",
+                price = "₹149 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 2,
+                imageRes = R.drawable.cold_coffee_items_2,
+                title = "Vanilla Cold Coffee",
+                price = "₹159 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 3,
+                imageRes = R.drawable.cold_coffee_items_3,
+                title = "Caramel Cold Coffee",
+                price = "₹169 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹40",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 4,
+                imageRes = R.drawable.cold_coffee_items_4,
+                title = "Hazelnut Cold Coffee",
+                price = "₹169 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹40",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 5,
+                imageRes = R.drawable.cold_coffee_items_5,
+                title = "French Vanilla Cold Coffee",
+                price = "₹179 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹50",
+                address = "Connaught Place, Delhi"
+            ),
 
-    // COLD BREW VARIETIES (6-10)
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.cold_coffee_items_6,  // Signature Cold Brew - smooth slow-steeped cold brew coffee, naturally sweet and less acidic
-        title = "Signature Cold Brew",
-        price = "₹169 (regular)",
-        restaurantName = "Roastery Coffee",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Hauz Khas, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 7,
-        imageRes = R.drawable.cold_coffee_items_7,  // Nitro Cold Brew - nitrogen-infused cold brew with creamy texture and cascading effect
-        title = "Nitro Cold Brew",
-        price = "₹199 (regular)",
-        restaurantName = "Roastery Coffee",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "12%",
-        discountAmount = "up to ₹50",
-        address = "Hauz Khas, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 8,
-        imageRes = R.drawable.cold_coffee_items_8,  // Vanilla Sweet Cream Cold Brew - cold brew topped with house-made vanilla sweet cream
-        title = "Vanilla Sweet Cream Cold Brew",
-        price = "₹189 (regular)",
-        restaurantName = "Roastery Coffee",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "up to ₹40",
-        address = "Hauz Khas, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 9,
-        imageRes = R.drawable.cold_coffee_items_9,  // Honey Almond Cold Brew - cold brew sweetened with honey and hint of almond
-        title = "Honey Almond Cold Brew",
-        price = "₹179 (regular)",
-        restaurantName = "Roastery Coffee",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Hauz Khas, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 10,
-        imageRes = R.drawable.cold_coffee_items_10,  // Cinnamon Cold Brew - cold brew infused with cinnamon sticks, warm spicy notes
-        title = "Cinnamon Cold Brew",
-        price = "₹169 (regular)",
-        restaurantName = "Roastery Coffee",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "up to ₹30",
-        address = "Hauz Khas, Delhi"
-    ),
+            // COLD BREW VARIETIES (6-10)
+            RestaurantItemFull(
+                id = 6,
+                imageRes = R.drawable.cold_coffee_items_6,
+                title = "Signature Cold Brew",
+                price = "₹169 (regular)",
+                restaurantName = "Roastery Coffee",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 7,
+                imageRes = R.drawable.cold_coffee_items_7,
+                title = "Nitro Cold Brew",
+                price = "₹199 (regular)",
+                restaurantName = "Roastery Coffee",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "12%",
+                discountAmount = "up to ₹50",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 8,
+                imageRes = R.drawable.cold_coffee_items_8,
+                title = "Vanilla Sweet Cream Cold Brew",
+                price = "₹189 (regular)",
+                restaurantName = "Roastery Coffee",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹40",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 9,
+                imageRes = R.drawable.cold_coffee_items_9,
+                title = "Honey Almond Cold Brew",
+                price = "₹179 (regular)",
+                restaurantName = "Roastery Coffee",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Hauz Khas, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 10,
+                imageRes = R.drawable.cold_coffee_items_10,
+                title = "Cinnamon Cold Brew",
+                price = "₹169 (regular)",
+                restaurantName = "Roastery Coffee",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Hauz Khas, Delhi"
+            ),
 
-    // FRAPPÉ & BLENDED VARIETIES (11-15)
-    FoodItemDoubleF(
-        id = 11,
-        imageRes = R.drawable.cold_coffee_items_11,  // Chocolate Frappé - blended frozen coffee drink with chocolate syrup, topped with whipped cream
-        title = "Chocolate Frappé",
-        price = "₹199 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "up to ₹60",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 12,
-        imageRes = R.drawable.cold_coffee_items_12,  // Caramel Frappé - creamy blended coffee with caramel, topped with whipped cream and caramel drizzle
-        title = "Caramel Frappé",
-        price = "₹199 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "up to ₹60",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 13,
-        imageRes = R.drawable.cold_coffee_items_13,  // Mocha Frappé - rich chocolate and coffee blended with ice, topped with chocolate shavings
-        title = "Mocha Frappé",
-        price = "₹209 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "up to ₹65",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 14,
-        imageRes = R.drawable.cold_coffee_items_14,  // Java Chip Frappé - blended coffee with chocolate chips, mocha sauce, topped with whipped cream
-        title = "Java Chip Frappé",
-        price = "₹219 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "up to ₹55",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 15,
-        imageRes = R.drawable.cold_coffee_items_15,  // White Mocha Frappé - creamy white chocolate and coffee blended with ice
-        title = "White Mocha Frappé",
-        price = "₹209 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "up to ₹50",
-        address = "Saket, Delhi"
-    ),
+            // FRAPPÉ & BLENDED VARIETIES (11-15)
+            RestaurantItemFull(
+                id = 11,
+                imageRes = R.drawable.cold_coffee_items_11,
+                title = "Chocolate Frappé",
+                price = "₹199 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 12,
+                imageRes = R.drawable.cold_coffee_items_12,
+                title = "Caramel Frappé",
+                price = "₹199 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 13,
+                imageRes = R.drawable.cold_coffee_items_13,
+                title = "Mocha Frappé",
+                price = "₹209 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹65",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 14,
+                imageRes = R.drawable.cold_coffee_items_14,
+                title = "Java Chip Frappé",
+                price = "₹219 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹55",
+                address = "Saket, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 15,
+                imageRes = R.drawable.cold_coffee_items_15,
+                title = "White Mocha Frappé",
+                price = "₹209 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹50",
+                address = "Saket, Delhi"
+            ),
 
-    // ICED LATTE & ESPRESSO VARIETIES (16-18)
-    FoodItemDoubleF(
-        id = 16,
-        imageRes = R.drawable.cold_coffee_items_16,  // Iced Latte - espresso mixed with chilled milk and ice, smooth and refreshing
-        title = "Iced Latte",
-        price = "₹159 (regular)",
-        restaurantName = "Espresso Bar",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.3 km",
-        discount = "10%",
-        discountAmount = "up to ₹35",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 17,
-        imageRes = R.drawable.cold_coffee_items_17,  // Iced Mocha - rich chocolate and espresso combined with chilled milk, topped with chocolate drizzle
-        title = "Iced Mocha",
-        price = "₹179 (regular)",
-        restaurantName = "Espresso Bar",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.3 km",
-        discount = "12%",
-        discountAmount = "up to ₹45",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 18,
-        imageRes = R.drawable.cold_coffee_items_18,  // Iced Americano - espresso shots diluted with chilled water and ice, bold and refreshing
-        title = "Iced Americano",
-        price = "₹139 (regular)",
-        restaurantName = "Espresso Bar",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.3 km",
-        discount = "10%",
-        discountAmount = "up to ₹25",
-        address = "Rajouri Garden, Delhi"
-    ),
+            // ICED LATTE & ESPRESSO VARIETIES (16-18)
+            RestaurantItemFull(
+                id = 16,
+                imageRes = R.drawable.cold_coffee_items_16,
+                title = "Iced Latte",
+                price = "₹159 (regular)",
+                restaurantName = "Espresso Bar",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹35",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 17,
+                imageRes = R.drawable.cold_coffee_items_17,
+                title = "Iced Mocha",
+                price = "₹179 (regular)",
+                restaurantName = "Espresso Bar",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "12%",
+                discountAmount = "up to ₹45",
+                address = "Rajouri Garden, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 18,
+                imageRes = R.drawable.cold_coffee_items_18,
+                title = "Iced Americano",
+                price = "₹139 (regular)",
+                restaurantName = "Espresso Bar",
+                rating = "4.6",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Rajouri Garden, Delhi"
+            ),
 
-    // SPECIALTY & SEASONAL (19-20)
-    FoodItemDoubleF(
-        id = 19,
-        imageRes = R.drawable.cold_coffee_items_19,  // Irish Cream Cold Coffee - cold coffee with Irish cream flavor, smooth and indulgent
-        title = "Irish Cream Cold Coffee",
-        price = "₹189 (regular)",
-        restaurantName = "Brew House",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "up to ₹45",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 20,
-        imageRes = R.drawable.cold_coffee_items_20,  // Affogato Cold Coffee - scoop of vanilla ice cream with shot of hot espresso, served cold
-        title = "Affogato Cold Coffee",
-        price = "₹199 (regular)",
-        restaurantName = "Coffee Culture",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "up to ₹60",
-        address = "Saket, Delhi"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
-            }
+            // SPECIALTY & SEASONAL (19-20)
+            RestaurantItemFull(
+                id = 19,
+                imageRes = R.drawable.cold_coffee_items_19,
+                title = "Irish Cream Cold Coffee",
+                price = "₹189 (regular)",
+                restaurantName = "Brew House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹45",
+                address = "Connaught Place, Delhi"
+            ),
+            RestaurantItemFull(
+                id = 20,
+                imageRes = R.drawable.cold_coffee_items_20,
+                title = "Affogato Cold Coffee",
+                price = "₹199 (regular)",
+                restaurantName = "Coffee Culture",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "Saket, Delhi"
+            )
+        )
+
+        // Display all restaurant items vertically
+        coldCoffeeItemsList.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
         }
     }
 }

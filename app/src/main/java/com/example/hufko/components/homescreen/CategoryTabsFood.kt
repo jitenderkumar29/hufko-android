@@ -79638,7 +79638,7 @@ val kachoriFilters = FilterConfig(
         FoodItemsListWithHeading(
             heading = null,
             subtitle = null,
-            foodItems = recommendedBhurjiItems,
+            foodItems = recommendedKachoriItems,
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
             },
@@ -79952,7 +79952,7 @@ val kachoriFilters = FilterConfig(
     )
 )
         // Display all restaurant items vertically
-        bhurjiItemsList.forEach { restaurantItem ->
+        kachoriItemsList.forEach { restaurantItem ->
             RestaurantItemListFull(
                 restaurantItem = restaurantItem,
                 onWishlistClick = { },

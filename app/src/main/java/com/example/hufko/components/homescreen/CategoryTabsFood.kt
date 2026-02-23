@@ -78610,17 +78610,1694 @@ val soupFilters = FilterConfig(
 
 @Composable
 fun BhurjiCategoryPage() {
-    CategoryContentPage("Bhurji")
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+val bhurjiFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // BHURJI BASE STYLES (with bowl/pan icons showing style)
+        FilterChip(
+            id = "classic_bhurji",
+            text = "Classic",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_classic_eggs  // Pan with classic scrambled eggs
+        ),
+        FilterChip(
+            id = "pav_bhurji",
+            text = "Pav Bhurji",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_pav_bhurji  // Bhurji with bread rolls
+        ),
+        FilterChip(
+            id = "butter_bhurji",
+            text = "Butter",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_butter_bhurji  // Butter pat icon
+        ),
+        FilterChip(
+            id = "masala_bhurji",
+            text = "Masala",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_masala_bhurji  // Spice blend icon
+        ),
+        FilterChip(
+            id = "cheese_bhurji",
+            text = "Cheese",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_cheese_bhurji  // Cheese wedge icon
+        ),
+        // EGG STYLES (text only)
+        FilterChip(
+            id = "soft_bhurji",
+            text = "Soft Scramble",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "brown_bhurji",
+            text = "Well-Browned",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "runny_bhurji",
+            text = "Runny",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "fluffy_bhurji",
+            text = "Fluffy",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // VEGETABLE ADD-INS (with left icons for key veggies)
+        FilterChip(
+            id = "corn_addin",
+            text = "Corn",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mushrooms_addin",
+            text = "Mushrooms",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "spinach_addin",
+            text = "Spinach",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "potatoes_addin",
+            text = "Potatoes",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // PROTEIN ADD-INS (with left icons for key proteins)
+        FilterChip(
+            id = "keema_addin",
+            text = "Add Keema",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "tofu_addin",
+            text = "Add Tofu",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // HERBS & SPICES (with left icons for key spices)
+        FilterChip(
+            id = "turmeric",
+            text = "Turmeric",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "cumin",
+            text = "Cumin",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "coriander_powder",
+            text = "Coriander Powder",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "garam_masala",
+            text = "Garam Masala",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "red_chilli",
+            text = "Red Chilli",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chaat_masala",
+            text = "Chaat Masala",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // FRESH HERBS (text only)
+        FilterChip(
+            id = "coriander_herb",
+            text = "Fresh Coriander",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "curry_leaves",
+            text = "Curry Leaves",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mint_leaves",
+            text = "Mint Leaves",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TOPPINGS & GARNISHES (with left icons for key toppings)
+        FilterChip(
+            id = "fried_onions",
+            text = "Fried Onions",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "fresh_coriander",
+            text = "Fresh Coriander",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chaat_topping",
+            text = "Chaat Masala",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "sev_topping",
+            text = "Sev",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SIDES & ACCOMPANIMENTS (with left icons)
+        FilterChip(
+            id = "salad_side",
+            text = "Onion Salad",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chutney_side",
+            text = "Green Chutney",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "ketchup_side",
+            text = "Tomato Ketchup",
+            type = FilterType.TEXT_ONLY
+        ),
+        // SIZE OPTIONS (text only)
+        FilterChip(
+            id = "regular_size",
+            text = "Regular (2 eggs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "large_size",
+            text = "Large (3 eggs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "extra_large",
+            text = "Extra Large (4 eggs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "family_size",
+            text = "Family (6 eggs)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY OPTIONS (text only)
+        FilterChip(
+            id = "egg_white_only",
+            text = "Egg White Only",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "low_oil",
+            text = "Low Oil",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "no_onion_no_garlic",
+            text = "No Onion/Garlic",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "gluten_free_bhurji",
+            text = "Gluten Free",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "low_spice",
+            text = "Low Spice",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2
+)
+        FilterButtonFood(
+            filterConfig = bhurjiFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
+       val recommendedBhurjiItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.bhurji_1, // Classic egg bhurji with pav bread
+        title = "Classic Egg Bhurji",
+        price = "₹149 (Regular) | ₹199 (Large)",
+        restaurantName = "Bhurji Junction",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "20%",
+        discountAmount = "up to ₹50",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.bhurji_2, // Paneer bhurji with paratha
+        title = "Paneer Bhurji",
+        price = "₹179 (Regular) | ₹249 (Large)",
+        restaurantName = "Punjabi Dhaba",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "2.4 km",
+        discount = "15%",
+        discountAmount = "up to ₹45",
+        address = "Karol Bagh, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.bhurji_3, // Masala bhurji with onions and spices
+        title = "Masala Bhurji",
+        price = "₹159 (Regular) | ₹219 (Large)",
+        restaurantName = "Spice Kitchen",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.bhurji_4, // Butter bhurji with brioche
+        title = "Butter Bhurji",
+        price = "₹169 (Regular) | ₹229 (Large)",
+        restaurantName = "Bhurji Junction",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "1.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹40",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.bhurji_5, // Cheese bhurji with melted cheese
+        title = "Cheese Bhurji",
+        price = "₹189 (Regular) | ₹259 (Large)",
+        restaurantName = "Cheese & Spice",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹45",
+        address = "Saket, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.bhurji_6, // Keema bhurji with minced meat
+        title = "Keema Bhurji",
+        price = "₹199 (Regular) | ₹279 (Large)",
+        restaurantName = "Mughlai House",
+        rating = "4.7",
+        deliveryTime = "25-30 mins",
+        distance = "2.6 km",
+        discount = "10%",
+        discountAmount = "up to ₹40",
+        address = "Chandni Chowk, Delhi"
+    )
+)
+        // Horizontal scroll section for recommended items
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = recommendedBhurjiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
+           val bhurjiItemsList = listOf(
+    // CLASSIC EGG BHURJI VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.bhurji_items_1, // Classic egg bhurji with pav
+        title = "Classic Egg Bhurji",
+        price = "₹119 (Regular) | ₹169 (Large)",
+        restaurantName = "Bhurji Junction",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.bhurji_items_2, // Masala bhurji with spices
+        title = "Masala Bhurji",
+        price = "₹129 (Regular) | ₹179 (Large)",
+        restaurantName = "Bhurji Junction",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.bhurji_items_3, // Butter bhurji
+        title = "Butter Bhurji",
+        price = "₹139 (Regular) | ₹189 (Large)",
+        restaurantName = "Bhurji Junction",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹40",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.bhurji_items_4, // Cheese bhurji
+        title = "Cheese Bhurji",
+        price = "₹149 (Regular) | ₹199 (Large)",
+        restaurantName = "Bhurji Junction",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹45",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.bhurji_items_5, // Paneer bhurji
+        title = "Paneer Bhurji",
+        price = "₹159 (Regular) | ₹209 (Large)",
+        restaurantName = "Bhurji Junction",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹50",
+        address = "Connaught Place, Delhi"
+    ),
+
+    // VEGETABLE BHURJI VARIETIES (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.bhurji_items_6, // Onion tomato bhurji
+        title = "Onion Tomato Bhurji",
+        price = "₹129 (Regular) | ₹179 (Large)",
+        restaurantName = "Spice Kitchen",
+        rating = "4.6",
+        deliveryTime = "15-20 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.bhurji_items_7, // Capsicum bhurji
+        title = "Capsicum Bhurji",
+        price = "₹139 (Regular) | ₹189 (Large)",
+        restaurantName = "Spice Kitchen",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.bhurji_items_8, // Corn bhurji
+        title = "Sweet Corn Bhurji",
+        price = "₹149 (Regular) | ₹199 (Large)",
+        restaurantName = "Spice Kitchen",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.8 km",
+        discount = "12%",
+        discountAmount = "up to ₹45",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.bhurji_items_9, // Mushroom bhurji
+        title = "Mushroom Bhurji",
+        price = "₹159 (Regular) | ₹209 (Large)",
+        restaurantName = "Spice Kitchen",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.8 km",
+        discount = "12%",
+        discountAmount = "up to ₹50",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.bhurji_items_10, // Methi bhurji
+        title = "Methi (Fenugreek) Bhurji",
+        price = "₹149 (Regular) | ₹199 (Large)",
+        restaurantName = "Spice Kitchen",
+        rating = "4.6",
+        deliveryTime = "15-20 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹40",
+        address = "Karol Bagh, Delhi"
+    ),
+
+    // NON-VEG BHURJI VARIETIES (11-15)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.bhurji_items_11, // Keema bhurji
+        title = "Keema Bhurji",
+        price = "₹179 (Regular) | ₹239 (Large)",
+        restaurantName = "Mughlai House",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "2.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹65",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.bhurji_items_12, // Chicken bhurji
+        title = "Chicken Keema Bhurji",
+        price = "₹169 (Regular) | ₹229 (Large)",
+        restaurantName = "Mughlai House",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹55",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.bhurji_items_13, // Egg and chicken combo
+        title = "Chicken & Egg Bhurji",
+        price = "₹189 (Regular) | ₹249 (Large)",
+        restaurantName = "Mughlai House",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "2.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹60",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.bhurji_items_14, // Spicy keema bhurji
+        title = "Hyderabadi Keema Bhurji",
+        price = "₹189 (Regular) | ₹249 (Large)",
+        restaurantName = "Mughlai House",
+        rating = "4.9",
+        deliveryTime = "25-30 mins",
+        distance = "2.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹70",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.bhurji_items_15, // Egg bhurji with mince
+        title = "Mince & Egg Bhurji",
+        price = "₹179 (Regular) | ₹239 (Large)",
+        restaurantName = "Mughlai House",
+        rating = "4.8",
+        deliveryTime = "25-30 mins",
+        distance = "2.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹55",
+        address = "Chandni Chowk, Delhi"
+    ),
+
+    // SPECIALTY & FUSION BHURJI (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.bhurji_items_16, // Pav bhurji
+        title = "Bhurji Pav",
+        price = "₹149 (2 pav) | ₹199 (4 pav)",
+        restaurantName = "Street Food King",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.3 km",
+        discount = "10%",
+        discountAmount = "up to ₹40",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.bhurji_items_17, // Cheese burst bhurji
+        title = "Cheese Burst Bhurji",
+        price = "₹169 (Regular) | ₹229 (Large)",
+        restaurantName = "Street Food King",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.3 km",
+        discount = "12%",
+        discountAmount = "up to ₹55",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.bhurji_items_18, // Bhurji roll
+        title = "Bhurji Frankie (Roll)",
+        price = "₹99 (Single) | ₹179 (Double)",
+        restaurantName = "Street Food King",
+        rating = "4.7",
+        deliveryTime = "10-15 mins",
+        distance = "1.3 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Lajpat Nagar, Delhi"
+    ),
+
+    // HEALTHY & DIETARY BHURJI (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.bhurji_items_19, // Egg white bhurji
+        title = "Egg White Bhurji",
+        price = "₹149 (Regular) | ₹199 (Large)",
+        restaurantName = "Fit Food Express",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.bhurji_items_20, // Jain bhurji (no onion/garlic)
+        title = "Jain Bhurji",
+        price = "₹159 (Regular) | ₹209 (Large)",
+        restaurantName = "Jain Bhojanalay",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "2.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹40",
+        address = "Rajouri Garden, Delhi"
+    )
+)
+        // Display all restaurant items vertically
+        bhurjiItemsList.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
 fun KhastaKachoriCategoryPage() {
-    CategoryContentPage("Khasta Kachori")
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+val kachoriFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // KACHORI BASE STYLES (with icons for each style)
+        FilterChip(
+            id = "traditional_kachori",
+            text = "Traditional",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_traditional_kachori  // Round kachori icon
+        ),
+        FilterChip(
+            id = "pyaz_kachori",
+            text = "Pyaz Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_onion_khasta_kachori  // Onion-filled kachori
+        ),
+        FilterChip(
+            id = "dal_kachori",
+            text = "Dal Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_dal_khasta_kachori  // Lentil-filled kachori
+        ),
+        FilterChip(
+            id = "mini_kachori",
+            text = "Mini Kachori",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_mini_khasta_kachori  // Small bite-sized kachori
+        ),
+        FilterChip(
+            id = "khasta_breakfast",
+            text = "Breakfast Special",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_breakfast_khasta_kachori  // Kachori with breakfast vibe
+        ),
+
+        // FILLING VARIETIES (text only)
+        FilterChip(
+            id = "moong_dal_filling",
+            text = "Moong Dal",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "urad_dal_filling",
+            text = "Urad Dal",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "masala_filling",
+            text = "Spiced Masala",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "paneer_filling",
+            text = "Paneer",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "aloo_filling",
+            text = "Aloo (Potato)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ACCOMPANIMENTS (with icons for key sides)
+        FilterChip(
+            id = "sweet_chutney",
+            text = "Sweet Chutney",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "garlic_chutney",
+            text = "Garlic Chutney",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TOPPINGS & GARNISHES (with icons for key toppings)
+        FilterChip(
+            id = "coriander_topping",
+            text = "Fresh Coriander",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pomegranate",
+            text = "Pomegranate Seeds",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chaat_masala",
+            text = "Chaat Masala",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // YOGURT & DAHI VARIETIES (with icons for key options)
+        FilterChip(
+            id = "hung_curd",
+            text = "Hung Curd",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "masala_dahi",
+            text = "Spiced Dahi",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPICE LEVELS (text only)
+        FilterChip(
+            id = "mild_spice",
+            text = "Mild",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "medium_spice",
+            text = "Medium",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "hot_spice",
+            text = "Hot",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "extra_hot",
+            text = "Extra Hot",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SIZE & PORTIONS (text only)
+        FilterChip(
+            id = "regular_serving",
+            text = "Regular (2 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "large_serving",
+            text = "Large (4 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "family_serving",
+            text = "Family (6 pcs)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "platter",
+            text = "Kachori Platter",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // ADD-ONS (with icons for popular additions)
+        FilterChip(
+            id = "extra_chutney",
+            text = "Extra Chutney",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "extra_onion",
+            text = "Extra Onions",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "paneer_topping",
+            text = "Paneer Cubes",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY PREFERENCES (text only)
+        FilterChip(
+            id = "baked_kachori",
+            text = "Baked (Low Oil)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "whole_wheat",
+            text = "Whole Wheat",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "gluten_free_kachori",
+            text = "Gluten Free",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "no_onion_no_garlic_kachori",
+            text = "No Onion/Garlic",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SPECIALTY KACHORIS (text only)
+        FilterChip(
+            id = "mawa_kachori",
+            text = "Mawa Kachori",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "dry_fruit_kachori",
+            text = "Dry Fruit",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chocolate_kachori",
+            text = "Chocolate",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2  // Adjust based on screen size needs
+)
+        FilterButtonFood(
+            filterConfig = kachoriFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
+       val recommendedKachoriItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.khasta_kachori_1, // Traditional round khasta kachori with chutneys
+        title = "Traditional Khasta Kachori",
+        price = "₹89 (2 pcs) | ₹149 (4 pcs)",
+        restaurantName = "Kachori Wala",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.1 km",
+        discount = "20%",
+        discountAmount = "up to ₹40",
+        address = "Chandni Chowk, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.khasta_kachori_2, // Pyaz kachori with onion filling, served with chutney
+        title = "Pyaz Kachori",
+        price = "₹99 (2 pcs) | ₹169 (4 pcs)",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "2.3 km",
+        discount = "15%",
+        discountAmount = "up to ₹35",
+        address = "Karol Bagh, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.khasta_kachori_3, // Dal kachori with moong dal filling
+        title = "Dal Kachori",
+        price = "₹79 (2 pcs) | ₹139 (4 pcs)",
+        restaurantName = "Sharma Snacks",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.6 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.khasta_kachori_4, // Kachori chaat with dahi, chutney and sev
+        title = "Kachori Chaat",
+        price = "₹129 (Regular) | ₹189 (Large)",
+        restaurantName = "Chaat Gali",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.4 km",
+        discount = "15%",
+        discountAmount = "up to ₹45",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.khasta_kachori_5, // Mini kachori basket with assortment of chutneys
+        title = "Mini Kachori Basket",
+        price = "₹149 (6 pcs) | ₹249 (12 pcs)",
+        restaurantName = "Bikaner Sweets",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "2.1 km",
+        discount = "12%",
+        discountAmount = "up to ₹50",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.khasta_kachori_6, // Mawa kachori - sweet version with dry fruits
+        title = "Mawa Kachori (Sweet)",
+        price = "₹109 (2 pcs) | ₹189 (4 pcs)",
+        restaurantName = "Jodhpur Sweets",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.9 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "South Extension, Delhi"
+    )
+)
+        // Horizontal scroll section for recommended items
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = recommendedBhurjiItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
+           val kachoriItemsList = listOf(
+    // TRADITIONAL KACHORI VARIETIES (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.khasta_kachori_items_1, // Traditional khasta kachori with chutneys
+        title = "Traditional Khasta Kachori",
+        price = "₹79 (2 pcs) | ₹129 (4 pcs)",
+        restaurantName = "Kachori Wala",
+        rating = "4.9",
+        deliveryTime = "10-15 mins",
+        distance = "1.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.khasta_kachori_items_2, // Pyaz kachori with onion filling
+        title = "Pyaz Kachori",
+        price = "₹89 (2 pcs) | ₹149 (4 pcs)",
+        restaurantName = "Kachori Wala",
+        rating = "4.8",
+        deliveryTime = "10-15 mins",
+        distance = "1.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.khasta_kachori_items_3, // Dal kachori with moong dal filling
+        title = "Dal Kachori",
+        price = "₹69 (2 pcs) | ₹119 (4 pcs)",
+        restaurantName = "Kachori Wala",
+        rating = "4.7",
+        deliveryTime = "10-15 mins",
+        distance = "1.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹20",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.khasta_kachori_items_4, // Aloo kachori with potato filling
+        title = "Aloo Kachori",
+        price = "₹79 (2 pcs) | ₹129 (4 pcs)",
+        restaurantName = "Kachori Wala",
+        rating = "4.8",
+        deliveryTime = "10-15 mins",
+        distance = "1.1 km",
+        discount = "12%",
+        discountAmount = "up to ₹25",
+        address = "Chandni Chowk, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.khasta_kachori_items_5, // Mawa kachori sweet version
+        title = "Mawa Kachori (Sweet)",
+        price = "₹99 (2 pcs) | ₹169 (4 pcs)",
+        restaurantName = "Kachori Wala",
+        rating = "4.9",
+        deliveryTime = "10-15 mins",
+        distance = "1.1 km",
+        discount = "12%",
+        discountAmount = "up to ₹35",
+        address = "Chandni Chowk, Delhi"
+    ),
+
+    // KACHORI CHAAT VARIETIES (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.khasta_kachori_items_6, // Dahi kachori with yogurt
+        title = "Dahi Kachori",
+        price = "₹99 (2 pcs) | ₹169 (4 pcs)",
+        restaurantName = "Chaat Gali",
+        rating = "4.9",
+        deliveryTime = "12-17 mins",
+        distance = "1.4 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.khasta_kachori_items_7, // Kachori chaat with chutneys
+        title = "Kachori Chaat",
+        price = "₹89 (Regular) | ₹149 (Large)",
+        restaurantName = "Chaat Gali",
+        rating = "4.8",
+        deliveryTime = "12-17 mins",
+        distance = "1.4 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.khasta_kachori_items_8, // Chole kachori with chickpea curry
+        title = "Chole Kachori",
+        price = "₹109 (Regular) | ₹179 (Large)",
+        restaurantName = "Chaat Gali",
+        rating = "4.9",
+        deliveryTime = "12-17 mins",
+        distance = "1.4 km",
+        discount = "12%",
+        discountAmount = "up to ₹40",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.khasta_kachori_items_9, // Aloo kachori chaat
+        title = "Aloo Kachori Chaat",
+        price = "₹99 (Regular) | ₹169 (Large)",
+        restaurantName = "Chaat Gali",
+        rating = "4.8",
+        deliveryTime = "12-17 mins",
+        distance = "1.4 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.khasta_kachori_items_10, // Special chaat platter
+        title = "Kachori Chaat Platter",
+        price = "₹199 (Platter)",
+        restaurantName = "Chaat Gali",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.4 km",
+        discount = "15%",
+        discountAmount = "up to ₹60",
+        address = "Connaught Place, Delhi"
+    ),
+
+    // REGIONAL SPECIALTY KACHORIS (11-15)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.khasta_kachori_items_11, // Rajasthani kachori
+        title = "Rajasthani Kachori",
+        price = "₹89 (2 pcs) | ₹149 (4 pcs)",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "2.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹35",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.khasta_kachori_items_12, // Jodhpuri kachori
+        title = "Jodhpuri Kachori",
+        price = "₹99 (2 pcs) | ₹169 (4 pcs)",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "2.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹40",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.khasta_kachori_items_13, // Bikaneri kachori
+        title = "Bikaneri Kachori",
+        price = "₹79 (2 pcs) | ₹139 (4 pcs)",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "2.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.khasta_kachori_items_14, // Indori kachori
+        title = "Indori Kachori",
+        price = "₹89 (2 pcs) | ₹149 (4 pcs)",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.7",
+        deliveryTime = "20-25 mins",
+        distance = "2.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "Karol Bagh, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.khasta_kachori_items_15, // Lucknowi kachori
+        title = "Lucknowi Kachori",
+        price = "₹109 (2 pcs) | ₹179 (4 pcs)",
+        restaurantName = "Rajasthan Bhavan",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "2.2 km",
+        discount = "15%",
+        discountAmount = "up to ₹50",
+        address = "Karol Bagh, Delhi"
+    ),
+
+    // KACHORI COMBO & MEAL (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.khasta_kachori_items_16, // Kachori with aloo sabzi
+        title = "Kachori Aloo Sabzi",
+        price = "₹129 (2 pcs + sabzi) | ₹199 (4 pcs + sabzi)",
+        restaurantName = "Sharma Snacks",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.6 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.khasta_kachori_items_17, // Kachori thali
+        title = "Kachori Thali",
+        price = "₹159 (Thali)",
+        restaurantName = "Sharma Snacks",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.6 km",
+        discount = "12%",
+        discountAmount = "up to ₹45",
+        address = "Lajpat Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.khasta_kachori_items_18, // Mini kachori basket
+        title = "Mini Kachori Basket",
+        price = "₹149 (6 pcs) | ₹249 (12 pcs)",
+        restaurantName = "Sharma Snacks",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.6 km",
+        discount = "12%",
+        discountAmount = "up to ₹55",
+        address = "Lajpat Nagar, Delhi"
+    ),
+
+    // KACHORI DESSERT & FUSION (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.khasta_kachori_items_19, // Dry fruit kachori
+        title = "Dry Fruit Kachori",
+        price = "₹149 (2 pcs) | ₹249 (4 pcs)",
+        restaurantName = "Bikaner Sweets",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "2.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹45",
+        address = "Rajouri Garden, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.khasta_kachori_items_20, // Chocolate kachori fusion
+        title = "Chocolate Kachori",
+        price = "₹129 (2 pcs) | ₹219 (4 pcs)",
+        restaurantName = "Bikaner Sweets",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "2.1 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Rajouri Garden, Delhi"
+    )
+)
+        // Display all restaurant items vertically
+        bhurjiItemsList.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
 fun HotDogCategoryPage() {
-    CategoryContentPage("Hot Dog")
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+val hotDogFilters = FilterConfig(
+    filters = listOf(
+        // Main filter dropdown
+        FilterChip(
+            id = "filters",
+            text = "Filters",
+            type = FilterType.FILTER_DROPDOWN,
+            icon = R.drawable.ic_filter,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+
+        // HOT DOG BASE STYLES (with icons for each style)
+        FilterChip(
+            id = "classic_hotdog",
+            text = "Classic",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_classic_hotdog  // Classic hot dog with bun
+        ),
+        FilterChip(
+            id = "chicago_hotdog",
+            text = "Chicago Style",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_chicago_hotdog  // Hot dog with pickles and tomatoes
+        ),
+        FilterChip(
+            id = "newyork_hotdog",
+            text = "NY Style",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_ny_hotdog  // Hot dog with sauerkraut and onions
+        ),
+        FilterChip(
+            id = "mexican_hotdog",
+            text = "Mexican Style",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_mexican_hotdog  // Hot dog with jalapenos and salsa
+        ),
+        FilterChip(
+            id = "loaded_hotdog",
+            text = "Loaded",
+            type = FilterType.WITH_LEFT_ICON,
+            icon = R.drawable.ic_loaded_hotdog  // Fully loaded hot dog
+        ),
+
+        // SAUSAGE TYPES (with icons for key varieties)
+        FilterChip(
+            id = "spicy_sausage",
+            text = "Spicy",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "cheese_stuffed",
+            text = "Cheese Stuffed",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // BUN TYPES (with icons for key options)
+        FilterChip(
+            id = "sesame_bun",
+            text = "Sesame Bun",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "whole_wheat_bun",
+            text = "Whole Wheat",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "gluten_free_bun",
+            text = "Gluten Free",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // TOPPINGS (with icons for popular toppings)
+        FilterChip(
+            id = "relish",
+            text = "Relish",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "onions",
+            text = "Onions",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "pickles",
+            text = "Pickles",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "jalapenos",
+            text = "Jalapeños",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "sauerkraut",
+            text = "Sauerkraut",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "chilli",
+            text = "Chilli",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "coleslaw",
+            text = "Coleslaw",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // CHEESE VARIETIES (with icons for key types)
+        FilterChip(
+            id = "pepper_jack",
+            text = "Pepper Jack",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "swiss_cheese",
+            text = "Swiss",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SIZE OPTIONS (text only)
+        FilterChip(
+            id = "regular_hotdog",
+            text = "Regular (6\")",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "footlong",
+            text = "Footlong (12\")",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "jumbo",
+            text = "Jumbo",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mini_hotdog",
+            text = "Mini (Party Size)",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // SIDES & COMBOS (with icons for key sides)
+        FilterChip(
+            id = "potato_wedges",
+            text = "Potato Wedges",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "mac_cheese",
+            text = "Mac & Cheese",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DRINKS (with icons for popular options)
+        FilterChip(
+            id = "lemonade",
+            text = "Lemonade",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "iced_tea",
+            text = "Iced Tea",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // DIETARY PREFERENCES (text only)
+        FilterChip(
+            id = "low_fat_hotdog",
+            text = "Low Fat",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "low_sodium",
+            text = "Low Sodium",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "keto_hotdog",
+            text = "Keto (No Bun)",
+            type = FilterType.TEXT_ONLY
+        ),
+        FilterChip(
+            id = "halal_hotdog",
+            text = "Halal",
+            type = FilterType.TEXT_ONLY
+        ),
+
+        // Sort dropdown
+        FilterChip(
+            id = "sort",
+            text = "Sort",
+            type = FilterType.SORT_DROPDOWN,
+            rightIcon = R.drawable.outline_keyboard_arrow_down_24
+        ),
+    ),
+    rows = 2  // Adjust based on screen size needs
+)
+        FilterButtonFood(
+            filterConfig = hotDogFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
+      val recommendedHotDogItems = listOf(
+    FoodItemDoubleF(
+        id = 1,
+        imageRes = R.drawable.hotdog_1, // Classic hot dog with ketchup and mustard
+        title = "Classic American Hot Dog",
+        price = "₹149 (Regular) | ₹199 (Footlong)",
+        restaurantName = "Dog House",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "20%",
+        discountAmount = "up to ₹50",
+        address = "Connaught Place, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 2,
+        imageRes = R.drawable.hotdog_2, // Chicago style hot dog with toppings
+        title = "Chicago Style Hot Dog",
+        price = "₹179 (Regular) | ₹249 (Footlong)",
+        restaurantName = "Windy City Eats",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "2.3 km",
+        discount = "15%",
+        discountAmount = "up to ₹55",
+        address = "Karol Bagh, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 3,
+        imageRes = R.drawable.hotdog_3, // Loaded hot dog with cheese and bacon
+        title = "Loaded Cheese & Bacon Dog",
+        price = "₹199 (Regular) | ₹279 (Footlong)",
+        restaurantName = "The Dogfather",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹45",
+        address = "Saket, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 4,
+        imageRes = R.drawable.hotdog_4, // Mexican hot dog with jalapenos and salsa
+        title = "Mexican Fiesta Dog",
+        price = "₹169 (Regular) | ₹239 (Footlong)",
+        restaurantName = "El Perro Caliente",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.5 km",
+        discount = "15%",
+        discountAmount = "up to ₹60",
+        address = "Hauz Khas, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 5,
+        imageRes = R.drawable.hotdog_5, // Veggie hot dog with plant-based sausage
+        title = "Vegan Garden Dog",
+        price = "₹159 (Regular) | ₹219 (Footlong)",
+        restaurantName = "Green Bites",
+        rating = "4.6",
+        deliveryTime = "20-25 mins",
+        distance = "2.1 km",
+        discount = "12%",
+        discountAmount = "up to ₹40",
+        address = "Rajouri Garden, Delhi"
+    ),
+    FoodItemDoubleF(
+        id = 6,
+        imageRes = R.drawable.hotdog_6, // Hot dog combo with fries and drink
+        title = "Hot Dog Combo Meal",
+        price = "₹249 (Regular Meal) | ₹329 (Footlong Meal)",
+        restaurantName = "Dog House",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹50",
+        address = "Connaught Place, Delhi"
+    )
+)
+        // Horizontal scroll section for recommended items
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = recommendedHotDogItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+
+
+    }
 }
 
 // Generic Category Content Page with sample food items

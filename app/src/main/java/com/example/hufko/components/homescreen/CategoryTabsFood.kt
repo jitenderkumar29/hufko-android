@@ -861,15 +861,69 @@ fun DietCategoryPage(
                 // Update selected index based on category (except See All)
                 if (dietCategoryPage != DietCategoryPage.SeeAll) {
                     selectedDietTabIndex = when (dietCategoryPage) {
+                        //DietCategoryPage.Chicken -> 0
+                        //DietCategoryPage.Salad -> 1
+                        //DietCategoryPage.Mutton -> 2
+                        //DietCategoryPage.Kebabs -> 3
+                        //DietCategoryPage.HealthySnacks -> 4
+                        //DietCategoryPage.LowCalorie -> 5
+                        //DietCategoryPage.Vegan -> 6
+                        //DietCategoryPage.ProteinRich -> 7
+                        //DietCategoryPage.SeeAll -> 8
                         DietCategoryPage.Chicken -> 0
-                        DietCategoryPage.Salad -> 1
-                        DietCategoryPage.Mutton -> 2
-                        DietCategoryPage.Kebabs -> 3
-                        DietCategoryPage.HealthySnacks -> 4
-                        DietCategoryPage.LowCalorie -> 5
-                        DietCategoryPage.Vegan -> 6
-                        DietCategoryPage.ProteinRich -> 7
-                        DietCategoryPage.SeeAll -> 8
+                    DietCategoryPage.Salad -> 1
+                    DietCategoryPage.Mutton -> 2
+                    DietCategoryPage.Kebabs -> 3
+                    DietCategoryPage.HealthySnacks -> 4
+                    DietCategoryPage.LowCalorie -> 5
+                    DietCategoryPage.Vegan -> 6
+                    DietCategoryPage.ProteinRich -> 7
+
+                    // Categories from your list (indices 8-22)
+                    DietCategoryPage.Dessert -> 8
+                    DietCategoryPage.VegMeal -> 9
+                    DietCategoryPage.Bowl -> 10
+                    DietCategoryPage.Sweets -> 11
+                    DietCategoryPage.Khichdi -> 12
+                    DietCategoryPage.Sundae -> 13
+                    DietCategoryPage.Juice -> 14
+                    DietCategoryPage.Lassi -> 15
+                    DietCategoryPage.CurdRice -> 16
+                    DietCategoryPage.Pudding -> 17
+                    DietCategoryPage.Custard -> 18
+                    DietCategoryPage.Soup -> 19
+                    DietCategoryPage.Brownie -> 20
+                    DietCategoryPage.Waffles -> 21
+                    DietCategoryPage.ColdCoffee -> 22
+
+                    // Additional diet-specific items (indices 23-46)
+                    DietCategoryPage.GrilledChicken -> 23
+                    DietCategoryPage.SteamedFish -> 24
+                    DietCategoryPage.QuinoaBowl -> 25
+                    DietCategoryPage.AvocadoToast -> 26
+                    DietCategoryPage.GreenSmoothie -> 27
+                    DietCategoryPage.Oatmeal -> 28
+                    DietCategoryPage.GreekYogurt -> 29
+                    DietCategoryPage.EggWhiteOmelette -> 30
+                    DietCategoryPage.TunaSalad -> 31
+                    DietCategoryPage.LentilSoup -> 32
+                    DietCategoryPage.CottageCheese -> 33
+                    DietCategoryPage.SproutsSalad -> 34
+                    DietCategoryPage.BrownRiceBowl -> 35
+                    DietCategoryPage.SteamedVeggies -> 36
+                    DietCategoryPage.FruitBowl -> 37
+                    DietCategoryPage.DetoxWater -> 38
+                    DietCategoryPage.HerbalTea -> 39
+                    DietCategoryPage.ProteinBar -> 40
+                    DietCategoryPage.BoiledEggs -> 41
+                    DietCategoryPage.HummusPlate -> 42
+                    DietCategoryPage.SushiRolls -> 43
+                    DietCategoryPage.TofuStirFry -> 44
+                    DietCategoryPage.ChiaPudding -> 45
+                    DietCategoryPage.MilletBowl -> 46
+                    DietCategoryPage.SeeAll -> 47
+
+                   //DietCategoryPage.SeeAll -> currentPage
                     }
                 }
             },
@@ -1443,6 +1497,7 @@ fun AllCategoryPage(
                 price = "FLAT 10% OFF",
                 imageRes = R.drawable.popular_chain_1,
 //                backgroundColor = Color(0xFFFFF8E1) // Light amber
+//            add    backgroundColor = Color(0xFFFFF8E1) // Light amber
             ),
             ProductListDGrid(
                 name = "Product 2",
@@ -80295,7 +80350,314 @@ val hotDogFilters = FilterConfig(
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
         )
+Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
 
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
+         val hotDogItemsList = listOf(
+    // CLASSIC HOT DOGS (1-5)
+    RestaurantItemFull(
+        id = 1,
+        imageRes = R.drawable.hotdog_items_1, // Classic hot dog with ketchup and mustard
+        title = "Classic American Hot Dog",
+        price = "₹99 (Regular) | ₹149 (Jumbo)",
+        restaurantName = "Dog Haus",
+        rating = "4.8",
+        deliveryTime = "10-15 mins",
+        distance = "0.9 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 2,
+        imageRes = R.drawable.hotdog_items_2, // Cheese hot dog with melted cheese
+        title = "Cheese Blast Hot Dog",
+        price = "₹129 (Regular) | ₹179 (Jumbo)",
+        restaurantName = "Dog Haus",
+        rating = "4.9",
+        deliveryTime = "10-15 mins",
+        distance = "0.9 km",
+        discount = "12%",
+        discountAmount = "up to ₹35",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 3,
+        imageRes = R.drawable.hotdog_items_3, // Chilli hot dog with beans and meat sauce
+        title = "Chilli Cheese Dog",
+        price = "₹149 (Regular) | ₹199 (Jumbo)",
+        restaurantName = "Dog Haus",
+        rating = "4.8",
+        deliveryTime = "12-17 mins",
+        distance = "0.9 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 4,
+        imageRes = R.drawable.hotdog_items_4, // Loaded hot dog with multiple toppings
+        title = "Loaded Texas Hot Dog",
+        price = "₹169 (Regular) | ₹249 (Jumbo)",
+        restaurantName = "Dog Haus",
+        rating = "4.7",
+        deliveryTime = "12-17 mins",
+        distance = "0.9 km",
+        discount = "15%",
+        discountAmount = "up to ₹50",
+        address = "Connaught Place, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 5,
+        imageRes = R.drawable.hotdog_items_5, // Spicy hot dog with jalapenos
+        title = "Jalapeno Fiesta Dog",
+        price = "₹139 (Regular) | ₹189 (Jumbo)",
+        restaurantName = "Dog Haus",
+        rating = "4.8",
+        deliveryTime = "10-15 mins",
+        distance = "0.9 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Connaught Place, Delhi"
+    ),
+
+    // INTERNATIONAL HOT DOG VARIETIES (6-10)
+    RestaurantItemFull(
+        id = 6,
+        imageRes = R.drawable.hotdog_items_6, // Mexican style hot dog with salsa
+        title = "Mexican Street Dog",
+        price = "₹149 (Regular) | ₹199 (Jumbo)",
+        restaurantName = "Global Bites",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹40",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 7,
+        imageRes = R.drawable.hotdog_items_7, // Chicago style with pickles and tomatoes
+        title = "Chicago Style Dog",
+        price = "₹159 (Regular) | ₹219 (Jumbo)",
+        restaurantName = "Global Bites",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 8,
+        imageRes = R.drawable.hotdog_items_8, // New York style with sauerkraut
+        title = "NYC Street Cart Dog",
+        price = "₹129 (Regular) | ₹179 (Jumbo)",
+        restaurantName = "Global Bites",
+        rating = "4.7",
+        deliveryTime = "15-20 mins",
+        distance = "1.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 9,
+        imageRes = R.drawable.hotdog_items_9, // Korean inspired with kimchi
+        title = "Korean Kimchi Dog",
+        price = "₹169 (Regular) | ₹229 (Jumbo)",
+        restaurantName = "Global Bites",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹45",
+        address = "Saket, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 10,
+        imageRes = R.drawable.hotdog_items_10, // Japanese style with teriyaki
+        title = "Tokyo Teriyaki Dog",
+        price = "₹159 (Regular) | ₹219 (Jumbo)",
+        restaurantName = "Global Bites",
+        rating = "4.9",
+        deliveryTime = "18-23 mins",
+        distance = "1.5 km",
+        discount = "15%",
+        discountAmount = "up to ₹55",
+        address = "Saket, Delhi"
+    ),
+
+    // PREMIUM & GOURMET HOT DOGS (11-15)
+    RestaurantItemFull(
+        id = 11,
+        imageRes = R.drawable.hotdog_items_11, // Truffle oil and mushroom hot dog
+        title = "Truffle Mushroom Dog",
+        price = "₹229 (Regular) | ₹299 (Jumbo)",
+        restaurantName = "Gourmet Grills",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "2.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹45",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 12,
+        imageRes = R.drawable.hotdog_items_12, // BBQ pulled pork hot dog
+        title = "BBQ Pulled Pork Dog",
+        price = "₹219 (Regular) | ₹289 (Jumbo)",
+        restaurantName = "Gourmet Grills",
+        rating = "4.8",
+        deliveryTime = "20-25 mins",
+        distance = "2.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹50",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 13,
+        imageRes = R.drawable.hotdog_items_13, // Bacon wrapped hot dog
+        title = "Bacon Wrapped Dog",
+        price = "₹199 (Regular) | ₹269 (Jumbo)",
+        restaurantName = "Gourmet Grills",
+        rating = "4.9",
+        deliveryTime = "20-25 mins",
+        distance = "2.5 km",
+        discount = "10%",
+        discountAmount = "up to ₹40",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 14,
+        imageRes = R.drawable.hotdog_items_14, // Lamb sausage hot dog
+        title = "Mediterranean Lamb Dog",
+        price = "₹239 (Regular) | ₹319 (Jumbo)",
+        restaurantName = "Gourmet Grills",
+        rating = "4.8",
+        deliveryTime = "22-27 mins",
+        distance = "2.5 km",
+        discount = "12%",
+        discountAmount = "up to ₹60",
+        address = "Vasant Vihar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 15,
+        imageRes = R.drawable.hotdog_items_15, // Surf and turf with shrimp
+        title = "Surf & Turf Dog",
+        price = "₹279 (Regular) | ₹359 (Jumbo)",
+        restaurantName = "Gourmet Grills",
+        rating = "4.7",
+        deliveryTime = "22-27 mins",
+        distance = "2.5 km",
+        discount = "15%",
+        discountAmount = "up to ₹80",
+        address = "Vasant Vihar, Delhi"
+    ),
+
+    // DESI-INSPIRED HOT DOGS (16-18)
+    RestaurantItemFull(
+        id = 16,
+        imageRes = R.drawable.hotdog_items_16, // Butter chicken flavored hot dog
+        title = "Butter Chicken Dog",
+        price = "₹169 (Regular) | ₹229 (Jumbo)",
+        restaurantName = "Desi Franks",
+        rating = "4.9",
+        deliveryTime = "15-20 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹35",
+        address = "Kamla Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 17,
+        imageRes = R.drawable.hotdog_items_17, // Tandoori flavored hot dog
+        title = "Tandoori Masala Dog",
+        price = "₹149 (Regular) | ₹199 (Jumbo)",
+        restaurantName = "Desi Franks",
+        rating = "4.8",
+        deliveryTime = "15-20 mins",
+        distance = "1.8 km",
+        discount = "12%",
+        discountAmount = "up to ₹40",
+        address = "Kamla Nagar, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 18,
+        imageRes = R.drawable.hotdog_items_18, // Chatpata chutney hot dog
+        title = "Chutney Wala Dog",
+        price = "₹129 (Regular) | ₹179 (Jumbo)",
+        restaurantName = "Desi Franks",
+        rating = "4.9",
+        deliveryTime = "12-17 mins",
+        distance = "1.8 km",
+        discount = "10%",
+        discountAmount = "up to ₹30",
+        address = "Kamla Nagar, Delhi"
+    ),
+
+    // VEGETARIAN & FUSION HOT DOGS (19-20)
+    RestaurantItemFull(
+        id = 19,
+        imageRes = R.drawable.hotdog_items_19, // Veggie sausage hot dog
+        title = "Garden Veggie Dog",
+        price = "₹119 (Regular) | ₹169 (Jumbo)",
+        restaurantName = "Green Bites",
+        rating = "4.8",
+        deliveryTime = "10-15 mins",
+        distance = "1.2 km",
+        discount = "10%",
+        discountAmount = "up to ₹25",
+        address = "Green Park, Delhi"
+    ),
+    RestaurantItemFull(
+        id = 20,
+        imageRes = R.drawable.hotdog_items_20, // Paneer tikka flavored hot dog
+        title = "Paneer Tikka Dog",
+        price = "₹139 (Regular) | ₹189 (Jumbo)",
+        restaurantName = "Green Bites",
+        rating = "4.9",
+        deliveryTime = "12-17 mins",
+        distance = "1.2 km",
+        discount = "12%",
+        discountAmount = "up to ₹35",
+        address = "Green Park, Delhi"
+    )
+)
+        // Display all restaurant items vertically
+        hotDogItemsList.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
 
     }
 }

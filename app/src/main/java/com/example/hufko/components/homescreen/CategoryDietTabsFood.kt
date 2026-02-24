@@ -1,14 +1,17 @@
 package com.example.hufko.components.homescreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -21,7 +24,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,10 +43,12 @@ import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.runtime.DisposableEffect
 
-// Sealed class for different category pages
+// Sealed class for different diet category pages
 sealed class DietCategoryPage(val title: String, val iconRes: Int) {
-    // From the image provided
+    // From the images provided (these use _food_diet suffix)
     object Chicken : DietCategoryPage("Chicken", R.drawable.chicken_food_diet)
     object Salad : DietCategoryPage("Salad", R.drawable.salad_food_diet)
     object Mutton : DietCategoryPage("Mutton", R.drawable.mutton_food_diet)
@@ -50,25 +57,95 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
     object LowCalorie : DietCategoryPage("Low Calorie", R.drawable.low_calorie_food_diet)
     object Vegan : DietCategoryPage("Vegan", R.drawable.vegan_food_diet)
     object ProteinRich : DietCategoryPage("Protein Rich", R.drawable.protein_food_diet)
+//    object SeeAll : DietCategoryPage("See All", R.drawable.see_all_food)
+
+    // Categories from your list (these use _food suffix without _diet)
+    object Dessert : DietCategoryPage("Dessert", R.drawable.dessert_food)
+    object VegMeal : DietCategoryPage("Veg Meal", R.drawable.veg_meal_food)
+    object Bowl : DietCategoryPage("Bowl", R.drawable.bowl_food)
+    object Sweets : DietCategoryPage("Sweets", R.drawable.sweets_food)
+    object Khichdi : DietCategoryPage("Khichdi", R.drawable.khichdi_food)
+    object Sundae : DietCategoryPage("Sundae", R.drawable.sundae_food)
+    object Juice : DietCategoryPage("Juice", R.drawable.juice_food)
+    object Lassi : DietCategoryPage("Lassi", R.drawable.lassi_food)
+    object CurdRice : DietCategoryPage("Curd Rice", R.drawable.curd_rice_food)
+    object Pudding : DietCategoryPage("Pudding", R.drawable.pudding_food)
+    object Custard : DietCategoryPage("Custard", R.drawable.custard_food)
+    object Soup : DietCategoryPage("Soup", R.drawable.soup_food)
+    object Brownie : DietCategoryPage("Brownie", R.drawable.brownie_food)
+    object Waffles : DietCategoryPage("Waffles", R.drawable.waffles_food)
+    object ColdCoffee : DietCategoryPage("Cold Coffee", R.drawable.cold_coffee_food)
+
+    // Additional diet-specific items (these use _food_diet suffix as they're diet-specific)
+    object GrilledChicken : DietCategoryPage("Grilled Chicken", R.drawable.grilled_chicken)
+    object SteamedFish : DietCategoryPage("Steamed Fish", R.drawable.steamed_fish)
+    object QuinoaBowl : DietCategoryPage("Quinoa Bowl", R.drawable.quinoa_bowl)
+    object AvocadoToast : DietCategoryPage("Avocado Toast", R.drawable.avocado_toast_food)
+    object GreenSmoothie : DietCategoryPage("Green Smoothie", R.drawable.green_smoothie_food)
+    object Oatmeal : DietCategoryPage("Oatmeal", R.drawable.oatmeal_food)
+    object GreekYogurt : DietCategoryPage("Greek Yogurt", R.drawable.greek_yogurt_food_diet)
+    object EggWhiteOmelette : DietCategoryPage("Egg White", R.drawable.egg_white_omelette_food_diet)
+    object TunaSalad : DietCategoryPage("Tuna Salad", R.drawable.tuna_salad_food_diet)
+    object LentilSoup : DietCategoryPage("Lentil Soup", R.drawable.lentil_soup_food_diet)
+    object CottageCheese : DietCategoryPage("Cottage Cheese", R.drawable.cottage_cheese_food_diet)
+    object SproutsSalad : DietCategoryPage("Sprouts Salad", R.drawable.sprouts_salad_food_diet)
+    object BrownRiceBowl : DietCategoryPage("Brown Rice", R.drawable.brown_rice_bowl_food_diet)
+    object SteamedVeggies : DietCategoryPage("Steamed Veg", R.drawable.steamed_veggies_food_diet)
+    object FruitBowl : DietCategoryPage("Fruit Bowl", R.drawable.fruit_bowl_food_diet)
+    object DetoxWater : DietCategoryPage("Detox Water", R.drawable.detox_water_food_diet)
+    object HerbalTea : DietCategoryPage("Herbal Tea", R.drawable.herbal_tea_food_diet)
+    object ProteinBar : DietCategoryPage("Protein Bar", R.drawable.protein_bar_food_diet)
+    object BoiledEggs : DietCategoryPage("Boiled Eggs", R.drawable.boiled_eggs_food_diet)
+    object HummusPlate : DietCategoryPage("Hummus Plate", R.drawable.hummus_plate_food_diet)
+    object SushiRolls : DietCategoryPage("Sushi Rolls", R.drawable.sushi_rolls_food_diet)
+    object TofuStirFry : DietCategoryPage("Tofu Stir Fry", R.drawable.tofu_stir_fry_food_diet)
+    object ChiaPudding : DietCategoryPage("Chia Pudding", R.drawable.chia_pudding_food_diet)
+    object MilletBowl : DietCategoryPage("Millet Bowl", R.drawable.millet_bowl_food_diet)
     object SeeAll : DietCategoryPage("See All", R.drawable.see_all_food)
+
 }
+
+data class DietFoodItem(
+    val id: Int,
+    val name: String,
+    val description: String? = null,
+    val imageRes: Int,
+    val calories: Int,
+    val protein: Int,
+    val isVeg: Boolean = true,
+    val category: String = "Chicken"
+)
+
 @Composable
 fun CategoryDietTabsFood(
     navController: NavHostController? = null,
-    currentSelectedIndex: Int,
-    selectedDietTabIndex: Int,
+    currentSelectedIndex: Int,  // This is the external index from parent
+    selectedDietTabIndex: Int,   // This is the diet-specific tab index
     onCategorySelected: (DietCategoryPage) -> Unit = {},
-    onTabIndexChanged: (Int) -> Unit = {}, // ✅ Add this callback
+    onTabIndexChanged: (Int) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
-
-    // Update when the prop changes
-    LaunchedEffect(selectedDietTabIndex) {
-        selectedTabIndex = selectedDietTabIndex
+    // Use selectedDietTabIndex as the internal state
+    var internalSelectedIndex by rememberSaveable {
+        mutableIntStateOf(
+            navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("currentDietSelectedIndex")
+                ?: selectedDietTabIndex
+        )
     }
 
-    val dietCategoryPages = listOf(
+    // Track recently selected tabs from "See All" page - using Set to avoid duplicates
+    var recentlySelectedTabs by rememberSaveable { mutableStateOf(setOf<Int>()) }
+
+    // Save changes back to savedStateHandle
+    LaunchedEffect(internalSelectedIndex) {
+        navController?.currentBackStackEntry?.savedStateHandle?.set(
+            "currentDietSelectedIndex",
+            internalSelectedIndex
+        )
+    }
+
+    // All diet category pages - Moved BEFORE the LaunchedEffect that uses it
+    val allDietCategoryPages = listOf(
         DietCategoryPage.Chicken,
         DietCategoryPage.Salad,
         DietCategoryPage.Mutton,
@@ -77,145 +154,454 @@ fun CategoryDietTabsFood(
         DietCategoryPage.LowCalorie,
         DietCategoryPage.Vegan,
         DietCategoryPage.ProteinRich,
-        DietCategoryPage.SeeAll
+
+        DietCategoryPage.Dessert,
+        DietCategoryPage.VegMeal,
+        DietCategoryPage.Bowl,
+        DietCategoryPage.Sweets,
+        DietCategoryPage.Khichdi,
+        DietCategoryPage.Sundae,
+        DietCategoryPage.Juice,
+        DietCategoryPage.Lassi,
+        DietCategoryPage.CurdRice,
+        DietCategoryPage.Pudding,
+        DietCategoryPage.Custard,
+        DietCategoryPage.Soup,
+        DietCategoryPage.Brownie,
+        DietCategoryPage.Waffles,
+        DietCategoryPage.ColdCoffee,
+        // Additional diet categories
+        DietCategoryPage.GrilledChicken,
+        DietCategoryPage.SteamedFish,
+        DietCategoryPage.QuinoaBowl,
+        DietCategoryPage.AvocadoToast,
+        DietCategoryPage.GreenSmoothie,
+        DietCategoryPage.Oatmeal,
+        DietCategoryPage.GreekYogurt,
+        DietCategoryPage.EggWhiteOmelette,
+        DietCategoryPage.TunaSalad,
+        DietCategoryPage.LentilSoup,
+        DietCategoryPage.CottageCheese,
+        DietCategoryPage.SproutsSalad,
+        DietCategoryPage.BrownRiceBowl,
+        DietCategoryPage.SteamedVeggies,
+        DietCategoryPage.FruitBowl,
+        DietCategoryPage.DetoxWater,
+        DietCategoryPage.HerbalTea,
+        DietCategoryPage.ProteinBar,
+        DietCategoryPage.BoiledEggs,
+        DietCategoryPage.HummusPlate,
+        DietCategoryPage.SushiRolls,
+        DietCategoryPage.TofuStirFry,
+        DietCategoryPage.ChiaPudding,
+        DietCategoryPage.MilletBowl,
     )
+
+    Log.d("CategoryDietTabsFood", "internalSelectedIndex: $internalSelectedIndex")
+    Log.d("CategoryDietTabsFood", "currentSelectedIndex from parent: $currentSelectedIndex")
+    Log.d("CategoryDietTabsFood", "recentlySelectedTabs: $recentlySelectedTabs")
+
+    // Update when parent state changes
+    LaunchedEffect(selectedDietTabIndex) {
+        internalSelectedIndex = selectedDietTabIndex
+    }
+
+    // Handle back navigation with selected index from See All page
+    DisposableEffect(navController) {
+        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
+        val liveData = savedStateHandle?.getLiveData<Int>("selectedDietTabFromSeeAll")
+
+        val observer = androidx.lifecycle.Observer<Int> { newIndex ->
+            if (newIndex != null) {
+                Log.d("CategoryDietTabsFood", "Received new index from See All: $newIndex")
+
+                // Add the selected tab to recently selected tabs if it's beyond initial visible count
+                if (newIndex >= 8) {
+                    // Update recentlySelectedTabs by adding the new index
+                    recentlySelectedTabs = recentlySelectedTabs + newIndex
+                    Log.d("CategoryDietTabsFood", "Added to recentlySelectedTabs: $newIndex, now: $recentlySelectedTabs")
+                }
+
+                // Update internal selected index
+                internalSelectedIndex = newIndex
+
+                // Notify parent about the change
+                onTabIndexChanged(newIndex)
+
+                // Get the category page and call onCategorySelected
+                allDietCategoryPages.getOrNull(newIndex)?.let { page ->
+                    onCategorySelected(page)
+                }
+
+                // Clear the value to prevent repeated updates
+                savedStateHandle?.remove<Int>("selectedDietTabFromSeeAll")
+            }
+        }
+
+        liveData?.observeForever(observer)
+
+        onDispose {
+            liveData?.removeObserver(observer)
+        }
+    }
+
+    // Initial visible tabs count
+    val initialVisibleCount = 8
+
+    // Build visible tabs: initial 8 + recently selected (sorted) + "See All"
+    val visibleTabs = remember(recentlySelectedTabs) {
+        buildList {
+            // Add first 8 tabs
+            addAll(allDietCategoryPages.take(initialVisibleCount))
+
+            // Add recently selected tabs (sorted to maintain consistent order)
+            val sortedRecentTabs = recentlySelectedTabs.sorted()
+            Log.d("CategoryDietTabsFood", "Building visible tabs with sorted recent tabs: $sortedRecentTabs")
+
+            sortedRecentTabs.forEach { index ->
+                if (index >= initialVisibleCount) {
+                    allDietCategoryPages.getOrNull(index)?.let { page ->
+                        add(page)
+                        Log.d("CategoryDietTabsFood", "Added recent tab at index $index: ${page.title}")
+                    }
+                }
+            }
+
+            // Add "See All" at the end
+            add(DietCategoryPage.SeeAll)
+        }
+    }
+
+    Log.d("CategoryDietTabsFood", "visibleTabs count: ${visibleTabs.size}")
+    visibleTabs.forEachIndexed { i, page ->
+        Log.d("CategoryDietTabsFood", "visibleTabs[$i]: ${page.title}")
+    }
+
+    val seeAllIndex = visibleTabs.indexOfLast { it is DietCategoryPage.SeeAll }
+
+    // Find the index in visibleTabs for a given allCategories index
+    fun getVisibleTabIndex(allCategoriesIndex: Int): Int {
+        return when {
+            allCategoriesIndex < initialVisibleCount -> allCategoriesIndex
+            allCategoriesIndex in recentlySelectedTabs -> {
+                // Calculate position in visibleTabs
+                val sortedRecentTabs = recentlySelectedTabs.sorted()
+                val recentIndex = sortedRecentTabs.indexOf(allCategoriesIndex)
+                initialVisibleCount + recentIndex
+            }
+            else -> seeAllIndex // "See All" tab
+        }
+    }
+
+    val selectedVisibleIndex = getVisibleTabIndex(internalSelectedIndex)
+
+    Log.d("CategoryDietTabsFood", "selectedVisibleIndex: $selectedVisibleIndex, internalSelectedIndex: $internalSelectedIndex")
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(0.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 0.dp)
-                .background(
-                    color = MaterialTheme.customColors.orangeLight,
-                    shape = RoundedCornerShape(16.dp)
-                )
-                .clip(
-                    RoundedCornerShape(
-                        bottomStart = 16.dp,
-                        bottomEnd = 16.dp
-                    )
-                )
-                .padding(horizontal = 6.dp, vertical = 0.dp)
-        ) {
-
-            // 👉 Heading
-            Text(
-                text = "Atharv, still looking for healthy diet?",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.customColors.white,
-                modifier = Modifier
-                    .padding(top = 8.dp)
+            .padding(horizontal = 12.dp, vertical = 0.dp)
+            .background(
+                color = MaterialTheme.customColors.orangeLight,
+                shape = RoundedCornerShape(16.dp)
             )
+            .clip(
+                RoundedCornerShape(
+                    bottomStart = 16.dp,
+                    bottomEnd = 16.dp
+                )
+            )
+            .padding(horizontal = 6.dp, vertical = 0.dp)
+    ) {
+        // Heading
+        Text(
+            text = "Atharv, still looking for healthy diet?",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.white,
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .padding(horizontal = 6.dp)
+        )
 
-            // 👉 Your ScrollableTabRow
-            ScrollableTabRow(
-                selectedTabIndex = selectedTabIndex,
-                containerColor = Color.Transparent,
-                contentColor = MaterialTheme.customColors.black,
-                edgePadding = 0.dp,
-                indicator = { tabPositions ->
-                    TabRowDefaults.Indicator(
-                        modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                        height = 5.dp,
-                        color = MaterialTheme.customColors.header
-                    )
+        // ScrollableTabRow
+        ScrollableTabRow(
+            selectedTabIndex = selectedVisibleIndex,
+            containerColor = Color.Transparent,
+            contentColor = MaterialTheme.customColors.black,
+            edgePadding = 0.dp,
+            indicator = { tabPositions ->
+                TabRowDefaults.Indicator(
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedVisibleIndex]),
+                    height = 5.dp,
+                    color = MaterialTheme.customColors.header
+                )
+            }
+        ) {
+            visibleTabs.forEachIndexed { index, dietCategoryPage ->
+                val isSeeAllTab = dietCategoryPage is DietCategoryPage.SeeAll
+                val allCategoriesIndex = when {
+                    index < initialVisibleCount -> index
+                    isSeeAllTab -> -1
+                    else -> {
+                        // Find which allCategories index this corresponds to
+                        val recentIndex = index - initialVisibleCount
+                        val sortedRecentTabs = recentlySelectedTabs.sorted()
+                        if (recentIndex < sortedRecentTabs.size) {
+                            sortedRecentTabs[recentIndex]
+                        } else -1
+                    }
                 }
-            ) {
-                dietCategoryPages.forEachIndexed { index, dietCategoryPage ->
-                    Tab(
-                        selected = selectedTabIndex == index,
-                        onClick = {
-                            selectedTabIndex = index
-                            onCategorySelected(dietCategoryPage)
 
-                            // 👉 Handle navigation when "See All" is clicked
-                                if (dietCategoryPage is DietCategoryPage.SeeAll) {
-//                            if (dietCategoryPage == DietCategoryPage.SeeAll && navController != null) {
-//                                navController.navigate("category_diet_tabs_list/$selectedTabIndex")
-                                navController?.navigate("category_diet_tabs_list/$selectedTabIndex")
-                            } else {
-                                // ✅ Update parent when regular tab is clicked
-                                onTabIndexChanged(selectedTabIndex)
-                            }
-                        },
-                        modifier = Modifier
-                            .padding(horizontal = 2.dp, vertical = 5.dp)
-                            .background(Color.Transparent)
-                    ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.padding(vertical = 4.dp)
-                                .width(80.dp)
-                                .background(
-                                    color = MaterialTheme.customColors.white,
-                                    shape = RoundedCornerShape(15.dp)
+                val isSelected = if (isSeeAllTab) {
+                    false // See All tab is never selected as a content tab
+                } else {
+                    internalSelectedIndex == allCategoriesIndex
+                }
+
+                Tab(
+                    selected = isSelected,
+                    onClick = {
+                        if (isSeeAllTab) {
+                            // Navigate to the "See All" page
+                            navController?.navigate("category_diet_tabs_list/${internalSelectedIndex}") {
+                                // Pass all categories and current index as arguments
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    "allDietCategories",
+                                    allDietCategoryPages
                                 )
-                                .padding(horizontal = 5.dp, vertical = 5.dp)
-                        ) {
-                            Image(
-                                painter = painterResource(id = dietCategoryPage.iconRes),
-                                contentDescription = dietCategoryPage.title,
-                                modifier = Modifier
-                                    .width(65.dp)
-                                    .height(55.dp),
-                                contentScale = ContentScale.FillBounds
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    "currentDietMainTabIndex",
+                                    internalSelectedIndex
+                                )
+                            }
+                        } else {
+                            // For regular tabs
+                            internalSelectedIndex = allCategoriesIndex
+                            onTabIndexChanged(allCategoriesIndex)
+                            onCategorySelected(dietCategoryPage)
+                        }
+                    },
+                    modifier = Modifier
+                        .padding(horizontal = 2.dp, vertical = 5.dp)
+                        .background(Color.Transparent)
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .padding(vertical = 4.dp)
+                            .width(80.dp)
+                            .background(
+                                color = MaterialTheme.customColors.white,
+                                shape = RoundedCornerShape(15.dp)
                             )
+                            .padding(horizontal = 5.dp, vertical = 5.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = dietCategoryPage.iconRes),
+                            contentDescription = dietCategoryPage.title,
+                            modifier = Modifier
+                                .width(65.dp)
+                                .height(55.dp),
+                            contentScale = ContentScale.FillBounds
+                        )
 
-                            Text(
-                                text = dietCategoryPage.title,
-                                fontSize = 15.sp,
-                                fontWeight = if (selectedTabIndex == index) FontWeight.Bold else FontWeight.Medium,
-                                color = if (selectedTabIndex == index) {
-                                    MaterialTheme.customColors.header
-                                } else {
-                                    MaterialTheme.customColors.black
-                                },
-                                maxLines = 2,
-                                textAlign = TextAlign.Center,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier.padding(top = 2.dp)
+                        Text(
+                            text = dietCategoryPage.title,
+                            fontSize = 15.sp,
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                            color = if (isSelected) {
+                                MaterialTheme.customColors.header
+                            } else {
+                                MaterialTheme.customColors.black
+                            },
+                            maxLines = 2,
+                            textAlign = TextAlign.Center,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.padding(top = 2.dp)
+                        )
+
+                        // Show a small indicator for recently added tabs
+                        if (!isSeeAllTab && allCategoriesIndex >= initialVisibleCount) {
+                            Box(
+                                modifier = Modifier
+                                    .padding(top = 2.dp)
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(MaterialTheme.customColors.header.copy(alpha = 0.6f))
                             )
                         }
                     }
                 }
             }
         }
+    }
 
-
-        // Show content for each tab
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFFEDF6FF),
-                            Color(0xFFFDFEFF)
-                        )
+    // Show content for each tab
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFFEDF6FF),
+                        Color(0xFFFDFEFF)
                     )
                 )
-        ) {
-            // Map index to corresponding page function using a when statement
-            when (selectedTabIndex) {
-                0 -> ChickenDietPage()
-                1 -> SaladDietPage()
-                2 -> MuttonDietPage()
-                3 -> KebabsDietPage()
-                4 -> HealthySnacksPage()
-                5 -> LowCaloriePage()
-                6 -> VeganPage()
-                7 -> ProteinRichPage()
-//                8 -> SeeAllPage()
+            )
+    ) {
+        // Get the actual category based on internalSelectedIndex
+        val actualCategory = allDietCategoryPages.getOrNull(internalSelectedIndex)
+
+        // Show content based on the actual category
+        when (actualCategory) {
+            DietCategoryPage.Chicken -> ChickenDietPage()
+            DietCategoryPage.Salad -> SaladDietPage()
+            DietCategoryPage.Mutton -> MuttonDietPage()
+            DietCategoryPage.Kebabs -> KebabsDietPage()
+            DietCategoryPage.HealthySnacks -> HealthySnacksPage()
+            DietCategoryPage.LowCalorie -> LowCaloriePage()
+            DietCategoryPage.Vegan -> VeganPage()
+            DietCategoryPage.ProteinRich -> ProteinRichPage()
+
+            DietCategoryPage.Dessert -> DessertPage()
+            DietCategoryPage.VegMeal -> VegMealPage()
+            DietCategoryPage.Bowl -> BowlPage()
+            DietCategoryPage.Sweets -> SweetsPage()
+            DietCategoryPage.Khichdi -> KhichdiPage()
+            DietCategoryPage.Sundae -> SundaePage()
+            DietCategoryPage.Juice -> JuicePage()
+            DietCategoryPage.Lassi -> LassiPage()
+            DietCategoryPage.CurdRice -> CurdRicePage()
+            DietCategoryPage.Pudding -> PuddingPage()
+            DietCategoryPage.Custard -> CustardPage()
+            DietCategoryPage.Soup -> SoupDietPage()
+            DietCategoryPage.Brownie -> BrowniePage()
+            DietCategoryPage.Waffles -> WafflesPage()
+            DietCategoryPage.ColdCoffee -> ColdCoffeePage()
+
+            DietCategoryPage.GrilledChicken -> GrilledChickenDietPage()
+            DietCategoryPage.SteamedFish -> SteamedFishDietPage()
+            DietCategoryPage.QuinoaBowl -> QuinoaBowlDietPage()
+            DietCategoryPage.AvocadoToast -> AvocadoToastDietPage()
+            DietCategoryPage.GreenSmoothie -> GreenSmoothieDietPage()
+            DietCategoryPage.Oatmeal -> OatmealDietPage()
+            DietCategoryPage.GreekYogurt -> GreekYogurtDietPage()
+            DietCategoryPage.EggWhiteOmelette -> EggWhiteOmeletteDietPage()
+            DietCategoryPage.TunaSalad -> TunaSaladDietPage()
+            DietCategoryPage.LentilSoup -> LentilSoupDietPage()
+            DietCategoryPage.CottageCheese -> CottageCheeseDietPage()
+            DietCategoryPage.SproutsSalad -> SproutsSaladDietPage()
+            DietCategoryPage.BrownRiceBowl -> BrownRiceBowlDietPage()
+            DietCategoryPage.SteamedVeggies -> SteamedVeggiesDietPage()
+            DietCategoryPage.FruitBowl -> FruitBowlDietPage()
+            DietCategoryPage.DetoxWater -> DetoxWaterDietPage()
+            DietCategoryPage.HerbalTea -> HerbalTeaDietPage()
+            DietCategoryPage.ProteinBar -> ProteinBarDietPage()
+            DietCategoryPage.BoiledEggs -> BoiledEggsDietPage()
+            DietCategoryPage.HummusPlate -> HummusPlateDietPage()
+            DietCategoryPage.SushiRolls -> SushiRollsDietPage()
+            DietCategoryPage.TofuStirFry -> TofuStirFryDietPage()
+            DietCategoryPage.ChiaPudding -> ChiaPuddingDietPage()
+            DietCategoryPage.MilletBowl -> MilletBowlDietPage()
+            null -> {
+                // Show empty state for "See All" tab or invalid index
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Select a diet category",
+                        color = MaterialTheme.customColors.gray,
+                        fontSize = 16.sp
+                    )
+                }
             }
+            else -> ChickenDietPage()
         }
     }
 }
 
+
+@Composable
+fun MainScreenWithDietTabs(navController: NavHostController) {
+    var currentPage by remember { mutableIntStateOf(0) }
+    var selectedDietTabIndex by remember { mutableIntStateOf(0) }
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        CategoryDietTabsFood(
+            navController = navController,
+            currentSelectedIndex = currentPage,  // Pass the current page
+            selectedDietTabIndex = selectedDietTabIndex, // Pass the selected diet tab index
+            onCategorySelected = { dietCategoryPage ->
+                val newIndex = when (dietCategoryPage) {
+                    // First 8 main categories (indices 0-7)
+                    DietCategoryPage.Chicken -> 0
+                    DietCategoryPage.Salad -> 1
+                    DietCategoryPage.Mutton -> 2
+                    DietCategoryPage.Kebabs -> 3
+                    DietCategoryPage.HealthySnacks -> 4
+                    DietCategoryPage.LowCalorie -> 5
+                    DietCategoryPage.Vegan -> 6
+                    DietCategoryPage.ProteinRich -> 7
+
+                    // Categories from your list (indices 8-22)
+                    DietCategoryPage.Dessert -> 8
+                    DietCategoryPage.VegMeal -> 9
+                    DietCategoryPage.Bowl -> 10
+                    DietCategoryPage.Sweets -> 11
+                    DietCategoryPage.Khichdi -> 12
+                    DietCategoryPage.Sundae -> 13
+                    DietCategoryPage.Juice -> 14
+                    DietCategoryPage.Lassi -> 15
+                    DietCategoryPage.CurdRice -> 16
+                    DietCategoryPage.Pudding -> 17
+                    DietCategoryPage.Custard -> 18
+                    DietCategoryPage.Soup -> 19
+                    DietCategoryPage.Brownie -> 20
+                    DietCategoryPage.Waffles -> 21
+                    DietCategoryPage.ColdCoffee -> 22
+
+                    // Additional diet-specific items (indices 23-46)
+                    DietCategoryPage.GrilledChicken -> 23
+                    DietCategoryPage.SteamedFish -> 24
+                    DietCategoryPage.QuinoaBowl -> 25
+                    DietCategoryPage.AvocadoToast -> 26
+                    DietCategoryPage.GreenSmoothie -> 27
+                    DietCategoryPage.Oatmeal -> 28
+                    DietCategoryPage.GreekYogurt -> 29
+                    DietCategoryPage.EggWhiteOmelette -> 30
+                    DietCategoryPage.TunaSalad -> 31
+                    DietCategoryPage.LentilSoup -> 32
+                    DietCategoryPage.CottageCheese -> 33
+                    DietCategoryPage.SproutsSalad -> 34
+                    DietCategoryPage.BrownRiceBowl -> 35
+                    DietCategoryPage.SteamedVeggies -> 36
+                    DietCategoryPage.FruitBowl -> 37
+                    DietCategoryPage.DetoxWater -> 38
+                    DietCategoryPage.HerbalTea -> 39
+                    DietCategoryPage.ProteinBar -> 40
+                    DietCategoryPage.BoiledEggs -> 41
+                    DietCategoryPage.HummusPlate -> 42
+                    DietCategoryPage.SushiRolls -> 43
+                    DietCategoryPage.TofuStirFry -> 44
+                    DietCategoryPage.ChiaPudding -> 45
+                    DietCategoryPage.MilletBowl -> 46
+
+                    DietCategoryPage.SeeAll -> currentPage
+                }
+                currentPage = newIndex
+                selectedDietTabIndex = newIndex
+            },
+            onTabIndexChanged = { newIndex: Int ->
+                currentPage = newIndex
+                selectedDietTabIndex = newIndex
+            }
+        )
+    }
+}
 // Category Page Composables for diet tabs
 
 @Composable
@@ -305,7 +691,7 @@ fun ChickenDietPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = chickenDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
@@ -397,7 +783,7 @@ fun ChickenDietPage() {
                 address = "Delhi"
             )
         )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -1921,7 +2307,7 @@ fun KebabsDietPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = kebabDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
@@ -2581,7 +2967,7 @@ fun HealthySnacksPage() {
                 address = "Morning Fresh, Delhi"
             )
         )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -2905,8 +3291,8 @@ fun HealthySnacksPage() {
             address = "Soybean Road"
         )
     )
-     Column {
-         healthySnackItems.forEach { restaurantItem ->
+    Column {
+        healthySnackItems.forEach { restaurantItem ->
             RestaurantItemListFull(
                 restaurantItem = restaurantItem,
                 onWishlistClick = { },
@@ -3695,7 +4081,7 @@ fun VeganPage() {
                 address = "Global Cuisine Street, Delhi",
             )
         )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -4163,7 +4549,7 @@ fun ProteinRichPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = proteinRichFoodFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
@@ -4260,7 +4646,7 @@ fun ProteinRichPage() {
                 address = "Indian Protein Corner, Delhi"
             )
         )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -4593,6 +4979,1109 @@ fun ProteinRichPage() {
     }
 }
 
+// Categories from your list (Dessert through Cold Coffee)
+@Composable
+fun DessertPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val dessertFoodFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY DESSERT FILTERS (WITH ICONS) - 5 Icon-based filters
+                FilterChip(
+                    id = "chocolate",
+                    text = "Chocolate",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_dessert_1
+                ),
+                FilterChip(
+                    id = "ice_cream",
+                    text = "Ice Cream",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_ice_cream_dessert_1
+                ),
+                FilterChip(
+                    id = "cakes",
+                    text = "Cakes",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cake_dessert_1
+                ),
+                FilterChip(
+                    id = "fruit_desserts",
+                    text = "Fruit Desserts",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fruits_dessert
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sugar_free_dessert
+                ),
+
+                // 3. ADDITIONAL DESSERT TYPES (TEXT ONLY)
+                FilterChip(
+                    id = "pastries",
+                    text = "Pastries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookies",
+                    text = "Cookies",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brownies",
+                    text = "Brownies",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "puddings",
+                    text = "Puddings",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "donuts",
+                    text = "Donuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. FLAVORS (TEXT ONLY)
+                FilterChip(
+                    id = "vanilla",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberry",
+                    text = "Strawberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "butterscotch",
+                    text = "Butterscotch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel",
+                    text = "Caramel",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. DIETARY (TEXT ONLY)
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto",
+                    text = "Keto",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. OCCASIONS (TEXT ONLY)
+                FilterChip(
+                    id = "birthday",
+                    text = "Birthday",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "anniversary",
+                    text = "Anniversary",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party",
+                    text = "Party",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "200_400",
+                    text = "₹200 - ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "400_600",
+                    text = "₹400 - ₹600",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_600",
+                    text = "Above ₹600",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. Sort By Dropdown
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+
+        FilterButtonFood(
+            filterConfig = dessertFoodFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val dessertFoodItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_dessert_chocolate_cake,
+                title = "Belgian Chocolate Cake",
+                price = "320",
+                restaurantName = "Sweet Cravings",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹48",
+                address = "Dessert Street, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_dessert_ice_cream,
+                title = "Premium Ice Cream Sundae",
+                price = "180",
+                restaurantName = "Frozen Delights",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹18",
+                address = "Sweet Avenue, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_dessert_brownie,
+                title = "Hot Chocolate Brownie",
+                price = "220",
+                restaurantName = "Brownie House",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "20%",
+                discountAmount = "up to ₹44",
+                address = "Chocolate Lane, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_dessert_gulab_jamun,
+                title = "Gulab Jamun with Rabri",
+                price = "160",
+                restaurantName = "Mithai Wala",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹19",
+                address = "Old Sweet Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_dessert_pastry,
+                title = "Fresh Cream Pastry Pack",
+                price = "240",
+                restaurantName = "The Bakery Shop",
+                rating = "4.7",
+                deliveryTime = "22-28 mins",
+                distance = "2.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹36",
+                address = "Bakery Road, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_dessert_fruit_bowl,
+                title = "Fresh Fruit Bowl with Honey",
+                price = "200",
+                restaurantName = "Healthy Sweets",
+                rating = "4.5",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹20",
+                address = "Fresh Market, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = dessertFoodItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val dessertFoodItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.dessert_image_1,
+            title = "Belgian Dark Chocolate Cake",
+            price = "320",
+            restaurantName = "The Chocolate Room",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "1.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹64",
+            address = "Chocolate Avenue"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.dessert_image_2,
+            title = "Premium Ice Cream Sundae",
+            price = "180",
+            restaurantName = "Frozen Delights",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Ice Cream Lane"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.dessert_image_3,
+            title = "Hot Chocolate Brownie with Ice Cream",
+            price = "220",
+            restaurantName = "Brownie Heaven",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹22",
+            address = "Brownie Street"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.dessert_image_4,
+            title = "Gulab Jamun with Rabri",
+            price = "160",
+            restaurantName = "Mithai Wala",
+            rating = "4.6",
+            deliveryTime = "18-22 mins",
+            distance = "1.5 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹40",
+            address = "Sweet Market"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.dessert_image_5,
+            title = "Fresh Fruit Pastry",
+            price = "240",
+            restaurantName = "The Bakery Shop",
+            rating = "4.7",
+            deliveryTime = "22-28 mins",
+            distance = "2.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹36",
+            address = "Bakery Road"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.dessert_image_6,
+            title = "Fresh Fruit Bowl with Honey",
+            price = "200",
+            restaurantName = "Healthy Sweets",
+            rating = "4.5",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹40",
+            address = "Fresh Market"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.dessert_image_7,
+            title = "Rasmalai (2 pieces)",
+            price = "190",
+            restaurantName = "Bengal Sweets",
+            rating = "4.8",
+            deliveryTime = "16-22 mins",
+            distance = "1.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Bengal Lane"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.dessert_image_8,
+            title = "Tiramisu Cup",
+            price = "280",
+            restaurantName = "Italian Desserts",
+            rating = "4.7",
+            deliveryTime = "24-30 mins",
+            distance = "2.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹28",
+            address = "Italian Street"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.dessert_image_9,
+            title = "Jalebi with Rabri",
+            price = "150",
+            restaurantName = "Old Delhi Sweets",
+            rating = "4.6",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹45",
+            address = "Chandni Chowk"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.dessert_image_10,
+            title = "Red Velvet Pastry",
+            price = "210",
+            restaurantName = "Cake Factory",
+            rating = "4.5",
+            deliveryTime = "20-25 mins",
+            distance = "1.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹42",
+            address = "Cake Avenue"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.dessert_image_11,
+            title = "Kulfi Falooda",
+            price = "170",
+            restaurantName = "Royal Kulfi",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Kulfi Lane"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.dessert_image_12,
+            title = "Chocolate Mousse Jar",
+            price = "190",
+            restaurantName = "Dessert Jar",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Dessert Street"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.dessert_image_13,
+            title = "Gajar Ka Halwa",
+            price = "200",
+            restaurantName = "Desi Mithai",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Winter Special Road"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.dessert_image_14,
+            title = "Waffle with Nutella",
+            price = "230",
+            restaurantName = "Waffle House",
+            rating = "4.6",
+            deliveryTime = "16-22 mins",
+            distance = "1.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹46",
+            address = "Waffle Corner"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.dessert_image_15,
+            title = "Creme Brulee",
+            price = "280",
+            restaurantName = "French Patisserie",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "2.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "French Quarter"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.dessert_image_16,
+            title = "Assorted Macarons (6 pcs)",
+            price = "350",
+            restaurantName = "Macaron Paradise",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "2.3 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹87",
+            address = "Paris Lane"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.dessert_image_17,
+            title = "Motichoor Ladoo (4 pcs)",
+            price = "140",
+            restaurantName = "Brijwasi Sweets",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹28",
+            address = "Sweet Circle"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.dessert_image_18,
+            title = "Cheesecake Slice",
+            price = "260",
+            restaurantName = "Cheesecake & Co.",
+            rating = "4.6",
+            deliveryTime = "20-26 mins",
+            distance = "1.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "Cheese Road"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.dessert_image_19,
+            title = "Kheer Rice Pudding",
+            price = "130",
+            restaurantName = "Traditional Desserts",
+            rating = "4.8",
+            deliveryTime = "10-16 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Tradition Street"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.dessert_image_20,
+            title = "Assorted Dessert Platter",
+            price = "450",
+            restaurantName = "Dessert Kingdom",
+            rating = "4.9",
+            deliveryTime = "25-35 mins",
+            distance = "2.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹67",
+            address = "Royal Dessert Road"
+        )
+    )
+    Column {
+        dessertFoodItems .forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
+}
+
+@Composable
+fun VegMealPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Veg Meal Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your veg meal items here
+    }
+}
+
+@Composable
+fun BowlPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Bowl Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your bowl items here
+    }
+}
+
+@Composable
+fun SweetsPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Sweets Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your sweets items here
+    }
+}
+
+@Composable
+fun KhichdiPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Khichdi Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your khichdi items here
+    }
+}
+
+@Composable
+fun SundaePage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Sundae Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your sundae items here
+    }
+}
+
+@Composable
+fun JuicePage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Juice Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your juice items here
+    }
+}
+
+@Composable
+fun LassiPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Lassi Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your lassi items here
+    }
+}
+
+@Composable
+fun CurdRicePage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Curd Rice Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your curd rice items here
+    }
+}
+
+@Composable
+fun PuddingPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Pudding Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your pudding items here
+    }
+}
+
+@Composable
+fun CustardPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Custard Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your custard items here
+    }
+}
+
+@Composable
+fun SoupDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Soup Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your soup items here
+    }
+}
+
+@Composable
+fun BrowniePage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Brownie Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your brownie items here
+    }
+}
+
+@Composable
+fun WafflesPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Waffles Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your waffles items here
+    }
+}
+
+@Composable
+fun ColdCoffeePage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Cold Coffee Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your cold coffee items here
+    }
+}
+
+// Additional diet-specific item pages
+@Composable
+fun GrilledChickenDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Grilled Chicken Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your grilled chicken items here
+    }
+}
+
+@Composable
+fun SteamedFishDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Steamed Fish Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your steamed fish items here
+    }
+}
+
+@Composable
+fun QuinoaBowlDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Quinoa Bowl Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your quinoa bowl items here
+    }
+}
+
+@Composable
+fun AvocadoToastDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Avocado Toast Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your avocado toast items here
+    }
+}
+
+@Composable
+fun GreenSmoothieDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Green Smoothie Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your green smoothie items here
+    }
+}
+
+@Composable
+fun OatmealDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Oatmeal Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your oatmeal items here
+    }
+}
+
+@Composable
+fun GreekYogurtDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Greek Yogurt Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your greek yogurt items here
+    }
+}
+
+@Composable
+fun EggWhiteOmeletteDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Egg White Omelette Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your egg white omelette items here
+    }
+}
+
+@Composable
+fun TunaSaladDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Tuna Salad Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your tuna salad items here
+    }
+}
+
+@Composable
+fun LentilSoupDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Lentil Soup Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your lentil soup items here
+    }
+}
+
+@Composable
+fun CottageCheeseDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Cottage Cheese Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your cottage cheese items here
+    }
+}
+
+@Composable
+fun SproutsSaladDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Sprouts Salad Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your sprouts salad items here
+    }
+}
+
+@Composable
+fun BrownRiceBowlDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Brown Rice Bowl Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your brown rice bowl items here
+    }
+}
+
+@Composable
+fun SteamedVeggiesDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Steamed Veggies Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your steamed veggies items here
+    }
+}
+
+@Composable
+fun FruitBowlDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Fruit Bowl Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your fruit bowl items here
+    }
+}
+
+@Composable
+fun DetoxWaterDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Detox Water Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your detox water items here
+    }
+}
+
+@Composable
+fun HerbalTeaDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Herbal Tea Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your herbal tea items here
+    }
+}
+
+@Composable
+fun ProteinBarDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Protein Bar Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your protein bar items here
+    }
+}
+
+@Composable
+fun BoiledEggsDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Boiled Eggs Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your boiled eggs items here
+    }
+}
+
+@Composable
+fun HummusPlateDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Hummus Plate Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your hummus plate items here
+    }
+}
+
+@Composable
+fun SushiRollsDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Sushi Rolls Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your sushi rolls items here
+    }
+}
+
+@Composable
+fun TofuStirFryDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Tofu Stir Fry Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your tofu stir fry items here
+    }
+}
+
+@Composable
+fun ChiaPuddingDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Chia Pudding Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your chia pudding items here
+    }
+}
+
+@Composable
+fun MilletBowlDietPage() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            text = "Millet Bowl Items",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.header
+        )
+        // Add your millet bowl items here
+    }
+}
+
 @Composable
 fun SeeAllPage() {
     Column(
@@ -4617,56 +6106,4 @@ fun SeeAllPage() {
             textAlign = TextAlign.Center
         )
     }
-}
-
-// Usage in MainScreen - Improved with proper indexing
-//@Composable
-//fun MainScreenWithDietTabs(navController: NavHostController) {
-//    var currentPage by remember { mutableIntStateOf(0) }
-//    Column(modifier = Modifier.fillMaxWidth()) {
-//        CategoryDietTabsFood(
-//            onCategorySelected = { dietCategoryPage ->
-//                // The index is already handled by the selectedTabIndex in CategoryDietTabsFood
-//                // We just need to update currentPage with the correct index
-//                currentPage = when (dietCategoryPage) {
-//                    DietCategoryPage.Chicken -> 0
-//                    DietCategoryPage.Salad -> 1
-//                    DietCategoryPage.Mutton -> 2
-//                    DietCategoryPage.Kebabs -> 3
-//                    DietCategoryPage.HealthySnacks -> 4
-//                    DietCategoryPage.LowCalorie -> 5
-//                    DietCategoryPage.Vegan -> 6
-//                    DietCategoryPage.ProteinRich -> 7
-//                    DietCategoryPage.SeeAll -> 8
-//                }
-//            }
-//        )
-//    }
-//}
-
-// Alternative: More robust approach using indexOf
-@Composable
-fun MainScreenWithDietTabsImproved(navController: NavHostController) {
-    var currentPage by remember { mutableIntStateOf(0) }
-
-    val dietCategoryPages = listOf(
-        DietCategoryPage.Chicken,
-        DietCategoryPage.Salad,
-        DietCategoryPage.Mutton,
-        DietCategoryPage.Kebabs,
-        DietCategoryPage.HealthySnacks,
-        DietCategoryPage.LowCalorie,
-        DietCategoryPage.Vegan,
-        DietCategoryPage.ProteinRich,
-        DietCategoryPage.SeeAll
-    )
-
-//    Column(modifier = Modifier.fillMaxWidth()) {
-//        CategoryDietTabsFood(
-//            onCategorySelected = { dietCategoryPage ->
-//                // Find the index of the selected category in the list
-//                currentPage = dietCategoryPages.indexOfFirst { it == dietCategoryPage }
-//            }
-//        )
-//    }
 }

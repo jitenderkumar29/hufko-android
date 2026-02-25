@@ -144,7 +144,7 @@ fun CategoryDietTabsFood(
         )
     }
 
-    // All diet category pages - Moved BEFORE the LaunchedEffect that uses it
+    // All diet category pages
     val allDietCategoryPages = listOf(
         DietCategoryPage.Chicken,
         DietCategoryPage.Salad,
@@ -279,16 +279,31 @@ fun CategoryDietTabsFood(
 
     val seeAllIndex = visibleTabs.indexOfLast { it is DietCategoryPage.SeeAll }
 
+    // Create a mapping from allCategories index to visibleTabs index
+    val allToVisibleIndexMap = remember(recentlySelectedTabs) {
+        val map = mutableMapOf<Int, Int>()
+
+        // Map first 8 tabs
+        for (i in 0 until minOf(initialVisibleCount, allDietCategoryPages.size)) {
+            map[i] = i
+        }
+
+        // Map recently selected tabs
+        val sortedRecentTabs = recentlySelectedTabs.sorted()
+        sortedRecentTabs.forEachIndexed { recentIndex, allIndex ->
+            if (allIndex >= initialVisibleCount) {
+                map[allIndex] = initialVisibleCount + recentIndex
+            }
+        }
+
+        map
+    }
+
     // Find the index in visibleTabs for a given allCategories index
     fun getVisibleTabIndex(allCategoriesIndex: Int): Int {
         return when {
             allCategoriesIndex < initialVisibleCount -> allCategoriesIndex
-            allCategoriesIndex in recentlySelectedTabs -> {
-                // Calculate position in visibleTabs
-                val sortedRecentTabs = recentlySelectedTabs.sorted()
-                val recentIndex = sortedRecentTabs.indexOf(allCategoriesIndex)
-                initialVisibleCount + recentIndex
-            }
+            allCategoriesIndex in allToVisibleIndexMap -> allToVisibleIndexMap[allCategoriesIndex] ?: seeAllIndex
             else -> seeAllIndex // "See All" tab
         }
     }
@@ -340,13 +355,15 @@ fun CategoryDietTabsFood(
         ) {
             visibleTabs.forEachIndexed { index, dietCategoryPage ->
                 val isSeeAllTab = dietCategoryPage is DietCategoryPage.SeeAll
+
+                // Find which allCategories index this corresponds to
                 val allCategoriesIndex = when {
                     index < initialVisibleCount -> index
                     isSeeAllTab -> -1
                     else -> {
-                        // Find which allCategories index this corresponds to
-                        val recentIndex = index - initialVisibleCount
+                        // This is a recently selected tab - find its original index
                         val sortedRecentTabs = recentlySelectedTabs.sorted()
+                        val recentIndex = index - initialVisibleCount
                         if (recentIndex < sortedRecentTabs.size) {
                             sortedRecentTabs[recentIndex]
                         } else -1
@@ -5589,41 +5606,1823 @@ fun DessertPage() {
 
 @Composable
 fun VegMealPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val vegMealDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY VEG MEAL FILTERS (WITH ICONS) - 5 Icon-based filters
+                FilterChip(
+                    id = "north_indian",
+                    text = "North Indian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_north_indian_thali
+                ),
+                FilterChip(
+                    id = "south_indian",
+                    text = "South Indian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_south_indian_thali
+                ),
+                FilterChip(
+                    id = "thali",
+                    text = "Thali",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_thali_meal
+                ),
+                FilterChip(
+                    id = "rice_bowl",
+                    text = "Rice Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice_bowl
+                ),
+                FilterChip(
+                    id = "salad_bowl",
+                    text = "Salad Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_salad_bowl
+                ),
+
+                // 3. ADDITIONAL MEAL TYPES (TEXT ONLY)
+                FilterChip(
+                    id = "curry",
+                    text = "Curry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dosa",
+                    text = "Dosa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "idli",
+                    text = "Idli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pav_bhaji",
+                    text = "Pav Bhaji",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pulao",
+                    text = "Pulao",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paratha",
+                    text = "Paratha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chaat",
+                    text = "Chaat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. PROTEIN SOURCES (TEXT ONLY)
+                FilterChip(
+                    id = "paneer",
+                    text = "Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu",
+                    text = "Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lentils",
+                    text = "Lentils (Dal)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chickpeas",
+                    text = "Chickpeas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soy",
+                    text = "Soy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushroom",
+                    text = "Mushroom",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. CUISINE STYLES (TEXT ONLY)
+                FilterChip(
+                    id = "punjabi",
+                    text = "Punjabi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gujarati",
+                    text = "Gujarati",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bengali",
+                    text = "Bengali",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rajasthani",
+                    text = "Rajasthani",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maharashtrian",
+                    text = "Maharashtrian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_fiber",
+                    text = "High Fiber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "balanced_meal",
+                    text = "Balanced Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. MEAL PREPARATION (TEXT ONLY)
+                FilterChip(
+                    id = "oil_free",
+                    text = "Oil Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed",
+                    text = "Steamed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled",
+                    text = "Grilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fried",
+                    text = "Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "baked",
+                    text = "Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. SPICE LEVEL (TEXT ONLY)
+                FilterChip(
+                    id = "mild",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "very_spicy",
+                    text = "Very Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "150_300",
+                    text = "₹150 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "300_500",
+                    text = "₹300 - ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_500",
+                    text = "Above ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. Sort By Dropdown
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+
+        FilterButtonFood(
+            filterConfig = vegMealDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val vegMealDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_veg_north_indian_thali,
+                title = "North Indian Veg Thali",
+                price = "299",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.3 km",
+                discount = "20%",
+                discountAmount = "up to ₹60",
+                address = "Main Bazaar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_veg_south_indian_meals,
+                title = "South Indian Meals",
+                price = "249",
+                restaurantName = "Madras Cafe",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹37",
+                address = "Anna Nagar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_veg_paneer_biryani,
+                title = "Paneer Biryani with Raita",
+                price = "279",
+                restaurantName = "Biryani House",
+                rating = "4.6",
+                deliveryTime = "30-35 mins",
+                distance = "2.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹28",
+                address = "Spice Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_veg_healthy_bowl,
+                title = "Quinoa Veg Power Bowl",
+                price = "329",
+                restaurantName = "Healthy Bites",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹49",
+                address = "Fitness Plaza, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_veg_rajasthani_thali,
+                title = "Rajasthani Thali Special",
+                price = "349",
+                restaurantName = "Royal Rasoi",
+                rating = "4.9",
+                deliveryTime = "35-40 mins",
+                distance = "3.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹87",
+                address = "Jaipur Road, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_veg_pav_bhaji,
+                title = "Butter Pav Bhaji",
+                price = "189",
+                restaurantName = "Mumbai Street Food",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹19",
+                address = "Food Street, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Veg Meal Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = vegMealDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val vegMealDietItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.veg_meal_1,
+            title = "North Indian Veg Thali",
+            price = "299",
+            restaurantName = "Punjabi Dhaba",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "1.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Main Bazaar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.veg_meal_2,
+            title = "South Indian Meals",
+            price = "249",
+            restaurantName = "Madras Cafe",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Anna Nagar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.veg_meal_3,
+            title = "Paneer Butter Masala + Naan",
+            price = "329",
+            restaurantName = "Curry Palace",
+            rating = "4.7",
+            deliveryTime = "25-30 mins",
+            distance = "2.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹33",
+            address = "Restaurant Road"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.veg_meal_4,
+            title = "Veg Biryani with Raita",
+            price = "259",
+            restaurantName = "Biryani House",
+            rating = "4.6",
+            deliveryTime = "30-35 mins",
+            distance = "2.0 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹65",
+            address = "Spice Market"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.veg_meal_5,
+            title = "Chole Bhature Combo",
+            price = "179",
+            restaurantName = "Chole Wala",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Food Street"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.veg_meal_6,
+            title = "Dal Makhani + Rice + Salad",
+            price = "219",
+            restaurantName = "Dal Special",
+            rating = "4.5",
+            deliveryTime = "20-25 mins",
+            distance = "1.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹44",
+            address = "Comfort Food Lane"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.veg_meal_7,
+            title = "Masala Dosa with Sambhar",
+            price = "149",
+            restaurantName = "Dosa Corner",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "South Avenue"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.veg_meal_8,
+            title = "Rajasthani Thali",
+            price = "349",
+            restaurantName = "Royal Rasoi",
+            rating = "4.9",
+            deliveryTime = "30-35 mins",
+            distance = "2.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹35",
+            address = "Jaipur Road"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.veg_meal_9,
+            title = "Pav Bhaji (Butter)",
+            price = "189",
+            restaurantName = "Mumbai Street Food",
+            rating = "4.6",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "30% OFF",
+            discountAmount = "up to ₹57",
+            address = "Food Truck Park"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.veg_meal_10,
+            title = "Quinoa Veg Power Bowl",
+            price = "329",
+            restaurantName = "Healthy Bites",
+            rating = "4.5",
+            deliveryTime = "18-24 mins",
+            distance = "1.6 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹66",
+            address = "Fitness Plaza"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.veg_meal_11,
+            title = "Gujarati Thali",
+            price = "279",
+            restaurantName = "Gujarat Bhavan",
+            rating = "4.7",
+            deliveryTime = "22-28 mins",
+            distance = "1.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "Gujarat Colony"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.veg_meal_12,
+            title = "Aloo Paratha + Curd",
+            price = "159",
+            restaurantName = "Paratha Point",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Breakfast Street"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.veg_meal_13,
+            title = "Idli-Vada Combo",
+            price = "139",
+            restaurantName = "South Indian Cafe",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Morning Market"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.veg_meal_14,
+            title = "Veg Kolhapuri + Bhakri",
+            price = "239",
+            restaurantName = "Maharashtra Mishra",
+            rating = "4.6",
+            deliveryTime = "20-26 mins",
+            distance = "1.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹48",
+            address = "Kolhapur Road"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.veg_meal_15,
+            title = "Mushroom Curry + Rice",
+            price = "259",
+            restaurantName = "Mushroom House",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "2.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "Mushroom Lane"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.veg_meal_16,
+            title = "Bengali Veg Thali",
+            price = "289",
+            restaurantName = "Bengal Kitchen",
+            rating = "4.5",
+            deliveryTime = "25-30 mins",
+            distance = "2.3 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹72",
+            address = "Bengal Street"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.veg_meal_17,
+            title = "Chana Masala + Bhatura",
+            price = "169",
+            restaurantName = "Chana Bhatura House",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "1.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹34",
+            address = "Old Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.veg_meal_18,
+            title = "Mediterranean Veg Wrap",
+            price = "219",
+            restaurantName = "Wrap & Roll",
+            rating = "4.6",
+            deliveryTime = "15-20 mins",
+            distance = "1.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Food Court"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.veg_meal_19,
+            title = "Kadhai Paneer + Tandoori Roti",
+            price = "309",
+            restaurantName = "Kadhai King",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹31",
+            address = "Tandoori Lane"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.veg_meal_20,
+            title = "Grand Veg Festival Thali",
+            price = "399",
+            restaurantName = "Grand Bazaar",
+            rating = "4.9",
+            deliveryTime = "30-35 mins",
+            distance = "2.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹60",
+            address = "Food Festival Ground"
         )
-        // Add your veg meal items here
+    )
+    Column {
+        vegMealDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun BowlPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val bowlDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY BOWL DIET FILTERS (WITH ICONS) - Most important categories with visuals
+                FilterChip(
+                    id = "protein_bowl",
+                    text = "Protein Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_protein_bowl
+                ),
+                FilterChip(
+                    id = "green_bowl",
+                    text = "Green Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_green_bowl
+                ),
+                FilterChip(
+                    id = "grain_bowl",
+                    text = "Grain Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_grain_bowl
+                ),
+                FilterChip(
+                    id = "quinoa_bowl",
+                    text = "Quinoa Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_quinoa_bowl
+                ),
+                FilterChip(
+                    id = "acai_bowl",
+                    text = "Acai Bowl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_acai_bowl
+                ),
+
+                // 3. BOWL BASE (TEXT ONLY)
+                FilterChip(
+                    id = "rice_base",
+                    text = "Rice Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quinoa_base",
+                    text = "Quinoa Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kale_base",
+                    text = "Kale Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mixed_greens",
+                    text = "Mixed Greens",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cauliflower_rice",
+                    text = "Cauliflower Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. PROTEIN ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "grilled_chicken",
+                    text = "Grilled Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "salmon",
+                    text = "Salmon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_protein",
+                    text = "Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggs",
+                    text = "Eggs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "beans",
+                    text = "Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lentils_protein",
+                    text = "Lentils",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. TOPPINGS & ADD-ONS (TEXT ONLY)
+                FilterChip(
+                    id = "avocado",
+                    text = "Avocado",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nuts",
+                    text = "Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "seeds",
+                    text = "Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_fruits",
+                    text = "Fresh Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "berries",
+                    text = "Berries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "granola",
+                    text = "Granola",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DRESSINGS & SAUCES (TEXT ONLY)
+                FilterChip(
+                    id = "sesame_dressing",
+                    text = "Sesame Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanut_sauce",
+                    text = "Peanut Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_dressing",
+                    text = "Yogurt Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_vinaigrette",
+                    text = "Lemon Vinaigrette",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sriracha",
+                    text = "Sriracha",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "high_protein_bowl",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_bowl",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_bowl",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_bowl",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_bowl",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_bowl",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. CALORIE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_400_cal",
+                    text = "Under 400 cal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "400_600_cal",
+                    text = "400-600 cal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "600_800_cal",
+                    text = "600-800 cal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_800_cal",
+                    text = "Above 800 cal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. CUISINE INSPIRATION (TEXT ONLY)
+                FilterChip(
+                    id = "asian_bowl",
+                    text = "Asian Inspired",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mediterranean_bowl",
+                    text = "Mediterranean",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mexican_bowl",
+                    text = "Mexican Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hawaiian_bowl",
+                    text = "Hawaiian",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. Sort By Dropdown
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+
+        FilterButtonFood(
+            filterConfig = bowlDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val bowlDietItems = listOf(
+            // 1. Protein Power Bowl
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_protein_power_bowl,
+                title = "Protein Power Bowl",
+                price = "399",
+                restaurantName = "Bowl Culture",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "Fitness District, Delhi"
+            ),
+            // 2. Acai Berry Bowl
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_acai_berry_bowl,
+                title = "Acai Berry Bowl",
+                price = "449",
+                restaurantName = "Healthy Bowl Co",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "2.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹45",
+                address = "Wellness Hub, Delhi"
+            ),
+            // 3. Quinoa Garden Bowl
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_quinoa_garden_bowl,
+                title = "Quinoa Garden Bowl",
+                price = "359",
+                restaurantName = "Green Theory",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹72",
+                address = "Eco Square, Delhi"
+            ),
+            // 4. Mediterranean Bowl
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_mediterranean_bowl,
+                title = "Mediterranean Bowl",
+                price = "429",
+                restaurantName = "Olive Kitchen",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹64",
+                address = "Mediterranean Plaza, Delhi"
+            ),
+            // 5. Hawaiian Poke Bowl
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_hawaiian_poke_bowl,
+                title = "Hawaiian Poke Bowl",
+                price = "499",
+                restaurantName = "Island Bowls",
+                rating = "4.9",
+                deliveryTime = "30-35 mins",
+                distance = "2.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹50",
+                address = "Beachside Ave, Delhi"
+            ),
+            // 6. Buddha's Delight Bowl
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_buddha_bowl,
+                title = "Buddha's Delight Bowl",
+                price = "379",
+                restaurantName = "Zen Kitchen",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹57",
+                address = "Peace Complex, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Bowl Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = bowlDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val bowlDietItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.bowl_diet_1,
+            title = "Classic Protein Power Bowl",
+            price = "349",
+            restaurantName = "Bowl Culture",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹70",
+            address = "Fitness District, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.bowl_diet_2,
+            title = "Acai Berry Bliss Bowl",
+            price = "429",
+            restaurantName = "Healthy Bowl Co",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹64",
+            address = "Wellness Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.bowl_diet_3,
+            title = "Quinoa Garden Harvest Bowl",
+            price = "359",
+            restaurantName = "Green Theory",
+            rating = "4.7",
+            deliveryTime = "22-28 mins",
+            distance = "1.9 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹72",
+            address = "Eco Square, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.bowl_diet_4,
+            title = "Mediterranean Sunshine Bowl",
+            price = "399",
+            restaurantName = "Olive Kitchen",
+            rating = "4.8",
+            deliveryTime = "25-30 mins",
+            distance = "2.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹60",
+            address = "Mediterranean Plaza, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.bowl_diet_5,
+            title = "Hawaiian Poke Bowl",
+            price = "479",
+            restaurantName = "Island Bowls",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "2.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹48",
+            address = "Beachside Ave, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.bowl_diet_6,
+            title = "Buddha's Delight Bowl",
+            price = "369",
+            restaurantName = "Zen Kitchen",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "1.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹55",
+            address = "Peace Complex, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.bowl_diet_7,
+            title = "Berry Blast Smoothie Bowl",
+            price = "319",
+            restaurantName = "Morning Bowls",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹32",
+            address = "Breakfast Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.bowl_diet_8,
+            title = "Thai Green Curry Bowl",
+            price = "409",
+            restaurantName = "Thai Spice",
+            rating = "4.7",
+            deliveryTime = "28-34 mins",
+            distance = "2.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹61",
+            address = "Asian Food Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.bowl_diet_9,
+            title = "Mexican Fiesta Bowl",
+            price = "379",
+            restaurantName = "Salsa Bowls",
+            rating = "4.6",
+            deliveryTime = "22-28 mins",
+            distance = "1.9 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹76",
+            address = "Food Square, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.bowl_diet_10,
+            title = "Tofu Teriyaki Bowl",
+            price = "349",
+            restaurantName = "Asian Wok",
+            rating = "4.7",
+            deliveryTime = "20-26 mins",
+            distance = "1.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹35",
+            address = "Teriyaki Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.bowl_diet_11,
+            title = "Falafel Hummus Bowl",
+            price = "329",
+            restaurantName = "Middle East Eats",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹49",
+            address = "Mediterranean Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.bowl_diet_12,
+            title = "Mango Coconut Chia Bowl",
+            price = "289",
+            restaurantName = "Tropical Bowls",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹29",
+            address = "Fruit Bazaar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.bowl_diet_13,
+            title = "Korean Bibimbap Bowl",
+            price = "419",
+            restaurantName = "Seoul Kitchen",
+            rating = "4.8",
+            deliveryTime = "25-30 mins",
+            distance = "2.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹63",
+            address = "Korea Town, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.bowl_diet_14,
+            title = "Moroccan Spice Bowl",
+            price = "389",
+            restaurantName = "Marrakesh Flavors",
+            rating = "4.7",
+            deliveryTime = "24-30 mins",
+            distance = "2.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹78",
+            address = "Spice Souk, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.bowl_diet_15,
+            title = "Greek Goddess Bowl",
+            price = "359",
+            restaurantName = "Athens Bowl Co",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹54",
+            address = "Greek Plaza, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.bowl_diet_16,
+            title = "Rainbow Veggie Bowl",
+            price = "299",
+            restaurantName = "Colorful Eats",
+            rating = "4.6",
+            deliveryTime = "18-23 mins",
+            distance = "1.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Green Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.bowl_diet_17,
+            title = "Japanese Zen Bowl",
+            price = "439",
+            restaurantName = "Tokyo Bowl House",
+            rating = "4.9",
+            deliveryTime = "26-32 mins",
+            distance = "2.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹44",
+            address = "Japantown, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.bowl_diet_18,
+            title = "California Sunrise Bowl",
+            price = "399",
+            restaurantName = "West Coast Bowls",
+            rating = "4.7",
+            deliveryTime = "22-28 mins",
+            distance = "1.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹60",
+            address = "Beach Boulevard, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.bowl_diet_19,
+            title = "Indian Masala Bowl",
+            price = "309",
+            restaurantName = "Spice Route",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹62",
+            address = "Masala Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.bowl_diet_20,
+            title = "Grand Superfood Bowl",
+            price = "499",
+            restaurantName = "Superfood Kitchen",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "2.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹75",
+            address = "Wellness Avenue, Delhi"
         )
-        // Add your bowl items here
+    )
+    Column {
+        bowlDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun SweetsPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(
-            text = "Sweets Items",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val sweetsDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY SWEETS DIET FILTERS (WITH ICONS) - Most important sweet categories with visuals
+                FilterChip(
+                    id = "indian_sweets",
+                    text = "Indian Sweets",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_indian_sweets
+                ),
+                FilterChip(
+                    id = "chocolate_desserts",
+                    text = "Chocolate Desserts",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_dessert_2
+                ),
+                FilterChip(
+                    id = "ice_cream",
+                    text = "Ice Cream",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_ice_cream
+                ),
+                FilterChip(
+                    id = "cakes_pastries",
+                    text = "Cakes & Pastries",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cake
+                ),
+                FilterChip(
+                    id = "traditional_desserts",
+                    text = "Traditional Desserts",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_traditional_dessert
+                ),
+
+                // 3. INDIAN SWEETS (MITHAS) - TEXT ONLY
+                FilterChip(
+                    id = "gulab_jamun",
+                    text = "Gulab Jamun",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rasgulla",
+                    text = "Rasgulla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalebi",
+                    text = "Jalebi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "barfi",
+                    text = "Barfi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "laddu",
+                    text = "Laddu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "halwa",
+                    text = "Halwa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kheer",
+                    text = "Kheer / Payasam",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peda",
+                    text = "Peda",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. INTERNATIONAL DESSERTS - TEXT ONLY
+                FilterChip(
+                    id = "tiramisu",
+                    text = "Tiramisu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheesecake",
+                    text = "Cheesecake",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brownie",
+                    text = "Brownie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookie",
+                    text = "Cookies",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "donut",
+                    text = "Donuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "waffle",
+                    text = "Waffles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pancake",
+                    text = "Pancakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crepe",
+                    text = "Crepes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "macaron",
+                    text = "Macarons",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mousse",
+                    text = "Mousse",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. ICE CREAM & FROZEN TREATS - TEXT ONLY
+                FilterChip(
+                    id = "vanilla_icecream",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_icecream",
+                    text = "Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberry_icecream",
+                    text = "Strawberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_icecream",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pista_icecream",
+                    text = "Pistachio",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kulfi",
+                    text = "Kulfi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sorbet",
+                    text = "Sorbet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gelato",
+                    text = "Gelato",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "frozen_yogurt",
+                    text = "Frozen Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. CAKE FLAVORS & TYPES - TEXT ONLY
+                FilterChip(
+                    id = "chocolate_cake",
+                    text = "Chocolate Cake",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_velvet",
+                    text = "Red Velvet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_forest",
+                    text = "Black Forest",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple_cake",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "butterscotch",
+                    text = "Butterscotch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit_cake",
+                    text = "Fruit Cake",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cupcakes",
+                    text = "Cupcakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. FESTIVAL SPECIAL SWEETS - TEXT ONLY
+                FilterChip(
+                    id = "diwali_sweets",
+                    text = "Diwali Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "holi_sweets",
+                    text = "Holi Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eid_sweets",
+                    text = "Eid Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "christmas_desserts",
+                    text = "Christmas Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "birthday_cakes",
+                    text = "Birthday Cakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "anniversary_desserts",
+                    text = "Anniversary Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_desserts",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_desserts",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_desserts",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_250",
+                    text = "₹100 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "250_500",
+                    text = "₹250 - ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_500",
+                    text = "Above ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. Sort By Dropdown
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
-        // Add your sweets items here
+
+        FilterButtonFood(
+            filterConfig = sweetsDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val sweetsDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_chocolate_cake,
+                title = "Chocolate Cake",
+                price = "299",
+                restaurantName = "Sweet Tooth Bakery",
+                rating = "4.8",
+                deliveryTime = "30-35 mins",
+                distance = "2.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹30",
+                address = "Dessert Avenue, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_gulab_jamun_1,
+                title = "Gulab Jamun (4 pcs)",
+                price = "149",
+                restaurantName = "Mithai Wala",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "5%",
+                discountAmount = "up to ₹7",
+                address = "Old Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_ice_cream_sundae,
+                title = "Ice Cream Sundae",
+                price = "199",
+                restaurantName = "Frozen Treats",
+                rating = "4.6",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹30",
+                address = "Cool Plaza, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_rasmalai_1,
+                title = "Rasmalai",
+                price = "249",
+                restaurantName = "Bengal Sweets",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "2.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Eastern Avenue, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_brownie,
+                title = "Chocolate Brownie",
+                price = "179",
+                restaurantName = "Bake House",
+                rating = "4.5",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹36",
+                address = "Baker Street, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_jalebi_1,
+                title = "Crispy Jalebi",
+                price = "129",
+                restaurantName = "Street Sweets",
+                rating = "4.4",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "0%",
+                discountAmount = "up to ₹0",
+                address = "Food Court, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = sweetsDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
     }
+
+
 }
 
 @Composable

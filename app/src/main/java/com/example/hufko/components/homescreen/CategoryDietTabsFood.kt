@@ -45,6 +45,7 @@ import com.example.hufko.ui.theme.customColors
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.saveable.Saver
 
 // Sealed class for different diet category pages
 sealed class DietCategoryPage(val title: String, val iconRes: Int) {
@@ -115,7 +116,6 @@ data class DietFoodItem(
     val isVeg: Boolean = true,
     val category: String = "Chicken"
 )
-
 @Composable
 fun CategoryDietTabsFood(
     navController: NavHostController? = null,
@@ -134,13 +134,27 @@ fun CategoryDietTabsFood(
     }
 
     // Track recently selected tabs from "See All" page - using Set to avoid duplicates
-    var recentlySelectedTabs by rememberSaveable { mutableStateOf(setOf<Int>()) }
+    // Initialize from savedStateHandle to persist across configuration changes
+    var recentlySelectedTabs by rememberSaveable(stateSaver = SetSaver) {
+        mutableStateOf(
+            navController?.currentBackStackEntry?.savedStateHandle?.get<Set<Int>>("recentlySelectedDietTabs")
+                ?: emptySet()
+        )
+    }
 
     // Save changes back to savedStateHandle
     LaunchedEffect(internalSelectedIndex) {
         navController?.currentBackStackEntry?.savedStateHandle?.set(
             "currentDietSelectedIndex",
             internalSelectedIndex
+        )
+    }
+
+    // Save recently selected tabs
+    LaunchedEffect(recentlySelectedTabs) {
+        navController?.currentBackStackEntry?.savedStateHandle?.set(
+            "recentlySelectedDietTabs",
+            recentlySelectedTabs
         )
     }
 
@@ -217,7 +231,7 @@ fun CategoryDietTabsFood(
 
                 // Add the selected tab to recently selected tabs if it's beyond initial visible count
                 if (newIndex >= 8) {
-                    // Update recentlySelectedTabs by adding the new index
+                    // Update recentlySelectedTabs by adding the new index (preserving all previous ones)
                     recentlySelectedTabs = recentlySelectedTabs + newIndex
                     Log.d("CategoryDietTabsFood", "Added to recentlySelectedTabs: $newIndex, now: $recentlySelectedTabs")
                 }
@@ -248,26 +262,30 @@ fun CategoryDietTabsFood(
     // Initial visible tabs count
     val initialVisibleCount = 8
 
+    // Configuration
+    val TAG = "CategoryDietTabsFood"
+
     // Build visible tabs: initial 8 + recently selected (sorted) + "See All"
     val visibleTabs = remember(recentlySelectedTabs) {
         buildList {
-            // Add first 8 tabs
+            // 1. Add first 8 tabs (default visible tabs)
             addAll(allDietCategoryPages.take(initialVisibleCount))
 
-            // Add recently selected tabs (sorted to maintain consistent order)
-            val sortedRecentTabs = recentlySelectedTabs.sorted()
-            Log.d("CategoryDietTabsFood", "Building visible tabs with sorted recent tabs: $sortedRecentTabs")
+            // 2. Add recently selected tabs that are beyond the initial visible range
+            val uniqueRecentTabs = recentlySelectedTabs
+                .filter { it >= initialVisibleCount } // Only include tabs beyond first 8
+                .sorted() // Sort for consistent order
 
-            sortedRecentTabs.forEach { index ->
-                if (index >= initialVisibleCount) {
-                    allDietCategoryPages.getOrNull(index)?.let { page ->
-                        add(page)
-                        Log.d("CategoryDietTabsFood", "Added recent tab at index $index: ${page.title}")
-                    }
+            Log.d(TAG, "Building visible tabs with filtered recent tabs: $uniqueRecentTabs")
+
+            uniqueRecentTabs.forEach { index ->
+                allDietCategoryPages.getOrNull(index)?.let { page ->
+                    add(page)
+                    Log.d(TAG, "Added recent tab at index $index: ${page.title}")
                 }
             }
 
-            // Add "See All" at the end
+            // 3. Add "See All" tab at the end
             add(DietCategoryPage.SeeAll)
         }
     }
@@ -397,6 +415,12 @@ fun CategoryDietTabsFood(
                             internalSelectedIndex = allCategoriesIndex
                             onTabIndexChanged(allCategoriesIndex)
                             onCategorySelected(dietCategoryPage)
+
+                            // Also add to recently selected if beyond initial count
+                            if (allCategoriesIndex >= initialVisibleCount) {
+                                recentlySelectedTabs = recentlySelectedTabs + allCategoriesIndex
+                                Log.d(TAG, "Added to recentlySelectedTabs on click: $allCategoriesIndex, now: $recentlySelectedTabs")
+                            }
                         }
                     },
                     modifier = Modifier
@@ -540,6 +564,12 @@ fun CategoryDietTabsFood(
         }
     }
 }
+
+// Custom SetSaver for rememberSaveable
+val SetSaver = Saver<Set<Int>, Set<Int>>(
+    save = { it },
+    restore = { it }
+)
 
 
 @Composable
@@ -7422,32 +7452,1633 @@ fun SweetsPage() {
         )
     }
 
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
 
+    // Sample data based on the provided images
+
+    val sweetsDietItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.sweets_diet_1,
+            title = "Date & Nut Energy Balls",
+            price = "199",
+            restaurantName = "Sweet Greens",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹40",
+            address = "Health Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.sweets_diet_2,
+            title = "Dark Chocolate Berry Cups",
+            price = "249",
+            restaurantName = "Pure Indulgence",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Sweet Corner, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.sweets_diet_3,
+            title = "Chia Seed Pudding",
+            price = "179",
+            restaurantName = "Healthy Treats",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Wellness Ave, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.sweets_diet_4,
+            title = "Almond Butter Brownie",
+            price = "219",
+            restaurantName = "Guilt-Free Bakes",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹44",
+            address = "Bakery Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.sweets_diet_5,
+            title = "Frozen Yogurt Berry Bowl",
+            price = "189",
+            restaurantName = "Yogurt World",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Dessert Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.sweets_diet_6,
+            title = "Raw Vegan Cheesecake",
+            price = "299",
+            restaurantName = "Raw Earth",
+            rating = "4.9",
+            deliveryTime = "22-28 mins",
+            distance = "1.9 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Organic Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.sweets_diet_7,
+            title = "Coconut Ladoo (Sugar-Free)",
+            price = "149",
+            restaurantName = "Indian Roots",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Old Delhi Street",
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.sweets_diet_8,
+            title = "Dark Chocolate Almond Bar",
+            price = "169",
+            restaurantName = "Choco Fit",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Chocolate Square, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.sweets_diet_9,
+            title = "Fruit Sorbet Cup",
+            price = "139",
+            restaurantName = "Frozen Bliss",
+            rating = "4.6",
+            deliveryTime = "10-15 mins",
+            distance = "0.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹28",
+            address = "Market Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.sweets_diet_10,
+            title = "Peanut Butter Protein Cups",
+            price = "229",
+            restaurantName = "Protein Lab",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Fitness Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.sweets_diet_11,
+            title = "Mango Sticky Rice (Light)",
+            price = "259",
+            restaurantName = "Thai Delight",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹26",
+            address = "Asian Plaza, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.sweets_diet_12,
+            title = "Gluten-Free Banana Bread",
+            price = "189",
+            restaurantName = "Healthy Bakes",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹38",
+            address = "Bakery Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.sweets_diet_13,
+            title = "Matcha Green Tea Mousse",
+            price = "279",
+            restaurantName = "Zen Desserts",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "1.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "Tea District, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.sweets_diet_14,
+            title = "Roasted Chickpea Sweets",
+            price = "129",
+            restaurantName = "Munch Healthy",
+            rating = "4.6",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Snack Corner, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.sweets_diet_15,
+            title = "Berry Compote with Granola",
+            price = "209",
+            restaurantName = "Morning Fresh",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹42",
+            address = "Breakfast Blvd, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.sweets_diet_16,
+            title = "Kheer (Low-Fat Rice Pudding)",
+            price = "169",
+            restaurantName = "Desi Delights",
+            rating = "4.7",
+            deliveryTime = "18-24 mins",
+            distance = "1.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Spice Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.sweets_diet_17,
+            title = "Chocolate Avocado Mousse",
+            price = "239",
+            restaurantName = "Pure Indulgence",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹24",
+            address = "Healthy Ave, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.sweets_diet_18,
+            title = "Fig & Honey Energy Bar",
+            price = "159",
+            restaurantName = "Nature's Basket",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹32",
+            address = "Organic Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.sweets_diet_19,
+            title = "Watermelon Granita",
+            price = "119",
+            restaurantName = "Summer Cool",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Beach Road, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.sweets_diet_20,
+            title = "Assorted Diet Dessert Box",
+            price = "449",
+            restaurantName = "Dessert Studio",
+            rating = "4.9",
+            deliveryTime = "22-28 mins",
+            distance = "2.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹90",
+            address = "Gourmet Street, Delhi"
+        )
+    )
+    Column {
+        sweetsDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
 fun KhichdiPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val khichdiDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY KHICHDI DIET FILTERS (WITH ICONS) - Main khichdi categories
+                FilterChip(
+                    id = "traditional_khichdi",
+                    text = "Traditional Khichdi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_traditional_food
+                ),
+                FilterChip(
+                    id = "protein_rich",
+                    text = "Protein Rich",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_protein
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_calorie
+                ),
+                FilterChip(
+                    id = "one_pot_meals",
+                    text = "One Pot Meals",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_one_pot
+                ),
+                FilterChip(
+                    id = "comfort_food",
+                    text = "Comfort Food",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_comfort_food
+                ),
+                // 5. REGIONAL VARIETIES (TEXT ONLY)
+                FilterChip(
+                    id = "gujarati_khichdi",
+                    text = "Gujarati Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bengali_khichdi",
+                    text = "Bengali Khichuri",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sindhi_khichdi",
+                    text = "Sindhi Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "south_indian",
+                    text = "South Indian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "punjabi_khichdi",
+                    text = "Punjabi Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bihari_khichdi",
+                    text = "Bihari Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. VEGETABLE ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "mixed_vegetable",
+                    text = "Mixed Vegetables",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "palak_khichdi",
+                    text = "Palak (Spinach)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lauki_khichdi",
+                    text = "Lauki (Bottle Gourd)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pumpkin_khichdi",
+                    text = "Pumpkin",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrot_beans",
+                    text = "Carrot & Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "methi_khichdi",
+                    text = "Methi (Fenugreek)",
+                    type = FilterType.TEXT_ONLY
+                ),
+            FilterChip(
+                id = "soyachunks_khichdi",
+                text = "Soya Chunks Khichdi",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "mushroom_khichdi",
+                text = "Mushroom Khichdi",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "peas_khichdi",
+                text = "Green Peas Khichdi",
+                type = FilterType.TEXT_ONLY
+            ),
+
+            // 8. DIETARY & HEALTH (TEXT ONLY)
+            FilterChip(
+                id = "sattvic_khichdi",
+                text = "Sattvic (No Onion/Garlic)",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "ayurvedic_khichdi",
+                text = "Ayurvedic Khichdi",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "detox_khichdi",
+                text = "Detox Khichdi",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "high_protein",
+                text = "High Protein",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "low_fat",
+                text = "Low Fat",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "diabetic_friendly",
+                text = "Diabetic Friendly",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "gluten_free_khichdi",
+                text = "Gluten Free",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "vegan_khichdi",
+                text = "Vegan",
+                type = FilterType.TEXT_ONLY
+            ),
+
+            // 9. CONVENIENCE (TEXT ONLY)
+            FilterChip(
+                id = "ready_to_eat",
+                text = "Ready to Eat",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "meal_combo",
+                text = "Meal Combos",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "family_pack",
+                text = "Family Pack",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "with_side_dishes",
+                text = "With Side Dishes",
+                type = FilterType.TEXT_ONLY
+            ),
+
+            // 10. SIDE DISHES (TEXT ONLY)
+            FilterChip(
+                id = "with_kadhi",
+                text = "With Kadhi",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "with_papad",
+                text = "With Papad",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "with_pickle",
+                text = "With Pickle",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "with_raita",
+                text = "With Raita",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "with_ghee",
+                text = "With Extra Ghee",
+                type = FilterType.TEXT_ONLY
+            ),
+
+            // 11. PRICE RANGE (TEXT ONLY)
+            FilterChip(
+                id = "under_100",
+                text = "Under ₹100",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "100_200",
+                text = "₹100 - ₹200",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "200_300",
+                text = "₹200 - ₹300",
+                type = FilterType.TEXT_ONLY
+            ),
+            FilterChip(
+                id = "above_300",
+                text = "Above ₹300",
+                type = FilterType.TEXT_ONLY
+            ),
+
+            // 12. SORT BY DROPDOWN
+            FilterChip(
+                id = "sort_by",
+                text = "Sort By",
+                type = FilterType.SORT_DROPDOWN,
+                rightIcon = R.drawable.outline_keyboard_arrow_down_24
+            )
+        ),
+        rows = 2
+        )
+
+        FilterButtonFood(
+            filterConfig = khichdiDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val khichdiDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_moong_dal_khichdi,
+                title = "Classic Moong Dal Khichdi",
+                price = "179",
+                restaurantName = "Healthy Bites",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Wellness Street, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_vegetable_khichdi,
+                title = "Mixed Vegetable Khichdi",
+                price = "199",
+                restaurantName = "Green Bowl Kitchen",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "1.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹20",
+                address = "Organic Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_tawa_khichdi,
+                title = "Special Tawa Khichdi",
+                price = "229",
+                restaurantName = "Punjabi Tadka",
+                rating = "4.7",
+                deliveryTime = "25-30 mins",
+                distance = "1.9 km",
+                discount = "20%",
+                discountAmount = "up to ₹46",
+                address = "Food Square, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_quinoa_khichdi,
+                title = "Quinoa Protein Khichdi",
+                price = "279",
+                restaurantName = "Fit Food Cafe",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹28",
+                address = "Fitness Hub, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_oats_khichdi,
+                title = "Oats & Moong Dal Khichdi",
+                price = "189",
+                restaurantName = "Diet Kitchen",
+                rating = "4.6",
+                deliveryTime = "18-22 mins",
+                distance = "1.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹28",
+                address = "Health Avenue, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_masala_khichdi_1,
+                title = "Masala Khichdi with Ghee",
+                price = "209",
+                restaurantName = "Spice Route",
+                rating = "4.8",
+                deliveryTime = "22-27 mins",
+                distance = "1.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹42",
+                address = "Spice Market, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Khichdi Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = khichdiDietItems ,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+
+    val khichdiDietItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.khichdi_diet_1,
+            title = "Moong Dal Khichdi (Plain)",
+            price = "149",
+            restaurantName = "Healthy Bites",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹30",
+            address = "Food Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.khichdi_diet_2,
+            title = "Vegetable Khichdi",
+            price = "179",
+            restaurantName = "Desi Roots",
+            rating = "4.7",
+            deliveryTime = "18-24 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Old Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.khichdi_diet_3,
+            title = "Brown Rice Khichdi",
+            price = "189",
+            restaurantName = "Nutri Meal",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Health Plaza, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.khichdi_diet_4,
+            title = "Quinoa Khichdi",
+            price = "229",
+            restaurantName = "Fusion Foods",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹46",
+            address = "Gourmet Avenue, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.khichdi_diet_5,
+            title = "Masala Khichdi",
+            price = "169",
+            restaurantName = "Spice Kitchen",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Spice Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.khichdi_diet_6,
+            title = "Palak Khichdi (Spinach)",
+            price = "159",
+            restaurantName = "Green Bowl",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Green Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.khichdi_diet_7,
+            title = "Bajra Khichdi",
+            price = "199",
+            restaurantName = "Rajasthani Thali",
+            rating = "4.6",
+            deliveryTime = "20-25 mins",
+            distance = "1.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹40",
+            address = "Heritage Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.khichdi_diet_8,
+            title = "Jowar Khichdi",
+            price = "189",
+            restaurantName = "Millet Magic",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Organic Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.khichdi_diet_9,
+            title = "Kadhi Khichdi Combo",
+            price = "249",
+            restaurantName = "Gujarati House",
+            rating = "4.9",
+            deliveryTime = "22-28 mins",
+            distance = "2.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹50",
+            address = "Sector 18, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.khichdi_diet_10,
+            title = "Papdi Khichdi",
+            price = "179",
+            restaurantName = "Street Foodies",
+            rating = "4.5",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Food Court, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.khichdi_diet_11,
+            title = "Methi Khichdi (Fenugreek)",
+            price = "159",
+            restaurantName = "Healthy Palate",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Wellness Road, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.khichdi_diet_12,
+            title = "Surti Khichdi",
+            price = "209",
+            restaurantName = "Gujarati Rasoi",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.6 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹42",
+            address = "South Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.khichdi_diet_13,
+            title = "Lauki Khichdi (Bottle Gourd)",
+            price = "169",
+            restaurantName = "Diet Delight",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Health Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.khichdi_diet_14,
+            title = "Tawa Khichdi",
+            price = "189",
+            restaurantName = "Punjabi Dhaba",
+            rating = "4.6",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Highway Inn, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.khichdi_diet_15,
+            title = "Soybean Khichdi",
+            price = "199",
+            restaurantName = "Protein Plus",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹40",
+            address = "Fitness Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.khichdi_diet_16,
+            title = "Paneer Khichdi",
+            price = "239",
+            restaurantName = "Cheese Cottage",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹36",
+            address = "Dairy Circle, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.khichdi_diet_17,
+            title = "Garlic Khichdi",
+            price = "169",
+            restaurantName = "Flavors of India",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Spice Bazaar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.khichdi_diet_18,
+            title = "Daliya Khichdi (Broken Wheat)",
+            price = "159",
+            restaurantName = "Whole Foods",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹32",
+            address = "Organic Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.khichdi_diet_19,
+            title = "Sambhar Khichdi",
+            price = "219",
+            restaurantName = "South Indian Cafe",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Chennai Express, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.khichdi_diet_20,
+            title = "Grand Khichdi Platter",
+            price = "349",
+            restaurantName = "Royal Feast",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "2.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹70",
+            address = "Palace Road, Delhi"
         )
-        // Add your khichdi items here
+    )
+    Column {
+        khichdiDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun SundaePage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val sundaeDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY SUNDAE DIET CATEGORIES (WITH ICONS)
+                FilterChip(
+                    id = "classic_sundaes",
+                    text = "Classic Sundaes",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_sundae
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_calorie_sundae
+                ),
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sugar_free_sundae
+                ),
+                FilterChip(
+                    id = "protein_sundaes",
+                    text = "Protein Sundaes",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_protein_sundae
+                ),
+                FilterChip(
+                    id = "vegan_sundaes",
+                    text = "Vegan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegan_sundae
+                ),
+
+                // 3. BASE FLAVORS (TEXT ONLY)
+                FilterChip(
+                    id = "vanilla_base",
+                    text = "Vanilla Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_base",
+                    text = "Chocolate Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberry_base",
+                    text = "Strawberry Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coffee_base",
+                    text = "Coffee Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_base",
+                    text = "Mango Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pistachio_base",
+                    text = "Pistachio Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_base",
+                    text = "Coconut Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "banana_base",
+                    text = "Banana Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "chocolate_sauce",
+                    text = "Chocolate Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_sauce",
+                    text = "Caramel Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberry_sauce",
+                    text = "Strawberry Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nuts_toppings",
+                    text = "Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sprinkles",
+                    text = "Sprinkles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cherry_on_top",
+                    text = "Cherry on Top",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brownie_bits",
+                    text = "Brownie Bits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookie_crumbs",
+                    text = "Cookie Crumbs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_fruits",
+                    text = "Fresh Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whipped_cream",
+                    text = "Whipped Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "waffle_pieces",
+                    text = "Waffle Pieces",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. OCCASION SUNDAES (TEXT ONLY)
+                FilterChip(
+                    id = "birthday_special",
+                    text = "Birthday Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_pack",
+                    text = "Party Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "date_night",
+                    text = "Date Night Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kids_favorite",
+                    text = "Kids Favorite",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 8. SIZE OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "small_sundae",
+                    text = "Small (150ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_sundae",
+                    text = "Regular (250ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_sundae",
+                    text = "Large (400ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sharing_sundae",
+                    text = "Sharing (600ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_200",
+                    text = "₹100 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_300",
+                    text = "Above ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 12. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = sundaeDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val sundaeDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_berry_protein_sundae,
+                title = "Berry Protein Sundae",
+                price = "249",
+                restaurantName = "Protein Lab",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹37",
+                address = "Fitness Street, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_greek_yogurt_sundae,
+                title = "Greek Yogurt Berry Bowl",
+                price = "219",
+                restaurantName = "Yogurt World",
+                rating = "4.8",
+                deliveryTime = "12-18 mins",
+                distance = "0.9 km",
+                discount = "10%",
+                discountAmount = "up to ₹22",
+                address = "Healthy Hub, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_dark_chocolate_sundae,
+                title = "Dark Chocolate Protein Sundae",
+                price = "279",
+                restaurantName = "Choco Fit",
+                rating = "4.9",
+                deliveryTime = "18-24 mins",
+                distance = "1.4 km",
+                discount = "20%",
+                discountAmount = "up to ₹56",
+                address = "Chocolate Square, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_mango_coconut_sundae,
+                title = "Mango Coconut Delight",
+                price = "229",
+                restaurantName = "Tropical Bliss",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹34",
+                address = "Fruit Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_banana_walnut_sundae,
+                title = "Banana Walnut Sundae",
+                price = "199",
+                restaurantName = "Nutty Scoops",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹20",
+                address = "Nut Street, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_mixed_berry_sundae,
+                title = "Mixed Berry Antioxidant Sundae",
+                price = "259",
+                restaurantName = "Berry Farms",
+                rating = "4.9",
+                deliveryTime = "16-22 mins",
+                distance = "1.3 km",
+                discount = "20%",
+                discountAmount = "up to ₹52",
+                address = "Berry Gardens, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Sundae Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = sundaeDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+
+    val sundaeDietItems = listOf(
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.sundae_diet_1,
+            title = "Berry Acai Protein Sundae",
+            price = "279",
+            restaurantName = "Protein Lab",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "Fitness Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.sundae_diet_2,
+            title = "Greek Yogurt Honey Walnut",
+            price = "229",
+            restaurantName = "Yogurt World",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹23",
+            address = "Healthy Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.sundae_diet_3,
+            title = "Dark Chocolate Almond Sundae",
+            price = "299",
+            restaurantName = "Choco Fit",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "1.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Chocolate Square, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.sundae_diet_4,
+            title = "Mango Coconut Light Sundae",
+            price = "239",
+            restaurantName = "Tropical Bliss",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹36",
+            address = "Fruit Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.sundae_diet_5,
+            title = "Banana Walnut Protein Sundae",
+            price = "219",
+            restaurantName = "Nutty Scoops",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹22",
+            address = "Nut Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.sundae_diet_6,
+            title = "Mixed Berry Antioxidant Sundae",
+            price = "269",
+            restaurantName = "Berry Farms",
+            rating = "4.9",
+            deliveryTime = "16-22 mins",
+            distance = "1.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹54",
+            address = "Berry Gardens, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.sundae_diet_7,
+            title = "Strawberry Chia Seed Sundae",
+            price = "209",
+            restaurantName = "Healthy Treats",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Wellness Ave, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.sundae_diet_8,
+            title = "Peanut Butter Cup Sundae",
+            price = "289",
+            restaurantName = "Protein Plus",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Fitness Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.sundae_diet_9,
+            title = "Matcha Green Tea Sundae",
+            price = "259",
+            restaurantName = "Zen Desserts",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹26",
+            address = "Tea District, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.sundae_diet_10,
+            title = "Pistachio Rose Delight",
+            price = "279",
+            restaurantName = "Royal Desserts",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹56",
+            address = "Palace Road, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.sundae_diet_11,
+            title = "Keto-Friendly Berry Sundae",
+            price = "319",
+            restaurantName = "Keto Kitchen",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "1.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹48",
+            address = "Diet Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.sundae_diet_12,
+            title = "Vegan Coconut Mango Sundae",
+            price = "249",
+            restaurantName = "Plant Power",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹25",
+            address = "Organic Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.sundae_diet_13,
+            title = "Coffee Walnut Protein Sundae",
+            price = "269",
+            restaurantName = "Brew & Scoop",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹54",
+            address = "Coffee Square, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.sundae_diet_14,
+            title = "Fig & Honey Greek Sundae",
+            price = "289",
+            restaurantName = "Mediterranean Delights",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "1.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Food Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.sundae_diet_15,
+            title = "Raspberry Dark Chocolate",
+            price = "299",
+            restaurantName = "Choco Berry",
+            rating = "4.8",
+            deliveryTime = "16-22 mins",
+            distance = "1.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹30",
+            address = "Berry Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.sundae_diet_16,
+            title = "Pineapple Coconut Light",
+            price = "219",
+            restaurantName = "Island Flavors",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹44",
+            address = "Market Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.sundae_diet_17,
+            title = "Almond Butter Cacao Sundae",
+            price = "309",
+            restaurantName = "Nutty Butters",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹46",
+            address = "Nut Avenue, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.sundae_diet_18,
+            title = "Watermelon Mint Sorbet Sundae",
+            price = "189",
+            restaurantName = "Summer Cool",
+            rating = "4.6",
+            deliveryTime = "10-15 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Beach Road, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.sundae_diet_19,
+            title = "Triple Berry Protein Sundae",
+            price = "289",
+            restaurantName = "Berry Bliss",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹58",
+            address = "Berry Gardens, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.sundae_diet_20,
+            title = "Grand Diet Sundae Platter",
+            price = "449",
+            restaurantName = "Dessert Studio",
+            rating = "4.9",
+            deliveryTime = "22-28 mins",
+            distance = "2.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹90",
+            address = "Gourmet Street, Delhi"
         )
-        // Add your sundae items here
+    )
+    Column {
+        sundaeDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

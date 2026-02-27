@@ -47,6 +47,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.saveable.Saver
 
+// Custom SetSaver for rememberSaveable
+val SetSaver = Saver<Set<Int>, Set<Int>>(
+    save = { it },
+    restore = { it }
+)
+
 // Sealed class for different diet category pages
 sealed class DietCategoryPage(val title: String, val iconRes: Int) {
     // From the images provided (these use _food_diet suffix)
@@ -58,7 +64,6 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
     object LowCalorie : DietCategoryPage("Low Calorie", R.drawable.low_calorie_food_diet)
     object Vegan : DietCategoryPage("Vegan", R.drawable.vegan_food_diet)
     object ProteinRich : DietCategoryPage("Protein Rich", R.drawable.protein_food_diet)
-//    object SeeAll : DietCategoryPage("See All", R.drawable.see_all_food)
 
     // Categories from your list (these use _food suffix without _diet)
     object Dessert : DietCategoryPage("Dessert", R.drawable.dessert_food)
@@ -103,7 +108,6 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
     object ChiaPudding : DietCategoryPage("Chia Pudding", R.drawable.chia_pudding_food_diet)
     object MilletBowl : DietCategoryPage("Millet Bowl", R.drawable.millet_bowl_food_diet)
     object SeeAll : DietCategoryPage("See All", R.drawable.see_all_food)
-
 }
 
 data class DietFoodItem(
@@ -116,6 +120,7 @@ data class DietFoodItem(
     val isVeg: Boolean = true,
     val category: String = "Chicken"
 )
+
 @Composable
 fun CategoryDietTabsFood(
     navController: NavHostController? = null,
@@ -326,7 +331,12 @@ fun CategoryDietTabsFood(
         }
     }
 
-    val selectedVisibleIndex = getVisibleTabIndex(internalSelectedIndex)
+    val selectedVisibleIndex = if (internalSelectedIndex < initialVisibleCount ||
+        internalSelectedIndex in allToVisibleIndexMap) {
+        getVisibleTabIndex(internalSelectedIndex)
+    } else {
+        seeAllIndex
+    }
 
     Log.d("CategoryDietTabsFood", "selectedVisibleIndex: $selectedVisibleIndex, internalSelectedIndex: $internalSelectedIndex")
 
@@ -381,9 +391,9 @@ fun CategoryDietTabsFood(
                     else -> {
                         // This is a recently selected tab - find its original index
                         val sortedRecentTabs = recentlySelectedTabs.sorted()
-                        val recentIndex = index - initialVisibleCount
-                        if (recentIndex < sortedRecentTabs.size) {
-                            sortedRecentTabs[recentIndex]
+                        val recentIndexInList = index - initialVisibleCount
+                        if (recentIndexInList < sortedRecentTabs.size) {
+                            sortedRecentTabs[recentIndexInList]
                         } else -1
                     }
                 }
@@ -565,13 +575,6 @@ fun CategoryDietTabsFood(
     }
 }
 
-// Custom SetSaver for rememberSaveable
-val SetSaver = Saver<Set<Int>, Set<Int>>(
-    save = { it },
-    restore = { it }
-)
-
-
 @Composable
 fun MainScreenWithDietTabs(navController: NavHostController) {
     var currentPage by remember { mutableIntStateOf(0) }
@@ -580,8 +583,8 @@ fun MainScreenWithDietTabs(navController: NavHostController) {
     Column(modifier = Modifier.fillMaxWidth()) {
         CategoryDietTabsFood(
             navController = navController,
-            currentSelectedIndex = currentPage,  // Pass the current page
-            selectedDietTabIndex = selectedDietTabIndex, // Pass the selected diet tab index
+            currentSelectedIndex = currentPage,
+            selectedDietTabIndex = selectedDietTabIndex,
             onCategorySelected = { dietCategoryPage ->
                 val newIndex = when (dietCategoryPage) {
                     // First 8 main categories (indices 0-7)
@@ -649,6 +652,8 @@ fun MainScreenWithDietTabs(navController: NavHostController) {
         )
     }
 }
+
+
 // Category Page Composables for diet tabs
 
 @Composable
@@ -9084,41 +9089,1927 @@ fun SundaePage() {
 
 @Composable
 fun JuicePage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val juiceDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY JUICE DIET CATEGORIES (WITH ICONS)
+                FilterChip(
+                    id = "detox_juices",
+                    text = "Detox Juices",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_detox_juice  // Leaf/detox icon
+                ),
+                FilterChip(
+                    id = "green_juices",
+                    text = "Green Juices",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_green_juice  // Green veggie icon
+                ),
+                FilterChip(
+                    id = "fruit_juices",
+                    text = "Fruit Juices",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fruit_juice  // Fruit icon
+                ),
+                FilterChip(
+                    id = "vegetable_juices",
+                    text = "Vegetable Juices",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable_juice  // Carrot/celery icon
+                ),
+                FilterChip(
+                    id = "protein_shakes",
+                    text = "Protein Shakes",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_protein_shake  // Protein/gym icon
+                ),
+                // 3. BASE FRUITS/VEGETABLES (TEXT ONLY)
+                FilterChip(
+                    id = "apple_base",
+                    text = "Apple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "orange_base",
+                    text = "Orange",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrot_base",
+                    text = "Carrot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_base",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kale_base",
+                    text = "Kale",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "beetroot_base",
+                    text = "Beetroot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_base",
+                    text = "Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turmeric_base",
+                    text = "Turmeric",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cucumber_base",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple_base",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "watermelon_base",
+                    text = "Watermelon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "celery_base",
+                    text = "Celery",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. ADDED BOOSTERS (TEXT ONLY)
+                FilterChip(
+                    id = "chia_seeds",
+                    text = "Chia Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "flax_seeds",
+                    text = "Flax Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "protein_powder",
+                    text = "Protein Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spirulina",
+                    text = "Spirulina",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "wheatgrass",
+                    text = "Wheatgrass",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_water",
+                    text = "Coconut Water",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "aloe_vera",
+                    text = "Aloe Vera",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "matcha",
+                    text = "Matcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_juice",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_friendly",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raw",
+                    text = "Raw",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. OCCASION/PURPOSE (TEXT ONLY)
+                FilterChip(
+                    id = "morning_detox",
+                    text = "Morning Detox",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout",
+                    text = "Post Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "meal_replacement",
+                    text = "Meal Replacement",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cleansing",
+                    text = "Cleansing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "energy_boost",
+                    text = "Energy Boost",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. SIZE OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "small_juice",
+                    text = "Small (250ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_juice",
+                    text = "Regular (350ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_juice",
+                    text = "Large (500ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack (1L)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_200",
+                    text = "₹100 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_300",
+                    text = "Above ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = juiceDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val juiceDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_green_detox_juice,
+                title = "Green Detox Juice",
+                price = "149",
+                restaurantName = "Fresh Press",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹30",
+                address = "Health Square, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_tropical_morning_juice,
+                title = "Tropical Morning Bliss",
+                price = "179",
+                restaurantName = "Juice Junction",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "1.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Fruit Bazaar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_protein_berry_smoothie,
+                title = "Protein Berry Smoothie",
+                price = "199",
+                restaurantName = "Smoothie Bar",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹20",
+                address = "Fitness Hub, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_immunity_booster,
+                title = "Immunity Booster Shot",
+                price = "129",
+                restaurantName = "Wellness Cafe",
+                rating = "4.7",
+                deliveryTime = "8-12 mins",
+                distance = "0.6 km",
+                discount = "25%",
+                discountAmount = "up to ₹32",
+                address = "Wellness Street, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_beetroot_carrot_blast,
+                title = "Beetroot Carrot Blast",
+                price = "159",
+                restaurantName = "Roots Juicery",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹24",
+                address = "Vegetable Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_coconut_watermelon_cooler,
+                title = "Coconut Watermelon Cooler",
+                price = "189",
+                restaurantName = "Tropical Sips",
+                rating = "4.9",
+                deliveryTime = "14-20 mins",
+                distance = "1.2 km",
+                discount = "20%",
+                discountAmount = "up to ₹38",
+                address = "Beach Road, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Juice Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = juiceDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+
+    val juiceDietItems = listOf(
+        // 1-5: DETOX & GREEN JUICES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.juice_diet_1,
+            title = "Classic Green Detox Juice",
+            price = "149",
+            restaurantName = "Fresh Press",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹30",
+            address = "Health Square, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.juice_diet_2,
+            title = "Cucumber Mint Cooler",
+            price = "129",
+            restaurantName = "Cool Juices",
+            rating = "4.7",
+            deliveryTime = "8-12 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Market Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.juice_diet_3,
+            title = "Wheatgrass Immunity Shot",
+            price = "99",
+            restaurantName = "Wellness Cafe",
+            rating = "4.8",
+            deliveryTime = "5-10 mins",
+            distance = "0.3 km",
+            discount = "25% OFF",
+            discountAmount = "up to ₹25",
+            address = "Fitness Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.juice_diet_4,
+            title = "Spinach Kale Green Blast",
+            price = "169",
+            restaurantName = "Green Goddess",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Organic Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.juice_diet_5,
+            title = "Lemon Ginger Detox",
+            price = "119",
+            restaurantName = "Detox Bar",
+            rating = "4.7",
+            deliveryTime = "8-12 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Wellness Ave, Delhi"
+        ),
+
+        // 6-10: FRUIT JUICES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.juice_diet_6,
+            title = "Tropical Orange Punch",
+            price = "139",
+            restaurantName = "Citrus Bliss",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.9 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹28",
+            address = "Fruit Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.juice_diet_7,
+            title = "Watermelon Mint Fresher",
+            price = "119",
+            restaurantName = "Summer Cool",
+            rating = "4.9",
+            deliveryTime = "8-12 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Beach Road, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.juice_diet_8,
+            title = "Pineapple Coconut Breeze",
+            price = "159",
+            restaurantName = "Island Flavors",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹32",
+            address = "Tropical Square, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.juice_diet_9,
+            title = "Mixed Berry Antioxidant",
+            price = "189",
+            restaurantName = "Berry Farms",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Berry Gardens, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.juice_diet_10,
+            title = "Apple Carrot Ginger",
+            price = "149",
+            restaurantName = "Roots Juicery",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Vegetable Market, Delhi"
+        ),
+
+        // 11-15: VEGETABLE JUICES
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.juice_diet_11,
+            title = "Beetroot Apple Blast",
+            price = "159",
+            restaurantName = "Red Roots",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹32",
+            address = "Health Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.juice_diet_12,
+            title = "Carrot Orange Sunshine",
+            price = "139",
+            restaurantName = "Vitamin Sea",
+            rating = "4.8",
+            deliveryTime = "8-14 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Wellness Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.juice_diet_13,
+            title = "Tomato Celery Spice",
+            price = "129",
+            restaurantName = "Veggie Delight",
+            rating = "4.6",
+            deliveryTime = "10-15 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Green Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.juice_diet_14,
+            title = "Cucumber Celery Cooler",
+            price = "119",
+            restaurantName = "Fresh Veggies",
+            rating = "4.7",
+            deliveryTime = "8-12 mins",
+            distance = "0.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹24",
+            address = "Farm Road, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.juice_diet_15,
+            title = "Parsley Spinach Greenie",
+            price = "149",
+            restaurantName = "Green Machine",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Organic Valley, Delhi"
+        ),
+
+        // 16-18: PROTEIN SMOOTHIES
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.juice_diet_16,
+            title = "Protein Berry Smoothie",
+            price = "199",
+            restaurantName = "Smoothie Bar",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "1.2 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹40",
+            address = "Fitness Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.juice_diet_17,
+            title = "Peanut Butter Banana Shake",
+            price = "189",
+            restaurantName = "Protein Plus",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Gym Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.juice_diet_18,
+            title = "Mango Protein Power",
+            price = "209",
+            restaurantName = "Tropical Protein",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹42",
+            address = "Fruit Bazaar, Delhi"
+        ),
+
+        // 19-20: SPECIALTY JUICES
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.juice_diet_19,
+            title = "Turmeric Ginger Immunity",
+            price = "149",
+            restaurantName = "Ayurveda Juices",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Herbal Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.juice_diet_20,
+            title = "Grand Juice Diet Platter",
+            price = "399",
+            restaurantName = "Juice Studio",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹80",
+            address = "Gourmet Street, Delhi"
         )
-        // Add your juice items here
+    )
+    Column {
+        juiceDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun LassiPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val lassiDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY LASSI DIET CATEGORIES (WITH ICONS)
+                FilterChip(
+                    id = "sweet_lassi",
+                    text = "Sweet Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sweet_lassi  // Sweet/cup icon with sugar crystal
+                ),
+                FilterChip(
+                    id = "salted_lassi",
+                    text = "Salted Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_salted_lassi  // Salt shaker/cup icon
+                ),
+                FilterChip(
+                    id = "mango_lassi",
+                    text = "Mango Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mango_lassi  // Mango/cup icon
+                ),
+                FilterChip(
+                    id = "rose_lassi",
+                    text = "Rose Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rose_lassi  // Rose flower/cup icon
+                ),
+                FilterChip(
+                    id = "dry_fruit_lassi",
+                    text = "Dry Fruit Lassi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dry_fruit_lassi  // Nuts/dry fruits icon
+                ),
+
+                // 3. BASE INGREDIENTS (TEXT ONLY)
+                FilterChip(
+                    id = "yogurt_base",
+                    text = "Fresh Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "greek_yogurt",
+                    text = "Greek Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_yogurt",
+                    text = "Low-Fat Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "full_cream_yogurt",
+                    text = "Full Cream Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "buffalo_milk",
+                    text = "Buffalo Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cow_milk",
+                    text = "Cow Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. FLAVOR ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "mango_pulp",
+                    text = "Mango Pulp",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rose_syrup",
+                    text = "Rose Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberry",
+                    text = "Strawberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "saffron",
+                    text = "Kesar (Saffron)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cardamom",
+                    text = "Cardamom",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rose_water",
+                    text = "Rose Water",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. DRY FRUITS & TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "almonds",
+                    text = "Badam (Almonds)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pistachios",
+                    text = "Pista (Pistachios)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cashews",
+                    text = "Kaju (Cashews)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raisins",
+                    text = "Kishmish (Raisins)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "charoli",
+                    text = "Charoli/Chironji",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar-Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "probiotic",
+                    text = "Probiotic Rich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. OCCASION/PURPOSE (TEXT ONLY)
+                FilterChip(
+                    id = "summer_special",
+                    text = "Summer Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "after_meal",
+                    text = "After Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pre_workout",
+                    text = "Pre-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "festival_special",
+                    text = "Festival Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_lassi",
+                    text = "Party Lassi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. SIZE OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "small_lassi",
+                    text = "Small (200ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_lassi",
+                    text = "Regular (300ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_lassi",
+                    text = "Large (500ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_lassi",
+                    text = "Family (1L)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_50",
+                    text = "Under ₹50",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "50_100",
+                    text = "₹50 - ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_150",
+                    text = "₹100 - ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_150",
+                    text = "Above ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. REGIONAL VARIETIES (TEXT ONLY)
+                FilterChip(
+                    id = "punjabi_lassi",
+                    text = "Punjabi Lassi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sindhi_lassi",
+                    text = "Sindhi Lassi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "haryanvi_lassi",
+                    text = "Haryanvi Lassi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bihari_lassi",
+                    text = "Bihari Lassi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = lassiDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val lassiDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_sweet_lassi_2,  // Creamy white lassi in glass with malai topping
+                title = "Classic Sweet Lassi",
+                price = "89",
+                restaurantName = "Punjabi Dhaba",
+                rating = "4.9",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹13",
+                address = "Old Market Road, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_mango_lassi_1,  // Yellow-orange mango lassi with mango pieces
+                title = "Royal Mango Lassi",
+                price = "129",
+                restaurantName = "Mango Grove",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "20%",
+                discountAmount = "up to ₹26",
+                address = "Fruit Market, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_salted_lassi_1,  // White lassi with cumin and black salt
+                title = "Masala Salted Lassi",
+                price = "99",
+                restaurantName = "Haldiram's Corner",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹10",
+                address = "Chowk Bazaar, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_dry_fruit_lassi_1,  // Thick lassi loaded with dry fruits
+                title = "Kaju Pista Delight",
+                price = "159",
+                restaurantName = "Royal Sweets",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "12%",
+                discountAmount = "up to ₹19",
+                address = "Sweets Gallery, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_rose_lassi_1,  // Pink lassi with rose petals
+                title = "Gulabi Rose Lassi",
+                price = "119",
+                restaurantName = "Flavors of Awadh",
+                rating = "4.8",
+                deliveryTime = "12-17 mins",
+                distance = "0.7 km",
+                discount = "15%",
+                discountAmount = "up to ₹18",
+                address = "Old City, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_bhang_lassi,  // Greenish lassi with special herbs
+                title = "Special Bhang Lassi",
+                price = "199",
+                restaurantName = "Blue Lassi Cafe",
+                rating = "4.7",
+                deliveryTime = "20-25 mins",
+                distance = "1.5 km",
+                discount = "5%",
+                discountAmount = "up to ₹10",
+                address = "River Side, Delhi",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Lassi Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = lassiDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val lassiDietItems = listOf(
+        // 1-5: CLASSIC & SWEET LASSI VARIETIES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.lassi_diet_1,
+            title = "Punjabi Sweet Lassi",
+            price = "89",
+            restaurantName = "Amritsari Dhaba",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹13",
+            address = "Old Market Road, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.lassi_diet_2,
+            title = "Malai Makkhan Lassi",
+            price = "119",
+            restaurantName = "Desi Tadka",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Village Square, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.lassi_diet_3,
+            title = "Kesar Elaichi Lassi",
+            price = "149",
+            restaurantName = "Royal Lassi House",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹30",
+            address = "Palace Road, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.lassi_diet_4,
+            title = "Rose Gulabi Lassi",
+            price = "129",
+            restaurantName = "Flavors of Awadh",
+            rating = "4.8",
+            deliveryTime = "12-17 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Old City, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.lassi_diet_5,
+            title = "Honey Almond Lassi",
+            price = "159",
+            restaurantName = "Pure Desi Ghee",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Sweet Market, Delhi"
+        ),
+
+        // 6-10: FRUIT LASSI VARIETIES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.lassi_diet_6,
+            title = "Royal Mango Lassi",
+            price = "139",
+            restaurantName = "Mango Grove",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹28",
+            address = "Fruit Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.lassi_diet_7,
+            title = "Strawberry Cream Lassi",
+            price = "149",
+            restaurantName = "Berry Blast",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Berry Gardens, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.lassi_diet_8,
+            title = "Banana Protein Lassi",
+            price = "129",
+            restaurantName = "Health Hub",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Fitness Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.lassi_diet_9,
+            title = "Lychee Rose Lassi",
+            price = "159",
+            restaurantName = "Exotic Flavors",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹32",
+            address = "Gourmet Lane, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.lassi_diet_10,
+            title = "Sitaphal (Custard Apple) Lassi",
+            price = "169",
+            restaurantName = "Seasonal Specials",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Fruit Bazaar, Delhi"
+        ),
+
+        // 11-15: SALTED & MASALA LASSI
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.lassi_diet_11,
+            title = "Masala Salted Lassi",
+            price = "99",
+            restaurantName = "Haldiram's Corner",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹10",
+            address = "Chowk Bazaar, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.lassi_diet_12,
+            title = "Jeera Pudina Lassi",
+            price = "109",
+            restaurantName = "Fresh & Cool",
+            rating = "4.7",
+            deliveryTime = "8-12 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹16",
+            address = "Herb Garden, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.lassi_diet_13,
+            title = "Black Salt Cumin Lassi",
+            price = "99",
+            restaurantName = "Street Food King",
+            rating = "4.8",
+            deliveryTime = "5-10 mins",
+            distance = "0.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹20",
+            address = "Food Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.lassi_diet_14,
+            title = "Green Chilli Ginger Lassi",
+            price = "119",
+            restaurantName = "Spicy Desi",
+            rating = "4.6",
+            deliveryTime = "10-15 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Spice Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.lassi_diet_15,
+            title = "Roasted Cumin Lassi",
+            price = "109",
+            restaurantName = "Traditional Tastes",
+            rating = "4.7",
+            deliveryTime = "8-12 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹16",
+            address = "Old Delhi, Delhi"
+        ),
+
+        // 16-18: DRY FRUIT & RICH LASSI
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.lassi_diet_16,
+            title = "Kaju Pista Badam Lassi",
+            price = "189",
+            restaurantName = "Royal Sweets",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Sweets Gallery, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.lassi_diet_17,
+            title = "Charoli Chironji Lassi",
+            price = "179",
+            restaurantName = "Heritage Foods",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹36",
+            address = "Traditional Market, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.lassi_diet_18,
+            title = "Dates & Walnut Lassi",
+            price = "169",
+            restaurantName = "Healthy Indulgence",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Wellness Street, Delhi"
+        ),
+
+        // 19-20: SPECIALTY & FUSION LASSI
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.lassi_diet_19,
+            title = "Saffron Pista Lassi",
+            price = "199",
+            restaurantName = "Lucknowi Zaika",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Nawab Street, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.lassi_diet_20,
+            title = "Grand Lassi Platter",
+            price = "349",
+            restaurantName = "Lassi Mahal",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹70",
+            address = "Gourmet Street, Delhi",
         )
-        // Add your lassi items here
+    )
+    Column {
+        lassiDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun CurdRicePage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(
-            text = "Curd Rice Items",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val curdRiceDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY CURD RICE CATEGORIES (WITH ICONS)
+                FilterChip(
+                    id = "south_indian_curd_rice",
+                    text = "South Indian Curd Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_south_indian_curd_rice  // Traditional south indian bowl with curry leaves
+                ),
+                FilterChip(
+                    id = "north_indian_dahi_chawal",
+                    text = "North Indian Dahi Chawal",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dahi_chawal  // North indian style with raita consistency
+                ),
+                FilterChip(
+                    id = "tempered_curd_rice",
+                    text = "Tempered Curd Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tempered_curd_rice  // Tadka/seasoning icon with mustard seeds
+                ),
+                FilterChip(
+                    id = "fruit_curd_rice",
+                    text = "Fruit Curd Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fruit_curd_rice  // Mixed fruits with yogurt
+                ),
+                FilterChip(
+                    id = "vegetable_curd_rice",
+                    text = "Vegetable Curd Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable_curd_rice  // Mixed veggies with yogurt
+                ),
+
+                // 3. RICE VARIETIES (TEXT ONLY)
+                FilterChip(
+                    id = "basmati_rice",
+                    text = "Basmati Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sona_masoori",
+                    text = "Sona Masoori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ponni_rice",
+                    text = "Ponni Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_rice",
+                    text = "Brown Rice (Healthy)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parboiled_rice",
+                    text = "Parboiled Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "leftover_rice",
+                    text = "Leftover Rice Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. CURD/YOGURT TYPES (TEXT ONLY)
+                FilterChip(
+                    id = "fresh_curd",
+                    text = "Fresh Homemade Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick_greek_yogurt",
+                    text = "Thick Greek Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sour_curd",
+                    text = "Sour Curd (Traditional)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_curd",
+                    text = "Low-Fat Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "buffalo_milk_curd",
+                    text = "Buffalo Milk Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cow_milk_curd",
+                    text = "Cow Milk Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. TEMPERING/TAKA INGREDIENTS (TEXT ONLY)
+                FilterChip(
+                    id = "mustard_seeds",
+                    text = "Rai (Mustard Seeds)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "curry_leaves",
+                    text = "Curry Leaves",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "urad_dal",
+                    text = "Urad Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chana_dal",
+                    text = "Chana Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hing",
+                    text = "Hing (Asafoetida)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dry_red_chilli",
+                    text = "Dry Red Chilli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger",
+                    text = "Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_chilli",
+                    text = "Green Chilli",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. ADD-INS & MIX-INS (TEXT ONLY)
+                FilterChip(
+                    id = "pomegranate",
+                    text = "Anar (Pomegranate)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grapes",
+                    text = "Angoor (Grapes)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_pieces",
+                    text = "Raw Mango Pieces",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cucumber",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrot_grated",
+                    text = "Grated Carrot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onion",
+                    text = "Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coriander",
+                    text = "Fresh Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint",
+                    text = "Mint Leaves",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. NUTS & DRY FRUITS (TEXT ONLY)
+                FilterChip(
+                    id = "cashews_curd_rice",
+                    text = "Kaju (Cashews)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raisins_curd_rice",
+                    text = "Kishmish (Raisins)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almonds_curd_rice",
+                    text = "Badam (Almonds)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pista_curd_rice",
+                    text = "Pista (Pistachios)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_curd_rice",
+                    text = "Vegan (Coconut Curd)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_curd_rice",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_curd_rice",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_curd_rice",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "probiotic_rich",
+                    text = "Probiotic Rich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_onion_garlic",
+                    text = "No Onion-Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "satvik",
+                    text = "Satvik (Pure)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. OCCASION/PURPOSE (TEXT ONLY)
+                FilterChip(
+                    id = "comfort_food",
+                    text = "Comfort Food",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "after_meal_curd_rice",
+                    text = "After Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "summer_cooler",
+                    text = "Summer Cooler",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sick_day_food",
+                    text = "Sick Day Food",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "festive_special",
+                    text = "Festive Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brunch_special",
+                    text = "Brunch Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. REGIONAL VARIETIES (TEXT ONLY)
+                FilterChip(
+                    id = "tamil_nadu_curd_rice",
+                    text = "Tamil Nadu Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "karnataka_mosranna",
+                    text = "Karnataka Mosranna",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "andhra_curd_rice",
+                    text = "Andhra Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kerala_curd_rice",
+                    text = "Kerala Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "telangana_perugu_annam",
+                    text = "Telangana Perugu Annam",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. SIDE ACCOMPANIMENTS (TEXT ONLY)
+                FilterChip(
+                    id = "mango_pickle",
+                    text = "Mango Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lime_pickle",
+                    text = "Lime Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "papad",
+                    text = "Papad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vadam",
+                    text = "Vadam (Fried Crisps)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thoran",
+                    text = "Vegetable Thoran",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. SIZE OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "small_curd_rice",
+                    text = "Small Bowl (200g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_curd_rice",
+                    text = "Regular Bowl (350g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_curd_rice",
+                    text = "Large Bowl (500g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_curd_rice",
+                    text = "Family Pack (1kg)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_60",
+                    text = "Under ₹60",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "60_100",
+                    text = "₹60 - ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_150_curd",
+                    text = "₹100 - ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_150_curd",
+                    text = "Above ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
-        // Add your curd rice items here
+         FilterButtonFood(
+            filterConfig = curdRiceDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val curdRiceDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_south_indian_curd_rice_1,  // White curd rice in banana leaf with curry leaves tempering
+                title = "South Indian Curd Rice",
+                price = "99",
+                restaurantName = "Madras Cafe",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹15",
+                address = "Triplicane, Chennai"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_tempered_curd_rice_1,  // Curd rice with mustard seeds, curry leaves, red chilli tempering on top
+                title = "Tempered Curd Rice",
+                price = "109",
+                restaurantName = "Saravana Bhavan",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹11",
+                address = "T. Nagar, Chennai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_fruit_curd_rice_1,  // Curd rice with pomegranate, grapes, apple pieces
+                title = "Fruit Curd Rice",
+                price = "129",
+                restaurantName = "Fruitful Bowl",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹19",
+                address = "Fruit Market, Chennai"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_vegetable_curd_rice_1,  // Curd rice with carrot, cucumber, grated vegetables
+                title = "Vegetable Curd Rice",
+                price = "119",
+                restaurantName = "Green Kitchen",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "12%",
+                discountAmount = "up to ₹14",
+                address = "Vegetable Market, Chennai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_dahi_chawal_1,  // North Indian style dahi chawal with raita consistency and boondi
+                title = "North Indian Dahi Chawal",
+                price = "109",
+                restaurantName = "Haldiram's",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "10%",
+                discountAmount = "up to ₹11",
+                address = "Chandni Chowk, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_andhra_curd_rice_1,  // Spicier version with green chillies, ginger, and curry leaves
+                title = "Andhra Perugu Annam",
+                price = "119",
+                restaurantName = "Andhra Mess",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "15%",
+                discountAmount = "up to ₹18",
+                address = "Andhra Colony, Chennai",
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = curdRiceDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
     }
+
+
 }
 
 @Composable

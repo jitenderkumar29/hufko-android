@@ -46,16 +46,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // Custom SetSaver for rememberSaveable
-val SetSaver = Saver<Set<Int>, Set<Int>>(
-    save = { it },
-    restore = { it }
-)
+//val SetSaver = Saver<Set<Int>, Set<Int>>(
+//    save = { it },
+//    restore = { it }
+//)
 
 // Sealed class for different diet category pages
 sealed class DietCategoryPage(val title: String, val iconRes: Int) {
-    // From the images provided (these use _food_diet suffix)
+    // First 8 main categories (indices 0-7)
     object Chicken : DietCategoryPage("Chicken", R.drawable.chicken_food_diet)
     object Salad : DietCategoryPage("Salad", R.drawable.salad_food_diet)
     object Mutton : DietCategoryPage("Mutton", R.drawable.mutton_food_diet)
@@ -65,7 +70,7 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
     object Vegan : DietCategoryPage("Vegan", R.drawable.vegan_food_diet)
     object ProteinRich : DietCategoryPage("Protein Rich", R.drawable.protein_food_diet)
 
-    // Categories from your list (these use _food suffix without _diet)
+    // Categories from your list (indices 8-22)
     object Dessert : DietCategoryPage("Dessert", R.drawable.dessert_food)
     object VegMeal : DietCategoryPage("Veg Meal", R.drawable.veg_meal_food)
     object Bowl : DietCategoryPage("Bowl", R.drawable.bowl_food)
@@ -82,7 +87,7 @@ sealed class DietCategoryPage(val title: String, val iconRes: Int) {
     object Waffles : DietCategoryPage("Waffles", R.drawable.waffles_food)
     object ColdCoffee : DietCategoryPage("Cold Coffee", R.drawable.cold_coffee_food)
 
-    // Additional diet-specific items (these use _food_diet suffix as they're diet-specific)
+    // Additional diet-specific items (indices 23-46)
     object GrilledChicken : DietCategoryPage("Grilled Chicken", R.drawable.grilled_chicken)
     object SteamedFish : DietCategoryPage("Steamed Fish", R.drawable.steamed_fish)
     object QuinoaBowl : DietCategoryPage("Quinoa Bowl", R.drawable.quinoa_bowl)
@@ -120,17 +125,78 @@ data class DietFoodItem(
     val isVeg: Boolean = true,
     val category: String = "Chicken"
 )
+// SetSaver for saving Set<Int> in rememberSaveable
+val SetSaver = Saver<Set<Int>, List<Int>>(
+    save = { it.toList() },
+    restore = { it.toSet() }
+)
 
 @Composable
 fun CategoryDietTabsFood(
     navController: NavHostController? = null,
-    currentSelectedIndex: Int,  // This is the external index from parent
-    selectedDietTabIndex: Int,   // This is the diet-specific tab index
+    currentSelectedIndex: Int,
+    selectedDietTabIndex: Int,
     onCategorySelected: (DietCategoryPage) -> Unit = {},
     onTabIndexChanged: (Int) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    // Use selectedDietTabIndex as the internal state
+    val TAG = "CategoryDietTabsFood"
+    val initialVisibleCount = 8
+
+    // All diet category pages
+    val allDietCategoryPages = remember {
+        listOf(
+            DietCategoryPage.Chicken,
+            DietCategoryPage.Salad,
+            DietCategoryPage.Mutton,
+            DietCategoryPage.Kebabs,
+            DietCategoryPage.HealthySnacks,
+            DietCategoryPage.LowCalorie,
+            DietCategoryPage.Vegan,
+            DietCategoryPage.ProteinRich,
+            DietCategoryPage.Dessert,
+            DietCategoryPage.VegMeal,
+            DietCategoryPage.Bowl,
+            DietCategoryPage.Sweets,
+            DietCategoryPage.Khichdi,
+            DietCategoryPage.Sundae,
+            DietCategoryPage.Juice,
+            DietCategoryPage.Lassi,
+            DietCategoryPage.CurdRice,
+            DietCategoryPage.Pudding,
+            DietCategoryPage.Custard,  // This is index 18
+            DietCategoryPage.Soup,
+            DietCategoryPage.Brownie,
+            DietCategoryPage.Waffles,
+            DietCategoryPage.ColdCoffee,
+            DietCategoryPage.GrilledChicken,
+            DietCategoryPage.SteamedFish,
+            DietCategoryPage.QuinoaBowl,
+            DietCategoryPage.AvocadoToast,
+            DietCategoryPage.GreenSmoothie,
+            DietCategoryPage.Oatmeal,
+            DietCategoryPage.GreekYogurt,
+            DietCategoryPage.EggWhiteOmelette,
+            DietCategoryPage.TunaSalad,
+            DietCategoryPage.LentilSoup,
+            DietCategoryPage.CottageCheese,
+            DietCategoryPage.SproutsSalad,
+            DietCategoryPage.BrownRiceBowl,
+            DietCategoryPage.SteamedVeggies,
+            DietCategoryPage.FruitBowl,
+            DietCategoryPage.DetoxWater,
+            DietCategoryPage.HerbalTea,
+            DietCategoryPage.ProteinBar,
+            DietCategoryPage.BoiledEggs,
+            DietCategoryPage.HummusPlate,
+            DietCategoryPage.SushiRolls,
+            DietCategoryPage.TofuStirFry,
+            DietCategoryPage.ChiaPudding,
+            DietCategoryPage.MilletBowl,
+        )
+    }
+
+    // Internal state
     var internalSelectedIndex by rememberSaveable {
         mutableIntStateOf(
             navController?.currentBackStackEntry?.savedStateHandle?.get<Int>("currentDietSelectedIndex")
@@ -138,8 +204,6 @@ fun CategoryDietTabsFood(
         )
     }
 
-    // Track recently selected tabs from "See All" page - using Set to avoid duplicates
-    // Initialize from savedStateHandle to persist across configuration changes
     var recentlySelectedTabs by rememberSaveable(stateSaver = SetSaver) {
         mutableStateOf(
             navController?.currentBackStackEntry?.savedStateHandle?.get<Set<Int>>("recentlySelectedDietTabs")
@@ -147,7 +211,7 @@ fun CategoryDietTabsFood(
         )
     }
 
-    // Save changes back to savedStateHandle
+    // Save state
     LaunchedEffect(internalSelectedIndex) {
         navController?.currentBackStackEntry?.savedStateHandle?.set(
             "currentDietSelectedIndex",
@@ -155,7 +219,6 @@ fun CategoryDietTabsFood(
         )
     }
 
-    // Save recently selected tabs
     LaunchedEffect(recentlySelectedTabs) {
         navController?.currentBackStackEntry?.savedStateHandle?.set(
             "recentlySelectedDietTabs",
@@ -163,96 +226,49 @@ fun CategoryDietTabsFood(
         )
     }
 
-    // All diet category pages
-    val allDietCategoryPages = listOf(
-        DietCategoryPage.Chicken,
-        DietCategoryPage.Salad,
-        DietCategoryPage.Mutton,
-        DietCategoryPage.Kebabs,
-        DietCategoryPage.HealthySnacks,
-        DietCategoryPage.LowCalorie,
-        DietCategoryPage.Vegan,
-        DietCategoryPage.ProteinRich,
-
-        DietCategoryPage.Dessert,
-        DietCategoryPage.VegMeal,
-        DietCategoryPage.Bowl,
-        DietCategoryPage.Sweets,
-        DietCategoryPage.Khichdi,
-        DietCategoryPage.Sundae,
-        DietCategoryPage.Juice,
-        DietCategoryPage.Lassi,
-        DietCategoryPage.CurdRice,
-        DietCategoryPage.Pudding,
-        DietCategoryPage.Custard,
-        DietCategoryPage.Soup,
-        DietCategoryPage.Brownie,
-        DietCategoryPage.Waffles,
-        DietCategoryPage.ColdCoffee,
-        // Additional diet categories
-        DietCategoryPage.GrilledChicken,
-        DietCategoryPage.SteamedFish,
-        DietCategoryPage.QuinoaBowl,
-        DietCategoryPage.AvocadoToast,
-        DietCategoryPage.GreenSmoothie,
-        DietCategoryPage.Oatmeal,
-        DietCategoryPage.GreekYogurt,
-        DietCategoryPage.EggWhiteOmelette,
-        DietCategoryPage.TunaSalad,
-        DietCategoryPage.LentilSoup,
-        DietCategoryPage.CottageCheese,
-        DietCategoryPage.SproutsSalad,
-        DietCategoryPage.BrownRiceBowl,
-        DietCategoryPage.SteamedVeggies,
-        DietCategoryPage.FruitBowl,
-        DietCategoryPage.DetoxWater,
-        DietCategoryPage.HerbalTea,
-        DietCategoryPage.ProteinBar,
-        DietCategoryPage.BoiledEggs,
-        DietCategoryPage.HummusPlate,
-        DietCategoryPage.SushiRolls,
-        DietCategoryPage.TofuStirFry,
-        DietCategoryPage.ChiaPudding,
-        DietCategoryPage.MilletBowl,
-    )
-
-    Log.d("CategoryDietTabsFood", "internalSelectedIndex: $internalSelectedIndex")
-    Log.d("CategoryDietTabsFood", "currentSelectedIndex from parent: $currentSelectedIndex")
-    Log.d("CategoryDietTabsFood", "recentlySelectedTabs: $recentlySelectedTabs")
-
-    // Update when parent state changes
+    // Update when parent changes
     LaunchedEffect(selectedDietTabIndex) {
-        internalSelectedIndex = selectedDietTabIndex
+        if (selectedDietTabIndex != internalSelectedIndex) {
+            internalSelectedIndex = selectedDietTabIndex
+            // When index changes from parent, add to recently selected if beyond initial count
+            if (selectedDietTabIndex >= initialVisibleCount) {
+                recentlySelectedTabs = recentlySelectedTabs + selectedDietTabIndex
+                Log.d(TAG, "Added to recentlySelectedTabs from parent: $selectedDietTabIndex")
+            }
+        }
     }
 
-    // Handle back navigation with selected index from See All page
+    // Handle selection from See All page
     DisposableEffect(navController) {
         val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
         val liveData = savedStateHandle?.getLiveData<Int>("selectedDietTabFromSeeAll")
 
         val observer = androidx.lifecycle.Observer<Int> { newIndex ->
             if (newIndex != null) {
-                Log.d("CategoryDietTabsFood", "Received new index from See All: $newIndex")
+                Log.d(TAG, "Received new index from See All: $newIndex")
 
-                // Add the selected tab to recently selected tabs if it's beyond initial visible count
-                if (newIndex >= 8) {
-                    // Update recentlySelectedTabs by adding the new index (preserving all previous ones)
+                // First update recently selected tabs
+                if (newIndex >= initialVisibleCount) {
                     recentlySelectedTabs = recentlySelectedTabs + newIndex
-                    Log.d("CategoryDietTabsFood", "Added to recentlySelectedTabs: $newIndex, now: $recentlySelectedTabs")
+                    Log.d(TAG, "Added to recentlySelectedTabs: $newIndex, now: $recentlySelectedTabs")
                 }
 
-                // Update internal selected index
-                internalSelectedIndex = newIndex
+                // Small delay to ensure recomposition with updated recentlySelectedTabs
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(10)
+                    // Then update internal selected index
+                    internalSelectedIndex = newIndex
 
-                // Notify parent about the change
-                onTabIndexChanged(newIndex)
+                    // Notify parent
+                    onTabIndexChanged(newIndex)
 
-                // Get the category page and call onCategorySelected
-                allDietCategoryPages.getOrNull(newIndex)?.let { page ->
-                    onCategorySelected(page)
+                    // Get the category page and call onCategorySelected
+                    allDietCategoryPages.getOrNull(newIndex)?.let { page ->
+                        onCategorySelected(page)
+                    }
                 }
 
-                // Clear the value to prevent repeated updates
+                // Clear the value
                 savedStateHandle?.remove<Int>("selectedDietTabFromSeeAll")
             }
         }
@@ -264,46 +280,33 @@ fun CategoryDietTabsFood(
         }
     }
 
-    // Initial visible tabs count
-    val initialVisibleCount = 8
-
-    // Configuration
-    val TAG = "CategoryDietTabsFood"
-
-    // Build visible tabs: initial 8 + recently selected (sorted) + "See All"
+    // Build visible tabs - recomputes whenever recentlySelectedTabs changes
     val visibleTabs = remember(recentlySelectedTabs) {
         buildList {
-            // 1. Add first 8 tabs (default visible tabs)
+            // Add first 8 tabs
             addAll(allDietCategoryPages.take(initialVisibleCount))
 
-            // 2. Add recently selected tabs that are beyond the initial visible range
-            val uniqueRecentTabs = recentlySelectedTabs
-                .filter { it >= initialVisibleCount } // Only include tabs beyond first 8
-                .sorted() // Sort for consistent order
+            // Add recently selected tabs beyond first 8, preserving order
+            val sortedRecentTabs = recentlySelectedTabs
+                .filter { it >= initialVisibleCount }
+                .sorted()
 
-            Log.d(TAG, "Building visible tabs with filtered recent tabs: $uniqueRecentTabs")
+            Log.d(TAG, "Building visibleTabs with recent tabs: $sortedRecentTabs")
 
-            uniqueRecentTabs.forEach { index ->
-                allDietCategoryPages.getOrNull(index)?.let { page ->
-                    add(page)
-                    Log.d(TAG, "Added recent tab at index $index: ${page.title}")
+            sortedRecentTabs.forEach { index ->
+                allDietCategoryPages.getOrNull(index)?.let {
+                    add(it)
+                    Log.d(TAG, "Added recent tab at index $index: ${it.title}")
                 }
             }
 
-            // 3. Add "See All" tab at the end
+            // Add See All tab at the end
             add(DietCategoryPage.SeeAll)
         }
     }
 
-    Log.d("CategoryDietTabsFood", "visibleTabs count: ${visibleTabs.size}")
-    visibleTabs.forEachIndexed { i, page ->
-        Log.d("CategoryDietTabsFood", "visibleTabs[$i]: ${page.title}")
-    }
-
-    val seeAllIndex = visibleTabs.indexOfLast { it is DietCategoryPage.SeeAll }
-
-    // Create a mapping from allCategories index to visibleTabs index
-    val allToVisibleIndexMap = remember(recentlySelectedTabs) {
+    // Create mapping from all indices to visible indices
+    val allToVisibleMap = remember(recentlySelectedTabs) {
         val map = mutableMapOf<Int, Int>()
 
         // Map first 8 tabs
@@ -311,34 +314,90 @@ fun CategoryDietTabsFood(
             map[i] = i
         }
 
-        // Map recently selected tabs
-        val sortedRecentTabs = recentlySelectedTabs.sorted()
-        sortedRecentTabs.forEachIndexed { recentIndex, allIndex ->
-            if (allIndex >= initialVisibleCount) {
-                map[allIndex] = initialVisibleCount + recentIndex
-            }
+        // Map recent tabs
+        val sortedRecentTabs = recentlySelectedTabs
+            .filter { it >= initialVisibleCount }
+            .sorted()
+
+        sortedRecentTabs.forEachIndexed { index, allIndex ->
+            map[allIndex] = initialVisibleCount + index
         }
 
         map
     }
 
-    // Find the index in visibleTabs for a given allCategories index
-    fun getVisibleTabIndex(allCategoriesIndex: Int): Int {
-        return when {
-            allCategoriesIndex < initialVisibleCount -> allCategoriesIndex
-            allCategoriesIndex in allToVisibleIndexMap -> allToVisibleIndexMap[allCategoriesIndex] ?: seeAllIndex
-            else -> seeAllIndex // "See All" tab
+    // Create reverse mapping from visible index to original index
+    val visibleToAllMap = remember(recentlySelectedTabs) {
+        val map = mutableMapOf<Int, Int>()
+
+        // Map first 8 tabs
+        for (i in 0 until minOf(initialVisibleCount, allDietCategoryPages.size)) {
+            map[i] = i
+        }
+
+        // Map recent tabs
+        val sortedRecentTabs = recentlySelectedTabs
+            .filter { it >= initialVisibleCount }
+            .sorted()
+
+        sortedRecentTabs.forEachIndexed { index, allIndex ->
+            map[initialVisibleCount + index] = allIndex
+        }
+
+        map
+    }
+
+    // Get visible index for current selection
+    val selectedVisibleIndex = remember(internalSelectedIndex, recentlySelectedTabs, visibleTabs) {
+        val visibleIndex = when {
+            // Case 1: Selected index is within first 8 tabs
+            internalSelectedIndex < initialVisibleCount -> internalSelectedIndex
+
+            // Case 2: Selected index is a recently selected tab (beyond first 8)
+            internalSelectedIndex in allToVisibleMap -> {
+                val index = allToVisibleMap[internalSelectedIndex]
+                Log.d(TAG, "Mapping internal index $internalSelectedIndex to visible index $index")
+                index ?: (visibleTabs.size - 1)
+            }
+
+            // Case 3: Selected index is not in visible tabs - add it to recently selected
+            else -> {
+                Log.d(TAG, "Selected index $internalSelectedIndex not found in visible tabs, adding to recently selected")
+                // Add to recently selected tabs
+                if (internalSelectedIndex >= initialVisibleCount) {
+                    // Use a coroutine to update recentlySelectedTabs
+                    CoroutineScope(Dispatchers.Main).launch {
+                        recentlySelectedTabs = recentlySelectedTabs + internalSelectedIndex
+                        Log.d(TAG, "Added missing tab to recentlySelectedTabs: $internalSelectedIndex")
+                    }
+                }
+                visibleTabs.size - 1 // Default to See All for now
+            }
+        }
+
+        // Ensure the visible index is within bounds
+        if (visibleIndex in visibleTabs.indices) {
+            visibleIndex
+        } else {
+            Log.d(TAG, "Visible index $visibleIndex out of bounds, defaulting to See All")
+            visibleTabs.size - 1
         }
     }
 
-    val selectedVisibleIndex = if (internalSelectedIndex < initialVisibleCount ||
-        internalSelectedIndex in allToVisibleIndexMap) {
-        getVisibleTabIndex(internalSelectedIndex)
-    } else {
-        seeAllIndex
+    // Debug logging
+    LaunchedEffect(internalSelectedIndex, recentlySelectedTabs) {
+        Log.d(TAG, "=== State Update ===")
+        Log.d(TAG, "internalSelectedIndex: $internalSelectedIndex")
+        Log.d(TAG, "selectedVisibleIndex: $selectedVisibleIndex")
+        Log.d(TAG, "recentlySelectedTabs: $recentlySelectedTabs")
+        Log.d(TAG, "visibleTabs size: ${visibleTabs.size}")
+        visibleTabs.forEachIndexed { index, page ->
+            val originalIndex = visibleToAllMap[index]
+            Log.d(TAG, "visibleTabs[$index]: ${page.title} (original index: $originalIndex)")
+        }
+        Log.d(TAG, "Selected tab title: ${visibleTabs.getOrNull(selectedVisibleIndex)?.title}")
+        Log.d(TAG, "==================")
     }
-
-    Log.d("CategoryDietTabsFood", "selectedVisibleIndex: $selectedVisibleIndex, internalSelectedIndex: $internalSelectedIndex")
 
     Column(
         modifier = Modifier
@@ -384,33 +443,21 @@ fun CategoryDietTabsFood(
             visibleTabs.forEachIndexed { index, dietCategoryPage ->
                 val isSeeAllTab = dietCategoryPage is DietCategoryPage.SeeAll
 
-                // Find which allCategories index this corresponds to
-                val allCategoriesIndex = when {
+                // Find original index for this visible tab
+                val originalIndex = when {
                     index < initialVisibleCount -> index
                     isSeeAllTab -> -1
-                    else -> {
-                        // This is a recently selected tab - find its original index
-                        val sortedRecentTabs = recentlySelectedTabs.sorted()
-                        val recentIndexInList = index - initialVisibleCount
-                        if (recentIndexInList < sortedRecentTabs.size) {
-                            sortedRecentTabs[recentIndexInList]
-                        } else -1
-                    }
+                    else -> visibleToAllMap[index] ?: -1
                 }
 
-                val isSelected = if (isSeeAllTab) {
-                    false // See All tab is never selected as a content tab
-                } else {
-                    internalSelectedIndex == allCategoriesIndex
-                }
+                val isSelected = !isSeeAllTab && internalSelectedIndex == originalIndex
 
                 Tab(
                     selected = isSelected,
                     onClick = {
                         if (isSeeAllTab) {
-                            // Navigate to the "See All" page
+                            // Navigate to See All page
                             navController?.navigate("category_diet_tabs_list/${internalSelectedIndex}") {
-                                // Pass all categories and current index as arguments
                                 navController.currentBackStackEntry?.savedStateHandle?.set(
                                     "allDietCategories",
                                     allDietCategoryPages
@@ -421,15 +468,18 @@ fun CategoryDietTabsFood(
                                 )
                             }
                         } else {
-                            // For regular tabs
-                            internalSelectedIndex = allCategoriesIndex
-                            onTabIndexChanged(allCategoriesIndex)
-                            onCategorySelected(dietCategoryPage)
+                            // Regular tab click
+                            if (originalIndex >= 0) {
+                                internalSelectedIndex = originalIndex
+                                onTabIndexChanged(originalIndex)
+                                onCategorySelected(dietCategoryPage)
 
-                            // Also add to recently selected if beyond initial count
-                            if (allCategoriesIndex >= initialVisibleCount) {
-                                recentlySelectedTabs = recentlySelectedTabs + allCategoriesIndex
-                                Log.d(TAG, "Added to recentlySelectedTabs on click: $allCategoriesIndex, now: $recentlySelectedTabs")
+                                // IMPORTANT: Always add to recently selected if beyond initial count
+                                if (originalIndex >= initialVisibleCount) {
+                                    // Add to recently selected even if already there (to ensure it appears)
+                                    recentlySelectedTabs = recentlySelectedTabs + originalIndex
+                                    Log.d(TAG, "Added to recentlySelectedTabs on click: $originalIndex")
+                                }
                             }
                         }
                     },
@@ -472,8 +522,8 @@ fun CategoryDietTabsFood(
                             modifier = Modifier.padding(top = 2.dp)
                         )
 
-                        // Show a small indicator for recently added tabs
-                        if (!isSeeAllTab && allCategoriesIndex >= initialVisibleCount) {
+                        // Show indicator for recently added tabs
+                        if (!isSeeAllTab && originalIndex >= initialVisibleCount) {
                             Box(
                                 modifier = Modifier
                                     .padding(top = 2.dp)
@@ -488,7 +538,7 @@ fun CategoryDietTabsFood(
         }
     }
 
-    // Show content for each tab
+    // Content section
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -501,10 +551,8 @@ fun CategoryDietTabsFood(
                 )
             )
     ) {
-        // Get the actual category based on internalSelectedIndex
         val actualCategory = allDietCategoryPages.getOrNull(internalSelectedIndex)
 
-        // Show content based on the actual category
         when (actualCategory) {
             DietCategoryPage.Chicken -> ChickenDietPage()
             DietCategoryPage.Salad -> SaladDietPage()
@@ -514,7 +562,6 @@ fun CategoryDietTabsFood(
             DietCategoryPage.LowCalorie -> LowCaloriePage()
             DietCategoryPage.Vegan -> VeganPage()
             DietCategoryPage.ProteinRich -> ProteinRichPage()
-
             DietCategoryPage.Dessert -> DessertPage()
             DietCategoryPage.VegMeal -> VegMealPage()
             DietCategoryPage.Bowl -> BowlPage()
@@ -525,12 +572,11 @@ fun CategoryDietTabsFood(
             DietCategoryPage.Lassi -> LassiPage()
             DietCategoryPage.CurdRice -> CurdRicePage()
             DietCategoryPage.Pudding -> PuddingPage()
-            DietCategoryPage.Custard -> CustardPage()
+            DietCategoryPage.Custard -> CustardPage()  // This should now be selectable
             DietCategoryPage.Soup -> SoupDietPage()
             DietCategoryPage.Brownie -> BrowniePage()
             DietCategoryPage.Waffles -> WafflesPage()
             DietCategoryPage.ColdCoffee -> ColdCoffeePage()
-
             DietCategoryPage.GrilledChicken -> GrilledChickenDietPage()
             DietCategoryPage.SteamedFish -> SteamedFishDietPage()
             DietCategoryPage.QuinoaBowl -> QuinoaBowlDietPage()
@@ -556,7 +602,6 @@ fun CategoryDietTabsFood(
             DietCategoryPage.ChiaPudding -> ChiaPuddingDietPage()
             DietCategoryPage.MilletBowl -> MilletBowlDietPage()
             null -> {
-                // Show empty state for "See All" tab or invalid index
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -652,7 +697,6 @@ fun MainScreenWithDietTabs(navController: NavHostController) {
         )
     }
 }
-
 
 // Category Page Composables for diet tabs
 
@@ -11009,32 +11053,1888 @@ fun CurdRicePage() {
         )
     }
 
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
 
+    // Sample data based on the provided images
+    val curdRiceDietItems = listOf(
+        // 1-5: CLASSIC CURD RICE VARIETIES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.curd_rice_diet_1,
+            title = "Traditional South Indian Curd Rice",
+            price = "99",
+            restaurantName = "Madras Cafe",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹15",
+            address = "Triplicane High Road, Chennai"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.curd_rice_diet_2,
+            title = "Kalyana Veetu Curd Rice",
+            price = "129",
+            restaurantName = "Kalyana Bhavan",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Marriage Road, Madurai"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.curd_rice_diet_3,
+            title = "Temple Style Curd Rice",
+            price = "89",
+            restaurantName = "Annapoorna Mess",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹18",
+            address = "Temple Street, Trichy"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.curd_rice_diet_4,
+            title = "Grandmother's Recipe Curd Rice",
+            price = "119",
+            restaurantName = "Paati's Kitchen",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Residential Colony, Coimbatore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.curd_rice_diet_5,
+            title = "Simple Homestyle Curd Rice",
+            price = "79",
+            restaurantName = "Home Food Express",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹8",
+            address = "Gandhi Nagar, Bangalore"
+        ),
+
+        // 6-10: FLAVORED & TEMPERED CURD RICE
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.curd_rice_diet_6,
+            title = "Pomegranate Curd Rice",
+            price = "149",
+            restaurantName = "Fusion Foods",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹30",
+            address = "Fruit Market, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.curd_rice_diet_7,
+            title = "Mango Curd Rice",
+            price = "159",
+            restaurantName = "Seasonal Delights",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Mango Garden, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.curd_rice_diet_8,
+            title = "Jeera Tadka Curd Rice",
+            price = "109",
+            restaurantName = "Spice Junction",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹16",
+            address = "Spice Market, Chennai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.curd_rice_diet_9,
+            title = "Mustard & Curry Leaf Curd Rice",
+            price = "119",
+            restaurantName = "South Indian Tiffins",
+            rating = "4.8",
+            deliveryTime = "12-17 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Mylapore, Chennai"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.curd_rice_diet_10,
+            title = "Ginger & Green Chilli Curd Rice",
+            price = "129",
+            restaurantName = "Spicy Treat",
+            rating = "4.6",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹26",
+            address = "Jayanagar, Bangalore"
+        ),
+
+        // 11-15: HEALTHY & DIET CURD RICE
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.curd_rice_diet_11,
+            title = "Brown Rice Curd Rice",
+            price = "149",
+            restaurantName = "Healthy Bites",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Wellness Colony, Pune"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.curd_rice_diet_12,
+            title = "Low Fat Greek Yogurt Rice",
+            price = "169",
+            restaurantName = "Fit Food Kitchen",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹34",
+            address = "Fitness Street, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.curd_rice_diet_13,
+            title = "Quinoa Curd Rice",
+            price = "189",
+            restaurantName = "Modern Healthy",
+            rating = "4.7",
+            deliveryTime = "18-22 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Health Hub, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.curd_rice_diet_14,
+            title = "Millet Curd Rice",
+            price = "159",
+            restaurantName = "Organic Valley",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Organic Market, Mysore"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.curd_rice_diet_15,
+            title = "Protein Rich Curd Rice with Nuts",
+            price = "199",
+            restaurantName = "Power Bowls",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "Sports Complex, Bangalore"
+        ),
+
+        // 16-18: DRY FRUIT & RICH CURD RICE
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.curd_rice_diet_16,
+            title = "Cashew & Raisin Curd Rice",
+            price = "179",
+            restaurantName = "Royal South Indian",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.curd_rice_diet_17,
+            title = "Badam Pista Curd Rice",
+            price = "189",
+            restaurantName = "Heritage Taste",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "1.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹38",
+            address = "Old City, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.curd_rice_diet_18,
+            title = "Dates & Walnut Curd Rice",
+            price = "199",
+            restaurantName = "Nutri Bowl",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "Green Park, Delhi"
+        ),
+
+        // 19-20: SPECIALTY & COMBO CURD RICE
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.curd_rice_diet_19,
+            title = "Curd Rice with Papad & Pickle",
+            price = "149",
+            restaurantName = "Complete Meal",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Food Court, Chennai"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.curd_rice_diet_20,
+            title = "Grand Curd Rice Thali",
+            price = "299",
+            restaurantName = "Bharatiya Rasoi",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "2.0 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Thali Village, Bangalore"
+        )
+    )
+    Column {
+        curdRiceDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
 fun PuddingPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val puddingDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY PUDDING CATEGORIES (WITH ICONS)
+                FilterChip(
+                    id = "rice_pudding_kheer",
+                    text = "Rice Pudding (Kheer)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice_pudding_diet  // Traditional kheer bowl with rice grains
+                ),
+                FilterChip(
+                    id = "bread_pudding",
+                    text = "Bread Pudding",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bread_pudding_diet  // Bread cubes in custard
+                ),
+                FilterChip(
+                    id = "chocolate_pudding",
+                    text = "Chocolate Pudding",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_pudding_diet  // Chocolate dessert cup
+                ),
+                FilterChip(
+                    id = "caramel_pudding",
+                    text = "Caramel Pudding (Flan)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_caramel_pudding_diet  // Caramel custard with sauce
+                ),
+                FilterChip(
+                    id = "tapioca_pudding",
+                    text = "Tapioca Pudding (Sabudana Kheer)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tapioca_pudding_diet  // Sabudana pearls in milk
+                ),
+                // 4. BASE INGREDIENTS (TEXT ONLY)
+                FilterChip(
+                    id = "milk_pudding",
+                    text = "Milk-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cream_pudding",
+                    text = "Cream-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "custard_pudding",
+                    text = "Custard-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_pudding",
+                    text = "Egg-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cornflour_pudding",
+                    text = "Cornflour-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gelatin_pudding",
+                    text = "Gelatin Set",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 6. INTERNATIONAL PUDDINGS (TEXT ONLY)
+                FilterChip(
+                    id = "english_pudding",
+                    text = "English Pudding",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "american_pudding",
+                    text = "American Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "french_pudding",
+                    text = "French Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spanish_flan",
+                    text = "Spanish Flan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "japanese_pudding",
+                    text = "Japanese Purin",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. FLAVOR PROFILES (TEXT ONLY)
+                FilterChip(
+                    id = "vanilla_pudding",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_pudding_flavor",
+                    text = "Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cardamom_pudding",
+                    text = "Cardamom (Elaichi)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "saffron_pudding",
+                    text = "Saffron (Kesar)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rose_pudding",
+                    text = "Rose (Gulab)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coffee_pudding",
+                    text = "Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "butterscotch",
+                    text = "Butterscotch",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. NUTS & DRY FRUITS (TEXT ONLY)
+                FilterChip(
+                    id = "almond_pudding",
+                    text = "Almonds (Badam)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pistachio_pudding",
+                    text = "Pistachios (Pista)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cashew_pudding",
+                    text = "Cashews (Kaju)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "walnut_pudding",
+                    text = "Walnuts (Akhrot)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raisin_pudding",
+                    text = "Raisins (Kishmish)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 10. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_pudding",
+                    text = "Vegan (Plant-Based)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_pudding",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar_pudding",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free_pudding",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless_pudding",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_pudding",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. OCCASION/PURPOSE (TEXT ONLY)
+                FilterChip(
+                    id = "festival_sweet",
+                    text = "Festival Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_dessert",
+                    text = "Party Dessert",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "comfort_pudding",
+                    text = "Comfort Food",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kids_special",
+                    text = "Kids Favourite",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "date_night_dessert",
+                    text = "Date Night Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "after_dinner_pudding",
+                    text = "After Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. TEXTURE PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "creamy_pudding",
+                    text = "Creamy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "silky_pudding",
+                    text = "Silky Smooth",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chunky_pudding",
+                    text = "Chunky (With Fruits/Nuts)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "layered_pudding",
+                    text = "Layered",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "baked_pudding",
+                    text = "Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed_pudding",
+                    text = "Steamed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chilled_pudding",
+                    text = "Chilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "warm_pudding",
+                    text = "Warm",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. TEMPERATURE (TEXT ONLY)
+                FilterChip(
+                    id = "hot_pudding",
+                    text = "Hot/Served Warm",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold_pudding",
+                    text = "Cold/Chilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "room_temp_pudding",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SERVING SIZE (TEXT ONLY)
+                FilterChip(
+                    id = "individual_pudding",
+                    text = "Individual Cup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "small_pudding",
+                    text = "Small (100-150g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_pudding",
+                    text = "Regular (200-250g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pudding",
+                    text = "Family Size (500g+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_80_pudding",
+                    text = "Under ₹80",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "80_150_pudding",
+                    text = "₹80 - ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "150_250_pudding",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_250_pudding",
+                    text = "Above ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 16. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = puddingDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val puddingDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_rice_kheer_1,  // Traditional rice kheer in clay pot with nuts and saffron
+                title = "Traditional Rice Kheer",
+                price = "89",
+                restaurantName = "Mishram Sweets",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹9",
+                address = "Chandni Chowk, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_bread_pudding_1,  // Shahi tukda style bread pudding with nuts and rabri
+                title = "Shahi Bread Pudding",
+                price = "149",
+                restaurantName = "Royal Desserts",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹22",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_caramel_custard_1,  // Caramel flan with golden caramel sauce on top
+                title = "Caramel Custard",
+                price = "129",
+                restaurantName = "Flan House",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.8 km",
+                discount = "12%",
+                discountAmount = "up to ₹15",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_seviyan_kheer_1,  // Vermicelli kheer with nuts and cardamom
+                title = "Seviyan Kheer",
+                price = "99",
+                restaurantName = "Lucknawi Zaika",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹10",
+                address = "Old Lucknow, Lucknow"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_mango_pudding_1,  // Mango pudding with fresh mango pieces
+                title = "Mango Pudding",
+                price = "139",
+                restaurantName = "Mango Mania",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹21",
+                address = "Fruit Market, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_chocolate_pudding_1,  // Rich chocolate pudding with chocolate shavings
+                title = "Belgian Chocolate Pudding",
+                price = "159",
+                restaurantName = "Chocolate Room",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹16",
+                address = "Bandra West, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Pudding Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = puddingDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val puddingDietItems = listOf(
+        // 1-5: CLASSIC INDIAN PUDDINGS (KHEER & PAYASAM)
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.pudding_diet_1,
+            title = "Traditional Rice Kheer",
+            price = "99",
+            restaurantName = "Mishram Sweets",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹10",
+            address = "Chandni Chowk, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.pudding_diet_2,
+            title = "Semiya Payasam (Vermicelli Pudding)",
+            price = "109",
+            restaurantName = "Kerala Kitchen",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹16",
+            address = "Fort Kochi, Kerala"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.pudding_diet_3,
+            title = "Phirni (Clay Pot Rice Pudding)",
+            price = "119",
+            restaurantName = "Mughal Darbar",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹14",
+            address = "Old Delhi, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.pudding_diet_4,
+            title = "Paradha Payasam (South Indian Kheer)",
+            price = "129",
+            restaurantName = "Temple Bhavan",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Guruvayur, Kerala"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.pudding_diet_5,
+            title = "Doodh Pak (Slow-Cooked Rice Pudding)",
+            price = "139",
+            restaurantName = "Royal Thali",
+            rating = "4.9",
+            deliveryTime = "18-22 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Palace Road, Jaipur"
+        ),
+
+        // 6-10: BREAD & MILK PUDDINGS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.pudding_diet_6,
+            title = "Shahi Tukda (Bread Pudding)",
+            price = "149",
+            restaurantName = "Lucknawi Zaika",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Hazratganj, Lucknow"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.pudding_diet_7,
+            title = "Double Ka Meetha (Hyderabadi Bread Pudding)",
+            price = "159",
+            restaurantName = "Nizam's Kitchen",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "1.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹32",
+            address = "Old City, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.pudding_diet_8,
+            title = "Caramel Custard Pudding",
+            price = "129",
+            restaurantName = "Flan House",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.pudding_diet_9,
+            title = "Bread & Butter Pudding",
+            price = "139",
+            restaurantName = "Anglo Indian Cafe",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Park Street, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.pudding_diet_10,
+            title = "Malai Rabri Pudding",
+            price = "169",
+            restaurantName = "Sweets Corner",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Juhu, Mumbai"
+        ),
+
+        // 11-15: FRUIT & FLAVORED PUDDINGS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.pudding_diet_11,
+            title = "Mango Phirni",
+            price = "159",
+            restaurantName = "Mango Mania",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Fruit Market, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.pudding_diet_12,
+            title = "Strawberry Cream Pudding",
+            price = "169",
+            restaurantName = "Berry Bliss",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Berry Gardens, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.pudding_diet_13,
+            title = "Chikoo (Sapota) Pudding",
+            price = "149",
+            restaurantName = "Seasonal Delights",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Maharashtra Market, Pune"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.pudding_diet_14,
+            title = "Sitaphal (Custard Apple) Kheer",
+            price = "179",
+            restaurantName = "Exotic Flavors",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹36",
+            address = "Fruit Bazaar, Chennai"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.pudding_diet_15,
+            title = "Jackfruit Payasam",
+            price = "169",
+            restaurantName = "Coastal Kitchen",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "1.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Mangalore, Karnataka"
+        ),
+
+        // 16-18: NUTS & DRY FRUIT PUDDINGS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.pudding_diet_16,
+            title = "Badam (Almond) Kheer",
+            price = "189",
+            restaurantName = "Nut House",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.pudding_diet_17,
+            title = "Pista (Pistachio) Phirni",
+            price = "199",
+            restaurantName = "Royal Sweets",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.pudding_diet_18,
+            title = "Kaju (Cashew) & Kesari Pudding",
+            price = "209",
+            restaurantName = "Heritage Taste",
+            rating = "4.9",
+            deliveryTime = "18-22 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Old City, Hyderabad"
+        ),
+
+        // 19-20: SPECIALTY & DIET PUDDINGS
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.pudding_diet_19,
+            title = "Sabudana (Tapioca) Kheer",
+            price = "129",
+            restaurantName = "Healthy Indulgence",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Wellness Street, Pune"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.pudding_diet_20,
+            title = "Sugar-Free Kesar Pudding",
+            price = "179",
+            restaurantName = "Diet Desserts",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Fitness Street, Mumbai"
         )
-        // Add your pudding items here
+    )
+    Column {
+        puddingDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun CustardPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val custardDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY CUSTARD CATEGORIES (WITH ICONS)
+                FilterChip(
+                    id = "classic_custard",
+                    text = "Classic Custard",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_custard_diet  // Traditional vanilla custard bowl
+                ),
+                FilterChip(
+                    id = "fruit_custard",
+                    text = "Fruit Custard",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fruit_custard_diet  // Mixed fruits in creamy custard
+                ),
+                FilterChip(
+                    id = "baked_custard",
+                    text = "Baked Custard",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_baked_custard_diet  // Baked custard with caramelized top
+                ),
+                FilterChip(
+                    id = "steamed_custard",
+                    text = "Steamed Custard",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_steamed_custard_diet  // Steamed custard in ramekin
+                ),
+                FilterChip(
+                    id = "caramel_custard",
+                    text = "Caramel Custard",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_caramel_custard_diet  // Flan with caramel sauce
+                ),
+                // 4. BASE TYPES (TEXT ONLY)
+                FilterChip(
+                    id = "milk_custard",
+                    text = "Milk-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cream_custard",
+                    text = "Cream-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_custard",
+                    text = "Egg-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cornflour_custard",
+                    text = "Cornflour-Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "custard_powder",
+                    text = "Custard Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. FLAVOR PROFILES (TEXT ONLY)
+                FilterChip(
+                    id = "vanilla_custard",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_custard",
+                    text = "Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "butterscotch_custard",
+                    text = "Butterscotch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberry_custard_flavor",
+                    text = "Strawberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_custard_flavor",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple_custard",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pista_custard",
+                    text = "Pistachio (Pista)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "badam_custard",
+                    text = "Almond (Badam)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kesar_custard",
+                    text = "Saffron (Kesar)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rose_custard",
+                    text = "Rose (Gulab)",
+                    type = FilterType.TEXT_ONLY
+                ),
+              // 8. CONSISTENCY & TEXTURE (TEXT ONLY)
+                FilterChip(
+                    id = "thin_custard",
+                    text = "Thin/Pouring",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick_custard",
+                    text = "Thick/Set",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "creamy_custard",
+                    text = "Creamy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smooth_custard",
+                    text = "Smooth",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chunky_custard",
+                    text = "Chunky (with Fruits)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. TEMPERATURE (TEXT ONLY)
+                FilterChip(
+                    id = "hot_custard",
+                    text = "Hot/Warm Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold_custard",
+                    text = "Cold/Chilled Custard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "room_temp_custard",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_custard",
+                    text = "Vegan (Plant-Based)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_custard",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar_custard",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free_custard",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless_custard_diet",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_custard",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_custard",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. OCCASION/PURPOSE (TEXT ONLY)
+                FilterChip(
+                    id = "party_custard",
+                    text = "Party Dessert",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kids_custard",
+                    text = "Kids Favorite",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "comfort_custard",
+                    text = "Comfort Food",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "after_meal_custard",
+                    text = "After Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "festival_custard",
+                    text = "Festival Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "summer_custard",
+                    text = "Summer Cooler",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. REGIONAL VARIETIES (TEXT ONLY)
+                FilterChip(
+                    id = "british_custard",
+                    text = "British Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "french_custard",
+                    text = "French Crème",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spanish_custard",
+                    text = "Spanish Flan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "asian_custard",
+                    text = "Asian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. SERVING STYLE (TEXT ONLY)
+                FilterChip(
+                    id = "individual_cup_custard",
+                    text = "Individual Cups",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_bowl_custard",
+                    text = "Family Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "layered_custard",
+                    text = "Layered Dessert",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "trifle_custard",
+                    text = "Custard Trifle",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SPECIAL ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "jelly_custard",
+                    text = "With Jelly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cake_custard",
+                    text = "With Cake Pieces",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookie_custard",
+                    text = "With Cookies",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ice_cream_custard",
+                    text = "With Ice Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. SERVING SIZE (TEXT ONLY)
+                FilterChip(
+                    id = "small_custard",
+                    text = "Small (100ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_custard",
+                    text = "Regular (200ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_custard",
+                    text = "Large (350ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_custard",
+                    text = "Family (500ml+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 16. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_70_custard",
+                    text = "Under ₹70",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "70_120_custard",
+                    text = "₹70 - ₹120",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "120_180_custard",
+                    text = "₹120 - ₹180",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_180_custard",
+                    text = "Above ₹180",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 17. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = custardDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val custardDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_custard_1,  // Classic vanilla custard in a dessert bowl with nutmeg sprinkle
+                title = "Classic Vanilla Custard",
+                price = "79",
+                restaurantName = "Dessert House",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹8",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_mixed_fruit_custard_1,  // Mixed fruit custard with apple, banana, pomegranate and grapes
+                title = "Mixed Fruit Custard",
+                price = "119",
+                restaurantName = "Fruit Bowl",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "12%",
+                discountAmount = "up to ₹14",
+                address = "Fruit Market, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_caramel_custard_2,  // Caramel custard flan with golden caramel sauce and cream
+                title = "Caramel Custard Flan",
+                price = "129",
+                restaurantName = "Flan House",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹19",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_mango_custard_1,  // Mango custard with fresh mango slices and mint garnish
+                title = "Alphonso Mango Custard",
+                price = "139",
+                restaurantName = "Mango Mania",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "1.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹14",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_baked_custard_1,  // Baked custard with caramelized top and berry compote
+                title = "Baked Egg Custard",
+                price = "109",
+                restaurantName = "Bake House",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "12%",
+                discountAmount = "up to ₹13",
+                address = "Park Street, Kolkata"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_strawberry_custard_1,  // Strawberry custard with fresh strawberry pieces
+                title = "Strawberry Cream Custard",
+                price = "129",
+                restaurantName = "Berry Bliss",
+                rating = "4.8",
+                deliveryTime = "12-18 mins",
+                distance = "1.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹19",
+                address = "Berry Gardens, Bangalore"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Custard Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = custardDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val custardDietItems = listOf(
+        // 1-5: CLASSIC CUSTARD VARIETIES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.custard_diet_1,
+            title = "Classic Vanilla Custard",
+            price = "79",
+            restaurantName = "Dessert House",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹8",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.custard_diet_2,
+            title = "Eggless Vanilla Custard",
+            price = "89",
+            restaurantName = "Pure Veg Sweets",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹9",
+            address = "Marine Lines, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.custard_diet_3,
+            title = "Caramel Custard Flan",
+            price = "129",
+            restaurantName = "Flan House",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.custard_diet_4,
+            title = "Baked Egg Custard",
+            price = "109",
+            restaurantName = "Bake House",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹13",
+            address = "Park Street, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.custard_diet_5,
+            title = "Steamed Custard Pudding",
+            price = "99",
+            restaurantName = "Steam Kitchen",
+            rating = "4.6",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹10",
+            address = "Andheri East, Mumbai"
+        ),
+
+        // 6-10: FRUIT CUSTARDS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.custard_diet_6,
+            title = "Mixed Fruit Custard",
+            price = "119",
+            restaurantName = "Fruit Bowl",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹14",
+            address = "Fruit Market, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.custard_diet_7,
+            title = "Alphonso Mango Custard",
+            price = "139",
+            restaurantName = "Mango Mania",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.custard_diet_8,
+            title = "Strawberry Cream Custard",
+            price = "129",
+            restaurantName = "Berry Bliss",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Berry Gardens, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.custard_diet_9,
+            title = "Banana Walnut Custard",
+            price = "109",
+            restaurantName = "Healthy Treats",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹13",
+            address = "Wellness Street, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.custard_diet_10,
+            title = "Baked Apple Custard",
+            price = "119",
+            restaurantName = "Apple Orchard",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Shimla Hills, Delhi"
+        ),
+
+        // 11-15: FLAVORED CUSTARDS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.custard_diet_11,
+            title = "Rich Chocolate Custard",
+            price = "139",
+            restaurantName = "Chocolate Room",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.custard_diet_12,
+            title = "Butterscotch Crunch Custard",
+            price = "129",
+            restaurantName = "Sweet Tooth",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.custard_diet_13,
+            title = "Pista (Pistachio) Custard",
+            price = "149",
+            restaurantName = "Royal Sweets",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.custard_diet_14,
+            title = "Badam (Almond) Custard",
+            price = "149",
+            restaurantName = "Nut House",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.custard_diet_15,
+            title = "Kesar (Saffron) Custard",
+            price = "159",
+            restaurantName = "Royal Thali",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Palace Road, Jaipur"
+        ),
+
+        // 16-18: PREMIUM & SPECIALTY CUSTARDS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.custard_diet_16,
+            title = "Tiramisu Custard",
+            price = "169",
+            restaurantName = "Italian Delights",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.custard_diet_17,
+            title = "Coconut Cream Custard",
+            price = "139",
+            restaurantName = "Coastal Flavors",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹17",
+            address = "Marine Drive, Kochi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.custard_diet_18,
+            title = "Coffee Walnut Custard",
+            price = "149",
+            restaurantName = "Cafe Dessert",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Brigade Road, Bangalore"
+        ),
+
+        // 19-20: LAYERED & TRIFLE CUSTARDS
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.custard_diet_19,
+            title = "Fruit Custard Trifle",
+            price = "159",
+            restaurantName = "Trifle House",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Park Street, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.custard_diet_20,
+            title = "Layered Berry Custard",
+            price = "169",
+            restaurantName = "Layered Desserts",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your custard items here
+    )
+    Column {
+        custardDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

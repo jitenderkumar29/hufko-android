@@ -12940,14 +12940,766 @@ fun CustardPage() {
 
 @Composable
 fun SoupDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val soupDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY SOUP CATEGORIES (WITH ICONS)
+                FilterChip(
+                    id = "chicken_soup",
+                    text = "Chicken Soup",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_soup_diet  // Chicken broth with pieces
+                ),
+                FilterChip(
+                    id = "vegetable_soup",
+                    text = "Vegetable Soup",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable_soup_diet  // Mixed vegetables in broth
+                ),
+                FilterChip(
+                    id = "tomato_soup",
+                    text = "Tomato Soup",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tomato_soup_diet  // Creamy tomato soup
+                ),
+                FilterChip(
+                    id = "lentil_soup",
+                    text = "Lentil Soup",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lentil_soup_diet  // Dal/bean based soup
+                ),
+                FilterChip(
+                    id = "cream_soup",
+                    text = "Cream Soup",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cream_soup_diet  // Creamy bisque style
+                ),
+                // 3. BROTH BASE (TEXT ONLY)
+                FilterChip(
+                    id = "clear_broth",
+                    text = "Clear Broth",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick_soup",
+                    text = "Thick Soup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "creamy_base",
+                    text = "Creamy Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tomato_base",
+                    text = "Tomato Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_base",
+                    text = "Coconut Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. PROTEIN TYPES (TEXT ONLY)
+                FilterChip(
+                    id = "chicken_protein",
+                    text = "Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mutton_protein",
+                    text = "Mutton/Lamb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_protein",
+                    text = "Fish/Seafood",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_protein",
+                    text = "Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_protein",
+                    text = "Tofu/Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lentil_protein",
+                    text = "Lentils/Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. CUISINE STYLES (TEXT ONLY)
+                FilterChip(
+                    id = "indian_soup",
+                    text = "Indian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chinese_soup",
+                    text = "Chinese Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thai_soup",
+                    text = "Thai Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "italian_soup",
+                    text = "Italian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mexican_soup",
+                    text = "Mexican Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "american_soup",
+                    text = "American Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "low_calorie_soup",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_soup",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_soup",
+                    text = "Low Carb/Keto",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_soup",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_soup",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_soup",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. HEALTH FOCUS (TEXT ONLY)
+                FilterChip(
+                    id = "detox_soup",
+                    text = "Detox/Cleanse",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "immunity_soup",
+                    text = "Immunity Booster",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold_fighting",
+                    text = "Cold/Flu Fighter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gut_health",
+                    text = "Gut Health",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. TEMPERATURE (TEXT ONLY)
+                FilterChip(
+                    id = "hot_soup",
+                    text = "Hot Soup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold_soup",
+                    text = "Cold Soup",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. OCCASION/SEASON (TEXT ONLY)
+                FilterChip(
+                    id = "winter_soup",
+                    text = "Winter Warmer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "monsoon_soup",
+                    text = "Monsoon Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "summer_soup",
+                    text = "Summer Cooler",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sick_day",
+                    text = "Sick Day Comfort",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "appetizer",
+                    text = "Starter/Appetizer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "light_meal",
+                    text = "Light Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. TEXTURE/CONSISTENCY (TEXT ONLY)
+                FilterChip(
+                    id = "chunky_soup",
+                    text = "Chunky",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smooth_soup",
+                    text = "Smooth/Puréed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brothy_soup",
+                    text = "Brothy/Light",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. SPECIAL ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "with_croutons",
+                    text = "With Croutons",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_noodles",
+                    text = "With Noodles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_rice",
+                    text = "With Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_dumplings",
+                    text = "With Dumplings",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. SERVING SIZE (TEXT ONLY)
+                FilterChip(
+                    id = "small_soup",
+                    text = "Small (200ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_soup",
+                    text = "Regular (350ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_soup",
+                    text = "Large (500ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_soup",
+                    text = "Family (1L+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_80_soup",
+                    text = "Under ₹80",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "80_150_soup",
+                    text = "₹80 - ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "150_250_soup",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_250_soup",
+                    text = "Above ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = soupDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val soupDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_tomato_soup_1,  // Creamy tomato soup in a bowl with basil leaf and cream swirl
+                title = "Classic Tomato Soup",
+                price = "89",
+                restaurantName = "Soup Symphony",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹13",
+                address = "MG Road, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_chicken_noodle_soup_1,  // Chicken noodle soup with vegetables in clear broth
+                title = "Hearty Chicken Noodle",
+                price = "149",
+                restaurantName = "Brother's Broth",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "12%",
+                discountAmount = "up to ₹18",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_cream_of_mushroom_1,  // Cream of mushroom soup with mushroom slices and herbs
+                title = "Cream of Mushroom",
+                price = "119",
+                restaurantName = "The Soup Spoon",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹12",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_thai_coconut_soup_1,  // Thai coconut soup (Tom Kha) with lemongrass and mushrooms
+                title = "Thai Coconut Soup",
+                price = "169",
+                restaurantName = "Thai Basil",
+                rating = "4.9",
+                deliveryTime = "18-25 mins",
+                distance = "1.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹25",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_mixed_vegetable_soup_1,  // Mixed vegetable soup with carrots, beans, corn in clear broth
+                title = "Garden Vegetable Soup",
+                price = "99",
+                restaurantName = "Green Bowl",
+                rating = "4.8",
+                deliveryTime = "10-15 mins",
+                distance = "0.6 km",
+                discount = "20%",
+                discountAmount = "up to ₹20",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_lentil_soup_1,  // Hearty lentil soup (dal shorba) with Indian spices
+                title = "Masala Lentil Shorba",
+                price = "109",
+                restaurantName = "Spice Route",
+                rating = "4.8",
+                deliveryTime = "12-18 mins",
+                distance = "0.9 km",
+                discount = "10%",
+                discountAmount = "up to ₹11",
+                address = "Baner, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Soup Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = soupDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val soupDietItems = listOf(
+        // 1-5: CLASSIC & COMFORT SOUPS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.soup_diet_1,
+            title = "Classic Tomato Soup",
+            price = "89",
+            restaurantName = "Soup Symphony",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹13",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.soup_diet_2,
+            title = "Cream of Mushroom",
+            price = "119",
+            restaurantName = "The Soup Spoon",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.soup_diet_3,
+            title = "Sweet Corn Vegetable Soup",
+            price = "99",
+            restaurantName = "Wok & Roll",
+            rating = "4.6",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹12",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.soup_diet_4,
+            title = "Hot & Sour Soup",
+            price = "109",
+            restaurantName = "Dragon House",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹16",
+            address = "Chinatown, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.soup_diet_5,
+            title = "Manchow Soup",
+            price = "99",
+            restaurantName = "Asian Wok",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹10",
+            address = "Andheri East, Mumbai"
+        ),
+
+        // 6-10: PROTEIN-RICH SOUPS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.soup_diet_6,
+            title = "Hearty Chicken Noodle",
+            price = "149",
+            restaurantName = "Brother's Broth",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.soup_diet_7,
+            title = "Lemon Coriander Chicken",
+            price = "139",
+            restaurantName = "Spice Kitchen",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.soup_diet_8,
+            title = "Mutton Bone Broth",
+            price = "179",
+            restaurantName = "Heritage Taste",
+            rating = "4.9",
+            deliveryTime = "18-25 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Old City, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.soup_diet_9,
+            title = "Egg Drop Soup",
+            price = "89",
+            restaurantName = "Quick Bites",
+            rating = "4.6",
+            deliveryTime = "8-12 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹13",
+            address = "Food Street, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.soup_diet_10,
+            title = "Chicken Clear Soup",
+            price = "119",
+            restaurantName = "Healthy Bowl",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹14",
+            address = "Salt Lake, Kolkata"
+        ),
+
+        // 11-15: INTERNATIONAL & EXOTIC SOUPS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.soup_diet_11,
+            title = "Thai Coconut Soup (Tom Kha)",
+            price = "169",
+            restaurantName = "Thai Basil",
+            rating = "4.9",
+            deliveryTime = "18-25 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.soup_diet_12,
+            title = "Tom Yum Soup",
+            price = "159",
+            restaurantName = "Bangkok Street",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.soup_diet_13,
+            title = "French Onion Soup",
+            price = "149",
+            restaurantName = "Café de Paris",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.soup_diet_14,
+            title = "Minestrone Soup",
+            price = "129",
+            restaurantName = "Italian Garden",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.soup_diet_15,
+            title = "Broccoli Cheddar Soup",
+            price = "139",
+            restaurantName = "American Diner",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "1.2 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹17",
+            address = "Sector 29, Gurgaon"
+        ),
+
+        // 16-18: INDIAN STYLE & LENTIL SOUPS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.soup_diet_16,
+            title = "Masala Lentil Shorba",
+            price = "109",
+            restaurantName = "Spice Route",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹11",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.soup_diet_17,
+            title = "Tomato Dhaniya Shorba",
+            price = "99",
+            restaurantName = "Punjab Grill",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹15",
+            address = "CP, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.soup_diet_18,
+            title = "Palak Corn Soup",
+            price = "119",
+            restaurantName = "Green Kitchen",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹14",
+            address = "Civil Lines, Jaipur"
+        ),
+
+        // 19-20: HEALTH & DIET SOUPS
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.soup_diet_19,
+            title = "Keto Chicken Soup",
+            price = "169",
+            restaurantName = "Fit Food Co.",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.soup_diet_20,
+            title = "Detox Green Soup",
+            price = "129",
+            restaurantName = "Healthy Soul",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹26",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your soup items here
+    )
+     Column {
+         soupDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

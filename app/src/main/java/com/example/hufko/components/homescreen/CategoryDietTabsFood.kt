@@ -13705,41 +13705,2100 @@ fun SoupDietPage() {
 
 @Composable
 fun BrowniePage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val brownieDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY BROWNIE CATEGORIES (WITH ICONS - MAIN FLAVOR PROFILES)
+                FilterChip(
+                    id = "classic_chocolate",
+                    text = "Classic Chocolate",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_chocolate  // Rich chocolate brownie
+                ),
+                FilterChip(
+                    id = "walnut_brownie",
+                    text = "Walnut",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_walnut_brownie  // Brownie with walnut pieces
+                ),
+                FilterChip(
+                    id = "blondie",
+                    text = "Blondie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_blondie_brownie  // Vanilla/butterscotch based
+                ),
+                FilterChip(
+                    id = "cheesecake_brownie",
+                    text = "Cheesecake Swirl",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cheesecake_brownie  // Brownie with cheesecake marbling
+                ),
+                FilterChip(
+                    id = "gluten_free_brownie",
+                    text = "Gluten Free",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gluten_free_brownie  // GF symbol with brownie
+                ),
+                // 3. CHOCOLATE TYPES (TEXT ONLY)
+                FilterChip(
+                    id = "dark_chocolate",
+                    text = "Dark Chocolate (70%+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "milk_chocolate",
+                    text = "Milk Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "white_chocolate",
+                    text = "White Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "triple_chocolate",
+                    text = "Triple Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free_chocolate",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. ADD-INS & MIX-INS (TEXT ONLY)
+                FilterChip(
+                    id = "nuts_brownie",
+                    text = "With Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_chips",
+                    text = "Extra Chocolate Chips",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_swirl",
+                    text = "Caramel Swirl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanut_butter",
+                    text = "Peanut Butter Swirl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "marshmallow",
+                    text = "Marshmallow",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookie_dough",
+                    text = "Cookie Dough",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit_infused",
+                    text = "Fruit Infused",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sea_salt",
+                    text = "Sea Salt",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. TEXTURE PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "fudgy_brownie",
+                    text = "Fudgy (Dense & Moist)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cakey_brownie",
+                    text = "Cakey (Light & Fluffy)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chewy_brownie",
+                    text = "Chewy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crusty_top",
+                    text = "Crusty Top",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gooey_center",
+                    text = "Gooey Center",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. SIZE/FORMAT (TEXT ONLY)
+                FilterChip(
+                    id = "individual_brownie",
+                    text = "Individual (1 pc)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_brownie",
+                    text = "Mini Bites (4-6 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "shareable_tray",
+                    text = "Shareable Tray (6-9 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_tray",
+                    text = "Family Tray (12+ pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brownie_cake",
+                    text = "Brownie Cake (Round)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "frosted_brownie",
+                    text = "Frosted",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "glazed_brownie",
+                    text = "Glazed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "drizzled_brownie",
+                    text = "Chocolate Drizzled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sprinkles_brownie",
+                    text = "With Sprinkles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "powdered_sugar",
+                    text = "Dusted with Powdered Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ice_cream_topping",
+                    text = "Served with Ice Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. DIETARY & HEALTH (TEXT ONLY)
+                FilterChip(
+                    id = "keto_brownie",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_brownie",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_brownie",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless_brownie",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_brownie",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nut_free_brownie",
+                    text = "Nut Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. OCCASION (TEXT ONLY)
+                FilterChip(
+                    id = "birthday_brownie",
+                    text = "Birthday Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gift_box",
+                    text = "Gift Boxed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_pack",
+                    text = "Party Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dessert_platter",
+                    text = "Dessert Platter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "holiday_special",
+                    text = "Holiday Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_50_brownie",
+                    text = "Under ₹50",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "50_100_brownie",
+                    text = "₹50 - ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_200_brownie",
+                    text = "₹100 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "200_350_brownie",
+                    text = "₹200 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_350_brownie",
+                    text = "Above ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. BRAND/BAKERY TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "artisan_brownie",
+                    text = "Artisan Bakery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "homemade_brownie",
+                    text = "Homemade Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_brownie",
+                    text = "Premium/Gourmet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "local_bakery",
+                    text = "Local Bakery",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. FRESHNESS (TEXT ONLY)
+                FilterChip(
+                    id = "fresh_baked",
+                    text = "Freshly Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "frozen_brownie",
+                    text = "Frozen/Heat at Home",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "shelf_stable",
+                    text = "Shelf Stable",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+         FilterButtonFood(
+            filterConfig = brownieDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val brownieDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_chocolate_brownie_1,  // Rich, fudgy chocolate brownie with cracked top, dusted with powdered sugar
+                title = "Classic Chocolate Fudge",
+                price = "79",
+                restaurantName = "Brownie House",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹8",
+                address = "Church Street, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_walnut_brownie_1,  // Dark chocolate brownie loaded with crunchy walnut pieces, golden brown crust
+                title = "Crunchy Walnut Brownie",
+                price = "99",
+                restaurantName = "Nutty Baker",
+                rating = "4.8",
+                deliveryTime = "18-25 mins",
+                distance = "0.9 km",
+                discount = "15%",
+                discountAmount = "up to ₹15",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_blondie_brownie_1,  // Golden vanilla blondie with white chocolate chips and a buttery sheen
+                title = "Caramel Blondie",
+                price = "89",
+                restaurantName = "Blondie's Cafe",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹9",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_cheesecake_brownie_1,  // Marbled brownie with creamy cheesecake swirl, creating beautiful patterns
+                title = "Cheesecake Swirl Brownie",
+                price = "129",
+                restaurantName = "The Dessert Story",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.1 km",
+                discount = "12%",
+                discountAmount = "up to ₹15",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_salted_caramel_brownie_1,  // Rich chocolate brownie drizzled with salted caramel sauce and sea salt flakes
+                title = "Salted Caramel Brownie",
+                price = "119",
+                restaurantName = "Caramel Heaven",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹18",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_gluten_free_brownie_1,  // Decadent gluten-free brownie with almond flour texture, rich chocolate chunks visible
+                title = "Gluten-Free Chocolate Brownie",
+                price = "139",
+                restaurantName = "Healthy Bites",
+                rating = "4.8",
+                deliveryTime = "18-25 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹14",
+                address = "Baner, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Brownie Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = brownieDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val brownieDietItems = listOf(
+        // 1-5: CLASSIC & FUDGY BROWNIES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.brownie_diet_1,
+            title = "Classic Chocolate Fudge Brownie",
+            price = "79",
+            restaurantName = "Brownie House",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹8",
+            address = "Church Street, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.brownie_diet_2,
+            title = "Triple Chocolate Brownie",
+            price = "119",
+            restaurantName = "Chocolate Factory",
+            rating = "4.8",
+            deliveryTime = "18-25 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.brownie_diet_3,
+            title = "Dark Chocolate Sea Salt",
+            price = "99",
+            restaurantName = "Artisan Desserts",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹12",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.brownie_diet_4,
+            title = "Belgian Chocolate Brownie",
+            price = "139",
+            restaurantName = "Belgian Waffle Co.",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.brownie_diet_5,
+            title = "Molten Lava Brownie",
+            price = "149",
+            restaurantName = "Lava Cafe",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Bandra West, Mumbai"
+        ),
+
+        // 6-10: NUTTY & CRUNCHY BROWNIES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.brownie_diet_6,
+            title = "Crunchy Walnut Brownie",
+            price = "99",
+            restaurantName = "Nutty Baker",
+            rating = "4.8",
+            deliveryTime = "18-25 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹15",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.brownie_diet_7,
+            title = "Pecan Caramel Brownie",
+            price = "129",
+            restaurantName = "Caramel Heaven",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.brownie_diet_8,
+            title = "Almond Chocolate Brownie",
+            price = "109",
+            restaurantName = "Healthy Bites",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹11",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.brownie_diet_9,
+            title = "Hazelnut Crunch Brownie",
+            price = "119",
+            restaurantName = "Nutella House",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.brownie_diet_10,
+            title = "Macadamia White Chocolate",
+            price = "149",
+            restaurantName = "Gourmet Treats",
+            rating = "4.9",
+            deliveryTime = "18-25 mins",
+            distance = "1.2 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Colaba, Mumbai"
+        ),
+
+        // 11-15: SPECIALTY & SWIRL BROWNIES
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.brownie_diet_11,
+            title = "Cheesecake Swirl Brownie",
+            price = "129",
+            restaurantName = "The Dessert Story",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.1 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.brownie_diet_12,
+            title = "Salted Caramel Brownie",
+            price = "119",
+            restaurantName = "Caramel Heaven",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.brownie_diet_13,
+            title = "Peanut Butter Swirl",
+            price = "129",
+            restaurantName = "Peanut Factory",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.brownie_diet_14,
+            title = "Mint Chocolate Brownie",
+            price = "109",
+            restaurantName = "Mint Leaf Cafe",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹11",
+            address = "Salt Lake, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.brownie_diet_15,
+            title = "Coffee Walnut Brownie",
+            price = "99",
+            restaurantName = "Coffee House",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹15",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 16-18: DIETARY & HEALTH-CONSCIOUS BROWNIES
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.brownie_diet_16,
+            title = "Gluten-Free Chocolate Brownie",
+            price = "139",
+            restaurantName = "Healthy Bites",
+            rating = "4.8",
+            deliveryTime = "18-25 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.brownie_diet_17,
+            title = "Vegan Walnut Brownie",
+            price = "129",
+            restaurantName = "Green Soul",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.brownie_diet_18,
+            title = "Keto Almond Brownie",
+            price = "159",
+            restaurantName = "Keto Kitchen",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Koramangala, Bangalore"
+        ),
+
+        // 19-20: SEASONAL & PREMIUM BROWNIES
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.brownie_diet_19,
+            title = "Red Velvet Brownie",
+            price = "119",
+            restaurantName = "Velvet Bakery",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹14",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.brownie_diet_20,
+            title = "Tiramisu Brownie",
+            price = "149",
+            restaurantName = "Italian Delights",
+            rating = "4.9",
+            deliveryTime = "18-25 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Colaba, Mumbai"
         )
-        // Add your brownie items here
+    )
+    Column {
+        brownieDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun WafflesPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val waffleDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY WAFFLE CATEGORIES (WITH ICONS - MAIN FLAVOR PROFILES)
+                FilterChip(
+                    id = "classic_waffle",
+                    text = "Classic Waffle",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_waffle  // Traditional belgian waffle
+                ),
+                FilterChip(
+                    id = "liege_waffle",
+                    text = "Liège Waffle",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_liege_waffle_diet  // Caramelized pearl sugar waffle
+                ),
+                FilterChip(
+                    id = "chocolate_waffle",
+                    text = "Chocolate Waffle",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chocolate_waffle  // Chocolate batter waffle
+                ),
+                FilterChip(
+                    id = "red_velvet_waffle",
+                    text = "Red Velvet",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_red_velvet_waffle  // Red velvet flavored
+                ),
+                FilterChip(
+                    id = "gluten_free_waffle",
+                    text = "Gluten Free",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gluten_free_waffle  // GF symbol with waffle
+                ),
+
+                // 3. BATTER BASES (TEXT ONLY)
+                FilterChip(
+                    id = "buttermilk_waffle",
+                    text = "Buttermilk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole_wheat_waffle",
+                    text = "Whole Wheat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oatmeal_waffle",
+                    text = "Oatmeal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "protein_waffle",
+                    text = "Protein Enriched",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pumpkin_waffle",
+                    text = "Pumpkin Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "banana_waffle",
+                    text = "Banana",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. TOPPINGS & SPREADS (TEXT ONLY)
+                FilterChip(
+                    id = "nutella_waffle",
+                    text = "Nutella Spread",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanut_butter_waffle",
+                    text = "Peanut Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maple_syrup",
+                    text = "Maple Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_syrup",
+                    text = "Chocolate Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_sauce",
+                    text = "Caramel Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "berry_compote",
+                    text = "Berry Compote",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whipped_cream",
+                    text = "Whipped Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ice_cream_waffle",
+                    text = "Ice Cream Scoop",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. FRUIT ADD-ONS (TEXT ONLY)
+                FilterChip(
+                    id = "fresh_berries",
+                    text = "Fresh Berries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "banana_slices",
+                    text = "Banana Slices",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_cinnamon",
+                    text = "Apple Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled_peach",
+                    text = "Grilled Peaches",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. SAVORY WAFFLES (TEXT ONLY)
+                FilterChip(
+                    id = "chicken_waffle",
+                    text = "Chicken & Waffle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bacon_waffle",
+                    text = "Bacon Waffle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_cheese_waffle",
+                    text = "Egg & Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheesy_waffle",
+                    text = "Cheese Waffle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "herb_waffle",
+                    text = "Herbs & Spices",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. TEXTURE & STYLE (TEXT ONLY)
+                FilterChip(
+                    id = "crispy_waffle",
+                    text = "Extra Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fluffy_waffle",
+                    text = "Light & Fluffy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick_waffle",
+                    text = "Thick Cut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thin_waffle",
+                    text = "Thin & Crisp",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stuffed_waffle",
+                    text = "Stuffed (Fillings)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. DIETARY & HEALTH (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_waffle",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_waffle",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_waffle",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free_waffle",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_waffle",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggless_waffle",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. SIZE/FORMAT (TEXT ONLY)
+                FilterChip(
+                    id = "single_waffle",
+                    text = "Single Waffle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "double_waffle",
+                    text = "Double Stack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_waffle_bites",
+                    text = "Mini Waffle Bites (4-6 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "waffle_sandwich",
+                    text = "Waffle Sandwich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "waffle_fries",
+                    text = "Waffle Fries/Slices",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. OCCASION (TEXT ONLY)
+                FilterChip(
+                    id = "breakfast_waffle",
+                    text = "Breakfast Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brunch_waffle",
+                    text = "Brunch Favorite",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dessert_waffle",
+                    text = "Dessert Waffle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "holiday_waffle",
+                    text = "Holiday Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_100_waffle",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_200_waffle",
+                    text = "₹100 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "200_350_waffle",
+                    text = "₹200 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "350_500_waffle",
+                    text = "₹350 - ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_500_waffle",
+                    text = "Above ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. ESTABLISHMENT TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "waffle_specialist",
+                    text = "Waffle Specialist",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cafe_waffle",
+                    text = "Café",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dessert_parlor",
+                    text = "Dessert Parlor",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "food_truck_waffle",
+                    text = "Food Truck",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. FRESHNESS (TEXT ONLY)
+                FilterChip(
+                    id = "fresh_made",
+                    text = "Made to Order",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premade_waffle",
+                    text = "Ready to Eat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "frozen_waffle",
+                    text = "Frozen/Heat at Home",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = waffleDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val waffleDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_waffle_1,  // Golden brown Belgian waffle with perfect grid pattern, dusted with powdered sugar, served with maple syrup drizzle
+                title = "Classic Belgian Waffle",
+                price = "149",
+                restaurantName = "Waffle House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Brigade Road, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_liege_waffle_1,  // Caramelized Liège waffle with pearl sugar chunks, irregular golden-brown crust, slightly glossy appearance
+                title = "Authentic Liège Waffle",
+                price = "179",
+                restaurantName = "Belgian Waffle Co.",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.7 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_chocolate_waffle_1,  // Rich chocolate waffle with chocolate chips, drizzled with melted chocolate, topped with chocolate shavings
+                title = "Double Chocolate Waffle",
+                price = "199",
+                restaurantName = "Chocolate Factory",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "12%",
+                discountAmount = "up to ₹24",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_red_velvet_waffle_1,  // Vibrant red velvet waffle with cream cheese glaze drizzle, white chocolate chips, elegant presentation
+                title = "Red Velvet Cream Cheese Waffle",
+                price = "219",
+                restaurantName = "The Dessert Story",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹22",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_strawberry_waffle_1,  // Crispy waffle topped with fresh strawberry slices, strawberry sauce drizzle, whipped cream dollop, mint garnish
+                title = "Strawberry Delight Waffle",
+                price = "189",
+                restaurantName = "Berry Bliss",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹28",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_savory_waffle_1,  // Golden savory waffle topped with fried chicken strip, honey butter drizzle, sprinkling of herbs
+                title = "Chicken & Waffle",
+                price = "249",
+                restaurantName = "Savory Bites",
+                rating = "4.8",
+                deliveryTime = "18-25 mins",
+                distance = "1.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Baner, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Waffles Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = waffleDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val waffleDietItems = listOf(
+        // 1-5: CLASSIC & BELGIAN WAFFLES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.waffle_diet_1,
+            title = "Classic Belgian Waffle",
+            price = "149",
+            restaurantName = "Waffle House",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Brigade Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.waffle_diet_2,
+            title = "Authentic Liège Waffle",
+            price = "179",
+            restaurantName = "Belgian Waffle Co.",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.waffle_diet_3,
+            title = "Brussels Waffle",
+            price = "159",
+            restaurantName = "European Delights",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.waffle_diet_4,
+            title = "Buttermilk Waffle",
+            price = "139",
+            restaurantName = "Morning Cafe",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.waffle_diet_5,
+            title = "Yeasted Waffle",
+            price = "169",
+            restaurantName = "Artisan Bakery",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "1.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Bandra West, Mumbai"
+        ),
+
+        // 6-10: CHOCOLATE & SWEET WAFFLES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.waffle_diet_6,
+            title = "Double Chocolate Waffle",
+            price = "199",
+            restaurantName = "Chocolate Factory",
+            rating = "4.9",
+            deliveryTime = "18-25 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.waffle_diet_7,
+            title = "Nutella Banana Waffle",
+            price = "209",
+            restaurantName = "Nutella House",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.waffle_diet_8,
+            title = "Salted Caramel Waffle",
+            price = "189",
+            restaurantName = "Caramel Heaven",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.waffle_diet_9,
+            title = "White Chocolate Berry",
+            price = "199",
+            restaurantName = "Berry Bliss",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.waffle_diet_10,
+            title = "Red Velvet Waffle",
+            price = "219",
+            restaurantName = "Velvet Bakery",
+            rating = "4.9",
+            deliveryTime = "18-25 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Colaba, Mumbai"
+        ),
+
+        // 11-15: FRUIT-TOPPED WAFFLES
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.waffle_diet_11,
+            title = "Mixed Berry Waffle",
+            price = "189",
+            restaurantName = "Berry Waffles",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.1 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹23",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.waffle_diet_12,
+            title = "Strawberry Delight",
+            price = "179",
+            restaurantName = "Strawberry Fields",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.waffle_diet_13,
+            title = "Banana Caramel Waffle",
+            price = "169",
+            restaurantName = "Caramel Heaven",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.waffle_diet_14,
+            title = "Apple Cinnamon Waffle",
+            price = "159",
+            restaurantName = "Cinnamon Cafe",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Salt Lake, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.waffle_diet_15,
+            title = "Peach Melba Waffle",
+            price = "199",
+            restaurantName = "Fruit Paradise",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 16-20: SAVORY & SPECIALTY WAFFLES
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.waffle_diet_16,
+            title = "Chicken & Waffle",
+            price = "249",
+            restaurantName = "Savory Bites",
+            rating = "4.9",
+            deliveryTime = "18-25 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹25",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.waffle_diet_17,
+            title = "Bacon Maple Waffle",
+            price = "229",
+            restaurantName = "Breakfast Club",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹27",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.waffle_diet_18,
+            title = "Cheese & Herb Waffle",
+            price = "179",
+            restaurantName = "Cheesy Bites",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.waffle_diet_19,
+            title = "Mediterranean Waffle",
+            price = "209",
+            restaurantName = "Olive Kitchen",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.waffle_diet_20,
+            title = "Waffle Ice Cream Sundae",
+            price = "239",
+            restaurantName = "Dessert Parlor",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹29",
+            address = "Colaba, Mumbai"
         )
-        // Add your waffles items here
+    )
+    Column {
+        waffleDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun ColdCoffeePage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(
-            text = "Cold Coffee Items",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val coldCoffeeDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY COLD COFFEE CATEGORIES (WITH ICONS - MAIN BEVERAGE TYPES)
+                FilterChip(
+                    id = "classic_iced_coffee",
+                    text = "Classic Iced Coffee",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_iced_coffee  // Simple iced coffee with ice cubes
+                ),
+                FilterChip(
+                    id = "cold_brew",
+                    text = "Cold Brew",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cold_brew_coffee  // Smooth cold brew in glass
+                ),
+                FilterChip(
+                    id = "frappe",
+                    text = "Frappé",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_frappe_coffee  // Blended frozen coffee drink
+                ),
+                FilterChip(
+                    id = "nitro_cold_brew",
+                    text = "Nitro Cold Brew",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_nitro_cold_brew  // Cascading nitro pour
+                ),
+                FilterChip(
+                    id = "vietnamese_iced",
+                    text = "Vietnamese Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vietnamese_coffee  // Phin filter with condensed milk
+                ),
+
+                // 3. COFFEE BASES (TEXT ONLY)
+                FilterChip(
+                    id = "espresso_based",
+                    text = "Espresso Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "drip_coffee",
+                    text = "Drip Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "french_press",
+                    text = "French Press",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "instant_coffee",
+                    text = "Instant Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "decaf_base",
+                    text = "Decaf",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. MILK TYPES & ALTERNATIVES (TEXT ONLY)
+                FilterChip(
+                    id = "dairy_milk",
+                    text = "Whole Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "skim_milk",
+                    text = "Skim Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oat_milk",
+                    text = "Oat Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almond_milk",
+                    text = "Almond Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soy_milk",
+                    text = "Soy Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_milk",
+                    text = "Coconut Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "condensed_milk",
+                    text = "Sweetened Condensed",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. FLAVOR SYRUPS (TEXT ONLY)
+                FilterChip(
+                    id = "vanilla_syrup",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_syrup",
+                    text = "Caramel",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hazelnut_syrup",
+                    text = "Hazelnut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_syrup",
+                    text = "Chocolate/Mocha",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cinnamon_syrup",
+                    text = "Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peppermint_syrup",
+                    text = "Peppermint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_syrup",
+                    text = "Coconut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_sugar",
+                    text = "Brown Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. TOPPINGS & ADD-ONS (TEXT ONLY)
+                FilterChip(
+                    id = "whipped_cream",
+                    text = "Whipped Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_drizzle",
+                    text = "Chocolate Drizzle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_drizzle",
+                    text = "Caramel Drizzle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cocoa_powder",
+                    text = "Dusted Cocoa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cinnamon_dust",
+                    text = "Cinnamon Dust",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_shavings",
+                    text = "Chocolate Shavings",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookie_crumbs",
+                    text = "Cookie Crumbs",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. ICE & TEMPERATURE (TEXT ONLY)
+                FilterChip(
+                    id = "regular_ice",
+                    text = "Regular Ice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crushed_ice",
+                    text = "Crushed Ice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coffee_ice_cubes",
+                    text = "Coffee Ice Cubes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "light_ice",
+                    text = "Light Ice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_ice",
+                    text = "No Ice (Room Temp)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blended_frozen",
+                    text = "Blended/Frozen",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. SWEETNESS LEVEL (TEXT ONLY)
+                FilterChip(
+                    id = "unsweetened",
+                    text = "Unsweetened",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lightly_sweetened",
+                    text = "Lightly Sweetened",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_sweet",
+                    text = "Regular Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_sweet",
+                    text = "Extra Sweet",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. DIETARY & HEALTH (TEXT ONLY)
+                FilterChip(
+                    id = "sugar_free",
+                    text = "Sugar Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_friendly",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_coffee",
+                    text = "Vegan (Plant Milk)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lactose_free",
+                    text = "Lactose Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. SIZE/FORMAT (TEXT ONLY)
+                FilterChip(
+                    id = "small_coffee",
+                    text = "Small (200ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_coffee",
+                    text = "Medium (300ml)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_coffee",
+                    text = "Large (400ml+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bottle_coffee",
+                    text = "Bottled/Canned",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack (1L+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. OCCASION/TIME (TEXT ONLY)
+                FilterChip(
+                    id = "morning_brew",
+                    text = "Morning Boost",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "afternoon_pickup",
+                    text = "Afternoon Pick-me-up",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "evening_treat",
+                    text = "Evening Treat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dessert_coffee",
+                    text = "Dessert Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_50_coffee",
+                    text = "Under ₹50",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "50_100_coffee",
+                    text = "₹50 - ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_150_coffee",
+                    text = "₹100 - ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "150_250_coffee",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_250_coffee",
+                    text = "Above ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. CAFE TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "coffee_chain",
+                    text = "Coffee Chain",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "specialty_roaster",
+                    text = "Specialty Roaster",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "local_cafe",
+                    text = "Local Café",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "drive_thru",
+                    text = "Drive-Thru",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. CAFFEINE LEVEL (TEXT ONLY)
+                FilterChip(
+                    id = "regular_caffeine",
+                    text = "Regular Caffeine",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_shot",
+                    text = "Extra Shot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "half_caff",
+                    text = "Half Caff",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "decaf",
+                    text = "Decaf",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
-        // Add your cold coffee items here
+        FilterButtonFood(
+            filterConfig = coldCoffeeDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val coldCoffeeDietItems = listOf(
+            // 1-6: COLD COFFEE VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_iced_coffee_1,  // Tall glass of classic iced coffee with ice cubes, light brown color, topped with a splash of milk, served with a striped straw
+                title = "Classic Iced Coffee",
+                price = "99",
+                restaurantName = "Brew House",
+                rating = "4.7",
+                deliveryTime = "10-15 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹10",
+                address = "Church Street, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_cold_brew_1,  // Dark, smooth cold brew served in a glass with large ice cube, garnished with coffee bean, rich dark brown color
+                title = "Smooth Cold Brew",
+                price = "129",
+                restaurantName = "Cold Brew Co.",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹19",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_frappe_1,  // Blended frozen coffee frappé with whipped cream topping, chocolate drizzle, caramel sauce streaks on glass
+                title = "Caramel Frappé",
+                price = "159",
+                restaurantName = "Frosty Brew",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "12%",
+                discountAmount = "up to ₹19",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_vietnamese_coffee_1,  // Vietnamese iced coffee with traditional phin filter on top, condensed milk layer at bottom, stirred caramel color
+                title = "Vietnamese Iced Coffee",
+                price = "139",
+                restaurantName = "Saigon Cafe",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "1.0 km",
+                discount = "10%",
+                discountAmount = "up to ₹14",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_mocha_ice_1,  // Iced mocha with chocolate sauce swirls on glass, whipped cream topping, chocolate shavings, dark and light layers
+                title = "Chilled Mocha",
+                price = "149",
+                restaurantName = "Chocolate Cafe",
+                rating = "4.7",
+                deliveryTime = "12-18 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹22",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_nitro_cold_brew_1,  // Nitro cold brew cascading in glass with creamy foam head, served from tap, dark stout-like appearance
+                title = "Nitro Cold Brew",
+                price = "179",
+                restaurantName = "Nitro Lab",
+                rating = "4.9",
+                deliveryTime = "10-15 mins",
+                distance = "0.9 km",
+                discount = "10%",
+                discountAmount = "up to ₹18",
+                address = "Baner, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = coldCoffeeDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
     }
+
 }
 
 // Additional diet-specific item pages

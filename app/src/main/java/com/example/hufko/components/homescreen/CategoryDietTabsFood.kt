@@ -15799,32 +15799,2055 @@ fun ColdCoffeePage() {
         )
     }
 
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val coldCoffeeDietItems = listOf(
+        // 1-5: CLASSIC COLD COFFEE VARIETIES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.cold_coffee_diet_1,
+            title = "Classic Iced Coffee",
+            price = "119",
+            restaurantName = "Coffee House",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.cold_coffee_diet_2,
+            title = "Cold Brew Black",
+            price = "149",
+            restaurantName = "Brew Bros",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.cold_coffee_diet_3,
+            title = "Vanilla Iced Latte",
+            price = "159",
+            restaurantName = "Latte Lounge",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.cold_coffee_diet_4,
+            title = "Caramel Iced Coffee",
+            price = "169",
+            restaurantName = "Caramel Cafe",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Brigade Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.cold_coffee_diet_5,
+            title = "Hazelnut Cold Brew",
+            price = "179",
+            restaurantName = "Nutty Brew",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Bandra West, Mumbai"
+        ),
+
+        // 6-10: SPECIALTY COLD COFFEE
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.cold_coffee_diet_6,
+            title = "Nitro Cold Brew",
+            price = "199",
+            restaurantName = "Nitro Lab",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.cold_coffee_diet_7,
+            title = "Vietnamese Iced Coffee",
+            price = "189",
+            restaurantName = "Saigon Cafe",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.cold_coffee_diet_8,
+            title = "Thai Iced Coffee",
+            price = "179",
+            restaurantName = "Bangkok Street",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.cold_coffee_diet_9,
+            title = "Irish Cold Coffee",
+            price = "209",
+            restaurantName = "Pub & Brew",
+            rating = "4.8",
+            deliveryTime = "18-25 mins",
+            distance = "1.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹25",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.cold_coffee_diet_10,
+            title = "Mexican Spiced Cold Brew",
+            price = "189",
+            restaurantName = "Spice Route",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Jayanagar, Bangalore"
+        ),
+
+        // 11-15: FROZEN & BLENDED COFFEE
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.cold_coffee_diet_11,
+            title = "Frappé Coffee",
+            price = "169",
+            restaurantName = "Frost Cafe",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Salt Lake, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.cold_coffee_diet_12,
+            title = "Mocha Frappuccino",
+            price = "199",
+            restaurantName = "Chocolate House",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.cold_coffee_diet_13,
+            title = "Caramel Frappé",
+            price = "189",
+            restaurantName = "Caramel Heaven",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.cold_coffee_diet_14,
+            title = "Java Chip Frappé",
+            price = "209",
+            restaurantName = "Coffee Club",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹21",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.cold_coffee_diet_15,
+            title = "Cookies & Cream Frappé",
+            price = "199",
+            restaurantName = "Dessert Cafe",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Indiranagar, Bangalore"
+        ),
+
+        // 16-20: MILK-BASED & DESSERT COFFEE
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.cold_coffee_diet_16,
+            title = "Iced Latte (Oat Milk)",
+            price = "189",
+            restaurantName = "Plant Brew",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.cold_coffee_diet_17,
+            title = "Iced Almond Milk Latte",
+            price = "179",
+            restaurantName = "Nut Milk Cafe",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.cold_coffee_diet_18,
+            title = "Coconut Cold Brew",
+            price = "199",
+            restaurantName = "Tropical Brews",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.cold_coffee_diet_19,
+            title = "Cold Coffee with Ice Cream",
+            price = "229",
+            restaurantName = "Scoops & Brews",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.cold_coffee_diet_20,
+            title = "Protein Cold Coffee",
+            price = "209",
+            restaurantName = "Fit Fuel",
+            rating = "4.7",
+            deliveryTime = "12-18 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹21",
+            address = "Koramangala, Bangalore"
+        )
+    )
+    Column {
+        coldCoffeeDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 // Additional diet-specific item pages
 @Composable
 fun GrilledChickenDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val grilledChickenDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY GRILLED CHICKEN CATEGORIES (WITH ICONS - MAIN PREPARATION STYLES)
+                FilterChip(
+                    id = "grilled_breast",
+                    text = "Grilled Breast",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_grilled_chicken_breast  // Juicy grilled chicken breast with grill marks
+                ),
+                FilterChip(
+                    id = "grilled_thighs",
+                    text = "Grilled Thighs",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_grilled_chicken_thigh  // Tender chicken thigh piece
+                ),
+                FilterChip(
+                    id = "chicken_tenders",
+                    text = "Chicken Tenders",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_tenders  // Crispy grilled chicken strips
+                ),
+                FilterChip(
+                    id = "chicken_skewers",
+                    text = "Chicken Skewers",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_skewers  // Chicken pieces on skewer with grill marks
+                ),
+                FilterChip(
+                    id = "spatchcock_chicken",
+                    text = "Spatchcock",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spatchcock_chicken  // Butterflied whole chicken
+                ),
+                // 3. MARINADES & SEASONINGS (TEXT ONLY)
+                FilterChip(
+                    id = "lemon_pepper",
+                    text = "Lemon Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_herb",
+                    text = "Garlic Herb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cajun_spice",
+                    text = "Cajun Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "teriyaki_glaze",
+                    text = "Teriyaki Glaze",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bbq_rub",
+                    text = "BBQ Rub",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peri_peri",
+                    text = "Peri Peri",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mediterranean",
+                    text = "Mediterranean",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tandoori_masala",
+                    text = "Tandoori Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "buffalo_sauce",
+                    text = "Buffalo Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honey_mustard",
+                    text = "Honey Mustard",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. SIDE DISHES (TEXT ONLY)
+                FilterChip(
+                    id = "steamed_veggies",
+                    text = "Steamed Veggies",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled_veggies",
+                    text = "Grilled Veggies",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garden_salad",
+                    text = "Garden Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caesar_salad",
+                    text = "Caesar Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_rice",
+                    text = "Brown Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quinoa",
+                    text = "Quinoa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet_potato",
+                    text = "Sweet Potato",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mashed_potato",
+                    text = "Mashed Potato",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. SAUCES & DRESSINGS (TEXT ONLY)
+                FilterChip(
+                    id = "ranch_dressing",
+                    text = "Ranch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blue_cheese",
+                    text = "Blue Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honey_mustard_sauce",
+                    text = "Honey Mustard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bbq_sauce",
+                    text = "BBQ Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "buffalo_dip",
+                    text = "Buffalo Dip",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tzatziki",
+                    text = "Tzatziki",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_aioli",
+                    text = "Garlic Aioli",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DIETARY & HEALTH (TEXT ONLY)
+                FilterChip(
+                    id = "low_carb",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_diet",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_diet",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_diet",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_antibiotics",
+                    text = "No Antibiotics",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "free_range",
+                    text = "Free Range",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. SPICE LEVEL (TEXT ONLY)
+                FilterChip(
+                    id = "mild_spice",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_chicken",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. COOKING STYLE (TEXT ONLY)
+                FilterChip(
+                    id = "char_grilled",
+                    text = "Char-Grilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "wood_fired",
+                    text = "Wood Fired",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pan_seared",
+                    text = "Pan Seared",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "open_flame",
+                    text = "Open Flame",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "150_250",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "250_350",
+                    text = "₹250 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "350_500",
+                    text = "₹350 - ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_500",
+                    text = "Above ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "lunch_special",
+                    text = "Lunch Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner_meal",
+                    text = "Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "meal_prep",
+                    text = "Meal Prep",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_meal",
+                    text = "Family Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. PORTION SIZE (TEXT ONLY)
+                FilterChip(
+                    id = "single_serving",
+                    text = "Single (150-200g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "double_serving",
+                    text = "Double (300-400g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack_chicken",
+                    text = "Family Pack (500g+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. RESTAURANT TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "fast_casual",
+                    text = "Fast Casual",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "healthy_eatery",
+                    text = "Healthy Eatery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sports_bar",
+                    text = "Sports Bar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fine_dining",
+                    text = "Fine Dining",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. ACCOMPANIMENTS (TEXT ONLY)
+                FilterChip(
+                    id = "with_bone",
+                    text = "With Bone",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "boneless",
+                    text = "Boneless",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "skin_on",
+                    text = "Skin On",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "skinless",
+                    text = "Skinless",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = grilledChickenDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val grilledChickenDietItems = listOf(
+            // 1-6: GRILLED CHICKEN VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_grilled_chicken_breast_1,  // Juicy grilled chicken breast with perfect grill marks, seasoned with herbs and black pepper, served with a lemon wedge on the side, steam rising from the meat
+                title = "Herb Grilled Chicken Breast",
+                price = "199",
+                restaurantName = "Grill Master",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹30",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_grilled_chicken_thighs_1,  // Tender grilled chicken thighs with caramelized edges, glazed with BBQ sauce, garnished with fresh parsley, slightly charred for smoky flavor
+                title = "BBQ Glazed Chicken Thighs",
+                price = "219",
+                restaurantName = "Smoky Grill",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "0.9 km",
+                discount = "10%",
+                discountAmount = "up to ₹22",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_chicken_skewers_1,  // Colorful chicken skewers with bell peppers, red onions, and cherry tomatoes, perfectly charred on the grill, served on a wooden platter with mint chutney
+                title = "Mediterranean Chicken Skewers",
+                price = "189",
+                restaurantName = "Kebab Studio",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "12%",
+                discountAmount = "up to ₹23",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_grilled_chicken_wings_1,  // Crispy grilled chicken wings with light char marks, tossed in peri-peri sauce, served with celery sticks and ranch dip on the side
+                title = "Peri-Peri Grilled Wings",
+                price = "179",
+                restaurantName = "Wingstop",
+                rating = "4.8",
+                deliveryTime = "12-18 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹18",
+                address = "Church Street, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_lemon_herb_chicken_1,  // Lemon herb grilled chicken with rosemary sprigs, garlic cloves, and lemon slices, golden brown crispy skin, served on a cast iron skillet
+                title = "Lemon Rosemary Grilled Chicken",
+                price = "229",
+                restaurantName = "Heritage Grill",
+                rating = "4.9",
+                deliveryTime = "18-25 mins",
+                distance = "1.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹34",
+                address = "Connaught Place, Delhi"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_tandoori_chicken_1,  // Traditional tandoori chicken with vibrant red color, charred edges, served with onion rings, mint chutney, and lemon wedge on a sizzling platter
+                title = "Tandoori Grilled Chicken",
+                price = "249",
+                restaurantName = "Punjabi Grill",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Koramangala, Bangalore"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Grilled Chicken Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = grilledChickenDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val grilledChickenDietItems = listOf(
+        // 1-5: CLASSIC GRILLED CHICKEN
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.grilled_chicken_diet_1,
+            title = "Classic Grilled Chicken Breast",
+            price = "249",
+            restaurantName = "Protein House",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.grilled_chicken_diet_2,
+            title = "Lemon Herb Grilled Chicken",
+            price = "269",
+            restaurantName = "Healthy Bites",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹27",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.grilled_chicken_diet_3,
+            title = "Peri Peri Grilled Chicken",
+            price = "279",
+            restaurantName = "Spice Grill",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹33",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.grilled_chicken_diet_4,
+            title = "Garlic Rosemary Chicken",
+            price = "259",
+            restaurantName = "Herb Kitchen",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "Brigade Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.grilled_chicken_diet_5,
+            title = "Honey Mustard Grilled Chicken",
+            price = "289",
+            restaurantName = "Sweet & Savory",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹29",
+            address = "Bandra West, Mumbai"
+        ),
+
+        // 6-10: GRILLED CHICKEN WITH VEGETABLES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.grilled_chicken_diet_6,
+            title = "Grilled Chicken with Steamed Veggies",
+            price = "299",
+            restaurantName = "Fresh & Fit",
+            rating = "4.9",
+            deliveryTime = "22-28 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹36",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.grilled_chicken_diet_7,
+            title = "Grilled Chicken Salad Bowl",
+            price = "279",
+            restaurantName = "Salad Story",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.grilled_chicken_diet_8,
+            title = "Mediterranean Grilled Chicken",
+            price = "309",
+            restaurantName = "Mediterraneo",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹31",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.grilled_chicken_diet_9,
+            title = "Grilled Chicken with Quinoa",
+            price = "319",
+            restaurantName = "Superfood Cafe",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹38",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.grilled_chicken_diet_10,
+            title = "Grilled Chicken with Brown Rice",
+            price = "289",
+            restaurantName = "Wholesome Kitchen",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Jayanagar, Bangalore"
+        ),
+
+        // 11-15: INTERNATIONAL GRILLED CHICKEN STYLES
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.grilled_chicken_diet_11,
+            title = "Tandoori Grilled Chicken",
+            price = "269",
+            restaurantName = "Tandoori Nights",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹27",
+            address = "Salt Lake, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.grilled_chicken_diet_12,
+            title = "Thai Basil Grilled Chicken",
+            price = "299",
+            restaurantName = "Thai Spice",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "1.1 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹36",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.grilled_chicken_diet_13,
+            title = "Moroccan Spiced Chicken",
+            price = "309",
+            restaurantName = "Marrakesh Cafe",
+            rating = "4.8",
+            deliveryTime = "25-30 mins",
+            distance = "1.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹46",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.grilled_chicken_diet_14,
+            title = "Teriyaki Grilled Chicken",
+            price = "289",
+            restaurantName = "Tokyo Grill",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹29",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.grilled_chicken_diet_15,
+            title = "Cajun Spiced Grilled Chicken",
+            price = "279",
+            restaurantName = "Louisiana Kitchen",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹33",
+            address = "Indiranagar, Bangalore"
+        ),
+
+        // 16-20: DIET-SPECIAL GRILLED CHICKEN
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.grilled_chicken_diet_16,
+            title = "Keto Grilled Chicken Bowl",
+            price = "329",
+            restaurantName = "Keto Kitchen",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹49",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.grilled_chicken_diet_17,
+            title = "Paleo Grilled Chicken",
+            price = "319",
+            restaurantName = "Paleo Plate",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹32",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.grilled_chicken_diet_18,
+            title = "High Protein Grilled Chicken",
+            price = "299",
+            restaurantName = "Protein Lab",
+            rating = "4.9",
+            deliveryTime = "18-22 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹36",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.grilled_chicken_diet_19,
+            title = "Low Carb Grilled Chicken",
+            price = "289",
+            restaurantName = "Low Carb Life",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.grilled_chicken_diet_20,
+            title = "Grilled Chicken with Avocado",
+            price = "349",
+            restaurantName = "Avocado Factory",
+            rating = "4.9",
+            deliveryTime = "22-28 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹35",
+            address = "Koramangala, Bangalore"
         )
-        // Add your grilled chicken items here
+    )
+    Column {
+        grilledChickenDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun SteamedFishDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val steamedFishDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY FISH TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "sea_bass",
+                    text = "Sea Bass",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sea_bass  // Whole sea bass fish illustration
+                ),
+                FilterChip(
+                    id = "salmon_fish",
+                    text = "Salmon",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_salmon  // Salmon fish with characteristic pink color
+                ),
+                FilterChip(
+                    id = "tilapia",
+                    text = "Tilapia",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tilapia  // Tilapia fish shape
+                ),
+                FilterChip(
+                    id = "pomfret",
+                    text = "Pomfret",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pomfret  // Silver pomfret fish
+                ),
+                FilterChip(
+                    id = "cod_fish",
+                    text = "Cod",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cod  // Cod fish illustration
+                ),
+                // 3. FISH CUTS & PREPARATION (TEXT ONLY)
+                FilterChip(
+                    id = "whole_fish",
+                    text = "Whole Fish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_fillet",
+                    text = "Fillet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_steak",
+                    text = "Steak Cut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "butterflied",
+                    text = "Butterflied",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. STEAMING STYLES (TEXT ONLY)
+                FilterChip(
+                    id = "cantonese_style",
+                    text = "Cantonese Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thai_style",
+                    text = "Thai Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "malay_style",
+                    text = "Malay Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "indian_style",
+                    text = "Indian Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "banana_leaf",
+                    text = "Banana Leaf Wrapped",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parchment_baked",
+                    text = "En Papillote",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. MARINADES & SEASONINGS (TEXT ONLY)
+                FilterChip(
+                    id = "ginger_spring_onion",
+                    text = "Ginger & Spring Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_dill",
+                    text = "Lemon Dill",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_butter",
+                    text = "Garlic Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soy_ginger",
+                    text = "Soy Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chili_lime",
+                    text = "Chili Lime",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "miso_glaze",
+                    text = "Miso Glaze",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "herb_crust",
+                    text = "Herb Crust",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tamarind_glaze",
+                    text = "Tamarind Glaze",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_cream",
+                    text = "Coconut Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. ACCOMPANIMENTS (TEXT ONLY)
+                FilterChip(
+                    id = "steamed_veggies_fish",
+                    text = "Steamed Veggies",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bok_choy",
+                    text = "Bok Choy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "asian_greens",
+                    text = "Asian Greens",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed_rice",
+                    text = "Steamed Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_rice_fish",
+                    text = "Brown Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quinoa_fish",
+                    text = "Quinoa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed_potatoes",
+                    text = "Steamed Potatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. SAUCES & CONDIMENTS (TEXT ONLY)
+                FilterChip(
+                    id = "soy_sauce",
+                    text = "Light Soy Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oyster_sauce",
+                    text = "Oyster Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chili_oil",
+                    text = "Chili Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_scallion_oil",
+                    text = "Ginger Scallion Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_butter_sauce",
+                    text = "Lemon Butter Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tartar_sauce",
+                    text = "Tartar Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet_chili",
+                    text = "Sweet Chili Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ponzu",
+                    text = "Ponzu",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. DIETARY & HEALTH (TEXT ONLY)
+                FilterChip(
+                    id = "low_carb_fish",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_fish",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_fish",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_fish",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_fish",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_fish",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_fish",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "heart_healthy",
+                    text = "Heart Healthy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "omega_3_rich",
+                    text = "Omega-3 Rich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "wild_caught",
+                    text = "Wild Caught",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "farm_raised",
+                    text = "Farm Raised",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sustainable",
+                    text = "Sustainable",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. SPICE LEVEL (TEXT ONLY)
+                FilterChip(
+                    id = "mild_fish",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_fish",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_fish",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thai_hot",
+                    text = "Thai Hot",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "fish_under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_200_350",
+                    text = "₹200 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_350_500",
+                    text = "₹350 - ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_500_750",
+                    text = "₹500 - ₹750",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_above_750",
+                    text = "Above ₹750",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. REGIONAL CUISINES (TEXT ONLY)
+                FilterChip(
+                    id = "chinese_fish",
+                    text = "Chinese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thai_fish",
+                    text = "Thai",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vietnamese_fish",
+                    text = "Vietnamese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "japanese_fish",
+                    text = "Japanese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kerala_fish",
+                    text = "Kerala Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bengali_fish",
+                    text = "Bengali Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "goan_fish",
+                    text = "Goan Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mediterranean_fish",
+                    text = "Mediterranean",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. PORTION SIZE (TEXT ONLY)
+                FilterChip(
+                    id = "single_fish",
+                    text = "Single (150-200g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "double_fish",
+                    text = "Double (300-400g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_fish",
+                    text = "Family (600g+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole_fish_portion",
+                    text = "Whole Fish",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. BONE OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "with_bones",
+                    text = "With Bones",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "boneless_fish",
+                    text = "Boneless",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SKIN OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "skin_on_fish",
+                    text = "Skin On",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "skinless_fish",
+                    text = "Skinless",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "light_meal",
+                    text = "Light Meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "main_course",
+                    text = "Main Course",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner_special",
+                    text = "Dinner Special",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "healthy_lunch",
+                    text = "Healthy Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 16. RESTAURANT TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "seafood_specialist",
+                    text = "Seafood Specialist",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "asian_eatery",
+                    text = "Asian Eatery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fine_dining_fish",
+                    text = "Fine Dining",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "casual_dining",
+                    text = "Casual Dining",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 17. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_fish",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = steamedFishDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val steamedFishDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_steamed_sea_bass_1,
+                title = "Cantonese Steamed Sea Bass",
+                price = "349",
+                restaurantName = "Dragon Wok",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹52",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_steamed_salmon_1,
+                title = "Lemon Dill Steamed Salmon",
+                price = "399",
+                restaurantName = "Sea Catch",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "1.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹40",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_thai_steamed_fish_1,
+                title = "Thai Style Steamed Pomfret",
+                price = "329",
+                restaurantName = "Thai Spice",
+                rating = "4.8",
+                deliveryTime = "22-28 mins",
+                distance = "0.9 km",
+                discount = "12%",
+                discountAmount = "up to ₹39",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_steamed_tilapia_1,
+                title = "Steamed Tilapia with Ginger",
+                price = "289",
+                restaurantName = "Healthy Bowl",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹43",
+                address = "Brigade Road, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_banana_leaf_fish_1,
+                title = "Banana Leaf Steamed Fish",
+                price = "359",
+                restaurantName = "Malay Kitchen",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "1.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹36",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_steamed_cod_1,
+                title = "Miso Glazed Steamed Cod",
+                price = "449",
+                restaurantName = "Umami Japan",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "1.0 km",
+                discount = "12%",
+                discountAmount = "up to ₹54",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Steamed Fish Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = steamedFishDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val steamedFishDietItems = listOf(
+        // 1-5: CLASSIC STEAMED FISH
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.steamed_fish_diet_1,
+            title = "Cantonese Steamed Sea Bass",
+            price = "349",
+            restaurantName = "Dragon Wok",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹52",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.steamed_fish_diet_2,
+            title = "Lemon Dill Steamed Salmon",
+            price = "399",
+            restaurantName = "Sea Catch",
+            rating = "4.9",
+            deliveryTime = "18-22 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹40",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.steamed_fish_diet_3,
+            title = "Thai Style Steamed Pomfret",
+            price = "329",
+            restaurantName = "Thai Spice",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹39",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.steamed_fish_diet_4,
+            title = "Steamed Tilapia with Ginger",
+            price = "289",
+            restaurantName = "Healthy Bowl",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Brigade Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.steamed_fish_diet_5,
+            title = "Banana Leaf Steamed Fish",
+            price = "359",
+            restaurantName = "Malay Kitchen",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "1.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹36",
+            address = "Bandra West, Mumbai"
+        ),
+
+        // 6-10: STEAMED FISH WITH ASIAN STYLES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.steamed_fish_diet_6,
+            title = "Miso Glazed Steamed Cod",
+            price = "449",
+            restaurantName = "Umami Japan",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹54",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.steamed_fish_diet_7,
+            title = "Soy Ginger Steamed Snapper",
+            price = "379",
+            restaurantName = "Asian Wok",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "1.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹57",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.steamed_fish_diet_8,
+            title = "Sichuan Style Steamed Fish",
+            price = "339",
+            restaurantName = "Red Chilli",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹34",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.steamed_fish_diet_9,
+            title = "Steamed Fish with Black Bean Sauce",
+            price = "359",
+            restaurantName = "Canton House",
+            rating = "4.7",
+            deliveryTime = "22-28 mins",
+            distance = "1.2 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹43",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.steamed_fish_diet_10,
+            title = "Vietnamese Steamed Fish",
+            price = "369",
+            restaurantName = "Saigon Delight",
+            rating = "4.8",
+            deliveryTime = "25-30 mins",
+            distance = "1.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹55",
+            address = "Jayanagar, Bangalore"
+        ),
+
+        // 11-15: STEAMED FISH WITH HERBS & VEGETABLES
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.steamed_fish_diet_11,
+            title = "Steamed Fish with Asparagus",
+            price = "389",
+            restaurantName = "Green Leaf",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹39",
+            address = "Salt Lake, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.steamed_fish_diet_12,
+            title = "Mediterranean Steamed Fish",
+            price = "409",
+            restaurantName = "Olive Grove",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹49",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.steamed_fish_diet_13,
+            title = "Steamed Fish with Bok Choy",
+            price = "329",
+            restaurantName = "Wok & Roll",
+            rating = "4.7",
+            deliveryTime = "18-22 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹49",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.steamed_fish_diet_14,
+            title = "Lemon Grass Steamed Fish",
+            price = "349",
+            restaurantName = "Thai Orchid",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹35",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.steamed_fish_diet_15,
+            title = "Steamed Fish with Fennel",
+            price = "379",
+            restaurantName = "Herb Garden",
+            rating = "4.9",
+            deliveryTime = "22-28 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹45",
+            address = "Indiranagar, Bangalore"
+        ),
+
+        // 16-20: DIET-SPECIAL STEAMED FISH
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.steamed_fish_diet_16,
+            title = "Keto Steamed Fish with Butter",
+            price = "419",
+            restaurantName = "Keto Kitchen",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹63",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.steamed_fish_diet_17,
+            title = "Paleo Steamed Fish",
+            price = "399",
+            restaurantName = "Paleo Plate",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹40",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.steamed_fish_diet_18,
+            title = "High Protein Steamed Fish",
+            price = "379",
+            restaurantName = "Protein Lab",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹45",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.steamed_fish_diet_19,
+            title = "Low Calorie Steamed Fish",
+            price = "339",
+            restaurantName = "Low Cal Life",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹51",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.steamed_fish_diet_20,
+            title = "Omega-3 Rich Steamed Salmon",
+            price = "459",
+            restaurantName = "Healthy Catch",
+            rating = "4.9",
+            deliveryTime = "22-28 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹46",
+            address = "Koramangala, Bangalore"
         )
-        // Add your steamed fish items here
+    )
+    Column {
+        steamedFishDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

@@ -17853,14 +17853,1041 @@ fun SteamedFishDietPage() {
 
 @Composable
 fun QuinoaBowlDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val quinoaBowlDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY QUINOA TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "white_quinoa",
+                    text = "White Quinoa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_white_quinoa  // White quinoa grains illustration
+                ),
+                FilterChip(
+                    id = "red_quinoa",
+                    text = "Red Quinoa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_red_quinoa  // Red quinoa grains with reddish hue
+                ),
+                FilterChip(
+                    id = "black_quinoa",
+                    text = "Black Quinoa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_black_quinoa  // Black quinoa grains illustration
+                ),
+                FilterChip(
+                    id = "tricolor_quinoa",
+                    text = "Tricolor Quinoa",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tricolor_quinoa  // Mix of white, red, black quinoa
+                ),
+                FilterChip(
+                    id = "quinoa_flakes",
+                    text = "Quinoa Flakes",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_quinoa_flakes  // Flattened quinoa flakes
+                ),
+
+                // 3. BOWL BASE (TEXT ONLY)
+                FilterChip(
+                    id = "quinoa_only",
+                    text = "Quinoa Only",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quinoa_rice_mix",
+                    text = "Quinoa & Rice Mix",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quinoa_greens_mix",
+                    text = "Quinoa & Greens",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quinoa_spring_mix",
+                    text = "Quinoa Spring Mix",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. PROTEIN SOURCES (TEXT ONLY)
+                FilterChip(
+                    id = "grilled_chicken",
+                    text = "Grilled Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "salmon_bowl",
+                    text = "Salmon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_bowl",
+                    text = "Tuna",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_bowl",
+                    text = "Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tempeh_bowl",
+                    text = "Tempeh",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "edamame_bowl",
+                    text = "Edamame",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chickpeas_bowl",
+                    text = "Chickpeas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_beans_bowl",
+                    text = "Black Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lentils_bowl",
+                    text = "Lentils",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hard_boiled_egg",
+                    text = "Hard Boiled Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "poached_egg",
+                    text = "Poached Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. FRESH VEGETABLES (TEXT ONLY)
+                FilterChip(
+                    id = "roasted_veggies",
+                    text = "Roasted Veggies",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed_broccoli",
+                    text = "Steamed Broccoli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "roasted_cauliflower",
+                    text = "Roasted Cauliflower",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_peppers_bowl",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cherry_tomatoes",
+                    text = "Cherry Tomatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cucumber_bowl",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_bowl",
+                    text = "Fresh Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kale_bowl",
+                    text = "Kale",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "arugula_bowl",
+                    text = "Arugula",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "roasted_sweet_potato",
+                    text = "Roasted Sweet Potato",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "avocado_bowl",
+                    text = "Avocado",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "roasted_mushrooms",
+                    text = "Roasted Mushrooms",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrots_bowl",
+                    text = "Shredded Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn_bowl",
+                    text = "Sweet Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_onion_bowl",
+                    text = "Red Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DRESSINGS & SAUCES (TEXT ONLY)
+                FilterChip(
+                    id = "lemon_herb_vinaigrette",
+                    text = "Lemon Herb Vinaigrette",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "balsamic_glaze",
+                    text = "Balsamic Glaze",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tahini_dressing",
+                    text = "Tahini Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "greek_yogurt_dressing",
+                    text = "Greek Yogurt Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cilantro_lime",
+                    text = "Cilantro Lime",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "avocado_crema",
+                    text = "Avocado Crema",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "miso_ginger",
+                    text = "Miso Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sesame_ginger",
+                    text = "Sesame Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_peanut",
+                    text = "Spicy Peanut Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sriracha_mayo",
+                    text = "Sriracha Mayo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pesto_bowl",
+                    text = "Pesto",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "olive_oil_lemon",
+                    text = "Olive Oil & Lemon",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. TOPPINGS & ADD-ONS (TEXT ONLY)
+                FilterChip(
+                    id = "roasted_nuts",
+                    text = "Roasted Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pumpkin_seeds",
+                    text = "Pumpkin Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sunflower_seeds",
+                    text = "Sunflower Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sesame_seeds",
+                    text = "Sesame Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chia_seeds",
+                    text = "Chia Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hemp_hearts",
+                    text = "Hemp Hearts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crumbled_feta",
+                    text = "Crumbled Feta",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "goat_cheese",
+                    text = "Goat Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parmesan_bowl",
+                    text = "Parmesan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nutritional_yeast",
+                    text = "Nutritional Yeast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_herbs_bowl",
+                    text = "Fresh Herbs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "microgreens_bowl",
+                    text = "Microgreens",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_bowl",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian_bowl",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_bowl",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_bowl",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_bowl",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_bowl",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_bowl",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_bowl",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_bowl",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole30_bowl",
+                    text = "Whole30",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sodium_bowl",
+                    text = "Low Sodium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic_bowl",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. SPICE LEVEL (TEXT ONLY)
+                FilterChip(
+                    id = "mild_bowl",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_bowl",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_bowl",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy_bowl",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "bowl_under_300",
+                    text = "Under ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bowl_300_500",
+                    text = "₹300 - ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bowl_500_700",
+                    text = "₹500 - ₹700",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bowl_700_1000",
+                    text = "₹700 - ₹1000",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bowl_above_1000",
+                    text = "Above ₹1000",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. CUISINE STYLES (TEXT ONLY)
+                FilterChip(
+                    id = "mediterranean_bowl",
+                    text = "Mediterranean",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mexican_bowl",
+                    text = "Mexican",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "asian_bowl",
+                    text = "Asian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "greek_bowl",
+                    text = "Greek",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "moroccan_bowl",
+                    text = "Moroccan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "indian_bowl",
+                    text = "Indian Fusion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "california_bowl",
+                    text = "California Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hawaiian_bowl",
+                    text = "Hawaiian (Poke)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. BOWL SIZE (TEXT ONLY)
+                FilterChip(
+                    id = "small_bowl",
+                    text = "Small (250-300g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_bowl",
+                    text = "Regular (400-450g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_bowl",
+                    text = "Large (550-600g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_bowl",
+                    text = "Family (800g+)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "light_lunch_bowl",
+                    text = "Light Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout_bowl",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "meal_prep_bowl",
+                    text = "Meal Prep Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner_bowl",
+                    text = "Dinner Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. PREPARATION STYLE (TEXT ONLY)
+                FilterChip(
+                    id = "raw_bowl",
+                    text = "Raw / Fresh",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "warm_bowl",
+                    text = "Warm Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold_bowl",
+                    text = "Cold Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled_bowl",
+                    text = "Grilled Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "roasted_bowl",
+                    text = "Roasted Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. SPECIAL DIETS (TEXT ONLY)
+                FilterChip(
+                    id = "diabetic_friendly",
+                    text = "Diabetic Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "heart_healthy_bowl",
+                    text = "Heart Healthy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "weight_loss_bowl",
+                    text = "Weight Loss",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "muscle_gain_bowl",
+                    text = "Muscle Gain",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 16. RESTAURANT TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "health_cafe",
+                    text = "Health Cafe",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bowl_specialist",
+                    text = "Bowl Specialist",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_restaurant",
+                    text = "Vegan Restaurant",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic_cafe",
+                    text = "Organic Cafe",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 17. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_bowl",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = quinoaBowlDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val quinoaBowlDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_mediterranean_quinoa_bowl_1,
+                title = "Mediterranean Quinoa Bowl",
+                price = "299",
+                restaurantName = "The Green Bowl",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹45",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_mexican_quinoa_bowl_1,
+                title = "Mexican Spicy Quinoa Bowl",
+                price = "329",
+                restaurantName = "Fiesta Fresh",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "1.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹39",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_thai_quinoa_bowl_1,
+                title = "Thai Peanut Quinoa Bowl",
+                price = "319",
+                restaurantName = "Thai Alive",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.9 km",
+                discount = "10%",
+                discountAmount = "up to ₹32",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_teriyaki_quinoa_bowl_1,
+                title = "Teriyaki Tofu Quinoa Bowl",
+                price = "289",
+                restaurantName = "Healthy Asian",
+                rating = "4.7",
+                deliveryTime = "15-20 mins",
+                distance = "0.7 km",
+                discount = "15%",
+                discountAmount = "up to ₹43",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_greek_quinoa_bowl_1,
+                title = "Greek Quinoa with Feta",
+                price = "339",
+                restaurantName = "Olympus Bowls",
+                rating = "4.9",
+                deliveryTime = "18-22 mins",
+                distance = "1.1 km",
+                discount = "12%",
+                discountAmount = "up to ₹41",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_southwest_quinoa_bowl_1,
+                title = "Southwest Grilled Chicken Quinoa",
+                price = "359",
+                restaurantName = "Desi Roots",
+                rating = "4.8",
+                deliveryTime = "22-28 mins",
+                distance = "1.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹36",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Quinoa Bowl Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = quinoaBowlDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val quinoaBowlDietItems = listOf(
+        // 1-5: CLASSIC QUINOA BOWLS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.quinoa_bowl_diet_1,
+            title = "Mediterranean Quinoa Bowl",
+            price = "299",
+            restaurantName = "The Green Bowl",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹45",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.quinoa_bowl_diet_2,
+            title = "Mexican Spicy Quinoa Bowl",
+            price = "329",
+            restaurantName = "Fiesta Fresh",
+            rating = "4.9",
+            deliveryTime = "18-22 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹39",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.quinoa_bowl_diet_3,
+            title = "Thai Peanut Quinoa Bowl",
+            price = "319",
+            restaurantName = "Thai Alive",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹32",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.quinoa_bowl_diet_4,
+            title = "Teriyaki Tofu Quinoa Bowl",
+            price = "289",
+            restaurantName = "Healthy Asian",
+            rating = "4.7",
+            deliveryTime = "15-20 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.quinoa_bowl_diet_5,
+            title = "Greek Quinoa with Feta",
+            price = "339",
+            restaurantName = "Olympus Bowls",
+            rating = "4.9",
+            deliveryTime = "18-22 mins",
+            distance = "1.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹41",
+            address = "Bandra West, Mumbai"
+        ),
+
+        // 6-10: FUSION & INTERNATIONAL STYLES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.quinoa_bowl_diet_6,
+            title = "Hawaiian Poke Quinoa Bowl",
+            price = "379",
+            restaurantName = "Island Bowls",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹57",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.quinoa_bowl_diet_7,
+            title = "Moroccan Spiced Quinoa Bowl",
+            price = "309",
+            restaurantName = "Marrakesh Cafe",
+            rating = "4.8",
+            deliveryTime = "22-28 mins",
+            distance = "1.1 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹37",
+            address = "Banjara Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.quinoa_bowl_diet_8,
+            title = "Japanese Miso Quinoa Bowl",
+            price = "349",
+            restaurantName = "Umami Bowl",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹35",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.quinoa_bowl_diet_9,
+            title = "Southwest Chipotle Quinoa",
+            price = "359",
+            restaurantName = "Desi Roots",
+            rating = "4.7",
+            deliveryTime = "22-28 mins",
+            distance = "1.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹54",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.quinoa_bowl_diet_10,
+            title = "Indian Masala Quinoa Bowl",
+            price = "299",
+            restaurantName = "Spice Roots",
+            rating = "4.8",
+            deliveryTime = "18-24 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹36",
+            address = "Jayanagar, Bangalore"
+        ),
+
+        // 11-15: PROTEIN-RICH BOWLS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.quinoa_bowl_diet_11,
+            title = "Grilled Chicken Quinoa Bowl",
+            price = "359",
+            restaurantName = "Protein House",
+            rating = "4.9",
+            deliveryTime = "18-24 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹36",
+            address = "Salt Lake, Kolkata"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.quinoa_bowl_diet_12,
+            title = "Salmon Avocado Quinoa Bowl",
+            price = "429",
+            restaurantName = "Sea Green",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹51",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.quinoa_bowl_diet_13,
+            title = "Chickpea & Spinach Quinoa",
+            price = "279",
+            restaurantName = "Plant Power",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.quinoa_bowl_diet_14,
+            title = "Tandoori Paneer Quinoa Bowl",
+            price = "319",
+            restaurantName = "Punjabi Angithi",
+            rating = "4.8",
+            deliveryTime = "18-22 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹32",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.quinoa_bowl_diet_15,
+            title = "Edamame & Tofu Quinoa Bowl",
+            price = "309",
+            restaurantName = "Vegan Valley",
+            rating = "4.7",
+            deliveryTime = "20-25 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹37",
+            address = "Indiranagar, Bangalore"
+        ),
+
+        // 16-20: BREAKFAST & SPECIALTY BOWLS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.quinoa_bowl_diet_16,
+            title = "Breakfast Power Quinoa Bowl",
+            price = "249",
+            restaurantName = "Morning Fresh",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.quinoa_bowl_diet_17,
+            title = "Rainbow Veggie Quinoa Bowl",
+            price = "269",
+            restaurantName = "Pure Earth",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.5 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹54",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.quinoa_bowl_diet_18,
+            title = "Buddha's Quinoa Bliss Bowl",
+            price = "349",
+            restaurantName = "Zen Bowl",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹52",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.quinoa_bowl_diet_19,
+            title = "Detox Green Quinoa Bowl",
+            price = "289",
+            restaurantName = "Juice & Bowl",
+            rating = "4.7",
+            deliveryTime = "18-22 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹35",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.quinoa_bowl_diet_20,
+            title = "Superfood Berry Quinoa Bowl",
+            price = "329",
+            restaurantName = "Berry Fresh",
+            rating = "4.8",
+            deliveryTime = "16-20 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹33",
+            address = "Bandra West, Mumbai"
         )
-        // Add your quinoa bowl items here
+    )
+    Column {
+        quinoaBowlDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

@@ -18893,41 +18893,2481 @@ fun QuinoaBowlDietPage() {
 
 @Composable
 fun AvocadoToastDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val avocadoToastDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY AVOCADO TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "classic_avocado",
+                    text = "Classic Avocado",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_avocado  // Whole avocado illustration
+                ),
+                FilterChip(
+                    id = "smashed_avocado",
+                    text = "Smashed Avocado",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_smashed_avocado  // Mashed/smashed avocado
+                ),
+                FilterChip(
+                    id = "avocado_slices",
+                    text = "Avocado Slices",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_avocado_slices  // Sliced avocado pieces
+                ),
+                FilterChip(
+                    id = "guacamole_style",
+                    text = "Guacamole Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_guacamole  // Guacamole with lime/cilantro
+                ),
+                FilterChip(
+                    id = "avocado_spread",
+                    text = "Avocado Spread",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_avocado_spread  // Smooth spread on toast
+                ),
+                // 4. TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "poached_egg_at",
+                    text = "Poached Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fried_egg",
+                    text = "Fried Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cherry_tomatoes_at",
+                    text = "Cherry Tomatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "radish_slices",
+                    text = "Radish Slices",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "microgreens_at",
+                    text = "Microgreens",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "arugula_at",
+                    text = "Arugula",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_pepper_flakes",
+                    text = "Red Pepper Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "everything_bagel",
+                    text = "Everything Bagel Seasoning",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sesame_seeds_at",
+                    text = "Sesame Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hemp_seeds",
+                    text = "Hemp Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chia_seeds_at",
+                    text = "Chia Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_onion_at",
+                    text = "Red Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pickled_onions",
+                    text = "Pickled Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cucumber_at",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smoked_salmon_at",
+                    text = "Smoked Salmon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bacon_crumbles",
+                    text = "Bacon Crumbles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turkey_breast",
+                    text = "Turkey Breast",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. FLAVOR ENHANCEMENTS (TEXT ONLY)
+                FilterChip(
+                    id = "sea_salt",
+                    text = "Sea Salt Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_pepper",
+                    text = "Black Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_juice",
+                    text = "Fresh Lemon Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lime_juice",
+                    text = "Fresh Lime Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "balsamic_glaze_at",
+                    text = "Balsamic Glaze",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hot_honey",
+                    text = "Hot Honey",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maple_syrup",
+                    text = "Maple Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. PROTEIN ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "soft_boiled_egg",
+                    text = "Soft Boiled Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "scrambled_eggs",
+                    text = "Scrambled Eggs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_scramble",
+                    text = "Tofu Scramble",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tempeh_bacon",
+                    text = "Tempeh Bacon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chickpea_mash",
+                    text = "Chickpea Mash",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "white_beans",
+                    text = "White Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. CHEESE & CREAMY (TEXT ONLY)
+                FilterChip(
+                    id = "feta_crumble",
+                    text = "Feta Crumble",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "goat_cheese_at",
+                    text = "Goat Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ricotta_at",
+                    text = "Ricotta",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cream_cheese",
+                    text = "Cream Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parmesan_at",
+                    text = "Parmesan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mozzarella_fresh",
+                    text = "Fresh Mozzarella",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. SPICE LEVEL (TEXT ONLY)
+                FilterChip(
+                    id = "mild_at",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_at",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_at",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_spicy_at",
+                    text = "Extra Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_at",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian_at",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_at",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_at",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nut_free",
+                    text = "Nut Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_at",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_at",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_at",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_at",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole30_at",
+                    text = "Whole30",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "toast_under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "toast_200_350",
+                    text = "₹200 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "toast_350_500",
+                    text = "₹350 - ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "toast_500_750",
+                    text = "₹500 - ₹750",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "toast_above_750",
+                    text = "Above ₹750",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "breakfast_toast",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brunch_toast",
+                    text = "Brunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch_toast",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snack_toast",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "light_dinner",
+                    text = "Light Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. TOAST STYLES (TEXT ONLY)
+                FilterChip(
+                    id = "open_faced",
+                    text = "Open Faced",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "closed_sandwich",
+                    text = "Closed Sandwich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "toast_platter",
+                    text = "Toast Platter (Multiple)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 14. CAFE TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "specialty_cafe",
+                    text = "Specialty Toast Cafe",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brunch_spot",
+                    text = "Brunch Spot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "healthy_cafe",
+                    text = "Healthy Cafe",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic_cafe_at",
+                    text = "Organic Cafe",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. FRUIT ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "strawberries",
+                    text = "Fresh Strawberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "figs_fresh",
+                    text = "Fresh Figs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pomegranate",
+                    text = "Pomegranate Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_fresh",
+                    text = "Fresh Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_slices",
+                    text = "Apple Slices",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 16. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_toast",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = avocadoToastDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val avocadoToastDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_avocado_toast_1,
+                title = "Classic Smashed Avocado Toast",
+                price = "249",
+                restaurantName = "Toast & Co.",
+                rating = "4.8",
+                deliveryTime = "12-15 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_poached_egg_avocado_toast_1,
+                title = "Avocado Toast with Poached Egg",
+                price = "299",
+                restaurantName = "The Breakfast Story",
+                rating = "4.9",
+                deliveryTime = "15-18 mins",
+                distance = "0.8 km",
+                discount = "15%",
+                discountAmount = "up to ₹45",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_mediterranean_avocado_toast_1,
+                title = "Mediterranean Avocado Toast",
+                price = "289",
+                restaurantName = "Olive & Toast",
+                rating = "4.8",
+                deliveryTime = "14-17 mins",
+                distance = "0.6 km",
+                discount = "12%",
+                discountAmount = "up to ₹35",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_smoked_salmon_avocado_toast_1,
+                title = "Smoked Salmon & Avocado Toast",
+                price = "379",
+                restaurantName = "Fresh Catch Cafe",
+                rating = "4.9",
+                deliveryTime = "16-20 mins",
+                distance = "1.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹38",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_mexican_avocado_toast_1,
+                title = "Mexican Spice Avocado Toast",
+                price = "269",
+                restaurantName = "Fiesta Fresh",
+                rating = "4.7",
+                deliveryTime = "13-16 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹40",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_sweet_potato_avocado_toast_1,
+                title = "Sweet Potato & Avocado Toast",
+                price = "259",
+                restaurantName = "Healthy Haven",
+                rating = "4.8",
+                deliveryTime = "15-18 mins",
+                distance = "0.7 km",
+                discount = "12%",
+                discountAmount = "up to ₹31",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Avocado Toast Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = avocadoToastDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color =  MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val avocadoToastDietItems = listOf(
+        // 1-5: CLASSIC AVOCADO TOASTS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.avocado_toast_diet_1,
+            title = "Classic Smashed Avocado Toast",
+            price = "249",
+            restaurantName = "Toast & Co.",
+            rating = "4.8",
+            deliveryTime = "12-15 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.avocado_toast_diet_2,
+            title = "Avocado Toast with Poached Egg",
+            price = "299",
+            restaurantName = "The Breakfast Story",
+            rating = "4.9",
+            deliveryTime = "15-18 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹36",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.avocado_toast_diet_3,
+            title = "Everything Bagel Avocado Toast",
+            price = "269",
+            restaurantName = "Bagel Shop",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹27",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.avocado_toast_diet_4,
+            title = "Simple Avocado on Sourdough",
+            price = "219",
+            restaurantName = "Bread & Butter",
+            rating = "4.8",
+            deliveryTime = "10-12 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.avocado_toast_diet_5,
+            title = "Avocado Toast with Microgreens",
+            price = "279",
+            restaurantName = "Green Garden Cafe",
+            rating = "4.9",
+            deliveryTime = "12-16 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹33",
+            address = "Koregaon Park, Pune"
+        ),
+
+        // 6-10: PROTEIN-RICH AVOCADO TOASTS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.avocado_toast_diet_6,
+            title = "Smoked Salmon Avocado Toast",
+            price = "379",
+            restaurantName = "Fresh Catch Cafe",
+            rating = "4.9",
+            deliveryTime = "16-20 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹38",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.avocado_toast_diet_7,
+            title = "Avocado Toast with Fried Egg",
+            price = "289",
+            restaurantName = "Eggspectations",
+            rating = "4.8",
+            deliveryTime = "12-15 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.avocado_toast_diet_8,
+            title = "Bacon & Avocado Toast",
+            price = "329",
+            restaurantName = "Morning Glory",
+            rating = "4.8",
+            deliveryTime = "14-18 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹39",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.avocado_toast_diet_9,
+            title = "Turkey Avocado Toast",
+            price = "319",
+            restaurantName = "Protein Plus",
+            rating = "4.7",
+            deliveryTime = "15-18 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹32",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.avocado_toast_diet_10,
+            title = "Tofu Scramble Avocado Toast",
+            price = "279",
+            restaurantName = "Plant Power",
+            rating = "4.8",
+            deliveryTime = "13-17 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: INTERNATIONAL & FUSION STYLES
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.avocado_toast_diet_11,
+            title = "Mediterranean Avocado Toast",
+            price = "299",
+            restaurantName = "Olive & Toast",
+            rating = "4.9",
+            deliveryTime = "14-17 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹36",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.avocado_toast_diet_12,
+            title = "Mexican Spice Avocado Toast",
+            price = "269",
+            restaurantName = "Fiesta Fresh",
+            rating = "4.8",
+            deliveryTime = "13-16 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹40",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.avocado_toast_diet_13,
+            title = "Caprese Avocado Toast",
+            price = "289",
+            restaurantName = "Italian Bistro",
+            rating = "4.9",
+            deliveryTime = "15-19 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹35",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.avocado_toast_diet_14,
+            title = "Asian Sesame Avocado Toast",
+            price = "279",
+            restaurantName = "Umami Toast",
+            rating = "4.7",
+            deliveryTime = "16-20 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹28",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.avocado_toast_diet_15,
+            title = "Indian Masala Avocado Toast",
+            price = "259",
+            restaurantName = "Spice Roots",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 16-20: SWEET & SPECIALTY AVOCADO TOASTS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.avocado_toast_diet_16,
+            title = "Sweet Potato Avocado Toast",
+            price = "259",
+            restaurantName = "Healthy Haven",
+            rating = "4.8",
+            deliveryTime = "15-18 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹31",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.avocado_toast_diet_17,
+            title = "Berry & Avocado Toast",
+            price = "299",
+            restaurantName = "Berry Fresh",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹30",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.avocado_toast_diet_18,
+            title = "Fig & Honey Avocado Toast",
+            price = "329",
+            restaurantName = "Fig & Olive",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹49",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.avocado_toast_diet_19,
+            title = "Pomegranate Avocado Toast",
+            price = "289",
+            restaurantName = "Fresh Bowl",
+            rating = "4.7",
+            deliveryTime = "13-16 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹35",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.avocado_toast_diet_20,
+            title = "Rainbow Veggie Avocado Toast",
+            price = "279",
+            restaurantName = "Pure Earth",
+            rating = "4.8",
+            deliveryTime = "15-19 mins",
+            distance = "0.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹56",
+            address = "Koregaon Park, Pune"
         )
-        // Add your avocado toast items here
+    )
+    Column {
+        avocadoToastDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun GreenSmoothieDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val greenSmoothieDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. KEY GREEN SMOOTHIE BASES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "kale_base",
+                    text = "Kale",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kale  // Kale leaf illustration
+                ),
+                FilterChip(
+                    id = "spinach_base",
+                    text = "Spinach",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spinach_green_smoothie  // Spinach leaf illustration
+                ),
+                FilterChip(
+                    id = "collard_greens",
+                    text = "Collard Greens",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_collard_greens_green_smoothie  // Collard greens leaf
+                ),
+                FilterChip(
+                    id = "swiss_chard",
+                    text = "Swiss Chard",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_swiss_chard_green_smoothie  // Swiss chard with colorful stems
+                ),
+                FilterChip(
+                    id = "romaine",
+                    text = "Romaine",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_romaine_green_smoothie  // Romaine lettuce head
+                ),
+                // 4. LIQUID BASES (TEXT ONLY)
+                FilterChip(
+                    id = "coconut_water",
+                    text = "Coconut Water",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almond_milk",
+                    text = "Almond Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oat_milk",
+                    text = "Oat Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_milk",
+                    text = "Coconut Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "water_base",
+                    text = "Water",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_tea",
+                    text = "Green Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "matcha_base",
+                    text = "Matcha",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. PROTEIN BOOSTERS (TEXT ONLY)
+                FilterChip(
+                    id = "protein_powder_vanilla",
+                    text = "Vanilla Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "protein_powder_unflavored",
+                    text = "Unflavored Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "collagen_peptides",
+                    text = "Collagen Peptides",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hemp_protein",
+                    text = "Hemp Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pea_protein",
+                    text = "Pea Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "greek_yogurt",
+                    text = "Greek Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "greek_yogurt",
+                    text = "Greek Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. SUPERFOOD ADD-INS (TEXT ONLY)
+                FilterChip(
+                    id = "chia_seeds",
+                    text = "Chia Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "flax_seeds",
+                    text = "Flax Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hemp_hearts",
+                    text = "Hemp Hearts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spirulina",
+                    text = "Spirulina",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chlorella",
+                    text = "Chlorella",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "matcha_powder",
+                    text = "Matcha Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "macna_powder",
+                    text = "Maca Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cacao_nibs",
+                    text = "Cacao Nibs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bee_pollen",
+                    text = "Bee Pollen",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "goji_berries",
+                    text = "Goji Berries",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. HEALTHY FATS (TEXT ONLY)
+                FilterChip(
+                    id = "almond_butter",
+                    text = "Almond Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanut_butter",
+                    text = "Peanut Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cashew_butter",
+                    text = "Cashew Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_oil",
+                    text = "Coconut Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "avocado_oil",
+                    text = "Avocado Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. NATURAL SWEETENERS (TEXT ONLY)
+                FilterChip(
+                    id = "medjool_dates",
+                    text = "Medjool Dates",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raw_honey",
+                    text = "Raw Honey",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maple_syrup_organic",
+                    text = "Maple Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stevia",
+                    text = "Stevia",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "monk_fruit",
+                    text = "Monk Fruit",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "agave_nectar",
+                    text = "Agave Nectar",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. HERBS & SPICES (TEXT ONLY)
+                FilterChip(
+                    id = "fresh_ginger",
+                    text = "Fresh Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_turmeric",
+                    text = "Fresh Turmeric",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cinnamon",
+                    text = "Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_leaves",
+                    text = "Fresh Mint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parsley",
+                    text = "Parsley",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cilantro",
+                    text = "Cilantro",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "basil",
+                    text = "Basil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_smoothie",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_green",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_green",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole30_green",
+                    text = "Whole30",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_fiber",
+                    text = "High Fiber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_green",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_green",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_green",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nut_free_green",
+                    text = "Nut Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soy_free",
+                    text = "Soy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. HEALTH GOALS (TEXT ONLY)
+                FilterChip(
+                    id = "energy_boost",
+                    text = "Energy Boost",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "detox_cleanse",
+                    text = "Detox & Cleanse",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "weight_loss",
+                    text = "Weight Loss",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gut_health",
+                    text = "Gut Health",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "immunity_boost",
+                    text = "Immunity Boost",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "anti_inflammatory",
+                    text = "Anti-Inflammatory",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. MEAL REPLACEMENT (TEXT ONLY)
+                FilterChip(
+                    id = "breakfast_smoothie",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch_smoothie",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snack_smoothie",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout_meal",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. TEXTURE PREFERENCE (TEXT ONLY)
+                FilterChip(
+                    id = "smooth_creamy",
+                    text = "Smooth & Creamy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thin_refreshing",
+                    text = "Thin & Refreshing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick_bowl",
+                    text = "Thick (Bowl Style)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chunks",
+                    text = "With Texture/Chunks",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "smoothie_under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smoothie_150_250",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smoothie_250_350",
+                    text = "₹250 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smoothie_350_450",
+                    text = "₹350 - ₹450",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smoothie_above_450",
+                    text = "Above ₹450",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. SMOOTHIE BOWL TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "granola",
+                    text = "Granola",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_flakes",
+                    text = "Coconut Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_fruit_toppings",
+                    text = "Fresh Fruit",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nuts_seeds",
+                    text = "Nuts & Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 16. SEASONAL (TEXT ONLY)
+                FilterChip(
+                    id = "spring_greens",
+                    text = "Spring Greens",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "summer_refreshers",
+                    text = "Summer Refreshers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fall_greens",
+                    text = "Fall Greens",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "winter_warmer",
+                    text = "Winter Warmers",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 17. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_smoothie",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = greenSmoothieDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val greenSmoothieDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_kale_power_smoothie_1,
+                title = "Kale Power Green Smoothie",
+                price = "199",
+                restaurantName = "Green Goddess Cafe",
+                rating = "4.9",
+                deliveryTime = "10-12 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹30",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_spinach_mango_smoothie_1,
+                title = "Spinach Mango Tango",
+                price = "179",
+                restaurantName = "The Smoothie Bar",
+                rating = "4.8",
+                deliveryTime = "12-15 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹18",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_detox_green_smoothie_1,
+                title = "Detox Green Cleanse",
+                price = "219",
+                restaurantName = "Pure Blend Co.",
+                rating = "4.9",
+                deliveryTime = "13-16 mins",
+                distance = "0.7 km",
+                discount = "20%",
+                discountAmount = "up to ₹44",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_protein_green_smoothie_1,
+                title = "Protein Power Greens",
+                price = "249",
+                restaurantName = "Fit Fuel Kitchen",
+                rating = "4.7",
+                deliveryTime = "14-17 mins",
+                distance = "1.1 km",
+                discount = "12%",
+                discountAmount = "up to ₹30",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_tropical_green_smoothie_1,
+                title = "Tropical Green Paradise",
+                price = "189",
+                restaurantName = "Island Greens",
+                rating = "4.8",
+                deliveryTime = "11-14 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹28",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_avocado_cucumber_smoothie_1,
+                title = "Avocado Cucumber Cooler",
+                price = "229",
+                restaurantName = "Fresh Pressed",
+                rating = "4.9",
+                deliveryTime = "12-15 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹23",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Green Smoothie Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = greenSmoothieDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val greenSmoothieDietItems = listOf(
+        // 1-5: CLASSIC GREEN SMOOTHIES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.green_smoothie_1,
+            title = "Classic Green Goddess Smoothie",
+            price = "169",
+            restaurantName = "Green Goddess Cafe",
+            rating = "4.8",
+            deliveryTime = "10-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.green_smoothie_2,
+            title = "Kale Spinach Power Blend",
+            price = "189",
+            restaurantName = "Daily Greens",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.green_smoothie_3,
+            title = "Simple Green Cleanse",
+            price = "149",
+            restaurantName = "Pure Blend Co.",
+            rating = "4.7",
+            deliveryTime = "8-12 mins",
+            distance = "0.2 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.green_smoothie_4,
+            title = "Cucumber Mint Refresher",
+            price = "159",
+            restaurantName = "Fresh Pressed",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.green_smoothie_5,
+            title = "Avocado Spinach Smoothie",
+            price = "199",
+            restaurantName = "Creamy Greens",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Koregaon Park, Pune"
+        ),
+
+        // 6-10: TROPICAL GREEN SMOOTHIES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.green_smoothie_6,
+            title = "Mango Spinach Tango",
+            price = "189",
+            restaurantName = "Tropical Greens",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.green_smoothie_7,
+            title = "Pineapple Kale Blast",
+            price = "199",
+            restaurantName = "Island Sips",
+            rating = "4.8",
+            deliveryTime = "13-16 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.green_smoothie_8,
+            title = "Banana Coconut Green",
+            price = "179",
+            restaurantName = "Tropics Cafe",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.green_smoothie_9,
+            title = "Papaya Lime Green Smoothie",
+            price = "189",
+            restaurantName = "Sunshine Smoothies",
+            rating = "4.7",
+            deliveryTime = "12-16 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.green_smoothie_10,
+            title = "Passion Fruit Greens",
+            price = "209",
+            restaurantName = "Exotic Blends",
+            rating = "4.9",
+            deliveryTime = "14-17 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹25",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: PROTEIN & SUPERFOOD SMOOTHIES
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.green_smoothie_11,
+            title = "Protein Power Greens",
+            price = "249",
+            restaurantName = "Fit Fuel Kitchen",
+            rating = "4.9",
+            deliveryTime = "14-17 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.green_smoothie_12,
+            title = "Matcha Almond Protein Smoothie",
+            price = "239",
+            restaurantName = "Matcha Bar",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹24",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.green_smoothie_13,
+            title = "Spirulina Supergreen Blend",
+            price = "229",
+            restaurantName = "Superfood Studio",
+            rating = "4.7",
+            deliveryTime = "15-18 mins",
+            distance = "1.1 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹27",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.green_smoothie_14,
+            title = "Chia Seed Green Smoothie",
+            price = "199",
+            restaurantName = "Healthy Haven",
+            rating = "4.8",
+            deliveryTime = "12-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.green_smoothie_15,
+            title = "Hemp & Flax Green Smoothie",
+            price = "219",
+            restaurantName = "Nutri Blends",
+            rating = "4.8",
+            deliveryTime = "13-16 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹22",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 16-20: DETOX & WELLNESS SMOOTHIES
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.green_smoothie_16,
+            title = "Detox Green Cleanse",
+            price = "189",
+            restaurantName = "Detox Bar",
+            rating = "4.8",
+            deliveryTime = "11-14 mins",
+            distance = "0.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹38",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.green_smoothie_17,
+            title = "Ginger Turmeric Wellness Shot Smoothie",
+            price = "209",
+            restaurantName = "Wellness Cafe",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.green_smoothie_18,
+            title = "Apple Celery Detox",
+            price = "169",
+            restaurantName = "Fresh & Clean",
+            rating = "4.7",
+            deliveryTime = "10-13 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.green_smoothie_19,
+            title = "Wheatgrass Power Punch",
+            price = "229",
+            restaurantName = "The Wheatgrass Co.",
+            rating = "4.8",
+            deliveryTime = "13-17 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹23",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.green_smoothie_20,
+            title = "Rainbow Greens Smoothie Bowl",
+            price = "259",
+            restaurantName = "Bowl Superfoods",
+            rating = "4.9",
+            deliveryTime = "15-19 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "Koregaon Park, Pune"
         )
-        // Add your green smoothie items here
+    )
+    Column {
+        greenSmoothieDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun OatmealDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(
-            text = "Oatmeal Items",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val oatmealDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. OATMEAL BASE TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "rolled_oats",
+                    text = "Rolled Oats",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rolled_oats  // Rolled oat flakes illustration
+                ),
+                FilterChip(
+                    id = "steel_cut_oats",
+                    text = "Steel Cut Oats",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_steel_cut_oats  // Whole oat groats/chopped
+                ),
+                FilterChip(
+                    id = "instant_oats",
+                    text = "Instant Oats",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_instant_oats  // Fine oat powder/flakes
+                ),
+                FilterChip(
+                    id = "scottish_oats",
+                    text = "Scottish Oats",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_scottish_oats  // Stone-ground oats
+                ),
+                FilterChip(
+                    id = "irish_oats",
+                    text = "Irish Oatmeal",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_irish_oats  // Traditional Irish oats
+                ),
+
+
+                // 4. LIQUID BASES (TEXT ONLY)
+                FilterChip(
+                    id = "milk_based",
+                    text = "Dairy Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almond_milk_oat",
+                    text = "Almond Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oat_milk_oat",
+                    text = "Oat Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_milk_oat",
+                    text = "Coconut Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soy_milk_oat",
+                    text = "Soy Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cashew_milk",
+                    text = "Cashew Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "water_based",
+                    text = "Water",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_juice_oat",
+                    text = "Apple Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. FRESH FRUIT TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "banana_oat",
+                    text = "Banana",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberries_oat",
+                    text = "Strawberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blueberries_oat",
+                    text = "Blueberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raspberries_oat",
+                    text = "Raspberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_oat",
+                    text = "Apple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pear_oat",
+                    text = "Pear",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peach_oat",
+                    text = "Peach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_oat",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple_oat",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cherries_oat",
+                    text = "Cherries",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DRIED FRUIT TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "raisins_oat",
+                    text = "Raisins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cranberries_oat",
+                    text = "Cranberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chopped_dates",
+                    text = "Chopped Dates",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dried_apricots",
+                    text = "Dried Apricots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dried_figs_oat",
+                    text = "Dried Figs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "prunes_oat",
+                    text = "Prunes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "goji_berries_oat",
+                    text = "Goji Berries",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. NUTS & SEEDS TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "almonds_oat",
+                    text = "Almonds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "walnuts_oat",
+                    text = "Walnuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pecans_oat",
+                    text = "Pecans",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cashews_oat",
+                    text = "Cashews",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanuts_oat",
+                    text = "Peanuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chia_seeds_oat",
+                    text = "Chia Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "flax_seeds_oat",
+                    text = "Flax Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hemp_seeds_oat",
+                    text = "Hemp Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pumpkin_seeds_oat",
+                    text = "Pumpkin Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sunflower_seeds_oat",
+                    text = "Sunflower Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_flakes_oat",
+                    text = "Coconut Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. NATURAL SWEETENERS (TEXT ONLY)
+                FilterChip(
+                    id = "honey_oat",
+                    text = "Honey",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maple_syrup_oat",
+                    text = "Maple Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_sugar_oat",
+                    text = "Brown Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut_sugar",
+                    text = "Coconut Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stevia_oat",
+                    text = "Stevia",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "agave_oat",
+                    text = "Agave Nectar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "date_syrup",
+                    text = "Date Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. SPICES & FLAVORINGS (TEXT ONLY)
+                FilterChip(
+                    id = "cinnamon_oat",
+                    text = "Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nutmeg_oat",
+                    text = "Nutmeg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cardamom_oat",
+                    text = "Cardamom",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_oat",
+                    text = "Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vanilla_oat",
+                    text = "Vanilla Extract",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pumpkin_spice",
+                    text = "Pumpkin Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_pie_spice",
+                    text = "Apple Pie Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. PROTEIN BOOSTERS (TEXT ONLY)
+                FilterChip(
+                    id = "protein_powder_oat",
+                    text = "Protein Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "greek_yogurt_oat",
+                    text = "Greek Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanut_butter_oat",
+                    text = "Peanut Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almond_butter_oat",
+                    text = "Almond Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "collagen_oat",
+                    text = "Collagen Peptides",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_white_protein",
+                    text = "Egg Whites",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegan_oat",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian_oat",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_oat",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_oat",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nut_free_oat",
+                    text = "Nut Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_oat",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_fiber_oat",
+                    text = "High Fiber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar_oat",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_oat",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_oat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. CONSISTENCY (TEXT ONLY)
+                FilterChip(
+                    id = "creamy_oatmeal",
+                    text = "Creamy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thick_oatmeal",
+                    text = "Thick & Hearty",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thin_oatmeal",
+                    text = "Thin/Porridge Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chewy_oatmeal",
+                    text = "Chewy/Texture",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "breakfast_oat",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brunch_oat",
+                    text = "Brunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snack_oat",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout_oat",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dessert_oat",
+                    text = "Dessert Oatmeal",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. TEMPERATURE (TEXT ONLY)
+                FilterChip(
+                    id = "hot_oatmeal",
+                    text = "Hot/Warm",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cold_oatmeal",
+                    text = "Cold/Overnight",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "room_temp_oat",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. SAVORY OATMEAL (TEXT ONLY)
+                FilterChip(
+                    id = "savory_oatmeal",
+                    text = "Savory Oatmeal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_topping_oat",
+                    text = "Egg Topping",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "avocado_oat",
+                    text = "Avocado",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushrooms_oat",
+                    text = "Mushrooms",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_oat",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese_oat",
+                    text = "Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 16. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "oat_under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oat_100_150",
+                    text = "₹100 - ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oat_150_200",
+                    text = "₹150 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oat_200_250",
+                    text = "₹200 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oat_above_250",
+                    text = "Above ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 17. CAFE/BRAND TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "oat_specialty",
+                    text = "Oatmeal Specialty Cafe",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "breakfast_spot_oat",
+                    text = "Breakfast Spot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "healthy_cafe_oat",
+                    text = "Healthy Cafe",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bakery_oat",
+                    text = "Bakery",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 18. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_oat",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
-        // Add your oatmeal items here
+        FilterButtonFood(
+            filterConfig = oatmealDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val oatmealDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_oatmeal_1,
+                title = "Classic Rolled Oatmeal",
+                price = "129",
+                restaurantName = "Morning Bowl",
+                rating = "4.8",
+                deliveryTime = "8-10 mins",
+                distance = "0.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹13",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_berry_oatmeal_1,
+                title = "Mixed Berry Oatmeal",
+                price = "159",
+                restaurantName = "Berry Good Cafe",
+                rating = "4.9",
+                deliveryTime = "10-12 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹24",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_overnight_oats_1,
+                title = "Overnight Oats with Chia",
+                price = "149",
+                restaurantName = "Oats & Co.",
+                rating = "4.8",
+                deliveryTime = "5-8 mins",
+                distance = "0.3 km",
+                discount = "12%",
+                discountAmount = "up to ₹18",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_apple_cinnamon_oatmeal_1,
+                title = "Apple Cinnamon Oatmeal",
+                price = "139",
+                restaurantName = "Spiced Oats",
+                rating = "4.7",
+                deliveryTime = "9-12 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹14",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_peanut_butter_oatmeal_1,
+                title = "Peanut Butter Banana Oats",
+                price = "179",
+                restaurantName = "Protein Oats",
+                rating = "4.9",
+                deliveryTime = "10-13 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_savory_oatmeal_1,
+                title = "Savory Masala Oatmeal",
+                price = "149",
+                restaurantName = "Desi Oats",
+                rating = "4.8",
+                deliveryTime = "11-14 mins",
+                distance = "0.7 km",
+                discount = "12%",
+                discountAmount = "up to ₹18",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = oatmealDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
     }
+
 }
 
 @Composable

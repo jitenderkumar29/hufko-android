@@ -21368,31 +21368,1777 @@ fun OatmealDietPage() {
         )
     }
 
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val oatmealDietItems = listOf(
+        // 1-5: CLASSIC OATMEALS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.oatmeal_1,
+            title = "Classic Rolled Oats with Berries",
+            price = "149",
+            restaurantName = "Morning Oats Cafe",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.oatmeal_2,
+            title = "Steel Cut Oats Breakfast Bowl",
+            price = "179",
+            restaurantName = "The Oat Kitchen",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.oatmeal_3,
+            title = "Simple Honey Oatmeal",
+            price = "129",
+            restaurantName = "Pure Breakfast",
+            rating = "4.7",
+            deliveryTime = "7-10 mins",
+            distance = "0.2 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.oatmeal_4,
+            title = "Brown Sugar & Cinnamon Oats",
+            price = "139",
+            restaurantName = "Cozy Bowls",
+            rating = "4.8",
+            deliveryTime = "9-12 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.oatmeal_5,
+            title = "Maple Syrup Oatmeal",
+            price = "159",
+            restaurantName = "Maple House",
+            rating = "4.8",
+            deliveryTime = "10-13 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Koregaon Park, Pune"
+        ),
+
+        // 6-10: FRUIT OATMEALS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.oatmeal_6,
+            title = "Banana Walnut Oatmeal",
+            price = "189",
+            restaurantName = "Nutty Oats",
+            rating = "4.9",
+            deliveryTime = "11-14 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.oatmeal_7,
+            title = "Apple Cinnamon Oatmeal",
+            price = "169",
+            restaurantName = "Apple Crisp Cafe",
+            rating = "4.8",
+            deliveryTime = "10-13 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.oatmeal_8,
+            title = "Mixed Berry Oatmeal Bowl",
+            price = "199",
+            restaurantName = "Berrylicious",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Sector 29, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.oatmeal_9,
+            title = "Peach & Almond Oatmeal",
+            price = "189",
+            restaurantName = "Stone Fruit Kitchen",
+            rating = "4.7",
+            deliveryTime = "11-15 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.oatmeal_10,
+            title = "Mango Coconut Oatmeal",
+            price = "209",
+            restaurantName = "Tropical Mornings",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹25",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: PROTEIN & NUT OATMEALS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.oatmeal_11,
+            title = "Peanut Butter Protein Oats",
+            price = "229",
+            restaurantName = "Protein Kitchen",
+            rating = "4.9",
+            deliveryTime = "13-16 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.oatmeal_12,
+            title = "",
+            price = "219",
+            restaurantName = "Nut Butter Co.",
+            rating = "4.8",
+            deliveryTime = "12-15 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹22",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.oatmeal_13,
+            title = "Quinoa Oat Protein Blend",
+            price = "249",
+            restaurantName = "Supergrain Kitchen",
+            rating = "4.8",
+            deliveryTime = "14-17 mins",
+            distance = "1.0 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹30",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.oatmeal_14,
+            title = "Cashew & Date Oatmeal",
+            price = "209",
+            restaurantName = "Healthy Indulgence",
+            rating = "4.7",
+            deliveryTime = "11-14 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.oatmeal_15,
+            title = "Pecan Maple Oatmeal",
+            price = "239",
+            restaurantName = "Pecan House",
+            rating = "4.9",
+            deliveryTime = "13-16 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹24",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 16-20: OVERNIGHT OATS & SPECIALTY
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.oatmeal_16,
+            title = "Overnight Oats with Berries",
+            price = "179",
+            restaurantName = "Overnight Oats Co.",
+            rating = "4.8",
+            deliveryTime = "7-10 mins",
+            distance = "0.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹36",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.oatmeal_17,
+            title = "Chocolate Peanut Butter Overnight Oats",
+            price = "219",
+            restaurantName = "Chocolate Oats Cafe",
+            rating = "4.9",
+            deliveryTime = "8-12 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.oatmeal_18,
+            title = "Savory Masala Oatmeal",
+            price = "159",
+            restaurantName = "Spicy Oats Kitchen",
+            rating = "4.7",
+            deliveryTime = "9-12 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.oatmeal_19,
+            title = "Pumpkin Spice Oatmeal",
+            price = "189",
+            restaurantName = "Fall Flavors Cafe",
+            rating = "4.8",
+            deliveryTime = "10-13 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.oatmeal_20,
+            title = "Acai Oatmeal Bowl",
+            price = "269",
+            restaurantName = "Acai Soul",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹40",
+            address = "Koregaon Park, Pune"
+        )
+    )
+    Column {
+        oatmealDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
 fun GreekYogurtDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val greekYogurtDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters_yogurt",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. YOGURT BASE TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "plain_greek",
+                    text = "Plain Greek Yogurt",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_yogurt  // Plain white yogurt bowl
+                ),
+                FilterChip(
+                    id = "vanilla_greek",
+                    text = "Vanilla Greek Yogurt",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vanilla_yogurt  // Yogurt with vanilla bean specks
+                ),
+                FilterChip(
+                    id = "honey_greek",
+                    text = "Honey Greek Yogurt",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_honey_yogurt  // Yogurt with honey drizzle
+                ),
+                FilterChip(
+                    id = "strained_greek",
+                    text = "Strained Greek Yogurt",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_strained_yogurt  // Extra thick yogurt
+                ),
+                FilterChip(
+                    id = "zero_fat_greek",
+                    text = "0% Fat Greek Yogurt",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_zero_fat_yogurt  // Fat-free symbol with yogurt
+                ),
+                // 3. FRUIT TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "strawberries_yogurt",
+                    text = "Strawberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blueberries_yogurt",
+                    text = "Blueberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raspberries_yogurt",
+                    text = "Raspberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blackberries_yogurt",
+                    text = "Blackberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "banana_yogurt",
+                    text = "Banana",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peach_yogurt",
+                    text = "Peach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_yogurt",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple_yogurt",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kiwi_yogurt",
+                    text = "Kiwi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cherries_yogurt",
+                    text = "Cherries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pomegranate_yogurt",
+                    text = "Pomegranate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "figs_yogurt",
+                    text = "Fresh Figs",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. NUTS & SEEDS TOPPINGS (TEXT ONLY)
+                FilterChip(
+                    id = "almonds_yogurt",
+                    text = "Almonds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "walnuts_yogurt",
+                    text = "Walnuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pistachios_yogurt",
+                    text = "Pistachios",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pecans_yogurt",
+                    text = "Pecans",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chia_seeds_yogurt",
+                    text = "Chia Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "flax_seeds_yogurt",
+                    text = "Flax Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hemp_seeds_yogurt",
+                    text = "Hemp Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pumpkin_seeds_yogurt",
+                    text = "Pumpkin Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sunflower_seeds_yogurt",
+                    text = "Sunflower Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 8. SAVORY MIX-INS (TEXT ONLY)
+                FilterChip(
+                    id = "cucumber_yogurt",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_yogurt",
+                    text = "Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dill_yogurt",
+                    text = "Fresh Dill",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_yogurt",
+                    text = "Mint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "olive_oil_yogurt",
+                    text = "Olive Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. DRIED FRUIT (TEXT ONLY)
+                FilterChip(
+                    id = "dried_cranberries",
+                    text = "Dried Cranberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dried_apricots_yogurt",
+                    text = "Dried Apricots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dried_figs_yogurt",
+                    text = "Dried Figs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dates_yogurt",
+                    text = "Chopped Dates",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "goji_berries_yogurt",
+                    text = "Goji Berries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raisins_yogurt",
+                    text = "Raisins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 12. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "vegetarian_yogurt",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_yogurt",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nut_free_yogurt",
+                    text = "Nut Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_yogurt",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_yogurt",
+                    text = "High Protein (>15g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar_yogurt",
+                    text = "Low Sugar (<5g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "probiotic_rich",
+                    text = "Probiotic Rich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 14. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "breakfast_yogurt",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snack_yogurt",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout_yogurt",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dessert_yogurt",
+                    text = "Dessert",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 16. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "yogurt_under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_100_200",
+                    text = "₹100 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_above_300",
+                    text = "Above ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 17. BRAND TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "greek_specialty",
+                    text = "Greek Yogurt Specialist",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_brand",
+                    text = "Dairy Brand",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "artisanal_yogurt",
+                    text = "Artisanal/Small Batch",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 18. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_yogurt",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = greekYogurtDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val greekYogurtDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_greek_yogurt_1,
+                title = "Classic Plain Greek Yogurt",
+                price = "149",
+                restaurantName = "Greek Delights",
+                rating = "4.8",
+                deliveryTime = "8-10 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_berry_greek_yogurt_1,
+                title = "Berry Blast Greek Yogurt",
+                price = "189",
+                restaurantName = "Berry Good Cafe",
+                rating = "4.9",
+                deliveryTime = "10-12 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹28",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_honey_walnut_greek_1,
+                title = "Honey & Walnut Greek Yogurt",
+                price = "199",
+                restaurantName = "Greek Delights",
+                rating = "4.9",
+                deliveryTime = "9-12 mins",
+                distance = "0.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹24",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_granola_parfait_1,
+                title = "Greek Yogurt Granola Parfait",
+                price = "179",
+                restaurantName = "Parfait House",
+                rating = "4.8",
+                deliveryTime = "8-11 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹18",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_mango_greek_yogurt_1,
+                title = "Mango & Pistachio Greek Yogurt",
+                price = "209",
+                restaurantName = "Tropical Greek",
+                rating = "4.8",
+                deliveryTime = "11-14 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹31",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_savory_greek_dip_1,
+                title = "Cucumber Dill Greek Yogurt Dip",
+                price = "159",
+                restaurantName = "Mediterranean Bites",
+                rating = "4.7",
+                deliveryTime = "7-10 mins",
+                distance = "0.4 km",
+                discount = "12%",
+                discountAmount = "up to ₹19",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Greek Yogurt Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = greekYogurtDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val greekYogurtDietItems = listOf(
+        // 1-5: CLASSIC GREEK YOGURT
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.greek_yogurt_1,
+            title = "Plain Greek Yogurt with Honey",
+            price = "159",
+            restaurantName = "Greek Delights",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.greek_yogurt_2,
+            title = "Greek Yogurt with Mixed Nuts",
+            price = "189",
+            restaurantName = "Healthy Bowl",
+            rating = "4.9",
+            deliveryTime = "10-14 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.greek_yogurt_3,
+            title = "Strained Greek Yogurt",
+            price = "149",
+            restaurantName = "Authentic Greek",
+            rating = "4.7",
+            deliveryTime = "7-10 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.greek_yogurt_4,
+            title = "Greek Yogurt with Maple Syrup",
+            price = "179",
+            restaurantName = "Maple Greek",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.greek_yogurt_5,
+            title = "Creamy Greek Yogurt Cup",
+            price = "139",
+            restaurantName = "Creamy Delight",
+            rating = "4.6",
+            deliveryTime = "6-9 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 6-10: FRUIT GREEK YOGURT
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.greek_yogurt_6,
+            title = "Berry Blast Greek Yogurt",
+            price = "199",
+            restaurantName = "Berry Farms",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.greek_yogurt_7,
+            title = "Strawberry Greek Yogurt Bowl",
+            price = "179",
+            restaurantName = "Strawberry Fields",
+            rating = "4.8",
+            deliveryTime = "10-13 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹21",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.greek_yogurt_8,
+            title = "Mango Greek Yogurt",
+            price = "189",
+            restaurantName = "Mango Mania",
+            rating = "4.7",
+            deliveryTime = "9-12 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.greek_yogurt_9,
+            title = "Mixed Fruit Greek Yogurt",
+            price = "209",
+            restaurantName = "Fusion Bowl",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.greek_yogurt_10,
+            title = "Peach & Honey Greek Yogurt",
+            price = "199",
+            restaurantName = "Peach Perfection",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: PROTEIN & GRANOLA GREEK YOGURT
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.greek_yogurt_11,
+            title = "Protein-Packed Greek Yogurt",
+            price = "229",
+            restaurantName = "Protein Lab",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.greek_yogurt_12,
+            title = "Granola & Greek Yogurt Parfait",
+            price = "189",
+            restaurantName = "Crunchy Morning",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.greek_yogurt_13,
+            title = "Almond & Greek Yogurt Bowl",
+            price = "209",
+            restaurantName = "Nutty Delight",
+            rating = "4.7",
+            deliveryTime = "11-15 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹25",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.greek_yogurt_14,
+            title = "Chia Seeds Greek Yogurt",
+            price = "199",
+            restaurantName = "Superfood Kitchen",
+            rating = "4.8",
+            deliveryTime = "10-13 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.greek_yogurt_15,
+            title = "Walnut & Date Greek Yogurt",
+            price = "219",
+            restaurantName = "Healthy Indulgence",
+            rating = "4.9",
+            deliveryTime = "12-16 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹22",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: SPECIALTY GREEK YOGURT
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.greek_yogurt_16,
+            title = "Honey Lavender Greek Yogurt",
+            price = "229",
+            restaurantName = "Floral Tastes",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.greek_yogurt_17,
+            title = "Savory Greek Yogurt Bowl",
+            price = "179",
+            restaurantName = "Savory Spoon",
+            rating = "4.6",
+            deliveryTime = "9-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹21",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.greek_yogurt_18,
+            title = "Fig & Walnut Greek Yogurt",
+            price = "239",
+            restaurantName = "Mediterranean Flavors",
+            rating = "4.8",
+            deliveryTime = "13-17 mins",
+            distance = "0.9 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹24",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.greek_yogurt_19,
+            title = "Coconut & Greek Yogurt",
+            price = "199",
+            restaurantName = "Tropical Bowl",
+            rating = "4.7",
+            deliveryTime = "10-14 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.greek_yogurt_20,
+            title = "Dark Chocolate Greek Yogurt",
+            price = "249",
+            restaurantName = "Chocolate Heaven",
+            rating = "4.9",
+            deliveryTime = "15-19 mins",
+            distance = "1.1 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹30",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your greek yogurt items here
+    )
+    Column {
+        greekYogurtDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun EggWhiteOmeletteDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val eggWhiteOmeletteDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters_omelette",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. EGG WHITE BASE TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "plain_eggwhite",
+                    text = "Plain Egg Whites",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_plain_eggwhite  // Simple egg white bowl
+                ),
+                FilterChip(
+                    id = "fluffy_eggwhite",
+                    text = "Fluffy Egg Whites",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fluffy_eggwhite  // Whipped/fluffy texture
+                ),
+                FilterChip(
+                    id = "southwest_eggwhite",
+                    text = "Southwest Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_southwest  // Southwest theme/pepper icon
+                ),
+                FilterChip(
+                    id = "mediterranean_eggwhite",
+                    text = "Mediterranean",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mediterranean  // Olive branch/Med theme
+                ),
+                FilterChip(
+                    id = "spicy_eggwhite",
+                    text = "Spicy Egg Whites",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy_eggwhite  // Chili pepper icon
+                ),
+
+                // 3. VEGETABLE MIX-INS (TEXT ONLY)
+                FilterChip(
+                    id = "spinach_omelette",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushrooms_omelette",
+                    text = "Mushrooms",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onions_omelette",
+                    text = "Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_peppers_omelette",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tomatoes_omelette",
+                    text = "Tomatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "broccoli_omelette",
+                    text = "Broccoli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "zucchini_omelette",
+                    text = "Zucchini",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kale_omelette",
+                    text = "Kale",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "asparagus_omelette",
+                    text = "Asparagus",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalapeno_omelette",
+                    text = "Jalapeño",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn_omelette",
+                    text = "Sweet Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peas_omelette",
+                    text = "Green Peas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 5. CHEESE TYPES (TEXT ONLY)
+                FilterChip(
+                    id = "feta_omelette",
+                    text = "Feta Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mozzarella_omelette",
+                    text = "Mozzarella",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheddar_omelette",
+                    text = "Cheddar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parmesan_omelette",
+                    text = "Parmesan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "goat_cheese_omelette",
+                    text = "Goat Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cottage_cheese_omelette",
+                    text = "Cottage Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. HERBS & SEASONINGS (WITH ICONS - FRESH HERBS)
+                FilterChip(
+                    id = "oregano_omelette",
+                    text = "Oregano",
+                    type = FilterType.TEXT_ONLY  // TEXT ONLY
+                ),
+                FilterChip(
+                    id = "thyme_omelette",
+                    text = "Thyme",
+                    type = FilterType.TEXT_ONLY  // TEXT ONLY
+                ),
+                FilterChip(
+                    id = "red_pepper_flakes",
+                    text = "Red Pepper Flakes",
+                    type = FilterType.TEXT_ONLY  // TEXT ONLY
+                ),
+                FilterChip(
+                    id = "black_pepper",
+                    text = "Cracked Black Pepper",
+                    type = FilterType.TEXT_ONLY  // TEXT ONLY
+                ),
+
+                // 7. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "low_fat_omelette",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_omelette",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_omelette",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian_omelette",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_omelette",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_omelette",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_omelette",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 9. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "breakfast_omelette",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brunch_omelette",
+                    text = "Brunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lunch_omelette",
+                    text = "Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner_omelette",
+                    text = "Light Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout_omelette",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 11. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "omelette_under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "omelette_150_250",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "omelette_250_350",
+                    text = "₹250 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "omelette_above_350",
+                    text = "Above ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 13. PREPARATION STYLE (TEXT ONLY)
+                FilterChip(
+                    id = "folded_omelette",
+                    text = "Folded Omelette",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "open_face_omelette",
+                    text = "Open Face",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "scrambled_whites",
+                    text = "Scrambled Whites",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "omelette_muffins",
+                    text = "Egg White Muffins",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_omelette",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = eggWhiteOmeletteDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val eggWhiteOmeletteDietItems = listOf(
+            // 1-6: EGG WHITE OMELETTE VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_eggwhite_omelette_1,
+                title = "Classic Egg White Omelette",
+                price = "159",
+                restaurantName = "Morning Fresh Cafe",
+                rating = "4.8",
+                deliveryTime = "7-10 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹16",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_spinach_mushroom_eggwhite_1,
+                title = "Spinach & Mushroom Egg White Omelette",
+                price = "189",
+                restaurantName = "Healthy Breakfast Co.",
+                rating = "4.9",
+                deliveryTime = "9-12 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹28",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_southwest_eggwhite_omelette_1,
+                title = "Southwest Egg White Omelette",
+                price = "199",
+                restaurantName = "Sunrise Kitchen",
+                rating = "4.7",
+                deliveryTime = "10-13 mins",
+                distance = "0.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹24",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_mediterranean_eggwhite_1,
+                title = "Mediterranean Egg White Omelette",
+                price = "219",
+                restaurantName = "Mediterranean Delight",
+                rating = "4.9",
+                deliveryTime = "11-14 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹33",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_protein_eggwhite_omelette_1,
+                title = "High Protein Egg White Omelette",
+                price = "239",
+                restaurantName = "Protein House",
+                rating = "4.8",
+                deliveryTime = "12-15 mins",
+                distance = "0.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹24",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_masala_eggwhite_omelette_1,
+                title = "Indian Masala Egg White Omelette",
+                price = "179",
+                restaurantName = "Masala Eggs",
+                rating = "4.8",
+                deliveryTime = "8-11 mins",
+                distance = "0.4 km",
+                discount = "12%",
+                discountAmount = "up to ₹21",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Egg White Omelette Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = eggWhiteOmeletteDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val eggWhiteOmeletteDietItems = listOf(
+        // 1-5: CLASSIC EGG WHITE OMELETTES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.eggwhite_1,
+            title = "Classic Egg White Omelette",
+            price = "159",
+            restaurantName = "Morning Fresh Cafe",
+            rating = "4.8",
+            deliveryTime = "7-10 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.eggwhite_2,
+            title = "Plain Egg White Omelette",
+            price = "139",
+            restaurantName = "Eggsclusive",
+            rating = "4.7",
+            deliveryTime = "6-9 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.eggwhite_3,
+            title = "Fluffy Egg White Omelette",
+            price = "169",
+            restaurantName = "Fluffy Eggs",
+            rating = "4.9",
+            deliveryTime = "8-11 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.eggwhite_4,
+            title = "Simple Salt & Pepper Egg Whites",
+            price = "129",
+            restaurantName = "Simple Breakfast",
+            rating = "4.6",
+            deliveryTime = "5-8 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.eggwhite_5,
+            title = "Herbed Egg White Omelette",
+            price = "179",
+            restaurantName = "Herb Garden",
+            rating = "4.8",
+            deliveryTime = "9-12 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 6-10: VEGETABLE EGG WHITE OMELETTES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.eggwhite_6,
+            title = "Spinach & Mushroom Egg White Omelette",
+            price = "199",
+            restaurantName = "Green Kitchen",
+            rating = "4.9",
+            deliveryTime = "10-13 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.eggwhite_7,
+            title = "Bell Pepper & Onion Egg White Omelette",
+            price = "189",
+            restaurantName = "Colorful Eggs",
+            rating = "4.8",
+            deliveryTime = "9-12 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹23",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.eggwhite_8,
+            title = "Tomato & Basil Egg White Omelette",
+            price = "179",
+            restaurantName = "Italian Morning",
+            rating = "4.7",
+            deliveryTime = "8-11 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.eggwhite_9,
+            title = "Broccoli & Zucchini Egg White Omelette",
+            price = "209",
+            restaurantName = "Veggie Delight",
+            rating = "4.8",
+            deliveryTime = "11-14 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.eggwhite_10,
+            title = "Asparagus & Cherry Tomato Omelette",
+            price = "219",
+            restaurantName = "Garden Fresh",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹26",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: PROTEIN-RICH EGG WHITE OMELETTES
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.eggwhite_11,
+            title = "Grilled Chicken Egg White Omelette",
+            price = "249",
+            restaurantName = "Protein House",
+            rating = "4.9",
+            deliveryTime = "13-16 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.eggwhite_12,
+            title = "Turkey & Spinach Egg White Omelette",
+            price = "259",
+            restaurantName = "Lean Protein",
+            rating = "4.8",
+            deliveryTime = "14-17 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹26",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.eggwhite_13,
+            title = "Paneer & Peas Egg White Omelette",
+            price = "229",
+            restaurantName = "Indian Fusion",
+            rating = "4.8",
+            deliveryTime = "11-14 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹27",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.eggwhite_14,
+            title = "Tofu & Kale Egg White Omelette",
+            price = "219",
+            restaurantName = "Vegan Kitchen",
+            rating = "4.7",
+            deliveryTime = "10-13 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.eggwhite_15,
+            title = "Double Protein Egg White Omelette",
+            price = "279",
+            restaurantName = "Gym Fuel",
+            rating = "4.9",
+            deliveryTime = "15-18 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹28",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: CHEESE & SPECIALTY EGG WHITE OMELETTES
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.eggwhite_16,
+            title = "Feta & Spinach Egg White Omelette",
+            price = "209",
+            restaurantName = "Mediterranean Flavors",
+            rating = "4.8",
+            deliveryTime = "10-13 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.eggwhite_17,
+            title = "Mozzarella & Tomato Egg White Omelette",
+            price = "199",
+            restaurantName = "Italian Cafe",
+            rating = "4.7",
+            deliveryTime = "9-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.eggwhite_18,
+            title = "Southwest Egg White Omelette",
+            price = "229",
+            restaurantName = "Tex-Mex Kitchen",
+            rating = "4.9",
+            deliveryTime = "12-15 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.eggwhite_19,
+            title = "Masala Egg White Omelette",
+            price = "189",
+            restaurantName = "Spicy Eggs",
+            rating = "4.8",
+            deliveryTime = "8-11 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.eggwhite_20,
+            title = "Greek Style Egg White Omelette",
+            price = "219",
+            restaurantName = "Greek Eggs",
+            rating = "4.8",
+            deliveryTime = "11-14 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹26",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your egg white omelette items here
+    )
+    Column {
+        eggWhiteOmeletteDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

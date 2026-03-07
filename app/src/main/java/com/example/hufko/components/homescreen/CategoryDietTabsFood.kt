@@ -23144,41 +23144,2037 @@ fun EggWhiteOmeletteDietPage() {
 
 @Composable
 fun TunaSaladDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val tunaSaladDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters_tuna",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. TUNA BASE TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "classic_tuna",
+                    text = "Classic Tuna",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_tuna  // Classic tuna can/fish icon
+                ),
+                FilterChip(
+                    id = "albacore_tuna",
+                    text = "Albacore Tuna",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_albacore  // Premium/fish icon
+                ),
+                FilterChip(
+                    id = "skipjack_tuna",
+                    text = "Skipjack Tuna",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_skipjack  // Light tuna/fish icon
+                ),
+                FilterChip(
+                    id = "yellowfin_tuna",
+                    text = "Yellowfin Tuna",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_yellowfin  // Yellowfin/fish icon
+                ),
+                FilterChip(
+                    id = "spicy_tuna",
+                    text = "Spicy Tuna",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spicy_tuna  // Chili + fish icon
+                ),
+                // 3. FRESH VEGETABLE ADD-INS (TEXT ONLY)
+                FilterChip(
+                    id = "lettuce_tuna",
+                    text = "Lettuce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_tuna",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cucumber_tuna",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tomatoes_tuna",
+                    text = "Cherry Tomatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_onion_tuna",
+                    text = "Red Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_peppers_tuna",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "celery_tuna",
+                    text = "Celery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrots_tuna",
+                    text = "Shredded Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "radishes_tuna",
+                    text = "Radishes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "avocado_tuna",
+                    text = "Avocado",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalapeno_tuna",
+                    text = "Jalapeño",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn_tuna",
+                    text = "Sweet Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. FRUITS & EXTRAS (TEXT ONLY)
+                FilterChip(
+                    id = "apple_tuna",
+                    text = "Apple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grapes_tuna",
+                    text = "Grapes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cranberries_tuna",
+                    text = "Dried Cranberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_tuna",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple_tuna",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. PROTEIN BOOSTERS (TEXT ONLY)
+                FilterChip(
+                    id = "hard_boiled_egg",
+                    text = "Hard Boiled Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chickpeas_tuna",
+                    text = "Chickpeas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "quinoa_tuna",
+                    text = "Quinoa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_beans_tuna",
+                    text = "Black Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. DRESSINGS & BINDINGS (TEXT ONLY)
+                FilterChip(
+                    id = "greek_yogurt_tuna",
+                    text = "Greek Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mayo_tuna",
+                    text = "Light Mayonnaise",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "olive_oil_tuna",
+                    text = "Olive Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_juice_tuna",
+                    text = "Lemon Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "balsamic_tuna",
+                    text = "Balsamic Glaze",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dijon_tuna",
+                    text = "Dijon Mustard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honey_tuna",
+                    text = "Honey",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. HERBS & SEASONINGS (TEXT ONLY)
+                FilterChip(
+                    id = "dill_tuna",
+                    text = "Fresh Dill",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parsley_tuna",
+                    text = "Parsley",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chives_tuna",
+                    text = "Chives",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "basil_tuna",
+                    text = "Fresh Basil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cilantro_tuna",
+                    text = "Cilantro",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_tuna",
+                    text = "Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_pepper_tuna",
+                    text = "Cracked Black Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_pepper_flakes_tuna",
+                    text = "Red Pepper Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "low_fat_tuna",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_tuna",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_tuna",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_tuna",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_tuna",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_tuna",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_tuna",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "light_lunch_tuna",
+                    text = "Light Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dinner_tuna",
+                    text = "Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "meal_prep_tuna",
+                    text = "Meal Prep",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout_tuna",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. SERVING STYLE (TEXT ONLY)
+                FilterChip(
+                    id = "tuna_salad_bowl",
+                    text = "Salad Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_sandwich",
+                    text = "Sandwich",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_wrap",
+                    text = "Wrap",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_stuffed_avocado",
+                    text = "Stuffed Avocado",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_stuffed_tomato",
+                    text = "Stuffed Tomato",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_cucumber_boats",
+                    text = "Cucumber Boats",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_crackers",
+                    text = "With Crackers",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "tuna_under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_300_400",
+                    text = "₹300 - ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tuna_above_400",
+                    text = "Above ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_tuna",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = tunaSaladDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val tunaSaladDietItems = listOf(
+            // 1-6: TUNA SALAD VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_tuna_salad_1,
+                title = "Classic Tuna Salad",
+                price = "249",
+                restaurantName = "Fresh Catch Deli",
+                rating = "4.9",
+                deliveryTime = "8-12 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹37",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_mediterranean_tuna_salad_1,
+                title = "Mediterranean Tuna Salad",
+                price = "289",
+                restaurantName = "Mediterranean Bites",
+                rating = "4.8",
+                deliveryTime = "10-14 mins",
+                distance = "0.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹35",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_avocado_tuna_salad_1,
+                title = "Avocado Tuna Salad",
+                price = "319",
+                restaurantName = "Healthy Bowl",
+                rating = "4.9",
+                deliveryTime = "9-13 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹32",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_spicy_tuna_salad_1,
+                title = "Spicy Sriracha Tuna Salad",
+                price = "269",
+                restaurantName = "Spice Route Cafe",
+                rating = "4.7",
+                deliveryTime = "11-15 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹40",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_protein_tuna_salad_1,
+                title = "High Protein Tuna Bowl",
+                price = "349",
+                restaurantName = "Protein Lab",
+                rating = "4.8",
+                deliveryTime = "12-16 mins",
+                distance = "0.7 km",
+                discount = "12%",
+                discountAmount = "up to ₹42",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_greek_yogurt_tuna_salad_1,
+                title = "Greek Yogurt Tuna Salad",
+                price = "279",
+                restaurantName = "Fresh & Fit",
+                rating = "4.8",
+                deliveryTime = "9-12 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹28",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Tuna Salad Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = tunaSaladDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val tunaSaladDietItems = listOf(
+        // 1-5: CLASSIC TUNA SALADS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.tuna_1,
+            title = "Classic Tuna Salad",
+            price = "249",
+            restaurantName = "Fresh Catch Deli",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.tuna_2,
+            title = "Simple Lemon Tuna Salad",
+            price = "219",
+            restaurantName = "Coastal Kitchen",
+            rating = "4.7",
+            deliveryTime = "7-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹22",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.tuna_3,
+            title = "Albacore Tuna Salad",
+            price = "289",
+            restaurantName = "Premium Catch",
+            rating = "4.9",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹35",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.tuna_4,
+            title = "Light Mayo Tuna Salad",
+            price = "229",
+            restaurantName = "Healthy Choices",
+            rating = "4.6",
+            deliveryTime = "6-9 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹23",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.tuna_5,
+            title = "Herbed Tuna Salad",
+            price = "259",
+            restaurantName = "Herb Garden",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 6-10: VEGETABLE TUNA SALADS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.tuna_6,
+            title = "Mediterranean Tuna Salad",
+            price = "299",
+            restaurantName = "Mediterranean Delight",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹45",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.tuna_7,
+            title = "Cucumber & Red Onion Tuna Salad",
+            price = "269",
+            restaurantName = "Fresh & Crunchy",
+            rating = "4.8",
+            deliveryTime = "9-12 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹32",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.tuna_8,
+            title = "Tomato & Basil Tuna Salad",
+            price = "279",
+            restaurantName = "Italian Sea",
+            rating = "4.7",
+            deliveryTime = "8-11 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹28",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.tuna_9,
+            title = "Bell Pepper & Corn Tuna Salad",
+            price = "289",
+            restaurantName = "Colorful Bowls",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.tuna_10,
+            title = "Greek Style Tuna Salad",
+            price = "309",
+            restaurantName = "Greek Flavors",
+            rating = "4.9",
+            deliveryTime = "12-16 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹37",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: FRUIT & NUT TUNA SALADS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.tuna_11,
+            title = "Avocado Tuna Salad",
+            price = "329",
+            restaurantName = "Avocado House",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹49",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.tuna_12,
+            title = "Apple & Walnut Tuna Salad",
+            price = "299",
+            restaurantName = "Fusion Fresh",
+            rating = "4.8",
+            deliveryTime = "14-18 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹30",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.tuna_13,
+            title = "Cranberry & Pecan Tuna Salad",
+            price = "319",
+            restaurantName = "Harvest Bowl",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹38",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.tuna_14,
+            title = "Mango & Avocado Tuna Salad",
+            price = "339",
+            restaurantName = "Tropical Bowl",
+            rating = "4.7",
+            deliveryTime = "11-15 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹51",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.tuna_15,
+            title = "Grape & Almond Tuna Salad",
+            price = "299",
+            restaurantName = "Nutty Fresh",
+            rating = "4.9",
+            deliveryTime = "15-19 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹30",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: PROTEIN-RICH & SPECIALTY TUNA SALADS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.tuna_16,
+            title = "Quinoa Tuna Protein Bowl",
+            price = "349",
+            restaurantName = "Protein Lab",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹52",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.tuna_17,
+            title = "Chickpea & Tuna Salad",
+            price = "289",
+            restaurantName = "Power Meals",
+            rating = "4.7",
+            deliveryTime = "10-14 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹35",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.tuna_18,
+            title = "Spicy Sriracha Tuna Salad",
+            price = "279",
+            restaurantName = "Spice Route",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.tuna_19,
+            title = "Wasabi Ginger Tuna Salad",
+            price = "309",
+            restaurantName = "Asian Fusion",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹31",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.tuna_20,
+            title = "Greek Yogurt Tuna Salad",
+            price = "269",
+            restaurantName = "Creamy Delights",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹32",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your tuna salad items here
+    )
+    Column {
+        tunaSaladDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun LentilSoupDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val lentilSoupDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters_lentil",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. LENTIL BASE TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "brown_lentils",
+                    text = "Brown Lentils",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_brown_lentils  // Brown lentil/legume icon
+                ),
+                FilterChip(
+                    id = "red_lentils",
+                    text = "Red Lentils",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_red_lentils  // Red lentil/split icon
+                ),
+                FilterChip(
+                    id = "green_lentils",
+                    text = "Green Lentils",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_green_lentils  // French/whole lentil icon
+                ),
+                FilterChip(
+                    id = "black_lentils",
+                    text = "Black Lentils",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_black_lentils  // Black beluga lentil icon
+                ),
+                FilterChip(
+                    id = "yellow_lentils",
+                    text = "Yellow Lentils",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_yellow_lentils  // Toor dal/split pea icon
+                ),
+
+                // 3. VEGETABLE ADD-INS (TEXT ONLY)
+                FilterChip(
+                    id = "carrots_lentil",
+                    text = "Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "celery_lentil",
+                    text = "Celery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onions_lentil",
+                    text = "Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_lentil",
+                    text = "Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tomatoes_lentil",
+                    text = "Tomatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_lentil",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kale_lentil",
+                    text = "Kale",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "potatoes_lentil",
+                    text = "Potatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet_potatoes_lentil",
+                    text = "Sweet Potatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_peppers_lentil",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "zucchini_lentil",
+                    text = "Zucchini",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushrooms_lentil",
+                    text = "Mushrooms",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. PROTEIN ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "chicken_lentil",
+                    text = "Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sausage_lentil",
+                    text = "Smoked Sausage",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bacon_lentil",
+                    text = "Bacon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_lentil",
+                    text = "Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. HERBS & SPICES (TEXT ONLY)
+                FilterChip(
+                    id = "thyme_lentil",
+                    text = "Thyme",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rosemary_lentil",
+                    text = "Rosemary",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bay_leaves_lentil",
+                    text = "Bay Leaves",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cumin_lentil",
+                    text = "Cumin",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coriander_lentil",
+                    text = "Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turmeric_lentil",
+                    text = "Turmeric",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paprika_lentil",
+                    text = "Paprika",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_pepper_flakes_lentil",
+                    text = "Red Pepper Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_pepper_lentil",
+                    text = "Black Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 7. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "low_fat_lentil",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie_lentil",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_fiber_lentil",
+                    text = "High Fiber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_lentil",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_lentil",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_lentil",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_lentil",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian_lentil",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_lentil",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "light_lunch_lentil",
+                    text = "Light Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hearty_dinner_lentil",
+                    text = "Hearty Dinner",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "meal_prep_lentil",
+                    text = "Meal Prep",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "comfort_food_lentil",
+                    text = "Comfort Food",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 10. SERVING STYLE (TEXT ONLY)
+                FilterChip(
+                    id = "soup_bowl_lentil",
+                    text = "Soup Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_rice_lentil",
+                    text = "Over Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_bread_lentil",
+                    text = "With Crusty Bread",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_salad_lentil",
+                    text = "With Side Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "lentil_under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lentil_150_250",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lentil_250_350",
+                    text = "₹250 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lentil_above_350",
+                    text = "Above ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_lentil",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = lentilSoupDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val lentilSoupDietItems = listOf(
+            // 1-6: LENTIL SOUP VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_lentil_soup_1,
+                title = "Classic Brown Lentil Soup",
+                price = "189",
+                restaurantName = "The Soup Kitchen",
+                rating = "4.8",
+                deliveryTime = "10-14 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹28",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_mediterranean_lentil_soup_1,
+                title = "Mediterranean Red Lentil Soup",
+                price = "219",
+                restaurantName = "Mediterranean Delights",
+                rating = "4.7",
+                deliveryTime = "12-16 mins",
+                distance = "0.6 km",
+                discount = "12%",
+                discountAmount = "up to ₹26",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_indian_lentil_soup_1,
+                title = "Indian Masoor Dal Soup",
+                price = "179",
+                restaurantName = "Spice Route Cafe",
+                rating = "4.9",
+                deliveryTime = "9-13 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹18",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_spicy_lentil_soup_1,
+                title = "Spicy Turkish Ezogelin Soup",
+                price = "239",
+                restaurantName = "Istanbul Grill",
+                rating = "4.8",
+                deliveryTime = "11-15 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹36",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_protein_lentil_soup_1,
+                title = "High Protein Lentil & Quinoa Soup",
+                price = "259",
+                restaurantName = "Protein Lab",
+                rating = "4.8",
+                deliveryTime = "13-17 mins",
+                distance = "0.7 km",
+                discount = "12%",
+                discountAmount = "up to ₹31",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_creamy_lentil_soup_1,
+                title = "Creamy Coconut Lentil Soup",
+                price = "199",
+                restaurantName = "Healthy Bowl",
+                rating = "4.7",
+                deliveryTime = "10-14 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹20",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Lentil Soup Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = lentilSoupDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val lentilSoupDietItems = listOf(
+        // 1-5: CLASSIC LENTIL SOUPS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.lentil_1,
+            title = "Classic Brown Lentil Soup",
+            price = "149",
+            restaurantName = "The Soup Kitchen",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.lentil_2,
+            title = "Simple Red Lentil Soup",
+            price = "129",
+            restaurantName = "Coastal Kitchen",
+            rating = "4.7",
+            deliveryTime = "7-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.lentil_3,
+            title = "French Green Lentil Soup",
+            price = "169",
+            restaurantName = "Premium Catch",
+            rating = "4.9",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.lentil_4,
+            title = "Light Vegetable Lentil Soup",
+            price = "139",
+            restaurantName = "Healthy Choices",
+            rating = "4.6",
+            deliveryTime = "6-9 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.lentil_5,
+            title = "Herbed Lentil & Spinach Soup",
+            price = "159",
+            restaurantName = "Herb Garden",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 6-10: INTERNATIONAL LENTIL SOUPS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.lentil_6,
+            title = "Mediterranean Lemon Lentil Soup",
+            price = "189",
+            restaurantName = "Mediterranean Delight",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.lentil_7,
+            title = "Turkish Red Lentil Soup (Mercimek)",
+            price = "179",
+            restaurantName = "Istanbul Flavors",
+            rating = "4.8",
+            deliveryTime = "9-12 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹21",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.lentil_8,
+            title = "Moroccan Harira Lentil Soup",
+            price = "199",
+            restaurantName = "Moroccan Spice",
+            rating = "4.7",
+            deliveryTime = "8-11 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.lentil_9,
+            title = "Ethiopian Misir Wot Lentil Soup",
+            price = "189",
+            restaurantName = "African Kitchen",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.lentil_10,
+            title = "Greek Lentil Soup (Fakes)",
+            price = "179",
+            restaurantName = "Greek Flavors",
+            rating = "4.9",
+            deliveryTime = "12-16 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹21",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: INDIAN-STYLE LENTIL SOUPS (DAL)
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.lentil_11,
+            title = "Masoor Dal Tadka Soup",
+            price = "159",
+            restaurantName = "Punjab Dhaba",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.lentil_12,
+            title = "Moong Dal Shorba",
+            price = "149",
+            restaurantName = "Royal Indian",
+            rating = "4.8",
+            deliveryTime = "14-18 mins",
+            distance = "1.0 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.lentil_13,
+            title = "Toor Dal & Vegetable Soup",
+            price = "139",
+            restaurantName = "Harvest Bowl",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹17",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.lentil_14,
+            title = "Urad Dal Rasam",
+            price = "129",
+            restaurantName = "South Indian Cafe",
+            rating = "4.7",
+            deliveryTime = "11-15 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.lentil_15,
+            title = "Panchmel Dal Soup (5 Lentils)",
+            price = "189",
+            restaurantName = "Rajasthani Thali",
+            rating = "4.9",
+            deliveryTime = "15-19 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: PROTEIN-RICH & SPECIALTY LENTIL SOUPS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.lentil_16,
+            title = "Quinoa & Lentil Power Soup",
+            price = "219",
+            restaurantName = "Protein Lab",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.lentil_17,
+            title = "Lentil & Chickpea High-Protein Soup",
+            price = "199",
+            restaurantName = "Power Meals",
+            rating = "4.7",
+            deliveryTime = "10-14 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.lentil_18,
+            title = "Spicy Chipotle Lentil Soup",
+            price = "179",
+            restaurantName = "Spice Route",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.lentil_19,
+            title = "Thai Coconut Lentil Soup",
+            price = "209",
+            restaurantName = "Asian Fusion",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹21",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.lentil_20,
+            title = "Smoked Paprika & Lentil Soup",
+            price = "169",
+            restaurantName = "Creamy Delights",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your lentil soup items here
+    )
+    Column {
+        lentilSoupDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun CottageCheeseDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(
-            text = "Cottage Cheese Items",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val cottageCheeseDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters_cottage",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. COTTAGE CHEESE BASE TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "low_fat_cottage",
+                    text = "Low Fat (1-2%)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_low_fat_cottage  // Low-fat dairy icon
+                ),
+                FilterChip(
+                    id = "regular_cottage",
+                    text = "Regular (4%)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_regular_cottage  // Full-fat dairy icon
+                ),
+                FilterChip(
+                    id = "creamed_cottage",
+                    text = "Creamed Cottage Cheese",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_creamed_cottage  // Creamy/rich dairy icon
+                ),
+                FilterChip(
+                    id = "dry_curd_cottage",
+                    text = "Dry Curd (Unsalted)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dry_curd_cottage  // Dry cheese curd icon
+                ),
+                FilterChip(
+                    id = "whipped_cottage",
+                    text = "Whipped Cottage Cheese",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_whipped_cottage  // Whipped/airy icon
+                ),
+
+                // 3. FRUIT ADD-INS (TEXT ONLY)
+                FilterChip(
+                    id = "strawberries_cottage",
+                    text = "Strawberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blueberries_cottage",
+                    text = "Blueberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raspberries_cottage",
+                    text = "Raspberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bananas_cottage",
+                    text = "Bananas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peaches_cottage",
+                    text = "Peaches",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple_cottage",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_cottage",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_cottage",
+                    text = "Apple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grapes_cottage",
+                    text = "Grapes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kiwi_cottage",
+                    text = "Kiwi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. VEGETABLE ADD-INS (TEXT ONLY)
+                FilterChip(
+                    id = "cucumber_cottage",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tomatoes_cottage",
+                    text = "Cherry Tomatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_peppers_cottage",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrots_cottage",
+                    text = "Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "radishes_cottage",
+                    text = "Radishes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_cottage",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "avocado_cottage",
+                    text = "Avocado",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalapeno_cottage",
+                    text = "Jalapeño",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. HERBS & SEASONINGS (TEXT ONLY)
+                FilterChip(
+                    id = "chives_cottage",
+                    text = "Fresh Chives",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dill_cottage",
+                    text = "Fresh Dill",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "parsley_cottage",
+                    text = "Parsley",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "basil_cottage",
+                    text = "Basil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_cottage",
+                    text = "Fresh Mint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cilantro_cottage",
+                    text = "Cilantro",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_pepper_cottage",
+                    text = "Cracked Black Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sea_salt_cottage",
+                    text = "Sea Salt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_powder_cottage",
+                    text = "Garlic Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onion_powder_cottage",
+                    text = "Onion Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 7. PROTEIN ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "hard_boiled_egg_cottage",
+                    text = "Hard Boiled Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chicken_breast_cottage",
+                    text = "Grilled Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turkey_cottage",
+                    text = "Turkey Breast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smoked_salmon_cottage",
+                    text = "Smoked Salmon",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. SWEETENERS & FLAVORINGS (TEXT ONLY)
+                FilterChip(
+                    id = "honey_cottage",
+                    text = "Honey",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "maple_syrup_cottage",
+                    text = "Maple Syrup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "agave_cottage",
+                    text = "Agave Nectar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cinnamon_cottage",
+                    text = "Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vanilla_cottage",
+                    text = "Vanilla Extract",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cocoa_cottage",
+                    text = "Cocoa Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "low_fat_diet_cottage",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_cottage",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_cottage",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_cottage",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian_cottage",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_cottage",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_cottage",
+                    text = "Paleo",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. MEAL TYPE (TEXT ONLY)
+                FilterChip(
+                    id = "breakfast_cottage",
+                    text = "Breakfast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snack_cottage",
+                    text = "Snack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "light_lunch_cottage",
+                    text = "Light Lunch",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout_cottage",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dessert_cottage",
+                    text = "Healthy Dessert",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. SERVING STYLE (TEXT ONLY)
+                FilterChip(
+                    id = "bowl_cottage",
+                    text = "Cottage Cheese Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "toast_cottage",
+                    text = "On Toast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stuffed_cottage",
+                    text = "Stuffed (Peppers/Tomatoes)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dip_cottage",
+                    text = "As a Dip",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "stuffed_pancakes_cottage",
+                    text = "In Pancakes/Blintzes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 12. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "cottage_under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cottage_150_250",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cottage_250_350",
+                    text = "₹250 - ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cottage_above_350",
+                    text = "Above ₹350",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_cottage",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
-        // Add your cottage cheese items here
+        FilterButtonFood(
+            filterConfig = cottageCheeseDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val cottageCheeseDietItems = listOf(
+            // 1-6: COTTAGE CHEESE VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_cottage_1,
+                title = "Classic Cottage Cheese Bowl",
+                price = "159",
+                restaurantName = "The Curd Bowl",
+                rating = "4.8",
+                deliveryTime = "8-12 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹24",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_fruit_cottage_1,
+                title = "Berry Bliss Cottage Cheese",
+                price = "189",
+                restaurantName = "Berry Fresh Cafe",
+                rating = "4.9",
+                deliveryTime = "10-14 mins",
+                distance = "0.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹23",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_savory_cottage_1,
+                title = "Garden Herb Cottage Cheese",
+                price = "169",
+                restaurantName = "Green Harvest",
+                rating = "4.7",
+                deliveryTime = "9-13 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹17",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_protein_cottage_1,
+                title = "High Protein Cottage Cheese Plate",
+                price = "229",
+                restaurantName = "Protein Lab",
+                rating = "4.8",
+                deliveryTime = "11-15 mins",
+                distance = "0.6 km",
+                discount = "15%",
+                discountAmount = "up to ₹34",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_tropical_cottage_1,
+                title = "Tropical Mango Cottage Cheese",
+                price = "199",
+                restaurantName = "Tropical Bowl",
+                rating = "4.8",
+                deliveryTime = "9-12 mins",
+                distance = "0.4 km",
+                discount = "12%",
+                discountAmount = "up to ₹24",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_avocado_cottage_1,
+                title = "Avocado & Cottage Cheese Toast",
+                price = "249",
+                restaurantName = "Toast & Co",
+                rating = "4.9",
+                deliveryTime = "12-16 mins",
+                distance = "0.7 km",
+                discount = "10%",
+                discountAmount = "up to ₹25",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = cottageCheeseDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
     }
+
+
 }
 
 @Composable

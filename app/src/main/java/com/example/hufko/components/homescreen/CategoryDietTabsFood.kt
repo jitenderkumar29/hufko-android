@@ -25173,21 +25173,778 @@ fun CottageCheeseDietPage() {
             headingBottomPadding = 0.dp
         )
     }
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
 
+    // Sample data based on the provided images
+    val cottageCheeseDietItems = listOf(
+        // 1-5: CLASSIC COTTAGE CHEESE DISHES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.cottage_1,
+            title = "Classic Paneer Tikka",
+            price = "249",
+            restaurantName = "Tandoori Nights",
+            rating = "4.9",
+            deliveryTime = "12-16 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.cottage_2,
+            title = "Grilled Cottage Cheese Salad",
+            price = "199",
+            restaurantName = "Fresh & Fit",
+            rating = "4.7",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.cottage_3,
+            title = "Cottage Cheese Stir-Fry",
+            price = "189",
+            restaurantName = "Healthy Bowl",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹23",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.cottage_4,
+            title = "Herbed Paneer Skewers",
+            price = "229",
+            restaurantName = "Green Kitchen",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.cottage_5,
+            title = "Cottage Cheese & Spinach Salad",
+            price = "179",
+            restaurantName = "Leaf & Love",
+            rating = "4.7",
+            deliveryTime = "7-11 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "MG Road, Bangalore"
+        ),
 
+        // 6-10: INTERNATIONAL COTTAGE CHEESE DISHES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.cottage_6,
+            title = "Mediterranean Feta-Style Cottage Cheese",
+            price = "259",
+            restaurantName = "Mediterranean Bowl",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.cottage_7,
+            title = "Greek Cottage Cheese Salad",
+            price = "219",
+            restaurantName = "Athens Delights",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹26",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.cottage_8,
+            title = "Italian Baked Cottage Cheese",
+            price = "279",
+            restaurantName = "Roma Kitchen",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "0.8 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹28",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.cottage_9,
+            title = "Mexican Cottage Cheese Bowl",
+            price = "239",
+            restaurantName = "Cantina Fresh",
+            rating = "4.7",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹36",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.cottage_10,
+            title = "French Herbed Fromage Blanc",
+            price = "289",
+            restaurantName = "Le Bistro",
+            rating = "4.9",
+            deliveryTime = "15-19 mins",
+            distance = "0.9 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹35",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: INDIAN-STYLE COTTAGE CHEESE (PANEER)
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.cottage_11,
+            title = "Palak Paneer (Low-Fat)",
+            price = "229",
+            restaurantName = "Punjab Dhaba",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "1.0 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.cottage_12,
+            title = "Matar Paneer (Diet Version)",
+            price = "209",
+            restaurantName = "Royal Indian",
+            rating = "4.8",
+            deliveryTime = "15-19 mins",
+            distance = "1.1 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹21",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.cottage_13,
+            title = "Paneer Bhurji (Low-Oil)",
+            price = "189",
+            restaurantName = "Harvest Bowl",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.7 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹23",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.cottage_14,
+            title = "Achari Paneer Tikka",
+            price = "249",
+            restaurantName = "Tandoori Zaika",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.8 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.cottage_15,
+            title = "Kadai Paneer (Light)",
+            price = "239",
+            restaurantName = "Spice Cottage",
+            rating = "4.8",
+            deliveryTime = "16-20 mins",
+            distance = "1.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹24",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: PROTEIN-RICH & SPECIALTY COTTAGE CHEESE
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.cottage_16,
+            title = "High-Protein Cottage Cheese Bowl",
+            price = "269",
+            restaurantName = "Protein Lab",
+            rating = "4.9",
+            deliveryTime = "12-16 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹40",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.cottage_17,
+            title = "Cottage Cheese & Quinoa Power Bowl",
+            price = "289",
+            restaurantName = "Power Meals",
+            rating = "4.8",
+            deliveryTime = "11-15 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹35",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.cottage_18,
+            title = "Smoked Cottage Cheese Platter",
+            price = "299",
+            restaurantName = "Spice Route",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹45",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.cottage_19,
+            title = "Thai Green Curry with Cottage Cheese",
+            price = "259",
+            restaurantName = "Asian Fusion",
+            rating = "4.8",
+            deliveryTime = "10-14 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹26",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.cottage_20,
+            title = "Cottage Cheese & Broccoli Bake",
+            price = "249",
+            restaurantName = "Creamy Delights",
+            rating = "4.8",
+            deliveryTime = "13-17 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹30",
+            address = "Jubilee Hills, Hyderabad"
+        )
+    )
+    Column {
+        cottageCheeseDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
 fun SproutsSaladDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(
-            text = "Sprouts Salad Items",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val sproutsSaladDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters_sprouts",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. SPROUTS BASE TYPES (WITH ICONS - MAIN CATEGORIES ONLY)
+                FilterChip(
+                    id = "moong_sprouts",
+                    text = "Moong Bean Sprouts",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_moong_sprouts  // Green moong dal icon
+                ),
+                FilterChip(
+                    id = "chickpea_sprouts",
+                    text = "Chickpea Sprouts (Kabuli)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chickpea_sprouts  // Chickpea/garbanzo icon
+                ),
+                FilterChip(
+                    id = "moth_bean_sprouts",
+                    text = "Moth Bean Sprouts (Matki)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_moth_bean  // Small brown bean icon
+                ),
+                FilterChip(
+                    id = "lentil_sprouts",
+                    text = "Lentil Sprouts (Masoor)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_lentil_sprouts  // Red/orange lentil icon
+                ),
+                FilterChip(
+                    id = "fenugreek_sprouts",
+                    text = "Fenugreek Sprouts (Methi)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fenugreek  // Fenugreek seed icon
+                ),
+                // 3. VEGETABLE ADD-INS (TEXT ONLY - SUPPLEMENTARY)
+                FilterChip(
+                    id = "onion_sprouts",
+                    text = "Red Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tomato_sprouts",
+                    text = "Fresh Tomato",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cucumber_sprouts",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrot_sprouts",
+                    text = "Grated Carrot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_pepper_sprouts",
+                    text = "Capsicum",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cabbage_sprouts",
+                    text = "Shredded Cabbage",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "radish_sprouts",
+                    text = "White Radish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "beetroot_sprouts",
+                    text = "Beetroot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn_sprouts",
+                    text = "Sweet Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "avocado_sprouts",
+                    text = "Avocado",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. FRUIT ADD-INS (TEXT ONLY)
+                FilterChip(
+                    id = "pomegranate_sprouts",
+                    text = "Pomegranate (Anar)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_sprouts",
+                    text = "Green Apple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_sprouts",
+                    text = "Raw Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "orange_sprouts",
+                    text = "Orange Segments",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grapes_sprouts",
+                    text = "Grapes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "berries_sprouts",
+                    text = "Mixed Berries",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. PROTEIN ADDITIONS (TEXT ONLY)
+                FilterChip(
+                    id = "paneer_sprouts",
+                    text = "Paneer Cubes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_sprouts",
+                    text = "Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chicken_sprouts",
+                    text = "Shredded Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "egg_sprouts",
+                    text = "Boiled Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nuts_sprouts",
+                    text = "Roasted Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "seeds_sprouts",
+                    text = "Seeds (Sunflower/Pumpkin)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. INDIAN STYLE SEASONINGS (TEXT ONLY)
+                FilterChip(
+                    id = "chaat_masala_sprouts",
+                    text = "Chaat Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jeera_powder_sprouts",
+                    text = "Roasted Cumin Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_pepper_sprouts",
+                    text = "Black Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_chilli_sprouts",
+                    text = "Red Chilli Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chatpata_sprouts",
+                    text = "Chatpata Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "amchur_sprouts",
+                    text = "Dry Mango Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. HERBS & FRESH SEASONINGS (TEXT ONLY)
+                FilterChip(
+                    id = "coriander_sprouts",
+                    text = "Fresh Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_sprouts",
+                    text = "Fresh Mint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "curry_leaves_sprouts",
+                    text = "Curry Leaves",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_juice_sprouts",
+                    text = "Lemon Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_sprouts",
+                    text = "Grated Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_chilli_sprouts",
+                    text = "Green Chilli",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. DRESSINGS & OILS (TEXT ONLY)
+                FilterChip(
+                    id = "olive_oil_sprouts",
+                    text = "Extra Virgin Olive Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sesame_oil_sprouts",
+                    text = "Sesame Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "balsamic_sprouts",
+                    text = "Balsamic Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honey_mustard_sprouts",
+                    text = "Honey Mustard",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_dressing_sprouts",
+                    text = "Yogurt Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tahini_sprouts",
+                    text = "Tahini",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_chutney_sprouts",
+                    text = "Green Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tamarind_sprouts",
+                    text = "Tamarind Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 10. DIETARY PREFERENCES (TEXT ONLY)
+                FilterChip(
+                    id = "low_calorie_sprouts",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_sprouts",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_sprouts",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_sprouts",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_sprouts",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raw_food_sprouts",
+                    text = "Raw Food",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_oil_sprouts",
+                    text = "No Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 13. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "sprouts_under_80",
+                    text = "Under ₹80",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sprouts_80_150",
+                    text = "₹80 - ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sprouts_150_250",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sprouts_above_250",
+                    text = "Above ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 14. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_sprouts",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
-        // Add your sprouts salad items here
+        FilterButtonFood(
+            filterConfig = sproutsSaladDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val sproutsSaladDietItems = listOf(
+            // 1-6: SPROUTS SALAD VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_sprouts_1,
+                title = "Classic Moong Sprouts Salad",
+                price = "89",
+                restaurantName = "Sprout House",
+                rating = "4.7",
+                deliveryTime = "5-9 mins",
+                distance = "0.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹9",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_chaat_sprouts_1,
+                title = "Chatpata Sprouts Chaat",
+                price = "99",
+                restaurantName = "Street Food Cafe",
+                rating = "4.9",
+                deliveryTime = "7-11 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹15",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_south_indian_sprouts_1,
+                title = "South Indian Sundal",
+                price = "79",
+                restaurantName = "Madras Kitchen",
+                rating = "4.8",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "12%",
+                discountAmount = "up to ₹9",
+                address = "Jubilee Hills, Hyderabad"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_protein_sprouts_1,
+                title = "High-Protein Chickpea Sprouts",
+                price = "129",
+                restaurantName = "Protein Power",
+                rating = "4.8",
+                deliveryTime = "8-12 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹13",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_fruit_sprouts_1,
+                title = "Sprouts & Pomegranate Salad",
+                price = "119",
+                restaurantName = "Fresh Bowl",
+                rating = "4.7",
+                deliveryTime = "6-9 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹18",
+                address = "Koregaon Park, Pune"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_mexican_sprouts_1,
+                title = "Mexican Style Sprouts Bowl",
+                price = "149",
+                restaurantName = "Global Greens",
+                rating = "4.9",
+                deliveryTime = "9-13 mins",
+                distance = "0.6 km",
+                discount = "12%",
+                discountAmount = "up to ₹18",
+                address = "Connaught Place, Delhi"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = sproutsSaladDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
     }
+
+
 }
 
 @Composable

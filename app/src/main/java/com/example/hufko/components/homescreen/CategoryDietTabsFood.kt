@@ -25944,32 +25944,1789 @@ fun SproutsSaladDietPage() {
         )
     }
 
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
 
+    // Sample data based on the provided images
+    val sproutsSaladDietItems = listOf(
+        // 1-5: CLASSIC SPROUTS SALADS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.sprouts_1,
+            title = "Classic Moong Sprouts Salad",
+            price = "149",
+            restaurantName = "Fresh & Fit",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.sprouts_2,
+            title = "Mixed Sprouts Chaat",
+            price = "129",
+            restaurantName = "Healthy Bites",
+            rating = "4.7",
+            deliveryTime = "7-11 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.sprouts_3,
+            title = "Sprouts & Pomegranate Salad",
+            price = "169",
+            restaurantName = "Green Bowl",
+            rating = "4.9",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.sprouts_4,
+            title = "Lemon Tossed Sprouts",
+            price = "119",
+            restaurantName = "Fresh Press",
+            rating = "4.6",
+            deliveryTime = "6-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.sprouts_5,
+            title = "Sprouts & Vegetable Medley",
+            price = "159",
+            restaurantName = "Harvest Bowl",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Whitefield, Bangalore"
+        ),
+
+        // 6-10: INTERNATIONAL SPROUTS SALADS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.sprouts_6,
+            title = "Thai Sprouts Salad with Peanut Dressing",
+            price = "189",
+            restaurantName = "Asian Greens",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹23",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.sprouts_7,
+            title = "Mediterranean Sprouts & Feta",
+            price = "209",
+            restaurantName = "Mediterranean Delight",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹31",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.sprouts_8,
+            title = "Mexican Sprouts Salsa Bowl",
+            price = "179",
+            restaurantName = "Cantina Fresh",
+            rating = "4.7",
+            deliveryTime = "10-14 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.sprouts_9,
+            title = "Japanese Sprouts with Sesame",
+            price = "199",
+            restaurantName = "Tokyo Bistro",
+            rating = "4.8",
+            deliveryTime = "13-17 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.sprouts_10,
+            title = "Middle Eastern Sprouts Tabbouleh",
+            price = "189",
+            restaurantName = "Falafel House",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: PROTEIN-RICH SPROUTS COMBOS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.sprouts_11,
+            title = "High-Protein Sprouts & Chickpea Salad",
+            price = "219",
+            restaurantName = "Protein Lab",
+            rating = "4.9",
+            deliveryTime = "10-14 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹26",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.sprouts_12,
+            title = "Sprouts & Tofu Power Bowl",
+            price = "229",
+            restaurantName = "Power Meals",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.sprouts_13,
+            title = "Sprouts & Grilled Paneer Salad",
+            price = "249",
+            restaurantName = "Fusion Fresh",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹25",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.sprouts_14,
+            title = "Sprouts & Quinoa Protein Mix",
+            price = "239",
+            restaurantName = "Healthy Habits",
+            rating = "4.8",
+            deliveryTime = "11-15 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹29",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.sprouts_15,
+            title = "Sprouts & Edamame Salad",
+            price = "259",
+            restaurantName = "Green Protein",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: INDIAN-STYLE & SPECIALTY SPROUTS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.sprouts_16,
+            title = "Sprouts Chaat with Yogurt",
+            price = "139",
+            restaurantName = "Street Food Tales",
+            rating = "4.7",
+            deliveryTime = "7-11 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.sprouts_17,
+            title = "Punjabi Style Sprouts Salad",
+            price = "149",
+            restaurantName = "Punjab Dhaba",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.sprouts_18,
+            title = "South Indian Sprouts Sundal",
+            price = "119",
+            restaurantName = "Madras Cafe",
+            rating = "4.8",
+            deliveryTime = "6-10 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.sprouts_19,
+            title = "Sprouts & Mango Salad (Seasonal)",
+            price = "169",
+            restaurantName = "Seasonal Tastes",
+            rating = "4.9",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.sprouts_20,
+            title = "Warm Sprouts & Vegetable Salad",
+            price = "159",
+            restaurantName = "Comfort Bowl",
+            rating = "4.7",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Jubilee Hills, Hyderabad"
+        )
+    )
+    Column {
+        sproutsSaladDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
 fun BrownRiceBowlDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val brownRiceBowlDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters_brown_rice",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. RICE BASE TYPES (WITH ICONS - MAIN CATEGORIES)
+                FilterChip(
+                    id = "short_grain_brown",
+                    text = "Short Grain Brown Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_short_grain_rice  // Short grain rice icon
+                ),
+                FilterChip(
+                    id = "long_grain_brown",
+                    text = "Long Grain Brown Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_long_grain_rice  // Long grain rice icon
+                ),
+                FilterChip(
+                    id = "basmati_brown",
+                    text = "Brown Basmati Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_basmati_rice_icon  // Basmati rice icon
+                ),
+                FilterChip(
+                    id = "jasmine_brown",
+                    text = "Brown Jasmine Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_jasmine_rice  // Jasmine rice icon
+                ),
+                FilterChip(
+                    id = "red_rice_brown",
+                    text = "Red Brown Rice",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_red_rice  // Red rice icon
+                ),
+                // 4. VEGETABLE ADD-INS (TEXT ONLY)
+                FilterChip(
+                    id = "broccoli_brown",
+                    text = "Broccoli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrots_brown",
+                    text = "Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_peppers_brown",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_brown",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "zucchini_brown",
+                    text = "Zucchini",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushrooms_brown",
+                    text = "Mushrooms",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peas_brown",
+                    text = "Green Peas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn_brown",
+                    text = "Sweet Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_beans_brown",
+                    text = "Green Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cauliflower_brown",
+                    text = "Cauliflower",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. PROTEIN OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "grilled_chicken_brown",
+                    text = "Grilled Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paneer_brown",
+                    text = "Paneer Tikka",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_brown",
+                    text = "Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_brown",
+                    text = "Fish (Grilled)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggs_brown",
+                    text = "Boiled Eggs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chickpeas_brown",
+                    text = "Chickpeas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lentils_brown",
+                    text = "Lentils (Dal)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "edamame_brown",
+                    text = "Edamame",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 7. SAUCES & DRESSINGS (TEXT ONLY)
+                FilterChip(
+                    id = "teriyaki_brown",
+                    text = "Teriyaki Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soy_sauce_brown",
+                    text = "Soy Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "schezwan_brown",
+                    text = "Schezwan Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "olive_oil_brown",
+                    text = "Olive Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_herb_brown",
+                    text = "Lemon Herb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_dip_brown",
+                    text = "Yogurt Dip",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pesto_brown",
+                    text = "Pesto Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "salsa_brown",
+                    text = "Fresh Salsa",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. INDIAN GRAVY STYLES (TEXT ONLY)
+                FilterChip(
+                    id = "kadai_brown",
+                    text = "Kadai Gravy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "palak_brown",
+                    text = "Palak (Spinach)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tawa_brown",
+                    text = "Tawa Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "curd_brown",
+                    text = "Curd Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 9. TOPPINGS & EXTRAS (TEXT ONLY)
+                FilterChip(
+                    id = "sesame_brown",
+                    text = "Sesame Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spring_onion_brown",
+                    text = "Spring Onion",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coriander_brown",
+                    text = "Fresh Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nori_brown",
+                    text = "Nori Sheets",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fried_onion_brown",
+                    text = "Fried Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cashews_brown",
+                    text = "Roasted Cashews",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 10. DIETARY PREFERENCES (WITH ICONS - MAIN CATEGORY)
+                FilterChip(
+                    id = "gluten_free_brown",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_brown",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 11. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "brown_under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_300_400",
+                    text = "₹300 - ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_above_400",
+                    text = "Above ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 13. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_brown",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = brownRiceBowlDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val brownRiceBowlDietItems = listOf(
+            // 1-6: BROWN RICE BOWL VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_brown_rice_1,
+                title = "Classic Brown Rice Bowl",
+                price = "149",
+                restaurantName = "Rice Bowl Cafe",
+                rating = "4.8",
+                deliveryTime = "8-12 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_veggie_brown_rice_1,
+                title = "Garden Vegetable Brown Rice",
+                price = "139",
+                restaurantName = "Green Kitchen",
+                rating = "4.7",
+                deliveryTime = "7-11 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹21",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_paneer_brown_rice_1,
+                title = "Paneer Tikka Brown Rice Bowl",
+                price = "189",
+                restaurantName = "Tandoori Bites",
+                rating = "4.9",
+                deliveryTime = "9-13 mins",
+                distance = "0.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹23",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_chicken_brown_rice_1,
+                title = "Grilled Chicken Brown Rice",
+                price = "219",
+                restaurantName = "Protein House",
+                rating = "4.9",
+                deliveryTime = "10-14 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹22",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_mediterranean_brown_rice_1,
+                title = "Mediterranean Brown Rice Bowl",
+                price = "199",
+                restaurantName = "Olive Garden",
+                rating = "4.8",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹30",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_mexican_brown_rice_1,
+                title = "Mexican Fiesta Brown Rice",
+                price = "179",
+                restaurantName = "Salsa Fresh",
+                rating = "4.7",
+                deliveryTime = "9-13 mins",
+                distance = "0.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹21",
+                address = "Koregaon Park, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Brown Rice Bowl Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = brownRiceBowlDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val brownRiceDietItems = listOf(
+        // 1-5: CLASSIC BROWN RICE BOWLS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.brown_rice_1,
+            title = "Classic Brown Rice with Vegetables",
+            price = "159",
+            restaurantName = "Fresh & Fit",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.brown_rice_2,
+            title = "Brown Rice & Chickpea Bowl",
+            price = "169",
+            restaurantName = "Healthy Bites",
+            rating = "4.7",
+            deliveryTime = "7-11 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.brown_rice_3,
+            title = "Brown Rice Pulao with Peas",
+            price = "149",
+            restaurantName = "Green Bowl",
+            rating = "4.9",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.brown_rice_4,
+            title = "Lemon Brown Rice with Nuts",
+            price = "139",
+            restaurantName = "Fresh Press",
+            rating = "4.6",
+            deliveryTime = "6-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹14",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.brown_rice_5,
+            title = "Brown Rice & Mixed Beans Bowl",
+            price = "179",
+            restaurantName = "Harvest Bowl",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Whitefield, Bangalore"
+        ),
+
+        // 6-10: ASIAN-INSPIRED BROWN RICE
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.brown_rice_6,
+            title = "Thai Brown Rice Bowl with Tofu",
+            price = "199",
+            restaurantName = "Asian Greens",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.brown_rice_7,
+            title = "Brown Rice Sushi Bowl",
+            price = "219",
+            restaurantName = "Tokyo Bistro",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.brown_rice_8,
+            title = "Stir-Fried Brown Rice with Vegetables",
+            price = "179",
+            restaurantName = "Wok Express",
+            rating = "4.7",
+            deliveryTime = "10-14 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.brown_rice_9,
+            title = "Brown Rice Bibimbap Bowl",
+            price = "229",
+            restaurantName = "Korean Kitchen",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹27",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.brown_rice_10,
+            title = "Coconut Brown Rice with Vegetables",
+            price = "189",
+            restaurantName = "Tropical Bowl",
+            rating = "4.8",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: PROTEIN-RICH BROWN RICE BOWLS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.brown_rice_11,
+            title = "Brown Rice with Lentils & Vegetables",
+            price = "189",
+            restaurantName = "Protein Lab",
+            rating = "4.9",
+            deliveryTime = "10-14 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹23",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.brown_rice_12,
+            title = "Brown Rice & Grilled Chicken Bowl",
+            price = "249",
+            restaurantName = "Power Meals",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.brown_rice_13,
+            title = "Brown Rice with Paneer & Peppers",
+            price = "219",
+            restaurantName = "Fusion Fresh",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹22",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.brown_rice_14,
+            title = "Brown Rice & Egg White Bowl",
+            price = "209",
+            restaurantName = "Healthy Habits",
+            rating = "4.8",
+            deliveryTime = "11-15 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹25",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.brown_rice_15,
+            title = "Brown Rice with Edamame & Corn",
+            price = "199",
+            restaurantName = "Green Protein",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: INDIAN-STYLE & SPECIALTY BROWN RICE
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.brown_rice_16,
+            title = "Brown Rice Vegetable Biryani",
+            price = "189",
+            restaurantName = "Biryani Bliss",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.brown_rice_17,
+            title = "Brown Rice Khichdi Bowl",
+            price = "149",
+            restaurantName = "Comfort Food",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.brown_rice_18,
+            title = "Curd Brown Rice with Vegetables",
+            price = "139",
+            restaurantName = "Madras Cafe",
+            rating = "4.7",
+            deliveryTime = "6-10 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.brown_rice_19,
+            title = "Brown Rice & Pumpkin Seeds Bowl",
+            price = "179",
+            restaurantName = "Seasonal Tastes",
+            rating = "4.9",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.brown_rice_20,
+            title = "Warm Brown Rice & Kale Bowl",
+            price = "169",
+            restaurantName = "Harvest Fresh",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your brown rice bowl items here
+    )
+    Column {
+        brownRiceDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun SteamedVeggiesDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val steamedVeggiesDietFilters = FilterConfig(
+            filters = listOf(
+                // 1. Main Filters Dropdown
+                FilterChip(
+                    id = "filters_steamed_veggies",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // 2. VEGETABLE CATEGORIES (WITH ICONS - MAIN CATEGORIES)
+                FilterChip(
+                    id = "root_veggies",
+                    text = "Root Vegetables",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_root_vegetable  // Carrot/beetroot icon
+                ),
+                FilterChip(
+                    id = "leafy_greens",
+                    text = "Leafy Greens",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_leafy_greens  // Spinach/kale icon
+                ),
+                FilterChip(
+                    id = "cruciferous",
+                    text = "Cruciferous",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_broccoli  // Broccoli/cauliflower icon
+                ),
+                FilterChip(
+                    id = "gourd_veggies",
+                    text = "Gourds & Squash",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_squash  // Pumpkin/zucchini icon
+                ),
+                FilterChip(
+                    id = "legumes_steamed",
+                    text = "Fresh Legumes",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_peas_pod  // Peas/beans icon
+                ),
+
+                // 3. SPECIFIC ROOT VEGETABLES (TEXT ONLY)
+                FilterChip(
+                    id = "carrots_steamed",
+                    text = "Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "beetroot_steamed",
+                    text = "Beetroot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "potatoes_steamed",
+                    text = "Potatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sweet_potatoes",
+                    text = "Sweet Potatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "radish_steamed",
+                    text = "Radish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turnips_steamed",
+                    text = "Turnips",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 4. LEAFY GREENS (TEXT ONLY)
+                FilterChip(
+                    id = "spinach_steamed",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kale_steamed",
+                    text = "Kale",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cabbage_steamed",
+                    text = "Cabbage",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lettuce_steamed",
+                    text = "Lettuce",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 5. CRUCIFEROUS VEGETABLES (TEXT ONLY)
+                FilterChip(
+                    id = "broccoli_steamed",
+                    text = "Broccoli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cauliflower_steamed",
+                    text = "Cauliflower",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brussels_sprouts",
+                    text = "Brussels Sprouts",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 6. GOURDS & SQUASH (TEXT ONLY)
+                FilterChip(
+                    id = "zucchini_steamed",
+                    text = "Zucchini",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pumpkin_steamed",
+                    text = "Pumpkin",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bottle_gourd",
+                    text = "Bottle Gourd (Lauki)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ridge_gourd",
+                    text = "Ridge Gourd (Tori)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bitter_gourd",
+                    text = "Bitter Gourd (Karela)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 7. FRESH LEGUMES (TEXT ONLY)
+                FilterChip(
+                    id = "peas_steamed",
+                    text = "Green Peas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_beans_steamed",
+                    text = "French Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "broad_beans",
+                    text = "Broad Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 8. OTHER VEGETABLES (TEXT ONLY)
+                FilterChip(
+                    id = "bell_peppers_steamed",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn_steamed",
+                    text = "Sweet Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushrooms_steamed",
+                    text = "Mushrooms",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onions_steamed",
+                    text = "Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 10. PROTEIN OPTIONS (TEXT ONLY - SUBSET OF PROTEIN)
+                FilterChip(
+                    id = "paneer_steamed",
+                    text = "Steamed Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_steamed",
+                    text = "Steamed Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chicken_steamed",
+                    text = "Steamed Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fish_steamed",
+                    text = "Steamed Fish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggs_steamed",
+                    text = "Steamed Eggs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chickpeas_steamed",
+                    text = "Chickpeas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 12. SEASONING OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "salt_pepper",
+                    text = "Salt & Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_juice",
+                    text = "Lemon Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "herbs_steamed",
+                    text = "Fresh Herbs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chaat_masala",
+                    text = "Chaat Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 13. DRESSING OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "olive_oil_steamed",
+                    text = "Extra Virgin Olive Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon_herb_steamed",
+                    text = "Lemon Herb Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_steamed",
+                    text = "Yogurt Dip",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 15. DIETARY OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "low_carb_steamed",
+                    text = "Low Carb",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_steamed",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_steamed",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_steamed",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_steamed",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // 17. STYLE OPTIONS (TEXT ONLY)
+                FilterChip(
+                    id = "whole_steamed",
+                    text = "Whole Vegetables",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chopped_steamed",
+                    text = "Chopped & Mixed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sliced_steamed",
+                    text = "Sliced",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 18. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "steamed_under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed_100_200",
+                    text = "₹100 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed_200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "steamed_above_300",
+                    text = "Above ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // 19. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by_steamed",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = steamedVeggiesDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val steamedVeggiesDietItems = listOf(
+            // 1-6: STEAMED VEGGIES DIET VARIETIES
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_steamed_veggies_1,
+                title = "Classic Steamed Vegetable Platter",
+                price = "129",
+                restaurantName = "Pure Steam Kitchen",
+                rating = "4.8",
+                deliveryTime = "8-12 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹13",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_green_steamed_veggies_1,
+                title = "Green Steam Bowl - Broccoli & Spinach",
+                price = "149",
+                restaurantName = "Green Kitchen",
+                rating = "4.7",
+                deliveryTime = "7-11 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹22",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_root_steamed_veggies_1,
+                title = "Root Vegetable Steam Medley",
+                price = "139",
+                restaurantName = "Harvest Bowl",
+                rating = "4.9",
+                deliveryTime = "9-13 mins",
+                distance = "0.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹17",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_protein_steamed_veggies_1,
+                title = "Steamed Veggies with Paneer",
+                price = "189",
+                restaurantName = "Protein House",
+                rating = "4.9",
+                deliveryTime = "10-14 mins",
+                distance = "0.6 km",
+                discount = "10%",
+                discountAmount = "up to ₹19",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_asian_steamed_veggies_1,
+                title = "Asian Style Steamed Vegetables",
+                price = "169",
+                restaurantName = "Asian Greens",
+                rating = "4.8",
+                deliveryTime = "8-12 mins",
+                distance = "0.4 km",
+                discount = "15%",
+                discountAmount = "up to ₹25",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_special_steamed_veggies_1,
+                title = "Steamed Veggie Diet Combo with Hummus",
+                price = "179",
+                restaurantName = "Soulful Bowl",
+                rating = "4.8",
+                deliveryTime = "9-13 mins",
+                distance = "0.5 km",
+                discount = "12%",
+                discountAmount = "up to ₹21",
+                address = "Koregaon Park, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Steamed Veggies Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = steamedVeggiesDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val steamedVeggiesDietItems = listOf(
+        // 1-5: CLASSIC STEAMED VEGGIE PLATTERS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.steamed_veggies_1,
+            title = "Classic Mixed Steamed Vegetables",
+            price = "129",
+            restaurantName = "Fresh & Fit",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.steamed_veggies_2,
+            title = "Broccoli & Cauliflower Steam Bowl",
+            price = "139",
+            restaurantName = "Healthy Bites",
+            rating = "4.7",
+            deliveryTime = "7-11 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.steamed_veggies_3,
+            title = "Carrot, Beans & Peas Steam Medley",
+            price = "119",
+            restaurantName = "Green Bowl",
+            rating = "4.9",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹14",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.steamed_veggies_4,
+            title = "Steamed Spinach & Corn Delight",
+            price = "129",
+            restaurantName = "Fresh Press",
+            rating = "4.6",
+            deliveryTime = "6-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.steamed_veggies_5,
+            title = "Rainbow Steamed Vegetables",
+            price = "149",
+            restaurantName = "Harvest Bowl",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Whitefield, Bangalore"
+        ),
+
+        // 6-10: ASIAN-INSPIRED STEAMED VEGGIES
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.steamed_veggies_6,
+            title = "Thai Steamed Veggies with Lemongrass",
+            price = "169",
+            restaurantName = "Asian Greens",
+            rating = "4.9",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.steamed_veggies_7,
+            title = "Japanese Steamed Vegetable Platter",
+            price = "179",
+            restaurantName = "Tokyo Bistro",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.steamed_veggies_8,
+            title = "Chinese Style Steamed Greens",
+            price = "149",
+            restaurantName = "Wok Express",
+            rating = "4.7",
+            deliveryTime = "10-14 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.steamed_veggies_9,
+            title = "Korean Steamed Vegetable Banchan",
+            price = "159",
+            restaurantName = "Korean Kitchen",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.8 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.steamed_veggies_10,
+            title = "Coconut Steam Vegetables",
+            price = "169",
+            restaurantName = "Tropical Bowl",
+            rating = "4.8",
+            deliveryTime = "11-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: PROTEIN-PACKED STEAMED VEGGIE BOWLS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.steamed_veggies_11,
+            title = "Steamed Veggies with Paneer",
+            price = "189",
+            restaurantName = "Protein Lab",
+            rating = "4.9",
+            deliveryTime = "10-14 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹23",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.steamed_veggies_12,
+            title = "Steamed Broccoli with Grilled Chicken",
+            price = "219",
+            restaurantName = "Power Meals",
+            rating = "4.8",
+            deliveryTime = "12-16 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.steamed_veggies_13,
+            title = "Steamed Vegetables with Tofu",
+            price = "179",
+            restaurantName = "Fusion Fresh",
+            rating = "4.9",
+            deliveryTime = "13-17 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.steamed_veggies_14,
+            title = "Steamed Veggies & Boiled Eggs",
+            price = "169",
+            restaurantName = "Healthy Habits",
+            rating = "4.8",
+            deliveryTime = "11-15 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.steamed_veggies_15,
+            title = "Steamed Edamame & Vegetable Bowl",
+            price = "189",
+            restaurantName = "Green Protein",
+            rating = "4.9",
+            deliveryTime = "14-18 mins",
+            distance = "0.9 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: INDIAN-STYLE & SPECIALTY STEAMED VEGGIES
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.steamed_veggies_16,
+            title = "Steamed Vegetable Khichdi",
+            price = "149",
+            restaurantName = "Biryani Bliss",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹15",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.steamed_veggies_17,
+            title = "South Indian Steam Sundal Platter",
+            price = "129",
+            restaurantName = "Madras Cafe",
+            rating = "4.8",
+            deliveryTime = "8-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.steamed_veggies_18,
+            title = "Steamed Veggie Salad Bowl",
+            price = "139",
+            restaurantName = "Madras Cafe",
+            rating = "4.7",
+            deliveryTime = "6-10 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.steamed_veggies_19,
+            title = "Steamed Veggies with Hummus",
+            price = "169",
+            restaurantName = "Seasonal Tastes",
+            rating = "4.9",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.steamed_veggies_20,
+            title = "Warm Steamed Vegetable Medley",
+            price = "149",
+            restaurantName = "Harvest Fresh",
+            rating = "4.8",
+            deliveryTime = "9-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your steamed veggies items here
+    )
+    Column {
+        steamedVeggiesDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

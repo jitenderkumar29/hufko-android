@@ -27732,41 +27732,1773 @@ fun SteamedVeggiesDietPage() {
 
 @Composable
 fun FruitBowlDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val fruitBowlDietFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters_fruit_bowl",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+                FilterChip(
+                    id = "tropical_fruits",
+                    text = "Tropical Fruits",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tropical
+                ),
+                FilterChip(
+                    id = "citrus_fruits",
+                    text = "Citrus Fruits",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_citrus
+                ),
+                FilterChip(
+                    id = "berries",
+                    text = "Berries",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_berries
+                ),
+                FilterChip(
+                    id = "stone_fruits",
+                    text = "Stone Fruits",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stone_fruit
+                ),
+                FilterChip(
+                    id = "melons",
+                    text = "Melons",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_melon
+                ),
+                FilterChip(
+                    id = "mango",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "banana",
+                    text = "Banana",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "papaya",
+                    text = "Papaya",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut",
+                    text = "Coconut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "guava",
+                    text = "Guava",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "orange",
+                    text = "Orange",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemon",
+                    text = "Lemon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grapefruit",
+                    text = "Grapefruit",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lime",
+                    text = "Lime",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tangerine",
+                    text = "Tangerine",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberries",
+                    text = "Strawberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blueberries",
+                    text = "Blueberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raspberries",
+                    text = "Raspberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blackberries",
+                    text = "Blackberries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peach",
+                    text = "Peach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "plum",
+                    text = "Plum",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apricot",
+                    text = "Apricot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cherries",
+                    text = "Cherries",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "watermelon",
+                    text = "Watermelon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "musk_melon",
+                    text = "Musk Melon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honeydew",
+                    text = "Honeydew",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kiwi",
+                    text = "Kiwi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dragon_fruit",
+                    text = "Dragon Fruit",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pomegranate",
+                    text = "Pomegranate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "avocado",
+                    text = "Avocado",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dates",
+                    text = "Dates",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raisins",
+                    text = "Raisins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apricots_dried",
+                    text = "Dried Apricots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "prunes",
+                    text = "Prunes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "figs_dried",
+                    text = "Dried Figs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_cut",
+                    text = "Fresh Cut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit_salad",
+                    text = "Mixed Fruit Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "smoothie_bowl",
+                    text = "Smoothie Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit_chaat",
+                    text = "Fruit Chaat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled_fruits",
+                    text = "Grilled Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "honey",
+                    text = "Honey",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nuts",
+                    text = "Mixed Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "seeds",
+                    text = "Seeds (Chia/Flax)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "granola",
+                    text = "Granola",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "yogurt_fruit",
+                    text = "Yogurt",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sugar",
+                    text = "Low Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_fruit",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_fruit",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_fiber",
+                    text = "High Fiber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "breakfast_bowl",
+                    text = "Breakfast Bowls",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snack_size",
+                    text = "Snack Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dessert_bowl",
+                    text = "Dessert Bowls",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_workout",
+                    text = "Post-Workout",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit_under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit_100_200",
+                    text = "₹100 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit_200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fruit_above_300",
+                    text = "Above ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sort_by_fruit",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = fruitBowlDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val fruitBowlDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_mixed_fruit_bowl_1,
+                title = "Seasonal Mixed Fruit Bowl",
+                price = "149",
+                restaurantName = "Fresh Fruits Co.",
+                rating = "4.9",
+                deliveryTime = "5-10 mins",
+                distance = "0.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹22",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_tropical_fruit_bowl_1,
+                title = "Tropical Fruit Delight - Mango, Pineapple",
+                price = "179",
+                restaurantName = "Tropica Bowl",
+                rating = "4.8",
+                deliveryTime = "6-11 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹18",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_berry_fruit_bowl_1,
+                title = "Berry Blast - Strawberry, Blueberry",
+                price = "199",
+                restaurantName = "Berry Farms",
+                rating = "4.9",
+                deliveryTime = "7-12 mins",
+                distance = "0.4 km",
+                discount = "12%",
+                discountAmount = "up to ₹24",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_citrus_fruit_bowl_1,
+                title = "Citrus Energizer - Orange, Grapefruit",
+                price = "159",
+                restaurantName = "Citrus Point",
+                rating = "4.7",
+                deliveryTime = "5-9 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹24",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_exotic_fruit_bowl_1,
+                title = "Exotic Fruit Bowl - Kiwi, Dragon Fruit",
+                price = "229",
+                restaurantName = "Exotica Fresh",
+                rating = "4.9",
+                deliveryTime = "8-13 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹23",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_protein_fruit_bowl_1,
+                title = "High Protein Fruit Bowl with Nuts",
+                price = "189",
+                restaurantName = "Protein Fruits",
+                rating = "4.8",
+                deliveryTime = "6-11 mins",
+                distance = "0.4 km",
+                discount = "12%",
+                discountAmount = "up to ₹23",
+                address = "Koregaon Park, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Fruit Bowl Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = fruitBowlDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val fruitBowlDietItems = listOf(
+        // 1-5: CLASSIC FRUIT BOWLS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.fruit_bowl_1,
+            title = "Seasonal Mixed Fruit Bowl",
+            price = "129",
+            restaurantName = "Fresh Fruits Co.",
+            rating = "4.9",
+            deliveryTime = "5-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.fruit_bowl_2,
+            title = "Classic Fruit Salad",
+            price = "119",
+            restaurantName = "Fruit Express",
+            rating = "4.8",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.fruit_bowl_3,
+            title = "Rainbow Fresh Fruit Platter",
+            price = "149",
+            restaurantName = "Harvest Bowl",
+            rating = "4.9",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.fruit_bowl_4,
+            title = "Morning Fruit Delight",
+            price = "109",
+            restaurantName = "Healthy Start",
+            rating = "4.7",
+            deliveryTime = "4-8 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹11",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.fruit_bowl_5,
+            title = "Mini Fruit Bowl Assorted",
+            price = "99",
+            restaurantName = "Fruit Basket",
+            rating = "4.8",
+            deliveryTime = "5-9 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹15",
+            address = "Whitefield, Bangalore"
+        ),
+
+        // 6-10: TROPICAL & CITRUS FRUIT BOWLS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.fruit_bowl_6,
+            title = "Tropical Fruit Blast - Mango, Pineapple",
+            price = "169",
+            restaurantName = "Tropica Bowl",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.fruit_bowl_7,
+            title = "Citrus Sunrise - Orange, Grapefruit",
+            price = "149",
+            restaurantName = "Citrus Point",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.fruit_bowl_8,
+            title = "Mango Magic Bowl",
+            price = "179",
+            restaurantName = "Mango Mania",
+            rating = "4.9",
+            deliveryTime = "9-14 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.fruit_bowl_9,
+            title = "Pineapple Paradise",
+            price = "159",
+            restaurantName = "Island Fresh",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.fruit_bowl_10,
+            title = "Orange & Grapefruit Energizer",
+            price = "139",
+            restaurantName = "Vitamin C Hub",
+            rating = "4.7",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹21",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: BERRY & EXOTIC FRUIT BOWLS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.fruit_bowl_11,
+            title = "Berry Blast - Strawberry, Blueberry",
+            price = "199",
+            restaurantName = "Berry Farms",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹24",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.fruit_bowl_12,
+            title = "Exotic Fruit Bowl - Kiwi, Dragon Fruit",
+            price = "229",
+            restaurantName = "Exotica Fresh",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.fruit_bowl_13,
+            title = "Pomegranate & Berry Medley",
+            price = "189",
+            restaurantName = "Antioxidant Bowl",
+            rating = "4.8",
+            deliveryTime = "9-14 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.fruit_bowl_14,
+            title = "Kiwi & Strawberry Fresh Bowl",
+            price = "179",
+            restaurantName = "Green Fresh",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹21",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.fruit_bowl_15,
+            title = "Mixed Berries with Banana",
+            price = "169",
+            restaurantName = "Berry Bliss",
+            rating = "4.9",
+            deliveryTime = "7-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹25",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: MELON, STONE FRUIT & SPECIALTY BOWLS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.fruit_bowl_16,
+            title = "Melon Magic - Watermelon, Musk Melon",
+            price = "129",
+            restaurantName = "Melon House",
+            rating = "4.8",
+            deliveryTime = "5-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹13",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.fruit_bowl_17,
+            title = "Stone Fruit Delight - Peach, Plum",
+            price = "159",
+            restaurantName = "Stone Fruit Co.",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹19",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.fruit_bowl_18,
+            title = "Fruit Chaat - Spiced Fruit Mix",
+            price = "119",
+            restaurantName = "Street Style Fruits",
+            rating = "4.9",
+            deliveryTime = "4-8 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.fruit_bowl_19,
+            title = "Dry Fruit & Nut Energy Bowl",
+            price = "179",
+            restaurantName = "Dry Fruit Delight",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.fruit_bowl_20,
+            title = "Low Calorie Fruit Bowl",
+            price = "139",
+            restaurantName = "Diet Fresh",
+            rating = "4.8",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹17",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your fruit bowl items here
+    )
+    Column {
+        fruitBowlDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun DetoxWaterDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val detoxWaterDietFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters_detox_water",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Base Categories with left icons
+                FilterChip(
+                    id = "citrus_detox",
+                    text = "Citrus Infused",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_citrus_detox
+                ),
+                FilterChip(
+                    id = "herbal_detox",
+                    text = "Herbal Infusions",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_herbs
+                ),
+                FilterChip(
+                    id = "fruit_detox",
+                    text = "Fruit Infused",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fruit_infused
+                ),
+                FilterChip(
+                    id = "vegetable_detox",
+                    text = "Vegetable Infused",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable
+                ),
+                FilterChip(
+                    id = "spice_detox",
+                    text = "Spice Infused",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_spice
+                ),
+
+                // Specific ingredients - Text only
+                FilterChip(
+                    id = "lemon_detox",
+                    text = "Lemon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cucumber_detox",
+                    text = "Cucumber",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_detox",
+                    text = "Mint Leaves",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_detox",
+                    text = "Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grapefruit_detox",
+                    text = "Grapefruit",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "strawberry_detox",
+                    text = "Strawberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "orange_detox",
+                    text = "Orange",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "watermelon_detox",
+                    text = "Watermelon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pineapple_detox",
+                    text = "Pineapple",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_cider",
+                    text = "Apple Cider",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cinnamon_detox",
+                    text = "Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turmeric_detox",
+                    text = "Turmeric",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "basil_detox",
+                    text = "Basil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rosemary_detox",
+                    text = "Rosemary",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lavender_detox",
+                    text = "Lavender",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Time of day - Text only
+                FilterChip(
+                    id = "morning_detox",
+                    text = "Morning Detox",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "evening_detox",
+                    text = "Evening Relax",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pre_meal",
+                    text = "Pre-meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "post_meal",
+                    text = "Post-meal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Duration - Text only
+                FilterChip(
+                    id = "1day_detox",
+                    text = "1 Day Cleanse",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "3day_detox",
+                    text = "3 Day Detox",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "5day_detox",
+                    text = "5 Day Reset",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "7day_detox",
+                    text = "7 Day Challenge",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // More specific ingredients - Text only
+                FilterChip(
+                    id = "jalapeno_detox",
+                    text = "Jalapeño",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kiwi_detox",
+                    text = "Kiwi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "berry_mix",
+                    text = "Berry Mix",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tropical_detox",
+                    text = "Tropical Blend",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Price ranges - Text only
+                FilterChip(
+                    id = "detox_under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "detox_200_400",
+                    text = "₹200 - ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "detox_400_600",
+                    text = "₹400 - ₹600",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "detox_above_600",
+                    text = "Above ₹600",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort_by_detox",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = detoxWaterDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val detoxWaterDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_cucumber_mint_detox_1,
+                title = "Cucumber Mint Infused Water",
+                price = "89",
+                restaurantName = "Detox Water Co.",
+                rating = "4.8",
+                deliveryTime = "4-8 mins",
+                distance = "0.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹9",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_lemon_ginger_detox_1,
+                title = "Lemon Ginger Detox Water",
+                price = "99",
+                restaurantName = "Wellness Sips",
+                rating = "4.9",
+                deliveryTime = "5-9 mins",
+                distance = "0.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹15",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_strawberry_basil_detox_1,
+                title = "Strawberry Basil Infusion",
+                price = "129",
+                restaurantName = "Berry Fresh Waters",
+                rating = "4.7",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹13",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_citrus_detox_water_1,
+                title = "Citrus Burst - Orange & Grapefruit",
+                price = "119",
+                restaurantName = "Citrus Hydration",
+                rating = "4.8",
+                deliveryTime = "5-9 mins",
+                distance = "0.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹14",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_watermelon_rosemary_detox_1,
+                title = "Watermelon Rosemary Chill",
+                price = "139",
+                restaurantName = "Fruit Infusions",
+                rating = "4.9",
+                deliveryTime = "7-11 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹14",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_apple_cinnamon_detox_1,
+                title = "Apple Cinnamon Warm Detox",
+                price = "149",
+                restaurantName = "Spice & Wellness",
+                rating = "4.8",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹22",
+                address = "Koregaon Park, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Detox Water Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = detoxWaterDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val detoxWaterDietItems = listOf(
+        // 1-5: CITRUS DETOX WATERS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.detox_water_1,
+            title = "Lemon & Mint Classic Detox",
+            price = "89",
+            restaurantName = "Detox Water Co.",
+            rating = "4.8",
+            deliveryTime = "5-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹9",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.detox_water_2,
+            title = "Orange & Grapefruit Sunrise",
+            price = "99",
+            restaurantName = "Citrus Hydration",
+            rating = "4.9",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹15",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.detox_water_3,
+            title = "Lemon Ginger Metabolism Booster",
+            price = "109",
+            restaurantName = "Wellness Sips",
+            rating = "4.9",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹13",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.detox_water_4,
+            title = "Lime & Basil Fresh Infusion",
+            price = "89",
+            restaurantName = "Fresh Infusions",
+            rating = "4.7",
+            deliveryTime = "4-8 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹9",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.detox_water_5,
+            title = "Tangerine & Rosemary Blend",
+            price = "119",
+            restaurantName = "Herbal Waters",
+            rating = "4.8",
+            deliveryTime = "5-9 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹18",
+            address = "Whitefield, Bangalore"
+        ),
+
+        // 6-10: CUCUMBER & MELON DETOX WATERS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.detox_water_6,
+            title = "Cucumber Mint Cooler",
+            price = "79",
+            restaurantName = "Cool Infusions",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹9",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.detox_water_7,
+            title = "Watermelon & Basil Chill",
+            price = "99",
+            restaurantName = "Summer Sips",
+            rating = "4.9",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹15",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.detox_water_8,
+            title = "Cucumber Lemon & Mint Trio",
+            price = "109",
+            restaurantName = "Triple Infusion",
+            rating = "4.9",
+            deliveryTime = "9-14 mins",
+            distance = "0.6 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹11",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.detox_water_9,
+            title = "Honeydew & Mint Refresh",
+            price = "119",
+            restaurantName = "Melon Waters",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹14",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.detox_water_10,
+            title = "Cucumber Lime Electrolyte",
+            price = "89",
+            restaurantName = "Hydrate Me",
+            rating = "4.8",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹13",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: BERRY & FRUIT INFUSED DETOX WATERS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.detox_water_11,
+            title = "Strawberry & Basil Infusion",
+            price = "129",
+            restaurantName = "Berry Fresh Waters",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.detox_water_12,
+            title = "Mixed Berry Antioxidant Water",
+            price = "149",
+            restaurantName = "Berry Bliss",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.detox_water_13,
+            title = "Pineapple & Ginger Zing",
+            price = "119",
+            restaurantName = "Tropical Infusions",
+            rating = "4.8",
+            deliveryTime = "9-14 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.detox_water_14,
+            title = "Apple & Cinnamon Warm Detox",
+            price = "139",
+            restaurantName = "Spice Waters",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹17",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.detox_water_15,
+            title = "Pear & Rosemary Infusion",
+            price = "129",
+            restaurantName = "Herbal Infusions",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹19",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: SPICE, HERBAL & SPECIALTY DETOX WATERS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.detox_water_16,
+            title = "Turmeric Ginger Immunity Shot",
+            price = "99",
+            restaurantName = "Golden Wellness",
+            rating = "4.9",
+            deliveryTime = "5-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹10",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.detox_water_17,
+            title = "Cucumber Jalapeño Spice Water",
+            price = "109",
+            restaurantName = "Spice Route",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹13",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.detox_water_18,
+            title = "Fennel & Mint Digestive Water",
+            price = "89",
+            restaurantName = "Ayurvedic Sips",
+            rating = "4.9",
+            deliveryTime = "4-8 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹13",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.detox_water_19,
+            title = "Lemon Cayenne Metabolism Boost",
+            price = "99",
+            restaurantName = "Fit Waters",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹10",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.detox_water_20,
+            title = "Detox Trio - Lemon, Cucumber, Mint",
+            price = "119",
+            restaurantName = "The Detox Kitchen",
+            rating = "4.9",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹14",
+            address = "Jubilee Hills, Hyderabad"
         )
-        // Add your detox water items here
+    )
+    Column {
+        detoxWaterDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun HerbalTeaDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(
-            text = "Herbal Tea Items",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val herbalTeaDietFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters_herbal_tea",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // Tea Base Categories with left icons
+                FilterChip(
+                    id = "green_tea",
+                    text = "Green Tea",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_green_tea_herbal_tea
+                ),
+                FilterChip(
+                    id = "black_tea",
+                    text = "Black Tea",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_black_tea_herbal_tea
+                ),
+                FilterChip(
+                    id = "white_tea",
+                    text = "White Tea",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_white_tea_herbal_tea
+                ),
+                FilterChip(
+                    id = "oolong_tea",
+                    text = "Oolong Tea",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_oolong_tea_herbal_tea
+                ),
+                FilterChip(
+                    id = "rooibos_tea",
+                    text = "Rooibos Tea",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rooibos_tea_herbal_tea
+                ),
+                // Specific herbs & spices - Text only
+                FilterChip(
+                    id = "peppermint",
+                    text = "Peppermint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spearmint",
+                    text = "Spearmint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "lemongrass",
+                    text = "Lemongrass",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_tea",
+                    text = "Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "turmeric_tea",
+                    text = "Turmeric",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cinnamon_tea",
+                    text = "Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cardamom",
+                    text = "Cardamom",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "clove",
+                    text = "Clove",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fennel",
+                    text = "Fennel Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "licorice",
+                    text = "Licorice Root",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "echinacea",
+                    text = "Echinacea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "elderberry",
+                    text = "Elderberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "nettle",
+                    text = "Nettle Leaf",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dandelion",
+                    text = "Dandelion Root",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "milk_thistle",
+                    text = "Milk Thistle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Time of day - Text only
+                FilterChip(
+                    id = "morning_tea",
+                    text = "Morning Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "afternoon_tea",
+                    text = "Afternoon Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "evening_tea",
+                    text = "Evening Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bedtime_tea",
+                    text = "Bedtime Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Temperature - Text only
+                FilterChip(
+                    id = "hot_tea",
+                    text = "Hot Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "iced_tea",
+                    text = "Iced Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Origin - Text only
+                FilterChip(
+                    id = "indian_tea",
+                    text = "Indian Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "japanese_tea",
+                    text = "Japanese Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chinese_tea",
+                    text = "Chinese Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "african_tea",
+                    text = "African Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Price ranges - Text only
+                FilterChip(
+                    id = "tea_under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tea_100_250",
+                    text = "₹100 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tea_250_400",
+                    text = "₹250 - ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tea_above_400",
+                    text = "Above ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Dietary preferences - Text only
+                FilterChip(
+                    id = "organic_tea",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_tea",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sugar_free_tea",
+                    text = "No Added Sugar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_tea",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort_by_tea",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
-        // Add your herbal tea items here
+        FilterButtonFood(
+            filterConfig = herbalTeaDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val herbalTeaDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_chamomile_lavender_tea_1,
+                title = "Chamomile Lavender Relaxing Tea",
+                price = "149",
+                restaurantName = "Tranquil Teas",
+                rating = "4.9",
+                deliveryTime = "6-10 mins",
+                distance = "0.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_tulsi_ginger_tea_1,
+                title = "Tulsi Ginger Immunity Tea",
+                price = "129",
+                restaurantName = "Ayurvedic Sips",
+                rating = "4.8",
+                deliveryTime = "5-9 mins",
+                distance = "0.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹19",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_peppermint_lemon_tea_1,
+                title = "Peppermint Lemon Digestive Tea",
+                price = "119",
+                restaurantName = "Fresh Mint Co.",
+                rating = "4.7",
+                deliveryTime = "4-8 mins",
+                distance = "0.1 km",
+                discount = "12%",
+                discountAmount = "up to ₹14",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_hibiscus_rose_tea_1,
+                title = "Hibiscus Rose Antioxidant Blend",
+                price = "159",
+                restaurantName = "Floral Brew",
+                rating = "4.9",
+                deliveryTime = "7-11 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹16",
+                address = "Bandra West, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_turmeric_ginger_tea_1,
+                title = "Turmeric Ginger Golden Milk Tea",
+                price = "169",
+                restaurantName = "Golden Wellness",
+                rating = "4.8",
+                deliveryTime = "6-10 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹25",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_lemon_lemongrass_tea_1,
+                title = "Lemon Lemongrass Detox Tea",
+                price = "139",
+                restaurantName = "Citrus & Herb",
+                rating = "4.8",
+                deliveryTime = "5-9 mins",
+                distance = "0.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹17",
+                address = "Koregaon Park, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = herbalTeaDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
     }
+
 }
 
 @Composable

@@ -34,7 +34,7 @@ fun CategoryDietTabsFList(
     navController: NavHostController? = null,
     onBackClick: () -> Unit = {},
     onTabIndexChanged: (Int) -> Unit = {},
-    name: String = "Diet Categories",
+    name: String = "Healthy Categories",
     initialSelectedIndex: Int = 0
 ) {
     var selectedCategoryIndex by remember { mutableStateOf(initialSelectedIndex) }
@@ -209,7 +209,7 @@ fun WelcomeContentDietFlist(
             .padding(16.dp)
     ) {
         Text(
-            text = "Diet Categories",
+            text = "Healthy Categories",
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.customColors.black

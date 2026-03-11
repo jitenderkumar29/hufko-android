@@ -29499,31 +29499,1625 @@ fun HerbalTeaDietPage() {
         )
     }
 
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val herbalTeaDietItems = listOf(
+        // 1-5: GREEN TEA VARIETIES
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.herbal_tea_1,
+            title = "Classic Green Tea - Zen",
+            price = "149",
+            restaurantName = "Tea Heaven",
+            rating = "4.9",
+            deliveryTime = "8-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹22",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.herbal_tea_2,
+            title = "Jasmine Green Tea Blossom",
+            price = "199",
+            restaurantName = "Floral Brews",
+            rating = "4.8",
+            deliveryTime = "10-15 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.herbal_tea_3,
+            title = "Moroccan Mint Green Tea",
+            price = "179",
+            restaurantName = "Mint & Leaves",
+            rating = "4.9",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹21",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.herbal_tea_4,
+            title = "Matcha Green Tea Powder",
+            price = "299",
+            restaurantName = "Japanese Tea House",
+            rating = "4.9",
+            deliveryTime = "12-18 mins",
+            distance = "0.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.herbal_tea_5,
+            title = "Honey Lemon Green Tea",
+            price = "159",
+            restaurantName = "Wellness Brew",
+            rating = "4.8",
+            deliveryTime = "6-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹16",
+            address = "Whitefield, Bangalore"
+        ),
+
+        // 6-10: HERBAL & TISANE TEAS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.herbal_tea_6,
+            title = "Chamomile Lavender Calm",
+            price = "189",
+            restaurantName = "Evening Serenity",
+            rating = "4.9",
+            deliveryTime = "9-14 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.herbal_tea_7,
+            title = "Peppermint Fresh Digest",
+            price = "169",
+            restaurantName = "Minty Fresh",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹20",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.herbal_tea_8,
+            title = "Rooibos Vanilla Cream",
+            price = "219",
+            restaurantName = "African Brews",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.herbal_tea_9,
+            title = "Hibiscus Berry Burst",
+            price = "179",
+            restaurantName = "Berry & Blossom",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹18",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.herbal_tea_10,
+            title = "Lemon Ginger Turmeric Boost",
+            price = "199",
+            restaurantName = "Immunity Plus",
+            rating = "4.9",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹30",
+            address = "Baner, Pune"
+        ),
+
+        // 11-15: AYURVEDIC & MEDICINAL TEAS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.herbal_tea_11,
+            title = "Tulsi (Holy Basil) Tea",
+            price = "149",
+            restaurantName = "Ayurvedic Sips",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.herbal_tea_12,
+            title = "Ashwagandha Calm & Focus",
+            price = "249",
+            restaurantName = "Ancient Remedies",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹37",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.herbal_tea_13,
+            title = "Triphala Digestive Tea",
+            price = "189",
+            restaurantName = "Ayurveda House",
+            rating = "4.8",
+            deliveryTime = "9-14 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.herbal_tea_14,
+            title = "Cinnamon Cardamom Spice",
+            price = "209",
+            restaurantName = "Spice Route Teas",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹25",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.herbal_tea_15,
+            title = "Licorice Mint Soother",
+            price = "179",
+            restaurantName = "Herbal Harmony",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹27",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+
+        // 16-20: SPECIALTY & WELLNESS TEAS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.herbal_tea_16,
+            title = "Detox Dandelion Root Tea",
+            price = "169",
+            restaurantName = "Cleanse Brew",
+            rating = "4.9",
+            deliveryTime = "5-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹17",
+            address = "Colaba, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.herbal_tea_17,
+            title = "Echinacea Elderberry Immune",
+            price = "229",
+            restaurantName = "Wellness Shield",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹27",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.herbal_tea_18,
+            title = "Nettle Leaf Iron Boost",
+            price = "159",
+            restaurantName = "Green Wellness",
+            rating = "4.9",
+            deliveryTime = "4-8 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹24",
+            address = "Koregaon Park, Pune"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.herbal_tea_19,
+            title = "Bedtime Chamomile Valerian",
+            price = "189",
+            restaurantName = "Sleep Well Teas",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹19",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.herbal_tea_20,
+            title = "Organic Matcha Latte Mix",
+            price = "349",
+            restaurantName = "Premium Brews",
+            rating = "4.9",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹42",
+            address = "Jubilee Hills, Hyderabad"
+        )
+    )
+    Column {
+        herbalTeaDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
+    }
 }
 
 @Composable
 fun ProteinBarDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val proteinBarDietFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters_protein_bar",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // ===== PROTEIN TYPE (WITH LEFT ICONS) =====
+                FilterChip(
+                    id = "whey_protein",
+                    text = "Whey Protein",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_whey_protein
+                ),
+                FilterChip(
+                    id = "casein_protein",
+                    text = "Casein Protein",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_casein_protein
+                ),
+                FilterChip(
+                    id = "soy_protein",
+                    text = "Soy Protein",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_soy_protein
+                ),
+                FilterChip(
+                    id = "pea_protein",
+                    text = "Pea Protein",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pea_protein
+                ),
+                FilterChip(
+                    id = "brown_rice_protein",
+                    text = "Brown Rice Protein",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice_protein
+                ),
+                // ===== FLAVORS (TEXT ONLY) =====
+                // Chocolate Flavors
+                FilterChip(
+                    id = "chocolate",
+                    text = "Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dark_chocolate",
+                    text = "Dark Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_peanut_butter",
+                    text = "Chocolate Peanut Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_mint",
+                    text = "Chocolate Mint",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_coconut",
+                    text = "Chocolate Coconut",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Fruit Flavors
+                FilterChip(
+                    id = "strawberry",
+                    text = "Strawberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "blueberry",
+                    text = "Blueberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mixed_berry",
+                    text = "Mixed Berry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "apple_cinnamon",
+                    text = "Apple Cinnamon",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Nut & Sweet Flavors
+                FilterChip(
+                    id = "peanut_butter",
+                    text = "Peanut Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "almond_butter",
+                    text = "Almond Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cookies_cream",
+                    text = "Cookies & Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vanilla",
+                    text = "Vanilla",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel",
+                    text = "Caramel",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coconut",
+                    text = "Coconut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coffee",
+                    text = "Coffee",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // ===== ADDED INGREDIENTS (TEXT ONLY) =====
+                FilterChip(
+                    id = "with_nuts",
+                    text = "With Nuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_seeds",
+                    text = "With Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_dried_fruit",
+                    text = "With Dried Fruit",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_coconut",
+                    text = "With Coconut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chocolate_chips",
+                    text = "With Chocolate Chips",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_probiotics",
+                    text = "With Probiotics",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_vitamins",
+                    text = "With Added Vitamins",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_minerals",
+                    text = "With Added Minerals",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== TEXTURE (TEXT ONLY) =====
+                FilterChip(
+                    id = "chewy_bar",
+                    text = "Chewy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crunchy_bar",
+                    text = "Crunchy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "soft_baked",
+                    text = "Soft Baked",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crispy_bar",
+                    text = "Crispy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // ===== PRICE RANGES (TEXT ONLY) =====
+                FilterChip(
+                    id = "bar_under_50",
+                    text = "Under ₹50",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bar_50_100",
+                    text = "₹50 - ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bar_100_150",
+                    text = "₹100 - ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bar_150_200",
+                    text = "₹150 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bar_above_200",
+                    text = "Above ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== BRAND TYPE (TEXT ONLY) =====
+                FilterChip(
+                    id = "international_brand",
+                    text = "International Brand",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "indian_brand",
+                    text = "Indian Brand",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium_brand",
+                    text = "Premium Brand",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "value_brand",
+                    text = "Value Brand",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Sort dropdown
+                FilterChip(
+                    id = "sort_by_protein_bar",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2 // 3 rows for better visibility of protein bar filters
+        )
+        FilterButtonFood(
+            filterConfig = proteinBarDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val proteinBarDietItems = listOf(
+            // 1: CHOCOLATE PROTEIN BARS
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_chocolate_peanut_butter_bar,
+                title = "Chocolate Peanut Butter Protein Bar",
+                price = "149",
+                restaurantName = "Muscle Fuel",
+                rating = "4.9",
+                deliveryTime = "8-12 mins",
+                distance = "0.3 km",
+                discount = "10%",
+                discountAmount = "up to ₹15",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_dark_chocolate_almond_bar,
+                title = "Dark Chocolate Almond Crunch Bar",
+                price = "179",
+                restaurantName = "Protein Heaven",
+                rating = "4.8",
+                deliveryTime = "7-11 mins",
+                distance = "0.2 km",
+                discount = "15%",
+                discountAmount = "up to ₹27",
+                address = "Koramangala, Bangalore"
+            ),
+
+            // 2: PLANT-BASED PROTEIN BARS
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_vegan_berry_blast_bar,
+                title = "Vegan Berry Blast Protein Bar",
+                price = "169",
+                restaurantName = "Plant Power",
+                rating = "4.7",
+                deliveryTime = "6-10 mins",
+                distance = "0.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹20",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_coconut_chocolate_bar,
+                title = "Coconut Chocolate Plant Bar",
+                price = "159",
+                restaurantName = "Green Protein",
+                rating = "4.8",
+                deliveryTime = "5-9 mins",
+                distance = "0.1 km",
+                discount = "10%",
+                discountAmount = "up to ₹16",
+                address = "Bandra West, Mumbai"
+            ),
+
+            // 3: HIGH-PROTEIN & SPECIALTY BARS
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_collagen_strawberry_bar,
+                title = "Collagen Strawberry Beauty Bar",
+                price = "199",
+                restaurantName = "Glow & Go",
+                rating = "4.9",
+                deliveryTime = "7-11 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹30",
+                address = "Juhu, Mumbai"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_keto_almond_bar,
+                title = "Keto Almond Butter Protein Bar",
+                price = "189",
+                restaurantName = "Keto Kitchen",
+                rating = "4.8",
+                deliveryTime = "6-10 mins",
+                distance = "0.2 km",
+                discount = "12%",
+                discountAmount = "up to ₹23",
+                address = "Koregaon Park, Pune"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Protein Bar Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = proteinBarDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val proteinBarDietItems = listOf(
+        // 1-5: PROTEIN BARS - CHOCOLATE & DESSERT FLAVORS
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.protein_bar_1,
+            title = "Double Chocolate Brownie Bar",
+            price = "249",
+            restaurantName = "FitFuel Kitchen",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.4 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹50",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.protein_bar_2,
+            title = "Peanut Butter Crunch Bar",
+            price = "229",
+            restaurantName = "Protein Pantry",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.protein_bar_3,
+            title = "Cookies & Cream Delight",
+            price = "259",
+            restaurantName = "Muscle Munchies",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹26",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.protein_bar_4,
+            title = "Salted Caramel Almond Bar",
+            price = "269",
+            restaurantName = "Healthy Indulgence",
+            rating = "4.9",
+            deliveryTime = "8-14 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹32",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.protein_bar_5,
+            title = "White Chocolate Raspberry",
+            price = "279",
+            restaurantName = "Gourmet Gains",
+            rating = "4.8",
+            deliveryTime = "14-19 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹42",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 6-10: PLANT-BASED & VEGAN PROTEIN BARS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.protein_bar_6,
+            title = "Vegan Dark Chocolate Almond",
+            price = "239",
+            restaurantName = "Plant Power",
+            rating = "4.9",
+            deliveryTime = "10-16 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹24",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.protein_bar_7,
+            title = "Pea Protein Blueberry Crunch",
+            price = "219",
+            restaurantName = "Green Protein Co",
+            rating = "4.8",
+            deliveryTime = "9-15 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹26",
+            address = "Andheri East, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.protein_bar_8,
+            title = "Salted Peanut Chocolate",
+            price = "229",
+            restaurantName = "Nutty Barista",
+            rating = "4.9",
+            deliveryTime = "12-17 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.protein_bar_9,
+            title = "Coconut Cashew Delight",
+            price = "249",
+            restaurantName = "Tropical Fit",
+            rating = "4.8",
+            deliveryTime = "8-14 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹25",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.protein_bar_10,
+            title = "Hemp Seed & Cacao Bar",
+            price = "289",
+            restaurantName = "Superfood Kitchen",
+            rating = "4.9",
+            deliveryTime = "11-16 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹43",
+            address = "Koregaon Park, Pune"
+        ),
+
+        // 11-15: HIGH PROTEIN & LOW CARB BARS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.protein_bar_11,
+            title = "Keto Almond Butter Cup",
+            price = "299",
+            restaurantName = "Keto Kingdom",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.3 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹60",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.protein_bar_12,
+            title = "Collagen Protein Bar - Vanilla",
+            price = "319",
+            restaurantName = "Beauty & Brawn",
+            rating = "4.8",
+            deliveryTime = "9-14 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹38",
+            address = "Hinjawadi, Pune"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.protein_bar_13,
+            title = "30g Protein Monster Bar",
+            price = "349",
+            restaurantName = "Massive Gains",
+            rating = "4.9",
+            deliveryTime = "13-18 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹52",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.protein_bar_14,
+            title = "Low Sugar Cinnamon Roll",
+            price = "269",
+            restaurantName = "Sugar-Free Zone",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹27",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.protein_bar_15,
+            title = "Brownie Batter High Protein",
+            price = "279",
+            restaurantName = "Protein Bakery",
+            rating = "4.9",
+            deliveryTime = "10-16 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹33",
+            address = "Banjara Hills, Hyderabad"
+        ),
+
+        // 16-20: ENERGY & PRE-WORKOUT BARS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.protein_bar_16,
+            title = "Coffee Espresso Protein Bar",
+            price = "239",
+            restaurantName = "Caffeine & Protein",
+            rating = "4.9",
+            deliveryTime = "7-12 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹36",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.protein_bar_17,
+            title = "Apple Cinnamon Oat Bar",
+            price = "199",
+            restaurantName = "Wholesome Bites",
+            rating = "4.8",
+            deliveryTime = "8-13 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹20",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.protein_bar_18,
+            title = "Matcha Green Tea Protein Bar",
+            price = "259",
+            restaurantName = "Matcha Mania",
+            rating = "4.9",
+            deliveryTime = "9-15 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹31",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.protein_bar_19,
+            title = "Berry Blast Energy Bar",
+            price = "219",
+            restaurantName = "Berry Active",
+            rating = "4.8",
+            deliveryTime = "6-11 mins",
+            distance = "0.2 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹33",
+            address = "Golf Course Road, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.protein_bar_20,
+            title = "Peanut Butter & Jelly Bar",
+            price = "249",
+            restaurantName = "School Snacks",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹25",
+            address = "Noida Sector 18, Noida"
         )
-        // Add your protein bar items here
+    )
+    Column {
+        proteinBarDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun BoiledEggsDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val boiledEggsDietFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters_boiled_eggs",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // ===== EGG PREPARATION STYLE (WITH LEFT ICONS) =====
+                FilterChip(
+                    id = "soft_boiled",
+                    text = "Soft Boiled (Runny Yolk)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_soft_boiled_egg
+                ),
+                FilterChip(
+                    id = "medium_boiled",
+                    text = "Medium Boiled (Semi-Soft)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_medium_boiled_egg
+                ),
+                FilterChip(
+                    id = "hard_boiled",
+                    text = "Hard Boiled (Firm Yolk)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_hard_boiled_egg
+                ),
+                FilterChip(
+                    id = "peeled_eggs",
+                    text = "Pre-Peeled Eggs",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_peeled_egg
+                ),
+
+                // ===== EGG TYPE (WITH LEFT ICONS) =====
+                FilterChip(
+                    id = "regular_eggs",
+                    text = "Regular White Eggs",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_white_egg
+                ),
+                // ===== SERVING SIZE (TEXT ONLY) =====
+                FilterChip(
+                    id = "single_egg",
+                    text = "Single Egg",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "two_eggs",
+                    text = "2 Eggs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "three_eggs",
+                    text = "3 Eggs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "four_eggs",
+                    text = "4 Eggs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "half_dozen",
+                    text = "Half Dozen (6)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "full_dozen",
+                    text = "Full Dozen (12)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // ===== ACCOMPANIMENTS (TEXT ONLY) =====
+                FilterChip(
+                    id = "with_bread",
+                    text = "With Bread Toast",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_butter",
+                    text = "With Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_salt",
+                    text = "With Salt Packet",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_mayo",
+                    text = "With Mayo Dip",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_mustard",
+                    text = "With Mustard Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_hot_sauce",
+                    text = "With Hot Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== DIETARY PREFERENCES (TEXT ONLY) =====
+                FilterChip(
+                    id = "low_calorie",
+                    text = "Low Calorie",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_friendly",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paleo_diet",
+                    text = "Paleo Diet",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== PRICE RANGES (TEXT ONLY) =====
+                FilterChip(
+                    id = "eggs_under_30",
+                    text = "Under ₹30",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggs_30_60",
+                    text = "₹30 - ₹60",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggs_60_100",
+                    text = "₹60 - ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggs_above_100",
+                    text = "Above ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // ===== PACKAGING OPTIONS (TEXT ONLY) =====
+                FilterChip(
+                    id = "eco_packaging",
+                    text = "Eco-Friendly Packaging",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "insulated_box",
+                    text = "Insulated Box",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_ice_pack",
+                    text = "With Ice Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort_by_eggs",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = boiledEggsDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val boiledEggsDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_single_boiled_egg,
+                title = "Classic Soft Boiled Egg (Runny Yolk)",
+                price = "25",
+                restaurantName = "Eggspress",
+                rating = "4.8",
+                deliveryTime = "5-10 mins",
+                distance = "0.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹3",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_double_boiled_eggs,
+                title = "Classic Medium Boiled Eggs (2 pcs)",
+                price = "45",
+                restaurantName = "Protein Pitstop",
+                rating = "4.9",
+                deliveryTime = "6-11 mins",
+                distance = "0.3 km",
+                discount = "12%",
+                discountAmount = "up to ₹5",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_hard_boiled_eggs_peeled,
+                title = "Hard Boiled Eggs (2 pcs) - Pre-Peeled",
+                price = "49",
+                restaurantName = "Peel & Eat",
+                rating = "4.7",
+                deliveryTime = "4-8 mins",
+                distance = "0.1 km",
+                discount = "15%",
+                discountAmount = "up to ₹7",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_dozen_boiled_eggs,
+                title = "Half Dozen Boiled Eggs (6 pcs)",
+                price = "129",
+                restaurantName = "Egg Cart",
+                rating = "4.9",
+                deliveryTime = "10-15 mins",
+                distance = "0.4 km",
+                discount = "12%",
+                discountAmount = "up to ₹15",
+                address = "Whitefield, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_full_dozen_boiled_eggs,
+                title = "Full Dozen Boiled Eggs (12 pcs) - Family Pack",
+                price = "239",
+                restaurantName = "The Egg Factory",
+                rating = "4.8",
+                deliveryTime = "12-18 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹36",
+                address = "MG Road, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_salt_pepper_eggs,
+                title = "Salt & Pepper Boiled Eggs (2 pcs)",
+                price = "55",
+                restaurantName = "Spice & Shell",
+                rating = "4.8",
+                deliveryTime = "5-9 mins",
+                distance = "0.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹6",
+                address = "Bandra West, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Boiled Eggs Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = boiledEggsDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val boiledEggsDietItems = listOf(
+        // 1-5: CLASSIC BOILED EGGS - PLAIN & SIMPLE
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.boiled_egg_1,
+            title = "Classic Soft Boiled Egg (Runny Yolk)",
+            price = "25",
+            restaurantName = "Eggspress",
+            rating = "4.8",
+            deliveryTime = "5-10 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹3",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.boiled_egg_2,
+            title = "Classic Medium Boiled Eggs (2 pcs)",
+            price = "45",
+            restaurantName = "Protein Pitstop",
+            rating = "4.9",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹5",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.boiled_egg_3,
+            title = "Hard Boiled Eggs (2 pcs) - Pre-Peeled",
+            price = "49",
+            restaurantName = "Peel & Eat",
+            rating = "4.7",
+            deliveryTime = "4-8 mins",
+            distance = "0.1 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹7",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.boiled_egg_4,
+            title = "Half Dozen Boiled Eggs (6 pcs)",
+            price = "129",
+            restaurantName = "Egg Cart",
+            rating = "4.9",
+            deliveryTime = "10-15 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.boiled_egg_5,
+            title = "Full Dozen Boiled Eggs (12 pcs) - Family Pack",
+            price = "239",
+            restaurantName = "The Egg Factory",
+            rating = "4.8",
+            deliveryTime = "12-18 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹36",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 6-10: SEASONED & FLAVORED BOILED EGGS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.boiled_egg_6,
+            title = "Salt & Pepper Boiled Eggs (2 pcs)",
+            price = "55",
+            restaurantName = "Spice & Shell",
+            rating = "4.8",
+            deliveryTime = "5-9 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹6",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.boiled_egg_7,
+            title = "Chaat Masala Boiled Eggs (2 pcs)",
+            price = "59",
+            restaurantName = "Indian Egg Co",
+            rating = "4.9",
+            deliveryTime = "6-10 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹7",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.boiled_egg_8,
+            title = "Chili & Lime Boiled Eggs (2 pcs)",
+            price = "59",
+            restaurantName = "Tangy Eggs",
+            rating = "4.8",
+            deliveryTime = "5-9 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹6",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.boiled_egg_9,
+            title = "Lemon Pepper & Herb Boiled Eggs (2 pcs)",
+            price = "65",
+            restaurantName = "Herb & Egg",
+            rating = "4.9",
+            deliveryTime = "6-11 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹10",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.boiled_egg_10,
+            title = "Cumin & Red Chili Boiled Eggs (2 pcs)",
+            price = "55",
+            restaurantName = "Masala Eggs",
+            rating = "4.8",
+            deliveryTime = "5-9 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹6",
+            address = "Koregaon Park, Pune"
+        ),
+
+        // 11-15: EGG VARIETIES & PREMIUM OPTIONS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.boiled_egg_11,
+            title = "Organic Brown Boiled Eggs (2 pcs)",
+            price = "79",
+            restaurantName = "Organic Farm Fresh",
+            rating = "4.9",
+            deliveryTime = "8-12 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹9",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.boiled_egg_12,
+            title = "Omega-3 Enriched Boiled Eggs (2 pcs)",
+            price = "89",
+            restaurantName = "Healthy Hen",
+            rating = "4.8",
+            deliveryTime = "7-11 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹9",
+            address = "Hinjawadi, Pune"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.boiled_egg_13,
+            title = "Free Range Boiled Eggs (2 pcs)",
+            price = "85",
+            restaurantName = "Happy Hens",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹13",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.boiled_egg_14,
+            title = "Quail Boiled Eggs (6 pcs) - Gourmet",
+            price = "149",
+            restaurantName = "Gourmet Eggs",
+            rating = "4.9",
+            deliveryTime = "9-14 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹18",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.boiled_egg_15,
+            title = "Jumbo Size Boiled Eggs (2 pcs) - Extra Large",
+            price = "95",
+            restaurantName = "Big Egg Energy",
+            rating = "4.8",
+            deliveryTime = "6-10 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹10",
+            address = "Banjara Hills, Hyderabad"
+        ),
+
+        // 16-20: EGG MEAL COMBOS & ACCOMPANIMENTS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.boiled_egg_16,
+            title = "Boiled Eggs with Brown Bread Toast (2 pcs)",
+            price = "99",
+            restaurantName = "Egg & Toast",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹12",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.boiled_egg_17,
+            title = "Boiled Eggs with Butter & Salt (2 pcs)",
+            price = "69",
+            restaurantName = "Butter Egg Co",
+            rating = "4.9",
+            deliveryTime = "5-9 mins",
+            distance = "0.2 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹7",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.boiled_egg_18,
+            title = "Boiled Eggs with Mayo Dip (2 pcs)",
+            price = "79",
+            restaurantName = "Dip & Egg",
+            rating = "4.8",
+            deliveryTime = "6-10 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹12",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.boiled_egg_19,
+            title = "Protein Pack: 4 Boiled Eggs + Seasoning",
+            price = "129",
+            restaurantName = "Gym Fuel",
+            rating = "4.9",
+            deliveryTime = "8-13 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Golf Course Road, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.boiled_egg_20,
+            title = "Breakfast Special: 2 Eggs + Bread + Butter",
+            price = "119",
+            restaurantName = "Morning Boost",
+            rating = "4.8",
+            deliveryTime = "7-12 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹12",
+            address = "Noida Sector 18, Noida"
         )
-        // Add your boiled eggs items here
+    )
+    Column {
+        boiledEggsDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 

@@ -31123,41 +31123,1674 @@ fun BoiledEggsDietPage() {
 
 @Composable
 fun HummusPlateDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val hummusPlateDietFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters_hummus_plate",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // ===== HUMMUS BASE FLAVORS (WITH LEFT ICONS) =====
+                FilterChip(
+                    id = "classic_hummus",
+                    text = "Classic Hummus",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_hummus  // Chickpea icon
+                ),
+                FilterChip(
+                    id = "roasted_red_pepper",
+                    text = "Roasted Red Pepper",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_red_pepper  // Pepper icon
+                ),
+                FilterChip(
+                    id = "garlic_hummus",
+                    text = "Garlic Hummus",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_garlic  // Garlic icon
+                ),
+                FilterChip(
+                    id = "spicy_hummus",
+                    text = "Spicy Hummus",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chilli  // Chilli icon
+                ),
+                FilterChip(
+                    id = "roasted_beetroot",
+                    text = "Roasted Beetroot",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_beetroot  // Beetroot icon
+                ),
+                // ===== SERVING STYLE (TEXT ONLY) =====
+                FilterChip(
+                    id = "regular_plate",
+                    text = "Regular Plate (200g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_plate",
+                    text = "Large Plate (350g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_size",
+                    text = "Family Size (500g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_platter",
+                    text = "Party Platter (1kg)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== ACCOMPANIMENTS (TEXT ONLY) =====
+                FilterChip(
+                    id = "with_pita_bread",
+                    text = "With Pita Bread",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_veggie_sticks",
+                    text = "With Veggie Sticks",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_crackers",
+                    text = "With Crackers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_falafel",
+                    text = "With Falafel (3 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_grilled_veggies",
+                    text = "With Grilled Veggies",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== EXTRAS (TEXT ONLY) =====
+                FilterChip(
+                    id = "extra_tahini",
+                    text = "Extra Tahini Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_garlic",
+                    text = "Extra Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_lemon",
+                    text = "Extra Lemon Juice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_sumac",
+                    text = "Extra Sumac",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== DIETARY PREFERENCES (TEXT ONLY) =====
+                FilterChip(
+                    id = "gluten_free",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_option",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oil_free",
+                    text = "Oil Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "organic",
+                    text = "Organic Chickpeas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sodium",
+                    text = "Low Sodium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== PRICE RANGES (TEXT ONLY) =====
+                FilterChip(
+                    id = "hummus_under_150",
+                    text = "Under ₹150",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hummus_150_250",
+                    text = "₹150 - ₹250",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hummus_250_400",
+                    text = "₹250 - ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hummus_above_400",
+                    text = "Above ₹400",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort_by_hummus",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = hummusPlateDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val hummusPlateDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_hummus_plate,
+                title = "Classic Hummus Plate with Pita",
+                price = "189",
+                restaurantName = "Hummus House",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹28",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_hummus_falafel_bowl,
+                title = "Hummus & Falafel Bowl (3 Falafels)",
+                price = "249",
+                restaurantName = "Mediterranean Delight",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹50",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_hummus_veggie_platter,
+                title = "Hummus with Grilled Veggies Platter",
+                price = "279",
+                restaurantName = "Green Garden Cafe",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "0.4 km",
+                discount = "10%",
+                discountAmount = "up to ₹28",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_hummus_pine_nuts,
+                title = "Premium Hummus with Pine Nuts",
+                price = "329",
+                restaurantName = "The Hummus Lab",
+                rating = "4.9",
+                deliveryTime = "12-18 mins",
+                distance = "0.2 km",
+                discount = "25%",
+                discountAmount = "up to ₹82",
+                address = "Whitefield, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_hummus_pomegranate,
+                title = "Roasted Beetroot Hummus with Pomegranate",
+                price = "299",
+                restaurantName = "Colorful Eats",
+                rating = "4.8",
+                deliveryTime = "16-21 mins",
+                distance = "0.6 km",
+                discount = "12%",
+                discountAmount = "up to ₹36",
+                address = "MG Road, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_hummus_party_platter,
+                title = "Hummus Party Platter (4 Varieties)",
+                price = "549",
+                restaurantName = "Hummus Central",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "0.8 km",
+                discount = "18%",
+                discountAmount = "up to ₹99",
+                address = "Bandra West, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Hummus Plate Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = hummusPlateDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val hummusPlateDietItems = listOf(
+        // 1-5: CLASSIC HUMMUS - PLAIN & SIMPLE
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.hummus_classic_1,
+            title = "Classic Hummus Plate with Pita Bread",
+            price = "189",
+            restaurantName = "Hummus House",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹28",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.hummus_classic_2,
+            title = "Traditional Hummus Bowl (300g)",
+            price = "219",
+            restaurantName = "Mediterranean Delight",
+            rating = "4.8",
+            deliveryTime = "18-23 mins",
+            distance = "0.5 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹22",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.hummus_classic_3,
+            title = "Small Hummus Dip (150g) - Side Portion",
+            price = "129",
+            restaurantName = "Dip & Sip",
+            rating = "4.7",
+            deliveryTime = "10-15 mins",
+            distance = "0.2 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹15",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.hummus_classic_4,
+            title = "Family Size Hummus Platter (500g)",
+            price = "399",
+            restaurantName = "Hummus Central",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.6 km",
+            discount = "18% OFF",
+            discountAmount = "up to ₹72",
+            address = "Whitefield, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.hummus_classic_5,
+            title = "Party Platter Hummus (1kg) with Pita",
+            price = "649",
+            restaurantName = "The Hummus Factory",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "0.8 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹130",
+            address = "MG Road, Bangalore"
+        ),
+
+        // 6-10: FLAVORED & SPECIALTY HUMMUS
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.hummus_flavored_6,
+            title = "Roasted Red Pepper Hummus Plate",
+            price = "239",
+            restaurantName = "Flavor Fiesta",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹29",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.hummus_flavored_7,
+            title = "Garlic Lover's Hummus (Extra Tahini)",
+            price = "229",
+            restaurantName = "Garlic & Co",
+            rating = "4.9",
+            deliveryTime = "14-19 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹34",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.hummus_flavored_8,
+            title = "Spicy Jalapeño Hummus Bowl",
+            price = "249",
+            restaurantName = "Spice Route",
+            rating = "4.8",
+            deliveryTime = "16-21 mins",
+            distance = "0.4 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹25",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.hummus_flavored_9,
+            title = "Roasted Beetroot Hummus (Vibrant Pink)",
+            price = "259",
+            restaurantName = "Colorful Eats",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.3 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹39",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.hummus_flavored_10,
+            title = "Black Olive & Sun-Dried Tomato Hummus",
+            price = "269",
+            restaurantName = "Mediterranean Flavors",
+            rating = "4.8",
+            deliveryTime = "17-22 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹32",
+            address = "Koregaon Park, Pune"
+        ),
+
+        // 11-15: HUMMUS WITH TOPPINGS & PREMIUM OPTIONS
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.hummus_topped_11,
+            title = "Hummus with Whole Chickpeas & Paprika",
+            price = "279",
+            restaurantName = "Topped Off",
+            rating = "4.9",
+            deliveryTime = "16-21 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹33",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.hummus_topped_12,
+            title = "Premium Hummus with Pine Nuts",
+            price = "329",
+            restaurantName = "Luxury Dip",
+            rating = "4.9",
+            deliveryTime = "18-23 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹49",
+            address = "Hinjawadi, Pune"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.hummus_topped_13,
+            title = "Hummus with Pomegranate Seeds",
+            price = "299",
+            restaurantName = "Ruby Eats",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹30",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.hummus_topped_14,
+            title = "Hummus with Sautéed Mushrooms",
+            price = "289",
+            restaurantName = "Earth & Harvest",
+            rating = "4.8",
+            deliveryTime = "16-21 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹35",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.hummus_topped_15,
+            title = "Hummus with Lamb-Stuffed (Veg Option)",
+            price = "319",
+            restaurantName = "Fusion Kitchen",
+            rating = "4.9",
+            deliveryTime = "19-24 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹48",
+            address = "Banjara Hills, Hyderabad"
+        ),
+
+        // 16-20: HUMMUS MEAL COMBOS & ACCOMPANIMENTS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.hummus_combo_16,
+            title = "Hummus with Falafel (3 pcs) & Pita",
+            price = "329",
+            restaurantName = "Falafel King",
+            rating = "4.9",
+            deliveryTime = "18-23 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹49",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.hummus_combo_17,
+            title = "Hummus with Grilled Veggies Platter",
+            price = "299",
+            restaurantName = "Garden Fresh",
+            rating = "4.8",
+            deliveryTime = "16-21 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹36",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.hummus_combo_18,
+            title = "Hummus with Fresh Veggie Sticks",
+            price = "259",
+            restaurantName = "Crunchy Bites",
+            rating = "4.8",
+            deliveryTime = "14-19 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹26",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.hummus_combo_19,
+            title = "Hummus Trio (3 Flavors) with Pita",
+            price = "449",
+            restaurantName = "Taste Trio",
+            rating = "4.9",
+            deliveryTime = "22-27 mins",
+            distance = "0.6 km",
+            discount = "18% OFF",
+            discountAmount = "up to ₹81",
+            address = "Golf Course Road, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.hummus_combo_20,
+            title = "Mediterranean Feast: Hummus + 4 Dips",
+            price = "599",
+            restaurantName = "Med Feast",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "0.7 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹120",
+            address = "Noida Sector 18, Noida"
         )
-        // Add your hummus plate items here
+    )
+    Column {
+        hummusPlateDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun SushiRollsDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val sushiRollsDietFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters_sushi_rolls",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // ===== SUSHI TYPES (WITH LEFT ICONS) =====
+                FilterChip(
+                    id = "maki_rolls",
+                    text = "Maki Rolls",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_maki_roll  // Classic rolled sushi icon
+                ),
+                FilterChip(
+                    id = "uramaki_rolls",
+                    text = "Uramaki (Inside-Out)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_uramaki  // Inside-out roll icon
+                ),
+                FilterChip(
+                    id = "temaki",
+                    text = "Temaki (Hand Rolls)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_temaki  // Cone-shaped hand roll icon
+                ),
+                FilterChip(
+                    id = "nigiri",
+                    text = "Nigiri",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_nigiri  // Fish on rice icon
+                ),
+                FilterChip(
+                    id = "sashimi",
+                    text = "Sashimi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_sashimi  // Sliced fish icon
+                ),
+                // ===== POPULAR ROLLS (TEXT ONLY) =====
+                FilterChip(
+                    id = "california_roll",
+                    text = "California Roll",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_tuna_roll",
+                    text = "Spicy Tuna Roll",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rainbow_roll",
+                    text = "Rainbow Roll",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dragon_roll",
+                    text = "Dragon Roll",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "philadelphia_roll",
+                    text = "Philadelphia Roll",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spider_roll",
+                    text = "Spider Roll",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rainbow_roll",
+                    text = "Rainbow Roll",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== ROLL SIZES (TEXT ONLY) =====
+                FilterChip(
+                    id = "regular_roll",
+                    text = "Regular (6 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_roll",
+                    text = "Large (8 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_tray",
+                    text = "Party Tray (12-15 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "combo_platter",
+                    text = "Combo Platter (24 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== ACCOMPANIMENTS (TEXT ONLY) =====
+                FilterChip(
+                    id = "with_wasabi",
+                    text = "With Wasabi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_ginger",
+                    text = "With Pickled Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_soy_sauce",
+                    text = "With Soy Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_miso_soup",
+                    text = "With Miso Soup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_edamame",
+                    text = "With Edamame",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== EXTRAS & TOPPINGS (TEXT ONLY) =====
+                FilterChip(
+                    id = "extra_wasabi",
+                    text = "Extra Wasabi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_ginger",
+                    text = "Extra Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sesame_seeds",
+                    text = "Toasted Sesame Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "flying_fish_roe",
+                    text = "Flying Fish Roe (Tobiko)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spicy_mayo",
+                    text = "Spicy Mayo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eel_sauce",
+                    text = "Eel Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== DIETARY PREFERENCES (TEXT ONLY) =====
+                FilterChip(
+                    id = "gluten_free_sushi",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian_sushi",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_sushi",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_carb_sushi",
+                    text = "Low Carb (No Rice)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_rice",
+                    text = "Brown Rice Option",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== PRICE RANGES (TEXT ONLY) =====
+                FilterChip(
+                    id = "sushi_under_300",
+                    text = "Under ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sushi_300_600",
+                    text = "₹300 - ₹600",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sushi_600_1000",
+                    text = "₹600 - ₹1000",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sushi_above_1000",
+                    text = "Above ₹1000",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Sort dropdown
+                FilterChip(
+                    id = "sort_by_sushi",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = sushiRollsDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val sushiRollsDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_california_roll,
+                title = "California Roll (8 pcs)",
+                price = "349",
+                restaurantName = "Sushi Master",
+                rating = "4.8",
+                deliveryTime = "25-30 mins",
+                distance = "0.4 km",
+                discount = "20%",
+                discountAmount = "up to ₹70",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_spicy_tuna_roll,
+                title = "Spicy Tuna Roll with Avocado",
+                price = "429",
+                restaurantName = "Tokyo Bay",
+                rating = "4.9",
+                deliveryTime = "20-25 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹64",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_salmon_nigiri_set,
+                title = "Salmon Nigiri (5 pcs) with Wasabi",
+                price = "499",
+                restaurantName = "Sushi & Co.",
+                rating = "4.7",
+                deliveryTime = "18-22 mins",
+                distance = "0.5 km",
+                discount = "10%",
+                discountAmount = "up to ₹50",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_rainbow_roll,
+                title = "Rainbow Roll (Assorted Fish)",
+                price = "589",
+                restaurantName = "Osaka Sushi Bar",
+                rating = "4.9",
+                deliveryTime = "22-28 mins",
+                distance = "0.6 km",
+                discount = "25%",
+                discountAmount = "up to ₹147",
+                address = "Whitefield, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_vegetarian_sushi_combo,
+                title = "Vegetarian Sushi Combo (12 pcs)",
+                price = "379",
+                restaurantName = "Green Sushi House",
+                rating = "4.8",
+                deliveryTime = "15-20 mins",
+                distance = "0.2 km",
+                discount = "30%",
+                discountAmount = "up to ₹114",
+                address = "MG Road, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_sashimi_deluxe_platter,
+                title = "Deluxe Sashimi Platter (15 pcs)",
+                price = "899",
+                restaurantName = "Sakura Japanese Restaurant",
+                rating = "4.9",
+                deliveryTime = "25-30 mins",
+                distance = "0.8 km",
+                discount = "12%",
+                discountAmount = "up to ₹108",
+                address = "Bandra West, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "Sushi Rolls Items",
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = sushiRollsDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+    Text(
+        text = "Restaurants delivering to you",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = "Featured restaurants",
+        style = MaterialTheme.typography.bodySmall.copy(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+            color = MaterialTheme.customColors.black
+        ),
+//            textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+
+    // Sample data based on the provided images
+    val sushiRollsDietItems = listOf(
+        // 1-5: CLASSIC MAKI ROLLS - SIMPLE & TRADITIONAL
+        RestaurantItemFull(
+            id = 1,
+            imageRes = R.drawable.sushi_classic_1,
+            title = "Classic California Roll (8 pcs)",
+            price = "349",
+            restaurantName = "Sushi Master",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹52",
+            address = "Indiranagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 2,
+            imageRes = R.drawable.sushi_classic_2,
+            title = "Tuna Maki Roll (6 pcs) with Soy Sauce",
+            price = "399",
+            restaurantName = "Tokyo Bay",
+            rating = "4.8",
+            deliveryTime = "18-23 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹40",
+            address = "Koramangala, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 3,
+            imageRes = R.drawable.sushi_classic_3,
+            title = "Salmon Avocado Roll (8 pcs)",
+            price = "429",
+            restaurantName = "Sushi & Co.",
+            rating = "4.9",
+            deliveryTime = "15-20 mins",
+            distance = "0.2 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹51",
+            address = "Jayanagar, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 4,
+            imageRes = R.drawable.sushi_classic_4,
+            title = "Cucumber Maki (Kappa Roll) - 6 pcs",
+            price = "249",
+            restaurantName = "Green Sushi House",
+            rating = "4.7",
+            deliveryTime = "12-17 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹25",
+            address = "MG Road, Bangalore"
+        ),
+        RestaurantItemFull(
+            id = 5,
+            imageRes = R.drawable.sushi_classic_5,
+            title = "Avocado Maki Roll (6 pcs) - Vegan",
+            price = "279",
+            restaurantName = "Plant Based Sushi",
+            rating = "4.8",
+            deliveryTime = "14-19 mins",
+            distance = "0.4 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹33",
+            address = "Whitefield, Bangalore"
+        ),
+
+        // 6-10: NIGIRI & SASHIMI - PURE & PREMIUM
+        RestaurantItemFull(
+            id = 6,
+            imageRes = R.drawable.sushi_nigiri_6,
+            title = "Salmon Nigiri (5 pcs) with Wasabi",
+            price = "499",
+            restaurantName = "Osaka Sushi Bar",
+            rating = "4.9",
+            deliveryTime = "18-23 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹75",
+            address = "Bandra West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 7,
+            imageRes = R.drawable.sushi_nigiri_7,
+            title = "Tuna Nigiri (5 pcs) - Fresh Catch",
+            price = "549",
+            restaurantName = "Mumbai Fish Co.",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹66",
+            address = "Juhu, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 8,
+            imageRes = R.drawable.sushi_nigiri_8,
+            title = "Eel Nigiri (Unagi) - 4 pcs",
+            price = "589",
+            restaurantName = "Sakura Japanese",
+            rating = "4.8",
+            deliveryTime = "22-27 mins",
+            distance = "0.7 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹59",
+            address = "Andheri West, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 9,
+            imageRes = R.drawable.sushi_nigiri_9,
+            title = "Assorted Sashimi Platter (12 pcs)",
+            price = "799",
+            restaurantName = "Sashimi House",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "0.8 km",
+            discount = "18% OFF",
+            discountAmount = "up to ₹144",
+            address = "Powai, Mumbai"
+        ),
+        RestaurantItemFull(
+            id = 10,
+            imageRes = R.drawable.sushi_nigiri_10,
+            title = "Salmon Sashimi (8 slices) - Premium Cut",
+            price = "649",
+            restaurantName = "Ocean Fresh",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.5 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹97",
+            address = "Koregaon Park, Pune"
+        ),
+
+        // 11-15: SPECIALTY ROLLS - SIGNATURE & FUSION
+        RestaurantItemFull(
+            id = 11,
+            imageRes = R.drawable.sushi_specialty_11,
+            title = "Rainbow Roll (Assorted Fish) - 8 pcs",
+            price = "629",
+            restaurantName = "Rainbow Sushi",
+            rating = "4.9",
+            deliveryTime = "22-27 mins",
+            distance = "0.5 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹75",
+            address = "Baner, Pune"
+        ),
+        RestaurantItemFull(
+            id = 12,
+            imageRes = R.drawable.sushi_specialty_12,
+            title = "Spicy Tuna Crunch Roll",
+            price = "549",
+            restaurantName = "Spice Fusion",
+            rating = "4.8",
+            deliveryTime = "20-25 mins",
+            distance = "0.4 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹82",
+            address = "Hinjawadi, Pune"
+        ),
+        RestaurantItemFull(
+            id = 13,
+            imageRes = R.drawable.sushi_specialty_13,
+            title = "Dragon Roll (Eel & Avocado)",
+            price = "679",
+            restaurantName = "Dragon Sushi",
+            rating = "4.9",
+            deliveryTime = "24-29 mins",
+            distance = "0.6 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹81",
+            address = "Gachibowli, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 14,
+            imageRes = R.drawable.sushi_specialty_14,
+            title = "Philadelphia Roll (Cream Cheese)",
+            price = "459",
+            restaurantName = "Creamy Rolls",
+            rating = "4.8",
+            deliveryTime = "18-23 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹46",
+            address = "Jubilee Hills, Hyderabad"
+        ),
+        RestaurantItemFull(
+            id = 15,
+            imageRes = R.drawable.sushi_specialty_15,
+            title = "Volcano Roll (Baked Seafood)",
+            price = "719",
+            restaurantName = "Volcano Kitchen",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "0.7 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹108",
+            address = "Banjara Hills, Hyderabad"
+        ),
+
+        // 16-20: VEGETARIAN & COMBO PLATTERS
+        RestaurantItemFull(
+            id = 16,
+            imageRes = R.drawable.sushi_veggie_16,
+            title = "Vegetarian Sushi Platter (16 pcs)",
+            price = "499",
+            restaurantName = "Veg Sushi House",
+            rating = "4.9",
+            deliveryTime = "20-25 mins",
+            distance = "0.4 km",
+            discount = "18% OFF",
+            discountAmount = "up to ₹90",
+            address = "Connaught Place, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 17,
+            imageRes = R.drawable.sushi_veggie_17,
+            title = "Sweet Potato Tempura Roll",
+            price = "379",
+            restaurantName = "Tempura House",
+            rating = "4.8",
+            deliveryTime = "16-21 mins",
+            distance = "0.3 km",
+            discount = "12% OFF",
+            discountAmount = "up to ₹45",
+            address = "Saket, Delhi"
+        ),
+        RestaurantItemFull(
+            id = 18,
+            imageRes = R.drawable.sushi_veggie_18,
+            title = "Avocado & Cucumber Brown Rice Roll",
+            price = "349",
+            restaurantName = "Healthy Sushi",
+            rating = "4.8",
+            deliveryTime = "15-20 mins",
+            distance = "0.3 km",
+            discount = "10% OFF",
+            discountAmount = "up to ₹35",
+            address = "DLF Cyber City, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 19,
+            imageRes = R.drawable.sushi_veggie_19,
+            title = "Sushi Boat Combo (32 pcs) - 6 Varieties",
+            price = "1299",
+            restaurantName = "Sushi Boat",
+            rating = "4.9",
+            deliveryTime = "30-35 mins",
+            distance = "0.9 km",
+            discount = "20% OFF",
+            discountAmount = "up to ₹260",
+            address = "Golf Course Road, Gurgaon"
+        ),
+        RestaurantItemFull(
+            id = 20,
+            imageRes = R.drawable.sushi_veggie_20,
+            title = "Sushi Making Kit + Fresh Rolls (DIY)",
+            price = "899",
+            restaurantName = "Sushi DIY",
+            rating = "4.9",
+            deliveryTime = "25-30 mins",
+            distance = "0.6 km",
+            discount = "15% OFF",
+            discountAmount = "up to ₹135",
+            address = "Noida Sector 18, Noida"
         )
-        // Add your sushi rolls items here
+    )
+    Column {
+        sushiRollsDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
+        }
     }
 }
 
 @Composable
 fun TofuStirFryDietPage() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(
-            text = "Tofu Stir Fry Items",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.header
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        val tofuStirFryDietFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters_tofu_stir_fry",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // ===== TOFU TYPES (WITH LEFT ICONS) =====
+                FilterChip(
+                    id = "firm_tofu",
+                    text = "Firm Tofu",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_firm_tofu  // Firm tofu block icon
+                ),
+                FilterChip(
+                    id = "extra_firm_tofu",
+                    text = "Extra Firm Tofu",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_extra_firm_tofu  // Dense tofu block icon
+                ),
+                FilterChip(
+                    id = "silken_tofu",
+                    text = "Silken Tofu (Soft)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_silken_tofu  // Soft tofu icon
+                ),
+                FilterChip(
+                    id = "smoked_tofu",
+                    text = "Smoked Tofu",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_smoked_tofu  // Smoked tofu icon
+                ),
+                FilterChip(
+                    id = "baked_tofu",
+                    text = "Baked Tofu",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_baked_tofu  // Baked tofu icon
+                ),
+                // ===== VEGETABLE OPTIONS (TEXT ONLY) =====
+                FilterChip(
+                    id = "broccoli_tofu",
+                    text = "Broccoli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bell_peppers_tofu",
+                    text = "Bell Peppers",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "snap_peas_tofu",
+                    text = "Snap Peas",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrots_tofu",
+                    text = "Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "baby_corn_tofu",
+                    text = "Baby Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bok_choy_tofu",
+                    text = "Bok Choy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "water_chestnuts",
+                    text = "Water Chestnuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bamboo_shoots",
+                    text = "Bamboo Shoots",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== SAUCE OPTIONS (TEXT ONLY) =====
+                FilterChip(
+                    id = "soy_sauce_base",
+                    text = "Soy Sauce Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "teriyaki_sauce",
+                    text = "Teriyaki Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "szechuan_sauce",
+                    text = "Szechuan Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_soy",
+                    text = "Ginger Soy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_chili",
+                    text = "Garlic Chili",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "black_bean_sauce",
+                    text = "Black Bean Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanut_sauce",
+                    text = "Peanut Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sesame_sauce",
+                    text = "Sesame Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // ===== SERVING STYLES (TEXT ONLY) =====
+                FilterChip(
+                    id = "tofu_bowl",
+                    text = "Tofu Bowl (with Rice)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_noodles",
+                    text = "Tofu with Noodles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_alone",
+                    text = "Tofu Only (No Carbs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_quinoa",
+                    text = "Tofu with Quinoa",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_brown_rice",
+                    text = "Tofu with Brown Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== PORTION SIZES (TEXT ONLY) =====
+                FilterChip(
+                    id = "small_tofu",
+                    text = "Small (200g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_tofu",
+                    text = "Regular (350g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_tofu",
+                    text = "Large (500g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_tofu",
+                    text = "Family Pack (800g)",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== DIETARY PREFERENCES (TEXT ONLY) =====
+                FilterChip(
+                    id = "vegan_tofu",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_tofu",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sodium_tofu",
+                    text = "Low Sodium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "oil_free_tofu",
+                    text = "Oil Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_tofu",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein_tofu",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== PRICE RANGES (TEXT ONLY) =====
+                FilterChip(
+                    id = "tofu_under_200",
+                    text = "Under ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_300_450",
+                    text = "₹300 - ₹450",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_above_450",
+                    text = "Above ₹450",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // ===== TOPPINGS (TEXT ONLY) =====
+                FilterChip(
+                    id = "sesame_seeds_tofu",
+                    text = "Sesame Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chopped_peanuts",
+                    text = "Chopped Peanuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spring_onions",
+                    text = "Spring Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_cilantro",
+                    text = "Fresh Cilantro",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chili_flakes",
+                    text = "Chili Flakes",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort_by_tofu",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
-        // Add your tofu stir fry items here
+        FilterButtonFood(
+            filterConfig = tofuStirFryDietFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+        // Sample data with all fields
+        val tofuStirFryDietItems = listOf(
+            FoodItemDoubleF(
+                id = 1,
+                imageRes = R.drawable.ic_classic_tofu_stir_fry,
+                title = "Classic Tofu Stir Fry with Vegetables",
+                price = "299",
+                restaurantName = "Green Wok",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.3 km",
+                discount = "15%",
+                discountAmount = "up to ₹45",
+                address = "Koramangala, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 2,
+                imageRes = R.drawable.ic_szechuan_tofu,
+                title = "Szechuan Tofu Stir Fry (Spicy)",
+                price = "329",
+                restaurantName = "Spice Garden",
+                rating = "4.9",
+                deliveryTime = "22-27 mins",
+                distance = "0.5 km",
+                discount = "20%",
+                discountAmount = "up to ₹66",
+                address = "Indiranagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 3,
+                imageRes = R.drawable.ic_ginger_garlic_tofu,
+                title = "Ginger Garlic Tofu with Broccoli",
+                price = "289",
+                restaurantName = "Wok & Roll",
+                rating = "4.7",
+                deliveryTime = "18-23 mins",
+                distance = "0.2 km",
+                discount = "10%",
+                discountAmount = "up to ₹29",
+                address = "Jayanagar, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 4,
+                imageRes = R.drawable.ic_thai_basil_tofu,
+                title = "Thai Basil Tofu Stir Fry",
+                price = "349",
+                restaurantName = "Thai Basil",
+                rating = "4.8",
+                deliveryTime = "20-25 mins",
+                distance = "0.4 km",
+                discount = "12%",
+                discountAmount = "up to ₹42",
+                address = "Whitefield, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 5,
+                imageRes = R.drawable.ic_tofu_cashew_stir_fry,
+                title = "Tofu & Cashew Nut Stir Fry",
+                price = "379",
+                restaurantName = "Nutty Wok",
+                rating = "4.9",
+                deliveryTime = "15-20 mins",
+                distance = "0.3 km",
+                discount = "18%",
+                discountAmount = "up to ₹68",
+                address = "MG Road, Bangalore"
+            ),
+            FoodItemDoubleF(
+                id = 6,
+                imageRes = R.drawable.ic_teriyaki_tofu_bowl,
+                title = "Teriyaki Tofu Bowl with Brown Rice",
+                price = "399",
+                restaurantName = "Healthy Bowl",
+                rating = "4.8",
+                deliveryTime = "18-22 mins",
+                distance = "0.5 km",
+                discount = "15%",
+                discountAmount = "up to ₹60",
+                address = "Bandra West, Mumbai"
+            )
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+//            textAlign = TextAlign.Center,
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        FoodItemsListWithHeading(
+            heading = null,
+            subtitle = null,
+            foodItems = tofuStirFryDietItems,
+            onItemClick = { foodItem ->
+                println("Food item clicked: ${foodItem.title}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 150.dp,
+            cardHeight = 170.dp,
+            horizontalSpacing = 8.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
     }
+
+
 }
 
 @Composable

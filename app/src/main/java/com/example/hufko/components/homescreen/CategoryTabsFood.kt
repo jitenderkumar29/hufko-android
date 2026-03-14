@@ -821,7 +821,7 @@ fun DietCategoryPage(
                 rating = "4.6",
                 deliveryTime = "12-18 mins",
                 distance = "1.4 km",
-                discount = null,
+                discount = "20%",
                 discountAmount = null,
                 address = "Paschim Vihar, Delhi",
                 calories = "390",
@@ -1167,7 +1167,7 @@ fun AllCategoryPage(
                 rating = "4.3",
                 deliveryTime = "60-65 mins",
                 distance = "5.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹100",
                 address = "Delhi",
                 category = "Fast Food"
@@ -1181,7 +1181,7 @@ fun AllCategoryPage(
                 rating = "4.0",
                 deliveryTime = "30-35 mins",
                 distance = "3.8 km",
-                discount = "ITEMS",
+                discount = "20%",
                 discountAmount = "up to ₹80",
                 address = "Delhi",
                 category = "Pizzas"
@@ -1195,7 +1195,7 @@ fun AllCategoryPage(
                 rating = "4.2",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "Delhi",
                 category = "Burgers"
@@ -1209,7 +1209,7 @@ fun AllCategoryPage(
                 rating = "4.2",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "ITEMS",
+                discount = "20%",
                 discountAmount = "up to ₹60",
                 address = "Delhi",
                 category = "Fast Food"
@@ -1223,7 +1223,7 @@ fun AllCategoryPage(
                 rating = "4.2",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "Delhi",
                 category = "Pizzas"
@@ -1852,7 +1852,7 @@ fun AllCategoryPage(
                 rating = "4.3",
                 deliveryTime = "25-30 mins",
                 distance = "4.3 km",
-                discount = "Upto 40%",
+                discount = "40%",
                 discountAmount = "on select items",
                 address = "Govindpuram",
             ),
@@ -1865,7 +1865,7 @@ fun AllCategoryPage(
                 rating = "4.2",
                 deliveryTime = "50-55 mins",
                 distance = "13.8 km",
-                discount = "FLAT 50%",
+                discount = "50%",
                 discountAmount = "OFF",
                 address = "Meerut",
             ),
@@ -1878,7 +1878,7 @@ fun AllCategoryPage(
                 rating = "4.1",
                 deliveryTime = "60-65 mins",
                 distance = "14.8 km",
-                discount = "",
+                discount = "20%",
                 discountAmount = "OFF",
                 address = "Badarpur",
             ),
@@ -1930,7 +1930,7 @@ fun AllCategoryPage(
                 rating = "4.0",
                 deliveryTime = "55-60 mins",
                 distance = "13 km",
-                discount = "",
+                discount = "20%",
                 discountAmount = "",
                 address = "Hydrabad",
             ),
@@ -1943,7 +1943,7 @@ fun AllCategoryPage(
                 rating = "4.1",
                 deliveryTime = "50-55 mins",
                 distance = "12.6 km",
-                discount = "Flat ₹125",
+                discount = "20%",
                 discountAmount = "",
                 address = "Chennai",
             ),
@@ -1982,7 +1982,7 @@ fun AllCategoryPage(
                 rating = "3.6",
                 deliveryTime = "50-55 mins",
                 distance = "12 km",
-                discount = "Upto 50%",
+                discount = "50%",
                 discountAmount = "on select items",
                 address = "Hydrabad",
             ),
@@ -2008,7 +2008,7 @@ fun AllCategoryPage(
                 rating = "4.1",
                 deliveryTime = "45-50 mins",
                 distance = "14.1 km",
-                discount = "",
+                discount = "20%",
                 discountAmount = "up to ₹120",
                 address = "Badarpur",
             ),
@@ -2021,7 +2021,7 @@ fun AllCategoryPage(
                 rating = "4.0",
                 deliveryTime = "55-60 mins",
                 distance = "13.8 km",
-                discount = "Buy 1 get 1",
+                discount = "20%",
                 discountAmount = "free",
                 address = "Meerut",
             ),
@@ -2330,7 +2330,7 @@ fun PizzasCategoryPage() {
                 rating = "3.9",
                 deliveryTime = "50-55 mins",
                 distance = "8.3 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Main Street, Downtown",
             ),
@@ -2343,7 +2343,7 @@ fun PizzasCategoryPage() {
                 rating = "5.9",
                 deliveryTime = "55-60 mins",
                 distance = "8.2 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Food Court, Mall Road",
             ),
@@ -2356,7 +2356,7 @@ fun PizzasCategoryPage() {
                 rating = "3.4",
                 deliveryTime = "50-55 mins",
                 distance = "6.9 km",
-                discount = "Buy 1 get 1 free",
+                discount = "20%",
                 discountAmount = "On all pizzas",
                 address = "Central Plaza",
             ),
@@ -2369,7 +2369,7 @@ fun PizzasCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "50-55 mins",
                 distance = "9 km",
-                discount = "50% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹100",
                 address = "North End Circle",
             ),
@@ -2382,7 +2382,7 @@ fun PizzasCategoryPage() {
                 rating = "5.43",
                 deliveryTime = "45-50 mins",
                 distance = "6.9 km",
-                discount = "50% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹100",
                 address = "South Extension",
             ),
@@ -2395,7 +2395,7 @@ fun PizzasCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "40-45 mins",
                 distance = "7.5 km",
-                discount = "Buy 1 get 1 free",
+                discount = "20%",
                 discountAmount = "On combo pizzas",
                 address = "West Gate Market",
             ),
@@ -2408,7 +2408,7 @@ fun PizzasCategoryPage() {
                 rating = "4.0",
                 deliveryTime = "50-55 mins",
                 distance = "8.3 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "East Side Plaza",
             ),
@@ -2421,7 +2421,7 @@ fun PizzasCategoryPage() {
                 rating = "3.1",
                 deliveryTime = "45-50 mins",
                 distance = "6.9 km",
-                discount = "Buy 1 get 1 free",
+                discount = "20%",
                 discountAmount = "On medium pizzas",
                 address = "City Center",
             ),
@@ -2434,7 +2434,7 @@ fun PizzasCategoryPage() {
                 rating = "4.0",
                 deliveryTime = "50-55 mins",
                 distance = "8.2 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Commercial Street",
             ),
@@ -2447,7 +2447,7 @@ fun PizzasCategoryPage() {
                 rating = "4.0",
                 deliveryTime = "55-60 mins",
                 distance = "9.1 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Entertainment District",
             ),
@@ -2460,7 +2460,7 @@ fun PizzasCategoryPage() {
                 rating = "4.1",
                 deliveryTime = "50-55 mins",
                 distance = "8.2 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Royal Market",
             ),
@@ -2473,7 +2473,7 @@ fun PizzasCategoryPage() {
                 rating = "4.1",
                 deliveryTime = "55-60 mins",
                 distance = "8.6 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Business Park Area",
             ),
@@ -2486,7 +2486,7 @@ fun PizzasCategoryPage() {
                 rating = "3.2",
                 deliveryTime = "50-55 mins",
                 distance = "6.9 km",
-                discount = "Buy 1 get 1 free",
+                discount = "20%",
                 discountAmount = "On large pizzas",
                 address = "Shopping Complex",
             ),
@@ -2499,7 +2499,7 @@ fun PizzasCategoryPage() {
                 rating = "4.1",
                 deliveryTime = "40-45 mins",
                 distance = "5.8 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Residential Area",
             ),
@@ -2512,7 +2512,7 @@ fun PizzasCategoryPage() {
                 rating = "3.7",
                 deliveryTime = "60-65 mins",
                 distance = "8.6 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "University Road",
             ),
@@ -2525,7 +2525,7 @@ fun PizzasCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "40-45 mins",
                 distance = "5.8 km",
-                discount = "Flat ₹175 OFF",
+                discount = "20%",
                 discountAmount = "above ₹349",
                 address = "Tech Park Zone",
             ),
@@ -2538,7 +2538,7 @@ fun PizzasCategoryPage() {
                 rating = "New",
                 deliveryTime = "45-50 mins",
                 distance = "7.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "International Street",
             ),
@@ -2551,7 +2551,7 @@ fun PizzasCategoryPage() {
                 rating = "4.0",
                 deliveryTime = "40-45 mins",
                 distance = "5.6 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Italian Corner",
             ),
@@ -2564,7 +2564,7 @@ fun PizzasCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "45-50 mins",
                 distance = "7.3 km",
-                discount = "60% OFF",
+                discount = "60%",
                 discountAmount = "up to ₹120",
                 address = "Traditional Market",
             ),
@@ -2577,7 +2577,7 @@ fun PizzasCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "50-55 mins",
                 distance = "9.1 km",
-                discount = "50% OFF",
+                discount = "50%",
                 discountAmount = "up to ₹100",
                 address = "Music Street",
             )
@@ -2850,7 +2850,7 @@ fun CakesCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹80",
                 address = "Bakery Street, City Center"
             ),
@@ -2863,7 +2863,7 @@ fun CakesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹75",
                 address = "MG Road, Downtown"
             ),
@@ -2876,7 +2876,7 @@ fun CakesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "40-50 mins",
                 distance = "3.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹120",
                 address = "European Quarter"
             ),
@@ -2889,7 +2889,7 @@ fun CakesCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹50",
                 address = "Market Lane, South End"
             ),
@@ -2902,7 +2902,7 @@ fun CakesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-45 mins",
                 distance = "4.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹150",
                 address = "Garden Road, East Side"
             ),
@@ -2915,7 +2915,7 @@ fun CakesCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-55 mins",
                 distance = "5.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹120",
                 address = "Food Court, Mega Mall"
             ),
@@ -2928,7 +2928,7 @@ fun CakesCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "30-40 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹60",
                 address = "Wellness Street"
             ),
@@ -2941,7 +2941,7 @@ fun CakesCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹100",
                 address = "Cafe District"
             ),
@@ -2954,7 +2954,7 @@ fun CakesCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "40-50 mins",
                 distance = "3.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹40",
                 address = "Beach Road"
             ),
@@ -2967,7 +2967,7 @@ fun CakesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹70",
                 address = "Fresh Market"
             ),
@@ -2980,7 +2980,7 @@ fun CakesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "50-60 mins",
                 distance = "4.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹100",
                 address = "Art District"
             ),
@@ -2993,7 +2993,7 @@ fun CakesCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "35-45 mins",
                 distance = "3.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹110",
                 address = "Palm Street"
             ),
@@ -3006,7 +3006,7 @@ fun CakesCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "2.3 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹40",
                 address = "Heritage Road"
             ),
@@ -3019,7 +3019,7 @@ fun CakesCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-40 mins",
                 distance = "2.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹70",
                 address = "Residential Area"
             ),
@@ -3032,7 +3032,7 @@ fun CakesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-50 mins",
                 distance = "4.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹160",
                 address = "Orchard Road"
             ),
@@ -3045,7 +3045,7 @@ fun CakesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "35-45 mins",
                 distance = "3.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹80",
                 address = "Seasonal Market"
             ),
@@ -3058,7 +3058,7 @@ fun CakesCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "30-40 mins",
                 distance = "2.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹120",
                 address = "Organic Street"
             ),
@@ -3071,7 +3071,7 @@ fun CakesCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "25-35 mins",
                 distance = "2.4 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹40",
                 address = "Spice Market"
             ),
@@ -3084,7 +3084,7 @@ fun CakesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-50 mins",
                 distance = "4.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹110",
                 address = "Kids Zone"
             ),
@@ -3097,7 +3097,7 @@ fun CakesCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-55 mins",
                 distance = "5.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹80",
                 address = "Luxury Lane"
             )
@@ -3360,7 +3360,7 @@ fun MomosCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "3.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "Connaught Place, Delhi"
             ),
@@ -3373,7 +3373,7 @@ fun MomosCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -3386,7 +3386,7 @@ fun MomosCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "4.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹75",
                 address = "Majnu Ka Tila, Delhi"
             ),
@@ -3399,7 +3399,7 @@ fun MomosCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-30 mins",
                 distance = "3.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹50",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -3412,7 +3412,7 @@ fun MomosCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "35-40 mins",
                 distance = "5.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹80",
                 address = "Saket, Delhi"
             ),
@@ -3425,7 +3425,7 @@ fun MomosCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "20-25 mins",
                 distance = "2.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹60",
                 address = "Karol Bagh, Delhi"
             ),
@@ -3438,7 +3438,7 @@ fun MomosCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "4.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹90",
                 address = "Dwarka, Delhi"
             ),
@@ -3451,7 +3451,7 @@ fun MomosCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "25-30 mins",
                 distance = "3.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹70",
                 address = "Pitampura, Delhi"
             ),
@@ -3464,7 +3464,7 @@ fun MomosCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "6.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹100",
                 address = "CR Park, Delhi"
             ),
@@ -3477,7 +3477,7 @@ fun MomosCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "30-35 mins",
                 distance = "4.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹55",
                 address = "Rohini, Delhi"
             ),
@@ -3490,7 +3490,7 @@ fun MomosCategoryPage() {
                 rating = "4.1",
                 deliveryTime = "25-30 mins",
                 distance = "3.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹65",
                 address = "Janakpuri, Delhi"
             ),
@@ -3503,7 +3503,7 @@ fun MomosCategoryPage() {
                 rating = "4.0",
                 deliveryTime = "20-25 mins",
                 distance = "2.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹50",
                 address = "Vikas Puri, Delhi"
             ),
@@ -3516,7 +3516,7 @@ fun MomosCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "3.9 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹75",
                 address = "Paschim Vihar, Delhi"
             ),
@@ -3529,7 +3529,7 @@ fun MomosCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "25-30 mins",
                 distance = "2.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹60",
                 address = "Patel Nagar, Delhi"
             ),
@@ -3542,7 +3542,7 @@ fun MomosCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "15-20 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹40",
                 address = "Rajendra Place, Delhi"
             ),
@@ -3555,7 +3555,7 @@ fun MomosCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "4.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹85",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -3568,7 +3568,7 @@ fun MomosCategoryPage() {
                 rating = "4.1",
                 deliveryTime = "20-25 mins",
                 distance = "2.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹45",
                 address = "Shalimar Bagh, Delhi"
             ),
@@ -3581,7 +3581,7 @@ fun MomosCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "3.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹80",
                 address = "Model Town, Delhi"
             ),
@@ -3594,7 +3594,7 @@ fun MomosCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-30 mins",
                 distance = "2.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Kirti Nagar, Delhi"
             ),
@@ -3607,7 +3607,7 @@ fun MomosCategoryPage() {
                 rating = "4.0",
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Naraina, Delhi"
             )
@@ -3882,7 +3882,7 @@ fun RollsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹70",
                 address = "Connaught Place, Delhi"
             ),
@@ -3895,7 +3895,7 @@ fun RollsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹45",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -3908,7 +3908,7 @@ fun RollsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "3.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -3921,7 +3921,7 @@ fun RollsCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹55",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -3934,7 +3934,7 @@ fun RollsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "4.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "CR Park, Delhi"
             ),
@@ -3947,7 +3947,7 @@ fun RollsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-30 mins",
                 distance = "3.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹75",
                 address = "Karol Bagh, Delhi"
             ),
@@ -3960,7 +3960,7 @@ fun RollsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹65",
                 address = "Greater Kailash, Delhi"
             ),
@@ -3973,7 +3973,7 @@ fun RollsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "4.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹85",
                 address = "Saket, Delhi"
             ),
@@ -3986,7 +3986,7 @@ fun RollsCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Pitampura, Delhi"
             ),
@@ -3999,7 +3999,7 @@ fun RollsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "3.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Rohini, Delhi"
             ),
@@ -4012,7 +4012,7 @@ fun RollsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "2.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹50",
                 address = "Dwarka, Delhi"
             ),
@@ -4025,7 +4025,7 @@ fun RollsCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "30-35 mins",
                 distance = "4.6 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹70",
                 address = "Jasola, Delhi"
             ),
@@ -4038,7 +4038,7 @@ fun RollsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "3.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹75",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -4051,7 +4051,7 @@ fun RollsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "2.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹65",
                 address = "Janakpuri, Delhi"
             ),
@@ -4064,7 +4064,7 @@ fun RollsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "5.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹95",
                 address = "Mehrauli, Delhi"
             ),
@@ -4077,7 +4077,7 @@ fun RollsCategoryPage() {
                 rating = "4.1",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Shahdara, Delhi"
             ),
@@ -4090,7 +4090,7 @@ fun RollsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "3.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Paschim Vihar, Delhi"
             ),
@@ -4103,7 +4103,7 @@ fun RollsCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹45",
                 address = "Patel Nagar, Delhi"
             ),
@@ -4116,7 +4116,7 @@ fun RollsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "4.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹100",
                 address = "Mayur Vihar, Delhi"
             ),
@@ -4129,7 +4129,7 @@ fun RollsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "3.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹90",
                 address = "Nehru Place, Delhi"
             )
@@ -4412,7 +4412,7 @@ fun BurgersCategoryPage() {
             rating = "4.5",
             deliveryTime = "20-25 mins",
             distance = "2.3 km",
-            discount = "30% OFF",
+            discount = "30%",
             discountAmount = "up to ₹75",
             address = "Connaught Place, Delhi"
         ),
@@ -4425,7 +4425,7 @@ fun BurgersCategoryPage() {
             rating = "4.6",
             deliveryTime = "15-20 mins",
             distance = "1.7 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹60",
             address = "Lajpat Nagar, Delhi"
         ),
@@ -4438,7 +4438,7 @@ fun BurgersCategoryPage() {
             rating = "4.4",
             deliveryTime = "10-15 mins",
             distance = "1.2 km",
-            discount = "25% OFF",
+            discount = "25%",
             discountAmount = "up to ₹65",
             address = "Saket, Delhi"
         ),
@@ -4451,7 +4451,7 @@ fun BurgersCategoryPage() {
             rating = "4.7",
             deliveryTime = "25-30 mins",
             distance = "3.1 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹70",
             address = "Rajouri Garden, Delhi"
         ),
@@ -4464,7 +4464,7 @@ fun BurgersCategoryPage() {
             rating = "4.3",
             deliveryTime = "20-25 mins",
             distance = "2.5 km",
-            discount = "30% OFF",
+            discount = "30%",
             discountAmount = "up to ₹55",
             address = "CR Park, Delhi"
         ),
@@ -4477,7 +4477,7 @@ fun BurgersCategoryPage() {
             rating = "4.5",
             deliveryTime = "18-22 mins",
             distance = "2.1 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹60",
             address = "Karol Bagh, Delhi"
         ),
@@ -4490,7 +4490,7 @@ fun BurgersCategoryPage() {
             rating = "4.8",
             deliveryTime = "25-30 mins",
             distance = "3.4 km",
-            discount = "25% OFF",
+            discount = "25%",
             discountAmount = "up to ₹85",
             address = "Greater Kailash, Delhi"
         ),
@@ -4503,7 +4503,7 @@ fun BurgersCategoryPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "4.2 km",
-            discount = "30% OFF",
+            discount = "30%",
             discountAmount = "up to ₹80",
             address = "Vasant Kunj, Delhi"
         ),
@@ -4516,7 +4516,7 @@ fun BurgersCategoryPage() {
             rating = "4.2",
             deliveryTime = "15-20 mins",
             distance = "1.8 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹40",
             address = "Pitampura, Delhi"
         ),
@@ -4529,7 +4529,7 @@ fun BurgersCategoryPage() {
             rating = "4.7",
             deliveryTime = "22-27 mins",
             distance = "2.9 km",
-            discount = "25% OFF",
+            discount = "25%",
             discountAmount = "up to ₹75",
             address = "Rohini, Delhi"
         ),
@@ -4542,7 +4542,7 @@ fun BurgersCategoryPage() {
             rating = "4.4",
             deliveryTime = "20-25 mins",
             distance = "2.4 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹50",
             address = "Dwarka, Delhi"
         ),
@@ -4555,7 +4555,7 @@ fun BurgersCategoryPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "3.3 km",
-            discount = "30% OFF",
+            discount = "30%",
             discountAmount = "up to ₹75",
             address = "Jasola, Delhi"
         ),
@@ -4568,7 +4568,7 @@ fun BurgersCategoryPage() {
             rating = "4.1",
             deliveryTime = "15-20 mins",
             distance = "1.5 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹35",
             address = "Shahdara, Delhi"
         ),
@@ -4581,7 +4581,7 @@ fun BurgersCategoryPage() {
             rating = "4.6",
             deliveryTime = "20-25 mins",
             distance = "2.7 km",
-            discount = "25% OFF",
+            discount = "25%",
             discountAmount = "up to ₹70",
             address = "Janakpuri, Delhi"
         ),
@@ -4594,7 +4594,7 @@ fun BurgersCategoryPage() {
             rating = "4.7",
             deliveryTime = "30-35 mins",
             distance = "4.5 km",
-            discount = "30% OFF",
+            discount = "30%",
             discountAmount = "up to ₹95",
             address = "Mehrauli, Delhi"
         ),
@@ -4607,7 +4607,7 @@ fun BurgersCategoryPage() {
             rating = "4.8",
             deliveryTime = "25-30 mins",
             distance = "3.8 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹75",
             address = "Mayur Vihar, Delhi"
         ),
@@ -4620,7 +4620,7 @@ fun BurgersCategoryPage() {
             rating = "4.3",
             deliveryTime = "20-25 mins",
             distance = "2.6 km",
-            discount = "25% OFF",
+            discount = "25%",
             discountAmount = "up to ₹60",
             address = "Paschim Vihar, Delhi"
         ),
@@ -4633,7 +4633,7 @@ fun BurgersCategoryPage() {
             rating = "4.8",
             deliveryTime = "30-35 mins",
             distance = "4.1 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹80",
             address = "Nehru Place, Delhi"
         ),
@@ -4646,7 +4646,7 @@ fun BurgersCategoryPage() {
             rating = "4.2",
             deliveryTime = "15-20 mins",
             distance = "1.9 km",
-            discount = "30% OFF",
+            discount = "30%",
             discountAmount = "up to ₹50",
             address = "Patel Nagar, Delhi"
         ),
@@ -4659,7 +4659,7 @@ fun BurgersCategoryPage() {
             rating = "4.6",
             deliveryTime = "25-30 mins",
             distance = "3.6 km",
-            discount = "25% OFF",
+            discount = "25%",
             discountAmount = "up to ₹95",
             address = "Dwarka Sector 21, Delhi"
         )
@@ -4886,7 +4886,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Paharganj, Delhi"
             ),
@@ -4899,7 +4899,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹45",
                 address = "Kamla Nagar, Delhi"
             ),
@@ -4912,7 +4912,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-18 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Shakti Nagar, Delhi"
             ),
@@ -4925,7 +4925,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-30 mins",
                 distance = "3.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹90",
                 address = "Bengali Market, Delhi"
             ),
@@ -4938,7 +4938,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -4951,7 +4951,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "4.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹60",
                 address = "South Extension, Delhi"
             ),
@@ -4964,7 +4964,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹50",
                 address = "Laxmi Nagar, Delhi"
             ),
@@ -4977,7 +4977,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹70",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -4990,7 +4990,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "3.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹55",
                 address = "Paschim Vihar, Delhi"
             ),
@@ -5003,7 +5003,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-22 mins",
                 distance = "2.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹75",
                 address = "Karol Bagh, Delhi"
             ),
@@ -5016,7 +5016,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "4.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹110",
                 address = "Rohini, Delhi"
             ),
@@ -5029,7 +5029,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹40",
                 address = "Dwarka, Delhi"
             ),
@@ -5042,7 +5042,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Patel Nagar, Delhi"
             ),
@@ -5055,7 +5055,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "3.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Janakpuri, Delhi"
             ),
@@ -5068,7 +5068,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "4.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹85",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -5081,7 +5081,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "2.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹65",
                 address = "Mayur Vihar, Delhi"
             ),
@@ -5094,7 +5094,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "3.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Nehru Place, Delhi"
             ),
@@ -5107,7 +5107,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "10-15 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Shahdara, Delhi"
             ),
@@ -5120,7 +5120,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "4.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹95",
                 address = "Greater Kailash, Delhi"
             ),
@@ -5133,7 +5133,7 @@ fun CholeBhatureCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "3.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹120",
                 address = "Saket, Delhi"
             )
@@ -5371,7 +5371,7 @@ fun SaladCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Hauz Khas, Delhi"
             ),
@@ -5384,7 +5384,7 @@ fun SaladCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹50",
                 address = "Connaught Place, Delhi"
             ),
@@ -5397,7 +5397,7 @@ fun SaladCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹75",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -5410,7 +5410,7 @@ fun SaladCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Green Park, Delhi"
             ),
@@ -5423,7 +5423,7 @@ fun SaladCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹60",
                 address = "Defence Colony, Delhi"
             ),
@@ -5436,7 +5436,7 @@ fun SaladCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹85",
                 address = "Greater Kailash, Delhi"
             ),
@@ -5449,7 +5449,7 @@ fun SaladCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-27 mins",
                 distance = "3.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹45",
                 address = "Saket, Delhi"
             ),
@@ -5462,7 +5462,7 @@ fun SaladCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "3.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹100",
                 address = "Nehru Place, Delhi"
             ),
@@ -5475,7 +5475,7 @@ fun SaladCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "2.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹55",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -5488,7 +5488,7 @@ fun SaladCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Karol Bagh, Delhi"
             ),
@@ -5501,7 +5501,7 @@ fun SaladCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Chanakyapuri, Delhi"
             ),
@@ -5514,7 +5514,7 @@ fun SaladCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-28 mins",
                 distance = "3.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹75",
                 address = "Dwarka, Delhi"
             ),
@@ -5527,7 +5527,7 @@ fun SaladCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "2.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹65",
                 address = "Lodhi Road, Delhi"
             ),
@@ -5540,7 +5540,7 @@ fun SaladCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Malviya Nagar, Delhi"
             ),
@@ -5553,7 +5553,7 @@ fun SaladCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Pitampura, Delhi"
             ),
@@ -5566,7 +5566,7 @@ fun SaladCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "3.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹95",
                 address = "South Extension, Delhi"
             ),
@@ -5579,7 +5579,7 @@ fun SaladCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "12-17 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -5592,7 +5592,7 @@ fun SaladCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹45",
                 address = "Rohini, Delhi"
             ),
@@ -5605,7 +5605,7 @@ fun SaladCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "3.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Janakpuri, Delhi"
             ),
@@ -5618,7 +5618,7 @@ fun SaladCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "2.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹75",
                 address = "Kailash Colony, Delhi"
             )
@@ -5857,7 +5857,7 @@ fun PattyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Hauz Khas, Delhi"
             ),
@@ -5870,7 +5870,7 @@ fun PattyCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹50",
                 address = "Connaught Place, Delhi"
             ),
@@ -5883,7 +5883,7 @@ fun PattyCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹75",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -5896,7 +5896,7 @@ fun PattyCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Green Park, Delhi"
             ),
@@ -5909,7 +5909,7 @@ fun PattyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹60",
                 address = "Defence Colony, Delhi"
             ),
@@ -5922,7 +5922,7 @@ fun PattyCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹85",
                 address = "Greater Kailash, Delhi"
             ),
@@ -5935,7 +5935,7 @@ fun PattyCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-27 mins",
                 distance = "3.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹45",
                 address = "Saket, Delhi"
             ),
@@ -5948,7 +5948,7 @@ fun PattyCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "3.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹100",
                 address = "Nehru Place, Delhi"
             ),
@@ -5961,7 +5961,7 @@ fun PattyCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "2.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹55",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -5974,7 +5974,7 @@ fun PattyCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Karol Bagh, Delhi"
             ),
@@ -5987,7 +5987,7 @@ fun PattyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Chanakyapuri, Delhi"
             ),
@@ -6000,7 +6000,7 @@ fun PattyCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-28 mins",
                 distance = "3.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹75",
                 address = "Dwarka, Delhi"
             ),
@@ -6013,7 +6013,7 @@ fun PattyCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "2.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹65",
                 address = "Lodhi Road, Delhi"
             ),
@@ -6026,7 +6026,7 @@ fun PattyCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Malviya Nagar, Delhi"
             ),
@@ -6039,7 +6039,7 @@ fun PattyCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Pitampura, Delhi"
             ),
@@ -6052,7 +6052,7 @@ fun PattyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "3.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹95",
                 address = "South Extension, Delhi"
             ),
@@ -6065,7 +6065,7 @@ fun PattyCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "12-17 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -6078,7 +6078,7 @@ fun PattyCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹45",
                 address = "Rohini, Delhi"
             ),
@@ -6091,7 +6091,7 @@ fun PattyCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "3.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Janakpuri, Delhi"
             ),
@@ -6104,7 +6104,7 @@ fun PattyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "2.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹75",
                 address = "Kailash Colony, Delhi"
             )
@@ -6393,7 +6393,7 @@ fun ChineseCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Connaught Place, Delhi"
             ),
@@ -6406,7 +6406,7 @@ fun ChineseCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Hauz Khas, Delhi"
             ),
@@ -6419,7 +6419,7 @@ fun ChineseCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "2.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹60",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -6432,7 +6432,7 @@ fun ChineseCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "12-15 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Green Park, Delhi"
             ),
@@ -6445,7 +6445,7 @@ fun ChineseCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹55",
                 address = "Defence Colony, Delhi"
             ),
@@ -6458,7 +6458,7 @@ fun ChineseCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-18 mins",
                 distance = "1.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹65",
                 address = "Greater Kailash, Delhi"
             ),
@@ -6471,7 +6471,7 @@ fun ChineseCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "2.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹45",
                 address = "Saket, Delhi"
             ),
@@ -6484,7 +6484,7 @@ fun ChineseCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "3.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹120",
                 address = "Nehru Place, Delhi"
             ),
@@ -6497,7 +6497,7 @@ fun ChineseCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "10-15 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹25",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -6510,7 +6510,7 @@ fun ChineseCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-16 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Karol Bagh, Delhi"
             ),
@@ -6523,7 +6523,7 @@ fun ChineseCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "2.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹85",
                 address = "Chanakyapuri, Delhi"
             ),
@@ -6536,7 +6536,7 @@ fun ChineseCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.7 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹40",
                 address = "Dwarka, Delhi"
             ),
@@ -6549,7 +6549,7 @@ fun ChineseCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "2.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹60",
                 address = "Lodhi Road, Delhi"
             ),
@@ -6562,7 +6562,7 @@ fun ChineseCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "16-21 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹40",
                 address = "Malviya Nagar, Delhi"
             ),
@@ -6575,7 +6575,7 @@ fun ChineseCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "14-19 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹50",
                 address = "Pitampura, Delhi"
             ),
@@ -6588,7 +6588,7 @@ fun ChineseCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.9 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹95",
                 address = "South Extension, Delhi"
             ),
@@ -6601,7 +6601,7 @@ fun ChineseCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-22 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹70",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -6614,7 +6614,7 @@ fun ChineseCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "2.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹45",
                 address = "Rohini, Delhi"
             ),
@@ -6627,7 +6627,7 @@ fun ChineseCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "3.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Janakpuri, Delhi"
             ),
@@ -6640,7 +6640,7 @@ fun ChineseCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.6 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹55",
                 address = "Kailash Colony, Delhi"
             )
@@ -6930,7 +6930,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Connaught Place, Delhi"
             ),
@@ -6943,7 +6943,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Hauz Khas, Delhi"
             ),
@@ -6956,7 +6956,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-17 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹45",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -6969,7 +6969,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Green Park, Delhi"
             ),
@@ -6982,7 +6982,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "2.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹65",
                 address = "Defence Colony, Delhi"
             ),
@@ -6995,7 +6995,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "14-19 mins",
                 distance = "1.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Greater Kailash, Delhi"
             ),
@@ -7008,7 +7008,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-21 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹60",
                 address = "Saket, Delhi"
             ),
@@ -7021,7 +7021,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "13-18 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Nehru Place, Delhi"
             ),
@@ -7034,7 +7034,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "2.8 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹80",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -7047,7 +7047,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹45",
                 address = "Karol Bagh, Delhi"
             ),
@@ -7060,7 +7060,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "11-16 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Chanakyapuri, Delhi"
             ),
@@ -7073,7 +7073,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "19-24 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Dwarka, Delhi"
             ),
@@ -7086,7 +7086,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "10-15 mins",
                 distance = "0.9 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹50",
                 address = "Lodhi Road, Delhi"
             ),
@@ -7099,7 +7099,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "12-17 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Malviya Nagar, Delhi"
             ),
@@ -7112,7 +7112,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "21-26 mins",
                 distance = "2.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Pitampura, Delhi"
             ),
@@ -7125,7 +7125,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "South Extension, Delhi"
             ),
@@ -7138,7 +7138,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "3.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹75",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -7151,7 +7151,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-19 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Rohini, Delhi"
             ),
@@ -7164,7 +7164,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-21 mins",
                 distance = "2.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹45",
                 address = "Janakpuri, Delhi"
             ),
@@ -7177,7 +7177,7 @@ fun IceCreamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "2.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹45",
                 address = "Kailash Colony, Delhi"
             )
@@ -7472,7 +7472,7 @@ fun AppamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -7485,7 +7485,7 @@ fun AppamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹25",
                 address = "Karol Bagh, Delhi"
             ),
@@ -7498,7 +7498,7 @@ fun AppamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Malviya Nagar, Delhi"
             ),
@@ -7511,7 +7511,7 @@ fun AppamCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "2.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹50",
                 address = "Saket, Delhi"
             ),
@@ -7524,7 +7524,7 @@ fun AppamCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "12-17 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Green Park, Delhi"
             ),
@@ -7537,7 +7537,7 @@ fun AppamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "2.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹45",
                 address = "Defence Colony, Delhi"
             ),
@@ -7550,7 +7550,7 @@ fun AppamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "2.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹45",
                 address = "Greater Kailash, Delhi"
             ),
@@ -7563,7 +7563,7 @@ fun AppamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "2.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -7576,7 +7576,7 @@ fun AppamCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-23 mins",
                 distance = "1.7 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹50",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -7589,7 +7589,7 @@ fun AppamCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "16-21 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Nehru Place, Delhi"
             ),
@@ -7602,7 +7602,7 @@ fun AppamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹40",
                 address = "Hauz Khas, Delhi"
             ),
@@ -7615,7 +7615,7 @@ fun AppamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Connaught Place, Delhi"
             ),
@@ -7628,7 +7628,7 @@ fun AppamCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "14-19 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Chanakyapuri, Delhi"
             ),
@@ -7641,7 +7641,7 @@ fun AppamCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "30-40 mins",
                 distance = "3.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Dwarka, Delhi"
             ),
@@ -7654,7 +7654,7 @@ fun AppamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-29 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "Lodhi Road, Delhi"
             ),
@@ -7667,7 +7667,7 @@ fun AppamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-31 mins",
                 distance = "2.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹55",
                 address = "South Extension, Delhi"
             ),
@@ -7680,7 +7680,7 @@ fun AppamCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "19-24 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Pitampura, Delhi"
             ),
@@ -7693,7 +7693,7 @@ fun AppamCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "3.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Rohini, Delhi"
             ),
@@ -7706,7 +7706,7 @@ fun AppamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "1.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Janakpuri, Delhi"
             ),
@@ -7719,7 +7719,7 @@ fun AppamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "2.1 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹60",
                 address = "Kailash Colony, Delhi"
             )
@@ -8022,7 +8022,7 @@ fun BathCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Karol Bagh, Delhi"
             ),
@@ -8035,7 +8035,7 @@ fun BathCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Saket, Delhi"
             ),
@@ -8048,7 +8048,7 @@ fun BathCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹20",
                 address = "Connaught Place, Delhi"
             ),
@@ -8061,7 +8061,7 @@ fun BathCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹40",
                 address = "Saket, Delhi"
             ),
@@ -8074,7 +8074,7 @@ fun BathCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -8087,7 +8087,7 @@ fun BathCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -8100,7 +8100,7 @@ fun BathCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Karol Bagh, Delhi"
             ),
@@ -8113,7 +8113,7 @@ fun BathCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Connaught Place, Delhi"
             ),
@@ -8126,7 +8126,7 @@ fun BathCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Saket, Delhi"
             ),
@@ -8139,7 +8139,7 @@ fun BathCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹25",
                 address = "Connaught Place, Delhi"
             ),
@@ -8152,7 +8152,7 @@ fun BathCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹20",
                 address = "Karol Bagh, Delhi"
             ),
@@ -8165,7 +8165,7 @@ fun BathCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Karol Bagh, Delhi"
             ),
@@ -8178,7 +8178,7 @@ fun BathCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹60",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -8191,7 +8191,7 @@ fun BathCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹25",
                 address = "Saket, Delhi"
             ),
@@ -8204,7 +8204,7 @@ fun BathCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹35",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -8217,7 +8217,7 @@ fun BathCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹20",
                 address = "Connaught Place, Delhi"
             ),
@@ -8230,7 +8230,7 @@ fun BathCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹35",
                 address = "Karol Bagh, Delhi"
             ),
@@ -8243,7 +8243,7 @@ fun BathCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹40",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -8256,7 +8256,7 @@ fun BathCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹20",
                 address = "Karol Bagh, Delhi"
             ),
@@ -8269,7 +8269,7 @@ fun BathCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Saket, Delhi"
             )
@@ -8535,7 +8535,7 @@ fun BondaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹15",
                 address = "Bengaluru"
             ),
@@ -8548,7 +8548,7 @@ fun BondaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Chennai"
             ),
@@ -8561,7 +8561,7 @@ fun BondaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹15",
                 address = "Coimbatore"
             ),
@@ -8574,7 +8574,7 @@ fun BondaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹20",
                 address = "Kochi"
             ),
@@ -8587,7 +8587,7 @@ fun BondaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹25",
                 address = "Bengaluru"
             ),
@@ -8600,7 +8600,7 @@ fun BondaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹25",
                 address = "Hyderabad"
             ),
@@ -8613,7 +8613,7 @@ fun BondaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Bengaluru"
             ),
@@ -8626,7 +8626,7 @@ fun BondaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Chennai"
             ),
@@ -8639,7 +8639,7 @@ fun BondaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹10",
                 address = "Hyderabad"
             ),
@@ -8652,7 +8652,7 @@ fun BondaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹40",
                 address = "Coimbatore"
             ),
@@ -8665,7 +8665,7 @@ fun BondaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹20",
                 address = "Bengaluru"
             ),
@@ -8678,7 +8678,7 @@ fun BondaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Hyderabad"
             ),
@@ -8691,7 +8691,7 @@ fun BondaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Chennai"
             ),
@@ -8704,7 +8704,7 @@ fun BondaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Coimbatore"
             ),
@@ -8717,7 +8717,7 @@ fun BondaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹25",
                 address = "Kochi"
             ),
@@ -8730,7 +8730,7 @@ fun BondaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Bengaluru"
             ),
@@ -8743,7 +8743,7 @@ fun BondaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Chennai"
             ),
@@ -8756,7 +8756,7 @@ fun BondaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Kochi"
             ),
@@ -8769,7 +8769,7 @@ fun BondaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹25",
                 address = "Coimbatore"
             ),
@@ -8782,7 +8782,7 @@ fun BondaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Hyderabad"
             )
@@ -9064,7 +9064,7 @@ fun CutletCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹15",
                 address = "Bengaluru"
             ),
@@ -9077,7 +9077,7 @@ fun CutletCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Chennai"
             ),
@@ -9090,7 +9090,7 @@ fun CutletCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Coimbatore"
             ),
@@ -9103,7 +9103,7 @@ fun CutletCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-18 mins",
                 distance = "0.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹10",
                 address = "Kochi"
             ),
@@ -9116,7 +9116,7 @@ fun CutletCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹25",
                 address = "Bengaluru"
             ),
@@ -9129,7 +9129,7 @@ fun CutletCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Hyderabad"
             ),
@@ -9142,7 +9142,7 @@ fun CutletCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Bengaluru"
             ),
@@ -9155,7 +9155,7 @@ fun CutletCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Chennai"
             ),
@@ -9168,7 +9168,7 @@ fun CutletCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹12",
                 address = "Hyderabad"
             ),
@@ -9181,7 +9181,7 @@ fun CutletCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹50",
                 address = "Coimbatore"
             ),
@@ -9194,7 +9194,7 @@ fun CutletCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹20",
                 address = "Bengaluru"
             ),
@@ -9207,7 +9207,7 @@ fun CutletCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Hyderabad"
             ),
@@ -9220,7 +9220,7 @@ fun CutletCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Chennai"
             ),
@@ -9233,7 +9233,7 @@ fun CutletCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹60",
                 address = "Coimbatore"
             ),
@@ -9246,7 +9246,7 @@ fun CutletCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹25",
                 address = "Kochi"
             ),
@@ -9259,7 +9259,7 @@ fun CutletCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Bengaluru"
             ),
@@ -9272,7 +9272,7 @@ fun CutletCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Chennai"
             ),
@@ -9285,7 +9285,7 @@ fun CutletCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Kochi"
             ),
@@ -9298,7 +9298,7 @@ fun CutletCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "1.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Coimbatore"
             ),
@@ -9311,7 +9311,7 @@ fun CutletCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Hyderabad"
             )
@@ -9621,7 +9621,7 @@ fun DessertCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Bengaluru"
             ),
@@ -9634,7 +9634,7 @@ fun DessertCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹25",
                 address = "Chennai"
             ),
@@ -9647,7 +9647,7 @@ fun DessertCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹20",
                 address = "Delhi"
             ),
@@ -9660,7 +9660,7 @@ fun DessertCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹40",
                 address = "Mumbai"
             ),
@@ -9673,7 +9673,7 @@ fun DessertCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "12-18 mins",
                 distance = "0.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹40",
                 address = "Bengaluru"
             ),
@@ -9686,7 +9686,7 @@ fun DessertCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹15",
                 address = "Kolkata"
             ),
@@ -9699,7 +9699,7 @@ fun DessertCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Bengaluru"
             ),
@@ -9712,7 +9712,7 @@ fun DessertCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹45",
                 address = "Pune"
             ),
@@ -9725,7 +9725,7 @@ fun DessertCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹12",
                 address = "Jaipur"
             ),
@@ -9738,7 +9738,7 @@ fun DessertCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹65",
                 address = "Hyderabad"
             ),
@@ -9751,7 +9751,7 @@ fun DessertCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Bengaluru"
             ),
@@ -9764,7 +9764,7 @@ fun DessertCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Lucknow"
             ),
@@ -9777,7 +9777,7 @@ fun DessertCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Chennai"
             ),
@@ -9790,7 +9790,7 @@ fun DessertCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Kolkata"
             ),
@@ -9803,7 +9803,7 @@ fun DessertCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹25",
                 address = "Mumbai"
             ),
@@ -9816,7 +9816,7 @@ fun DessertCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹22",
                 address = "Delhi"
             ),
@@ -9829,7 +9829,7 @@ fun DessertCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹65",
                 address = "Goa"
             ),
@@ -9842,7 +9842,7 @@ fun DessertCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-22 mins",
                 distance = "1.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Ahmedabad"
             ),
@@ -9855,7 +9855,7 @@ fun DessertCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹50",
                 address = "Bengaluru"
             ),
@@ -9868,7 +9868,7 @@ fun DessertCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹75",
                 address = "Mumbai"
             )
@@ -10175,7 +10175,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Gujarat Bhavan, Ahmedabad"
             ),
@@ -10188,7 +10188,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Vastrapur, Ahmedabad"
             ),
@@ -10201,7 +10201,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹40",
                 address = "Maninagar, Ahmedabad"
             ),
@@ -10214,7 +10214,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-22 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹15",
                 address = "Prahlad Nagar, Ahmedabad"
             ),
@@ -10227,7 +10227,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "12-16 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹20",
                 address = "Navrangpura, Ahmedabad"
             ),
@@ -10240,7 +10240,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Satellite, Ahmedabad"
             ),
@@ -10253,7 +10253,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Bodakdev, Ahmedabad"
             ),
@@ -10266,7 +10266,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "3.0 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹50",
                 address = "SG Highway, Ahmedabad"
             ),
@@ -10279,7 +10279,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Thaltej, Ahmedabad"
             ),
@@ -10292,7 +10292,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "3.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹40",
                 address = "Vijay Cross Roads, Ahmedabad"
             ),
@@ -10305,7 +10305,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "28-33 mins",
                 distance = "2.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "Naranpura, Ahmedabad"
             ),
@@ -10318,7 +10318,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "10-15 mins",
                 distance = "0.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Memnagar, Ahmedabad"
             ),
@@ -10331,7 +10331,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Gurukul, Ahmedabad"
             ),
@@ -10344,7 +10344,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-28 mins",
                 distance = "2.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "Sola, Ahmedabad"
             ),
@@ -10357,7 +10357,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "25-30 mins",
                 distance = "3.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Ranip, Ahmedabad"
             ),
@@ -10370,7 +10370,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.9 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹30",
                 address = "Shilaj, Ahmedabad"
             ),
@@ -10383,7 +10383,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Iscon Circle, Ahmedabad"
             ),
@@ -10396,7 +10396,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-23 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Vasna, Ahmedabad"
             ),
@@ -10409,7 +10409,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Navjeevan Press, Ahmedabad"
             ),
@@ -10422,7 +10422,7 @@ fun DhoklaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "3.8 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹90",
                 address = "Science City, Ahmedabad"
             )
@@ -10753,7 +10753,7 @@ fun DosaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹45",
                 address = "Connaught Place, Delhi"
             ),
@@ -10766,7 +10766,7 @@ fun DosaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Karol Bagh, Delhi"
             ),
@@ -10779,7 +10779,7 @@ fun DosaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "South Ex, Delhi"
             ),
@@ -10792,7 +10792,7 @@ fun DosaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-22 mins",
                 distance = "2.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -10805,7 +10805,7 @@ fun DosaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-18 mins",
                 distance = "1.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹19",
                 address = "Hauz Khas, Delhi"
             ),
@@ -10818,7 +10818,7 @@ fun DosaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "12-16 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "Saket, Delhi"
             ),
@@ -10831,7 +10831,7 @@ fun DosaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹53",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -10844,7 +10844,7 @@ fun DosaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹26",
                 address = "Nehru Place, Delhi"
             ),
@@ -10857,7 +10857,7 @@ fun DosaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "3.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹96",
                 address = "Dwarka, Delhi"
             ),
@@ -10870,7 +10870,7 @@ fun DosaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-23 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Malviya Nagar, Delhi"
             ),
@@ -10883,7 +10883,7 @@ fun DosaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Rohini, Delhi"
             ),
@@ -10896,7 +10896,7 @@ fun DosaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "3.2 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹133",
                 address = "Pitampura, Delhi"
             ),
@@ -10909,7 +10909,7 @@ fun DosaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "16-21 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹39",
                 address = "Janakpuri, Delhi"
             ),
@@ -10922,7 +10922,7 @@ fun DosaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "22-28 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Vikas Puri, Delhi"
             ),
@@ -10935,7 +10935,7 @@ fun DosaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹17",
                 address = "Green Park, Delhi"
             ),
@@ -10948,7 +10948,7 @@ fun DosaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹34",
                 address = "Shalimar Bagh, Delhi"
             ),
@@ -10961,7 +10961,7 @@ fun DosaCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "Laxmi Nagar, Delhi"
             ),
@@ -10974,7 +10974,7 @@ fun DosaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "2.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹81",
                 address = "Mayur Vihar, Delhi"
             ),
@@ -10987,7 +10987,7 @@ fun DosaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹24",
                 address = "Preet Vihar, Delhi"
             ),
@@ -11000,7 +11000,7 @@ fun DosaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "3.5 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹140",
                 address = "Noida Sector 18, Noida"
             )
@@ -11302,7 +11302,7 @@ fun DholdaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Gujarat Bhavan, Ahmedabad",
             ),
@@ -11315,7 +11315,7 @@ fun DholdaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Vastrapur, Ahmedabad",
             ),
@@ -11328,7 +11328,7 @@ fun DholdaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹40",
                 address = "Maninagar, Ahmedabad",
             ),
@@ -11341,7 +11341,7 @@ fun DholdaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-22 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹15",
                 address = "Prahlad Nagar, Ahmedabad",
             ),
@@ -11354,7 +11354,7 @@ fun DholdaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "12-16 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹20",
                 address = "Navrangpura, Ahmedabad",
             ),
@@ -11367,7 +11367,7 @@ fun DholdaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Satellite, Ahmedabad",
             ),
@@ -11380,7 +11380,7 @@ fun DholdaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Bodakdev, Ahmedabad",
             ),
@@ -11393,7 +11393,7 @@ fun DholdaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "3.0 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹50",
                 address = "SG Highway, Ahmedabad",
             ),
@@ -11406,7 +11406,7 @@ fun DholdaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Thaltej, Ahmedabad",
             ),
@@ -11419,7 +11419,7 @@ fun DholdaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "3.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹40",
                 address = "Vijay Cross Roads, Ahmedabad",
             ),
@@ -11432,7 +11432,7 @@ fun DholdaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "28-33 mins",
                 distance = "2.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹70",
                 address = "Naranpura, Ahmedabad",
             ),
@@ -11445,7 +11445,7 @@ fun DholdaCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "10-15 mins",
                 distance = "0.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Memnagar, Ahmedabad",
             ),
@@ -11458,7 +11458,7 @@ fun DholdaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹25",
                 address = "Gurukul, Ahmedabad",
             ),
@@ -11471,7 +11471,7 @@ fun DholdaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-28 mins",
                 distance = "2.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "Sola, Ahmedabad",
             ),
@@ -11484,7 +11484,7 @@ fun DholdaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "25-30 mins",
                 distance = "3.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "Ranip, Ahmedabad",
             ),
@@ -11497,7 +11497,7 @@ fun DholdaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.9 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹30",
                 address = "Shilaj, Ahmedabad",
             ),
@@ -11510,7 +11510,7 @@ fun DholdaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Iscon Circle, Ahmedabad",
             ),
@@ -11523,7 +11523,7 @@ fun DholdaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-23 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Vasna, Ahmedabad",
             ),
@@ -11536,7 +11536,7 @@ fun DholdaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Navjeevan Press, Ahmedabad",
             ),
@@ -11549,7 +11549,7 @@ fun DholdaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "3.8 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹100",
                 address = "Science City, Ahmedabad",
             )
@@ -11881,7 +11881,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -11894,7 +11894,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹36",
                 address = "Karol Bagh, Delhi"
             ),
@@ -11907,7 +11907,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-15 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹40",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -11920,7 +11920,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "1.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹22",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -11933,7 +11933,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-18 mins",
                 distance = "1.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "Pitampura, Delhi"
             ),
@@ -11946,7 +11946,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "10-14 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹38",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -11959,7 +11959,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "8-12 mins",
                 distance = "0.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹23",
                 address = "Rohini, Delhi"
             ),
@@ -11972,7 +11972,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "2.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹53",
                 address = "Dwarka, Delhi"
             ),
@@ -11985,7 +11985,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "3.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Saket, Delhi"
             ),
@@ -11998,7 +11998,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "2.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹20",
                 address = "Green Park, Delhi"
             ),
@@ -12011,7 +12011,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "3.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹105",
                 address = "Uttam Nagar, Delhi"
             ),
@@ -12024,7 +12024,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-23 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹35",
                 address = "Janakpuri, Delhi"
             ),
@@ -12037,7 +12037,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-33 mins",
                 distance = "4.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Old Delhi, Delhi"
             ),
@@ -12050,7 +12050,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Nehru Place, Delhi"
             ),
@@ -12063,7 +12063,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-18 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹25",
                 address = "Kirti Nagar, Delhi"
             ),
@@ -12076,7 +12076,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "10-15 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹28",
                 address = "Patel Nagar, Delhi"
             ),
@@ -12089,7 +12089,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "2.2 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹21",
                 address = "Shahdara, Delhi"
             ),
@@ -12102,7 +12102,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "16-21 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹46",
                 address = "Model Town, Delhi"
             ),
@@ -12115,7 +12115,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "3.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹52",
                 address = "South Delhi, Delhi"
             ),
@@ -12128,7 +12128,7 @@ fun GulabJamunCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "4.2 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹112",
                 address = "Connaught Place, Delhi"
             )
@@ -12484,7 +12484,7 @@ fun IdliCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹16",
                 address = "Sarojini Nagar, Delhi"
             ),
@@ -12497,7 +12497,7 @@ fun IdliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹18",
                 address = "Laxmi Nagar, Delhi"
             ),
@@ -12510,7 +12510,7 @@ fun IdliCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹28",
                 address = "Rajendra Place, Delhi"
             ),
@@ -12523,7 +12523,7 @@ fun IdliCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-23 mins",
                 distance = "2.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹13",
                 address = "Malviya Nagar, Delhi"
             ),
@@ -12536,7 +12536,7 @@ fun IdliCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "14-19 mins",
                 distance = "1.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹42",
                 address = "Punjabi Bagh, Delhi"
             ),
@@ -12549,7 +12549,7 @@ fun IdliCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Kalkaji, Delhi"
             ),
@@ -12562,7 +12562,7 @@ fun IdliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "2.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹23",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -12575,7 +12575,7 @@ fun IdliCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "16-21 mins",
                 distance = "1.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹34",
                 address = "Greater Kailash, Delhi"
             ),
@@ -12588,7 +12588,7 @@ fun IdliCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-17 mins",
                 distance = "1.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹29",
                 address = "Kamla Nagar, Delhi"
             ),
@@ -12601,7 +12601,7 @@ fun IdliCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-23 mins",
                 distance = "1.9 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹13",
                 address = "Hauz Khas, Delhi"
             ),
@@ -12614,7 +12614,7 @@ fun IdliCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "2.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹54",
                 address = "Saket, Delhi"
             ),
@@ -12627,7 +12627,7 @@ fun IdliCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹19",
                 address = "Paschim Vihar, Delhi"
             ),
@@ -12640,7 +12640,7 @@ fun IdliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹23",
                 address = "Janakpuri, Delhi"
             ),
@@ -12653,7 +12653,7 @@ fun IdliCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Rohini, Delhi"
             ),
@@ -12666,7 +12666,7 @@ fun IdliCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-19 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹26",
                 address = "Dwarka, Delhi"
             ),
@@ -12679,7 +12679,7 @@ fun IdliCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "16-21 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹33",
                 address = "Shahdara, Delhi"
             ),
@@ -12692,7 +12692,7 @@ fun IdliCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-17 mins",
                 distance = "1.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹11",
                 address = "Karol Bagh, Delhi"
             ),
@@ -12705,7 +12705,7 @@ fun IdliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "2.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹34",
                 address = "Green Park, Delhi"
             ),
@@ -12718,7 +12718,7 @@ fun IdliCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "10-15 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹23",
                 address = "Patel Nagar, Delhi"
             ),
@@ -12731,7 +12731,7 @@ fun IdliCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "3.2 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹98",
                 address = "Connaught Place, Delhi"
             )
@@ -13114,7 +13114,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹90",
                 address = "Hitech City, Hyderabad"
             ),
@@ -13127,7 +13127,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "3.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹83",
                 address = "Aminabad, Lucknow"
             ),
@@ -13140,7 +13140,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Koramangala, Bengaluru"
             ),
@@ -13153,7 +13153,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹42",
                 address = "Calicut, Kerala"
             ),
@@ -13166,7 +13166,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-25 mins",
                 distance = "1.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹105",
                 address = "Park Street, Kolkata"
             ),
@@ -13179,7 +13179,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-28 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹76",
                 address = "Colaba, Mumbai"
             ),
@@ -13192,7 +13192,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-35 mins",
                 distance = "3.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹72",
                 address = "Karol Bagh, Delhi"
             ),
@@ -13205,7 +13205,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-22 mins",
                 distance = "0.8 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹100",
                 address = "Koregaon Park, Pune"
             ),
@@ -13218,7 +13218,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "32-40 mins",
                 distance = "4.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹52",
                 address = "Kannur, Kerala"
             ),
@@ -13231,7 +13231,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-27 mins",
                 distance = "1.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Dal Lake, Srinagar"
             ),
@@ -13244,7 +13244,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-38 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹98",
                 address = "Banjara Hills, Hyderabad"
             ),
@@ -13257,7 +13257,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-24 mins",
                 distance = "1.4 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹95",
                 address = "Shahu Nagar, Kolhapur"
             ),
@@ -13270,7 +13270,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-32 mins",
                 distance = "2.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹69",
                 address = "Karaikudi, Tamil Nadu"
             ),
@@ -13283,7 +13283,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-42 mins",
                 distance = "3.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹58",
                 address = "Mumbai Central, Mumbai"
             ),
@@ -13296,7 +13296,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "16-22 mins",
                 distance = "1.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹58",
                 address = "MG Road, Bengaluru"
             ),
@@ -13309,7 +13309,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-28 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹110",
                 address = "Connaught Place, Delhi"
             ),
@@ -13322,7 +13322,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-30 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹47",
                 address = "Hazratganj, Lucknow"
             ),
@@ -13335,7 +13335,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-33 mins",
                 distance = "2.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹86",
                 address = "Panaji, Goa"
             ),
@@ -13348,7 +13348,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "3.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹204",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -13361,7 +13361,7 @@ fun BiryaniCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-26 mins",
                 distance = "1.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹95",
                 address = "Anna Nagar, Chennai"
             )
@@ -13717,7 +13717,7 @@ fun ThaliCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹90",
                 address = "Jaipur, Rajasthan"
             ),
@@ -13730,7 +13730,7 @@ fun ThaliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹52",
                 address = "Ahmedabad, Gujarat"
             ),
@@ -13743,7 +13743,7 @@ fun ThaliCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -13756,7 +13756,7 @@ fun ThaliCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹55",
                 address = "Amritsar, Punjab"
             ),
@@ -13769,7 +13769,7 @@ fun ThaliCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹66",
                 address = "Delhi NCR"
             ),
@@ -13782,7 +13782,7 @@ fun ThaliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-38 mins",
                 distance = "2.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹96",
                 address = "Mumbai, Maharashtra"
             ),
@@ -13795,7 +13795,7 @@ fun ThaliCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹63",
                 address = "Kolkata, West Bengal"
             ),
@@ -13808,7 +13808,7 @@ fun ThaliCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "3.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹68",
                 address = "Srinagar, Kashmir"
             ),
@@ -13821,7 +13821,7 @@ fun ThaliCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹104",
                 address = "Karaikudi, Tamil Nadu"
             ),
@@ -13834,7 +13834,7 @@ fun ThaliCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹73",
                 address = "Pune, Maharashtra"
             ),
@@ -13847,7 +13847,7 @@ fun ThaliCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "3.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹87",
                 address = "Lucknow, UP"
             ),
@@ -13860,7 +13860,7 @@ fun ThaliCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-32 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹68",
                 address = "Mumbai, Maharashtra"
             ),
@@ -13873,7 +13873,7 @@ fun ThaliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-28 mins",
                 distance = "1.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹81",
                 address = "Udupi, Karnataka"
             ),
@@ -13886,7 +13886,7 @@ fun ThaliCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "32-42 mins",
                 distance = "2.6 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹62",
                 address = "Hyderabad, Telangana"
             ),
@@ -13899,7 +13899,7 @@ fun ThaliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹95",
                 address = "Kochi, Kerala"
             ),
@@ -13912,7 +13912,7 @@ fun ThaliCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹62",
                 address = "Ahmedabad, Gujarat"
             ),
@@ -13925,7 +13925,7 @@ fun ThaliCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-55 mins",
                 distance = "3.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹255",
                 address = "Bengaluru, Karnataka"
             ),
@@ -13938,7 +13938,7 @@ fun ThaliCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹89",
                 address = "Panaji, Goa"
             ),
@@ -13951,7 +13951,7 @@ fun ThaliCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹96",
                 address = "Delhi NCR"
             ),
@@ -13964,7 +13964,7 @@ fun ThaliCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "22-32 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹98",
                 address = "Mumbai, Maharashtra"
             )
@@ -14330,7 +14330,7 @@ fun ChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹64",
                 address = "Delhi NCR"
             ),
@@ -14343,7 +14343,7 @@ fun ChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹42",
                 address = "Hyderabad, Telangana"
             ),
@@ -14356,7 +14356,7 @@ fun ChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹88",
                 address = "Punjab"
             ),
@@ -14369,7 +14369,7 @@ fun ChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹42",
                 address = "Lucknow, UP"
             ),
@@ -14382,7 +14382,7 @@ fun ChickenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-28 mins",
                 distance = "1.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹78",
                 address = "Kolkata, WB"
             ),
@@ -14395,7 +14395,7 @@ fun ChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹76",
                 address = "Srinagar, Kashmir"
             ),
@@ -14408,7 +14408,7 @@ fun ChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹51",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -14421,7 +14421,7 @@ fun ChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹45",
                 address = "Delhi NCR"
             ),
@@ -14434,7 +14434,7 @@ fun ChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Hyderabad, Telangana"
             ),
@@ -14447,7 +14447,7 @@ fun ChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹78",
                 address = "Punjab"
             ),
@@ -14460,7 +14460,7 @@ fun ChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹47",
                 address = "Lucknow, UP"
             ),
@@ -14473,7 +14473,7 @@ fun ChickenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹81",
                 address = "Kerala"
             ),
@@ -14486,7 +14486,7 @@ fun ChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-38 mins",
                 distance = "2.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹72",
                 address = "Mumbai, Maharashtra"
             ),
@@ -14499,7 +14499,7 @@ fun ChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹50",
                 address = "Amritsar, Punjab"
             ),
@@ -14512,7 +14512,7 @@ fun ChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹73",
                 address = "Kolkata, WB"
             ),
@@ -14525,7 +14525,7 @@ fun ChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.6 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹41",
                 address = "Delhi NCR"
             ),
@@ -14538,7 +14538,7 @@ fun ChickenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-28 mins",
                 distance = "1.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹72",
                 address = "Mumbai, Maharashtra"
             ),
@@ -14551,7 +14551,7 @@ fun ChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹58",
                 address = "Bangalore, Karnataka"
             ),
@@ -14564,7 +14564,7 @@ fun ChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹74",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -14577,7 +14577,7 @@ fun ChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-38 mins",
                 distance = "2.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹60",
                 address = "Pune, Maharashtra"
             )
@@ -14854,7 +14854,7 @@ fun VegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Delhi NCR"
             ),
@@ -14867,7 +14867,7 @@ fun VegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Hyderabad, Telangana"
             ),
@@ -14880,7 +14880,7 @@ fun VegMealCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹65",
                 address = "Punjab"
             ),
@@ -14893,7 +14893,7 @@ fun VegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹32",
                 address = "Lucknow, UP"
             ),
@@ -14906,7 +14906,7 @@ fun VegMealCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-28 mins",
                 distance = "1.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹54",
                 address = "Kolkata, WB"
             ),
@@ -14919,7 +14919,7 @@ fun VegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "Srinagar, Kashmir"
             ),
@@ -14932,7 +14932,7 @@ fun VegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹38",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -14945,7 +14945,7 @@ fun VegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹32",
                 address = "Delhi NCR"
             ),
@@ -14958,7 +14958,7 @@ fun VegMealCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹48",
                 address = "Bangalore, Karnataka"
             ),
@@ -14971,7 +14971,7 @@ fun VegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹58",
                 address = "Punjab"
             ),
@@ -14984,7 +14984,7 @@ fun VegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹41",
                 address = "Lucknow, UP"
             ),
@@ -14997,7 +14997,7 @@ fun VegMealCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "Kerala"
             ),
@@ -15010,7 +15010,7 @@ fun VegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-38 mins",
                 distance = "2.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Mumbai, Maharashtra"
             ),
@@ -15023,7 +15023,7 @@ fun VegMealCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Amritsar, Punjab"
             ),
@@ -15036,7 +15036,7 @@ fun VegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹53",
                 address = "Kolkata, WB"
             ),
@@ -15049,7 +15049,7 @@ fun VegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.6 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹30",
                 address = "Delhi NCR"
             ),
@@ -15062,7 +15062,7 @@ fun VegMealCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-28 mins",
                 distance = "1.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹66",
                 address = "Mumbai, Maharashtra"
             ),
@@ -15075,7 +15075,7 @@ fun VegMealCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹45",
                 address = "Bangalore, Karnataka"
             ),
@@ -15088,7 +15088,7 @@ fun VegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹54",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -15101,7 +15101,7 @@ fun VegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-38 mins",
                 distance = "2.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹38",
                 address = "Pune, Maharashtra"
             )
@@ -15397,7 +15397,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹76",
                 address = "Chandni Chowk, Delhi",
             ),
@@ -15410,7 +15410,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹48",
                 address = "Amritsar, Punjab",
             ),
@@ -15423,7 +15423,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "3.2 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹28",
                 address = "ITC Maurya, Delhi",
             ),
@@ -15436,7 +15436,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹105",
                 address = "Srinagar, Kashmir",
             ),
@@ -15449,7 +15449,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "1.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹54",
                 address = "Karol Bagh, Delhi",
             ),
@@ -15462,7 +15462,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹70",
                 address = "Lucknow, Uttar Pradesh",
             ),
@@ -15475,7 +15475,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹22",
                 address = "Paharganj, Delhi",
             ),
@@ -15488,7 +15488,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹68",
                 address = "Daryaganj, Delhi",
             ),
@@ -15501,7 +15501,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Rajouri Garden, Delhi",
             ),
@@ -15514,7 +15514,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹48",
                 address = "Connaught Place, Delhi",
             ),
@@ -15527,7 +15527,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.8 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹58",
                 address = "Gurgaon, Haryana",
             ),
@@ -15540,7 +15540,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "3.1 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹58",
                 address = "Jama Masjid, Delhi",
             ),
@@ -15553,7 +15553,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "Noida, Uttar Pradesh",
             ),
@@ -15566,7 +15566,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹51",
                 address = "Old Delhi",
             ),
@@ -15579,7 +15579,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-28 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹68",
                 address = "Chandigarh, Punjab",
             ),
@@ -15592,7 +15592,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-32 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹52",
                 address = "Jaipur, Rajasthan",
             ),
@@ -15605,7 +15605,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹42",
                 address = "Amritsar, Punjab",
             ),
@@ -15618,7 +15618,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹56",
                 address = "Delhi NCR",
             ),
@@ -15631,7 +15631,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹57",
                 address = "Lucknow, UP",
             ),
@@ -15644,7 +15644,7 @@ fun NorthIndianCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹66",
                 address = "Highway Dhaba, Delhi",
             )
@@ -15948,7 +15948,7 @@ fun PaneerCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹48",
                 address = "Amritsar, Punjab",
             ),
@@ -15961,7 +15961,7 @@ fun PaneerCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Rajouri Garden, Delhi",
             ),
@@ -15974,7 +15974,7 @@ fun PaneerCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.8 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹58",
                 address = "Gurgaon, Haryana",
             ),
@@ -15987,7 +15987,7 @@ fun PaneerCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹56",
                 address = "Delhi NCR",
             ),
@@ -16000,7 +16000,7 @@ fun PaneerCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-28 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹68",
                 address = "Chandigarh, Punjab",
             ),
@@ -16013,7 +16013,7 @@ fun PaneerCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹58",
                 address = "Chandigarh",
             ),
@@ -16026,7 +16026,7 @@ fun PaneerCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹51",
                 address = "Delhi",
             ),
@@ -16039,7 +16039,7 @@ fun PaneerCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹83",
                 address = "New Delhi",
             ),
@@ -16052,7 +16052,7 @@ fun PaneerCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹70",
                 address = "Gurgaon",
             ),
@@ -16065,7 +16065,7 @@ fun PaneerCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.2 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹56",
                 address = "Old Delhi",
             ),
@@ -16078,7 +16078,7 @@ fun PaneerCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹66",
                 address = "Noida",
             ),
@@ -16091,7 +16091,7 @@ fun PaneerCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "1.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹84",
                 address = "Delhi NCR",
             ),
@@ -16104,7 +16104,7 @@ fun PaneerCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹65",
                 address = "Delhi",
             ),
@@ -16117,7 +16117,7 @@ fun PaneerCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "Chennai Style, Delhi",
             ),
@@ -16130,7 +16130,7 @@ fun PaneerCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹27",
                 address = "Delhi Street Food",
             ),
@@ -16143,7 +16143,7 @@ fun PaneerCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹66",
                 address = "Pune Style, Delhi",
             ),
@@ -16156,7 +16156,7 @@ fun PaneerCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹78",
                 address = "Italian Fusion, Delhi",
             ),
@@ -16169,7 +16169,7 @@ fun PaneerCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Hyderabad Style, Delhi",
             ),
@@ -16182,7 +16182,7 @@ fun PaneerCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹15",
                 address = "Street Food Corner",
             ),
@@ -16195,7 +16195,7 @@ fun PaneerCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹38",
                 address = "Cafe Delight",
             )
@@ -16502,7 +16502,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Delhi NCR",
             ),
@@ -16515,7 +16515,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹32",
                 address = "Kolkata, West Bengal",
             ),
@@ -16528,7 +16528,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹63",
                 address = "Mumbai, Maharashtra",
             ),
@@ -16541,7 +16541,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹40",
                 address = "Bengaluru, Karnataka",
             ),
@@ -16554,7 +16554,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Chennai, Tamil Nadu",
             ),
@@ -16567,7 +16567,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹69",
                 address = "Ahmedabad, Gujarat",
             ),
@@ -16580,7 +16580,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹50",
                 address = "Pune, Maharashtra",
             ),
@@ -16593,7 +16593,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹41",
                 address = "Hyderabad, Telangana",
             ),
@@ -16606,7 +16606,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹58",
                 address = "Goa",
             ),
@@ -16619,7 +16619,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.4 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹57",
                 address = "Kerala",
             ),
@@ -16632,7 +16632,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹57",
                 address = "Delhi",
             ),
@@ -16645,7 +16645,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹34",
                 address = "Jaipur, Rajasthan",
             ),
@@ -16658,7 +16658,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹60",
                 address = "Singapore Town, Delhi",
             ),
@@ -16671,7 +16671,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-45 mins",
                 distance = "2.6 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹56",
                 address = "Chinatown, Delhi",
             ),
@@ -16684,7 +16684,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹54",
                 address = "Korean Street, Delhi",
             ),
@@ -16697,7 +16697,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Health Hub, Delhi",
             ),
@@ -16710,7 +16710,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹75",
                 address = "Specialty Restaurant",
             ),
@@ -16723,7 +16723,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹52",
                 address = "Malaysian Street, Delhi",
             ),
@@ -16736,7 +16736,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹69",
                 address = "Hakka Street, Delhi",
             ),
@@ -16749,7 +16749,7 @@ fun FriedRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹53",
                 address = "Luxury Restaurant, Delhi",
             )
@@ -17070,7 +17070,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Delhi NCR"
             ),
@@ -17083,7 +17083,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Kolkata, West Bengal"
             ),
@@ -17096,7 +17096,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹34",
                 address = "Mumbai, Maharashtra"
             ),
@@ -17109,7 +17109,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹45",
                 address = "Bengaluru, Karnataka"
             ),
@@ -17122,7 +17122,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹63",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -17135,7 +17135,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "1.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹48",
                 address = "Ahmedabad, Gujarat"
             ),
@@ -17148,7 +17148,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹52",
                 address = "Pune, Maharashtra"
             ),
@@ -17161,7 +17161,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹36",
                 address = "Hyderabad, Telangana"
             ),
@@ -17174,7 +17174,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Goa"
             ),
@@ -17187,7 +17187,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.2 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹55",
                 address = "Kerala"
             ),
@@ -17200,7 +17200,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-20 mins",
                 distance = "1.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹51",
                 address = "Delhi"
             ),
@@ -17213,7 +17213,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "10-15 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Jaipur, Rajasthan"
             ),
@@ -17226,7 +17226,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹58",
                 address = "Singapore Town, Delhi"
             ),
@@ -17239,7 +17239,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "2.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹36",
                 address = "Chinatown, Delhi"
             ),
@@ -17252,7 +17252,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "Korean Street, Delhi"
             ),
@@ -17265,7 +17265,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹27",
                 address = "Health Hub, Delhi"
             ),
@@ -17278,7 +17278,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹73",
                 address = "Specialty Restaurant"
             ),
@@ -17291,7 +17291,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "Malaysian Street, Delhi"
             ),
@@ -17304,7 +17304,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹96",
                 address = "Japanese Corner, Delhi"
             ),
@@ -17317,7 +17317,7 @@ fun NoodlesCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹51",
                 address = "Luxury Restaurant, Delhi"
             )
@@ -17672,7 +17672,7 @@ fun ParathaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Delhi NCR"
             ),
@@ -17685,7 +17685,7 @@ fun ParathaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹27",
                 address = "Punjab"
             ),
@@ -17698,7 +17698,7 @@ fun ParathaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹23",
                 address = "Lucknow, Uttar Pradesh"
             ),
@@ -17711,7 +17711,7 @@ fun ParathaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹14",
                 address = "Rajasthan"
             ),
@@ -17724,7 +17724,7 @@ fun ParathaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹33",
                 address = "Jaipur, Rajasthan"
             ),
@@ -17737,7 +17737,7 @@ fun ParathaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Hyderabad, Telangana"
             ),
@@ -17750,7 +17750,7 @@ fun ParathaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹23",
                 address = "Haryana"
             ),
@@ -17763,7 +17763,7 @@ fun ParathaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹29",
                 address = "Uttarakhand"
             ),
@@ -17776,7 +17776,7 @@ fun ParathaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹44",
                 address = "Mumbai, Maharashtra"
             ),
@@ -17789,7 +17789,7 @@ fun ParathaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "10-20 mins",
                 distance = "0.9 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹30",
                 address = "Delhi"
             ),
@@ -17802,7 +17802,7 @@ fun ParathaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹21",
                 address = "Old Delhi"
             ),
@@ -17815,7 +17815,7 @@ fun ParathaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹19",
                 address = "Bengaluru, Karnataka"
             ),
@@ -17828,7 +17828,7 @@ fun ParathaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹38",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -17841,7 +17841,7 @@ fun ParathaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-25 mins",
                 distance = "1.2 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹31",
                 address = "Kolkata, West Bengal"
             ),
@@ -17854,7 +17854,7 @@ fun ParathaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹38",
                 address = "Hyderabad, Telangana"
             ),
@@ -17867,7 +17867,7 @@ fun ParathaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-20 mins",
                 distance = "0.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹29",
                 address = "Amritsar, Punjab"
             ),
@@ -17880,7 +17880,7 @@ fun ParathaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹21",
                 address = "Ayurvedic Kitchen"
             ),
@@ -17893,7 +17893,7 @@ fun ParathaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹27",
                 address = "Spice Hub, Delhi"
             ),
@@ -17906,7 +17906,7 @@ fun ParathaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "1.3 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹20",
                 address = "Garlic Street, Delhi"
             ),
@@ -17919,7 +17919,7 @@ fun ParathaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹38",
                 address = "Luxury Restaurant, Delhi"
             )
@@ -18268,7 +18268,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Delhi"
             ),
@@ -18281,7 +18281,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹27",
                 address = "Mumbai, Maharashtra"
             ),
@@ -18294,7 +18294,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Pune, Maharashtra"
             ),
@@ -18307,7 +18307,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Chandigarh"
             ),
@@ -18320,7 +18320,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.7 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹34",
                 address = "Bengaluru, Karnataka"
             ),
@@ -18333,7 +18333,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹37",
                 address = "Hyderabad, Telangana"
             ),
@@ -18346,7 +18346,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹33",
                 address = "Noida, UP"
             ),
@@ -18359,7 +18359,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹28",
                 address = "Jaipur, Rajasthan"
             ),
@@ -18372,7 +18372,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹39",
                 address = "Kolkata, West Bengal"
             ),
@@ -18385,7 +18385,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹46",
                 address = "Delhi NCR"
             ),
@@ -18398,7 +18398,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹35",
                 address = "Gurgaon, Haryana"
             ),
@@ -18411,7 +18411,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹26",
                 address = "Ahmedabad, Gujarat"
             ),
@@ -18424,7 +18424,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹36",
                 address = "Indore, MP"
             ),
@@ -18437,7 +18437,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹36",
                 address = "Lucknow, UP"
             ),
@@ -18450,7 +18450,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹42",
                 address = "Amritsar, Punjab"
             ),
@@ -18463,7 +18463,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹37",
                 address = "Delhi"
             ),
@@ -18476,7 +18476,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.6 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹36",
                 address = "Surat, Gujarat"
             ),
@@ -18489,7 +18489,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹42",
                 address = "Bhopal, MP"
             ),
@@ -18502,7 +18502,7 @@ fun ShawarmaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹42",
                 address = "Kochi, Kerala"
             ),
@@ -18515,7 +18515,7 @@ fun ShawarmaCategoryPage() {
                 rating = "5.0",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹32",
                 address = "Dubai Style Kitchen, Delhi"
             )
@@ -18918,7 +18918,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -18931,7 +18931,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-20 mins",
                 distance = "0.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹12",
                 address = "Bangalore, Karnataka"
             ),
@@ -18944,7 +18944,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹23",
                 address = "Madurai, Tamil Nadu"
             ),
@@ -18957,7 +18957,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹22",
                 address = "Hyderabad, Telangana"
             ),
@@ -18970,7 +18970,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Coimbatore, Tamil Nadu"
             ),
@@ -18983,7 +18983,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "10-20 mins",
                 distance = "0.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹9",
                 address = "Bangalore, Karnataka"
             ),
@@ -18996,7 +18996,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹23",
                 address = "Kochi, Kerala"
             ),
@@ -19009,7 +19009,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹21",
                 address = "Vijayawada, Andhra Pradesh"
             ),
@@ -19022,7 +19022,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹21",
                 address = "Bangalore, Karnataka"
             ),
@@ -19035,7 +19035,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹22",
                 address = "Mangalore, Karnataka"
             ),
@@ -19048,7 +19048,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹27",
                 address = "Trivandrum, Kerala"
             ),
@@ -19061,7 +19061,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "10-20 mins",
                 distance = "0.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹19",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -19074,7 +19074,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Madurai, Tamil Nadu"
             ),
@@ -19087,7 +19087,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹19",
                 address = "Kochi, Kerala"
             ),
@@ -19100,7 +19100,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹30",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -19113,7 +19113,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Trivandrum, Kerala"
             ),
@@ -19126,7 +19126,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹26",
                 address = "Bangalore, Karnataka"
             ),
@@ -19139,7 +19139,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-20 mins",
                 distance = "0.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹21",
                 address = "Mangalore, Karnataka"
             ),
@@ -19152,7 +19152,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Karaikudi, Tamil Nadu"
             ),
@@ -19165,7 +19165,7 @@ fun SouthIndianCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Hyderabad, Telangana"
             )
@@ -19577,7 +19577,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹12",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -19590,7 +19590,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹11",
                 address = "Karol Bagh, Delhi"
             ),
@@ -19603,7 +19603,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹27",
                 address = "Connaught Place, Delhi"
             ),
@@ -19616,7 +19616,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹21",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -19629,7 +19629,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹10",
                 address = "Bengaluru, Karnataka"
             ),
@@ -19642,7 +19642,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Pune, Maharashtra"
             ),
@@ -19655,7 +19655,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-20 mins",
                 distance = "0.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹11",
                 address = "Mumbai, Maharashtra"
             ),
@@ -19668,7 +19668,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "20-30 mins",
                 distance = "1.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹28",
                 address = "Kolkata, West Bengal"
             ),
@@ -19681,7 +19681,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹28",
                 address = "Hyderabad, Telangana"
             ),
@@ -19694,7 +19694,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹20",
                 address = "Jaipur, Rajasthan"
             ),
@@ -19707,7 +19707,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹18",
                 address = "Lucknow, Uttar Pradesh"
             ),
@@ -19720,7 +19720,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹19",
                 address = "Ahmedabad, Gujarat"
             ),
@@ -19733,7 +19733,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹38",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -19746,7 +19746,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹8",
                 address = "Amritsar, Punjab"
             ),
@@ -19759,7 +19759,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹15",
                 address = "Bhopal, Madhya Pradesh"
             ),
@@ -19772,7 +19772,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Goa"
             ),
@@ -19785,7 +19785,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹17",
                 address = "Chandigarh"
             ),
@@ -19798,7 +19798,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹60",
                 address = "Nagpur, Maharashtra"
             ),
@@ -19811,7 +19811,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Surat, Gujarat"
             ),
@@ -19824,7 +19824,7 @@ fun AlooTikkiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "Patna, Bihar"
             )
@@ -20219,7 +20219,7 @@ fun PastaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹64",
                 address = "Connaught Place, Delhi"
             ),
@@ -20232,7 +20232,7 @@ fun PastaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹42",
                 address = "Koramangala, Bangalore"
             ),
@@ -20245,7 +20245,7 @@ fun PastaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹35",
                 address = "Bandra West, Mumbai"
             ),
@@ -20258,7 +20258,7 @@ fun PastaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹60",
                 address = "Cyber City, Gurgaon"
             ),
@@ -20271,7 +20271,7 @@ fun PastaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹52",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -20284,7 +20284,7 @@ fun PastaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹76",
                 address = "Park Street, Kolkata"
             ),
@@ -20297,7 +20297,7 @@ fun PastaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹54",
                 address = "Indiranagar, Bangalore"
             ),
@@ -20310,7 +20310,7 @@ fun PastaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹50",
                 address = "Colaba, Mumbai"
             ),
@@ -20323,7 +20323,7 @@ fun PastaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹68",
                 address = "Sector 17, Chandigarh"
             ),
@@ -20336,7 +20336,7 @@ fun PastaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹62",
                 address = "Khan Market, Delhi"
             ),
@@ -20349,7 +20349,7 @@ fun PastaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹78",
                 address = "Vashi, Navi Mumbai"
             ),
@@ -20362,7 +20362,7 @@ fun PastaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹61",
                 address = "Juhu, Mumbai"
             ),
@@ -20375,7 +20375,7 @@ fun PastaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "MG Road, Pune"
             ),
@@ -20388,7 +20388,7 @@ fun PastaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "25-35 mins",
                 distance = "1.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Civil Lines, Jaipur"
             ),
@@ -20401,7 +20401,7 @@ fun PastaCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹90",
                 address = "Banjara Hills, Hyderabad"
             ),
@@ -20414,7 +20414,7 @@ fun PastaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹44",
                 address = "Gomti Nagar, Lucknow"
             ),
@@ -20427,7 +20427,7 @@ fun PastaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-45 mins",
                 distance = "2.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹66",
                 address = "Marathahalli, Bangalore"
             ),
@@ -20440,7 +20440,7 @@ fun PastaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹59",
                 address = "Salt Lake, Kolkata"
             ),
@@ -20453,7 +20453,7 @@ fun PastaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "2.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹60",
                 address = "Aerocity, Delhi"
             ),
@@ -20466,7 +20466,7 @@ fun PastaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-55 mins",
                 distance = "3.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹48",
                 address = "Chanakyapuri, Delhi"
             )
@@ -20848,7 +20848,7 @@ fun PastryCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Connaught Place, Delhi"
             ),
@@ -20861,7 +20861,7 @@ fun PastryCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹27",
                 address = "Koramangala, Bangalore"
             ),
@@ -20874,7 +20874,7 @@ fun PastryCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹15",
                 address = "Bandra West, Mumbai"
             ),
@@ -20887,7 +20887,7 @@ fun PastryCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Cyber City, Gurgaon"
             ),
@@ -20900,7 +20900,7 @@ fun PastryCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹16",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -20913,7 +20913,7 @@ fun PastryCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Park Street, Kolkata"
             ),
@@ -20926,7 +20926,7 @@ fun PastryCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "1.7 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹17",
                 address = "Baner Road, Pune"
             ),
@@ -20939,7 +20939,7 @@ fun PastryCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹20",
                 address = "MG Road, Ahmedabad"
             ),
@@ -20952,7 +20952,7 @@ fun PastryCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-30 mins",
                 distance = "1.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹17",
                 address = "Banjara Hills, Hyderabad"
             ),
@@ -20965,7 +20965,7 @@ fun PastryCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹38",
                 address = "Indiranagar, Bangalore"
             ),
@@ -20978,7 +20978,7 @@ fun PastryCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹63",
                 address = "Powai, Mumbai"
             ),
@@ -20991,7 +20991,7 @@ fun PastryCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹25",
                 address = "Sector 29, Gurgaon"
             ),
@@ -21004,7 +21004,7 @@ fun PastryCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹30",
                 address = "Salt Lake, Kolkata"
             ),
@@ -21017,7 +21017,7 @@ fun PastryCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Civil Lines, Jaipur"
             ),
@@ -21030,7 +21030,7 @@ fun PastryCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-25 mins",
                 distance = "0.6 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹33",
                 address = "Sadar Bazaar, Nagpur"
             ),
@@ -21043,7 +21043,7 @@ fun PastryCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-20 mins",
                 distance = "0.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹14",
                 address = "Camp Area, Pune"
             ),
@@ -21056,7 +21056,7 @@ fun PastryCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹64",
                 address = "Ballygunge, Kolkata"
             ),
@@ -21069,7 +21069,7 @@ fun PastryCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹19",
                 address = "Sector 17, Chandigarh"
             ),
@@ -21082,7 +21082,7 @@ fun PastryCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-35 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹36",
                 address = "Viman Nagar, Pune"
             ),
@@ -21095,7 +21095,7 @@ fun PastryCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "2.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹35",
                 address = "Lodhi Road, Delhi"
             )
@@ -21498,7 +21498,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Andheri West, Mumbai"
             ),
@@ -21511,7 +21511,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Sadashiv Nagar, Bangalore"
             ),
@@ -21524,7 +21524,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹63",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -21537,7 +21537,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹20",
                 address = "Malad West, Mumbai"
             ),
@@ -21550,7 +21550,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "Koramangala, Bangalore"
             ),
@@ -21563,7 +21563,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹34",
                 address = "Bandra, Mumbai"
             ),
@@ -21576,7 +21576,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Gurgaon Sector 14"
             ),
@@ -21589,7 +21589,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹20",
                 address = "Kolkata Park Street"
             ),
@@ -21602,7 +21602,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹42",
                 address = "Hyderabad Gachibowli"
             ),
@@ -21615,7 +21615,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹38",
                 address = "Pune FC Road"
             ),
@@ -21628,7 +21628,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹29",
                 address = "Chennai T Nagar"
             ),
@@ -21641,7 +21641,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "1.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹19",
                 address = "Ahmedabad CG Road"
             ),
@@ -21654,7 +21654,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹41",
                 address = "Delhi Chandni Chowk"
             ),
@@ -21667,7 +21667,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹32",
                 address = "Bangalore Indiranagar"
             ),
@@ -21680,7 +21680,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹29",
                 address = "Mumbai Dadar"
             ),
@@ -21693,7 +21693,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹65",
                 address = "Surat Athwa"
             ),
@@ -21706,7 +21706,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Jaipur MI Road"
             ),
@@ -21719,7 +21719,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "10-20 mins",
                 distance = "0.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹36",
                 address = "Nagpur Sitabuldi"
             ),
@@ -21732,7 +21732,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹68",
                 address = "Delhi Saket"
             ),
@@ -21745,7 +21745,7 @@ fun PavBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Lucknow Hazratganj"
             )
@@ -22187,7 +22187,7 @@ fun SandwichCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Koramangala, Bangalore"
             ),
@@ -22200,7 +22200,7 @@ fun SandwichCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Connaught Place, Delhi"
             ),
@@ -22213,7 +22213,7 @@ fun SandwichCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹19",
                 address = "Bandra West, Mumbai"
             ),
@@ -22226,7 +22226,7 @@ fun SandwichCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-20 mins",
                 distance = "0.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Powai, Mumbai"
             ),
@@ -22239,7 +22239,7 @@ fun SandwichCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹32",
                 address = "Baner, Pune"
             ),
@@ -22252,7 +22252,7 @@ fun SandwichCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹34",
                 address = "Cyber City, Gurgaon"
             ),
@@ -22265,7 +22265,7 @@ fun SandwichCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹21",
                 address = "Salt Lake, Kolkata"
             ),
@@ -22278,7 +22278,7 @@ fun SandwichCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "1.6 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹19",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -22291,7 +22291,7 @@ fun SandwichCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "MG Road, Ahmedabad"
             ),
@@ -22304,7 +22304,7 @@ fun SandwichCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-25 mins",
                 distance = "0.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹33",
                 address = "Sector 17, Chandigarh"
             ),
@@ -22317,7 +22317,7 @@ fun SandwichCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹23",
                 address = "Indiranagar, Bangalore"
             ),
@@ -22330,7 +22330,7 @@ fun SandwichCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹21",
                 address = "Andheri East, Mumbai"
             ),
@@ -22343,7 +22343,7 @@ fun SandwichCategoryPage() {
                 rating = "4.2",
                 deliveryTime = "10-20 mins",
                 distance = "0.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹22",
                 address = "Park Street, Kolkata"
             ),
@@ -22356,7 +22356,7 @@ fun SandwichCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹35",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -22369,7 +22369,7 @@ fun SandwichCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹19",
                 address = "Banjara Hills, Hyderabad"
             ),
@@ -22382,7 +22382,7 @@ fun SandwichCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹36",
                 address = "Malad West, Mumbai"
             ),
@@ -22395,7 +22395,7 @@ fun SandwichCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-45 mins",
                 distance = "2.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹46",
                 address = "Viman Nagar, Pune"
             ),
@@ -22408,7 +22408,7 @@ fun SandwichCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "1.7 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹84",
                 address = "Sector 29, Gurgaon"
             ),
@@ -22421,7 +22421,7 @@ fun SandwichCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹26",
                 address = "Ballygunge, Kolkata"
             ),
@@ -22434,7 +22434,7 @@ fun SandwichCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-50 mins",
                 distance = "2.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹26",
                 address = "Lodhi Road, Delhi"
             )
@@ -22803,7 +22803,7 @@ fun ShakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Connaught Place, Delhi"
             ),
@@ -22816,7 +22816,7 @@ fun ShakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Juhu, Mumbai"
             ),
@@ -22829,7 +22829,7 @@ fun ShakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹25",
                 address = "Koramangala, Bangalore"
             ),
@@ -22842,7 +22842,7 @@ fun ShakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-20 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹75",
                 address = "Hitech City, Hyderabad"
             ),
@@ -22855,7 +22855,7 @@ fun ShakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹50",
                 address = "Phoenix Marketcity, Chennai"
             ),
@@ -22868,7 +22868,7 @@ fun ShakeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹46",
                 address = "Magarpatta, Pune"
             ),
@@ -22881,7 +22881,7 @@ fun ShakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹28",
                 address = "Indiranagar, Bangalore"
             ),
@@ -22894,7 +22894,7 @@ fun ShakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹31",
                 address = "Hauz Khas, Delhi"
             ),
@@ -22907,7 +22907,7 @@ fun ShakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹34",
                 address = "Bandra West, Mumbai"
             ),
@@ -22920,7 +22920,7 @@ fun ShakeCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹60",
                 address = "Manjalpur, Vadodara"
             ),
@@ -22933,7 +22933,7 @@ fun ShakeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹34",
                 address = "Sector 22, Chandigarh"
             ),
@@ -22946,7 +22946,7 @@ fun ShakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹27",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -22959,7 +22959,7 @@ fun ShakeCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "10-20 mins",
                 distance = "0.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Koregaon Park, Pune"
             ),
@@ -22972,7 +22972,7 @@ fun ShakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹52",
                 address = "Connaught Place, Delhi"
             ),
@@ -22985,7 +22985,7 @@ fun ShakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹37",
                 address = "Hitech City, Hyderabad"
             ),
@@ -22998,7 +22998,7 @@ fun ShakeCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹50",
                 address = "Salt Lake, Kolkata"
             ),
@@ -23011,7 +23011,7 @@ fun ShakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Linking Road, Mumbai"
             ),
@@ -23024,7 +23024,7 @@ fun ShakeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "1.7 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹120",
                 address = "Cyber City, Gurgaon"
             ),
@@ -23037,7 +23037,7 @@ fun ShakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹49",
                 address = "Powai, Mumbai"
             ),
@@ -23050,7 +23050,7 @@ fun ShakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "2.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹30",
                 address = "Rajouri Garden, Delhi"
             )
@@ -23414,7 +23414,7 @@ fun SamosaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹8",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -23427,7 +23427,7 @@ fun SamosaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹10",
                 address = "Connaught Place, Delhi"
             ),
@@ -23440,7 +23440,7 @@ fun SamosaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹9",
                 address = "Jama Masjid, Delhi"
             ),
@@ -23453,7 +23453,7 @@ fun SamosaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹19",
                 address = "Bandra, Mumbai"
             ),
@@ -23466,7 +23466,7 @@ fun SamosaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹22",
                 address = "Karol Bagh, Delhi"
             ),
@@ -23479,7 +23479,7 @@ fun SamosaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹15",
                 address = "Sector 18, Noida"
             ),
@@ -23492,7 +23492,7 @@ fun SamosaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹11",
                 address = "New Friends Colony, Delhi"
             ),
@@ -23505,7 +23505,7 @@ fun SamosaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-35 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹14",
                 address = "Cyber Hub, Gurgaon"
             ),
@@ -23518,7 +23518,7 @@ fun SamosaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹24",
                 address = "Koramangala, Bangalore"
             ),
@@ -23531,7 +23531,7 @@ fun SamosaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹8",
                 address = "Matunga, Mumbai"
             ),
@@ -23544,7 +23544,7 @@ fun SamosaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹38",
                 address = "Salt Lake, Kolkata"
             ),
@@ -23557,7 +23557,7 @@ fun SamosaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹8",
                 address = "Safdarjung Enclave, Delhi"
             ),
@@ -23570,7 +23570,7 @@ fun SamosaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-45 mins",
                 distance = "2.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹18",
                 address = "Lal Chowk, Srinagar"
             ),
@@ -23583,7 +23583,7 @@ fun SamosaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Phoenix Mall, Chennai"
             ),
@@ -23596,7 +23596,7 @@ fun SamosaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹14",
                 address = "Hitech City, Hyderabad"
             ),
@@ -23609,7 +23609,7 @@ fun SamosaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹11",
                 address = "Model Town, Ludhiana"
             ),
@@ -23622,7 +23622,7 @@ fun SamosaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.4 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹11",
                 address = "Old City, Hyderabad"
             ),
@@ -23635,7 +23635,7 @@ fun SamosaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹21",
                 address = "MI Road, Jaipur"
             ),
@@ -23648,7 +23648,7 @@ fun SamosaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹8",
                 address = "Malad West, Mumbai"
             ),
@@ -23661,7 +23661,7 @@ fun SamosaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹26",
                 address = "GT Karnal Road, Delhi"
             )
@@ -24033,7 +24033,7 @@ fun PooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "T Nagar, Chennai"
             ),
@@ -24046,7 +24046,7 @@ fun PooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹21",
                 address = "Connaught Place, Delhi"
             ),
@@ -24059,7 +24059,7 @@ fun PooriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹13",
                 address = "Koramangala, Bangalore"
             ),
@@ -24072,7 +24072,7 @@ fun PooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-20 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹38",
                 address = "Lalbagh Road, Bangalore"
             ),
@@ -24085,7 +24085,7 @@ fun PooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹24",
                 address = "Adyar, Chennai"
             ),
@@ -24098,7 +24098,7 @@ fun PooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Shivaji Park, Mumbai"
             ),
@@ -24111,7 +24111,7 @@ fun PooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹26",
                 address = "Bandra West, Mumbai"
             ),
@@ -24124,7 +24124,7 @@ fun PooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.2 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹13",
                 address = "Indiranagar, Bangalore"
             ),
@@ -24137,7 +24137,7 @@ fun PooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -24150,7 +24150,7 @@ fun PooriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-25 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹36",
                 address = "Gandhi Bazaar, Bangalore"
             ),
@@ -24163,7 +24163,7 @@ fun PooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹23",
                 address = "Navrangpura, Ahmedabad"
             ),
@@ -24176,7 +24176,7 @@ fun PooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹30",
                 address = "Banjara Hills, Hyderabad"
             ),
@@ -24189,7 +24189,7 @@ fun PooriCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "10-20 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹28",
                 address = "Koregaon Park, Pune"
             ),
@@ -24202,7 +24202,7 @@ fun PooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹48",
                 address = "Connaught Place, Delhi"
             ),
@@ -24215,7 +24215,7 @@ fun PooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹14",
                 address = "Hitech City, Hyderabad"
             ),
@@ -24228,7 +24228,7 @@ fun PooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Fort, Mumbai"
             ),
@@ -24241,7 +24241,7 @@ fun PooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹26",
                 address = "Sitapura, Jaipur"
             ),
@@ -24254,7 +24254,7 @@ fun PooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹105",
                 address = "Jayanagar, Bangalore"
             ),
@@ -24267,7 +24267,7 @@ fun PooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Powai, Mumbai"
             ),
@@ -24280,7 +24280,7 @@ fun PooriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹20",
                 address = "Mylapore, Chennai"
             )
@@ -24651,7 +24651,7 @@ fun BowlCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹57",
                 address = "Khan Market, Delhi"
             ),
@@ -24664,7 +24664,7 @@ fun BowlCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-35 mins",
                 distance = "2.2 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹45",
                 address = "Bandra West, Mumbai"
             ),
@@ -24677,7 +24677,7 @@ fun BowlCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹70",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -24690,7 +24690,7 @@ fun BowlCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Indiranagar, Bangalore"
             ),
@@ -24703,7 +24703,7 @@ fun BowlCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹50",
                 address = "Koregaon Park, Pune"
             ),
@@ -24716,7 +24716,7 @@ fun BowlCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "0.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹126",
                 address = "Gurgaon Sector 29"
             ),
@@ -24729,7 +24729,7 @@ fun BowlCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹54",
                 address = "GK-1, Delhi"
             ),
@@ -24742,7 +24742,7 @@ fun BowlCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹78",
                 address = "MG Road, Bangalore"
             ),
@@ -24755,7 +24755,7 @@ fun BowlCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹85",
                 address = "Andheri West, Mumbai"
             ),
@@ -24768,7 +24768,7 @@ fun BowlCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-25 mins",
                 distance = "1.2 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹31",
                 address = "JP Nagar, Bangalore"
             ),
@@ -24781,7 +24781,7 @@ fun BowlCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.7 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹74",
                 address = "Salt Lake, Kolkata"
             ),
@@ -24794,7 +24794,7 @@ fun BowlCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹58",
                 address = "Banjara Hills, Hyderabad"
             ),
@@ -24807,7 +24807,7 @@ fun BowlCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-20 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹41",
                 address = "Viman Nagar, Pune"
             ),
@@ -24820,7 +24820,7 @@ fun BowlCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹144",
                 address = "Marine Drive, Mumbai"
             ),
@@ -24833,7 +24833,7 @@ fun BowlCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹83",
                 address = "Bandra Kurla Complex"
             ),
@@ -24846,7 +24846,7 @@ fun BowlCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹74",
                 address = "Koramangala, Bangalore"
             ),
@@ -24859,7 +24859,7 @@ fun BowlCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-40 mins",
                 distance = "2.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹66",
                 address = "Hitech City, Hyderabad"
             ),
@@ -24872,7 +24872,7 @@ fun BowlCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-50 mins",
                 distance = "2.5 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹228",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -24885,7 +24885,7 @@ fun BowlCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹80",
                 address = "Powai, Mumbai"
             ),
@@ -24898,7 +24898,7 @@ fun BowlCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹35",
                 address = "Connaught Place, Delhi"
             )
@@ -25283,7 +25283,7 @@ fun PohaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-25 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹16",
                 address = "Sarafa Bazaar, Indore"
             ),
@@ -25296,7 +25296,7 @@ fun PohaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹11",
                 address = "Shivaji Park, Mumbai"
             ),
@@ -25309,7 +25309,7 @@ fun PohaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹9",
                 address = "Sitabuldi, Nagpur"
             ),
@@ -25322,7 +25322,7 @@ fun PohaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-20 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹23",
                 address = "Hazratganj, Lucknow"
             ),
@@ -25335,7 +25335,7 @@ fun PohaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹17",
                 address = "New Market, Bhopal"
             ),
@@ -25348,7 +25348,7 @@ fun PohaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹20",
                 address = "Dadar, Mumbai"
             ),
@@ -25361,7 +25361,7 @@ fun PohaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹13",
                 address = "Colaba, Mumbai"
             ),
@@ -25374,7 +25374,7 @@ fun PohaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "2.2 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹9",
                 address = "Park Street, Kolkata"
             ),
@@ -25387,7 +25387,7 @@ fun PohaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹16",
                 address = "Law Garden, Ahmedabad"
             ),
@@ -25400,7 +25400,7 @@ fun PohaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-25 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹24",
                 address = "Rajaram Road, Kolhapur"
             ),
@@ -25413,7 +25413,7 @@ fun PohaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Calangute, Goa"
             ),
@@ -25426,7 +25426,7 @@ fun PohaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹17",
                 address = "Model Town, Delhi"
             ),
@@ -25439,7 +25439,7 @@ fun PohaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "10-20 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹21",
                 address = "Koregaon Park, Pune"
             ),
@@ -25452,7 +25452,7 @@ fun PohaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹28",
                 address = "Connaught Place, Delhi"
             ),
@@ -25465,7 +25465,7 @@ fun PohaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹12",
                 address = "Hitech City, Hyderabad"
             ),
@@ -25478,7 +25478,7 @@ fun PohaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Fort, Mumbai"
             ),
@@ -25491,7 +25491,7 @@ fun PohaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹13",
                 address = "MI Road, Jaipur"
             ),
@@ -25504,7 +25504,7 @@ fun PohaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹23",
                 address = "Jayanagar, Bangalore"
             ),
@@ -25517,7 +25517,7 @@ fun PohaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Powai, Mumbai"
             ),
@@ -25530,7 +25530,7 @@ fun PohaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹13",
                 address = "Mylapore, Chennai"
             )
@@ -25921,7 +25921,7 @@ fun SweetsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-25 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Park Street, Kolkata"
             ),
@@ -25934,7 +25934,7 @@ fun SweetsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹17",
                 address = "Esplanade, Kolkata"
             ),
@@ -25947,7 +25947,7 @@ fun SweetsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-20 mins",
                 distance = "0.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹30",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -25960,7 +25960,7 @@ fun SweetsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-35 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹15",
                 address = "Connaught Place, Delhi"
             ),
@@ -25973,7 +25973,7 @@ fun SweetsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹63",
                 address = "Nagpur Central"
             ),
@@ -25986,7 +25986,7 @@ fun SweetsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-25 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Law Garden, Ahmedabad"
             ),
@@ -25999,7 +25999,7 @@ fun SweetsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹14",
                 address = "T Nagar, Chennai"
             ),
@@ -26012,7 +26012,7 @@ fun SweetsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹14",
                 address = "Mathura"
             ),
@@ -26025,7 +26025,7 @@ fun SweetsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Bhawanipur, Kolkata"
             ),
@@ -26038,7 +26038,7 @@ fun SweetsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹33",
                 address = "Karol Bagh, Delhi"
             ),
@@ -26051,7 +26051,7 @@ fun SweetsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹26",
                 address = "Marine Lines, Mumbai"
             ),
@@ -26064,7 +26064,7 @@ fun SweetsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Fort Kochi, Kerala"
             ),
@@ -26077,7 +26077,7 @@ fun SweetsCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹14",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -26090,7 +26090,7 @@ fun SweetsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹100",
                 address = "Salt Lake, Kolkata"
             ),
@@ -26103,7 +26103,7 @@ fun SweetsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹40",
                 address = "Bandra, Mumbai"
             ),
@@ -26116,7 +26116,7 @@ fun SweetsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹150",
                 address = "Sadar Bazaar, Delhi"
             ),
@@ -26129,7 +26129,7 @@ fun SweetsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹17",
                 address = "Hazratganj, Lucknow"
             ),
@@ -26142,7 +26142,7 @@ fun SweetsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Panaji, Goa"
             ),
@@ -26155,7 +26155,7 @@ fun SweetsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹10",
                 address = "Jaipur Sweet House"
             ),
@@ -26168,7 +26168,7 @@ fun SweetsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹34",
                 address = "Alwar, Rajasthan"
             )
@@ -26539,7 +26539,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Karol Bagh, Delhi"
             ),
@@ -26552,7 +26552,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹27",
                 address = "Majnu Ka Tila, Delhi"
             ),
@@ -26565,7 +26565,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹45",
                 address = "Marine Lines, Mumbai"
             ),
@@ -26578,7 +26578,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹35",
                 address = "Park Street, Kolkata"
             ),
@@ -26591,7 +26591,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "NH-8, Gurgaon"
             ),
@@ -26604,7 +26604,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Indiranagar, Bangalore"
             ),
@@ -26617,7 +26617,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹24",
                 address = "Amritsar"
             ),
@@ -26630,7 +26630,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹19",
                 address = "Chandigarh"
             ),
@@ -26643,7 +26643,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹26",
                 address = "Srinagar"
             ),
@@ -26656,7 +26656,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹36",
                 address = "Connaught Place, Delhi"
             ),
@@ -26669,7 +26669,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹26",
                 address = "Old Delhi"
             ),
@@ -26682,7 +26682,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹27",
                 address = "Udaipur"
             ),
@@ -26695,7 +26695,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹13",
                 address = "Hyderabad"
             ),
@@ -26708,7 +26708,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Ludhiana"
             ),
@@ -26721,7 +26721,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹20",
                 address = "Pune"
             ),
@@ -26734,7 +26734,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹135",
                 address = "Noida"
             ),
@@ -26747,7 +26747,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹29",
                 address = "Peshawar Road"
             ),
@@ -26760,7 +26760,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "South Delhi"
             ),
@@ -26773,7 +26773,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹14",
                 address = "Jaipur"
             ),
@@ -26786,7 +26786,7 @@ fun CholePooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹24",
                 address = "Lucknow"
             )
@@ -27179,7 +27179,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹18",
                 address = "Law Garden, Ahmedabad"
             ),
@@ -27192,7 +27192,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹11",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -27205,7 +27205,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹36",
                 address = "Hyderabad"
             ),
@@ -27218,7 +27218,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹11",
                 address = "Chandigarh"
             ),
@@ -27231,7 +27231,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "Punjab"
             ),
@@ -27244,7 +27244,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹19",
                 address = "Bandra, Mumbai"
             ),
@@ -27257,7 +27257,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-40 mins",
                 distance = "2.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹13",
                 address = "Bangalore"
             ),
@@ -27270,7 +27270,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "1.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹10",
                 address = "Chennai"
             ),
@@ -27283,7 +27283,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-30 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹16",
                 address = "Kolkata"
             ),
@@ -27296,7 +27296,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹29",
                 address = "Pune"
             ),
@@ -27309,7 +27309,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹11",
                 address = "Delhi"
             ),
@@ -27322,7 +27322,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹21",
                 address = "Hyderabad"
             ),
@@ -27335,7 +27335,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "30-40 mins",
                 distance = "2.3 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹10",
                 address = "Jaipur"
             ),
@@ -27348,7 +27348,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-45 mins",
                 distance = "2.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹45",
                 address = "Ahmedabad"
             ),
@@ -27361,7 +27361,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "1.4 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹12",
                 address = "Mumbai"
             ),
@@ -27374,7 +27374,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-50 mins",
                 distance = "3.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹75",
                 address = "Delhi"
             ),
@@ -27387,7 +27387,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-35 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹13",
                 address = "Bangalore"
             ),
@@ -27400,7 +27400,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "35-45 mins",
                 distance = "2.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹20",
                 address = "Kolkata"
             ),
@@ -27413,7 +27413,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-25 mins",
                 distance = "1.1 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹8",
                 address = "Pune"
             ),
@@ -27426,7 +27426,7 @@ fun KhichdiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹20",
                 address = "Delhi"
             )
@@ -27819,7 +27819,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Park Street, Kolkata"
             ),
@@ -27832,7 +27832,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹50",
                 address = "Connaught Place, Delhi"
             ),
@@ -27845,7 +27845,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹28",
                 address = "Lalbagh, Bangalore"
             ),
@@ -27858,7 +27858,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹75",
                 address = "Bandra West, Mumbai"
             ),
@@ -27871,7 +27871,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹72",
                 address = "Jubilee Hills, Hyderabad"
             ),
@@ -27884,7 +27884,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.5 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹47",
                 address = "Salt Lake, Kolkata"
             ),
@@ -27897,7 +27897,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹64",
                 address = "Indiranagar, Bangalore"
             ),
@@ -27910,7 +27910,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "2.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹53",
                 address = "Hinjewadi, Pune"
             ),
@@ -27923,7 +27923,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹21",
                 address = "Gurgaon"
             ),
@@ -27936,7 +27936,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹73",
                 address = "Chennai"
             ),
@@ -27949,7 +27949,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Sarojini Nagar, Delhi"
             ),
@@ -27962,7 +27962,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-30 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Koramangala, Bangalore"
             ),
@@ -27975,7 +27975,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "35-45 mins",
                 distance = "3.0 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹32",
                 address = "Bandra, Mumbai"
             ),
@@ -27988,7 +27988,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-35 mins",
                 distance = "2.1 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹43",
                 address = "Chandigarh"
             ),
@@ -28001,7 +28001,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-30 mins",
                 distance = "1.9 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹57",
                 address = "Hyderabad"
             ),
@@ -28014,7 +28014,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "40-50 mins",
                 distance = "2.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹150",
                 address = "Noida"
             ),
@@ -28027,7 +28027,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹38",
                 address = "Jaipur"
             ),
@@ -28040,7 +28040,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹35",
                 address = "Pune"
             ),
@@ -28053,7 +28053,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-40 mins",
                 distance = "2.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹95",
                 address = "Kolkata"
             ),
@@ -28066,7 +28066,7 @@ fun ChilliChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-45 mins",
                 distance = "2.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹64",
                 address = "Delhi"
             )
@@ -28479,7 +28479,7 @@ fun TeaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹5",
                 address = "Connaught Place, Delhi"
             ),
@@ -28492,7 +28492,7 @@ fun TeaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹10",
                 address = "Lal Chowk, Srinagar"
             ),
@@ -28505,7 +28505,7 @@ fun TeaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹15",
                 address = "Park Street, Kolkata"
             ),
@@ -28518,7 +28518,7 @@ fun TeaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-18 mins",
                 distance = "1.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹12",
                 address = "Koregaon Park, Pune"
             ),
@@ -28531,7 +28531,7 @@ fun TeaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹16",
                 address = "Guwahati, Assam"
             ),
@@ -28544,7 +28544,7 @@ fun TeaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "10-15 mins",
                 distance = "0.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹11",
                 address = "MG Road, Bangalore"
             ),
@@ -28557,7 +28557,7 @@ fun TeaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.2 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹9",
                 address = "Leh, Ladakh"
             ),
@@ -28570,7 +28570,7 @@ fun TeaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "2.5 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹24",
                 address = "South Mumbai"
             ),
@@ -28583,7 +28583,7 @@ fun TeaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹11",
                 address = "Colaba, Mumbai"
             ),
@@ -28596,7 +28596,7 @@ fun TeaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹16",
                 address = "Civil Lines, Delhi"
             ),
@@ -28609,7 +28609,7 @@ fun TeaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹24",
                 address = "Bandra, Mumbai"
             ),
@@ -28622,7 +28622,7 @@ fun TeaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹18",
                 address = "Chennai"
             ),
@@ -28635,7 +28635,7 @@ fun TeaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹39",
                 address = "Hyderabad"
             ),
@@ -28648,7 +28648,7 @@ fun TeaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹10",
                 address = "Pune"
             ),
@@ -28661,7 +28661,7 @@ fun TeaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-15 mins",
                 distance = "0.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹11",
                 address = "Kolkata"
             ),
@@ -28674,7 +28674,7 @@ fun TeaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "1.9 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹19",
                 address = "Jaipur"
             ),
@@ -28687,7 +28687,7 @@ fun TeaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹7",
                 address = "Bangalore"
             ),
@@ -28700,7 +28700,7 @@ fun TeaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-18 mins",
                 distance = "1.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹10",
                 address = "Delhi"
             ),
@@ -28713,7 +28713,7 @@ fun TeaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "2.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Gurgaon"
             ),
@@ -28726,7 +28726,7 @@ fun TeaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹16",
                 address = "Noida"
             )
@@ -29081,7 +29081,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹8",
                 address = "Dadar Station, Mumbai"
             ),
@@ -29094,7 +29094,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹12",
                 address = "Andheri West, Mumbai"
             ),
@@ -29107,7 +29107,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "12-18 mins",
                 distance = "0.8 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹7",
                 address = "Sion Circle, Mumbai"
             ),
@@ -29120,7 +29120,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹20",
                 address = "Vile Parle, Mumbai"
             ),
@@ -29133,7 +29133,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-22 mins",
                 distance = "1.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹25",
                 address = "Matunga, Mumbai"
             ),
@@ -29146,7 +29146,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹15",
                 address = "Powai, Mumbai"
             ),
@@ -29159,7 +29159,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-15 mins",
                 distance = "0.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹9",
                 address = "Borivali, Mumbai"
             ),
@@ -29172,7 +29172,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Chandigarh"
             ),
@@ -29185,7 +29185,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-18 mins",
                 distance = "1.1 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹17",
                 address = "Thane, Maharashtra"
             ),
@@ -29198,7 +29198,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "1.4 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹24",
                 address = "Pune"
             ),
@@ -29211,7 +29211,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹39",
                 address = "South Mumbai"
             ),
@@ -29224,7 +29224,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-28 mins",
                 distance = "1.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹43",
                 address = "Navi Mumbai"
             ),
@@ -29237,7 +29237,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹15",
                 address = "Bangalore"
             ),
@@ -29250,7 +29250,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Colaba, Mumbai"
             ),
@@ -29263,7 +29263,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-24 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹27",
                 address = "Delhi"
             ),
@@ -29276,7 +29276,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹30",
                 address = "Ahmedabad"
             ),
@@ -29289,7 +29289,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹18",
                 address = "Nagpur"
             ),
@@ -29302,7 +29302,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹12",
                 address = "Surat"
             ),
@@ -29315,7 +29315,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-30 mins",
                 distance = "2.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹42",
                 address = "Hyderabad"
             ),
@@ -29328,7 +29328,7 @@ fun VadaPavCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹22",
                 address = "Kolkata"
             )
@@ -29710,7 +29710,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹20",
                 address = "Colaba Causeway, Mumbai"
             ),
@@ -29723,7 +29723,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹22",
                 address = "Connaught Place, Delhi"
             ),
@@ -29736,7 +29736,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "12-15 mins",
                 distance = "0.7 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹13",
                 address = "Koramangala, Bangalore"
             ),
@@ -29749,7 +29749,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-14 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹30",
                 address = "Bandra West, Mumbai"
             ),
@@ -29762,7 +29762,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-22 mins",
                 distance = "1.3 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹51",
                 address = "Chandigarh"
             ),
@@ -29775,7 +29775,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹32",
                 address = "Juhu, Mumbai"
             ),
@@ -29788,7 +29788,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "12-16 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹28",
                 address = "Powai, Mumbai"
             ),
@@ -29801,7 +29801,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-22 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹28",
                 address = "Indiranagar, Bangalore"
             ),
@@ -29814,7 +29814,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-18 mins",
                 distance = "1.0 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹35",
                 address = "Kolkata"
             ),
@@ -29827,7 +29827,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-18 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹42",
                 address = "Pune"
             ),
@@ -29840,7 +29840,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "16-20 mins",
                 distance = "1.4 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹18",
                 address = "Ooty, Tamil Nadu"
             ),
@@ -29853,7 +29853,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-12 mins",
                 distance = "0.3 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹8",
                 address = "DU North Campus, Delhi"
             ),
@@ -29866,7 +29866,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-15 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹26",
                 address = "Ahmedabad"
             ),
@@ -29879,7 +29879,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "1.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹28",
                 address = "Hyderabad"
             ),
@@ -29892,7 +29892,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "11-14 mins",
                 distance = "0.6 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹19",
                 address = "Nagpur"
             ),
@@ -29905,7 +29905,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹60",
                 address = "Chennai"
             ),
@@ -29918,7 +29918,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-21 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹34",
                 address = "Goa"
             ),
@@ -29931,7 +29931,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "13-16 mins",
                 distance = "0.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹18",
                 address = "Surat"
             ),
@@ -29944,7 +29944,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-28 mins",
                 distance = "2.1 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹66",
                 address = "Noida"
             ),
@@ -29957,7 +29957,7 @@ fun MasalaMaggiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹37",
                 address = "Lucknow"
             )
@@ -30329,7 +30329,7 @@ fun KulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Karol Bagh, Delhi"
             ),
@@ -30342,7 +30342,7 @@ fun KulcheCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-16 mins",
                 distance = "0.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹24",
                 address = "Punjabi Bagh, Delhi"
             ),
@@ -30355,7 +30355,7 @@ fun KulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-14 mins",
                 distance = "0.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹35",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -30368,7 +30368,7 @@ fun KulcheCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-22 mins",
                 distance = "1.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹66",
                 address = "Connaught Place, Delhi"
             ),
@@ -30381,7 +30381,7 @@ fun KulcheCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹25",
                 address = "Old Delhi"
             ),
@@ -30394,7 +30394,7 @@ fun KulcheCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "16-20 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹40",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -30407,7 +30407,7 @@ fun KulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "1.3 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹28",
                 address = "Chandigarh"
             ),
@@ -30420,7 +30420,7 @@ fun KulcheCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-18 mins",
                 distance = "0.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹30",
                 address = "Gurgaon"
             ),
@@ -30433,7 +30433,7 @@ fun KulcheCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-19 mins",
                 distance = "1.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹43",
                 address = "Noida"
             ),
@@ -30446,7 +30446,7 @@ fun KulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "13-17 mins",
                 distance = "0.7 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹30",
                 address = "South Delhi"
             ),
@@ -30459,7 +30459,7 @@ fun KulcheCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "16-20 mins",
                 distance = "1.4 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹34",
                 address = "Faridabad"
             ),
@@ -30472,7 +30472,7 @@ fun KulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹63",
                 address = "Dwarka, Delhi"
             ),
@@ -30485,7 +30485,7 @@ fun KulcheCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "22-28 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹36",
                 address = "Highway Dhaba"
             ),
@@ -30498,7 +30498,7 @@ fun KulcheCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-22 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹46",
                 address = "Pitampura, Delhi"
             ),
@@ -30511,7 +30511,7 @@ fun KulcheCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "14-18 mins",
                 distance = "1.0 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹19",
                 address = "Rohini, Delhi"
             ),
@@ -30524,7 +30524,7 @@ fun KulcheCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-14 mins",
                 distance = "0.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹12",
                 address = "Hauz Khas, Delhi"
             ),
@@ -30537,7 +30537,7 @@ fun KulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "17-21 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹48",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -30550,7 +30550,7 @@ fun KulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "19-24 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹45",
                 address = "Greater Noida"
             ),
@@ -30563,7 +30563,7 @@ fun KulcheCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹31",
                 address = "Amritsar"
             ),
@@ -30576,7 +30576,7 @@ fun KulcheCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "2.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹105",
                 address = "Saket, Delhi"
             )
@@ -30884,7 +30884,7 @@ fun WingsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "Buy 1 Get 1",
+                discount = "20%",
                 discountAmount = "50% off",
                 address = "Vasant Kunj, Delhi",
             )
@@ -30957,7 +30957,7 @@ fun WingsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹72",
                 address = "Connaught Place, Delhi"
             ),
@@ -30970,7 +30970,7 @@ fun WingsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-18 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹84",
                 address = "Saket, Delhi"
             ),
@@ -30983,7 +30983,7 @@ fun WingsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹55",
                 address = "Cyber City, Gurgaon"
             ),
@@ -30996,7 +30996,7 @@ fun WingsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹162",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -31009,7 +31009,7 @@ fun WingsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-28 mins",
                 distance = "1.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹114",
                 address = "Greater Kailash, Delhi"
             ),
@@ -31022,7 +31022,7 @@ fun WingsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "BOGO OFF",
+                discount = "BOGO",
                 discountAmount = "50% off",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -31035,7 +31035,7 @@ fun WingsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "1.1 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹82",
                 address = "Punjabi Bagh, Delhi"
             ),
@@ -31048,7 +31048,7 @@ fun WingsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "1.3 km",
-                discount = "22% OFF",
+                discount = "22%",
                 discountAmount = "up to ₹107",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -31061,7 +31061,7 @@ fun WingsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹81",
                 address = "Defence Colony, Delhi"
             ),
@@ -31074,7 +31074,7 @@ fun WingsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "16-20 mins",
                 distance = "1.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹86",
                 address = "Karol Bagh, Delhi"
             ),
@@ -31087,7 +31087,7 @@ fun WingsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "21-26 mins",
                 distance = "1.6 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹117",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -31100,7 +31100,7 @@ fun WingsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "24-29 mins",
                 distance = "2.1 km",
-                discount = "12% OFF",
+                discount = "12%",
                 discountAmount = "up to ₹61",
                 address = "Select Citywalk, Delhi"
             ),
@@ -31113,7 +31113,7 @@ fun WingsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-23 mins",
                 distance = "1.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹117",
                 address = "Golf Course Road, Gurgaon"
             ),
@@ -31126,7 +31126,7 @@ fun WingsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹87",
                 address = "Rohini, Delhi"
             ),
@@ -31139,7 +31139,7 @@ fun WingsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹124",
                 address = "DLF Phase 4, Gurgaon"
             ),
@@ -31152,7 +31152,7 @@ fun WingsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-19 mins",
                 distance = "0.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹79",
                 address = "Cyber Hub, Gurgaon"
             ),
@@ -31165,7 +31165,7 @@ fun WingsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.7 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹125",
                 address = "Malviya Nagar, Delhi"
             ),
@@ -31178,7 +31178,7 @@ fun WingsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "26-32 mins",
                 distance = "2.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹225",
                 address = "Noida Sector 18"
             ),
@@ -31191,7 +31191,7 @@ fun WingsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "19-24 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹106",
                 address = "Pitampura, Delhi"
             ),
@@ -31204,7 +31204,7 @@ fun WingsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "23-28 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹85",
                 address = "Hauz Khas, Delhi"
             )
@@ -31481,7 +31481,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "12-15 mins",
                 distance = "0.5 km",
-                discount = "Buy 1 Get 1",
+                discount = "20%",
                 discountAmount = "Free Curd",
                 address = "Old Delhi",
             )
@@ -31554,7 +31554,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -31567,7 +31567,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹33",
                 address = "Karol Bagh, Delhi"
             ),
@@ -31580,7 +31580,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-22 mins",
                 distance = "1.2 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹20",
                 address = "Connaught Place, Delhi"
             ),
@@ -31593,7 +31593,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹62",
                 address = "MG Road, Gurgaon"
             ),
@@ -31606,7 +31606,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-28 mins",
                 distance = "1.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹63",
                 address = "Noida Sector 18"
             ),
@@ -31619,7 +31619,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "12-15 mins",
                 distance = "0.5 km",
-                discount = "BOGO OFF",
+                discount = "20%",
                 discountAmount = "Free Curd",
                 address = "Old Delhi"
             ),
@@ -31632,7 +31632,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹38",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -31645,7 +31645,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Papad & Pickle",
                 address = "Nehru Place, Delhi"
             ),
@@ -31658,7 +31658,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹60",
                 address = "Chawri Bazar, Delhi"
             ),
@@ -31671,7 +31671,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Extra Pooris",
                 address = "Bengaluru"
             ),
@@ -31684,7 +31684,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.6 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹41",
                 address = "Chennai"
             ),
@@ -31697,7 +31697,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-29 mins",
                 distance = "2.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Mumbai"
             ),
@@ -31710,7 +31710,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-23 mins",
                 distance = "1.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹72",
                 address = "Pune"
             ),
@@ -31723,7 +31723,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹43",
                 address = "Ahmedabad"
             ),
@@ -31736,7 +31736,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹70",
                 address = "Hyderabad"
             ),
@@ -31749,7 +31749,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-19 mins",
                 distance = "0.9 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹48",
                 address = "Jaipur"
             ),
@@ -31762,7 +31762,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "0.7 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹56",
                 address = "Kolkata"
             ),
@@ -31775,7 +31775,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "26-32 mins",
                 distance = "2.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹165",
                 address = "Chandigarh"
             ),
@@ -31788,7 +31788,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "19-24 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹52",
                 address = "Lucknow"
             ),
@@ -31801,7 +31801,7 @@ fun AlooPooriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "23-28 mins",
                 distance = "1.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹46",
                 address = "Bangalore"
             )
@@ -32093,7 +32093,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "14-17 mins",
                 distance = "0.7 km",
-                discount = "Buy 1 Get 1",
+                discount = "20%",
                 discountAmount = "Free Toast",
                 address = "MG Road, Bangalore",
             )
@@ -32166,7 +32166,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-15 mins",
                 distance = "0.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹24",
                 address = "Koramangala, Bangalore"
             ),
@@ -32179,7 +32179,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-13 mins",
                 distance = "0.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹13",
                 address = "Indiranagar, Bangalore"
             ),
@@ -32192,7 +32192,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-18 mins",
                 distance = "1.0 km",
-                discount = "10% OFF",
+                discount = "10%",
                 discountAmount = "up to ₹14",
                 address = "Whitefield, Bangalore"
             ),
@@ -32205,7 +32205,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "1.3 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹40",
                 address = "Jayanagar, Bangalore"
             ),
@@ -32218,7 +32218,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹54",
                 address = "HSR Layout, Bangalore"
             ),
@@ -32231,7 +32231,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "14-17 mins",
                 distance = "0.7 km",
-                discount = "BOGO OFF",
+                discount = "20%",
                 discountAmount = "Free Toast",
                 address = "MG Road, Bangalore"
             ),
@@ -32244,7 +32244,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-28 mins",
                 distance = "1.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹38",
                 address = "Church Street, Bangalore"
             ),
@@ -32257,7 +32257,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.1 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "With Avocado",
                 address = "Bellandur, Bangalore"
             ),
@@ -32270,7 +32270,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "16-20 mins",
                 distance = "1.2 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹52",
                 address = "Marathahalli, Bangalore"
             ),
@@ -32283,7 +32283,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "13-16 mins",
                 distance = "0.9 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Extra Cheese",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -32296,7 +32296,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹37",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -32309,7 +32309,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-29 mins",
                 distance = "2.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹55",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -32322,7 +32322,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "17-22 mins",
                 distance = "1.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹40",
                 address = "Richmond Town, Bangalore"
             ),
@@ -32335,7 +32335,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹24",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -32348,7 +32348,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-32 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹37",
                 address = "Brigade Road, Bangalore"
             ),
@@ -32361,7 +32361,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-19 mins",
                 distance = "0.8 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹19",
                 address = "KR Puram, Bangalore"
             ),
@@ -32374,7 +32374,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "11-16 mins",
                 distance = "0.7 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹50",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -32387,7 +32387,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "23-28 mins",
                 distance = "2.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹84",
                 address = "Electronic City, Bangalore"
             ),
@@ -32400,7 +32400,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "1.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹31",
                 address = "Yelahanka, Bangalore"
             ),
@@ -32413,7 +32413,7 @@ fun OmeletteCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "21-26 mins",
                 distance = "1.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹29",
                 address = "Hebbal, Bangalore"
             )
@@ -32702,7 +32702,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "1.1 km",
-                discount = "Buy 1 Get 1",
+                discount = "20%",
                 discountAmount = "Free Drinks",
                 address = "HSR Layout, Bangalore",
             ),
@@ -32715,7 +32715,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "Combo Offer",
+                discount = "20%",
                 discountAmount = "Free Dessert",
                 address = "MG Road, Bangalore",
             )
@@ -32788,7 +32788,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹70",
                 address = "Koramangala, Bangalore"
             ),
@@ -32801,7 +32801,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹64",
                 address = "Indiranagar, Bangalore"
             ),
@@ -32814,7 +32814,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹36",
                 address = "Whitefield, Bangalore"
             ),
@@ -32827,7 +32827,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹105",
                 address = "Jayanagar, Bangalore"
             ),
@@ -32840,7 +32840,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "1.1 km",
-                discount = "BOGO OFF",
+                discount = "20%",
                 discountAmount = "Free Drinks",
                 address = "HSR Layout, Bangalore"
             ),
@@ -32853,7 +32853,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Free Dessert",
                 address = "MG Road, Bangalore"
             ),
@@ -32866,7 +32866,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "23-28 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹52",
                 address = "Church Street, Bangalore"
             ),
@@ -32879,7 +32879,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Extra Raita",
                 address = "Bellandur, Bangalore"
             ),
@@ -32892,7 +32892,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "19-24 mins",
                 distance = "1.3 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹88",
                 address = "Marathahalli, Bangalore"
             ),
@@ -32905,7 +32905,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "16-21 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹81",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -32918,7 +32918,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-19 mins",
                 distance = "0.7 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹32",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -32931,7 +32931,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "2.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹80",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -32944,7 +32944,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "31-36 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹62",
                 address = "Richmond Town, Bangalore"
             ),
@@ -32957,7 +32957,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹51",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -32970,7 +32970,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-31 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹72",
                 address = "Brigade Road, Bangalore"
             ),
@@ -32983,7 +32983,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹54",
                 address = "KR Puram, Bangalore"
             ),
@@ -32996,7 +32996,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "0.9 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹87",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -33009,7 +33009,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "33-38 mins",
                 distance = "2.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹135",
                 address = "Electronic City, Bangalore"
             ),
@@ -33022,7 +33022,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-29 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹58",
                 address = "Yelahanka, Bangalore"
             ),
@@ -33035,7 +33035,7 @@ fun NonVegMealCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "27-32 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹49",
                 address = "Hebbal, Bangalore"
             )
@@ -33280,7 +33280,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "12-18 mins",
                 distance = "0.3 km",
-                discount = "Buy 1 Get 1",
+                discount = "20%",
                 discountAmount = "Free Chutney",
                 address = "Indiranagar, Bangalore",
             ),
@@ -33319,7 +33319,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-22 mins",
                 distance = "1.0 km",
-                discount = "Oil-Free Option",
+                discount = "20%",
                 discountAmount = "₹10 Extra",
                 address = "Whitefield, Bangalore",
             ),
@@ -33332,7 +33332,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "No Onion Garlic",
+                discount = "20%",
                 discountAmount = "Special Jain",
                 address = "MG Road, Bangalore",
             )
@@ -33405,7 +33405,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹12",
                 address = "Koramangala, Bangalore"
             ),
@@ -33418,7 +33418,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "12-18 mins",
                 distance = "0.3 km",
-                discount = "BOGO OFF",
+                discount = "20%",
                 discountAmount = "Free Chutney",
                 address = "Indiranagar, Bangalore"
             ),
@@ -33431,7 +33431,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹11",
                 address = "Jayanagar, Bangalore"
             ),
@@ -33444,7 +33444,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹16",
                 address = "HSR Layout, Bangalore"
             ),
@@ -33457,7 +33457,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-22 mins",
                 distance = "1.0 km",
-                discount = "HEALTH OFF",
+                discount = "20%",
                 discountAmount = "Oil-Free",
                 address = "Whitefield, Bangalore"
             ),
@@ -33470,7 +33470,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "JAIN OFF",
+                discount = "20%",
                 discountAmount = "No Onion Garlic",
                 address = "MG Road, Bangalore"
             ),
@@ -33483,7 +33483,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "23-28 mins",
                 distance = "1.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹19",
                 address = "Church Street, Bangalore"
             ),
@@ -33496,7 +33496,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Extra Chutney",
                 address = "Bellandur, Bangalore"
             ),
@@ -33509,7 +33509,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "19-24 mins",
                 distance = "1.3 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹32",
                 address = "Marathahalli, Bangalore"
             ),
@@ -33522,7 +33522,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "16-21 mins",
                 distance = "1.0 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹27",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -33535,7 +33535,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-19 mins",
                 distance = "0.7 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹9",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -33548,7 +33548,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "2.1 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹18",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -33561,7 +33561,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "31-36 mins",
                 distance = "2.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹17",
                 address = "Richmond Town, Bangalore"
             ),
@@ -33574,7 +33574,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.6 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹10",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -33587,7 +33587,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-31 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹19",
                 address = "Brigade Road, Bangalore"
             ),
@@ -33600,7 +33600,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹32",
                 address = "KR Puram, Bangalore"
             ),
@@ -33613,7 +33613,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "0.9 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹22",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -33626,7 +33626,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "33-38 mins",
                 distance = "2.4 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹75",
                 address = "Electronic City, Bangalore"
             ),
@@ -33639,7 +33639,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-29 mins",
                 distance = "1.7 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹16",
                 address = "Yelahanka, Bangalore"
             ),
@@ -33652,7 +33652,7 @@ fun BreadPakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "27-32 mins",
                 distance = "2.0 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹18",
                 address = "Hebbal, Bangalore"
             )
@@ -34027,7 +34027,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.3 km",
-                discount = "FREE DEL",
+                discount = "20%",
                 discountAmount = "above ₹200",
                 address = "Indiranagar, Bangalore"
             ),
@@ -34040,7 +34040,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "12-18 mins",
                 distance = "0.5 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹27",
                 address = "Koramangala, Bangalore"
             ),
@@ -34053,7 +34053,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "BOGO OFF",
+                discount = "20%",
                 discountAmount = "on Lattes",
                 address = "MG Road, Bangalore"
             ),
@@ -34066,7 +34066,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹32",
                 address = "Jayanagar, Bangalore"
             ),
@@ -34079,7 +34079,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "₹20 off",
                 address = "Whitefield, Bangalore"
             ),
@@ -34092,7 +34092,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "TRADITION",
+                discount = "20%",
                 discountAmount = "Steel Tumbler",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -34105,7 +34105,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-19 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹62",
                 address = "HSR Layout, Bangalore"
             ),
@@ -34118,7 +34118,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.3 km",
-                discount = "BREW OFF",
+                discount = "20%",
                 discountAmount = "Extra Shot",
                 address = "Bellandur, Bangalore"
             ),
@@ -34131,7 +34131,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "16-21 mins",
                 distance = "0.6 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹84",
                 address = "Marathahalli, Bangalore"
             ),
@@ -34144,7 +34144,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹54",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -34157,7 +34157,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹18",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -34170,7 +34170,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "1.2 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹47",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -34183,7 +34183,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "28-33 mins",
                 distance = "2.0 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Richmond Town, Bangalore"
             ),
@@ -34196,7 +34196,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹34",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -34209,7 +34209,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "23-28 mins",
                 distance = "1.6 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹48",
                 address = "Brigade Road, Bangalore"
             ),
@@ -34222,7 +34222,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "18% OFF",
+                discount = "18%",
                 discountAmount = "up to ₹63",
                 address = "KR Puram, Bangalore"
             ),
@@ -34235,7 +34235,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "1.0 km",
-                discount = "35% OFF",
+                discount = "35%",
                 discountAmount = "up to ₹59",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -34248,7 +34248,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "30% OFF",
+                discount = "30%",
                 discountAmount = "up to ₹135",
                 address = "Electronic City, Bangalore"
             ),
@@ -34261,7 +34261,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "1.9 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹42",
                 address = "Yelahanka, Bangalore"
             ),
@@ -34274,7 +34274,7 @@ fun CoffeeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-29 mins",
                 distance = "1.7 km",
-                discount = "15% OFF",
+                discount = "15%",
                 discountAmount = "up to ₹45",
                 address = "Hebbal, Bangalore"
             )
@@ -34639,7 +34639,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.4 km",
-                discount = "FREE DEL",
+                discount = "20%",
                 discountAmount = "above ₹300",
                 address = "Indiranagar, Bangalore"
             ),
@@ -34652,7 +34652,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-22 mins",
                 distance = "0.6 km",
-                discount = "THALI OFF",
+                discount = "20%",
                 discountAmount = "Kadhi + Pickle",
                 address = "Koramangala, Bangalore"
             ),
@@ -34665,7 +34665,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-16 mins",
                 distance = "0.3 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹28",
                 address = "Jayanagar, Bangalore"
             ),
@@ -34678,7 +34678,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Free Lassi",
                 address = "Whitefield, Bangalore"
             ),
@@ -34691,7 +34691,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "JAIN OFF",
+                discount = "20%",
                 discountAmount = "10% off",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -34704,7 +34704,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "STREET OFF",
+                discount = "20%",
                 discountAmount = "₹30 off",
                 address = "MG Road, Bangalore"
             ),
@@ -34717,7 +34717,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-19 mins",
                 distance = "0.8 km",
-                discount = "25% OFF",
+                discount = "25%",
                 discountAmount = "up to ₹37",
                 address = "HSR Layout, Bangalore"
             ),
@@ -34730,7 +34730,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.3 km",
-                discount = "BENGALI OFF",
+                discount = "20%",
                 discountAmount = "Free Mishti",
                 address = "Bellandur, Bangalore"
             ),
@@ -34743,7 +34743,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "16-21 mins",
                 distance = "0.6 km",
-                discount = "40% OFF",
+                discount = "40%",
                 discountAmount = "up to ₹80",
                 address = "Marathahalli, Bangalore"
             ),
@@ -34756,7 +34756,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Free Chutney",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -34769,7 +34769,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "FUSION OFF",
+                discount = "20%",
                 discountAmount = "Extra Cheese",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -34782,7 +34782,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "1.2 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -34795,7 +34795,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "28-33 mins",
                 distance = "2.0 km",
-                discount = "STUFFED OFF",
+                discount = "20%",
                 discountAmount = "2+1 Offer",
                 address = "Richmond Town, Bangalore"
             ),
@@ -34808,7 +34808,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "BREAKFAST",
+                discount = "20%",
                 discountAmount = "Tea/Coffee Free",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -34821,7 +34821,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "23-28 mins",
                 distance = "1.6 km",
-                discount = "ANDHRA OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy",
                 address = "Brigade Road, Bangalore"
             ),
@@ -34834,7 +34834,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "MAHARASHTRIAN",
+                discount = "20%",
                 discountAmount = "Free Solkadhi",
                 address = "KR Puram, Bangalore"
             ),
@@ -34847,7 +34847,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "1.0 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "15% off",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -34860,7 +34860,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "Sweet Included",
                 address = "Electronic City, Bangalore"
             ),
@@ -34873,7 +34873,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "1.9 km",
-                discount = "GOAN OFF",
+                discount = "20%",
                 discountAmount = "Coconut Based",
                 address = "Yelahanka, Bangalore"
             ),
@@ -34886,7 +34886,7 @@ fun PooriBhajiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-29 mins",
                 distance = "1.7 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Pure Ghee",
                 address = "Hebbal, Bangalore"
             )
@@ -35248,7 +35248,7 @@ fun PulaoCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "0.4 km",
-                discount = "FREE DEL",
+                discount = "20%",
                 discountAmount = "above ₹400",
                 address = "Indiranagar, Bangalore"
             ),
@@ -35261,7 +35261,7 @@ fun PulaoCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.7 km",
-                discount = "DUM OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused",
                 address = "Koramangala, Bangalore"
             ),
@@ -35274,7 +35274,7 @@ fun PulaoCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹44",
                 address = "Jayanagar, Bangalore"
             ),
@@ -35287,7 +35287,7 @@ fun PulaoCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "KASHMIRI OFF",
+                discount = "20%",
                 discountAmount = "Free Raita",
                 address = "Whitefield, Bangalore"
             ),
@@ -35300,7 +35300,7 @@ fun PulaoCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "12-16 mins",
                 distance = "0.3 km",
-                discount = "EGG OFF",
+                discount = "20%",
                 discountAmount = "2 Eggs Free",
                 address = "MG Road, Bangalore"
             ),
@@ -35313,7 +35313,7 @@ fun PulaoCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "14-18 mins",
                 distance = "0.6 km",
-                discount = "FUSION OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy",
                 address = "HSR Layout, Bangalore"
             ),
@@ -35326,7 +35326,7 @@ fun PulaoCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "22-27 mins",
                 distance = "0.9 km",
-                discount = "AWADHI OFF",
+                discount = "20%",
                 discountAmount = "Premium Basmati",
                 address = "Bellandur, Bangalore"
             ),
@@ -35339,7 +35339,7 @@ fun PulaoCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "SEAFOOD OFF",
+                discount = "20%",
                 discountAmount = "Fresh Prawns",
                 address = "Marathahalli, Bangalore"
             ),
@@ -35352,7 +35352,7 @@ fun PulaoCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "15% off",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -35365,7 +35365,7 @@ fun PulaoCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "1.5 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-5",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -35378,7 +35378,7 @@ fun PulaoCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "JEERA OFF",
+                discount = "20%",
                 discountAmount = "Extra Jeera",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -35391,7 +35391,7 @@ fun PulaoCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-29 mins",
                 distance = "1.2 km",
-                discount = "TIKKA OFF",
+                discount = "20%",
                 discountAmount = "Grilled Chicken",
                 address = "Richmond Town, Bangalore"
             ),
@@ -35404,7 +35404,7 @@ fun PulaoCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "MUGHLAI OFF",
+                discount = "20%",
                 discountAmount = "Dry Fruits",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -35417,7 +35417,7 @@ fun PulaoCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-23 mins",
                 distance = "1.4 km",
-                discount = "MATAR OFF",
+                discount = "20%",
                 discountAmount = "Fresh Peas",
                 address = "Brigade Road, Bangalore"
             ),
@@ -35430,7 +35430,7 @@ fun PulaoCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "26-31 mins",
                 distance = "1.6 km",
-                discount = "ANDHRA OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy",
                 address = "KR Puram, Bangalore"
             ),
@@ -35443,7 +35443,7 @@ fun PulaoCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "29-34 mins",
                 distance = "1.8 km",
-                discount = "MALABAR OFF",
+                discount = "20%",
                 discountAmount = "Coconut Flavored",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -35456,7 +35456,7 @@ fun PulaoCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Serves 8",
                 address = "Electronic City, Bangalore"
             ),
@@ -35469,7 +35469,7 @@ fun PulaoCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "21-26 mins",
                 distance = "1.0 km",
-                discount = "MUSHROOM OFF",
+                discount = "20%",
                 discountAmount = "Fresh Mushrooms",
                 address = "Yelahanka, Bangalore"
             ),
@@ -35482,7 +35482,7 @@ fun PulaoCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "27-32 mins",
                 distance = "1.9 km",
-                discount = "FRUITY OFF",
+                discount = "20%",
                 discountAmount = "Mixed Fruits",
                 address = "Hebbal, Bangalore"
             ),
@@ -35495,7 +35495,7 @@ fun PulaoCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "32-37 mins",
                 distance = "1.7 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Real Saffron",
                 address = "Whitefield, Bangalore"
             )
@@ -35848,7 +35848,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.4 km",
-                discount = "FREE DEL",
+                discount = "20%",
                 discountAmount = "above ₹400",
                 address = "Indiranagar, Bangalore"
             ),
@@ -35861,7 +35861,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-22 mins",
                 distance = "0.7 km",
-                discount = "TANDOOR OFF",
+                discount = "20%",
                 discountAmount = "Fresh Herbs",
                 address = "Koramangala, Bangalore"
             ),
@@ -35874,7 +35874,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹36",
                 address = "Jayanagar, Bangalore"
             ),
@@ -35887,7 +35887,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "1.0 km",
-                discount = "KEEMA OFF",
+                discount = "20%",
                 discountAmount = "Spiced Mince",
                 address = "Whitefield, Bangalore"
             ),
@@ -35900,7 +35900,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.3 km",
-                discount = "CRISPY OFF",
+                discount = "20%",
                 discountAmount = "Extra Flaky",
                 address = "MG Road, Bangalore"
             ),
@@ -35913,7 +35913,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "16-21 mins",
                 distance = "0.6 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Family Size",
                 address = "HSR Layout, Bangalore"
             ),
@@ -35926,7 +35926,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "19-24 mins",
                 distance = "0.9 km",
-                discount = "ALOO OFF",
+                discount = "20%",
                 discountAmount = "Spiced Potato",
                 address = "Bellandur, Bangalore"
             ),
@@ -35939,7 +35939,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "21-26 mins",
                 distance = "1.3 km",
-                discount = "CHEESE OFF",
+                discount = "20%",
                 discountAmount = "Mozzarella",
                 address = "Marathahalli, Bangalore"
             ),
@@ -35952,7 +35952,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "15% off",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -35965,7 +35965,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-5",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -35978,7 +35978,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "13-18 mins",
                 distance = "0.5 km",
-                discount = "KALONJI OFF",
+                discount = "20%",
                 discountAmount = "Nigella Seeds",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -35991,7 +35991,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "22-27 mins",
                 distance = "1.2 km",
-                discount = "TIKKA OFF",
+                discount = "20%",
                 discountAmount = "Grilled Chicken",
                 address = "Richmond Town, Bangalore"
             ),
@@ -36004,7 +36004,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "2.0 km",
-                discount = "MUGHLAI OFF",
+                discount = "20%",
                 discountAmount = "Rich Flavors",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -36017,7 +36017,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "VEGGIE OFF",
+                discount = "20%",
                 discountAmount = "Fresh Vegetables",
                 address = "Brigade Road, Bangalore"
             ),
@@ -36030,7 +36030,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "24-29 mins",
                 distance = "1.6 km",
-                discount = "ANDHRA OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy",
                 address = "KR Puram, Bangalore"
             ),
@@ -36043,7 +36043,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "27-32 mins",
                 distance = "1.8 km",
-                discount = "MALABAR OFF",
+                discount = "20%",
                 discountAmount = "Coconut Touch",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -36056,7 +36056,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "32-37 mins",
                 distance = "2.2 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Assorted Flavors",
                 address = "Electronic City, Bangalore"
             ),
@@ -36069,7 +36069,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "23-28 mins",
                 distance = "1.0 km",
-                discount = "MUSHROOM OFF",
+                discount = "20%",
                 discountAmount = "Button Mushrooms",
                 address = "Yelahanka, Bangalore"
             ),
@@ -36082,7 +36082,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
-                discount = "KASHMIRI OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused",
                 address = "Hebbal, Bangalore"
             ),
@@ -36095,7 +36095,7 @@ fun ChurChurNaanCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.7 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Truffle Oil",
                 address = "Whitefield, Bangalore"
             )
@@ -36472,7 +36472,7 @@ fun KebabsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "0.4 km",
-                discount = "FREE DEL",
+                discount = "20%",
                 discountAmount = "above ₹500",
                 address = "Indiranagar, Bangalore"
             ),
@@ -36485,7 +36485,7 @@ fun KebabsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.7 km",
-                discount = "SEEKH OFF",
+                discount = "20%",
                 discountAmount = "Spiced Minced",
                 address = "Koramangala, Bangalore"
             ),
@@ -36498,7 +36498,7 @@ fun KebabsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "0.5 km",
-                discount = "20% OFF",
+                discount = "20%",
                 discountAmount = "up to ₹56",
                 address = "Jayanagar, Bangalore"
             ),
@@ -36511,7 +36511,7 @@ fun KebabsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "TANDOOR OFF",
+                discount = "20%",
                 discountAmount = "Charcoal Grilled",
                 address = "Whitefield, Bangalore"
             ),
@@ -36524,7 +36524,7 @@ fun KebabsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.3 km",
-                discount = "SHAMI OFF",
+                discount = "20%",
                 discountAmount = "Lentil Based",
                 address = "MG Road, Bangalore"
             ),
@@ -36537,7 +36537,7 @@ fun KebabsCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "24-29 mins",
                 distance = "0.6 km",
-                discount = "SEAFOOD OFF",
+                discount = "20%",
                 discountAmount = "Fresh Fish",
                 address = "HSR Layout, Bangalore"
             ),
@@ -36550,7 +36550,7 @@ fun KebabsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "21-26 mins",
                 distance = "0.9 km",
-                discount = "MALAI OFF",
+                discount = "20%",
                 discountAmount = "Creamy Marinade",
                 address = "Bellandur, Bangalore"
             ),
@@ -36563,7 +36563,7 @@ fun KebabsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "1.3 km",
-                discount = "PRAWN OFF",
+                discount = "20%",
                 discountAmount = "Jumbo Prawns",
                 address = "Marathahalli, Bangalore"
             ),
@@ -36576,7 +36576,7 @@ fun KebabsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "19-24 mins",
                 distance = "0.8 km",
-                discount = "HARIYALI OFF",
+                discount = "20%",
                 discountAmount = "Green Marinade",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -36589,7 +36589,7 @@ fun KebabsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "1.5 km",
-                discount = "PLATTER OFF",
+                discount = "20%",
                 discountAmount = "Assorted Kebabs",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -36602,7 +36602,7 @@ fun KebabsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "16-21 mins",
                 distance = "0.5 km",
-                discount = "PANEER OFF",
+                discount = "20%",
                 discountAmount = "Cottage Cheese",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -36615,7 +36615,7 @@ fun KebabsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.2 km",
-                discount = "GALOUTI OFF",
+                discount = "20%",
                 discountAmount = "Melt in Mouth",
                 address = "Richmond Town, Bangalore"
             ),
@@ -36628,7 +36628,7 @@ fun KebabsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "BOTI OFF",
+                discount = "20%",
                 discountAmount = "Boneless Pieces",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -36641,7 +36641,7 @@ fun KebabsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "27-32 mins",
                 distance = "1.4 km",
-                discount = "AFGHANI OFF",
+                discount = "20%",
                 discountAmount = "Yogurt Marinade",
                 address = "Brigade Road, Bangalore"
             ),
@@ -36654,7 +36654,7 @@ fun KebabsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "29-34 mins",
                 distance = "1.6 km",
-                discount = "ANDHRA OFF",
+                discount = "20%",
                 discountAmount = "Fiery Spices",
                 address = "KR Puram, Bangalore"
             ),
@@ -36667,7 +36667,7 @@ fun KebabsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "32-37 mins",
                 distance = "1.8 km",
-                discount = "KASHMIRI OFF",
+                discount = "20%",
                 discountAmount = "Aromatic Spices",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -36680,7 +36680,7 @@ fun KebabsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Serves 6-8",
                 address = "Electronic City, Bangalore"
             ),
@@ -36693,7 +36693,7 @@ fun KebabsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "MUSHROOM OFF",
+                discount = "20%",
                 discountAmount = "Button Mushrooms",
                 address = "Yelahanka, Bangalore"
             ),
@@ -36706,7 +36706,7 @@ fun KebabsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "23-28 mins",
                 distance = "1.9 km",
-                discount = "TANDOORI OFF",
+                discount = "20%",
                 discountAmount = "Traditional Style",
                 address = "Hebbal, Bangalore"
             ),
@@ -36719,7 +36719,7 @@ fun KebabsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "33-38 mins",
                 distance = "1.7 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Gourmet Selection",
                 address = "Whitefield, Bangalore"
             )
@@ -37111,7 +37111,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.3 km",
-                discount = "MASALA OFF",
+                discount = "20%",
                 discountAmount = "Spiced Potato",
                 address = "Indiranagar, Bangalore"
             ),
@@ -37124,7 +37124,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "12-17 mins",
                 distance = "0.4 km",
-                discount = "DAHI OFF",
+                discount = "20%",
                 discountAmount = "Creamy Yogurt",
                 address = "Koramangala, Bangalore"
             ),
@@ -37137,7 +37137,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.7 km",
-                discount = "PUCHKA OFF",
+                discount = "20%",
                 discountAmount = "Tangy Tamarind",
                 address = "Jayanagar, Bangalore"
             ),
@@ -37150,7 +37150,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-19 mins",
                 distance = "0.5 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Fiery Green Chili",
                 address = "Whitefield, Bangalore"
             ),
@@ -37163,7 +37163,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "CHEESE OFF",
+                discount = "20%",
                 discountAmount = "Mozzarella Cheese",
                 address = "MG Road, Bangalore"
             ),
@@ -37176,7 +37176,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "16-21 mins",
                 distance = "0.6 km",
-                discount = "MEETHA OFF",
+                discount = "20%",
                 discountAmount = "Sweet Water",
                 address = "HSR Layout, Bangalore"
             ),
@@ -37189,7 +37189,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.9 km",
-                discount = "RAGDA OFF",
+                discount = "20%",
                 discountAmount = "White Peas Curry",
                 address = "Bellandur, Bangalore"
             ),
@@ -37202,7 +37202,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "SPROUT OFF",
+                discount = "20%",
                 discountAmount = "Fresh Moong Sprouts",
                 address = "Marathahalli, Bangalore"
             ),
@@ -37215,7 +37215,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "13-18 mins",
                 distance = "0.4 km",
-                discount = "PAPDI OFF",
+                discount = "20%",
                 discountAmount = "Crispy Papdi",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -37228,7 +37228,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "22-27 mins",
                 distance = "1.2 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-5",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -37241,7 +37241,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "0.9 km",
-                discount = "LUCKNOW OFF",
+                discount = "20%",
                 discountAmount = "Royal Recipe",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -37254,7 +37254,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "21-26 mins",
                 distance = "1.1 km",
-                discount = "HYDERABADI OFF",
+                discount = "20%",
                 discountAmount = "Spicy & Tangy",
                 address = "Richmond Town, Bangalore"
             ),
@@ -37267,7 +37267,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "17-22 mins",
                 distance = "0.8 km",
-                discount = "CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Chocolate Sauce",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -37280,7 +37280,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "BUTTER OFF",
+                discount = "20%",
                 discountAmount = "Creamy Butter",
                 address = "Brigade Road, Bangalore"
             ),
@@ -37293,7 +37293,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "23-28 mins",
                 distance = "1.4 km",
-                discount = "HAKKA OFF",
+                discount = "20%",
                 discountAmount = "Chinese Flavors",
                 address = "KR Puram, Bangalore"
             ),
@@ -37306,7 +37306,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "14-19 mins",
                 distance = "0.5 km",
-                discount = "CHATPATA OFF",
+                discount = "20%",
                 discountAmount = "Tangy & Spicy",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -37319,7 +37319,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "50+ Puris",
                 address = "Electronic City, Bangalore"
             ),
@@ -37332,7 +37332,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "1.0 km",
-                discount = "FRUIT OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Fruits",
                 address = "Yelahanka, Bangalore"
             ),
@@ -37345,7 +37345,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "16-21 mins",
                 distance = "0.7 km",
-                discount = "TRADITIONAL OFF",
+                discount = "20%",
                 discountAmount = "Grandma's Recipe",
                 address = "Hebbal, Bangalore"
             ),
@@ -37358,7 +37358,7 @@ fun PanipuriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Gourmet Varieties",
                 address = "Whitefield, Bangalore"
             )
@@ -37805,7 +37805,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "0.4 km",
-                discount = "CLASSIC OFF",
+                discount = "20%",
                 discountAmount = "Soft Paneer",
                 address = "Indiranagar, Bangalore"
             ),
@@ -37818,7 +37818,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-23 mins",
                 distance = "0.5 km",
-                discount = "KESAR OFF",
+                discount = "20%",
                 discountAmount = "Saffron Flavored",
                 address = "Koramangala, Bangalore"
             ),
@@ -37831,7 +37831,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "0.7 km",
-                discount = "MALAI OFF",
+                discount = "20%",
                 discountAmount = "Creamy Paneer",
                 address = "Jayanagar, Bangalore"
             ),
@@ -37844,7 +37844,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "0.9 km",
-                discount = "DRYFRUIT OFF",
+                discount = "20%",
                 discountAmount = "Nuts & Raisins",
                 address = "Whitefield, Bangalore"
             ),
@@ -37857,7 +37857,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.3 km",
-                discount = "CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Chocolate Sauce",
                 address = "MG Road, Bangalore"
             ),
@@ -37870,7 +37870,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "0.6 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Diabetic Friendly",
                 address = "HSR Layout, Bangalore"
             ),
@@ -37883,7 +37883,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "0.8 km",
-                discount = "BADAM OFF",
+                discount = "20%",
                 discountAmount = "Almond Flavored",
                 address = "Bellandur, Bangalore"
             ),
@@ -37896,7 +37896,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "17-22 mins",
                 distance = "0.6 km",
-                discount = "ROSE OFF",
+                discount = "20%",
                 discountAmount = "Rose Essence",
                 address = "Marathahalli, Bangalore"
             ),
@@ -37909,7 +37909,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "0.5 km",
-                discount = "CARDAMOM OFF",
+                discount = "20%",
                 discountAmount = "Elaichi Flavored",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -37922,7 +37922,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 5-6",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -37935,7 +37935,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-29 mins",
                 distance = "0.9 km",
-                discount = "LUCKNOWI OFF",
+                discount = "20%",
                 discountAmount = "Royal Recipe",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -37948,7 +37948,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Coconut Milk",
                 address = "Richmond Town, Bangalore"
             ),
@@ -37961,7 +37961,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "0.8 km",
-                discount = "SAFFRON OFF",
+                discount = "20%",
                 discountAmount = "Premium Saffron",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -37974,7 +37974,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-21 mins",
                 distance = "0.7 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Small Pieces",
                 address = "Brigade Road, Bangalore"
             ),
@@ -37987,7 +37987,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "1.3 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Extra Large",
                 address = "KR Puram, Bangalore"
             ),
@@ -38000,7 +38000,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.2 km",
-                discount = "HOMEMADE OFF",
+                discount = "20%",
                 discountAmount = "Traditional Method",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -38013,7 +38013,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Serves 10-12",
                 address = "Electronic City, Bangalore"
             ),
@@ -38026,7 +38026,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "28-33 mins",
                 distance = "1.1 km",
-                discount = "FROZEN OFF",
+                discount = "20%",
                 discountAmount = "Long Lasting",
                 address = "Yelahanka, Bangalore"
             ),
@@ -38039,7 +38039,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-29 mins",
                 distance = "1.4 km",
-                discount = "A2 OFF",
+                discount = "20%",
                 discountAmount = "A2 Cow Milk",
                 address = "Hebbal, Bangalore"
             ),
@@ -38052,7 +38052,7 @@ fun RasmalaiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.6 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Edible Gold Leaf",
                 address = "Whitefield, Bangalore"
             )
@@ -38338,7 +38338,7 @@ fun MuttonCategoryPage() {
             rating = "4.8",
             deliveryTime = "35-40 mins",
             distance = "4.2 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹90",
             address = "Mughlai Street, Old Delhi"
         ),
@@ -38351,7 +38351,7 @@ fun MuttonCategoryPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.5 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹63",
             address = "Royal Palace Road"
         ),
@@ -38364,7 +38364,7 @@ fun MuttonCategoryPage() {
             rating = "4.7",
             deliveryTime = "40-45 mins",
             distance = "5.1 km",
-            discount = "25% OFF",
+            discount = "25%",
             discountAmount = "up to ₹120",
             address = "Kashmiri Valley Lane"
         ),
@@ -38377,7 +38377,7 @@ fun MuttonCategoryPage() {
             rating = "4.4",
             deliveryTime = "25-30 mins",
             distance = "2.8 km",
-            discount = "10% OFF",
+            discount = "10%",
             discountAmount = "up to ₹38",
             address = "Spice Market Area"
         ),
@@ -38390,7 +38390,7 @@ fun MuttonCategoryPage() {
             rating = "4.5",
             deliveryTime = "20-25 mins",
             distance = "2.3 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹70",
             address = "Kebab Street Corner"
         ),
@@ -38403,7 +38403,7 @@ fun MuttonCategoryPage() {
             rating = "4.8",
             deliveryTime = "35-40 mins",
             distance = "4.5 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹82",
             address = "Handi Special Area"
         ),
@@ -38416,7 +38416,7 @@ fun MuttonCategoryPage() {
             rating = "4.3",
             deliveryTime = "25-30 mins",
             distance = "3.2 km",
-            discount = "10% OFF",
+            discount = "10%",
             discountAmount = "up to ₹32",
             address = "Keema Lane"
         ),
@@ -38429,7 +38429,7 @@ fun MuttonCategoryPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.8 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹88",
             address = "Kadai Special Road"
         ),
@@ -38442,7 +38442,7 @@ fun MuttonCategoryPage() {
             rating = "4.4",
             deliveryTime = "30-35 mins",
             distance = "4.0 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹60",
             address = "Pulao Street"
         ),
@@ -38455,7 +38455,7 @@ fun MuttonCategoryPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "2.5 km",
-            discount = "10% OFF",
+            discount = "10%",
             discountAmount = "up to ₹37",
             address = "Highway Dhaba Road"
         ),
@@ -38468,7 +38468,7 @@ fun MuttonCategoryPage() {
             rating = "4.7",
             deliveryTime = "35-40 mins",
             distance = "4.8 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹92",
             address = "Maharashtrian Food Street"
         ),
@@ -38481,7 +38481,7 @@ fun MuttonCategoryPage() {
             rating = "4.8",
             deliveryTime = "40-45 mins",
             distance = "5.3 km",
-            discount = "25% OFF",
+            discount = "25%",
             discountAmount = "up to ₹130",
             address = "Afghan Street"
         ),
@@ -38494,7 +38494,7 @@ fun MuttonCategoryPage() {
             rating = "4.9",
             deliveryTime = "45-50 mins",
             distance = "5.0 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹73",
             address = "Nihari Street, Old Delhi"
         ),
@@ -38507,7 +38507,7 @@ fun MuttonCategoryPage() {
             rating = "4.8",
             deliveryTime = "50-55 mins",
             distance = "6.2 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹150",
             address = "BBQ Grill Street"
         ),
@@ -38520,7 +38520,7 @@ fun MuttonCategoryPage() {
             rating = "4.3",
             deliveryTime = "20-25 mins",
             distance = "2.0 km",
-            discount = "10% OFF",
+            discount = "10%",
             discountAmount = "up to ₹28",
             address = "Soup Corner Lane"
         ),
@@ -38533,7 +38533,7 @@ fun MuttonCategoryPage() {
             rating = "4.5",
             deliveryTime = "40-45 mins",
             distance = "4.5 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹58",
             address = "Paya Street"
         ),
@@ -38546,7 +38546,7 @@ fun MuttonCategoryPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.7 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹82",
             address = "Chop Grill Road"
         ),
@@ -38559,7 +38559,7 @@ fun MuttonCategoryPage() {
             rating = "4.7",
             deliveryTime = "35-40 mins",
             distance = "4.3 km",
-            discount = "15% OFF",
+            discount = "15%",
             discountAmount = "up to ₹72",
             address = "Awadhi Street, Lucknowi"
         ),
@@ -38572,7 +38572,7 @@ fun MuttonCategoryPage() {
             rating = "4.4",
             deliveryTime = "25-30 mins",
             distance = "2.9 km",
-            discount = "10% OFF",
+            discount = "10%",
             discountAmount = "up to ₹34",
             address = "Pao Bhaji Street"
         ),
@@ -38585,7 +38585,7 @@ fun MuttonCategoryPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.6 km",
-            discount = "20% OFF",
+            discount = "20%",
             discountAmount = "up to ₹86",
             address = "Kebab Mahal Road"
         )
@@ -38996,7 +38996,7 @@ fun FishCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "SALMON OFF",
+                discount = "20%",
                 discountAmount = "Norwegian Salmon",
                 address = "Indiranagar, Bangalore"
             ),
@@ -39009,7 +39009,7 @@ fun FishCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "ROHU OFF",
+                discount = "20%",
                 discountAmount = "Freshwater Fish",
                 address = "Koramangala, Bangalore"
             ),
@@ -39022,7 +39022,7 @@ fun FishCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.1 km",
-                discount = "POMFRET OFF",
+                discount = "20%",
                 discountAmount = "Sea Fish",
                 address = "Jayanagar, Bangalore"
             ),
@@ -39035,7 +39035,7 @@ fun FishCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "35-40 mins",
                 distance = "3.5 km",
-                discount = "LIVE OFF",
+                discount = "20%",
                 discountAmount = "Live & Fresh",
                 address = "Whitefield, Bangalore"
             ),
@@ -39048,7 +39048,7 @@ fun FishCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "4.2 km",
-                discount = "TUNA OFF",
+                discount = "20%",
                 discountAmount = "Sushi Grade",
                 address = "MG Road, Bangalore"
             ),
@@ -39061,7 +39061,7 @@ fun FishCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "MACKEREL OFF",
+                discount = "20%",
                 discountAmount = "Omega-3 Rich",
                 address = "HSR Layout, Bangalore"
             ),
@@ -39074,7 +39074,7 @@ fun FishCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "5.0 km",
-                discount = "HILSA OFF",
+                discount = "20%",
                 discountAmount = "Bengali Special",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -39087,7 +39087,7 @@ fun FishCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "BASA OFF",
+                discount = "20%",
                 discountAmount = "Boneless Fillets",
                 address = "BTM Layout, Bangalore"
             ),
@@ -39100,7 +39100,7 @@ fun FishCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "3.2 km",
-                discount = "KARIMEEN OFF",
+                discount = "20%",
                 discountAmount = "Kerala Delicacy",
                 address = "Electronic City, Bangalore"
             ),
@@ -39113,7 +39113,7 @@ fun FishCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "SURMAI OFF",
+                discount = "20%",
                 discountAmount = "Seawater Fish",
                 address = "Marathahalli, Bangalore"
             ),
@@ -39126,7 +39126,7 @@ fun FishCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "ANCHOVIES OFF",
+                discount = "20%",
                 discountAmount = "Small Fish",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -39139,7 +39139,7 @@ fun FishCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "4.0 km",
-                discount = "ORGANIC OFF",
+                discount = "20%",
                 discountAmount = "Farm Raised",
                 address = "Yelahanka, Bangalore"
             ),
@@ -39152,7 +39152,7 @@ fun FishCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "2.8 km",
-                discount = "SNAPPER OFF",
+                discount = "20%",
                 discountAmount = "Deep Sea Fish",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -39165,7 +39165,7 @@ fun FishCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "1.5 km",
-                discount = "CATFISH OFF",
+                discount = "20%",
                 discountAmount = "Mud Water Fish",
                 address = "Bellandur, Bangalore"
             ),
@@ -39178,7 +39178,7 @@ fun FishCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "38-43 mins",
                 distance = "3.8 km",
-                discount = "SEER OFF",
+                discount = "20%",
                 discountAmount = "Premium Fish",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -39191,7 +39191,7 @@ fun FishCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "26-31 mins",
                 distance = "2.3 km",
-                discount = "BUTTERFISH OFF",
+                discount = "20%",
                 discountAmount = "Buttery Texture",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -39204,7 +39204,7 @@ fun FishCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "18-23 mins",
                 distance = "1.1 km",
-                discount = "SARDINES OFF",
+                discount = "20%",
                 discountAmount = "Calcium Rich",
                 address = "Richmond Town, Bangalore"
             ),
@@ -39217,7 +39217,7 @@ fun FishCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "42-47 mins",
                 distance = "4.5 km",
-                discount = "TROUT OFF",
+                discount = "20%",
                 discountAmount = "River Fish",
                 address = "Hebbal, Bangalore"
             ),
@@ -39230,7 +39230,7 @@ fun FishCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-29 mins",
                 distance = "1.7 km",
-                discount = "FRY OFF",
+                discount = "20%",
                 discountAmount = "Ready to Fry",
                 address = "KR Puram, Bangalore"
             ),
@@ -39243,7 +39243,7 @@ fun FishCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-55 mins",
                 distance = "5.2 km",
-                discount = "PLATTER OFF",
+                discount = "20%",
                 discountAmount = "Mixed Variety",
                 address = "Brigade Road, Bangalore"
             )
@@ -39693,7 +39693,7 @@ fun PakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "ONION OFF",
+                discount = "20%",
                 discountAmount = "Classic Snack",
                 address = "Indiranagar, Bangalore"
             ),
@@ -39706,7 +39706,7 @@ fun PakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "0.6 km",
-                discount = "POTATO OFF",
+                discount = "20%",
                 discountAmount = "Aloo Pakora",
                 address = "Koramangala, Bangalore"
             ),
@@ -39719,7 +39719,7 @@ fun PakodaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "1.2 km",
-                discount = "PALAK OFF",
+                discount = "20%",
                 discountAmount = "Spinach Fritters",
                 address = "Jayanagar, Bangalore"
             ),
@@ -39732,7 +39732,7 @@ fun PakodaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "MIRCHI OFF",
+                discount = "20%",
                 discountAmount = "Chili Fritters",
                 address = "Whitefield, Bangalore"
             ),
@@ -39745,7 +39745,7 @@ fun PakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "22-27 mins",
                 distance = "1.0 km",
-                discount = "PANEER OFF",
+                discount = "20%",
                 discountAmount = "Cottage Cheese",
                 address = "MG Road, Bangalore"
             ),
@@ -39758,7 +39758,7 @@ fun PakodaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "MIXED OFF",
+                discount = "20%",
                 discountAmount = "Assorted Variety",
                 address = "HSR Layout, Bangalore"
             ),
@@ -39771,7 +39771,7 @@ fun PakodaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "10-15 mins",
                 distance = "0.4 km",
-                discount = "BREAD OFF",
+                discount = "20%",
                 discountAmount = "Stuffed Bread",
                 address = "BTM Layout, Bangalore"
             ),
@@ -39784,7 +39784,7 @@ fun PakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "16-21 mins",
                 distance = "1.1 km",
-                discount = "CORN OFF",
+                discount = "20%",
                 discountAmount = "Cheese Stuffed",
                 address = "Marathahalli, Bangalore"
             ),
@@ -39797,7 +39797,7 @@ fun PakodaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "19-24 mins",
                 distance = "1.3 km",
-                discount = "GOBI OFF",
+                discount = "20%",
                 discountAmount = "Cauliflower Fusion",
                 address = "Electronic City, Bangalore"
             ),
@@ -39810,7 +39810,7 @@ fun PakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-29 mins",
                 distance = "1.6 km",
-                discount = "AIRFRIED OFF",
+                discount = "20%",
                 discountAmount = "Low Oil Healthy",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -39823,7 +39823,7 @@ fun PakodaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "21-26 mins",
                 distance = "1.4 km",
-                discount = "MUSHROOM OFF",
+                discount = "20%",
                 discountAmount = "Button Mushrooms",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -39836,7 +39836,7 @@ fun PakodaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "ROYAL OFF",
+                discount = "20%",
                 discountAmount = "Premium Selection",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -39849,7 +39849,7 @@ fun PakodaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "1.3 km",
-                discount = "MOONG OFF",
+                discount = "20%",
                 discountAmount = "Lentil Fritters",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -39862,7 +39862,7 @@ fun PakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.7 km",
-                discount = "BABYCORN OFF",
+                discount = "20%",
                 discountAmount = "Mini Corn Fritters",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -39875,7 +39875,7 @@ fun PakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "2.2 km",
-                discount = "CHICKEN OFF",
+                discount = "20%",
                 discountAmount = "Chicken Fritters",
                 address = "Richmond Town, Bangalore"
             ),
@@ -39888,7 +39888,7 @@ fun PakodaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "19-24 mins",
                 distance = "1.5 km",
-                discount = "EGG OFF",
+                discount = "20%",
                 discountAmount = "Boiled Egg Fritters",
                 address = "Bellandur, Bangalore"
             ),
@@ -39901,7 +39901,7 @@ fun PakodaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "1.9 km",
-                discount = "BANANA OFF",
+                discount = "20%",
                 discountAmount = "Kerala Style",
                 address = "Hebbal, Bangalore"
             ),
@@ -39914,7 +39914,7 @@ fun PakodaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.1 km",
-                discount = "PERIPERI OFF",
+                discount = "20%",
                 discountAmount = "Portuguese Style",
                 address = "KR Puram, Bangalore"
             ),
@@ -39927,7 +39927,7 @@ fun PakodaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "23-28 mins",
                 distance = "1.8 km",
-                discount = "CHEESE OFF",
+                discount = "20%",
                 discountAmount = "Garlic Infused",
                 address = "Yelahanka, Bangalore"
             ),
@@ -39940,7 +39940,7 @@ fun PakodaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.5 km",
-                discount = "MONSOON OFF",
+                discount = "20%",
                 discountAmount = "Rainy Day Special",
                 address = "Brigade Road, Bangalore"
             )
@@ -40358,7 +40358,7 @@ fun HalwaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "GAJAR OFF",
+                discount = "20%",
                 discountAmount = "Carrot Halwa",
                 address = "Indiranagar, Bangalore"
             ),
@@ -40371,7 +40371,7 @@ fun HalwaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "BADAM OFF",
+                discount = "20%",
                 discountAmount = "Almond Delight",
                 address = "Koramangala, Bangalore"
             ),
@@ -40384,7 +40384,7 @@ fun HalwaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "MOONG OFF",
+                discount = "20%",
                 discountAmount = "Lentil Sweet",
                 address = "Jayanagar, Bangalore"
             ),
@@ -40397,7 +40397,7 @@ fun HalwaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "SOOJI OFF",
+                discount = "20%",
                 discountAmount = "Semolina Halwa",
                 address = "Whitefield, Bangalore"
             ),
@@ -40410,7 +40410,7 @@ fun HalwaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "DIWALI OFF",
+                discount = "20%",
                 discountAmount = "Festival Special",
                 address = "MG Road, Bangalore"
             ),
@@ -40423,7 +40423,7 @@ fun HalwaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "1.3 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Healthy Option",
                 address = "HSR Layout, Bangalore"
             ),
@@ -40436,7 +40436,7 @@ fun HalwaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "KADDU OFF",
+                discount = "20%",
                 discountAmount = "Pumpkin Sweet",
                 address = "BTM Layout, Bangalore"
             ),
@@ -40449,7 +40449,7 @@ fun HalwaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "PISTA OFF",
+                discount = "20%",
                 discountAmount = "Pistachio Treat",
                 address = "Marathahalli, Bangalore"
             ),
@@ -40462,7 +40462,7 @@ fun HalwaCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "28-33 mins",
                 distance = "1.8 km",
-                discount = "LAUKI OFF",
+                discount = "20%",
                 discountAmount = "Bottle Gourd Halwa",
                 address = "Electronic City, Bangalore"
             ),
@@ -40475,7 +40475,7 @@ fun HalwaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "KESAR OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -40488,7 +40488,7 @@ fun HalwaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "24-29 mins",
                 distance = "1.7 km",
-                discount = "DUDHI OFF",
+                discount = "20%",
                 discountAmount = "White Pumpkin",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -40501,7 +40501,7 @@ fun HalwaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "ROYAL OFF",
+                discount = "20%",
                 discountAmount = "Premium Mix",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -40514,7 +40514,7 @@ fun HalwaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "2.0 km",
-                discount = "CHANA OFF",
+                discount = "20%",
                 discountAmount = "Bengali Special",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -40527,7 +40527,7 @@ fun HalwaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "22-27 mins",
                 distance = "1.9 km",
-                discount = "APPLE OFF",
+                discount = "20%",
                 discountAmount = "Fruit Based",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -40540,7 +40540,7 @@ fun HalwaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "32-37 mins",
                 distance = "2.8 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Kerala Special",
                 address = "Richmond Town, Bangalore"
             ),
@@ -40553,7 +40553,7 @@ fun HalwaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "29-34 mins",
                 distance = "2.1 km",
-                discount = "MAKHANA OFF",
+                discount = "20%",
                 discountAmount = "Fox Nuts Halwa",
                 address = "Bellandur, Bangalore"
             ),
@@ -40566,7 +40566,7 @@ fun HalwaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "27-32 mins",
                 distance = "2.3 km",
-                discount = "DATES OFF",
+                discount = "20%",
                 discountAmount = "Natural Sweetener",
                 address = "Hebbal, Bangalore"
             ),
@@ -40579,7 +40579,7 @@ fun HalwaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "31-36 mins",
                 distance = "2.4 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Summer Special",
                 address = "KR Puram, Bangalore"
             ),
@@ -40592,7 +40592,7 @@ fun HalwaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "23-28 mins",
                 distance = "1.9 km",
-                discount = "SABUDANA OFF",
+                discount = "20%",
                 discountAmount = "Vrat Special",
                 address = "Yelahanka, Bangalore"
             ),
@@ -40605,7 +40605,7 @@ fun HalwaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "3.0 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "Grand Platter",
                 address = "Brigade Road, Bangalore"
             )
@@ -40987,7 +40987,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "1.1 km",
-                discount = "AMERICAN OFF",
+                discount = "20%",
                 discountAmount = "Classic Style",
                 address = "Indiranagar, Bangalore"
             ),
@@ -41000,7 +41000,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "FILIPINO OFF",
+                discount = "20%",
                 discountAmount = "Manila Style",
                 address = "Koramangala, Bangalore"
             ),
@@ -41013,7 +41013,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-18 mins",
                 distance = "0.7 km",
-                discount = "VEGGIE OFF",
+                discount = "20%",
                 discountAmount = "Crispy Noodles",
                 address = "Jayanagar, Bangalore"
             ),
@@ -41026,7 +41026,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "22-27 mins",
                 distance = "1.6 km",
-                discount = "CHICKEN OFF",
+                discount = "20%",
                 discountAmount = "Brown Sauce",
                 address = "Whitefield, Bangalore"
             ),
@@ -41039,7 +41039,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "SHRIMP OFF",
+                discount = "20%",
                 discountAmount = "Oyster Sauce",
                 address = "MG Road, Bangalore"
             ),
@@ -41052,7 +41052,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-24 mins",
                 distance = "1.2 km",
-                discount = "BEEF OFF",
+                discount = "20%",
                 discountAmount = "Spicy Version",
                 address = "HSR Layout, Bangalore"
             ),
@@ -41065,7 +41065,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "PORK OFF",
+                discount = "20%",
                 discountAmount = "Cantonese Style",
                 address = "BTM Layout, Bangalore"
             ),
@@ -41078,7 +41078,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "2.1 km",
-                discount = "SINGAPORE OFF",
+                discount = "20%",
                 discountAmount = "SE Asian Style",
                 address = "Marathahalli, Bangalore"
             ),
@@ -41091,7 +41091,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-23 mins",
                 distance = "1.3 km",
-                discount = "MUSHROOM OFF",
+                discount = "20%",
                 discountAmount = "Vegan Option",
                 address = "Electronic City, Bangalore"
             ),
@@ -41104,7 +41104,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.5 km",
-                discount = "SEAFOOD OFF",
+                discount = "20%",
                 discountAmount = "Premium Mix",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -41117,7 +41117,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "TOFU OFF",
+                discount = "20%",
                 discountAmount = "Protein Rich",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -41130,7 +41130,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.4 km",
-                discount = "CRISPY OFF",
+                discount = "20%",
                 discountAmount = "Textured Noodles",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -41143,7 +41143,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "26-31 mins",
                 distance = "2.0 km",
-                discount = "INDONESIA OFF",
+                discount = "20%",
                 discountAmount = "Jakarta Style",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -41156,7 +41156,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-29 mins",
                 distance = "1.8 km",
-                discount = "SWEETSOUR OFF",
+                discount = "20%",
                 discountAmount = "Balanced Flavor",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -41169,7 +41169,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.3 km",
-                discount = "THAI OFF",
+                discount = "20%",
                 discountAmount = "Lemongrass Touch",
                 address = "Richmond Town, Bangalore"
             ),
@@ -41182,7 +41182,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "32-37 mins",
                 distance = "2.2 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "4-5 Portions",
                 address = "Bellandur, Bangalore"
             ),
@@ -41195,7 +41195,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
-                discount = "SZECHUAN OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy",
                 address = "Hebbal, Bangalore"
             ),
@@ -41208,7 +41208,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "LUNCH OFF",
+                discount = "20%",
                 discountAmount = "Complete Meal",
                 address = "KR Puram, Bangalore"
             ),
@@ -41221,7 +41221,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "21-26 mins",
                 distance = "1.5 km",
-                discount = "MIXVEG OFF",
+                discount = "20%",
                 discountAmount = "Balanced Meal",
                 address = "Yelahanka, Bangalore"
             ),
@@ -41234,7 +41234,7 @@ fun ChopSueyCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-33 mins",
                 distance = "2.0 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Meat Variety",
                 address = "Brigade Road, Bangalore"
             )
@@ -41621,7 +41621,7 @@ fun KormaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "MUGHAL OFF",
+                discount = "20%",
                 discountAmount = "Royal Preparation",
                 address = "Indiranagar, Bangalore"
             ),
@@ -41634,7 +41634,7 @@ fun KormaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "NAVRATAN OFF",
+                discount = "20%",
                 discountAmount = "Nine Jewels Mix",
                 address = "Jayanagar, Bangalore"
             ),
@@ -41647,7 +41647,7 @@ fun KormaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.1 km",
-                discount = "AWADHI OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused",
                 address = "Koramangala, Bangalore"
             ),
@@ -41660,7 +41660,7 @@ fun KormaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "PANEER OFF",
+                discount = "20%",
                 discountAmount = "Cashew Cream",
                 address = "HSR Layout, Bangalore"
             ),
@@ -41673,7 +41673,7 @@ fun KormaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-33 mins",
                 distance = "1.9 km",
-                discount = "KASHMIRI OFF",
+                discount = "20%",
                 discountAmount = "Rogan Josh Style",
                 address = "Whitefield, Bangalore"
             ),
@@ -41686,7 +41686,7 @@ fun KormaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "32-38 mins",
                 distance = "2.4 km",
-                discount = "HYDERABADI OFF",
+                discount = "20%",
                 discountAmount = "Nawabi Style",
                 address = "MG Road, Bangalore"
             ),
@@ -41699,7 +41699,7 @@ fun KormaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "1.7 km",
-                discount = "MALABAR OFF",
+                discount = "20%",
                 discountAmount = "Coastal Style",
                 address = "BTM Layout, Bangalore"
             ),
@@ -41712,7 +41712,7 @@ fun KormaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "EGG OFF",
+                discount = "20%",
                 discountAmount = "Protein Rich",
                 address = "Marathahalli, Bangalore"
             ),
@@ -41725,7 +41725,7 @@ fun KormaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "1.4 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Dairy Free",
                 address = "Electronic City, Bangalore"
             ),
@@ -41738,7 +41738,7 @@ fun KormaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.3 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Three Varieties",
                 address = "Sarjapur Road, Bangalore"
             ),
@@ -41751,7 +41751,7 @@ fun KormaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "MUSHROOM OFF",
+                discount = "20%",
                 discountAmount = "Earthly Flavors",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -41764,7 +41764,7 @@ fun KormaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-29 mins",
                 distance = "1.6 km",
-                discount = "BUTTER OFF",
+                discount = "20%",
                 discountAmount = "Creamy Texture",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -41777,7 +41777,7 @@ fun KormaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "27-32 mins",
                 distance = "2.0 km",
-                discount = "BENGALI OFF",
+                discount = "20%",
                 discountAmount = "Mustard Flavored",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -41790,7 +41790,7 @@ fun KormaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "21-26 mins",
                 distance = "1.5 km",
-                discount = "SWEET OFF",
+                discount = "20%",
                 discountAmount = "Mild & Sweet",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -41803,7 +41803,7 @@ fun KormaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "29-34 mins",
                 distance = "2.2 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Thai Fusion",
                 address = "Richmond Town, Bangalore"
             ),
@@ -41816,7 +41816,7 @@ fun KormaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "33-38 mins",
                 distance = "2.1 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-5",
                 address = "Bellandur, Bangalore"
             ),
@@ -41829,7 +41829,7 @@ fun KormaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-31 mins",
                 distance = "1.8 km",
-                discount = "ANDHRA OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy",
                 address = "Hebbal, Bangalore"
             ),
@@ -41842,7 +41842,7 @@ fun KormaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-21 mins",
                 distance = "0.7 km",
-                discount = "LUNCH OFF",
+                discount = "20%",
                 discountAmount = "Complete Thali",
                 address = "KR Puram, Bangalore"
             ),
@@ -41855,7 +41855,7 @@ fun KormaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "MIXVEG OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Veggies",
                 address = "Yelahanka, Bangalore"
             ),
@@ -41868,7 +41868,7 @@ fun KormaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Dual Meat",
                 address = "Brigade Road, Bangalore"
             )
@@ -42247,7 +42247,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "BIKANERI OFF",
+                discount = "20%",
                 discountAmount = "Original Recipe",
                 address = "Indiranagar, Bangalore"
             ),
@@ -42260,7 +42260,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-18 mins",
                 distance = "0.5 km",
-                discount = "INDORE OFF",
+                discount = "20%",
                 discountAmount = "Thin & Crispy",
                 address = "Jayanagar, Bangalore"
             ),
@@ -42273,7 +42273,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "FARSAN OFF",
+                discount = "20%",
                 discountAmount = "Assorted Mix",
                 address = "Koramangala, Bangalore"
             ),
@@ -42286,7 +42286,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "MATHRI OFF",
+                discount = "20%",
                 discountAmount = "Flaky & Crisp",
                 address = "HSR Layout, Bangalore"
             ),
@@ -42299,7 +42299,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "MIXTURE OFF",
+                discount = "20%",
                 discountAmount = "Nutty Crunch",
                 address = "Whitefield, Bangalore"
             ),
@@ -42312,7 +42312,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.5 km",
-                discount = "KHATTA OFF",
+                discount = "20%",
                 discountAmount = "Sweet & Sour",
                 address = "MG Road, Bangalore"
             ),
@@ -42325,7 +42325,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "16-21 mins",
                 distance = "1.1 km",
-                discount = "DALMOTH OFF",
+                discount = "20%",
                 discountAmount = "Protein Rich",
                 address = "BTM Layout, Bangalore"
             ),
@@ -42338,7 +42338,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.3 km",
-                discount = "CHAKLI OFF",
+                discount = "20%",
                 discountAmount = "Spiral Crisps",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -42351,7 +42351,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.3",
                 deliveryTime = "10-15 mins",
                 distance = "0.4 km",
-                discount = "PEANUT OFF",
+                discount = "20%",
                 discountAmount = "Street Style",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -42364,7 +42364,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.8 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Luxury Mix",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -42377,7 +42377,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "CORN OFF",
+                discount = "20%",
                 discountAmount = "Crunchy Corn",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -42390,7 +42390,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-29 mins",
                 distance = "1.6 km",
-                discount = "BUTTER OFF",
+                discount = "20%",
                 discountAmount = "Rich & Buttery",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -42403,7 +42403,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "1.3 km",
-                discount = "JHAL OFF",
+                discount = "20%",
                 discountAmount = "Tangy & Spicy",
                 address = "Malleshwaram, Bangalore"
             ),
@@ -42416,7 +42416,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "21-26 mins",
                 distance = "1.5 km",
-                discount = "SWEET OFF",
+                discount = "20%",
                 discountAmount = "Sugar Coated",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -42429,7 +42429,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "14-19 mins",
                 distance = "0.8 km",
-                discount = "PUFFED OFF",
+                discount = "20%",
                 discountAmount = "Light & Crisp",
                 address = "Richmond Town, Bangalore"
             ),
@@ -42442,7 +42442,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "5 Varieties",
                 address = "Bellandur, Bangalore"
             ),
@@ -42455,7 +42455,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "1.8 km",
-                discount = "ANDHRA OFF",
+                discount = "20%",
                 discountAmount = "Extra Hot",
                 address = "Hebbal, Bangalore"
             ),
@@ -42468,7 +42468,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-21 mins",
                 distance = "0.7 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "Tea Time",
                 address = "KR Puram, Bangalore"
             ),
@@ -42481,7 +42481,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "CHIVDA OFF",
+                discount = "20%",
                 discountAmount = "Savory Mix",
                 address = "Yelahanka, Bangalore"
             ),
@@ -42494,7 +42494,7 @@ fun NamkeenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "HAMPER OFF",
+                discount = "20%",
                 discountAmount = "Gift Pack",
                 address = "Brigade Road, Bangalore"
             )
@@ -42834,7 +42834,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "BUTTON OFF",
+                discount = "20%",
                 discountAmount = "Fresh Harvest",
                 address = "Indiranagar, Bangalore"
             ),
@@ -42847,7 +42847,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "OYSTER OFF",
+                discount = "20%",
                 discountAmount = "Velvet Texture",
                 address = "Koramangala, Bangalore"
             ),
@@ -42860,7 +42860,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "SHIITAKE OFF",
+                discount = "20%",
                 discountAmount = "Umami Rich",
                 address = "Jayanagar, Bangalore"
             ),
@@ -42873,7 +42873,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-22 mins",
                 distance = "1.0 km",
-                discount = "PORTOBELLO OFF",
+                discount = "20%",
                 discountAmount = "Grill Ready",
                 address = "HSR Layout, Bangalore"
             ),
@@ -42886,7 +42886,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "MOREL OFF",
+                discount = "20%",
                 discountAmount = "Gourmet Grade",
                 address = "Whitefield, Bangalore"
             ),
@@ -42899,7 +42899,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-18 mins",
                 distance = "0.7 km",
-                discount = "CREMINI OFF",
+                discount = "20%",
                 discountAmount = "Baby Portobello",
                 address = "MG Road, Bangalore"
             ),
@@ -42912,7 +42912,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "ENOKI OFF",
+                discount = "20%",
                 discountAmount = "Fine Strands",
                 address = "Richmond Town, Bangalore"
             ),
@@ -42925,7 +42925,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.4 km",
-                discount = "TRUMPET OFF",
+                discount = "20%",
                 discountAmount = "Meaty Texture",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -42938,7 +42938,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "MAITAKE OFF",
+                discount = "20%",
                 discountAmount = "Health Benefits",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -42951,7 +42951,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-33 mins",
                 distance = "1.9 km",
-                discount = "LION OFF",
+                discount = "20%",
                 discountAmount = "Brain Health",
                 address = "Bellandur, Bangalore"
             ),
@@ -42964,7 +42964,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "MIXED OFF",
+                discount = "20%",
                 discountAmount = "5 Varieties",
                 address = "BTM Layout, Bangalore"
             ),
@@ -42977,7 +42977,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "CHANTERELLE OFF",
+                discount = "20%",
                 discountAmount = "Golden Harvest",
                 address = "Brigade Road, Bangalore"
             ),
@@ -42990,7 +42990,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "1.1 km",
-                discount = "ORGANIC OFF",
+                discount = "20%",
                 discountAmount = "Certified Organic",
                 address = "Jayanagar, Bangalore"
             ),
@@ -43003,7 +43003,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "1.6 km",
-                discount = "PORCINI OFF",
+                discount = "20%",
                 discountAmount = "Italian Import",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -43016,7 +43016,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
-                discount = "SLICED OFF",
+                discount = "20%",
                 discountAmount = "Convenient",
                 address = "Marathahalli, Bangalore"
             ),
@@ -43029,7 +43029,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "32-37 mins",
                 distance = "2.1 km",
-                discount = "WILD OFF",
+                discount = "20%",
                 discountAmount = "Natural Foraging",
                 address = "Hebbal, Bangalore"
             ),
@@ -43042,7 +43042,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-19 mins",
                 distance = "0.8 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Bite-sized",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -43055,7 +43055,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "GROW OFF",
+                discount = "20%",
                 discountAmount = "DIY Kit",
                 address = "HSR Layout, Bangalore"
             ),
@@ -43068,7 +43068,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "1.5 km",
-                discount = "SEASONAL OFF",
+                discount = "20%",
                 discountAmount = "Monthly Special",
                 address = "Koramangala, Bangalore"
             ),
@@ -43081,7 +43081,7 @@ fun MushroomsCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "HAMPER OFF",
+                discount = "20%",
                 discountAmount = "Luxury Selection",
                 address = "Indiranagar, Bangalore"
             )
@@ -43429,7 +43429,7 @@ fun KeemaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "KEEMA OFF",
+                discount = "20%",
                 discountAmount = "Fresh Minced",
                 address = "Indiranagar, Bangalore"
             ),
@@ -43442,7 +43442,7 @@ fun KeemaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "MUTTON OFF",
+                discount = "20%",
                 discountAmount = "Extra Lean",
                 address = "Koramangala, Bangalore"
             ),
@@ -43455,7 +43455,7 @@ fun KeemaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "OFF",
+                discount = "20%",
                 discountAmount = "Spicy Masala",
                 address = "Jayanagar, Bangalore"
             ),
@@ -43468,7 +43468,7 @@ fun KeemaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "SOYA OFF",
+                discount = "20%",
                 discountAmount = "Plant Protein",
                 address = "HSR Layout, Bangalore"
             ),
@@ -43481,7 +43481,7 @@ fun KeemaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "SAMPLER OFF",
+                discount = "20%",
                 discountAmount = "3 Meat Mix",
                 address = "Whitefield, Bangalore"
             ),
@@ -43494,7 +43494,7 @@ fun KeemaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-18 mins",
                 distance = "0.6 km",
-                discount = "MARINATED OFF",
+                discount = "20%",
                 discountAmount = "Ready to Cook",
                 address = "MG Road, Bangalore"
             ),
@@ -43507,7 +43507,7 @@ fun KeemaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "PARATHA OFF",
+                discount = "20%",
                 discountAmount = "Perfect Filling",
                 address = "Richmond Town, Bangalore"
             ),
@@ -43520,7 +43520,7 @@ fun KeemaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "22-27 mins",
                 distance = "1.4 km",
-                discount = "LAMB OFF",
+                discount = "20%",
                 discountAmount = "Kebab Ready",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -43533,7 +43533,7 @@ fun KeemaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "TURKEY OFF",
+                discount = "20%",
                 discountAmount = "Low Fat",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -43546,7 +43546,7 @@ fun KeemaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "1.9 km",
-                discount = "PAV OFF",
+                discount = "20%",
                 discountAmount = "Street Style",
                 address = "Bellandur, Bangalore"
             ),
@@ -43559,7 +43559,7 @@ fun KeemaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "FISH OFF",
+                discount = "20%",
                 discountAmount = "Bengali Spices",
                 address = "BTM Layout, Bangalore"
             ),
@@ -43572,7 +43572,7 @@ fun KeemaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "BIRYANI OFF",
+                discount = "20%",
                 discountAmount = "Ready Mix",
                 address = "Brigade Road, Bangalore"
             ),
@@ -43585,7 +43585,7 @@ fun KeemaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "1.1 km",
-                discount = "ORGANIC OFF",
+                discount = "20%",
                 discountAmount = "Free Range",
                 address = "Jayanagar, Bangalore"
             ),
@@ -43598,7 +43598,7 @@ fun KeemaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "26-31 mins",
                 distance = "1.6 km",
-                discount = "PULAO OFF",
+                discount = "20%",
                 discountAmount = "Instant Mix",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -43611,7 +43611,7 @@ fun KeemaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
-                discount = "MATAR OFF",
+                discount = "20%",
                 discountAmount = "Peas Added",
                 address = "Marathahalli, Bangalore"
             ),
@@ -43624,7 +43624,7 @@ fun KeemaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "32-37 mins",
                 distance = "2.1 km",
-                discount = "HALAL OFF",
+                discount = "20%",
                 discountAmount = "Certified",
                 address = "Hebbal, Bangalore"
             ),
@@ -43637,7 +43637,7 @@ fun KeemaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-19 mins",
                 distance = "0.8 km",
-                discount = "MOMO OFF",
+                discount = "20%",
                 discountAmount = "Perfect Filling",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -43650,7 +43650,7 @@ fun KeemaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "BHAJI OFF",
+                discount = "20%",
                 discountAmount = "Spicy Mix",
                 address = "HSR Layout, Bangalore"
             ),
@@ -43663,7 +43663,7 @@ fun KeemaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "1.5 km",
-                discount = "KOFFTA OFF",
+                discount = "20%",
                 discountAmount = "Ready Mix",
                 address = "Koramangala, Bangalore"
             ),
@@ -43676,7 +43676,7 @@ fun KeemaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "HAMPER OFF",
+                discount = "20%",
                 discountAmount = "Luxury Selection",
                 address = "Indiranagar, Bangalore"
             )
@@ -44022,7 +44022,7 @@ fun SundaeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-15 mins",
                 distance = "0.5 km",
-                discount = "FUDGE OFF",
+                discount = "20%",
                 discountAmount = "Classic Favorite",
                 address = "Indiranagar, Bangalore"
             ),
@@ -44035,7 +44035,7 @@ fun SundaeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Chocolate Lover",
                 address = "Koramangala, Bangalore"
             ),
@@ -44048,7 +44048,7 @@ fun SundaeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-14 mins",
                 distance = "0.6 km",
-                discount = "BERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Strawberries",
                 address = "Jayanagar, Bangalore"
             ),
@@ -44061,7 +44061,7 @@ fun SundaeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-22 mins",
                 distance = "1.1 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Dairy Free",
                 address = "HSR Layout, Bangalore"
             ),
@@ -44074,7 +44074,7 @@ fun SundaeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "BANANA OFF",
+                discount = "20%",
                 discountAmount = "Family Favorite",
                 address = "Whitefield, Bangalore"
             ),
@@ -44087,7 +44087,7 @@ fun SundaeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "14-18 mins",
                 distance = "0.7 km",
-                discount = "BROWNIE OFF",
+                discount = "20%",
                 discountAmount = "Brownie Chunks",
                 address = "MG Road, Bangalore"
             ),
@@ -44100,7 +44100,7 @@ fun SundaeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-20 mins",
                 distance = "0.9 km",
-                discount = "NUTTY OFF",
+                discount = "20%",
                 discountAmount = "Extra Nuts",
                 address = "Richmond Town, Bangalore"
             ),
@@ -44113,7 +44113,7 @@ fun SundaeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "1.0 km",
-                discount = "COOKIE OFF",
+                discount = "20%",
                 discountAmount = "Crushed Oreos",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -44126,7 +44126,7 @@ fun SundaeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-16 mins",
                 distance = "0.8 km",
-                discount = "MINT OFF",
+                discount = "20%",
                 discountAmount = "Refreshing Mint",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -44139,7 +44139,7 @@ fun SundaeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-19 mins",
                 distance = "1.2 km",
-                discount = "SALTED OFF",
+                discount = "20%",
                 discountAmount = "Sweet & Salty",
                 address = "Bellandur, Bangalore"
             ),
@@ -44152,7 +44152,7 @@ fun SundaeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "14-18 mins",
                 distance = "1.0 km",
-                discount = "AFFOGATO OFF",
+                discount = "20%",
                 discountAmount = "Coffee Infused",
                 address = "BTM Layout, Bangalore"
             ),
@@ -44165,7 +44165,7 @@ fun SundaeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
-                discount = "RAINBOW OFF",
+                discount = "20%",
                 discountAmount = "Colorful Fun",
                 address = "Brigade Road, Bangalore"
             ),
@@ -44178,7 +44178,7 @@ fun SundaeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "16-20 mins",
                 distance = "1.1 km",
-                discount = "PB OFF",
+                discount = "20%",
                 discountAmount = "Peanut Butter Swirl",
                 address = "Jayanagar, Bangalore"
             ),
@@ -44191,7 +44191,7 @@ fun SundaeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "TIRAMISU OFF",
+                discount = "20%",
                 discountAmount = "Coffee Flavor",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -44204,7 +44204,7 @@ fun SundaeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-16 mins",
                 distance = "0.7 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Mango",
                 address = "Marathahalli, Bangalore"
             ),
@@ -44217,7 +44217,7 @@ fun SundaeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "1.2 km",
-                discount = "ROCKY OFF",
+                discount = "20%",
                 discountAmount = "Marshmallow & Nuts",
                 address = "Hebbal, Bangalore"
             ),
@@ -44230,7 +44230,7 @@ fun SundaeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Diabetic Friendly",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -44243,7 +44243,7 @@ fun SundaeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "BIRTHDAY OFF",
+                discount = "20%",
                 discountAmount = "Celebration Special",
                 address = "HSR Layout, Bangalore"
             ),
@@ -44256,7 +44256,7 @@ fun SundaeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-19 mins",
                 distance = "1.0 km",
-                discount = "POPCORN OFF",
+                discount = "20%",
                 discountAmount = "Caramel Popcorn",
                 address = "Koramangala, Bangalore"
             ),
@@ -44269,7 +44269,7 @@ fun SundaeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "HAMPER OFF",
+                discount = "20%",
                 discountAmount = "Premium Selection",
                 address = "Indiranagar, Bangalore"
             )
@@ -44592,7 +44592,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
-                discount = "BENGAL OFF",
+                discount = "20%",
                 discountAmount = "Traditional Recipe",
                 address = "Kolkata Sweet House, Bangalore"
             ),
@@ -44605,7 +44605,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "12-16 mins",
                 distance = "0.5 km",
-                discount = "KESAR OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused",
                 address = "Rajmahal Road, Bangalore"
             ),
@@ -44618,7 +44618,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "MILK OFF",
+                discount = "20%",
                 discountAmount = "Creamy Delight",
                 address = "Indiranagar, Bangalore"
             ),
@@ -44631,7 +44631,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Chocolate Twist",
                 address = "Koramangala, Bangalore"
             ),
@@ -44644,7 +44644,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "ODISHA OFF",
+                discount = "20%",
                 discountAmount = "Regional Special",
                 address = "Jayanagar, Bangalore"
             ),
@@ -44657,7 +44657,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "14-18 mins",
                 distance = "0.8 km",
-                discount = "ROSE OFF",
+                discount = "20%",
                 discountAmount = "Rose Essence",
                 address = "HSR Layout, Bangalore"
             ),
@@ -44670,7 +44670,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "22-28 mins",
                 distance = "1.3 km",
-                discount = "DRYFRUIT OFF",
+                discount = "20%",
                 discountAmount = "Nutty Filling",
                 address = "MG Road, Bangalore"
             ),
@@ -44683,7 +44683,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-20 mins",
                 distance = "0.7 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Party Pack",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -44696,7 +44696,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Diabetic Friendly",
                 address = "Whitefield, Bangalore"
             ),
@@ -44709,7 +44709,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Mixed Flavors",
                 address = "BTM Layout, Bangalore"
             ),
@@ -44722,7 +44722,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
-                discount = "CARDAMOM OFF",
+                discount = "20%",
                 discountAmount = "Aromatic Spice",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -44735,7 +44735,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "PISTA OFF",
+                discount = "20%",
                 discountAmount = "Pistachio Flavored",
                 address = "Richmond Town, Bangalore"
             ),
@@ -44748,7 +44748,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "FRESH OFF",
+                discount = "20%",
                 discountAmount = "Made Daily",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -44761,7 +44761,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.4 km",
-                discount = "ORGANIC OFF",
+                discount = "20%",
                 discountAmount = "Farm Fresh Paneer",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -44774,7 +44774,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "Celebration Pack",
                 address = "Marathahalli, Bangalore"
             ),
@@ -44787,7 +44787,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Special",
                 address = "Hebbal, Bangalore"
             ),
@@ -44800,7 +44800,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "28-33 mins",
                 distance = "1.7 km",
-                discount = "HONEY OFF",
+                discount = "20%",
                 discountAmount = "Natural Sweetener",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -44813,7 +44813,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "GIFT OFF",
+                discount = "20%",
                 discountAmount = "Premium Packaging",
                 address = "HSR Layout, Bangalore"
             ),
@@ -44826,7 +44826,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "17-22 mins",
                 distance = "1.0 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Coconut Essence",
                 address = "Koramangala, Bangalore"
             ),
@@ -44839,7 +44839,7 @@ fun RasgullaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "HAMPER OFF",
+                discount = "20%",
                 discountAmount = "Luxury Collection",
                 address = "Indiranagar, Bangalore"
             )
@@ -45187,7 +45187,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "CLASSIC OFF",
+                discount = "20%",
                 discountAmount = "Traditional Recipe",
                 address = "Indiranagar, Bangalore"
             ),
@@ -45200,7 +45200,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-22 mins",
                 distance = "1.2 km",
-                discount = "CREAMY OFF",
+                discount = "20%",
                 discountAmount = "Rich & Creamy",
                 address = "Koramangala, Bangalore"
             ),
@@ -45213,7 +45213,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "TANDOORI OFF",
+                discount = "20%",
                 discountAmount = "Clay Oven Smoked",
                 address = "Jayanagar, Bangalore"
             ),
@@ -45226,7 +45226,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-16 mins",
                 distance = "0.7 km",
-                discount = "BONELESS OFF",
+                discount = "20%",
                 discountAmount = "Easy Eating",
                 address = "HSR Layout, Bangalore"
             ),
@@ -45239,7 +45239,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "4-5 People",
                 address = "Whitefield, Bangalore"
             ),
@@ -45252,7 +45252,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "22-28 mins",
                 distance = "1.3 km",
-                discount = "CASHEW OFF",
+                discount = "20%",
                 discountAmount = "Cashew Rich",
                 address = "MG Road, Bangalore"
             ),
@@ -45265,7 +45265,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "16-20 mins",
                 distance = "0.9 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Hot",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -45278,7 +45278,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-18 mins",
                 distance = "0.6 km",
-                discount = "MILD OFF",
+                discount = "20%",
                 discountAmount = "Kid Friendly",
                 address = "BTM Layout, Bangalore"
             ),
@@ -45291,7 +45291,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "NAAN OFF",
+                discount = "20%",
                 discountAmount = "Butter Naan Included",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -45304,7 +45304,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "17-22 mins",
                 distance = "1.0 km",
-                discount = "RICE OFF",
+                discount = "20%",
                 discountAmount = "Basmati Rice Included",
                 address = "Richmond Town, Bangalore"
             ),
@@ -45317,7 +45317,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "21-26 mins",
                 distance = "1.4 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Full Meal Deal",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -45330,7 +45330,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "RESTAURANT OFF",
+                discount = "20%",
                 discountAmount = "Fine Dining Experience",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -45343,7 +45343,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "DHABA OFF",
+                discount = "20%",
                 discountAmount = "Authentic Dhaba Taste",
                 address = "Marathahalli, Bangalore"
             ),
@@ -45356,7 +45356,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "1.1 km",
-                discount = "GRAVY OFF",
+                discount = "20%",
                 discountAmount = "Extra Rich Gravy",
                 address = "Hebbal, Bangalore"
             ),
@@ -45369,7 +45369,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.5 km",
-                discount = "SALAD OFF",
+                discount = "20%",
                 discountAmount = "Fresh Salad Included",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -45382,7 +45382,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "HALF OFF",
+                discount = "20%",
                 discountAmount = "Single Serving",
                 address = "HSR Layout, Bangalore"
             ),
@@ -45395,7 +45395,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Extra Large Portion",
                 address = "Koramangala, Bangalore"
             ),
@@ -45408,7 +45408,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "6-8 People",
                 address = "Whitefield, Bangalore"
             ),
@@ -45421,7 +45421,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "13-18 mins",
                 distance = "0.8 km",
-                discount = "LUNCH OFF",
+                discount = "20%",
                 discountAmount = "Perfect Office Lunch",
                 address = "MG Road, Bangalore"
             ),
@@ -45434,7 +45434,7 @@ fun ButterChickenCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.5 km",
-                discount = "FEAST OFF",
+                discount = "20%",
                 discountAmount = "Premium Dining Experience",
                 address = "Indiranagar, Bangalore"
             )
@@ -45801,7 +45801,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "RAJASTHANI OFF",
+                discount = "20%",
                 discountAmount = "Authentic Recipe",
                 address = "Indiranagar, Bangalore"
             ),
@@ -45814,7 +45814,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "12-18 mins",
                 distance = "0.9 km",
-                discount = "DELHI OFF",
+                discount = "20%",
                 discountAmount = "Spicy Potato Filling",
                 address = "Koramangala, Bangalore"
             ),
@@ -45827,7 +45827,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "CRISPY OFF",
+                discount = "20%",
                 discountAmount = "Crunchy Shell",
                 address = "Jayanagar, Bangalore"
             ),
@@ -45840,7 +45840,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "8-12 mins",
                 distance = "0.6 km",
-                discount = "CURD OFF",
+                discount = "20%",
                 discountAmount = "Extra Creamy",
                 address = "HSR Layout, Bangalore"
             ),
@@ -45853,7 +45853,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "4 Large Pieces",
                 address = "Whitefield, Bangalore"
             ),
@@ -45866,7 +45866,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-22 mins",
                 distance = "1.2 km",
-                discount = "POMEGRANATE OFF",
+                discount = "20%",
                 discountAmount = "Fresh Seeds",
                 address = "MG Road, Bangalore"
             ),
@@ -45879,7 +45879,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "16-20 mins",
                 distance = "0.9 km",
-                discount = "SWEET OFF",
+                discount = "20%",
                 discountAmount = "Extra Chutneys",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -45892,7 +45892,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "14-18 mins",
                 distance = "0.6 km",
-                discount = "MILD OFF",
+                discount = "20%",
                 discountAmount = "Kid Friendly",
                 address = "BTM Layout, Bangalore"
             ),
@@ -45905,7 +45905,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "SEV OFF",
+                discount = "20%",
                 discountAmount = "Crispy Sev Topping",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -45918,7 +45918,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "17-22 mins",
                 distance = "1.0 km",
-                discount = "BOONDI OFF",
+                discount = "20%",
                 discountAmount = "Boondi Topping",
                 address = "Richmond Town, Bangalore"
             ),
@@ -45931,7 +45931,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "21-26 mins",
                 distance = "1.4 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "With Samosa & Golgappa",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -45944,7 +45944,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "RESTAURANT OFF",
+                discount = "20%",
                 discountAmount = "Gourmet Presentation",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -45957,7 +45957,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "STREET OFF",
+                discount = "20%",
                 discountAmount = "Authentic Street Taste",
                 address = "Marathahalli, Bangalore"
             ),
@@ -45970,7 +45970,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "1.1 km",
-                discount = "CHUTNEY OFF",
+                discount = "20%",
                 discountAmount = "Extra Sauces",
                 address = "Hebbal, Bangalore"
             ),
@@ -45983,7 +45983,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.5 km",
-                discount = "SALAD OFF",
+                discount = "20%",
                 discountAmount = "Fresh Salad Toppings",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -45996,7 +45996,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Small Serving",
                 address = "HSR Layout, Bangalore"
             ),
@@ -46009,7 +46009,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Extra Large Size",
                 address = "Koramangala, Bangalore"
             ),
@@ -46022,7 +46022,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "For 8-10 People",
                 address = "Whitefield, Bangalore"
             ),
@@ -46035,7 +46035,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "13-18 mins",
                 distance = "0.8 km",
-                discount = "LUNCH OFF",
+                discount = "20%",
                 discountAmount = "Perfect Office Snack",
                 address = "MG Road, Bangalore"
             ),
@@ -46048,7 +46048,7 @@ fun RajKachoriCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.5 km",
-                discount = "FEAST OFF",
+                discount = "20%",
                 discountAmount = "All Toppings Included",
                 address = "Indiranagar, Bangalore"
             )
@@ -46380,7 +46380,7 @@ fun ChaatCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
-                discount = "MUMBAI OFF",
+                discount = "20%",
                 discountAmount = "Authentic Street Taste",
                 address = "Indiranagar, Bangalore"
             ),
@@ -46393,7 +46393,7 @@ fun ChaatCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.7 km",
-                discount = "DELHI OFF",
+                discount = "20%",
                 discountAmount = "Spicy Potato Patties",
                 address = "Koramangala, Bangalore"
             ),
@@ -46406,7 +46406,7 @@ fun ChaatCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-18 mins",
                 distance = "0.9 km",
-                discount = "BHEL OFF",
+                discount = "20%",
                 discountAmount = "Extra Crunchy",
                 address = "Jayanagar, Bangalore"
             ),
@@ -46419,7 +46419,7 @@ fun ChaatCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "6-10 mins",
                 distance = "0.5 km",
-                discount = "DAHI OFF",
+                discount = "20%",
                 discountAmount = "Extra Creamy Yogurt",
                 address = "HSR Layout, Bangalore"
             ),
@@ -46432,7 +46432,7 @@ fun ChaatCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "14-18 mins",
                 distance = "1.0 km",
-                discount = "PAPDI OFF",
+                discount = "20%",
                 discountAmount = "Crispy Papdis",
                 address = "Whitefield, Bangalore"
             ),
@@ -46445,7 +46445,7 @@ fun ChaatCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "11-16 mins",
                 distance = "0.8 km",
-                discount = "SEV OFF",
+                discount = "20%",
                 discountAmount = "Extra Crispy Sev",
                 address = "MG Road, Bangalore"
             ),
@@ -46458,7 +46458,7 @@ fun ChaatCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "SAMOSA OFF",
+                discount = "20%",
                 discountAmount = "Crumbled Samosa",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -46471,7 +46471,7 @@ fun ChaatCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "1.3 km",
-                discount = "KOLKATA OFF",
+                discount = "20%",
                 discountAmount = "Sweet Yogurt Base",
                 address = "BTM Layout, Bangalore"
             ),
@@ -46484,7 +46484,7 @@ fun ChaatCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "3 Chaat Varieties",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -46497,7 +46497,7 @@ fun ChaatCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.4 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "For 4-5 People",
                 address = "Richmond Town, Bangalore"
             ),
@@ -46510,7 +46510,7 @@ fun ChaatCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "9-14 mins",
                 distance = "0.6 km",
-                discount = "MILD OFF",
+                discount = "20%",
                 discountAmount = "Less Spicy",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -46523,7 +46523,7 @@ fun ChaatCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "16-21 mins",
                 distance = "1.0 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Hot",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -46536,7 +46536,7 @@ fun ChaatCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "7-11 mins",
                 distance = "0.3 km",
-                discount = "STREET OFF",
+                discount = "20%",
                 discountAmount = "Authentic Cart Taste",
                 address = "Marathahalli, Bangalore"
             ),
@@ -46549,7 +46549,7 @@ fun ChaatCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "RESTAURANT OFF",
+                discount = "20%",
                 discountAmount = "Gourmet Presentation",
                 address = "Hebbal, Bangalore"
             ),
@@ -46562,7 +46562,7 @@ fun ChaatCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "1.2 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "With Sprouts",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -46575,7 +46575,7 @@ fun ChaatCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "13-18 mins",
                 distance = "0.8 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Small Portions",
                 address = "HSR Layout, Bangalore"
             ),
@@ -46588,7 +46588,7 @@ fun ChaatCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.8 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Extra Large Serving",
                 address = "Koramangala, Bangalore"
             ),
@@ -46601,7 +46601,7 @@ fun ChaatCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "For 8-10 Guests",
                 address = "Whitefield, Bangalore"
             ),
@@ -46614,7 +46614,7 @@ fun ChaatCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "0.7 km",
-                discount = "LUNCH OFF",
+                discount = "20%",
                 discountAmount = "Perfect Office Snack",
                 address = "MG Road, Bangalore"
             ),
@@ -46627,7 +46627,7 @@ fun ChaatCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "5 Premium Chaat Types",
                 address = "Indiranagar, Bangalore"
             )
@@ -46960,7 +46960,7 @@ fun UttapamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "ONION OFF",
+                discount = "20%",
                 discountAmount = "Crispy Onion Topping",
                 address = "Indiranagar, Bangalore"
             ),
@@ -46973,7 +46973,7 @@ fun UttapamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-18 mins",
                 distance = "0.7 km",
-                discount = "VEGGIE OFF",
+                discount = "20%",
                 discountAmount = "Assorted Vegetables",
                 address = "Koramangala, Bangalore"
             ),
@@ -46986,7 +46986,7 @@ fun UttapamCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
-                discount = "CHEESE OFF",
+                discount = "20%",
                 discountAmount = "Mozzarella Cheese",
                 address = "Jayanagar, Bangalore"
             ),
@@ -46999,7 +46999,7 @@ fun UttapamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "6-10 mins",
                 distance = "0.3 km",
-                discount = "PLAIN OFF",
+                discount = "20%",
                 discountAmount = "Authentic Taste",
                 address = "HSR Layout, Bangalore"
             ),
@@ -47012,7 +47012,7 @@ fun UttapamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "14-19 mins",
                 distance = "1.0 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "With Both Chutneys",
                 address = "Whitefield, Bangalore"
             ),
@@ -47025,7 +47025,7 @@ fun UttapamCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "11-16 mins",
                 distance = "0.8 km",
-                discount = "PANEER OFF",
+                discount = "20%",
                 discountAmount = "Fresh Cottage Cheese",
                 address = "MG Road, Bangalore"
             ),
@@ -47038,7 +47038,7 @@ fun UttapamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "CORN OFF",
+                discount = "20%",
                 discountAmount = "Sweet Corn Kernels",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -47051,7 +47051,7 @@ fun UttapamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.2 km",
-                discount = "MASALA OFF",
+                discount = "20%",
                 discountAmount = "Spicy Potato Mix",
                 address = "BTM Layout, Bangalore"
             ),
@@ -47064,7 +47064,7 @@ fun UttapamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "3 Uttapam Types",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -47077,7 +47077,7 @@ fun UttapamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.3 km",
-                discount = "SAMPLER OFF",
+                discount = "20%",
                 discountAmount = "5 Mini Uttapams",
                 address = "Richmond Town, Bangalore"
             ),
@@ -47090,7 +47090,7 @@ fun UttapamCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "9-14 mins",
                 distance = "0.5 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Mild Flavors",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -47103,7 +47103,7 @@ fun UttapamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "16-21 mins",
                 distance = "0.9 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Green Chilies",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -47116,7 +47116,7 @@ fun UttapamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "7-11 mins",
                 distance = "0.4 km",
-                discount = "TRADITIONAL OFF",
+                discount = "20%",
                 discountAmount = "Authentic Recipe",
                 address = "Marathahalli, Bangalore"
             ),
@@ -47129,7 +47129,7 @@ fun UttapamCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "GOURMET OFF",
+                discount = "20%",
                 discountAmount = "Truffle Infused",
                 address = "Hebbal, Bangalore"
             ),
@@ -47142,7 +47142,7 @@ fun UttapamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "With Spinach",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -47155,7 +47155,7 @@ fun UttapamCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "13-18 mins",
                 distance = "0.7 km",
-                discount = "RAVA OFF",
+                discount = "20%",
                 discountAmount = "Semolina Batter",
                 address = "HSR Layout, Bangalore"
             ),
@@ -47168,7 +47168,7 @@ fun UttapamCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.7 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Extra Large Size",
                 address = "Koramangala, Bangalore"
             ),
@@ -47181,7 +47181,7 @@ fun UttapamCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "For 10-12 People",
                 address = "Whitefield, Bangalore"
             ),
@@ -47194,7 +47194,7 @@ fun UttapamCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "0.6 km",
-                discount = "LUNCH OFF",
+                discount = "20%",
                 discountAmount = "Perfect Office Meal",
                 address = "MG Road, Bangalore"
             ),
@@ -47207,7 +47207,7 @@ fun UttapamCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "5 Premium Varieties",
                 address = "Indiranagar, Bangalore"
             )
@@ -47562,7 +47562,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "GLAZED OFF",
+                discount = "20%",
                 discountAmount = "Signature Glaze",
                 address = "Indiranagar, Bangalore"
             ),
@@ -47575,7 +47575,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-18 mins",
                 distance = "0.8 km",
-                discount = "CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Rich Chocolate",
                 address = "Koramangala, Bangalore"
             ),
@@ -47588,7 +47588,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
-                discount = "STRAWBERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Strawberry Jam",
                 address = "Jayanagar, Bangalore"
             ),
@@ -47601,7 +47601,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "6-10 mins",
                 distance = "0.3 km",
-                discount = "BOSTON OFF",
+                discount = "20%",
                 discountAmount = "Custard Filling",
                 address = "HSR Layout, Bangalore"
             ),
@@ -47614,7 +47614,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "14-19 mins",
                 distance = "1.0 km",
-                discount = "SPRINKLES OFF",
+                discount = "20%",
                 discountAmount = "Colorful Toppings",
                 address = "Whitefield, Bangalore"
             ),
@@ -47627,7 +47627,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "11-16 mins",
                 distance = "0.8 km",
-                discount = "MATCHA OFF",
+                discount = "20%",
                 discountAmount = "Japanese Green Tea",
                 address = "MG Road, Bangalore"
             ),
@@ -47640,7 +47640,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "CINNAMON OFF",
+                discount = "20%",
                 discountAmount = "Warm Spice Coating",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -47653,7 +47653,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.2 km",
-                discount = "VELVET OFF",
+                discount = "20%",
                 discountAmount = "Cream Cheese Frosting",
                 address = "BTM Layout, Bangalore"
             ),
@@ -47666,7 +47666,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "ASSORTED OFF",
+                discount = "20%",
                 discountAmount = "6 Varieties",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -47679,7 +47679,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.3 km",
-                discount = "HOLES OFF",
+                discount = "20%",
                 discountAmount = "Bite-sized Treats",
                 address = "Richmond Town, Bangalore"
             ),
@@ -47692,7 +47692,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "9-14 mins",
                 distance = "0.5 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Fun Colors",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -47705,7 +47705,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "16-21 mins",
                 distance = "0.9 km",
-                discount = "DOUBLE CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Extra Chocolate",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -47718,7 +47718,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "7-11 mins",
                 distance = "0.4 km",
-                discount = "CLASSIC OFF",
+                discount = "20%",
                 discountAmount = "Traditional Recipe",
                 address = "Marathahalli, Bangalore"
             ),
@@ -47731,7 +47731,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Sea Salt Topping",
                 address = "Hebbal, Bangalore"
             ),
@@ -47744,7 +47744,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "BAKED OFF",
+                discount = "20%",
                 discountAmount = "Not Fried",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -47757,7 +47757,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "13-18 mins",
                 distance = "0.7 km",
-                discount = "COFFEE OFF",
+                discount = "20%",
                 discountAmount = "Coffee Infused",
                 address = "HSR Layout, Bangalore"
             ),
@@ -47770,7 +47770,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.7 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Giant Size",
                 address = "Koramangala, Bangalore"
             ),
@@ -47783,7 +47783,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "BIRTHDAY OFF",
+                discount = "20%",
                 discountAmount = "Custom Decorations",
                 address = "Whitefield, Bangalore"
             ),
@@ -47796,7 +47796,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "0.6 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Meetings",
                 address = "MG Road, Bangalore"
             ),
@@ -47809,7 +47809,7 @@ fun DoughnutCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "12 Premium Varieties",
                 address = "Indiranagar, Bangalore"
             )
@@ -48199,7 +48199,7 @@ fun JuiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "8-12 mins",
                 distance = "0.5 km",
-                discount = "ORANGE OFF",
+                discount = "20%",
                 discountAmount = "Freshly Squeezed",
                 address = "Indiranagar, Bangalore"
             ),
@@ -48212,7 +48212,7 @@ fun JuiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-18 mins",
                 distance = "0.8 km",
-                discount = "DETOX OFF",
+                discount = "20%",
                 discountAmount = "Spinach & Kale",
                 address = "Koramangala, Bangalore"
             ),
@@ -48225,7 +48225,7 @@ fun JuiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
-                discount = "WATERMELON OFF",
+                discount = "20%",
                 discountAmount = "Summer Special",
                 address = "Jayanagar, Bangalore"
             ),
@@ -48238,7 +48238,7 @@ fun JuiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "6-10 mins",
                 distance = "0.3 km",
-                discount = "POMEGRANATE OFF",
+                discount = "20%",
                 discountAmount = "Antioxidant Rich",
                 address = "HSR Layout, Bangalore"
             ),
@@ -48251,7 +48251,7 @@ fun JuiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "14-19 mins",
                 distance = "1.0 km",
-                discount = "TROPICAL OFF",
+                discount = "20%",
                 discountAmount = "3 Fruits Combo",
                 address = "Whitefield, Bangalore"
             ),
@@ -48264,7 +48264,7 @@ fun JuiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "11-16 mins",
                 distance = "0.8 km",
-                discount = "ROOTS OFF",
+                discount = "20%",
                 discountAmount = "Immunity Booster",
                 address = "MG Road, Bangalore"
             ),
@@ -48277,7 +48277,7 @@ fun JuiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "SUGARCANE OFF",
+                discount = "20%",
                 discountAmount = "Freshly Crushed",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -48290,7 +48290,7 @@ fun JuiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.2 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Special",
                 address = "BTM Layout, Bangalore"
             ),
@@ -48303,7 +48303,7 @@ fun JuiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "CLEANSE OFF",
+                discount = "20%",
                 discountAmount = "3-Day Program",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -48316,7 +48316,7 @@ fun JuiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.3 km",
-                discount = "BERRY OFF",
+                discount = "20%",
                 discountAmount = "Loaded with Berries",
                 address = "Richmond Town, Bangalore"
             ),
@@ -48329,7 +48329,7 @@ fun JuiceCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "9-14 mins",
                 distance = "0.5 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Fun Flavors",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -48342,7 +48342,7 @@ fun JuiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "16-21 mins",
                 distance = "0.9 km",
-                discount = "GINGER OFF",
+                discount = "20%",
                 discountAmount = "Spicy & Healthy",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -48355,7 +48355,7 @@ fun JuiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "7-11 mins",
                 distance = "0.4 km",
-                discount = "MOSAMBI OFF",
+                discount = "20%",
                 discountAmount = "Sweet Lime Fresh",
                 address = "Marathahalli, Bangalore"
             ),
@@ -48368,7 +48368,7 @@ fun JuiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "ALOE OFF",
+                discount = "20%",
                 discountAmount = "Skin Health",
                 address = "Hebbal, Bangalore"
             ),
@@ -48381,7 +48381,7 @@ fun JuiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Diabetic Friendly",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -48394,7 +48394,7 @@ fun JuiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "13-18 mins",
                 distance = "0.7 km",
-                discount = "COFFEE OFF",
+                discount = "20%",
                 discountAmount = "Energy Booster",
                 address = "HSR Layout, Bangalore"
             ),
@@ -48407,7 +48407,7 @@ fun JuiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.7 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Party Size",
                 address = "Koramangala, Bangalore"
             ),
@@ -48420,7 +48420,7 @@ fun JuiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "BIRTHDAY OFF",
+                discount = "20%",
                 discountAmount = "6 Varieties",
                 address = "Whitefield, Bangalore"
             ),
@@ -48433,7 +48433,7 @@ fun JuiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "0.6 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "10 Servings",
                 address = "MG Road, Bangalore"
             ),
@@ -48446,7 +48446,7 @@ fun JuiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "8 Premium Juices",
                 address = "Indiranagar, Bangalore"
             )
@@ -48880,7 +48880,7 @@ fun LassiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "SWEET OFF",
+                discount = "20%",
                 discountAmount = "Creamy Yogurt",
                 address = "Indiranagar, Bangalore"
             ),
@@ -48893,7 +48893,7 @@ fun LassiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-18 mins",
                 distance = "0.8 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Fresh Mango Pulp",
                 address = "Koramangala, Bangalore"
             ),
@@ -48906,7 +48906,7 @@ fun LassiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
-                discount = "ROSE OFF",
+                discount = "20%",
                 discountAmount = "Rose Petal Essence",
                 address = "Jayanagar, Bangalore"
             ),
@@ -48919,7 +48919,7 @@ fun LassiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "6-10 mins",
                 distance = "0.3 km",
-                discount = "KESAR OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused",
                 address = "HSR Layout, Bangalore"
             ),
@@ -48932,7 +48932,7 @@ fun LassiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "14-19 mins",
                 distance = "1.0 km",
-                discount = "BANANA OFF",
+                discount = "20%",
                 discountAmount = "Natural Sweetener",
                 address = "Whitefield, Bangalore"
             ),
@@ -48945,7 +48945,7 @@ fun LassiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "11-16 mins",
                 distance = "0.8 km",
-                discount = "CHAAS OFF",
+                discount = "20%",
                 discountAmount = "Digestive Aid",
                 address = "MG Road, Bangalore"
             ),
@@ -48958,7 +48958,7 @@ fun LassiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "STRAWBERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Strawberries",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -48971,7 +48971,7 @@ fun LassiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "1.2 km",
-                discount = "ELAICHI OFF",
+                discount = "20%",
                 discountAmount = "Aromatic Spice",
                 address = "BTM Layout, Bangalore"
             ),
@@ -48984,7 +48984,7 @@ fun LassiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Sharing Size",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -48997,7 +48997,7 @@ fun LassiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.3 km",
-                discount = "DRYFRUIT OFF",
+                discount = "20%",
                 discountAmount = "Loaded with Nuts",
                 address = "Richmond Town, Bangalore"
             ),
@@ -49010,7 +49010,7 @@ fun LassiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "9-14 mins",
                 distance = "0.5 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Fun & Frothy",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -49023,7 +49023,7 @@ fun LassiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "16-21 mins",
                 distance = "0.9 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Diabetic Friendly",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -49036,7 +49036,7 @@ fun LassiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "7-11 mins",
                 distance = "0.4 km",
-                discount = "MATKA OFF",
+                discount = "20%",
                 discountAmount = "In Clay Pot",
                 address = "Marathahalli, Bangalore"
             ),
@@ -49049,7 +49049,7 @@ fun LassiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "SAFFRON OFF",
+                discount = "20%",
                 discountAmount = "Premium Quality",
                 address = "Hebbal, Bangalore"
             ),
@@ -49062,7 +49062,7 @@ fun LassiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "1.1 km",
-                discount = "BUTTERSCOTCH OFF",
+                discount = "20%",
                 discountAmount = "Caramel Flavor",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -49075,7 +49075,7 @@ fun LassiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "13-18 mins",
                 distance = "0.7 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "2 Premium Flavors",
                 address = "HSR Layout, Bangalore"
             ),
@@ -49088,7 +49088,7 @@ fun LassiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.7 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "Party Size (3L)",
                 address = "Koramangala, Bangalore"
             ),
@@ -49101,7 +49101,7 @@ fun LassiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "6 Varieties",
                 address = "Whitefield, Bangalore"
             ),
@@ -49114,7 +49114,7 @@ fun LassiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "0.6 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "15 Servings",
                 address = "MG Road, Bangalore"
             ),
@@ -49127,7 +49127,7 @@ fun LassiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "8 Premium Lassi",
                 address = "Indiranagar, Bangalore"
             )
@@ -49474,7 +49474,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-25 mins",
                 distance = "0.5 km",
-                discount = "CLASSIC OFF",
+                discount = "20%",
                 discountAmount = "Creamy Tomato Gravy",
                 address = "Indiranagar, Bangalore"
             ),
@@ -49487,7 +49487,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-30 mins",
                 distance = "0.8 km",
-                discount = "PANEER OFF",
+                discount = "20%",
                 discountAmount = "Fresh Paneer Kofta",
                 address = "Koramangala, Bangalore"
             ),
@@ -49500,7 +49500,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-22 mins",
                 distance = "0.6 km",
-                discount = "KHOYA OFF",
+                discount = "20%",
                 discountAmount = "Rich Khoya Filling",
                 address = "Jayanagar, Bangalore"
             ),
@@ -49513,7 +49513,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "22-28 mins",
                 distance = "1.2 km",
-                discount = "CASHEW OFF",
+                discount = "20%",
                 discountAmount = "Loaded with Cashews",
                 address = "HSR Layout, Bangalore"
             ),
@@ -49526,7 +49526,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Sharing Size",
                 address = "Whitefield, Bangalore"
             ),
@@ -49539,7 +49539,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.7 km",
-                discount = "TANDOOR OFF",
+                discount = "20%",
                 discountAmount = "Clay Oven Baked",
                 address = "MG Road, Bangalore"
             ),
@@ -49552,7 +49552,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-23 mins",
                 distance = "0.9 km",
-                discount = "BUTTER OFF",
+                discount = "20%",
                 discountAmount = "Extra Butter Gravy",
                 address = "Bannerghatta Road, Bangalore"
             ),
@@ -49565,7 +49565,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-35 mins",
                 distance = "1.8 km",
-                discount = "NAWABI OFF",
+                discount = "20%",
                 discountAmount = "Royal Preparation",
                 address = "BTM Layout, Bangalore"
             ),
@@ -49578,7 +49578,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-21 mins",
                 distance = "0.8 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy Gravy",
                 address = "Basavanagudi, Bangalore"
             ),
@@ -49591,7 +49591,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "24-30 mins",
                 distance = "1.3 km",
-                discount = "DRYFRUIT OFF",
+                discount = "20%",
                 discountAmount = "Rich Dry Fruits",
                 address = "Richmond Town, Bangalore"
             ),
@@ -49604,7 +49604,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-19 mins",
                 distance = "0.5 km",
-                discount = "MATAR OFF",
+                discount = "20%",
                 discountAmount = "With Green Peas",
                 address = "Sadashivanagar, Bangalore"
             ),
@@ -49617,7 +49617,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-32 mins",
                 distance = "1.6 km",
-                discount = "MUGHLAI OFF",
+                discount = "20%",
                 discountAmount = "Royal Mughlai Style",
                 address = "Lavelle Road, Bangalore"
             ),
@@ -49630,7 +49630,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-17 mins",
                 distance = "0.4 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Mild & Creamy",
                 address = "Marathahalli, Bangalore"
             ),
@@ -49643,7 +49643,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-38 mins",
                 distance = "1.9 km",
-                discount = "SAFFRON OFF",
+                discount = "20%",
                 discountAmount = "Premium Saffron",
                 address = "Hebbal, Bangalore"
             ),
@@ -49656,7 +49656,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "32-40 mins",
                 distance = "2.1 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "8 Koftas with Naan",
                 address = "Rajajinagar, Bangalore"
             ),
@@ -49669,7 +49669,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-26 mins",
                 distance = "1.1 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Kofta + Rice + Naan",
                 address = "HSR Layout, Bangalore"
             ),
@@ -49682,7 +49682,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-42 mins",
                 distance = "2.3 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "12 Koftas with Gravy",
                 address = "Koramangala, Bangalore"
             ),
@@ -49695,7 +49695,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "2.8 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "24 Koftas Tray",
                 address = "Whitefield, Bangalore"
             ),
@@ -49708,7 +49708,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-32 mins",
                 distance = "1.4 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "15 Lunch Boxes",
                 address = "MG Road, Bangalore"
             ),
@@ -49721,7 +49721,7 @@ fun MalaiKoftaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-35 mins",
                 distance = "1.7 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "Complete Thali",
                 address = "Indiranagar, Bangalore"
             )
@@ -50117,7 +50117,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.4 km",
-                discount = "CLASSIC OFF",
+                discount = "20%",
                 discountAmount = "Traditional Recipe",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -50130,7 +50130,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-25 mins",
                 distance = "0.6 km",
-                discount = "PAPDI OFF",
+                discount = "20%",
                 discountAmount = "Extra Crispy Papdi",
                 address = "Karol Bagh, Delhi"
             ),
@@ -50143,7 +50143,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-30 mins",
                 distance = "0.8 km",
-                discount = "MOONG OFF",
+                discount = "20%",
                 discountAmount = "Healthy Moong Dal",
                 address = "Rajkot, Gujarat"
             ),
@@ -50156,7 +50156,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-35 mins",
                 distance = "1.2 km",
-                discount = "POMEGRANATE OFF",
+                discount = "20%",
                 discountAmount = "Fresh Pomegranate Topping",
                 address = "Lucknow, Uttar Pradesh"
             ),
@@ -50169,7 +50169,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-40 mins",
                 distance = "1.5 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Sharing Size",
                 address = "Mumbai, Maharashtra"
             ),
@@ -50182,7 +50182,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "0.9 km",
-                discount = "SWEET OFF",
+                discount = "20%",
                 discountAmount = "Less Spicy, More Sweet",
                 address = "Mathura, Uttar Pradesh"
             ),
@@ -50195,7 +50195,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-22 mins",
                 distance = "0.5 km",
-                discount = "BOONDI OFF",
+                discount = "20%",
                 discountAmount = "Loaded with Boondi",
                 address = "Jaipur, Rajasthan"
             ),
@@ -50208,7 +50208,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-35 mins",
                 distance = "1.8 km",
-                discount = "NAWABI OFF",
+                discount = "20%",
                 discountAmount = "Premium Dry Fruits",
                 address = "Hyderabad, Telangana"
             ),
@@ -50221,7 +50221,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "14-20 mins",
                 distance = "0.7 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Green Chutney",
                 address = "Kolkata, West Bengal"
             ),
@@ -50234,7 +50234,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-25 mins",
                 distance = "1.1 km",
-                discount = "SEV OFF",
+                discount = "20%",
                 discountAmount = "Crispy Sev Topping",
                 address = "Andheri, Mumbai"
             ),
@@ -50247,7 +50247,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "21-27 mins",
                 distance = "0.9 km",
-                discount = "HEALTH OFF",
+                discount = "20%",
                 discountAmount = "Low Fat Yogurt",
                 address = "Pune, Maharashtra"
             ),
@@ -50260,7 +50260,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-32 mins",
                 distance = "1.6 km",
-                discount = "LUCKNOWI OFF",
+                discount = "20%",
                 discountAmount = "Awadhi Special Recipe",
                 address = "Lucknow, Uttar Pradesh"
             ),
@@ -50273,7 +50273,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-18 mins",
                 distance = "0.4 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Mild & Creamy",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -50286,7 +50286,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-38 mins",
                 distance = "1.9 km",
-                discount = "SAFFRON OFF",
+                discount = "20%",
                 discountAmount = "Premium Saffron Yogurt",
                 address = "Amritsar, Punjab"
             ),
@@ -50299,7 +50299,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "32-40 mins",
                 distance = "2.1 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "20 Pieces Platter",
                 address = "Ahmedabad, Gujarat"
             ),
@@ -50312,7 +50312,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-26 mins",
                 distance = "1.1 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Bhalle + Golgappe + Drink",
                 address = "Bangalore, Karnataka"
             ),
@@ -50325,7 +50325,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-42 mins",
                 distance = "2.3 km",
-                discount = "JUMBO OFF",
+                discount = "20%",
                 discountAmount = "30 Pieces Bucket",
                 address = "Delhi NCR"
             ),
@@ -50338,7 +50338,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-50 mins",
                 distance = "2.8 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "50 Pieces Tray",
                 address = "Udaipur, Rajasthan"
             ),
@@ -50351,7 +50351,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-32 mins",
                 distance = "1.4 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "25 Lunch Boxes",
                 address = "Gurgaon, Haryana"
             ),
@@ -50364,7 +50364,7 @@ fun DahiBalleCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-35 mins",
                 distance = "1.7 km",
-                discount = "FESTIVAL OFF",
+                discount = "20%",
                 discountAmount = "Complete Chaat Thali",
                 address = "Varanasi, Uttar Pradesh"
             )
@@ -50780,7 +50780,7 @@ fun RajmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "0.5 km",
-                discount = "PUNJABI OFF",
+                discount = "20%",
                 discountAmount = "Traditional Recipe",
                 address = "Chandigarh Road, Delhi"
             ),
@@ -50793,7 +50793,7 @@ fun RajmaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "0.8 km",
-                discount = "KASHMIRI OFF",
+                discount = "20%",
                 discountAmount = "Special Dry Ginger",
                 address = "Srinagar Colony, Delhi"
             ),
@@ -50806,7 +50806,7 @@ fun RajmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-22 mins",
                 distance = "0.6 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Rice Included",
                 address = "Karol Bagh, Delhi"
             ),
@@ -50819,7 +50819,7 @@ fun RajmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.2 km",
-                discount = "HANDI OFF",
+                discount = "20%",
                 discountAmount = "Clay Pot Cooked",
                 address = "Old Delhi"
             ),
@@ -50832,7 +50832,7 @@ fun RajmaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "35-40 mins",
                 distance = "1.5 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4",
                 address = "South Delhi"
             ),
@@ -50845,7 +50845,7 @@ fun RajmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.0 km",
-                discount = "DHABA OFF",
+                discount = "20%",
                 discountAmount = "Extra Butter",
                 address = "GT Karnal Road, Delhi"
             ),
@@ -50858,7 +50858,7 @@ fun RajmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "26-32 mins",
                 distance = "1.3 km",
-                discount = "JAMMU OFF",
+                discount = "20%",
                 discountAmount = "Mountain Spices",
                 address = "Jammu, Jammu & Kashmir"
             ),
@@ -50871,7 +50871,7 @@ fun RajmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "19-24 mins",
                 distance = "0.9 km",
-                discount = "BLACK OFF",
+                discount = "20%",
                 discountAmount = "Black Kidney Beans",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -50884,7 +50884,7 @@ fun RajmaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "21-27 mins",
                 distance = "0.7 km",
-                discount = "CHITRA OFF",
+                discount = "20%",
                 discountAmount = "Speckled Beans",
                 address = "Pune, Maharashtra"
             ),
@@ -50897,7 +50897,7 @@ fun RajmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "24-30 mins",
                 distance = "1.1 km",
-                discount = "CREAM OFF",
+                discount = "20%",
                 discountAmount = "Fresh Cream Added",
                 address = "Mumbai, Maharashtra"
             ),
@@ -50910,7 +50910,7 @@ fun RajmaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "17-23 mins",
                 distance = "0.8 km",
-                discount = "GARLIC OFF",
+                discount = "20%",
                 discountAmount = "Extra Garlic Flavor",
                 address = "Lucknow, Uttar Pradesh"
             ),
@@ -50923,7 +50923,7 @@ fun RajmaCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "20-26 mins",
                 distance = "0.9 km",
-                discount = "HEALTH OFF",
+                discount = "20%",
                 discountAmount = "Low Oil Recipe",
                 address = "Bangalore, Karnataka"
             ),
@@ -50936,7 +50936,7 @@ fun RajmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-31 mins",
                 distance = "1.2 km",
-                discount = "PARATHA OFF",
+                discount = "20%",
                 discountAmount = "With 2 Parathas",
                 address = "Amritsar, Punjab"
             ),
@@ -50949,7 +50949,7 @@ fun RajmaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-34 mins",
                 distance = "1.6 km",
-                discount = "SUNDAY OFF",
+                discount = "20%",
                 discountAmount = "Weekend Special",
                 address = "Chandigarh"
             ),
@@ -50962,7 +50962,7 @@ fun RajmaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "16-21 mins",
                 distance = "0.5 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Hot & Spicy",
                 address = "Hyderabad, Telangana"
             ),
@@ -50975,7 +50975,7 @@ fun RajmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-42 mins",
                 distance = "1.8 km",
-                discount = "SLOW OFF",
+                discount = "20%",
                 discountAmount = "8 Hours Cooking",
                 address = "Udaipur, Rajasthan"
             ),
@@ -50988,7 +50988,7 @@ fun RajmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-38 mins",
                 distance = "2.1 km",
-                discount = "BIRYANI OFF",
+                discount = "20%",
                 discountAmount = "Rajma Rice Fusion",
                 address = "Delhi NCR"
             ),
@@ -51001,7 +51001,7 @@ fun RajmaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.4 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "10 Lunch Boxes",
                 address = "Gurgaon, Haryana"
             ),
@@ -51014,7 +51014,7 @@ fun RajmaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-55 mins",
                 distance = "2.5 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "50 Person Batch",
                 address = "Jaipur, Rajasthan"
             ),
@@ -51027,7 +51027,7 @@ fun RajmaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "38-45 mins",
                 distance = "2.2 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "25 Person Pack",
                 address = "Ahmedabad, Gujarat"
             )
@@ -51421,7 +51421,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "0.7 km",
-                discount = "BUTTER OFF",
+                discount = "20%",
                 discountAmount = "Rich Creamy Gravy",
                 address = "Karol Bagh, Delhi"
             ),
@@ -51434,7 +51434,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.2 km",
-                discount = "AFGHANI OFF",
+                discount = "20%",
                 discountAmount = "Cashew & Cream Sauce",
                 address = "Saket, Delhi"
             ),
@@ -51447,7 +51447,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.5 km",
-                discount = "PUNJABI OFF",
+                discount = "20%",
                 discountAmount = "Bone-in Chicken",
                 address = "Chandigarh Road, Delhi"
             ),
@@ -51460,7 +51460,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.5 km",
-                discount = "CREAM OFF",
+                discount = "20%",
                 discountAmount = "Extra Fresh Cream",
                 address = "Connaught Place, Delhi"
             ),
@@ -51473,7 +51473,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "40-45 mins",
                 distance = "1.8 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-5",
                 address = "South Delhi"
             ),
@@ -51486,7 +51486,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "DHABA OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy Masala",
                 address = "GT Karnal Road, Delhi"
             ),
@@ -51499,7 +51499,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-34 mins",
                 distance = "1.3 km",
-                discount = "KASHMIRI OFF",
+                discount = "20%",
                 discountAmount = "Dry Ginger & Cardamom",
                 address = "Srinagar Colony, Delhi"
             ),
@@ -51512,7 +51512,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "0.9 km",
-                discount = "BONELESS OFF",
+                discount = "20%",
                 discountAmount = "100% Boneless",
                 address = "Mumbai, Maharashtra"
             ),
@@ -51525,7 +51525,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "32-38 mins",
                 distance = "1.4 km",
-                discount = "CLAY OFF",
+                discount = "20%",
                 discountAmount = "Traditional Clay Pot",
                 address = "Jaipur, Rajasthan"
             ),
@@ -51538,7 +51538,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-36 mins",
                 distance = "1.6 km",
-                discount = "MUGHLAI OFF",
+                discount = "20%",
                 discountAmount = "Royal Recipe",
                 address = "Lucknow, Uttar Pradesh"
             ),
@@ -51551,7 +51551,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-26 mins",
                 distance = "0.8 km",
-                discount = "GARLIC OFF",
+                discount = "20%",
                 discountAmount = "Extra Garlic Paste",
                 address = "Amritsar, Punjab"
             ),
@@ -51564,7 +51564,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-31 mins",
                 distance = "0.9 km",
-                discount = "HEALTH OFF",
+                discount = "20%",
                 discountAmount = "Low Oil Recipe",
                 address = "Bangalore, Karnataka"
             ),
@@ -51577,7 +51577,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-36 mins",
                 distance = "1.2 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "With 4 Butter Naans",
                 address = "Hyderabad, Telangana"
             ),
@@ -51590,7 +51590,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.7 km",
-                discount = "WEEKEND OFF",
+                discount = "20%",
                 discountAmount = "Friday-Sunday Only",
                 address = "Chandigarh"
             ),
@@ -51603,7 +51603,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.6 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Green Chilies",
                 address = "Chennai, Tamil Nadu"
             ),
@@ -51616,7 +51616,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-48 mins",
                 distance = "2.0 km",
-                discount = "DUM OFF",
+                discount = "20%",
                 discountAmount = "Slow Dum Cooking",
                 address = "Kolkata, West Bengal"
             ),
@@ -51629,7 +51629,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-35 mins",
                 distance = "1.5 km",
-                discount = "FUSION OFF",
+                discount = "20%",
                 discountAmount = "Chicken + Paneer Mix",
                 address = "Ahmedabad, Gujarat"
             ),
@@ -51642,7 +51642,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-32 mins",
                 distance = "1.3 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "12 Lunch Boxes",
                 address = "Gurgaon, Haryana"
             ),
@@ -51655,7 +51655,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-60 mins",
                 distance = "2.8 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "80 Person Batch",
                 address = "Udaipur, Rajasthan"
             ),
@@ -51668,7 +51668,7 @@ fun ChickenHandiCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "42-50 mins",
                 distance = "2.4 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "30 Person Pack",
                 address = "Pune, Maharashtra"
             )
@@ -52058,7 +52058,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Rich Chocolate Ganache",
                 address = "Connaught Place, Delhi"
             ),
@@ -52071,7 +52071,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "VELVET OFF",
+                discount = "20%",
                 discountAmount = "Premium Cream Cheese",
                 address = "South Extension, Delhi"
             ),
@@ -52084,7 +52084,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.3 km",
-                discount = "RAINBOW OFF",
+                discount = "20%",
                 discountAmount = "Colorful Sprinkles",
                 address = "Karol Bagh, Delhi"
             ),
@@ -52097,7 +52097,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "BERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Strawberries",
                 address = "Saket, Delhi"
             ),
@@ -52110,7 +52110,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Crunchy Walnuts",
                 address = "Greater Kailash, Delhi"
             ),
@@ -52123,7 +52123,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-22 mins",
                 distance = "0.7 km",
-                discount = "MOCHA OFF",
+                discount = "20%",
                 discountAmount = "Arabica Coffee Beans",
                 address = "Khan Market, Delhi"
             ),
@@ -52136,7 +52136,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.0 km",
-                discount = "OREO OFF",
+                discount = "20%",
                 discountAmount = "Real Oreo Cookies",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -52149,7 +52149,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
-                discount = "LEMON OFF",
+                discount = "20%",
                 discountAmount = "Fresh Lemon Zest",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -52162,7 +52162,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.4 km",
-                discount = "BLUEBERRY OFF",
+                discount = "20%",
                 discountAmount = "Cheesecake Swirl",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -52175,7 +52175,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "TROPICAL OFF",
+                discount = "20%",
                 discountAmount = "Tropical Fruit Mix",
                 address = "Hauz Khas, Delhi"
             ),
@@ -52188,7 +52188,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "GLUTEN FREE",
+                discount = "20%",
                 discountAmount = "Wheat-Free Recipe",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -52201,7 +52201,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Dairy-Free & Eggless",
                 address = "Green Park, Delhi"
             ),
@@ -52214,7 +52214,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "BIRTHDAY OFF",
+                discount = "20%",
                 discountAmount = "Custom Name Writing",
                 address = "Dwarka, Delhi"
             ),
@@ -52227,7 +52227,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "6 Different Flavors",
                 address = "Pitampura, Delhi"
             ),
@@ -52240,7 +52240,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-27 mins",
                 distance = "1.1 km",
-                discount = "SUGAR FREE",
+                discount = "20%",
                 discountAmount = "Stevia Sweetened",
                 address = "Rohini, Delhi"
             ),
@@ -52253,7 +52253,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "SALTED OFF",
+                discount = "20%",
                 discountAmount = "Himalayan Pink Salt",
                 address = "Defence Colony, Delhi"
             ),
@@ -52266,7 +52266,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "PEANUT OFF",
+                discount = "20%",
                 discountAmount = "Crunchy Peanut Topping",
                 address = "Mayur Vihar, Delhi"
             ),
@@ -52279,7 +52279,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Alphonso Mango",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -52292,7 +52292,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "CORPORATE OFF",
+                discount = "20%",
                 discountAmount = "Custom Logo Printing",
                 address = "Gurgaon, Haryana"
             ),
@@ -52305,7 +52305,7 @@ fun CupcakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "3.0 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "3 Tier Display Stand",
                 address = "Noida, Uttar Pradesh"
             )
@@ -52653,7 +52653,7 @@ fun BhelCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.4 km",
-                discount = "MUMBAI OFF",
+                discount = "20%",
                 discountAmount = "Authentic Mumbai Recipe",
                 address = "Connaught Place, Delhi"
             ),
@@ -52666,7 +52666,7 @@ fun BhelCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
-                discount = "PUNE OFF",
+                discount = "20%",
                 discountAmount = "Extra Spicy Masala",
                 address = "Karol Bagh, Delhi"
             ),
@@ -52679,7 +52679,7 @@ fun BhelCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "JAIN OFF",
+                discount = "20%",
                 discountAmount = "No Onion Garlic",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -52692,7 +52692,7 @@ fun BhelCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "12-18 mins",
                 distance = "0.5 km",
-                discount = "SEV OFF",
+                discount = "20%",
                 discountAmount = "Extra Sev Topping",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -52705,7 +52705,7 @@ fun BhelCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-22 mins",
                 distance = "0.7 km",
-                discount = "WET OFF",
+                discount = "20%",
                 discountAmount = "Tangy Tamarind Chutney",
                 address = "Khan Market, Delhi"
             ),
@@ -52718,7 +52718,7 @@ fun BhelCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "8-12 mins",
                 distance = "0.3 km",
-                discount = "DRY OFF",
+                discount = "20%",
                 discountAmount = "Extra Papdi Crunch",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -52731,7 +52731,7 @@ fun BhelCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4 People",
                 address = "South Extension, Delhi"
             ),
@@ -52744,7 +52744,7 @@ fun BhelCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.0 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Ghost Pepper Level",
                 address = "Saket, Delhi"
             ),
@@ -52757,7 +52757,7 @@ fun BhelCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "POMEGRANATE OFF",
+                discount = "20%",
                 discountAmount = "Fresh Ruby Pomegranate",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -52770,7 +52770,7 @@ fun BhelCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "Mixed Sprouts Added",
                 address = "Green Park, Delhi"
             ),
@@ -52783,7 +52783,7 @@ fun BhelCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Fresh Coconut Garnish",
                 address = "Hauz Khas, Delhi"
             ),
@@ -52796,7 +52796,7 @@ fun BhelCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "FUSION OFF",
+                discount = "20%",
                 discountAmount = "Pav Bhaji Masala Twist",
                 address = "Greater Kailash, Delhi"
             ),
@@ -52809,7 +52809,7 @@ fun BhelCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Individual Serving Cups",
                 address = "Dwarka, Delhi"
             ),
@@ -52822,7 +52822,7 @@ fun BhelCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Snacking",
                 address = "Pitampura, Delhi"
             ),
@@ -52835,7 +52835,7 @@ fun BhelCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-27 mins",
                 distance = "1.1 km",
-                discount = "LOW SODIUM",
+                discount = "20%",
                 discountAmount = "Less Salt, Same Taste",
                 address = "Rohini, Delhi"
             ),
@@ -52848,7 +52848,7 @@ fun BhelCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "MASALA OFF",
+                discount = "20%",
                 discountAmount = "Special House Masala",
                 address = "Defence Colony, Delhi"
             ),
@@ -52861,7 +52861,7 @@ fun BhelCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "PEANUT OFF",
+                discount = "20%",
                 discountAmount = "Roasted Peanuts Added",
                 address = "Mayur Vihar, Delhi"
             ),
@@ -52874,7 +52874,7 @@ fun BhelCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "SUMMER OFF",
+                discount = "20%",
                 discountAmount = "Cool Mint Chutney",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -52887,7 +52887,7 @@ fun BhelCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "CORPORATE OFF",
+                discount = "20%",
                 discountAmount = "Custom Branded Packaging",
                 address = "Gurgaon, Haryana"
             ),
@@ -52900,7 +52900,7 @@ fun BhelCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "3.0 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "Live Counter Setup",
                 address = "Noida, Uttar Pradesh"
             )
@@ -53246,7 +53246,7 @@ fun MuffinCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "BLUEBERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Wild Blueberries",
                 address = "Connaught Place, Delhi"
             ),
@@ -53259,7 +53259,7 @@ fun MuffinCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "CHOCOLATE OFF",
+                discount = "20%",
                 discountAmount = "Belgian Chocolate Chips",
                 address = "South Extension, Delhi"
             ),
@@ -53272,7 +53272,7 @@ fun MuffinCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "10-15 mins",
                 distance = "0.3 km",
-                discount = "BANANA OFF",
+                discount = "20%",
                 discountAmount = "Ripe Bananas, Crunchy Walnuts",
                 address = "Karol Bagh, Delhi"
             ),
@@ -53285,7 +53285,7 @@ fun MuffinCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "LEMON OFF",
+                discount = "20%",
                 discountAmount = "Fresh Lemon Zest",
                 address = "Saket, Delhi"
             ),
@@ -53298,7 +53298,7 @@ fun MuffinCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "APPLE OFF",
+                discount = "20%",
                 discountAmount = "Fresh Apples, Ceylon Cinnamon",
                 address = "Greater Kailash, Delhi"
             ),
@@ -53311,7 +53311,7 @@ fun MuffinCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-22 mins",
                 distance = "0.7 km",
-                discount = "GLUTEN FREE",
+                discount = "20%",
                 discountAmount = "Almond Flour Base",
                 address = "Khan Market, Delhi"
             ),
@@ -53324,7 +53324,7 @@ fun MuffinCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.0 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Dairy-Free & Eggless",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -53337,7 +53337,7 @@ fun MuffinCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
-                discount = "CRANBERRY OFF",
+                discount = "20%",
                 discountAmount = "Tart Cranberries, Sweet Orange",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -53350,7 +53350,7 @@ fun MuffinCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.4 km",
-                discount = "PUMPKIN OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Pumpkin Puree",
                 address = "Vasant Vihar, Delhi"
             ),
@@ -53363,7 +53363,7 @@ fun MuffinCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "CARROT OFF",
+                discount = "20%",
                 discountAmount = "Fresh Grated Carrots",
                 address = "Green Park, Delhi"
             ),
@@ -53376,7 +53376,7 @@ fun MuffinCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "TROPICAL OFF",
+                discount = "20%",
                 discountAmount = "Alphonso Mango, Coconut Flakes",
                 address = "Hauz Khas, Delhi"
             ),
@@ -53389,7 +53389,7 @@ fun MuffinCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "VELVET OFF",
+                discount = "20%",
                 discountAmount = "Cream Cheese Swirl",
                 address = "Greater Kailash, Delhi"
             ),
@@ -53402,7 +53402,7 @@ fun MuffinCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "ASSORTMENT OFF",
+                discount = "20%",
                 discountAmount = "3 Different Flavors",
                 address = "Dwarka, Delhi"
             ),
@@ -53415,7 +53415,7 @@ fun MuffinCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Parties",
                 address = "Pitampura, Delhi"
             ),
@@ -53428,7 +53428,7 @@ fun MuffinCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "22-27 mins",
                 distance = "1.1 km",
-                discount = "SUGAR FREE",
+                discount = "20%",
                 discountAmount = "Stevia Sweetened",
                 address = "Rohini, Delhi"
             ),
@@ -53441,7 +53441,7 @@ fun MuffinCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Himalayan Salt Caramel",
                 address = "Defence Colony, Delhi"
             ),
@@ -53454,7 +53454,7 @@ fun MuffinCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "PEANUT OFF",
+                discount = "20%",
                 discountAmount = "Crunchy Peanut Butter",
                 address = "Mayur Vihar, Delhi"
             ),
@@ -53467,7 +53467,7 @@ fun MuffinCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "SUMMER OFF",
+                discount = "20%",
                 discountAmount = "Mixed Summer Berries",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -53480,7 +53480,7 @@ fun MuffinCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "CORPORATE OFF",
+                discount = "20%",
                 discountAmount = "Custom Branding Available",
                 address = "Gurgaon, Haryana"
             ),
@@ -53493,7 +53493,7 @@ fun MuffinCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "3.0 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "3 Tier Display Stand Included",
                 address = "Noida, Uttar Pradesh"
             )
@@ -53826,7 +53826,7 @@ fun CookiesCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
-                discount = "CHOCOLATE OFF",
+                discount = "20%",
                 discountAmount = "Belgian Chocolate Chunks",
                 address = "Connaught Place, Delhi"
             ),
@@ -53839,7 +53839,7 @@ fun CookiesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "12-17 mins",
                 distance = "0.4 km",
-                discount = "OATMEAL OFF",
+                discount = "20%",
                 discountAmount = "Organic Oats & Raisins",
                 address = "South Extension, Delhi"
             ),
@@ -53852,7 +53852,7 @@ fun CookiesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "DOUBLE OFF",
+                discount = "20%",
                 discountAmount = "Double Cocoa, Fudge Center",
                 address = "Karol Bagh, Delhi"
             ),
@@ -53865,7 +53865,7 @@ fun CookiesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "SPRINKLE OFF",
+                discount = "20%",
                 discountAmount = "Colorful Rainbow Sprinkles",
                 address = "Saket, Delhi"
             ),
@@ -53878,7 +53878,7 @@ fun CookiesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "18-22 mins",
                 distance = "0.7 km",
-                discount = "PEANUT OFF",
+                discount = "20%",
                 discountAmount = "Crunchy Peanut Texture",
                 address = "Greater Kailash, Delhi"
             ),
@@ -53891,7 +53891,7 @@ fun CookiesCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.3 km",
-                discount = "GLUTEN FREE",
+                discount = "20%",
                 discountAmount = "Almond & Coconut Flour",
                 address = "Khan Market, Delhi"
             ),
@@ -53904,7 +53904,7 @@ fun CookiesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.0 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Dairy-Free, Eggless",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -53917,7 +53917,7 @@ fun CookiesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "MACADAMIA OFF",
+                discount = "20%",
                 discountAmount = "Australian Macadamia Nuts",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -53930,7 +53930,7 @@ fun CookiesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "GINGER OFF",
+                discount = "20%",
                 discountAmount = "Fresh Ginger & Molasses",
                 address = "Hauz Khas, Delhi"
             ),
@@ -53943,7 +53943,7 @@ fun CookiesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.9 km",
-                discount = "VELVET OFF",
+                discount = "20%",
                 discountAmount = "Cream Cheese Swirl",
                 address = "Green Park, Delhi"
             ),
@@ -53956,7 +53956,7 @@ fun CookiesCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Himalayan Salt Flakes",
                 address = "Defence Colony, Delhi"
             ),
@@ -53969,7 +53969,7 @@ fun CookiesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "M&M OFF",
+                discount = "20%",
                 discountAmount = "Rainbow M&M's Inside",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -53982,7 +53982,7 @@ fun CookiesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "ASSORTMENT OFF",
+                discount = "20%",
                 discountAmount = "4 Different Flavors",
                 address = "Dwarka, Delhi"
             ),
@@ -53995,7 +53995,7 @@ fun CookiesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Perfect Party Snacks",
                 address = "Pitampura, Delhi"
             ),
@@ -54008,7 +54008,7 @@ fun CookiesCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "1.4 km",
-                discount = "SUGAR FREE",
+                discount = "20%",
                 discountAmount = "Stevia Sweetened",
                 address = "Rohini, Delhi"
             ),
@@ -54021,7 +54021,7 @@ fun CookiesCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-23 mins",
                 distance = "0.9 km",
-                discount = "STUFFED OFF",
+                discount = "20%",
                 discountAmount = "Molten Nutella Center",
                 address = "Mayur Vihar, Delhi"
             ),
@@ -54034,7 +54034,7 @@ fun CookiesCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "1.3 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Toasted Coconut Flakes",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -54047,7 +54047,7 @@ fun CookiesCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "MATCHA OFF",
+                discount = "20%",
                 discountAmount = "Premium Japanese Matcha",
                 address = "Saket, Delhi"
             ),
@@ -54060,7 +54060,7 @@ fun CookiesCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.5 km",
-                discount = "CORPORATE OFF",
+                discount = "20%",
                 discountAmount = "Custom Packaging Available",
                 address = "Gurgaon, Haryana"
             ),
@@ -54073,7 +54073,7 @@ fun CookiesCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-55 mins",
                 distance = "3.2 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "Elegant Display Tower Included",
                 address = "Noida, Uttar Pradesh"
             )
@@ -54414,7 +54414,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "0.8 km",
-                discount = "BUTTER OFF",
+                discount = "20%",
                 discountAmount = "Rich Creamy Gravy",
                 address = "Connaught Place, Delhi"
             ),
@@ -54427,7 +54427,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.5 km",
-                discount = "TANDOORI OFF",
+                discount = "20%",
                 discountAmount = "Clay Oven Roasted",
                 address = "South Extension, Delhi"
             ),
@@ -54440,7 +54440,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.2 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Traditional Indian Spices",
                 address = "Karol Bagh, Delhi"
             ),
@@ -54453,7 +54453,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-20 mins",
                 distance = "0.3 km",
-                discount = "CRISPY OFF",
+                discount = "20%",
                 discountAmount = "Extra Crispy Coating",
                 address = "Saket, Delhi"
             ),
@@ -54466,7 +54466,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.5 km",
-                discount = "BIRYANI OFF",
+                discount = "20%",
                 discountAmount = "Basmati Rice & Saffron",
                 address = "Greater Kailash, Delhi"
             ),
@@ -54479,7 +54479,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "0.9 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Greens & Herbs",
                 address = "Khan Market, Delhi"
             ),
@@ -54492,7 +54492,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-28 mins",
                 distance = "1.0 km",
-                discount = "TIKKA OFF",
+                discount = "20%",
                 discountAmount = "Charcoal Flavored Tikka",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -54505,7 +54505,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "ORIENTAL OFF",
+                discount = "20%",
                 discountAmount = "Schezwan Style",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -54518,7 +54518,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "KORMA OFF",
+                discount = "20%",
                 discountAmount = "Cashew & Almond Gravy",
                 address = "Hauz Khas, Delhi"
             ),
@@ -54531,7 +54531,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.9 km",
-                discount = "BBQ OFF",
+                discount = "20%",
                 discountAmount = "Smoky BBQ Glaze",
                 address = "Green Park, Delhi"
             ),
@@ -54544,7 +54544,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "SHAWARMA OFF",
+                discount = "20%",
                 discountAmount = "Garlic Mayo & Pickles",
                 address = "Defence Colony, Delhi"
             ),
@@ -54557,7 +54557,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "POPCORN OFF",
+                discount = "20%",
                 discountAmount = "Bite-Sized Crunchy",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -54570,7 +54570,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "THALI OFF",
+                discount = "20%",
                 discountAmount = "4 Curries + Dessert",
                 address = "Dwarka, Delhi"
             ),
@@ -54583,7 +54583,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "BURGER OFF",
+                discount = "20%",
                 discountAmount = "With Fries & Drink",
                 address = "Pitampura, Delhi"
             ),
@@ -54596,7 +54596,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "25-30 mins",
                 distance = "1.4 km",
-                discount = "SOUP OFF",
+                discount = "20%",
                 discountAmount = "Herbal Clear Soup",
                 address = "Rohini, Delhi"
             ),
@@ -54609,7 +54609,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-23 mins",
                 distance = "0.9 km",
-                discount = "STUFFED OFF",
+                discount = "20%",
                 discountAmount = "Spinach & Cheese Filling",
                 address = "Mayur Vihar, Delhi"
             ),
@@ -54622,7 +54622,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "1.3 km",
-                discount = "MOMO OFF",
+                discount = "20%",
                 discountAmount = "With Spicy Chutney",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -54635,7 +54635,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "TERIYAKI OFF",
+                discount = "20%",
                 discountAmount = "Japanese Teriyaki Sauce",
                 address = "Saket, Delhi"
             ),
@@ -54648,7 +54648,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.5 km",
-                discount = "CORPORATE OFF",
+                discount = "20%",
                 discountAmount = "Customizable Menu Options",
                 address = "Gurgaon, Haryana"
             ),
@@ -54661,7 +54661,7 @@ fun ChickenChaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-55 mins",
                 distance = "3.2 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "Buffet Setup Included",
                 address = "Noida, Uttar Pradesh"
             )
@@ -54997,7 +54997,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "TIKKA OFF",
+                discount = "20%",
                 discountAmount = "Charcoal Grilled Paneer",
                 address = "Chandni Chowk, Delhi"
             ),
@@ -55010,7 +55010,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "AMRITSARI OFF",
+                discount = "20%",
                 discountAmount = "Authentic Amritsari Masala",
                 address = "Rajouri Garden, Delhi"
             ),
@@ -55023,7 +55023,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "BUTTER OFF",
+                discount = "20%",
                 discountAmount = "Rich Creamy Butter Gravy",
                 address = "Connaught Place, Delhi"
             ),
@@ -55036,7 +55036,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-15 mins",
                 distance = "0.3 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Hot Green Chilies",
                 address = "Karol Bagh, Delhi"
             ),
@@ -55049,7 +55049,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "BHURJI OFF",
+                discount = "20%",
                 discountAmount = "Scrambled Paneer Spices",
                 address = "Old Delhi"
             ),
@@ -55062,7 +55062,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "TANDOOR OFF",
+                discount = "20%",
                 discountAmount = "Clay Oven Roasted Flavor",
                 address = "South Extension, Delhi"
             ),
@@ -55075,7 +55075,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.1 km",
-                discount = "CHEESE OFF",
+                discount = "20%",
                 discountAmount = "Mozzarella & Cheddar Blend",
                 address = "Greater Kailash, Delhi"
             ),
@@ -55088,7 +55088,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "MALAI OFF",
+                discount = "20%",
                 discountAmount = "Fresh Cream & Cashew Paste",
                 address = "Hauz Khas, Delhi"
             ),
@@ -55101,7 +55101,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.7 km",
-                discount = "MATAR OFF",
+                discount = "20%",
                 discountAmount = "Fresh Green Peas Curry",
                 address = "Lajpat Nagar, Delhi"
             ),
@@ -55114,7 +55114,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.9 km",
-                discount = "FUSION OFF",
+                discount = "20%",
                 discountAmount = "Indo-Chinese Style Gravy",
                 address = "Vasant Kunj, Delhi"
             ),
@@ -55127,7 +55127,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "MASALA OFF",
+                discount = "20%",
                 discountAmount = "Aromatic Indian Spices",
                 address = "Saket, Delhi"
             ),
@@ -55140,7 +55140,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.2 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-5 People",
                 address = "Dwarka, Delhi"
             ),
@@ -55153,7 +55153,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "TIKKA MASALA OFF",
+                discount = "20%",
                 discountAmount = "Tangy Tomato Gravy",
                 address = "Green Park, Delhi"
             ),
@@ -55166,7 +55166,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "0.6 km",
-                discount = "HARIYALI OFF",
+                discount = "20%",
                 discountAmount = "Fresh Coriander & Mint",
                 address = "Khan Market, Delhi"
             ),
@@ -55179,7 +55179,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "ACHARI OFF",
+                discount = "20%",
                 discountAmount = "Tangy Pickle Flavored",
                 address = "Pitampura, Delhi"
             ),
@@ -55192,7 +55192,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "KADAI OFF",
+                discount = "20%",
                 discountAmount = "Bell Peppers & Onions",
                 address = "Rohini, Delhi"
             ),
@@ -55205,7 +55205,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-33 mins",
                 distance = "1.0 km",
-                discount = "MAKHANI OFF",
+                discount = "20%",
                 discountAmount = "Buttery Tomato Gravy",
                 address = "Defence Colony, Delhi"
             ),
@@ -55218,7 +55218,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "32-37 mins",
                 distance = "1.6 km",
-                discount = "LABABDAR OFF",
+                discount = "20%",
                 discountAmount = "Rich Cream & Cashew Sauce",
                 address = "Noida, Uttar Pradesh"
             ),
@@ -55231,7 +55231,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "2.0 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Perfect for 10-12 Guests",
                 address = "Gurgaon, Haryana"
             ),
@@ -55244,7 +55244,7 @@ fun PaneerKulcheCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "50-55 mins",
                 distance = "2.5 km",
-                discount = "CORPORATE OFF",
+                discount = "20%",
                 discountAmount = "20+ Portions Minimum",
                 address = "Faridabad, Haryana"
             )
@@ -55592,7 +55592,7 @@ fun ChaachCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "MASALA OFF",
+                discount = "20%",
                 discountAmount = "Authentic Gujarati Spices",
                 address = "Sion, Mumbai"
             ),
@@ -55605,7 +55605,7 @@ fun ChaachCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "JEERA OFF",
+                discount = "20%",
                 discountAmount = "Fresh Cumin & Mint",
                 address = "Andheri West, Mumbai"
             ),
@@ -55618,7 +55618,7 @@ fun ChaachCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "MATKA OFF",
+                discount = "20%",
                 discountAmount = "Traditional Earthen Pot Serving",
                 address = "Bandra, Mumbai"
             ),
@@ -55631,7 +55631,7 @@ fun ChaachCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "CHILLED OFF",
+                discount = "20%",
                 discountAmount = "Perfect Summer Cooler",
                 address = "Ghatkopar, Mumbai"
             ),
@@ -55644,7 +55644,7 @@ fun ChaachCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-5 People",
                 address = "Powai, Mumbai"
             ),
@@ -55657,7 +55657,7 @@ fun ChaachCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "PROBIOTIC OFF",
+                discount = "20%",
                 discountAmount = "Natural Gut Health Booster",
                 address = "Juhu, Mumbai"
             ),
@@ -55670,7 +55670,7 @@ fun ChaachCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.1 km",
-                discount = "ADRACK OFF",
+                discount = "20%",
                 discountAmount = "Fresh Ginger for Digestion",
                 address = "Vile Parle, Mumbai"
             ),
@@ -55683,7 +55683,7 @@ fun ChaachCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "SWEET OFF",
+                discount = "20%",
                 discountAmount = "Organic Jaggery Sweetened",
                 address = "Dadar, Mumbai"
             ),
@@ -55696,7 +55696,7 @@ fun ChaachCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.7 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Hot Green Chillies",
                 address = "Borivali, Mumbai"
             ),
@@ -55709,7 +55709,7 @@ fun ChaachCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.9 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "With Samosa & Pakora",
                 address = "Malad, Mumbai"
             ),
@@ -55722,7 +55722,7 @@ fun ChaachCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "DIET OFF",
+                discount = "20%",
                 discountAmount = "Low Calorie Healthy Option",
                 address = "Santacruz, Mumbai"
             ),
@@ -55735,7 +55735,7 @@ fun ChaachCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.2 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Perfect for 20-25 Guests",
                 address = "Thane, Maharashtra"
             ),
@@ -55748,7 +55748,7 @@ fun ChaachCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "ROSE OFF",
+                discount = "20%",
                 discountAmount = "Delicate Rose Petal Flavor",
                 address = "Worli, Mumbai"
             ),
@@ -55761,7 +55761,7 @@ fun ChaachCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "0.6 km",
-                discount = "AJWAIN OFF",
+                discount = "20%",
                 discountAmount = "Carom Seeds for Digestion",
                 address = "Chembur, Mumbai"
             ),
@@ -55774,7 +55774,7 @@ fun ChaachCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "BOTTLED OFF",
+                discount = "20%",
                 discountAmount = "500ml Sealed Bottle",
                 address = "Navi Mumbai"
             ),
@@ -55787,7 +55787,7 @@ fun ChaachCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "KASHMIRI OFF",
+                discount = "20%",
                 discountAmount = "Kahwa Tea Infused Chaach",
                 address = "Kharghar, Navi Mumbai"
             ),
@@ -55800,7 +55800,7 @@ fun ChaachCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "28-33 mins",
                 distance = "1.0 km",
-                discount = "THANDAI OFF",
+                discount = "20%",
                 discountAmount = "Festival Special Thandai Mix",
                 address = "Kalyan, Maharashtra"
             ),
@@ -55813,7 +55813,7 @@ fun ChaachCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "32-37 mins",
                 distance = "1.6 km",
-                discount = "CORPORATE OFF",
+                discount = "20%",
                 discountAmount = "10 Liters Office Delivery",
                 address = "BKC, Mumbai"
             ),
@@ -55826,7 +55826,7 @@ fun ChaachCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "2.0 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "50 Liters Bulk Order",
                 address = "Panvel, Maharashtra"
             ),
@@ -55839,7 +55839,7 @@ fun ChaachCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "50-55 mins",
                 distance = "2.5 km",
-                discount = "SAFFRON OFF",
+                discount = "20%",
                 discountAmount = "Premium Kashmiri Saffron",
                 address = "Lonavala, Maharashtra"
             )
@@ -56184,7 +56184,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "SOYA OFF",
+                discount = "20%",
                 discountAmount = "High Protein Soybean Base",
                 address = "Andheri East, Mumbai"
             ),
@@ -56197,7 +56197,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "CHEESE OFF",
+                discount = "20%",
                 discountAmount = "Mozzarella & Cheddar Stuffing",
                 address = "Bandra, Mumbai"
             ),
@@ -56210,7 +56210,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
-                discount = "CORN OFF",
+                discount = "20%",
                 discountAmount = "Crispy Corn Flakes Coating",
                 address = "Ghatkopar, Mumbai"
             ),
@@ -56223,7 +56223,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "SCHEZWAN OFF",
+                discount = "20%",
                 discountAmount = "Authentic Indo-Chinese Sauce",
                 address = "Powai, Mumbai"
             ),
@@ -56236,7 +56236,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "95% Less Oil Air Fried",
                 address = "Juhu, Mumbai"
             ),
@@ -56249,7 +56249,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "MIXED OFF",
+                discount = "20%",
                 discountAmount = "5 Vegetable Variety Platter",
                 address = "Sion, Mumbai"
             ),
@@ -56262,7 +56262,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "TANDOOR OFF",
+                discount = "20%",
                 discountAmount = "Clay Oven Smoked Flavor",
                 address = "Santacruz, Mumbai"
             ),
@@ -56275,7 +56275,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "BREAD OFF",
+                discount = "20%",
                 discountAmount = "Japanese Panko Bread Crumbs",
                 address = "Malad, Mumbai"
             ),
@@ -56288,7 +56288,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-6 Family Members",
                 address = "Borivali, Mumbai"
             ),
@@ -56301,7 +56301,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Gourmet Plating & Serving",
                 address = "Colaba, Mumbai"
             ),
@@ -56314,7 +56314,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "HOT OFF",
+                discount = "20%",
                 discountAmount = "Extra Green Chillies & Spices",
                 address = "Dadar, Mumbai"
             ),
@@ -56327,7 +56327,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "CREAMY OFF",
+                discount = "20%",
                 discountAmount = "Rich Creamy Cashew Base",
                 address = "Kandivali, Mumbai"
             ),
@@ -56340,7 +56340,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.2 km",
-                discount = "BEETROOT OFF",
+                discount = "20%",
                 discountAmount = "Natural Color & Nutrients",
                 address = "Vile Parle, Mumbai"
             ),
@@ -56353,7 +56353,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "32-37 mins",
                 distance = "1.5 km",
-                discount = "THAI OFF",
+                discount = "20%",
                 discountAmount = "Lemongrass & Thai Basil Flavor",
                 address = "Worli, Mumbai"
             ),
@@ -56366,7 +56366,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "ITALIAN OFF",
+                discount = "20%",
                 discountAmount = "Oregano, Basil & Thyme Crust",
                 address = "Chembur, Mumbai"
             ),
@@ -56379,7 +56379,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Fun Shapes & Mild Flavors",
                 address = "Thane, Maharashtra"
             ),
@@ -56392,7 +56392,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.2 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Perfect for 10-12 Guests",
                 address = "Panvel, Maharashtra"
             ),
@@ -56405,7 +56405,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "50-55 mins",
                 distance = "2.5 km",
-                discount = "CORPORATE OFF",
+                discount = "20%",
                 discountAmount = "Office Meetings & Events",
                 address = "BKC, Mumbai"
             ),
@@ -56418,7 +56418,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "55-60 mins",
                 distance = "3.0 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "Bulk Order for 50+ Guests",
                 address = "Navi Mumbai"
             ),
@@ -56431,7 +56431,7 @@ fun VegLollipopCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.8 km",
-                discount = "TRUFFLE OFF",
+                discount = "20%",
                 discountAmount = "Premium Black Truffle Infused",
                 address = "Alibaug, Maharashtra"
             )
@@ -56816,7 +56816,7 @@ fun SubCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "ITALIAN OFF",
+                discount = "20%",
                 discountAmount = "Authentic Italian Herb Bread",
                 address = "Bandra, Mumbai"
             ),
@@ -56829,7 +56829,7 @@ fun SubCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "PAN OFF",
+                discount = "20%",
                 discountAmount = "Tandoori Marinated Paneer",
                 address = "Andheri East, Mumbai"
             ),
@@ -56842,7 +56842,7 @@ fun SubCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "FOOTLONG OFF",
+                discount = "20%",
                 discountAmount = "12-inch Extra Large Sub",
                 address = "Powai, Mumbai"
             ),
@@ -56855,7 +56855,7 @@ fun SubCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.0 km",
-                discount = "MEDITERRANEAN OFF",
+                discount = "20%",
                 discountAmount = "Olives, Feta & Hummus",
                 address = "Juhu, Mumbai"
             ),
@@ -56868,7 +56868,7 @@ fun SubCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "0.6 km",
-                discount = "AVOCADO OFF",
+                discount = "20%",
                 discountAmount = "Fresh Hass Avocado Slices",
                 address = "Ghatkopar, Mumbai"
             ),
@@ -56881,7 +56881,7 @@ fun SubCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "CHEESE OFF",
+                discount = "20%",
                 discountAmount = "Mozzarella, Cheddar & Parmesan",
                 address = "Sion, Mumbai"
             ),
@@ -56894,7 +56894,7 @@ fun SubCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "1.3 km",
-                discount = "TURKEY OFF",
+                discount = "20%",
                 discountAmount = "Smoked Turkey Breast",
                 address = "Santacruz, Mumbai"
             ),
@@ -56907,7 +56907,7 @@ fun SubCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "BBQ OFF",
+                discount = "20%",
                 discountAmount = "House-made BBQ Sauce",
                 address = "Malad, Mumbai"
             ),
@@ -56920,7 +56920,7 @@ fun SubCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Family of 3-4",
                 address = "Borivali, Mumbai"
             ),
@@ -56933,7 +56933,7 @@ fun SubCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "32-37 mins",
                 distance = "1.7 km",
-                discount = "STEAK OFF",
+                discount = "20%",
                 discountAmount = "Grilled Angus Beef Steak",
                 address = "Colaba, Mumbai"
             ),
@@ -56946,7 +56946,7 @@ fun SubCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "MEXICAN OFF",
+                discount = "20%",
                 discountAmount = "Jalapeños & Chipotle Sauce",
                 address = "Dadar, Mumbai"
             ),
@@ -56959,7 +56959,7 @@ fun SubCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "22-27 mins",
                 distance = "0.9 km",
-                discount = "MUSHROOM OFF",
+                discount = "20%",
                 discountAmount = "Sautéed Button Mushrooms",
                 address = "Kandivali, Mumbai"
             ),
@@ -56972,7 +56972,7 @@ fun SubCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "TUNA OFF",
+                discount = "20%",
                 discountAmount = "Fresh Tuna with Mayonnaise",
                 address = "Vile Parle, Mumbai"
             ),
@@ -56985,7 +56985,7 @@ fun SubCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.7 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "100% Plant-based Ingredients",
                 address = "Worli, Mumbai"
             ),
@@ -56998,7 +56998,7 @@ fun SubCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.2 km",
-                discount = "CLUB OFF",
+                discount = "20%",
                 discountAmount = "Triple Layer Premium Sub",
                 address = "Chembur, Mumbai"
             ),
@@ -57011,7 +57011,7 @@ fun SubCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "3 Mini Subs for Kids",
                 address = "Thane, Maharashtra"
             ),
@@ -57024,7 +57024,7 @@ fun SubCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.0 km",
-                discount = "OFFICE OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Office Meetings",
                 address = "BKC, Mumbai"
             ),
@@ -57037,7 +57037,7 @@ fun SubCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "GLUTEN OFF",
+                discount = "20%",
                 discountAmount = "Certified Gluten-Free Bread",
                 address = "Panvel, Maharashtra"
             ),
@@ -57050,7 +57050,7 @@ fun SubCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "55-60 mins",
                 distance = "2.8 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "Bulk Order for 50+ Guests",
                 address = "Navi Mumbai"
             ),
@@ -57063,7 +57063,7 @@ fun SubCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "TRUFFLE OFF",
+                discount = "20%",
                 discountAmount = "Premium Black Truffle Oil",
                 address = "Alibaug, Maharashtra"
             )
@@ -57436,7 +57436,7 @@ fun PancakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "CLASSIC OFF",
+                discount = "20%",
                 discountAmount = "Traditional Fluffy Buttermilk Pancakes",
                 address = "Bandra, Mumbai"
             ),
@@ -57449,7 +57449,7 @@ fun PancakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "CHOCOLATE OFF",
+                discount = "20%",
                 discountAmount = "Rich Dark Chocolate Chips",
                 address = "Andheri West, Mumbai"
             ),
@@ -57462,7 +57462,7 @@ fun PancakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "18-23 mins",
                 distance = "0.7 km",
-                discount = "BLUEBERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Canadian Blueberries",
                 address = "Juhu, Mumbai"
             ),
@@ -57475,7 +57475,7 @@ fun PancakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "PROTEIN OFF",
+                discount = "20%",
                 discountAmount = "25g Protein per Serving",
                 address = "Powai, Mumbai"
             ),
@@ -57488,7 +57488,7 @@ fun PancakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "22-27 mins",
                 distance = "0.9 km",
-                discount = "RED VELVET OFF",
+                discount = "20%",
                 discountAmount = "Cream Cheese Frosting Drizzle",
                 address = "Sion, Mumbai"
             ),
@@ -57501,7 +57501,7 @@ fun PancakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "BANANA OFF",
+                discount = "20%",
                 discountAmount = "Ripe Bananas & Crushed Walnuts",
                 address = "Ghatkopar, Mumbai"
             ),
@@ -57514,7 +57514,7 @@ fun PancakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "APPLE OFF",
+                discount = "20%",
                 discountAmount = "Caramelized Apple Slices",
                 address = "Santacruz, Mumbai"
             ),
@@ -57527,7 +57527,7 @@ fun PancakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "NUTELLA OFF",
+                discount = "20%",
                 discountAmount = "Premium Nutella Filling",
                 address = "Malad, Mumbai"
             ),
@@ -57540,7 +57540,7 @@ fun PancakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "4 Varieties for Family of 4",
                 address = "Borivali, Mumbai"
             ),
@@ -57553,7 +57553,7 @@ fun PancakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.4 km",
-                discount = "LEMON OFF",
+                discount = "20%",
                 discountAmount = "Fresh Lemon Zest & Ricotta",
                 address = "Colaba, Mumbai"
             ),
@@ -57566,7 +57566,7 @@ fun PancakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.0 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "100% Plant-based Ingredients",
                 address = "Dadar, Mumbai"
             ),
@@ -57579,7 +57579,7 @@ fun PancakeCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "GLUTEN OFF",
+                discount = "20%",
                 discountAmount = "Certified Gluten-Free Flour",
                 address = "Kandivali, Mumbai"
             ),
@@ -57592,7 +57592,7 @@ fun PancakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.6 km",
-                discount = "TROPICAL OFF",
+                discount = "20%",
                 discountAmount = "Fresh Pineapple & Coconut Shavings",
                 address = "Vile Parle, Mumbai"
             ),
@@ -57605,7 +57605,7 @@ fun PancakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "BISCOFF OFF",
+                discount = "20%",
                 discountAmount = "Lotus Biscoff Spread & Crumbs",
                 address = "Worli, Mumbai"
             ),
@@ -57618,7 +57618,7 @@ fun PancakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.3 km",
-                discount = "CHEESECAKE OFF",
+                discount = "20%",
                 discountAmount = "Strawberry Compote & Cream Cheese",
                 address = "Chembur, Mumbai"
             ),
@@ -57631,7 +57631,7 @@ fun PancakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "18-23 mins",
                 distance = "0.8 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Fun Animal Shapes & Colors",
                 address = "Thane, Maharashtra"
             ),
@@ -57644,7 +57644,7 @@ fun PancakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "BRUNCH OFF",
+                discount = "20%",
                 discountAmount = "Complete Brunch for 3-4 People",
                 address = "Panvel, Maharashtra"
             ),
@@ -57657,7 +57657,7 @@ fun PancakeCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "MATCHA OFF",
+                discount = "20%",
                 discountAmount = "Premium Japanese Matcha Powder",
                 address = "BKC, Mumbai"
             ),
@@ -57670,7 +57670,7 @@ fun PancakeCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "BIRTHDAY OFF",
+                discount = "20%",
                 discountAmount = "Special Decoration for Birthdays",
                 address = "Navi Mumbai"
             ),
@@ -57683,7 +57683,7 @@ fun PancakeCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.5 km",
-                discount = "GOLD OFF",
+                discount = "20%",
                 discountAmount = "Edible Gold Leaf & Premium Toppings",
                 address = "Alibaug, Maharashtra"
             )
@@ -58076,7 +58076,7 @@ fun NihariCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "ROYAL OFF",
+                discount = "20%",
                 discountAmount = "Slow Cooked for 8 Hours",
                 address = "Mohammed Ali Road, Mumbai"
             ),
@@ -58089,7 +58089,7 @@ fun NihariCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "MUGHLAI OFF",
+                discount = "20%",
                 discountAmount = "Secret Mughlai Spices Blend",
                 address = "Bhendi Bazaar, Mumbai"
             ),
@@ -58102,7 +58102,7 @@ fun NihariCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "BONE MARROW OFF",
+                discount = "20%",
                 discountAmount = "Rich Bone Marrow Gravy",
                 address = "Kurla, Mumbai"
             ),
@@ -58115,7 +58115,7 @@ fun NihariCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.5 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Special 10 Spice Blend",
                 address = "Byculla, Mumbai"
             ),
@@ -58128,7 +58128,7 @@ fun NihariCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "TRADITIONAL OFF",
+                discount = "20%",
                 discountAmount = "Original Delhi Style Recipe",
                 address = "Colaba, Mumbai"
             ),
@@ -58141,7 +58141,7 @@ fun NihariCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
-                discount = "VEG OFF",
+                discount = "20%",
                 discountAmount = "7 Winter Vegetables Cooked Slow",
                 address = "Sion, Mumbai"
             ),
@@ -58154,7 +58154,7 @@ fun NihariCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Feeds 4-5 People with Naan",
                 address = "Andheri East, Mumbai"
             ),
@@ -58167,7 +58167,7 @@ fun NihariCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.2 km",
-                discount = "LAMB OFF",
+                discount = "20%",
                 discountAmount = "Whole Lamb Shank Slow Cooked",
                 address = "Kemps Corner, Mumbai"
             ),
@@ -58180,7 +58180,7 @@ fun NihariCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "1.6 km",
-                discount = "AWADHI OFF",
+                discount = "20%",
                 discountAmount = "Original Handi Cooking Style",
                 address = "Marine Lines, Mumbai"
             ),
@@ -58193,7 +58193,7 @@ fun NihariCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "3.0 km",
-                discount = "NALLI OFF",
+                discount = "20%",
                 discountAmount = "Bone-in Meat with Rich Marrow",
                 address = "Nagpada, Mumbai"
             ),
@@ -58206,7 +58206,7 @@ fun NihariCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "DUM OFF",
+                discount = "20%",
                 discountAmount = "Sealed Dum Cooking Technique",
                 address = "Santacruz, Mumbai"
             ),
@@ -58219,7 +58219,7 @@ fun NihariCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
-                discount = "EGG OFF",
+                discount = "20%",
                 discountAmount = "2 Boiled Eggs with Rich Gravy",
                 address = "Ghatkopar, Mumbai"
             ),
@@ -58232,7 +58232,7 @@ fun NihariCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "SHAHI OFF",
+                discount = "20%",
                 discountAmount = "Royal Recipe with Saffron",
                 address = "Mahim, Mumbai"
             ),
@@ -58245,7 +58245,7 @@ fun NihariCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "28-33 mins",
                 distance = "1.3 km",
-                discount = "FUSION OFF",
+                discount = "20%",
                 discountAmount = "Butter Chicken Meets Nihari",
                 address = "Powai, Mumbai"
             ),
@@ -58258,7 +58258,7 @@ fun NihariCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.5 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Feeds 8-10 People Complete Meal",
                 address = "Borivali, Mumbai"
             ),
@@ -58271,7 +58271,7 @@ fun NihariCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Nihari with Biryani & Raita",
                 address = "Malad, Mumbai"
             ),
@@ -58284,7 +58284,7 @@ fun NihariCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.7 km",
-                discount = "KOLKATA OFF",
+                discount = "20%",
                 discountAmount = "East Indian Style with Mustard Oil",
                 address = "Dadar, Mumbai"
             ),
@@ -58297,7 +58297,7 @@ fun NihariCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "70% Less Oil, Same Taste",
                 address = "Vile Parle, Mumbai"
             ),
@@ -58310,7 +58310,7 @@ fun NihariCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "60-70 mins",
                 distance = "3.5 km",
-                discount = "WEDDING OFF",
+                discount = "20%",
                 discountAmount = "Traditional Wedding Recipe for 15",
                 address = "Thane, Maharashtra"
             ),
@@ -58323,7 +58323,7 @@ fun NihariCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-55 mins",
                 distance = "4.0 km",
-                discount = "GOLD OFF",
+                discount = "20%",
                 discountAmount = "Edible Gold Leaf & Premium Spices",
                 address = "Juhu, Mumbai"
             )
@@ -58703,7 +58703,7 @@ fun TacosCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "CARNE OFF",
+                discount = "20%",
                 discountAmount = "Grilled Skirt Steak with Fresh Lime",
                 address = "Bandra West, Mumbai"
             ),
@@ -58716,7 +58716,7 @@ fun TacosCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
-                discount = "AL PASTOR OFF",
+                discount = "20%",
                 discountAmount = "Spit-Grilled Pork with Pineapple",
                 address = "Andheri West, Mumbai"
             ),
@@ -58729,7 +58729,7 @@ fun TacosCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "BAJA OFF",
+                discount = "20%",
                 discountAmount = "Beer-Battered Fish with Cabbage Slaw",
                 address = "Powai, Mumbai"
             ),
@@ -58742,7 +58742,7 @@ fun TacosCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
-                discount = "TINGA OFF",
+                discount = "20%",
                 discountAmount = "Shredded Chicken in Chipotle Sauce",
                 address = "Khar, Mumbai"
             ),
@@ -58755,7 +58755,7 @@ fun TacosCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "18-22 mins",
                 distance = "1.0 km",
-                discount = "VEGETARIAN OFF",
+                discount = "20%",
                 discountAmount = "Grilled Veggies with Melted Cheese",
                 address = "Santacruz West, Mumbai"
             ),
@@ -58768,7 +58768,7 @@ fun TacosCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "12-15 mins",
                 distance = "0.4 km",
-                discount = "BREAKFAST OFF",
+                discount = "20%",
                 discountAmount = "Scrambled Eggs with Spicy Chorizo",
                 address = "Lower Parel, Mumbai"
             ),
@@ -58781,7 +58781,7 @@ fun TacosCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.3 km",
-                discount = "CARNITAS OFF",
+                discount = "20%",
                 discountAmount = "Slow-Cooked Pulled Pork",
                 address = "Worli, Mumbai"
             ),
@@ -58794,7 +58794,7 @@ fun TacosCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "28-33 mins",
                 distance = "1.7 km",
-                discount = "SHRIMP OFF",
+                discount = "20%",
                 discountAmount = "Spicy Garlic Shrimp with Avocado",
                 address = "Colaba, Mumbai"
             ),
@@ -58807,7 +58807,7 @@ fun TacosCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "BARBACOA OFF",
+                discount = "20%",
                 discountAmount = "Slow-Cooked Beef Cheek",
                 address = "Byculla, Mumbai"
             ),
@@ -58820,7 +58820,7 @@ fun TacosCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "LENGUA OFF",
+                discount = "20%",
                 discountAmount = "Tender Braised Beef Tongue",
                 address = "Kemps Corner, Mumbai"
             ),
@@ -58833,7 +58833,7 @@ fun TacosCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Pulled Jackfruit with Mango Salsa",
                 address = "Mahim, Mumbai"
             ),
@@ -58846,7 +58846,7 @@ fun TacosCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "SAMPLER OFF",
+                discount = "20%",
                 discountAmount = "6 Different Tacos with 3 Sauces",
                 address = "Ghatkopar, Mumbai"
             ),
@@ -58859,7 +58859,7 @@ fun TacosCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "BIRRIA OFF",
+                discount = "20%",
                 discountAmount = "Dipped Tacos with Beef Broth",
                 address = "Andheri East, Mumbai"
             ),
@@ -58872,7 +58872,7 @@ fun TacosCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "22-27 mins",
                 distance = "1.1 km",
-                discount = "TUESDAY OFF",
+                discount = "20%",
                 discountAmount = "3 Fish Tacos for Price of 2",
                 address = "Santacruz, Mumbai"
             ),
@@ -58885,7 +58885,7 @@ fun TacosCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.3 km",
-                discount = "LAMB OFF",
+                discount = "20%",
                 discountAmount = "Slow-Cooked Lamb Shoulder",
                 address = "Borivali, Mumbai"
             ),
@@ -58898,7 +58898,7 @@ fun TacosCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "18-23 mins",
                 distance = "0.7 km",
-                discount = "NACHO OFF",
+                discount = "20%",
                 discountAmount = "Tacos with Nacho Cheese & Jalapeños",
                 address = "Malad, Mumbai"
             ),
@@ -58911,7 +58911,7 @@ fun TacosCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "KOREAN OFF",
+                discount = "20%",
                 discountAmount = "Bulgogi Beef with Kimchi",
                 address = "Dadar, Mumbai"
             ),
@@ -58924,7 +58924,7 @@ fun TacosCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "HYBRID OFF",
+                discount = "20%",
                 discountAmount = "Burrito Fillings in Taco Shell",
                 address = "Vile Parle, Mumbai"
             ),
@@ -58937,7 +58937,7 @@ fun TacosCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.8 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "20 Tacos with All Toppings",
                 address = "Thane, Maharashtra"
             ),
@@ -58950,7 +58950,7 @@ fun TacosCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "3.2 km",
-                discount = "GOLD OFF",
+                discount = "20%",
                 discountAmount = "Wagyu Beef with Edible Gold Leaf",
                 address = "Juhu, Mumbai"
             )
@@ -59362,7 +59362,7 @@ fun TheplaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "METHI OFF",
+                discount = "20%",
                 discountAmount = "Fresh Fenugreek Leaves Daily",
                 address = "Borivali West, Mumbai"
             ),
@@ -59375,7 +59375,7 @@ fun TheplaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "MULI OFF",
+                discount = "20%",
                 discountAmount = "Seasonal White Radish Special",
                 address = "Malad East, Mumbai"
             ),
@@ -59388,7 +59388,7 @@ fun TheplaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "GARLIC OFF",
+                discount = "20%",
                 discountAmount = "Extra Garlic for Health Benefits",
                 address = "Andheri West, Mumbai"
             ),
@@ -59401,7 +59401,7 @@ fun TheplaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "PALAK OFF",
+                discount = "20%",
                 discountAmount = "Spinach Rich in Iron",
                 address = "Santacruz West, Mumbai"
             ),
@@ -59414,7 +59414,7 @@ fun TheplaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "MIXED OFF",
+                discount = "20%",
                 discountAmount = "5 Different Vegetables Blend",
                 address = "Kandivali East, Mumbai"
             ),
@@ -59427,7 +59427,7 @@ fun TheplaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "3.0 km",
-                discount = "JOWAR OFF",
+                discount = "20%",
                 discountAmount = "100% Gluten-Free Sorghum Flour",
                 address = "Powai, Mumbai"
             ),
@@ -59440,7 +59440,7 @@ fun TheplaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "BAJRA OFF",
+                discount = "20%",
                 discountAmount = "Pearl Millet for Winter Warmth",
                 address = "Goregaon West, Mumbai"
             ),
@@ -59453,7 +59453,7 @@ fun TheplaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "PUDINA OFF",
+                discount = "20%",
                 discountAmount = "Fresh Mint Cooling Effect",
                 address = "Dahisar East, Mumbai"
             ),
@@ -59466,7 +59466,7 @@ fun TheplaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "LASANIYA OFF",
+                discount = "20%",
                 discountAmount = "Extra Garlic & Green Chillies",
                 address = "Mira Road, Thane"
             ),
@@ -59479,7 +59479,7 @@ fun TheplaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "BEETROOT OFF",
+                discount = "20%",
                 discountAmount = "Natural Pink Color & Nutrients",
                 address = "Vasai West, Palghar"
             ),
@@ -59492,7 +59492,7 @@ fun TheplaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.8 km",
-                discount = "TRAVEL OFF",
+                discount = "20%",
                 discountAmount = "Stays Fresh for 10 Days",
                 address = "Bhayandar East, Thane"
             ),
@@ -59505,7 +59505,7 @@ fun TheplaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "GOBI OFF",
+                discount = "20%",
                 discountAmount = "Fresh Cauliflower Florets",
                 address = "Nallasopara West, Palghar"
             ),
@@ -59518,7 +59518,7 @@ fun TheplaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "MOONG OFF",
+                discount = "20%",
                 discountAmount = "Yellow Lentil Protein Boost",
                 address = "Virar West, Palghar"
             ),
@@ -59531,7 +59531,7 @@ fun TheplaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "AJWAIN OFF",
+                discount = "20%",
                 discountAmount = "Carom Seeds for Digestion",
                 address = "Ulhasnagar, Thane"
             ),
@@ -59544,7 +59544,7 @@ fun TheplaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "DABELI OFF",
+                discount = "20%",
                 discountAmount = "Thepla with Dabeli Masala",
                 address = "Kalyan West, Thane"
             ),
@@ -59557,7 +59557,7 @@ fun TheplaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "THALI OFF",
+                discount = "20%",
                 discountAmount = "4 Thepla with Curry & Buttermilk",
                 address = "Dombivli East, Thane"
             ),
@@ -59570,7 +59570,7 @@ fun TheplaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Zero Sugar, Diabetic Friendly",
                 address = "Badlapur East, Thane"
             ),
@@ -59583,7 +59583,7 @@ fun TheplaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "OILFREE OFF",
+                discount = "20%",
                 discountAmount = "Cooked on Tawa Without Oil",
                 address = "Ambernath East, Thane"
             ),
@@ -59596,7 +59596,7 @@ fun TheplaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "3.5 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Variety of 5 Different Theplas",
                 address = "Navi Mumbai, Panvel"
             ),
@@ -59609,7 +59609,7 @@ fun TheplaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-55 mins",
                 distance = "4.0 km",
-                discount = "GOLD OFF",
+                discount = "20%",
                 discountAmount = "Edible Gold Leaf & Premium Spices",
                 address = "South Mumbai, Colaba"
             )
@@ -59969,7 +59969,7 @@ fun FafdaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "TRADITION OFF",
+                discount = "20%",
                 discountAmount = "Authentic Recipe from Gujarat",
                 address = "Borivali West, Mumbai"
             ),
@@ -59982,7 +59982,7 @@ fun FafdaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "SPICY OFF",
+                discount = "20%",
                 discountAmount = "Extra Red Chilli Powder & Masala",
                 address = "Malad East, Mumbai"
             ),
@@ -59995,7 +59995,7 @@ fun FafdaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Perfect Dussehra & Diwali Combo",
                 address = "Andheri West, Mumbai"
             ),
@@ -60008,7 +60008,7 @@ fun FafdaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "GARLIC OFF",
+                discount = "20%",
                 discountAmount = "Fresh Garlic & Ginger Paste",
                 address = "Santacruz West, Mumbai"
             ),
@@ -60021,7 +60021,7 @@ fun FafdaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Family Gatherings",
                 address = "Kandivali East, Mumbai"
             ),
@@ -60034,7 +60034,7 @@ fun FafdaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "3.0 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Extra Thin & Crispy Texture",
                 address = "Powai, Mumbai"
             ),
@@ -60047,7 +60047,7 @@ fun FafdaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "JEERA OFF",
+                discount = "20%",
                 discountAmount = "Loaded with Roasted Cumin Seeds",
                 address = "Goregaon West, Mumbai"
             ),
@@ -60060,7 +60060,7 @@ fun FafdaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "CHATPATA OFF",
+                discount = "20%",
                 discountAmount = "Tangy & Spicy Street Flavor",
                 address = "Dahisar East, Mumbai"
             ),
@@ -60073,7 +60073,7 @@ fun FafdaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "AJWAIN OFF",
+                discount = "20%",
                 discountAmount = "Carom Seeds for Better Digestion",
                 address = "Mira Road, Thane"
             ),
@@ -60086,7 +60086,7 @@ fun FafdaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "CHUTNEY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Raw Papaya Chutney Included",
                 address = "Vasai West, Palghar"
             ),
@@ -60099,7 +60099,7 @@ fun FafdaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.8 km",
-                discount = "OILFREE OFF",
+                discount = "20%",
                 discountAmount = "Baked Instead of Fried",
                 address = "Bhayandar East, Thane"
             ),
@@ -60112,7 +60112,7 @@ fun FafdaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "SAMBHARO OFF",
+                discount = "20%",
                 discountAmount = "Served with Spicy Cabbage Sambharo",
                 address = "Nallasopara West, Palghar"
             ),
@@ -60125,7 +60125,7 @@ fun FafdaCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "KADHI OFF",
+                discount = "20%",
                 discountAmount = "Complete Meal with Sweet Kadhi",
                 address = "Virar West, Palghar"
             ),
@@ -60138,7 +60138,7 @@ fun FafdaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "BESAN OFF",
+                discount = "20%",
                 discountAmount = "Fresh Gram Flour with Spices",
                 address = "Ulhasnagar, Thane"
             ),
@@ -60151,7 +60151,7 @@ fun FafdaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Weddings & Functions",
                 address = "Kalyan West, Thane"
             ),
@@ -60164,7 +60164,7 @@ fun FafdaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "THALI OFF",
+                discount = "20%",
                 discountAmount = "Fafda with 3 Chutneys & Tea",
                 address = "Dombivli East, Thane"
             ),
@@ -60177,7 +60177,7 @@ fun FafdaCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "LOWSALT OFF",
+                discount = "20%",
                 discountAmount = "60% Less Salt for BP Patients",
                 address = "Badlapur East, Thane"
             ),
@@ -60190,7 +60190,7 @@ fun FafdaCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "GREEN OFF",
+                discount = "20%",
                 discountAmount = "Fresh Coriander & Mint Chutney",
                 address = "Ambernath East, Thane"
             ),
@@ -60203,7 +60203,7 @@ fun FafdaCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "3.5 km",
-                discount = "CURD OFF",
+                discount = "20%",
                 discountAmount = "Served with Fresh Curd",
                 address = "Navi Mumbai, Panvel"
             ),
@@ -60216,7 +60216,7 @@ fun FafdaCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-55 mins",
                 distance = "4.0 km",
-                discount = "GOLD OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused with Premium Spices",
                 address = "South Mumbai, Colaba"
             )
@@ -60594,7 +60594,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "BELGIAN OFF",
+                discount = "20%",
                 discountAmount = "Authentic Belgian Cocoa Beans",
                 address = "Bandra West, Mumbai"
             ),
@@ -60607,7 +60607,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "SWISS OFF",
+                discount = "20%",
                 discountAmount = "Creamy Swiss Milk Chocolate",
                 address = "Juhu, Mumbai"
             ),
@@ -60620,7 +60620,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "TRUFFLE OFF",
+                discount = "20%",
                 discountAmount = "Handcrafted Gourmet Truffles",
                 address = "Andheri West, Mumbai"
             ),
@@ -60633,7 +60633,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "WHITE OFF",
+                discount = "20%",
                 discountAmount = "Premium White Chocolate & Almonds",
                 address = "Santacruz, Mumbai"
             ),
@@ -60646,7 +60646,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "RUBY OFF",
+                discount = "20%",
                 discountAmount = "Rare Natural Ruby Cocoa",
                 address = "Powai, Mumbai"
             ),
@@ -60659,7 +60659,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "HAZELNUT OFF",
+                discount = "20%",
                 discountAmount = "Creamy Hazelnut Praline Center",
                 address = "Malad, Mumbai"
             ),
@@ -60672,7 +60672,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "SALT OFF",
+                discount = "20%",
                 discountAmount = "Himalayan Pink Salt Flakes",
                 address = "Khar, Mumbai"
             ),
@@ -60685,7 +60685,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "ORANGE OFF",
+                discount = "20%",
                 discountAmount = "Candied Orange Peel Infused",
                 address = "Dadar, Mumbai"
             ),
@@ -60698,7 +60698,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Sweetened with Stevia",
                 address = "Goregaon, Mumbai"
             ),
@@ -60711,7 +60711,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "GIFT OFF",
+                discount = "20%",
                 discountAmount = "Elegant Packaging & Assorted Chocolates",
                 address = "Worli, Mumbai"
             ),
@@ -60724,7 +60724,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Gooey Caramel Center",
                 address = "Bandra East, Mumbai"
             ),
@@ -60737,7 +60737,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "MINT OFF",
+                discount = "20%",
                 discountAmount = "Fresh Peppermint Oil Infused",
                 address = "Vile Parle, Mumbai"
             ),
@@ -60750,7 +60750,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "SPREAD OFF",
+                discount = "20%",
                 discountAmount = "Creamy Chocolate Hazelnut Spread",
                 address = "Thane, Mumbai"
             ),
@@ -60763,7 +60763,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "ORGANIC OFF",
+                discount = "20%",
                 discountAmount = "Certified Organic Cocoa Beans",
                 address = "Andheri East, Mumbai"
             ),
@@ -60776,7 +60776,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
-                discount = "BAKING OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Cookies & Desserts",
                 address = "Chembur, Mumbai"
             ),
@@ -60789,7 +60789,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "HOT OFF",
+                discount = "20%",
                 discountAmount = "Premium Drinking Chocolate",
                 address = "Colaba, Mumbai"
             ),
@@ -60802,7 +60802,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "2.3 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Dairy-Free, Plant-Based",
                 address = "Lower Parel, Mumbai"
             ),
@@ -60815,7 +60815,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
-                discount = "COFFEE OFF",
+                discount = "20%",
                 discountAmount = "Arabica Coffee Beans Embedded",
                 address = "Fort, Mumbai"
             ),
@@ -60828,7 +60828,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "STRAWBERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Strawberries Dipped in Dark Chocolate",
                 address = "Peddar Road, Mumbai"
             ),
@@ -60841,7 +60841,7 @@ fun ChocolateCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "3.5 km",
-                discount = "GOLD OFF",
+                discount = "20%",
                 discountAmount = "Edible Gold Leaf & Premium Ingredients",
                 address = "South Mumbai, Mumbai"
             )
@@ -61196,7 +61196,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "TRADITION OFF",
+                discount = "20%",
                 discountAmount = "Authentic Tamil Nadu Style",
                 address = "Matunga, Mumbai"
             ),
@@ -61209,7 +61209,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "FRUITY OFF",
+                discount = "20%",
                 discountAmount = "Loaded with Fresh Pomegranate Seeds",
                 address = "Andheri West, Mumbai"
             ),
@@ -61222,7 +61222,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "JEERA OFF",
+                discount = "20%",
                 discountAmount = "Roasted Cumin Seeds Infused",
                 address = "Santacruz, Mumbai"
             ),
@@ -61235,7 +61235,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "TADKA OFF",
+                discount = "20%",
                 discountAmount = "Mustard & Curry Leaves Tempering",
                 address = "Dadar, Mumbai"
             ),
@@ -61248,7 +61248,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "THALI OFF",
+                discount = "20%",
                 discountAmount = "With Pickle, Papad & Chutney",
                 address = "Malad, Mumbai"
             ),
@@ -61261,7 +61261,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "SUMMER OFF",
+                discount = "20%",
                 discountAmount = "Perfect for Hot Summer Days",
                 address = "Borivali, Mumbai"
             ),
@@ -61274,7 +61274,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
-                discount = "GINGER OFF",
+                discount = "20%",
                 discountAmount = "Fresh Ginger Grated Finely",
                 address = "Kandivali, Mumbai"
             ),
@@ -61287,7 +61287,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.7 km",
-                discount = "LUNCH OFF",
+                discount = "20%",
                 discountAmount = "Perfectly Packed for Office Lunch",
                 address = "Goregaon, Mumbai"
             ),
@@ -61300,7 +61300,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
-                discount = "VEGGIE OFF",
+                discount = "20%",
                 discountAmount = "Grated Carrot & Fresh Coriander",
                 address = "Powai, Mumbai"
             ),
@@ -61313,7 +61313,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.8 km",
-                discount = "FESTIVE OFF",
+                discount = "20%",
                 discountAmount = "Special Pongal & Diwali Recipe",
                 address = "Thane, Mumbai"
             ),
@@ -61326,7 +61326,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "MINT OFF",
+                discount = "20%",
                 discountAmount = "Fresh Mint Leaves Infused",
                 address = "Vashi, Navi Mumbai"
             ),
@@ -61339,7 +61339,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "GRAPES OFF",
+                discount = "20%",
                 discountAmount = "Sweet Green Grapes Added",
                 address = "Panvel, Navi Mumbai"
             ),
@@ -61352,7 +61352,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "ANDHRA OFF",
+                discount = "20%",
                 discountAmount = "Extra Green Chilies & Spices",
                 address = "Chembur, Mumbai"
             ),
@@ -61365,7 +61365,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "No Oil, Low Calorie Version",
                 address = "Dombivli, Thane"
             ),
@@ -61378,7 +61378,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "3.0 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Serves 4-5 People",
                 address = "Kalyan, Thane"
             ),
@@ -61391,7 +61391,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
-                discount = "PICKLE OFF",
+                discount = "20%",
                 discountAmount = "Served with Homemade Mango Pickle",
                 address = "Ulhasnagar, Thane"
             ),
@@ -61404,7 +61404,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "2.5 km",
-                discount = "BROWN OFF",
+                discount = "20%",
                 discountAmount = "Made with Organic Brown Rice",
                 address = "Bhayandar, Mumbai"
             ),
@@ -61417,7 +61417,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
-                discount = "CASHEW OFF",
+                discount = "20%",
                 discountAmount = "Golden Fried Cashew Nuts",
                 address = "Virar, Palghar"
             ),
@@ -61430,7 +61430,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Mildly Sweet, Less Spicy",
                 address = "Mira Road, Thane"
             ),
@@ -61443,7 +61443,7 @@ fun CurdRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "3.5 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused with Dry Fruits",
                 address = "Colaba, South Mumbai"
             )
@@ -61800,7 +61800,7 @@ fun PuddingCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "BREAD OFF",
+                discount = "20%",
                 discountAmount = "Homemade with Raisins & Nuts",
                 address = "Bandra West, Mumbai"
             ),
@@ -61813,7 +61813,7 @@ fun PuddingCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Rich & Decadent Chocolate Dessert",
                 address = "Andheri West, Mumbai"
             ),
@@ -61826,7 +61826,7 @@ fun PuddingCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Silky Smooth with Caramel Topping",
                 address = "Khar, Mumbai"
             ),
@@ -61839,7 +61839,7 @@ fun PuddingCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "KHEER OFF",
+                discount = "20%",
                 discountAmount = "Saffron Infused with Dry Fruits",
                 address = "Matunga, Mumbai"
             ),
@@ -61852,7 +61852,7 @@ fun PuddingCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "35-40 mins",
                 distance = "2.5 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Dairy Free Coconut Milk Base",
                 address = "Lower Parel, Mumbai"
             ),
@@ -61865,7 +61865,7 @@ fun PuddingCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-45 mins",
                 distance = "3.0 km",
-                discount = "EGGLESS OFF",
+                discount = "20%",
                 discountAmount = "Freshly Baked & Warm",
                 address = "Malad West, Mumbai"
             ),
@@ -61878,7 +61878,7 @@ fun PuddingCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "TAPIOCA OFF",
+                discount = "20%",
                 discountAmount = "Chewy Pearls in Coconut Milk",
                 address = "Vile Parle, Mumbai"
             ),
@@ -61891,7 +61891,7 @@ fun PuddingCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "FRUIT OFF",
+                discount = "20%",
                 discountAmount = "Mixed Fresh Fruits in Custard",
                 address = "Santacruz, Mumbai"
             ),
@@ -61904,7 +61904,7 @@ fun PuddingCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "TOFFEE OFF",
+                discount = "20%",
                 discountAmount = "British Classic with Date Sauce",
                 address = "Colaba, Mumbai"
             ),
@@ -61917,7 +61917,7 @@ fun PuddingCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.8 km",
-                discount = "FESTIVE OFF",
+                discount = "20%",
                 discountAmount = "Ground Rice Pudding for Celebrations",
                 address = "Thane, Mumbai"
             ),
@@ -61930,7 +61930,7 @@ fun PuddingCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Alphonso Mango Puree",
                 address = "Vashi, Navi Mumbai"
             ),
@@ -61943,7 +61943,7 @@ fun PuddingCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "SEMOLINA OFF",
+                discount = "20%",
                 discountAmount = "Healthy Sooji Pudding with Nuts",
                 address = "Panvel, Navi Mumbai"
             ),
@@ -61956,7 +61956,7 @@ fun PuddingCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "CHILLED OFF",
+                discount = "20%",
                 discountAmount = "Perfect Summer Chocolate Dessert",
                 address = "Chembur, Mumbai"
             ),
@@ -61969,7 +61969,7 @@ fun PuddingCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.1 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Sweetened with Stevia & Dates",
                 address = "Dombivli, Thane"
             ),
@@ -61982,7 +61982,7 @@ fun PuddingCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "3.0 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Assorted Puddings for 6-8 People",
                 address = "Kalyan, Thane"
             ),
@@ -61995,7 +61995,7 @@ fun PuddingCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "VANILLA OFF",
+                discount = "20%",
                 discountAmount = "Pure Madagascar Vanilla Beans",
                 address = "Ulhasnagar, Thane"
             ),
@@ -62008,7 +62008,7 @@ fun PuddingCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "2.3 km",
-                discount = "ORGANIC OFF",
+                discount = "20%",
                 discountAmount = "Made with Organic Brown Rice",
                 address = "Bhayandar, Mumbai"
             ),
@@ -62021,7 +62021,7 @@ fun PuddingCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
-                discount = "DRYFRUIT OFF",
+                discount = "20%",
                 discountAmount = "Loaded with Almonds, Cashews & Pistachios",
                 address = "Virar, Palghar"
             ),
@@ -62034,7 +62034,7 @@ fun PuddingCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "Colorful & Fun Pudding for Children",
                 address = "Mira Road, Thane"
             ),
@@ -62047,7 +62047,7 @@ fun PuddingCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "3.5 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Coffee Liqueur Infused Italian Dessert",
                 address = "South Mumbai"
             )
@@ -62370,7 +62370,7 @@ fun CroissantCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
-                discount = "FRENCH OFF",
+                discount = "20%",
                 discountAmount = "Authentic French Butter & Recipe",
                 address = "Colaba, Mumbai"
             ),
@@ -62383,7 +62383,7 @@ fun CroissantCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "CHOCO OFF",
+                discount = "20%",
                 discountAmount = "Dark & Milk Chocolate Batons Inside",
                 address = "Bandra West, Mumbai"
             ),
@@ -62396,7 +62396,7 @@ fun CroissantCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "ALMOND OFF",
+                discount = "20%",
                 discountAmount = "Frangipane Filling with Almond Flakes",
                 address = "Andheri West, Mumbai"
             ),
@@ -62409,7 +62409,7 @@ fun CroissantCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "SAVORY OFF",
+                discount = "20%",
                 discountAmount = "Smoked Ham & Emmental Cheese",
                 address = "Khar, Mumbai"
             ),
@@ -62422,7 +62422,7 @@ fun CroissantCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "6 Mini Croissants (3 Different Flavors)",
                 address = "Juhu, Mumbai"
             ),
@@ -62435,7 +62435,7 @@ fun CroissantCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "35-40 mins",
                 distance = "2.5 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Plant-Based Butter & Almond Cream",
                 address = "Lower Parel, Mumbai"
             ),
@@ -62448,7 +62448,7 @@ fun CroissantCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "Made with 100% Whole Wheat Flour",
                 address = "Vile Parle, Mumbai"
             ),
@@ -62461,7 +62461,7 @@ fun CroissantCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "BERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Raspberry Cream Filling",
                 address = "Santacruz, Mumbai"
             ),
@@ -62474,7 +62474,7 @@ fun CroissantCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
-                discount = "ARTISAN OFF",
+                discount = "20%",
                 discountAmount = "Traditional French Almond Croissant",
                 address = "Colaba, Mumbai"
             ),
@@ -62487,7 +62487,7 @@ fun CroissantCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.8 km",
-                discount = "FESTIVE OFF",
+                discount = "20%",
                 discountAmount = "12 Assorted Croissants for Parties",
                 address = "Thane, Mumbai"
             ),
@@ -62500,7 +62500,7 @@ fun CroissantCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Seasonal Alphonso Mango Cream Filling",
                 address = "Vashi, Navi Mumbai"
             ),
@@ -62513,7 +62513,7 @@ fun CroissantCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "GLUTENFREE OFF",
+                discount = "20%",
                 discountAmount = "Gluten-Free Flour Alternative",
                 address = "Panvel, Navi Mumbai"
             ),
@@ -62526,7 +62526,7 @@ fun CroissantCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "HAZELNUT OFF",
+                discount = "20%",
                 discountAmount = "Chocolate & Hazelnut Spread Filling",
                 address = "Chembur, Mumbai"
             ),
@@ -62539,7 +62539,7 @@ fun CroissantCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.1 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Sweetened with Natural Sweeteners",
                 address = "Dombivli, Thane"
             ),
@@ -62552,7 +62552,7 @@ fun CroissantCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "3.0 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "15 Croissants with 5 Different Fillings",
                 address = "Kalyan, Thane"
             ),
@@ -62565,7 +62565,7 @@ fun CroissantCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
-                discount = "CINNAMON OFF",
+                discount = "20%",
                 discountAmount = "Cinnamon Sugar Swirl Inside",
                 address = "Ulhasnagar, Thane"
             ),
@@ -62578,7 +62578,7 @@ fun CroissantCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "2.3 km",
-                discount = "ORGANIC OFF",
+                discount = "20%",
                 discountAmount = "Made with Certified Organic Ingredients",
                 address = "Bhayandar, Mumbai"
             ),
@@ -62591,7 +62591,7 @@ fun CroissantCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
-                discount = "PISTACHIO OFF",
+                discount = "20%",
                 discountAmount = "Pistachio Cream & Crushed Pistachios",
                 address = "Virar, Palghar"
             ),
@@ -62604,7 +62604,7 @@ fun CroissantCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
-                discount = "KIDS OFF",
+                discount = "20%",
                 discountAmount = "4 Mini Croissants with Fun Shapes",
                 address = "Mira Road, Thane"
             ),
@@ -62617,7 +62617,7 @@ fun CroissantCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "3.5 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "Valrhona Chocolate & French Butter",
                 address = "South Mumbai"
             )
@@ -62930,7 +62930,7 @@ fun KhandviCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "20-25 mins",
                 distance = "0.6 km",
-                discount = "GUJARATI OFF",
+                discount = "20%",
                 discountAmount = "Authentic Besan & Curd Recipe with Rai Tadka",
                 address = "Ghatkopar East, Mumbai"
             ),
@@ -62943,7 +62943,7 @@ fun KhandviCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
-                discount = "SESAME OFF",
+                discount = "20%",
                 discountAmount = "Roasted White Sesame Seeds & Curry Leaves",
                 address = "Dadar West, Mumbai"
             ),
@@ -62956,7 +62956,7 @@ fun KhandviCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Fresh Grated Coconut & Green Coriander Chutney",
                 address = "Vile Parle East, Mumbai"
             ),
@@ -62969,7 +62969,7 @@ fun KhandviCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "MUSTARD OFF",
+                discount = "20%",
                 discountAmount = "Rai Tadka with Green Chillies & Hing",
                 address = "Borivali West, Mumbai"
             ),
@@ -62982,7 +62982,7 @@ fun KhandviCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "STUFFED OFF",
+                discount = "20%",
                 discountAmount = "Soft Paneer Filling with Mild Spices",
                 address = "Andheri East, Mumbai"
             ),
@@ -62995,7 +62995,7 @@ fun KhandviCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.4 km",
-                discount = "GARLIC OFF",
+                discount = "20%",
                 discountAmount = "Kadi Patta & Crushed Garlic Tempering",
                 address = "Matunga, Mumbai"
             ),
@@ -63008,7 +63008,7 @@ fun KhandviCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "HEALTHY OFF",
+                discount = "20%",
                 discountAmount = "Minimal Oil with Dry Roasted Tadka",
                 address = "Mulund West, Mumbai"
             ),
@@ -63021,7 +63021,7 @@ fun KhandviCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "GINGER OFF",
+                discount = "20%",
                 discountAmount = "Fresh Ginger & Slit Green Chilli Tadka",
                 address = "Powai, Mumbai"
             ),
@@ -63034,7 +63034,7 @@ fun KhandviCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "METHI OFF",
+                discount = "20%",
                 discountAmount = "Fresh Fenugreek Leaves in Besa",
                 address = "Kandivali West, Mumbai"
             ),
@@ -63047,7 +63047,7 @@ fun KhandviCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.5 km",
-                discount = "FESTIVE OFF",
+                discount = "20%",
                 discountAmount = "12 Assorted Khandvi Rolls with 4 Toppings",
                 address = "Malad East, Mumbai"
             ),
@@ -63060,7 +63060,7 @@ fun KhandviCategoryPage() {
                 rating = "4.4",
                 deliveryTime = "25-30 mins",
                 distance = "1.7 km",
-                discount = "FUSION OFF",
+                discount = "20%",
                 discountAmount = "Sweet Cocoa Khandvi with Dessert Tadka",
                 address = "Bandra East, Mumbai"
             ),
@@ -63073,7 +63073,7 @@ fun KhandviCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
-                discount = "PEANUT OFF",
+                discount = "20%",
                 discountAmount = "Crushed Peanuts & Karipatta Tadka",
                 address = "Santacruz West, Mumbai"
             ),
@@ -63086,7 +63086,7 @@ fun KhandviCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
-                discount = "HING OFF",
+                discount = "20%",
                 discountAmount = "Extra Hing Tadka for Digestion",
                 address = "Kings Circle, Mumbai"
             ),
@@ -63099,7 +63099,7 @@ fun KhandviCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
-                discount = "JAIN OFF",
+                discount = "20%",
                 discountAmount = "Made without Onion, Garlic & Root Veggies",
                 address = "Dadar East, Mumbai"
             ),
@@ -63112,7 +63112,7 @@ fun KhandviCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "3.2 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "25 Pieces with 5 Chutney Varieties",
                 address = "Thane West, Mumbai"
             ),
@@ -63125,7 +63125,7 @@ fun KhandviCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "2.0 km",
-                discount = "GHEE OFF",
+                discount = "20%",
                 discountAmount = "Lightly Pan-Roasted in Pure Desi Ghee",
                 address = "Bhayandar East, Mumbai"
             ),
@@ -63138,7 +63138,7 @@ fun KhandviCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "35-40 mins",
                 distance = "2.4 km",
-                discount = "ORGANIC OFF",
+                discount = "20%",
                 discountAmount = "Topped with Farm-Fresh Microgreens",
                 address = "Palava City, Thane"
             ),
@@ -63151,7 +63151,7 @@ fun KhandviCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
-                discount = "CHAAT OFF",
+                discount = "20%",
                 discountAmount = "Khandvi Pieces with Sev, Pomegranate & Chutneys",
                 address = "Lokhandwala, Andheri West"
             ),
@@ -63164,7 +63164,7 @@ fun KhandviCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "2.1 km",
-                discount = "MILLET OFF",
+                discount = "20%",
                 discountAmount = "Finger Millet & Besan Blend, Gluten-Free",
                 address = "Kharghar, Navi Mumbai"
             ),
@@ -63177,7 +63177,7 @@ fun KhandviCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.8 km",
-                discount = "PREMIUM OFF",
+                discount = "20%",
                 discountAmount = "8 Varieties: Plain, Sesame, Coconut, Paneer, Garlic, Methi, Spicy, Ghee",
                 address = "Fort, South Mumbai"
             )
@@ -63501,7 +63501,7 @@ fun GajakCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "25-30 mins",
                 distance = "0.8 km",
-                discount = "RAJASTHANI OFF",
+                discount = "20%",
                 discountAmount = "Pure Sesame Seeds & Jaggery, Crunchy Texture",
                 address = "Borivali West, Mumbai"
             ),
@@ -63514,7 +63514,7 @@ fun GajakCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.2 km",
-                discount = "MATHURA OFF",
+                discount = "20%",
                 discountAmount = "Sesame & Khoya Blend, Peda Shaped Gajak",
                 address = "Malad East, Mumbai"
             ),
@@ -63527,7 +63527,7 @@ fun GajakCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.5 km",
-                discount = "WINTER OFF",
+                discount = "20%",
                 discountAmount = "Edible Gum, Dry Fruits & Sesame, Warming Effect",
                 address = "Andheri West, Mumbai"
             ),
@@ -63540,7 +63540,7 @@ fun GajakCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
-                discount = "NUTTY OFF",
+                discount = "20%",
                 discountAmount = "Roasted Peanuts & Til, High Protein",
                 address = "Dadar East, Mumbai"
             ),
@@ -63553,7 +63553,7 @@ fun GajakCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "SUGARFREE OFF",
+                discount = "20%",
                 discountAmount = "Stevia Sweetened, Diabetic Friendly",
                 address = "Matunga, Mumbai"
             ),
@@ -63566,7 +63566,7 @@ fun GajakCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "PREMIUM DRYFRUIT OFF",
+                discount = "20%",
                 discountAmount = "Cashews, Almonds, Pistachios with Black Sesame",
                 address = "Juhu, Mumbai"
             ),
@@ -63579,7 +63579,7 @@ fun GajakCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Desiccated Coconut & Til, Chewy Texture",
                 address = "Bandra West, Mumbai"
             ),
@@ -63592,7 +63592,7 @@ fun GajakCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
-                discount = "MASALA OFF",
+                discount = "20%",
                 discountAmount = "Black Pepper, Jeera & Chilli Flakes in Til",
                 address = "Ghatkopar West, Mumbai"
             ),
@@ -63605,7 +63605,7 @@ fun GajakCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "1.6 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Alphonso Mango Pulp with White Sesame",
                 address = "Vile Parle West, Mumbai"
             ),
@@ -63618,7 +63618,7 @@ fun GajakCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "CHOCOLATE OFF",
+                discount = "20%",
                 discountAmount = "Dark Chocolate Enrobed Til Gajak",
                 address = "Powai, Mumbai"
             ),
@@ -63631,7 +63631,7 @@ fun GajakCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.4 km",
-                discount = "MULTISEED OFF",
+                discount = "20%",
                 discountAmount = "Flax Seeds, Sunflower Seeds, Melon Seeds & Til",
                 address = "Kurla West, Mumbai"
             ),
@@ -63644,7 +63644,7 @@ fun GajakCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
-                discount = "GINGER JAGGERY OFF",
+                discount = "20%",
                 discountAmount = "Sonth (Dry Ginger) infused Jaggery Til",
                 address = "Santacruz East, Mumbai"
             ),
@@ -63657,7 +63657,7 @@ fun GajakCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "ROYAL OFF",
+                discount = "20%",
                 discountAmount = "Pistachio & Almond Stuffed Gajak Rolls",
                 address = "Lower Parel, Mumbai"
             ),
@@ -63670,7 +63670,7 @@ fun GajakCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.7 km",
-                discount = "KESAR OFF",
+                discount = "20%",
                 discountAmount = "Kesar Flavored Til with Elaichi",
                 address = "Chembur, Mumbai"
             ),
@@ -63683,7 +63683,7 @@ fun GajakCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
-                discount = "RAGI OFF",
+                discount = "20%",
                 discountAmount = "Finger Millet, Sesame & Jaggery, Iron Rich",
                 address = "Kharghar, Navi Mumbai"
             ),
@@ -63696,7 +63696,7 @@ fun GajakCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "1.8 km",
-                discount = "GULKAND OFF",
+                discount = "20%",
                 discountAmount = "Rose Petal Preserve infused in Til",
                 address = "Dadar West, Mumbai"
             ),
@@ -63709,7 +63709,7 @@ fun GajakCategoryPage() {
                 rating = "4.5",
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
-                discount = "LIGHT OFF",
+                discount = "20%",
                 discountAmount = "40% Less Sweet, Extra Til Crunch",
                 address = "Mulund West, Mumbai"
             ),
@@ -63722,7 +63722,7 @@ fun GajakCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "COFFEE OFF",
+                discount = "20%",
                 discountAmount = "Instant Coffee Powder & Walnut Bits in Til",
                 address = "BKC, Mumbai"
             ),
@@ -63735,7 +63735,7 @@ fun GajakCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.3 km",
-                discount = "GIFT OFF",
+                discount = "20%",
                 discountAmount = "6 Varieties: Plain, Masala, Dry Fruit, Coconut, Chocolate, Ginger",
                 address = "Thane West, Mumbai"
             ),
@@ -63748,7 +63748,7 @@ fun GajakCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "MAKHANA OFF",
+                discount = "20%",
                 discountAmount = "Crushed Makhana, Til & Jaggery, Guilt-Free",
                 address = "Navi Mumbai, Vashi"
             )
@@ -64126,7 +64126,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.2 km",
-                discount = "MADRAS OFF",
+                discount = "20%",
                 discountAmount = "Authentic Toor Dal, Drumstick & Tamarind Pulp",
                 address = "Matunga, Mumbai"
             ),
@@ -64139,7 +64139,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "ARACHUVITTA OFF",
+                discount = "20%",
                 discountAmount = "Freshly Ground Coconut Masala, Traditional Method",
                 address = "Dadar West, Mumbai"
             ),
@@ -64152,7 +64152,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "MALABAR OFF",
+                discount = "20%",
                 discountAmount = "Coconut Based Sambar, Ash Gourd & Raw Mango",
                 address = "Chembur, Mumbai"
             ),
@@ -64165,7 +64165,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.3 km",
-                discount = "CHETTINAD OFF",
+                discount = "20%",
                 discountAmount = "Spicy Sambar with Kalpasi & Roasted Spices",
                 address = "T Nagar, Chennai"
             ),
@@ -64178,7 +64178,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "DRUMSTICK OFF",
+                discount = "20%",
                 discountAmount = "Fresh Drumsticks & Purple Brinjal, Ghee Tadka",
                 address = "Andheri East, Mumbai"
             ),
@@ -64191,7 +64191,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.6 km",
-                discount = "JAIN OFF",
+                discount = "20%",
                 discountAmount = "No Onion-No Garlic, Potatoes & Raw Banana",
                 address = "Borivali West, Mumbai"
             ),
@@ -64204,7 +64204,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
-                discount = "PUMPKIN OFF",
+                discount = "20%",
                 discountAmount = "Red Pumpkin, Toor Dal & Coconut Paste",
                 address = "Vile Parle West, Mumbai"
             ),
@@ -64217,7 +64217,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.7 km",
-                discount = "MULLANGI OFF",
+                discount = "20%",
                 discountAmount = "White Radish & Sambar Powder, Mustard Tadka",
                 address = "Mulund East, Mumbai"
             ),
@@ -64230,7 +64230,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "25-30 mins",
                 distance = "1.1 km",
-                discount = "UDUPI OFF",
+                discount = "20%",
                 discountAmount = "Caramelized Onions & Ripe Tomatoes",
                 address = "Santacruz West, Mumbai"
             ),
@@ -64243,7 +64243,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "MYSORE OFF",
+                discount = "20%",
                 discountAmount = "Sweet & Tangy Sambar with Pumpkin",
                 address = "Bandra East, Mumbai"
             ),
@@ -64256,7 +64256,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "BROWN RICE OFF",
+                discount = "20%",
                 discountAmount = "Unpolished Brown Rice, High Fiber Sambar",
                 address = "Powai, Mumbai"
             ),
@@ -64269,7 +64269,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.2 km",
-                discount = "GHEE ROAST OFF",
+                discount = "20%",
                 discountAmount = "Rice Tossed in Pure Ghee, Sambar on Side",
                 address = "Khar, Mumbai"
             ),
@@ -64282,7 +64282,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "PALAKKAD OFF",
+                discount = "20%",
                 discountAmount = "Vellarikka (Ash Gourd) & Thuvaram Paruppu",
                 address = "Thane West, Mumbai"
             ),
@@ -64295,7 +64295,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "No Ghee, Coconut Oil Based Tadka",
                 address = "Kandivali West, Mumbai"
             ),
@@ -64308,7 +64308,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "BHINDI OFF",
+                discount = "20%",
                 discountAmount = "Fresh Bhindi, Pearl Onions & Sambar",
                 address = "Goregaon East, Mumbai"
             ),
@@ -64321,7 +64321,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.7 km",
-                discount = "MEAL OFF",
+                discount = "20%",
                 discountAmount = "Includes Fried Papad & Urad Vadam",
                 address = "Malad West, Mumbai"
             ),
@@ -64334,7 +64334,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "BASMATI OFF",
+                discount = "20%",
                 discountAmount = "Aged Basmati Rice, Mild Aromatic Sambar",
                 address = "Juhu, Mumbai"
             ),
@@ -64347,7 +64347,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.4 km",
-                discount = "COMBO OFF",
+                discount = "20%",
                 discountAmount = "Sambar Rice & Curd Rice with Mixed Pickle",
                 address = "BKC, Mumbai"
             ),
@@ -64360,7 +64360,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.6 km",
-                discount = "SADHYA OFF",
+                discount = "20%",
                 discountAmount = "10 Vegetables, Karamani & Paasi Paruppu",
                 address = "Fort, Mumbai"
             ),
@@ -64373,7 +64373,7 @@ fun SambarRiceCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.3 km",
-                discount = "EXTRA DAL OFF",
+                discount = "20%",
                 discountAmount = "Double Toor Dal, 2 Whole Drumsticks",
                 address = "Dadar East, Mumbai"
             )
@@ -64759,7 +64759,7 @@ fun TartCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.1 km",
-                discount = "FRENCH OFF",
+                discount = "20%",
                 discountAmount = "Vanilla Pastry Cream, Seasonal Berries & Apricot Glaze",
                 address = "Bandra West, Mumbai"
             ),
@@ -64772,7 +64772,7 @@ fun TartCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "2.4 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Dark Chocolate Ganache, Housemade Salted Caramel",
                 address = "Juhu, Mumbai"
             ),
@@ -64785,7 +64785,7 @@ fun TartCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.7 km",
-                discount = "CITRUS OFF",
+                discount = "20%",
                 discountAmount = "Tangy Lemon Curd, Torched Italian Meringue",
                 address = "Dadar West, Mumbai"
             ),
@@ -64798,7 +64798,7 @@ fun TartCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "1.9 km",
-                discount = "BERRY OFF",
+                discount = "20%",
                 discountAmount = "Strawberry, Blueberry & Raspberry on Silky Custard",
                 address = "Powai, Mumbai"
             ),
@@ -64811,7 +64811,7 @@ fun TartCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "1.5 km",
-                discount = "APPLE OFF",
+                discount = "20%",
                 discountAmount = "Baked Apple Slices, Cinnamon Dust, Frangipane Base",
                 address = "Andheri West, Mumbai"
             ),
@@ -64824,7 +64824,7 @@ fun TartCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "2.6 km",
-                discount = "BELGIAN OFF",
+                discount = "20%",
                 discountAmount = "Roasted Hazelnuts, 70% Dark Chocolate, Shortcrust",
                 address = "Lower Parel, Mumbai"
             ),
@@ -64837,7 +64837,7 @@ fun TartCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "KEY LIME OFF",
+                discount = "20%",
                 discountAmount = "Key Lime Curd, Graham Cracker Crust, Whipped Cream",
                 address = "Khar, Mumbai"
             ),
@@ -64850,7 +64850,7 @@ fun TartCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.2 km",
-                discount = "PECAN OFF",
+                discount = "20%",
                 discountAmount = "Toasted Pecans, Maple Syrup Filling, Buttery Crust",
                 address = "BKC, Mumbai"
             ),
@@ -64863,7 +64863,7 @@ fun TartCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "PASSION OFF",
+                discount = "20%",
                 discountAmount = "Passion Fruit Curd, Coconut Dacquoise, Toasted Flakes",
                 address = "Vile Parle West, Mumbai"
             ),
@@ -64876,7 +64876,7 @@ fun TartCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.6 km",
-                discount = "SAVORY OFF",
+                discount = "20%",
                 discountAmount = "Wild Mushrooms, Caramelized Onion, Fresh Thyme",
                 address = "Colaba, Mumbai"
             ),
@@ -64889,7 +64889,7 @@ fun TartCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.3 km",
-                discount = "GF OFF",
+                discount = "20%",
                 discountAmount = "Almond Flour Crust, Mixed Berry Compote, Crumble Top",
                 address = "Santacruz West, Mumbai"
             ),
@@ -64902,7 +64902,7 @@ fun TartCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-45 mins",
                 distance = "2.1 km",
-                discount = "TIRAMISU OFF",
+                discount = "20%",
                 discountAmount = "Mascarpone Cream, Coffee Soak, Cocoa Dusting",
                 address = "Prabhadevi, Mumbai"
             ),
@@ -64915,7 +64915,7 @@ fun TartCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.5 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Coconut Ganache, Fresh Raspberries, Almond Crust",
                 address = "Worli, Mumbai"
             ),
@@ -64928,7 +64928,7 @@ fun TartCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "BANOFFEE OFF",
+                discount = "20%",
                 discountAmount = "Banana Slices, Dulce de Leche, Whipped Cream",
                 address = "Malad West, Mumbai"
             ),
@@ -64941,7 +64941,7 @@ fun TartCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "PROVENCE OFF",
+                discount = "20%",
                 discountAmount = "Heirloom Tomatoes, Herbed Goat Cheese, Olive Oil",
                 address = "Goregaon East, Mumbai"
             ),
@@ -64954,7 +64954,7 @@ fun TartCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "2.4 km",
-                discount = "PERSIAN OFF",
+                discount = "20%",
                 discountAmount = "Ground Pistachios, Rose Pastry Cream, Dried Petals",
                 address = "Fort, Mumbai"
             ),
@@ -64967,7 +64967,7 @@ fun TartCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "1.7 km",
-                discount = "EGGLESS OFF",
+                discount = "20%",
                 discountAmount = "Cinnamon Apples, Streusel Topping, Egg-Free Crust",
                 address = "Mulund West, Mumbai"
             ),
@@ -64980,7 +64980,7 @@ fun TartCategoryPage() {
                 rating = "4.6",
                 deliveryTime = "30-35 mins",
                 distance = "1.6 km",
-                discount = "LORRAINE OFF",
+                discount = "20%",
                 discountAmount = "Bacon Lardons, Gruyère Cheese, Egg Custard",
                 address = "Ballard Estate, Mumbai"
             ),
@@ -64993,7 +64993,7 @@ fun TartCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-55 mins",
                 distance = "2.8 km",
-                discount = "ASSORTED OFF",
+                discount = "20%",
                 discountAmount = "Chocolate, Lemon, Berry, Caramel, Pistachio, Coconut",
                 address = "Lower Parel, Mumbai"
             ),
@@ -65006,7 +65006,7 @@ fun TartCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.5 km",
-                discount = "MATCHA OFF",
+                discount = "20%",
                 discountAmount = "Ceremonial Matcha, White Chocolate Ganache",
                 address = "BKC, Mumbai"
             )
@@ -65391,7 +65391,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "NONNA'S OFF",
+                discount = "20%",
                 discountAmount = "Savoiardi Ladyfingers, Espresso Soak, Mascarpone Cream, Cocoa Dust",
                 address = "Bandra West, Mumbai"
             ),
@@ -65404,7 +65404,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.2 km",
-                discount = "MARSALA OFF",
+                discount = "20%",
                 discountAmount = "Marsala-Infused Ladyfingers, Velvety Mascarpone, Dark Cocoa",
                 address = "Juhu, Mumbai"
             ),
@@ -65417,7 +65417,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.3 km",
-                discount = "RUM OFF",
+                discount = "20%",
                 discountAmount = "Jamaican Rum Soak, Espresso Mascarpone, Chocolate Shavings",
                 address = "Khar West, Mumbai"
             ),
@@ -65430,7 +65430,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.6 km",
-                discount = "FAMILY OFF",
+                discount = "20%",
                 discountAmount = "Espresso Syrup, Classic Mascarpone, Cocoa Powder",
                 address = "Dadar West, Mumbai"
             ),
@@ -65443,7 +65443,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "2.5 km",
-                discount = "ARTISAN OFF",
+                discount = "20%",
                 discountAmount = "Colombian Single-Origin Espresso, Imported Mascarpone, Gold Dusting",
                 address = "Lower Parel, Mumbai"
             ),
@@ -65458,7 +65458,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "CHOCOLATE OFF",
+                discount = "20%",
                 discountAmount = "Chocolate-Soaked Sponge, Dark Chocolate Mascarpone, Cocoa Nibs",
                 address = "Andheri West, Mumbai"
             ),
@@ -65471,7 +65471,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "2.4 km",
-                discount = "GIANDUJA OFF",
+                discount = "20%",
                 discountAmount = "Hazelnut Praline, Chocolate-Hazelnut Mascarpone, Crushed Hazelnuts",
                 address = "BKC, Mumbai"
             ),
@@ -65484,7 +65484,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.1 km",
-                discount = "RUBY OFF",
+                discount = "20%",
                 discountAmount = "White Chocolate Ganache, Raspberry Coulis, Vanilla Mascarpone",
                 address = "Powai, Mumbai"
             ),
@@ -65499,7 +65499,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "BERRY OFF",
+                discount = "20%",
                 discountAmount = "Strawberry-Infused Ladyfingers, Berry Mascarpone, Fresh Strawberries",
                 address = "Santacruz West, Mumbai"
             ),
@@ -65512,7 +65512,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "45-50 mins",
                 distance = "2.6 km",
-                discount = "PISTACHIO OFF",
+                discount = "20%",
                 discountAmount = "Bronte Pistachio Cream, Pistachio Sponge, Crushed Pistachios",
                 address = "Worli, Mumbai"
             ),
@@ -65525,7 +65525,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.3 km",
-                discount = "MATCHA OFF",
+                discount = "20%",
                 discountAmount = "Uji Matcha Sponge, White Chocolate Mascarpone, Matcha Dust",
                 address = "BKC, Mumbai"
             ),
@@ -65538,7 +65538,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.7 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Mango Purée Soak, Mango Mascarpone, Fresh Mango Cubes",
                 address = "Vile Parle West, Mumbai"
             ),
@@ -65553,7 +65553,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.2 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Caramel-Soaked Ladyfingers, Salted Caramel Mascarpone, Caramel Drizzle",
                 address = "Goregaon West, Mumbai"
             ),
@@ -65566,7 +65566,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "45-50 mins",
                 distance = "2.5 km",
-                discount = "PECAN OFF",
+                discount = "20%",
                 discountAmount = "Pecan Praline Layer, Bourbon-Vanilla Mascarpone, Toasted Pecans",
                 address = "Malad West, Mumbai"
             ),
@@ -65579,7 +65579,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.1 km",
-                discount = "AMARETTO OFF",
+                discount = "20%",
                 discountAmount = "Amaretto-Soaked Ladyfingers, Almond Mascarpone, Toasted Almonds",
                 address = "Prabhadevi, Mumbai"
             ),
@@ -65594,7 +65594,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "45-50 mins",
                 distance = "2.4 km",
-                discount = "VEGAN OFF",
+                discount = "20%",
                 discountAmount = "Almond Ladyfingers, Cashew Mascarpone, Date Caramel, Cacao",
                 address = "Colaba, Mumbai"
             ),
@@ -65607,7 +65607,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "GF OFF",
+                discount = "20%",
                 discountAmount = "GF Almond Sponge, Espresso Soak, Classic Mascarpone",
                 address = "Santacruz East, Mumbai"
             ),
@@ -65620,7 +65620,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "45-50 mins",
                 distance = "2.3 km",
-                discount = "KETO OFF",
+                discount = "20%",
                 discountAmount = "Almond Flour Layers, Sugar-Free Mascarpone, Stevia Espresso",
                 address = "Andheri East, Mumbai"
             ),
@@ -65635,7 +65635,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.5 km",
-                discount = "MINI OFF",
+                discount = "20%",
                 discountAmount = "Assorted: Classic, Chocolate, Strawberry, Pistachio, Salted Caramel, Matcha",
                 address = "Fort, Mumbai"
             ),
@@ -65648,7 +65648,7 @@ fun TiramisuCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "55-60 mins",
                 distance = "3.0 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Large Format Tiramisu, Custom Message Available, Serves 12-14",
                 address = "Lower Parel, Mumbai"
             )
@@ -66040,7 +66040,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "GRANNY'S OFF",
+                discount = "20%",
                 discountAmount = "Granny Smith Apples, Cinnamon Spice, Lattice Crust, Served Warm",
                 address = "Bandra West, Mumbai"
             ),
@@ -66053,7 +66053,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.2 km",
-                discount = "FALL OFF",
+                discount = "20%",
                 discountAmount = "Organic Pumpkin, Warm Autumn Spices, Flaky Butter Crust, Whipped Cream",
                 address = "Juhu, Mumbai"
             ),
@@ -66066,7 +66066,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.8 km",
-                discount = "PECAN OFF",
+                discount = "20%",
                 discountAmount = "Toasted Pecans, Rich Bourbon-Caramel, Shortbread Crust",
                 address = "Khar West, Mumbai"
             ),
@@ -66079,7 +66079,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "KEY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Key Lime Juice, Condensed Milk, Graham Crust, Meringue",
                 address = "Dadar West, Mumbai"
             ),
@@ -66092,7 +66092,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "CHERRY OFF",
+                discount = "20%",
                 discountAmount = "Bing Cherries, Almond Extract, Lattice Crust, Vanilla Bean",
                 address = "Lower Parel, Mumbai"
             ),
@@ -66107,7 +66107,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.7 km",
-                discount = "BANANA OFF",
+                discount = "20%",
                 discountAmount = "Fresh Bananas, Vanilla Pastry Cream, Whipped Topping, Graham Crust",
                 address = "Andheri West, Mumbai"
             ),
@@ -66120,7 +66120,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.3 km",
-                discount = "COCONUT OFF",
+                discount = "20%",
                 discountAmount = "Toasted Coconut, Coconut Pastry Cream, Whipped Cream, Flaky Crust",
                 address = "BKC, Mumbai"
             ),
@@ -66133,7 +66133,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "CHOCOLATE OFF",
+                discount = "20%",
                 discountAmount = "Dark Chocolate Pudding, Chocolate Whipped Cream, Oreo Crust",
                 address = "Powai, Mumbai"
             ),
@@ -66148,7 +66148,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.6 km",
-                discount = "BERRY OFF",
+                discount = "20%",
                 discountAmount = "Wild Blueberries, Lemon Zest, Butter Lattice Crust",
                 address = "Santacruz West, Mumbai"
             ),
@@ -66161,7 +66161,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.1 km",
-                discount = "PEACH OFF",
+                discount = "20%",
                 discountAmount = "Ripe Peaches, Cinnamon Streusel, Vanilla Glaze",
                 address = "Worli, Mumbai"
             ),
@@ -66174,7 +66174,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.4 km",
-                discount = "FARM OFF",
+                discount = "20%",
                 discountAmount = "Strawberries, Rhubarb, Orange Zest, Lattice Crust",
                 address = "BKC, Mumbai"
             ),
@@ -66187,7 +66187,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "BASKET OFF",
+                discount = "20%",
                 discountAmount = "Raspberry, Blueberry, Blackberry, Lemon Sugar Crust",
                 address = "Vile Parle West, Mumbai"
             ),
@@ -66202,7 +66202,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.5 km",
-                discount = "BOURBON OFF",
+                discount = "20%",
                 discountAmount = "Kentucky Bourbon, Toasted Pecans, Chocolate Drizzle",
                 address = "Goregaon West, Mumbai"
             ),
@@ -66215,7 +66215,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.3 km",
-                discount = "MAPLE OFF",
+                discount = "20%",
                 discountAmount = "Grade A Maple Syrup, Toasted Walnuts, Butter Crust",
                 address = "Malad West, Mumbai"
             ),
@@ -66228,7 +66228,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "CARAMEL OFF",
+                discount = "20%",
                 discountAmount = "Honeycrisp Apples, Salted Caramel, Streusel Topping",
                 address = "Prabhadevi, Mumbai"
             ),
@@ -66243,7 +66243,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "LEMON OFF",
+                discount = "20%",
                 discountAmount = "Tangy Lemon Curd, Toasted Meringue, Buttery Crust",
                 address = "Colaba, Mumbai"
             ),
@@ -66256,7 +66256,7 @@ fun PieCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.2 km",
-                discount = "MERINGUE OFF",
+                discount = "20%",
                 discountAmount = "Dark Chocolate Filling, Swiss Meringue, Chocolate Crust",
                 address = "Santacruz East, Mumbai"
             ),
@@ -66269,7 +66269,7 @@ fun PieCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "CREAM OFF",
+                discount = "20%",
                 discountAmount = "Orange Curd, Vanilla Cream, Graham Crust, Orange Zest",
                 address = "Andheri East, Mumbai"
             ),
@@ -66284,7 +66284,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "1.7 km",
-                discount = "SAMPLER OFF",
+                discount = "20%",
                 discountAmount = "Assorted: Apple, Pecan, Pumpkin, Cherry, Lemon, Chocolate Cream",
                 address = "Fort, Mumbai"
             ),
@@ -66297,7 +66297,7 @@ fun PieCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "50-55 mins",
                 distance = "3.2 km",
-                discount = "PARTY OFF",
+                discount = "20%",
                 discountAmount = "Extra Large Deep Dish Apple Pie, Serves 12-14, Cinnamon Ice Cream on Side",
                 address = "Lower Parel, Mumbai"
             )
@@ -66710,7 +66710,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.2 km",
-                discount = "VANILLA OFF",
+                discount = "20%",
                 discountAmount = "Madagascar Vanilla Bean Custard, Nutmeg Dusted, Buttery Pastry Shell",
                 address = "Bandra West, Mumbai"
             ),
@@ -66723,7 +66723,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.8 km",
-                discount = "GRANDMA OFF",
+                discount = "20%",
                 discountAmount = "Farm-Fresh Eggs, Creamy Texture, Caramelized Top, Served Chilled",
                 address = "Juhu, Mumbai"
             ),
@@ -66736,7 +66736,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.5 km",
-                discount = "FLAN OFF",
+                discount = "20%",
                 discountAmount = "Silky Custard, Golden Caramel Sauce, Silicone Smooth Finish",
                 address = "Khar West, Mumbai"
             ),
@@ -66749,7 +66749,7 @@ fun CustardCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "2.0 km",
-                discount = "ISLAND OFF",
+                discount = "20%",
                 discountAmount = "Toasted Coconut Flakes, Creamy Coconut Custard, Flaky Crust",
                 address = "Dadar West, Mumbai"
             ),
@@ -66762,7 +66762,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.7 km",
-                discount = "BUTTER OFF",
+                discount = "20%",
                 discountAmount = "Rich Butterscotch Custard, Brown Sugar Streusel, Sea Salt Finish",
                 address = "Lower Parel, Mumbai"
             ),
@@ -66777,7 +66777,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.3 km",
-                discount = "MANGO OFF",
+                discount = "20%",
                 discountAmount = "Alphonso Mango Pulp, Silky Custard, Shortbread Crust, Saffron Garnish",
                 address = "Andheri West, Mumbai"
             ),
@@ -66790,7 +66790,7 @@ fun CustardCategoryPage() {
                 rating = "4.7",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "BANANA OFF",
+                discount = "20%",
                 discountAmount = "Fresh Banana Slices, Vanilla Custard, Nilla Wafer Crust",
                 address = "BKC, Mumbai"
             ),
@@ -66803,7 +66803,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "30-35 mins",
                 distance = "1.4 km",
-                discount = "BERRY OFF",
+                discount = "20%",
                 discountAmount = "Fresh Strawberry Purée, Creamy Custard, Graham Cracker Crust",
                 address = "Powai, Mumbai"
             ),
@@ -66816,7 +66816,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.6 km",
-                discount = "CITRUS OFF",
+                discount = "20%",
                 discountAmount = "Tangy Lemon Custard, Toasted Meringue Topping, Butter Crust",
                 address = "Santacruz West, Mumbai"
             ),
@@ -66831,7 +66831,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.2 km",
-                discount = "SPICE OFF",
+                discount = "20%",
                 discountAmount = "Pumpkin Purée, Cinnamon-Nutmeg Custard, Whipped Cream Rosettes",
                 address = "Worli, Mumbai"
             ),
@@ -66844,7 +66844,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.3 km",
-                discount = "ROSE OFF",
+                discount = "20%",
                 discountAmount = "Green Cardamom Infused Custard, Rose Water Drizzle, Pistachio Crust",
                 address = "BKC, Mumbai"
             ),
@@ -66857,7 +66857,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "2.1 km",
-                discount = "ROYAL OFF",
+                discount = "20%",
                 discountAmount = "Kesar Saffron Custard, Crushed Pistachios, Almond Flour Crust",
                 address = "Vile Parle West, Mumbai"
             ),
@@ -66872,7 +66872,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.5 km",
-                discount = "COCOA OFF",
+                discount = "20%",
                 discountAmount = "Belgian Dark Chocolate Custard, Chocolate Shavings, Oreo Crust",
                 address = "Goregaon West, Mumbai"
             ),
@@ -66885,7 +66885,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "1.8 km",
-                discount = "NUTTY OFF",
+                discount = "20%",
                 discountAmount = "Milk Chocolate Custard, Toasted Hazelnuts, Gianduja Swirl",
                 address = "Malad West, Mumbai"
             ),
@@ -66898,7 +66898,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "35-40 mins",
                 distance = "1.7 km",
-                discount = "MAGIC OFF",
+                discount = "20%",
                 discountAmount = "Creamy White Chocolate Custard, Raspberry Coulis Swirl, Shortbread Crust",
                 address = "Prabhadevi, Mumbai"
             ),
@@ -66913,7 +66913,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
-                discount = "LISBON OFF",
+                discount = "20%",
                 discountAmount = "Egg Custard Tarts, Cinnamon Dusted, Flaky Puff Pastry, Served Warm",
                 address = "Colaba, Mumbai"
             ),
@@ -66926,7 +66926,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "40-45 mins",
                 distance = "2.0 km",
-                discount = "PARIS OFF",
+                discount = "20%",
                 discountAmount = "Crème Pâtissière, Fresh Berries, Glazed Fruit Topping, Pâte Sucrée",
                 address = "Santacruz East, Mumbai"
             ),
@@ -66939,7 +66939,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.9 km",
-                discount = "RIO OFF",
+                discount = "20%",
                 discountAmount = "Condensed Milk Custard, Caramel Topping, Silky Smooth Texture",
                 address = "Andheri East, Mumbai"
             ),
@@ -66954,7 +66954,7 @@ fun CustardCategoryPage() {
                 rating = "4.8",
                 deliveryTime = "35-40 mins",
                 distance = "1.6 km",
-                discount = "ZEN OFF",
+                discount = "20%",
                 discountAmount = "Ceremonial Matcha Custard, White Chocolate Ganache, Black Sesame Crust",
                 address = "Fort, Mumbai"
             ),
@@ -66967,7 +66967,7 @@ fun CustardCategoryPage() {
                 rating = "4.9",
                 deliveryTime = "40-45 mins",
                 distance = "1.8 km",
-                discount = "COLLECT OFF",
+                discount = "20%",
                 discountAmount = "Mini Sampler: Vanilla, Chocolate, Mango, Salted Caramel Custard Pies",
                 address = "Lower Parel, Mumbai"
             )
@@ -67338,7 +67338,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
-        discount = "CHAAT OFF",
+        discount = "20%",
         discountAmount = "Crispy Puris, Diced Potatoes, Onions, Tomatoes, 3 Chutneys, Fine Sev",
         address = "Dadar West, Mumbai"
     ),
@@ -67351,7 +67351,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "DAHI OFF",
+        discount = "20%",
         discountAmount = "Crispy Puris, Whipped Dahi, Sweet Chutney, Green Chutney, Fine Sev, Pomegranate",
         address = "Matunga East, Mumbai"
     ),
@@ -67364,7 +67364,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "MASALA OFF",
+        discount = "20%",
         discountAmount = "Extra Spicy Chaat Masala, Chopped Onions, Green Chilies, Mint Chutney, Thick Sev",
         address = "Ghatkopar West, Mumbai"
     ),
@@ -67377,7 +67377,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "CHEESE OFF",
+        discount = "20%",
         discountAmount = "Grated Amul Cheese, Classic Sev Puri Toppings, Green Chutney, Sweet Chutney",
         address = "Mulund West, Mumbai"
     ),
@@ -67390,7 +67390,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
-        discount = "RAGDA OFF",
+        discount = "20%",
         discountAmount = "White Pea Curry Base, Puris Topped With Ragda, Onions, Sev, Chutneys",
         address = "Vile Parle West, Mumbai"
     ),
@@ -67405,7 +67405,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "TANDOORI OFF",
+        discount = "20%",
         discountAmount = "Tandoori Mayo, Spiced Potatoes, Onions, Mint Chutney, Crunchy Sev",
         address = "Andheri West, Mumbai"
     ),
@@ -67418,7 +67418,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "DELHI OFF",
+        discount = "20%",
         discountAmount = "North Indian Style, Chickpeas, Potatoes, Imli Chutney, Garlic Chutney, Sev",
         address = "Borivali West, Mumbai"
     ),
@@ -67431,7 +67431,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "GREEN OFF",
+        discount = "20%",
         discountAmount = "Extra Pudina Chutney, Coriander Garnish, Green Chilies, Fresh Sev",
         address = "Kandivali West, Mumbai"
     ),
@@ -67444,7 +67444,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.7 km",
-        discount = "IMLI OFF",
+        discount = "20%",
         discountAmount = "Sweet & Tangy Imli Chutney, Date Pulp, Spiced Potatoes, Thin Sev",
         address = "Malad West, Mumbai"
     ),
@@ -67459,7 +67459,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.9 km",
-        discount = "PANEER OFF",
+        discount = "20%",
         discountAmount = "Cottage Cheese Cubes, Spiced Potatoes, Green Chutney, Grated Sev",
         address = "Powai, Mumbai"
     ),
@@ -67472,7 +67472,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "CORN OFF",
+        discount = "20%",
         discountAmount = "Sweet Corn Kernels, Cheese Sauce, Classic Toppings, Crispy Sev",
         address = "BKC, Mumbai"
     ),
@@ -67485,7 +67485,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.6",
         deliveryTime = "15-20 mins",
         distance = "0.8 km",
-        discount = "RAILWAY OFF",
+        discount = "20%",
         discountAmount = "Quick Style, Extra Crunchy Puris, Onion-Sev Mix, 2 Chutneys",
         address = "Santacruz Station, Mumbai"
     ),
@@ -67500,7 +67500,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
-        discount = "HEALTHY OFF",
+        discount = "20%",
         discountAmount = "Brown Puris, Low-Oil Sev, Fresh Veggies, Green Chutney",
         address = "Juhu, Mumbai"
     ),
@@ -67513,7 +67513,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "SPROUT OFF",
+        discount = "20%",
         discountAmount = "Healthy Moong Sprouts, Chopped Veggies, Lemon Juice, Bhujia Sev",
         address = "Versova, Mumbai"
     ),
@@ -67526,7 +67526,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "30-35 mins",
         distance = "2.0 km",
-        discount = "FIT OFF",
+        discount = "20%",
         discountAmount = "Chickpea & Paneer Topping, Multigrain Puris, Protein Sev, Mint Chutney",
         address = "Lower Parel, Mumbai"
     ),
@@ -67541,7 +67541,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "MEXICAN OFF",
+        discount = "20%",
         discountAmount = "Salsa, Refried Beans, Cheese, Sour Cream, Sev, Jalapeños",
         address = "Andheri East, Mumbai"
     ),
@@ -67554,7 +67554,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.7",
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
-        discount = "THAI OFF",
+        discount = "20%",
         discountAmount = "Thai Sweet Chilli Sauce, Peanuts, Fresh Herbs, Crispy Onions, Sev",
         address = "Prabhadevi, Mumbai"
     ),
@@ -67567,7 +67567,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "PERI OFF",
+        discount = "20%",
         discountAmount = "Peri Peri Spiced Potatoes, Onions, Garlic Chutney, Flavored Sev",
         address = "Goregaon West, Mumbai"
     ),
@@ -67582,7 +67582,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.9",
         deliveryTime = "35-40 mins",
         distance = "2.2 km",
-        discount = "PARTY OFF",
+        discount = "20%",
         discountAmount = "Assorted 12 Pieces: 3 Classic, 3 Dahi, 3 Spicy, 3 Cheese Sev Puri",
         address = "Worli, Mumbai"
     ),
@@ -67595,7 +67595,7 @@ val sevPuriFilters = FilterConfig(
         rating = "4.8",
         deliveryTime = "30-35 mins",
         distance = "1.7 km",
-        discount = "SAMPLE OFF",
+        discount = "20%",
         discountAmount = "Trial Box: Classic, Dahi, Masala & Cheese Sev Puri (2 pcs each)",
         address = "Fort, Mumbai"
     )
@@ -67974,7 +67974,7 @@ Column(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
-        discount = "COCOA OFF",
+        discount = "20%",
         discountAmount = "70% Belgian Dark Chocolate, Aerated Silky Texture, Cocoa Dusted, Chocolate Shavings",
         address = "Bandra West, Mumbai"
     ),
@@ -67987,7 +67987,7 @@ Column(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "NUTTY OFF",
+        discount = "20%",
         discountAmount = "Smooth Milk Chocolate, Toasted Hazelnut Crunch, Gianduja Swirl, Whipped Cream",
         address = "Juhu, Mumbai"
     ),
@@ -68000,7 +68000,7 @@ Column(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.7 km",
-        discount = "MAGIC OFF",
+        discount = "20%",
         discountAmount = "Creamy White Chocolate, Raspberry Coulis Swirl, Fresh Berry Topping, Shortbread Crumb",
         address = "Khar West, Mumbai"
     ),
@@ -68013,7 +68013,7 @@ Column(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
-        discount = "LAYER OFF",
+        discount = "20%",
         discountAmount = "Three Layers: Dark, Milk & White Chocolate, Chocolate Ganache Drip, Gold Dust",
         address = "Lower Parel, Mumbai"
     ),
@@ -68026,7 +68026,7 @@ Column(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "CARAMEL OFF",
+        discount = "20%",
         discountAmount = "Dark Chocolate Mousse, Salted Caramel Core, Caramelized Almonds, Sea Salt Finish",
         address = "Andheri West, Mumbai"
     ),
@@ -68041,7 +68041,7 @@ Column(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "MANGO OFF",
+        discount = "20%",
         discountAmount = "Fresh Alphonso Mango Pulp, Light & Creamy Texture, Mango Coulis, Pistachio Crumble",
         address = "Vile Parle West, Mumbai"
     ),
@@ -68054,7 +68054,7 @@ Column(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "BERRY OFF",
+        discount = "20%",
         discountAmount = "Fresh Strawberry Purée, Vanilla Bean Infused, Strawberry Gel Center, White Chocolate Curls",
         address = "Santacruz West, Mumbai"
     ),
@@ -68067,7 +68067,7 @@ Column(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "PASSION OFF",
+        discount = "20%",
         discountAmount = "Tangy Passion Fruit Curd, Light Mousse, Coconut Cream Layer, Toasted Coconut Flakes",
         address = "Dadar West, Mumbai"
     ),
@@ -68080,7 +68080,7 @@ Column(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "MIXBERRY OFF",
+        discount = "20%",
         discountAmount = "Strawberry, Blueberry & Raspberry Swirl, Creamy Vanilla Base, Fresh Berry Compote",
         address = "Powai, Mumbai"
     ),
@@ -68095,7 +68095,7 @@ Column(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.8 km",
-        discount = "ROSEPIST OFF",
+        discount = "20%",
         discountAmount = "Ground Pistachio Mousse, Rose Water Infusion, Crushed Pistachios, Edible Rose Petals",
         address = "BKC, Mumbai"
     ),
@@ -68108,7 +68108,7 @@ Column(
         rating = "4.8",
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
-        discount = "PRALINE OFF",
+        discount = "20%",
         discountAmount = "Hazelnut Praline Mousse, Gianduja Layer, Crushed HazelNuts, Chocolate Feather",
         address = "Worli, Mumbai"
     ),
@@ -68121,7 +68121,7 @@ Column(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "PECAN OFF",
+        discount = "20%",
         discountAmount = "Salted Caramel Mousse, Candied Pecans, Dulce de Leche Swirl, Caramel Drizzle",
         address = "Malad West, Mumbai"
     ),
@@ -68136,7 +68136,7 @@ Column(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
-        discount = "TIRAMISU OFF",
+        discount = "20%",
         discountAmount = "Coffee-Infused Mascarpone Mousse, Ladyfinger Crumb, Cocoa Dusted, Espresso Gel",
         address = "Colaba, Mumbai"
     ),
@@ -68149,7 +68149,7 @@ Column(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "MATCHA OFF",
+        discount = "20%",
         discountAmount = "Ceremonial Matcha, White Chocolate Base, Red Bean Swirl, Black Sesame Crumble",
         address = "Fort, Mumbai"
     ),
@@ -68162,7 +68162,7 @@ Column(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "ESPRESSO OFF",
+        discount = "20%",
         discountAmount = "Brewed Espresso Mousse, Coffee Gel Center, Chocolate Coffee Beans, Whipped Cream",
         address = "Goregaon West, Mumbai"
     ),
@@ -68177,7 +68177,7 @@ Column(
         rating = "4.9",
         deliveryTime = "35-40 mins",
         distance = "2.1 km",
-        discount = "CHAMPAGNE OFF",
+        discount = "20%",
         discountAmount = "Champagne-Infused Mousse, Strawberry Gelee, Gold Leaf Garnish, Premium Glass",
         address = "Prabhadevi, Mumbai"
     ),
@@ -68190,7 +68190,7 @@ Column(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
-        discount = "SAFFRON OFF",
+        discount = "20%",
         discountAmount = "Kesar Saffron Mousse, Green Cardamom Infusion, Crushed Almonds, Silver Leaf",
         address = "Andheri East, Mumbai"
     ),
@@ -68203,7 +68203,7 @@ Column(
         rating = "4.8",
         deliveryTime = "30-35 mins",
         distance = "1.7 km",
-        discount = "LAVENDER OFF",
+        discount = "20%",
         discountAmount = "Lavender Infused Mousse, Blueberry Compote Core, Honey Lavender Glaze, Edible Flowers",
         address = "Juhu, Mumbai"
     ),
@@ -68218,7 +68218,7 @@ Column(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.8 km",
-        discount = "SHOT OFF",
+        discount = "20%",
         discountAmount = "Mini Shots: Dark Choc, Mango, Strawberry, Salted Caramel, Pistachio, White Choc",
         address = "Lower Parel, Mumbai"
     ),
@@ -68231,7 +68231,7 @@ Column(
         rating = "4.9",
         deliveryTime = "35-40 mins",
         distance = "2.2 km",
-        discount = "GIFT OFF",
+        discount = "20%",
         discountAmount = "Gift Box: Belgian Dark, Alphonso Mango, Champagne Strawberry, Saffron Pistachio",
         address = "BKC, Mumbai"
     )
@@ -68566,7 +68566,7 @@ Column(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.2 km",
-        discount = "RAJASTHAN OFF",
+        discount = "20%",
         discountAmount = "Crispy Flaky Exterior, Spiced Moong Dal Filling, Imli Chutney, Green Chutney, Fresh Coriander",
         address = "C Scheme, Jaipur"
     ),
@@ -68579,7 +68579,7 @@ Column(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "PYAZ OFF",
+        discount = "20%",
         discountAmount = "Golden Fried Kachori, Spicy Onion Filling, Fennel Seeds, Aloo Sabzi, Sweet Boondi",
         address = "Bapu Bazar, Jaipur"
     ),
@@ -68592,7 +68592,7 @@ Column(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "MAWA OFF",
+        discount = "20%",
         discountAmount = "Sweet & Spicy Fusion, Khoya Mawa Filling, Dry Fruits, Cardamom Flavor, Rabri, Silver Leaf",
         address = "Sardarpura, Jodhpur"
     ),
@@ -68605,7 +68605,7 @@ Column(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
-        discount = "BIKANER OFF",
+        discount = "20%",
         discountAmount = "Famous Bikaneri Style, Crunchy Layers, Spiced Dal Filling, Hing, Saunf, Served with Aloo Sabzi",
         address = "Wani, Bikaner"
     ),
@@ -68618,7 +68618,7 @@ Column(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "TEETHA OFF",
+        discount = "20%",
         discountAmount = "Extra Spicy Filling, Crushed Peppercorns, Red Chili Powder, Hing, Garlic Chutney, Crispy Layers",
         address = "Vaishali Nagar, Jaipur"
     ),
@@ -68633,7 +68633,7 @@ Column(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
-        discount = "BENGAL OFF",
+        discount = "20%",
         discountAmount = "Large Flaky Kachori, Urad Dal Filling, Bengali Style Spices, Aloo Dom, Cholar Dal",
         address = "Salt Lake, Kolkata"
     ),
@@ -68646,7 +68646,7 @@ Column(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "INDORE OFF",
+        discount = "20%",
         discountAmount = "Indori Style, Thin & Crispy, Moong Dal Filling, Imli Chutney, Sev, Pomegranate",
         address = "Rajwada, Indore"
     ),
@@ -68659,7 +68659,7 @@ Column(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "KHASTA OFF",
+        discount = "20%",
         discountAmount = "Extra Flaky & Crispy, Moong Dal Filling, Mild Spices, Aloo Sabzi, Imli Chutney",
         address = "Tajganj, Agra"
     ),
@@ -68672,7 +68672,7 @@ Column(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "NAWABI OFF",
+        discount = "20%",
         discountAmount = "Awadhi Style, Mawa & Paneer Filling, Saffron Infused, Dry Fruits, Silver Leaf",
         address = "Hazratganj, Lucknow"
     ),
@@ -68687,7 +68687,7 @@ Column(
         rating = "4.9",
         deliveryTime = "15-20 mins",
         distance = "0.8 km",
-        discount = "DAHI OFF",
+        discount = "20%",
         discountAmount = "Crispy Kachoris, Whipped Dahi, Sweet Imli Chutney, Green Chutney, Roasted Cumin, Pomegranate, Sev",
         address = "C Scheme, Jaipur"
     ),
@@ -68700,7 +68700,7 @@ Column(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "1.0 km",
-        discount = "CHAAT OFF",
+        discount = "20%",
         discountAmount = "Crushed Kachoris, Yogurt, Tamarind Chutney, Mint Chutney, Onion, Tomato, Sev, Fresh Coriander",
         address = "MI Road, Jaipur"
     ),
@@ -68713,7 +68713,7 @@ Column(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "TIKKA OFF",
+        discount = "20%",
         discountAmount = "Grilled Kachoris, Spiced Yogurt, Mint Chutney, Onion Rings, Green Chilies, Chaat Masala",
         address = "Sodala, Jaipur"
     ),
@@ -68728,7 +68728,7 @@ Column(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "URAD OFF",
+        discount = "20%",
         discountAmount = "Black Gram Filling, Whole Spices, Ginger Garlic Paste, Flaky Layers, Aloo Sabzi",
         address = "Pratap Nagar, Jaipur"
     ),
@@ -68741,7 +68741,7 @@ Column(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "MIX DAL OFF",
+        discount = "20%",
         discountAmount = "5 Dals Mix: Moong, Urad, Chana, Masoor, Toor, Perfect Spice Balance, Flaky Texture",
         address = "Malviya Nagar, Jaipur"
     ),
@@ -68754,7 +68754,7 @@ Column(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
-        discount = "ALOO OFF",
+        discount = "20%",
         discountAmount = "Spiced Potato Filling, Cumin Seeds, Green Chilies, Fresh Coriander, Served with Green Chutney",
         address = "Tonk Road, Jaipur"
     ),
@@ -68769,7 +68769,7 @@ Column(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
-        discount = "DRYFRUIT OFF",
+        discount = "20%",
         discountAmount = "Premium Kachori, Cashews, Almonds, Raisins, Pistachios, Cardamom, Silver Leaf, Saffron",
         address = "Civil Lines, Jaipur"
     ),
@@ -68782,7 +68782,7 @@ Column(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "PANEER OFF",
+        discount = "20%",
         discountAmount = "Fresh Paneer Filling, Mild Spices, Kasuri Methi, Creamy Texture, Mint Chutney",
         address = "Vaishali Nagar, Jaipur"
     ),
@@ -68795,7 +68795,7 @@ Column(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "HARA OFF",
+        discount = "20%",
         discountAmount = "Spinach & Peas Filling, Mint, Coriander, Green Chili, Healthy Twist, Lightly Spiced",
         address = "Jawahar Nagar, Jaipur"
     ),
@@ -68810,7 +68810,7 @@ Column(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
-        discount = "PLATTER OFF",
+        discount = "20%",
         discountAmount = "Assorted Mini Kachoris: 4 Moong Dal, 4 Pyaz, 4 Masala, 3 Chutneys, Onion Rings, Green Chilies",
         address = "Raja Park, Jaipur"
     ),
@@ -68823,7 +68823,7 @@ Column(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "2.0 km",
-        discount = "GIFT BOX OFF",
+        discount = "20%",
         discountAmount = "Premium Gift Box: Jodhpuri Mawa, Dry Fruit, Paneer, Lucknowi Kachori, Silver Leaf, Rabri, Saffron",
         address = "Ajmer Road, Jaipur"
     )
@@ -69187,7 +69187,7 @@ val jalebiItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "JALEBI OFF",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Bapu Bazar, Jaipur"
     ),
@@ -69200,7 +69200,7 @@ val jalebiItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "IMARTI OFF",
+        discount = "20%",
         discountAmount = "up to ₹65",
         address = "C Scheme, Jaipur"
     ),
@@ -69213,7 +69213,7 @@ val jalebiItems = listOf(
         rating = "4.7",
         deliveryTime = "15-20 mins",
         distance = "0.9 km",
-        discount = "MINI OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Vaishali Nagar, Jaipur"
     ),
@@ -69226,7 +69226,7 @@ val jalebiItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "2.1 km",
-        discount = "KESAR OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Malviya Nagar, Jaipur"
     ),
@@ -69239,7 +69239,7 @@ val jalebiItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
-        discount = "RABRI OFF",
+        discount = "20%",
         discountAmount = "up to ₹90",
         address = "Sardarpura, Jodhpur"
     ),
@@ -69254,7 +69254,7 @@ val jalebiItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "PUNJAB OFF",
+        discount = "20%",
         discountAmount = "up to ₹55",
         address = "Amritsar, Punjab"
     ),
@@ -69267,7 +69267,7 @@ val jalebiItems = listOf(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
-        discount = "BENGAL OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Salt Lake, Kolkata"
     ),
@@ -69280,7 +69280,7 @@ val jalebiItems = listOf(
         rating = "4.6",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "SOUTH OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "T Nagar, Chennai"
     ),
@@ -69293,7 +69293,7 @@ val jalebiItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "DILLI OFF",
+        discount = "20%",
         discountAmount = "up to ₹75",
         address = "Chandni Chowk, Delhi"
     ),
@@ -69308,7 +69308,7 @@ val jalebiItems = listOf(
         rating = "4.6",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "CHAAT OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Mansarovar, Jaipur"
     ),
@@ -69321,7 +69321,7 @@ val jalebiItems = listOf(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
-        discount = "DESSERT OFF",
+        discount = "20%F",
         discountAmount = "up to ₹110",
         address = "C Scheme, Jaipur"
     ),
@@ -69334,7 +69334,7 @@ val jalebiItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "FALOODA OFF",
+        discount = "20%",
         discountAmount = "up to ₹85",
         address = "MI Road, Jaipur"
     ),
@@ -69349,7 +69349,7 @@ val jalebiItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
-        discount = "PREMIUM OFF",
+        discount = "20%",
         discountAmount = "up to ₹125",
         address = "Civil Lines, Jaipur"
     ),
@@ -69362,7 +69362,7 @@ val jalebiItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "ROSE OFF",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Vaishali Nagar, Jaipur"
     ),
@@ -69375,7 +69375,7 @@ val jalebiItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "ELAICHI OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Malviya Nagar, Jaipur"
     ),
@@ -69390,7 +69390,7 @@ val jalebiItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
-        discount = "CRISPY OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Tonk Road, Jaipur"
     ),
@@ -69403,7 +69403,7 @@ val jalebiItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "SOFT OFF",
+        discount = "20%",
         discountAmount = "up to ₹65",
         address = "Pratap Nagar, Jaipur"
     ),
@@ -69416,7 +69416,7 @@ val jalebiItems = listOf(
         rating = "4.6",
         deliveryTime = "15-20 mins",
         distance = "1.0 km",
-        discount = "JUMBO OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Raja Park, Jaipur"
     ),
@@ -69431,7 +69431,7 @@ val jalebiItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.8 km",
-        discount = "DIWALI OFF",
+        discount = "20%",
         discountAmount = "up to ₹175",
         address = "Ajmer Road, Jaipur"
     ),
@@ -69444,7 +69444,7 @@ val jalebiItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "2.0 km",
-        discount = "GIFT OFF",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Civil Lines, Jaipur"
     )
@@ -69760,7 +69760,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "PYAAJ OFF",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Bapu Bazar, Jaipur"
     ),
@@ -69773,7 +69773,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "TEekha OFF",
+        discount = "20%",
         discountAmount = "up to ₹65",
         address = "C Scheme, Jaipur"
     ),
@@ -69786,7 +69786,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.7",
         deliveryTime = "15-20 mins",
         distance = "0.9 km",
-        discount = "MINI OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Vaishali Nagar, Jaipur"
     ),
@@ -69799,7 +69799,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "2.1 km",
-        discount = "ALOO OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Malviya Nagar, Jaipur"
     ),
@@ -69812,7 +69812,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
-        discount = "DAHI OFF",
+        discount = "20%",
         discountAmount = "up to ₹90",
         address = "Sardarpura, Jodhpur"
     ),
@@ -69827,7 +69827,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "MATHURA OFF",
+        discount = "20%",
         discountAmount = "up to ₹55",
         address = "Mathura, UP"
     ),
@@ -69840,7 +69840,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
-        discount = "JODHPUR OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Jodhpur, Rajasthan"
     ),
@@ -69853,7 +69853,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.6",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "INDORE OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Indore, MP"
     ),
@@ -69866,7 +69866,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "BANARAS OFF",
+        discount = "20%",
         discountAmount = "up to ₹75",
         address = "Varanasi, UP"
     ),
@@ -69881,7 +69881,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.6",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "IMLI OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Mansarovar, Jaipur"
     ),
@@ -69894,7 +69894,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
-        discount = "PUDINA OFF",
+        discount = "20%",
         discountAmount = "up to ₹110",
         address = "C Scheme, Jaipur"
     ),
@@ -69907,7 +69907,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "COMBO OFF",
+        discount = "20%",
         discountAmount = "up to ₹85",
         address = "MI Road, Jaipur"
     ),
@@ -69922,7 +69922,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
-        discount = "ONION OFF",
+        discount = "20%",
         discountAmount = "up to ₹125",
         address = "Civil Lines, Jaipur"
     ),
@@ -69935,7 +69935,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "MOONG OFF",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Vaishali Nagar, Jaipur"
     ),
@@ -69948,7 +69948,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "MASALA OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Malviya Nagar, Jaipur"
     ),
@@ -69963,7 +69963,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
-        discount = "LACCHA OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Tonk Road, Jaipur"
     ),
@@ -69976,7 +69976,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "CRISPY OFF",
+        discount = "20%",
         discountAmount = "up to ₹65",
         address = "Pratap Nagar, Jaipur"
     ),
@@ -69989,7 +69989,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.6",
         deliveryTime = "15-20 mins",
         distance = "1.0 km",
-        discount = "JUMBO OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Raja Park, Jaipur"
     ),
@@ -70004,7 +70004,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.8 km",
-        discount = "ATTA OFF",
+        discount = "20%",
         discountAmount = "up to ₹175",
         address = "Ajmer Road, Jaipur"
     ),
@@ -70017,7 +70017,7 @@ val pyaajKachoriItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "2.0 km",
-        discount = "GIFT OFF",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Civil Lines, Jaipur"
     )
@@ -70348,7 +70348,7 @@ val rajmaRiceItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.2 km",
-        discount = "RAJMA OFF",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Connaught Place, Delhi"
     ),
@@ -70361,7 +70361,7 @@ val rajmaRiceItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.8 km",
-        discount = "BUTTER OFF",
+        discount = "20%",
         discountAmount = "up to ₹100",
         address = "Sector 17, Chandigarh"
     ),
@@ -70374,7 +70374,7 @@ val rajmaRiceItems = listOf(
         rating = "4.7",
         deliveryTime = "35-40 mins",
         distance = "2.3 km",
-        discount = "KASHMIR OFF",
+        discount = "20%",
         discountAmount = "up to ₹120",
         address = "Srinagar, J&K"
     ),
@@ -70387,7 +70387,7 @@ val rajmaRiceItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "NAAN OFF",
+        discount = "20%",
         discountAmount = "up to ₹90",
         address = "South Extension, Delhi"
     ),
@@ -70400,7 +70400,7 @@ val rajmaRiceItems = listOf(
         rating = "4.5",
         deliveryTime = "15-20 mins",
         distance = "0.8 km",
-        discount = "MINI OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -70415,7 +70415,7 @@ val rajmaRiceItems = listOf(
         rating = "4.8",
         deliveryTime = "30-35 mins",
         distance = "2.0 km",
-        discount = "HILL OFF",
+        discount = "20%",
         discountAmount = "up to ₹85",
         address = "Shimla, HP"
     ),
@@ -70428,7 +70428,7 @@ val rajmaRiceItems = listOf(
         rating = "4.7",
         deliveryTime = "30-35 mins",
         distance = "2.2 km",
-        discount = "GARHWAL OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Dehradun, UK"
     ),
@@ -70441,7 +70441,7 @@ val rajmaRiceItems = listOf(
         rating = "4.6",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "MAHA OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Pune, Maharashtra"
     ),
@@ -70454,7 +70454,7 @@ val rajmaRiceItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "BENGAL OFF",
+        discount = "20%",
         discountAmount = "up to ₹75",
         address = "Salt Lake, Kolkata"
     ),
@@ -70469,7 +70469,7 @@ val rajmaRiceItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
-        discount = "COMBO OFF",
+        discount = "20%",
         discountAmount = "up to ₹95",
         address = "Model Town, Delhi"
     ),
@@ -70482,7 +70482,7 @@ val rajmaRiceItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
-        discount = "RAITA OFF",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Rajouri Garden, Delhi"
     ),
@@ -70495,7 +70495,7 @@ val rajmaRiceItems = listOf(
         rating = "4.6",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "SALAD OFF",
+        discount = "20%",
         discountAmount = "up to ₹55",
         address = "GK II, Delhi"
     ),
@@ -70510,7 +70510,7 @@ val rajmaRiceItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "SWEET OFF",
+        discount = "20%",
         discountAmount = "up to ₹85",
         address = "Janakpuri, Delhi"
     ),
@@ -70523,7 +70523,7 @@ val rajmaRiceItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
-        discount = "GARLIC OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Patel Nagar, Delhi"
     ),
@@ -70536,7 +70536,7 @@ val rajmaRiceItems = listOf(
         rating = "4.9",
         deliveryTime = "35-40 mins",
         distance = "2.4 km",
-        discount = "SMOKE OFF",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Cyber City, Gurgaon"
     ),
@@ -70551,7 +70551,7 @@ val rajmaRiceItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
-        discount = "HEALTH OFF",
+        discount = "20%",
         discountAmount = "up to ₹110",
         address = "Green Park, Delhi"
     ),
@@ -70564,7 +70564,7 @@ val rajmaRiceItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.0 km",
-        discount = "JEERA OFF",
+        discount = "20%",
         discountAmount = "up to ₹75",
         address = "Karol Bagh, Delhi"
     ),
@@ -70577,7 +70577,7 @@ val rajmaRiceItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "BASMATI OFF",
+        discount = "20%",
         discountAmount = "up to ₹90",
         address = "Vasant Vihar, Delhi"
     ),
@@ -70592,7 +70592,7 @@ val rajmaRiceItems = listOf(
         rating = "4.6",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "CHEESE OFF",
+        discount = "20%",
         discountAmount = "up to ₹95",
         address = "Saket, Delhi"
     ),
@@ -70605,7 +70605,7 @@ val rajmaRiceItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
-        discount = "THALI OFF",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Chandni Chowk, Delhi"
     )
@@ -71013,7 +71013,7 @@ val upmaItems = listOf(
         rating = "4.7",
         deliveryTime = "15-20 mins",
         distance = "0.9 km",
-        discount = "UPMA OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Mylapore, Chennai"
     ),
@@ -71026,7 +71026,7 @@ val upmaItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "VEG OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Indiranagar, Bangalore"
     ),
@@ -71039,7 +71039,7 @@ val upmaItems = listOf(
         rating = "4.6",
         deliveryTime = "15-20 mins",
         distance = "1.1 km",
-        discount = "ONION OFF",
+        discount = "20%",
         discountAmount = "up to ₹35",
         address = "T Nagar, Chennai"
     ),
@@ -71052,7 +71052,7 @@ val upmaItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "GHEE OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Adyar, Chennai"
     ),
@@ -71065,7 +71065,7 @@ val upmaItems = listOf(
         rating = "4.5",
         deliveryTime = "10-15 mins",
         distance = "0.6 km",
-        discount = "MINI OFF",
+        discount = "20%",
         discountAmount = "up to ₹25",
         address = "Koramangala, Bangalore"
     ),
@@ -71080,7 +71080,7 @@ val upmaItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.7 km",
-        discount = "KERALA OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Fort Kochi, Kerala"
     ),
@@ -71093,7 +71093,7 @@ val upmaItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "ANDHRA OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Gachibowli, Hyderabad"
     ),
@@ -71106,7 +71106,7 @@ val upmaItems = listOf(
         rating = "4.6",
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
-        discount = "KARNATAKA OFF",
+        discount = "20%",
         discountAmount = "up to ₹35",
         address = "Malleshwaram, Bangalore"
     ),
@@ -71119,7 +71119,7 @@ val upmaItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "2.0 km",
-        discount = "CHETTINAD OFF",
+        discount = "20%",
         discountAmount = "up to ₹55",
         address = "Chettinad, Tamil Nadu"
     ),
@@ -71134,7 +71134,7 @@ val upmaItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "WHEAT OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Jayanagar, Bangalore"
     ),
@@ -71147,7 +71147,7 @@ val upmaItems = listOf(
         rating = "4.7",
         deliveryTime = "15-20 mins",
         distance = "1.0 km",
-        discount = "SEMIYA OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Mangalore, Karnataka"
     ),
@@ -71160,7 +71160,7 @@ val upmaItems = listOf(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "1.1 km",
-        discount = "OATS OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Whitefield, Bangalore"
     ),
@@ -71173,7 +71173,7 @@ val upmaItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "RAGI OFF",
+        discount = "20%",
         discountAmount = "up to ₹55",
         address = "Electronic City, Bangalore"
     ),
@@ -71188,7 +71188,7 @@ val upmaItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "SAMBAR OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Velachery, Chennai"
     ),
@@ -71201,7 +71201,7 @@ val upmaItems = listOf(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "0.9 km",
-        discount = "CHUTNEY OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Banashankari, Bangalore"
     ),
@@ -71214,7 +71214,7 @@ val upmaItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "PORIYAL OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Tambaram, Chennai"
     ),
@@ -71229,7 +71229,7 @@ val upmaItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "MASALA OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "MG Road, Bangalore"
     ),
@@ -71242,7 +71242,7 @@ val upmaItems = listOf(
         rating = "4.7",
         deliveryTime = "15-20 mins",
         distance = "1.1 km",
-        discount = "CURRY OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Basavanagudi, Bangalore"
     ),
@@ -71255,7 +71255,7 @@ val upmaItems = listOf(
         rating = "4.6",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "PEANUT OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "HBR Layout, Bangalore"
     ),
@@ -71268,7 +71268,7 @@ val upmaItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
-        discount = "NAVRATNA OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Banjara Hills, Hyderabad"
     )
@@ -71616,7 +71616,7 @@ val manchurianItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "GOBI OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Connaught Place, Delhi"
     ),
@@ -71629,7 +71629,7 @@ val manchurianItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
-        discount = "CHICKEN OFF",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Salt Lake, Kolkata"
     ),
@@ -71642,7 +71642,7 @@ val manchurianItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "PANEER OFF",
+        discount = "20%",
         discountAmount = "up to ₹55",
         address = "Koramangala, Bangalore"
     ),
@@ -71655,7 +71655,7 @@ val manchurianItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "MUSHROOM OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Andheri West, Mumbai"
     ),
@@ -71668,7 +71668,7 @@ val manchurianItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "BABYCORN OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Jubilee Hills, Hyderabad"
     ),
@@ -71683,7 +71683,7 @@ val manchurianItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
-        discount = "DRY OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "MG Road, Pune"
     ),
@@ -71696,7 +71696,7 @@ val manchurianItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "2.0 km",
-        discount = "GRAVY OFF",
+        discount = "20%",
         discountAmount = "up to ₹90",
         address = "Park Street, Kolkata"
     ),
@@ -71709,7 +71709,7 @@ val manchurianItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "SEMI OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Indiranagar, Bangalore"
     ),
@@ -71722,7 +71722,7 @@ val manchurianItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "SCHEZWAN OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Banjara Hills, Hyderabad"
     ),
@@ -71737,7 +71737,7 @@ val manchurianItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
-        discount = "MIXVEG OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Shivaji Nagar, Pune"
     ),
@@ -71750,7 +71750,7 @@ val manchurianItems = listOf(
         rating = "4.6",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "CAPSICUM OFF",
+        discount = "20%",
         discountAmount = "up to ₹35",
         address = "Civil Lines, Delhi"
     ),
@@ -71763,7 +71763,7 @@ val manchurianItems = listOf(
         rating = "4.5",
         deliveryTime = "15-20 mins",
         distance = "0.9 km",
-        discount = "CABBAGE OFF",
+        discount = "20%",
         discountAmount = "up to ₹30",
         address = "Karol Bagh, Delhi"
     ),
@@ -71776,7 +71776,7 @@ val manchurianItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "CARROT OFF",
+        discount = "20%",
         discountAmount = "up to ₹35",
         address = "Jayanagar, Bangalore"
     ),
@@ -71791,7 +71791,7 @@ val manchurianItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "GARLIC OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Patel Nagar, Delhi"
     ),
@@ -71804,7 +71804,7 @@ val manchurianItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
-        discount = "GINGER OFF",
+        discount = "20%",
         discountAmount = "up to ₹75",
         address = "Koregaon Park, Pune"
     ),
@@ -71817,7 +71817,7 @@ val manchurianItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "CHILLI OFF",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Saket, Delhi"
     ),
@@ -71830,7 +71830,7 @@ val manchurianItems = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.9 km",
-        discount = "HONEY OFF",
+        discount = "20%",
         discountAmount = "up to ₹100",
         address = "Bandra West, Mumbai"
     ),
@@ -71845,7 +71845,7 @@ val manchurianItems = listOf(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
-        discount = "TANDOORI OFF",
+        discount = "20%",
         discountAmount = "up to ₹55",
         address = "Civil Lines, Delhi"
     ),
@@ -71858,7 +71858,7 @@ val manchurianItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
-        discount = "AIRFRY OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Whitefield, Bangalore"
     ),
@@ -71871,7 +71871,7 @@ val manchurianItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "2.2 km",
-        discount = "FAMILY OFF",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "GK II, Delhi"
     )
@@ -72190,7 +72190,7 @@ val paneerPakodaItems = listOf(
         rating = "4.9",
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
-        discount = "PAKODA OFF",
+        discount = "20%",
         discountAmount = "up to ₹25",
         address = "Chandni Chowk, Delhi"
     ),
@@ -72203,7 +72203,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "18-22 mins",
         distance = "1.5 km",
-        discount = "CHILI OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "CP, Delhi"
     ),
@@ -72216,7 +72216,7 @@ val paneerPakodaItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
-        discount = "CHEESE OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "South Extension, Delhi"
     ),
@@ -72229,7 +72229,7 @@ val paneerPakodaItems = listOf(
         rating = "4.7",
         deliveryTime = "15-20 mins",
         distance = "1.1 km",
-        discount = "CRISPY OFF",
+        discount = "20%",
         discountAmount = "up to ₹30",
         address = "Karol Bagh, Delhi"
     ),
@@ -72242,7 +72242,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "18-22 mins",
         distance = "1.4 km",
-        discount = "MASALA OFF",
+        discount = "20%",
         discountAmount = "up to ₹35",
         address = "Rajouri Garden, Delhi"
     ),
@@ -72257,7 +72257,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "18-22 mins",
         distance = "1.3 km",
-        discount = "BESAN OFF",
+        discount = "20%",
         discountAmount = "up to ₹35",
         address = "Jayanagar, Bangalore"
     ),
@@ -72270,7 +72270,7 @@ val paneerPakodaItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.6 km",
-        discount = "CORN OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Koregaon Park, Pune"
     ),
@@ -72283,7 +72283,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
-        discount = "RAVA OFF",
+        discount = "20%",
         discountAmount = "up to ₹30",
         address = "Mylapore, Chennai"
     ),
@@ -72296,7 +72296,7 @@ val paneerPakodaItems = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "GLUTEN OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Indiranagar, Bangalore"
     ),
@@ -72311,7 +72311,7 @@ val paneerPakodaItems = listOf(
         rating = "4.9",
         deliveryTime = "18-22 mins",
         distance = "1.4 km",
-        discount = "GREEN OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Banjara Hills, Hyderabad"
     ),
@@ -72324,7 +72324,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.7 km",
-        discount = "JALAPENO OFF",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Bandra West, Mumbai"
     ),
@@ -72337,7 +72337,7 @@ val paneerPakodaItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "SPINACH OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Shivaji Nagar, Pune"
     ),
@@ -72350,7 +72350,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "18-22 mins",
         distance = "1.2 km",
-        discount = "MINT OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Civil Lines, Delhi"
     ),
@@ -72365,7 +72365,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "1.1 km",
-        discount = "AJWANI OFF",
+        discount = "20%",
         discountAmount = "up to ₹30",
         address = "Sadar Bazaar, Delhi"
     ),
@@ -72378,7 +72378,7 @@ val paneerPakodaItems = listOf(
         rating = "4.9",
         deliveryTime = "18-22 mins",
         distance = "1.4 km",
-        discount = "GINGER OFF",
+        discount = "20%",
         discountAmount = "up to ₹35",
         address = "Patel Nagar, Delhi"
     ),
@@ -72391,7 +72391,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "1.0 km",
-        discount = "CHAAT OFF",
+        discount = "20%",
         discountAmount = "up to ₹40",
         address = "Karol Bagh, Delhi"
     ),
@@ -72404,7 +72404,7 @@ val paneerPakodaItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "SCHEZWAN OFF",
+        discount = "20%",
         discountAmount = "up to ₹45",
         address = "Jubilee Hills, Hyderabad"
     ),
@@ -72419,7 +72419,7 @@ val paneerPakodaItems = listOf(
         rating = "4.9",
         deliveryTime = "15-20 mins",
         distance = "1.1 km",
-        discount = "DEEP OFF",
+        discount = "20%",
         discountAmount = "up to ₹25",
         address = "Chandni Chowk, Delhi"
     ),
@@ -72432,7 +72432,7 @@ val paneerPakodaItems = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.6 km",
-        discount = "AIRFRY OFF",
+        discount = "20%",
         discountAmount = "up to ₹50",
         address = "Whitefield, Bangalore"
     ),
@@ -72445,7 +72445,7 @@ val paneerPakodaItems = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "2.0 km",
-        discount = "FAMILY OFF",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "GK II, Delhi"
     )
@@ -72774,7 +72774,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "2.1 km",
-        discount = "NYC OFF",
+        discount = "20%",
         discountAmount = "up to ₹300",
         address = "Connaught Place, Delhi"
     ),
@@ -72787,7 +72787,7 @@ val cheeseCakeItems = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.8 km",
-        discount = "JAPAN OFF",
+        discount = "20%",
         discountAmount = "up to ₹250",
         address = "Saket, Delhi"
     ),
@@ -72800,7 +72800,7 @@ val cheeseCakeItems = listOf(
         rating = "4.7",
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
-        discount = "ITALY OFF",
+        discount = "20%",
         discountAmount = "up to ₹350",
         address = "Vasant Kunj, Delhi"
     ),
@@ -72813,7 +72813,7 @@ val cheeseCakeItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
-        discount = "GERMAN OFF",
+        discount = "20%",
         discountAmount = "up to ₹300",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -72826,7 +72826,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.2 km",
-        discount = "FRENCH OFF",
+        discount = "20%",
         discountAmount = "up to ₹400",
         address = "Hauz Khas, Delhi"
     ),
@@ -72840,7 +72840,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
-        discount = "BERRY OFF",
+        discount = "20%",
         discountAmount = "up to ₹350",
         address = "Greater Kailash, Delhi"
     ),
@@ -72853,7 +72853,7 @@ val cheeseCakeItems = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
-        discount = "BLUE OFF",
+        discount = "20%",
         discountAmount = "up to ₹350",
         address = "Indiranagar, Bangalore"
     ),
@@ -72866,7 +72866,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.1 km",
-        discount = "ROSE OFF",
+        discount = "20%",
         discountAmount = "up to ₹400",
         address = "Koregaon Park, Pune"
     ),
@@ -72879,7 +72879,7 @@ val cheeseCakeItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.8 km",
-        discount = "MANGO OFF",
+        discount = "20%",
         discountAmount = "up to ₹380",
         address = "Bandra West, Mumbai"
     ),
@@ -72892,7 +72892,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.2 km",
-        discount = "MIXBERRY OFF",
+        discount = "20%",
         discountAmount = "up to ₹450",
         address = "Jubilee Hills, Hyderabad"
     ),
@@ -72907,7 +72907,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
-        discount = "CHOC OFF",
+        discount = "20%",
         discountAmount = "up to ₹500",
         address = "Hauz Khas, Delhi"
     ),
@@ -72920,7 +72920,7 @@ val cheeseCakeItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
-        discount = "CARAMEL OFF",
+        discount = "20%",
         discountAmount = "up to ₹400",
         address = "South Extension, Delhi"
     ),
@@ -72933,7 +72933,7 @@ val cheeseCakeItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.6 km",
-        discount = "OREO OFF",
+        discount = "20%",
         discountAmount = "up to ₹380",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -72946,7 +72946,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.0 km",
-        discount = "NUTELLA OFF",
+        discount = "20%",
         discountAmount = "up to ₹550",
         address = "Banjara Hills, Hyderabad"
     ),
@@ -72961,7 +72961,7 @@ val cheeseCakeItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.7 km",
-        discount = "MATCHA OFF",
+        discount = "20%",
         discountAmount = "up to ₹450",
         address = "Whitefield, Bangalore"
     ),
@@ -72974,7 +72974,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.1 km",
-        discount = "TIRAMISU OFF",
+        discount = "20%",
         discountAmount = "up to ₹500",
         address = "CP, Delhi"
     ),
@@ -72987,7 +72987,7 @@ val cheeseCakeItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.5 km",
-        discount = "LEMON OFF",
+        discount = "20%",
         discountAmount = "up to ₹350",
         address = "Karol Bagh, Delhi"
     ),
@@ -73002,7 +73002,7 @@ val cheeseCakeItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
-        discount = "KETO OFF",
+        discount = "20%",
         discountAmount = "up to ₹600",
         address = "Dwarka, Delhi"
     ),
@@ -73015,7 +73015,7 @@ val cheeseCakeItems = listOf(
         rating = "4.7",
         deliveryTime = "35-45 mins",
         distance = "2.0 km",
-        discount = "VEGAN OFF",
+        discount = "20%",
         discountAmount = "up to ₹550",
         address = "Koregaon Park, Pune"
     ),
@@ -73030,7 +73030,7 @@ val cheeseCakeItems = listOf(
         rating = "4.9",
         deliveryTime = "45-50 mins",
         distance = "2.5 km",
-        discount = "PARTY OFF",
+        discount = "20%",
         discountAmount = "up to ₹300",
         address = "GK II, Delhi"
     )
@@ -73341,7 +73341,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.5 km",
-        discount = "BROWNIE20",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Connaught Place, Delhi"
     ),
@@ -73354,7 +73354,7 @@ val brownieItems = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
-        discount = "BELGIAN25",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Saket, Delhi"
     ),
@@ -73367,7 +73367,7 @@ val brownieItems = listOf(
         rating = "4.7",
         deliveryTime = "20-30 mins",
         distance = "1.2 km",
-        discount = "WALNUT15",
+        discount = "20%",
         discountAmount = "up to ₹120",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -73380,7 +73380,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.8 km",
-        discount = "DAIRY20",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Vasant Kunj, Delhi"
     ),
@@ -73393,7 +73393,7 @@ val brownieItems = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "2.1 km",
-        discount = "DARK30",
+        discount = "20%",
         discountAmount = "up to ₹250",
         address = "Hauz Khas, Delhi"
     ),
@@ -73408,7 +73408,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
-        discount = "CARAMEL20",
+        discount = "20%",
         discountAmount = "up to ₹220",
         address = "South Extension, Delhi"
     ),
@@ -73421,7 +73421,7 @@ val brownieItems = listOf(
         rating = "4.9",
         deliveryTime = "25-35 mins",
         distance = "1.6 km",
-        discount = "PEANUT25",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Greater Kailash, Delhi"
     ),
@@ -73434,7 +73434,7 @@ val brownieItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.4 km",
-        discount = "ALMOND15",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Karol Bagh, Delhi"
     ),
@@ -73447,7 +73447,7 @@ val brownieItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.2 km",
-        discount = "PRALINE30",
+        discount = "20%",
         discountAmount = "up to ₹280",
         address = "Banjara Hills, Hyderabad"
     ),
@@ -73460,7 +73460,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
-        discount = "MACADAMIA25",
+        discount = "20%",
         discountAmount = "up to ₹300",
         address = "Jubilee Hills, Hyderabad"
     ),
@@ -73475,7 +73475,7 @@ val brownieItems = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "1.8 km",
-        discount = "SWIRL25",
+        discount = "20%",
         discountAmount = "up to ₹250",
         address = "Indiranagar, Bangalore"
     ),
@@ -73488,7 +73488,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.5 km",
-        discount = "RED20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Whitefield, Bangalore"
     ),
@@ -73501,7 +73501,7 @@ val brownieItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
-        discount = "MINT15",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Koregaon Park, Pune"
     ),
@@ -73514,7 +73514,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "20-30 mins",
         distance = "1.3 km",
-        discount = "COFFEE20",
+        discount = "20%",
         discountAmount = "up to ₹160",
         address = "Bandra West, Mumbai"
     ),
@@ -73529,7 +73529,7 @@ val brownieItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.6 km",
-        discount = "ORANGE15",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -73542,7 +73542,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
-        discount = "RASPBERRY20",
+        discount = "20%",
         discountAmount = "up to ₹220",
         address = "GK II, Delhi"
     ),
@@ -73555,7 +73555,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
-        discount = "CHILI25",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "CP, Delhi"
     ),
@@ -73570,7 +73570,7 @@ val brownieItems = listOf(
         rating = "4.8",
         deliveryTime = "35-45 mins",
         distance = "2.1 km",
-        discount = "GLUTEN25",
+        discount = "20%",
         discountAmount = "up to ₹300",
         address = "Dwarka, Delhi"
     ),
@@ -73583,7 +73583,7 @@ val brownieItems = listOf(
         rating = "4.7",
         deliveryTime = "35-45 mins",
         distance = "2.0 km",
-        discount = "VEGAN20",
+        discount = "20%",
         discountAmount = "up to ₹280",
         address = "Koregaon Park, Pune"
     ),
@@ -73598,7 +73598,7 @@ val brownieItems = listOf(
         rating = "4.9",
         deliveryTime = "40-50 mins",
         distance = "2.4 km",
-        discount = "GIFT30",
+        discount = "20%",
         discountAmount = "up to ₹350",
         address = "Hauz Khas, Delhi"
     )
@@ -73906,7 +73906,7 @@ val chaapItems = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
-        discount = "TANDOORI20",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "GTB Nagar, Delhi"
     ),
@@ -73919,7 +73919,7 @@ val chaapItems = listOf(
         rating = "4.8",
         deliveryTime = "35-45 mins",
         distance = "2.5 km",
-        discount = "AFGHANI25",
+        discount = "20%",
         discountAmount = "up to ₹220",
         address = "Rohini, Delhi"
     ),
@@ -73932,7 +73932,7 @@ val chaapItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "2.2 km",
-        discount = "MALAI25",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Green Park, Delhi"
     ),
@@ -73945,7 +73945,7 @@ val chaapItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
-        discount = "TANGDI30",
+        discount = "20%",
         discountAmount = "up to ₹250",
         address = "Rajouri Garden, Delhi"
     ),
@@ -73958,7 +73958,7 @@ val chaapItems = listOf(
         rating = "4.7",
         deliveryTime = "30-40 mins",
         distance = "2.1 km",
-        discount = "RESHMI20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Janakpuri, Delhi"
     ),
@@ -73973,7 +73973,7 @@ val chaapItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.8 km",
-        discount = "ACHARI20",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -73986,7 +73986,7 @@ val chaapItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.9 km",
-        discount = "MASALA15",
+        discount = "20%",
         discountAmount = "up to ₹160",
         address = "Kamla Nagar, Delhi"
     ),
@@ -73999,7 +73999,7 @@ val chaapItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
-        discount = "PEPPER25",
+        discount = "20%",
         discountAmount = "up to ₹190",
         address = "Vasant Vihar, Delhi"
     ),
@@ -74012,7 +74012,7 @@ val chaapItems = listOf(
         rating = "4.8",
         deliveryTime = "35-45 mins",
         distance = "2.4 km",
-        discount = "HYDERABADI25",
+        discount = "20%",
         discountAmount = "up to ₹210",
         address = "Banjara Hills, Hyderabad"
     ),
@@ -74025,7 +74025,7 @@ val chaapItems = listOf(
         rating = "4.7",
         deliveryTime = "30-40 mins",
         distance = "2.2 km",
-        discount = "KOLHAPURI20",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Koregaon Park, Pune"
     ),
@@ -74040,7 +74040,7 @@ val chaapItems = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "1.8 km",
-        discount = "BUTTER25",
+        discount = "20%",
         discountAmount = "up to ₹230",
         address = "Connaught Place, Delhi"
     ),
@@ -74053,7 +74053,7 @@ val chaapItems = listOf(
         rating = "4.8",
         deliveryTime = "35-45 mins",
         distance = "2.1 km",
-        discount = "MUSHROOM20",
+        discount = "20%",
         discountAmount = "up to ₹240",
         address = "Saket, Delhi"
     ),
@@ -74066,7 +74066,7 @@ val chaapItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
-        discount = "KADHAI15",
+        discount = "20%",
         discountAmount = "up to ₹170",
         address = "Karol Bagh, Delhi"
     ),
@@ -74079,7 +74079,7 @@ val chaapItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
-        discount = "BHUNA20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Pitampura, Delhi"
     ),
@@ -74094,7 +74094,7 @@ val chaapItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.6 km",
-        discount = "CHILLI15",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "GTB Nagar, Delhi"
     ),
@@ -74107,7 +74107,7 @@ val chaapItems = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
-        discount = "HARABHARA20",
+        discount = "20%",
         discountAmount = "up to ₹160",
         address = "Indirapuram, Ghaziabad"
     ),
@@ -74120,7 +74120,7 @@ val chaapItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
-        discount = "STUFFED25",
+        discount = "20%",
         discountAmount = "up to ₹280",
         address = "Hauz Khas, Delhi"
     ),
@@ -74135,7 +74135,7 @@ val chaapItems = listOf(
         rating = "4.8",
         deliveryTime = "35-45 mins",
         distance = "2.2 km",
-        discount = "LUCKNOWI25",
+        discount = "20%",
         discountAmount = "up to ₹250",
         address = "Civil Lines, Delhi"
     ),
@@ -74148,7 +74148,7 @@ val chaapItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.4 km",
-        discount = "MUGHLAI30",
+        discount = "20%",
         discountAmount = "up to ₹280",
         address = "Old Delhi, Delhi"
     ),
@@ -74163,7 +74163,7 @@ val chaapItems = listOf(
         rating = "4.9",
         deliveryTime = "40-50 mins",
         distance = "2.5 km",
-        discount = "FEAST30",
+        discount = "20%",
         discountAmount = "up to ₹400",
         address = "Noida Sector 18, Noida"
     )
@@ -74563,7 +74563,7 @@ val dalItems = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "1.8 km",
-        discount = "MAKHANI25",
+        discount = "20%",
         discountAmount = "up to ₹250",
         address = "Connaught Place, Delhi"
     ),
@@ -74576,7 +74576,7 @@ val dalItems = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.6 km",
-        discount = "BUTTER20",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Saket, Delhi"
     ),
@@ -74589,7 +74589,7 @@ val dalItems = listOf(
         rating = "4.8",
         deliveryTime = "20-30 mins",
         distance = "1.2 km",
-        discount = "TADKA15",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -74602,7 +74602,7 @@ val dalItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "FRY10",
+        discount = "20%",
         discountAmount = "up to ₹100",
         address = "Karol Bagh, Delhi"
     ),
@@ -74615,7 +74615,7 @@ val dalItems = listOf(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
-        discount = "PALAK15",
+        discount = "20%",
         discountAmount = "up to ₹120",
         address = "GTB Nagar, Delhi"
     ),
@@ -74630,7 +74630,7 @@ val dalItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
-        discount = "PANCHMEL20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Rajouri Garden, Delhi"
     ),
@@ -74643,7 +74643,7 @@ val dalItems = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.9 km",
-        discount = "GUJARATI15",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Vasant Vihar, Delhi"
     ),
@@ -74656,7 +74656,7 @@ val dalItems = listOf(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
-        discount = "BENGALI10",
+        discount = "20%",
         discountAmount = "up to ₹120",
         address = "Chittaranjan Park, Delhi"
     ),
@@ -74669,7 +74669,7 @@ val dalItems = listOf(
         rating = "4.7",
         deliveryTime = "30-35 mins",
         distance = "2.1 km",
-        discount = "MAHA15",
+        discount = "20%",
         discountAmount = "up to ₹140",
         address = "Vashi, Mumbai"
     ),
@@ -74682,7 +74682,7 @@ val dalItems = listOf(
         rating = "4.8",
         deliveryTime = "30-40 mins",
         distance = "2.2 km",
-        discount = "HYDERABADI20",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Banjara Hills, Hyderabad"
     ),
@@ -74697,7 +74697,7 @@ val dalItems = listOf(
         rating = "4.6",
         deliveryTime = "20-30 mins",
         distance = "1.5 km",
-        discount = "CHANA10",
+        discount = "20%",
         discountAmount = "up to ₹100",
         address = "Kamla Nagar, Delhi"
     ),
@@ -74710,7 +74710,7 @@ val dalItems = listOf(
         rating = "4.6",
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
-        discount = "TOOR10",
+        discount = "20%",
         discountAmount = "up to ₹90",
         address = "Malleswaram, Bangalore"
     ),
@@ -74723,7 +74723,7 @@ val dalItems = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "MOONG10",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Indiranagar, Bangalore"
     ),
@@ -74736,7 +74736,7 @@ val dalItems = listOf(
         rating = "4.5",
         deliveryTime = "20-30 mins",
         distance = "1.6 km",
-        discount = "MASOOR5",
+        discount = "20%",
         discountAmount = "up to ₹60",
         address = "Koregaon Park, Pune"
     ),
@@ -74751,7 +74751,7 @@ val dalItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
-        discount = "BAATI25",
+        discount = "20%",
         discountAmount = "up to ₹300",
         address = "Pitampura, Delhi"
     ),
@@ -74764,7 +74764,7 @@ val dalItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
-        discount = "PAKWAN15",
+        discount = "20%",
         discountAmount = "up to ₹120",
         address = "Rajouri Garden, Delhi"
     ),
@@ -74777,7 +74777,7 @@ val dalItems = listOf(
         rating = "4.8",
         deliveryTime = "30-35 mins",
         distance = "2.0 km",
-        discount = "DHOKLI20",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Borivali, Mumbai"
     ),
@@ -74792,7 +74792,7 @@ val dalItems = listOf(
         rating = "4.7",
         deliveryTime = "25-35 mins",
         distance = "1.9 km",
-        discount = "PROTEIN20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Dwarka, Delhi"
     ),
@@ -74805,7 +74805,7 @@ val dalItems = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "JAIN15",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Borivali, Mumbai"
     ),
@@ -74820,7 +74820,7 @@ val dalItems = listOf(
         rating = "4.9",
         deliveryTime = "35-45 mins",
         distance = "2.4 km",
-        discount = "DALFEAST25",
+        discount = "20%",
         discountAmount = "up to ₹350",
         address = "Hauz Khas, Delhi"
     )
@@ -75211,7 +75211,7 @@ val waffleItemsList = listOf(
         rating = "4.9",
         deliveryTime = "20-30 mins",
         distance = "1.2 km",
-        discount = "BELGIAN25",
+        discount = "20%",
         discountAmount = "up to ₹250",
         address = "Connaught Place, Delhi"
     ),
@@ -75224,7 +75224,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.5 km",
-        discount = "BRUSSELS20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Saket, Delhi"
     ),
@@ -75237,7 +75237,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
-        discount = "LIEGE20",
+        discount = "20%",
         discountAmount = "up to ₹220",
         address = "Saket, Delhi"
     ),
@@ -75250,7 +75250,7 @@ val waffleItemsList = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
-        discount = "AMERICAN15",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -75263,7 +75263,7 @@ val waffleItemsList = listOf(
         rating = "4.7",
         deliveryTime = "20-30 mins",
         distance = "1.8 km",
-        discount = "BUTTERMILK15",
+        discount = "20%",
         discountAmount = "up to ₹160",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -75278,7 +75278,7 @@ val waffleItemsList = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
-        discount = "NUTELLA25",
+        discount = "20%",
         discountAmount = "up to ₹300",
         address = "Rajouri Garden, Delhi"
     ),
@@ -75291,7 +75291,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "20-30 mins",
         distance = "1.3 km",
-        discount = "CHOCO20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Rajouri Garden, Delhi"
     ),
@@ -75304,7 +75304,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
-        discount = "REDVELVET20",
+        discount = "20%",
         discountAmount = "up to ₹240",
         address = "GTB Nagar, Delhi"
     ),
@@ -75317,7 +75317,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "15-20 mins",
         distance = "1.4 km",
-        discount = "GELATO15",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Karol Bagh, Delhi"
     ),
@@ -75330,7 +75330,7 @@ val waffleItemsList = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
-        discount = "BROWNIE25",
+        discount = "20%",
         discountAmount = "up to ₹280",
         address = "Rajouri Garden, Delhi"
     ),
@@ -75345,7 +75345,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.6 km",
-        discount = "BERRY20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Vasant Vihar, Delhi"
     ),
@@ -75358,7 +75358,7 @@ val waffleItemsList = listOf(
         rating = "4.9",
         deliveryTime = "20-30 mins",
         distance = "1.6 km",
-        discount = "BANANA25",
+        discount = "20%",
         discountAmount = "up to ₹300",
         address = "Vasant Vihar, Delhi"
     ),
@@ -75371,7 +75371,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.6 km",
-        discount = "BLUEBERRY20",
+        discount = "20%",
         discountAmount = "up to ₹220",
         address = "Vasant Vihar, Delhi"
     ),
@@ -75384,7 +75384,7 @@ val waffleItemsList = listOf(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "1.9 km",
-        discount = "FRUIT15",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Dwarka, Delhi"
     ),
@@ -75399,7 +75399,7 @@ val waffleItemsList = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "2.2 km",
-        discount = "CHICKEN25",
+        discount = "20%",
         discountAmount = "up to ₹350",
         address = "Pitampura, Delhi"
     ),
@@ -75412,7 +75412,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "1.8 km",
-        discount = "BACON20",
+        discount = "20%",
         discountAmount = "up to ₹250",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -75425,7 +75425,7 @@ val waffleItemsList = listOf(
         rating = "4.7",
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
-        discount = "CHEESE15",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Kamla Nagar, Delhi"
     ),
@@ -75440,7 +75440,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "2.0 km",
-        discount = "MATCHA20",
+        discount = "20%",
         discountAmount = "up to ₹240",
         address = "Hauz Khas, Delhi"
     ),
@@ -75453,7 +75453,7 @@ val waffleItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "2.1 km",
-        discount = "PUMPKIN20",
+        discount = "20%",
         discountAmount = "up to ₹220",
         address = "Greater Kailash, Delhi"
     ),
@@ -75468,7 +75468,7 @@ val waffleItemsList = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "2.3 km",
-        discount = "WAFFLEFEAST25",
+        discount = "20%",
         discountAmount = "up to ₹350",
         address = "Cyber City, Gurgaon"
     )
@@ -75778,7 +75778,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.1 km",
-        discount = "ALOO25",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Chandni Chowk, Delhi"
     ),
@@ -75791,7 +75791,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "0.9 km",
-        discount = "KHASTA20",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Model Town, Delhi"
     ),
@@ -75804,7 +75804,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.1 km",
-        discount = "PYAZ20",
+        discount = "20%",
         discountAmount = "up to ₹65",
         address = "Chandni Chowk, Delhi"
     ),
@@ -75817,7 +75817,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "2.3 km",
-        discount = "DAL25",
+        discount = "20%",
         discountAmount = "up to ₹75",
         address = "Karol Bagh, Delhi"
     ),
@@ -75830,7 +75830,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-35 mins",
         distance = "2.3 km",
-        discount = "MOONG20",
+        discount = "20%",
         discountAmount = "up to ₹80",
         address = "Karol Bagh, Delhi"
     ),
@@ -75845,7 +75845,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
-        discount = "DAHI25",
+        discount = "20%",
         discountAmount = "up to ₹90",
         address = "Chandni Chowk, Delhi"
     ),
@@ -75858,7 +75858,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.7 km",
-        discount = "CHAAT20",
+        discount = "20%",
         discountAmount = "up to ₹85",
         address = "Kamla Nagar, Delhi"
     ),
@@ -75871,7 +75871,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "20-30 mins",
         distance = "1.1 km",
-        discount = "BHALLA25",
+        discount = "20%",
         discountAmount = "up to ₹100",
         address = "Chandni Chowk, Delhi"
     ),
@@ -75884,7 +75884,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "ALOOCHAAT20",
+        discount = "20%",
         discountAmount = "up to ₹90",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -75897,7 +75897,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
-        discount = "PLATTER25",
+        discount = "20%",
         discountAmount = "up to ₹150",
         address = "Kamla Nagar, Delhi"
     ),
@@ -75912,7 +75912,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "30-35 mins",
         distance = "2.5 km",
-        discount = "RAJASTHAN20",
+        discount = "20%",
         discountAmount = "up to ₹100",
         address = "Raja Garden, Delhi"
     ),
@@ -75925,7 +75925,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "30-35 mins",
         distance = "2.5 km",
-        discount = "JODHPUR25",
+        discount = "20%",
         discountAmount = "up to ₹110",
         address = "Raja Garden, Delhi"
     ),
@@ -75938,7 +75938,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.7",
         deliveryTime = "25-30 mins",
         distance = "2.0 km",
-        discount = "INDORI20",
+        discount = "20%",
         discountAmount = "up to ₹85",
         address = "Janakpuri, Delhi"
     ),
@@ -75951,7 +75951,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "25-30 mins",
         distance = "2.3 km",
-        discount = "BIKANER20",
+        discount = "20%",
         discountAmount = "up to ₹95",
         address = "Karol Bagh, Delhi"
     ),
@@ -75966,7 +75966,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
-        discount = "DELHI20",
+        discount = "20%",
         discountAmount = "up to ₹70",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -75979,7 +75979,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.1 km",
-        discount = "OLDDELHI25",
+        discount = "20%",
         discountAmount = "up to ₹85",
         address = "Chandni Chowk, Delhi"
     ),
@@ -75992,7 +75992,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "20-25 mins",
         distance = "0.9 km",
-        discount = "SABZI25",
+        discount = "20%",
         discountAmount = "up to ₹95",
         address = "Model Town, Delhi"
     ),
@@ -76007,7 +76007,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
-        discount = "MINI25",
+        discount = "20%",
         discountAmount = "up to ₹120",
         address = "Lajpat Nagar, Delhi"
     ),
@@ -76020,7 +76020,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.8",
         deliveryTime = "35-40 mins",
         distance = "2.3 km",
-        discount = "PARTY20",
+        discount = "20%",
         discountAmount = "up to ₹200",
         address = "Karol Bagh, Delhi"
     ),
@@ -76035,7 +76035,7 @@ val alooKachoriItemsList = listOf(
         rating = "4.9",
         deliveryTime = "30-40 mins",
         distance = "1.7 km",
-        discount = "FEAST25",
+        discount = "20%",
         discountAmount = "up to ₹180",
         address = "Kamla Nagar, Delhi"
     )

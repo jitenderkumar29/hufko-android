@@ -8192,7 +8192,7 @@ fun BathCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
                 discount = "25%",
-                discountAmount = "₹20,
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -27859,7 +27859,7 @@ fun ChilliChickenCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
                 discount = "25%",
-                discountAmount = "₹20,
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             RestaurantItemFull(
@@ -65305,7 +65305,7 @@ fun TiramisuCategoryPage() {
                 deliveryTime = "45-50 mins",
                 distance = "2.5 km",
                 discount = "15%",
-                discountAmount = "₹20,
+                discountAmount = "₹20",
                 address = "Lower Parel, Mumbai"
             ),
             FoodItemDoubleF(
@@ -65649,7 +65649,7 @@ fun TiramisuCategoryPage() {
                 deliveryTime = "55-60 mins",
                 distance = "3.0 km",
                 discount = "20%",
-                discountAmount = "₹20,
+                discountAmount = "₹20",
                 address = "Lower Parel, Mumbai"
             )
         ).forEach { restaurantItem ->
@@ -68191,7 +68191,7 @@ Column(
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
         discount = "20%",
-        discountAmount = "₹20,
+        discountAmount = "₹20",
         address = "Andheri East, Mumbai"
     ),
     RestaurantItemFull(
@@ -69214,7 +69214,7 @@ val jalebiItems = listOf(
         deliveryTime = "15-20 mins",
         distance = "0.9 km",
         discount = "20%",
-        discountAmount = "₹20,
+        discountAmount = "₹20",
         address = "Vaishali Nagar, Jaipur"
     ),
     RestaurantItemFull(
@@ -71723,7 +71723,7 @@ val manchurianItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
         discount = "20%",
-        discountAmount = "₹20,
+        discountAmount = "₹20",
         address = "Banjara Hills, Hyderabad"
     ),
 
@@ -73203,7 +73203,7 @@ val brownieItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
         discount = "15%",
-        discountAmount = "up to ₹100",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -73216,7 +73216,7 @@ val brownieItems = listOf(
         deliveryTime = "30-35 mins",
         distance = "2.1 km",
         discount = "10%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     FoodItemDoubleF(
@@ -73229,7 +73229,7 @@ val brownieItems = listOf(
         deliveryTime = "30-35 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Vasant Kunj, Delhi"
     ),
     FoodItemDoubleF(
@@ -73242,7 +73242,7 @@ val brownieItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
         discount = "12%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     FoodItemDoubleF(
@@ -73255,7 +73255,7 @@ val brownieItems = listOf(
         deliveryTime = "30-35 mins",
         distance = "1.9 km",
         discount = "15%",
-        discountAmount = "up to ₹220",
+        discountAmount = "₹20",
         address = "Greater Kailash, Delhi"
     ),
     FoodItemDoubleF(
@@ -73268,7 +73268,7 @@ val brownieItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
         discount = "18%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     )
 )
@@ -73342,7 +73342,7 @@ val brownieItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.5 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -73355,7 +73355,7 @@ val brownieItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -73368,7 +73368,7 @@ val brownieItems = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.2 km",
         discount = "20%",
-        discountAmount = "up to ₹120",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -73381,7 +73381,7 @@ val brownieItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Vasant Kunj, Delhi"
     ),
     RestaurantItemFull(
@@ -73394,7 +73394,7 @@ val brownieItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.1 km",
         discount = "20%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
 
@@ -73409,7 +73409,7 @@ val brownieItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
         discount = "20%",
-        discountAmount = "up to ₹220",
+        discountAmount = "₹20",
         address = "South Extension, Delhi"
     ),
     RestaurantItemFull(
@@ -73422,7 +73422,7 @@ val brownieItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.6 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Greater Kailash, Delhi"
     ),
     RestaurantItemFull(
@@ -73435,7 +73435,7 @@ val brownieItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.4 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -73448,7 +73448,7 @@ val brownieItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.2 km",
         discount = "20%",
-        discountAmount = "up to ₹280",
+        discountAmount = "₹20",
         address = "Banjara Hills, Hyderabad"
     ),
     RestaurantItemFull(
@@ -73461,7 +73461,7 @@ val brownieItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹300",
+        discountAmount = "₹20",
         address = "Jubilee Hills, Hyderabad"
     ),
 
@@ -73476,7 +73476,7 @@ val brownieItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Indiranagar, Bangalore"
     ),
     RestaurantItemFull(
@@ -73489,7 +73489,7 @@ val brownieItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.5 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Whitefield, Bangalore"
     ),
     RestaurantItemFull(
@@ -73502,7 +73502,7 @@ val brownieItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Koregaon Park, Pune"
     ),
     RestaurantItemFull(
@@ -73515,7 +73515,7 @@ val brownieItems = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.3 km",
         discount = "20%",
-        discountAmount = "up to ₹160",
+        discountAmount = "₹20",
         address = "Bandra West, Mumbai"
     ),
 
@@ -73530,7 +73530,7 @@ val brownieItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.6 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -73543,7 +73543,7 @@ val brownieItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
         discount = "20%",
-        discountAmount = "up to ₹220",
+        discountAmount = "₹20",
         address = "GK II, Delhi"
     ),
     RestaurantItemFull(
@@ -73556,7 +73556,7 @@ val brownieItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "CP, Delhi"
     ),
 
@@ -73571,7 +73571,7 @@ val brownieItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.1 km",
         discount = "20%",
-        discountAmount = "up to ₹300",
+        discountAmount = "₹20",
         address = "Dwarka, Delhi"
     ),
     RestaurantItemFull(
@@ -73584,7 +73584,7 @@ val brownieItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹280",
+        discountAmount = "₹20",
         address = "Koregaon Park, Pune"
     ),
 
@@ -73599,7 +73599,7 @@ val brownieItems = listOf(
         deliveryTime = "40-50 mins",
         distance = "2.4 km",
         discount = "20%",
-        discountAmount = "up to ₹350",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     )
 ).forEach { restaurantItem ->
@@ -73768,7 +73768,7 @@ val chaapItems = listOf(
         deliveryTime = "30-35 mins",
         distance = "2.1 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -73781,7 +73781,7 @@ val chaapItems = listOf(
         deliveryTime = "30-35 mins",
         distance = "1.8 km",
         discount = "15%",
-        discountAmount = "up to ₹120",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     FoodItemDoubleF(
@@ -73794,7 +73794,7 @@ val chaapItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
         discount = "18%",
-        discountAmount = "up to ₹130",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     FoodItemDoubleF(
@@ -73807,7 +73807,7 @@ val chaapItems = listOf(
         deliveryTime = "35-40 mins",
         distance = "2.3 km",
         discount = "22%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Vasant Kunj, Delhi"
     ),
     FoodItemDoubleF(
@@ -73820,7 +73820,7 @@ val chaapItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.6 km",
         discount = "12%",
-        discountAmount = "up to ₹100",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     FoodItemDoubleF(
@@ -73833,7 +73833,7 @@ val chaapItems = listOf(
         deliveryTime = "35-40 mins",
         distance = "2.0 km",
         discount = "25%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     )
 )
@@ -73907,7 +73907,7 @@ val chaapItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "GTB Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -73920,7 +73920,7 @@ val chaapItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.5 km",
         discount = "20%",
-        discountAmount = "up to ₹220",
+        discountAmount = "₹20",
         address = "Rohini, Delhi"
     ),
     RestaurantItemFull(
@@ -73933,7 +73933,7 @@ val chaapItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.2 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Green Park, Delhi"
     ),
     RestaurantItemFull(
@@ -73946,7 +73946,7 @@ val chaapItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -73959,7 +73959,7 @@ val chaapItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.1 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Janakpuri, Delhi"
     ),
 
@@ -73974,7 +73974,7 @@ val chaapItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -73987,7 +73987,7 @@ val chaapItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.9 km",
         discount = "20%",
-        discountAmount = "up to ₹160",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -74000,7 +74000,7 @@ val chaapItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹190",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -74013,7 +74013,7 @@ val chaapItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.4 km",
         discount = "20%",
-        discountAmount = "up to ₹210",
+        discountAmount = "₹20",
         address = "Banjara Hills, Hyderabad"
     ),
     RestaurantItemFull(
@@ -74026,7 +74026,7 @@ val chaapItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.2 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Koregaon Park, Pune"
     ),
 
@@ -74041,7 +74041,7 @@ val chaapItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹230",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -74054,7 +74054,7 @@ val chaapItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.1 km",
         discount = "20%",
-        discountAmount = "up to ₹240",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -74067,7 +74067,7 @@ val chaapItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹170",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -74080,7 +74080,7 @@ val chaapItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "1.9 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Pitampura, Delhi"
     ),
 
@@ -74095,7 +74095,7 @@ val chaapItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.6 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "GTB Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -74108,7 +74108,7 @@ val chaapItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹160",
+        discountAmount = "₹20",
         address = "Indirapuram, Ghaziabad"
     ),
     RestaurantItemFull(
@@ -74121,7 +74121,7 @@ val chaapItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹280",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
 
@@ -74136,7 +74136,7 @@ val chaapItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.2 km",
         discount = "20%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Civil Lines, Delhi"
     ),
     RestaurantItemFull(
@@ -74149,7 +74149,7 @@ val chaapItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.4 km",
         discount = "20%",
-        discountAmount = "up to ₹280",
+        discountAmount = "₹20",
         address = "Old Delhi, Delhi"
     ),
 
@@ -74164,7 +74164,7 @@ val chaapItems = listOf(
         deliveryTime = "40-50 mins",
         distance = "2.5 km",
         discount = "20%",
-        discountAmount = "up to ₹400",
+        discountAmount = "₹20",
         address = "Noida Sector 18, Noida"
     )
 ).forEach { restaurantItem ->
@@ -74425,7 +74425,7 @@ val dalItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
         discount = "15%",
-        discountAmount = "up to ₹120",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -74438,7 +74438,7 @@ val dalItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
         discount = "10%",
-        discountAmount = "up to ₹80",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     FoodItemDoubleF(
@@ -74451,7 +74451,7 @@ val dalItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "2.0 km",
         discount = "12%",
-        discountAmount = "up to ₹100",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     FoodItemDoubleF(
@@ -74464,7 +74464,7 @@ val dalItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.6 km",
         discount = "10%",
-        discountAmount = "up to ₹70",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     FoodItemDoubleF(
@@ -74477,7 +74477,7 @@ val dalItems = listOf(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "5%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     FoodItemDoubleF(
@@ -74490,7 +74490,7 @@ val dalItems = listOf(
         deliveryTime = "30-35 mins",
         distance = "2.2 km",
         discount = "20%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Pitampura, Delhi"
     )
 )
@@ -74564,7 +74564,7 @@ val dalItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -74577,7 +74577,7 @@ val dalItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.6 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -74590,7 +74590,7 @@ val dalItems = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.2 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -74603,7 +74603,7 @@ val dalItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
         discount = "20%",
-        discountAmount = "up to ₹100",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -74616,7 +74616,7 @@ val dalItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹120",
+        discountAmount = "₹20",
         address = "GTB Nagar, Delhi"
     ),
 
@@ -74631,7 +74631,7 @@ val dalItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -74644,7 +74644,7 @@ val dalItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.9 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -74657,7 +74657,7 @@ val dalItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹120",
+        discountAmount = "₹20",
         address = "Chittaranjan Park, Delhi"
     ),
     RestaurantItemFull(
@@ -74670,7 +74670,7 @@ val dalItems = listOf(
         deliveryTime = "30-35 mins",
         distance = "2.1 km",
         discount = "20%",
-        discountAmount = "up to ₹140",
+        discountAmount = "₹20",
         address = "Vashi, Mumbai"
     ),
     RestaurantItemFull(
@@ -74683,7 +74683,7 @@ val dalItems = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.2 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Banjara Hills, Hyderabad"
     ),
 
@@ -74698,7 +74698,7 @@ val dalItems = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.5 km",
         discount = "20%",
-        discountAmount = "up to ₹100",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -74711,7 +74711,7 @@ val dalItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
         discount = "20%",
-        discountAmount = "up to ₹90",
+        discountAmount = "₹20",
         address = "Malleswaram, Bangalore"
     ),
     RestaurantItemFull(
@@ -74724,7 +74724,7 @@ val dalItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
         discount = "20%",
-        discountAmount = "up to ₹80",
+        discountAmount = "₹20",
         address = "Indiranagar, Bangalore"
     ),
     RestaurantItemFull(
@@ -74737,7 +74737,7 @@ val dalItems = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.6 km",
         discount = "20%",
-        discountAmount = "up to ₹60",
+        discountAmount = "₹20",
         address = "Koregaon Park, Pune"
     ),
 
@@ -74752,7 +74752,7 @@ val dalItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹300",
+        discountAmount = "₹20",
         address = "Pitampura, Delhi"
     ),
     RestaurantItemFull(
@@ -74765,7 +74765,7 @@ val dalItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹120",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -74778,7 +74778,7 @@ val dalItems = listOf(
         deliveryTime = "30-35 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Borivali, Mumbai"
     ),
 
@@ -74793,7 +74793,7 @@ val dalItems = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.9 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Dwarka, Delhi"
     ),
     RestaurantItemFull(
@@ -74806,7 +74806,7 @@ val dalItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Borivali, Mumbai"
     ),
 
@@ -74821,7 +74821,7 @@ val dalItems = listOf(
         deliveryTime = "35-45 mins",
         distance = "2.4 km",
         discount = "20%",
-        discountAmount = "up to ₹350",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     )
 ).forEach { restaurantItem ->
@@ -75073,7 +75073,7 @@ val waffleItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
         discount = "15%",
-        discountAmount = "up to ₹120",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -75086,7 +75086,7 @@ val waffleItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
         discount = "10%",
-        discountAmount = "up to ₹80",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -75099,7 +75099,7 @@ val waffleItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.8 km",
         discount = "12%",
-        discountAmount = "up to ₹100",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     FoodItemDoubleF(
@@ -75112,7 +75112,7 @@ val waffleItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
         discount = "10%",
-        discountAmount = "up to ₹90",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     FoodItemDoubleF(
@@ -75125,7 +75125,7 @@ val waffleItems = listOf(
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "5%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     FoodItemDoubleF(
@@ -75138,7 +75138,7 @@ val waffleItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Pitampura, Delhi"
     )
 )
@@ -75212,7 +75212,7 @@ val waffleItemsList = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.2 km",
         discount = "20%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -75225,7 +75225,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.5 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -75238,7 +75238,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
         discount = "20%",
-        discountAmount = "up to ₹220",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -75251,7 +75251,7 @@ val waffleItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -75264,7 +75264,7 @@ val waffleItemsList = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹160",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
 
@@ -75279,7 +75279,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
         discount = "20%",
-        discountAmount = "up to ₹300",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -75292,7 +75292,7 @@ val waffleItemsList = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.3 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -75305,7 +75305,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹240",
+        discountAmount = "₹20",
         address = "GTB Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -75318,7 +75318,7 @@ val waffleItemsList = listOf(
         deliveryTime = "15-20 mins",
         distance = "1.4 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -75331,7 +75331,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.3 km",
         discount = "20%",
-        discountAmount = "up to ₹280",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
 
@@ -75346,7 +75346,7 @@ val waffleItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.6 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -75359,7 +75359,7 @@ val waffleItemsList = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.6 km",
         discount = "20%",
-        discountAmount = "up to ₹300",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -75372,7 +75372,7 @@ val waffleItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.6 km",
         discount = "20%",
-        discountAmount = "up to ₹220",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -75385,7 +75385,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.9 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Dwarka, Delhi"
     ),
 
@@ -75400,7 +75400,7 @@ val waffleItemsList = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.2 km",
         discount = "20%",
-        discountAmount = "up to ₹350",
+        discountAmount = "₹20",
         address = "Pitampura, Delhi"
     ),
     RestaurantItemFull(
@@ -75413,7 +75413,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.8 km",
         discount = "20%",
-        discountAmount = "up to ₹250",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -75426,7 +75426,7 @@ val waffleItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
 
@@ -75441,7 +75441,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹240",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
     RestaurantItemFull(
@@ -75454,7 +75454,7 @@ val waffleItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "2.1 km",
         discount = "20%",
-        discountAmount = "up to ₹220",
+        discountAmount = "₹20",
         address = "Greater Kailash, Delhi"
     ),
 
@@ -75469,7 +75469,7 @@ val waffleItemsList = listOf(
         deliveryTime = "30-40 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹350",
+        discountAmount = "₹20",
         address = "Cyber City, Gurgaon"
     )
 ).forEach { restaurantItem ->
@@ -75640,7 +75640,7 @@ val alooKachoriItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.1 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     FoodItemDoubleF(
@@ -75653,7 +75653,7 @@ val alooKachoriItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
         discount = "15%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     FoodItemDoubleF(
@@ -75666,7 +75666,7 @@ val alooKachoriItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "2.3 km",
         discount = "12%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     FoodItemDoubleF(
@@ -75679,7 +75679,7 @@ val alooKachoriItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.7 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
     FoodItemDoubleF(
@@ -75692,7 +75692,7 @@ val alooKachoriItems = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
         discount = "20%",
-        discountAmount = "up to ₹70",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     FoodItemDoubleF(
@@ -75705,7 +75705,7 @@ val alooKachoriItems = listOf(
         deliveryTime = "20-25 mins",
         distance = "0.9 km",
         discount = "15%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Model Town, Delhi"
     )
 )
@@ -75779,7 +75779,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.1 km",
         discount = "20%",
-        discountAmount = "up to ₹80",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -75792,7 +75792,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "0.9 km",
         discount = "20%",
-        discountAmount = "up to ₹70",
+        discountAmount = "₹20",
         address = "Model Town, Delhi"
     ),
     RestaurantItemFull(
@@ -75805,7 +75805,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.1 km",
         discount = "20%",
-        discountAmount = "up to ₹65",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -75818,7 +75818,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹75",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -75831,7 +75831,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-35 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹80",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
 
@@ -75846,7 +75846,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.1 km",
         discount = "20%",
-        discountAmount = "up to ₹90",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -75859,7 +75859,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹85",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -75872,7 +75872,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "20-30 mins",
         distance = "1.1 km",
         discount = "20%",
-        discountAmount = "up to ₹100",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -75885,7 +75885,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
         discount = "20%",
-        discountAmount = "up to ₹90",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -75898,7 +75898,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-35 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹150",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
 
@@ -75913,7 +75913,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "30-35 mins",
         distance = "2.5 km",
         discount = "20%",
-        discountAmount = "up to ₹100",
+        discountAmount = "₹20",
         address = "Raja Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -75926,7 +75926,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "30-35 mins",
         distance = "2.5 km",
         discount = "20%",
-        discountAmount = "up to ₹110",
+        discountAmount = "₹20",
         address = "Raja Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -75939,7 +75939,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "2.0 km",
         discount = "20%",
-        discountAmount = "up to ₹85",
+        discountAmount = "₹20",
         address = "Janakpuri, Delhi"
     ),
     RestaurantItemFull(
@@ -75952,7 +75952,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹95",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
 
@@ -75967,7 +75967,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "1.4 km",
         discount = "20%",
-        discountAmount = "up to ₹70",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -75980,7 +75980,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.1 km",
         discount = "20%",
-        discountAmount = "up to ₹85",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -75993,7 +75993,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "20-25 mins",
         distance = "0.9 km",
         discount = "20%",
-        discountAmount = "up to ₹95",
+        discountAmount = "₹20",
         address = "Model Town, Delhi"
     ),
 
@@ -76008,7 +76008,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "25-30 mins",
         distance = "1.4 km",
         discount = "20%",
-        discountAmount = "up to ₹120",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -76021,7 +76021,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "35-40 mins",
         distance = "2.3 km",
         discount = "20%",
-        discountAmount = "up to ₹200",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
 
@@ -76036,7 +76036,7 @@ val alooKachoriItemsList = listOf(
         deliveryTime = "30-40 mins",
         distance = "1.7 km",
         discount = "20%",
-        discountAmount = "up to ₹180",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     )
 ).forEach { restaurantItem ->
@@ -76235,7 +76235,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             FoodItemDoubleF(
@@ -76248,7 +76248,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
             FoodItemDoubleF(
@@ -76261,7 +76261,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹55",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
             FoodItemDoubleF(
@@ -76274,7 +76274,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Kamla Nagar, Delhi"
             ),
             FoodItemDoubleF(
@@ -76287,7 +76287,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             FoodItemDoubleF(
@@ -76300,7 +76300,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
                 discount = "20%",
-                discountAmount = "up to ₹80",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             )
         )
@@ -76364,7 +76364,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             RestaurantItemFull(
@@ -76377,7 +76377,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
             RestaurantItemFull(
@@ -76390,7 +76390,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹55",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
             RestaurantItemFull(
@@ -76403,7 +76403,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Kamla Nagar, Delhi"
             ),
             RestaurantItemFull(
@@ -76416,7 +76416,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
 
@@ -76431,7 +76431,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.9 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Lajpat Nagar, Delhi"
             ),
             RestaurantItemFull(
@@ -76444,7 +76444,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
                 discount = "12%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Lajpat Nagar, Delhi"
             ),
             RestaurantItemFull(
@@ -76457,7 +76457,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-30 mins",
                 distance = "1.9 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Lajpat Nagar, Delhi"
             ),
             RestaurantItemFull(
@@ -76470,7 +76470,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "30-35 mins",
                 distance = "2.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹70",
+                discountAmount = "₹20",
                 address = "Green Park, Delhi"
             ),
             RestaurantItemFull(
@@ -76483,7 +76483,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Hauz Khas, Delhi"
             ),
 
@@ -76498,7 +76498,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Kamla Nagar, Delhi"
             ),
             RestaurantItemFull(
@@ -76511,7 +76511,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             RestaurantItemFull(
@@ -76524,7 +76524,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Dwarka, Delhi"
             ),
             RestaurantItemFull(
@@ -76537,7 +76537,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Dwarka, Delhi"
             ),
 
@@ -76552,7 +76552,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
             RestaurantItemFull(
@@ -76565,7 +76565,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-30 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹55",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
             RestaurantItemFull(
@@ -76578,7 +76578,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
                 discount = "12%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Kamla Nagar, Delhi"
             ),
 
@@ -76593,7 +76593,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.2 km",
                 discount = "20%",
-                discountAmount = "up to ₹100",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             RestaurantItemFull(
@@ -76606,7 +76606,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "25-35 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹90",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
             RestaurantItemFull(
@@ -76619,7 +76619,7 @@ fun CholeKulcheCategoryPage() {
                 deliveryTime = "35-40 mins",
                 distance = "1.2 km",
                 discount = "25%",
-                discountAmount = "up to ₹200",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             )
         )
@@ -76861,7 +76861,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -76874,7 +76874,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
                 discount = "12%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -76887,7 +76887,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             FoodItemDoubleF(
@@ -76900,7 +76900,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             FoodItemDoubleF(
@@ -76913,7 +76913,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -76926,7 +76926,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             )
         )
@@ -76990,7 +76990,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹20",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77003,7 +77003,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77016,7 +77016,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -77029,7 +77029,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -77042,7 +77042,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
                 discount = "12%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
 
@@ -77057,7 +77057,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.7 km",
                 discount = "10%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Hauz Khas, Delhi"
             ),
             RestaurantItemFull(
@@ -77070,7 +77070,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77083,7 +77083,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
                 discount = "12%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -77096,7 +77096,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
             RestaurantItemFull(
@@ -77109,7 +77109,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Pitampura, Delhi"
             ),
 
@@ -77124,7 +77124,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
                 discount = "15%",
-                discountAmount = "up to ₹80",
+                discountAmount = "₹20",
                 address = "Vasant Vihar, Delhi"
             ),
             RestaurantItemFull(
@@ -77137,7 +77137,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "2.0 km",
                 discount = "12%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Vasant Vihar, Delhi"
             ),
             RestaurantItemFull(
@@ -77150,7 +77150,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -77163,7 +77163,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹70",
+                discountAmount = "₹20",
                 address = "Green Park, Delhi"
             ),
             RestaurantItemFull(
@@ -77176,7 +77176,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Dwarka, Delhi"
             ),
 
@@ -77191,7 +77191,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "30-35 mins",
                 distance = "1.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹90",
+                discountAmount = "₹20",
                 address = "Green Park, Delhi"
             ),
             RestaurantItemFull(
@@ -77204,7 +77204,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹75",
+                discountAmount = "₹20",
                 address = "Green Park, Delhi"
             ),
             RestaurantItemFull(
@@ -77217,7 +77217,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "25-30 mins",
                 distance = "2.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Greater Kailash, Delhi"
             ),
 
@@ -77232,7 +77232,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
                 discount = "20%",
-                discountAmount = "up to ₹120",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77245,7 +77245,7 @@ fun FriesCategoryPage() {
                 deliveryTime = "35-40 mins",
                 distance = "1.3 km",
                 discount = "25%",
-                discountAmount = "up to ₹250",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             )
         )
@@ -77523,7 +77523,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -77536,7 +77536,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -77549,7 +77549,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             FoodItemDoubleF(
@@ -77562,7 +77562,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹55",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             FoodItemDoubleF(
@@ -77575,7 +77575,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -77588,7 +77588,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             )
         )
@@ -77652,7 +77652,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77665,7 +77665,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77678,7 +77678,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77691,7 +77691,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77704,7 +77704,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
 
@@ -77719,7 +77719,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Hauz Khas, Delhi"
             ),
             RestaurantItemFull(
@@ -77732,7 +77732,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.8 km",
                 discount = "12%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Hauz Khas, Delhi"
             ),
             RestaurantItemFull(
@@ -77745,7 +77745,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Hauz Khas, Delhi"
             ),
             RestaurantItemFull(
@@ -77758,7 +77758,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Hauz Khas, Delhi"
             ),
             RestaurantItemFull(
@@ -77771,7 +77771,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Hauz Khas, Delhi"
             ),
 
@@ -77786,7 +77786,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -77799,7 +77799,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -77812,7 +77812,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹65",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -77825,7 +77825,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹55",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
             RestaurantItemFull(
@@ -77838,7 +77838,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             ),
 
@@ -77853,7 +77853,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             RestaurantItemFull(
@@ -77866,7 +77866,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
                 discount = "12%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
             RestaurantItemFull(
@@ -77879,7 +77879,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Rajouri Garden, Delhi"
             ),
 
@@ -77894,7 +77894,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             RestaurantItemFull(
@@ -77907,7 +77907,7 @@ fun ColdCoffeeCategoryPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Saket, Delhi"
             )
         )
@@ -78264,7 +78264,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "15%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -78277,7 +78277,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -78290,7 +78290,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "2.1 km",
         discount = "12%",
-        discountAmount = "up to ₹38",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     FoodItemDoubleF(
@@ -78303,7 +78303,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.3 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -78316,7 +78316,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "15%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -78329,7 +78329,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     )
 )
@@ -78392,7 +78392,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -78405,7 +78405,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -78418,7 +78418,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "12%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -78431,7 +78431,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -78444,7 +78444,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
 
@@ -78459,7 +78459,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
     RestaurantItemFull(
@@ -78472,7 +78472,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "12%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
     RestaurantItemFull(
@@ -78485,7 +78485,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
     RestaurantItemFull(
@@ -78498,7 +78498,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "15%",
-        discountAmount = "up to ₹60",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
     RestaurantItemFull(
@@ -78511,7 +78511,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "12%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
 
@@ -78526,7 +78526,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -78539,7 +78539,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -78552,7 +78552,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.5 km",
         discount = "15%",
-        discountAmount = "up to ₹65",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -78565,7 +78565,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -78578,7 +78578,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
 
@@ -78593,7 +78593,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.3 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -78606,7 +78606,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.3 km",
         discount = "12%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -78619,7 +78619,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "10-15 mins",
         distance = "1.3 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
 
@@ -78634,7 +78634,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
         discount = "15%",
-        discountAmount = "up to ₹65",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -78647,7 +78647,7 @@ val soupFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "1.5 km",
         discount = "12%",
-        discountAmount = "up to ₹60",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     )
 )
@@ -78954,7 +78954,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
         discount = "20%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -78967,7 +78967,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "2.4 km",
         discount = "15%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     FoodItemDoubleF(
@@ -78980,7 +78980,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -78993,7 +78993,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "1.2 km",
         discount = "15%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -79006,7 +79006,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     FoodItemDoubleF(
@@ -79019,7 +79019,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "2.6 km",
         discount = "10%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     )
 )
@@ -79081,7 +79081,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -79094,7 +79094,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -79107,7 +79107,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "12%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -79120,7 +79120,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -79133,7 +79133,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "12%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
 
@@ -79148,7 +79148,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -79161,7 +79161,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -79174,7 +79174,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.8 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -79187,7 +79187,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.8 km",
         discount = "12%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -79200,7 +79200,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
 
@@ -79215,7 +79215,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "2.2 km",
         discount = "15%",
-        discountAmount = "up to ₹65",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -79228,7 +79228,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "2.2 km",
         discount = "12%",
-        discountAmount = "up to ₹55",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -79241,7 +79241,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "2.2 km",
         discount = "12%",
-        discountAmount = "up to ₹60",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -79254,7 +79254,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "2.2 km",
         discount = "15%",
-        discountAmount = "up to ₹70",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -79267,7 +79267,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "25-30 mins",
         distance = "2.2 km",
         discount = "12%",
-        discountAmount = "up to ₹55",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
 
@@ -79282,7 +79282,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.3 km",
         discount = "10%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -79295,7 +79295,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.3 km",
         discount = "12%",
-        discountAmount = "up to ₹55",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -79308,7 +79308,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "10-15 mins",
         distance = "1.3 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
 
@@ -79323,7 +79323,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -79336,7 +79336,7 @@ val bhurjiFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.5 km",
         discount = "10%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     )
 )
@@ -79620,7 +79620,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.1 km",
         discount = "20%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     FoodItemDoubleF(
@@ -79633,7 +79633,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.3 km",
         discount = "15%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     FoodItemDoubleF(
@@ -79646,7 +79646,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.6 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     FoodItemDoubleF(
@@ -79659,7 +79659,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.4 km",
         discount = "15%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -79672,7 +79672,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.1 km",
         discount = "12%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     FoodItemDoubleF(
@@ -79685,7 +79685,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.9 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "South Extension, Delhi"
     )
 )
@@ -79747,7 +79747,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "10-15 mins",
         distance = "1.1 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -79760,7 +79760,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "10-15 mins",
         distance = "1.1 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -79773,7 +79773,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "10-15 mins",
         distance = "1.1 km",
         discount = "10%",
-        discountAmount = "up to ₹20",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -79786,7 +79786,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "10-15 mins",
         distance = "1.1 km",
         discount = "12%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
     RestaurantItemFull(
@@ -79799,7 +79799,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "10-15 mins",
         distance = "1.1 km",
         discount = "12%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Chandni Chowk, Delhi"
     ),
 
@@ -79814,7 +79814,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "12-17 mins",
         distance = "1.4 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -79827,7 +79827,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "12-17 mins",
         distance = "1.4 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -79840,7 +79840,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "12-17 mins",
         distance = "1.4 km",
         discount = "12%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -79853,7 +79853,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "12-17 mins",
         distance = "1.4 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -79866,7 +79866,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.4 km",
         discount = "15%",
-        discountAmount = "up to ₹60",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
 
@@ -79881,7 +79881,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.2 km",
         discount = "12%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -79894,7 +79894,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.2 km",
         discount = "12%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -79907,7 +79907,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.2 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -79920,7 +79920,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.2 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     RestaurantItemFull(
@@ -79933,7 +79933,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.2 km",
         discount = "15%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
 
@@ -79948,7 +79948,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.6 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -79961,7 +79961,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.6 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -79974,7 +79974,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.6 km",
         discount = "12%",
-        discountAmount = "up to ₹55",
+        discountAmount = "₹20",
         address = "Lajpat Nagar, Delhi"
     ),
 
@@ -79989,7 +79989,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "2.1 km",
         discount = "10%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     RestaurantItemFull(
@@ -80002,7 +80002,7 @@ val kachoriFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "2.1 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     )
 )
@@ -80264,7 +80264,7 @@ val hotDogFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "20%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     FoodItemDoubleF(
@@ -80277,7 +80277,7 @@ val hotDogFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.3 km",
         discount = "15%",
-        discountAmount = "up to ₹55",
+        discountAmount = "₹20",
         address = "Karol Bagh, Delhi"
     ),
     FoodItemDoubleF(
@@ -80290,7 +80290,7 @@ val hotDogFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     FoodItemDoubleF(
@@ -80303,7 +80303,7 @@ val hotDogFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "15%",
-        discountAmount = "up to ₹60",
+        discountAmount = "₹20",
         address = "Hauz Khas, Delhi"
     ),
     FoodItemDoubleF(
@@ -80316,7 +80316,7 @@ val hotDogFilters = FilterConfig(
         deliveryTime = "20-25 mins",
         distance = "2.1 km",
         discount = "12%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Rajouri Garden, Delhi"
     ),
     FoodItemDoubleF(
@@ -80329,7 +80329,7 @@ val hotDogFilters = FilterConfig(
         deliveryTime = "15-20 mins",
         distance = "1.2 km",
         discount = "10%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     )
 )
@@ -80390,7 +80390,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "10-15 mins",
         distance = "0.9 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -80403,7 +80403,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "10-15 mins",
         distance = "0.9 km",
         discount = "12%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -80416,7 +80416,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "12-17 mins",
         distance = "0.9 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -80429,7 +80429,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "12-17 mins",
         distance = "0.9 km",
         discount = "15%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
     RestaurantItemFull(
@@ -80442,7 +80442,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "10-15 mins",
         distance = "0.9 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Connaught Place, Delhi"
     ),
 
@@ -80457,7 +80457,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "12%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -80470,7 +80470,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -80483,7 +80483,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -80496,7 +80496,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "15-20 mins",
         distance = "1.5 km",
         discount = "12%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
     RestaurantItemFull(
@@ -80509,7 +80509,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "18-23 mins",
         distance = "1.5 km",
         discount = "15%",
-        discountAmount = "up to ₹55",
+        discountAmount = "₹20",
         address = "Saket, Delhi"
     ),
 
@@ -80524,7 +80524,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "20-25 mins",
         distance = "2.5 km",
         discount = "10%",
-        discountAmount = "up to ₹45",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -80537,7 +80537,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "20-25 mins",
         distance = "2.5 km",
         discount = "12%",
-        discountAmount = "up to ₹50",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -80550,7 +80550,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "20-25 mins",
         distance = "2.5 km",
         discount = "10%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -80563,7 +80563,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "22-27 mins",
         distance = "2.5 km",
         discount = "12%",
-        discountAmount = "up to ₹60",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
     RestaurantItemFull(
@@ -80576,7 +80576,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "22-27 mins",
         distance = "2.5 km",
         discount = "15%",
-        discountAmount = "up to ₹80",
+        discountAmount = "₹20",
         address = "Vasant Vihar, Delhi"
     ),
 
@@ -80591,7 +80591,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "15-20 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -80604,7 +80604,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "15-20 mins",
         distance = "1.8 km",
         discount = "12%",
-        discountAmount = "up to ₹40",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
     RestaurantItemFull(
@@ -80617,7 +80617,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "12-17 mins",
         distance = "1.8 km",
         discount = "10%",
-        discountAmount = "up to ₹30",
+        discountAmount = "₹20",
         address = "Kamla Nagar, Delhi"
     ),
 
@@ -80632,7 +80632,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "10-15 mins",
         distance = "1.2 km",
         discount = "10%",
-        discountAmount = "up to ₹25",
+        discountAmount = "₹20",
         address = "Green Park, Delhi"
     ),
     RestaurantItemFull(
@@ -80645,7 +80645,7 @@ Spacer(modifier = Modifier.height(15.dp))
         deliveryTime = "12-17 mins",
         distance = "1.2 km",
         discount = "12%",
-        discountAmount = "up to ₹35",
+        discountAmount = "₹20",
         address = "Green Park, Delhi"
     )
 )

@@ -810,7 +810,7 @@ fun ChickenDietPage() {
                 deliveryTime = "30-35 mins",
                 distance = "4.2 km",
                 discount = "30%",
-                discountAmount = "up to ₹75",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -823,7 +823,7 @@ fun ChickenDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "3.5 km",
                 discount = "25%",
-                discountAmount = "up to ₹55",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -836,7 +836,7 @@ fun ChickenDietPage() {
                 deliveryTime = "40-45 mins",
                 distance = "5.8 km",
                 discount = "20%",
-                discountAmount = "up to ₹56",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -849,7 +849,7 @@ fun ChickenDietPage() {
                 deliveryTime = "50-55 mins",
                 distance = "6.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹48",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -862,7 +862,7 @@ fun ChickenDietPage() {
                 deliveryTime = "35-40 mins",
                 distance = "4.7 km",
                 discount = "40%",
-                discountAmount = "up to ₹104",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -875,7 +875,7 @@ fun ChickenDietPage() {
                 deliveryTime = "30-35 mins",
                 distance = "3.9 km",
                 discount = "35%",
-                discountAmount = "up to ₹84",
+                discountAmount = "₹20",
                 address = "Delhi"
             )
         )
@@ -951,8 +951,8 @@ fun ChickenDietPage() {
             rating = "4.5",
             deliveryTime = "30-35 mins",
             distance = "4.2 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹100",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Grill Street, Downtown"
         ),
         RestaurantItemFull(
@@ -964,8 +964,8 @@ fun ChickenDietPage() {
             rating = "4.3",
             deliveryTime = "25-30 mins",
             distance = "3.5 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹120",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fast Food Lane"
         ),
         RestaurantItemFull(
@@ -977,8 +977,8 @@ fun ChickenDietPage() {
             rating = "4.4",
             deliveryTime = "40-45 mins",
             distance = "5.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹80",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Curry Corner"
         ),
         RestaurantItemFull(
@@ -990,8 +990,8 @@ fun ChickenDietPage() {
             rating = "4.6",
             deliveryTime = "50-55 mins",
             distance = "6.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹85",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Royal Feast Avenue"
         ),
         RestaurantItemFull(
@@ -1003,8 +1003,8 @@ fun ChickenDietPage() {
             rating = "4.7",
             deliveryTime = "35-40 mins",
             distance = "4.7 km",
-            discount = "40% OFF",
-            discountAmount = "up to ₹130",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Highway Dhaba"
         ),
         RestaurantItemFull(
@@ -1016,8 +1016,8 @@ fun ChickenDietPage() {
             rating = "4.2",
             deliveryTime = "30-35 mins",
             distance = "3.9 km",
-            discount = "35% OFF",
-            discountAmount = "up to ₹135",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Tandoori Street"
         ),
         RestaurantItemFull(
@@ -1029,8 +1029,8 @@ fun ChickenDietPage() {
             rating = "4.1",
             deliveryTime = "20-25 mins",
             distance = "2.8 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chinatown Plaza"
         ),
         RestaurantItemFull(
@@ -1042,8 +1042,8 @@ fun ChickenDietPage() {
             rating = "4.8",
             deliveryTime = "35-40 mins",
             distance = "4.5 km",
-            discount = "50% OFF",
-            discountAmount = "up to ₹130",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Biryani Street"
         ),
         RestaurantItemFull(
@@ -1055,8 +1055,8 @@ fun ChickenDietPage() {
             rating = "4.3",
             deliveryTime = "25-30 mins",
             distance = "3.2 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹55",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Middle Eastern Quarter"
         ),
         RestaurantItemFull(
@@ -1068,8 +1068,8 @@ fun ChickenDietPage() {
             rating = "4.0",
             deliveryTime = "30-35 mins",
             distance = "4.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹50",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market"
         ),
         RestaurantItemFull(
@@ -1081,8 +1081,8 @@ fun ChickenDietPage() {
             rating = "4.4",
             deliveryTime = "40-45 mins",
             distance = "5.2 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹95",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Royal Tikka Street"
         ),
         RestaurantItemFull(
@@ -1094,8 +1094,8 @@ fun ChickenDietPage() {
             rating = "4.6",
             deliveryTime = "45-50 mins",
             distance = "6.1 km",
-            discount = "35% OFF",
-            discountAmount = "up to ₹95",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mughlai Avenue"
         ),
         RestaurantItemFull(
@@ -1107,8 +1107,8 @@ fun ChickenDietPage() {
             rating = "4.2",
             deliveryTime = "25-30 mins",
             distance = "3.7 km",
-            discount = "40% OFF",
-            discountAmount = "up to ₹120",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Appetizer Lane"
         ),
         RestaurantItemFull(
@@ -1120,8 +1120,8 @@ fun ChickenDietPage() {
             rating = "4.1",
             deliveryTime = "20-25 mins",
             distance = "2.5 km",
-            discount = "50% OFF",
-            discountAmount = "up to ₹100",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fast Food Court"
         ),
         RestaurantItemFull(
@@ -1133,8 +1133,8 @@ fun ChickenDietPage() {
             rating = "4.3",
             deliveryTime = "30-35 mins",
             distance = "4.3 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wings Street"
         ),
         RestaurantItemFull(
@@ -1146,8 +1146,8 @@ fun ChickenDietPage() {
             rating = "4.0",
             deliveryTime = "15-20 mins",
             distance = "1.8 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹55",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Quick Bite Center"
         ),
         RestaurantItemFull(
@@ -1159,8 +1159,8 @@ fun ChickenDietPage() {
             rating = "4.5",
             deliveryTime = "35-40 mins",
             distance = "5.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹65",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Japanese Quarter"
         ),
         RestaurantItemFull(
@@ -1172,8 +1172,8 @@ fun ChickenDietPage() {
             rating = "4.1",
             deliveryTime = "25-30 mins",
             distance = "3.4 km",
-            discount = "Buy 1 get 1 free",
-            discountAmount = "On large buckets",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Entertainment District"
         ),
         RestaurantItemFull(
@@ -1185,8 +1185,8 @@ fun ChickenDietPage() {
             rating = "4.4",
             deliveryTime = "30-35 mins",
             distance = "4.6 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹70",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Italian Street"
         ),
         RestaurantItemFull(
@@ -1198,8 +1198,8 @@ fun ChickenDietPage() {
             rating = "4.2",
             deliveryTime = "20-25 mins",
             distance = "2.9 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹70",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Center"
         )
     )
@@ -1330,7 +1330,7 @@ fun SaladDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "3.2 km",
                 discount = "25%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1343,7 +1343,7 @@ fun SaladDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "2.8 km",
                 discount = "20%",
-                discountAmount = "up to ₹44",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1356,7 +1356,7 @@ fun SaladDietPage() {
                 deliveryTime = "10-15 mins",
                 distance = "1.5 km",
                 discount = "30%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1369,7 +1369,7 @@ fun SaladDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "4.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1382,7 +1382,7 @@ fun SaladDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "3.5 km",
                 discount = "25%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1395,7 +1395,7 @@ fun SaladDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "3.8 km",
                 discount = "20%",
-                discountAmount = "up to ₹38",
+                discountAmount = "₹20",
                 address = "Delhi"
             )
         )
@@ -1471,8 +1471,8 @@ fun SaladDietPage() {
             rating = "4.6",
             deliveryTime = "20-25 mins",
             distance = "2.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health Street, Downtown"
         ),
         RestaurantItemFull(
@@ -1484,8 +1484,8 @@ fun SaladDietPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "3.2 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹80",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Hub Lane"
         ),
         RestaurantItemFull(
@@ -1497,8 +1497,8 @@ fun SaladDietPage() {
             rating = "4.4",
             deliveryTime = "15-20 mins",
             distance = "1.9 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹75",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Quick Bite Corner"
         ),
         RestaurantItemFull(
@@ -1510,8 +1510,8 @@ fun SaladDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "2.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Olive Oil Avenue"
         ),
         RestaurantItemFull(
@@ -1523,8 +1523,8 @@ fun SaladDietPage() {
             rating = "4.8",
             deliveryTime = "30-35 mins",
             distance = "4.1 km",
-            discount = "40% OFF",
-            discountAmount = "up to ₹80",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Plant-Based District"
         ),
         RestaurantItemFull(
@@ -1536,8 +1536,8 @@ fun SaladDietPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "3.4 km",
-            discount = "35% OFF",
-            discountAmount = "up to ₹85",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Nutrition Street"
         ),
         RestaurantItemFull(
@@ -1549,8 +1549,8 @@ fun SaladDietPage() {
             rating = "4.3",
             deliveryTime = "30-35 mins",
             distance = "4.3 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹65",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Asian Fusion Plaza"
         ),
         RestaurantItemFull(
@@ -1562,8 +1562,8 @@ fun SaladDietPage() {
             rating = "4.6",
             deliveryTime = "20-25 mins",
             distance = "2.7 km",
-            discount = "50% OFF",
-            discountAmount = "up to ₹140",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Center"
         ),
         RestaurantItemFull(
@@ -1575,8 +1575,8 @@ fun SaladDietPage() {
             rating = "4.4",
             deliveryTime = "35-40 mins",
             distance = "5.1 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹75",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "European Quarter"
         ),
         RestaurantItemFull(
@@ -1588,8 +1588,8 @@ fun SaladDietPage() {
             rating = "4.7",
             deliveryTime = "25-30 mins",
             distance = "3.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹50",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Market"
         ),
         RestaurantItemFull(
@@ -1601,8 +1601,8 @@ fun SaladDietPage() {
             rating = "4.5",
             deliveryTime = "20-25 mins",
             distance = "2.9 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹65",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Lane"
         ),
         RestaurantItemFull(
@@ -1614,8 +1614,8 @@ fun SaladDietPage() {
             rating = "4.3",
             deliveryTime = "30-35 mins",
             distance = "4.2 km",
-            discount = "35% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mexican Street"
         ),
         RestaurantItemFull(
@@ -1627,8 +1627,8 @@ fun SaladDietPage() {
             rating = "4.6",
             deliveryTime = "25-30 mins",
             distance = "3.5 km",
-            discount = "40% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health District"
         ),
         RestaurantItemFull(
@@ -1640,8 +1640,8 @@ fun SaladDietPage() {
             rating = "4.2",
             deliveryTime = "15-20 mins",
             distance = "1.7 km",
-            discount = "50% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Detox Center"
         ),
         RestaurantItemFull(
@@ -1653,8 +1653,8 @@ fun SaladDietPage() {
             rating = "4.4",
             deliveryTime = "25-30 mins",
             distance = "3.1 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹50",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Comfort Food Lane"
         ),
         RestaurantItemFull(
@@ -1666,8 +1666,8 @@ fun SaladDietPage() {
             rating = "4.5",
             deliveryTime = "20-25 mins",
             distance = "2.6 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹70",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Italian Quarter"
         ),
         RestaurantItemFull(
@@ -1679,8 +1679,8 @@ fun SaladDietPage() {
             rating = "4.4",
             deliveryTime = "30-35 mins",
             distance = "4.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Asian District"
         ),
         RestaurantItemFull(
@@ -1692,8 +1692,8 @@ fun SaladDietPage() {
             rating = "4.7",
             deliveryTime = "30-35 mins",
             distance = "4.0 km",
-            discount = "Buy 1 get 1 free",
-            discountAmount = "On all salads",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gourmet Street"
         ),
         RestaurantItemFull(
@@ -1705,8 +1705,8 @@ fun SaladDietPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "3.6 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹70",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Grill Avenue"
         ),
         RestaurantItemFull(
@@ -1718,8 +1718,8 @@ fun SaladDietPage() {
             rating = "4.3",
             deliveryTime = "35-40 mins",
             distance = "4.8 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹75",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market Lane"
         )
     )
@@ -1862,7 +1862,7 @@ fun MuttonDietPage() {
                 deliveryTime = "35-40 mins",
                 distance = "4.2 km",
                 discount = "20%",
-                discountAmount = "up to ₹90",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1875,7 +1875,7 @@ fun MuttonDietPage() {
                 deliveryTime = "30-35 mins",
                 distance = "3.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹63",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1888,7 +1888,7 @@ fun MuttonDietPage() {
                 deliveryTime = "40-45 mins",
                 distance = "5.1 km",
                 discount = "25%",
-                discountAmount = "up to ₹120",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1901,7 +1901,7 @@ fun MuttonDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "2.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹38",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1914,7 +1914,7 @@ fun MuttonDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.3 km",
                 discount = "20%",
-                discountAmount = "up to ₹70",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -1927,7 +1927,7 @@ fun MuttonDietPage() {
                 deliveryTime = "35-40 mins",
                 distance = "4.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹82",
+                discountAmount = "₹20",
                 address = "Delhi"
             )
         )
@@ -2003,8 +2003,8 @@ fun MuttonDietPage() {
             rating = "4.8",
             deliveryTime = "35-40 mins",
             distance = "4.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mughlai Street, Old Delhi"
         ),
         RestaurantItemFull(
@@ -2016,8 +2016,8 @@ fun MuttonDietPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹63",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Royal Palace Road"
         ),
         RestaurantItemFull(
@@ -2029,8 +2029,8 @@ fun MuttonDietPage() {
             rating = "4.7",
             deliveryTime = "40-45 mins",
             distance = "5.1 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹120",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Kashmiri Valley Lane"
         ),
         RestaurantItemFull(
@@ -2042,8 +2042,8 @@ fun MuttonDietPage() {
             rating = "4.4",
             deliveryTime = "25-30 mins",
             distance = "2.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market Area"
         ),
         RestaurantItemFull(
@@ -2055,8 +2055,8 @@ fun MuttonDietPage() {
             rating = "4.5",
             deliveryTime = "20-25 mins",
             distance = "2.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹70",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Kebab Street Corner"
         ),
         RestaurantItemFull(
@@ -2068,8 +2068,8 @@ fun MuttonDietPage() {
             rating = "4.8",
             deliveryTime = "35-40 mins",
             distance = "4.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹82",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Handi Special Area"
         ),
         RestaurantItemFull(
@@ -2081,8 +2081,8 @@ fun MuttonDietPage() {
             rating = "4.3",
             deliveryTime = "25-30 mins",
             distance = "3.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Keema Lane"
         ),
         RestaurantItemFull(
@@ -2094,8 +2094,8 @@ fun MuttonDietPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹88",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Kadai Special Road"
         ),
         RestaurantItemFull(
@@ -2107,8 +2107,8 @@ fun MuttonDietPage() {
             rating = "4.4",
             deliveryTime = "30-35 mins",
             distance = "4.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Pulao Street"
         ),
         RestaurantItemFull(
@@ -2120,8 +2120,8 @@ fun MuttonDietPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "2.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Highway Dhaba Road"
         ),
         RestaurantItemFull(
@@ -2133,8 +2133,8 @@ fun MuttonDietPage() {
             rating = "4.7",
             deliveryTime = "35-40 mins",
             distance = "4.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹92",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Maharashtrian Food Street"
         ),
         RestaurantItemFull(
@@ -2146,8 +2146,8 @@ fun MuttonDietPage() {
             rating = "4.8",
             deliveryTime = "40-45 mins",
             distance = "5.3 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹130",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Afghan Street"
         ),
         RestaurantItemFull(
@@ -2159,8 +2159,8 @@ fun MuttonDietPage() {
             rating = "4.9",
             deliveryTime = "45-50 mins",
             distance = "5.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹73",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Nihari Street, Old Delhi"
         ),
         RestaurantItemFull(
@@ -2172,8 +2172,8 @@ fun MuttonDietPage() {
             rating = "4.8",
             deliveryTime = "50-55 mins",
             distance = "6.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹150",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "BBQ Grill Street"
         ),
         RestaurantItemFull(
@@ -2185,8 +2185,8 @@ fun MuttonDietPage() {
             rating = "4.3",
             deliveryTime = "20-25 mins",
             distance = "2.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Soup Corner Lane"
         ),
         RestaurantItemFull(
@@ -2198,8 +2198,8 @@ fun MuttonDietPage() {
             rating = "4.5",
             deliveryTime = "40-45 mins",
             distance = "4.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹58",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Paya Street"
         ),
         RestaurantItemFull(
@@ -2211,8 +2211,8 @@ fun MuttonDietPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.7 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹82",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chop Grill Road"
         ),
         RestaurantItemFull(
@@ -2224,8 +2224,8 @@ fun MuttonDietPage() {
             rating = "4.7",
             deliveryTime = "35-40 mins",
             distance = "4.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹72",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Awadhi Street, Lucknowi"
         ),
         RestaurantItemFull(
@@ -2237,8 +2237,8 @@ fun MuttonDietPage() {
             rating = "4.4",
             deliveryTime = "25-30 mins",
             distance = "2.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Pao Bhaji Street"
         ),
         RestaurantItemFull(
@@ -2250,8 +2250,8 @@ fun MuttonDietPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.6 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹86",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Kebab Mahal Road"
         )
     )
@@ -2426,7 +2426,7 @@ fun KebabsDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
                 discount = "20%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -2439,7 +2439,7 @@ fun KebabsDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "3.2 km",
                 discount = "25%",
-                discountAmount = "up to ₹90",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -2452,7 +2452,7 @@ fun KebabsDietPage() {
                 deliveryTime = "30-35 mins",
                 distance = "3.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹48",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -2465,7 +2465,7 @@ fun KebabsDietPage() {
                 deliveryTime = "22-28 mins",
                 distance = "2.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -2478,7 +2478,7 @@ fun KebabsDietPage() {
                 deliveryTime = "35-40 mins",
                 distance = "4.0 km",
                 discount = "20%",
-                discountAmount = "up to ₹72",
+                discountAmount = "₹20",
                 address = "Delhi"
             ),
             FoodItemDoubleF(
@@ -2491,7 +2491,7 @@ fun KebabsDietPage() {
                 deliveryTime = "25-32 mins",
                 distance = "3.0 km",
                 discount = "15%",
-                discountAmount = "up to ₹55",
+                discountAmount = "₹20",
                 address = "Delhi"
             )
         )
@@ -2568,8 +2568,8 @@ fun KebabsDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "2.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹56",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Kebab Street Corner"
         ),
         RestaurantItemFull(
@@ -2581,8 +2581,8 @@ fun KebabsDietPage() {
             rating = "4.8",
             deliveryTime = "25-30 mins",
             distance = "3.2 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹88",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Awadhi Gali, Lucknowi Street"
         ),
         RestaurantItemFull(
@@ -2594,8 +2594,8 @@ fun KebabsDietPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹48",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Tandoori Lane"
         ),
         RestaurantItemFull(
@@ -2607,8 +2607,8 @@ fun KebabsDietPage() {
             rating = "4.5",
             deliveryTime = "22-28 mins",
             distance = "2.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Green Avenue Road"
         ),
         RestaurantItemFull(
@@ -2620,8 +2620,8 @@ fun KebabsDietPage() {
             rating = "4.7",
             deliveryTime = "35-40 mins",
             distance = "4.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹72",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mughlai Street, Old Delhi"
         ),
         RestaurantItemFull(
@@ -2633,8 +2633,8 @@ fun KebabsDietPage() {
             rating = "4.6",
             deliveryTime = "25-32 mins",
             distance = "3.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹55",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Factory Road"
         ),
         RestaurantItemFull(
@@ -2646,8 +2646,8 @@ fun KebabsDietPage() {
             rating = "4.7",
             deliveryTime = "30-35 mins",
             distance = "3.9 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹78",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Afghan Grill Street"
         ),
         RestaurantItemFull(
@@ -2659,8 +2659,8 @@ fun KebabsDietPage() {
             rating = "4.4",
             deliveryTime = "25-30 mins",
             distance = "2.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Darbar Chowk"
         ),
         RestaurantItemFull(
@@ -2672,8 +2672,8 @@ fun KebabsDietPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹68",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "BBQ Grill Road"
         ),
         RestaurantItemFull(
@@ -2685,8 +2685,8 @@ fun KebabsDietPage() {
             rating = "4.3",
             deliveryTime = "20-25 mins",
             distance = "1.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Nawabi Corner"
         ),
         RestaurantItemFull(
@@ -2698,8 +2698,8 @@ fun KebabsDietPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "2.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹53",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market Road"
         ),
         RestaurantItemFull(
@@ -2711,8 +2711,8 @@ fun KebabsDietPage() {
             rating = "4.8",
             deliveryTime = "30-35 mins",
             distance = "3.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹84",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Lucknowi Food Street"
         ),
         RestaurantItemFull(
@@ -2724,8 +2724,8 @@ fun KebabsDietPage() {
             rating = "4.7",
             deliveryTime = "35-40 mins",
             distance = "4.7 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹118",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "BBQ Grill Street"
         ),
         RestaurantItemFull(
@@ -2737,8 +2737,8 @@ fun KebabsDietPage() {
             rating = "4.6",
             deliveryTime = "25-30 mins",
             distance = "3.6 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹62",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Kebab Mahal Road"
         ),
         RestaurantItemFull(
@@ -2750,8 +2750,8 @@ fun KebabsDietPage() {
             rating = "4.4",
             deliveryTime = "20-25 mins",
             distance = "2.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Lebanese Street"
         ),
         RestaurantItemFull(
@@ -2763,8 +2763,8 @@ fun KebabsDietPage() {
             rating = "4.3",
             deliveryTime = "18-22 mins",
             distance = "1.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Rolls Gali"
         ),
         RestaurantItemFull(
@@ -2776,8 +2776,8 @@ fun KebabsDietPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "3.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹76",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Darbar Road"
         ),
         RestaurantItemFull(
@@ -2789,8 +2789,8 @@ fun KebabsDietPage() {
             rating = "4.8",
             deliveryTime = "40-45 mins",
             distance = "5.2 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹130",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Arabian Food Street"
         ),
         RestaurantItemFull(
@@ -2802,8 +2802,8 @@ fun KebabsDietPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "2.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fusion Lane"
         ),
         RestaurantItemFull(
@@ -2815,8 +2815,8 @@ fun KebabsDietPage() {
             rating = "4.7",
             deliveryTime = "35-40 mins",
             distance = "4.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Royal Mughlai Street"
         )
     )
@@ -2994,7 +2994,7 @@ fun HealthySnacksPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.5 km",
                 discount = "20%",
-                discountAmount = "up to ₹56",
+                discountAmount = "₹20",
                 address = "Health Hub, Delhi"
             ),
             FoodItemDoubleF(
@@ -3007,7 +3007,7 @@ fun HealthySnacksPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Fitness Zone, Delhi"
             ),
             FoodItemDoubleF(
@@ -3020,7 +3020,7 @@ fun HealthySnacksPage() {
                 deliveryTime = "25-30 mins",
                 distance = "3.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Organic Street, Delhi"
             ),
             FoodItemDoubleF(
@@ -3033,7 +3033,7 @@ fun HealthySnacksPage() {
                 deliveryTime = "18-22 mins",
                 distance = "1.8 km",
                 discount = "25%",
-                discountAmount = "up to ₹55",
+                discountAmount = "₹20",
                 address = "Wellness Center, Delhi"
             ),
             FoodItemDoubleF(
@@ -3046,7 +3046,7 @@ fun HealthySnacksPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.5 km",
                 discount = "20%",
-                discountAmount = "up to ₹32",
+                discountAmount = "₹20",
                 address = "Healthy Bites, Delhi"
             ),
             FoodItemDoubleF(
@@ -3059,7 +3059,7 @@ fun HealthySnacksPage() {
                 deliveryTime = "22-28 mins",
                 distance = "2.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Morning Fresh, Delhi"
             )
         )
@@ -3135,8 +3135,8 @@ fun HealthySnacksPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Street"
         ),
         RestaurantItemFull(
@@ -3148,8 +3148,8 @@ fun HealthySnacksPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "2.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹56",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Lane"
         ),
         RestaurantItemFull(
@@ -3161,8 +3161,8 @@ fun HealthySnacksPage() {
             rating = "4.6",
             deliveryTime = "12-18 mins",
             distance = "1.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Corner"
         ),
         RestaurantItemFull(
@@ -3174,8 +3174,8 @@ fun HealthySnacksPage() {
             rating = "4.5",
             deliveryTime = "15-20 mins",
             distance = "2.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health Avenue"
         ),
         RestaurantItemFull(
@@ -3187,8 +3187,8 @@ fun HealthySnacksPage() {
             rating = "4.4",
             deliveryTime = "18-22 mins",
             distance = "2.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Clean Food Street"
         ),
         RestaurantItemFull(
@@ -3200,8 +3200,8 @@ fun HealthySnacksPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "2.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹48",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mediterranean Road"
         ),
         RestaurantItemFull(
@@ -3213,8 +3213,8 @@ fun HealthySnacksPage() {
             rating = "4.6",
             deliveryTime = "10-15 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Superfood Lane"
         ),
         RestaurantItemFull(
@@ -3226,8 +3226,8 @@ fun HealthySnacksPage() {
             rating = "4.3",
             deliveryTime = "12-16 mins",
             distance = "1.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Salad Street"
         ),
         RestaurantItemFull(
@@ -3239,8 +3239,8 @@ fun HealthySnacksPage() {
             rating = "4.5",
             deliveryTime = "14-19 mins",
             distance = "1.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Toast Corner"
         ),
         RestaurantItemFull(
@@ -3252,8 +3252,8 @@ fun HealthySnacksPage() {
             rating = "4.4",
             deliveryTime = "10-14 mins",
             distance = "1.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Energy Street"
         ),
         RestaurantItemFull(
@@ -3265,8 +3265,8 @@ fun HealthySnacksPage() {
             rating = "4.7",
             deliveryTime = "16-21 mins",
             distance = "2.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Avocado Road"
         ),
         RestaurantItemFull(
@@ -3278,8 +3278,8 @@ fun HealthySnacksPage() {
             rating = "4.5",
             deliveryTime = "18-23 mins",
             distance = "2.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹29",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Light Food Street"
         ),
         RestaurantItemFull(
@@ -3291,8 +3291,8 @@ fun HealthySnacksPage() {
             rating = "4.6",
             deliveryTime = "11-16 mins",
             distance = "1.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Trail Mix Lane"
         ),
         RestaurantItemFull(
@@ -3304,8 +3304,8 @@ fun HealthySnacksPage() {
             rating = "4.7",
             deliveryTime = "17-22 mins",
             distance = "2.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹46",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Protein Street"
         ),
         RestaurantItemFull(
@@ -3317,8 +3317,8 @@ fun HealthySnacksPage() {
             rating = "4.5",
             deliveryTime = "8-12 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Smoothie Corner"
         ),
         RestaurantItemFull(
@@ -3330,8 +3330,8 @@ fun HealthySnacksPage() {
             rating = "4.3",
             deliveryTime = "13-17 mins",
             distance = "1.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹11",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Crunchy Street"
         ),
         RestaurantItemFull(
@@ -3343,8 +3343,8 @@ fun HealthySnacksPage() {
             rating = "4.6",
             deliveryTime = "19-24 mins",
             distance = "2.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Veggie Lane"
         ),
         RestaurantItemFull(
@@ -3356,8 +3356,8 @@ fun HealthySnacksPage() {
             rating = "4.4",
             deliveryTime = "14-19 mins",
             distance = "1.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Breakfast Street"
         ),
         RestaurantItemFull(
@@ -3369,8 +3369,8 @@ fun HealthySnacksPage() {
             rating = "4.7",
             deliveryTime = "21-26 mins",
             distance = "2.6 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹50",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Zoodle Avenue"
         ),
         RestaurantItemFull(
@@ -3382,8 +3382,8 @@ fun HealthySnacksPage() {
             rating = "4.5",
             deliveryTime = "15-20 mins",
             distance = "1.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Soybean Road"
         )
     )
@@ -3545,7 +3545,7 @@ fun LowCaloriePage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Green Valley, Delhi"
             ),
 
@@ -3559,7 +3559,7 @@ fun LowCaloriePage() {
                 deliveryTime = "12-18 mins",
                 distance = "1.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹12",
+                discountAmount = "₹20",
                 address = "Fitness Hub, Delhi"
             ),
 
@@ -3573,7 +3573,7 @@ fun LowCaloriePage() {
                 deliveryTime = "18-22 mins",
                 distance = "2.3 km",
                 discount = "20%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Wellness Street, Delhi"
             ),
 
@@ -3587,7 +3587,7 @@ fun LowCaloriePage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹13",
+                discountAmount = "₹20",
                 address = "Healthy Market, Delhi"
             ),
 
@@ -3601,7 +3601,7 @@ fun LowCaloriePage() {
                 deliveryTime = "22-28 mins",
                 distance = "2.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Organic Square, Delhi"
             ),
 
@@ -3615,7 +3615,7 @@ fun LowCaloriePage() {
                 deliveryTime = "16-22 mins",
                 distance = "1.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹21",
+                discountAmount = "₹20",
                 address = "Breakfast Lane, Delhi"
             ),
         )
@@ -3691,8 +3691,8 @@ fun LowCaloriePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Green Valley"
         ),
         RestaurantItemFull(
@@ -3704,8 +3704,8 @@ fun LowCaloriePage() {
             rating = "4.7",
             deliveryTime = "14-20 mins",
             distance = "1.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Healthy Lane"
         ),
         RestaurantItemFull(
@@ -3717,8 +3717,8 @@ fun LowCaloriePage() {
             rating = "4.5",
             deliveryTime = "10-16 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Garden Street"
         ),
         RestaurantItemFull(
@@ -3730,8 +3730,8 @@ fun LowCaloriePage() {
             rating = "4.6",
             deliveryTime = "16-22 mins",
             distance = "2.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Road"
         ),
         RestaurantItemFull(
@@ -3743,8 +3743,8 @@ fun LowCaloriePage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "1.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Street"
         ),
         RestaurantItemFull(
@@ -3756,8 +3756,8 @@ fun LowCaloriePage() {
             rating = "4.4",
             deliveryTime = "15-20 mins",
             distance = "1.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Breakfast Avenue"
         ),
         RestaurantItemFull(
@@ -3769,8 +3769,8 @@ fun LowCaloriePage() {
             rating = "4.6",
             deliveryTime = "10-15 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Nutri Lane"
         ),
         RestaurantItemFull(
@@ -3782,8 +3782,8 @@ fun LowCaloriePage() {
             rating = "4.5",
             deliveryTime = "16-22 mins",
             distance = "2.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baker Street"
         ),
         RestaurantItemFull(
@@ -3795,8 +3795,8 @@ fun LowCaloriePage() {
             rating = "4.7",
             deliveryTime = "8-14 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Smoothie Corner"
         ),
         RestaurantItemFull(
@@ -3808,8 +3808,8 @@ fun LowCaloriePage() {
             rating = "4.4",
             deliveryTime = "12-16 mins",
             distance = "1.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Crunch Street"
         ),
         RestaurantItemFull(
@@ -3821,8 +3821,8 @@ fun LowCaloriePage() {
             rating = "4.5",
             deliveryTime = "18-23 mins",
             distance = "2.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Light Street"
         ),
         RestaurantItemFull(
@@ -3834,8 +3834,8 @@ fun LowCaloriePage() {
             rating = "4.7",
             deliveryTime = "14-20 mins",
             distance = "2.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Avocado Road"
         ),
         RestaurantItemFull(
@@ -3847,8 +3847,8 @@ fun LowCaloriePage() {
             rating = "4.3",
             deliveryTime = "8-12 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹11",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Hydration Lane"
         ),
         RestaurantItemFull(
@@ -3860,8 +3860,8 @@ fun LowCaloriePage() {
             rating = "4.6",
             deliveryTime = "20-25 mins",
             distance = "2.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Zoodle Avenue"
         ),
         RestaurantItemFull(
@@ -3873,8 +3873,8 @@ fun LowCaloriePage() {
             rating = "4.5",
             deliveryTime = "15-22 mins",
             distance = "1.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Soup Street"
         ),
         RestaurantItemFull(
@@ -3886,8 +3886,8 @@ fun LowCaloriePage() {
             rating = "4.4",
             deliveryTime = "14-20 mins",
             distance = "2.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wrap Lane"
         ),
         RestaurantItemFull(
@@ -3899,8 +3899,8 @@ fun LowCaloriePage() {
             rating = "4.6",
             deliveryTime = "12-18 mins",
             distance = "1.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bowl Street"
         ),
         RestaurantItemFull(
@@ -3912,8 +3912,8 @@ fun LowCaloriePage() {
             rating = "4.7",
             deliveryTime = "20-26 mins",
             distance = "2.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Lane"
         ),
         RestaurantItemFull(
@@ -3925,8 +3925,8 @@ fun LowCaloriePage() {
             rating = "4.4",
             deliveryTime = "10-15 mins",
             distance = "1.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Healthy Corner"
         ),
         RestaurantItemFull(
@@ -3938,8 +3938,8 @@ fun LowCaloriePage() {
             rating = "4.5",
             deliveryTime = "15-22 mins",
             distance = "1.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Detox Avenue"
         )
     )
@@ -4103,7 +4103,7 @@ fun VeganPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "20%",
-                discountAmount = "up to ₹44",
+                discountAmount = "₹20",
                 address = "Eco Street, Delhi",
             ),
 
@@ -4117,7 +4117,7 @@ fun VeganPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹27",
+                discountAmount = "₹20",
                 address = "Vegan Hub, Delhi",
             ),
 
@@ -4131,7 +4131,7 @@ fun VeganPage() {
                 deliveryTime = "18-22 mins",
                 distance = "1.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Organic Square, Delhi",
             ),
 
@@ -4145,7 +4145,7 @@ fun VeganPage() {
                 deliveryTime = "12-16 mins",
                 distance = "0.9 km",
                 discount = "25%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Health Lane, Delhi",
             ),
 
@@ -4159,7 +4159,7 @@ fun VeganPage() {
                 deliveryTime = "10-15 mins",
                 distance = "1.0 km",
                 discount = "15%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Fitness Corner, Delhi",
             ),
 
@@ -4173,7 +4173,7 @@ fun VeganPage() {
                 deliveryTime = "22-28 mins",
                 distance = "2.2 km",
                 discount = "20%",
-                discountAmount = "up to ₹42",
+                discountAmount = "₹20",
                 address = "Global Cuisine Street, Delhi",
             )
         )
@@ -4247,8 +4247,8 @@ fun VeganPage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "1.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹44",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Vegan Street"
         ),
         RestaurantItemFull(
@@ -4260,8 +4260,8 @@ fun VeganPage() {
             rating = "4.7",
             deliveryTime = "14-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Corner"
         ),
         RestaurantItemFull(
@@ -4273,8 +4273,8 @@ fun VeganPage() {
             rating = "4.8",
             deliveryTime = "16-22 mins",
             distance = "1.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Eco Lane"
         ),
         RestaurantItemFull(
@@ -4286,8 +4286,8 @@ fun VeganPage() {
             rating = "4.6",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Plant Avenue"
         ),
         RestaurantItemFull(
@@ -4299,8 +4299,8 @@ fun VeganPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Lane"
         ),
         RestaurantItemFull(
@@ -4312,8 +4312,8 @@ fun VeganPage() {
             rating = "4.9",
             deliveryTime = "20-26 mins",
             distance = "2.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Global Street"
         ),
         RestaurantItemFull(
@@ -4325,8 +4325,8 @@ fun VeganPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Dessert Lane"
         ),
         RestaurantItemFull(
@@ -4338,8 +4338,8 @@ fun VeganPage() {
             rating = "4.7",
             deliveryTime = "18-24 mins",
             distance = "1.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Asian Avenue"
         ),
         RestaurantItemFull(
@@ -4351,8 +4351,8 @@ fun VeganPage() {
             rating = "4.6",
             deliveryTime = "22-28 mins",
             distance = "2.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Burger Street"
         ),
         RestaurantItemFull(
@@ -4364,8 +4364,8 @@ fun VeganPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "2.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Lane"
         ),
         RestaurantItemFull(
@@ -4377,8 +4377,8 @@ fun VeganPage() {
             rating = "4.7",
             deliveryTime = "16-22 mins",
             distance = "1.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mediterranean Road"
         ),
         RestaurantItemFull(
@@ -4390,8 +4390,8 @@ fun VeganPage() {
             rating = "4.5",
             deliveryTime = "18-23 mins",
             distance = "1.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Stir Fry Lane"
         ),
         RestaurantItemFull(
@@ -4403,8 +4403,8 @@ fun VeganPage() {
             rating = "4.6",
             deliveryTime = "15-20 mins",
             distance = "1.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Soup Street"
         ),
         RestaurantItemFull(
@@ -4416,8 +4416,8 @@ fun VeganPage() {
             rating = "4.8",
             deliveryTime = "20-26 mins",
             distance = "2.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bowl Avenue"
         ),
         RestaurantItemFull(
@@ -4429,8 +4429,8 @@ fun VeganPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "2.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sushi Lane"
         ),
         RestaurantItemFull(
@@ -4442,8 +4442,8 @@ fun VeganPage() {
             rating = "4.6",
             deliveryTime = "14-19 mins",
             distance = "1.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sandwich Street"
         ),
         RestaurantItemFull(
@@ -4455,8 +4455,8 @@ fun VeganPage() {
             rating = "4.7",
             deliveryTime = "22-28 mins",
             distance = "2.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Pasta Avenue"
         ),
         RestaurantItemFull(
@@ -4468,8 +4468,8 @@ fun VeganPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Dessert Corner"
         ),
         RestaurantItemFull(
@@ -4481,8 +4481,8 @@ fun VeganPage() {
             rating = "4.6",
             deliveryTime = "18-24 mins",
             distance = "2.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Grill Street"
         ),
         RestaurantItemFull(
@@ -4494,8 +4494,8 @@ fun VeganPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "2.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Protein Lane"
         )
     )
@@ -4668,7 +4668,7 @@ fun ProteinRichPage() {
                 deliveryTime = "18-22 mins",
                 distance = "1.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹42",
+                discountAmount = "₹20",
                 address = "Fitness Street, Delhi"
             ),
 
@@ -4682,7 +4682,7 @@ fun ProteinRichPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Protein Lane, Delhi"
             ),
 
@@ -4696,7 +4696,7 @@ fun ProteinRichPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.8 km",
                 discount = "20%",
-                discountAmount = "up to ₹44",
+                discountAmount = "₹20",
                 address = "Gym Road, Delhi"
             ),
 
@@ -4710,7 +4710,7 @@ fun ProteinRichPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Vegan Protein Hub, Delhi"
             ),
 
@@ -4724,7 +4724,7 @@ fun ProteinRichPage() {
                 deliveryTime = "22-28 mins",
                 distance = "2.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹32",
+                discountAmount = "₹20",
                 address = "Seafood Avenue, Delhi"
             ),
 
@@ -4738,7 +4738,7 @@ fun ProteinRichPage() {
                 deliveryTime = "16-21 mins",
                 distance = "1.6 km",
                 discount = "12%",
-                discountAmount = "up to ₹31",
+                discountAmount = "₹20",
                 address = "Indian Protein Corner, Delhi"
             )
         )
@@ -4811,8 +4811,8 @@ fun ProteinRichPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹56",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Muscle Street"
         ),
         RestaurantItemFull(
@@ -4824,8 +4824,8 @@ fun ProteinRichPage() {
             rating = "4.9",
             deliveryTime = "18-25 mins",
             distance = "1.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹52",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fish Avenue"
         ),
         RestaurantItemFull(
@@ -4837,8 +4837,8 @@ fun ProteinRichPage() {
             rating = "4.7",
             deliveryTime = "20-30 mins",
             distance = "2.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Steak Lane"
         ),
         RestaurantItemFull(
@@ -4850,8 +4850,8 @@ fun ProteinRichPage() {
             rating = "4.6",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Egg Street"
         ),
         RestaurantItemFull(
@@ -4863,8 +4863,8 @@ fun ProteinRichPage() {
             rating = "4.5",
             deliveryTime = "10-16 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Yogurt Lane"
         ),
         RestaurantItemFull(
@@ -4876,8 +4876,8 @@ fun ProteinRichPage() {
             rating = "4.7",
             deliveryTime = "16-22 mins",
             distance = "1.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹44",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Ocean Road"
         ),
         RestaurantItemFull(
@@ -4889,8 +4889,8 @@ fun ProteinRichPage() {
             rating = "4.8",
             deliveryTime = "14-20 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gym Street"
         ),
         RestaurantItemFull(
@@ -4902,8 +4902,8 @@ fun ProteinRichPage() {
             rating = "4.7",
             deliveryTime = "18-24 mins",
             distance = "1.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Avenue"
         ),
         RestaurantItemFull(
@@ -4915,8 +4915,8 @@ fun ProteinRichPage() {
             rating = "4.6",
             deliveryTime = "8-15 mins",
             distance = "0.8 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Supplement Lane"
         ),
         RestaurantItemFull(
@@ -4928,8 +4928,8 @@ fun ProteinRichPage() {
             rating = "4.5",
             deliveryTime = "15-20 mins",
             distance = "1.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Deli Corner"
         ),
         RestaurantItemFull(
@@ -4941,8 +4941,8 @@ fun ProteinRichPage() {
             rating = "4.7",
             deliveryTime = "13-19 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Dairy Avenue"
         ),
         RestaurantItemFull(
@@ -4954,8 +4954,8 @@ fun ProteinRichPage() {
             rating = "4.8",
             deliveryTime = "20-28 mins",
             distance = "2.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Burger Road"
         ),
         RestaurantItemFull(
@@ -4967,8 +4967,8 @@ fun ProteinRichPage() {
             rating = "4.9",
             deliveryTime = "19-26 mins",
             distance = "2.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Shrimp Lane"
         ),
         RestaurantItemFull(
@@ -4980,8 +4980,8 @@ fun ProteinRichPage() {
             rating = "4.6",
             deliveryTime = "16-22 mins",
             distance = "1.6 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Soup Street"
         ),
         RestaurantItemFull(
@@ -4993,8 +4993,8 @@ fun ProteinRichPage() {
             rating = "4.8",
             deliveryTime = "22-30 mins",
             distance = "2.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹57",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chicken Avenue"
         ),
         RestaurantItemFull(
@@ -5006,8 +5006,8 @@ fun ProteinRichPage() {
             rating = "4.5",
             deliveryTime = "10-18 mins",
             distance = "1.2 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Snack Lane"
         ),
         RestaurantItemFull(
@@ -5019,8 +5019,8 @@ fun ProteinRichPage() {
             rating = "4.7",
             deliveryTime = "18-25 mins",
             distance = "1.9 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹52",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Tikka Corner"
         ),
         RestaurantItemFull(
@@ -5032,8 +5032,8 @@ fun ProteinRichPage() {
             rating = "4.6",
             deliveryTime = "12-20 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Dessert Protein"
         ),
         RestaurantItemFull(
@@ -5045,8 +5045,8 @@ fun ProteinRichPage() {
             rating = "4.8",
             deliveryTime = "20-28 mins",
             distance = "2.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Balance Road"
         ),
         RestaurantItemFull(
@@ -5058,8 +5058,8 @@ fun ProteinRichPage() {
             rating = "4.9",
             deliveryTime = "25-35 mins",
             distance = "2.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹67",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Ultimate Street"
         )
     )
@@ -5281,7 +5281,7 @@ fun DessertPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹48",
+                discountAmount = "₹20",
                 address = "Dessert Street, Delhi"
             ),
             FoodItemDoubleF(
@@ -5294,7 +5294,7 @@ fun DessertPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Sweet Avenue, Delhi"
             ),
             FoodItemDoubleF(
@@ -5307,7 +5307,7 @@ fun DessertPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
                 discount = "20%",
-                discountAmount = "up to ₹44",
+                discountAmount = "₹20",
                 address = "Chocolate Lane, Delhi"
             ),
             FoodItemDoubleF(
@@ -5320,7 +5320,7 @@ fun DessertPage() {
                 deliveryTime = "18-22 mins",
                 distance = "1.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Old Sweet Market, Delhi"
             ),
             FoodItemDoubleF(
@@ -5333,7 +5333,7 @@ fun DessertPage() {
                 deliveryTime = "22-28 mins",
                 distance = "2.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Bakery Road, Delhi"
             ),
             FoodItemDoubleF(
@@ -5346,7 +5346,7 @@ fun DessertPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹20",
+                discountAmount = "₹20",
                 address = "Fresh Market, Delhi"
             )
         )
@@ -5419,8 +5419,8 @@ fun DessertPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "1.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹64",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chocolate Avenue"
         ),
         RestaurantItemFull(
@@ -5432,8 +5432,8 @@ fun DessertPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Ice Cream Lane"
         ),
         RestaurantItemFull(
@@ -5445,8 +5445,8 @@ fun DessertPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "1.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Brownie Street"
         ),
         RestaurantItemFull(
@@ -5458,8 +5458,8 @@ fun DessertPage() {
             rating = "4.6",
             deliveryTime = "18-22 mins",
             distance = "1.5 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sweet Market"
         ),
         RestaurantItemFull(
@@ -5471,8 +5471,8 @@ fun DessertPage() {
             rating = "4.7",
             deliveryTime = "22-28 mins",
             distance = "2.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bakery Road"
         ),
         RestaurantItemFull(
@@ -5484,8 +5484,8 @@ fun DessertPage() {
             rating = "4.5",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fresh Market"
         ),
         RestaurantItemFull(
@@ -5497,8 +5497,8 @@ fun DessertPage() {
             rating = "4.8",
             deliveryTime = "16-22 mins",
             distance = "1.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bengal Lane"
         ),
         RestaurantItemFull(
@@ -5510,8 +5510,8 @@ fun DessertPage() {
             rating = "4.7",
             deliveryTime = "24-30 mins",
             distance = "2.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Italian Street"
         ),
         RestaurantItemFull(
@@ -5523,8 +5523,8 @@ fun DessertPage() {
             rating = "4.6",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chandni Chowk"
         ),
         RestaurantItemFull(
@@ -5536,8 +5536,8 @@ fun DessertPage() {
             rating = "4.5",
             deliveryTime = "20-25 mins",
             distance = "1.7 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Cake Avenue"
         ),
         RestaurantItemFull(
@@ -5549,8 +5549,8 @@ fun DessertPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Kulfi Lane"
         ),
         RestaurantItemFull(
@@ -5562,8 +5562,8 @@ fun DessertPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Dessert Street"
         ),
         RestaurantItemFull(
@@ -5575,8 +5575,8 @@ fun DessertPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Winter Special Road"
         ),
         RestaurantItemFull(
@@ -5588,8 +5588,8 @@ fun DessertPage() {
             rating = "4.6",
             deliveryTime = "16-22 mins",
             distance = "1.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹46",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Waffle Corner"
         ),
         RestaurantItemFull(
@@ -5601,8 +5601,8 @@ fun DessertPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "2.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "French Quarter"
         ),
         RestaurantItemFull(
@@ -5614,8 +5614,8 @@ fun DessertPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "2.3 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹87",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Paris Lane"
         ),
         RestaurantItemFull(
@@ -5627,8 +5627,8 @@ fun DessertPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sweet Circle"
         ),
         RestaurantItemFull(
@@ -5640,8 +5640,8 @@ fun DessertPage() {
             rating = "4.6",
             deliveryTime = "20-26 mins",
             distance = "1.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Cheese Road"
         ),
         RestaurantItemFull(
@@ -5653,8 +5653,8 @@ fun DessertPage() {
             rating = "4.8",
             deliveryTime = "10-16 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Tradition Street"
         ),
         RestaurantItemFull(
@@ -5666,8 +5666,8 @@ fun DessertPage() {
             rating = "4.9",
             deliveryTime = "25-35 mins",
             distance = "2.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹67",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Royal Dessert Road"
         )
     )
@@ -5962,7 +5962,7 @@ fun VegMealPage() {
                 deliveryTime = "30-35 mins",
                 distance = "2.3 km",
                 discount = "20%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Main Bazaar, Delhi"
             ),
             FoodItemDoubleF(
@@ -5975,7 +5975,7 @@ fun VegMealPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹37",
+                discountAmount = "₹20",
                 address = "Anna Nagar, Delhi"
             ),
             FoodItemDoubleF(
@@ -5988,7 +5988,7 @@ fun VegMealPage() {
                 deliveryTime = "30-35 mins",
                 distance = "2.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Spice Market, Delhi"
             ),
             FoodItemDoubleF(
@@ -6001,7 +6001,7 @@ fun VegMealPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹49",
+                discountAmount = "₹20",
                 address = "Fitness Plaza, Delhi"
             ),
             FoodItemDoubleF(
@@ -6014,7 +6014,7 @@ fun VegMealPage() {
                 deliveryTime = "35-40 mins",
                 distance = "3.2 km",
                 discount = "25%",
-                discountAmount = "up to ₹87",
+                discountAmount = "₹20",
                 address = "Jaipur Road, Delhi"
             ),
             FoodItemDoubleF(
@@ -6027,7 +6027,7 @@ fun VegMealPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Food Street, Delhi"
             )
         )
@@ -6100,8 +6100,8 @@ fun VegMealPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "1.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Main Bazaar, Delhi"
         ),
         RestaurantItemFull(
@@ -6113,8 +6113,8 @@ fun VegMealPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Anna Nagar, Delhi"
         ),
         RestaurantItemFull(
@@ -6126,8 +6126,8 @@ fun VegMealPage() {
             rating = "4.7",
             deliveryTime = "25-30 mins",
             distance = "2.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Restaurant Road"
         ),
         RestaurantItemFull(
@@ -6139,8 +6139,8 @@ fun VegMealPage() {
             rating = "4.6",
             deliveryTime = "30-35 mins",
             distance = "2.0 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹65",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market"
         ),
         RestaurantItemFull(
@@ -6152,8 +6152,8 @@ fun VegMealPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Street"
         ),
         RestaurantItemFull(
@@ -6165,8 +6165,8 @@ fun VegMealPage() {
             rating = "4.5",
             deliveryTime = "20-25 mins",
             distance = "1.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹44",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Comfort Food Lane"
         ),
         RestaurantItemFull(
@@ -6178,8 +6178,8 @@ fun VegMealPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "South Avenue"
         ),
         RestaurantItemFull(
@@ -6191,8 +6191,8 @@ fun VegMealPage() {
             rating = "4.9",
             deliveryTime = "30-35 mins",
             distance = "2.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jaipur Road"
         ),
         RestaurantItemFull(
@@ -6204,8 +6204,8 @@ fun VegMealPage() {
             rating = "4.6",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "30% OFF",
-            discountAmount = "up to ₹57",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Truck Park"
         ),
         RestaurantItemFull(
@@ -6217,8 +6217,8 @@ fun VegMealPage() {
             rating = "4.5",
             deliveryTime = "18-24 mins",
             distance = "1.6 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹66",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Plaza"
         ),
         RestaurantItemFull(
@@ -6230,8 +6230,8 @@ fun VegMealPage() {
             rating = "4.7",
             deliveryTime = "22-28 mins",
             distance = "1.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gujarat Colony"
         ),
         RestaurantItemFull(
@@ -6243,8 +6243,8 @@ fun VegMealPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Breakfast Street"
         ),
         RestaurantItemFull(
@@ -6256,8 +6256,8 @@ fun VegMealPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Morning Market"
         ),
         RestaurantItemFull(
@@ -6269,8 +6269,8 @@ fun VegMealPage() {
             rating = "4.6",
             deliveryTime = "20-26 mins",
             distance = "1.7 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹48",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Kolhapur Road"
         ),
         RestaurantItemFull(
@@ -6282,8 +6282,8 @@ fun VegMealPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "2.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mushroom Lane"
         ),
         RestaurantItemFull(
@@ -6295,8 +6295,8 @@ fun VegMealPage() {
             rating = "4.5",
             deliveryTime = "25-30 mins",
             distance = "2.3 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹72",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bengal Street"
         ),
         RestaurantItemFull(
@@ -6308,8 +6308,8 @@ fun VegMealPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old Delhi"
         ),
         RestaurantItemFull(
@@ -6321,8 +6321,8 @@ fun VegMealPage() {
             rating = "4.6",
             deliveryTime = "15-20 mins",
             distance = "1.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Court"
         ),
         RestaurantItemFull(
@@ -6334,8 +6334,8 @@ fun VegMealPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "1.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Tandoori Lane"
         ),
         RestaurantItemFull(
@@ -6347,8 +6347,8 @@ fun VegMealPage() {
             rating = "4.9",
             deliveryTime = "30-35 mins",
             distance = "2.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Festival Ground"
         )
     )
@@ -6644,7 +6644,7 @@ fun BowlPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Fitness District, Delhi"
             ),
             // 2. Acai Berry Bowl
@@ -6658,7 +6658,7 @@ fun BowlPage() {
                 deliveryTime = "20-25 mins",
                 distance = "2.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Wellness Hub, Delhi"
             ),
             // 3. Quinoa Garden Bowl
@@ -6672,7 +6672,7 @@ fun BowlPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.5 km",
                 discount = "20%",
-                discountAmount = "up to ₹72",
+                discountAmount = "₹20",
                 address = "Eco Square, Delhi"
             ),
             // 4. Mediterranean Bowl
@@ -6686,7 +6686,7 @@ fun BowlPage() {
                 deliveryTime = "30-35 mins",
                 distance = "2.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹64",
+                discountAmount = "₹20",
                 address = "Mediterranean Plaza, Delhi"
             ),
             // 5. Hawaiian Poke Bowl
@@ -6700,7 +6700,7 @@ fun BowlPage() {
                 deliveryTime = "30-35 mins",
                 distance = "2.7 km",
                 discount = "10%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Beachside Ave, Delhi"
             ),
             // 6. Buddha's Delight Bowl
@@ -6714,7 +6714,7 @@ fun BowlPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹57",
+                discountAmount = "₹20",
                 address = "Peace Complex, Delhi"
             )
         )
@@ -6787,8 +6787,8 @@ fun BowlPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹70",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness District, Delhi"
         ),
         RestaurantItemFull(
@@ -6800,8 +6800,8 @@ fun BowlPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹64",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -6813,8 +6813,8 @@ fun BowlPage() {
             rating = "4.7",
             deliveryTime = "22-28 mins",
             distance = "1.9 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹72",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Eco Square, Delhi"
         ),
         RestaurantItemFull(
@@ -6826,8 +6826,8 @@ fun BowlPage() {
             rating = "4.8",
             deliveryTime = "25-30 mins",
             distance = "2.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mediterranean Plaza, Delhi"
         ),
         RestaurantItemFull(
@@ -6839,8 +6839,8 @@ fun BowlPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "2.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹48",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Beachside Ave, Delhi"
         ),
         RestaurantItemFull(
@@ -6852,8 +6852,8 @@ fun BowlPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "1.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹55",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Peace Complex, Delhi"
         ),
         RestaurantItemFull(
@@ -6865,8 +6865,8 @@ fun BowlPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Breakfast Street, Delhi"
         ),
         RestaurantItemFull(
@@ -6878,8 +6878,8 @@ fun BowlPage() {
             rating = "4.7",
             deliveryTime = "28-34 mins",
             distance = "2.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹61",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Asian Food Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -6891,8 +6891,8 @@ fun BowlPage() {
             rating = "4.6",
             deliveryTime = "22-28 mins",
             distance = "1.9 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹76",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Square, Delhi"
         ),
         RestaurantItemFull(
@@ -6904,8 +6904,8 @@ fun BowlPage() {
             rating = "4.7",
             deliveryTime = "20-26 mins",
             distance = "1.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Teriyaki Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -6917,8 +6917,8 @@ fun BowlPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹49",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mediterranean Market, Delhi"
         ),
         RestaurantItemFull(
@@ -6930,8 +6930,8 @@ fun BowlPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹29",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Bazaar, Delhi"
         ),
         RestaurantItemFull(
@@ -6943,8 +6943,8 @@ fun BowlPage() {
             rating = "4.8",
             deliveryTime = "25-30 mins",
             distance = "2.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹63",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Korea Town, Delhi"
         ),
         RestaurantItemFull(
@@ -6956,8 +6956,8 @@ fun BowlPage() {
             rating = "4.7",
             deliveryTime = "24-30 mins",
             distance = "2.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹78",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Souk, Delhi"
         ),
         RestaurantItemFull(
@@ -6969,8 +6969,8 @@ fun BowlPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "1.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹54",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Greek Plaza, Delhi"
         ),
         RestaurantItemFull(
@@ -6982,8 +6982,8 @@ fun BowlPage() {
             rating = "4.6",
             deliveryTime = "18-23 mins",
             distance = "1.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Green Market, Delhi"
         ),
         RestaurantItemFull(
@@ -6995,8 +6995,8 @@ fun BowlPage() {
             rating = "4.9",
             deliveryTime = "26-32 mins",
             distance = "2.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹44",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Japantown, Delhi"
         ),
         RestaurantItemFull(
@@ -7008,8 +7008,8 @@ fun BowlPage() {
             rating = "4.7",
             deliveryTime = "22-28 mins",
             distance = "1.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Beach Boulevard, Delhi"
         ),
         RestaurantItemFull(
@@ -7021,8 +7021,8 @@ fun BowlPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹62",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Masala Street, Delhi"
         ),
         RestaurantItemFull(
@@ -7034,8 +7034,8 @@ fun BowlPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "2.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹75",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Avenue, Delhi"
         )
     )
@@ -7400,7 +7400,7 @@ fun SweetsPage() {
                 deliveryTime = "30-35 mins",
                 distance = "2.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Dessert Avenue, Delhi"
             ),
             FoodItemDoubleF(
@@ -7413,7 +7413,7 @@ fun SweetsPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "5%",
-                discountAmount = "up to ₹7",
+                discountAmount = "₹20",
                 address = "Old Market, Delhi"
             ),
             FoodItemDoubleF(
@@ -7426,7 +7426,7 @@ fun SweetsPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Cool Plaza, Delhi"
             ),
             FoodItemDoubleF(
@@ -7439,7 +7439,7 @@ fun SweetsPage() {
                 deliveryTime = "25-30 mins",
                 distance = "2.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Eastern Avenue, Delhi"
             ),
             FoodItemDoubleF(
@@ -7452,7 +7452,7 @@ fun SweetsPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
                 discount = "20%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Baker Street, Delhi"
             ),
             FoodItemDoubleF(
@@ -7465,7 +7465,7 @@ fun SweetsPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
                 discount = "0%",
-                discountAmount = "up to ₹0",
+                discountAmount = "₹20",
                 address = "Food Court, Delhi"
             )
         )
@@ -7539,8 +7539,8 @@ fun SweetsPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health Street, Delhi"
         ),
         RestaurantItemFull(
@@ -7552,8 +7552,8 @@ fun SweetsPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sweet Corner, Delhi"
         ),
         RestaurantItemFull(
@@ -7565,8 +7565,8 @@ fun SweetsPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Ave, Delhi"
         ),
         RestaurantItemFull(
@@ -7578,8 +7578,8 @@ fun SweetsPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹44",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bakery Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -7591,8 +7591,8 @@ fun SweetsPage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Dessert Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -7604,8 +7604,8 @@ fun SweetsPage() {
             rating = "4.9",
             deliveryTime = "22-28 mins",
             distance = "1.9 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Market, Delhi"
         ),
         RestaurantItemFull(
@@ -7617,8 +7617,8 @@ fun SweetsPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old Delhi Street",
         ),
         RestaurantItemFull(
@@ -7630,8 +7630,8 @@ fun SweetsPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chocolate Square, Delhi"
         ),
         RestaurantItemFull(
@@ -7643,8 +7643,8 @@ fun SweetsPage() {
             rating = "4.6",
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Market Street, Delhi"
         ),
         RestaurantItemFull(
@@ -7656,8 +7656,8 @@ fun SweetsPage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -7669,8 +7669,8 @@ fun SweetsPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "1.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Asian Plaza, Delhi"
         ),
         RestaurantItemFull(
@@ -7682,8 +7682,8 @@ fun SweetsPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bakery Street, Delhi"
         ),
         RestaurantItemFull(
@@ -7695,8 +7695,8 @@ fun SweetsPage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "1.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Tea District, Delhi"
         ),
         RestaurantItemFull(
@@ -7708,8 +7708,8 @@ fun SweetsPage() {
             rating = "4.6",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Snack Corner, Delhi"
         ),
         RestaurantItemFull(
@@ -7721,8 +7721,8 @@ fun SweetsPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Breakfast Blvd, Delhi"
         ),
         RestaurantItemFull(
@@ -7734,8 +7734,8 @@ fun SweetsPage() {
             rating = "4.7",
             deliveryTime = "18-24 mins",
             distance = "1.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market, Delhi"
         ),
         RestaurantItemFull(
@@ -7747,8 +7747,8 @@ fun SweetsPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Healthy Ave, Delhi"
         ),
         RestaurantItemFull(
@@ -7760,8 +7760,8 @@ fun SweetsPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -7773,8 +7773,8 @@ fun SweetsPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Beach Road, Delhi"
         ),
         RestaurantItemFull(
@@ -7786,8 +7786,8 @@ fun SweetsPage() {
             rating = "4.9",
             deliveryTime = "22-28 mins",
             distance = "2.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gourmet Street, Delhi"
         )
     )
@@ -8078,7 +8078,7 @@ fun KhichdiPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹27",
+                discountAmount = "₹20",
                 address = "Wellness Street, Delhi"
             ),
             FoodItemDoubleF(
@@ -8091,7 +8091,7 @@ fun KhichdiPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹20",
+                discountAmount = "₹20",
                 address = "Organic Market, Delhi"
             ),
             FoodItemDoubleF(
@@ -8104,7 +8104,7 @@ fun KhichdiPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.9 km",
                 discount = "20%",
-                discountAmount = "up to ₹46",
+                discountAmount = "₹20",
                 address = "Food Square, Delhi"
             ),
             FoodItemDoubleF(
@@ -8117,7 +8117,7 @@ fun KhichdiPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Fitness Hub, Delhi"
             ),
             FoodItemDoubleF(
@@ -8130,7 +8130,7 @@ fun KhichdiPage() {
                 deliveryTime = "18-22 mins",
                 distance = "1.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Health Avenue, Delhi"
             ),
             FoodItemDoubleF(
@@ -8143,7 +8143,7 @@ fun KhichdiPage() {
                 deliveryTime = "22-27 mins",
                 distance = "1.5 km",
                 discount = "20%",
-                discountAmount = "up to ₹42",
+                discountAmount = "₹20",
                 address = "Spice Market, Delhi"
             )
         )
@@ -8217,8 +8217,8 @@ fun KhichdiPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Street, Delhi"
         ),
         RestaurantItemFull(
@@ -8230,8 +8230,8 @@ fun KhichdiPage() {
             rating = "4.7",
             deliveryTime = "18-24 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old Market, Delhi"
         ),
         RestaurantItemFull(
@@ -8243,8 +8243,8 @@ fun KhichdiPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health Plaza, Delhi"
         ),
         RestaurantItemFull(
@@ -8256,8 +8256,8 @@ fun KhichdiPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹46",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gourmet Avenue, Delhi"
         ),
         RestaurantItemFull(
@@ -8269,8 +8269,8 @@ fun KhichdiPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market, Delhi"
         ),
         RestaurantItemFull(
@@ -8282,8 +8282,8 @@ fun KhichdiPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Green Street, Delhi"
         ),
         RestaurantItemFull(
@@ -8295,8 +8295,8 @@ fun KhichdiPage() {
             rating = "4.6",
             deliveryTime = "20-25 mins",
             distance = "1.7 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Heritage Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -8308,8 +8308,8 @@ fun KhichdiPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Market, Delhi"
         ),
         RestaurantItemFull(
@@ -8321,8 +8321,8 @@ fun KhichdiPage() {
             rating = "4.9",
             deliveryTime = "22-28 mins",
             distance = "2.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹50",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 18, Delhi"
         ),
         RestaurantItemFull(
@@ -8334,8 +8334,8 @@ fun KhichdiPage() {
             rating = "4.5",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Court, Delhi"
         ),
         RestaurantItemFull(
@@ -8347,8 +8347,8 @@ fun KhichdiPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Road, Delhi"
         ),
         RestaurantItemFull(
@@ -8360,8 +8360,8 @@ fun KhichdiPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.6 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "South Delhi"
         ),
         RestaurantItemFull(
@@ -8373,8 +8373,8 @@ fun KhichdiPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health Street, Delhi"
         ),
         RestaurantItemFull(
@@ -8386,8 +8386,8 @@ fun KhichdiPage() {
             rating = "4.6",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Highway Inn, Delhi"
         ),
         RestaurantItemFull(
@@ -8399,8 +8399,8 @@ fun KhichdiPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "1.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -8412,8 +8412,8 @@ fun KhichdiPage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Dairy Circle, Delhi"
         ),
         RestaurantItemFull(
@@ -8425,8 +8425,8 @@ fun KhichdiPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Bazaar, Delhi"
         ),
         RestaurantItemFull(
@@ -8438,8 +8438,8 @@ fun KhichdiPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -8451,8 +8451,8 @@ fun KhichdiPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chennai Express, Delhi"
         ),
         RestaurantItemFull(
@@ -8464,8 +8464,8 @@ fun KhichdiPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "2.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹70",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Palace Road, Delhi"
         )
     )
@@ -8728,7 +8728,7 @@ fun SundaePage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹37",
+                discountAmount = "₹20",
                 address = "Fitness Street, Delhi"
             ),
             FoodItemDoubleF(
@@ -8741,7 +8741,7 @@ fun SundaePage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.9 km",
                 discount = "10%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Healthy Hub, Delhi"
             ),
             FoodItemDoubleF(
@@ -8754,7 +8754,7 @@ fun SundaePage() {
                 deliveryTime = "18-24 mins",
                 distance = "1.4 km",
                 discount = "20%",
-                discountAmount = "up to ₹56",
+                discountAmount = "₹20",
                 address = "Chocolate Square, Delhi"
             ),
             FoodItemDoubleF(
@@ -8767,7 +8767,7 @@ fun SundaePage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹34",
+                discountAmount = "₹20",
                 address = "Fruit Market, Delhi"
             ),
             FoodItemDoubleF(
@@ -8780,7 +8780,7 @@ fun SundaePage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.7 km",
                 discount = "10%",
-                discountAmount = "up to ₹20",
+                discountAmount = "₹20",
                 address = "Nut Street, Delhi"
             ),
             FoodItemDoubleF(
@@ -8793,7 +8793,7 @@ fun SundaePage() {
                 deliveryTime = "16-22 mins",
                 distance = "1.3 km",
                 discount = "20%",
-                discountAmount = "up to ₹52",
+                discountAmount = "₹20",
                 address = "Berry Gardens, Delhi"
             )
         )
@@ -8867,8 +8867,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Street, Delhi"
         ),
         RestaurantItemFull(
@@ -8880,8 +8880,8 @@ fun SundaePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Healthy Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -8893,8 +8893,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "1.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chocolate Square, Delhi"
         ),
         RestaurantItemFull(
@@ -8906,8 +8906,8 @@ fun SundaePage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Market, Delhi"
         ),
         RestaurantItemFull(
@@ -8919,8 +8919,8 @@ fun SundaePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Nut Street, Delhi"
         ),
         RestaurantItemFull(
@@ -8932,8 +8932,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "16-22 mins",
             distance = "1.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹54",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Gardens, Delhi"
         ),
         RestaurantItemFull(
@@ -8945,8 +8945,8 @@ fun SundaePage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Ave, Delhi"
         ),
         RestaurantItemFull(
@@ -8958,8 +8958,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -8971,8 +8971,8 @@ fun SundaePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Tea District, Delhi"
         ),
         RestaurantItemFull(
@@ -8984,8 +8984,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.7 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹56",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Palace Road, Delhi"
         ),
         RestaurantItemFull(
@@ -8997,8 +8997,8 @@ fun SundaePage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "1.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹48",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Diet Street, Delhi"
         ),
         RestaurantItemFull(
@@ -9010,8 +9010,8 @@ fun SundaePage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -9023,8 +9023,8 @@ fun SundaePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹54",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Coffee Square, Delhi"
         ),
         RestaurantItemFull(
@@ -9036,8 +9036,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "1.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Street, Delhi"
         ),
         RestaurantItemFull(
@@ -9049,8 +9049,8 @@ fun SundaePage() {
             rating = "4.8",
             deliveryTime = "16-22 mins",
             distance = "1.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -9062,8 +9062,8 @@ fun SundaePage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹44",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Market Street, Delhi"
         ),
         RestaurantItemFull(
@@ -9075,8 +9075,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹46",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Nut Avenue, Delhi"
         ),
         RestaurantItemFull(
@@ -9088,8 +9088,8 @@ fun SundaePage() {
             rating = "4.6",
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Beach Road, Delhi"
         ),
         RestaurantItemFull(
@@ -9101,8 +9101,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹58",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Gardens, Delhi"
         ),
         RestaurantItemFull(
@@ -9114,8 +9114,8 @@ fun SundaePage() {
             rating = "4.9",
             deliveryTime = "22-28 mins",
             distance = "2.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹90",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gourmet Street, Delhi"
         )
     )
@@ -9415,7 +9415,7 @@ fun JuicePage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
                 discount = "20%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Health Square, Delhi"
             ),
             FoodItemDoubleF(
@@ -9428,7 +9428,7 @@ fun JuicePage() {
                 deliveryTime = "12-18 mins",
                 distance = "1.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹27",
+                discountAmount = "₹20",
                 address = "Fruit Bazaar, Delhi"
             ),
             FoodItemDoubleF(
@@ -9441,7 +9441,7 @@ fun JuicePage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹20",
+                discountAmount = "₹20",
                 address = "Fitness Hub, Delhi"
             ),
             FoodItemDoubleF(
@@ -9454,7 +9454,7 @@ fun JuicePage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.6 km",
                 discount = "25%",
-                discountAmount = "up to ₹32",
+                discountAmount = "₹20",
                 address = "Wellness Street, Delhi"
             ),
             FoodItemDoubleF(
@@ -9467,7 +9467,7 @@ fun JuicePage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Vegetable Market, Delhi"
             ),
             FoodItemDoubleF(
@@ -9480,7 +9480,7 @@ fun JuicePage() {
                 deliveryTime = "14-20 mins",
                 distance = "1.2 km",
                 discount = "20%",
-                discountAmount = "up to ₹38",
+                discountAmount = "₹20",
                 address = "Beach Road, Delhi"
             )
         )
@@ -9555,8 +9555,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health Square, Delhi"
         ),
         RestaurantItemFull(
@@ -9568,8 +9568,8 @@ fun JuicePage() {
             rating = "4.7",
             deliveryTime = "8-12 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Market Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -9581,8 +9581,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "5-10 mins",
             distance = "0.3 km",
-            discount = "25% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Street, Delhi"
         ),
         RestaurantItemFull(
@@ -9594,8 +9594,8 @@ fun JuicePage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Market, Delhi"
         ),
         RestaurantItemFull(
@@ -9607,8 +9607,8 @@ fun JuicePage() {
             rating = "4.7",
             deliveryTime = "8-12 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Ave, Delhi"
         ),
 
@@ -9622,8 +9622,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.9 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Market, Delhi"
         ),
         RestaurantItemFull(
@@ -9635,8 +9635,8 @@ fun JuicePage() {
             rating = "4.9",
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Beach Road, Delhi"
         ),
         RestaurantItemFull(
@@ -9648,8 +9648,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Tropical Square, Delhi"
         ),
         RestaurantItemFull(
@@ -9661,8 +9661,8 @@ fun JuicePage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Gardens, Delhi"
         ),
         RestaurantItemFull(
@@ -9674,8 +9674,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Vegetable Market, Delhi"
         ),
 
@@ -9689,8 +9689,8 @@ fun JuicePage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -9702,8 +9702,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "8-14 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Street, Delhi"
         ),
         RestaurantItemFull(
@@ -9715,8 +9715,8 @@ fun JuicePage() {
             rating = "4.6",
             deliveryTime = "10-15 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Green Market, Delhi"
         ),
         RestaurantItemFull(
@@ -9728,8 +9728,8 @@ fun JuicePage() {
             rating = "4.7",
             deliveryTime = "8-12 mins",
             distance = "0.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Farm Road, Delhi"
         ),
         RestaurantItemFull(
@@ -9741,8 +9741,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Valley, Delhi"
         ),
 
@@ -9756,8 +9756,8 @@ fun JuicePage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -9769,8 +9769,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gym Street, Delhi"
         ),
         RestaurantItemFull(
@@ -9782,8 +9782,8 @@ fun JuicePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Bazaar, Delhi"
         ),
 
@@ -9797,8 +9797,8 @@ fun JuicePage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Herbal Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -9810,8 +9810,8 @@ fun JuicePage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹80",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gourmet Street, Delhi"
         )
     )
@@ -10121,7 +10121,7 @@ fun LassiPage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹13",
+                discountAmount = "₹20",
                 address = "Old Market Road, Delhi"
             ),
             FoodItemDoubleF(
@@ -10134,7 +10134,7 @@ fun LassiPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.8 km",
                 discount = "20%",
-                discountAmount = "up to ₹26",
+                discountAmount = "₹20",
                 address = "Fruit Market, Delhi"
             ),
             FoodItemDoubleF(
@@ -10147,7 +10147,7 @@ fun LassiPage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹10",
+                discountAmount = "₹20",
                 address = "Chowk Bazaar, Delhi"
             ),
             FoodItemDoubleF(
@@ -10160,7 +10160,7 @@ fun LassiPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
                 discount = "12%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Sweets Gallery, Delhi"
             ),
             FoodItemDoubleF(
@@ -10173,7 +10173,7 @@ fun LassiPage() {
                 deliveryTime = "12-17 mins",
                 distance = "0.7 km",
                 discount = "15%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Old City, Delhi"
             ),
             FoodItemDoubleF(
@@ -10186,7 +10186,7 @@ fun LassiPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.5 km",
                 discount = "5%",
-                discountAmount = "up to ₹10",
+                discountAmount = "₹20",
                 address = "River Side, Delhi",
             )
         )
@@ -10260,8 +10260,8 @@ fun LassiPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old Market Road, Delhi"
         ),
         RestaurantItemFull(
@@ -10273,8 +10273,8 @@ fun LassiPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Village Square, Delhi"
         ),
         RestaurantItemFull(
@@ -10286,8 +10286,8 @@ fun LassiPage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Palace Road, Delhi"
         ),
         RestaurantItemFull(
@@ -10299,8 +10299,8 @@ fun LassiPage() {
             rating = "4.8",
             deliveryTime = "12-17 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old City, Delhi"
         ),
         RestaurantItemFull(
@@ -10312,8 +10312,8 @@ fun LassiPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sweet Market, Delhi"
         ),
 
@@ -10327,8 +10327,8 @@ fun LassiPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Market, Delhi"
         ),
         RestaurantItemFull(
@@ -10340,8 +10340,8 @@ fun LassiPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Gardens, Delhi"
         ),
         RestaurantItemFull(
@@ -10353,8 +10353,8 @@ fun LassiPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Street, Delhi"
         ),
         RestaurantItemFull(
@@ -10366,8 +10366,8 @@ fun LassiPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gourmet Lane, Delhi"
         ),
         RestaurantItemFull(
@@ -10379,8 +10379,8 @@ fun LassiPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Bazaar, Delhi"
         ),
 
@@ -10394,8 +10394,8 @@ fun LassiPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹10",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chowk Bazaar, Delhi"
         ),
         RestaurantItemFull(
@@ -10407,8 +10407,8 @@ fun LassiPage() {
             rating = "4.7",
             deliveryTime = "8-12 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Herb Garden, Delhi"
         ),
         RestaurantItemFull(
@@ -10420,8 +10420,8 @@ fun LassiPage() {
             rating = "4.8",
             deliveryTime = "5-10 mins",
             distance = "0.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Street, Delhi"
         ),
         RestaurantItemFull(
@@ -10433,8 +10433,8 @@ fun LassiPage() {
             rating = "4.6",
             deliveryTime = "10-15 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market, Delhi"
         ),
         RestaurantItemFull(
@@ -10446,8 +10446,8 @@ fun LassiPage() {
             rating = "4.7",
             deliveryTime = "8-12 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old Delhi, Delhi"
         ),
 
@@ -10461,8 +10461,8 @@ fun LassiPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sweets Gallery, Delhi"
         ),
         RestaurantItemFull(
@@ -10474,8 +10474,8 @@ fun LassiPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Traditional Market, Delhi"
         ),
         RestaurantItemFull(
@@ -10487,8 +10487,8 @@ fun LassiPage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Street, Delhi"
         ),
 
@@ -10502,8 +10502,8 @@ fun LassiPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Nawab Street, Delhi"
         ),
         RestaurantItemFull(
@@ -10515,8 +10515,8 @@ fun LassiPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.8 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹70",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gourmet Street, Delhi",
         )
     )
@@ -10952,7 +10952,7 @@ fun CurdRicePage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Triplicane, Chennai"
             ),
             FoodItemDoubleF(
@@ -10965,7 +10965,7 @@ fun CurdRicePage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹11",
+                discountAmount = "₹20",
                 address = "T. Nagar, Chennai"
             ),
             FoodItemDoubleF(
@@ -10978,7 +10978,7 @@ fun CurdRicePage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Fruit Market, Chennai"
             ),
             FoodItemDoubleF(
@@ -10991,7 +10991,7 @@ fun CurdRicePage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
                 discount = "12%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Vegetable Market, Chennai"
             ),
             FoodItemDoubleF(
@@ -11004,7 +11004,7 @@ fun CurdRicePage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
                 discount = "10%",
-                discountAmount = "up to ₹11",
+                discountAmount = "₹20",
                 address = "Chandni Chowk, Delhi"
             ),
             FoodItemDoubleF(
@@ -11017,7 +11017,7 @@ fun CurdRicePage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
                 discount = "15%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Andhra Colony, Chennai",
             )
         )
@@ -11091,8 +11091,8 @@ fun CurdRicePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Triplicane High Road, Chennai"
         ),
         RestaurantItemFull(
@@ -11104,8 +11104,8 @@ fun CurdRicePage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Marriage Road, Madurai"
         ),
         RestaurantItemFull(
@@ -11117,8 +11117,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Temple Street, Trichy"
         ),
         RestaurantItemFull(
@@ -11130,8 +11130,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Residential Colony, Coimbatore"
         ),
         RestaurantItemFull(
@@ -11143,8 +11143,8 @@ fun CurdRicePage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹8",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gandhi Nagar, Bangalore"
         ),
 
@@ -11158,8 +11158,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Market, Hyderabad"
         ),
         RestaurantItemFull(
@@ -11171,8 +11171,8 @@ fun CurdRicePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mango Garden, Bangalore"
         ),
         RestaurantItemFull(
@@ -11184,8 +11184,8 @@ fun CurdRicePage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Spice Market, Chennai"
         ),
         RestaurantItemFull(
@@ -11197,8 +11197,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "12-17 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mylapore, Chennai"
         ),
         RestaurantItemFull(
@@ -11210,8 +11210,8 @@ fun CurdRicePage() {
             rating = "4.6",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
 
@@ -11225,8 +11225,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Colony, Pune"
         ),
         RestaurantItemFull(
@@ -11238,8 +11238,8 @@ fun CurdRicePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Street, Mumbai"
         ),
         RestaurantItemFull(
@@ -11251,8 +11251,8 @@ fun CurdRicePage() {
             rating = "4.7",
             deliveryTime = "18-22 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Health Hub, Delhi"
         ),
         RestaurantItemFull(
@@ -11264,8 +11264,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Organic Market, Mysore"
         ),
         RestaurantItemFull(
@@ -11277,8 +11277,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sports Complex, Bangalore"
         ),
 
@@ -11292,8 +11292,8 @@ fun CurdRicePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -11305,8 +11305,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "1.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old City, Hyderabad"
         ),
         RestaurantItemFull(
@@ -11318,8 +11318,8 @@ fun CurdRicePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Green Park, Delhi"
         ),
 
@@ -11333,8 +11333,8 @@ fun CurdRicePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Court, Chennai"
         ),
         RestaurantItemFull(
@@ -11346,8 +11346,8 @@ fun CurdRicePage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "2.0 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹60",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Thali Village, Bangalore"
         )
     )
@@ -11733,7 +11733,7 @@ fun PuddingPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
                 discount = "10%",
-                discountAmount = "up to ₹9",
+                discountAmount = "₹20",
                 address = "Chandni Chowk, Delhi"
             ),
             FoodItemDoubleF(
@@ -11746,7 +11746,7 @@ fun PuddingPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -11759,7 +11759,7 @@ fun PuddingPage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.8 km",
                 discount = "12%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -11772,7 +11772,7 @@ fun PuddingPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹10",
+                discountAmount = "₹20",
                 address = "Old Lucknow, Lucknow"
             ),
             FoodItemDoubleF(
@@ -11785,7 +11785,7 @@ fun PuddingPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹21",
+                discountAmount = "₹20",
                 address = "Fruit Market, Mumbai"
             ),
             FoodItemDoubleF(
@@ -11798,7 +11798,7 @@ fun PuddingPage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹16",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             )
         )
@@ -11872,8 +11872,8 @@ fun PuddingPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹10",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chandni Chowk, Delhi"
         ),
         RestaurantItemFull(
@@ -11885,8 +11885,8 @@ fun PuddingPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fort Kochi, Kerala"
         ),
         RestaurantItemFull(
@@ -11898,8 +11898,8 @@ fun PuddingPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old Delhi, Delhi"
         ),
         RestaurantItemFull(
@@ -11911,8 +11911,8 @@ fun PuddingPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Guruvayur, Kerala"
         ),
         RestaurantItemFull(
@@ -11924,8 +11924,8 @@ fun PuddingPage() {
             rating = "4.9",
             deliveryTime = "18-22 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Palace Road, Jaipur"
         ),
 
@@ -11939,8 +11939,8 @@ fun PuddingPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Hazratganj, Lucknow"
         ),
         RestaurantItemFull(
@@ -11952,8 +11952,8 @@ fun PuddingPage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "1.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old City, Hyderabad"
         ),
         RestaurantItemFull(
@@ -11965,8 +11965,8 @@ fun PuddingPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -11978,8 +11978,8 @@ fun PuddingPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Park Street, Kolkata"
         ),
         RestaurantItemFull(
@@ -11991,8 +11991,8 @@ fun PuddingPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
 
@@ -12006,8 +12006,8 @@ fun PuddingPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = ₹20",
             address = "Fruit Market, Mumbai"
         ),
         RestaurantItemFull(
@@ -12019,8 +12019,8 @@ fun PuddingPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Gardens, Bangalore"
         ),
         RestaurantItemFull(
@@ -12032,8 +12032,8 @@ fun PuddingPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Maharashtra Market, Pune"
         ),
         RestaurantItemFull(
@@ -12045,8 +12045,8 @@ fun PuddingPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Bazaar, Chennai"
         ),
         RestaurantItemFull(
@@ -12058,8 +12058,8 @@ fun PuddingPage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "1.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Mangalore, Karnataka"
         ),
 
@@ -12073,8 +12073,8 @@ fun PuddingPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -12086,8 +12086,8 @@ fun PuddingPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -12099,8 +12099,8 @@ fun PuddingPage() {
             rating = "4.9",
             deliveryTime = "18-22 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old City, Hyderabad"
         ),
 
@@ -12114,8 +12114,8 @@ fun PuddingPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Street, Pune"
         ),
         RestaurantItemFull(
@@ -12127,8 +12127,8 @@ fun PuddingPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fitness Street, Mumbai"
         )
     )
@@ -12527,7 +12527,7 @@ fun CustardPage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹8",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -12540,7 +12540,7 @@ fun CustardPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.8 km",
                 discount = "12%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Fruit Market, Mumbai"
             ),
             FoodItemDoubleF(
@@ -12553,7 +12553,7 @@ fun CustardPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -12566,7 +12566,7 @@ fun CustardPage() {
                 deliveryTime = "12-18 mins",
                 distance = "1.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -12579,7 +12579,7 @@ fun CustardPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
                 discount = "12%",
-                discountAmount = "up to ₹13",
+                discountAmount = "₹20",
                 address = "Park Street, Kolkata"
             ),
             FoodItemDoubleF(
@@ -12592,7 +12592,7 @@ fun CustardPage() {
                 deliveryTime = "12-18 mins",
                 distance = "1.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Berry Gardens, Bangalore"
             )
         )
@@ -12666,8 +12666,8 @@ fun CustardPage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹8",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -12679,8 +12679,8 @@ fun CustardPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹9",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Marine Lines, Mumbai"
         ),
         RestaurantItemFull(
@@ -12692,8 +12692,8 @@ fun CustardPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -12705,8 +12705,8 @@ fun CustardPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Park Street, Kolkata"
         ),
         RestaurantItemFull(
@@ -12718,8 +12718,8 @@ fun CustardPage() {
             rating = "4.6",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹10",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
 
@@ -12733,8 +12733,8 @@ fun CustardPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Fruit Market, Mumbai"
         ),
         RestaurantItemFull(
@@ -12746,8 +12746,8 @@ fun CustardPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -12759,8 +12759,8 @@ fun CustardPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Berry Gardens, Bangalore"
         ),
         RestaurantItemFull(
@@ -12772,8 +12772,8 @@ fun CustardPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Wellness Street, Pune"
         ),
         RestaurantItemFull(
@@ -12785,8 +12785,8 @@ fun CustardPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Shimla Hills, Delhi"
         ),
 
@@ -12800,8 +12800,8 @@ fun CustardPage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -12813,8 +12813,8 @@ fun CustardPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -12826,8 +12826,8 @@ fun CustardPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -12839,8 +12839,8 @@ fun CustardPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -12852,8 +12852,8 @@ fun CustardPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Palace Road, Jaipur"
         ),
 
@@ -12867,8 +12867,8 @@ fun CustardPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -12880,8 +12880,8 @@ fun CustardPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Marine Drive, Kochi"
         ),
         RestaurantItemFull(
@@ -12893,8 +12893,8 @@ fun CustardPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Brigade Road, Bangalore"
         ),
 
@@ -12908,8 +12908,8 @@ fun CustardPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Park Street, Kolkata"
         ),
         RestaurantItemFull(
@@ -12921,8 +12921,8 @@ fun CustardPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -13292,7 +13292,7 @@ fun SoupDietPage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹13",
+                discountAmount = "₹20",
                 address = "MG Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -13305,7 +13305,7 @@ fun SoupDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
                 discount = "12%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -13318,7 +13318,7 @@ fun SoupDietPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.7 km",
                 discount = "10%",
-                discountAmount = "up to ₹12",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -13331,7 +13331,7 @@ fun SoupDietPage() {
                 deliveryTime = "18-25 mins",
                 distance = "1.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -13344,7 +13344,7 @@ fun SoupDietPage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.6 km",
                 discount = "20%",
-                discountAmount = "up to ₹20",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -13357,7 +13357,7 @@ fun SoupDietPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.9 km",
                 discount = "10%",
-                discountAmount = "up to ₹11",
+                discountAmount = "₹20",
                 address = "Baner, Pune"
             )
         )
@@ -13431,8 +13431,8 @@ fun SoupDietPage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -13444,8 +13444,8 @@ fun SoupDietPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -13457,8 +13457,8 @@ fun SoupDietPage() {
             rating = "4.6",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -13470,8 +13470,8 @@ fun SoupDietPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Chinatown, Kolkata"
         ),
         RestaurantItemFull(
@@ -13483,8 +13483,8 @@ fun SoupDietPage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹10",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
 
@@ -13498,8 +13498,8 @@ fun SoupDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -13511,8 +13511,8 @@ fun SoupDietPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -13524,8 +13524,8 @@ fun SoupDietPage() {
             rating = "4.9",
             deliveryTime = "18-25 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Old City, Hyderabad"
         ),
         RestaurantItemFull(
@@ -13537,8 +13537,8 @@ fun SoupDietPage() {
             rating = "4.6",
             deliveryTime = "8-12 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Food Street, Pune"
         ),
         RestaurantItemFull(
@@ -13550,8 +13550,8 @@ fun SoupDietPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Salt Lake, Kolkata"
         ),
 
@@ -13565,8 +13565,8 @@ fun SoupDietPage() {
             rating = "4.9",
             deliveryTime = "18-25 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -13578,8 +13578,8 @@ fun SoupDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -13591,8 +13591,8 @@ fun SoupDietPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -13604,8 +13604,8 @@ fun SoupDietPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -13617,8 +13617,8 @@ fun SoupDietPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
 
@@ -13632,8 +13632,8 @@ fun SoupDietPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹11",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -13645,8 +13645,8 @@ fun SoupDietPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "CP, Delhi"
         ),
         RestaurantItemFull(
@@ -13658,8 +13658,8 @@ fun SoupDietPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Civil Lines, Jaipur"
         ),
 
@@ -13673,8 +13673,8 @@ fun SoupDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -13686,8 +13686,8 @@ fun SoupDietPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -14065,7 +14065,7 @@ fun BrowniePage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹8",
+                discountAmount = "₹20",
                 address = "Church Street, Bangalore"
             ),
             FoodItemDoubleF(
@@ -14078,7 +14078,7 @@ fun BrowniePage() {
                 deliveryTime = "18-25 mins",
                 distance = "0.9 km",
                 discount = "15%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -14091,7 +14091,7 @@ fun BrowniePage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.7 km",
                 discount = "10%",
-                discountAmount = "up to ₹9",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -14104,7 +14104,7 @@ fun BrowniePage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.1 km",
                 discount = "12%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -14117,7 +14117,7 @@ fun BrowniePage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -14130,7 +14130,7 @@ fun BrowniePage() {
                 deliveryTime = "18-25 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Baner, Pune"
             )
         )
@@ -14204,8 +14204,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹8",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Church Street, Bangalore"
         ),
         RestaurantItemFull(
@@ -14217,8 +14217,8 @@ fun BrowniePage() {
             rating = "4.8",
             deliveryTime = "18-25 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -14230,8 +14230,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -14243,8 +14243,8 @@ fun BrowniePage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -14256,8 +14256,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
 
@@ -14271,8 +14271,8 @@ fun BrowniePage() {
             rating = "4.8",
             deliveryTime = "18-25 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -14284,8 +14284,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -14297,8 +14297,8 @@ fun BrowniePage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹11",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -14310,8 +14310,8 @@ fun BrowniePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -14323,8 +14323,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "18-25 mins",
             distance = "1.2 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
 
@@ -14338,8 +14338,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.1 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -14351,8 +14351,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -14364,8 +14364,8 @@ fun BrowniePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -14377,8 +14377,8 @@ fun BrowniePage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹11",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Salt Lake, Kolkata"
         ),
         RestaurantItemFull(
@@ -14390,8 +14390,8 @@ fun BrowniePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -14405,8 +14405,8 @@ fun BrowniePage() {
             rating = "4.8",
             deliveryTime = "18-25 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -14418,8 +14418,8 @@ fun BrowniePage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -14431,8 +14431,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
 
@@ -14446,8 +14446,8 @@ fun BrowniePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -14459,8 +14459,8 @@ fun BrowniePage() {
             rating = "4.9",
             deliveryTime = "18-25 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         )
     )
@@ -14856,7 +14856,7 @@ fun WafflesPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Brigade Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -14869,7 +14869,7 @@ fun WafflesPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.7 km",
                 discount = "15%",
-                discountAmount = "up to ₹27",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -14882,7 +14882,7 @@ fun WafflesPage() {
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
                 discount = "12%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -14895,7 +14895,7 @@ fun WafflesPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -14908,7 +14908,7 @@ fun WafflesPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -14921,7 +14921,7 @@ fun WafflesPage() {
                 deliveryTime = "18-25 mins",
                 distance = "1.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Baner, Pune"
             )
         )
@@ -14995,8 +14995,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Brigade Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -15008,8 +15008,8 @@ fun WafflesPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -15021,8 +15021,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -15034,8 +15034,8 @@ fun WafflesPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -15047,8 +15047,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
 
@@ -15062,8 +15062,8 @@ fun WafflesPage() {
             rating = "4.9",
             deliveryTime = "18-25 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -15075,8 +15075,8 @@ fun WafflesPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -15088,8 +15088,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -15101,8 +15101,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -15114,8 +15114,8 @@ fun WafflesPage() {
             rating = "4.9",
             deliveryTime = "18-25 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
 
@@ -15129,8 +15129,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "1.1 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -15142,8 +15142,8 @@ fun WafflesPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -15155,8 +15155,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -15168,8 +15168,8 @@ fun WafflesPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Salt Lake, Kolkata"
         ),
         RestaurantItemFull(
@@ -15181,8 +15181,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -15196,8 +15196,8 @@ fun WafflesPage() {
             rating = "4.9",
             deliveryTime = "18-25 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -15209,8 +15209,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -15222,8 +15222,8 @@ fun WafflesPage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -15235,8 +15235,8 @@ fun WafflesPage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -15248,8 +15248,8 @@ fun WafflesPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹29",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         )
     )
@@ -15698,7 +15698,7 @@ fun ColdCoffeePage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹10",
+                discountAmount = "₹20",
                 address = "Church Street, Bangalore"
             ),
             FoodItemDoubleF(
@@ -15711,7 +15711,7 @@ fun ColdCoffeePage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -15724,7 +15724,7 @@ fun ColdCoffeePage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
                 discount = "12%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -15737,7 +15737,7 @@ fun ColdCoffeePage() {
                 deliveryTime = "15-20 mins",
                 distance = "1.0 km",
                 discount = "10%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -15750,7 +15750,7 @@ fun ColdCoffeePage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -15763,7 +15763,7 @@ fun ColdCoffeePage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.9 km",
                 discount = "10%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Baner, Pune"
             )
         )
@@ -15837,8 +15837,8 @@ fun ColdCoffeePage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -15850,8 +15850,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -15863,8 +15863,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -15876,8 +15876,8 @@ fun ColdCoffeePage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Brigade Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -15889,8 +15889,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
 
@@ -15904,8 +15904,8 @@ fun ColdCoffeePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -15917,8 +15917,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -15930,8 +15930,8 @@ fun ColdCoffeePage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -15943,8 +15943,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "18-25 mins",
             distance = "1.3 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -15956,8 +15956,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
 
@@ -15971,8 +15971,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Salt Lake, Kolkata"
         ),
         RestaurantItemFull(
@@ -15984,8 +15984,8 @@ fun ColdCoffeePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -15997,8 +15997,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -16010,8 +16010,8 @@ fun ColdCoffeePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -16023,8 +16023,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
 
@@ -16038,8 +16038,8 @@ fun ColdCoffeePage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -16051,8 +16051,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -16064,8 +16064,8 @@ fun ColdCoffeePage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -16077,8 +16077,8 @@ fun ColdCoffeePage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -16090,8 +16090,8 @@ fun ColdCoffeePage() {
             rating = "4.7",
             deliveryTime = "12-18 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         )
     )
@@ -16528,7 +16528,7 @@ fun GrilledChickenDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -16541,7 +16541,7 @@ fun GrilledChickenDietPage() {
                 deliveryTime = "18-22 mins",
                 distance = "0.9 km",
                 discount = "10%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -16554,7 +16554,7 @@ fun GrilledChickenDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
                 discount = "12%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -16567,7 +16567,7 @@ fun GrilledChickenDietPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Church Street, Bangalore"
             ),
             FoodItemDoubleF(
@@ -16580,7 +16580,7 @@ fun GrilledChickenDietPage() {
                 deliveryTime = "18-25 mins",
                 distance = "1.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹34",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             ),
             FoodItemDoubleF(
@@ -16593,7 +16593,7 @@ fun GrilledChickenDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             )
         )
@@ -16667,8 +16667,8 @@ fun GrilledChickenDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -16680,8 +16680,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -16693,8 +16693,8 @@ fun GrilledChickenDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -16706,8 +16706,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Brigade Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -16719,8 +16719,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹29",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
 
@@ -16734,8 +16734,8 @@ fun GrilledChickenDietPage() {
             rating = "4.9",
             deliveryTime = "22-28 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -16747,8 +16747,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -16760,8 +16760,8 @@ fun GrilledChickenDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -16773,8 +16773,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -16786,8 +16786,8 @@ fun GrilledChickenDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
 
@@ -16801,8 +16801,8 @@ fun GrilledChickenDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Salt Lake, Kolkata"
         ),
         RestaurantItemFull(
@@ -16814,8 +16814,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "1.1 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -16827,8 +16827,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "25-30 mins",
             distance = "1.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹46",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -16840,8 +16840,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹29",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -16853,8 +16853,8 @@ fun GrilledChickenDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
 
@@ -16868,8 +16868,8 @@ fun GrilledChickenDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹49",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -16881,8 +16881,8 @@ fun GrilledChickenDietPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -16894,8 +16894,8 @@ fun GrilledChickenDietPage() {
             rating = "4.9",
             deliveryTime = "18-22 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -16907,8 +16907,8 @@ fun GrilledChickenDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -16920,8 +16920,8 @@ fun GrilledChickenDietPage() {
             rating = "4.9",
             deliveryTime = "22-28 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         )
     )
@@ -17442,7 +17442,7 @@ fun SteamedFishDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "0.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹52",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -17455,7 +17455,7 @@ fun SteamedFishDietPage() {
                 deliveryTime = "18-22 mins",
                 distance = "1.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -17468,7 +17468,7 @@ fun SteamedFishDietPage() {
                 deliveryTime = "22-28 mins",
                 distance = "0.9 km",
                 discount = "12%",
-                discountAmount = "up to ₹39",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -17481,7 +17481,7 @@ fun SteamedFishDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹43",
+                discountAmount = "₹20",
                 address = "Brigade Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -17494,7 +17494,7 @@ fun SteamedFishDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "1.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -17507,7 +17507,7 @@ fun SteamedFishDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "1.0 km",
                 discount = "12%",
-                discountAmount = "up to ₹54",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -17581,8 +17581,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹52",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -17594,8 +17594,8 @@ fun SteamedFishDietPage() {
             rating = "4.9",
             deliveryTime = "18-22 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -17607,8 +17607,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -17620,8 +17620,8 @@ fun SteamedFishDietPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Brigade Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -17633,8 +17633,8 @@ fun SteamedFishDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "1.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
 
@@ -17648,8 +17648,8 @@ fun SteamedFishDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹54",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -17661,8 +17661,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "1.1 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹57",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -17674,8 +17674,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -17687,8 +17687,8 @@ fun SteamedFishDietPage() {
             rating = "4.7",
             deliveryTime = "22-28 mins",
             distance = "1.2 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -17700,8 +17700,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "25-30 mins",
             distance = "1.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹55",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
 
@@ -17715,8 +17715,8 @@ fun SteamedFishDietPage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Salt Lake, Kolkata"
         ),
         RestaurantItemFull(
@@ -17728,8 +17728,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹49",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -17741,8 +17741,8 @@ fun SteamedFishDietPage() {
             rating = "4.7",
             deliveryTime = "18-22 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹49",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -17754,8 +17754,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -17767,8 +17767,8 @@ fun SteamedFishDietPage() {
             rating = "4.9",
             deliveryTime = "22-28 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
 
@@ -17782,8 +17782,8 @@ fun SteamedFishDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹63",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -17795,8 +17795,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -17808,8 +17808,8 @@ fun SteamedFishDietPage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -17821,8 +17821,8 @@ fun SteamedFishDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹51",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -17834,8 +17834,8 @@ fun SteamedFishDietPage() {
             rating = "4.9",
             deliveryTime = "22-28 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹46",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         )
     )
@@ -18482,7 +18482,7 @@ fun QuinoaBowlDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -18495,7 +18495,7 @@ fun QuinoaBowlDietPage() {
                 deliveryTime = "18-22 mins",
                 distance = "1.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹39",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -18508,7 +18508,7 @@ fun QuinoaBowlDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "0.9 km",
                 discount = "10%",
-                discountAmount = "up to ₹32",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -18521,7 +18521,7 @@ fun QuinoaBowlDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.7 km",
                 discount = "15%",
-                discountAmount = "up to ₹43",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -18534,7 +18534,7 @@ fun QuinoaBowlDietPage() {
                 deliveryTime = "18-22 mins",
                 distance = "1.1 km",
                 discount = "12%",
-                discountAmount = "up to ₹41",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -18547,7 +18547,7 @@ fun QuinoaBowlDietPage() {
                 deliveryTime = "22-28 mins",
                 distance = "1.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -18621,8 +18621,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -18634,8 +18634,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.9",
             deliveryTime = "18-22 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -18647,8 +18647,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -18660,8 +18660,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.7",
             deliveryTime = "15-20 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -18673,8 +18673,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.9",
             deliveryTime = "18-22 mins",
             distance = "1.3 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹41",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
 
@@ -18688,8 +18688,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹57",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -18701,8 +18701,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "22-28 mins",
             distance = "1.1 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Banjara Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -18714,8 +18714,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -18727,8 +18727,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.7",
             deliveryTime = "22-28 mins",
             distance = "1.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹54",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -18740,8 +18740,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "18-24 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
 
@@ -18755,8 +18755,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.9",
             deliveryTime = "18-24 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Salt Lake, Kolkata"
         ),
         RestaurantItemFull(
@@ -18768,8 +18768,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹51",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -18781,8 +18781,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -18794,8 +18794,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "18-22 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -18807,8 +18807,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
 
@@ -18822,8 +18822,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -18835,8 +18835,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.5 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹54",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -18848,8 +18848,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹52",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -18861,8 +18861,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.7",
             deliveryTime = "18-22 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -18874,8 +18874,8 @@ fun QuinoaBowlDietPage() {
             rating = "4.8",
             deliveryTime = "16-20 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         )
     )
@@ -19354,7 +19354,7 @@ fun AvocadoToastDietPage() {
                 deliveryTime = "12-15 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -19367,7 +19367,7 @@ fun AvocadoToastDietPage() {
                 deliveryTime = "15-18 mins",
                 distance = "0.8 km",
                 discount = "15%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -19380,7 +19380,7 @@ fun AvocadoToastDietPage() {
                 deliveryTime = "14-17 mins",
                 distance = "0.6 km",
                 discount = "12%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -19393,7 +19393,7 @@ fun AvocadoToastDietPage() {
                 deliveryTime = "16-20 mins",
                 distance = "1.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹38",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -19406,7 +19406,7 @@ fun AvocadoToastDietPage() {
                 deliveryTime = "13-16 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -19419,7 +19419,7 @@ fun AvocadoToastDietPage() {
                 deliveryTime = "15-18 mins",
                 distance = "0.7 km",
                 discount = "12%",
-                discountAmount = "up to ₹31",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -19493,8 +19493,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "12-15 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -19506,8 +19506,8 @@ fun AvocadoToastDietPage() {
             rating = "4.9",
             deliveryTime = "15-18 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -19519,8 +19519,8 @@ fun AvocadoToastDietPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -19532,8 +19532,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "10-12 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -19545,8 +19545,8 @@ fun AvocadoToastDietPage() {
             rating = "4.9",
             deliveryTime = "12-16 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -19560,8 +19560,8 @@ fun AvocadoToastDietPage() {
             rating = "4.9",
             deliveryTime = "16-20 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -19573,8 +19573,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "12-15 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -19586,8 +19586,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "14-18 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -19599,8 +19599,8 @@ fun AvocadoToastDietPage() {
             rating = "4.7",
             deliveryTime = "15-18 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -19612,8 +19612,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "13-17 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -19627,8 +19627,8 @@ fun AvocadoToastDietPage() {
             rating = "4.9",
             deliveryTime = "14-17 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -19640,8 +19640,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "13-16 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -19653,8 +19653,8 @@ fun AvocadoToastDietPage() {
             rating = "4.9",
             deliveryTime = "15-19 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -19666,8 +19666,8 @@ fun AvocadoToastDietPage() {
             rating = "4.7",
             deliveryTime = "16-20 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -19679,8 +19679,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -19694,8 +19694,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "15-18 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -19707,8 +19707,8 @@ fun AvocadoToastDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -19720,8 +19720,8 @@ fun AvocadoToastDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹49",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -19733,8 +19733,8 @@ fun AvocadoToastDietPage() {
             rating = "4.7",
             deliveryTime = "13-16 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -19746,8 +19746,8 @@ fun AvocadoToastDietPage() {
             rating = "4.8",
             deliveryTime = "15-19 mins",
             distance = "0.7 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹56",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         )
     )
@@ -20281,7 +20281,7 @@ fun GreenSmoothieDietPage() {
                 deliveryTime = "10-12 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -20294,7 +20294,7 @@ fun GreenSmoothieDietPage() {
                 deliveryTime = "12-15 mins",
                 distance = "0.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -20307,7 +20307,7 @@ fun GreenSmoothieDietPage() {
                 deliveryTime = "13-16 mins",
                 distance = "0.7 km",
                 discount = "20%",
-                discountAmount = "up to ₹44",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -20320,7 +20320,7 @@ fun GreenSmoothieDietPage() {
                 deliveryTime = "14-17 mins",
                 distance = "1.1 km",
                 discount = "12%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -20333,7 +20333,7 @@ fun GreenSmoothieDietPage() {
                 deliveryTime = "11-14 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -20346,7 +20346,7 @@ fun GreenSmoothieDietPage() {
                 deliveryTime = "12-15 mins",
                 distance = "0.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -20420,8 +20420,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "10-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -20433,8 +20433,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -20446,8 +20446,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.7",
             deliveryTime = "8-12 mins",
             distance = "0.2 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -20459,8 +20459,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -20472,8 +20472,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -20487,8 +20487,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -20500,8 +20500,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "13-16 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -20513,8 +20513,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -20526,8 +20526,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.7",
             deliveryTime = "12-16 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -20539,8 +20539,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.9",
             deliveryTime = "14-17 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -20554,8 +20554,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.9",
             deliveryTime = "14-17 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -20567,8 +20567,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -20580,8 +20580,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.7",
             deliveryTime = "15-18 mins",
             distance = "1.1 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -20593,8 +20593,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "12-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -20606,8 +20606,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "13-16 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -20621,8 +20621,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "11-14 mins",
             distance = "0.4 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -20634,8 +20634,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -20647,8 +20647,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.7",
             deliveryTime = "10-13 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -20660,8 +20660,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.8",
             deliveryTime = "13-17 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -20673,8 +20673,8 @@ fun GreenSmoothieDietPage() {
             rating = "4.9",
             deliveryTime = "15-19 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         )
     )
@@ -21267,7 +21267,7 @@ fun OatmealDietPage() {
                 deliveryTime = "8-10 mins",
                 distance = "0.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹13",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -21280,7 +21280,7 @@ fun OatmealDietPage() {
                 deliveryTime = "10-12 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -21293,7 +21293,7 @@ fun OatmealDietPage() {
                 deliveryTime = "5-8 mins",
                 distance = "0.3 km",
                 discount = "12%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -21306,7 +21306,7 @@ fun OatmealDietPage() {
                 deliveryTime = "9-12 mins",
                 distance = "0.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -21319,7 +21319,7 @@ fun OatmealDietPage() {
                 deliveryTime = "10-13 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹27",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -21332,7 +21332,7 @@ fun OatmealDietPage() {
                 deliveryTime = "11-14 mins",
                 distance = "0.7 km",
                 discount = "12%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -21406,8 +21406,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -21419,8 +21419,8 @@ fun OatmealDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -21432,8 +21432,8 @@ fun OatmealDietPage() {
             rating = "4.7",
             deliveryTime = "7-10 mins",
             distance = "0.2 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -21445,8 +21445,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "9-12 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -21458,8 +21458,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "10-13 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -21473,8 +21473,8 @@ fun OatmealDietPage() {
             rating = "4.9",
             deliveryTime = "11-14 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -21486,8 +21486,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "10-13 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -21499,8 +21499,8 @@ fun OatmealDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Sector 29, Gurgaon"
         ),
         RestaurantItemFull(
@@ -21512,8 +21512,8 @@ fun OatmealDietPage() {
             rating = "4.7",
             deliveryTime = "11-15 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -21525,8 +21525,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -21540,8 +21540,8 @@ fun OatmealDietPage() {
             rating = "4.9",
             deliveryTime = "13-16 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -21553,8 +21553,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "12-15 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -21566,8 +21566,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "14-17 mins",
             distance = "1.0 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -21579,8 +21579,8 @@ fun OatmealDietPage() {
             rating = "4.7",
             deliveryTime = "11-14 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -21592,8 +21592,8 @@ fun OatmealDietPage() {
             rating = "4.9",
             deliveryTime = "13-16 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -21607,8 +21607,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "7-10 mins",
             distance = "0.3 km",
-            discount = "20% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -21620,8 +21620,8 @@ fun OatmealDietPage() {
             rating = "4.9",
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -21633,8 +21633,8 @@ fun OatmealDietPage() {
             rating = "4.7",
             deliveryTime = "9-12 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -21646,8 +21646,8 @@ fun OatmealDietPage() {
             rating = "4.8",
             deliveryTime = "10-13 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -21659,8 +21659,8 @@ fun OatmealDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         )
     )
@@ -22020,7 +22020,7 @@ fun GreekYogurtDietPage() {
                 deliveryTime = "8-10 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -22033,7 +22033,7 @@ fun GreekYogurtDietPage() {
                 deliveryTime = "10-12 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -22046,7 +22046,7 @@ fun GreekYogurtDietPage() {
                 deliveryTime = "9-12 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -22059,7 +22059,7 @@ fun GreekYogurtDietPage() {
                 deliveryTime = "8-11 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -22072,7 +22072,7 @@ fun GreekYogurtDietPage() {
                 deliveryTime = "11-14 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹31",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -22085,7 +22085,7 @@ fun GreekYogurtDietPage() {
                 deliveryTime = "7-10 mins",
                 distance = "0.4 km",
                 discount = "12%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -22159,8 +22159,8 @@ fun GreekYogurtDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -22172,8 +22172,8 @@ fun GreekYogurtDietPage() {
             rating = "4.9",
             deliveryTime = "10-14 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -22185,8 +22185,8 @@ fun GreekYogurtDietPage() {
             rating = "4.7",
             deliveryTime = "7-10 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -22198,8 +22198,8 @@ fun GreekYogurtDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -22211,8 +22211,8 @@ fun GreekYogurtDietPage() {
             rating = "4.6",
             deliveryTime = "6-9 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -22226,8 +22226,8 @@ fun GreekYogurtDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -22239,8 +22239,8 @@ fun GreekYogurtDietPage() {
             rating = "4.8",
             deliveryTime = "10-13 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -22252,8 +22252,8 @@ fun GreekYogurtDietPage() {
             rating = "4.7",
             deliveryTime = "9-12 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -22265,8 +22265,8 @@ fun GreekYogurtDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -22278,8 +22278,8 @@ fun GreekYogurtDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -22293,8 +22293,8 @@ fun GreekYogurtDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -22306,8 +22306,8 @@ fun GreekYogurtDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -22319,8 +22319,8 @@ fun GreekYogurtDietPage() {
             rating = "4.7",
             deliveryTime = "11-15 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -22332,8 +22332,8 @@ fun GreekYogurtDietPage() {
             rating = "4.8",
             deliveryTime = "10-13 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -22345,8 +22345,8 @@ fun GreekYogurtDietPage() {
             rating = "4.9",
             deliveryTime = "12-16 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -22360,8 +22360,8 @@ fun GreekYogurtDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -22373,8 +22373,8 @@ fun GreekYogurtDietPage() {
             rating = "4.6",
             deliveryTime = "9-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -22386,8 +22386,8 @@ fun GreekYogurtDietPage() {
             rating = "4.8",
             deliveryTime = "13-17 mins",
             distance = "0.9 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -22399,8 +22399,8 @@ fun GreekYogurtDietPage() {
             rating = "4.7",
             deliveryTime = "10-14 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -22412,8 +22412,8 @@ fun GreekYogurtDietPage() {
             rating = "4.9",
             deliveryTime = "15-19 mins",
             distance = "1.1 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -22733,7 +22733,7 @@ fun EggWhiteOmeletteDietPage() {
                 deliveryTime = "7-10 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹16",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -22746,7 +22746,7 @@ fun EggWhiteOmeletteDietPage() {
                 deliveryTime = "9-12 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -22759,7 +22759,7 @@ fun EggWhiteOmeletteDietPage() {
                 deliveryTime = "10-13 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -22772,7 +22772,7 @@ fun EggWhiteOmeletteDietPage() {
                 deliveryTime = "11-14 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹33",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -22785,7 +22785,7 @@ fun EggWhiteOmeletteDietPage() {
                 deliveryTime = "12-15 mins",
                 distance = "0.7 km",
                 discount = "10%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -22798,7 +22798,7 @@ fun EggWhiteOmeletteDietPage() {
                 deliveryTime = "8-11 mins",
                 distance = "0.4 km",
                 discount = "12%",
-                discountAmount = "up to ₹21",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -22872,8 +22872,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "7-10 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -22885,8 +22885,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.7",
             deliveryTime = "6-9 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -22898,8 +22898,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.9",
             deliveryTime = "8-11 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -22911,8 +22911,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.6",
             deliveryTime = "5-8 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -22924,8 +22924,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "9-12 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -22939,8 +22939,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.9",
             deliveryTime = "10-13 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -22952,8 +22952,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "9-12 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -22965,8 +22965,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.7",
             deliveryTime = "8-11 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -22978,8 +22978,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "11-14 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -22991,8 +22991,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -23006,8 +23006,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.9",
             deliveryTime = "13-16 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -23019,8 +23019,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "14-17 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -23032,8 +23032,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "11-14 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -23045,8 +23045,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.7",
             deliveryTime = "10-13 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -23058,8 +23058,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.9",
             deliveryTime = "15-18 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -23073,8 +23073,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "10-13 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -23086,8 +23086,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.7",
             deliveryTime = "9-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -23099,8 +23099,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.9",
             deliveryTime = "12-15 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -23112,8 +23112,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "8-11 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -23125,8 +23125,8 @@ fun EggWhiteOmeletteDietPage() {
             rating = "4.8",
             deliveryTime = "11-14 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -23533,7 +23533,7 @@ fun TunaSaladDietPage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹37",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -23546,7 +23546,7 @@ fun TunaSaladDietPage() {
                 deliveryTime = "10-14 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹35",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -23559,7 +23559,7 @@ fun TunaSaladDietPage() {
                 deliveryTime = "9-13 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹32",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -23572,7 +23572,7 @@ fun TunaSaladDietPage() {
                 deliveryTime = "11-15 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹40",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -23585,7 +23585,7 @@ fun TunaSaladDietPage() {
                 deliveryTime = "12-16 mins",
                 distance = "0.7 km",
                 discount = "12%",
-                discountAmount = "up to ₹42",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -23598,7 +23598,7 @@ fun TunaSaladDietPage() {
                 deliveryTime = "9-12 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -23672,8 +23672,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -23685,8 +23685,8 @@ fun TunaSaladDietPage() {
             rating = "4.7",
             deliveryTime = "7-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -23698,8 +23698,8 @@ fun TunaSaladDietPage() {
             rating = "4.9",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -23711,8 +23711,8 @@ fun TunaSaladDietPage() {
             rating = "4.6",
             deliveryTime = "6-9 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -23724,8 +23724,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -23739,8 +23739,8 @@ fun TunaSaladDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -23752,8 +23752,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "9-12 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -23765,8 +23765,8 @@ fun TunaSaladDietPage() {
             rating = "4.7",
             deliveryTime = "8-11 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -23778,8 +23778,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹43",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -23791,8 +23791,8 @@ fun TunaSaladDietPage() {
             rating = "4.9",
             deliveryTime = "12-16 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -23806,8 +23806,8 @@ fun TunaSaladDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹49",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -23819,8 +23819,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "14-18 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -23832,8 +23832,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹38",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -23845,8 +23845,8 @@ fun TunaSaladDietPage() {
             rating = "4.7",
             deliveryTime = "11-15 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹51",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -23858,8 +23858,8 @@ fun TunaSaladDietPage() {
             rating = "4.9",
             deliveryTime = "15-19 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -23873,8 +23873,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹52",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -23886,8 +23886,8 @@ fun TunaSaladDietPage() {
             rating = "4.7",
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -23899,8 +23899,8 @@ fun TunaSaladDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹42",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -23912,8 +23912,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -23925,8 +23925,8 @@ fun TunaSaladDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹32",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -24268,7 +24268,7 @@ fun LentilSoupDietPage() {
                 deliveryTime = "10-14 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -24281,7 +24281,7 @@ fun LentilSoupDietPage() {
                 deliveryTime = "12-16 mins",
                 distance = "0.6 km",
                 discount = "12%",
-                discountAmount = "up to ₹26",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -24294,7 +24294,7 @@ fun LentilSoupDietPage() {
                 deliveryTime = "9-13 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -24307,7 +24307,7 @@ fun LentilSoupDietPage() {
                 deliveryTime = "11-15 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -24320,7 +24320,7 @@ fun LentilSoupDietPage() {
                 deliveryTime = "13-17 mins",
                 distance = "0.7 km",
                 discount = "12%",
-                discountAmount = "up to ₹31",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -24333,7 +24333,7 @@ fun LentilSoupDietPage() {
                 deliveryTime = "10-14 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹20",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -24407,8 +24407,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -24420,8 +24420,8 @@ fun LentilSoupDietPage() {
             rating = "4.7",
             deliveryTime = "7-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹13",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -24433,8 +24433,8 @@ fun LentilSoupDietPage() {
             rating = "4.9",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -24446,8 +24446,8 @@ fun LentilSoupDietPage() {
             rating = "4.6",
             deliveryTime = "6-9 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -24459,8 +24459,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -24474,8 +24474,8 @@ fun LentilSoupDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -24487,8 +24487,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "9-12 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -24500,8 +24500,8 @@ fun LentilSoupDietPage() {
             rating = "4.7",
             deliveryTime = "8-11 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -24513,8 +24513,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -24526,8 +24526,8 @@ fun LentilSoupDietPage() {
             rating = "4.9",
             deliveryTime = "12-16 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -24541,8 +24541,8 @@ fun LentilSoupDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -24554,8 +24554,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "14-18 mins",
             distance = "1.0 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -24567,8 +24567,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -24580,8 +24580,8 @@ fun LentilSoupDietPage() {
             rating = "4.7",
             deliveryTime = "11-15 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -24593,8 +24593,8 @@ fun LentilSoupDietPage() {
             rating = "4.9",
             deliveryTime = "15-19 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -24608,8 +24608,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -24621,8 +24621,8 @@ fun LentilSoupDietPage() {
             rating = "4.7",
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -24634,8 +24634,8 @@ fun LentilSoupDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -24647,8 +24647,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -24660,8 +24660,8 @@ fun LentilSoupDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -25073,7 +25073,7 @@ fun CottageCheeseDietPage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -25086,7 +25086,7 @@ fun CottageCheeseDietPage() {
                 deliveryTime = "10-14 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -25099,7 +25099,7 @@ fun CottageCheeseDietPage() {
                 deliveryTime = "9-13 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹17",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -25112,7 +25112,7 @@ fun CottageCheeseDietPage() {
                 deliveryTime = "11-15 mins",
                 distance = "0.6 km",
                 discount = "15%",
-                discountAmount = "up to ₹34",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -25125,7 +25125,7 @@ fun CottageCheeseDietPage() {
                 deliveryTime = "9-12 mins",
                 distance = "0.4 km",
                 discount = "12%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -25138,7 +25138,7 @@ fun CottageCheeseDietPage() {
                 deliveryTime = "12-16 mins",
                 distance = "0.7 km",
                 discount = "10%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -25211,8 +25211,8 @@ fun CottageCheeseDietPage() {
             rating = "4.9",
             deliveryTime = "12-16 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -25224,8 +25224,8 @@ fun CottageCheeseDietPage() {
             rating = "4.7",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -25237,8 +25237,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -25250,8 +25250,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -25263,8 +25263,8 @@ fun CottageCheeseDietPage() {
             rating = "4.7",
             deliveryTime = "7-11 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -25278,8 +25278,8 @@ fun CottageCheeseDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -25291,8 +25291,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -25304,8 +25304,8 @@ fun CottageCheeseDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "0.8 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -25317,8 +25317,8 @@ fun CottageCheeseDietPage() {
             rating = "4.7",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹36",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -25330,8 +25330,8 @@ fun CottageCheeseDietPage() {
             rating = "4.9",
             deliveryTime = "15-19 mins",
             distance = "0.9 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -25345,8 +25345,8 @@ fun CottageCheeseDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "1.0 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -25358,8 +25358,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "15-19 mins",
             distance = "1.1 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -25371,8 +25371,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -25384,8 +25384,8 @@ fun CottageCheeseDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -25397,8 +25397,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "16-20 mins",
             distance = "1.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -25412,8 +25412,8 @@ fun CottageCheeseDietPage() {
             rating = "4.9",
             deliveryTime = "12-16 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹40",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -25425,8 +25425,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "11-15 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹35",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -25438,8 +25438,8 @@ fun CottageCheeseDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹45",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -25451,8 +25451,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "10-14 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -25464,8 +25464,8 @@ fun CottageCheeseDietPage() {
             rating = "4.8",
             deliveryTime = "13-17 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -25843,7 +25843,7 @@ fun SproutsSaladDietPage() {
                 deliveryTime = "5-9 mins",
                 distance = "0.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹9",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -25856,7 +25856,7 @@ fun SproutsSaladDietPage() {
                 deliveryTime = "7-11 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -25869,7 +25869,7 @@ fun SproutsSaladDietPage() {
                 deliveryTime = "6-10 mins",
                 distance = "0.3 km",
                 discount = "12%",
-                discountAmount = "up to ₹9",
+                discountAmount = "₹20",
                 address = "Jubilee Hills, Hyderabad"
             ),
             FoodItemDoubleF(
@@ -25882,7 +25882,7 @@ fun SproutsSaladDietPage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹13",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -25895,7 +25895,7 @@ fun SproutsSaladDietPage() {
                 deliveryTime = "6-9 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             ),
             FoodItemDoubleF(
@@ -25908,7 +25908,7 @@ fun SproutsSaladDietPage() {
                 deliveryTime = "9-13 mins",
                 distance = "0.6 km",
                 discount = "12%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Connaught Place, Delhi"
             )
         )
@@ -25982,8 +25982,8 @@ fun SproutsSaladDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹15",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -25995,8 +25995,8 @@ fun SproutsSaladDietPage() {
             rating = "4.7",
             deliveryTime = "7-11 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -26008,8 +26008,8 @@ fun SproutsSaladDietPage() {
             rating = "4.9",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -26021,8 +26021,8 @@ fun SproutsSaladDietPage() {
             rating = "4.6",
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹12",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -26034,8 +26034,8 @@ fun SproutsSaladDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -26049,8 +26049,8 @@ fun SproutsSaladDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -26062,8 +26062,8 @@ fun SproutsSaladDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹31",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -26075,8 +26075,8 @@ fun SproutsSaladDietPage() {
             rating = "4.7",
             deliveryTime = "10-14 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -26088,8 +26088,8 @@ fun SproutsSaladDietPage() {
             rating = "4.8",
             deliveryTime = "13-17 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -26101,8 +26101,8 @@ fun SproutsSaladDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -26116,8 +26116,8 @@ fun SproutsSaladDietPage() {
             rating = "4.9",
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹26",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -26129,8 +26129,8 @@ fun SproutsSaladDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹34",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -26142,8 +26142,8 @@ fun SproutsSaladDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -26155,8 +26155,8 @@ fun SproutsSaladDietPage() {
             rating = "4.8",
             deliveryTime = "11-15 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹29",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -26168,8 +26168,8 @@ fun SproutsSaladDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹39",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -26183,8 +26183,8 @@ fun SproutsSaladDietPage() {
             rating = "4.7",
             deliveryTime = "7-11 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -26196,8 +26196,8 @@ fun SproutsSaladDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -26209,8 +26209,8 @@ fun SproutsSaladDietPage() {
             rating = "4.8",
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -26222,8 +26222,8 @@ fun SproutsSaladDietPage() {
             rating = "4.9",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹17",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -26235,8 +26235,8 @@ fun SproutsSaladDietPage() {
             rating = "4.7",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -26557,7 +26557,7 @@ fun BrownRiceBowlDietPage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -26570,7 +26570,7 @@ fun BrownRiceBowlDietPage() {
                 deliveryTime = "7-11 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹21",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -26583,7 +26583,7 @@ fun BrownRiceBowlDietPage() {
                 deliveryTime = "9-13 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -26596,7 +26596,7 @@ fun BrownRiceBowlDietPage() {
                 deliveryTime = "10-14 mins",
                 distance = "0.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -26609,7 +26609,7 @@ fun BrownRiceBowlDietPage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Juhu, Mumbai"
             ),
             FoodItemDoubleF(
@@ -26622,7 +26622,7 @@ fun BrownRiceBowlDietPage() {
                 deliveryTime = "9-13 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹21",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             )
         )
@@ -26696,8 +26696,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹16",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -26709,8 +26709,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.7",
             deliveryTime = "7-11 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -26722,8 +26722,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.9",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -26735,8 +26735,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.6",
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹14",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -26748,8 +26748,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -26763,8 +26763,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹24",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -26776,8 +26776,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹33",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -26789,8 +26789,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.7",
             deliveryTime = "10-14 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -26802,8 +26802,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹27",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -26815,8 +26815,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹28",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -26830,8 +26830,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.9",
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹23",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -26843,8 +26843,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹37",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -26856,8 +26856,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹22",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -26869,8 +26869,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "11-15 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹25",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -26882,8 +26882,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹30",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -26897,8 +26897,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹19",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -26910,8 +26910,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -26923,8 +26923,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.7",
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
-            discountAmount = "up to ₹21",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -26936,8 +26936,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.9",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
-            discountAmount = "up to ₹18",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -26949,8 +26949,8 @@ fun BrownRiceBowlDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
-            discountAmount = "up to ₹20",
+            discount = "30%",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -27460,7 +27460,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "Indiranagar, Bangalore"
         ),
@@ -27473,7 +27473,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.7",
             deliveryTime = "7-11 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹21",
             address = "Koramangala, Bangalore"
         ),
@@ -27486,7 +27486,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.9",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹14",
             address = "Jayanagar, Bangalore"
         ),
@@ -27499,7 +27499,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.6",
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "MG Road, Bangalore"
         ),
@@ -27512,7 +27512,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹22",
             address = "Whitefield, Bangalore"
         ),
@@ -27527,7 +27527,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.9",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹20",
             address = "Bandra West, Mumbai"
         ),
@@ -27540,7 +27540,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹27",
             address = "Juhu, Mumbai"
         ),
@@ -27553,7 +27553,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.7",
             deliveryTime = "10-14 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Andheri West, Mumbai"
         ),
@@ -27566,7 +27566,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.8 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "Koregaon Park, Pune"
         ),
@@ -27579,7 +27579,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹25",
             address = "Baner, Pune"
         ),
@@ -27594,7 +27594,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.9",
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹23",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -27607,7 +27607,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "12-16 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Gachibowli, Hyderabad"
         ),
@@ -27620,7 +27620,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.9",
             deliveryTime = "13-17 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Saket, Delhi"
         ),
@@ -27633,7 +27633,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "11-15 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹20",
             address = "Connaught Place, Delhi"
         ),
@@ -27646,7 +27646,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.9",
             deliveryTime = "14-18 mins",
             distance = "0.9 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹28",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -27661,7 +27661,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Colaba, Mumbai"
         ),
@@ -27674,7 +27674,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Powai, Mumbai"
         ),
@@ -27687,7 +27687,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.7",
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹21",
             address = "Koregaon Park, Pune"
         ),
@@ -27700,7 +27700,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.9",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹17",
             address = "Indiranagar, Bangalore"
         ),
@@ -27713,7 +27713,7 @@ fun SteamedVeggiesDietPage() {
             rating = "4.8",
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Jubilee Hills, Hyderabad"
         )
@@ -28217,7 +28217,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "Indiranagar, Bangalore"
         ),
@@ -28230,7 +28230,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Koramangala, Bangalore"
         ),
@@ -28243,7 +28243,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Jayanagar, Bangalore"
         ),
@@ -28256,7 +28256,7 @@ fun FruitBowlDietPage() {
             rating = "4.7",
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹11",
             address = "MG Road, Bangalore"
         ),
@@ -28269,7 +28269,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "5-9 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Whitefield, Bangalore"
         ),
@@ -28284,7 +28284,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹20",
             address = "Bandra West, Mumbai"
         ),
@@ -28297,7 +28297,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹22",
             address = "Juhu, Mumbai"
         ),
@@ -28310,7 +28310,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "9-14 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Andheri West, Mumbai"
         ),
@@ -28323,7 +28323,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "Koregaon Park, Pune"
         ),
@@ -28336,7 +28336,7 @@ fun FruitBowlDietPage() {
             rating = "4.7",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹21",
             address = "Baner, Pune"
         ),
@@ -28351,7 +28351,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹24",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -28364,7 +28364,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹34",
             address = "Gachibowli, Hyderabad"
         ),
@@ -28377,7 +28377,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "Saket, Delhi"
         ),
@@ -28390,7 +28390,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹21",
             address = "Connaught Place, Delhi"
         ),
@@ -28403,7 +28403,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹25",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -28418,7 +28418,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "Colaba, Mumbai"
         ),
@@ -28431,7 +28431,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "Powai, Mumbai"
         ),
@@ -28444,7 +28444,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Koregaon Park, Pune"
         ),
@@ -28457,7 +28457,7 @@ fun FruitBowlDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Indiranagar, Bangalore"
         ),
@@ -28470,7 +28470,7 @@ fun FruitBowlDietPage() {
             rating = "4.8",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹17",
             address = "Jubilee Hills, Hyderabad"
         )
@@ -28871,7 +28871,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹9",
             address = "Indiranagar, Bangalore"
         ),
@@ -28884,7 +28884,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Koramangala, Bangalore"
         ),
@@ -28897,7 +28897,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "Jayanagar, Bangalore"
         ),
@@ -28910,7 +28910,7 @@ fun DetoxWaterDietPage() {
             rating = "4.7",
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹9",
             address = "MG Road, Bangalore"
         ),
@@ -28923,7 +28923,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "5-9 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Whitefield, Bangalore"
         ),
@@ -28938,7 +28938,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹9",
             address = "Bandra West, Mumbai"
         ),
@@ -28951,7 +28951,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Juhu, Mumbai"
         ),
@@ -28964,7 +28964,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "9-14 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹11",
             address = "Andheri West, Mumbai"
         ),
@@ -28977,7 +28977,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹14",
             address = "Koregaon Park, Pune"
         ),
@@ -28990,7 +28990,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "Baner, Pune"
         ),
@@ -29005,7 +29005,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -29018,7 +29018,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹22",
             address = "Gachibowli, Hyderabad"
         ),
@@ -29031,7 +29031,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹12",
             address = "Saket, Delhi"
         ),
@@ -29044,7 +29044,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹17",
             address = "Connaught Place, Delhi"
         ),
@@ -29057,7 +29057,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -29072,7 +29072,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹10",
             address = "Colaba, Mumbai"
         ),
@@ -29085,7 +29085,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "Powai, Mumbai"
         ),
@@ -29098,7 +29098,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "Koregaon Park, Pune"
         ),
@@ -29111,7 +29111,7 @@ fun DetoxWaterDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹10",
             address = "Indiranagar, Bangalore"
         ),
@@ -29124,7 +29124,7 @@ fun DetoxWaterDietPage() {
             rating = "4.9",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹14",
             address = "Jubilee Hills, Hyderabad"
         )
@@ -29537,7 +29537,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹22",
             address = "Indiranagar, Bangalore"
         ),
@@ -29550,7 +29550,7 @@ fun HerbalTeaDietPage() {
             rating = "4.8",
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹20",
             address = "Koramangala, Bangalore"
         ),
@@ -29563,7 +29563,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹21",
             address = "Jayanagar, Bangalore"
         ),
@@ -29576,7 +29576,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹60",
             address = "MG Road, Bangalore"
         ),
@@ -29589,7 +29589,7 @@ fun HerbalTeaDietPage() {
             rating = "4.8",
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹16",
             address = "Whitefield, Bangalore"
         ),
@@ -29604,7 +29604,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹28",
             address = "Bandra West, Mumbai"
         ),
@@ -29617,7 +29617,7 @@ fun HerbalTeaDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹20",
             address = "Juhu, Mumbai"
         ),
@@ -29630,7 +29630,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Andheri West, Mumbai"
         ),
@@ -29643,7 +29643,7 @@ fun HerbalTeaDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Koregaon Park, Pune"
         ),
@@ -29656,7 +29656,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹30",
             address = "Baner, Pune"
         ),
@@ -29671,7 +29671,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -29684,7 +29684,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹37",
             address = "Gachibowli, Hyderabad"
         ),
@@ -29697,7 +29697,7 @@ fun HerbalTeaDietPage() {
             rating = "4.8",
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "Saket, Delhi"
         ),
@@ -29710,7 +29710,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹25",
             address = "Connaught Place, Delhi"
         ),
@@ -29723,7 +29723,7 @@ fun HerbalTeaDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹27",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -29738,7 +29738,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹17",
             address = "Colaba, Mumbai"
         ),
@@ -29751,7 +29751,7 @@ fun HerbalTeaDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹27",
             address = "Powai, Mumbai"
         ),
@@ -29764,7 +29764,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹24",
             address = "Koregaon Park, Pune"
         ),
@@ -29777,7 +29777,7 @@ fun HerbalTeaDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "Indiranagar, Bangalore"
         ),
@@ -29790,7 +29790,7 @@ fun HerbalTeaDietPage() {
             rating = "4.9",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹42",
             address = "Jubilee Hills, Hyderabad"
         )
@@ -30230,7 +30230,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.4 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹50",
             address = "Koramangala, Bangalore"
         ),
@@ -30243,7 +30243,7 @@ fun ProteinBarDietPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹34",
             address = "Indiranagar, Bangalore"
         ),
@@ -30256,7 +30256,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹26",
             address = "Whitefield, Bangalore"
         ),
@@ -30269,7 +30269,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "8-14 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹32",
             address = "Jayanagar, Bangalore"
         ),
@@ -30282,7 +30282,7 @@ fun ProteinBarDietPage() {
             rating = "4.8",
             deliveryTime = "14-19 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹42",
             address = "MG Road, Bangalore"
         ),
@@ -30297,7 +30297,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "10-16 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹24",
             address = "Bandra West, Mumbai"
         ),
@@ -30310,7 +30310,7 @@ fun ProteinBarDietPage() {
             rating = "4.8",
             deliveryTime = "9-15 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹26",
             address = "Andheri East, Mumbai"
         ),
@@ -30323,7 +30323,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "12-17 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹34",
             address = "Juhu, Mumbai"
         ),
@@ -30336,7 +30336,7 @@ fun ProteinBarDietPage() {
             rating = "4.8",
             deliveryTime = "8-14 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹25",
             address = "Powai, Mumbai"
         ),
@@ -30349,7 +30349,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "11-16 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹43",
             address = "Koregaon Park, Pune"
         ),
@@ -30364,7 +30364,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.3 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹60",
             address = "Baner, Pune"
         ),
@@ -30377,7 +30377,7 @@ fun ProteinBarDietPage() {
             rating = "4.8",
             deliveryTime = "9-14 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹38",
             address = "Hinjawadi, Pune"
         ),
@@ -30390,7 +30390,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "13-18 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹52",
             address = "Gachibowli, Hyderabad"
         ),
@@ -30403,7 +30403,7 @@ fun ProteinBarDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹27",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -30416,7 +30416,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "10-16 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Banjara Hills, Hyderabad"
         ),
@@ -30431,7 +30431,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "7-12 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹36",
             address = "Connaught Place, Delhi"
         ),
@@ -30444,7 +30444,7 @@ fun ProteinBarDietPage() {
             rating = "4.8",
             deliveryTime = "8-13 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹20",
             address = "Saket, Delhi"
         ),
@@ -30457,7 +30457,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "9-15 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹31",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -30470,7 +30470,7 @@ fun ProteinBarDietPage() {
             rating = "4.8",
             deliveryTime = "6-11 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Golf Course Road, Gurgaon"
         ),
@@ -30483,7 +30483,7 @@ fun ProteinBarDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹25",
             address = "Noida Sector 18, Noida"
         )
@@ -30851,7 +30851,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹3",
             address = "Indiranagar, Bangalore"
         ),
@@ -30864,7 +30864,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹5",
             address = "Koramangala, Bangalore"
         ),
@@ -30877,7 +30877,7 @@ fun BoiledEggsDietPage() {
             rating = "4.7",
             deliveryTime = "4-8 mins",
             distance = "0.1 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹7",
             address = "Jayanagar, Bangalore"
         ),
@@ -30890,7 +30890,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "10-15 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Whitefield, Bangalore"
         ),
@@ -30903,7 +30903,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "12-18 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹36",
             address = "MG Road, Bangalore"
         ),
@@ -30918,7 +30918,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "5-9 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹6",
             address = "Bandra West, Mumbai"
         ),
@@ -30931,7 +30931,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "6-10 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹7",
             address = "Juhu, Mumbai"
         ),
@@ -30944,7 +30944,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "5-9 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹6",
             address = "Andheri West, Mumbai"
         ),
@@ -30957,7 +30957,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹10",
             address = "Powai, Mumbai"
         ),
@@ -30970,7 +30970,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "5-9 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹6",
             address = "Koregaon Park, Pune"
         ),
@@ -30985,7 +30985,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹9",
             address = "Baner, Pune"
         ),
@@ -30998,7 +30998,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "7-11 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹9",
             address = "Hinjawadi, Pune"
         ),
@@ -31011,7 +31011,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹13",
             address = "Gachibowli, Hyderabad"
         ),
@@ -31024,7 +31024,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -31037,7 +31037,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "6-10 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹10",
             address = "Banjara Hills, Hyderabad"
         ),
@@ -31052,7 +31052,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹12",
             address = "Connaught Place, Delhi"
         ),
@@ -31065,7 +31065,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "5-9 mins",
             distance = "0.2 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹7",
             address = "Saket, Delhi"
         ),
@@ -31078,7 +31078,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "6-10 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹12",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -31091,7 +31091,7 @@ fun BoiledEggsDietPage() {
             rating = "4.9",
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Golf Course Road, Gurgaon"
         ),
@@ -31104,7 +31104,7 @@ fun BoiledEggsDietPage() {
             rating = "4.8",
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹12",
             address = "Noida Sector 18, Noida"
         )
@@ -31467,7 +31467,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹28",
             address = "Koramangala, Bangalore"
         ),
@@ -31480,7 +31480,7 @@ fun HummusPlateDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹22",
             address = "Indiranagar, Bangalore"
         ),
@@ -31493,7 +31493,7 @@ fun HummusPlateDietPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.2 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹15",
             address = "Jayanagar, Bangalore"
         ),
@@ -31506,7 +31506,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
-            discount = "18% OFF",
+            discount = "30%",
             discountAmount = "up to ₹72",
             address = "Whitefield, Bangalore"
         ),
@@ -31519,7 +31519,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "0.8 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹130",
             address = "MG Road, Bangalore"
         ),
@@ -31534,7 +31534,7 @@ fun HummusPlateDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹29",
             address = "Bandra West, Mumbai"
         ),
@@ -31547,7 +31547,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "14-19 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹34",
             address = "Juhu, Mumbai"
         ),
@@ -31560,7 +31560,7 @@ fun HummusPlateDietPage() {
             rating = "4.8",
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹25",
             address = "Andheri West, Mumbai"
         ),
@@ -31573,7 +31573,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹39",
             address = "Powai, Mumbai"
         ),
@@ -31586,7 +31586,7 @@ fun HummusPlateDietPage() {
             rating = "4.8",
             deliveryTime = "17-22 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹32",
             address = "Koregaon Park, Pune"
         ),
@@ -31601,7 +31601,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Baner, Pune"
         ),
@@ -31614,7 +31614,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹49",
             address = "Hinjawadi, Pune"
         ),
@@ -31627,7 +31627,7 @@ fun HummusPlateDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹30",
             address = "Gachibowli, Hyderabad"
         ),
@@ -31640,7 +31640,7 @@ fun HummusPlateDietPage() {
             rating = "4.8",
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹35",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -31653,7 +31653,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "19-24 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹48",
             address = "Banjara Hills, Hyderabad"
         ),
@@ -31668,7 +31668,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹49",
             address = "Connaught Place, Delhi"
         ),
@@ -31681,7 +31681,7 @@ fun HummusPlateDietPage() {
             rating = "4.8",
             deliveryTime = "16-21 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹36",
             address = "Saket, Delhi"
         ),
@@ -31694,7 +31694,7 @@ fun HummusPlateDietPage() {
             rating = "4.8",
             deliveryTime = "14-19 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹26",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -31707,7 +31707,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "22-27 mins",
             distance = "0.6 km",
-            discount = "18% OFF",
+            discount = "30%",
             discountAmount = "up to ₹81",
             address = "Golf Course Road, Gurgaon"
         ),
@@ -31720,7 +31720,7 @@ fun HummusPlateDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "0.7 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹120",
             address = "Noida Sector 18, Noida"
         )
@@ -32124,7 +32124,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹52",
             address = "Indiranagar, Bangalore"
         ),
@@ -32137,7 +32137,7 @@ fun SushiRollsDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹40",
             address = "Koramangala, Bangalore"
         ),
@@ -32150,7 +32150,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.2 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹51",
             address = "Jayanagar, Bangalore"
         ),
@@ -32163,7 +32163,7 @@ fun SushiRollsDietPage() {
             rating = "4.7",
             deliveryTime = "12-17 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹25",
             address = "MG Road, Bangalore"
         ),
@@ -32176,7 +32176,7 @@ fun SushiRollsDietPage() {
             rating = "4.8",
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Whitefield, Bangalore"
         ),
@@ -32191,7 +32191,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹75",
             address = "Bandra West, Mumbai"
         ),
@@ -32204,7 +32204,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹66",
             address = "Juhu, Mumbai"
         ),
@@ -32217,7 +32217,7 @@ fun SushiRollsDietPage() {
             rating = "4.8",
             deliveryTime = "22-27 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹59",
             address = "Andheri West, Mumbai"
         ),
@@ -32230,7 +32230,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "0.8 km",
-            discount = "18% OFF",
+            discount = "30%",
             discountAmount = "up to ₹144",
             address = "Powai, Mumbai"
         ),
@@ -32243,7 +32243,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹97",
             address = "Koregaon Park, Pune"
         ),
@@ -32258,7 +32258,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "22-27 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹75",
             address = "Baner, Pune"
         ),
@@ -32271,7 +32271,7 @@ fun SushiRollsDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹82",
             address = "Hinjawadi, Pune"
         ),
@@ -32284,7 +32284,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "24-29 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹81",
             address = "Gachibowli, Hyderabad"
         ),
@@ -32297,7 +32297,7 @@ fun SushiRollsDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹46",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -32310,7 +32310,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "0.7 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹108",
             address = "Banjara Hills, Hyderabad"
         ),
@@ -32325,7 +32325,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.4 km",
-            discount = "18% OFF",
+            discount = "30%",
             discountAmount = "up to ₹90",
             address = "Connaught Place, Delhi"
         ),
@@ -32338,7 +32338,7 @@ fun SushiRollsDietPage() {
             rating = "4.8",
             deliveryTime = "16-21 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹45",
             address = "Saket, Delhi"
         ),
@@ -32351,7 +32351,7 @@ fun SushiRollsDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹35",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -32364,7 +32364,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "30-35 mins",
             distance = "0.9 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹260",
             address = "Golf Course Road, Gurgaon"
         ),
@@ -32377,7 +32377,7 @@ fun SushiRollsDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹135",
             address = "Noida Sector 18, Noida"
         )
@@ -32829,7 +32829,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹45",
             address = "Indiranagar, Bangalore"
         ),
@@ -32842,7 +32842,7 @@ fun TofuStirFryDietPage() {
             rating = "4.9",
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Koramangala, Bangalore"
         ),
@@ -32855,7 +32855,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.2 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹38",
             address = "Jayanagar, Bangalore"
         ),
@@ -32868,7 +32868,7 @@ fun TofuStirFryDietPage() {
             rating = "4.7",
             deliveryTime = "14-19 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹29",
             address = "MG Road, Bangalore"
         ),
@@ -32881,7 +32881,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "17-22 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹41",
             address = "Whitefield, Bangalore"
         ),
@@ -32896,7 +32896,7 @@ fun TofuStirFryDietPage() {
             rating = "4.9",
             deliveryTime = "19-24 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹54",
             address = "Bandra West, Mumbai"
         ),
@@ -32909,7 +32909,7 @@ fun TofuStirFryDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹42",
             address = "Juhu, Mumbai"
         ),
@@ -32922,7 +32922,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹37",
             address = "Andheri West, Mumbai"
         ),
@@ -32935,7 +32935,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "22-27 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹57",
             address = "Powai, Mumbai"
         ),
@@ -32948,7 +32948,7 @@ fun TofuStirFryDietPage() {
             rating = "4.7",
             deliveryTime = "17-22 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹39",
             address = "Koregaon Park, Pune"
         ),
@@ -32963,7 +32963,7 @@ fun TofuStirFryDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹63",
             address = "Baner, Pune"
         ),
@@ -32976,7 +32976,7 @@ fun TofuStirFryDietPage() {
             rating = "4.9",
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹47",
             address = "Hinjawadi, Pune"
         ),
@@ -32989,7 +32989,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
-            discount = "18% OFF",
+            discount = "30%",
             discountAmount = "up to ₹72",
             address = "Gachibowli, Hyderabad"
         ),
@@ -33002,7 +33002,7 @@ fun TofuStirFryDietPage() {
             rating = "4.9",
             deliveryTime = "19-24 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹64",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -33015,7 +33015,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹38",
             address = "Banjara Hills, Hyderabad"
         ),
@@ -33030,7 +33030,7 @@ fun TofuStirFryDietPage() {
             rating = "4.9",
             deliveryTime = "17-22 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹48",
             address = "Connaught Place, Delhi"
         ),
@@ -33043,7 +33043,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹47",
             address = "Saket, Delhi"
         ),
@@ -33056,7 +33056,7 @@ fun TofuStirFryDietPage() {
             rating = "4.8",
             deliveryTime = "16-21 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹35",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -33069,7 +33069,7 @@ fun TofuStirFryDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "0.9 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹180",
             address = "Golf Course Road, Gurgaon"
         ),
@@ -33082,7 +33082,7 @@ fun TofuStirFryDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹54",
             address = "Noida Sector 18, Noida"
         )
@@ -33527,7 +33527,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.8",
             deliveryTime = "12-17 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "Indiranagar, Bangalore"
         ),
@@ -33540,7 +33540,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.7",
             deliveryTime = "10-15 mins",
             distance = "0.2 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹20",
             address = "Koramangala, Bangalore"
         ),
@@ -33553,7 +33553,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "13-18 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹30",
             address = "Jayanagar, Bangalore"
         ),
@@ -33566,7 +33566,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.8",
             deliveryTime = "11-16 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "MG Road, Bangalore"
         ),
@@ -33579,7 +33579,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹26",
             address = "Whitefield, Bangalore"
         ),
@@ -33594,7 +33594,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹34",
             address = "Bandra West, Mumbai"
         ),
@@ -33607,7 +33607,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "14-19 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹25",
             address = "Juhu, Mumbai"
         ),
@@ -33620,7 +33620,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.8",
             deliveryTime = "16-21 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹24",
             address = "Andheri West, Mumbai"
         ),
@@ -33633,7 +33633,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.8",
             deliveryTime = "13-18 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹30",
             address = "Powai, Mumbai"
         ),
@@ -33646,7 +33646,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.7",
             deliveryTime = "14-19 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹26",
             address = "Koregaon Park, Pune"
         ),
@@ -33661,7 +33661,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "12-17 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Baner, Pune"
         ),
@@ -33674,7 +33674,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹30",
             address = "Hinjawadi, Pune"
         ),
@@ -33687,7 +33687,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.8",
             deliveryTime = "11-16 mins",
             distance = "0.6 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹19",
             address = "Gachibowli, Hyderabad"
         ),
@@ -33700,7 +33700,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "13-18 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹34",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -33713,7 +33713,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "15-20 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹29",
             address = "Banjara Hills, Hyderabad"
         ),
@@ -33728,7 +33728,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "12-17 mins",
             distance = "0.4 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹40",
             address = "Connaught Place, Delhi"
         ),
@@ -33741,7 +33741,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.8",
             deliveryTime = "14-19 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹24",
             address = "Saket, Delhi"
         ),
@@ -33754,7 +33754,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "13-18 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹26",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -33767,7 +33767,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.9 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹140",
             address = "Golf Course Road, Gurgaon"
         ),
@@ -33780,7 +33780,7 @@ fun ChiaPuddingDietPage() {
             rating = "4.7",
             deliveryTime = "16-21 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹54",
             address = "Noida Sector 18, Noida"
         )
@@ -34270,7 +34270,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹27",
             address = "Indiranagar, Bangalore"
         ),
@@ -34283,7 +34283,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹20",
             address = "Koramangala, Bangalore"
         ),
@@ -34296,7 +34296,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "15-20 mins",
             distance = "0.2 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹28",
             address = "Jayanagar, Bangalore"
         ),
@@ -34309,7 +34309,7 @@ fun MilletBowlDietPage() {
             rating = "4.7",
             deliveryTime = "17-22 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹26",
             address = "MG Road, Bangalore"
         ),
@@ -34322,7 +34322,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹18",
             address = "Whitefield, Bangalore"
         ),
@@ -34337,7 +34337,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "19-24 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹49",
             address = "Bandra West, Mumbai"
         ),
@@ -34350,7 +34350,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹35",
             address = "Juhu, Mumbai"
         ),
@@ -34363,7 +34363,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "20-25 mins",
             distance = "0.7 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹27",
             address = "Andheri West, Mumbai"
         ),
@@ -34376,7 +34376,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "17-22 mins",
             distance = "0.8 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹36",
             address = "Powai, Mumbai"
         ),
@@ -34389,7 +34389,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹36",
             address = "Koregaon Park, Pune"
         ),
@@ -34404,7 +34404,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "19-24 mins",
             distance = "0.5 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹46",
             address = "Baner, Pune"
         ),
@@ -34417,7 +34417,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.4 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹35",
             address = "Hinjawadi, Pune"
         ),
@@ -34430,7 +34430,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹48",
             address = "Gachibowli, Hyderabad"
         ),
@@ -34443,7 +34443,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "19-24 mins",
             distance = "0.3 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹30",
             address = "Jubilee Hills, Hyderabad"
         ),
@@ -34456,7 +34456,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "18-23 mins",
             distance = "0.7 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹33",
             address = "Banjara Hills, Hyderabad"
         ),
@@ -34471,7 +34471,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
-            discount = "10% OFF",
+            discount = "30%",
             discountAmount = "up to ₹22",
             address = "Connaught Place, Delhi"
         ),
@@ -34484,7 +34484,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
-            discount = "15% OFF",
+            discount = "30%",
             discountAmount = "up to ₹52",
             address = "Saket, Delhi"
         ),
@@ -34497,7 +34497,7 @@ fun MilletBowlDietPage() {
             rating = "4.8",
             deliveryTime = "16-21 mins",
             distance = "0.3 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹31",
             address = "DLF Cyber City, Gurgaon"
         ),
@@ -34510,7 +34510,7 @@ fun MilletBowlDietPage() {
             rating = "4.9",
             deliveryTime = "25-30 mins",
             distance = "0.9 km",
-            discount = "20% OFF",
+            discount = "30%",
             discountAmount = "up to ₹160",
             address = "Golf Course Road, Gurgaon"
         ),
@@ -34523,7 +34523,7 @@ fun MilletBowlDietPage() {
             rating = "4.7",
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
-            discount = "12% OFF",
+            discount = "30%",
             discountAmount = "up to ₹54",
             address = "Noida Sector 18, Noida"
         )

@@ -12007,7 +12007,7 @@ fun PuddingPage() {
             deliveryTime = "12-18 mins",
             distance = "1.2 km",
             discount = "30%",
-            discountAmount = ₹20",
+            discountAmount = "₹20",
             address = "Fruit Market, Mumbai"
         ),
         RestaurantItemFull(
@@ -27321,7 +27321,7 @@ fun SteamedVeggiesDietPage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹13",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -27334,7 +27334,7 @@ fun SteamedVeggiesDietPage() {
                 deliveryTime = "7-11 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -27347,7 +27347,7 @@ fun SteamedVeggiesDietPage() {
                 deliveryTime = "9-13 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹17",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -27360,7 +27360,7 @@ fun SteamedVeggiesDietPage() {
                 deliveryTime = "10-14 mins",
                 distance = "0.6 km",
                 discount = "10%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -27373,7 +27373,7 @@ fun SteamedVeggiesDietPage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Juhu, Mumbai"
             ),
             FoodItemDoubleF(
@@ -27386,7 +27386,7 @@ fun SteamedVeggiesDietPage() {
                 deliveryTime = "9-13 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹21",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             )
         )
@@ -27461,7 +27461,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -27474,7 +27474,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "7-11 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹21",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -27487,7 +27487,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹14",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -27500,7 +27500,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -27513,7 +27513,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹22",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -27528,7 +27528,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹20",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -27541,7 +27541,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "12-16 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹27",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -27554,7 +27554,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "10-14 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -27567,7 +27567,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "13-17 mins",
             distance = "0.8 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -27580,7 +27580,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "11-15 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹25",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -27595,7 +27595,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "10-14 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹23",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -27608,7 +27608,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "12-16 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -27621,7 +27621,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "13-17 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -27634,7 +27634,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "11-15 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹20",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -27647,7 +27647,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "14-18 mins",
             distance = "0.9 km",
             discount = "30%",
-            discountAmount = "up to ₹28",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -27662,7 +27662,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "9-13 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -27675,7 +27675,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -27688,7 +27688,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹21",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -27701,7 +27701,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹17",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -27714,7 +27714,7 @@ fun SteamedVeggiesDietPage() {
             deliveryTime = "9-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -28078,7 +28078,7 @@ fun FruitBowlDietPage() {
                 deliveryTime = "5-10 mins",
                 distance = "0.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -28091,7 +28091,7 @@ fun FruitBowlDietPage() {
                 deliveryTime = "6-11 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹18",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -28104,7 +28104,7 @@ fun FruitBowlDietPage() {
                 deliveryTime = "7-12 mins",
                 distance = "0.4 km",
                 discount = "12%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -28117,7 +28117,7 @@ fun FruitBowlDietPage() {
                 deliveryTime = "5-9 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -28130,7 +28130,7 @@ fun FruitBowlDietPage() {
                 deliveryTime = "8-13 mins",
                 distance = "0.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Juhu, Mumbai"
             ),
             FoodItemDoubleF(
@@ -28143,7 +28143,7 @@ fun FruitBowlDietPage() {
                 deliveryTime = "6-11 mins",
                 distance = "0.4 km",
                 discount = "12%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             )
         )
@@ -28218,7 +28218,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -28231,7 +28231,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -28244,7 +28244,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -28257,7 +28257,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹11",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -28270,7 +28270,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "5-9 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -28285,7 +28285,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹20",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -28298,7 +28298,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹22",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -28311,7 +28311,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "9-14 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -28324,7 +28324,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -28337,7 +28337,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹21",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -28352,7 +28352,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹24",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -28365,7 +28365,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹34",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -28378,7 +28378,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -28391,7 +28391,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹21",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -28404,7 +28404,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹25",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -28419,7 +28419,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -28432,7 +28432,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -28445,7 +28445,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -28458,7 +28458,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -28471,7 +28471,7 @@ fun FruitBowlDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹17",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -28732,7 +28732,7 @@ fun DetoxWaterDietPage() {
                 deliveryTime = "4-8 mins",
                 distance = "0.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹9",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -28745,7 +28745,7 @@ fun DetoxWaterDietPage() {
                 deliveryTime = "5-9 mins",
                 distance = "0.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -28758,7 +28758,7 @@ fun DetoxWaterDietPage() {
                 deliveryTime = "6-10 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹13",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -28771,7 +28771,7 @@ fun DetoxWaterDietPage() {
                 deliveryTime = "5-9 mins",
                 distance = "0.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -28784,7 +28784,7 @@ fun DetoxWaterDietPage() {
                 deliveryTime = "7-11 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Juhu, Mumbai"
             ),
             FoodItemDoubleF(
@@ -28797,7 +28797,7 @@ fun DetoxWaterDietPage() {
                 deliveryTime = "6-10 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             )
         )
@@ -28872,7 +28872,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹9",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -28885,7 +28885,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -28898,7 +28898,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -28911,7 +28911,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹9",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -28924,7 +28924,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "5-9 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -28939,7 +28939,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹9",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -28952,7 +28952,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -28965,7 +28965,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "9-14 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹11",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -28978,7 +28978,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹14",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -28991,7 +28991,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -29006,7 +29006,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -29019,7 +29019,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹22",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -29032,7 +29032,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹12",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -29045,7 +29045,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹17",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -29058,7 +29058,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -29073,7 +29073,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹10",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -29086,7 +29086,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -29099,7 +29099,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -29112,7 +29112,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹10",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -29125,7 +29125,7 @@ fun DetoxWaterDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹14",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -29398,7 +29398,7 @@ fun HerbalTeaDietPage() {
                 deliveryTime = "6-10 mins",
                 distance = "0.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -29411,7 +29411,7 @@ fun HerbalTeaDietPage() {
                 deliveryTime = "5-9 mins",
                 distance = "0.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -29424,7 +29424,7 @@ fun HerbalTeaDietPage() {
                 deliveryTime = "4-8 mins",
                 distance = "0.1 km",
                 discount = "12%",
-                discountAmount = "up to ₹14",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -29437,7 +29437,7 @@ fun HerbalTeaDietPage() {
                 deliveryTime = "7-11 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹16",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
             FoodItemDoubleF(
@@ -29450,7 +29450,7 @@ fun HerbalTeaDietPage() {
                 deliveryTime = "6-10 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹25",
+                discountAmount = "₹20",
                 address = "Juhu, Mumbai"
             ),
             FoodItemDoubleF(
@@ -29463,7 +29463,7 @@ fun HerbalTeaDietPage() {
                 deliveryTime = "5-9 mins",
                 distance = "0.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹17",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             )
         )
@@ -29538,7 +29538,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "8-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹22",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -29551,7 +29551,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹20",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -29564,7 +29564,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹21",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -29577,7 +29577,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "12-18 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹60",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -29590,7 +29590,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "6-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹16",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -29605,7 +29605,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹28",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -29618,7 +29618,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹20",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -29631,7 +29631,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -29644,7 +29644,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -29657,7 +29657,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹30",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
 
@@ -29672,7 +29672,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -29685,7 +29685,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹37",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -29698,7 +29698,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -29711,7 +29711,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹25",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -29724,7 +29724,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹27",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
 
@@ -29739,7 +29739,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹17",
+            discountAmount = "₹20",
             address = "Colaba, Mumbai"
         ),
         RestaurantItemFull(
@@ -29752,7 +29752,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹27",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -29765,7 +29765,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "4-8 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹24",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
         RestaurantItemFull(
@@ -29778,7 +29778,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -29791,7 +29791,7 @@ fun HerbalTeaDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹42",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         )
     )
@@ -30087,7 +30087,7 @@ fun ProteinBarDietPage() {
                 deliveryTime = "8-12 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -30100,7 +30100,7 @@ fun ProteinBarDietPage() {
                 deliveryTime = "7-11 mins",
                 distance = "0.2 km",
                 discount = "15%",
-                discountAmount = "up to ₹27",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
 
@@ -30115,7 +30115,7 @@ fun ProteinBarDietPage() {
                 deliveryTime = "6-10 mins",
                 distance = "0.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹20",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -30128,7 +30128,7 @@ fun ProteinBarDietPage() {
                 deliveryTime = "5-9 mins",
                 distance = "0.1 km",
                 discount = "10%",
-                discountAmount = "up to ₹16",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             ),
 
@@ -30143,7 +30143,7 @@ fun ProteinBarDietPage() {
                 deliveryTime = "7-11 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Juhu, Mumbai"
             ),
             FoodItemDoubleF(
@@ -30156,7 +30156,7 @@ fun ProteinBarDietPage() {
                 deliveryTime = "6-10 mins",
                 distance = "0.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Koregaon Park, Pune"
             )
         )
@@ -30231,7 +30231,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹50",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -30244,7 +30244,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "12-18 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹34",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -30257,7 +30257,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹26",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -30270,7 +30270,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "8-14 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹32",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -30283,7 +30283,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹42",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -30298,7 +30298,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "10-16 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹24",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -30311,7 +30311,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "9-15 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹26",
+            discountAmount = "₹20",
             address = "Andheri East, Mumbai"
         ),
         RestaurantItemFull(
@@ -30324,7 +30324,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "12-17 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹34",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -30337,7 +30337,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "8-14 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹25",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -30350,7 +30350,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "11-16 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹43",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -30365,7 +30365,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹60",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -30378,7 +30378,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "9-14 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹38",
+            discountAmount = "₹20",
             address = "Hinjawadi, Pune"
         ),
         RestaurantItemFull(
@@ -30391,7 +30391,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "13-18 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹52",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -30404,7 +30404,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹27",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -30417,7 +30417,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "10-16 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Banjara Hills, Hyderabad"
         ),
 
@@ -30432,7 +30432,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹36",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -30445,7 +30445,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹20",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -30458,7 +30458,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "9-15 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹31",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
         RestaurantItemFull(
@@ -30471,7 +30471,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Golf Course Road, Gurgaon"
         ),
         RestaurantItemFull(
@@ -30484,7 +30484,7 @@ fun ProteinBarDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹25",
+            discountAmount = "₹20",
             address = "Noida Sector 18, Noida"
         )
     )
@@ -30712,7 +30712,7 @@ fun BoiledEggsDietPage() {
                 deliveryTime = "5-10 mins",
                 distance = "0.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹3",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -30725,7 +30725,7 @@ fun BoiledEggsDietPage() {
                 deliveryTime = "6-11 mins",
                 distance = "0.3 km",
                 discount = "12%",
-                discountAmount = "up to ₹5",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -30738,7 +30738,7 @@ fun BoiledEggsDietPage() {
                 deliveryTime = "4-8 mins",
                 distance = "0.1 km",
                 discount = "15%",
-                discountAmount = "up to ₹7",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -30751,7 +30751,7 @@ fun BoiledEggsDietPage() {
                 deliveryTime = "10-15 mins",
                 distance = "0.4 km",
                 discount = "12%",
-                discountAmount = "up to ₹15",
+                discountAmount = "₹20",
                 address = "Whitefield, Bangalore"
             ),
             FoodItemDoubleF(
@@ -30764,7 +30764,7 @@ fun BoiledEggsDietPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "MG Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -30777,7 +30777,7 @@ fun BoiledEggsDietPage() {
                 deliveryTime = "5-9 mins",
                 distance = "0.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹6",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             )
         )
@@ -30852,7 +30852,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "5-10 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹3",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -30865,7 +30865,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹5",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -30878,7 +30878,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "4-8 mins",
             distance = "0.1 km",
             discount = "30%",
-            discountAmount = "up to ₹7",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -30891,7 +30891,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -30904,7 +30904,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "12-18 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹36",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -30919,7 +30919,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "5-9 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹6",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -30932,7 +30932,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "6-10 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹7",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -30945,7 +30945,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "5-9 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹6",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -30958,7 +30958,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "6-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹10",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -30971,7 +30971,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "5-9 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹6",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -30986,7 +30986,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "8-12 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹9",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -30999,7 +30999,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "7-11 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹9",
+            discountAmount = "₹20",
             address = "Hinjawadi, Pune"
         ),
         RestaurantItemFull(
@@ -31012,7 +31012,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹13",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -31025,7 +31025,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "9-14 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -31038,7 +31038,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "6-10 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹10",
+            discountAmount = "₹20",
             address = "Banjara Hills, Hyderabad"
         ),
 
@@ -31053,7 +31053,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹12",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -31066,7 +31066,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "5-9 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹7",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -31079,7 +31079,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "6-10 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹12",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
         RestaurantItemFull(
@@ -31092,7 +31092,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "8-13 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Golf Course Road, Gurgaon"
         ),
         RestaurantItemFull(
@@ -31105,7 +31105,7 @@ fun BoiledEggsDietPage() {
             deliveryTime = "7-12 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹12",
+            discountAmount = "₹20",
             address = "Noida Sector 18, Noida"
         )
     )
@@ -31328,7 +31328,7 @@ fun HummusPlateDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -31341,7 +31341,7 @@ fun HummusPlateDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "0.5 km",
                 discount = "20%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -31354,7 +31354,7 @@ fun HummusPlateDietPage() {
                 deliveryTime = "18-22 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹28",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -31367,7 +31367,7 @@ fun HummusPlateDietPage() {
                 deliveryTime = "12-18 mins",
                 distance = "0.2 km",
                 discount = "25%",
-                discountAmount = "up to ₹82",
+                discountAmount = "₹20",
                 address = "Whitefield, Bangalore"
             ),
             FoodItemDoubleF(
@@ -31380,7 +31380,7 @@ fun HummusPlateDietPage() {
                 deliveryTime = "16-21 mins",
                 distance = "0.6 km",
                 discount = "12%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "MG Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -31393,7 +31393,7 @@ fun HummusPlateDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "0.8 km",
                 discount = "18%",
-                discountAmount = "up to ₹99",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             )
         )
@@ -31468,7 +31468,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹28",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -31481,7 +31481,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹22",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -31494,7 +31494,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹15",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -31507,7 +31507,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹72",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
         RestaurantItemFull(
@@ -31520,7 +31520,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "25-30 mins",
             distance = "0.8 km",
             discount = "30%",
-            discountAmount = "up to ₹130",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
 
@@ -31535,7 +31535,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹29",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -31548,7 +31548,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹34",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -31561,7 +31561,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹25",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -31574,7 +31574,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹39",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -31587,7 +31587,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "17-22 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹32",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -31602,7 +31602,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -31615,7 +31615,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹49",
+            discountAmount = "₹20",
             address = "Hinjawadi, Pune"
         ),
         RestaurantItemFull(
@@ -31628,7 +31628,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹30",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -31641,7 +31641,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹35",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -31654,7 +31654,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "19-24 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹48",
+            discountAmount = "₹20",
             address = "Banjara Hills, Hyderabad"
         ),
 
@@ -31669,7 +31669,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹49",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -31682,7 +31682,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹36",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -31695,7 +31695,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹26",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
         RestaurantItemFull(
@@ -31708,7 +31708,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "22-27 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹81",
+            discountAmount = "₹20",
             address = "Golf Course Road, Gurgaon"
         ),
         RestaurantItemFull(
@@ -31721,7 +31721,7 @@ fun HummusPlateDietPage() {
             deliveryTime = "25-30 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹120",
+            discountAmount = "₹20",
             address = "Noida Sector 18, Noida"
         )
     )
@@ -31985,7 +31985,7 @@ fun SushiRollsDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "0.4 km",
                 discount = "20%",
-                discountAmount = "up to ₹70",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -31998,7 +31998,7 @@ fun SushiRollsDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹64",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32011,7 +32011,7 @@ fun SushiRollsDietPage() {
                 deliveryTime = "18-22 mins",
                 distance = "0.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹50",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32024,7 +32024,7 @@ fun SushiRollsDietPage() {
                 deliveryTime = "22-28 mins",
                 distance = "0.6 km",
                 discount = "25%",
-                discountAmount = "up to ₹147",
+                discountAmount = "₹20",
                 address = "Whitefield, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32037,7 +32037,7 @@ fun SushiRollsDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.2 km",
                 discount = "30%",
-                discountAmount = "up to ₹114",
+                discountAmount = "₹20",
                 address = "MG Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32050,7 +32050,7 @@ fun SushiRollsDietPage() {
                 deliveryTime = "25-30 mins",
                 distance = "0.8 km",
                 discount = "12%",
-                discountAmount = "up to ₹108",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             )
         )
@@ -32125,7 +32125,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹52",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -32138,7 +32138,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹40",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -32151,7 +32151,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹51",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -32164,7 +32164,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "12-17 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹25",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -32177,7 +32177,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -32192,7 +32192,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹75",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -32205,7 +32205,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹66",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -32218,7 +32218,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "22-27 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹59",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -32231,7 +32231,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "25-30 mins",
             distance = "0.8 km",
             discount = "30%",
-            discountAmount = "up to ₹144",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -32244,7 +32244,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹97",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -32259,7 +32259,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "22-27 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹75",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -32272,7 +32272,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹82",
+            discountAmount = "₹20",
             address = "Hinjawadi, Pune"
         ),
         RestaurantItemFull(
@@ -32285,7 +32285,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "24-29 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹81",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -32298,7 +32298,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹46",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -32311,7 +32311,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "25-30 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹108",
+            discountAmount = "₹20",
             address = "Banjara Hills, Hyderabad"
         ),
 
@@ -32326,7 +32326,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹90",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -32339,7 +32339,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹45",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -32352,7 +32352,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹35",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
         RestaurantItemFull(
@@ -32365,7 +32365,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "30-35 mins",
             distance = "0.9 km",
             discount = "30%",
-            discountAmount = "up to ₹260",
+            discountAmount = "₹20",
             address = "Golf Course Road, Gurgaon"
         ),
         RestaurantItemFull(
@@ -32378,7 +32378,7 @@ fun SushiRollsDietPage() {
             deliveryTime = "25-30 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹135",
+            discountAmount = "₹20",
             address = "Noida Sector 18, Noida"
         )
     )
@@ -32689,7 +32689,7 @@ fun TofuStirFryDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹45",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32702,7 +32702,7 @@ fun TofuStirFryDietPage() {
                 deliveryTime = "22-27 mins",
                 distance = "0.5 km",
                 discount = "20%",
-                discountAmount = "up to ₹66",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32715,7 +32715,7 @@ fun TofuStirFryDietPage() {
                 deliveryTime = "18-23 mins",
                 distance = "0.2 km",
                 discount = "10%",
-                discountAmount = "up to ₹29",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32728,7 +32728,7 @@ fun TofuStirFryDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "0.4 km",
                 discount = "12%",
-                discountAmount = "up to ₹42",
+                discountAmount = "₹20",
                 address = "Whitefield, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32741,7 +32741,7 @@ fun TofuStirFryDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.3 km",
                 discount = "18%",
-                discountAmount = "up to ₹68",
+                discountAmount = "₹20",
                 address = "MG Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -32754,7 +32754,7 @@ fun TofuStirFryDietPage() {
                 deliveryTime = "18-22 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹60",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             )
         )
@@ -32830,7 +32830,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹45",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -32843,7 +32843,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -32856,7 +32856,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹38",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -32869,7 +32869,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹29",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -32882,7 +32882,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "17-22 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹41",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -32897,7 +32897,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "19-24 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹54",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -32910,7 +32910,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹42",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -32923,7 +32923,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹37",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -32936,7 +32936,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "22-27 mins",
             distance = "0.8 km",
             discount = "30%",
-            discountAmount = "up to ₹57",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -32949,7 +32949,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "17-22 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹39",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -32964,7 +32964,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹63",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -32977,7 +32977,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹47",
+            discountAmount = "₹20",
             address = "Hinjawadi, Pune"
         ),
         RestaurantItemFull(
@@ -32990,7 +32990,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹72",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -33003,7 +33003,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "19-24 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹64",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -33016,7 +33016,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹38",
+            discountAmount = "₹20",
             address = "Banjara Hills, Hyderabad"
         ),
 
@@ -33031,7 +33031,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "17-22 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹48",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -33044,7 +33044,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹47",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -33057,7 +33057,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹35",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
         RestaurantItemFull(
@@ -33070,7 +33070,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "25-30 mins",
             distance = "0.9 km",
             discount = "30%",
-            discountAmount = "up to ₹180",
+            discountAmount = "₹20",
             address = "Golf Course Road, Gurgaon"
         ),
         RestaurantItemFull(
@@ -33083,7 +33083,7 @@ fun TofuStirFryDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹54",
+            discountAmount = "₹20",
             address = "Noida Sector 18, Noida"
         )
     )
@@ -33387,7 +33387,7 @@ fun ChiaPuddingDietPage() {
                 deliveryTime = "15-20 mins",
                 distance = "0.3 km",
                 discount = "10%",
-                discountAmount = "up to ₹19",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -33400,7 +33400,7 @@ fun ChiaPuddingDietPage() {
                 deliveryTime = "18-23 mins",
                 distance = "0.5 km",
                 discount = "15%",
-                discountAmount = "up to ₹33",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -33413,7 +33413,7 @@ fun ChiaPuddingDietPage() {
                 deliveryTime = "12-17 mins",
                 distance = "0.2 km",
                 discount = "12%",
-                discountAmount = "up to ₹24",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -33426,7 +33426,7 @@ fun ChiaPuddingDietPage() {
                 deliveryTime = "16-21 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Whitefield, Bangalore"
             ),
             FoodItemDoubleF(
@@ -33439,7 +33439,7 @@ fun ChiaPuddingDietPage() {
                 deliveryTime = "14-19 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹31",
+                discountAmount = "₹20",
                 address = "MG Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -33452,7 +33452,7 @@ fun ChiaPuddingDietPage() {
                 deliveryTime = "17-22 mins",
                 distance = "0.5 km",
                 discount = "12%",
-                discountAmount = "up to ₹29",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             )
         )
@@ -33528,7 +33528,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "12-17 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -33541,7 +33541,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "10-15 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹20",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -33554,7 +33554,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "13-18 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹30",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -33567,7 +33567,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "11-16 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -33580,7 +33580,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹26",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -33595,7 +33595,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹34",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -33608,7 +33608,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹25",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -33621,7 +33621,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹24",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -33634,7 +33634,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "13-18 mins",
             distance = "0.8 km",
             discount = "30%",
-            discountAmount = "up to ₹30",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -33647,7 +33647,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹26",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -33662,7 +33662,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "12-17 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -33675,7 +33675,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹30",
+            discountAmount = "₹20",
             address = "Hinjawadi, Pune"
         ),
         RestaurantItemFull(
@@ -33688,7 +33688,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "11-16 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹19",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -33701,7 +33701,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "13-18 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹34",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -33714,7 +33714,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹29",
+            discountAmount = "₹20",
             address = "Banjara Hills, Hyderabad"
         ),
 
@@ -33729,7 +33729,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "12-17 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹40",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -33742,7 +33742,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹24",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -33755,7 +33755,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "13-18 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹26",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
         RestaurantItemFull(
@@ -33768,7 +33768,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.9 km",
             discount = "30%",
-            discountAmount = "up to ₹140",
+            discountAmount = "₹20",
             address = "Golf Course Road, Gurgaon"
         ),
         RestaurantItemFull(
@@ -33781,7 +33781,7 @@ fun ChiaPuddingDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹54",
+            discountAmount = "₹20",
             address = "Noida Sector 18, Noida"
         )
     )
@@ -34130,7 +34130,7 @@ fun MilletBowlDietPage() {
                 deliveryTime = "18-23 mins",
                 distance = "0.3 km",
                 discount = "12%",
-                discountAmount = "up to ₹30",
+                discountAmount = "₹20",
                 address = "Koramangala, Bangalore"
             ),
             FoodItemDoubleF(
@@ -34143,7 +34143,7 @@ fun MilletBowlDietPage() {
                 deliveryTime = "16-21 mins",
                 distance = "0.5 km",
                 discount = "10%",
-                discountAmount = "up to ₹22",
+                discountAmount = "₹20",
                 address = "Indiranagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -34156,7 +34156,7 @@ fun MilletBowlDietPage() {
                 deliveryTime = "20-25 mins",
                 distance = "0.4 km",
                 discount = "15%",
-                discountAmount = "up to ₹42",
+                discountAmount = "₹20",
                 address = "Jayanagar, Bangalore"
             ),
             FoodItemDoubleF(
@@ -34169,7 +34169,7 @@ fun MilletBowlDietPage() {
                 deliveryTime = "19-24 mins",
                 distance = "0.6 km",
                 discount = "12%",
-                discountAmount = "up to ₹36",
+                discountAmount = "₹20",
                 address = "Whitefield, Bangalore"
             ),
             FoodItemDoubleF(
@@ -34182,7 +34182,7 @@ fun MilletBowlDietPage() {
                 deliveryTime = "17-22 mins",
                 distance = "0.3 km",
                 discount = "15%",
-                discountAmount = "up to ₹39",
+                discountAmount = "₹20",
                 address = "MG Road, Bangalore"
             ),
             FoodItemDoubleF(
@@ -34195,7 +34195,7 @@ fun MilletBowlDietPage() {
                 deliveryTime = "14-19 mins",
                 distance = "0.4 km",
                 discount = "10%",
-                discountAmount = "up to ₹23",
+                discountAmount = "₹20",
                 address = "Bandra West, Mumbai"
             )
         )
@@ -34271,7 +34271,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹27",
+            discountAmount = "₹20",
             address = "Indiranagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -34284,7 +34284,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹20",
+            discountAmount = "₹20",
             address = "Koramangala, Bangalore"
         ),
         RestaurantItemFull(
@@ -34297,7 +34297,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "15-20 mins",
             distance = "0.2 km",
             discount = "30%",
-            discountAmount = "up to ₹28",
+            discountAmount = "₹20",
             address = "Jayanagar, Bangalore"
         ),
         RestaurantItemFull(
@@ -34310,7 +34310,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "17-22 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹26",
+            discountAmount = "₹20",
             address = "MG Road, Bangalore"
         ),
         RestaurantItemFull(
@@ -34323,7 +34323,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹18",
+            discountAmount = "₹20",
             address = "Whitefield, Bangalore"
         ),
 
@@ -34338,7 +34338,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "19-24 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹49",
+            discountAmount = "₹20",
             address = "Bandra West, Mumbai"
         ),
         RestaurantItemFull(
@@ -34351,7 +34351,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹35",
+            discountAmount = "₹20",
             address = "Juhu, Mumbai"
         ),
         RestaurantItemFull(
@@ -34364,7 +34364,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹27",
+            discountAmount = "₹20",
             address = "Andheri West, Mumbai"
         ),
         RestaurantItemFull(
@@ -34377,7 +34377,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "17-22 mins",
             distance = "0.8 km",
             discount = "30%",
-            discountAmount = "up to ₹36",
+            discountAmount = "₹20",
             address = "Powai, Mumbai"
         ),
         RestaurantItemFull(
@@ -34390,7 +34390,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹36",
+            discountAmount = "₹20",
             address = "Koregaon Park, Pune"
         ),
 
@@ -34405,7 +34405,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "19-24 mins",
             distance = "0.5 km",
             discount = "30%",
-            discountAmount = "up to ₹46",
+            discountAmount = "₹20",
             address = "Baner, Pune"
         ),
         RestaurantItemFull(
@@ -34418,7 +34418,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹35",
+            discountAmount = "₹20",
             address = "Hinjawadi, Pune"
         ),
         RestaurantItemFull(
@@ -34431,7 +34431,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹48",
+            discountAmount = "₹20",
             address = "Gachibowli, Hyderabad"
         ),
         RestaurantItemFull(
@@ -34444,7 +34444,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "19-24 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹30",
+            discountAmount = "₹20",
             address = "Jubilee Hills, Hyderabad"
         ),
         RestaurantItemFull(
@@ -34457,7 +34457,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.7 km",
             discount = "30%",
-            discountAmount = "up to ₹33",
+            discountAmount = "₹20",
             address = "Banjara Hills, Hyderabad"
         ),
 
@@ -34472,7 +34472,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "14-19 mins",
             distance = "0.4 km",
             discount = "30%",
-            discountAmount = "up to ₹22",
+            discountAmount = "₹20",
             address = "Connaught Place, Delhi"
         ),
         RestaurantItemFull(
@@ -34485,7 +34485,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "18-23 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹52",
+            discountAmount = "₹20",
             address = "Saket, Delhi"
         ),
         RestaurantItemFull(
@@ -34498,7 +34498,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "16-21 mins",
             distance = "0.3 km",
             discount = "30%",
-            discountAmount = "up to ₹31",
+            discountAmount = "₹20",
             address = "DLF Cyber City, Gurgaon"
         ),
         RestaurantItemFull(
@@ -34511,7 +34511,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "25-30 mins",
             distance = "0.9 km",
             discount = "30%",
-            discountAmount = "up to ₹160",
+            discountAmount = "₹20",
             address = "Golf Course Road, Gurgaon"
         ),
         RestaurantItemFull(
@@ -34524,7 +34524,7 @@ fun MilletBowlDietPage() {
             deliveryTime = "20-25 mins",
             distance = "0.6 km",
             discount = "30%",
-            discountAmount = "up to ₹54",
+            discountAmount = "₹20",
             address = "Noida Sector 18, Noida"
         )
     )

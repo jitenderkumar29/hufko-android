@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.hufko.ui.theme.customColors
 import com.example.hufko.R
+import com.example.hufko.components.GroceryHome.GroceryHome
 import com.example.hufko.components.navigation.TabNavigationApp
 
 data class CategoryHeaderClass(
@@ -241,7 +242,16 @@ fun CategoryScreen(navController: NavHostController? = null,
 }
 
 @Composable fun GroceryScreen(navController: NavHostController? = null) {
-    ScreenTemplate("Grocery", navController = navController)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.customColors.background)
+    ) {
+        GroceryHome(
+            navController = navController,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
 }
 
 @Composable fun ShoppingScreen(navController: NavHostController? = null) {

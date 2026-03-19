@@ -22,11 +22,18 @@ import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.components.homescreen.AddressSelection
+import com.example.hufko.components.homescreen.BannerFood
+import com.example.hufko.components.homescreen.BannerPadding
 import com.example.hufko.components.homescreen.CashbackButton
 import com.example.hufko.components.homescreen.CategoryItem
+import com.example.hufko.components.homescreen.CategoryItemBgImg
+import com.example.hufko.components.homescreen.CategoryListBgImg
 import com.example.hufko.components.homescreen.CategoryListSimple
+import com.example.hufko.components.homescreen.DotPosition
+import com.example.hufko.components.homescreen.DynamicSpacing
 import com.example.hufko.components.homescreen.Location
 import com.example.hufko.components.homescreen.LocationSelectionButton
+import com.example.hufko.components.homescreen.OverlayPosition
 import com.example.hufko.components.homescreen.VegNonVegButton
 import com.example.hufko.components.searchbar.SearchBar
 import com.example.hufko.ui.theme.customColors
@@ -194,6 +201,17 @@ fun GroceryHome(
                         .background(Color.White)
 //                        .padding(12.dp)
                 ) {
+//                    Spacer(modifier = Modifier.height(20.dp))
+                    // gudi Sale
+                    val gudiCategoriesSimple = listOf(
+                        CategoryItem(0, "", R.drawable.ic_gudi_sale_1, "View products"),
+                        CategoryItem(1, "", R.drawable.ic_gudi_sale_2, "View products"),
+                        CategoryItem(2, "", R.drawable.ic_gudi_sale_3, "View products"),
+                        CategoryItem(3, "", R.drawable.ic_gudi_sale_4, "View products"),
+                        CategoryItem(4, "", R.drawable.ic_gudi_sale_5, "View products"),
+                    )
+
+//        Spacer(modifier = Modifier.height(10.dp))
                     Image(
                         painter = painterResource(R.drawable.ic_gudi),
                         contentDescription = "Banner",
@@ -204,13 +222,112 @@ fun GroceryHome(
                             ),
                         contentScale = ContentScale.FillBounds
                     )
+                    CategoryListSimple(
+                        items = gudiCategoriesSimple,
+                        onItemClick = { item -> println("Selected: ${item.name}") },
+                        itemWidth = 110.dp,
+                        itemHeight = 140.dp,
+                        horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+                        horizontalPadding = 12.dp,
+                        backgroundColor = Color(0xFFE2FCE3)
+                    )
 
+                    val items = listOf(
+                        CategoryItemBgImg(
+                            id = 1,
+                            name = "",
+                            imageRes = R.drawable.ic_fest_1
+                        ),
+                        CategoryItemBgImg(
+                            id = 2,
+                            name = "",
+                            imageRes = R.drawable.ic_fest_2
+                        ),
+                        CategoryItemBgImg(
+                            id = 3,
+                            name = "",
+                            imageRes = R.drawable.ic_fest_3
+                        ),
+                        CategoryItemBgImg(
+                            id = 4,
+                            name = "",
+                            imageRes = R.drawable.ic_fest_4
+                        ),
+                        CategoryItemBgImg(
+                            id = 5,
+                            name = "",
+                            imageRes = R.drawable.ic_fest_5
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    CategoryListBgImg(
+                        backgroundImageRes = R.drawable.ic_fest_bg,
+                        items = items,
+                        onItemClick = { },
+                        backgroundImageHeight = 300.dp,
+                        listItemWidth = 120.dp,
+                        listItemHeight = 230.dp,
+                        overlayItemSize = 90.dp,
+                        overlayTextSize = 12.sp,
+                        backgroundOverlay = Color.Black.copy(alpha = 0.3f),
+                        overlayBottomPosition = OverlayPosition.pixels(250.dp),
+                        title = null,
+                        showHorizontalList = false,
+                        overlayItemsSpacing = DynamicSpacing.Fixed(15.dp), // Fixed 28dp between overlay items
+                        listItemsSpacing = DynamicSpacing.Fixed(12.dp) // Fixed 12dp between list items
+                    )
+
+                    // Banner Section
+
+                    BannerFood(
+                        images = listOf(
+                            painterResource(id = R.drawable.all_grocery_banner1),
+                            painterResource(id = R.drawable.all_grocery_banner2),
+                            painterResource(id = R.drawable.all_grocery_banner3),
+                            painterResource(id = R.drawable.all_grocery_banner4),
+                            painterResource(id = R.drawable.all_grocery_banner5),
+                        ),
+                        onImageClick = { page ->
+                            when (page) {
+                                0 -> onBanner1Click()
+                                1 -> onBanner2Click()
+                                2 -> onBanner3Click()
+                            }
+                        },
+                        autoScrollDelay = 2000,
+                        height = 225.dp,
+                        roundedCornerShape = 0.dp,
+                        contentScale = ContentScale.FillBounds,
+                        dotSize = 8.dp,
+                        dotPadding = 4.dp,
+                        dotPosition = DotPosition.BELOW_IMAGE,
+                        overlayGradient = true, // Adds gradient for better visibility
+                        selectedDotColor = Color.White,
+                        padding = BannerPadding.all(8.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    )
+
+                    // Feature this week
+                    val featureThisWeekCategoriesGrocery = listOf(
+                        CategoryItem(0, "", R.drawable.ic_grocery_newly_launched, "View products"),
+                        CategoryItem(1, "", R.drawable.ic_grocery_oral_health, "View products"),
+                        CategoryItem(2, "", R.drawable.ic_grocery_ugadi, "View products"),
+                        CategoryItem(3, "", R.drawable.ic_grocery_exam, "View products"),
+                        CategoryItem(4, "", R.drawable.ic_grocery_decathlon, "View products"),
+                        CategoryItem(5, "", R.drawable.ic_grocery_date_delight, "View products"),
+                        CategoryItem(6, "", R.drawable.ic_grocery_glow, "View products"),
+                        CategoryItem(7, "", R.drawable.ic_grocery_metro, "View products"),
+                        CategoryItem(8, "", R.drawable.ic_grocery_lifestyle, "View products"),
+                        CategoryItem(9, "", R.drawable.ic_grocery_summer, "View products"),
+                    )
 
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "Recommended for you",
+                        text = "Feature This Week",
                         style = MaterialTheme.typography.bodySmall.copy(
-                            fontSize = 18.sp,
+                            fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.customColors.black
                         ),
@@ -218,6 +335,30 @@ fun GroceryHome(
                         modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
                     )
                     Spacer(modifier = Modifier.height(10.dp))
+
+                    CategoryListSimple(
+                        items = featureThisWeekCategoriesGrocery,
+                        onItemClick = { item -> println("Selected: ${item.name}") },
+                        itemWidth = 100.dp,
+                        itemHeight = 120.dp,
+                        horizontalSpacing = 12.dp,
+//                        verticalPadding = 8.dp,
+                        horizontalPadding = 12.dp,
+                        backgroundColor = Color(0xFFFFFFFF)
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = "Recommended for you",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.customColors.black
+                        ),
+                        maxLines = 1,
+                        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
 
                     GroceryTabs(
                         navController = navController,
@@ -290,4 +431,19 @@ fun CashbackButtonWrapper(
         amount = amount,
         modifier = modifier
     )
+}
+
+private fun onBanner1Click() {
+    // Handle banner 1 click
+    println("Banner 1 clicked")
+}
+
+private fun onBanner2Click() {
+    // Handle banner 2 click
+    println("Banner 2 clicked")
+}
+
+private fun onBanner3Click() {
+    // Handle banner 3 click
+    println("Banner 3 clicked")
 }

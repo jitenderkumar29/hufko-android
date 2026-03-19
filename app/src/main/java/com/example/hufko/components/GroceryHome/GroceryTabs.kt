@@ -1,5 +1,3 @@
-
-
 package com.example.hufko.components.GroceryHome
 
 import android.util.Log
@@ -27,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -37,19 +36,21 @@ import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 
-// Sealed class for different grocery category pages
+// Sealed class for different grocery category pages - UPDATED with new categories
 sealed class GroceryCategoryPage(val title: String, val iconRes: Int) {
-    // Main categories from the images
-    object TopPicks : GroceryCategoryPage("Top Picks", R.drawable.top_picks)
-    object MasalaSugarSpices : GroceryCategoryPage("Masala, sugar & spices", R.drawable.masala_spices)
-    object OilGhee : GroceryCategoryPage("Oil & ghee", R.drawable.oil_ghee)
-    object NoodlesPasta : GroceryCategoryPage("Noodles & pasta", R.drawable.noodles_pasta)
-    object DalPulses : GroceryCategoryPage("Dal & pulses", R.drawable.dal_pulses)
-    object AttaRiceGrains : GroceryCategoryPage("Atta, rice & grains", R.drawable.atta_rice)
-    object ChipsBiscuits : GroceryCategoryPage("Chips & biscuits", R.drawable.chips_biscuits)
-    object JuicesColdDrinks : GroceryCategoryPage("Juices & cold drinks", R.drawable.juices_drinks)
-    object DryFruitsNuts : GroceryCategoryPage("Dry fruits & nuts", R.drawable.dry_fruits)
-    object OtherCategories : GroceryCategoryPage("Other Categories", R.drawable.other_categories)
+    // New categories from the list
+    object Fresh : GroceryCategoryPage("Fresh", R.drawable.fresh)
+    object Summer : GroceryCategoryPage("Summer", R.drawable.summer)
+    object Ramadan : GroceryCategoryPage("Ramadan", R.drawable.ramadan)
+    object Organic : GroceryCategoryPage("Organic", R.drawable.organic)
+    object Health : GroceryCategoryPage("Health", R.drawable.health)
+    object Gifting : GroceryCategoryPage("Gifting", R.drawable.gifting)
+    object Toys : GroceryCategoryPage("Toys", R.drawable.toys)
+    object Kids : GroceryCategoryPage("Kids", R.drawable.kids)
+    object Beauty : GroceryCategoryPage("Beauty", R.drawable.beauty)
+    object Pets : GroceryCategoryPage("Pets", R.drawable.pets)
+    object Decor : GroceryCategoryPage("Decor", R.drawable.decor)
+    object Imported : GroceryCategoryPage("Imported", R.drawable.imported)
 }
 
 // Data class for grocery items
@@ -61,7 +62,7 @@ data class GroceryItem(
     val price: String,
     val weight: String,
     val isVeg: Boolean = true,
-    val category: String = "Top Picks"
+    val category: String = "Fresh"
 )
 
 @Composable
@@ -99,24 +100,27 @@ fun GroceryTabs(
         currentSelectedIndex = selectedTabIndex
     }
 
-    // All grocery category pages from the images (all tabs displayed)
+    // All grocery category pages from the new list (all tabs displayed)
     val allCategoryPages = listOf(
-        GroceryCategoryPage.TopPicks,
-        GroceryCategoryPage.MasalaSugarSpices,
-        GroceryCategoryPage.OilGhee,
-        GroceryCategoryPage.NoodlesPasta,
-        GroceryCategoryPage.DalPulses,
-        GroceryCategoryPage.AttaRiceGrains,
-        GroceryCategoryPage.ChipsBiscuits,
-        GroceryCategoryPage.JuicesColdDrinks,
-        GroceryCategoryPage.DryFruitsNuts,
-        GroceryCategoryPage.OtherCategories
+        GroceryCategoryPage.Fresh,
+        GroceryCategoryPage.Summer,
+        GroceryCategoryPage.Ramadan,
+        GroceryCategoryPage.Organic,
+        GroceryCategoryPage.Health,
+        GroceryCategoryPage.Gifting,
+        GroceryCategoryPage.Toys,
+        GroceryCategoryPage.Kids,
+        GroceryCategoryPage.Beauty,
+        GroceryCategoryPage.Pets,
+        GroceryCategoryPage.Decor,
+        GroceryCategoryPage.Imported
     )
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-//            .background(MaterialTheme.customColors.skyBlue)
+        modifier = Modifier.run {
+            fillMaxWidth()
+                .background(Color(0xFFFFECC9))
+        }
     ) {
         ScrollableTabRow(
             selectedTabIndex = currentSelectedIndex,
@@ -149,29 +153,30 @@ fun GroceryTabs(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.padding(vertical = 2.dp, horizontal = 0.dp)
                     ) {
-                        Image(
-                            painter = painterResource(id = categoryPage.iconRes),
-                            contentDescription = categoryPage.title,
+                        // Use a custom ImageWithFallback composable
+                        ImageWithFallback(
+                            iconRes = categoryPage.iconRes,
+                            title = categoryPage.title,
+                            isSelected = isSelected,
                             modifier = Modifier
-                                .width(75.dp)
-                                .height(85.dp),
-                            contentScale = ContentScale.FillBounds
+                                .width(45.dp)
+                                .height(45.dp)
                         )
 
-//                        Text(
-//                            text = categoryPage.title,
-//                            fontSize = 13.sp,
-//                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-//                            color = if (isSelected) {
-//                                MaterialTheme.customColors.header
-//                            } else {
-//                                MaterialTheme.customColors.black
-//                            },
-//                            maxLines = 2,
-//                            textAlign = TextAlign.Center,
-//                            overflow = TextOverflow.Ellipsis,
-//                            modifier = Modifier.padding(top = 4.dp)
-//                        )
+                        Text(
+                            text = categoryPage.title,
+                            fontSize = 12.sp,
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                            color = if (isSelected) {
+                                MaterialTheme.customColors.header
+                            } else {
+                                MaterialTheme.customColors.black
+                            },
+                            maxLines = 2,
+                            textAlign = TextAlign.Center,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.padding(top = 2.dp)
+                        )
                     }
                 }
             }
@@ -195,16 +200,18 @@ fun GroceryTabs(
 
             // Show content based on the actual category
             when (actualCategory) {
-                GroceryCategoryPage.TopPicks -> TopPicksCategoryPage()
-                GroceryCategoryPage.MasalaSugarSpices -> MasalaSugarSpicesCategoryPage()
-                GroceryCategoryPage.OilGhee -> OilGheeCategoryPage()
-                GroceryCategoryPage.NoodlesPasta -> NoodlesPastaCategoryPage()
-                GroceryCategoryPage.DalPulses -> DalPulsesCategoryPage()
-                GroceryCategoryPage.AttaRiceGrains -> AttaRiceGrainsCategoryPage()
-                GroceryCategoryPage.ChipsBiscuits -> ChipsBiscuitsCategoryPage()
-                GroceryCategoryPage.JuicesColdDrinks -> JuicesColdDrinksCategoryPage()
-                GroceryCategoryPage.DryFruitsNuts -> DryFruitsNutsCategoryPage()
-                GroceryCategoryPage.OtherCategories -> OtherCategoriesPage()
+                GroceryCategoryPage.Fresh -> FreshCategoryPage()
+                GroceryCategoryPage.Summer -> SummerCategoryPage()
+                GroceryCategoryPage.Ramadan -> RamadanCategoryPage()
+                GroceryCategoryPage.Organic -> OrganicCategoryPage()
+                GroceryCategoryPage.Health -> HealthCategoryPage()
+                GroceryCategoryPage.Gifting -> GiftingCategoryPage()
+                GroceryCategoryPage.Toys -> ToysCategoryPage()
+                GroceryCategoryPage.Kids -> KidsCategoryPage()
+                GroceryCategoryPage.Beauty -> BeautyCategoryPage()
+                GroceryCategoryPage.Pets -> PetsCategoryPage()
+                GroceryCategoryPage.Decor -> DecorCategoryPage()
+                GroceryCategoryPage.Imported -> ImportedCategoryPage()
                 null -> {
                     // Show empty state for invalid index
                     Box(
@@ -225,100 +232,171 @@ fun GroceryTabs(
     }
 }
 
+// New composable to handle image loading with fallback - NO TRY-CATCH AROUND COMPOSABLES
+@Composable
+fun ImageWithFallback(
+    iconRes: Int,
+    title: String,
+    isSelected: Boolean,
+    modifier: Modifier = Modifier
+) {
+    // Use a state to track if we should show fallback
+    var showFallback by remember(iconRes) { mutableStateOf(false) }
+    val context = LocalContext.current
+
+    // Check if resource exists - this is not a composable function call
+    val resourceExists = try {
+        context.resources.getResourceEntryName(iconRes)
+        true
+    } catch (e: Exception) {
+        false
+    }
+
+    if (resourceExists && !showFallback) {
+        // Image exists, show it
+        Image(
+            painter = painterResource(id = iconRes),
+            contentDescription = title,
+            modifier = modifier,
+            contentScale = ContentScale.FillBounds
+        )
+    } else {
+        // Image doesn't exist or failed, show fallback
+        Box(
+            modifier = Modifier
+                .size(60.dp)
+                .clip(CircleShape)
+                .background(
+                    if (isSelected)
+                        MaterialTheme.customColors.header.copy(alpha = 0.2f)
+                    else
+                        Color.LightGray.copy(alpha = 0.1f)
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = title.take(1).uppercase(),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = if (isSelected)
+                    MaterialTheme.customColors.header
+                else
+                    MaterialTheme.customColors.gray
+            )
+        }
+    }
+}
+
 // Sample content for each category page
 @Composable
-fun TopPicksCategoryPage() {
-    val sampleItems = listOf(
-        GroceryItemTwo(
-            id = 1,
-            discount = "12% OFF",
-            title = "Fortune Sunlite Sunflower Oil",
-            weight = "800 g",
-            discountedPrice = "₹163",
-            originalPrice = "₹185",
-            imageRes = R.drawable.fortune_sunlite_sunflower_oil
-        ),
-        GroceryItemTwo(
-            id = 2,
-            discount = "20% OFF",
-            title = "Fortune Premium Kachi Ghani Pure Mustard Oil",
-            weight = "1 L",
-            discountedPrice = "₹168",
-            originalPrice = "₹210",
-            imageRes = R.drawable.fortune_premium_kachi_ghani_mustard_oil
-        ),
-        GroceryItemTwo(
-            id = 3,
-            discount = "18% OFF",
-            title = "Fortune Premium Kachi Ghani Pure Mustard Oil",
-            weight = "1 L",
-            discountedPrice = "₹176",
-            originalPrice = "₹215",
-            imageRes = R.drawable.fortune_premium_kachi_ghani_mustard_oil_1
-        ),
-        GroceryItemTwo(
-            id = 4,
-            discount = "22% OFF",
-            title = "Exo Anti-Bacterial Diswash Bar",
-            weight = "Pack of 4, 120 g",
-            discountedPrice = "₹30",
-            originalPrice = "",
-            imageRes = R.drawable.exo_antibacterial_dishwash_bar
-        ),
-        GroceryItemTwo(
-            id = 5,
-            discount = "",
-            title = "Parle Platina Hide & Seek Cookies",
-            weight = "200 g",
-            discountedPrice = "₹42",
-            originalPrice = "₹54",
-            imageRes = R.drawable.parle_platina_hide_seek_cookies
-        ),
-        GroceryItemTwo(
-            id = 6,
-            discount = "12% OFF",
-            title = "Fortune Sunlite Sunflower Oil Jar",
-            weight = "4.35 kg",
-            discountedPrice = "₹929",
-            originalPrice = "₹1,055",
-            imageRes = R.drawable.fortune_sunlite_sunflower_oil_jar_1
-        ),
-        GroceryItemTwo(
-            id = 7,
-            discount = "18% OFF",
-            title = "Maggi 2-Minute Masala Instant Noodles",
-            weight = "Pack of 12, 70 g",
-            discountedPrice = "₹148",
-            originalPrice = "₹180",
-            imageRes = R.drawable.maggi_masala_instant_noodles_pack
-        ),
-        GroceryItemTwo(
-            id = 8,
-            discount = "34% OFF",
-            title = "Tata Sampann Toor Dal/Arhar Dal",
-            weight = "1 kg",
-            discountedPrice = "₹162",
-            originalPrice = "₹244",
-            imageRes = R.drawable.tata_sampann_toor_dal_1
-        ),
-        GroceryItemTwo(
-            id = 9,
-            discount = "27% OFF",
-            title = "Vedaka Raw Peanuts",
-            weight = "1 kg",
-            discountedPrice = "₹219",
-            originalPrice = "₹300",
-            imageRes = R.drawable.vedaka_raw_peanuts
-        ),
-        GroceryItemTwo(
-            id = 10,
-            discount = "18% OFF",
-            title = "Saffola Active Multi-Source Oil",
-            weight = "850 g",
-            discountedPrice = "₹153",
-            originalPrice = "₹187",
-            imageRes = R.drawable.saffola_active_multisource_oil
-        ),
+fun FreshCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(12.dp)
+    ) {
+        val sampleItems = listOf(
+            GroceryItemTwo(
+                id = 1,
+                discount = "12% OFF",
+                title = "Fortune Sunlite Sunflower Oil",
+                weight = "800 g",
+                discountedPrice = "₹163",
+                originalPrice = "₹185",
+                imageRes = R.drawable.fortune_sunlite_sunflower_oil,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 2,
+                discount = "20% OFF",
+                title = "Fortune Premium Kachi Ghani Pure Mustard Oil",
+                weight = "1 L",
+                discountedPrice = "₹168",
+                originalPrice = "₹210",
+                imageRes = R.drawable.fortune_premium_kachi_ghani_mustard_oil,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 3,
+                discount = "18% OFF",
+                title = "Fortune Premium Kachi Ghani Pure Mustard Oil",
+                weight = "1 L",
+                discountedPrice = "₹176",
+                originalPrice = "₹215",
+                imageRes = R.drawable.fortune_premium_kachi_ghani_mustard_oil_1,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 4,
+                discount = "22% OFF",
+                title = "Exo Anti-Bacterial Diswash Bar",
+                weight = "Pack of 4, 120 g",
+                discountedPrice = "₹30",
+                originalPrice = "",
+                imageRes = R.drawable.exo_antibacterial_dishwash_bar,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 5,
+                discount = "22% OFF",
+                title = "Parle Platina Hide & Seek Cookies",
+                weight = "200 g",
+                discountedPrice = "₹42",
+                originalPrice = "₹54",
+                imageRes = R.drawable.parle_platina_hide_seek_cookies,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 6,
+                discount = "12% OFF",
+                title = "Fortune Sunlite Sunflower Oil Jar",
+                weight = "4.35 kg",
+                discountedPrice = "₹929",
+                originalPrice = "₹1,055",
+                imageRes = R.drawable.fortune_sunlite_sunflower_oil_jar_1,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 7,
+                discount = "18% OFF",
+                title = "Maggi 2-Minute Masala Instant Noodles",
+                weight = "Pack of 12, 70 g",
+                discountedPrice = "₹148",
+                originalPrice = "₹180",
+                imageRes = R.drawable.maggi_masala_instant_noodles_pack,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 8,
+                discount = "34% OFF",
+                title = "Tata Sampann Toor Dal/Arhar Dal",
+                weight = "1 kg",
+                discountedPrice = "₹162",
+                originalPrice = "₹244",
+                imageRes = R.drawable.tata_sampann_toor_dal_1,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 9,
+                discount = "27% OFF",
+                title = "Vedaka Raw Peanuts",
+                weight = "1 kg",
+                discountedPrice = "₹219",
+                originalPrice = "₹300",
+                imageRes = R.drawable.vedaka_raw_peanuts,
+                quantity = 0
+            ),
+            GroceryItemTwo(
+                id = 10,
+                discount = "18% OFF",
+                title = "Saffola Active Multi-Source Oil",
+                weight = "850 g",
+                discountedPrice = "₹153",
+                originalPrice = "₹187",
+                imageRes = R.drawable.saffola_active_multisource_oil,
+                quantity = 0
+            ),
 //        GroceryItemTwo(
 //            id = 11,
 //            discount = "10% OFF",
@@ -490,15 +568,39 @@ fun TopPicksCategoryPage() {
 //            originalPrice = "₹219",
 //            imageRes = R.drawable.dettol_skincare_liquid_handwash
 //        )
-    )
+        )
 
-    MaterialTheme {
-        GroceryItemsHorizontal(items = sampleItems)
+//        Spacer(modifier = Modifier.height(10.dp))
+//        Text(
+//            text = "Fresh",
+//            style = MaterialTheme.typography.bodySmall.copy(
+//                fontSize = 24.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = MaterialTheme.customColors.black
+//            ),
+//            maxLines = 1,
+//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+//        )
+//        Text(
+//            text = "Fresh essentials",
+//            fontSize = 16.sp,
+//            color = MaterialTheme.customColors.gray,
+//            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+//        )
+        MaterialTheme {
+            GroceryItemsHorizontal(items = sampleItems,
+                onQuantityChange = { itemId, newQuantity ->
+                    // Handle quantity change (e.g., update cart, etc.)
+                    println("Item $itemId quantity changed to $newQuantity")
+                },
+                rows = 2)
+        }
+
     }
 }
 
 @Composable
-fun MasalaSugarSpicesCategoryPage() {
+fun SummerCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -507,7 +609,7 @@ fun MasalaSugarSpicesCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Masala Sugar Spices Category",
+            text = "Summer Special",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -516,11 +618,17 @@ fun MasalaSugarSpicesCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Text(
+            text = "Cool drinks, ice creams & summer essentials",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
     }
 }
 
 @Composable
-fun OilGheeCategoryPage() {
+fun RamadanCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -529,7 +637,7 @@ fun OilGheeCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Oil Ghee Category",
+            text = "Ramadan Special",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -538,11 +646,17 @@ fun OilGheeCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Text(
+            text = "Dates, sweets & Ramadan essentials",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
     }
 }
 
 @Composable
-fun NoodlesPastaCategoryPage() {
+fun OrganicCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -551,7 +665,7 @@ fun NoodlesPastaCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = " Noodles Pasta Category",
+            text = "Organic Products",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -560,11 +674,17 @@ fun NoodlesPastaCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Text(
+            text = "100% organic groceries & staples",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
     }
 }
 
 @Composable
-fun DalPulsesCategoryPage() {
+fun HealthCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -573,7 +693,7 @@ fun DalPulsesCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = " Dal Pulses Category",
+            text = "Health & Wellness",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -582,11 +702,17 @@ fun DalPulsesCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Text(
+            text = "Healthy foods, supplements & more",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
     }
 }
 
 @Composable
-fun AttaRiceGrainsCategoryPage() {
+fun GiftingCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -595,7 +721,7 @@ fun AttaRiceGrainsCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Atta Rice Grains Category",
+            text = "Gifting",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -604,11 +730,17 @@ fun AttaRiceGrainsCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Text(
+            text = "Gift hampers & special occasion gifts",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
     }
 }
 
 @Composable
-fun ChipsBiscuitsCategoryPage() {
+fun ToysCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -617,7 +749,7 @@ fun ChipsBiscuitsCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Chips Biscuits Category",
+            text = "Toys",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -626,11 +758,17 @@ fun ChipsBiscuitsCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Text(
+            text = "Kids toys, games & educational items",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
     }
 }
 
 @Composable
-fun JuicesColdDrinksCategoryPage() {
+fun KidsCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -639,7 +777,7 @@ fun JuicesColdDrinksCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Juices Cold Drinks Category",
+            text = "Kids",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -648,11 +786,17 @@ fun JuicesColdDrinksCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Text(
+            text = "Kids clothing, accessories & more",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
     }
 }
 
 @Composable
-fun DryFruitsNutsCategoryPage() {
+fun BeautyCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -661,7 +805,7 @@ fun DryFruitsNutsCategoryPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Dry Fruits Nuts",
+            text = "Beauty",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -670,11 +814,17 @@ fun DryFruitsNutsCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
+        Text(
+            text = "Cosmetics, skincare & personal care",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
     }
 }
 
 @Composable
-fun OtherCategoriesPage() {
+fun PetsCategoryPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -683,7 +833,7 @@ fun OtherCategoriesPage() {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Other Categories",
+            text = "Pets",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -691,6 +841,68 @@ fun OtherCategoriesPage() {
             ),
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Text(
+            text = "Pet food, accessories & care products",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
+    }
+}
+
+@Composable
+fun DecorCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(12.dp)
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Home Decor",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Text(
+            text = "Home decoration & furnishings",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+        )
+    }
+}
+
+@Composable
+fun ImportedCategoryPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(12.dp)
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Imported Products",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Text(
+            text = "International brands & imported goods",
+            fontSize = 16.sp,
+            color = MaterialTheme.customColors.gray,
+            modifier = Modifier.padding(start = 12.dp, top = 8.dp)
         )
     }
 }

@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.times
 import com.example.hufko.ui.theme.customColors
 
 /* -------------------- DATA MODEL -------------------- */
@@ -47,11 +48,23 @@ fun CategoryListBgImg(
     listItemWidth: Dp = 140.dp,
     listItemHeight: Dp = 180.dp,
     overlayItemSize: Dp = 72.dp,
+    /* NEW PARAMETER FOR INDEPENDENT HEIGHT CONTROL */
+    overlayItemHeight: Dp? = null, // If null, uses overlayItemSize for both width and height
     overlayTextSize: TextUnit = 12.sp,
     backgroundOverlay: Color = Color.Black.copy(alpha = 0.3f),
     title: String? = null,
-    showHorizontalList: Boolean = false
+    showHorizontalList: Boolean = false,
+    /* POSITIONING PARAMETERS */
+    overlayBottomPosition: OverlayPosition = OverlayPosition.Half,
+    overlayBottomOffset: Dp = 0.dp,
+    /* DYNAMIC SPACING PARAMETERS */
+    overlayItemsSpacing: DynamicSpacing = DynamicSpacing.Fixed(28.dp),
+    listItemsSpacing: DynamicSpacing = DynamicSpacing.Fixed(12.dp)
 ) {
+    // Use provided height or fall back to size for square shape
+    val actualOverlayHeight = overlayItemHeight ?: overlayItemSize
+    val actualOverlayWidth = overlayItemSize
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -66,6 +79,7 @@ fun CategoryListBgImg(
                 .height(backgroundImageHeight)
         ) {
             val boxHeight = maxHeight
+            val boxWidth = maxWidth
 
             Image(
                 painter = painterResource(backgroundImageRes),
@@ -77,29 +91,53 @@ fun CategoryListBgImg(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(backgroundOverlay)
+                    .background(Color.Transparent)
             )
 
-            // Container for overlay items at the bottom half
+            // Container for overlay items
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(boxHeight / 2)
+                    .height(when (overlayBottomPosition) {
+                        is OverlayPosition.Pixels -> overlayBottomPosition.height
+                        is OverlayPosition.Percentage -> boxHeight * overlayBottomPosition.percentage
+                        OverlayPosition.Half -> boxHeight / 2
+                        OverlayPosition.WrapContent -> calculateWrapContentHeight(items, actualOverlayHeight)
+                    })
                     .align(Alignment.BottomCenter)
+                    .offset(y = overlayBottomOffset)
             ) {
-                // Scrollable overlay items in the bottom half
+                // Calculate dynamic spacing for overlay items
+                val overlaySpacing = calculateDynamicSpacing(
+                    spacing = overlayItemsSpacing,
+                    screenWidth = boxWidth,
+                    itemCount = items.size,
+                    itemWidth = if (items.any { it.name.isNotEmpty() }) 100.dp else actualOverlayWidth,
+                    defaultSpacing = 28.dp
+                )
+
+                // Scrollable overlay items with dynamic spacing and independent height
                 LazyRow(
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .padding(horizontal = 16.dp, vertical = 0.dp),
-                    horizontalArrangement = Arrangement.spacedBy(28.dp),
-                    verticalAlignment = Alignment.CenterVertically // Changed to center for better alignment when no text
+                    horizontalArrangement = when (overlaySpacing) {
+                        is CalculatedSpacing.Fixed -> Arrangement.spacedBy(overlaySpacing.value)
+                        is CalculatedSpacing.SpaceBetween -> Arrangement.SpaceBetween
+                        is CalculatedSpacing.SpaceAround -> Arrangement.SpaceAround
+                        is CalculatedSpacing.SpaceEvenly -> Arrangement.SpaceEvenly
+                        is CalculatedSpacing.Start -> Arrangement.Start
+                        is CalculatedSpacing.End -> Arrangement.End
+                        is CalculatedSpacing.Center -> Arrangement.Center
+                    },
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     items(items) { item ->
                         OverlayItemOnBackground(
                             item = item,
-                            size = overlayItemSize,
+                            width = actualOverlayWidth,
+                            height = actualOverlayHeight, // Pass independent height
                             textSize = overlayTextSize,
                             onClick = { onItemClick(item) }
                         )
@@ -122,24 +160,155 @@ fun CategoryListBgImg(
         /* -------- CONDITIONAL HORIZONTAL SCROLLABLE LIST -------- */
 
         if (showHorizontalList) {
-            LazyRow(
+            BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    .padding(bottom = 16.dp)
             ) {
-                items(items) { item ->
-                    CategoryListItemBgImg(
-                        item = item,
-                        width = listItemWidth,
-                        height = listItemHeight,
-                        onClick = { onItemClick(item) }
-                    )
+                val boxWidth = maxWidth
+
+                // Calculate dynamic spacing for list items
+                val listSpacing = calculateDynamicSpacing(
+                    spacing = listItemsSpacing,
+                    screenWidth = boxWidth,
+                    itemCount = items.size,
+                    itemWidth = listItemWidth,
+                    defaultSpacing = 12.dp
+                )
+
+                LazyRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = when (listSpacing) {
+                        is CalculatedSpacing.Fixed -> Arrangement.spacedBy(listSpacing.value)
+                        is CalculatedSpacing.SpaceBetween -> Arrangement.SpaceBetween
+                        is CalculatedSpacing.SpaceAround -> Arrangement.SpaceAround
+                        is CalculatedSpacing.SpaceEvenly -> Arrangement.SpaceEvenly
+                        is CalculatedSpacing.Start -> Arrangement.Start
+                        is CalculatedSpacing.End -> Arrangement.End
+                        is CalculatedSpacing.Center -> Arrangement.Center
+                    }
+                ) {
+                    items(items) { item ->
+                        CategoryListItemBgImg(
+                            item = item,
+                            width = listItemWidth,
+                            height = listItemHeight,
+                            onClick = { onItemClick(item) }
+                        )
+                    }
                 }
             }
         }
     }
+}
+
+/* -------------------- SPACING HELPERS -------------------- */
+
+/**
+ * Sealed class for dynamic spacing options
+ */
+sealed class DynamicSpacing {
+    data class Fixed(val value: Dp) : DynamicSpacing()
+    data class Responsive(
+        val minSpacing: Dp = 8.dp,
+        val maxSpacing: Dp = 32.dp,
+        val preferredItemCount: Int = 4
+    ) : DynamicSpacing()
+    object SpaceBetween : DynamicSpacing()
+    object SpaceAround : DynamicSpacing()
+    object SpaceEvenly : DynamicSpacing()
+    object Start : DynamicSpacing()
+    object End : DynamicSpacing()
+    object Center : DynamicSpacing()
+
+    companion object {
+        fun fixed(value: Dp) = Fixed(value)
+        fun responsive(minSpacing: Dp = 8.dp, maxSpacing: Dp = 32.dp, preferredItemCount: Int = 4) =
+            Responsive(minSpacing, maxSpacing, preferredItemCount)
+    }
+}
+
+/**
+ * Internal sealed class for calculated spacing
+ */
+private sealed class CalculatedSpacing {
+    data class Fixed(val value: Dp) : CalculatedSpacing()
+    object SpaceBetween : CalculatedSpacing()
+    object SpaceAround : CalculatedSpacing()
+    object SpaceEvenly : CalculatedSpacing()
+    object Start : CalculatedSpacing()
+    object End : CalculatedSpacing()
+    object Center : CalculatedSpacing()
+}
+
+/**
+ * Helper function to calculate dynamic spacing based on screen width
+ */
+private fun calculateDynamicSpacing(
+    spacing: DynamicSpacing,
+    screenWidth: Dp,
+    itemCount: Int,
+    itemWidth: Dp,
+    defaultSpacing: Dp
+): CalculatedSpacing {
+    return when (spacing) {
+        is DynamicSpacing.Fixed -> CalculatedSpacing.Fixed(spacing.value)
+        is DynamicSpacing.Responsive -> {
+            if (itemCount == 0) return CalculatedSpacing.Fixed(defaultSpacing)
+            val totalItemsWidth = itemCount * itemWidth
+            val availableWidth = screenWidth - 32.dp
+            if (totalItemsWidth >= availableWidth) {
+                CalculatedSpacing.Fixed(spacing.minSpacing)
+            } else {
+                val spaceCount = itemCount - 1
+                if (spaceCount > 0) {
+                    val remainingSpace = availableWidth - totalItemsWidth
+                    val calculatedSpacing = (remainingSpace / spaceCount).coerceIn(
+                        spacing.minSpacing,
+                        spacing.maxSpacing
+                    )
+                    CalculatedSpacing.Fixed(calculatedSpacing)
+                } else {
+                    CalculatedSpacing.Fixed(defaultSpacing)
+                }
+            }
+        }
+        DynamicSpacing.SpaceBetween -> CalculatedSpacing.SpaceBetween
+        DynamicSpacing.SpaceAround -> CalculatedSpacing.SpaceAround
+        DynamicSpacing.SpaceEvenly -> CalculatedSpacing.SpaceEvenly
+        DynamicSpacing.Start -> CalculatedSpacing.Start
+        DynamicSpacing.End -> CalculatedSpacing.End
+        DynamicSpacing.Center -> CalculatedSpacing.Center
+    }
+}
+
+/* -------------------- POSITIONING HELPERS -------------------- */
+
+/**
+ * Sealed class to define how overlay items should be positioned from the bottom
+ */
+sealed class OverlayPosition {
+    object Half : OverlayPosition()
+    data class Pixels(val height: Dp) : OverlayPosition()
+    data class Percentage(val percentage: Float) : OverlayPosition()
+    object WrapContent : OverlayPosition()
+
+    companion object {
+        fun pixels(height: Dp) = Pixels(height)
+        fun percentage(percentage: Float) = Percentage(percentage)
+    }
+}
+
+/**
+ * Helper function to calculate height needed to wrap content
+ */
+private fun calculateWrapContentHeight(
+    items: List<CategoryItemBgImg>,
+    overlayItemHeight: Dp
+): Dp {
+    val maxItemHeight = overlayItemHeight + if (items.any { it.name.isNotEmpty() }) 30.dp else 0.dp
+    return maxItemHeight + 16.dp
 }
 
 /* -------------------- OVERLAY ITEM -------------------- */
@@ -149,30 +318,35 @@ fun OverlayItemOnBackground(
     item: CategoryItemBgImg,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    size: Dp = 72.dp,
+    width: Dp = 72.dp,
+    height: Dp = 72.dp, // New parameter for independent height
     textSize: TextUnit = 12.sp,
-    elevation: Dp = 6.dp
+    elevation: Dp = 6.dp,
+    /* OPTIONAL: Custom shape corner radius */
+    cornerRadius: Dp = 12.dp
 ) {
     Column(
         modifier = modifier
-            .width(if (item.name.isNotEmpty()) 100.dp else size) // Adjust width based on name presence
+            .width(if (item.name.isNotEmpty()) 100.dp else width)
             .clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = if (item.name.isNotEmpty()) Arrangement.Top else Arrangement.Center
     ) {
+        // Image container with independent width and height
         Box(
             modifier = Modifier
-                .size(size)
-                .shadow(elevation, RoundedCornerShape(12.dp))
-                .clip(RoundedCornerShape(12.dp))
+                .width(width)
+                .height(height) // Using independent height
+                .shadow(elevation, RoundedCornerShape(cornerRadius))
+                .clip(RoundedCornerShape(cornerRadius))
                 .background(Color.White),
             contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(item.imageRes),
-                contentDescription = item.name.ifEmpty { "Category item ${item.id}" }, // Use fallback description
+                contentDescription = item.name.ifEmpty { "Category item ${item.id}" },
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.FillBounds // Changed to Crop for better fit with different aspect ratios
             )
         }
 
@@ -212,7 +386,7 @@ fun CategoryListItemBgImg(
             painter = painterResource(item.imageRes),
             contentDescription = item.name.ifEmpty { "Category item ${item.id}" },
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.FillBounds
         )
 
         if (item.name.isNotEmpty()) {

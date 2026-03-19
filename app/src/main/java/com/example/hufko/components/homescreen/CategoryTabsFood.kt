@@ -1030,9 +1030,6 @@ fun AllCategoryPage(
 //            backgroundColor = Color(0xFF041258)
 //        )
 
-
-
-
         val items = listOf(
             CategoryItemBgImg(
                 id = 1,

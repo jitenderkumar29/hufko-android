@@ -347,6 +347,184 @@ fun GroceryHome(
                         backgroundColor = Color(0xFFFFFFFF)
                     )
 
+                    val defaultGroceryItems = listOf(
+                        GroceryItemCategory(
+                            id = 1,
+                            title = "Fresh vegetables",
+                            iconRes = R.drawable.ic_vegetables
+                        ),
+                        GroceryItemCategory(
+                            id = 2,
+                            title = "Fresh fruits",
+                            iconRes = R.drawable.ic_fruits
+                        ),
+                        GroceryItemCategory(
+                            id = 3,
+                            title = "Atta, rice & grains",
+                            iconRes = R.drawable.ic_grains
+                        ),
+                        GroceryItemCategory(
+                            id = 4,
+                            title = "Dal & pulses",
+                            iconRes = R.drawable.ic_dal
+                        ),
+                        GroceryItemCategory(
+                            id = 5,
+                            title = "Oil & ghee",
+                            iconRes = R.drawable.ic_oil
+                        ),
+                        GroceryItemCategory(
+                            id = 6,
+                            title = "Masala, sugar & spices",
+                            iconRes = R.drawable.ic_spices_grocery
+                        ),
+                        GroceryItemCategory(
+                            id = 7,
+                            title = "Milk & dairy",
+                            iconRes = R.drawable.ic_dairy
+                        ),
+                        GroceryItemCategory(
+                            id = 8,
+                            title = "Breads & bakery",
+                            iconRes = R.drawable.ic_bakery
+                        ),
+                        GroceryItemCategory(
+                            id = 9,
+                            title = "Cereals & breakfast",
+                            iconRes = R.drawable.ic_cereals
+                        ),
+                        GroceryItemCategory(
+                            id = 10,
+                            title = "Tea, coffee & drink mixes",
+                            iconRes = R.drawable.ic_tea_coffee
+                        ),
+                        GroceryItemCategory(
+                            id = 11,
+                            title = "Juices & cold drinks",
+                            iconRes = R.drawable.ic_juices
+                        ),
+                        GroceryItemCategory(
+                            id = 12,
+                            title = "Sauces & spreads",
+                            iconRes = R.drawable.ic_sauces
+                        ),
+                        GroceryItemCategory(
+                            id = 13,
+                            title = "Dry fruits & seeds",
+                            iconRes = R.drawable.ic_dry_fruits
+                        ),
+                        GroceryItemCategory(
+                            id = 14,
+                            title = "Noodles & pasta",
+                            iconRes = R.drawable.ic_noodles
+                        ),
+                        GroceryItemCategory(
+                            id = 15,
+                            title = "Chips & biscuits",
+                            iconRes = R.drawable.ic_chips
+                        ),
+                        GroceryItemCategory(
+                            id = 16,
+                            title = "Chocolates & ice cream",
+                            iconRes = R.drawable.ic_chocolates
+                        )
+                    )
+                    // In your screen composable
+                    Spacer(modifier = Modifier.height(10.dp))
+                    ListItemsGrid(
+                        browseText = "Groceries & Food",
+                        items = defaultGroceryItems,
+                        onItemClick = { item ->
+                            println("Clicked: ${item.title}")
+                        },
+                        columns = 4,
+                        horizontalSpacing = 8.dp,
+                        verticalSpacing = 1.dp,
+                        itemHeight = 120.dp,
+                        imageSize = 90.dp,
+                        backgroundColor = MaterialTheme.customColors.background,
+                        onBackClick = {}
+                    )
+
+                    val defaultBeautyCareItems = listOf(
+                        GroceryItemCategory(
+                            id = 1,
+                            title = "Bath & body",
+                            iconRes = R.drawable.ic_bath_body
+                        ),
+                        GroceryItemCategory(
+                            id = 2,
+                            title = "Hair care",
+                            iconRes = R.drawable.ic_hair_care
+                        ),
+                        GroceryItemCategory(
+                            id = 3,
+                            title = "Skin & face",
+                            iconRes = R.drawable.ic_skin_face
+                        ),
+                        GroceryItemCategory(
+                            id = 4,
+                            title = "Deos & perfumes",
+                            iconRes = R.drawable.ic_deos_perfumes
+                        ),
+                        GroceryItemCategory(
+                            id = 5,
+                            title = "Feminine hygiene",
+                            iconRes = R.drawable.ic_feminine_hygiene
+                        ),
+                        GroceryItemCategory(
+                            id = 6,
+                            title = "Men's grooming",
+                            iconRes = R.drawable.ic_mens_grooming
+                        ),
+                        GroceryItemCategory(
+                            id = 7,
+                            title = "Oral care",
+                            iconRes = R.drawable.ic_oral_care
+                        ),
+                        GroceryItemCategory(
+                            id = 8,
+                            title = "Baby care",
+                            iconRes = R.drawable.ic_baby_care
+                        ),
+                        GroceryItemCategory(
+                            id = 9,
+                            title = "Makeup & cosmetics",
+                            iconRes = R.drawable.ic_makeup_cosmetics
+                        ),
+                        GroceryItemCategory(
+                            id = 10,
+                            title = "Pharma & wellness",
+                            iconRes = R.drawable.ic_pharma_wellness
+                        ),
+                        GroceryItemCategory(
+                            id = 11,
+                            title = "Diet & nutrition",
+                            iconRes = R.drawable.ic_diet_nutrition
+                        ),
+                        GroceryItemCategory(
+                            id = 12,
+                            title = "Pet care",
+                            iconRes = R.drawable.ic_pet_care
+                        )
+                    )
+                    // In your screen composable
+                    Spacer(modifier = Modifier.height(10.dp))
+                    ListItemsGrid(
+                        browseText = "Beauty & Personal Care",
+                        items = defaultBeautyCareItems,
+                        onItemClick = { item ->
+                            println("Clicked: ${item.title}")
+                        },
+                        columns = 4,
+                        horizontalSpacing = 8.dp,
+                        verticalSpacing = 1.dp,
+                        itemHeight = 120.dp,
+                        imageSize = 90.dp,
+                        backgroundColor = MaterialTheme.customColors.background,
+                        onBackClick = {}
+                    )
+
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = "Recommended for you",

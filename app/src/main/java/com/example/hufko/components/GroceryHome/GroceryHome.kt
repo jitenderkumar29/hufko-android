@@ -525,6 +525,104 @@ fun GroceryHome(
                         onBackClick = {}
                     )
 
+                    val householdItems = listOf(
+                        GroceryItemCategory(
+                            id = 1,
+                            title = "Laundry detergents",
+                            iconRes = R.drawable.ic_laundry_detergent
+                        ),
+                        GroceryItemCategory(
+                            id = 2,
+                            title = "Household & toilet cleaners",
+                            iconRes = R.drawable.ic_toilet_cleaner
+                        ),
+                        GroceryItemCategory(
+                            id = 3,
+                            title = "Cleaning supplies",
+                            iconRes = R.drawable.ic_cleaning_supplies
+                        ),
+                        GroceryItemCategory(
+                            id = 4,
+                            title = "Home & kitchen",
+                            iconRes = R.drawable.ic_home_kitchen
+                        )
+                    )
+                    // In your screen composable
+                    Spacer(modifier = Modifier.height(10.dp))
+                    ListItemsGrid(
+                        browseText = "Household essentials",
+                        items = householdItems,
+                        onItemClick = { item ->
+                            println("Clicked: ${item.title}")
+                        },
+                        columns = 4,
+                        horizontalSpacing = 8.dp,
+                        verticalSpacing = 1.dp,
+                        itemHeight = 120.dp,
+                        imageSize = 90.dp,
+                        backgroundColor = MaterialTheme.customColors.background,
+                        onBackClick = {}
+                    )
+
+                    val storeCategories = listOf(
+                        GroceryItemCategory(
+                            id = 1,
+                            title = "Local delights",
+                            iconRes = R.drawable.ic_local_delights // Replace with actual icon
+                        ),
+                        GroceryItemCategory(
+                            id = 2,
+                            title = "Millets",
+                            iconRes = R.drawable.ic_millets // Replace with actual icon
+                        ),
+                        GroceryItemCategory(
+                            id = 3,
+                            title = "Combos",
+                            iconRes = R.drawable.ic_combos // Replace with actual icon
+                        ),
+                        GroceryItemCategory(
+                            id = 4,
+                            title = "Pooja essentials",
+                            iconRes = R.drawable.ic_pooja_essentials // Replace with actual icon
+                        ),
+                        GroceryItemCategory(
+                            id = 5,
+                            title = "Premium & organic",
+                            iconRes = R.drawable.ic_premium_organic // Replace with actual icon
+                        ),
+                        GroceryItemCategory(
+                            id = 6,
+                            title = "Beauty",
+                            iconRes = R.drawable.ic_beauty // Replace with actual icon
+                        ),
+                        GroceryItemCategory(
+                            id = 7,
+                            title = "Pet care",
+                            iconRes = R.drawable.ic_pet_care_1 // Replace with actual icon
+                        ),
+                        GroceryItemCategory(
+                            id = 8,
+                            title = "Brand of the week",
+                            iconRes = R.drawable.ic_brand_week // Replace with actual icon
+                        )
+                    )
+                    // In your screen composable
+                    Spacer(modifier = Modifier.height(10.dp))
+                    ListItemsGrid(
+                        browseText = "Shop by store",
+                        items = storeCategories,
+                        onItemClick = { item ->
+                            println("Clicked: ${item.title}")
+                        },
+                        columns = 4,
+                        horizontalSpacing = 8.dp,
+                        verticalSpacing = 1.dp,
+                        itemHeight = 120.dp,
+                        imageSize = 90.dp,
+                        backgroundColor = MaterialTheme.customColors.background,
+                        onBackClick = {}
+                    )
+
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = "Recommended for you",

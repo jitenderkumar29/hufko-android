@@ -53,6 +53,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.draw.clip
+import com.example.hufko.components.homescreen.completeRestaurantItems
+
 //import androidx.compose.ui.Arrangement
 
 // Sealed class for different category pages
@@ -557,7 +559,12 @@ fun CategoryTabsFood(
 
             // Show content based on the actual category
             when (actualCategory) {
-                CategoryPage.All -> AllCategoryPage()
+                CategoryPage.All -> AllCategoryPage(
+                    navController = navController,
+                    onBanner1Click = { /* Handle banner 1 click */ },
+                    onBanner2Click = { /* Handle banner 2 click */ },
+                    onBanner3Click = { /* Handle banner 3 click */ }
+                    )
                 CategoryPage.Diet -> {
                     DietCategoryPage(
                         navController = navController,
@@ -710,7 +717,11 @@ fun CategoryTabsFood(
                         )
                     }
                 }
-                else -> AllCategoryPage()
+                else -> AllCategoryPage( navController = navController,
+                            onBanner1Click = { /* Handle banner 1 click */ },
+                            onBanner2Click = { /* Handle banner 2 click */ },
+                            onBanner3Click = { /* Handle banner 3 click */ }
+                            )
             }
         }
     }
@@ -936,6 +947,7 @@ fun DietCategoryPage(
 }
 @Composable
 fun AllCategoryPage(
+   navController: NavHostController? = null,
     onBanner1Click: () -> Unit = {},
     onBanner2Click: () -> Unit = {},
     onBanner3Click: () -> Unit = {}
@@ -1140,92 +1152,7 @@ fun AllCategoryPage(
 //        )
 
         // Sample data with all fields
-        val completeRestaurantItems = listOf(
-            TopRatedRestaurantItem(
-                id = 1,
-                imageRes = R.drawable.ic_top_rated_food_1,
-                title = "Burger King",
-                price = "180",
-                restaurantName = "Shree Jee Restaurant",
-                rating = "4.1",
-                deliveryTime = "45-50 mins",
-                distance = "7.3 km",
-                discount = "ITEMS",
-                discountAmount = "₹20",
-                address = "Delhi",
-                category = "Burgers"
-            ),
-            TopRatedRestaurantItem(
-                id = 2,
-                imageRes = R.drawable.ic_top_rated_food_2,
-                title = "Bakingo",
-                price = "220",
-                restaurantName = "Amiche Pizza",
-                rating = "4.3",
-                deliveryTime = "60-65 mins",
-                distance = "5.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Delhi",
-                category = "Fast Food"
-            ),
-            TopRatedRestaurantItem(
-                id = 3,
-                imageRes = R.drawable.ic_top_rated_food_3,
-                title = "Big Bowl",
-                price = "150",
-                restaurantName = "Spice Garden",
-                rating = "4.0",
-                deliveryTime = "30-35 mins",
-                distance = "3.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi",
-                category = "Pizzas"
-            ),
-            TopRatedRestaurantItem(
-                id = 4,
-                imageRes = R.drawable.ic_top_rated_food_4,
-                title = "Peppers Pizza",
-                price = "199",
-                restaurantName = "Amiche Pizza",
-                rating = "4.2",
-                deliveryTime = "25-30 mins",
-                distance = "2.5 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Delhi",
-                category = "Burgers"
-            ),
-            TopRatedRestaurantItem(
-                id = 5,
-                imageRes = R.drawable.ic_top_rated_food_5,
-                title = "Zaika Food",
-                price = "199",
-                restaurantName = "Amiche Pizza",
-                rating = "4.2",
-                deliveryTime = "25-30 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi",
-                category = "Fast Food"
-            ),
-            TopRatedRestaurantItem(
-                id = 6,
-                imageRes = R.drawable.ic_top_rated_food_6,
-                title = "Havmor Ice Cream",
-                price = "199",
-                restaurantName = "Amiche Pizza",
-                rating = "4.2",
-                deliveryTime = "25-30 mins",
-                distance = "2.5 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Delhi",
-                category = "Pizzas"
-            )
-        )
+
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = "Top rated restaurants near you",
@@ -1240,23 +1167,27 @@ fun AllCategoryPage(
         Spacer(modifier = Modifier.height(20.dp))
 
         TopRatedRestaurants(
-            heading = null,
-            subtitle = null,
-            restaurantItems = completeRestaurantItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 110.dp,
-            cardHeight = 190.dp,
-            imageHeight = 130.dp, // Fixed image height
-            imageCornerRadius = 15.dp,
-            spacing = 15.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+                heading = null,
+                subtitle = null,
+                restaurantItems = completeRestaurantItems,
+                onItemClick = { foodItem ->
+                    // Navigate to RestaurantDetails with the item data - using safe call
+                    navController?.navigate("restaurant_details/${foodItem.id}")
+                    // Or if using direct navigation with parcelable:
+                    // navController?.currentBackStackEntry?.savedStateHandle?.set("restaurantItem", foodItem)
+                    // navController?.navigate("restaurant_details")
+                },
+                modifier = Modifier.fillMaxWidth(),
+                backgroundColor = Color.White,
+                cardWidth = 110.dp,
+                cardHeight = 190.dp,
+                imageHeight = 130.dp,
+                imageCornerRadius = 15.dp,
+                spacing = 15.dp,
+                horizontalPadding = 12.dp,
+                verticalPadding = 0.dp,
+                headingBottomPadding = 0.dp
+            )
 
         // Housefull Sale
         val housefullSaleCategoriesSimple = listOf(
@@ -2070,6 +2001,7 @@ fun PizzasCategoryPage() {
     fun filterByDeliveryTime(maxTime: Int) {
         println("Filter by max delivery time: $maxTime minutes")
     }
+    //Column(
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -2289,8 +2221,9 @@ fun PizzasCategoryPage() {
         )
 
     }
-//        FilterButtonFood()
 
+//        FilterButtonFood()
+        Spacer(modifier = Modifier.height(10.dp))
         Spacer(modifier = Modifier.height(15.dp))
         Text(
             text = "Restaurants delivering to you",

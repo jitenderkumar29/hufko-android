@@ -1,5 +1,7 @@
 package com.example.hufko.components.homescreen
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,6 +41,7 @@ import com.example.hufko.ui.theme.customColors
 /**
  * Food item data class for Top Rated Restaurants
  */
+@Parcelize
 data class TopRatedRestaurantItem(
     val id: Int? = null,
     val imageRes: Int? = null,
@@ -56,7 +59,7 @@ data class TopRatedRestaurantItem(
     val isHighProtein: Boolean? = null,
     val category: String? = null,
     val isWishlisted: Boolean? = null,
-)
+) : Parcelable
 
 /**
  * Individual Top Rated Restaurant card
@@ -638,3 +641,90 @@ fun TopRatedRestaurantDynamicCornersPreview() {
         }
     }
 }
+
+val completeRestaurantItems = listOf(
+    TopRatedRestaurantItem(
+        id = 1,
+        imageRes = R.drawable.ic_top_rated_food_1,
+        title = "Burger King",
+        price = "180",
+        restaurantName = "Hunger Cure",
+        rating = "4.1",
+        deliveryTime = "45-50 mins",
+        distance = "7.3 km",
+        discount = "ITEMS",
+        discountAmount = "₹20",
+        address = "Delhi",
+        category = "Burgers"
+    ),
+    TopRatedRestaurantItem(
+        id = 2,
+        imageRes = R.drawable.ic_top_rated_food_2,
+        title = "Bakingo",
+        price = "220",
+        restaurantName = "Amiche Pizza",
+        rating = "4.3",
+        deliveryTime = "60-65 mins",
+        distance = "5.2 km",
+        discount = "30%",
+        discountAmount = "₹20",
+        address = "Delhi",
+        category = "Fast Food"
+    ),
+    TopRatedRestaurantItem(
+        id = 3,
+        imageRes = R.drawable.ic_top_rated_food_3,
+        title = "Big Bowl",
+        price = "150",
+        restaurantName = "Spice Garden",
+        rating = "4.0",
+        deliveryTime = "30-35 mins",
+        distance = "3.8 km",
+        discount = "20%",
+        discountAmount = "₹20",
+        address = "Delhi",
+        category = "Pizzas"
+    ),
+    TopRatedRestaurantItem(
+        id = 4,
+        imageRes = R.drawable.ic_top_rated_food_4,
+        title = "Peppers Pizza",
+        price = "199",
+        restaurantName = "Amiche Pizza",
+        rating = "4.2",
+        deliveryTime = "25-30 mins",
+        distance = "2.5 km",
+        discount = "30%",
+        discountAmount = "₹20",
+        address = "Delhi",
+        category = "Burgers"
+    ),
+    TopRatedRestaurantItem(
+        id = 5,
+        imageRes = R.drawable.ic_top_rated_food_5,
+        title = "Zaika Food",
+        price = "199",
+        restaurantName = "Amiche Pizza",
+        rating = "4.2",
+        deliveryTime = "25-30 mins",
+        distance = "2.5 km",
+        discount = "20%",
+        discountAmount = "₹20",
+        address = "Delhi",
+        category = "Fast Food"
+    ),
+    TopRatedRestaurantItem(
+        id = 6,
+        imageRes = R.drawable.ic_top_rated_food_6,
+        title = "Havmor Ice Cream",
+        price = "199",
+        restaurantName = "Amiche Pizza",
+        rating = "4.2",
+        deliveryTime = "25-30 mins",
+        distance = "2.5 km",
+        discount = "30%",
+        discountAmount = "₹20",
+        address = "Delhi",
+        category = "Pizzas"
+    )
+)

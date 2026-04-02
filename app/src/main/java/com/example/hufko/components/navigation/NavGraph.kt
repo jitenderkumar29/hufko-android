@@ -17,6 +17,9 @@ import com.example.hufko.components.homescreen.CategoryScreen
 import com.example.hufko.components.homescreen.CategoryTabsFList
 import com.example.hufko.components.homescreen.CategoryTabsFood
 import com.example.hufko.components.homescreen.CategoryTabsFullListScreen
+import com.example.hufko.components.homescreen.RestaurantDetails
+import com.example.hufko.components.homescreen.TopRatedRestaurantItem
+import com.example.hufko.components.homescreen.completeRestaurantItems
 
 // Define navigation routes in your app
 object Routes {
@@ -132,6 +135,27 @@ fun AppNavGraph(navController: NavHostController) {
                 }
             )
         }
+
+        composable(
+            "restaurant_details/{restaurantId}",
+            arguments = listOf(navArgument("restaurantId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val restaurantId = backStackEntry.arguments?.getInt("restaurantId")
+            // Find the restaurant item by ID from your data source
+            val restaurantItem = findRestaurantById(restaurantId)
+
+            RestaurantDetails(
+                onBackClick = { navController.popBackStack() },
+                navController = navController,
+                restaurantItem = restaurantItem
+            )
+        }
+
         // Add other destinations as needed
     }
+}
+
+// Helper function to find restaurant by ID
+fun findRestaurantById(id: Int?): TopRatedRestaurantItem? {
+    return completeRestaurantItems.find { it.id == id }
 }

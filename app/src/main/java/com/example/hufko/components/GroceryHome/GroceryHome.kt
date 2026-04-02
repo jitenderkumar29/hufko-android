@@ -279,7 +279,6 @@ fun GroceryHome(
                     )
 
                     // Banner Section
-
                     BannerFood(
                         images = listOf(
                             painterResource(id = R.drawable.all_grocery_banner1),

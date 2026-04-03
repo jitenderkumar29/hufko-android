@@ -46,6 +46,11 @@ data class FoodItemDoubleF(
     val isHighProtein: Boolean? = null,
     val category: String? = null,
     val isWishlisted: Boolean? = false,
+    val description: String? = null,
+    val quantity: String? = null,
+    val infoIcon: Int? = null,
+    val highlyReordered: String? = null,
+    val reorderedQuantity: String? = null,
 )
 
 /**

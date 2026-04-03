@@ -73,9 +73,9 @@ fun RestaurantCard(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onItemClick(currentItem) }
-            .background(MaterialTheme.customColors.header)
-            .padding(horizontal = 15.dp, vertical = 8.dp),
-        shape = RoundedCornerShape(20.dp),
+            .background(MaterialTheme.customColors.blackHeader)
+            .padding(top = 0.dp, bottom = 15.dp, start = 12.dp, end = 12.dp),
+        shape = RoundedCornerShape(30.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -93,12 +93,12 @@ fun RestaurantCard(
                 Image(
                     painter = painterResource(id = R.drawable.hufko_seal),
                     contentDescription = "icon",
-                    modifier = Modifier.size(20.dp),
+                    modifier = Modifier.size(17.dp),
                 )
                 Spacer(modifier = Modifier.width(2.dp))
                 Text(
                     text = "Hufko Seal",
-                    fontSize = 20.sp,
+                    fontSize = 17.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.customColors.darkAccent2
                 )
@@ -116,7 +116,7 @@ fun RestaurantCard(
                 ) {
                     Text(
                         text = currentItem.restaurantName ?: "",
-                        fontSize = 20.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     )
@@ -124,7 +124,7 @@ fun RestaurantCard(
                     Image(
                         painter = painterResource(id = R.drawable.info_exclamation_mark_icon),
                         contentDescription = "info icon",
-                        modifier = Modifier.size(20.dp),
+                        modifier = Modifier.size(18.dp),
                     )
                 }
 
@@ -132,7 +132,7 @@ fun RestaurantCard(
                 Surface(
                     shape = RoundedCornerShape(20.dp),
                     color = MaterialTheme.customColors.success,
-                    modifier = Modifier.size(width = 70.dp, height = 35.dp)
+                    modifier = Modifier.size(width = 65.dp, height = 30.dp)
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.Center,
@@ -141,14 +141,14 @@ fun RestaurantCard(
                     ) {
                         Text(
                             text = formatRating(currentItem.rating),
-                            fontSize = 20.sp,
+                            fontSize = 17.sp,
                             color = Color.White,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
                             text = "★",
-                            fontSize = 20.sp,
+                            fontSize = 18.sp,
                             color = Color.White,
                             modifier = Modifier.padding(bottom = 5.dp)
                         )
@@ -172,12 +172,12 @@ fun RestaurantCard(
                     Image(
                         painter = painterResource(id = R.drawable.baseline_location_pin_24),
                         contentDescription = "icon",
-                        modifier = Modifier.size(20.dp),
+                        modifier = Modifier.size(18.dp),
                         colorFilter = ColorFilter.tint(MaterialTheme.customColors.success)
                     )
                     Text(
                         text = currentItem.distance ?: "",
-                        fontSize = 15.sp,
+                        fontSize = 14.sp,
                         color = Color.Gray
                     )
                     Text(
@@ -187,7 +187,7 @@ fun RestaurantCard(
                     )
                     Text(
                         text = currentItem.address ?: "",
-                        fontSize = 15.sp,
+                        fontSize = 14.sp,
                         color = Color.Gray,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -200,7 +200,7 @@ fun RestaurantCard(
                 ) {
                     Text(
                         text = "${getRandomRatings()}K+ ratings",
-                        fontSize = 12.sp,
+                        fontSize = 11.sp,
                         color = Color.Gray
                     )
                 }
@@ -214,13 +214,13 @@ fun RestaurantCard(
                 Image(
                     painter = painterResource(id = R.drawable.outline_flash_on_24),
                     contentDescription = "icon",
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(18.dp)
                         .padding(top = 3.dp),
                     colorFilter = ColorFilter.tint(MaterialTheme.customColors.success)
                 )
                 Text(
                     text = currentItem.deliveryTime ?: "",
-                    fontSize = 15.sp,
+                    fontSize = 14.sp,
                     color = Color.Gray
                 )
                 Text(
@@ -230,20 +230,19 @@ fun RestaurantCard(
                 )
                 Text(
                     text = "Schedule for later",
-                    fontSize = 15.sp,
+                    fontSize = 14.sp,
                     color = Color.Gray,
                 )
                 // Down arrow icon
                 Icon(
                     painter = painterResource(id = R.drawable.outline_keyboard_arrow_down_24),
                     contentDescription = "Dropdown arrow",
-                    modifier = Modifier.size(30.dp)
+                    modifier = Modifier.size(25.dp)
                         .padding(top = 1.dp),
                     tint = Color.Gray
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
-
+            Spacer(modifier = Modifier.height(5.dp))
             // Divider
             HorizontalDivider(
                 color = Color.LightGray,
@@ -302,7 +301,7 @@ fun OfferSection(
             label = "offerTransition"
         ) { index ->
             Row(
-                modifier = Modifier.padding(start = 0.dp, top = 12.dp, end = 0.dp, bottom = 12.dp),
+                modifier = Modifier.padding(start = 0.dp, top = 8.dp, end = 0.dp, bottom = 5.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -389,7 +388,7 @@ fun OfferSection(
 }
 
 // Helper function to safely format rating
-private fun formatRating(rating: Any?): String {
+internal fun formatRating(rating: Any?): String {
     return when (rating) {
         null -> "0.0"
         is String -> rating
@@ -401,7 +400,7 @@ private fun formatRating(rating: Any?): String {
 }
 
 // Helper functions
-private fun getRandomRatings(): String {
+fun getRandomRatings(): String {
     val ratings = listOf(298, 79, 299, 250)
     return ratings.random().toString()
 }

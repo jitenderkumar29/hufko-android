@@ -46,7 +46,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.listSaver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -13693,12 +13692,12 @@ fun SoupDietPage() {
     )
      Column {
          soupDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+             RestaurantItemListFull(
+                 restaurantItem = restaurantItem,
+                 onWishlistClick = { },
+                 onThreeDotClick = { },
+                 onItemClick = { }
+             )
         }
     }
 }

@@ -654,7 +654,7 @@ val completeRestaurantItems = listOf(
         distance = "7.3 km",
         discount = "ITEMS",
         discountAmount = "₹20",
-        address = "Delhi",
+        address = "Pacific Jasola",
         category = "Burgers"
     ),
     TopRatedRestaurantItem(
@@ -668,7 +668,7 @@ val completeRestaurantItems = listOf(
         distance = "5.2 km",
         discount = "30%",
         discountAmount = "₹20",
-        address = "Delhi",
+        address = "City Center",
         category = "Fast Food"
     ),
     TopRatedRestaurantItem(
@@ -682,7 +682,7 @@ val completeRestaurantItems = listOf(
         distance = "3.8 km",
         discount = "20%",
         discountAmount = "₹20",
-        address = "Delhi",
+        address = "Faridabad Sector-15",
         category = "Pizzas"
     ),
     TopRatedRestaurantItem(
@@ -696,7 +696,7 @@ val completeRestaurantItems = listOf(
         distance = "2.5 km",
         discount = "30%",
         discountAmount = "₹20",
-        address = "Delhi",
+        address = "Pacific Jasola",
         category = "Burgers"
     ),
     TopRatedRestaurantItem(
@@ -710,7 +710,7 @@ val completeRestaurantItems = listOf(
         distance = "2.5 km",
         discount = "20%",
         discountAmount = "₹20",
-        address = "Delhi",
+        address = "City Center",
         category = "Fast Food"
     ),
     TopRatedRestaurantItem(
@@ -724,7 +724,7 @@ val completeRestaurantItems = listOf(
         distance = "2.5 km",
         discount = "30%",
         discountAmount = "₹20",
-        address = "Delhi",
+        address = "Faridabad Sector-15",
         category = "Pizzas"
     )
 )

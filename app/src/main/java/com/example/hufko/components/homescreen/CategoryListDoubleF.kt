@@ -34,6 +34,7 @@ data class FoodItemDoubleF(
     val imageRes: Int? = null,
     val title: String? = null,
     val price: String? = null,
+    val originalPrice: String? = null,
     val restaurantName: String? = null,
     val rating: String? = null,
     val deliveryTime: String? = null,
@@ -51,6 +52,7 @@ data class FoodItemDoubleF(
     val infoIcon: Int? = null,
     val highlyReordered: String? = null,
     val reorderedQuantity: String? = null,
+    val bestSeller:  Boolean? = false,
 )
 
 /**

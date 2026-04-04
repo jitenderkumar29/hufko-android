@@ -12,12 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.hufko.MainActivity
 import com.example.hufko.R
 import com.example.hufko.components.searchbar.SearchBar
 import com.example.hufko.ui.theme.customColors
@@ -36,6 +39,7 @@ fun RestaurantDetails(
             imageRes = R.drawable.restaurant_image_pizzas_food_1,
             title = "Chicken Burger",
             price = "275",
+            originalPrice = "375",
             restaurantName = "Burger Hub",
             rating = "4.3",
             deliveryTime = "20-25 mins",
@@ -53,12 +57,14 @@ fun RestaurantDetails(
             infoIcon = R.drawable.ic_veg_rest,
             highlyReordered = "70",
             reorderedQuantity = "150+ orders",
+            bestSeller = true,
         ),
         FoodItemDoubleF(
             id = 2,
             imageRes = R.drawable.restaurant_image_pizzas_food_2,
             title = "Chilli Garlic Momos",
             price = "363",
+            originalPrice = "563",
             restaurantName = "Momo Express",
             rating = "4.5",
             deliveryTime = "25-30 mins",
@@ -75,105 +81,114 @@ fun RestaurantDetails(
             quantity = "1",
             infoIcon = R.drawable.ic_veg_rest,
             highlyReordered = "65",
-            reorderedQuantity = "200+ orders"
+            reorderedQuantity = "200+ orders",
+            bestSeller = false,
         ),
-//        FoodItemDoubleF(
-//            id = 3,
-//            imageRes = R.drawable.restaurant_image_pizzas_food_3,
-//            title = "Ultimate Cheese Pizza",
-//            price = "399",
-//            restaurantName = "Pizza Heaven",
-//            rating = "4.3",
-//            deliveryTime = "25-30 mins",
-//            distance = "2.5 km",
-//            discount = "",
-//            discountAmount = "",
-//            address = "Food Court, Mall Road",
-//            calories = "780 kcal",
-//            protein = "24g",
-//            isHighProtein = false,
-//            category = "Pizza",
-//            isWishlisted = false,
-//            description = "Classic margherita with extra cheese and basil",
-//            quantity = "1",
-//            infoIcon = R.drawable.ic_veg_rest,
-//            highlyReordered = "",
-//            reorderedQuantity = ""
-//        ),
-//
-//        // Image 2: Corn Pizza with Deal
-//        FoodItemDoubleF(
-//            id = 4,
-//            imageRes = R.drawable.restaurant_image_pizzas_food_4,
-//            title = "Corn Pizza",
-//            price = "139",
-//            restaurantName = "Pizza Corner",
-//            rating = "3.8",
-//            deliveryTime = "20-25 mins",
-//            distance = "1.5 km",
-//            discount = "",
-//            discountAmount = "",
-//            address = "Street Food Market",
-//            calories = "620 kcal",
-//            protein = "16g",
-//            isHighProtein = false,
-//            category = "Pizza",
-//            isWishlisted = false,
-//            description = "Sweet corn pizza with creamy sauce",
-//            quantity = "1",
-//            infoIcon = R.drawable.ic_veg_rest,
-//            highlyReordered = "Highly reordered",
-//            reorderedQuantity = ""
-//        ),
-//
-//        // Image 3: Flotzz Pizzas
-//        FoodItemDoubleF(
-//            id = 5,
-//            imageRes = R.drawable.restaurant_image_pizzas_food_5,
-//            title = "Ultimate Flotzz Pizza",
-//            price = "399",
-//            restaurantName = "Flotzz Pizza",
-//            rating = "4.2",
-//            deliveryTime = "30-35 mins",
-//            distance = "3.0 km",
-//            discount = "",
-//            discountAmount = "",
-//            address = "Food Plaza, Sector 5",
-//            calories = "850 kcal",
-//            protein = "32g",
-//            isHighProtein = true,
-//            category = "Pizza",
-//            isWishlisted = false,
-//            description = "Loaded with cheese and toppings",
-//            quantity = "1",
-//            infoIcon = R.drawable.ic_non_veg_rest,
-//            highlyReordered = "",
-//            reorderedQuantity = "500+ orders"
-//        ),
-//
-//        FoodItemDoubleF(
-//            id = 6,
-//            imageRes = R.drawable.restaurant_image_pizzas_food_6,
-//            title = "Tandoori Chicken Pizza",
-//            price = "399",
-//            restaurantName = "Flotzz Pizza",
-//            rating = "4.5",
-//            deliveryTime = "30-35 mins",
-//            distance = "3.0 km",
-//            discount = "",
-//            discountAmount = "",
-//            address = "Food Plaza, Sector 5",
-//            calories = "890 kcal",
-//            protein = "38g",
-//            isHighProtein = true,
-//            category = "Pizza",
-//            isWishlisted = true,
-//            description = "Tandoori chicken with spicy sauce",
-//            quantity = "1",
-//            infoIcon = R.drawable.ic_non_veg_rest,
-//            highlyReordered = "",
-//            reorderedQuantity = "500+ orders"
-//        )
+        FoodItemDoubleF(
+            id = 3,
+            imageRes = R.drawable.restaurant_image_pizzas_food_3,
+            title = "Ultimate Cheese Pizza",
+            price = "399",
+            originalPrice = "499",
+            restaurantName = "Pizza Heaven",
+            rating = "4.3",
+            deliveryTime = "25-30 mins",
+            distance = "2.5 km",
+            discount = "",
+            discountAmount = "",
+            address = "Food Court, Mall Road",
+            calories = "780 kcal",
+            protein = "24g",
+            isHighProtein = false,
+            category = "Pizza",
+            isWishlisted = false,
+            description = "Classic margherita with extra cheese and basil",
+            quantity = "1",
+            infoIcon = R.drawable.ic_veg_rest,
+            highlyReordered = "",
+            reorderedQuantity = "",
+            bestSeller = false,
+        ),
+
+        // Image 2: Corn Pizza with Deal
+        FoodItemDoubleF(
+            id = 4,
+            imageRes = R.drawable.restaurant_image_pizzas_food_4,
+            title = "Corn Pizza",
+            price = "139",
+            originalPrice = "239",
+            restaurantName = "Pizza Corner",
+            rating = "3.8",
+            deliveryTime = "20-25 mins",
+            distance = "1.5 km",
+            discount = "",
+            discountAmount = "",
+            address = "Street Food Market",
+            calories = "620 kcal",
+            protein = "16g",
+            isHighProtein = false,
+            category = "Pizza",
+            isWishlisted = false,
+            description = "Sweet corn pizza with creamy sauce",
+            quantity = "1",
+            infoIcon = R.drawable.ic_veg_rest,
+            highlyReordered = "Highly reordered",
+            reorderedQuantity = "",
+            bestSeller = true,
+        ),
+
+        // Image 3: Flotzz Pizzas
+        FoodItemDoubleF(
+            id = 5,
+            imageRes = R.drawable.restaurant_image_pizzas_food_5,
+            title = "Ultimate Flotzz Pizza",
+            price = "399",
+            originalPrice = "499",
+            restaurantName = "Flotzz Pizza",
+            rating = "4.2",
+            deliveryTime = "30-35 mins",
+            distance = "3.0 km",
+            discount = "",
+            discountAmount = "",
+            address = "Food Plaza, Sector 5",
+            calories = "850 kcal",
+            protein = "32g",
+            isHighProtein = true,
+            category = "Pizza",
+            isWishlisted = false,
+            description = "Loaded with cheese and toppings",
+            quantity = "1",
+            infoIcon = R.drawable.ic_non_veg_rest,
+            highlyReordered = "",
+            reorderedQuantity = "500+ orders",
+            bestSeller = true,
+        ),
+
+        FoodItemDoubleF(
+            id = 6,
+            imageRes = R.drawable.restaurant_image_pizzas_food_6,
+            title = "Tandoori Chicken Pizza",
+            price = "399",
+            originalPrice = "499",
+            restaurantName = "Flotzz Pizza",
+            rating = "4.5",
+            deliveryTime = "30-35 mins",
+            distance = "3.0 km",
+            discount = "",
+            discountAmount = "",
+            address = "Food Plaza, Sector 5",
+            calories = "890 kcal",
+            protein = "38g",
+            isHighProtein = true,
+            category = "Pizza",
+            isWishlisted = true,
+            description = "Tandoori chicken with spicy sauce",
+            quantity = "1",
+            infoIcon = R.drawable.ic_non_veg_rest,
+            highlyReordered = "",
+            reorderedQuantity = "500+ orders",
+            bestSeller = false,
+        )
     )
     LazyColumn(
         modifier = Modifier
@@ -314,25 +329,15 @@ fun RestaurantDetails(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(MaterialTheme.customColors.background)
-                        .padding(top = 8.dp, bottom = 8.dp, start = 12.dp, end = 12.dp)
+                        .padding(top = 8.dp, bottom = 8.dp, start = 12.dp, end = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp), // Gap between elements
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
+                    // SearchBar - 85% width
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = 0.dp,
-                                bottom = 0.dp,
-                                start = 0.dp,
-                                end = 0.dp
-                            )
-                            .clip(
-                                RoundedCornerShape(
-                                    topStart = 8.dp,
-                                    topEnd = 8.dp,
-                                    bottomStart = 8.dp,
-                                    bottomEnd = 8.dp
-                                )
-                            )
+                            .weight(0.85f) // 85% of available width
+                            .clip(RoundedCornerShape(8.dp))
                             .background(MaterialTheme.customColors.background)
                     ) {
                         SearchBar(
@@ -340,54 +345,114 @@ fun RestaurantDetails(
                             backgroundColor = MaterialTheme.customColors.background,
                             placeholder = "Search for dishes",
                             onQueryChange = { searchQuery = it },
-                            onSearch = { println("Search performed: $it") }
+                            onSearch = { println("Search performed: $it") },
+                            qrIconColorMike = MaterialTheme.customColors.orange
                         )
                     }
+
+                    // Image Button - 15% width
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = MaterialTheme.customColors.skyBlue,
+                        modifier = Modifier
+                            .weight(0.15f) // 15% of available width
+                            .size(width = 45.dp, height = 45.dp) // Fixed size within weight
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_people),
+                                contentDescription = "Group Order Icon",
+                                modifier = Modifier.size(30.dp),
+                                colorFilter = ColorFilter.tint(MaterialTheme.customColors.darkAccent2)
+                            )
+                        }
+                    }
                 }
+            }
+            val restFilters = FilterConfig(
+                filters = listOf(
+                    FilterChip(
+                        "filters",
+                        "Filters",
+                        FilterType.FILTER_DROPDOWN,
+                        R.drawable.ic_filter,
+                        R.drawable.outline_keyboard_arrow_down_24
+                    ),
+                    FilterChip("veg", "Veg", FilterType.WITH_LEFT_ICON, R.drawable.ic_veg_rest),
+                    FilterChip("egg", "Egg", FilterType.WITH_LEFT_ICON, R.drawable.ic_egg_rest),
+                    FilterChip(
+                        "non_veg",
+                        "Non-Veg",
+                        FilterType.WITH_LEFT_ICON,
+                        R.drawable.ic_non_veg_rest
+                    ),
+                    FilterChip(
+                        "eat_right",
+                        "EatRight",
+                        FilterType.WITH_LEFT_ICON,
+                        R.drawable.ic_eat_right_rest
+                    ),
+                    FilterChip("rating_4+", "Rating 4.0+", FilterType.TEXT_ONLY),
+                    FilterChip(
+                        "highly_reordered",
+                        "Highly Reordered",
+                        FilterType.WITH_LEFT_ICON,
+                        R.drawable.ic_highly_reordered_rest
+                    ),
+                    FilterChip(
+                        "spicy",
+                        "Spicy",
+                        FilterType.WITH_LEFT_ICON,
+                        R.drawable.ic_spicy_rest
+                    ),
+                    FilterChip(
+                        "kids_choice",
+                        "Kid's choice",
+                        FilterType.WITH_LEFT_ICON,
+                        R.drawable.ic_kids_choice_rest
+                    ),
+                    FilterChip("buy_1_get_1", "Buy 1 Get 1", FilterType.TEXT_ONLY),
+                    FilterChip("50_off", "50% Off", FilterType.TEXT_ONLY),
+                    FilterChip(
+                        "schedule",
+                        "Schedule",
+                        FilterType.SORT_DROPDOWN,
+                        rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                    ),
+                ),
+                rows = 1
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.customColors.background)
+                    .padding(top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp)
+                    .offset(y = (-5).dp)
+            ) {
+                FilterButtonFood(
+                    filterConfig = restFilters,
+                    onFilterClick = { println("Filter clicked: ${it.text}") },
+                    onSortClick = { println("Sort clicked") }
+                )
             }
         }
 
         // Item 4: Filter Button
+//        stickyHeader {
+////            item {
+//
+////            }
+//        }
+
+        // Divider
         item {
-            val restFilters = FilterConfig(
-                filters = listOf(
-                    FilterChip("filters", "Filters", FilterType.FILTER_DROPDOWN, R.drawable.ic_filter, R.drawable.outline_keyboard_arrow_down_24),
-                    FilterChip("veg", "Veg", FilterType.WITH_LEFT_ICON, R.drawable.ic_veg_rest),
-                    FilterChip("egg", "Egg", FilterType.WITH_LEFT_ICON, R.drawable.ic_egg_rest),
-                    FilterChip("non_veg", "Non-Veg", FilterType.WITH_LEFT_ICON, R.drawable.ic_non_veg_rest),
-                    FilterChip("eat_right", "EatRight", FilterType.WITH_LEFT_ICON, R.drawable.ic_eat_right_rest),
-                    FilterChip("rating_4+", "Rating 4.0+", FilterType.TEXT_ONLY),
-                    FilterChip("highly_reordered", "Highly Reordered", FilterType.WITH_LEFT_ICON, R.drawable.ic_highly_reordered_rest),
-                    FilterChip("spicy", "Spicy", FilterType.WITH_LEFT_ICON, R.drawable.ic_spicy_rest),
-                    FilterChip("kids_choice", "Kid's choice", FilterType.WITH_LEFT_ICON, R.drawable.ic_kids_choice_rest),
-                    FilterChip("buy_1_get_1", "Buy 1 Get 1", FilterType.TEXT_ONLY),
-                    FilterChip("50_off", "50% Off", FilterType.TEXT_ONLY),
-                    FilterChip("schedule", "Schedule", FilterType.SORT_DROPDOWN, rightIcon = R.drawable.outline_keyboard_arrow_down_24),
-                ),
-                rows = 1
-            )
-            FilterButtonFood(
-                filterConfig = restFilters,
-                onFilterClick = { println("Filter clicked: ${it.text}") },
-                onSortClick = { println("Sort clicked") }
-            )
+            Divider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 0.dp))
         }
 
-        // Item 5: Food Items Grid
-        item {
-//            Spacer(modifier = Modifier.height(15.dp))
-            Text(
-                text = "Recommended for you",
-                style = MaterialTheme.typography.bodySmall.copy(
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.customColors.black
-                ),
-//            textAlign = TextAlign.Center,
-                maxLines = 1,
-                modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-            )
-        }
         item {
             Column(
                 modifier = Modifier
@@ -395,28 +460,114 @@ fun RestaurantDetails(
                     .background(Color(0xFFF5F5F5))
                     .padding(12.dp)
             ) {
-                val rows = foodItems.chunked(2)
-                rows.forEach { rowItems ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        rowItems.forEach { item ->
-                            RestaurantItemDetails2(
-                                item = item,
-                                modifier = Modifier.weight(1f),
-                                onAddClick = { println("Added: ${item.title}") }
-                            )
-                        }
-                        if (rowItems.size == 1) {
-                            Spacer(modifier = Modifier.weight(1f))
-                        }
+                Text(
+                    text = "Top Picks",
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.customColors.black
+                    ),
+//            textAlign = TextAlign.Center,
+                    maxLines = 1,
+                    modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+                RestaurantItemDetails3(
+                    items = foodItems,
+                    onAddClick = { item ->
+                        println("Added: ${item.title}")
                     }
+                )
+            }
+        }
+
+        // Divider
+        item {
+            Divider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 0.dp))
+        }
+
+        // Item 5: Food Items Grid
+        item {
+            Spacer(modifier = Modifier.height(15.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 0.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.ic_99_store),
+                    contentDescription = "Offer Image",
+                    modifier = Modifier
+//                        .fillMaxWidth()
+                        .height(40.dp)
+                        .width(140.dp),
+                    contentScale = ContentScale.FillBounds
+                )
+
+                // Down arrow icon
+                Icon(
+                    painter = painterResource(id = R.drawable.outline_keyboard_arrow_down_24),
+                    contentDescription = "Dropdown arrow",
+                    modifier = Modifier.size(30.dp)
+                        .padding(top = 1.dp),
+                    tint = Color.Gray
+                )
+            }
+            Surface(
+                shape = RoundedCornerShape(20.dp),
+                color = Color.Transparent, // Make Surface transparent
+//                modifier = Modifier.size(width = 230.dp, height = 30.dp)
+            ) {
+                Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .padding(start = 12.dp, top = 5.dp, end = 12.dp, bottom = 5.dp)
+                    ) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_free_delivery_above_99),
+                        contentDescription = "Offer Image",
+                        modifier = Modifier
+//                        .fillMaxWidth()
+                            .height(40.dp)
+                            .width(230.dp),
+                        contentScale = ContentScale.FillBounds
+                    )
                 }
             }
         }
+
+
+                item {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color(0xFFF5F5F5))
+                            .padding(12.dp)
+                    ) {
+                        val rows = foodItems.chunked(2)
+                        rows.forEach { rowItems ->
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = 12.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                rowItems.forEach { item ->
+                                    RestaurantItemDetails2(
+                                        item = item,
+                                        modifier = Modifier.weight(1f),
+                                        onAddClick = { println("Added: ${item.title}") }
+                                    )
+                                }
+                                if (rowItems.size == 1) {
+                                    Spacer(modifier = Modifier.weight(1f))
+                                }
+                            }
+                        }
+                    }
+                }
 
         // Item 6: Divider
         item {
@@ -432,6 +583,17 @@ fun RestaurantDetails(
                     .padding(vertical = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                Text(
+                    text = "Recommended For You",
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.customColors.black
+                    ),
+//            textAlign = TextAlign.Center,
+                    maxLines = 1,
+                    modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+                )
                 foodItems.forEach { item ->
                     RestaurantItemDetails(
                         item = item,
@@ -450,7 +612,7 @@ fun PreviewRestaurantDetails() {
         Surface(modifier = Modifier.fillMaxSize()) {
             RestaurantDetails(
                 onBackClick = {},
-                navController = NavHostController(com.example.hufko.MainActivity()),
+                navController = NavHostController(MainActivity()),
                 restaurantItem = null
             )
         }

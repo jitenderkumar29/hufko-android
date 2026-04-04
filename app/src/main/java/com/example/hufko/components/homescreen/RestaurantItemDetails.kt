@@ -23,6 +23,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.graphics.Brush
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 
@@ -99,12 +100,134 @@ fun RestaurantItemDetails(
                     )
                 }
 
-                // Price
-                Text(
-                    text = "₹${item.price}",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp
-                )
+                // Price and discount
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "₹${item.price}",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Image(
+                        painter = painterResource(R.drawable.discount_badge),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(12.dp),
+//                            .clip(RoundedCornerShape(12.dp)),
+                        contentScale = ContentScale.FillBounds
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Text(
+                        text = "${item.discount}",
+                        color = Color.DarkGray,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Text(
+                        text = "USE HUFKO COUPON",
+                        fontSize = 12.sp,
+                        color = Color.DarkGray,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+
+//              Rating
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = Color.Transparent,
+                    modifier = Modifier.wrapContentSize()  // Dynamic width & height
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                brush = Brush.horizontalGradient(
+                                    colors = listOf(
+                                        MaterialTheme.customColors.success.copy(alpha = 0.2f),
+                                        MaterialTheme.customColors.success.copy(alpha = 0.1f)
+                                    )
+                                ),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(
+                                start = 6.dp,
+                                top = 0.dp,
+                                end = 6.dp,
+                                bottom = 0.dp
+                            )
+                        ) {
+                            Text(
+                                text = "★",
+                                fontSize = 12.sp,
+                                color = MaterialTheme.customColors.success,
+                                modifier = Modifier.padding(bottom = 2.dp)
+                            )
+                            Spacer(modifier = Modifier.width(2.dp))
+                            Text(
+                                text = formatRating(item.rating),
+                                fontSize = 12.sp,
+                                color = MaterialTheme.customColors.success,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(modifier = Modifier.width(2.dp))
+                            Text(
+                                text = "(${getRandomRatings()})",
+                                fontSize = 12.sp,
+                                color = MaterialTheme.customColors.success,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                }
+
+                //            Protein
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = item.protein ?: "Untitled",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.customColors.orangeVivid, // Primary text color
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+//                    modifier = Modifier.weight(1f)
+                    )
+                    Spacer(modifier = Modifier.width(1.dp))
+                    Text(
+                        text = "Protein",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.customColors.orangeVivid, // Secondary/Label color
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+//                    modifier = Modifier.weight(1f)
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+
+                    Text(
+                        text = "•",
+                        fontSize = 20.sp,
+                        color = MaterialTheme.customColors.orangeLight // Separator color
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Text(
+                        text = item.calories ?: "Untitled",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.customColors.orangeVivid, // Primary text color
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+//                    modifier = Modifier.weight(1f)
+                    )
+                }
 
                 // Description
                 Text(
@@ -141,7 +264,7 @@ fun RestaurantItemDetails(
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 8.dp),
+                    .padding(end = 1.dp),
                 verticalArrangement = Arrangement.spacedBy(3.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

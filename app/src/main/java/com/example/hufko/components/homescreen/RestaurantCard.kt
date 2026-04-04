@@ -5,7 +5,6 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
@@ -91,9 +90,22 @@ fun RestaurantCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
+                    painter = painterResource(id = R.drawable.ic_high_protein),
+                    contentDescription = "icon",
+                    modifier = Modifier.size(15.dp),
+                )
+                Spacer(modifier = Modifier.width(3.dp))
+                Text(
+                    text = "High Protein",
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.customColors.darkAccent2
+                )
+                Spacer(modifier = Modifier.width(5.dp))
+                Image(
                     painter = painterResource(id = R.drawable.hufko_seal),
                     contentDescription = "icon",
-                    modifier = Modifier.size(17.dp),
+                    modifier = Modifier.size(15.dp),
                 )
                 Spacer(modifier = Modifier.width(2.dp))
                 Text(
@@ -192,6 +204,25 @@ fun RestaurantCard(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                    // Down arrow icon
+                    Box(
+                        modifier = Modifier
+                            .offset(x = (-5).dp) // Pull icon left
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.outline_arrow_drop_down_24),
+                            contentDescription = "Dropdown arrow",
+                            modifier = Modifier.size(30.dp),
+                            tint = Color.Gray
+                        )
+                    }
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.outline_arrow_drop_down_24),
+//                        contentDescription = "Dropdown arrow",
+//                        modifier = Modifier.size(30.dp)
+//                            .padding(top = 1.dp),
+//                        tint = Color.Gray
+//                    )
                 }
 
                 // Right side: Ratings
@@ -301,7 +332,7 @@ fun OfferSection(
             label = "offerTransition"
         ) { index ->
             Row(
-                modifier = Modifier.padding(start = 0.dp, top = 8.dp, end = 0.dp, bottom = 5.dp),
+                modifier = Modifier.padding(start = 0.dp, top = 0.dp, end = 0.dp, bottom = 0.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {

@@ -78,7 +78,9 @@ data class CustomColors(
     val skyBlue: Color,
     val yellowish: Color,
     val orangeLight: Color,
+    val orangeVivid: Color,
     val orangeButton: Color,
+    val yellowButton: Color,
     val blackHeader: Color,
 
     // Custom gray colors
@@ -163,7 +165,9 @@ val LightCustomColors = CustomColors(
     skyBlue = Color(0xFFDDE0FF),
     yellowish = Color(0xFF9DEE21),
     orangeLight = Color(0xFFFF7C1C),
+    orangeVivid = Color(0xFFCE7D10),
     orangeButton = Color(0xFFFE5200),
+    yellowButton = Color(0xFFFFC107),
     blackHeader = Color(0xFF02050C),
 
 //    lightAccent = Color(0xFFB9DC96),
@@ -254,7 +258,9 @@ val DarkCustomColors = CustomColors(
     skyBlue = Color(0xFFDDE0FF),
     yellowish = Color(0xFF9DEE21),
     orangeLight = Color(0xFFFF7C1C),
+    orangeVivid = Color(0xFFCE7D10),
     orangeButton = Color(0xFFFE5200),
+    yellowButton = Color(0xFFFFC107),
     blackHeader = Color(0xFF02050C),
 
     // Custom gray colors

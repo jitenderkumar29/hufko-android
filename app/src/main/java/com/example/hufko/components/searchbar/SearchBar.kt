@@ -59,7 +59,8 @@ fun SearchBar(
     textColor: Color = MaterialTheme.colorScheme.scrim,
     placeholderColor: Color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.7f),
     elevation: Int = 2,
-    qrIconColor: Color = MaterialTheme.colorScheme.scrim
+    qrIconColor: Color = MaterialTheme.colorScheme.scrim,
+    qrIconColorMike: Color = MaterialTheme.colorScheme.scrim
 ) {
     var isFocused by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
@@ -179,7 +180,7 @@ fun SearchBar(
                     Icon(
                         painter = painterResource(id = R.drawable.outline_mic_24),
                         contentDescription = "Microphone",
-                        tint = qrIconColor,
+                        tint = qrIconColorMike,
                         modifier = Modifier
                             .size(25.dp)
                             .clickable { onQRCodeScan() }

@@ -90,5 +90,6 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt:coil-gif:2.6.0")
+    implementation(platform("androidx.compose:compose-bom:2023.06.00"))
 
 }

@@ -15,7 +15,6 @@ import com.example.hufko.components.Account.Account
 import com.example.hufko.components.homescreen.CategoryDietTabsFList
 import com.example.hufko.components.homescreen.CategoryScreen
 import com.example.hufko.components.homescreen.CategoryTabsFList
-import com.example.hufko.components.homescreen.CategoryTabsFood
 import com.example.hufko.components.homescreen.CategoryTabsFullListScreen
 import com.example.hufko.components.homescreen.RestaurantDetails
 import com.example.hufko.components.homescreen.TopRatedRestaurantItem

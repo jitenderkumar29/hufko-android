@@ -38,7 +38,8 @@ data class FilterChip(
     val icon: Int? = null,
     val rightIcon: Int? = null,
     val isSelected: Boolean = false,
-    val metadata: Map<String, Any> = emptyMap() // For additional data like price range, rating, etc.
+    val metadata: Map<String, Any> = emptyMap(), // For additional data like price range, rating, etc.
+    val customCornerRadius: Int? = null // Optional custom corner radius in dp
 )
 
 enum class FilterType {
@@ -58,7 +59,8 @@ data class FilterConfig(
     val chipHeight: Int = 40, // Height of each chip in dp
     val chipPadding: Int = 16, // Horizontal padding for chips in dp
     val showDividers: Boolean = false, // Whether to show dividers between rows
-    val autoPartition: Boolean = true // Whether to automatically partition filters into rows
+    val autoPartition: Boolean = true, // Whether to automatically partition filters into rows
+    val cornerRadius: Int? = null // Optional global corner radius override (null = use chipHeight/2)
 )
 
 @Composable
@@ -95,6 +97,7 @@ fun FilterButtonFood(
                     chipHeight = filterConfig.chipHeight,
                     chipSpacing = filterConfig.chipSpacing,
                     chipPadding = filterConfig.chipPadding,
+                    cornerRadius = filterConfig.cornerRadius,
                     onFilterClick = onFilterClick,
                     onSortClick = onSortClick
                 )
@@ -109,6 +112,7 @@ private fun FilterRow(
     chipHeight: Int,
     chipSpacing: Int,
     chipPadding: Int,
+    cornerRadius: Int?,
     onFilterClick: (FilterChip) -> Unit,
     onSortClick: () -> Unit
 ) {
@@ -123,6 +127,7 @@ private fun FilterRow(
                 filter = filter,
                 chipHeight = chipHeight,
                 chipPadding = chipPadding,
+                cornerRadius = cornerRadius,
                 onFilterClick = onFilterClick,
                 onSortClick = onSortClick
             )
@@ -135,6 +140,7 @@ private fun FilterChipItem(
     filter: FilterChip,
     chipHeight: Int,
     chipPadding: Int,
+    cornerRadius: Int?,
     onFilterClick: (FilterChip) -> Unit,
     onSortClick: () -> Unit
 ) {
@@ -147,6 +153,7 @@ private fun FilterChipItem(
                 isSelected = filter.isSelected,
                 chipHeight = chipHeight,
                 chipPadding = chipPadding,
+                cornerRadius = filter.customCornerRadius ?: cornerRadius,
                 onClick = { onFilterClick(filter) }
             )
         }
@@ -157,6 +164,7 @@ private fun FilterChipItem(
                 isSelected = filter.isSelected,
                 chipHeight = chipHeight,
                 chipPadding = chipPadding,
+                cornerRadius = filter.customCornerRadius ?: cornerRadius,
                 onClick = { onSortClick() }
             )
         }
@@ -167,6 +175,7 @@ private fun FilterChipItem(
                 isSelected = filter.isSelected,
                 chipHeight = chipHeight,
                 chipPadding = chipPadding,
+                cornerRadius = filter.customCornerRadius ?: cornerRadius,
                 onClick = { onFilterClick(filter) }
             )
         }
@@ -177,6 +186,7 @@ private fun FilterChipItem(
                 isSelected = filter.isSelected,
                 chipHeight = chipHeight,
                 chipPadding = chipPadding,
+                cornerRadius = filter.customCornerRadius ?: cornerRadius,
                 onClick = { onFilterClick(filter) }
             )
         }
@@ -188,6 +198,7 @@ private fun FilterChipItem(
                 isSelected = filter.isSelected,
                 chipHeight = chipHeight,
                 chipPadding = chipPadding,
+                cornerRadius = filter.customCornerRadius ?: cornerRadius,
                 onClick = { onFilterClick(filter) }
             )
         }
@@ -197,6 +208,7 @@ private fun FilterChipItem(
                 isSelected = filter.isSelected,
                 chipHeight = chipHeight,
                 chipPadding = chipPadding,
+                cornerRadius = filter.customCornerRadius ?: cornerRadius,
                 onClick = { onFilterClick(filter) }
             )
         }
@@ -211,6 +223,12 @@ private fun partitionFilters(filters: List<FilterChip>, rows: Int): List<List<Fi
     return filters.chunked(itemsPerRow)
 }
 
+// Helper function to get dynamic corner radius
+private fun getCornerRadius(chipHeight: Int, customRadius: Int?): RoundedCornerShape {
+    val radius = customRadius ?: (chipHeight / 2)
+    return RoundedCornerShape(radius.dp)
+}
+
 // Reusable component for chips with left icon only
 @Composable
 fun FilterChipWithLeftIcon(
@@ -219,20 +237,22 @@ fun FilterChipWithLeftIcon(
     isSelected: Boolean = false,
     chipHeight: Int = 40,
     chipPadding: Int = 16,
+    cornerRadius: Int? = null,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colors = getFilterChipColors(isSelected)
+    val cornerShape = getCornerRadius(chipHeight, cornerRadius)
 
     Row(
         modifier = modifier
             .height(chipHeight.dp)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(cornerShape)
             .background(colors.backgroundColor)
             .border(
                 width = 1.dp,
                 color = colors.borderColor,
-                shape = RoundedCornerShape(20.dp)
+                shape = cornerShape
             )
             .clickable { onClick() }
             .padding(horizontal = chipPadding.dp),
@@ -262,20 +282,22 @@ fun FilterChipWithRightIcon(
     isSelected: Boolean = false,
     chipHeight: Int = 40,
     chipPadding: Int = 16,
+    cornerRadius: Int? = null,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colors = getFilterChipColors(isSelected)
+    val cornerShape = getCornerRadius(chipHeight, cornerRadius)
 
     Row(
         modifier = modifier
             .height(chipHeight.dp)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(cornerShape)
             .background(colors.backgroundColor)
             .border(
                 width = 1.dp,
                 color = colors.borderColor,
-                shape = RoundedCornerShape(20.dp)
+                shape = cornerShape
             )
             .clickable { onClick() }
             .padding(horizontal = chipPadding.dp),
@@ -306,20 +328,22 @@ fun FilterChipWithBothIcons(
     isSelected: Boolean = false,
     chipHeight: Int = 40,
     chipPadding: Int = 16,
+    cornerRadius: Int? = null,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colors = getFilterChipColors(isSelected)
+    val cornerShape = getCornerRadius(chipHeight, cornerRadius)
 
     Row(
         modifier = modifier
             .height(chipHeight.dp)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(cornerShape)
             .background(colors.backgroundColor)
             .border(
                 width = 1.dp,
                 color = colors.borderColor,
-                shape = RoundedCornerShape(20.dp)
+                shape = cornerShape
             )
             .clickable { onClick() }
             .padding(horizontal = chipPadding.dp),
@@ -354,20 +378,22 @@ fun FilterChipTextOnly(
     isSelected: Boolean = false,
     chipHeight: Int = 40,
     chipPadding: Int = 16,
+    cornerRadius: Int? = null,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colors = getFilterChipColors(isSelected)
+    val cornerShape = getCornerRadius(chipHeight, cornerRadius)
 
     Row(
         modifier = modifier
             .height(chipHeight.dp)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(cornerShape)
             .background(colors.backgroundColor)
             .border(
                 width = 1.dp,
                 color = colors.borderColor,
-                shape = RoundedCornerShape(20.dp)
+                shape = cornerShape
             )
             .clickable { onClick() }
             .padding(horizontal = chipPadding.dp),
@@ -546,7 +572,8 @@ fun createFilterChip(
     icon: Int? = null,
     rightIcon: Int? = null,
     isSelected: Boolean = false,
-    metadata: Map<String, Any> = emptyMap()
+    metadata: Map<String, Any> = emptyMap(),
+    customCornerRadius: Int? = null
 ): FilterChip {
     return FilterChip(
         id = id,
@@ -555,7 +582,8 @@ fun createFilterChip(
         icon = icon,
         rightIcon = rightIcon,
         isSelected = isSelected,
-        metadata = metadata
+        metadata = metadata,
+        customCornerRadius = customCornerRadius
     )
 }
 
@@ -575,7 +603,7 @@ fun ExampleUsageFilter() {
         }
     )
 
-    // Custom configuration
+    // Custom configuration with custom corner radius
     FilterButtonFood(
         filterConfig = FilterConfig(
             filters = listOf(
@@ -583,7 +611,8 @@ fun ExampleUsageFilter() {
                     id = "custom_filter",
                     text = "Custom Filter",
                     type = FilterType.TEXT_ONLY,
-                    isSelected = true
+                    isSelected = true,
+                    customCornerRadius = 8 // Individual chip custom radius
                 ),
                 createFilterChip(
                     id = "another_filter",
@@ -594,7 +623,8 @@ fun ExampleUsageFilter() {
             ),
             rows = 1,
             chipHeight = 36,
-            chipSpacing = 8
+            chipSpacing = 8,
+            cornerRadius = 18 // Global corner radius (pill shape for 36dp height)
         ),
         onFilterClick = { filter ->
             println("Custom filter clicked: ${filter.text}")
@@ -602,6 +632,22 @@ fun ExampleUsageFilter() {
         onSortClick = {
             println("Custom sort clicked")
         }
+    )
+
+    // Example with square corners
+    FilterButtonFood(
+        filterConfig = FilterConfig(
+            filters = listOf(
+                createFilterChip(
+                    id = "square_chip",
+                    text = "Square Corners",
+                    type = FilterType.TEXT_ONLY
+                )
+            ),
+            chipHeight = 40,
+            cornerRadius = 4 // Small radius for slightly rounded corners
+        ),
+        onFilterClick = { }
     )
 
     // Empty case - won't render anything

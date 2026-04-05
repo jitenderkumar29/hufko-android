@@ -190,17 +190,17 @@ fun RestaurantCard(
                     Text(
                         text = currentItem.distance ?: "",
                         fontSize = 14.sp,
-                        color = Color.Gray
+                        color = Color.DarkGray
                     )
                     Text(
                         text = "•",
                         fontSize = 20.sp,
-                        color = Color.Gray
+                        color = Color.DarkGray
                     )
                     Text(
                         text = currentItem.address ?: "",
                         fontSize = 14.sp,
-                        color = Color.Gray,
+                        color = Color.DarkGray,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -213,7 +213,7 @@ fun RestaurantCard(
                             painter = painterResource(id = R.drawable.outline_arrow_drop_down_24),
                             contentDescription = "Dropdown arrow",
                             modifier = Modifier.size(30.dp),
-                            tint = Color.Gray
+                            tint = Color.DarkGray
                         )
                     }
 //                    Icon(
@@ -232,7 +232,7 @@ fun RestaurantCard(
                     Text(
                         text = "${getRandomRatings()}K+ ratings",
                         fontSize = 11.sp,
-                        color = Color.Gray
+                        color = Color.DarkGray
                     )
                 }
             }
@@ -252,17 +252,17 @@ fun RestaurantCard(
                 Text(
                     text = currentItem.deliveryTime ?: "",
                     fontSize = 14.sp,
-                    color = Color.Gray
+                    color = Color.DarkGray
                 )
                 Text(
                     text = "•",
                     fontSize = 20.sp,
-                    color = Color.Gray
+                    color = Color.DarkGray
                 )
                 Text(
                     text = "Schedule for later",
                     fontSize = 14.sp,
-                    color = Color.Gray,
+                    color = Color.DarkGray,
                 )
                 // Down arrow icon
                 Icon(
@@ -270,7 +270,7 @@ fun RestaurantCard(
                     contentDescription = "Dropdown arrow",
                     modifier = Modifier.size(25.dp)
                         .padding(top = 1.dp),
-                    tint = Color.Gray
+                    tint = Color.DarkGray
                 )
             }
             Spacer(modifier = Modifier.height(5.dp))

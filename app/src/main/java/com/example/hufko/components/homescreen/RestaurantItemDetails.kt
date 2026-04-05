@@ -264,14 +264,15 @@ fun RestaurantItemDetails(
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 1.dp),
+                    .padding(end = 0.dp),  // Removed extra space - changed from 1.dp to 0.dp
                 verticalArrangement = Arrangement.spacedBy(3.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
                     modifier = Modifier
-                        .width(140.dp)
-                        .height(140.dp)
+                        .fillMaxWidth()  // Changed from fixed width to fill remaining space
+//                        .width(140.dp)
+                        .height(170.dp)
                 ) {
                     // Image
                     Image(
@@ -381,3 +382,5 @@ fun PreviewRestaurantItemDetails() {
         }
     }
 }
+
+// Helper functions (add these if not already defined elsewhere)

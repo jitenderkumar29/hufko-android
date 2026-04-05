@@ -36,8 +36,8 @@ fun RestaurantDetails(
     val foodItems = listOf(
         FoodItemDoubleF(
             id = 1,
-            imageRes = R.drawable.restaurant_image_pizzas_food_1,
-            title = "Chicken Burger",
+            imageRes = R.drawable.restaurant_image_pizzas_food_items_1,
+            title = "Chicken Pizza",
             price = "275",
             originalPrice = "375",
             restaurantName = "Burger Hub",
@@ -61,8 +61,8 @@ fun RestaurantDetails(
         ),
         FoodItemDoubleF(
             id = 2,
-            imageRes = R.drawable.restaurant_image_pizzas_food_2,
-            title = "Chilli Garlic Momos",
+            imageRes = R.drawable.restaurant_image_pizzas_food_items_2,
+            title = "Chilli Garlic Pizza",
             price = "363",
             originalPrice = "563",
             restaurantName = "Momo Express",
@@ -86,7 +86,7 @@ fun RestaurantDetails(
         ),
         FoodItemDoubleF(
             id = 3,
-            imageRes = R.drawable.restaurant_image_pizzas_food_3,
+            imageRes = R.drawable.restaurant_image_pizzas_food_items_3,
             title = "Ultimate Cheese Pizza",
             price = "399",
             originalPrice = "499",
@@ -113,7 +113,7 @@ fun RestaurantDetails(
         // Image 2: Corn Pizza with Deal
         FoodItemDoubleF(
             id = 4,
-            imageRes = R.drawable.restaurant_image_pizzas_food_4,
+            imageRes = R.drawable.restaurant_image_pizzas_food_items_4,
             title = "Corn Pizza",
             price = "139",
             originalPrice = "239",
@@ -140,7 +140,7 @@ fun RestaurantDetails(
         // Image 3: Flotzz Pizzas
         FoodItemDoubleF(
             id = 5,
-            imageRes = R.drawable.restaurant_image_pizzas_food_5,
+            imageRes = R.drawable.restaurant_image_pizzas_food_items_5,
             title = "Ultimate Flotzz Pizza",
             price = "399",
             originalPrice = "499",
@@ -166,7 +166,7 @@ fun RestaurantDetails(
 
         FoodItemDoubleF(
             id = 6,
-            imageRes = R.drawable.restaurant_image_pizzas_food_6,
+            imageRes = R.drawable.restaurant_image_pizzas_food_items_6,
             title = "Tandoori Chicken Pizza",
             price = "399",
             originalPrice = "499",
@@ -424,7 +424,10 @@ fun RestaurantDetails(
                         rightIcon = R.drawable.outline_keyboard_arrow_down_24
                     ),
                 ),
-                rows = 1
+                rows = 1,
+                chipHeight = 35,  // Set chip height to 30dp
+                cornerRadius = 8,   // Set corner radius to 8dp
+                chipPadding = 8   // Set corner radius to 8dp
             )
             Row(
                 modifier = Modifier
@@ -489,31 +492,31 @@ fun RestaurantDetails(
         // Item 5: Food Items Grid
         item {
             Spacer(modifier = Modifier.height(15.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 0.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.ic_99_store),
-                    contentDescription = "Offer Image",
-                    modifier = Modifier
-//                        .fillMaxWidth()
-                        .height(40.dp)
-                        .width(140.dp),
-                    contentScale = ContentScale.FillBounds
-                )
-
-                // Down arrow icon
-                Icon(
-                    painter = painterResource(id = R.drawable.outline_keyboard_arrow_down_24),
-                    contentDescription = "Dropdown arrow",
-                    modifier = Modifier.size(30.dp)
-                        .padding(top = 1.dp),
-                    tint = Color.Gray
-                )
-            }
+//            Row(
+//                modifier = Modifier.fillMaxWidth()
+//                    .padding(horizontal = 12.dp, vertical = 0.dp),
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                Image(
+//                    painter = painterResource(R.drawable.ic_99_store),
+//                    contentDescription = "Offer Image",
+//                    modifier = Modifier
+////                        .fillMaxWidth()
+//                        .height(40.dp)
+//                        .width(140.dp),
+//                    contentScale = ContentScale.FillBounds
+//                )
+//
+//                // Down arrow icon
+//                Icon(
+//                    painter = painterResource(id = R.drawable.outline_keyboard_arrow_down_24),
+//                    contentDescription = "Dropdown arrow",
+//                    modifier = Modifier.size(30.dp)
+//                        .padding(top = 1.dp),
+//                    tint = Color.Gray
+//                )
+//            }
             Surface(
                 shape = RoundedCornerShape(20.dp),
                 color = Color.Transparent, // Make Surface transparent

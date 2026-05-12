@@ -13,12 +13,13 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,13 +28,21 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.collections.isNotEmpty
-import  com.example.hufko.R
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import com.example.hufko.api.services.model.Banner
 
 enum class DotPosition {
     OVERLAY,      // Dots overlay on bottom of image
@@ -61,6 +70,13 @@ data class BannerPadding(
     }
 }
 
+// ==================== BANNER IMAGE DATA SEALED CLASS ====================
+sealed class BannerImageData {
+    data class Remote(val url: String, val placeholder: Int = R.drawable.ic_broken_image) : BannerImageData()
+    data class Local(val resId: Int) : BannerImageData()
+}
+
+// ==================== ORIGINAL BANNER FOOD (Static Images) ====================
 @Composable
 fun BannerFood(
     images: List<Painter>,
@@ -78,8 +94,8 @@ fun BannerFood(
     autoScrollEnabled: Boolean = true,
     dotPosition: DotPosition = DotPosition.BELOW_IMAGE,
     overlayGradient: Boolean = true,
-    showDots: Boolean = true, // New parameter to control dots visibility
-    padding: BannerPadding = BannerPadding.Zero // New padding parameter
+    showDots: Boolean = true,
+    padding: BannerPadding = BannerPadding.Zero
 ) {
     require(images.isNotEmpty()) { "Images list cannot be empty" }
 
@@ -120,7 +136,6 @@ fun BannerFood(
                 .fillMaxWidth()
                 .height(height)
         ) {
-            // Pager with images and rounded corners
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier
@@ -138,7 +153,6 @@ fun BannerFood(
                 )
             }
 
-            // Overlay dots - shown only when dotPosition is OVERLAY and showDots is true
             if (dotPosition == DotPosition.OVERLAY && showDots && (dotSize == null || dotSize > 0.dp)) {
                 Box(
                     modifier = Modifier
@@ -147,7 +161,6 @@ fun BannerFood(
                             if (overlayGradient) {
                                 Modifier.drawWithContent {
                                     drawContent()
-                                    // Draw gradient overlay for better dot visibility
                                     drawRect(
                                         brush = Brush.verticalGradient(
                                             colors = listOf(
@@ -179,7 +192,6 @@ fun BannerFood(
             }
         }
 
-        // Below-image dots - shown only when dotPosition is BELOW_IMAGE and showDots is true
         if (dotPosition == DotPosition.BELOW_IMAGE && showDots && (dotSize == null || dotSize > 0.dp)) {
             Column {
                 Spacer(
@@ -205,15 +217,13 @@ fun BannerFood(
                 )
             }
         }
-
-        // No dots shown when showDots is false or dotPosition is NONE
     }
 }
 
-// Overloaded version with showDots parameter (for backward compatibility)
+// ==================== DYNAMIC BANNER FOOD FOR DATA (Using BannerImageData) ====================
 @Composable
-fun BannerFood(
-    images: List<Painter>,
+fun DynamicBannerFoodFromData(
+    images: List<BannerImageData>,
     onImageClick: (Int) -> Unit = {},
     modifier: Modifier = Modifier,
     height: Dp = 270.dp,
@@ -223,38 +233,252 @@ fun BannerFood(
     selectedDotColor: Color = MaterialTheme.customColors.linkColor,
     unselectedDotColor: Color = Color.White.copy(alpha = 0.9f),
     backgroundColor: Color = Color.White,
-    contentScale: ContentScale = ContentScale.FillBounds,
+    contentScale: ContentScale = ContentScale.Crop,
     autoScrollDelay: Long = 5000,
     autoScrollEnabled: Boolean = true,
-    dotPosition: DotPosition = DotPosition.BELOW_IMAGE,
-    overlayGradient: Boolean = true
+    dotPosition: DotPosition = DotPosition.OVERLAY,
+    overlayGradient: Boolean = false,
+    showDots: Boolean = true,
+    padding: BannerPadding = BannerPadding.Zero
 ) {
-    BannerFood(
-        images = images,
-        onImageClick = onImageClick,
-        modifier = modifier,
-        height = height,
-        roundedCornerShape = roundedCornerShape,
-        dotSize = dotSize,
-        dotPadding = dotPadding,
-        selectedDotColor = selectedDotColor,
-        unselectedDotColor = unselectedDotColor,
-        backgroundColor = backgroundColor,
-        contentScale = contentScale,
-        autoScrollDelay = autoScrollDelay,
-        autoScrollEnabled = autoScrollEnabled,
-        dotPosition = dotPosition,
-        overlayGradient = overlayGradient,
-        showDots = true, // Default to showing dots
-        padding = BannerPadding.Zero // Default to no padding
+    require(images.isNotEmpty()) { "Images list cannot be empty" }
+
+    val pagerState = rememberPagerState(
+        pageCount = { images.size },
+        initialPage = 0
     )
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+
+    val bannerShape = RoundedCornerShape(roundedCornerShape)
+
+    // Auto-scroll effect
+    LaunchedEffect(autoScrollEnabled, showDots) {
+        if (!autoScrollEnabled) return@LaunchedEffect
+
+        while (true) {
+            delay(autoScrollDelay)
+            val nextPage = (pagerState.currentPage + 1) % images.size
+            pagerState.animateScrollToPage(nextPage)
+        }
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .background(backgroundColor)
+            .padding(
+                start = padding.start,
+                top = padding.top,
+                end = padding.end,
+                bottom = padding.bottom
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height)
+        ) {
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(bannerShape)
+            ) { page ->
+                val imageData = images[page]
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(bannerShape)
+                        .clickable { onImageClick(page) }
+                ) {
+                    when (imageData) {
+                        is BannerImageData.Remote -> {
+                            // Log the URL being loaded
+                            println("🖼️ Loading image $page: ${imageData.url}")
+
+                            val painter = rememberAsyncImagePainter(
+                                model = ImageRequest.Builder(context)
+                                    .data(imageData.url)
+                                    .crossfade(true)
+                                    .build()
+                            )
+
+                            val imageState = painter.state
+
+                            // Log image state
+                            when (imageState) {
+                                is AsyncImagePainter.State.Success -> {
+                                    println("✅ Image $page loaded successfully")
+                                    Image(
+                                        painter = painter,
+                                        contentDescription = "Banner ${page + 1}",
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentScale = contentScale
+                                    )
+                                }
+                                is AsyncImagePainter.State.Error -> {
+                                    println("❌ Image $page failed to load: ${imageState.result.throwable.message}")
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(Color(0xFFF5F5F5)),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Column(
+                                            horizontalAlignment = Alignment.CenterHorizontally,
+                                            verticalArrangement = Arrangement.Center
+                                        ) {
+                                            Text(
+                                                text = "🖼️",
+                                                fontSize = 48.sp
+                                            )
+                                            Spacer(modifier = Modifier.height(8.dp))
+                                            Text(
+                                                text = "Failed to load image",
+                                                fontSize = 12.sp,
+                                                color = Color.Gray
+                                            )
+                                            Text(
+                                                text = imageData.url.take(50),
+                                                fontSize = 10.sp,
+                                                color = Color.Gray,
+                                                maxLines = 1,
+                                                overflow = TextOverflow.Ellipsis
+                                            )
+                                        }
+                                    }
+                                }
+                                is AsyncImagePainter.State.Loading -> {
+                                    println("⏳ Image $page loading...")
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(Color(0xFFF5F5F5)),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Column(
+                                            horizontalAlignment = Alignment.CenterHorizontally,
+                                            verticalArrangement = Arrangement.Center
+                                        ) {
+                                            CircularProgressIndicator(
+                                                modifier = Modifier.size(40.dp),
+                                                color = MaterialTheme.colorScheme.primary
+                                            )
+                                            Spacer(modifier = Modifier.height(8.dp))
+                                            Text(
+                                                text = "Loading...",
+                                                fontSize = 12.sp,
+                                                color = Color.Gray
+                                            )
+                                        }
+                                    }
+                                }
+                                else -> {
+                                    println("⚠️ Image $page unknown state")
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(Color(0xFFF5F5F5)),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(
+                                            text = "📷",
+                                            fontSize = 48.sp
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                        is BannerImageData.Local -> {
+                            Image(
+                                painter = painterResource(imageData.resId),
+                                contentDescription = "Banner ${page + 1}",
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = contentScale
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Overlay dots
+            if (dotPosition == DotPosition.OVERLAY && showDots && (dotSize == null || dotSize > 0.dp)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .then(
+                            if (overlayGradient) {
+                                Modifier.drawWithContent {
+                                    drawContent()
+                                    drawRect(
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(
+                                                Color.Transparent,
+                                                Color.Black.copy(alpha = 0.3f)
+                                            ),
+                                            startY = size.height * 0.6f,
+                                            endY = size.height
+                                        )
+                                    )
+                                }
+                            } else {
+                                Modifier
+                            }
+                        ),
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    OverlayDotsFashion(
+                        pagerState = pagerState,
+                        imageCount = images.size,
+                        dotSize = dotSize,
+                        dotPadding = dotPadding,
+                        selectedDotColor = selectedDotColor,
+                        unselectedDotColor = unselectedDotColor,
+                        indicatorDuration = autoScrollDelay,
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    )
+                }
+            }
+        }
+
+        // Dots below image
+        if (dotPosition == DotPosition.BELOW_IMAGE && showDots && (dotSize == null || dotSize > 0.dp)) {
+            Column {
+                Spacer(
+                    modifier = Modifier.height(8.dp)
+                        .fillMaxWidth()
+                        .background(backgroundColor)
+                )
+
+                OverlayDotsFashion(
+                    pagerState = pagerState,
+                    imageCount = images.size,
+                    dotSize = dotSize,
+                    dotPadding = dotPadding,
+                    selectedDotColor = selectedDotColor,
+                    unselectedDotColor = unselectedDotColor,
+                    indicatorDuration = autoScrollDelay
+                )
+
+                Spacer(
+                    modifier = Modifier.height(3.dp)
+                        .fillMaxWidth()
+                        .background(backgroundColor)
+                )
+            }
+        }
+    }
 }
 
-// New overload with padding but without showDots parameter
+// ==================== DYNAMIC BANNER FOOD (Works with Banner model) ====================
 @Composable
-fun BannerFood(
-    images: List<Painter>,
-    onImageClick: (Int) -> Unit = {},
+fun DynamicBannerFood(
+    banners: List<Banner>,
+    onBannerClick: (Banner) -> Unit = {},
     modifier: Modifier = Modifier,
     height: Dp = 270.dp,
     roundedCornerShape: Dp = 16.dp,
@@ -263,35 +487,210 @@ fun BannerFood(
     selectedDotColor: Color = MaterialTheme.customColors.linkColor,
     unselectedDotColor: Color = Color.White.copy(alpha = 0.9f),
     backgroundColor: Color = Color.White,
-    contentScale: ContentScale = ContentScale.FillBounds,
+    contentScale: ContentScale = ContentScale.Crop,
     autoScrollDelay: Long = 5000,
     autoScrollEnabled: Boolean = true,
-    dotPosition: DotPosition = DotPosition.BELOW_IMAGE,
+    dotPosition: DotPosition = DotPosition.OVERLAY,
     overlayGradient: Boolean = true,
-    padding: BannerPadding // New overload with padding parameter
+    showDots: Boolean = true,
+    padding: BannerPadding = BannerPadding.Zero
 ) {
-    BannerFood(
-        images = images,
-        onImageClick = onImageClick,
-        modifier = modifier,
-        height = height,
-        roundedCornerShape = roundedCornerShape,
-        dotSize = dotSize,
-        dotPadding = dotPadding,
-        selectedDotColor = selectedDotColor,
-        unselectedDotColor = unselectedDotColor,
-        backgroundColor = backgroundColor,
-        contentScale = contentScale,
-        autoScrollDelay = autoScrollDelay,
-        autoScrollEnabled = autoScrollEnabled,
-        dotPosition = dotPosition,
-        overlayGradient = overlayGradient,
-        showDots = true, // Default to showing dots
-        padding = padding // Use provided padding
+    require(banners.isNotEmpty()) { "Banners list cannot be empty" }
+
+    val pagerState = rememberPagerState(
+        pageCount = { banners.size },
+        initialPage = 0
     )
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+
+    val bannerShape = RoundedCornerShape(roundedCornerShape)
+
+    // Auto-scroll effect
+    LaunchedEffect(autoScrollEnabled) {
+        if (!autoScrollEnabled) return@LaunchedEffect
+
+        while (true) {
+            delay(autoScrollDelay)
+            val nextPage = (pagerState.currentPage + 1) % banners.size
+            pagerState.animateScrollToPage(nextPage)
+        }
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .background(backgroundColor)
+            .padding(
+                start = padding.start,
+                top = padding.top,
+                end = padding.end,
+                bottom = padding.bottom
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height)
+        ) {
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(bannerShape)
+            ) { page ->
+                val banner = banners[page]
+
+                // Load image with error handling
+                val painter = rememberAsyncImagePainter(
+                    model = ImageRequest.Builder(context)
+                        .data(banner.imageUrl)
+                        .crossfade(true)
+                        .build()
+                )
+
+                val imageState = painter.state
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(bannerShape)
+                        .clickable { onBannerClick(banner) }
+                ) {
+                    // Show image when loaded successfully
+                    when (imageState) {
+                        is AsyncImagePainter.State.Success -> {
+                            Image(
+                                painter = painter,
+                                contentDescription = banner.title,
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = contentScale
+                            )
+                        }
+                        is AsyncImagePainter.State.Error -> {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(Color.Black.copy(alpha = 0.3f)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                banner.title?.let {
+                                    Text(
+                                        text = it,
+                                        color = Color.White,
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                            }
+                        }
+                        else -> {
+                            // Loading state
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(Color.LightGray),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(32.dp),
+                                    color = Color.White
+                                )
+                            }
+                        }
+                    }
+
+                    // Overlay gradient and text
+                    if (overlayGradient) {
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .fillMaxWidth()
+                                .height(120.dp)
+                                .background(
+                                    Brush.verticalGradient(
+                                        colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f))
+                                    )
+                                )
+                        )
+
+                        Column(
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .padding(16.dp)
+                        ) {
+                            banner.title?.let {
+                                Text(
+                                    text = it,
+                                    color = Color.White,
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                            if (!banner.description.isNullOrEmpty()) {
+                                Text(
+                                    text = banner.description,
+                                    color = Color.White.copy(alpha = 0.8f),
+                                    fontSize = 12.sp,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.padding(top = 4.dp)
+                                )
+                            }
+
+                            // Banner type indicator
+                            Box(
+                                modifier = Modifier
+                                    .padding(top = 8.dp)
+                                    .background(
+                                        color = when (banner.bannerType) {
+                                            "HOME_PAGE" -> Color(0xFFFF5722)
+                                            "PROMOTIONAL" -> Color(0xFF4CAF50)
+                                            "FLASH_SALE" -> Color(0xFFF44336)
+                                            else -> Color(0xFF9C27B0)
+                                        },
+                                        shape = RoundedCornerShape(4.dp)
+                                    )
+                                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                            ) {
+                                Text(
+                                    text = banner.bannerType?.replace("_", " ") ?: "",
+                                    color = Color.White,
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Overlay dots
+            if (dotPosition == DotPosition.OVERLAY && showDots && (dotSize == null || dotSize > 0.dp)) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    OverlayDotsFashion(
+                        pagerState = pagerState,
+                        imageCount = banners.size,
+                        dotSize = dotSize,
+                        dotPadding = dotPadding,
+                        selectedDotColor = Color.White,
+                        unselectedDotColor = Color.White.copy(alpha = 0.5f),
+                        indicatorDuration = autoScrollDelay,
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    )
+                }
+            }
+        }
+    }
 }
 
-// Enhanced Dot indicator with modifier support
 @Composable
 fun OverlayDotsFashion(
     pagerState: PagerState,
@@ -365,7 +764,46 @@ fun OverlayDotsFashion(
     }
 }
 
-// New composable for banner without dots (simplified API)
+// Overloads for backward compatibility
+@Composable
+fun BannerFood(
+    images: List<Painter>,
+    onImageClick: (Int) -> Unit = {},
+    modifier: Modifier = Modifier,
+    height: Dp = 270.dp,
+    roundedCornerShape: Dp = 16.dp,
+    dotSize: Dp? = null,
+    dotPadding: Dp? = null,
+    selectedDotColor: Color = MaterialTheme.customColors.linkColor,
+    unselectedDotColor: Color = Color.White.copy(alpha = 0.9f),
+    backgroundColor: Color = Color.White,
+    contentScale: ContentScale = ContentScale.FillBounds,
+    autoScrollDelay: Long = 5000,
+    autoScrollEnabled: Boolean = true,
+    dotPosition: DotPosition = DotPosition.BELOW_IMAGE,
+    overlayGradient: Boolean = true
+) {
+    BannerFood(
+        images = images,
+        onImageClick = onImageClick,
+        modifier = modifier,
+        height = height,
+        roundedCornerShape = roundedCornerShape,
+        dotSize = dotSize,
+        dotPadding = dotPadding,
+        selectedDotColor = selectedDotColor,
+        unselectedDotColor = unselectedDotColor,
+        backgroundColor = backgroundColor,
+        contentScale = contentScale,
+        autoScrollDelay = autoScrollDelay,
+        autoScrollEnabled = autoScrollEnabled,
+        dotPosition = dotPosition,
+        overlayGradient = overlayGradient,
+        showDots = true,
+        padding = BannerPadding.Zero
+    )
+}
+
 @Composable
 fun BannerFoodWithoutDots(
     images: List<Painter>,
@@ -377,7 +815,7 @@ fun BannerFoodWithoutDots(
     contentScale: ContentScale = ContentScale.FillBounds,
     autoScrollDelay: Long = 5000,
     autoScrollEnabled: Boolean = true,
-    padding: BannerPadding = BannerPadding.Zero // Added padding parameter
+    padding: BannerPadding = BannerPadding.Zero
 ) {
     BannerFood(
         images = images,
@@ -385,7 +823,7 @@ fun BannerFoodWithoutDots(
         modifier = modifier,
         height = height,
         roundedCornerShape = roundedCornerShape,
-        dotSize = 0.dp, // Set dotSize to 0 to hide dots
+        dotSize = 0.dp,
         backgroundColor = backgroundColor,
         contentScale = contentScale,
         autoScrollDelay = autoScrollDelay,
@@ -393,120 +831,349 @@ fun BannerFoodWithoutDots(
         dotPosition = DotPosition.NONE,
         overlayGradient = false,
         showDots = false,
-        padding = padding // Pass padding
+        padding = padding
     )
 }
 
-// Preview function to demonstrate both versions
 @Composable
-fun BannerFoodPreview() {
-    Column(
+fun DynamicBannerCarousel(
+    banners: List<Banner>,
+    onBannerClick: (Banner) -> Unit
+) {
+    var currentIndex by remember { mutableIntStateOf(0) }
+    val context = LocalContext.current
+
+    // Auto-scroll effect
+    LaunchedEffect(Unit) {
+        while (true) {
+            kotlinx.coroutines.delay(3000)
+            currentIndex = (currentIndex + 1) % banners.size
+        }
+    }
+
+    Box(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color.LightGray)
-            .padding(16.dp)
+            .fillMaxWidth()
+            .height(250.dp)
     ) {
-        // 1. Banner with all-around padding
-        Text("Banner with All-Around Padding", modifier = Modifier.padding(bottom = 8.dp))
-        BannerFood(
-            images = listOf(
-                androidx.compose.ui.res.painterResource(R.drawable.restaurant_1),
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_1),
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_2)
-            ),
-            height = 150.dp,
-            autoScrollEnabled = false,
-            padding = BannerPadding.all(8.dp)
-        )
+        if (banners.isNotEmpty()) {
+            val banner = banners[currentIndex]
 
-        Spacer(modifier = Modifier.height(24.dp))
+            // Load image with error handling
+            val painter = rememberAsyncImagePainter(
+                model = ImageRequest.Builder(context)
+                    .data(banner.imageUrl)
+                    .crossfade(true)
+                    .build()
+            )
 
-        // 2. Banner with horizontal padding only
-        Text("Banner with Horizontal Padding", modifier = Modifier.padding(bottom = 8.dp))
-        BannerFood(
-            images = listOf(
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_3),
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_4)
-            ),
-            height = 140.dp,
-            showDots = false,
-            autoScrollEnabled = false,
-            padding = BannerPadding.horizontal(16.dp)
-        )
+            val imageState = painter.state
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickable { onBannerClick(banner) }
+            ) {
+                // Show image when loaded successfully
+                if (imageState is AsyncImagePainter.State.Success) {
+                    Image(
+                        painter = painter,
+                        contentDescription = banner.title,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+                // Show error when image fails to load
+                else if (imageState is AsyncImagePainter.State.Error) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.LightGray),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_broken_image),
+                                contentDescription = "Image Error",
+                                modifier = Modifier.size(48.dp),
+                                tint = Color.Gray
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = "Failed to load image",
+                                color = Color.Gray,
+                                fontSize = 12.sp
+                            )
+                            banner.title?.let {
+                                Text(
+                                    text = it,
+                                    color = Color.DarkGray,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            }
+                        }
+                    }
+                }
+                // Show loading placeholder
+                else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.LightGray),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            CircularProgressIndicator()
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Loading...",
+                                color = Color.Gray,
+                                fontSize = 12.sp
+                            )
+                        }
+                    }
+                }
 
-        // 3. Banner with symmetric padding
-        Text("Banner with Symmetric Padding", modifier = Modifier.padding(bottom = 8.dp))
-        BannerFood(
-            images = listOf(
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_5),
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_6)
-            ),
-            height = 130.dp,
-            autoScrollEnabled = false,
-            padding = BannerPadding.symmetric(horizontal = 24.dp, vertical = 8.dp)
-        )
+                // Banner overlay text and gradient
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .fillMaxWidth()
+                        .background(
+                            Brush.verticalGradient(
+                                colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f))
+                            )
+                        )
+                        .padding(16.dp)
+                ) {
+                    Column {
+                        banner.title?.let {
+                            Text(
+                                text = it,
+                                color = Color.White,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        banner.description?.let {
+                            Text(
+                                text = it,
+                                color = Color.White.copy(alpha = 0.8f),
+                                fontSize = 12.sp,
+                                maxLines = 2,
+                                modifier = Modifier.padding(top = 4.dp)
+                            )
+                        }
+                        // Banner type indicator
+                        Box(
+                            modifier = Modifier
+                                .padding(top = 8.dp)
+                                .background(
+                                    color = when (banner.bannerType) {
+                                        "HOME_PAGE" -> Color(0xFFFF5722)
+                                        "PROMOTIONAL" -> Color(0xFF4CAF50)
+                                        "FLASH_SALE" -> Color(0xFFF44336)
+                                        else -> Color(0xFF9C27B0)
+                                    },
+                                    shape = RoundedCornerShape(4.dp)
+                                )
+                                .padding(horizontal = 8.dp, vertical = 4.dp)
+                        ) {
+                            Text(
+                                text = banner.bannerType?.replace("_", " ") ?: "",
+                                color = Color.White,
+                                fontSize = 10.sp
+                            )
+                        }
+                    }
+                }
+            }
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // 4. Banner with custom padding
-        Text("Banner with Custom Padding", modifier = Modifier.padding(bottom = 8.dp))
-        BannerFoodWithoutDots(
-            images = listOf(
-                androidx.compose.ui.res.painterResource(R.drawable.restaurant_1),
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_1)
-            ),
-            height = 120.dp,
-            autoScrollEnabled = false,
-            padding = BannerPadding(start = 32.dp, top = 4.dp, end = 32.dp, bottom = 4.dp)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // 5. Banner with no padding (default)
-        Text("Banner with No Padding (Default)", modifier = Modifier.padding(bottom = 8.dp))
-        BannerFood(
-            images = listOf(
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_2),
-                androidx.compose.ui.res.painterResource(R.drawable.popular_chain_3)
-            ),
-            height = 110.dp,
-            autoScrollEnabled = false
-        )
+            // Dot indicators
+            Row(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                banners.indices.forEach { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .clip(RoundedCornerShape(4.dp))
+                            .background(
+                                if (index == currentIndex) Color.White
+                                else Color.White.copy(alpha = 0.5f)
+                            )
+                    )
+                }
+            }
+        }
     }
 }
 
-// Example usage in your app:
 @Composable
-fun ExampleUsageBanner() {
-    // Example 1: With all-around padding
-    BannerFood(
-        images = listOf(/* your images */),
-        padding = BannerPadding.all(16.dp)
+fun DynamicBannerCard(
+    banner: Banner,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    width: Dp = 160.dp,
+    height: Dp = 200.dp,
+    showTypeTag: Boolean = true,
+    showPriority: Boolean = true
+) {
+    val context = LocalContext.current
+    val painter = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(context)
+            .data(banner.imageUrl)
+            .crossfade(true)
+            .build()
     )
 
-    // Example 2: With horizontal padding only
-    BannerFood(
-        images = listOf(/* your images */),
-        padding = BannerPadding.horizontal(24.dp)
-    )
+    val imageState = painter.state
 
-    // Example 3: With symmetric padding
-    BannerFood(
-        images = listOf(/* your images */),
-        padding = BannerPadding.symmetric(horizontal = 16.dp, vertical = 8.dp)
-    )
+    Card(
+        modifier = modifier
+            .width(width)
+            .height(height)
+            .clickable { onClick() },
+        shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Show image when loaded successfully
+            if (imageState is AsyncImagePainter.State.Success) {
+                Image(
+                    painter = painter,
+                    contentDescription = banner.title,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            }
+            // Show error when image fails to load
+            else if (imageState is AsyncImagePainter.State.Error) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.LightGray),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_broken_image),
+                            contentDescription = "Image Error",
+                            modifier = Modifier.size(32.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = banner.title?.take(20) ?: "",
+                            color = Color.Gray,
+                            fontSize = 10.sp,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                        )
+                        Text(
+                            text = "Image not found",
+                            color = Color.Gray,
+                            fontSize = 9.sp
+                        )
+                    }
+                }
+            }
+            // Show loading placeholder
+            else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.LightGray),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator(modifier = Modifier.size(32.dp))
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Loading...",
+                            color = Color.Gray,
+                            fontSize = 10.sp
+                        )
+                    }
+                }
+            }
 
-    // Example 4: With custom padding
-    BannerFood(
-        images = listOf(/* your images */),
-        padding = BannerPadding(start = 20.dp, top = 10.dp, end = 20.dp, bottom = 10.dp)
-    )
+            // Overlay gradient
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .fillMaxWidth()
+                    .height(100.dp)
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.9f))
+                        )
+                    )
+            )
 
-    // Example 5: Without dots with padding
-    BannerFoodWithoutDots(
-        images = listOf(/* your images */),
-        padding = BannerPadding.all(12.dp)
-    )
+            // Banner text
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(8.dp)
+            ) {
+                banner.title?.let {
+                    Text(
+                        text = it,
+                        color = Color.White,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+
+                // Banner type tag
+                if (showTypeTag) {
+                    Box(
+                        modifier = Modifier
+                            .padding(top = 4.dp)
+                            .background(
+                                color = when (banner.bannerType) {
+                                    "HOME_PAGE" -> Color(0xFFFF5722)
+                                    "PROMOTIONAL" -> Color(0xFF4CAF50)
+                                    "FLASH_SALE" -> Color(0xFFF44336)
+                                    else -> Color(0xFF9C27B0)
+                                },
+                                shape = RoundedCornerShape(4.dp)
+                            )
+                            .padding(horizontal = 6.dp, vertical = 2.dp)
+                    ) {
+                        Text(
+                            text = banner.bannerType?.replace("_", " ") ?: "",
+                            color = Color.White,
+                            fontSize = 9.sp
+                        )
+                    }
+                }
+
+                // Priority indicator - FIXED NULL SAFETY
+                if (showPriority) {
+                    val priorityValue = banner.priority ?: 0
+                    if (priorityValue in 1..3) {
+                        Text(
+                            text = when (priorityValue) {
+                                1 -> "🔥 Most Popular"
+                                2 -> "🔥 Very Popular"
+                                3 -> "🔥 Popular"
+                                else -> "🔥 Popular"
+                            },
+                            color = Color(0xFFFF9800),
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
 }

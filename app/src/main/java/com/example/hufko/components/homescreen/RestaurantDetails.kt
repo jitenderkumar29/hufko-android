@@ -451,9 +451,9 @@ fun RestaurantDetails(
 ////            }
 //        }
 
-        // Divider
+        // HorizontalDivider
         item {
-            Divider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 0.dp))
+            HorizontalDivider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 0.dp))
         }
 
         item {
@@ -484,9 +484,9 @@ fun RestaurantDetails(
             }
         }
 
-        // Divider
+        // HorizontalDivider
         item {
-            Divider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 0.dp))
+            HorizontalDivider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 0.dp))
         }
 
         // Item 5: Food Items Grid
@@ -572,9 +572,9 @@ fun RestaurantDetails(
                     }
                 }
 
-        // Item 6: Divider
+        // Item 6: HorizontalDivider
         item {
-            Divider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 0.dp))
+            HorizontalDivider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 0.dp))
         }
 
         // Item 7: List View Items

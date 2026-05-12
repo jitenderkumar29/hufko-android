@@ -28,7 +28,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -208,7 +208,7 @@ private fun UserProfileSection() {
 
 //        Spacer(modifier = Modifier.height(16.dp))
 
-//        Divider(color = Color.LightGray, thickness = 1.dp)
+//        HorizontalDivider(color = Color.LightGray, thickness = 1.dp)
     }
 }
 
@@ -423,7 +423,7 @@ private fun AccountOptionsSection() {
                 isCheckbox = option.isCheckbox,
                 isChecked = option.isChecked
             )
-            Divider(color = Color.LightGray, thickness = 1.dp)
+            HorizontalDivider(color = Color.LightGray, thickness = 1.dp)
         }
     }
 }
@@ -566,7 +566,7 @@ private fun AccountItem(
             )
         }
     }
-//    Divider(color = Color.LightGray, thickness = 1.dp)
+//    HorizontalDivider(color = Color.LightGray, thickness = 1.dp)
 }
 
 

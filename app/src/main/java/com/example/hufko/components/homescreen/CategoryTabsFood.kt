@@ -3,57 +3,48 @@ package com.example.hufko.components.homescreen
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRowDefaults
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material3.*
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
+import kotlinx.coroutines.delay
+
 import com.example.hufko.R
+import com.example.hufko.api.services.model.Banner
+import com.example.hufko.api.services.viewmodels.BannerViewModels
 import com.example.hufko.ui.theme.customColors
-import androidx.compose.ui.text.style.TextAlign
-import kotlin.Int
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.ui.draw.clip
-import com.example.hufko.components.homescreen.completeRestaurantItems
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.filled.Error
 
 //import androidx.compose.ui.Arrangement
 
@@ -206,6 +197,10 @@ data class FoodItem(
     val isVeg: Boolean = true,
     val category: String = "All"
 )
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoryTabsFood(
     navController: NavHostController? = null,
@@ -213,6 +208,8 @@ fun CategoryTabsFood(
     onCategorySelected: (CategoryPage) -> Unit = {},
     onTabIndexChanged: (Int) -> Unit = {}
 ) {
+    val bannerViewModel: BannerViewModels = viewModel()
+
     // Get current value
     var currentSelectedIndex by rememberSaveable {
         mutableIntStateOf(
@@ -448,7 +445,7 @@ fun CategoryTabsFood(
             contentColor = MaterialTheme.customColors.black,
             edgePadding = 0.dp,
             indicator = { tabPositions ->
-                TabRowDefaults.Indicator(
+                TabRowDefaults.SecondaryIndicator(
                     modifier = Modifier.tabIndicatorOffset(tabPositions[selectedVisibleIndex]),
                     height = 5.dp,
                     color = MaterialTheme.customColors.header
@@ -560,11 +557,12 @@ fun CategoryTabsFood(
             // Show content based on the actual category
             when (actualCategory) {
                 CategoryPage.All -> AllCategoryPage(
-                    navController = navController,
-                    onBanner1Click = { /* Handle banner 1 click */ },
-                    onBanner2Click = { /* Handle banner 2 click */ },
-                    onBanner3Click = { /* Handle banner 3 click */ }
-                    )
+                navController = navController,
+                viewModel = viewModel(),  // Add this line
+                onBanner1Click = { /* Handle banner 1 click */ },
+                onBanner2Click = { /* Handle banner 2 click */ },
+                onBanner3Click = { /* Handle banner 3 click */ }
+)
                 CategoryPage.Diet -> {
                     DietCategoryPage(
                         navController = navController,
@@ -717,15 +715,18 @@ fun CategoryTabsFood(
                         )
                     }
                 }
-                else -> AllCategoryPage( navController = navController,
-                            onBanner1Click = { /* Handle banner 1 click */ },
-                            onBanner2Click = { /* Handle banner 2 click */ },
-                            onBanner3Click = { /* Handle banner 3 click */ }
-                            )
+                else -> AllCategoryPage(
+                navController = navController,
+                viewModel = viewModel(),  // Add this line
+                onBanner1Click = { /* Handle banner 1 click */ },
+                onBanner2Click = { /* Handle banner 2 click */ },
+                onBanner3Click = { /* Handle banner 3 click */ }
+)
             }
         }
     }
 }
+
 
 // Add this to your navigation graph:
 // composable("category_tabs_f_list") {
@@ -736,6 +737,7 @@ fun CategoryTabsFood(
 //         }
 //     )
 // }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DietCategoryPage(
     onBanner1Click: () -> Unit = {},
@@ -945,135 +947,472 @@ fun DietCategoryPage(
         )
     }
 }
+
+
+// Sample restaurant items data - MOVED OUTSIDE the composable function
+private val sampleRestaurantItemsAll = listOf(
+    RestaurantItemFull(id = 1, imageRes = R.drawable.restaurant_image_all_food_1, title = "Paneer Delight Momos", price = "159", restaurantName = "Goblins", rating = "4.0", deliveryTime = "30-35 mins", distance = "5.8 km", discount = "50%", discountAmount = "₹20", address = "Govindpuram"),
+    RestaurantItemFull(id = 2, imageRes = R.drawable.restaurant_image_all_food_2, title = "Egg Curry", price = "90", restaurantName = "Bori & Rori Junction", rating = "3.5", deliveryTime = "40-45 mins", distance = "6.8 km", discount = "50%", discountAmount = "₹20", address = "Noida"),
+    RestaurantItemFull(id = 3, imageRes = R.drawable.restaurant_image_all_food_3, title = "Tawa Chicken", price = "299", restaurantName = "FFC Express", rating = "3.9", deliveryTime = "40-45 mins", distance = "8.2 km", discount = "50%", discountAmount = "₹20", address = "Delhi"),
+    RestaurantItemFull(id = 4, imageRes = R.drawable.restaurant_image_all_food_4, title = "Pasta", price = "300 for one", restaurantName = "Gustaro Pasta", rating = "4.5", deliveryTime = "70-75 mins", distance = "14.3 km", discount = "50%", discountAmount = "₹20", address = "Bengaluru"),
+    RestaurantItemFull(id = 5, imageRes = R.drawable.restaurant_image_all_food_5, title = "Burger", price = "200 for one", restaurantName = "Ayub Chaumin Wale", rating = "4.3", deliveryTime = "25-30 mins", distance = "4.3 km", discount = "40%", discountAmount = "₹20", address = "Govindpuram"),
+    RestaurantItemFull(id = 6, imageRes = R.drawable.restaurant_image_all_food_6, title = "Biryani", price = "400 for one", restaurantName = "Charcoal Eats - Biryani & Beyond", rating = "4.2", deliveryTime = "50-55 mins", distance = "13.8 km", discount = "50%", discountAmount = "₹20", address = "Meerut"),
+    RestaurantItemFull(id = 7, imageRes = R.drawable.restaurant_image_all_food_7, title = "Honey Chilli Porero", price = "160", restaurantName = "Desi Mugz", rating = "4.1", deliveryTime = "60-65 mins", distance = "14.8 km", discount = "20%", discountAmount = "₹20", address = "Badarpur"),
+    RestaurantItemFull(id = 8, imageRes = R.drawable.restaurant_image_all_food_8, title = "Paneer Paratha", price = "119", restaurantName = "Swaad Aaya", rating = "3.5", deliveryTime = "55-60 mins", distance = "13.8 km", discount = "50%", discountAmount = "₹20", address = "Meerut"),
+    RestaurantItemFull(id = 9, imageRes = R.drawable.restaurant_image_all_food_9, title = "Arhar Dal Tadka", price = "180", restaurantName = "Uncle Ke Rasoi", rating = "4.0", deliveryTime = "55-60 mins", distance = "13 km", discount = "50%", discountAmount = "₹20", address = "Agra"),
+    RestaurantItemFull(id = 10, imageRes = R.drawable.restaurant_image_all_food_10, title = "Pure Veg", price = "200 for one", restaurantName = "Shree Krishna Baker's", rating = "3.5", deliveryTime = "45-50 mins", distance = "10.9 km", discount = "50%", discountAmount = "₹20", address = "Aligarh"),
+    RestaurantItemFull(id = 11, imageRes = R.drawable.restaurant_image_all_food_11, title = "Paneer Manchurian Dry", price = "110", restaurantName = "King Of Spices", rating = "4.0", deliveryTime = "55-60 mins", distance = "13 km", discount = "20%", discountAmount = "₹20", address = "Hydrabad"),
+    RestaurantItemFull(id = 12, imageRes = R.drawable.restaurant_image_all_food_12, title = "North Indian", price = "450 for one", restaurantName = "The Food Workshop", rating = "4.1", deliveryTime = "50-55 mins", distance = "12.6 km", discount = "20%", discountAmount = "₹20", address = "Chennai"),
+    RestaurantItemFull(id = 13, imageRes = R.drawable.restaurant_image_all_food_13, title = "Veg Fried Rice with Veg Manchurian", price = "250", restaurantName = "Old Veg Rasoi", rating = "4.0", deliveryTime = "55-60 mins", distance = "13 km", discount = "50%", discountAmount = "₹20", address = "Agra"),
+    RestaurantItemFull(id = 14, imageRes = R.drawable.restaurant_image_all_food_14, title = "Pure Veg", price = "", restaurantName = "Radha Rani Ki Rasoi", rating = "3.8", deliveryTime = "65-70 mins", distance = "13.9 km", discount = "50%", discountAmount = "₹20", address = "Aligarh"),
+    RestaurantItemFull(id = 15, imageRes = R.drawable.restaurant_image_all_food_15, title = "Farmers Choice Pizza", price = "124", restaurantName = "The Hot Pizza", rating = "3.6", deliveryTime = "50-55 mins", distance = "12 km", discount = "50%", discountAmount = "₹20", address = "Hydrabad"),
+    RestaurantItemFull(id = 16, imageRes = R.drawable.restaurant_image_all_food_16, title = "Chaap Biryani", price = "210", restaurantName = "Annapurna Thali", rating = "3.7", deliveryTime = "55-60 mins", distance = "14.1 km", discount = "60%", discountAmount = "₹20", address = "Hydrabad"),
+    RestaurantItemFull(id = 17, imageRes = R.drawable.restaurant_image_all_food_17, title = "Chinese", price = "200 for one", restaurantName = "Chinese Wokology", rating = "4.1", deliveryTime = "45-50 mins", distance = "14.1 km", discount = "20%", discountAmount = "₹20", address = "Badarpur"),
+    RestaurantItemFull(id = 18, imageRes = R.drawable.restaurant_image_all_food_18, title = "Eggless Red Velvet Cake", price = "599", restaurantName = "Bakincake", rating = "4.0", deliveryTime = "55-60 mins", distance = "13.8 km", discount = "20%", discountAmount = "₹20", address = "Meerut"),
+    RestaurantItemFull(id = 19, imageRes = R.drawable.restaurant_image_all_food_19, title = "Pure Veg", price = "200 for one", restaurantName = "mahapooran", rating = "3.7", deliveryTime = "30-35 mins", distance = "5.6 km", discount = "50%", discountAmount = "₹20", address = "Badarpur"),
+    RestaurantItemFull(id = 20, imageRes = R.drawable.restaurant_image_all_food_20, title = "Paneer Handi", price = "180", restaurantName = "Shree Jee Restaurant", rating = "4.1", deliveryTime = "45-50 mins", distance = "7.3 km", discount = "60%", discountAmount = "₹20", address = "Delhi")
+)
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AllCategoryPage(
-   navController: NavHostController? = null,
+    navController: NavHostController? = null,
+    viewModel: BannerViewModels = viewModel(),
+    superCategoryId: String = "FOOD_SUPER",
+    categoryId: String = "ALL_FOOD_CAT",
     onBanner1Click: () -> Unit = {},
     onBanner2Click: () -> Unit = {},
     onBanner3Click: () -> Unit = {}
 ) {
+
+    fun trackBannerClick(banner: Banner) {
+        println("🎯 Banner clicked: ${banner.title} (ID: ${banner.id}, Type: ${banner.bannerType})")
+        // TODO: Implement actual tracking when API is available
+    }
+
+    // Collect state from ViewModel
+    val allBanners by viewModel.bannersByCategory.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val error by viewModel.error.collectAsState()
+    val totalPages by viewModel.totalPages.collectAsState()
+    val totalElements by viewModel.totalElements.collectAsState()
+
+    // Load banners when composable is first created
+    LaunchedEffect(superCategoryId, categoryId) {
+        println("🚀 Initializing AllCategoryPage with superCategory: $superCategoryId, category: $categoryId")
+        viewModel.loadBannersBySuperCategoryAndCategory(
+            superCategoryId = superCategoryId,
+            categoryId = categoryId,
+            page = 0,
+            size = 20
+        )
+    }
+
+    // Clean up when composable is disposed
+    DisposableEffect(Unit) {
+        onDispose {
+            println("🧹 Cleaning up AllCategoryPage")
+            viewModel.clearError()
+        }
+    }
+
+    // Filter only banners with valid image URLs and active status
+    val validBanners by remember(allBanners) {
+        derivedStateOf {
+            val filtered = allBanners.filter { banner ->
+                val hasValidImage = !banner.imageUrl.isNullOrBlank()
+                val isActive = banner.isActive == true
+                val isValid = hasValidImage && isActive
+
+                if (!hasValidImage && banner.id != null) {
+                    println("⚠️ Banner ${banner.id} (${banner.title}) has no valid image URL")
+                }
+                if (!isActive && banner.id != null) {
+                    println("⚠️ Banner ${banner.id} (${banner.title}) is inactive")
+                }
+
+                isValid
+            }
+            filtered
+        }
+    }
+
+   // In AllCategoryPage, update bannerImagesData creation:
+val bannerImagesData by remember(validBanners) {
+    derivedStateOf {
+        validBanners.mapNotNull { banner ->
+            // Fix the image URL
+            val fullUrl = banner.imageUrl?.let { url ->
+                if (url.startsWith("/")) {
+                    "http://192.168.31.49:8085$url"
+                } else {
+                    url
+                }
+            }
+            fullUrl?.let { BannerImageData.Remote(url = it) }
+        }
+    }
+}
+
+    // Debug logging
+    LaunchedEffect(validBanners, bannerImagesData, isLoading, error) {
+        println("=== AllCategoryPage State Debug ===")
+        println("Total banners from API: ${allBanners.size}")
+        println("Valid banners with images: ${validBanners.size}")
+        println("Banner images data created: ${bannerImagesData.size}")
+        println("Is Loading: $isLoading")
+        println("Error: $error")
+        println("Pagination - Page: ${viewModel.currentPage.value}, Total Pages: $totalPages, Total Elements: $totalElements")
+
+        if (allBanners.isEmpty() && !isLoading && error == null) {
+            println("⚠️ No banners received from API - showing fallback UI")
+            println("💡 Troubleshooting tips:")
+            println("   1. Check if superCategoryId '$superCategoryId' is correct")
+            println("   2. Check if categoryId '$categoryId' is correct")
+            println("   3. Verify API endpoint is accessible")
+            println("   4. Check if there are any active banners in the database")
+        }
+
+        if (error != null) {
+            println("❌ Error loading banners: $error")
+        }
+
+        // Print each valid banner details (limit to first 5 to avoid spam)
+        validBanners.take(5).forEachIndexed { index, banner ->
+            println("Valid Banner $index: ID=${banner.id}, Title=${banner.title}, Type=${banner.bannerType}, ImageUrl=${banner.imageUrl}")
+        }
+        if (validBanners.size > 5) {
+            println("... and ${validBanners.size - 5} more banners")
+        }
+        println("=================================")
+    }
+
+    // Main Column without Scaffold
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
+//            .verticalScroll(rememberScrollState())
     ) {
-        // Banner Section
-        BannerFood(
-            images = listOf(
-                painterResource(id = R.drawable.all_food_banner3),
-                painterResource(id = R.drawable.all_food_banner1),
-                painterResource(id = R.drawable.all_food_banner2),
-                painterResource(id = R.drawable.all_food_banner4),
-                painterResource(id = R.drawable.all_food_banner5),
-                painterResource(id = R.drawable.all_food_banner6),
-                painterResource(id = R.drawable.all_food_banner7),
-                painterResource(id = R.drawable.all_food_banner8),
-                painterResource(id = R.drawable.all_food_banner9),
-                painterResource(id = R.drawable.all_food_banner10),
-                painterResource(id = R.drawable.all_food_banner11),
-                painterResource(id = R.drawable.all_food_banner12),
-                painterResource(id = R.drawable.all_food_banner13),
-                painterResource(id = R.drawable.all_food_banner14),
-                painterResource(id = R.drawable.all_food_banner15),
-                painterResource(id = R.drawable.all_food_banner16),
-                painterResource(id = R.drawable.all_food_banner17),
-            ),
-            onImageClick = { page ->
-                when (page) {
-                    0 -> onBanner1Click()
-                    1 -> onBanner2Click()
-                    2 -> onBanner3Click()
+
+         // ==================== DYNAMIC BANNER FROM API ====================
+        when {
+            isLoading -> {
+                // Show loading indicator while banners are loading
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .padding(12.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        CircularProgressIndicator(
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(40.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Loading banners...",
+                            fontSize = 12.sp,
+                            color = Color.Gray
+                        )
+                    }
                 }
-            },
-            autoScrollDelay = 2000,
-            height = 250.dp,
-            roundedCornerShape = 0.dp,
-            contentScale = ContentScale.FillBounds,
-            dotSize = 8.dp,
-            dotPadding = 4.dp,
-            dotPosition = DotPosition.OVERLAY,
-            overlayGradient = true, // Adds gradient for better visibility
-            selectedDotColor = Color.White,
+            }
+
+            error != null -> {
+                // Show error message with retry option
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .padding(12.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Card(
+                        modifier = Modifier.fillMaxSize(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(0xFFFFF3E0)
+                        ),
+                        shape = RoundedCornerShape(16.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Error,
+                                contentDescription = "Error",
+                                tint = Color.Red,
+                                modifier = Modifier.size(48.dp)
+                            )
+                            Spacer(modifier = Modifier.height(12.dp))
+                            Text(
+                                text = "Failed to load banners",
+                                color = Color.Red,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = error ?: "Unknown error occurred",
+                                color = Color.Red.copy(alpha = 0.7f),
+                                fontSize = 12.sp,
+                                modifier = Modifier.padding(top = 4.dp),
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Button(
+                                onClick = {
+                                    println("🔄 Retrying banner load...")
+                                    viewModel.loadBannersBySuperCategoryAndCategory(
+                                        superCategoryId = superCategoryId,
+                                        categoryId = categoryId
+                                    )
+                                },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.primary
+                                ),
+                                modifier = Modifier.height(36.dp)
+                            ) {
+                                Text("Retry", fontSize = 14.sp)
+                            }
+                        }
+                    }
+                }
+            }
+
+            bannerImagesData.isNotEmpty() -> {
+                // Show dynamic banner with API data
+                println("🎨 Rendering dynamic banner with ${bannerImagesData.size} images")
+                DynamicBannerFoodFromData(
+                    images = bannerImagesData,
+                    onImageClick = { page ->
+                        val banner = validBanners.getOrNull(page)
+                        if (banner != null) {
+                            println("🖱️ Banner clicked at index $page: ${banner.title}")
+                            trackBannerClick(banner)
+
+                            when (banner.bannerType) {
+                                "HOME_PAGE" -> {
+                                    println("🏠 Navigating to home page")
+                                    onBanner1Click()
+                                }
+                                "PROMOTIONAL" -> {
+                                    println("🎉 Navigating to promotional page")
+                                    onBanner2Click()
+                                }
+                                "FLASH_SALE" -> {
+                                    println("⚡ Navigating to flash sale")
+                                    onBanner3Click()
+                                }
+                                else -> {
+                                    banner.clickUrl?.let { url ->
+                                        println("🔗 Navigating to URL: $url")
+                                        // TODO: Implement navigation using WebView or Custom Tab
+                                    }
+                                }
+                            }
+                        } else {
+                            println("⚠️ No banner found for index $page")
+                        }
+                    },
+                    autoScrollDelay = 3000,
+                    height = 200.dp,
+                    roundedCornerShape = 16.dp,
+                    contentScale = ContentScale.Crop,
+                    dotSize = 8.dp,
+                    dotPadding = 4.dp,
+                    dotPosition = DotPosition.OVERLAY,
+                    overlayGradient = false,
+                    selectedDotColor = Color.White,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp, vertical = 12.dp),
+                    padding = BannerPadding(
+                        start = 0.dp,
+                        top = 0.dp,
+                        end = 0.dp,
+                        bottom = 0.dp
+                    )
+                )
+            }
+
+            else -> {
+                // Show fallback/empty state when no banners available
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .padding(12.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Card(
+                        modifier = Modifier.fillMaxSize(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(0xFFF5F5F5)
+                        ),
+                        shape = RoundedCornerShape(16.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            // Empty state visual
+                            Box(
+                                modifier = Modifier
+                                    .size(80.dp)
+                                    .background(
+                                        Color.LightGray.copy(alpha = 0.3f),
+                                        shape = RoundedCornerShape(12.dp)
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "🎯",
+                                    fontSize = 40.sp
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
+                                text = "No banners available",
+                                fontSize = 16.sp,
+                                color = Color.Gray,
+                                fontWeight = FontWeight.Medium
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Check back later for exciting offers!",
+                                fontSize = 13.sp,
+                                color = Color.Gray.copy(alpha = 0.7f),
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+       Text(
+            text = "Banners Available: ${bannerImagesData.size}",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            ),
+            maxLines = 1,
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(start = 12.dp)
         )
 
-        // Use your ₹20 free cash auto applied at checkout
+        // Debug: Print first few banner image URLs
+LaunchedEffect(validBanners) {
+    println("=== Banner Image URLs Debug ===")
+    validBanners.take(5).forEachIndexed { index, banner ->
+        println("Banner $index: ${banner.title}")
+        println("  Image URL: ${banner.imageUrl}")
+        println("  Thumbnail: ${banner.thumbnailUrl}")
+        println("  Mobile URL: ${banner.mobileImageUrl}")
+    }
+}
+
+        // Add this after your banner section for debugging
+Card(
+    modifier = Modifier
+        .fillMaxWidth()
+        .padding(12.dp),
+    colors = CardDefaults.cardColors(
+        containerColor = Color(0xFFE3F2FD)
+    )
+) {
+    Column(modifier = Modifier.padding(12.dp)) {
+    validBanners.take(5).forEachIndexed { index, banner ->
+    Text(
+            text = "Banner $index: ${banner.title}",
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp
+        )
+        Text(
+            text = "Image URL: ${banner.imageUrl}",
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp
+        )
+    }
+        Text(
+            text = "🔍 API Debug Info",
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = "SuperCategory: $superCategoryId",
+            fontSize = 12.sp
+        )
+        Text(
+            text = "Category: $categoryId",
+            fontSize = 12.sp
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Test button
+        Button(
+            onClick = {
+                println("🔍 Manual test triggered")
+                viewModel.loadBannersBySuperCategoryAndCategory(
+                    superCategoryId = superCategoryId,
+                    categoryId = categoryId,
+                    page = 0,
+                    size = 20
+                )
+            },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF2196F3)
+            )
+        ) {
+            Text("Test API Again", color = Color.White)
+        }
+    }
+}
+
+        // ==================== FREE CASH BANNER ====================
         Image(
             painter = painterResource(R.drawable.ic_use_your_free_cash_auto_applied),
-            contentDescription = "Banner",
+            contentDescription = "Free Cash Banner",
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(
-                    min = 100.dp,
-                    max = 300.dp
-                ),
+                .heightIn(min = 100.dp, max = 300.dp),
             contentScale = ContentScale.FillBounds
         )
 
-//         New Year 2026
-        val newYearCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_new_year_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_new_year_2, "View products"),
-            CategoryItem(2, "", R.drawable.ic_new_year_3, "View products"),
-            CategoryItem(3, "", R.drawable.ic_new_year_4, "View products"),
-            CategoryItem(4, "", R.drawable.ic_new_year_5, "View products"),
-        )
-//                Spacer(modifier = Modifier.height(10.dp))
-//        Image(
-//            painter = painterResource(R.drawable.ic_ic_new_year_header),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
-//        CategoryListSimple(
-//            items = newYearCategoriesSimple,
-//            onItemClick = { item -> println("Selected: ${item.name}") },
-//            itemWidth = 113.dp,
-//            itemHeight = 110.dp,
-//            horizontalSpacing = 12.dp,
-////                        verticalPadding = 8.dp,
-//            horizontalPadding = 12.dp,
-//            backgroundColor = Color(0xFF041258)
-//        )
-
-        val items = listOf(
-            CategoryItemBgImg(
-                id = 1,
-                name = "",
-                imageRes = R.drawable.ic_new_year_1
-            ),
-            CategoryItemBgImg(
-                id = 2,
-                name = "",
-                imageRes = R.drawable.ic_new_year_2
-            ),
-            CategoryItemBgImg(
-                id = 3,
-                name = "",
-                imageRes = R.drawable.ic_new_year_3
-            ),
-            CategoryItemBgImg(
-                id = 4,
-                name = "",
-                imageRes = R.drawable.ic_new_year_4
-            ),
-            CategoryItemBgImg(
-                id = 5,
-                name = "",
-                imageRes = R.drawable.ic_new_year_5
-            )
+        // ==================== NEW YEAR 2026 SECTION ====================
+        val newYearItems = listOf(
+            CategoryItemBgImg(id = 1, name = "", imageRes = R.drawable.ic_new_year_1),
+            CategoryItemBgImg(id = 2, name = "", imageRes = R.drawable.ic_new_year_2),
+            CategoryItemBgImg(id = 3, name = "", imageRes = R.drawable.ic_new_year_3),
+            CategoryItemBgImg(id = 4, name = "", imageRes = R.drawable.ic_new_year_4),
+            CategoryItemBgImg(id = 5, name = "", imageRes = R.drawable.ic_new_year_5)
         )
 
         CategoryListBgImg(
             backgroundImageRes = R.drawable.ic_happy_lohri,
-            items = items,
-            onItemClick = { },
+            items = newYearItems,
+            onItemClick = { item ->
+                println("New Year item clicked: ${item.id}")
+            },
             backgroundImageHeight = 250.dp,
             listItemWidth = 140.dp,
             listItemHeight = 140.dp,
@@ -1084,112 +1423,42 @@ fun AllCategoryPage(
             showHorizontalList = false
         )
 
-//        // New Year 2026
-//        val newYearSampleProducts = listOf(
-//            ProductListGrid(
-//                name = "Product 1",
-//                price = "FLAT 10% OFF",
-//                imageRes = R.drawable.ic_new_year_1,
-////                backgroundColor = Color(0xFFFFF8E1) // Light amber
-//            ),
-//            ProductListGrid(
-//                name = "Product 2",
-//                price = "FLAT 25% OFF",
-//                imageRes = R.drawable.ic_new_year_2,
-////                backgroundColor = Color(0xFFE8F5E8) // Light green
-//            ),
-//            ProductListGrid(
-//                name = "Product 3",
-//                price = "FLAT 10% OFF",
-//                imageRes = R.drawable.ic_new_year_3,
-////                backgroundColor = Color(0xFFE3F2FD) // Light blue
-//            )
-//        )
-//        // New Year 2026 Header
-//        Image(
-//            painter = painterResource(R.drawable.ic_ic_new_year_header),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-////                .height(80.dp),
-//            contentScale = ContentScale.FillBounds
-//        )
-//        // header New Year 2026 Grid
-//        CategoryListGridF(
-//            products = newYearSampleProducts,
-//            columns = 3,
-//            gridHeight = 145.dp, // fixed height to avoid crashes
-//            showName = false,
-//            showPrice = false,   // hide price
-//            imageAspectRatio = 3f / 3f,
-//            defaultCardColor = Color(0xFF041258),
-//            textColor = Color.White,
-//            onItemClick = { product ->
-//                println("Clicked on ${product.name}")
-//            }
-//        )
-
-//        Image(
-//            painter = painterResource(R.drawable.ic_introducing_healthy_score),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(180.dp),
-//            contentScale = ContentScale.FillBounds
-//        )
-        // Badges
-//        Image(
-//            painter = painterResource(R.drawable.ic_badges_all),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(180.dp),
-//            contentScale = ContentScale.FillBounds
-//        )
-
-        // Sample data with all fields
-
+        // ==================== TOP RATED RESTAURANTS ====================
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = "Top rated restaurants near you",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.customColors.black
+                color = Color.Black
             ),
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
 
         TopRatedRestaurants(
-                heading = null,
-                subtitle = null,
-                restaurantItems = completeRestaurantItems,
-                onItemClick = { foodItem ->
-                    // Navigate to RestaurantDetails with the item data - using safe call
-                    navController?.navigate("restaurant_details/${foodItem.id}")
-                    // Or if using direct navigation with parcelable:
-                    // navController?.currentBackStackEntry?.savedStateHandle?.set("restaurantItem", foodItem)
-                    // navController?.navigate("restaurant_details")
-                },
-                modifier = Modifier.fillMaxWidth(),
-                backgroundColor = Color.White,
-                cardWidth = 110.dp,
-                cardHeight = 190.dp,
-                imageHeight = 130.dp,
-                imageCornerRadius = 15.dp,
-                spacing = 15.dp,
-                horizontalPadding = 12.dp,
-                verticalPadding = 0.dp,
-                headingBottomPadding = 0.dp
-            )
+            heading = null,
+            subtitle = null,
+            restaurantItems = completeRestaurantItems,
+            onItemClick = { foodItem ->
+                navController?.navigate("restaurant_details/${foodItem.id}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color.White,
+            cardWidth = 110.dp,
+            cardHeight = 190.dp,
+            imageHeight = 130.dp,
+            imageCornerRadius = 15.dp,
+            spacing = 15.dp,
+            horizontalPadding = 12.dp,
+            verticalPadding = 0.dp,
+            headingBottomPadding = 0.dp
+        )
 
-        // Housefull Sale
+        // ==================== HOUSEFULL SALE ====================
         val housefullSaleCategoriesSimple = listOf(
             CategoryItem(0, "", R.drawable.ic_housefull_sale_1, "View products"),
             CategoryItem(1, "", R.drawable.ic_housefull_sale_2, "View products"),
@@ -1198,54 +1467,54 @@ fun AllCategoryPage(
             CategoryItem(3, "", R.drawable.ic_housefull_sale_4, "View products"),
         )
 
-//        Spacer(modifier = Modifier.height(10.dp))
         Image(
             painter = painterResource(R.drawable.ic_housefull_sale_header),
-            contentDescription = "Banner",
+            contentDescription = "Housefull Sale",
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(
-                    min = 100.dp,
-                    max = 300.dp
-                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-            contentScale = ContentScale.FillBounds
-        )
-        CategoryListSimple(
-            items = housefullSaleCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
-            itemWidth = 110.dp,
-            itemHeight = 110.dp,
-            horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
-            horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFFC653)
-        )
-        Image(
-            painter = painterResource(R.drawable.ic_housefull_sale_footer),
-            contentDescription = "Banner",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(20.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+                .heightIn(min = 100.dp, max = 300.dp),
             contentScale = ContentScale.FillBounds
         )
 
-        // Healthy Score
+        CategoryListSimple(
+            items = housefullSaleCategoriesSimple,
+            onItemClick = { item ->
+                println("Housefull Sale item selected: ${item.name}")
+            },
+            itemWidth = 110.dp,
+            itemHeight = 110.dp,
+            horizontalSpacing = 12.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFFFC653)
+        )
+
+        Image(
+            painter = painterResource(R.drawable.ic_housefull_sale_footer),
+            contentDescription = "Housefull Sale Footer",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp),
+            contentScale = ContentScale.FillBounds
+        )
+
+        // ==================== HEALTHY SCORE BANNER ====================
         BannerFood(
             images = listOf(
-                painterResource(id = R.drawable.ic_introducing_healthy_score),
-                painterResource(id = R.drawable.all_eat_right),
-                painterResource(id = R.drawable.all_flat_frre_coke),
-                painterResource(id = R.drawable.buy_one_get_one),
-                painterResource(id = R.drawable.get_flat_off),
-                painterResource(id = R.drawable.offkfc_bucket),
-                painterResource(id = R.drawable.anupam_restaurant),
-                painterResource(id = R.drawable.bikkgane_biryani),
+                painterResource(R.drawable.ic_introducing_healthy_score),
+                painterResource(R.drawable.all_eat_right),
+                painterResource(R.drawable.all_flat_frre_coke),
+                painterResource(R.drawable.buy_one_get_one),
+                painterResource(R.drawable.get_flat_off),
+                painterResource(R.drawable.offkfc_bucket),
+                painterResource(R.drawable.anupam_restaurant),
+                painterResource(R.drawable.bikkgane_biryani),
             ),
             onImageClick = { page ->
                 when (page) {
                     0 -> onBanner1Click()
                     1 -> onBanner2Click()
                     2 -> onBanner3Click()
+                    else -> println("Healthy score banner $page clicked")
                 }
             },
             autoScrollDelay = 3000,
@@ -1255,14 +1524,13 @@ fun AllCategoryPage(
             dotSize = 8.dp,
             dotPadding = 4.dp,
             dotPosition = DotPosition.NONE,
-            overlayGradient = false, // Adds gradient for better visibility
+            overlayGradient = false,
             selectedDotColor = Color.White,
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             padding = BannerPadding(start = 10.dp, top = 15.dp, end = 10.dp, bottom = 15.dp)
         )
 
-        // Jantastic Bites
+        // ==================== JANTASTIC BITES ====================
         val jantasticBitesCategoriesSimple = listOf(
             CategoryItem(0, "", R.drawable.ic_jantastic_bites_1, "View products"),
             CategoryItem(1, "", R.drawable.ic_jantastic_bites_2, "View products"),
@@ -1272,40 +1540,40 @@ fun AllCategoryPage(
             CategoryItem(5, "", R.drawable.ic_jantastic_bites_6, "View products"),
             CategoryItem(6, "", R.drawable.ic_jantastic_bites_7, "View products"),
         )
+
         Spacer(modifier = Modifier.height(20.dp))
         Image(
             painter = painterResource(R.drawable.ic_jantastic_bites_header),
-            contentDescription = "Banner",
+            contentDescription = "Jantastic Bites",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(150.dp),
-//            .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
             contentScale = ContentScale.FillBounds
         )
+
         CategoryListSimple(
             items = jantasticBitesCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
+            onItemClick = { item ->
+                println("Jantastic Bites item selected: ${item.name}")
+            },
             itemWidth = 113.dp,
             itemHeight = 110.dp,
             horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
             backgroundColor = Color(0xFFFF4423)
         )
+
         Image(
             painter = painterResource(R.drawable.ic_jantastic_bites_footer_2),
-            contentDescription = "Banner",
+            contentDescription = "Jantastic Bites Footer",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(25.dp), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
+                .height(25.dp),
             contentScale = ContentScale.FillBounds
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Feature this week
+        // ==================== FEATURE THIS WEEK ====================
         val featureThisWeekCategoriesSimple = listOf(
             CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
             CategoryItem(1, "", R.drawable.ic_credit_card_week, "View products"),
@@ -1324,191 +1592,75 @@ fun AllCategoryPage(
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.customColors.black
+                color = Color.Black
             ),
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
-//        Image(
-//            painter = painterResource(R.drawable.ic_feature_this_week),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
+
         CategoryListSimple(
             items = featureThisWeekCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
+            onItemClick = { item ->
+                println("Feature This Week item selected: ${item.name}")
+            },
             itemWidth = 100.dp,
             itemHeight = 120.dp,
             horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFFFFFF)
+            backgroundColor = Color.White
         )
 
-//        Popular Chain
-//        val sampleProducts = listOf(
-//            ProductListGrid(
-//                name = "Product 1",
-//                price = "FLAT 10% OFF",
-//                imageRes = R.drawable.popular_chain_1,
-////                backgroundColor = Color(0xFFFFF8E1) // Light amber
-//            ),
-//            ProductListGrid(
-//                name = "Product 2",
-//                price = "FLAT 25% OFF",
-//                imageRes = R.drawable.popular_chain_2,
-////                backgroundColor = Color(0xFFE8F5E8) // Light green
-//            ),
-//            ProductListGrid(
-//                name = "Product 3",
-//                price = "FLAT 10% OFF",
-//                imageRes = R.drawable.popular_chain_3,
-////                backgroundColor = Color(0xFFE3F2FD) // Light blue
-//            ),
-//            ProductListGrid(
-//                name = "Product 4",
-//                price = "FLAT 20% OFF",
-//                imageRes = R.drawable.popular_chain_4
-//                // No background color - will use default
-//            ),
-//            ProductListGrid(
-//                name = "Product 5",
-//                price = "FLAT 10% OFF",
-//                imageRes = R.drawable.popular_chain_5
-//                // No background color - will use default
-//            ),
-//            ProductListGrid(
-//                name = "Product 6",
-//                price = "FLAT 30% OFF",
-//                imageRes = R.drawable.popular_chain_6
-//                // No background color - will use default
-//            )
-//        )
-        // Display CategoryListGrid showing **name only**
+        // ==================== POPULAR CHAIN ====================
         Image(
             painter = painterResource(R.drawable.ic_popular_chain_header),
-            contentDescription = "Banner",
+            contentDescription = "Popular Chain",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(80.dp),
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
             contentScale = ContentScale.FillBounds
         )
-        // Example 1: Fixed image height (original behavior)
-//        CategoryListGridF(
-//            products = sampleProducts,
-//            columns = 3,
-//            gridHeight = 350.dp, // fixed height to avoid crashes
-//            showName = false,
-//            showPrice = true,   // hide price
-//            imageAspectRatio = 3f / 3f,
-//            defaultCardColor = Color(0xFF023726),
-//            textColor = Color.White,
-//            onItemClick = { product ->
-//                println("Clicked on ${product.name}")
-//            }
-//        )
 
         val sampleProductsD = listOf(
-            ProductListDGrid(
-                name = "Product 1",
-                price = "FLAT 10% OFF",
-                imageRes = R.drawable.popular_chain_1,
-//                backgroundColor = Color(0xFFFFF8E1) // Light amber
-//            add    backgroundColor = Color(0xFFFFF8E1) // Light amber
-            ),
-            ProductListDGrid(
-                name = "Product 2",
-                price = "FLAT 25% OFF",
-                imageRes = R.drawable.popular_chain_2,
-//                backgroundColor = Color(0xFFE8F5E8) // Light green
-            ),
-            ProductListDGrid(
-                name = "Product 3",
-                price = "FLAT 10% OFF",
-                imageRes = R.drawable.popular_chain_3,
-//                backgroundColor = Color(0xFFE3F2FD) // Light blue
-            ),
-            ProductListDGrid(
-                name = "Product 4",
-                price = "FLAT 20% OFF",
-                imageRes = R.drawable.popular_chain_4
-                // No background color - will use default
-            ),
-            ProductListDGrid(
-                name = "Product 5",
-                price = "FLAT 10% OFF",
-                imageRes = R.drawable.popular_chain_5
-                // No background color - will use default
-            ),
-            ProductListDGrid(
-                name = "Product 6",
-                price = "FLAT 30% OFF",
-                imageRes = R.drawable.popular_chain_6
-                // No background color - will use default
-            ),
-            ProductListDGrid(
-                name = "Product 7",
-                price = "FLAT 20% OFF",
-                imageRes = R.drawable.popular_chain_7
-                // No background color - will use default
-            ),
-            ProductListDGrid(
-                name = "Product 8",
-                price = "FLAT 50% OFF",
-                imageRes = R.drawable.popular_chain_8
-                // No background color - will use default
-            ),
-            ProductListDGrid(
-                name = "Product 9",
-                price = "FLAT 20% OFF",
-                imageRes = R.drawable.popular_chain_9
-                // No background color - will use default
-            ),
-            ProductListDGrid(
-                name = "Product 10",
-                price = "FLAT 50% OFF",
-                imageRes = R.drawable.popular_chain_10
-                // No background color - will use default
-            )
+            ProductListDGrid(name = "Product 1", price = "FLAT 10% OFF", imageRes = R.drawable.popular_chain_1),
+            ProductListDGrid(name = "Product 2", price = "FLAT 25% OFF", imageRes = R.drawable.popular_chain_2),
+            ProductListDGrid(name = "Product 3", price = "FLAT 10% OFF", imageRes = R.drawable.popular_chain_3),
+            ProductListDGrid(name = "Product 4", price = "FLAT 20% OFF", imageRes = R.drawable.popular_chain_4),
+            ProductListDGrid(name = "Product 5", price = "FLAT 10% OFF", imageRes = R.drawable.popular_chain_5),
+            ProductListDGrid(name = "Product 6", price = "FLAT 30% OFF", imageRes = R.drawable.popular_chain_6),
+            ProductListDGrid(name = "Product 7", price = "FLAT 20% OFF", imageRes = R.drawable.popular_chain_7),
+            ProductListDGrid(name = "Product 8", price = "FLAT 50% OFF", imageRes = R.drawable.popular_chain_8),
+            ProductListDGrid(name = "Product 9", price = "FLAT 20% OFF", imageRes = R.drawable.popular_chain_9),
+            ProductListDGrid(name = "Product 10", price = "FLAT 50% OFF", imageRes = R.drawable.popular_chain_10)
         )
-        // Example 1: Square items with fixed width/height
+
         CategoryListScrollDF(
             products = sampleProductsD,
             itemWidth = 121.dp,
             itemHeight = 140.dp,
             backgroundColor = Color(0xFF023726),
-//            showName = false,
-//            showPrice = true,
-//            imageHeight = 100.dp,
             itemSpacing = 0.dp,
             rowSpacing = 0.dp,
             onItemClick = { product ->
-                println("Clicked on ${product.name}")
+                println("Popular chain product clicked: ${product.name}")
             }
         )
 
-        // More on hufko
+        // ==================== MORE ON HUFKO ====================
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = "More On Hufko",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.customColors.black
+                color = Color.Black
             ),
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -1523,125 +1675,21 @@ fun AllCategoryPage(
             CategoryItem(7, "", R.drawable.ic_explore_more_4, "View products"),
             CategoryItem(8, "", R.drawable.ic_explore_more_6, "View products"),
         )
+
         CategoryListSimple(
             items = moreOnHufkoCategoriesSimple,
-            onItemClick = { item -> println("Selected: ${item.name}") },
+            onItemClick = { item ->
+                println("More On Hufko item selected: ${item.name}")
+            },
             itemWidth = 100.dp,
             itemHeight = 100.dp,
             horizontalSpacing = 12.dp,
-//                        verticalPadding = 8.dp,
             horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFFFFFF)
+            backgroundColor = Color.White
         )
 
-        // Explore More
-//        val exploreMoreCategoriesSimple = listOf(
-//            CategoryItem(0, "", R.drawable.ic_explore_more_1, "View products"),
-//            CategoryItem(1, "", R.drawable.ic_explore_more_2, "View products"),
-//            CategoryItem(3, "", R.drawable.ic_explore_more_3, "View products"),
-//            CategoryItem(4, "", R.drawable.ic_explore_more_4, "View products"),
-//            CategoryItem(5, "", R.drawable.ic_explore_more_5, "View products"),
-//            CategoryItem(6, "", R.drawable.ic_explore_more_6, "View products"),
-//        )
-//
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Text(
-//            text = "Explore More",
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                fontSize = 24.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = MaterialTheme.customColors.black
-//            ),
-//            maxLines = 1,
-//            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Image(
-//            painter = painterResource(R.drawable.ic_explore_more),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
-//        CategoryListSimple(
-//            items = exploreMoreCategoriesSimple,
-//            onItemClick = { item -> println("Selected: ${item.name}") },
-//            itemWidth = 100.dp,
-//            itemHeight = 120.dp,
-//            horizontalSpacing = 12.dp,
-////                        verticalPadding = 8.dp,
-//            horizontalPadding = 12.dp,
-//            backgroundColor = Color(0xFFFFFFFF)
-//        )
-
-//        // Feature this week
-//        val featureThisWeekCategoriesSimple = listOf(
-//            CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
-//            CategoryItem(1, "", R.drawable.ic_chikki_gajak, "View products"),
-//            CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
-//        )
-//
-//        Image(
-//            painter = painterResource(R.drawable.ic_feature_this_week),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
-//        CategoryListSimple(
-//            items = featureThisWeekCategoriesSimple,
-//            onItemClick = { item -> println("Selected: ${item.name}") },
-//            itemWidth = 170.dp,
-//            itemHeight = 220.dp,
-//            horizontalSpacing = 12.dp,
-////                        verticalPadding = 8.dp,
-//            horizontalPadding = 12.dp,
-//            backgroundColor = Color(0xFFFDFDF1)
-//        )
-
-//        // 2026 Resolution
-//        val resolutionCategoriesSimple = listOf(
-//            CategoryItem(0, "", R.drawable.ic_resolution_1, "View products"),
-//            CategoryItem(1, "", R.drawable.ic_resolution_2, "View products"),
-//            CategoryItem(2, "", R.drawable.ic_resolution_3, "View products"),
-//            CategoryItem(3, "", R.drawable.ic_resolution_4, "View products"),
-//            CategoryItem(4, "", R.drawable.ic_resolution_5, "View products"),
-//        )
-//
-//        Spacer(modifier = Modifier.height(10.dp))
-//        Image(
-//            painter = painterResource(R.drawable.ic_resolution_header),
-//            contentDescription = "Banner",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .heightIn(
-//                    min = 100.dp,
-//                    max = 300.dp
-//                ), // Height between min and max, // 30% of screen height, // Sets height based on width and aspect ratio
-//            contentScale = ContentScale.FillBounds
-//        )
-//        CategoryListSimple(
-//            items = resolutionCategoriesSimple,
-//            onItemClick = { item -> println("Selected: ${item.name}") },
-//            itemWidth = 100.dp,
-//            itemHeight = 120.dp,
-//            horizontalSpacing = 12.dp,
-////                        verticalPadding = 8.dp,
-//            horizontalPadding = 12.dp,
-//            backgroundColor = Color(0xFFE3FFC4)
-//        )
-
+        // ==================== FILTER BUTTON ====================
         Spacer(modifier = Modifier.height(15.dp))
-        // Filter Button
-
         val allFilters = FilterConfig(
             filters = listOf(
                 FilterChip(
@@ -1680,29 +1728,30 @@ fun AllCategoryPage(
             ),
             rows = 1
         )
+
         FilterButtonFood(
             filterConfig = allFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
             }
         )
 
+        // ==================== RESTAURANTS DELIVERING TO YOU ====================
         Spacer(modifier = Modifier.height(15.dp))
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = Color.Black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -1710,289 +1759,39 @@ fun AllCategoryPage(
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.customColors.black
+                color = Color.Black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
-        // Sample data based on the provided images
-        val sampleRestaurantItems = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.restaurant_image_all_food_1,
-                title = "Paneer Delight Momos",
-                price = "159",
-                restaurantName = "Goblins",
-                rating = "4.0",
-                deliveryTime = "30-35 mins",
-                distance = "5.8 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Govindpuram",
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.restaurant_image_all_food_2,
-                title = "Egg Curry",
-                price = "90",
-                restaurantName = "Bori & Rori Junction",
-                rating = "3.5",
-                deliveryTime = "40-45 mins",
-                distance = "6.8 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Noida",
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.restaurant_image_all_food_3,
-                title = "Tawa Chicken",
-                price = "299",
-                restaurantName = "FFC Express",
-                rating = "3.9",
-                deliveryTime = "40-45 mins",
-                distance = "8.2 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Delhi",
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.restaurant_image_all_food_4,
-                title = "Pasta",
-                price = "300 for one",
-                restaurantName = "Gustaro Pasta",
-                rating = "4.5",
-                deliveryTime = "70-75 mins",
-                distance = "14.3 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Bengaluru",
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.restaurant_image_all_food_5,
-                title = "Burger",
-                price = "200 for one",
-                restaurantName = "Ayub Chaumin Wale",
-                rating = "4.3",
-                deliveryTime = "25-30 mins",
-                distance = "4.3 km",
-                discount = "40%",
-                discountAmount = "₹20",
-                address = "Govindpuram",
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.restaurant_image_all_food_6,
-                title = "Biryani",
-                price = "400 for one",
-                restaurantName = "Charcoal Eats - Biryani & Beyond",
-                rating = "4.2",
-                deliveryTime = "50-55 mins",
-                distance = "13.8 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Meerut",
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.restaurant_image_all_food_7,
-                title = "Honey Chilli Porero",
-                price = "160",
-                restaurantName = "Desi Mugz",
-                rating = "4.1",
-                deliveryTime = "60-65 mins",
-                distance = "14.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Badarpur",
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.restaurant_image_all_food_8,
-                title = "Paneer Paratha",
-                price = "119",
-                restaurantName = "Swaad Aaya",
-                rating = "3.5",
-                deliveryTime = "55-60 mins",
-                distance = "13.8 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Meerut",
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.restaurant_image_all_food_9,
-                title = "Arhar Dal Tadka",
-                price = "180",
-                restaurantName = "Uncle Ke Rasoi",
-                rating = "4.0",
-                deliveryTime = "55-60 mins",
-                distance = "13 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Agra",
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.restaurant_image_all_food_10,
-                title = "Pure Veg",
-                price = "200 for one",
-                restaurantName = "Shree Krishna Baker's",
-                rating = "3.5",
-                deliveryTime = "45-50 mins",
-                distance = "10.9 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Aligarh",
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.restaurant_image_all_food_11,
-                title = "Paneer Manchurian Dry",
-                price = "110",
-                restaurantName = "King Of Spices",
-                rating = "4.0",
-                deliveryTime = "55-60 mins",
-                distance = "13 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hydrabad",
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.restaurant_image_all_food_12,
-                title = "North Indian",
-                price = "450 for one",
-                restaurantName = "The Food Workshop",
-                rating = "4.1",
-                deliveryTime = "50-55 mins",
-                distance = "12.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chennai",
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.restaurant_image_all_food_13,
-                title = "Veg Fried Rice with Veg Manchurian",
-                price = "250",
-                restaurantName = "Old Veg Rasoi",
-                rating = "4.0",
-                deliveryTime = "55-60 mins",
-                distance = "13 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Agra",
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.restaurant_image_all_food_14,
-                title = "Pure Veg",
-                price = "",
-                restaurantName = "Radha Rani Ki Rasoi",
-                rating = "3.8",
-                deliveryTime = "65-70 mins",
-                distance = "13.9 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Aligarh",
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.restaurant_image_all_food_15,
-                title = "Farmers Choice Pizza",
-                price = "124",
-                restaurantName = "The Hot Pizza",
-                rating = "3.6",
-                deliveryTime = "50-55 mins",
-                distance = "12 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Hydrabad",
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.restaurant_image_all_food_16,
-                title = "Chaap Biryani",
-                price = "210",
-                restaurantName = "Annapurna Thali",
-                rating = "3.7",
-                deliveryTime = "55-60 mins",
-                distance = "14.1 km",
-                discount = "60%",
-                discountAmount = "₹20",
-                address = "Hydrabad",
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.restaurant_image_all_food_17,
-                title = "Chinese",
-                price = "200 for one",
-                restaurantName = "Chinese Wokology",
-                rating = "4.1",
-                deliveryTime = "45-50 mins",
-                distance = "14.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Badarpur",
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.restaurant_image_all_food_18,
-                title = "Eggless Red Velvet Cake",
-                price = "599",
-                restaurantName = "Bakincake",
-                rating = "4.0",
-                deliveryTime = "55-60 mins",
-                distance = "13.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Meerut",
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.restaurant_image_all_food_19,
-                title = "Pure Veg",
-                price = "200 for one",
-                restaurantName = "mahapooran",
-                rating = "3.7",
-                deliveryTime = "30-35 mins",
-                distance = "5.6 km",
-                discount = "50%",
-                discountAmount = "₹20",
-                address = "Badarpur",
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.restaurant_image_all_food_20,
-                title = "Paneer Handi",
-                price = "180",
-                restaurantName = "Shree Jee Restaurant",
-                rating = "4.1",
-                deliveryTime = "45-50 mins",
-                distance = "7.3 km",
-                discount = "60%",
-                discountAmount = "₹20",
-                address = "Delhi",
-            )
-        )
 
+        // ==================== RESTAURANT ITEMS LIST ====================
         Column {
-            sampleRestaurantItems.forEach { restaurantItem ->
+            sampleRestaurantItemsAll.forEach { restaurantItem ->
                 RestaurantItemListFull(
                     restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
+                    onWishlistClick = {
+
+                    },
+                    onThreeDotClick = {
+
+                    },
+                    onItemClick = {
+
+                    }
                 )
             }
         }
+
+        // Add bottom padding for better scrolling experience
+        Spacer(modifier = Modifier.height(30.dp))
     }
 }
+
+
 
 @Composable
 fun PizzasCategoryPage() {
@@ -80791,4 +80590,9 @@ private fun onBanner2Click() {
 private fun onBanner3Click() {
     // Handle banner 3 click
     println("Banner 3 clicked")
+}
+
+private fun onCategoryPageClick() {
+    // Handle banner 3 click
+    println("onCategoryPageClick")
 }

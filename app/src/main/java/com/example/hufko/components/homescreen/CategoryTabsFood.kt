@@ -40,11 +40,15 @@ import coil.compose.rememberAsyncImagePainter
 import kotlinx.coroutines.delay
 
 import com.example.hufko.R
-import com.example.hufko.api.services.model.Banner
 import com.example.hufko.api.services.viewmodels.BannerViewModels
 import com.example.hufko.ui.theme.customColors
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.filled.Error
+import com.example.hufko.api.services.config.NetworkConfig
+import com.example.hufko.api.services.viewmodels.DietFoodViewModel
+import com.example.hufko.components.homescreen.BannerPreNextF
+import com.example.hufko.api.services.models.Banner
+import coil.compose.AsyncImage
 
 //import androidx.compose.ui.Arrangement
 
@@ -737,6 +741,7 @@ fun CategoryTabsFood(
 //         }
 //     )
 // }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DietCategoryPage(
@@ -744,13 +749,37 @@ fun DietCategoryPage(
     onBanner2Click: () -> Unit = {},
     onBanner3Click: () -> Unit = {},
     navController: NavHostController? = null,
-    currentSelectedIndex: Int, // ✅ Added type annotation
-    initialDietTabIndex: Int = 0 // ✅ Accept initial tab index
-){
-    // ✅ Use rememberSaveable to persist state across recompositions
+    currentSelectedIndex: Int,
+    initialDietTabIndex: Int = 0,
+    viewModel: DietFoodViewModel = viewModel()
+) {
     var selectedDietTabIndex by rememberSaveable { mutableIntStateOf(initialDietTabIndex) }
+    val dietFoodItems by viewModel.dietFoodItems.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val error by viewModel.error.collectAsState()
 
-    // ✅ Also save to a shared state that CategoryTabsFood can access
+    // Fetch data when tab changes - Using the correct API call
+    LaunchedEffect(selectedDietTabIndex) {
+        val superCategory = "FOOD_SUPER"
+        val category = "DIET_FOOD_CAT"
+
+        println("🔍 Fetching diet foods with:")
+        println("   SuperCategory: $superCategory")
+        println("   Category: $category")
+        println("   Selected Index: $selectedDietTabIndex")
+
+        // Use loadBannersBySuperCategoryAndCategory directly
+        viewModel.loadDietBannersBySuperCategoryAndCategory(superCategory, category)
+    }
+
+    // Convert API data to banner format
+    val bannerItems = remember(dietFoodItems) {
+        val items = viewModel.convertToBannerItems(dietFoodItems)
+        println("📊 Converted ${dietFoodItems.size} diet items to ${items.size} banner items")
+        items
+    }
+
+    // Save state logic
     val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
     LaunchedEffect(navController) {
@@ -759,90 +788,23 @@ fun DietCategoryPage(
             ?.getStateFlow<Int?>("dietTabIndex", null)
             ?.collect { newIndex ->
                 newIndex?.let { index ->
-                    // Update the selected tab index
                     selectedDietTabIndex = index
-                    // Clear the saved state
                     navController.currentBackStackEntry
                         ?.savedStateHandle
                         ?.remove<Int>("dietTabIndex")
                 }
             }
     }
-    // ✅ Save state when leaving
+
     DisposableEffect(Unit) {
         onDispose {
-            // Save the current diet tab index when leaving this page
             savedStateHandle?.set("dietTabIndex", selectedDietTabIndex)
         }
     }
 
-    // ✅ Handle returning from the see-all screen
-    LaunchedEffect(navController?.currentBackStackEntry) {
-        navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Int>("updatedDietTabIndex")
-            ?.observeForever { newIndex ->
-                if (newIndex != null) {
-                    selectedDietTabIndex = newIndex
-                    navController.currentBackStackEntry?.savedStateHandle?.remove<Int>("updatedDietTabIndex")
-                }
-            }
-    }
-
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
-        val allDietItems = listOf(
-            FoodItemBannerPreNextF(
-                id = 1,
-                imageRes = R.drawable.diet_food_banner1,
-                title = "Grilled Chicken Salad",
-                price = "180",
-                restaurantName = "Fit Feast",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "2.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Rohini, Delhi",
-                calories = "320",
-                protein = "28",
-                isHighProtein = true
-            ),
-            FoodItemBannerPreNextF(
-                id = 2,
-                imageRes = R.drawable.diet_food_banner2,
-                title = "Paneer Quinoa Bowl",
-                price = "160",
-                restaurantName = "Healthy Mash",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "3.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Janakpuri, Delhi",
-                calories = "350",
-                protein = "22",
-                isHighProtein = true
-            ),
-            FoodItemBannerPreNextF(
-                id = 3,
-                imageRes = R.drawable.diet_food_banner3,
-                title = "Oats Peanut Butter Bowl",
-                price = "110",
-                restaurantName = "Muscle Bowl",
-                rating = "4.6",
-                deliveryTime = "12-18 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Paschim Vihar, Delhi",
-                calories = "390",
-                protein = "17",
-                isHighProtein = true
-            ),
-        )
-
         Image(
             painter = painterResource(R.drawable.ic_diet_header),
             contentDescription = "Banner",
@@ -852,99 +814,210 @@ fun DietCategoryPage(
             contentScale = ContentScale.FillBounds
         )
 
-        BannerPreNextF(
-            foodItems = allDietItems,
-            onItemClick = { foodItem ->
-                println("Clicked on: ${foodItem.title}")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 0.dp),
-            backgroundColor1 = Color(0xFF131709),
-            backgroundColor2 = Color(0xFFFFFFFF)
-        )
+        // Show loading state
+        if (isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    CircularProgressIndicator()
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text("Loading diet foods...", color = Color.Gray)
+                }
+            }
+        }
+        // Show error state
+        else if (error != null) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("Error: $error", color = Color.Red)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(onClick = {
+                        val superCategory = "FOOD_SUPER"
+                        val category = "DIET_FOOD_CAT"
+                        viewModel.loadBannersBySuperCategoryAndCategory(superCategory, category)
+                    }) {
+                        Text("Retry")
+                    }
+                }
+            }
+        }
+        // Show data
+        else if (bannerItems.isNotEmpty()) {
+            BannerDynamicPreNextF(
+                foodItems = bannerItems,
+                onItemClick = { foodItem ->
+                    println("Clicked on: ${foodItem.title}")
+                    navController?.navigate("diet_food_detail/${foodItem.id}")
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 0.dp),
+                backgroundColor1 = Color(0xFF131709),
+                backgroundColor2 = Color(0xFFFFFFFF)
+            )
+        } else {
+            // Empty state with debug info
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("No diet food items found", color = Color.Gray)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Raw items: ${dietFoodItems.size}",
+                        color = Color.Gray,
+                        fontSize = 12.sp
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(
+                        onClick = {
+                            val superCategory = "FOOD_SUPER"
+                            val category = "DIET_FOOD_CAT"
+                            viewModel.loadBannersBySuperCategoryAndCategory(superCategory, category)
+                        }
+                    ) {
+                        Text("Refresh")
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(10.dp))
 
         CategoryDietTabsFood(
             navController = navController,
-            currentSelectedIndex  = currentSelectedIndex,
+            currentSelectedIndex = currentSelectedIndex,
             selectedDietTabIndex = selectedDietTabIndex,
             onCategorySelected = { dietCategoryPage ->
-                // Update selected index based on category (except See All)
                 if (dietCategoryPage != DietCategoryPage.SeeAll) {
-                    selectedDietTabIndex = when (dietCategoryPage) {
-                        //DietCategoryPage.Chicken -> 0
-                        //DietCategoryPage.Salad -> 1
-                        //DietCategoryPage.Mutton -> 2
-                        //DietCategoryPage.Kebabs -> 3
-                        //DietCategoryPage.HealthySnacks -> 4
-                        //DietCategoryPage.LowCalorie -> 5
-                        //DietCategoryPage.Vegan -> 6
-                        //DietCategoryPage.ProteinRich -> 7
-                        //DietCategoryPage.SeeAll -> 8
-                        DietCategoryPage.Chicken -> 0
-                    DietCategoryPage.Salad -> 1
-                    DietCategoryPage.Mutton -> 2
-                    DietCategoryPage.Kebabs -> 3
-                    DietCategoryPage.HealthySnacks -> 4
-                    DietCategoryPage.LowCalorie -> 5
-                    DietCategoryPage.Vegan -> 6
-                    DietCategoryPage.ProteinRich -> 7
-
-                    // Categories from your list (indices 8-22)
-                    DietCategoryPage.Dessert -> 8
-                    DietCategoryPage.VegMeal -> 9
-                    DietCategoryPage.Bowl -> 10
-                    DietCategoryPage.Sweets -> 11
-                    DietCategoryPage.Khichdi -> 12
-                    DietCategoryPage.Sundae -> 13
-                    DietCategoryPage.Juice -> 14
-                    DietCategoryPage.Lassi -> 15
-                    DietCategoryPage.CurdRice -> 16
-                    DietCategoryPage.Pudding -> 17
-                    DietCategoryPage.Custard -> 18
-                    DietCategoryPage.Soup -> 19
-                    DietCategoryPage.Brownie -> 20
-                    DietCategoryPage.Waffles -> 21
-                    DietCategoryPage.ColdCoffee -> 22
-
-                    // Additional diet-specific items (indices 23-46)
-                    DietCategoryPage.GrilledChicken -> 23
-                    DietCategoryPage.SteamedFish -> 24
-                    DietCategoryPage.QuinoaBowl -> 25
-                    DietCategoryPage.AvocadoToast -> 26
-                    DietCategoryPage.GreenSmoothie -> 27
-                    DietCategoryPage.Oatmeal -> 28
-                    DietCategoryPage.GreekYogurt -> 29
-                    DietCategoryPage.EggWhiteOmelette -> 30
-                    DietCategoryPage.TunaSalad -> 31
-                    DietCategoryPage.LentilSoup -> 32
-                    DietCategoryPage.CottageCheese -> 33
-                    DietCategoryPage.SproutsSalad -> 34
-                    DietCategoryPage.BrownRiceBowl -> 35
-                    DietCategoryPage.SteamedVeggies -> 36
-                    DietCategoryPage.FruitBowl -> 37
-                    DietCategoryPage.DetoxWater -> 38
-                    DietCategoryPage.HerbalTea -> 39
-                    DietCategoryPage.ProteinBar -> 40
-                    DietCategoryPage.BoiledEggs -> 41
-                    DietCategoryPage.HummusPlate -> 42
-                    DietCategoryPage.SushiRolls -> 43
-                    DietCategoryPage.TofuStirFry -> 44
-                    DietCategoryPage.ChiaPudding -> 45
-                    DietCategoryPage.MilletBowl -> 46
-                    DietCategoryPage.SeeAll -> 47
-
-                   //DietCategoryPage.SeeAll -> currentPage
-                    }
+                    selectedDietTabIndex = getIndexFromCategory(dietCategoryPage)
                 }
             },
             onTabIndexChanged = { newIndex ->
-                // ✅ Update local state when tab changes
                 selectedDietTabIndex = newIndex
             }
         )
+    }
+}
+
+// Helper function to get subCategory from index
+private fun getSubCategoryFromIndex(index: Int): String {
+    return when (index) {
+        0 -> "Chicken"
+        1 -> "Salad"
+        2 -> "Mutton"
+        3 -> "Kebabs"
+        4 -> "HealthySnacks"
+        5 -> "LowCalorie"
+        6 -> "Vegan"
+        7 -> "ProteinRich"
+        8 -> "Dessert"
+        9 -> "VegMeal"
+        10 -> "Bowl"
+        11 -> "Sweets"
+        12 -> "Khichdi"
+        13 -> "Sundae"
+        14 -> "Juice"
+        15 -> "Lassi"
+        16 -> "CurdRice"
+        17 -> "Pudding"
+        18 -> "Custard"
+        19 -> "Soup"
+        20 -> "Brownie"
+        21 -> "Waffles"
+        22 -> "ColdCoffee"
+        23 -> "GrilledChicken"
+        24 -> "SteamedFish"
+        25 -> "QuinoaBowl"
+        26 -> "AvocadoToast"
+        27 -> "GreenSmoothie"
+        28 -> "Oatmeal"
+        29 -> "GreekYogurt"
+        30 -> "EggWhiteOmelette"
+        31 -> "TunaSalad"
+        32 -> "LentilSoup"
+        33 -> "CottageCheese"
+        34 -> "SproutsSalad"
+        35 -> "BrownRiceBowl"
+        36 -> "SteamedVeggies"
+        37 -> "FruitBowl"
+        38 -> "DetoxWater"
+        39 -> "HerbalTea"
+        40 -> "ProteinBar"
+        41 -> "BoiledEggs"
+        42 -> "HummusPlate"
+        43 -> "SushiRolls"
+        44 -> "TofuStirFry"
+        45 -> "ChiaPudding"
+        46 -> "MilletBowl"
+        47 -> "SeeAll"
+        else -> ""
+    }
+}
+
+// Helper function to get index from category
+private fun getIndexFromCategory(category: DietCategoryPage): Int {
+    return when (category) {
+        DietCategoryPage.Chicken -> 0
+        DietCategoryPage.Salad -> 1
+        DietCategoryPage.Mutton -> 2
+        DietCategoryPage.Kebabs -> 3
+        DietCategoryPage.HealthySnacks -> 4
+        DietCategoryPage.LowCalorie -> 5
+        DietCategoryPage.Vegan -> 6
+        DietCategoryPage.ProteinRich -> 7
+        DietCategoryPage.Dessert -> 8
+        DietCategoryPage.VegMeal -> 9
+        DietCategoryPage.Bowl -> 10
+        DietCategoryPage.Sweets -> 11
+        DietCategoryPage.Khichdi -> 12
+        DietCategoryPage.Sundae -> 13
+        DietCategoryPage.Juice -> 14
+        DietCategoryPage.Lassi -> 15
+        DietCategoryPage.CurdRice -> 16
+        DietCategoryPage.Pudding -> 17
+        DietCategoryPage.Custard -> 18
+        DietCategoryPage.Soup -> 19
+        DietCategoryPage.Brownie -> 20
+        DietCategoryPage.Waffles -> 21
+        DietCategoryPage.ColdCoffee -> 22
+        DietCategoryPage.GrilledChicken -> 23
+        DietCategoryPage.SteamedFish -> 24
+        DietCategoryPage.QuinoaBowl -> 25
+        DietCategoryPage.AvocadoToast -> 26
+        DietCategoryPage.GreenSmoothie -> 27
+        DietCategoryPage.Oatmeal -> 28
+        DietCategoryPage.GreekYogurt -> 29
+        DietCategoryPage.EggWhiteOmelette -> 30
+        DietCategoryPage.TunaSalad -> 31
+        DietCategoryPage.LentilSoup -> 32
+        DietCategoryPage.CottageCheese -> 33
+        DietCategoryPage.SproutsSalad -> 34
+        DietCategoryPage.BrownRiceBowl -> 35
+        DietCategoryPage.SteamedVeggies -> 36
+        DietCategoryPage.FruitBowl -> 37
+        DietCategoryPage.DetoxWater -> 38
+        DietCategoryPage.HerbalTea -> 39
+        DietCategoryPage.ProteinBar -> 40
+        DietCategoryPage.BoiledEggs -> 41
+        DietCategoryPage.HummusPlate -> 42
+        DietCategoryPage.SushiRolls -> 43
+        DietCategoryPage.TofuStirFry -> 44
+        DietCategoryPage.ChiaPudding -> 45
+        DietCategoryPage.MilletBowl -> 46
+        DietCategoryPage.SeeAll -> 47
     }
 }
 
@@ -986,6 +1059,28 @@ fun AllCategoryPage(
     onBanner2Click: () -> Unit = {},
     onBanner3Click: () -> Unit = {}
 ) {
+    // Collect healthy score banners
+    val healthyScoreBanners by viewModel.healthyScoreBanners.collectAsState()
+
+    // Load healthy score banners when composable is first created
+    LaunchedEffect(Unit) {
+        viewModel.loadHealthyScoreBanners()
+    }
+     // Create banner images data for healthy score
+    val healthyScoreBannerImagesData by remember(healthyScoreBanners) {
+        derivedStateOf {
+            healthyScoreBanners.mapNotNull { banner ->
+                val fullUrl = banner.imageUrl?.let { url ->
+                    when {
+                        url.startsWith("http") -> url
+                        url.startsWith("/") -> "${NetworkConfig.BASE_URL}$url"
+                        else -> "${NetworkConfig.BASE_URL}/$url"
+                    }
+                }
+                fullUrl?.let { BannerImageData.Remote(url = it) }
+            }
+        }
+    }
 
     fun trackBannerClick(banner: Banner) {
         println("🎯 Banner clicked: ${banner.title} (ID: ${banner.id}, Type: ${banner.bannerType})")
@@ -1018,76 +1113,39 @@ fun AllCategoryPage(
         }
     }
 
-    // Filter only banners with valid image URLs and active status
-    val validBanners by remember(allBanners) {
-        derivedStateOf {
-            val filtered = allBanners.filter { banner ->
-                val hasValidImage = !banner.imageUrl.isNullOrBlank()
-                val isActive = banner.isActive == true
-                val isValid = hasValidImage && isActive
+    // Filter only banners with valid image URLs (no isActive field in your banner data)
+val validBanners by remember(allBanners) {
+    derivedStateOf {
+        val filtered = allBanners.filter { banner ->
+            val hasValidImage = !banner.imageUrl.isNullOrBlank()
 
-                if (!hasValidImage && banner.id != null) {
-                    println("⚠️ Banner ${banner.id} (${banner.title}) has no valid image URL")
-                }
-                if (!isActive && banner.id != null) {
-                    println("⚠️ Banner ${banner.id} (${banner.title}) is inactive")
-                }
-
-                isValid
+            if (!hasValidImage && banner.id != null) {
+                println("⚠️ Banner ${banner.id} (${banner.title}) has no valid image URL")
             }
-            filtered
+
+            hasValidImage  // Only check for valid image URL
         }
+        println("✅ Found ${filtered.size} valid banners out of ${allBanners.size} total")
+        filtered
     }
+}
 
    // In AllCategoryPage, update bannerImagesData creation:
 val bannerImagesData by remember(validBanners) {
     derivedStateOf {
         validBanners.mapNotNull { banner ->
-            // Fix the image URL
+            // Fix the image URL using BASE_URL (no trailing slash)
             val fullUrl = banner.imageUrl?.let { url ->
-                if (url.startsWith("/")) {
-                    "http://192.168.31.49:8085$url"
-                } else {
-                    url
+                when {
+                    url.startsWith("http") -> url  // Already full URL
+                    url.startsWith("/") -> "${NetworkConfig.BASE_URL}$url"  // BASE_URL has no trailing slash
+                    else -> "${NetworkConfig.BASE_URL}/$url"  // Add missing slash
                 }
             }
             fullUrl?.let { BannerImageData.Remote(url = it) }
         }
     }
 }
-
-    // Debug logging
-    LaunchedEffect(validBanners, bannerImagesData, isLoading, error) {
-        println("=== AllCategoryPage State Debug ===")
-        println("Total banners from API: ${allBanners.size}")
-        println("Valid banners with images: ${validBanners.size}")
-        println("Banner images data created: ${bannerImagesData.size}")
-        println("Is Loading: $isLoading")
-        println("Error: $error")
-        println("Pagination - Page: ${viewModel.currentPage.value}, Total Pages: $totalPages, Total Elements: $totalElements")
-
-        if (allBanners.isEmpty() && !isLoading && error == null) {
-            println("⚠️ No banners received from API - showing fallback UI")
-            println("💡 Troubleshooting tips:")
-            println("   1. Check if superCategoryId '$superCategoryId' is correct")
-            println("   2. Check if categoryId '$categoryId' is correct")
-            println("   3. Verify API endpoint is accessible")
-            println("   4. Check if there are any active banners in the database")
-        }
-
-        if (error != null) {
-            println("❌ Error loading banners: $error")
-        }
-
-        // Print each valid banner details (limit to first 5 to avoid spam)
-        validBanners.take(5).forEachIndexed { index, banner ->
-            println("Valid Banner $index: ID=${banner.id}, Title=${banner.title}, Type=${banner.bannerType}, ImageUrl=${banner.imageUrl}")
-        }
-        if (validBanners.size > 5) {
-            println("... and ${validBanners.size - 5} more banners")
-        }
-        println("=================================")
-    }
 
     // Main Column without Scaffold
     Column(
@@ -1193,57 +1251,56 @@ val bannerImagesData by remember(validBanners) {
             bannerImagesData.isNotEmpty() -> {
                 // Show dynamic banner with API data
                 println("🎨 Rendering dynamic banner with ${bannerImagesData.size} images")
-                DynamicBannerFoodFromData(
-                    images = bannerImagesData,
-                    onImageClick = { page ->
-                        val banner = validBanners.getOrNull(page)
-                        if (banner != null) {
-                            println("🖱️ Banner clicked at index $page: ${banner.title}")
-                            trackBannerClick(banner)
+                DynamicBannerWithAsyncImage(
+                images = bannerImagesData,
+                onImageClick = { page ->
+                    val banner = validBanners.getOrNull(page)
+                    if (banner != null) {
+                        println("🖱️ Banner clicked at index $page: ${banner.title}")
+                        trackBannerClick(banner)
 
-                            when (banner.bannerType) {
-                                "HOME_PAGE" -> {
-                                    println("🏠 Navigating to home page")
-                                    onBanner1Click()
-                                }
-                                "PROMOTIONAL" -> {
-                                    println("🎉 Navigating to promotional page")
-                                    onBanner2Click()
-                                }
-                                "FLASH_SALE" -> {
-                                    println("⚡ Navigating to flash sale")
-                                    onBanner3Click()
-                                }
-                                else -> {
-                                    banner.clickUrl?.let { url ->
-                                        println("🔗 Navigating to URL: $url")
-                                        // TODO: Implement navigation using WebView or Custom Tab
-                                    }
+                        when (banner.bannerType) {
+                            "HOME_PAGE" -> {
+                                println("🏠 Navigating to home page")
+                                onBanner1Click()
+                            }
+                            "PROMOTIONAL" -> {
+                                println("🎉 Navigating to promotional page")
+                                onBanner2Click()
+                            }
+                            "FLASH_SALE" -> {
+                                println("⚡ Navigating to flash sale")
+                                onBanner3Click()
+                            }
+                            else -> {
+                                banner.clickUrl?.let { url ->
+                                    println("🔗 Navigating to URL: $url")
                                 }
                             }
-                        } else {
-                            println("⚠️ No banner found for index $page")
                         }
-                    },
-                    autoScrollDelay = 3000,
-                    height = 200.dp,
-                    roundedCornerShape = 16.dp,
-                    contentScale = ContentScale.Crop,
-                    dotSize = 8.dp,
-                    dotPadding = 4.dp,
-                    dotPosition = DotPosition.OVERLAY,
-                    overlayGradient = false,
-                    selectedDotColor = Color.White,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 12.dp, vertical = 12.dp),
-                    padding = BannerPadding(
-                        start = 0.dp,
-                        top = 0.dp,
-                        end = 0.dp,
-                        bottom = 0.dp
-                    )
+                    } else {
+                        println("⚠️ No banner found for index $page")
+                    }
+                },
+                autoScrollDelay = 3000,
+                height = 200.dp,
+                roundedCornerShape = 16.dp,
+                contentScale = ContentScale.Crop,
+                dotSize = 8.dp,
+                dotPadding = 4.dp,
+                dotPosition = DotPosition.OVERLAY,
+                overlayGradient = false,
+                selectedDotColor = Color.White,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 12.dp),
+                padding = BannerPadding(
+                    start = 0.dp,
+                    top = 0.dp,
+                    end = 0.dp,
+                    bottom = 0.dp
                 )
+            )
             }
 
             else -> {
@@ -1304,97 +1361,15 @@ val bannerImagesData by remember(validBanners) {
             }
         }
 
-       Text(
-            text = "Banners Available: ${bannerImagesData.size}",
-            style = MaterialTheme.typography.bodySmall.copy(
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            ),
-            maxLines = 1,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 12.dp)
-        )
 
-        // Debug: Print first few banner image URLs
-LaunchedEffect(validBanners) {
-    println("=== Banner Image URLs Debug ===")
-    validBanners.take(5).forEachIndexed { index, banner ->
-        println("Banner $index: ${banner.title}")
-        println("  Image URL: ${banner.imageUrl}")
-        println("  Thumbnail: ${banner.thumbnailUrl}")
-        println("  Mobile URL: ${banner.mobileImageUrl}")
-    }
-}
-
-        // Add this after your banner section for debugging
-Card(
-    modifier = Modifier
-        .fillMaxWidth()
-        .padding(12.dp),
-    colors = CardDefaults.cardColors(
-        containerColor = Color(0xFFE3F2FD)
-    )
-) {
-    Column(modifier = Modifier.padding(12.dp)) {
-    validBanners.take(5).forEachIndexed { index, banner ->
-    Text(
-            text = "Banner $index: ${banner.title}",
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp
-        )
-        Text(
-            text = "Image URL: ${banner.imageUrl}",
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp
-        )
-    }
-        Text(
-            text = "🔍 API Debug Info",
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = "SuperCategory: $superCategoryId",
-            fontSize = 12.sp
-        )
-        Text(
-            text = "Category: $categoryId",
-            fontSize = 12.sp
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Test button
-        Button(
-            onClick = {
-                println("🔍 Manual test triggered")
-                viewModel.loadBannersBySuperCategoryAndCategory(
-                    superCategoryId = superCategoryId,
-                    categoryId = categoryId,
-                    page = 0,
-                    size = 20
-                )
-            },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF2196F3)
-            )
-        ) {
-            Text("Test API Again", color = Color.White)
-        }
-    }
-}
 
         // ==================== FREE CASH BANNER ====================
-        Image(
-            painter = painterResource(R.drawable.ic_use_your_free_cash_auto_applied),
+             AsyncImage(
+            model = "${NetworkConfig.BASE_URL }/assets/banners/ic_use_your_free_cash_auto_applied.png",
             contentDescription = "Free Cash Banner",
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 100.dp, max = 300.dp),
+                .heightIn(min = 100.dp, max = 160.dp),
             contentScale = ContentScale.FillBounds
         )
 
@@ -1497,38 +1472,50 @@ Card(
             contentScale = ContentScale.FillBounds
         )
 
-        // ==================== HEALTHY SCORE BANNER ====================
-        BannerFood(
-            images = listOf(
-                painterResource(R.drawable.ic_introducing_healthy_score),
-                painterResource(R.drawable.all_eat_right),
-                painterResource(R.drawable.all_flat_frre_coke),
-                painterResource(R.drawable.buy_one_get_one),
-                painterResource(R.drawable.get_flat_off),
-                painterResource(R.drawable.offkfc_bucket),
-                painterResource(R.drawable.anupam_restaurant),
-                painterResource(R.drawable.bikkgane_biryani),
-            ),
+         // ==================== HEALTHY SCORE BANNER ====================
+    if (healthyScoreBannerImagesData.isNotEmpty()) {
+        DynamicBannerWithAsyncImage(
+            images = healthyScoreBannerImagesData,
             onImageClick = { page ->
-                when (page) {
-                    0 -> onBanner1Click()
-                    1 -> onBanner2Click()
-                    2 -> onBanner3Click()
-                    else -> println("Healthy score banner $page clicked")
+                val banner = healthyScoreBanners.getOrNull(page)
+                if (banner != null) {
+                    println("🖱️ Healthy Score banner clicked at index $page: ${banner.title}")
+                    when (page) {
+                        0 -> onBanner1Click()
+                        1 -> onBanner2Click()
+                        2 -> onBanner3Click()
+                        else -> {
+                            banner.clickUrl?.let { url ->
+                                println("🔗 Navigating to URL: $url")
+                            }
+                        }
+                    }
                 }
             },
             autoScrollDelay = 3000,
             height = 180.dp,
             roundedCornerShape = 20.dp,
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
             dotSize = 8.dp,
             dotPadding = 4.dp,
-            dotPosition = DotPosition.NONE,
+            dotPosition = DotPosition.NONE,  // Changed from NONE to show dots for API banners
             overlayGradient = false,
             selectedDotColor = Color.White,
             modifier = Modifier.fillMaxWidth(),
             padding = BannerPadding(start = 10.dp, top = 15.dp, end = 10.dp, bottom = 15.dp)
         )
+    } else {
+        // Optional: Show a loading indicator or fallback UI
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+                .padding(12.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+    }
 
         // ==================== JANTASTIC BITES ====================
         val jantasticBitesCategoriesSimple = listOf(

@@ -3,16 +3,21 @@ package com.example.hufko.api.services.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hufko.api.services.config.NetworkConfig
-import com.example.hufko.api.services.model.Banner
+import com.example.hufko.api.services.models.Banner
+import com.example.hufko.api.services.models.BannerPageResponse
 import com.example.hufko.api.services.network.BannerRetrofitClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
-class BannerViewModels : ViewModel() {
+open class BannerViewModels : ViewModel() {
 
     private val apiService = BannerRetrofitClient.apiService
+
+    private val _healthyScoreBanners = MutableStateFlow<List<Banner>>(emptyList())
+    val healthyScoreBanners: StateFlow<List<Banner>> = _healthyScoreBanners.asStateFlow()
 
     private val _homeBanners = MutableStateFlow<List<Banner>>(emptyList())
     val homeBanners: StateFlow<List<Banner>> = _homeBanners.asStateFlow()
@@ -29,10 +34,10 @@ class BannerViewModels : ViewModel() {
     private val _selectedBanner = MutableStateFlow<Banner?>(null)
     val selectedBanner: StateFlow<Banner?> = _selectedBanner.asStateFlow()
 
-    private val _isLoading = MutableStateFlow(false)
+    val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
-    private val _error = MutableStateFlow<String?>(null)
+    val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
     private val _totalPages = MutableStateFlow(0)
@@ -53,27 +58,28 @@ class BannerViewModels : ViewModel() {
     private val _currentCategory = MutableStateFlow("")
     val currentCategory: StateFlow<String> = _currentCategory.asStateFlow()
 
-    private val _currentBannerType = MutableStateFlow("")
-    val currentBannerType: StateFlow<String> = _currentBannerType.asStateFlow()
-
     fun loadHomeBanners() {
         viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-
             try {
-                println("🔄 Loading home banners...")
-                val response = apiService.getHomeBanners()
-
-                val banners = response.content ?: emptyList()
-                val fixedBanners = fixImageUrls(banners)
-
-                _homeBanners.value = fixedBanners
+                _isLoading.value = true
                 _error.value = null
-                println("✅ Loaded ${fixedBanners.size} home banners")
+
+                val response: Response<BannerPageResponse> = apiService.getHomeBanners()
+
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        val banners = fixImageUrls(body.content)
+                        _homeBanners.value = banners
+                    } else {
+                        _error.value = "Empty response body"
+                    }
+                } else {
+                    _error.value = "HTTP ${response.code()}: ${response.message()}"
+                }
+
             } catch (e: Exception) {
                 _error.value = e.message
-                println("❌ Exception loading home banners: ${e.message}")
                 e.printStackTrace()
             } finally {
                 _isLoading.value = false
@@ -83,22 +89,26 @@ class BannerViewModels : ViewModel() {
 
     fun loadAllBanners() {
         viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-
             try {
-                println("🔄 Loading all banners...")
-                val response = apiService.getAllBanners()
-
-                val banners = response.content ?: emptyList()
-                val fixedBanners = fixImageUrls(banners)
-
-                _allBanners.value = fixedBanners
+                _isLoading.value = true
                 _error.value = null
-                println("✅ Loaded ${fixedBanners.size} total banners")
+
+                val response: Response<BannerPageResponse> = apiService.getAllBanners()
+
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        val banners = fixImageUrls(body.content)
+                        _allBanners.value = banners
+                    } else {
+                        _error.value = "Empty response body"
+                    }
+                } else {
+                    _error.value = "HTTP ${response.code()}: ${response.message()}"
+                }
+
             } catch (e: Exception) {
                 _error.value = e.message
-                println("❌ Exception loading all banners: ${e.message}")
                 e.printStackTrace()
             } finally {
                 _isLoading.value = false
@@ -112,28 +122,29 @@ class BannerViewModels : ViewModel() {
         size: Int = 20
     ) {
         viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-
             try {
-                println("🔄 Loading banners for category: $categoryId, page: $page, size: $size")
-                val response = apiService.getBannersByCategory(categoryId, page, size)
-
-                val banners = response.content ?: emptyList()
-                val fixedBanners = fixImageUrls(banners)
-
-                _bannersByCategory.value = fixedBanners
-                _filteredBanners.value = fixedBanners
-                _totalPages.value = response.totalPages ?: 0
-                _totalElements.value = response.totalElements ?: 0L
-                _currentPage.value = response.page ?: page
-                _currentSize.value = response.size ?: size
-
+                _isLoading.value = true
                 _error.value = null
-                println("✅ Loaded ${fixedBanners.size} banners for category $categoryId")
+
+                val response: Response<BannerPageResponse> = apiService.getBannersByCategory(
+                    categoryId,
+                    page,
+                    size
+                )
+
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        handlePagedResponse(body)
+                    } else {
+                        _error.value = "Empty response body"
+                    }
+                } else {
+                    _error.value = "HTTP ${response.code()}: ${response.message()}"
+                }
+
             } catch (e: Exception) {
                 _error.value = e.message
-                println("❌ Exception loading banners: ${e.message}")
                 e.printStackTrace()
             } finally {
                 _isLoading.value = false
@@ -147,60 +158,29 @@ class BannerViewModels : ViewModel() {
         size: Int = 20
     ) {
         viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-
             try {
-                println("🔄 Loading banners for super category: $superCategoryId, page: $page, size: $size")
-                val response = apiService.getBannersBySuperCategory(superCategoryId, page, size)
-
-                val banners = response.content ?: emptyList()
-                val fixedBanners = fixImageUrls(banners)
-
-                _bannersByCategory.value = fixedBanners
-                _filteredBanners.value = fixedBanners
-                _totalPages.value = response.totalPages ?: 0
-                _totalElements.value = response.totalElements ?: 0L
-                _currentPage.value = response.page ?: page
-                _currentSize.value = response.size ?: size
-
+                _isLoading.value = true
                 _error.value = null
-                println("✅ Loaded ${fixedBanners.size} banners for super category $superCategoryId")
-            } catch (e: Exception) {
-                _error.value = e.message
-                println("❌ Exception loading banners: ${e.message}")
-                e.printStackTrace()
-            } finally {
-                _isLoading.value = false
-            }
-        }
-    }
 
-    fun loadBannerById(bannerId: String) {
-        viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-
-            try {
-                println("🔄 Loading banner by ID: $bannerId")
-                val banner = apiService.getBannerById(bannerId)
-
-                // Fix image URL for single banner
-                val fixedBanner = banner.copy(
-                    imageUrl = banner.imageUrl?.let { url ->
-                        if (url.startsWith("/")) {
-                            "${NetworkConfig.BASE_URL.dropLast(1)}$url"
-                        } else {
-                            url
-                        }
-                    }
+                val response: Response<BannerPageResponse> = apiService.getBannersBySuperCategory(
+                    superCategoryId,
+                    page,
+                    size
                 )
 
-                _selectedBanner.value = fixedBanner
-                println("✅ Loaded banner: ${fixedBanner.title}")
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        handlePagedResponse(body)
+                    } else {
+                        _error.value = "Empty response body"
+                    }
+                } else {
+                    _error.value = "HTTP ${response.code()}: ${response.message()}"
+                }
+
             } catch (e: Exception) {
                 _error.value = e.message
-                println("❌ Exception loading banner: ${e.message}")
                 e.printStackTrace()
             } finally {
                 _isLoading.value = false
@@ -215,81 +195,187 @@ class BannerViewModels : ViewModel() {
         size: Int = 20
     ) {
         viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-
             try {
-                println("🔄 Loading banners for superCategory: $superCategoryId, category: $categoryId")
-
-                val response = apiService.getBannersBySuperCategoryAndCategory(
-                    superCategoryId,
-                    categoryId,
-                    page,
-                    size
-                )
-
-                println("📡 Response received")
-                println("📡 Total Elements: ${response.totalElements}")
-                println("📡 Total Pages: ${response.totalPages}")
-                println("📡 Current Page: ${response.page}")
-
-                val banners = response.content ?: emptyList()
-                println("✅ Loaded ${banners.size} banners from API")
-
-                // Fix image URLs - add base URL if needed
-                val fixedBanners = fixImageUrls(banners)
-
-                _bannersByCategory.value = fixedBanners
-                _filteredBanners.value = fixedBanners
-                _totalPages.value = response.totalPages ?: 0
-                _totalElements.value = response.totalElements ?: 0L
-                _currentPage.value = response.page ?: page
-                _currentSize.value = response.size ?: size
-                _currentSuperCategory.value = superCategoryId
-                _currentCategory.value = categoryId
-
+                _isLoading.value = true
                 _error.value = null
 
-                // Print first banner for debugging
-                fixedBanners.firstOrNull()?.let {
-                    println("📸 First banner image URL: ${it.imageUrl}")
+                val response: Response<BannerPageResponse> = apiService
+                    .getBannersBySuperCategoryAndCategory(
+                        superCategoryId,
+                        categoryId,
+                        page,
+                        size
+                    )
+
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        handlePagedResponse(body)
+                        _currentSuperCategory.value = superCategoryId
+                        _currentCategory.value = categoryId
+                    } else {
+                        _error.value = "Empty response body"
+                        _bannersByCategory.value = emptyList()
+                    }
+                } else {
+                    _error.value = "HTTP ${response.code()}: ${response.message()}"
+                    _bannersByCategory.value = emptyList()
                 }
 
             } catch (e: Exception) {
-                println("❌ Exception caught: ${e.message}")
-                e.printStackTrace()
-                _error.value = "Error: ${e.message}"
+                _error.value = e.message
                 _bannersByCategory.value = emptyList()
+                e.printStackTrace()
             } finally {
                 _isLoading.value = false
             }
         }
     }
 
-    // Helper function to fix image URLs
+//    fun loadDietBannersBySuperCategoryAndCategory(
+//        superCategoryId: String,
+//        categoryId: String,
+//        page: Int = 0,
+//        size: Int = 20
+//    ) {
+//        viewModelScope.launch {
+//            try {
+//                _isLoading.value = true
+//                _error.value = null
+//
+//                val response: Response<BannerPageResponse> = apiService
+//                    .getBannersBySuperCategoryAndCategory(
+//                        superCategoryId,
+//                        categoryId,
+//                        page,
+//                        size
+//                    )
+//
+//                if (response.isSuccessful) {
+//                    val body = response.body()
+//                    if (body != null) {
+//                        handlePagedResponse(body)
+//                        _currentSuperCategory.value = superCategoryId
+//                        _currentCategory.value = categoryId
+//                    } else {
+//                        _error.value = "Empty response body"
+//                        _bannersByCategory.value = emptyList()
+//                    }
+//                } else {
+//                    _error.value = "HTTP ${response.code()}: ${response.message()}"
+//                    _bannersByCategory.value = emptyList()
+//                }
+//
+//            } catch (e: Exception) {
+//                _error.value = e.message
+//                _bannersByCategory.value = emptyList()
+//                e.printStackTrace()
+//            } finally {
+//                _isLoading.value = false
+//            }
+//        }
+//    }
+
+    fun loadHealthyScoreBanners() {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                _error.value = null
+
+                val response: Response<BannerPageResponse> = apiService
+                    .getBannersBySuperCategoryAndCategory(
+                        superCategoryId = "FOOD_SUPER",
+                        categoryId = "ALL_FOOD_HEALTHY_SCORE",
+                        page = 0,
+                        size = 20
+                    )
+
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        _healthyScoreBanners.value = fixImageUrls(body.content)
+                    } else {
+                        _error.value = "Empty response body"
+                    }
+                } else {
+                    _error.value = "HTTP ${response.code()}: ${response.message()}"
+                }
+
+            } catch (e: Exception) {
+                _error.value = e.message
+                e.printStackTrace()
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun loadBannerById(bannerId: String) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                _error.value = null
+
+                val response: Response<Banner> = apiService.getBannerById(bannerId)
+
+                if (response.isSuccessful) {
+                    val banner = response.body()
+                    if (banner != null) {
+                        _selectedBanner.value = banner.copy(
+                            imageUrl = fixSingleImageUrl(banner.imageUrl)
+                        )
+                    } else {
+                        _error.value = "Banner not found"
+                    }
+                } else {
+                    _error.value = "HTTP ${response.code()}: ${response.message()}"
+                }
+
+            } catch (e: Exception) {
+                _error.value = e.message
+                e.printStackTrace()
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    private fun handlePagedResponse(response: BannerPageResponse) {
+        val fixedBanners = fixImageUrls(response.content)
+        _bannersByCategory.value = fixedBanners
+        _filteredBanners.value = fixedBanners
+        _totalPages.value = response.totalPages
+        _totalElements.value = response.totalElements
+        _currentPage.value = response.number
+        _currentSize.value = response.size
+    }
+
     private fun fixImageUrls(banners: List<Banner>): List<Banner> {
-        val baseUrl = NetworkConfig.BASE_URL  // This is without trailing slash
         return banners.map { banner ->
             banner.copy(
-                imageUrl = banner.imageUrl?.let { url ->
-                    when {
-                        url.startsWith("http") -> url  // Already full URL
-                        url.startsWith("/") -> "$baseUrl$url"  // Relative path
-                        else -> "$baseUrl/$url"  // Add missing slash
-                    }
-                }
+                imageUrl = fixSingleImageUrl(banner.imageUrl)
             )
         }
     }
 
-    // Helper function to get valid banners with images
-    fun getValidBannersWithImages(): List<Banner> {
-        return _bannersByCategory.value.filter { banner ->
-            !banner.imageUrl.isNullOrBlank() && banner.isActive == true
+    private fun fixSingleImageUrl(url: String?): String {
+        if (url.isNullOrBlank()) return ""
+
+        val baseUrl = NetworkConfig.BASE_URL.removeSuffix("/")
+
+        return when {
+            url.startsWith("http") -> url
+            url.startsWith("/") -> "$baseUrl$url"
+            else -> "$baseUrl/$url"
         }
     }
 
-    // Helper function to check if there are any valid banners
+    fun getValidBannersWithImages(): List<Banner> {
+        return _bannersByCategory.value.filter {
+            it.imageUrl.isNotBlank()
+        }
+    }
+
     fun hasValidBanners(): Boolean {
         return getValidBannersWithImages().isNotEmpty()
     }

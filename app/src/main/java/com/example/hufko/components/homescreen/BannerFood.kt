@@ -42,7 +42,9 @@ import kotlinx.coroutines.launch
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import com.example.hufko.api.services.model.Banner
+import com.example.hufko.api.services.models.Banner
+import coil.compose.AsyncImage
+import androidx.compose.runtime.Composable
 
 enum class DotPosition {
     OVERLAY,      // Dots overlay on bottom of image
@@ -1173,6 +1175,154 @@ fun DynamicBannerCard(
                         )
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun DynamicBannerWithAsyncImage(
+    images: List<BannerImageData.Remote>,
+    onImageClick: (Int) -> Unit = {},
+    autoScrollDelay: Long = 5000,  // Changed to Long to match other components
+    height: Dp = 200.dp,
+    roundedCornerShape: Dp = 16.dp,
+    contentScale: ContentScale = ContentScale.Crop,
+    dotSize: Dp? = null,  // Changed to nullable to match
+    dotPadding: Dp? = null,  // Changed to nullable to match
+    dotPosition: DotPosition = DotPosition.OVERLAY,
+    overlayGradient: Boolean = false,
+    selectedDotColor: Color = Color.White,
+    unselectedDotColor: Color = Color.White.copy(alpha = 0.5f),  // Added to match
+    modifier: Modifier = Modifier,
+    padding: BannerPadding = BannerPadding.Zero  // Changed to match other components
+) {
+    if (images.isEmpty()) return
+
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        pageCount = { images.size }
+    )
+
+    val bannerShape = RoundedCornerShape(roundedCornerShape)
+
+    // Auto-scroll effect
+    LaunchedEffect(autoScrollDelay, images.size) {
+        if (autoScrollDelay > 0 && images.size > 1) {
+            while (true) {
+                delay(autoScrollDelay)
+                val nextPage = (pagerState.currentPage + 1) % images.size
+                pagerState.animateScrollToPage(nextPage)
+            }
+        }
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(
+                start = padding.start,
+                top = padding.top,
+                end = padding.end,
+                bottom = padding.bottom
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height)
+        ) {
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(bannerShape)
+            ) { page ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(bannerShape)
+                        .clickable { onImageClick(page) },
+                    shape = bannerShape,
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                ) {
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(images[page].url)
+                            .crossfade(true)
+                            .build(),
+                        contentDescription = "Banner ${page + 1}",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.FillBounds,
+                        error = painterResource(R.drawable.ic_error)
+                    )
+                }
+            }
+
+            // Overlay dots (same as DynamicBannerFoodFromData)
+            if (dotPosition == DotPosition.OVERLAY && (dotSize == null || dotSize > 0.dp)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .then(
+                            if (overlayGradient) {
+                                Modifier.drawWithContent {
+                                    drawContent()
+                                    drawRect(
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(
+                                                Color.Transparent,
+                                                Color.Black.copy(alpha = 0.3f)
+                                            ),
+                                            startY = size.height * 0.6f,
+                                            endY = size.height
+                                        )
+                                    )
+                                }
+                            } else {
+                                Modifier
+                            }
+                        ),
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    OverlayDotsFashion(
+                        pagerState = pagerState,
+                        imageCount = images.size,
+                        dotSize = dotSize,
+                        dotPadding = dotPadding,
+                        selectedDotColor = selectedDotColor,
+                        unselectedDotColor = unselectedDotColor,
+                        indicatorDuration = autoScrollDelay,
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    )
+                }
+            }
+        }
+
+        // Dots below image (same as DynamicBannerFoodFromData)
+        if (dotPosition == DotPosition.BELOW_IMAGE && (dotSize == null || dotSize > 0.dp)) {
+            Column {
+                Spacer(
+                    modifier = Modifier.height(8.dp)
+                        .fillMaxWidth()
+                )
+
+                OverlayDotsFashion(
+                    pagerState = pagerState,
+                    imageCount = images.size,
+                    dotSize = dotSize,
+                    dotPadding = dotPadding,
+                    selectedDotColor = selectedDotColor,
+                    unselectedDotColor = unselectedDotColor,
+                    indicatorDuration = autoScrollDelay
+                )
+
+                Spacer(
+                    modifier = Modifier.height(3.dp)
+                        .fillMaxWidth()
+                )
             }
         }
     }

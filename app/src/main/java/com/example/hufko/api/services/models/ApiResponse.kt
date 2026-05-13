@@ -1,4 +1,4 @@
-package com.example.hufko.api.services.model
+package com.example.hufko.api.services.models
 
 import com.google.gson.annotations.SerializedName
 

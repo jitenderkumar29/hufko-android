@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
+import coil.compose.AsyncImage
+import com.example.hufko.api.services.config.NetworkConfig
 import com.example.hufko.ui.theme.customColors
 
 /* -------------------- DATA MODEL -------------------- */
@@ -33,6 +35,15 @@ data class CategoryItemBgImg(
     val id: Int,
     val name: String,
     val imageRes: Int,
+    val subtitle: String? = null
+)
+
+/* -------------------- DATA MODEL FOR DYNAMIC -------------------- */
+
+data class CategoryItemBgImgDynamic(
+    val id: Int,
+    val name: String,
+    val imageUrl: String,  // Network URL instead of resource ID
     val subtitle: String? = null
 )
 
@@ -387,6 +398,241 @@ fun CategoryListItemBgImg(
             contentDescription = item.name.ifEmpty { "Category item ${item.id}" },
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds
+        )
+
+        if (item.name.isNotEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomStart)
+                    .background(Color.Black.copy(alpha = 0.5f))
+            ) {
+                Text(
+                    text = item.name,
+                    modifier = Modifier.padding(8.dp),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
+    }
+}
+
+
+
+/* -------------------- MAIN DYNAMIC COMPONENT -------------------- */
+
+@Composable
+fun CategoryListBgImgDynamic(
+    backgroundImageUrl: String,
+    items: List<CategoryItemBgImgDynamic>,
+    onItemClick: (CategoryItemBgImgDynamic) -> Unit,
+    modifier: Modifier = Modifier,
+    backgroundImageHeight: Dp = 200.dp,
+    listItemWidth: Dp = 140.dp,
+    listItemHeight: Dp = 180.dp,
+    overlayItemSize: Dp = 72.dp,
+    overlayItemHeight: Dp? = null,
+    overlayTextSize: TextUnit = 12.sp,
+    backgroundOverlay: Color = Color.Black.copy(alpha = 0.0f),
+    title: String? = null,
+    showHorizontalList: Boolean = false,
+    overlayBottomPosition: OverlayPosition = OverlayPosition.Half,
+    overlayBottomOffset: Dp = 0.dp,
+    overlayItemsSpacing: DynamicSpacing = DynamicSpacing.Fixed(28.dp),
+    listItemsSpacing: DynamicSpacing = DynamicSpacing.Fixed(12.dp),
+    placeholderRes: Int? = null,
+    errorRes: Int? = null
+) {
+    val actualOverlayHeight = overlayItemHeight ?: overlayItemSize
+    val actualOverlayWidth = overlayItemSize
+
+    // Helper function for wrap content calculation
+    fun calculateWrapContentHeightForItems(
+        items: List<CategoryItemBgImgDynamic>,
+        overlayItemHeight: Dp
+    ): Dp {
+        val textHeight = if (items.any { it.name.isNotEmpty() }) 40.dp else 0.dp
+        val maxItemHeight = overlayItemHeight + textHeight
+        return maxItemHeight + 32.dp
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.customColors.white)
+    ) {
+        BoxWithConstraints(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(backgroundImageHeight)
+        ) {
+            val boxHeight = maxHeight
+            val boxWidth = maxWidth
+
+            // Background image
+            AsyncImage(
+                model = backgroundImageUrl,
+                contentDescription = "Background",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillBounds,
+                placeholder = placeholderRes?.let { painterResource(it) },
+                error = errorRes?.let { painterResource(it) }
+            )
+
+            // Dark overlay if needed
+            if (backgroundOverlay.alpha > 0f) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(backgroundOverlay)
+                )
+            }
+
+            // Calculate overlay container height
+            val overlayContainerHeight = when (overlayBottomPosition) {
+                is OverlayPosition.Pixels -> overlayBottomPosition.height
+                is OverlayPosition.Percentage -> boxHeight * overlayBottomPosition.percentage
+                OverlayPosition.Half -> boxHeight / 2
+                OverlayPosition.WrapContent -> calculateWrapContentHeightForItems(items, actualOverlayHeight)
+            }
+
+            // Container for overlay items - FIXED vertical alignment
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(overlayContainerHeight)
+                    .align(Alignment.BottomCenter)
+                    .offset(y = overlayBottomOffset),
+                contentAlignment = Alignment.BottomCenter  // Changed from Center to BottomCenter
+            ) {
+                val overlaySpacing = calculateDynamicSpacing(
+                    spacing = overlayItemsSpacing,
+                    screenWidth = boxWidth,
+                    itemCount = items.size,
+                    itemWidth = if (items.any { it.name.isNotEmpty() }) 100.dp else actualOverlayWidth,
+                    defaultSpacing = 28.dp
+                )
+
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()  // Changed from fillMaxHeight() to wrapContentHeight()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    horizontalArrangement = when (overlaySpacing) {
+                        is CalculatedSpacing.Fixed -> Arrangement.spacedBy(overlaySpacing.value)
+                        is CalculatedSpacing.SpaceBetween -> Arrangement.SpaceBetween
+                        is CalculatedSpacing.SpaceAround -> Arrangement.SpaceAround
+                        is CalculatedSpacing.SpaceEvenly -> Arrangement.SpaceEvenly
+                        is CalculatedSpacing.Start -> Arrangement.Start
+                        is CalculatedSpacing.End -> Arrangement.End
+                        is CalculatedSpacing.Center -> Arrangement.Center
+                    },
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    items(items) { item ->
+                        OverlayItemOnBackgroundDynamic(
+                            item = item,
+                            width = actualOverlayWidth,
+                            height = actualOverlayHeight,
+                            textSize = overlayTextSize,
+                            onClick = { onItemClick(item) },
+                            placeholderRes = placeholderRes,
+                            errorRes = errorRes
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* -------------------- DYNAMIC OVERLAY ITEM -------------------- */
+
+@Composable
+fun OverlayItemOnBackgroundDynamic(
+    item: CategoryItemBgImgDynamic,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    width: Dp = 72.dp,
+    height: Dp = 72.dp,
+    textSize: TextUnit = 12.sp,
+    elevation: Dp = 6.dp,
+    cornerRadius: Dp = 12.dp,
+    placeholderRes: Int? = null,
+    errorRes: Int? = null
+) {
+    Column(
+        modifier = modifier
+            .width(if (item.name.isNotEmpty()) 100.dp else width)
+            .clickable { onClick() },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = if (item.name.isNotEmpty()) Arrangement.Top else Arrangement.Center
+    ) {
+        // Image container
+        Box(
+            modifier = Modifier
+                .width(width)
+                .height(height)
+                .shadow(elevation, RoundedCornerShape(cornerRadius))
+                .clip(RoundedCornerShape(cornerRadius))
+                .background(Color.White),
+            contentAlignment = Alignment.Center
+        ) {
+            AsyncImage(
+                model = item.imageUrl,
+                contentDescription = item.name.ifEmpty { "Category item ${item.id}" },
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillBounds,
+                placeholder = placeholderRes?.let { painterResource(it) },
+                error = errorRes?.let { painterResource(it) }
+            )
+        }
+
+        // Item name text
+        if (item.name.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(6.dp))
+            Text(
+                text = item.name,
+                fontSize = textSize,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+/* -------------------- DYNAMIC LIST ITEM -------------------- */
+
+@Composable
+fun CategoryListItemBgImgDynamic(
+    item: CategoryItemBgImgDynamic,
+    onClick: () -> Unit,
+    width: Dp = 140.dp,
+    height: Dp = 140.dp,
+    placeholderRes: Int? = null,
+    errorRes: Int? = null
+) {
+    Box(
+        modifier = Modifier
+            .width(width)
+            .height(height)
+            .clip(RoundedCornerShape(12.dp))
+            .clickable { onClick() }
+    ) {
+        AsyncImage(
+            model = item.imageUrl,
+            contentDescription = item.name.ifEmpty { "Category item ${item.id}" },
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
+            placeholder = placeholderRes?.let { painterResource(it) },
+            error = errorRes?.let { painterResource(it) }
         )
 
         if (item.name.isNotEmpty()) {

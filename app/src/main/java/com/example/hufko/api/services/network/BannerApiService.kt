@@ -8,7 +8,6 @@ import retrofit2.http.Query
 import retrofit2.Response
 
 interface BannerApiService {
-
     @GET("api/banners")
     suspend fun getAllBanners(): Response<BannerPageResponse>
 

@@ -1373,30 +1373,50 @@ val bannerImagesData by remember(validBanners) {
             contentScale = ContentScale.FillBounds
         )
 
-        // ==================== NEW YEAR 2026 SECTION ====================
-        val newYearItems = listOf(
-            CategoryItemBgImg(id = 1, name = "", imageRes = R.drawable.ic_new_year_1),
-            CategoryItemBgImg(id = 2, name = "", imageRes = R.drawable.ic_new_year_2),
-            CategoryItemBgImg(id = 3, name = "", imageRes = R.drawable.ic_new_year_3),
-            CategoryItemBgImg(id = 4, name = "", imageRes = R.drawable.ic_new_year_4),
-            CategoryItemBgImg(id = 5, name = "", imageRes = R.drawable.ic_new_year_5)
-        )
+       // ==================== NEW YEAR 2026 SECTION (DYNAMIC) ====================
+            val newYearDynamicItems = listOf(
+                CategoryItemBgImgDynamic(
+                    id = 1,
+                    name = "",
+                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_1.png"
+                ),
+                CategoryItemBgImgDynamic(
+                    id = 2,
+                    name = "",
+                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_2.png"
+                ),
+                CategoryItemBgImgDynamic(
+                    id = 3,
+                    name = "",
+                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_3.png"
+                ),
+                CategoryItemBgImgDynamic(
+                    id = 4,
+                    name = "",
+                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_4.png"
+                ),
+                CategoryItemBgImgDynamic(
+                    id = 5,
+                    name = "",
+                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_5.png"
+                )
+            )
 
-        CategoryListBgImg(
-            backgroundImageRes = R.drawable.ic_happy_lohri,
-            items = newYearItems,
-            onItemClick = { item ->
-                println("New Year item clicked: ${item.id}")
-            },
-            backgroundImageHeight = 250.dp,
-            listItemWidth = 140.dp,
-            listItemHeight = 140.dp,
-            overlayItemSize = 100.dp,
-            overlayTextSize = 12.sp,
-            backgroundOverlay = Color.Black.copy(alpha = 0.3f),
-            title = null,
-            showHorizontalList = false
-        )
+
+            CategoryListBgImgDynamic(
+                backgroundImageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_happy_lohri.png",
+                items = newYearDynamicItems,
+                onItemClick = { item ->
+                    println("New Year dynamic item clicked: ${item.name}")
+                },
+                backgroundImageHeight = 250.dp,
+                overlayItemSize = 100.dp,
+                overlayItemHeight = 100.dp,
+                overlayTextSize = 12.sp,
+                title = "",
+                showHorizontalList = true,
+            )
+
 
         // ==================== TOP RATED RESTAURANTS ====================
         Spacer(modifier = Modifier.height(20.dp))
@@ -1407,11 +1427,11 @@ val bannerImagesData by remember(validBanners) {
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
             ),
-            maxLines = 1,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 12.dp)
         )
+
         Spacer(modifier = Modifier.height(20.dp))
 
         TopRatedRestaurants(
@@ -1433,44 +1453,51 @@ val bannerImagesData by remember(validBanners) {
             headingBottomPadding = 0.dp
         )
 
+
         // ==================== HOUSEFULL SALE ====================
         val housefullSaleCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_housefull_sale_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_housefull_sale_2, "View products"),
-            CategoryItem(2, "", R.drawable.ic_housefull_sale_3, "View products"),
-            CategoryItem(4, "", R.drawable.ic_housefull_sale_5, "View products"),
-            CategoryItem(3, "", R.drawable.ic_housefull_sale_4, "View products"),
+            CategoryItemUrl(0, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_1.png", ""),
+            CategoryItemUrl(1, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_2.png", ""),
+            CategoryItemUrl(2, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_3.png", ""),
+            CategoryItemUrl(4, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_5.png", ""),
+            CategoryItemUrl(3, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_4.png", ""),
         )
+        // Debug: Print URLs
 
-        Image(
-            painter = painterResource(R.drawable.ic_housefull_sale_header),
+        AsyncImage(
+            model = "${NetworkConfig.BASE_URL }/assets/banners/ic_housefull_sale_header.png",
             contentDescription = "Housefull Sale",
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 100.dp, max = 300.dp),
+                .heightIn(min = 100.dp, max = 100.dp),
             contentScale = ContentScale.FillBounds
         )
 
-        CategoryListSimple(
+        CategoryListSimpleDynamicUrl(
             items = housefullSaleCategoriesSimple,
             onItemClick = { item ->
                 println("Housefull Sale item selected: ${item.name}")
+                // Handle click navigation
             },
             itemWidth = 110.dp,
             itemHeight = 110.dp,
             horizontalSpacing = 12.dp,
             horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFFC653)
+            backgroundColor = Color(0xFFFFC653),
+            showSubtitle = true,
+            showItemName = false, // Hide name since it's empty
+            cornerRadius = 8.dp,
+            imageContentScale = ContentScale.FillBounds
         )
 
-        Image(
-            painter = painterResource(R.drawable.ic_housefull_sale_footer),
-            contentDescription = "Housefull Sale Footer",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(20.dp),
-            contentScale = ContentScale.FillBounds
-        )
+        AsyncImage(
+                model = "${NetworkConfig.BASE_URL }/assets/banners/ic_housefull_sale_footer.png",
+                contentDescription = "Housefull Sale Footer",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(20.dp),
+                contentScale = ContentScale.FillBounds
+            )
 
          // ==================== HEALTHY SCORE BANNER ====================
     if (healthyScoreBannerImagesData.isNotEmpty()) {
@@ -1519,18 +1546,19 @@ val bannerImagesData by remember(validBanners) {
 
         // ==================== JANTASTIC BITES ====================
         val jantasticBitesCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_jantastic_bites_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_jantastic_bites_2, "View products"),
-            CategoryItem(2, "", R.drawable.ic_jantastic_bites_3, "View products"),
-            CategoryItem(3, "", R.drawable.ic_jantastic_bites_4, "View products"),
-            CategoryItem(4, "", R.drawable.ic_jantastic_bites_5, "View products"),
-            CategoryItem(5, "", R.drawable.ic_jantastic_bites_6, "View products"),
-            CategoryItem(6, "", R.drawable.ic_jantastic_bites_7, "View products"),
+            CategoryItemUrl(0, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_1.png", ""),
+            CategoryItemUrl(1, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_2.png", ""),
+            CategoryItemUrl(2, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_3.png", ""),
+            CategoryItemUrl(3, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_4.png", ""),
+            CategoryItemUrl(4, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_5.png", ""),
+            CategoryItemUrl(5, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_6.png", ""),
+            CategoryItemUrl(6, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_7.png", ""),
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-        Image(
-            painter = painterResource(R.drawable.ic_jantastic_bites_header),
+
+        AsyncImage(
+            model = "${NetworkConfig.BASE_URL }/assets/banners/ic_jantastic_bites_header.png",
             contentDescription = "Jantastic Bites",
             modifier = Modifier
                 .fillMaxWidth()
@@ -1538,39 +1566,45 @@ val bannerImagesData by remember(validBanners) {
             contentScale = ContentScale.FillBounds
         )
 
-        CategoryListSimple(
-            items = jantasticBitesCategoriesSimple,
-            onItemClick = { item ->
-                println("Jantastic Bites item selected: ${item.name}")
-            },
-            itemWidth = 113.dp,
-            itemHeight = 110.dp,
-            horizontalSpacing = 12.dp,
-            horizontalPadding = 12.dp,
-            backgroundColor = Color(0xFFFF4423)
-        )
+            CategoryListSimpleDynamicUrl(
+                items = jantasticBitesCategoriesSimple,
+                onItemClick = { item ->
+                    println("Jantastic Bites item selected: ${item.name}")
+                    // Handle click navigation
+                },
+                itemWidth = 113.dp,
+                itemHeight = 110.dp,
+                horizontalSpacing = 12.dp,
+                horizontalPadding = 12.dp,
+                backgroundColor = Color(0xFFFF4423),
+                showSubtitle = false,
+                showItemName = false, // Hide name since it's empty
+                cornerRadius = 8.dp,
+                imageContentScale = ContentScale.FillBounds
+            )
 
-        Image(
-            painter = painterResource(R.drawable.ic_jantastic_bites_footer_2),
-            contentDescription = "Jantastic Bites Footer",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(25.dp),
-            contentScale = ContentScale.FillBounds
-        )
+            AsyncImage(
+                model = "${NetworkConfig.BASE_URL }/assets/banners/ic_jantastic_bites_footer_2.png",
+                contentDescription = "Jantastic Bites Footer",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(25.dp),
+                contentScale = ContentScale.FillBounds
+            )
+
         Spacer(modifier = Modifier.height(10.dp))
 
         // ==================== FEATURE THIS WEEK ====================
         val featureThisWeekCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_newly_launched, "View products"),
-            CategoryItem(1, "", R.drawable.ic_credit_card_week, "View products"),
-            CategoryItem(2, "", R.drawable.ic_price_drop, "View products"),
-            CategoryItem(3, "", R.drawable.ic_thermals, "View products"),
-            CategoryItem(4, "", R.drawable.ic_blankets, "View products"),
-            CategoryItem(5, "", R.drawable.ic_study_forex, "View products"),
-            CategoryItem(6, "", R.drawable.ic_housemaid, "View products"),
-            CategoryItem(7, "", R.drawable.ic_protein_snacks_week, "View products"),
-            CategoryItem(8, "", R.drawable.ic_derma_store_week, "View products"),
+            CategoryItemUrl(0, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_newly_launched.png", "View products"),
+            CategoryItemUrl(1, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_credit_card_week.png", "View products"),
+            CategoryItemUrl(2, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_price_drop.png", "View products"),
+            CategoryItemUrl(3, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_thermals.png", "View products"),
+            CategoryItemUrl(4, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_blankets.png", "View products"),
+            CategoryItemUrl(5, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_study_forex.png", "View products"),
+            CategoryItemUrl(6, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housemaid.png", "View products"),
+            CategoryItemUrl(7, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_protein_snacks_week.png", "View products"),
+            CategoryItemUrl(8, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_derma_store_week.png", "View products"),
         )
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -1588,50 +1622,73 @@ val bannerImagesData by remember(validBanners) {
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        CategoryListSimple(
+        CategoryListSimpleDynamicUrl(
             items = featureThisWeekCategoriesSimple,
             onItemClick = { item ->
                 println("Feature This Week item selected: ${item.name}")
+                // Handle navigation
             },
             itemWidth = 100.dp,
             itemHeight = 120.dp,
             horizontalSpacing = 12.dp,
             horizontalPadding = 12.dp,
-            backgroundColor = Color.White
+            backgroundColor = Color.White,
+            showItemName = false,  // Hide since name is empty
+            showSubtitle = false,   // Show "View products"
+
         )
 
         // ==================== POPULAR CHAIN ====================
-        Image(
-            painter = painterResource(R.drawable.ic_popular_chain_header),
-            contentDescription = "Popular Chain",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp),
-            contentScale = ContentScale.FillBounds
+         AsyncImage(
+                model = "${NetworkConfig.BASE_URL }/assets/banners/ic_popular_chain_header.png",
+                contentDescription = "Popular Chain",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp),
+                contentScale = ContentScale.FillBounds
+            )
+
+
+        // ==================== POPULAR CHAINS (DYNAMIC URL VERSION) ====================
+        val sampleProductsDynamic = listOf(
+            ProductListDGridUrl("", "FLAT 10% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_1.png"),
+            ProductListDGridUrl("", "FLAT 25% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_2.png"),
+            ProductListDGridUrl("", "FLAT 10% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_3.png"),
+            ProductListDGridUrl("", "FLAT 20% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_4.png"),
+            ProductListDGridUrl("", "FLAT 10% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_5.png"),
+            ProductListDGridUrl("", "FLAT 30% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_6.png"),
+            ProductListDGridUrl("", "FLAT 20% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_7.png"),
+            ProductListDGridUrl("", "FLAT 50% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_8.png"),
+            ProductListDGridUrl("", "FLAT 20% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_9.png"),
+            ProductListDGridUrl("", "FLAT 50% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_10.png")
         )
 
-        val sampleProductsD = listOf(
-            ProductListDGrid(name = "Product 1", price = "FLAT 10% OFF", imageRes = R.drawable.popular_chain_1),
-            ProductListDGrid(name = "Product 2", price = "FLAT 25% OFF", imageRes = R.drawable.popular_chain_2),
-            ProductListDGrid(name = "Product 3", price = "FLAT 10% OFF", imageRes = R.drawable.popular_chain_3),
-            ProductListDGrid(name = "Product 4", price = "FLAT 20% OFF", imageRes = R.drawable.popular_chain_4),
-            ProductListDGrid(name = "Product 5", price = "FLAT 10% OFF", imageRes = R.drawable.popular_chain_5),
-            ProductListDGrid(name = "Product 6", price = "FLAT 30% OFF", imageRes = R.drawable.popular_chain_6),
-            ProductListDGrid(name = "Product 7", price = "FLAT 20% OFF", imageRes = R.drawable.popular_chain_7),
-            ProductListDGrid(name = "Product 8", price = "FLAT 50% OFF", imageRes = R.drawable.popular_chain_8),
-            ProductListDGrid(name = "Product 9", price = "FLAT 20% OFF", imageRes = R.drawable.popular_chain_9),
-            ProductListDGrid(name = "Product 10", price = "FLAT 50% OFF", imageRes = R.drawable.popular_chain_10)
-        )
+     // Use the simplified version first to test
+       CategoryListScrollDFDynamic(
+            products = sampleProductsDynamic,
+            itemWidth = 115.dp,
+            itemHeight = 115.dp,
+            priceStripHeight = 40.dp,
 
-        CategoryListScrollDF(
-            products = sampleProductsD,
-            itemWidth = 121.dp,
-            itemHeight = 140.dp,
-            backgroundColor = Color(0xFF023726),
-            itemSpacing = 0.dp,
-            rowSpacing = 0.dp,
+            // Dynamic colors
+            backgroundColor = Color(0xFF023726), // Dark green background for the entire section
+            defaultCardColor = Color(0xFF023726), // Card background color
+            priceStripBackgroundColor = Color(0xFF023726), // Price strip background (same as main bg)
+
+            // Text colors
+            priceTextColor = Color.White, // White text on dark background
+            priceTextSize = 13,
+            priceTextWeight = FontWeight.Bold,
+
+            // Other parameters
+            itemSpacing = 8.dp,
+            rowSpacing = 8.dp,
+            showLoadingIndicator = false,
+            showPriceStrip = true,
+            imageContentScale = ContentScale.FillBounds,
+            cornerRadius = 8.dp,
             onItemClick = { product ->
-                println("Popular chain product clicked: ${product.name}")
+                println("Product clicked: ${product.name}")
             }
         )
 

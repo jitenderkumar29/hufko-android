@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 
@@ -490,3 +491,293 @@ val roomCategoriesSimple = listOf(
     CategoryItem(1, "Bathroom", R.drawable.ic_credit_card_week, "View products"),
     CategoryItem(2, "Bedroom", R.drawable.ic_price_drop, "View products"),
 )
+
+/**
+ * Dynamic category list component with enhanced features
+ * Similar to CategoryListSimple but with additional dynamic capabilities
+ */
+
+
+/**
+ * New data class for URL-based images
+ */
+data class CategoryItemUrl(
+    val id: Int,
+    val name: String,
+    val imageUrl: String,
+    val subtitle: String? = null,
+    val overlayTitle: String? = null,
+    val overlaySubtitle: String? = null
+)
+
+/**
+ * Dynamic category list component for URL images
+ */
+@Composable
+fun CategoryListSimpleDynamicUrl(
+    items: List<CategoryItemUrl>,
+    onItemClick: (CategoryItemUrl) -> Unit,
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.customColors.white,
+    itemBackgroundColor: Color = MaterialTheme.customColors.white,
+    textColor: Color = Color.Black,
+    showOverlayOnImage: Boolean = false,
+    overlayBackground: Color = Color.Black.copy(alpha = 0.6f),
+    overlayTextColor: Color = Color.White,
+    showItemName: Boolean = true,
+    itemWidth: Dp = 150.dp,
+    itemHeight: Dp = 200.dp,
+    horizontalSpacing: Dp = 16.dp,
+    verticalPadding: Dp = 12.dp,
+    horizontalPadding: Dp = 16.dp,
+    dynamicItemSizes: Boolean = false,
+    sizeMultiplier: (CategoryItemUrl) -> Float = { 1f },
+    enableGradientOverlay: Boolean = false,
+    gradientColors: List<Color> = listOf(Color.Transparent, Color.Black.copy(alpha = 0.7f)),
+    showSubtitle: Boolean = true,
+    subtitleTextColor: Color = Color.White,
+    imageContentScale: ContentScale = ContentScale.Crop,
+    cornerRadius: Dp = 8.dp,
+    maxLinesForName: Int = 1,
+    fontSizeForName: Int = 16
+) {
+    require(items.isNotEmpty()) { "Items list cannot be empty" }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(backgroundColor)
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding)
+    ) {
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(horizontalSpacing),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            items(items) { item ->
+                val finalWidth = if (dynamicItemSizes) {
+                    itemWidth * (sizeMultiplier(item) ?: 1f)
+                } else {
+                    itemWidth
+                }
+
+                val finalHeight = if (dynamicItemSizes) {
+                    itemHeight * (sizeMultiplier(item) ?: 1f)
+                } else {
+                    itemHeight
+                }
+
+                CategoryListItemDynamicUrl(
+                    item = item,
+                    onClick = { onItemClick(item) },
+                    backgroundColor = itemBackgroundColor,
+                    textColor = textColor,
+                    showOverlayOnImage = showOverlayOnImage,
+                    overlayBackground = overlayBackground,
+                    overlayTextColor = overlayTextColor,
+                    showItemName = showItemName,
+                    itemWidth = finalWidth,
+                    itemHeight = finalHeight,
+                    enableGradientOverlay = enableGradientOverlay,
+                    gradientColors = gradientColors,
+                    showSubtitle = showSubtitle,
+                    subtitleTextColor = subtitleTextColor,
+                    imageContentScale = imageContentScale,
+                    cornerRadius = cornerRadius,
+                    maxLinesForName = maxLinesForName,
+                    fontSizeForName = fontSizeForName
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Dynamic category list item for URL images
+ */
+@Composable
+fun CategoryListItemDynamicUrl(
+    item: CategoryItemUrl,
+    onClick: () -> Unit,
+    backgroundColor: Color = MaterialTheme.customColors.white,
+    textColor: Color = Color.Black,
+    showOverlayOnImage: Boolean = false,
+    overlayBackground: Color = Color.Black.copy(alpha = 0.6f),
+    overlayTextColor: Color = Color.White,
+    showItemName: Boolean = true,
+    itemWidth: Dp = 150.dp,
+    itemHeight: Dp = 200.dp,
+    enableGradientOverlay: Boolean = false,
+    gradientColors: List<Color> = listOf(Color.Transparent, Color.Black.copy(alpha = 0.7f)),
+    showSubtitle: Boolean = true,
+    subtitleTextColor: Color = Color.White,
+    imageContentScale: ContentScale = ContentScale.Crop,
+    cornerRadius: Dp = 8.dp,
+    maxLinesForName: Int = 1,
+    fontSizeForName: Int = 16
+) {
+    Box(
+        modifier = Modifier
+            .width(itemWidth)
+            .height(itemHeight)
+            .clip(RoundedCornerShape(cornerRadius))
+            .clickable(onClick = onClick)
+            .background(backgroundColor),
+        contentAlignment = Alignment.BottomStart
+    ) {
+        // Remote image using Coil
+        AsyncImage(
+            model = item.imageUrl,
+            contentDescription = item.name,
+            contentScale = imageContentScale,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(cornerRadius))
+        )
+
+        // Gradient overlay (if enabled)
+        if (enableGradientOverlay) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = gradientColors,
+                            startY = 80f
+                        )
+                    )
+            )
+        }
+
+        // Content overlay
+        if (showItemName || (showSubtitle && item.subtitle != null)) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp, vertical = 8.dp)
+            ) {
+                Column {
+                    if (showItemName && item.name.isNotEmpty()) {
+                        Text(
+                            text = item.name,
+                            fontSize = fontSizeForName.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (showOverlayOnImage || enableGradientOverlay) overlayTextColor else textColor,
+                            maxLines = maxLinesForName,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+
+                    if (showSubtitle && item.subtitle != null) {
+                        Text(
+                            text = item.subtitle!!,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Normal,
+                            color = if (showOverlayOnImage || enableGradientOverlay) subtitleTextColor else textColor.copy(alpha = 0.7f),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * With heading support for URL images
+ */
+@Composable
+fun CategoryListSimpleDynamicUrlWithHeading(
+    heading: String? = null,
+    subtitle: String? = null,
+    items: List<CategoryItemUrl>,
+    onItemClick: (CategoryItemUrl) -> Unit,
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.customColors.white,
+    itemBackgroundColor: Color = MaterialTheme.customColors.white,
+    textColor: Color = Color.Black,
+    showOverlayOnImage: Boolean = false,
+    overlayBackground: Color = Color.Black.copy(alpha = 0.6f),
+    overlayTextColor: Color = Color.White,
+    showItemName: Boolean = true,
+    itemWidth: Dp = 150.dp,
+    itemHeight: Dp = 200.dp,
+    horizontalSpacing: Dp = 16.dp,
+    verticalPadding: Dp = 12.dp,
+    horizontalPadding: Dp = 16.dp,
+    headingBottomPadding: Dp = 12.dp,
+    dynamicItemSizes: Boolean = false,
+    sizeMultiplier: (CategoryItemUrl) -> Float = { 1f },
+    enableGradientOverlay: Boolean = false,
+    gradientColors: List<Color> = listOf(Color.Transparent, Color.Black.copy(alpha = 0.7f)),
+    showSubtitle: Boolean = true,
+    subtitleTextColor: Color = Color.White,
+    imageContentScale: ContentScale = ContentScale.Crop,
+    cornerRadius: Dp = 8.dp,
+    maxLinesForName: Int = 1,
+    fontSizeForName: Int = 16
+) {
+    require(items.isNotEmpty()) { "Items list cannot be empty" }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(backgroundColor)
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding)
+    ) {
+        // Optional header with heading and subtitle
+        heading?.let {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = headingBottomPadding)
+            ) {
+                Text(
+                    text = heading,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = textColor
+                )
+
+                subtitle?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = textColor.copy(alpha = 0.7f),
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
+            }
+        }
+
+        CategoryListSimpleDynamicUrl(
+            items = items,
+            onItemClick = onItemClick,
+            modifier = Modifier,
+            backgroundColor = Color.Transparent,
+            itemBackgroundColor = itemBackgroundColor,
+            textColor = textColor,
+            showOverlayOnImage = showOverlayOnImage,
+            overlayBackground = overlayBackground,
+            overlayTextColor = overlayTextColor,
+            showItemName = showItemName,
+            itemWidth = itemWidth,
+            itemHeight = itemHeight,
+            horizontalSpacing = horizontalSpacing,
+            verticalPadding = 0.dp,
+            horizontalPadding = 0.dp,
+            dynamicItemSizes = dynamicItemSizes,
+            sizeMultiplier = sizeMultiplier,
+            enableGradientOverlay = enableGradientOverlay,
+            gradientColors = gradientColors,
+            showSubtitle = showSubtitle,
+            subtitleTextColor = subtitleTextColor,
+            imageContentScale = imageContentScale,
+            cornerRadius = cornerRadius,
+            maxLinesForName = maxLinesForName,
+            fontSizeForName = fontSizeForName
+        )
+    }
+}

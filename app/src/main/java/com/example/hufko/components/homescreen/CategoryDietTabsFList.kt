@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
+import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun CategoryDietTabsFList(
@@ -273,7 +274,8 @@ fun DietCategoryItem(
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = categoryPage.iconRes),
+                rememberAsyncImagePainter(categoryPage.iconUrl),
+//                painter = painterResource(id = categoryPage.iconRes),
                 contentDescription = categoryPage.title,
                 modifier = Modifier.size(70.dp)
             )

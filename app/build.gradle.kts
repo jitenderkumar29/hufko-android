@@ -71,7 +71,8 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.5.0")
 // OkHttp (for logging)
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-
+    implementation(libs.androidx.compose.runtime)
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -83,6 +84,7 @@ dependencies {
     implementation(libs.androidx.compose.foundation.layout)
     implementation(libs.androidx.benchmark.traceprocessor)
     implementation(libs.generativeai)
+    implementation(libs.mediation.test.suite)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

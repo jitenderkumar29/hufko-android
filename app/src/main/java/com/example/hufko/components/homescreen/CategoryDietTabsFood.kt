@@ -46,10 +46,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.saveable.Saver
+import com.example.hufko.api.services.config.NetworkConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import coil.compose.rememberAsyncImagePainter
 
 // Custom SetSaver for rememberSaveable
 //val SetSaver = Saver<Set<Int>, Set<Int>>(
@@ -58,60 +60,306 @@ import kotlinx.coroutines.launch
 //)
 
 // Sealed class for different diet category pages
-sealed class DietCategoryPage(val title: String, val iconRes: Int) {
-    // First 8 main categories (indices 0-7)
-    object Chicken : DietCategoryPage("Chicken", R.drawable.chicken_food_diet)
-    object Salad : DietCategoryPage("Salad", R.drawable.salad_food_diet)
-    object Mutton : DietCategoryPage("Mutton", R.drawable.mutton_food_diet)
-    object Kebabs : DietCategoryPage("Kebabs", R.drawable.kebabs_food_diet)
-    object HealthySnacks : DietCategoryPage("Snacks", R.drawable.healthy_snacks_food_diet)
-    object LowCalorie : DietCategoryPage("Low Calorie", R.drawable.low_calorie_food_diet)
-    object Vegan : DietCategoryPage("Vegan", R.drawable.vegan_food_diet)
-    object ProteinRich : DietCategoryPage("Protein Rich", R.drawable.protein_food_diet)
+sealed class DietCategoryPage(
+    val title: String,
+    val iconUrl: String,
+    val category: String = "",
+    val priority: Int = 1,
+    val isActive: Boolean = true
+) {
 
-    // Categories from your list (indices 8-22)
-    object Dessert : DietCategoryPage("Dessert", R.drawable.dessert_food)
-    object VegMeal : DietCategoryPage("Veg Meal", R.drawable.veg_meal_food)
-    object Bowl : DietCategoryPage("Bowl", R.drawable.bowl_food)
-    object Sweets : DietCategoryPage("Sweets", R.drawable.sweets_food)
-    object Khichdi : DietCategoryPage("Khichdi", R.drawable.khichdi_food)
-    object Sundae : DietCategoryPage("Sundae", R.drawable.sundae_food)
-    object Juice : DietCategoryPage("Juice", R.drawable.juice_food)
-    object Lassi : DietCategoryPage("Lassi", R.drawable.lassi_food)
-    object CurdRice : DietCategoryPage("Curd Rice", R.drawable.curd_rice_food)
-    object Pudding : DietCategoryPage("Pudding", R.drawable.pudding_food)
-    object Custard : DietCategoryPage("Custard", R.drawable.custard_food)
-    object Soup : DietCategoryPage("Soup", R.drawable.soup_food)
-    object Brownie : DietCategoryPage("Brownie", R.drawable.brownie_food)
-    object Waffles : DietCategoryPage("Waffles", R.drawable.waffles_food)
-    object ColdCoffee : DietCategoryPage("Cold Coffee", R.drawable.cold_coffee_food)
+    // First 8 main categories (indices 0-7)
+    object Chicken : DietCategoryPage(
+        title = "Chicken",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/chicken.png",
+        category = "Chicken"
+    )
+
+    object Salad : DietCategoryPage(
+        title = "Salad",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/salad.png",
+        category = "Salad"
+    )
+
+    object Mutton : DietCategoryPage(
+        title = "Mutton",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/mutton.png",
+        category = "Mutton"
+    )
+
+    object Kebabs : DietCategoryPage(
+        title = "Kebabs",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/kebabs.png",
+        category = "Kebabs"
+    )
+
+    object HealthySnacks : DietCategoryPage(
+        title = "Snacks",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/snacks.png",
+        category = "Snacks"
+    )
+
+    object LowCalorie : DietCategoryPage(
+        title = "Low Calorie",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/low_calorie.png",
+        category = "LowCalorie"
+    )
+
+    object Vegan : DietCategoryPage(
+        title = "Vegan",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/vegan.png",
+        category = "Vegan"
+    )
+
+    object ProteinRich : DietCategoryPage(
+        title = "Protein Rich",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/protein_rich.png",
+        category = "ProteinRich"
+    )
+
+    // Categories from list (indices 8-22)
+
+    object Dessert : DietCategoryPage(
+        "Dessert",
+        "${NetworkConfig.BASE_URL}/assets/banners/dessert.png",
+        "Dessert"
+    )
+
+    object VegMeal : DietCategoryPage(
+        "Veg Meal",
+        "${NetworkConfig.BASE_URL}/assets/banners/veg_meal.png",
+        "VegMeal"
+    )
+
+    object Bowl : DietCategoryPage(
+        "Bowl",
+        "${NetworkConfig.BASE_URL}/assets/banners/bowl.png",
+        "Bowl"
+    )
+
+    object Sweets : DietCategoryPage(
+        "Sweets",
+        "${NetworkConfig.BASE_URL}/assets/banners/sweets.png",
+        "Sweets"
+    )
+
+    object Khichdi : DietCategoryPage(
+        "Khichdi",
+        "${NetworkConfig.BASE_URL}/assets/banners/khichdi.png",
+        "Khichdi"
+    )
+
+    object Sundae : DietCategoryPage(
+        "Sundae",
+        "${NetworkConfig.BASE_URL}/assets/banners/sundae.png",
+        "Sundae"
+    )
+
+    object Juice : DietCategoryPage(
+        "Juice",
+        "${NetworkConfig.BASE_URL}/assets/banners/juice.png",
+        "Juice"
+    )
+
+    object Lassi : DietCategoryPage(
+        "Lassi",
+        "${NetworkConfig.BASE_URL}/assets/banners/lassi.png",
+        "Lassi"
+    )
+
+    object CurdRice : DietCategoryPage(
+        "Curd Rice",
+        "${NetworkConfig.BASE_URL}/assets/banners/curd_rice.png",
+        "CurdRice"
+    )
+
+    object Pudding : DietCategoryPage(
+        "Pudding",
+        "${NetworkConfig.BASE_URL}/assets/banners/pudding.png",
+        "Pudding"
+    )
+
+    object Custard : DietCategoryPage(
+        "Custard",
+        "${NetworkConfig.BASE_URL}/assets/banners/custard.png",
+        "Custard"
+    )
+
+    object Soup : DietCategoryPage(
+        "Soup",
+        "${NetworkConfig.BASE_URL}/assets/banners/soup.png",
+        "Soup"
+    )
+
+    object Brownie : DietCategoryPage(
+        "Brownie",
+        "${NetworkConfig.BASE_URL}/assets/banners/brownie.png",
+        "Brownie"
+    )
+
+    object Waffles : DietCategoryPage(
+        "Waffles",
+        "${NetworkConfig.BASE_URL}/assets/banners/waffles.png",
+        "Waffles"
+    )
+
+    object ColdCoffee : DietCategoryPage(
+        "Cold Coffee",
+        "${NetworkConfig.BASE_URL}/assets/banners/cold_coffee.png",
+        "ColdCoffee"
+    )
 
     // Additional diet-specific items (indices 23-46)
-    object GrilledChicken : DietCategoryPage("Grilled Chicken", R.drawable.grilled_chicken)
-    object SteamedFish : DietCategoryPage("Steamed Fish", R.drawable.steamed_fish)
-    object QuinoaBowl : DietCategoryPage("Quinoa Bowl", R.drawable.quinoa_bowl)
-    object AvocadoToast : DietCategoryPage("Avocado Toast", R.drawable.avocado_toast_food)
-    object GreenSmoothie : DietCategoryPage("Green Smoothie", R.drawable.green_smoothie_food)
-    object Oatmeal : DietCategoryPage("Oatmeal", R.drawable.oatmeal_food)
-    object GreekYogurt : DietCategoryPage("Greek Yogurt", R.drawable.greek_yogurt_food_diet)
-    object EggWhiteOmelette : DietCategoryPage("Egg White", R.drawable.egg_white_omelette_food_diet)
-    object TunaSalad : DietCategoryPage("Tuna Salad", R.drawable.tuna_salad_food_diet)
-    object LentilSoup : DietCategoryPage("Lentil Soup", R.drawable.lentil_soup_food_diet)
-    object CottageCheese : DietCategoryPage("Cottage Cheese", R.drawable.cottage_cheese_food_diet)
-    object SproutsSalad : DietCategoryPage("Sprouts Salad", R.drawable.sprouts_salad_food_diet)
-    object BrownRiceBowl : DietCategoryPage("Brown Rice", R.drawable.brown_rice_bowl_food_diet)
-    object SteamedVeggies : DietCategoryPage("Steamed Veg", R.drawable.steamed_veggies_food_diet)
-    object FruitBowl : DietCategoryPage("Fruit Bowl", R.drawable.fruit_bowl_food_diet)
-    object DetoxWater : DietCategoryPage("Detox Water", R.drawable.detox_water_food_diet)
-    object HerbalTea : DietCategoryPage("Herbal Tea", R.drawable.herbal_tea_food_diet)
-    object ProteinBar : DietCategoryPage("Protein Bar", R.drawable.protein_bar_food_diet)
-    object BoiledEggs : DietCategoryPage("Boiled Eggs", R.drawable.boiled_eggs_food_diet)
-    object HummusPlate : DietCategoryPage("Hummus Plate", R.drawable.hummus_plate_food_diet)
-    object SushiRolls : DietCategoryPage("Sushi Rolls", R.drawable.sushi_rolls_food_diet)
-    object TofuStirFry : DietCategoryPage("Tofu Stir Fry", R.drawable.tofu_stir_fry_food_diet)
-    object ChiaPudding : DietCategoryPage("Chia Pudding", R.drawable.chia_pudding_food_diet)
-    object MilletBowl : DietCategoryPage("Millet Bowl", R.drawable.millet_bowl_food_diet)
-    object SeeAll : DietCategoryPage("See All", R.drawable.see_all_food)
+
+    object GrilledChicken : DietCategoryPage(
+        "Grilled Chicken",
+        "${NetworkConfig.BASE_URL}/assets/banners/grilled_chicken.png",
+        "GrilledChicken"
+    )
+
+    object SteamedFish : DietCategoryPage(
+        "Steamed Fish",
+        "${NetworkConfig.BASE_URL}/assets/banners/steamed_fish.png",
+        "SteamedFish"
+    )
+
+    object QuinoaBowl : DietCategoryPage(
+        "Quinoa Bowl",
+        "${NetworkConfig.BASE_URL}/assets/banners/quinoa_bowl.png",
+        "QuinoaBowl"
+    )
+
+    object AvocadoToast : DietCategoryPage(
+        "Avocado Toast",
+        "${NetworkConfig.BASE_URL}/assets/banners/avocado_toast.png",
+        "AvocadoToast"
+    )
+
+    object GreenSmoothie : DietCategoryPage(
+        "Green Smoothie",
+        "${NetworkConfig.BASE_URL}/assets/banners/green_smoothie.png",
+        "GreenSmoothie"
+    )
+
+    object Oatmeal : DietCategoryPage(
+        "Oatmeal",
+        "${NetworkConfig.BASE_URL}/assets/banners/oatmeal.png",
+        "Oatmeal"
+    )
+
+    object GreekYogurt : DietCategoryPage(
+        "Greek Yogurt",
+        "${NetworkConfig.BASE_URL}/assets/banners/greek_yogurt.png",
+        "GreekYogurt"
+    )
+
+    object EggWhiteOmelette : DietCategoryPage(
+        "Egg White",
+        "${NetworkConfig.BASE_URL}/assets/banners/egg_white.png",
+        "EggWhite"
+    )
+
+    object TunaSalad : DietCategoryPage(
+        "Tuna Salad",
+        "${NetworkConfig.BASE_URL}/assets/banners/tuna_salad.png",
+        "TunaSalad"
+    )
+
+    object LentilSoup : DietCategoryPage(
+        "Lentil Soup",
+        "${NetworkConfig.BASE_URL}/assets/banners/lentil_soup.png",
+        "LentilSoup"
+    )
+
+    object CottageCheese : DietCategoryPage(
+        "Cottage Cheese",
+        "${NetworkConfig.BASE_URL}/assets/banners/cottage_cheese.png",
+        "CottageCheese"
+    )
+
+    object SproutsSalad : DietCategoryPage(
+        "Sprouts Salad",
+        "${NetworkConfig.BASE_URL}/assets/banners/sprouts_salad.png",
+        "SproutsSalad"
+    )
+
+    object BrownRiceBowl : DietCategoryPage(
+        "Brown Rice",
+        "${NetworkConfig.BASE_URL}/assets/banners/brown_rice.png",
+        "BrownRice"
+    )
+
+    object SteamedVeggies : DietCategoryPage(
+        "Steamed Veg",
+        "${NetworkConfig.BASE_URL}/assets/banners/steamed_veg.png",
+        "SteamedVeg"
+    )
+
+    object FruitBowl : DietCategoryPage(
+        "Fruit Bowl",
+        "${NetworkConfig.BASE_URL}/assets/banners/fruit_bowl.png",
+        "FruitBowl"
+    )
+
+    object DetoxWater : DietCategoryPage(
+        "Detox Water",
+        "${NetworkConfig.BASE_URL}/assets/banners/detox_water.png",
+        "DetoxWater"
+    )
+
+    object HerbalTea : DietCategoryPage(
+        "Herbal Tea",
+        "${NetworkConfig.BASE_URL}/assets/banners/herbal_tea.png",
+        "HerbalTea"
+    )
+
+    object ProteinBar : DietCategoryPage(
+        "Protein Bar",
+        "${NetworkConfig.BASE_URL}/assets/banners/protein_bar.png",
+        "ProteinBar"
+    )
+
+    object BoiledEggs : DietCategoryPage(
+        "Boiled Eggs",
+        "${NetworkConfig.BASE_URL}/assets/banners/boiled_eggs.png",
+        "BoiledEggs"
+    )
+
+    object HummusPlate : DietCategoryPage(
+        "Hummus Plate",
+        "${NetworkConfig.BASE_URL}/assets/banners/hummus_plate.png",
+        "HummusPlate"
+    )
+
+    object SushiRolls : DietCategoryPage(
+        "Sushi Rolls",
+        "${NetworkConfig.BASE_URL}/assets/banners/sushi_rolls.png",
+        "SushiRolls"
+    )
+
+    object TofuStirFry : DietCategoryPage(
+        "Tofu Stir Fry",
+        "${NetworkConfig.BASE_URL}/assets/banners/tofu_stir_fry.png",
+        "TofuStirFry"
+    )
+
+    object ChiaPudding : DietCategoryPage(
+        "Chia Pudding",
+        "${NetworkConfig.BASE_URL}/assets/banners/chia_pudding.png",
+        "ChiaPudding"
+    )
+
+    object MilletBowl : DietCategoryPage(
+        "Millet Bowl",
+        "${NetworkConfig.BASE_URL}/assets/banners/millet_bowl.png",
+        "MilletBowl"
+    )
+
+    object SeeAll : DietCategoryPage(
+        "See All",
+        "${NetworkConfig.BASE_URL}/assets/banners/see_all.png",
+        "SeeAll"
+    )
 }
 
 data class DietFoodItem(
@@ -498,7 +746,8 @@ fun CategoryDietTabsFood(
                             .padding(horizontal = 5.dp, vertical = 5.dp)
                     ) {
                         Image(
-                            painter = painterResource(id = dietCategoryPage.iconRes),
+                            rememberAsyncImagePainter(dietCategoryPage.iconUrl),
+//                            painter = painterResource(id = dietCategoryPage.iconRes),
                             contentDescription = dietCategoryPage.title,
                             modifier = Modifier
                                 .width(65.dp)
@@ -7914,144 +8163,144 @@ fun KhichdiPage() {
                     text = "Methi (Fenugreek)",
                     type = FilterType.TEXT_ONLY
                 ),
-            FilterChip(
-                id = "soyachunks_khichdi",
-                text = "Soya Chunks Khichdi",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "mushroom_khichdi",
-                text = "Mushroom Khichdi",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "peas_khichdi",
-                text = "Green Peas Khichdi",
-                type = FilterType.TEXT_ONLY
-            ),
+                FilterChip(
+                    id = "soyachunks_khichdi",
+                    text = "Soya Chunks Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushroom_khichdi",
+                    text = "Mushroom Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peas_khichdi",
+                    text = "Green Peas Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-            // 8. DIETARY & HEALTH (TEXT ONLY)
-            FilterChip(
-                id = "sattvic_khichdi",
-                text = "Sattvic (No Onion/Garlic)",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "ayurvedic_khichdi",
-                text = "Ayurvedic Khichdi",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "detox_khichdi",
-                text = "Detox Khichdi",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "high_protein",
-                text = "High Protein",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "low_fat",
-                text = "Low Fat",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "diabetic_friendly",
-                text = "Diabetic Friendly",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "gluten_free_khichdi",
-                text = "Gluten Free",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "vegan_khichdi",
-                text = "Vegan",
-                type = FilterType.TEXT_ONLY
-            ),
+                // 8. DIETARY & HEALTH (TEXT ONLY)
+                FilterChip(
+                    id = "sattvic_khichdi",
+                    text = "Sattvic (No Onion/Garlic)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ayurvedic_khichdi",
+                    text = "Ayurvedic Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "detox_khichdi",
+                    text = "Detox Khichdi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "high_protein",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "diabetic_friendly",
+                    text = "Diabetic Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_khichdi",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_khichdi",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-            // 9. CONVENIENCE (TEXT ONLY)
-            FilterChip(
-                id = "ready_to_eat",
-                text = "Ready to Eat",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "meal_combo",
-                text = "Meal Combos",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "family_pack",
-                text = "Family Pack",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "with_side_dishes",
-                text = "With Side Dishes",
-                type = FilterType.TEXT_ONLY
-            ),
+                // 9. CONVENIENCE (TEXT ONLY)
+                FilterChip(
+                    id = "ready_to_eat",
+                    text = "Ready to Eat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "meal_combo",
+                    text = "Meal Combos",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_side_dishes",
+                    text = "With Side Dishes",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-            // 10. SIDE DISHES (TEXT ONLY)
-            FilterChip(
-                id = "with_kadhi",
-                text = "With Kadhi",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "with_papad",
-                text = "With Papad",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "with_pickle",
-                text = "With Pickle",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "with_raita",
-                text = "With Raita",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "with_ghee",
-                text = "With Extra Ghee",
-                type = FilterType.TEXT_ONLY
-            ),
+                // 10. SIDE DISHES (TEXT ONLY)
+                FilterChip(
+                    id = "with_kadhi",
+                    text = "With Kadhi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_papad",
+                    text = "With Papad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_pickle",
+                    text = "With Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_raita",
+                    text = "With Raita",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_ghee",
+                    text = "With Extra Ghee",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-            // 11. PRICE RANGE (TEXT ONLY)
-            FilterChip(
-                id = "under_100",
-                text = "Under ₹100",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "100_200",
-                text = "₹100 - ₹200",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "200_300",
-                text = "₹200 - ₹300",
-                type = FilterType.TEXT_ONLY
-            ),
-            FilterChip(
-                id = "above_300",
-                text = "Above ₹300",
-                type = FilterType.TEXT_ONLY
-            ),
+                // 11. PRICE RANGE (TEXT ONLY)
+                FilterChip(
+                    id = "under_100",
+                    text = "Under ₹100",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "100_200",
+                    text = "₹100 - ₹200",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "200_300",
+                    text = "₹200 - ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "above_300",
+                    text = "Above ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-            // 12. SORT BY DROPDOWN
-            FilterChip(
-                id = "sort_by",
-                text = "Sort By",
-                type = FilterType.SORT_DROPDOWN,
-                rightIcon = R.drawable.outline_keyboard_arrow_down_24
-            )
-        ),
-        rows = 2
+                // 12. SORT BY DROPDOWN
+                FilterChip(
+                    id = "sort_by",
+                    text = "Sort By",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
         )
 
         FilterButtonFood(
@@ -10928,7 +11177,7 @@ fun CurdRicePage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = curdRiceDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
@@ -12270,7 +12519,7 @@ fun CustardPage() {
                     text = "Rose (Gulab)",
                     type = FilterType.TEXT_ONLY
                 ),
-              // 8. CONSISTENCY & TEXTURE (TEXT ONLY)
+                // 8. CONSISTENCY & TEXTURE (TEXT ONLY)
                 FilterChip(
                     id = "thin_custard",
                     text = "Thin/Pouring",
@@ -12503,7 +12752,7 @@ fun CustardPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = custardDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
@@ -13690,14 +13939,14 @@ fun SoupDietPage() {
             address = "Jubilee Hills, Hyderabad"
         )
     )
-     Column {
-         soupDietItems.forEach { restaurantItem ->
-             RestaurantItemListFull(
-                 restaurantItem = restaurantItem,
-                 onWishlistClick = { },
-                 onThreeDotClick = { },
-                 onItemClick = { }
-             )
+    Column {
+        soupDietItems.forEach { restaurantItem ->
+            RestaurantItemListFull(
+                restaurantItem = restaurantItem,
+                onWishlistClick = { },
+                onThreeDotClick = { },
+                onItemClick = { }
+            )
         }
     }
 }
@@ -14041,7 +14290,7 @@ fun BrowniePage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = brownieDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")

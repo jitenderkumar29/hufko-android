@@ -38,7 +38,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import kotlinx.coroutines.delay
-
 import com.example.hufko.R
 import com.example.hufko.api.services.viewmodels.BannerViewModels
 import com.example.hufko.ui.theme.customColors
@@ -49,149 +48,12 @@ import com.example.hufko.api.services.viewmodels.DietFoodViewModel
 import com.example.hufko.components.homescreen.BannerPreNextF
 import com.example.hufko.api.services.models.Banner
 import coil.compose.AsyncImage
+import androidx.compose.ui.platform.LocalContext
+import com.example.hufko.components.homescreen.CategoryPage
+import com.example.hufko.components.homescreen.CategoryDietTabsFood
 
 //import androidx.compose.ui.Arrangement
 
-// Sealed class for different category pages
-sealed class CategoryPage(val title: String, val iconRes: Int) {
-    // From the images provided
-    object All : CategoryPage("All", R.drawable.all_food)
-    object Diet : CategoryPage("Diet", R.drawable.diet_food)
-    object Pizzas : CategoryPage("Pizzas", R.drawable.pizzas_food)
-    object Cakes : CategoryPage("Cakes", R.drawable.cakes_food)
-    object Momos : CategoryPage("Momos", R.drawable.momos_food)
-    object Rolls : CategoryPage("Rolls", R.drawable.rolls_food)
-    object Burgers : CategoryPage("Burgers", R.drawable.burgers_food)
-    object CholeBhature : CategoryPage("Chole Bhature", R.drawable.chole_bhature_food)
-    object Salad : CategoryPage("Salad", R.drawable.salad_food)
-    object Patty : CategoryPage("Patty", R.drawable.patty_food)
-    object Chinese : CategoryPage("Chinese", R.drawable.chinese_food)
-    object IceCream : CategoryPage("Ice Cream", R.drawable.ice_cream_food)
-    object Appam : CategoryPage("Appam", R.drawable.appam_food)
-    object Bath : CategoryPage("Bath", R.drawable.bath_food)
-    object Bonda : CategoryPage("Bonda", R.drawable.bonda_food)
-    object Cutlet : CategoryPage("Cutlet", R.drawable.cutlet_food)
-    object Dessert : CategoryPage("Dessert", R.drawable.dessert_food)
-    object Dhokla : CategoryPage("Dhokla", R.drawable.dhokla_food)
-    object Dosa : CategoryPage("Dosa", R.drawable.dosa_food)
-    object Dholda : CategoryPage("Dholda", R.drawable.dholda_food)
-    object GulabJamun : CategoryPage("Gulab Jamun", R.drawable.gulab_jamun_food)
-    object Idli : CategoryPage("Idli", R.drawable.idli_food)
-    object Biryani : CategoryPage("Biryani", R.drawable.biryani_food)
-    object Thali : CategoryPage("Thali", R.drawable.thali_food)
-    object Chicken : CategoryPage("Chicken", R.drawable.chicken_food)
-    object VegMeal : CategoryPage("Veg Meal", R.drawable.veg_meal_food)
-    object NorthIndian : CategoryPage("North Indian", R.drawable.north_indian_food)
-    object Paneer : CategoryPage("Paneer", R.drawable.paneer_food)
-    object FriedRice : CategoryPage("Fried Rice", R.drawable.fried_rice_food)
-    object Noodles : CategoryPage("Noodles", R.drawable.noodles_food)
-    object Paratha : CategoryPage("Paratha", R.drawable.paratha_food)
-    object Shawarma : CategoryPage("Shawarma", R.drawable.shawarma_food)
-    object SouthIndian : CategoryPage("South Indian", R.drawable.south_indian_food)
-    object AlooTikki : CategoryPage("Aloo Tikki", R.drawable.aloo_tikki_food)
-    object Pasta : CategoryPage("Pasta", R.drawable.pasta_food)
-    object Pastry : CategoryPage("Pastry", R.drawable.pastry_food)
-    object PavBhaji : CategoryPage("Pav Bhaji", R.drawable.pav_bhaji_food)
-    object Sandwich : CategoryPage("Sandwich", R.drawable.sandwich_food)
-    object Shake : CategoryPage("Shake", R.drawable.shake_food)
-    object Samosa : CategoryPage("Samosa", R.drawable.samosa_food)
-    object Poori : CategoryPage("Poori", R.drawable.poori_food)
-    object Bowl : CategoryPage("Bowl", R.drawable.bowl_food)
-    object Poha : CategoryPage("Poha", R.drawable.poha_food)
-
-    // New categories from the list
-    object Sweets : CategoryPage("Sweets", R.drawable.sweets_food)
-    object CholePoori : CategoryPage("Chole Poori", R.drawable.chole_poori_food)
-    object Khichdi : CategoryPage("Khichdi", R.drawable.khichdi_food)
-    object ChilliChicken : CategoryPage("Chilli Chicken", R.drawable.chilli_chicken_food)
-    object Tea : CategoryPage("Tea", R.drawable.tea_food)
-    object VadaPav : CategoryPage("Vada Pav", R.drawable.vada_pav_food)
-    object MasalaMaggi : CategoryPage("Masala Maggi", R.drawable.masala_maggi_food)
-    object Kulche : CategoryPage("Kulche", R.drawable.kulche_food)
-    object Wings : CategoryPage("Wings", R.drawable.wings_food)
-    object AlooPoori : CategoryPage("Aloo Poori", R.drawable.aloo_poori_food)
-    object Omelette : CategoryPage("Omelette", R.drawable.omelette_food)
-    object NonVegMeal : CategoryPage("Non Veg Meal", R.drawable.non_veg_meal_food)
-    object BreadPakoda : CategoryPage("Bread Pakoda", R.drawable.bread_pakoda_food)
-    object Coffee : CategoryPage("Coffee", R.drawable.coffee_food)
-    object PooriBhaji : CategoryPage("Poori Bhaji", R.drawable.poori_bhaji_food)
-    object Pulao : CategoryPage("Pulao", R.drawable.pulao_food)
-    object ChurChurNaan : CategoryPage("Chur Chur Naan", R.drawable.chur_chur_naan_food)
-    object Kebabs : CategoryPage("Kebabs", R.drawable.kebabs_food)
-    object Panipuri : CategoryPage("Panipuri", R.drawable.panipuri_food)
-    object Rasmalai : CategoryPage("Rasmalai", R.drawable.rasmalai_food)
-    object Mutton : CategoryPage("Mutton", R.drawable.mutton_food)
-    object Fish : CategoryPage("Fish", R.drawable.fish_food)
-    object Pakoda : CategoryPage("Pakoda", R.drawable.pakoda_food)
-    object Halwa : CategoryPage("Halwa", R.drawable.halwa_food)
-    object ChopSuey : CategoryPage("Chop Suey", R.drawable.chop_suey_food)
-    object Korma : CategoryPage("Korma", R.drawable.korma_food)
-    object Namkeen : CategoryPage("Namkeen", R.drawable.namkeen_food)
-    object Mushrooms : CategoryPage("Mushrooms", R.drawable.mushrooms_food)
-    object Keema : CategoryPage("Keema", R.drawable.keema_food)
-    object Sundae : CategoryPage("Sundae", R.drawable.sundae_food)
-    object Rasgulla : CategoryPage("Rasgulla", R.drawable.rasgulla_food)
-    object ButterChicken : CategoryPage("Butter Chicken", R.drawable.butter_chicken_food)
-    object RajKachori : CategoryPage("Raj Kachori", R.drawable.raj_kachori_food)
-    object Chaat : CategoryPage("Chaat", R.drawable.chaat_food)
-    object Uttapam : CategoryPage("Uttapam", R.drawable.uttapam_food)
-    object Doughnut : CategoryPage("Doughnut", R.drawable.doughnut_food)
-    object Juice : CategoryPage("Juice", R.drawable.juice_food)
-    object Lassi : CategoryPage("Lassi", R.drawable.lassi_food)
-    object MalaiKofta : CategoryPage("Malai Kofta", R.drawable.malai_kofta_food)
-    object DahiBalle : CategoryPage("Dahi Balle", R.drawable.dahi_balle_food)
-    object Rajma : CategoryPage("Rajma", R.drawable.rajma_food)
-    object ChickenHandi : CategoryPage("Chicken Handi", R.drawable.chicken_handi_food)
-    object Cupcake : CategoryPage("Cupcake", R.drawable.cupcake_food)
-    object Bhel : CategoryPage("Bhel", R.drawable.bhel_food)
-    object Muffin : CategoryPage("Muffin", R.drawable.muffin_food)
-    object Cookies : CategoryPage("Cookies", R.drawable.cookies_food)
-    object ChickenCha : CategoryPage("Chicken Cha", R.drawable.chicken_cha_food)
-    object PaneerKulche : CategoryPage("Paneer Kulche", R.drawable.paneer_kulche_food)
-    object Chaach : CategoryPage("Chaach", R.drawable.chaach_food)
-    object VegLollipop : CategoryPage("Veg Lollipop", R.drawable.veg_lollipop_food)
-    object Sub : CategoryPage("Sub", R.drawable.sub_food)
-    object Pancake : CategoryPage("Pancake", R.drawable.pancake_food)
-    object Nihari : CategoryPage("Nihari", R.drawable.nihari_food)
-    object Tacos : CategoryPage("Tacos", R.drawable.tacos_food)
-    object Thepla : CategoryPage("Thepla", R.drawable.thepla_food)
-    object Fafda : CategoryPage("Fafda", R.drawable.fafda_food)
-    object Chocolate : CategoryPage("Chocolate", R.drawable.chocolate_food)
-    object CurdRice : CategoryPage("Curd Rice", R.drawable.curd_rice_food)
-    object Pudding : CategoryPage("Pudding", R.drawable.pudding_food)
-    object Croissant : CategoryPage("Croissant", R.drawable.croissant_food)
-    object Khandvi : CategoryPage("Khandvi", R.drawable.khandvi_food)
-    object Gajak : CategoryPage("Gajak", R.drawable.gajak_food)
-    object SambarRice : CategoryPage("Sambar Rice", R.drawable.sambar_rice_food)
-    object Tart : CategoryPage("Tart", R.drawable.tart_food)
-    object Tiramisu : CategoryPage("Tiramisu", R.drawable.tiramisu_food)
-    object Pie : CategoryPage("Pie", R.drawable.pie_food)
-    object Custard : CategoryPage("Custard", R.drawable.custard_food)
-    object SevPoori : CategoryPage("Sev Poori", R.drawable.sev_poori_food)
-    object Mousse : CategoryPage("Mousse", R.drawable.mousse_food)
-    object DalKachori : CategoryPage("Dal Kachori", R.drawable.dal_kachori_food)
-    object Jalebi : CategoryPage("Jalebi", R.drawable.jalebi_food)
-    object PyaajKachori : CategoryPage("Pyaaj Kachori", R.drawable.pyaaj_kachori_food)
-    object RajmaRice : CategoryPage("Rajma Rice", R.drawable.rajma_rice_food)
-    object Upma : CategoryPage("Upma", R.drawable.upma_food)
-    object Manchurian : CategoryPage("Manchurian", R.drawable.manchurian_food)
-    object PaneerPakoda : CategoryPage("Paneer Pakoda", R.drawable.paneer_pakoda_food)
-    object Cheesecake : CategoryPage("Cheesecake", R.drawable.cheesecake_food)
-    object Brownie : CategoryPage("Brownie", R.drawable.brownie_food)
-    object Chaap : CategoryPage("Chaap", R.drawable.chaap_food)
-    object Dal : CategoryPage("Dal", R.drawable.dal_food)
-    object Waffles : CategoryPage("Waffles", R.drawable.waffles_food)
-    object AlooKachori : CategoryPage("Aloo Kachori", R.drawable.aloo_kachori_food)
-    object CholeKulche : CategoryPage("Chole Kulche", R.drawable.chole_kulche_food)
-    object Fries : CategoryPage("Fries", R.drawable.fries_food)
-    object ColdCoffee : CategoryPage("Cold Coffee", R.drawable.cold_coffee_food)
-    object Soup : CategoryPage("Soup", R.drawable.soup_food)
-    object Bhurji : CategoryPage("Bhurji", R.drawable.bhurji_food)
-    object KhastaKachori : CategoryPage("Khasta Kachori", R.drawable.khasta_kachori_food)
-    object HotDog : CategoryPage("Hot Dog", R.drawable.hot_dog_food)
-
-    object SeeAll : CategoryPage("See All", R.drawable.see_all_food)
-}
 
 data class FoodItem(
     val id: Int,
@@ -202,8 +64,6 @@ data class FoodItem(
     val category: String = "All"
 )
 
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoryTabsFood(
@@ -213,6 +73,7 @@ fun CategoryTabsFood(
     onTabIndexChanged: (Int) -> Unit = {}
 ) {
     val bannerViewModel: BannerViewModels = viewModel()
+    val context = LocalContext.current
 
     // Get current value
     var currentSelectedIndex by rememberSaveable {
@@ -245,143 +106,141 @@ fun CategoryTabsFood(
         currentSelectedIndex = selectedTabIndex
     }
 
-    // All category pages
-    // Update this section in CategoryTabsFood function
-    val allCategoryPages = listOf(
-        CategoryPage.All,
-        CategoryPage.Diet,
-        CategoryPage.Pizzas,
-        CategoryPage.Cakes,
-        CategoryPage.Momos,
-        CategoryPage.Rolls,
-        CategoryPage.Burgers,
-        CategoryPage.CholeBhature,
-        CategoryPage.Salad,
-        CategoryPage.Patty,
-        CategoryPage.Chinese,
-        CategoryPage.IceCream,
-        CategoryPage.Appam,
-        CategoryPage.Bath,
-        CategoryPage.Bonda,
-        CategoryPage.Cutlet,
-        CategoryPage.Dessert,
-        CategoryPage.Dhokla,
-        CategoryPage.Dosa,
-        CategoryPage.Dholda,
-        CategoryPage.GulabJamun,
-        CategoryPage.Idli,
-        CategoryPage.Biryani,
-        CategoryPage.Thali,
-        CategoryPage.Chicken,
-        CategoryPage.VegMeal,
-        CategoryPage.NorthIndian,
-        CategoryPage.Paneer,
-        CategoryPage.FriedRice,
-        CategoryPage.Noodles,
-        CategoryPage.Paratha,
-        CategoryPage.Shawarma,
-        CategoryPage.SouthIndian,
-        CategoryPage.AlooTikki,
-        CategoryPage.Pasta,
-        CategoryPage.Pastry,
-        CategoryPage.PavBhaji,
-        CategoryPage.Sandwich,
-        CategoryPage.Shake,
-        CategoryPage.Samosa,
-        CategoryPage.Poori,
-        CategoryPage.Bowl,
-        CategoryPage.Poha,
-        // Add all new categories
-        CategoryPage.Sweets,
-        CategoryPage.CholePoori,
-        CategoryPage.Khichdi,
-        CategoryPage.ChilliChicken,
-        CategoryPage.Tea,
-        CategoryPage.VadaPav,
-        CategoryPage.MasalaMaggi,
-        CategoryPage.Kulche,
-        CategoryPage.Wings,
-        CategoryPage.AlooPoori,
-        CategoryPage.Omelette,
-        CategoryPage.NonVegMeal,
-        CategoryPage.BreadPakoda,
-        CategoryPage.Coffee,
-        CategoryPage.PooriBhaji,
-        CategoryPage.Pulao,
-        CategoryPage.ChurChurNaan,
-        CategoryPage.Kebabs,
-        CategoryPage.Panipuri,
-        CategoryPage.Rasmalai,
-        CategoryPage.Mutton,
-        CategoryPage.Fish,
-        CategoryPage.Pakoda,
-        CategoryPage.Halwa,
-        CategoryPage.ChopSuey,
-        CategoryPage.Korma,
-        CategoryPage.Namkeen,
-        CategoryPage.Mushrooms,
-        CategoryPage.Keema,
-        CategoryPage.Sundae,
-        CategoryPage.Rasgulla,
-        CategoryPage.ButterChicken,
-        CategoryPage.RajKachori,
-        CategoryPage.Chaat,
-        CategoryPage.Uttapam,
-        CategoryPage.Doughnut,
-        CategoryPage.Juice,
-        CategoryPage.Lassi,
-        CategoryPage.MalaiKofta,
-        CategoryPage.DahiBalle,
-        CategoryPage.Rajma,
-        CategoryPage.ChickenHandi,
-        CategoryPage.Cupcake,
-        CategoryPage.Bhel,
-        CategoryPage.Muffin,
-        CategoryPage.Cookies,
-        CategoryPage.ChickenCha,
-        CategoryPage.PaneerKulche,
-        CategoryPage.Chaach,
-        CategoryPage.VegLollipop,
-        CategoryPage.Sub,
-        CategoryPage.Pancake,
-        CategoryPage.Nihari,
-        CategoryPage.Tacos,
-        CategoryPage.Thepla,
-        CategoryPage.Fafda,
-        CategoryPage.Chocolate,
-        CategoryPage.CurdRice,
-        CategoryPage.Pudding,
-        CategoryPage.Croissant,
-        CategoryPage.Khandvi,
-        CategoryPage.Gajak,
-        CategoryPage.SambarRice,
-        CategoryPage.Tart,
-        CategoryPage.Tiramisu,
-        CategoryPage.Pie,
-        CategoryPage.Custard,
-        CategoryPage.SevPoori,
-        CategoryPage.Mousse,
-        CategoryPage.DalKachori,
-        CategoryPage.Jalebi,
-        CategoryPage.PyaajKachori,
-        CategoryPage.RajmaRice,
-        CategoryPage.Upma,
-        CategoryPage.Manchurian,
-        CategoryPage.PaneerPakoda,
-        CategoryPage.Cheesecake,
-        CategoryPage.Brownie,
-        CategoryPage.Chaap,
-        CategoryPage.Dal,
-        CategoryPage.Waffles,
-        CategoryPage.AlooKachori,
-        CategoryPage.CholeKulche,
-        CategoryPage.Fries,
-        CategoryPage.ColdCoffee,
-        CategoryPage.Soup,
-        CategoryPage.Bhurji,
-        CategoryPage.KhastaKachori,
-        CategoryPage.HotDog,
-    )
+    // Get all category pages and filter only active ones, then sort by priority
+  val allCategoryPages = listOf(
+    CategoryPage.All,
+    CategoryPage.Diet,
+    CategoryPage.Pizzas,
+    CategoryPage.Cakes,
+    CategoryPage.Momos,
+    CategoryPage.Rolls,
+    CategoryPage.Burgers,
+    CategoryPage.CholeBhature,
+    CategoryPage.Salad,
+    CategoryPage.Patty,
+    CategoryPage.Chinese,
+    CategoryPage.IceCream,
+    CategoryPage.Appam,
+    CategoryPage.Bath,
+    CategoryPage.Bonda,
+    CategoryPage.Cutlet,
+    CategoryPage.Dessert,
+    CategoryPage.Dhokla,
+    CategoryPage.Dosa,
+    CategoryPage.Dholda,
+    CategoryPage.GulabJamun,
+    CategoryPage.Idli,
+    CategoryPage.Biryani,
+    CategoryPage.Thali,
+    CategoryPage.Chicken,
+    CategoryPage.VegMeal,
+    CategoryPage.NorthIndian,
+    CategoryPage.Paneer,
+    CategoryPage.FriedRice,
+    CategoryPage.Noodles,
+    CategoryPage.Paratha,
+    CategoryPage.Shawarma,
+    CategoryPage.SouthIndian,
+    CategoryPage.AlooTikki,
+    CategoryPage.Pasta,
+    CategoryPage.Pastry,
+    CategoryPage.PavBhaji,
+    CategoryPage.Sandwich,
+    CategoryPage.Shake,
+    CategoryPage.Samosa,
+    CategoryPage.Poori,
+    CategoryPage.Bowl,
+    CategoryPage.Poha,
+    CategoryPage.Sweets,
+    CategoryPage.CholePoori,
+    CategoryPage.Khichdi,
+    CategoryPage.ChilliChicken,
+    CategoryPage.Tea,
+    CategoryPage.VadaPav,
+    CategoryPage.MasalaMaggi,
+    CategoryPage.Kulche,
+    CategoryPage.Wings,
+    CategoryPage.AlooPoori,
+    CategoryPage.Omelette,
+    CategoryPage.NonVegMeal,
+    CategoryPage.BreadPakoda,
+    CategoryPage.Coffee,
+    CategoryPage.PooriBhaji,
+    CategoryPage.Pulao,
+    CategoryPage.ChurChurNaan,
+    CategoryPage.Kebabs,
+    CategoryPage.Panipuri,
+    CategoryPage.Rasmalai,
+    CategoryPage.Mutton,
+    CategoryPage.Fish,
+    CategoryPage.Pakoda,
+    CategoryPage.Halwa,
+    CategoryPage.ChopSuey,
+    CategoryPage.Korma,
+    CategoryPage.Namkeen,
+    CategoryPage.Mushrooms,
+    CategoryPage.Keema,
+    CategoryPage.Sundae,
+    CategoryPage.Rasgulla,
+    CategoryPage.ButterChicken,
+    CategoryPage.RajKachori,
+    CategoryPage.Chaat,
+    CategoryPage.Uttapam,
+    CategoryPage.Doughnut,
+    CategoryPage.Juice,
+    CategoryPage.Lassi,
+    CategoryPage.MalaiKofta,
+    CategoryPage.DahiBalle,
+    CategoryPage.Rajma,
+    CategoryPage.ChickenHandi,
+    CategoryPage.Cupcake,
+    CategoryPage.Bhel,
+    CategoryPage.Muffin,
+    CategoryPage.Cookies,
+    CategoryPage.ChickenCha,
+    CategoryPage.PaneerKulche,
+    CategoryPage.Chaach,
+    CategoryPage.VegLollipop,
+    CategoryPage.Sub,
+    CategoryPage.Pancake,
+    CategoryPage.Nihari,
+    CategoryPage.Tacos,
+    CategoryPage.Thepla,
+    CategoryPage.Fafda,
+    CategoryPage.Chocolate,
+    CategoryPage.CurdRice,
+    CategoryPage.Pudding,
+    CategoryPage.Croissant,
+    CategoryPage.Khandvi,
+    CategoryPage.Gajak,
+    CategoryPage.SambarRice,
+    CategoryPage.Tart,
+    CategoryPage.Tiramisu,
+    CategoryPage.Pie,
+    CategoryPage.Custard,
+    CategoryPage.SevPoori,
+    CategoryPage.Mousse,
+    CategoryPage.DalKachori,
+    CategoryPage.Jalebi,
+    CategoryPage.PyaajKachori,
+    CategoryPage.RajmaRice,
+    CategoryPage.Upma,
+    CategoryPage.Manchurian,
+    CategoryPage.PaneerPakoda,
+    CategoryPage.Cheesecake,
+    CategoryPage.Brownie,
+    CategoryPage.Chaap,
+    CategoryPage.Dal,
+    CategoryPage.Waffles,
+    CategoryPage.AlooKachori,
+    CategoryPage.CholeKulche,
+    CategoryPage.Fries,
+    CategoryPage.ColdCoffee,
+    CategoryPage.Soup,
+    CategoryPage.Bhurji,
+    CategoryPage.KhastaKachori,
+    CategoryPage.HotDog,
+).filter { it.isActive }.sortedBy { it.priority }
 
     // Initial visible tabs (first 19 + recently selected + "See All")
     val initialVisibleCount = 19
@@ -503,8 +362,12 @@ fun CategoryTabsFood(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.padding(vertical = 4.dp)
                     ) {
+                        // Use Coil's AsyncImage for loading from URL
                         Image(
-                            painter = painterResource(id = categoryPage.iconRes),
+                            painter = rememberAsyncImagePainter(
+                                model = categoryPage.iconUrl,
+                                error = androidx.compose.ui.res.painterResource(id = R.drawable.placeholder_food)
+                            ),
                             contentDescription = categoryPage.title,
                             modifier = Modifier
                                 .width(65.dp)
@@ -547,7 +410,7 @@ fun CategoryTabsFood(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    brush = Brush.verticalGradient(
+                    Brush.verticalGradient(
                         colors = listOf(
                             Color(0xFFEDF6FF),
                             Color(0xFFFDFEFF)
@@ -561,12 +424,12 @@ fun CategoryTabsFood(
             // Show content based on the actual category
             when (actualCategory) {
                 CategoryPage.All -> AllCategoryPage(
-                navController = navController,
-                viewModel = viewModel(),  // Add this line
-                onBanner1Click = { /* Handle banner 1 click */ },
-                onBanner2Click = { /* Handle banner 2 click */ },
-                onBanner3Click = { /* Handle banner 3 click */ }
-)
+                    navController = navController,
+                    viewModel = viewModel(),
+                    onBanner1Click = { /* Handle banner 1 click */ },
+                    onBanner2Click = { /* Handle banner 2 click */ },
+                    onBanner3Click = { /* Handle banner 3 click */ }
+                )
                 CategoryPage.Diet -> {
                     DietCategoryPage(
                         navController = navController,
@@ -688,7 +551,7 @@ fun CategoryTabsFood(
                 CategoryPage.Jalebi -> JalebiCategoryPage()
                 CategoryPage.PyaajKachori -> PyaajKachoriCategoryPage()
                 CategoryPage.RajmaRice -> RajmaRiceCategoryPage()
-                CategoryPage.Upma ->  UpmaCategoryPage()
+                CategoryPage.Upma -> UpmaCategoryPage()
                 CategoryPage.Manchurian -> ManchurianCategoryPage()
                 CategoryPage.PaneerPakoda -> PaneerPakodaCategoryPage()
                 CategoryPage.Cheesecake -> CheesecakeCategoryPage()
@@ -720,17 +583,16 @@ fun CategoryTabsFood(
                     }
                 }
                 else -> AllCategoryPage(
-                navController = navController,
-                viewModel = viewModel(),  // Add this line
-                onBanner1Click = { /* Handle banner 1 click */ },
-                onBanner2Click = { /* Handle banner 2 click */ },
-                onBanner3Click = { /* Handle banner 3 click */ }
-)
+                    navController = navController,
+                    viewModel = viewModel(),
+                    onBanner1Click = { /* Handle banner 1 click */ },
+                    onBanner2Click = { /* Handle banner 2 click */ },
+                    onBanner3Click = { /* Handle banner 3 click */ }
+                )
             }
         }
     }
 }
-
 
 // Add this to your navigation graph:
 // composable("category_tabs_f_list") {
@@ -741,6 +603,7 @@ fun CategoryTabsFood(
 //         }
 //     )
 // }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -1219,6 +1082,9 @@ val bannerImagesData by remember(validBanners) {
                                 color = Color.Red,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "${bannerImagesData}",
                             )
                             Text(
                                 text = error ?: "Unknown error occurred",
@@ -1709,28 +1575,31 @@ val bannerImagesData by remember(validBanners) {
         Spacer(modifier = Modifier.height(10.dp))
 
         val moreOnHufkoCategoriesSimple = listOf(
-            CategoryItem(0, "", R.drawable.ic_more_on_hufko_1, "View products"),
-            CategoryItem(1, "", R.drawable.ic_more_on_hufko_2, "View products"),
-            CategoryItem(2, "", R.drawable.ic_more_on_hufko_3, "View products"),
-            CategoryItem(3, "", R.drawable.ic_more_on_hufko_4, "View products"),
-            CategoryItem(4, "", R.drawable.ic_more_on_hufko_5, "View products"),
-            CategoryItem(5, "", R.drawable.ic_more_on_hufko_6, "View products"),
-            CategoryItem(6, "", R.drawable.ic_more_on_hufko_7, "View products"),
-            CategoryItem(7, "", R.drawable.ic_explore_more_4, "View products"),
-            CategoryItem(8, "", R.drawable.ic_explore_more_6, "View products"),
+            CategoryItemUrl(0, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_more_on_hufko_1.png", "View products"),
+            CategoryItemUrl(1, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_more_on_hufko_2.png", "View products"),
+            CategoryItemUrl(2, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_more_on_hufko_3.png", "View products"),
+            CategoryItemUrl(3, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_more_on_hufko_4.png", "View products"),
+            CategoryItemUrl(4, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_more_on_hufko_5.png", "View products"),
+            CategoryItemUrl(5, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_more_on_hufko_6.png", "View products"),
+            CategoryItemUrl(6, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_more_on_hufko_7.png", "View products"),
+            CategoryItemUrl(7, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_explore_more_4.png", "View products"),
+            CategoryItemUrl(8, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_explore_more_6.png", "View products"),
         )
 
-        CategoryListSimple(
-            items = moreOnHufkoCategoriesSimple,
-            onItemClick = { item ->
+         CategoryListSimpleDynamicUrl(
+                items = moreOnHufkoCategoriesSimple,
+                onItemClick = { item ->
                 println("More On Hufko item selected: ${item.name}")
-            },
-            itemWidth = 100.dp,
-            itemHeight = 100.dp,
-            horizontalSpacing = 12.dp,
-            horizontalPadding = 12.dp,
-            backgroundColor = Color.White
-        )
+                },
+                itemWidth = 100.dp,
+                itemHeight = 100.dp,
+                horizontalSpacing = 12.dp,
+                horizontalPadding = 12.dp,
+                backgroundColor = Color.White,
+                showItemName = false,  // Hide since name is empty
+                showSubtitle = false,   // Show "View products"
+            )
+
 
         // ==================== FILTER BUTTON ====================
         Spacer(modifier = Modifier.height(15.dp))

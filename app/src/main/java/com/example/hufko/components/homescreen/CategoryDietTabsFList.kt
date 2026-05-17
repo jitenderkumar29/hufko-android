@@ -29,7 +29,8 @@ import androidx.navigation.NavHostController
 import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 import coil.compose.rememberAsyncImagePainter
-
+// homescreen/CategoryDietTabsFList.kt
+// homescreen/CategoryDietTabsFList.kt
 @Composable
 fun CategoryDietTabsFList(
     navController: NavHostController? = null,
@@ -52,7 +53,6 @@ fun CategoryDietTabsFList(
                 DietCategoryPage.LowCalorie,
                 DietCategoryPage.Vegan,
                 DietCategoryPage.ProteinRich,
-
                 DietCategoryPage.Dessert,
                 DietCategoryPage.VegMeal,
                 DietCategoryPage.Bowl,
@@ -68,7 +68,6 @@ fun CategoryDietTabsFList(
                 DietCategoryPage.Brownie,
                 DietCategoryPage.Waffles,
                 DietCategoryPage.ColdCoffee,
-                // Additional diet categories
                 DietCategoryPage.GrilledChicken,
                 DietCategoryPage.SteamedFish,
                 DietCategoryPage.QuinoaBowl,
@@ -118,6 +117,7 @@ fun CategoryDietTabsFList(
                     modifier = Modifier
                         .size(28.dp)
                         .clickable {
+                            // Save the selected index before going back
                             onTabIndexChanged(selectedCategoryIndex)
                             onBackClick()
                         }
@@ -186,11 +186,7 @@ fun CategoryDietTabsFList(
             selectedCategoryIndex = selectedCategoryIndex,
             onCategorySelected = { index ->
                 selectedCategoryIndex = index
-                // Pass the selected index back to the main screen
-                navController?.previousBackStackEntry?.savedStateHandle?.set(
-                    "selectedDietTabFromSeeAll",
-                    index
-                )
+                // Call the callback which will save to savedStateHandle
                 onTabIndexChanged(index)
                 onBackClick()
             }
@@ -232,7 +228,6 @@ fun DietCategoriesGrid(
     selectedCategoryIndex: Int = 0,
     onCategorySelected: (Int) -> Unit = {}
 ) {
-    // ALL CATEGORIES ARE NOW CLICKABLE - removed the clickable restriction
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
         modifier = Modifier.fillMaxSize(),
@@ -240,14 +235,12 @@ fun DietCategoriesGrid(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         itemsIndexed(allDietCategories) { index, categoryPage ->
-            // Skip the "See All" page in the grid
             if (categoryPage !is DietCategoryPage.SeeAll) {
-                // All items are now clickable - removed the isClickable condition
                 DietCategoryItem(
                     categoryPage = categoryPage,
                     isSelected = index == selectedCategoryIndex,
                     onClick = {
-                        onCategorySelected(index) // All items can now be clicked
+                        onCategorySelected(index)
                     }
                 )
             }
@@ -259,13 +252,13 @@ fun DietCategoriesGrid(
 fun DietCategoryItem(
     categoryPage: DietCategoryPage,
     isSelected: Boolean = false,
-    onClick: () -> Unit = {}  // Removed isClickable parameter
+    onClick: () -> Unit = {}
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(4.dp)
-            .clickable { onClick() }  // Always clickable
+            .clickable { onClick() }
     ) {
         Box(
             modifier = Modifier
@@ -274,8 +267,7 @@ fun DietCategoryItem(
             contentAlignment = Alignment.Center
         ) {
             Image(
-                rememberAsyncImagePainter(categoryPage.iconUrl),
-//                painter = painterResource(id = categoryPage.iconRes),
+                painter = rememberAsyncImagePainter(categoryPage.iconUrl),
                 contentDescription = categoryPage.title,
                 modifier = Modifier.size(70.dp)
             )
@@ -294,7 +286,5 @@ fun DietCategoryItem(
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.width(70.dp)
         )
-
-        // Removed the "New" indicator since all items are now clickable
     }
 }

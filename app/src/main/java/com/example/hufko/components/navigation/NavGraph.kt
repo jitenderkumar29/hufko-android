@@ -75,6 +75,7 @@ fun AppNavGraph(navController: NavHostController) {
             )
         }
 
+        // In your NavGraph setup, update the route:
         composable(
             "category_diet_tabs_list/{selectedDietIndex}",
             arguments = listOf(navArgument("selectedDietIndex") {
@@ -85,14 +86,22 @@ fun AppNavGraph(navController: NavHostController) {
             val selectedDietIndex = backStackEntry.arguments?.getInt("selectedDietIndex") ?: 0
 
             CategoryDietTabsFList(
+                navController = navController,
                 onBackClick = {
                     navController.popBackStack()
                 },
                 onTabIndexChanged = { newIndex ->
-                    // Save the updated index to be read by the home screen
+                    // Save to both current and previous back stack entries
+                    navController.currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("selectedDietTabFromSeeAll", newIndex)
+
+                    // Also save to previous entry for redundancy
                     navController.previousBackStackEntry
                         ?.savedStateHandle
-                        ?.set("updatedDietTabIndex", newIndex)
+                        ?.set("selectedDietTabFromSeeAll", newIndex)
+
+                    Log.d("Navigation", "Saved selected index: $newIndex")
                 },
                 name = "All Food Categories",
                 initialSelectedIndex = selectedDietIndex

@@ -604,7 +604,6 @@ fun CategoryTabsFood(
 //     )
 // }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DietCategoryPage(

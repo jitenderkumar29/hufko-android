@@ -71,49 +71,49 @@ sealed class DietCategoryPage(
     // First 8 main categories (indices 0-7)
     object Chicken : DietCategoryPage(
         title = "Chicken",
-        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/chicken.png",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/chicken_food_diet.png",
         category = "Chicken"
     )
 
     object Salad : DietCategoryPage(
         title = "Salad",
-        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/salad.png",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/salad_food_diet.png",
         category = "Salad"
     )
 
     object Mutton : DietCategoryPage(
         title = "Mutton",
-        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/mutton.png",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/mutton_food_diet.png",
         category = "Mutton"
     )
 
     object Kebabs : DietCategoryPage(
         title = "Kebabs",
-        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/kebabs.png",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/kebabs_food_diet.png",
         category = "Kebabs"
     )
 
     object HealthySnacks : DietCategoryPage(
         title = "Snacks",
-        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/snacks.png",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/healthy_snacks_food_diet.png",
         category = "Snacks"
     )
 
     object LowCalorie : DietCategoryPage(
         title = "Low Calorie",
-        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/low_calorie.png",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/low_calorie_food_diet.png",
         category = "LowCalorie"
     )
 
     object Vegan : DietCategoryPage(
         title = "Vegan",
-        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/vegan.png",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/vegan_food_diet.png",
         category = "Vegan"
     )
 
     object ProteinRich : DietCategoryPage(
         title = "Protein Rich",
-        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/protein_rich.png",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/protein_food_diet.png",
         category = "ProteinRich"
     )
 
@@ -121,91 +121,92 @@ sealed class DietCategoryPage(
 
     object Dessert : DietCategoryPage(
         "Dessert",
-        "${NetworkConfig.BASE_URL}/assets/banners/dessert.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/dessert_food.png",
         "Dessert"
     )
 
     object VegMeal : DietCategoryPage(
         "Veg Meal",
-        "${NetworkConfig.BASE_URL}/assets/banners/veg_meal.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/veg_meal_food.png",
         "VegMeal"
     )
 
     object Bowl : DietCategoryPage(
         "Bowl",
-        "${NetworkConfig.BASE_URL}/assets/banners/bowl.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/bowl_food.png",
         "Bowl"
     )
 
     object Sweets : DietCategoryPage(
         "Sweets",
-        "${NetworkConfig.BASE_URL}/assets/banners/sweets.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/sweets_food.png",
         "Sweets"
     )
 
     object Khichdi : DietCategoryPage(
         "Khichdi",
-        "${NetworkConfig.BASE_URL}/assets/banners/khichdi.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/khichdi_food.png",
         "Khichdi"
     )
 
     object Sundae : DietCategoryPage(
         "Sundae",
-        "${NetworkConfig.BASE_URL}/assets/banners/sundae.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/sundae_food.png",
         "Sundae"
     )
 
     object Juice : DietCategoryPage(
         "Juice",
-        "${NetworkConfig.BASE_URL}/assets/banners/juice.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/juice_food.png",
         "Juice"
     )
 
     object Lassi : DietCategoryPage(
         "Lassi",
-        "${NetworkConfig.BASE_URL}/assets/banners/lassi.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/lassi_food.png",
         "Lassi"
     )
 
     object CurdRice : DietCategoryPage(
         "Curd Rice",
-        "${NetworkConfig.BASE_URL}/assets/banners/curd_rice.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/curd_rice_food.png",
         "CurdRice"
     )
 
     object Pudding : DietCategoryPage(
         "Pudding",
-        "${NetworkConfig.BASE_URL}/assets/banners/pudding.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/pudding_food.png",
         "Pudding"
     )
 
     object Custard : DietCategoryPage(
         "Custard",
-        "${NetworkConfig.BASE_URL}/assets/banners/custard.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/custard_food.png",
         "Custard"
     )
 
     object Soup : DietCategoryPage(
         "Soup",
-        "${NetworkConfig.BASE_URL}/assets/banners/soup.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/soup_food.png",
         "Soup"
     )
 
     object Brownie : DietCategoryPage(
         "Brownie",
-        "${NetworkConfig.BASE_URL}/assets/banners/brownie.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/brownie_food.png",
         "Brownie"
     )
 
     object Waffles : DietCategoryPage(
         "Waffles",
-        "${NetworkConfig.BASE_URL}/assets/banners/waffles.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/waffles_food.png",
         "Waffles"
     )
 
     object ColdCoffee : DietCategoryPage(
         "Cold Coffee",
-        "${NetworkConfig.BASE_URL}/assets/banners/cold_coffee.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/cold_coffee_food" +
+                ".png",
         "ColdCoffee"
     )
 
@@ -231,133 +232,133 @@ sealed class DietCategoryPage(
 
     object AvocadoToast : DietCategoryPage(
         "Avocado Toast",
-        "${NetworkConfig.BASE_URL}/assets/banners/avocado_toast.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/avocado_toast_food.png",
         "AvocadoToast"
     )
 
     object GreenSmoothie : DietCategoryPage(
         "Green Smoothie",
-        "${NetworkConfig.BASE_URL}/assets/banners/green_smoothie.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/green_smoothie_food.png",
         "GreenSmoothie"
     )
 
     object Oatmeal : DietCategoryPage(
         "Oatmeal",
-        "${NetworkConfig.BASE_URL}/assets/banners/oatmeal.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/oatmeal_food.png",
         "Oatmeal"
     )
 
     object GreekYogurt : DietCategoryPage(
         "Greek Yogurt",
-        "${NetworkConfig.BASE_URL}/assets/banners/greek_yogurt.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/greek_yogurt_food_diet.png",
         "GreekYogurt"
     )
 
     object EggWhiteOmelette : DietCategoryPage(
         "Egg White",
-        "${NetworkConfig.BASE_URL}/assets/banners/egg_white.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/egg_white_omelette_food_diet.png",
         "EggWhite"
     )
 
     object TunaSalad : DietCategoryPage(
         "Tuna Salad",
-        "${NetworkConfig.BASE_URL}/assets/banners/tuna_salad.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/tuna_salad_food_diet.png",
         "TunaSalad"
     )
 
     object LentilSoup : DietCategoryPage(
         "Lentil Soup",
-        "${NetworkConfig.BASE_URL}/assets/banners/lentil_soup.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/lentil_soup_food_diet.png",
         "LentilSoup"
     )
 
     object CottageCheese : DietCategoryPage(
         "Cottage Cheese",
-        "${NetworkConfig.BASE_URL}/assets/banners/cottage_cheese.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/cottage_cheese_food_diet.png",
         "CottageCheese"
     )
 
     object SproutsSalad : DietCategoryPage(
         "Sprouts Salad",
-        "${NetworkConfig.BASE_URL}/assets/banners/sprouts_salad.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/sprouts_salad_food_diet.png",
         "SproutsSalad"
     )
 
     object BrownRiceBowl : DietCategoryPage(
         "Brown Rice",
-        "${NetworkConfig.BASE_URL}/assets/banners/brown_rice.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/brown_rice_bowl_food_diet.png",
         "BrownRice"
     )
 
     object SteamedVeggies : DietCategoryPage(
         "Steamed Veg",
-        "${NetworkConfig.BASE_URL}/assets/banners/steamed_veg.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/steamed_veggies_food_diet.png",
         "SteamedVeg"
     )
 
     object FruitBowl : DietCategoryPage(
         "Fruit Bowl",
-        "${NetworkConfig.BASE_URL}/assets/banners/fruit_bowl.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/fruit_bowl_food_diet.png",
         "FruitBowl"
     )
 
     object DetoxWater : DietCategoryPage(
         "Detox Water",
-        "${NetworkConfig.BASE_URL}/assets/banners/detox_water.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/detox_water_food_diet.png",
         "DetoxWater"
     )
 
     object HerbalTea : DietCategoryPage(
         "Herbal Tea",
-        "${NetworkConfig.BASE_URL}/assets/banners/herbal_tea.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/herbal_tea_food_diet.png",
         "HerbalTea"
     )
 
     object ProteinBar : DietCategoryPage(
         "Protein Bar",
-        "${NetworkConfig.BASE_URL}/assets/banners/protein_bar.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/protein_bar_food_diet.png",
         "ProteinBar"
     )
 
     object BoiledEggs : DietCategoryPage(
         "Boiled Eggs",
-        "${NetworkConfig.BASE_URL}/assets/banners/boiled_eggs.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/boiled_eggs_food_diet.png",
         "BoiledEggs"
     )
 
     object HummusPlate : DietCategoryPage(
         "Hummus Plate",
-        "${NetworkConfig.BASE_URL}/assets/banners/hummus_plate.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/hummus_plate_food_diet.png",
         "HummusPlate"
     )
 
     object SushiRolls : DietCategoryPage(
         "Sushi Rolls",
-        "${NetworkConfig.BASE_URL}/assets/banners/sushi_rolls.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/sushi_rolls_food_diet.png",
         "SushiRolls"
     )
 
     object TofuStirFry : DietCategoryPage(
         "Tofu Stir Fry",
-        "${NetworkConfig.BASE_URL}/assets/banners/tofu_stir_fry.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/tofu_stir_fry_food_diet.png",
         "TofuStirFry"
     )
 
     object ChiaPudding : DietCategoryPage(
         "Chia Pudding",
-        "${NetworkConfig.BASE_URL}/assets/banners/chia_pudding.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/chia_pudding_food_diet.png",
         "ChiaPudding"
     )
 
     object MilletBowl : DietCategoryPage(
         "Millet Bowl",
-        "${NetworkConfig.BASE_URL}/assets/banners/millet_bowl.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/millet_bowl_food_diet.png",
         "MilletBowl"
     )
 
     object SeeAll : DietCategoryPage(
         "See All",
-        "${NetworkConfig.BASE_URL}/assets/banners/see_all.png",
+        "${NetworkConfig.BASE_URL}/assets/banners/see_all_food.png",
         "SeeAll"
     )
 }
@@ -476,11 +477,13 @@ fun CategoryDietTabsFood(
     // Update when parent changes
     LaunchedEffect(selectedDietTabIndex) {
         if (selectedDietTabIndex != internalSelectedIndex) {
+            Log.d(TAG, "External selectedDietTabIndex changed: $selectedDietTabIndex")
             internalSelectedIndex = selectedDietTabIndex
-            // When index changes from parent, add to recently selected if beyond initial count
+
+            // Also add to recently selected if needed
             if (selectedDietTabIndex >= initialVisibleCount) {
                 recentlySelectedTabs = recentlySelectedTabs + selectedDietTabIndex
-                Log.d(TAG, "Added to recentlySelectedTabs from parent: $selectedDietTabIndex")
+                Log.d(TAG, "Added to recentlySelectedTabs from external: $selectedDietTabIndex")
             }
         }
     }
@@ -488,57 +491,65 @@ fun CategoryDietTabsFood(
     // Handle selection from See All page
     DisposableEffect(navController) {
         val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
-        val liveData = savedStateHandle?.getLiveData<Int>("selectedDietTabFromSeeAll")
+
+        // Listen for both the direct key and the updated index
+        val liveData1 = savedStateHandle?.getLiveData<Int>("selectedDietTabFromSeeAll")
+        val liveData2 = navController?.previousBackStackEntry?.savedStateHandle?.getLiveData<Int>("selectedDietTabFromSeeAll")
 
         val observer = androidx.lifecycle.Observer<Int> { newIndex ->
-            if (newIndex != null) {
+            if (newIndex != null && newIndex != internalSelectedIndex) {
                 Log.d(TAG, "Received new index from See All: $newIndex")
 
-                // First update recently selected tabs
+                // Add to recently selected tabs if beyond first 8
                 if (newIndex >= initialVisibleCount) {
-                    recentlySelectedTabs = recentlySelectedTabs + newIndex
-                    Log.d(TAG, "Added to recentlySelectedTabs: $newIndex, now: $recentlySelectedTabs")
+                    val updatedSet = recentlySelectedTabs + newIndex
+                    recentlySelectedTabs = updatedSet
+                    Log.d(TAG, "Added to recentlySelectedTabs: $newIndex, now has ${updatedSet.size} items")
+                    Log.d(TAG, "Recently selected tabs: $recentlySelectedTabs")
                 }
 
-                // Small delay to ensure recomposition with updated recentlySelectedTabs
-                CoroutineScope(Dispatchers.Main).launch {
-                    delay(10)
-                    // Then update internal selected index
-                    internalSelectedIndex = newIndex
+                // Update the selected index
+                internalSelectedIndex = newIndex
 
-                    // Notify parent
-                    onTabIndexChanged(newIndex)
+                // Notify parent
+                onTabIndexChanged(newIndex)
 
-                    // Get the category page and call onCategorySelected
-                    allDietCategoryPages.getOrNull(newIndex)?.let { page ->
-                        onCategorySelected(page)
-                    }
+                // Get the category page and call onCategorySelected
+                allDietCategoryPages.getOrNull(newIndex)?.let { page ->
+                    onCategorySelected(page)
+                    Log.d(TAG, "Selected category: ${page.title}")
                 }
 
-                // Clear the value
-                savedStateHandle?.remove<Int>("selectedDietTabFromSeeAll")
+                // Clear the values
+                navController?.currentBackStackEntry?.savedStateHandle?.remove<Int>("selectedDietTabFromSeeAll")
+                navController?.previousBackStackEntry?.savedStateHandle?.remove<Int>("selectedDietTabFromSeeAll")
             }
         }
 
-        liveData?.observeForever(observer)
+        liveData1?.observeForever(observer)
+        liveData2?.observeForever(observer)
 
         onDispose {
-            liveData?.removeObserver(observer)
+            liveData1?.removeObserver(observer)
+            liveData2?.removeObserver(observer)
         }
     }
 
     // Build visible tabs - recomputes whenever recentlySelectedTabs changes
-    val visibleTabs = remember(recentlySelectedTabs) {
+    val visibleTabs = remember(recentlySelectedTabs, internalSelectedIndex) {
         buildList {
             // Add first 8 tabs
             addAll(allDietCategoryPages.take(initialVisibleCount))
 
+            Log.d(TAG, "Building visibleTabs - Recently selected: $recentlySelectedTabs")
+
             // Add recently selected tabs beyond first 8, preserving order
+            // Convert to list and sort to maintain consistent order
             val sortedRecentTabs = recentlySelectedTabs
                 .filter { it >= initialVisibleCount }
                 .sorted()
 
-            Log.d(TAG, "Building visibleTabs with recent tabs: $sortedRecentTabs")
+            Log.d(TAG, "Sorted recent tabs: $sortedRecentTabs")
 
             sortedRecentTabs.forEach { index ->
                 allDietCategoryPages.getOrNull(index)?.let {
@@ -602,23 +613,19 @@ fun CategoryDietTabsFood(
 
             // Case 2: Selected index is a recently selected tab (beyond first 8)
             internalSelectedIndex in allToVisibleMap -> {
-                val index = allToVisibleMap[internalSelectedIndex]
+                val index = allToVisibleMap[internalSelectedIndex] ?: (visibleTabs.size - 1)
                 Log.d(TAG, "Mapping internal index $internalSelectedIndex to visible index $index")
-                index ?: (visibleTabs.size - 1)
+                index
             }
 
-            // Case 3: Selected index is not in visible tabs - add it to recently selected
+            // Case 3: Selected index is not in visible tabs - this shouldn't happen now
             else -> {
-                Log.d(TAG, "Selected index $internalSelectedIndex not found in visible tabs, adding to recently selected")
-                // Add to recently selected tabs
+                Log.d(TAG, "WARNING: Selected index $internalSelectedIndex not found in visible tabs")
+                // Force add to recently selected
                 if (internalSelectedIndex >= initialVisibleCount) {
-                    // Use a coroutine to update recentlySelectedTabs
-                    CoroutineScope(Dispatchers.Main).launch {
-                        recentlySelectedTabs = recentlySelectedTabs + internalSelectedIndex
-                        Log.d(TAG, "Added missing tab to recentlySelectedTabs: $internalSelectedIndex")
-                    }
+                    recentlySelectedTabs = recentlySelectedTabs + internalSelectedIndex
                 }
-                visibleTabs.size - 1 // Default to See All for now
+                visibleTabs.size - 1 // Default to See All
             }
         }
 
@@ -631,11 +638,17 @@ fun CategoryDietTabsFood(
         }
     }
 
+    // Force recomposition of content when internalSelectedIndex changes
+    val currentCategory = remember(internalSelectedIndex) {
+        allDietCategoryPages.getOrNull(internalSelectedIndex)
+    }
+
     // Debug logging
-    LaunchedEffect(internalSelectedIndex, recentlySelectedTabs) {
+    LaunchedEffect(internalSelectedIndex, recentlySelectedTabs, selectedVisibleIndex) {
         Log.d(TAG, "=== State Update ===")
         Log.d(TAG, "internalSelectedIndex: $internalSelectedIndex")
         Log.d(TAG, "selectedVisibleIndex: $selectedVisibleIndex")
+        Log.d(TAG, "selectedVisibleIndex in bounds: ${selectedVisibleIndex in visibleTabs.indices}")
         Log.d(TAG, "recentlySelectedTabs: $recentlySelectedTabs")
         Log.d(TAG, "visibleTabs size: ${visibleTabs.size}")
         visibleTabs.forEachIndexed { index, page ->
@@ -643,6 +656,7 @@ fun CategoryDietTabsFood(
             Log.d(TAG, "visibleTabs[$index]: ${page.title} (original index: $originalIndex)")
         }
         Log.d(TAG, "Selected tab title: ${visibleTabs.getOrNull(selectedVisibleIndex)?.title}")
+        Log.d(TAG, "Current category: ${currentCategory?.title}")
         Log.d(TAG, "==================")
     }
 
@@ -665,7 +679,7 @@ fun CategoryDietTabsFood(
         // Heading
         Text(
             text = "Atharv, still looking for healthy diet?",
-            fontSize = 20.sp,
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.customColors.white,
             modifier = Modifier
@@ -680,11 +694,13 @@ fun CategoryDietTabsFood(
             contentColor = MaterialTheme.customColors.black,
             edgePadding = 0.dp,
             indicator = { tabPositions ->
-                TabRowDefaults.Indicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedVisibleIndex]),
-                    height = 5.dp,
-                    color = MaterialTheme.customColors.header
-                )
+                if (selectedVisibleIndex in tabPositions.indices) {
+                    TabRowDefaults.Indicator(
+                        modifier = Modifier.tabIndicatorOffset(tabPositions[selectedVisibleIndex]),
+                        height = 5.dp,
+                        color = MaterialTheme.customColors.header
+                    )
+                }
             }
         ) {
             visibleTabs.forEachIndexed { index, dietCategoryPage ->
@@ -697,7 +713,11 @@ fun CategoryDietTabsFood(
                     else -> visibleToAllMap[index] ?: -1
                 }
 
-                val isSelected = !isSeeAllTab && internalSelectedIndex == originalIndex
+                val isSelected = if (isSeeAllTab) {
+                    false
+                } else {
+                    originalIndex == internalSelectedIndex
+                }
 
                 Tab(
                     selected = isSelected,
@@ -717,6 +737,9 @@ fun CategoryDietTabsFood(
                         } else {
                             // Regular tab click
                             if (originalIndex >= 0) {
+                                Log.d(TAG, "Tab clicked: ${dietCategoryPage.title}, originalIndex: $originalIndex")
+
+                                // Update internal selected index
                                 internalSelectedIndex = originalIndex
                                 onTabIndexChanged(originalIndex)
                                 onCategorySelected(dietCategoryPage)
@@ -746,8 +769,7 @@ fun CategoryDietTabsFood(
                             .padding(horizontal = 5.dp, vertical = 5.dp)
                     ) {
                         Image(
-                            rememberAsyncImagePainter(dietCategoryPage.iconUrl),
-//                            painter = painterResource(id = dietCategoryPage.iconRes),
+                            painter = rememberAsyncImagePainter(dietCategoryPage.iconUrl),
                             contentDescription = dietCategoryPage.title,
                             modifier = Modifier
                                 .width(65.dp)
@@ -786,7 +808,7 @@ fun CategoryDietTabsFood(
         }
     }
 
-    // Content section
+    // Content section - Using currentCategory directly for better reactivity
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -799,9 +821,12 @@ fun CategoryDietTabsFood(
                 )
             )
     ) {
-        val actualCategory = allDietCategoryPages.getOrNull(internalSelectedIndex)
+        // Log the current category for debugging
+        LaunchedEffect(currentCategory) {
+            Log.d(TAG, "Rendering content for category: ${currentCategory?.title} at index $internalSelectedIndex")
+        }
 
-        when (actualCategory) {
+        when (currentCategory) {
             DietCategoryPage.Chicken -> ChickenDietPage()
             DietCategoryPage.Salad -> SaladDietPage()
             DietCategoryPage.Mutton -> MuttonDietPage()
@@ -820,7 +845,7 @@ fun CategoryDietTabsFood(
             DietCategoryPage.Lassi -> LassiPage()
             DietCategoryPage.CurdRice -> CurdRicePage()
             DietCategoryPage.Pudding -> PuddingPage()
-            DietCategoryPage.Custard -> CustardPage()  // This should now be selectable
+            DietCategoryPage.Custard -> CustardPage()
             DietCategoryPage.Soup -> SoupDietPage()
             DietCategoryPage.Brownie -> BrowniePage()
             DietCategoryPage.Waffles -> WafflesPage()
@@ -849,7 +874,8 @@ fun CategoryDietTabsFood(
             DietCategoryPage.TofuStirFry -> TofuStirFryDietPage()
             DietCategoryPage.ChiaPudding -> ChiaPuddingDietPage()
             DietCategoryPage.MilletBowl -> MilletBowlDietPage()
-            null -> {
+            DietCategoryPage.SeeAll -> {
+                // When "See All" is selected, show the grid view
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -857,14 +883,35 @@ fun CategoryDietTabsFood(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "Select a diet category",
+                        text = "All categories view",
                         color = MaterialTheme.customColors.gray,
                         fontSize = 16.sp
                     )
                 }
             }
-            else -> ChickenDietPage()
+            null -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "Select a diet category",
+                            color = MaterialTheme.customColors.gray,
+                            fontSize = 16.sp
+                        )
+                        Text(
+                            text = "Current index: $internalSelectedIndex",
+                            color = MaterialTheme.customColors.gray,
+                            fontSize = 12.sp
+                        )
+                    }
+                }
+            }
         }
+
     }
 }
 

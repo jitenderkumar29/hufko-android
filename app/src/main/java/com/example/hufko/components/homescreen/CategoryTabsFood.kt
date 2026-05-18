@@ -51,6 +51,8 @@ import coil.compose.AsyncImage
 import androidx.compose.ui.platform.LocalContext
 import com.example.hufko.components.homescreen.CategoryPage
 import com.example.hufko.components.homescreen.CategoryDietTabsFood
+import com.example.hufko.api.services.viewmodels.RestaurantViewModel
+
 
 //import androidx.compose.ui.Arrangement
 
@@ -420,12 +422,13 @@ fun CategoryTabsFood(
         ) {
             // Get the actual category based on currentSelectedIndex
             val actualCategory = allCategoryPages.getOrNull(currentSelectedIndex)
-
+            val restaurantViewModel: RestaurantViewModel = viewModel()
             // Show content based on the actual category
             when (actualCategory) {
                 CategoryPage.All -> AllCategoryPage(
                     navController = navController,
                     viewModel = viewModel(),
+                    restaurantViewModel = restaurantViewModel,
                     onBanner1Click = { /* Handle banner 1 click */ },
                     onBanner2Click = { /* Handle banner 2 click */ },
                     onBanner3Click = { /* Handle banner 3 click */ }
@@ -585,6 +588,7 @@ fun CategoryTabsFood(
                 else -> AllCategoryPage(
                     navController = navController,
                     viewModel = viewModel(),
+                    restaurantViewModel = restaurantViewModel,
                     onBanner1Click = { /* Handle banner 1 click */ },
                     onBanner2Click = { /* Handle banner 2 click */ },
                     onBanner3Click = { /* Handle banner 3 click */ }
@@ -884,43 +888,34 @@ private fun getIndexFromCategory(category: DietCategoryPage): Int {
 }
 
 
-// Sample restaurant items data - MOVED OUTSIDE the composable function
-private val sampleRestaurantItemsAll = listOf(
-    RestaurantItemFull(id = 1, imageRes = R.drawable.restaurant_image_all_food_1, title = "Paneer Delight Momos", price = "159", restaurantName = "Goblins", rating = "4.0", deliveryTime = "30-35 mins", distance = "5.8 km", discount = "50%", discountAmount = "₹20", address = "Govindpuram"),
-    RestaurantItemFull(id = 2, imageRes = R.drawable.restaurant_image_all_food_2, title = "Egg Curry", price = "90", restaurantName = "Bori & Rori Junction", rating = "3.5", deliveryTime = "40-45 mins", distance = "6.8 km", discount = "50%", discountAmount = "₹20", address = "Noida"),
-    RestaurantItemFull(id = 3, imageRes = R.drawable.restaurant_image_all_food_3, title = "Tawa Chicken", price = "299", restaurantName = "FFC Express", rating = "3.9", deliveryTime = "40-45 mins", distance = "8.2 km", discount = "50%", discountAmount = "₹20", address = "Delhi"),
-    RestaurantItemFull(id = 4, imageRes = R.drawable.restaurant_image_all_food_4, title = "Pasta", price = "300 for one", restaurantName = "Gustaro Pasta", rating = "4.5", deliveryTime = "70-75 mins", distance = "14.3 km", discount = "50%", discountAmount = "₹20", address = "Bengaluru"),
-    RestaurantItemFull(id = 5, imageRes = R.drawable.restaurant_image_all_food_5, title = "Burger", price = "200 for one", restaurantName = "Ayub Chaumin Wale", rating = "4.3", deliveryTime = "25-30 mins", distance = "4.3 km", discount = "40%", discountAmount = "₹20", address = "Govindpuram"),
-    RestaurantItemFull(id = 6, imageRes = R.drawable.restaurant_image_all_food_6, title = "Biryani", price = "400 for one", restaurantName = "Charcoal Eats - Biryani & Beyond", rating = "4.2", deliveryTime = "50-55 mins", distance = "13.8 km", discount = "50%", discountAmount = "₹20", address = "Meerut"),
-    RestaurantItemFull(id = 7, imageRes = R.drawable.restaurant_image_all_food_7, title = "Honey Chilli Porero", price = "160", restaurantName = "Desi Mugz", rating = "4.1", deliveryTime = "60-65 mins", distance = "14.8 km", discount = "20%", discountAmount = "₹20", address = "Badarpur"),
-    RestaurantItemFull(id = 8, imageRes = R.drawable.restaurant_image_all_food_8, title = "Paneer Paratha", price = "119", restaurantName = "Swaad Aaya", rating = "3.5", deliveryTime = "55-60 mins", distance = "13.8 km", discount = "50%", discountAmount = "₹20", address = "Meerut"),
-    RestaurantItemFull(id = 9, imageRes = R.drawable.restaurant_image_all_food_9, title = "Arhar Dal Tadka", price = "180", restaurantName = "Uncle Ke Rasoi", rating = "4.0", deliveryTime = "55-60 mins", distance = "13 km", discount = "50%", discountAmount = "₹20", address = "Agra"),
-    RestaurantItemFull(id = 10, imageRes = R.drawable.restaurant_image_all_food_10, title = "Pure Veg", price = "200 for one", restaurantName = "Shree Krishna Baker's", rating = "3.5", deliveryTime = "45-50 mins", distance = "10.9 km", discount = "50%", discountAmount = "₹20", address = "Aligarh"),
-    RestaurantItemFull(id = 11, imageRes = R.drawable.restaurant_image_all_food_11, title = "Paneer Manchurian Dry", price = "110", restaurantName = "King Of Spices", rating = "4.0", deliveryTime = "55-60 mins", distance = "13 km", discount = "20%", discountAmount = "₹20", address = "Hydrabad"),
-    RestaurantItemFull(id = 12, imageRes = R.drawable.restaurant_image_all_food_12, title = "North Indian", price = "450 for one", restaurantName = "The Food Workshop", rating = "4.1", deliveryTime = "50-55 mins", distance = "12.6 km", discount = "20%", discountAmount = "₹20", address = "Chennai"),
-    RestaurantItemFull(id = 13, imageRes = R.drawable.restaurant_image_all_food_13, title = "Veg Fried Rice with Veg Manchurian", price = "250", restaurantName = "Old Veg Rasoi", rating = "4.0", deliveryTime = "55-60 mins", distance = "13 km", discount = "50%", discountAmount = "₹20", address = "Agra"),
-    RestaurantItemFull(id = 14, imageRes = R.drawable.restaurant_image_all_food_14, title = "Pure Veg", price = "", restaurantName = "Radha Rani Ki Rasoi", rating = "3.8", deliveryTime = "65-70 mins", distance = "13.9 km", discount = "50%", discountAmount = "₹20", address = "Aligarh"),
-    RestaurantItemFull(id = 15, imageRes = R.drawable.restaurant_image_all_food_15, title = "Farmers Choice Pizza", price = "124", restaurantName = "The Hot Pizza", rating = "3.6", deliveryTime = "50-55 mins", distance = "12 km", discount = "50%", discountAmount = "₹20", address = "Hydrabad"),
-    RestaurantItemFull(id = 16, imageRes = R.drawable.restaurant_image_all_food_16, title = "Chaap Biryani", price = "210", restaurantName = "Annapurna Thali", rating = "3.7", deliveryTime = "55-60 mins", distance = "14.1 km", discount = "60%", discountAmount = "₹20", address = "Hydrabad"),
-    RestaurantItemFull(id = 17, imageRes = R.drawable.restaurant_image_all_food_17, title = "Chinese", price = "200 for one", restaurantName = "Chinese Wokology", rating = "4.1", deliveryTime = "45-50 mins", distance = "14.1 km", discount = "20%", discountAmount = "₹20", address = "Badarpur"),
-    RestaurantItemFull(id = 18, imageRes = R.drawable.restaurant_image_all_food_18, title = "Eggless Red Velvet Cake", price = "599", restaurantName = "Bakincake", rating = "4.0", deliveryTime = "55-60 mins", distance = "13.8 km", discount = "20%", discountAmount = "₹20", address = "Meerut"),
-    RestaurantItemFull(id = 19, imageRes = R.drawable.restaurant_image_all_food_19, title = "Pure Veg", price = "200 for one", restaurantName = "mahapooran", rating = "3.7", deliveryTime = "30-35 mins", distance = "5.6 km", discount = "50%", discountAmount = "₹20", address = "Badarpur"),
-    RestaurantItemFull(id = 20, imageRes = R.drawable.restaurant_image_all_food_20, title = "Paneer Handi", price = "180", restaurantName = "Shree Jee Restaurant", rating = "4.1", deliveryTime = "45-50 mins", distance = "7.3 km", discount = "60%", discountAmount = "₹20", address = "Delhi")
-)
-
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AllCategoryPage(
     navController: NavHostController? = null,
     viewModel: BannerViewModels = viewModel(),
+    restaurantViewModel: RestaurantViewModel = viewModel(), // Add restaurant ViewModel
     superCategoryId: String = "FOOD_SUPER",
     categoryId: String = "ALL_FOOD_CAT",
     onBanner1Click: () -> Unit = {},
     onBanner2Click: () -> Unit = {},
     onBanner3Click: () -> Unit = {}
 ) {
+    // Collect restaurant state
+    val restaurants by restaurantViewModel.restaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+if (restaurants.isNotEmpty()) {
+    val firstRestaurant = restaurants.first()
+    println("Available fields: ${firstRestaurant::class.java.declaredFields.map { it.name }}")
+}
+    // Load restaurants from API when composable is first created
+    LaunchedEffect(Unit) {
+        println("🚀 Loading restaurants from API for category: ALL")
+        restaurantViewModel.loadRestaurantsByCategory("ALL")
+    }
+
     // Collect healthy score banners
     val healthyScoreBanners by viewModel.healthyScoreBanners.collectAsState()
 
@@ -928,7 +923,8 @@ fun AllCategoryPage(
     LaunchedEffect(Unit) {
         viewModel.loadHealthyScoreBanners()
     }
-     // Create banner images data for healthy score
+
+    // Create banner images data for healthy score
     val healthyScoreBannerImagesData by remember(healthyScoreBanners) {
         derivedStateOf {
             healthyScoreBanners.mapNotNull { banner ->
@@ -946,7 +942,6 @@ fun AllCategoryPage(
 
     fun trackBannerClick(banner: Banner) {
         println("🎯 Banner clicked: ${banner.title} (ID: ${banner.id}, Type: ${banner.bannerType})")
-        // TODO: Implement actual tracking when API is available
     }
 
     // Collect state from ViewModel
@@ -972,55 +967,51 @@ fun AllCategoryPage(
         onDispose {
             println("🧹 Cleaning up AllCategoryPage")
             viewModel.clearError()
+            restaurantViewModel.clearError()
         }
     }
 
-    // Filter only banners with valid image URLs (no isActive field in your banner data)
-val validBanners by remember(allBanners) {
-    derivedStateOf {
-        val filtered = allBanners.filter { banner ->
-            val hasValidImage = !banner.imageUrl.isNullOrBlank()
-
-            if (!hasValidImage && banner.id != null) {
-                println("⚠️ Banner ${banner.id} (${banner.title}) has no valid image URL")
-            }
-
-            hasValidImage  // Only check for valid image URL
-        }
-        println("✅ Found ${filtered.size} valid banners out of ${allBanners.size} total")
-        filtered
-    }
-}
-
-   // In AllCategoryPage, update bannerImagesData creation:
-val bannerImagesData by remember(validBanners) {
-    derivedStateOf {
-        validBanners.mapNotNull { banner ->
-            // Fix the image URL using BASE_URL (no trailing slash)
-            val fullUrl = banner.imageUrl?.let { url ->
-                when {
-                    url.startsWith("http") -> url  // Already full URL
-                    url.startsWith("/") -> "${NetworkConfig.BASE_URL}$url"  // BASE_URL has no trailing slash
-                    else -> "${NetworkConfig.BASE_URL}/$url"  // Add missing slash
+    // Filter only banners with valid image URLs
+       val validBanners by remember(allBanners) {
+        derivedStateOf {
+            allBanners.filter { banner ->
+                banner.imageUrl.isNullOrBlank().not().also { hasValidImage ->
+                   // if (!hasValidImage && banner.id != null) {
+                     //   println("⚠️ Banner ${banner.id} (${banner.title}) has no valid image URL")
+                    //}
                 }
+            }.also { filtered ->
+                println("✅ Found ${filtered.size} valid banners out of ${allBanners.size} total")
             }
-            fullUrl?.let { BannerImageData.Remote(url = it) }
         }
     }
-}
+
+    val bannerImagesData by remember(validBanners) {
+        derivedStateOf {
+            validBanners.mapNotNull { banner ->
+                val fullUrl = banner.imageUrl?.let { url ->
+                    when {
+                        url.startsWith("http") -> url
+                        url.startsWith("/") -> "${NetworkConfig.BASE_URL}$url"
+                        else -> "${NetworkConfig.BASE_URL}/$url"
+                    }
+                }
+                fullUrl?.let { BannerImageData.Remote(url = it) }
+            }
+        }
+    }
 
     // Main Column without Scaffold
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-//            .verticalScroll(rememberScrollState())
+            //.verticalScroll(rememberScrollState())
     ) {
 
-         // ==================== DYNAMIC BANNER FROM API ====================
+        // ==================== DYNAMIC BANNER FROM API ====================
         when {
             isLoading -> {
-                // Show loading indicator while banners are loading
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -1047,7 +1038,6 @@ val bannerImagesData by remember(validBanners) {
             }
 
             error != null -> {
-                // Show error message with retry option
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -1083,9 +1073,6 @@ val bannerImagesData by remember(validBanners) {
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "${bannerImagesData}",
-                            )
-                            Text(
                                 text = error ?: "Unknown error occurred",
                                 color = Color.Red.copy(alpha = 0.7f),
                                 fontSize = 12.sp,
@@ -1114,62 +1101,60 @@ val bannerImagesData by remember(validBanners) {
             }
 
             bannerImagesData.isNotEmpty() -> {
-                // Show dynamic banner with API data
                 println("🎨 Rendering dynamic banner with ${bannerImagesData.size} images")
                 DynamicBannerWithAsyncImage(
-                images = bannerImagesData,
-                onImageClick = { page ->
-                    val banner = validBanners.getOrNull(page)
-                    if (banner != null) {
-                        println("🖱️ Banner clicked at index $page: ${banner.title}")
-                        trackBannerClick(banner)
+                    images = bannerImagesData,
+                    onImageClick = { page ->
+                        val banner = validBanners.getOrNull(page)
+                        if (banner != null) {
+                            println("🖱️ Banner clicked at index $page: ${banner.title}")
+                            trackBannerClick(banner)
 
-                        when (banner.bannerType) {
-                            "HOME_PAGE" -> {
-                                println("🏠 Navigating to home page")
-                                onBanner1Click()
-                            }
-                            "PROMOTIONAL" -> {
-                                println("🎉 Navigating to promotional page")
-                                onBanner2Click()
-                            }
-                            "FLASH_SALE" -> {
-                                println("⚡ Navigating to flash sale")
-                                onBanner3Click()
-                            }
-                            else -> {
-                                banner.clickUrl?.let { url ->
-                                    println("🔗 Navigating to URL: $url")
+                            when (banner.bannerType) {
+                                "HOME_PAGE" -> {
+                                    println("🏠 Navigating to home page")
+                                    onBanner1Click()
+                                }
+                                "PROMOTIONAL" -> {
+                                    println("🎉 Navigating to promotional page")
+                                    onBanner2Click()
+                                }
+                                "FLASH_SALE" -> {
+                                    println("⚡ Navigating to flash sale")
+                                    onBanner3Click()
+                                }
+                                else -> {
+                                    banner.clickUrl?.let { url ->
+                                        println("🔗 Navigating to URL: $url")
+                                    }
                                 }
                             }
+                        } else {
+                            println("⚠️ No banner found for index $page")
                         }
-                    } else {
-                        println("⚠️ No banner found for index $page")
-                    }
-                },
-                autoScrollDelay = 3000,
-                height = 200.dp,
-                roundedCornerShape = 16.dp,
-                contentScale = ContentScale.Crop,
-                dotSize = 8.dp,
-                dotPadding = 4.dp,
-                dotPosition = DotPosition.OVERLAY,
-                overlayGradient = false,
-                selectedDotColor = Color.White,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 12.dp),
-                padding = BannerPadding(
-                    start = 0.dp,
-                    top = 0.dp,
-                    end = 0.dp,
-                    bottom = 0.dp
+                    },
+                    autoScrollDelay = 3000,
+                    height = 200.dp,
+                    roundedCornerShape = 16.dp,
+                    contentScale = ContentScale.Crop,
+                    dotSize = 8.dp,
+                    dotPadding = 4.dp,
+                    dotPosition = DotPosition.OVERLAY,
+                    overlayGradient = false,
+                    selectedDotColor = Color.White,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp, vertical = 12.dp),
+                    padding = BannerPadding(
+                        start = 0.dp,
+                        top = 0.dp,
+                        end = 0.dp,
+                        bottom = 0.dp
+                    )
                 )
-            )
             }
 
             else -> {
-                // Show fallback/empty state when no banners available
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -1191,7 +1176,6 @@ val bannerImagesData by remember(validBanners) {
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
                         ) {
-                            // Empty state visual
                             Box(
                                 modifier = Modifier
                                     .size(80.dp)
@@ -1226,11 +1210,9 @@ val bannerImagesData by remember(validBanners) {
             }
         }
 
-
-
         // ==================== FREE CASH BANNER ====================
-             AsyncImage(
-            model = "${NetworkConfig.BASE_URL }/assets/banners/ic_use_your_free_cash_auto_applied.png",
+        AsyncImage(
+            model = "${NetworkConfig.BASE_URL}/assets/banners/ic_use_your_free_cash_auto_applied.png",
             contentDescription = "Free Cash Banner",
             modifier = Modifier
                 .fillMaxWidth()
@@ -1238,50 +1220,48 @@ val bannerImagesData by remember(validBanners) {
             contentScale = ContentScale.FillBounds
         )
 
-       // ==================== NEW YEAR 2026 SECTION (DYNAMIC) ====================
-            val newYearDynamicItems = listOf(
-                CategoryItemBgImgDynamic(
-                    id = 1,
-                    name = "",
-                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_1.png"
-                ),
-                CategoryItemBgImgDynamic(
-                    id = 2,
-                    name = "",
-                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_2.png"
-                ),
-                CategoryItemBgImgDynamic(
-                    id = 3,
-                    name = "",
-                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_3.png"
-                ),
-                CategoryItemBgImgDynamic(
-                    id = 4,
-                    name = "",
-                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_4.png"
-                ),
-                CategoryItemBgImgDynamic(
-                    id = 5,
-                    name = "",
-                    imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_5.png"
-                )
+        // ==================== NEW YEAR 2026 SECTION (DYNAMIC) ====================
+        val newYearDynamicItems = listOf(
+            CategoryItemBgImgDynamic(
+                id = 1,
+                name = "",
+                imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_1.png"
+            ),
+            CategoryItemBgImgDynamic(
+                id = 2,
+                name = "",
+                imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_2.png"
+            ),
+            CategoryItemBgImgDynamic(
+                id = 3,
+                name = "",
+                imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_3.png"
+            ),
+            CategoryItemBgImgDynamic(
+                id = 4,
+                name = "",
+                imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_4.png"
+            ),
+            CategoryItemBgImgDynamic(
+                id = 5,
+                name = "",
+                imageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_new_year_5.png"
             )
+        )
 
-
-            CategoryListBgImgDynamic(
-                backgroundImageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_happy_lohri.png",
-                items = newYearDynamicItems,
-                onItemClick = { item ->
-                    println("New Year dynamic item clicked: ${item.name}")
-                },
-                backgroundImageHeight = 250.dp,
-                overlayItemSize = 100.dp,
-                overlayItemHeight = 100.dp,
-                overlayTextSize = 12.sp,
-                title = "",
-                showHorizontalList = true,
-            )
-
+        CategoryListBgImgDynamic(
+            backgroundImageUrl = "${NetworkConfig.BASE_URL}/assets/banners/ic_happy_lohri.png",
+            items = newYearDynamicItems,
+            onItemClick = { item ->
+                println("New Year dynamic item clicked: ${item.name}")
+            },
+            backgroundImageHeight = 250.dp,
+            overlayItemSize = 100.dp,
+            overlayItemHeight = 100.dp,
+            overlayTextSize = 12.sp,
+            title = "",
+            showHorizontalList = true,
+        )
 
         // ==================== TOP RATED RESTAURANTS ====================
         Spacer(modifier = Modifier.height(20.dp))
@@ -1318,7 +1298,6 @@ val bannerImagesData by remember(validBanners) {
             headingBottomPadding = 0.dp
         )
 
-
         // ==================== HOUSEFULL SALE ====================
         val housefullSaleCategoriesSimple = listOf(
             CategoryItemUrl(0, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_1.png", ""),
@@ -1327,10 +1306,9 @@ val bannerImagesData by remember(validBanners) {
             CategoryItemUrl(4, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_5.png", ""),
             CategoryItemUrl(3, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_4.png", ""),
         )
-        // Debug: Print URLs
 
         AsyncImage(
-            model = "${NetworkConfig.BASE_URL }/assets/banners/ic_housefull_sale_header.png",
+            model = "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_header.png",
             contentDescription = "Housefull Sale",
             modifier = Modifier
                 .fillMaxWidth()
@@ -1342,7 +1320,6 @@ val bannerImagesData by remember(validBanners) {
             items = housefullSaleCategoriesSimple,
             onItemClick = { item ->
                 println("Housefull Sale item selected: ${item.name}")
-                // Handle click navigation
             },
             itemWidth = 110.dp,
             itemHeight = 110.dp,
@@ -1350,64 +1327,63 @@ val bannerImagesData by remember(validBanners) {
             horizontalPadding = 12.dp,
             backgroundColor = Color(0xFFFFC653),
             showSubtitle = true,
-            showItemName = false, // Hide name since it's empty
+            showItemName = false,
             cornerRadius = 8.dp,
             imageContentScale = ContentScale.FillBounds
         )
 
         AsyncImage(
-                model = "${NetworkConfig.BASE_URL }/assets/banners/ic_housefull_sale_footer.png",
-                contentDescription = "Housefull Sale Footer",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(20.dp),
-                contentScale = ContentScale.FillBounds
-            )
+            model = "${NetworkConfig.BASE_URL}/assets/banners/ic_housefull_sale_footer.png",
+            contentDescription = "Housefull Sale Footer",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp),
+            contentScale = ContentScale.FillBounds
+        )
 
-         // ==================== HEALTHY SCORE BANNER ====================
-    if (healthyScoreBannerImagesData.isNotEmpty()) {
-        DynamicBannerWithAsyncImage(
-            images = healthyScoreBannerImagesData,
-            onImageClick = { page ->
-                val banner = healthyScoreBanners.getOrNull(page)
-                if (banner != null) {
-                    println("🖱️ Healthy Score banner clicked at index $page: ${banner.title}")
-                    when (page) {
-                        0 -> onBanner1Click()
-                        1 -> onBanner2Click()
-                        2 -> onBanner3Click()
-                        else -> {
-                            banner.clickUrl?.let { url ->
-                                println("🔗 Navigating to URL: $url")
+        // ==================== HEALTHY SCORE BANNER ====================
+        if (healthyScoreBannerImagesData.isNotEmpty()) {
+            DynamicBannerWithAsyncImage(
+                images = healthyScoreBannerImagesData,
+                onImageClick = { page ->
+                    val banner = healthyScoreBanners.getOrNull(page)
+                    if (banner != null) {
+                        println("🖱️ Healthy Score banner clicked at index $page: ${banner.title}")
+                        when (page) {
+                            0 -> onBanner1Click()
+                            1 -> onBanner2Click()
+                            2 -> onBanner3Click()
+                            else -> {
+                                banner.clickUrl?.let { url ->
+                                    println("🔗 Navigating to URL: $url")
+                                }
                             }
                         }
                     }
-                }
-            },
-            autoScrollDelay = 3000,
-            height = 180.dp,
-            roundedCornerShape = 20.dp,
-            contentScale = ContentScale.Crop,
-            dotSize = 8.dp,
-            dotPadding = 4.dp,
-            dotPosition = DotPosition.NONE,  // Changed from NONE to show dots for API banners
-            overlayGradient = false,
-            selectedDotColor = Color.White,
-            modifier = Modifier.fillMaxWidth(),
-            padding = BannerPadding(start = 10.dp, top = 15.dp, end = 10.dp, bottom = 15.dp)
-        )
-    } else {
-        // Optional: Show a loading indicator or fallback UI
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp)
-                .padding(12.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
+                },
+                autoScrollDelay = 3000,
+                height = 180.dp,
+                roundedCornerShape = 20.dp,
+                contentScale = ContentScale.Crop,
+                dotSize = 8.dp,
+                dotPadding = 4.dp,
+                dotPosition = DotPosition.NONE,
+                overlayGradient = false,
+                selectedDotColor = Color.White,
+                modifier = Modifier.fillMaxWidth(),
+                padding = BannerPadding(start = 10.dp, top = 15.dp, end = 10.dp, bottom = 15.dp)
+            )
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp)
+                    .padding(12.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
         }
-    }
 
         // ==================== JANTASTIC BITES ====================
         val jantasticBitesCategoriesSimple = listOf(
@@ -1423,7 +1399,7 @@ val bannerImagesData by remember(validBanners) {
         Spacer(modifier = Modifier.height(20.dp))
 
         AsyncImage(
-            model = "${NetworkConfig.BASE_URL }/assets/banners/ic_jantastic_bites_header.png",
+            model = "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_header.png",
             contentDescription = "Jantastic Bites",
             modifier = Modifier
                 .fillMaxWidth()
@@ -1431,31 +1407,30 @@ val bannerImagesData by remember(validBanners) {
             contentScale = ContentScale.FillBounds
         )
 
-            CategoryListSimpleDynamicUrl(
-                items = jantasticBitesCategoriesSimple,
-                onItemClick = { item ->
-                    println("Jantastic Bites item selected: ${item.name}")
-                    // Handle click navigation
-                },
-                itemWidth = 113.dp,
-                itemHeight = 110.dp,
-                horizontalSpacing = 12.dp,
-                horizontalPadding = 12.dp,
-                backgroundColor = Color(0xFFFF4423),
-                showSubtitle = false,
-                showItemName = false, // Hide name since it's empty
-                cornerRadius = 8.dp,
-                imageContentScale = ContentScale.FillBounds
-            )
+        CategoryListSimpleDynamicUrl(
+            items = jantasticBitesCategoriesSimple,
+            onItemClick = { item ->
+                println("Jantastic Bites item selected: ${item.name}")
+            },
+            itemWidth = 113.dp,
+            itemHeight = 110.dp,
+            horizontalSpacing = 12.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color(0xFFFF4423),
+            showSubtitle = false,
+            showItemName = false,
+            cornerRadius = 8.dp,
+            imageContentScale = ContentScale.FillBounds
+        )
 
-            AsyncImage(
-                model = "${NetworkConfig.BASE_URL }/assets/banners/ic_jantastic_bites_footer_2.png",
-                contentDescription = "Jantastic Bites Footer",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(25.dp),
-                contentScale = ContentScale.FillBounds
-            )
+        AsyncImage(
+            model = "${NetworkConfig.BASE_URL}/assets/banners/ic_jantastic_bites_footer_2.png",
+            contentDescription = "Jantastic Bites Footer",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(25.dp),
+            contentScale = ContentScale.FillBounds
+        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -1491,61 +1466,51 @@ val bannerImagesData by remember(validBanners) {
             items = featureThisWeekCategoriesSimple,
             onItemClick = { item ->
                 println("Feature This Week item selected: ${item.name}")
-                // Handle navigation
             },
             itemWidth = 100.dp,
             itemHeight = 120.dp,
             horizontalSpacing = 12.dp,
             horizontalPadding = 12.dp,
             backgroundColor = Color.White,
-            showItemName = false,  // Hide since name is empty
-            showSubtitle = false,   // Show "View products"
-
+            showItemName = false,
+            showSubtitle = false,
         )
 
         // ==================== POPULAR CHAIN ====================
-         AsyncImage(
-                model = "${NetworkConfig.BASE_URL }/assets/banners/ic_popular_chain_header.png",
-                contentDescription = "Popular Chain",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(80.dp),
-                contentScale = ContentScale.FillBounds
-            )
-
-
-        // ==================== POPULAR CHAINS (DYNAMIC URL VERSION) ====================
-        val sampleProductsDynamic = listOf(
-            ProductListDGridUrl("", "FLAT 10% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_1.png"),
-            ProductListDGridUrl("", "FLAT 25% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_2.png"),
-            ProductListDGridUrl("", "FLAT 10% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_3.png"),
-            ProductListDGridUrl("", "FLAT 20% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_4.png"),
-            ProductListDGridUrl("", "FLAT 10% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_5.png"),
-            ProductListDGridUrl("", "FLAT 30% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_6.png"),
-            ProductListDGridUrl("", "FLAT 20% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_7.png"),
-            ProductListDGridUrl("", "FLAT 50% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_8.png"),
-            ProductListDGridUrl("", "FLAT 20% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_9.png"),
-            ProductListDGridUrl("", "FLAT 50% OFF", "http://192.168.31.49:8085/assets/banners/popular_chain_10.png")
+        AsyncImage(
+            model = "${NetworkConfig.BASE_URL}/assets/banners/ic_popular_chain_header.png",
+            contentDescription = "Popular Chain",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp),
+            contentScale = ContentScale.FillBounds
         )
 
-     // Use the simplified version first to test
-       CategoryListScrollDFDynamic(
+        // ==================== POPULAR CHAINS ====================
+            val sampleProductsDynamic = listOf(
+                ProductListDGridUrl("", "FLAT 10% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_1.png"),
+                ProductListDGridUrl("", "FLAT 25% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_2.png"),
+                ProductListDGridUrl("", "FLAT 10% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_3.png"),
+                ProductListDGridUrl("", "FLAT 20% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_4.png"),
+                ProductListDGridUrl("", "FLAT 10% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_5.png"),
+                ProductListDGridUrl("", "FLAT 30% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_6.png"),
+                ProductListDGridUrl("", "FLAT 20% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_7.png"),
+                ProductListDGridUrl("", "FLAT 50% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_8.png"),
+                ProductListDGridUrl("", "FLAT 20% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_9.png"),
+                ProductListDGridUrl("", "FLAT 50% OFF", "${NetworkConfig.BASE_URL}/assets/banners/popular_chain_10.png")
+            )
+
+        CategoryListScrollDFDynamic(
             products = sampleProductsDynamic,
             itemWidth = 115.dp,
             itemHeight = 115.dp,
             priceStripHeight = 40.dp,
-
-            // Dynamic colors
-            backgroundColor = Color(0xFF023726), // Dark green background for the entire section
-            defaultCardColor = Color(0xFF023726), // Card background color
-            priceStripBackgroundColor = Color(0xFF023726), // Price strip background (same as main bg)
-
-            // Text colors
-            priceTextColor = Color.White, // White text on dark background
+            backgroundColor = Color(0xFF023726),
+            defaultCardColor = Color(0xFF023726),
+            priceStripBackgroundColor = Color(0xFF023726),
+            priceTextColor = Color.White,
             priceTextSize = 13,
             priceTextWeight = FontWeight.Bold,
-
-            // Other parameters
             itemSpacing = 8.dp,
             rowSpacing = 8.dp,
             showLoadingIndicator = false,
@@ -1585,20 +1550,19 @@ val bannerImagesData by remember(validBanners) {
             CategoryItemUrl(8, "", "${NetworkConfig.BASE_URL}/assets/banners/ic_explore_more_6.png", "View products"),
         )
 
-         CategoryListSimpleDynamicUrl(
-                items = moreOnHufkoCategoriesSimple,
-                onItemClick = { item ->
+        CategoryListSimpleDynamicUrl(
+            items = moreOnHufkoCategoriesSimple,
+            onItemClick = { item ->
                 println("More On Hufko item selected: ${item.name}")
-                },
-                itemWidth = 100.dp,
-                itemHeight = 100.dp,
-                horizontalSpacing = 12.dp,
-                horizontalPadding = 12.dp,
-                backgroundColor = Color.White,
-                showItemName = false,  // Hide since name is empty
-                showSubtitle = false,   // Show "View products"
-            )
-
+            },
+            itemWidth = 100.dp,
+            itemHeight = 100.dp,
+            horizontalSpacing = 12.dp,
+            horizontalPadding = 12.dp,
+            backgroundColor = Color.White,
+            showItemName = false,
+            showSubtitle = false,
+        )
 
         // ==================== FILTER BUTTON ====================
         Spacer(modifier = Modifier.height(15.dp))
@@ -1641,7 +1605,7 @@ val bannerImagesData by remember(validBanners) {
             rows = 1
         )
 
-        FilterButtonFood(
+         FilterButtonFood(
             filterConfig = allFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
@@ -1680,23 +1644,79 @@ val bannerImagesData by remember(validBanners) {
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // ==================== RESTAURANT ITEMS LIST ====================
-        Column {
-            sampleRestaurantItemsAll.forEach { restaurantItem ->
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = {
-
-                    },
-                    onThreeDotClick = {
-
-                    },
-                    onItemClick = {
-
+        // ==================== RESTAURANT ITEMS LIST FROM API ====================
+            when {
+                isRestaurantsLoading && restaurants.isEmpty() -> {
+                    Box(modifier = Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            CircularProgressIndicator()
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text("Loading restaurants...", color = Color.Gray)
+                        }
                     }
-                )
-            }
+                }
+
+                restaurantError != null && restaurants.isEmpty() -> {
+                    Box(modifier = Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text("Error: $restaurantError", color = Color.Red)
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Button(onClick = { restaurantViewModel.loadRestaurantsByCategory("ALL") }) {
+                                Text("Retry")
+                            }
+                        }
+                    }
+                }
+
+               restaurants.isNotEmpty() -> {
+    Column {
+        restaurants.forEach { restaurant ->
+            RestaurantItemListFullDynamic(
+                restaurantItem = RestaurantItemFullDynamic(
+                    id = restaurant.id, // This is now String
+                    imageUrl = restaurant.imageUrl,
+                    title = restaurant.title,
+                    price = restaurant.priceAvg,
+                    restaurantName = restaurant.restaurantName,
+                    rating = restaurant.rating,
+                    deliveryTime = restaurant.deliveryTime,
+                    distance = restaurant.distance,
+                    address = restaurant.address?.city ?: restaurant.outlet,
+                    discount = restaurant.discountAvg ?: "",
+                    discountAmount = restaurant.discountAmountAvg ?: "",
+                    isWishlisted = restaurant.isWishlisted
+                ),
+                onWishlistClick = { id ->
+                    //println("Wishlist clicked for restaurant: $id")
+                },
+                onThreeDotClick = { id ->
+                    //println("Three dot clicked for restaurant: $id")
+                },
+                onItemClick = { id ->
+                    //navController?.navigate("restaurant_details/$id")
+                }
+            )
         }
+    }
+}
+
+                else -> {
+                    Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_launcher_foreground),
+                                contentDescription = "No restaurants",
+                                modifier = Modifier.size(64.dp),
+                                tint = Color.Gray
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text("No restaurants found", fontSize = 16.sp, color = Color.Gray)
+                        }
+                    }
+                }
+            }
 
         // Add bottom padding for better scrolling experience
         Spacer(modifier = Modifier.height(30.dp))

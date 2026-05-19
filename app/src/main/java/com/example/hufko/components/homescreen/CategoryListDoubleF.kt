@@ -23,7 +23,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.hufko.R
+import com.example.hufko.api.services.config.NetworkConfig
 import com.example.hufko.ui.theme.customColors
 
 /**
@@ -32,6 +34,32 @@ import com.example.hufko.ui.theme.customColors
 data class FoodItemDoubleF(
     val id: Int? = null,
     val imageRes: Int? = null,
+    val title: String? = null,
+    val price: String? = null,
+    val originalPrice: String? = null,
+    val restaurantName: String? = null,
+    val rating: String? = null,
+    val deliveryTime: String? = null,
+    val distance: String? = null,
+    val discount: String? = null,
+    val discountAmount: String? = null,
+    val address: String? = null,
+    val calories: String? = null,
+    val protein: String? = null,
+    val isHighProtein: Boolean? = null,
+    val category: String? = null,
+    val isWishlisted: Boolean? = false,
+    val description: String? = null,
+    val quantity: String? = null,
+    val infoIcon: Int? = null,
+    val highlyReordered: String? = null,
+    val reorderedQuantity: String? = null,
+    val bestSeller:  Boolean? = false,
+)
+
+data class FoodItemDoubleFDynamic(
+    val id: String? = null,
+    val imageUrl: String? = null,
     val title: String? = null,
     val price: String? = null,
     val originalPrice: String? = null,
@@ -320,5 +348,281 @@ fun FoodItemsListWithHeading(
             horizontalPadding = horizontalPadding
         )
         Spacer(modifier = Modifier.height(10.dp))
+    }
+}
+
+
+// FoodItemsListWithHeadingDynamic
+@Composable
+fun FoodItemsListWithHeadingDynamic (
+    heading: String? = null,
+    subtitle: String? = null,
+    foodItems: List<FoodItemDoubleFDynamic>,
+    onItemClick: (FoodItemDoubleFDynamic) -> Unit, // Removed ? to make it non-nullable
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.customColors.white,
+    cardWidth: Dp = 160.dp,
+    cardHeight: Dp = 240.dp,
+    horizontalSpacing: Dp = 12.dp,
+    verticalSpacing: Dp = 12.dp,
+    horizontalPadding: Dp = 16.dp,
+    verticalPadding: Dp = 16.dp,
+    headingBottomPadding: Dp = 12.dp
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(backgroundColor)
+    ) {
+        if (heading != null || subtitle != null) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = horizontalPadding)
+                    .padding(top = verticalPadding, bottom = headingBottomPadding)
+            ) {
+                heading?.let {
+                    Text(
+                        text = heading,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                }
+                subtitle?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.Gray,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
+            }
+        }
+
+        FoodItemsListDynamic(
+            foodItems = foodItems,
+            onItemClick = onItemClick, // Now matches the non-nullable type
+            backgroundColor = backgroundColor,
+            cardWidth = cardWidth,
+            cardHeight = cardHeight,
+            horizontalSpacing = horizontalSpacing,
+            verticalSpacing = verticalSpacing,
+            horizontalPadding = horizontalPadding
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+    }
+}
+
+
+@Composable
+fun FoodItemsListDynamic (
+    foodItems: List<FoodItemDoubleFDynamic>,
+    onItemClick: (FoodItemDoubleFDynamic) -> Unit,
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.customColors.white,
+    cardWidth: Dp = 160.dp,
+    cardHeight: Dp = 240.dp,
+    horizontalSpacing: Dp = 12.dp,
+    verticalSpacing: Dp = 12.dp,
+    horizontalPadding: Dp = 16.dp
+) {
+    if (foodItems.isEmpty()) {
+        // Show empty state or return empty box
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(backgroundColor)
+                .padding(horizontal = horizontalPadding)
+        ) {
+            Text(
+                text = "No food items available",
+                color = Color.Gray,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+        return
+    }
+
+    // Split items into pairs for two rows
+    val itemPairs = foodItems.chunked(2)
+
+    LazyRow(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(backgroundColor)
+            .padding(horizontal = horizontalPadding),
+        horizontalArrangement = Arrangement.spacedBy(horizontalSpacing)
+    ) {
+        items(itemPairs) { pair ->
+            Column(
+                verticalArrangement = Arrangement.spacedBy(verticalSpacing),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // First item in the pair
+                pair.getOrNull(0)?.let { firstItem ->
+                    FoodItemCardDynamic(
+                        foodItem = firstItem,
+                        onClick = { onItemClick(firstItem) },
+                        cardWidth = cardWidth,
+                        cardHeight = cardHeight
+                    )
+                }
+
+                // Second item in the pair
+                pair.getOrNull(1)?.let { secondItem ->
+                    FoodItemCardDynamic(
+                        foodItem = secondItem,
+                        onClick = { onItemClick(secondItem) },
+                        cardWidth = cardWidth,
+                        cardHeight = cardHeight
+                    )
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun FoodItemCardDynamic(
+    foodItem: FoodItemDoubleFDynamic,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.customColors.white,
+    cardWidth: Dp = 160.dp,
+    cardHeight: Dp = 240.dp,
+    imageHeight: Dp = 120.dp,
+    defaultImageRes: Int = R.drawable.restaurant_1 // Default image if none provided
+) {
+    Column(
+        modifier = modifier
+            .width(cardWidth)
+            .height(cardHeight)
+            .clip(RoundedCornerShape(12.dp))
+            .clickable(onClick = onClick)
+            .background(backgroundColor)
+    ) {
+        // Image section with overlay
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(imageHeight)
+        ) {
+
+            // Food image
+            AsyncImage(
+                model = getFullImageUrl(foodItem.imageUrl), // Use the helper function
+                contentDescription = foodItem.title ?: "Food item",
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(defaultImageRes),
+                error = painterResource(defaultImageRes),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
+            )
+
+           // Discount badge at top-left
+            foodItem.discount?.let { discount ->
+                if (discount.isNotEmpty()) {
+                    // Title and price badge at top left of image
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.TopStart)
+                            .padding(start = 4.dp, top = 4.dp)
+                            .background(Color(0xB146322B), RoundedCornerShape(6.dp))
+                            .padding(horizontal = 4.dp, vertical = 2.dp)
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "${discount} OFF up to ₹100",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFFFFFFFF)
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Rating overlay at bottom of image (only if rating or delivery time exists)
+            if (foodItem.rating != null || foodItem.deliveryTime != null) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .background(
+                            color = MaterialTheme.customColors.success,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(horizontal = 4.dp, vertical = 2.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        // Rating
+                        foodItem.rating?.let { rating ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = rating,
+                                    color = Color.White,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    modifier = Modifier.padding(start = 2.dp)
+                                )
+                                Text(
+                                    text = "★",
+                                    color = Color.White,
+                                    fontSize = 14.sp
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Content section below image
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 4.dp, vertical = 4.dp)
+        ) {
+            // Title
+            foodItem.title?.let { title ->
+                Text(
+                    text = title,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            // Delivery time
+            foodItem.deliveryTime?.let { deliveryTime ->
+                Text(
+                    text = deliveryTime,
+                    color = Color.Black,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        }
+    }
+}
+
+fun getFullImageUrl(imageUrl: String?): String {
+    return when {
+        imageUrl.isNullOrEmpty() -> "" // Handle null or empty
+        imageUrl.startsWith("http") -> imageUrl
+        imageUrl.startsWith("/") -> "${NetworkConfig.BASE_URL}$imageUrl"
+        else -> "${NetworkConfig.BASE_URL}/$imageUrl"
     }
 }

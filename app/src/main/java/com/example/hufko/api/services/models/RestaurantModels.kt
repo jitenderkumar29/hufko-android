@@ -124,7 +124,11 @@ data class RestaurantItemFull(
     @SerializedName("createdAt")
     val createdAt: String? = null,
     @SerializedName("updatedAt")
-    val updatedAt: String? = null
+    val updatedAt: String? = null,
+    @SerializedName("recommended")
+    val recommended: Boolean = false,
+    @SerializedName("featured")
+    val featured: Boolean = false
 )
 
 data class Address(

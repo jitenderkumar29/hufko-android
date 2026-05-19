@@ -33,4 +33,18 @@ interface RestaurantApiService {
     suspend fun searchRestaurants(
         @Query("q") query: String
     ): RestaurantResponse
+
+    // NEW: Get featured restaurants using query parameter
+    @GET("api/restaurants/category/{category}/featured")
+    suspend fun getFeaturedRestaurants(
+        @Path("category") category: String,
+        @Query("featured") featured: Boolean = true
+    ): RestaurantResponse
+
+    // NEW: Get recommended restaurants
+    @GET("api/restaurants/category/{category}/recommended")
+    suspend fun getRecommendedRestaurants(
+        @Path("category") category: String,
+        @Query("recommended") recommended: Boolean = true
+    ): RestaurantResponse
 }

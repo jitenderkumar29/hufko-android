@@ -445,9 +445,9 @@ fun CategoryTabsFood(
                 CategoryPage.Cakes -> CakesCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Momos -> MomosCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Rolls -> RollsCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Burgers -> BurgersCategoryPage()
-                CategoryPage.CholeBhature -> CholeBhatureCategoryPage()
-                CategoryPage.Salad -> SaladCategoryPage()
+                CategoryPage.Burgers -> BurgersCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.CholeBhature -> CholeBhatureCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Salad -> SaladCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Patty -> PattyCategoryPage()
                 CategoryPage.Chinese -> ChineseCategoryPage()
                 CategoryPage.IceCream -> IceCreamCategoryPage()
@@ -3047,9 +3047,23 @@ fun RollsCategoryPage(restaurantViewModel: RestaurantViewModel = viewModel()) {
     }
 }
 
-
 @Composable
-fun BurgersCategoryPage() {
+fun BurgersCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load featured restaurants from API
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BURGERS")
+        restaurantViewModel.loadFeaturedRestaurants("BURGERS", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BURGERS", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -3160,88 +3174,9 @@ fun BurgersCategoryPage() {
                 // Handle sort logic
             }
         )
-        val completeBurgerFoodItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.burger_king_burgers,
-                title = "Classic Chicken Burger",
-                price = "145",
-                restaurantName = "Burger King",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "2.3 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.mcdonalds_burgers,
-                title = "McAloo Tikki Burger",
-                price = "65",
-                restaurantName = "McDonald's",
-                rating = "4.3",
-                deliveryTime = "15-20 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lajpat Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.burger_singh_burgers,
-                title = "Butter Chicken Burger",
-                price = "175",
-                restaurantName = "Burger Singh",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "3.1 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.wendys_burgers,
-                title = "Bacon Cheeseburger",
-                price = "195",
-                restaurantName = "Wendy's",
-                rating = "4.4",
-                deliveryTime = "20-25 mins",
-                distance = "2.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.local_burger_corner_burgers,
-                title = "Veg Supreme Burger",
-                price = "85",
-                restaurantName = "Local Burger Corner",
-                rating = "4.2",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Karol Bagh, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.premium_burger_house_burgers,
-                title = "Double Cheese Burger",
-                price = "165",
-                restaurantName = "Premium Burger House",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "3.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Greater Kailash, Delhi"
-            )
-        )
 
         Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -3249,20 +3184,34 @@ fun BurgersCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
+        // ==================== RECOMMENDED RESTAURANTS FROM API ====================
+        FoodItemsListWithHeadingDynamic(
             heading = null,
             subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = completeBurgerFoodItems,
+            foodItems = recommendedRestaurants.map { restaurant ->
+                FoodItemDoubleFDynamic(
+                    id = restaurant.id,
+                    imageUrl = restaurant.imageUrl,
+                    title = restaurant.title,
+                    price = restaurant.priceAvg,
+                    restaurantName = restaurant.restaurantName,
+                    rating = restaurant.rating,
+                    deliveryTime = restaurant.deliveryTime,
+                    distance = restaurant.distance,
+                    discount = restaurant.discountAvg,
+                    discountAmount = restaurant.discountAmountAvg,
+                    address = restaurant.address?.city ?: restaurant.outlet,
+                    isWishlisted = restaurant.isWishlisted
+                )
+            },
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
+                //navController?.navigate("restaurant_details/${foodItem.id}")
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
@@ -3273,311 +3222,157 @@ fun BurgersCategoryPage() {
             verticalPadding = 0.dp,
             headingBottomPadding = 0.dp
         )
-    }
 
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
-    // Sample data based on the provided images
-    val sampleBurgerItems = listOf(
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.burger_classic_chicken,
-            title = "Classic Chicken Burger",
-            price = "120",
-            restaurantName = "Burger King",
-            rating = "4.5",
-            deliveryTime = "20-25 mins",
-            distance = "2.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.burger_cheese_blast,
-            title = "Cheese Blast Burger",
-            price = "135",
-            restaurantName = "Cheese Burger Hub",
-            rating = "4.6",
-            deliveryTime = "15-20 mins",
-            distance = "1.7 km",
-            discount = "20%",
-            discountAmount = "₹20",
-            address = "Lajpat Nagar, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.burger_mcspicy_chicken,
-            title = "McSpicy Chicken Burger",
-            price = "110",
-            restaurantName = "McDonald's",
-            rating = "4.4",
-            deliveryTime = "10-15 mins",
-            distance = "1.2 km",
-            discount = "25%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.burger_double_pattie,
-            title = "Double Pattie Burger",
-            price = "160",
-            restaurantName = "Double Patty House",
-            rating = "4.7",
-            deliveryTime = "25-30 mins",
-            distance = "3.1 km",
-            discount = "15%",
-            discountAmount = "₹20",
-            address = "Rajouri Garden, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.burger_veg_maharaja,
-            title = "Veg Maharaja Burger",
-            price = "95",
-            restaurantName = "Veg Burger Palace",
-            rating = "4.3",
-            deliveryTime = "20-25 mins",
-            distance = "2.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "CR Park, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.burger_chicken_tikka,
-            title = "Chicken Tikka Burger",
-            price = "125",
-            restaurantName = "Tikka Burger Point",
-            rating = "4.5",
-            deliveryTime = "18-22 mins",
-            distance = "2.1 km",
-            discount = "20%",
-            discountAmount = "₹20",
-            address = "Karol Bagh, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.burger_bacon_cheese,
-            title = "Bacon Cheese Burger",
-            price = "175",
-            restaurantName = "Bacon Burger Factory",
-            rating = "4.8",
-            deliveryTime = "25-30 mins",
-            distance = "3.4 km",
-            discount = "25%",
-            discountAmount = "₹20",
-            address = "Greater Kailash, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.burger_mushroom_swiss,
-            title = "Mushroom Swiss Burger",
-            price = "140",
-            restaurantName = "Gourmet Burger Co.",
-            rating = "4.6",
-            deliveryTime = "30-35 mins",
-            distance = "4.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Vasant Kunj, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.burger_spicy_veg,
-            title = "Spicy Veg Burger",
-            price = "85",
-            restaurantName = "Spicy Burger Corner",
-            rating = "4.2",
-            deliveryTime = "15-20 mins",
-            distance = "1.8 km",
-            discount = "20%",
-            discountAmount = "₹20",
-            address = "Pitampura, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.burger_triple_cheese,
-            title = "Triple Cheese Burger",
-            price = "150",
-            restaurantName = "Cheese Lovers Burger",
-            rating = "4.7",
-            deliveryTime = "22-27 mins",
-            distance = "2.9 km",
-            discount = "25%",
-            discountAmount = "₹20",
-            address = "Rohini, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.burger_crispy_chicken,
-            title = "Crispy Chicken Burger",
-            price = "115",
-            restaurantName = "Crispy Burger Joint",
-            rating = "4.4",
-            deliveryTime = "20-25 mins",
-            distance = "2.4 km",
-            discount = "15%",
-            discountAmount = "₹20",
-            address = "Dwarka, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.burger_bbq_chicken,
-            title = "BBQ Chicken Burger",
-            price = "130",
-            restaurantName = "BBQ Burger House",
-            rating = "4.5",
-            deliveryTime = "25-30 mins",
-            distance = "3.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jasola, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.burger_aloo_tikki,
-            title = "Aloo Tikki Burger",
-            price = "70",
-            restaurantName = "Desi Burger Point",
-            rating = "4.1",
-            deliveryTime = "15-20 mins",
-            distance = "1.5 km",
-            discount = "20%",
-            discountAmount = "₹20",
-            address = "Shahdara, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.burger_jalapeno_cheese,
-            title = "Jalapeno Cheese Burger",
-            price = "145",
-            restaurantName = "Jalapeno Burger Co.",
-            rating = "4.6",
-            deliveryTime = "20-25 mins",
-            distance = "2.7 km",
-            discount = "25%",
-            discountAmount = "₹20",
-            address = "Janakpuri, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.burger_mutton_pattie,
-            title = "Mutton Pattie Burger",
-            price = "165",
-            restaurantName = "Mutton Burger Specialists",
-            rating = "4.7",
-            deliveryTime = "30-35 mins",
-            distance = "4.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mehrauli, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.burger_fish_fillet,
-            title = "Fish Fillet Burger",
-            price = "155",
-            restaurantName = "Fish Burger Experts",
-            rating = "4.8",
-            deliveryTime = "25-30 mins",
-            distance = "3.8 km",
-            discount = "20%",
-            discountAmount = "₹20",
-            address = "Mayur Vihar, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.burger_paneer_tikka,
-            title = "Paneer Tikka Burger",
-            price = "105",
-            restaurantName = "Paneer Burger Center",
-            rating = "4.3",
-            deliveryTime = "20-25 mins",
-            distance = "2.6 km",
-            discount = "25%",
-            discountAmount = "₹20",
-            address = "Paschim Vihar, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.burger_chicken_premium,
-            title = "Chicken Premium Burger",
-            price = "180",
-            restaurantName = "Premium Burger House",
-            rating = "4.8",
-            deliveryTime = "30-35 mins",
-            distance = "4.1 km",
-            discount = "15%",
-            discountAmount = "₹20",
-            address = "Nehru Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.burger_veg_crunchy,
-            title = "Veg Crunchy Burger",
-            price = "90",
-            restaurantName = "Crunchy Burger Spot",
-            rating = "4.2",
-            deliveryTime = "15-20 mins",
-            distance = "1.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Patel Nagar, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.burger_combo_special,
-            title = "Combo Special Burger",
-            price = "195",
-            restaurantName = "Burger Combo Masters",
-            rating = "4.6",
-            deliveryTime = "25-30 mins",
-            distance = "3.6 km",
-            discount = "25%",
-            discountAmount = "₹20",
-            address = "Dwarka Sector 21, Delhi"
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        sampleBurgerItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== FEATURED RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            Icons.Default.Error,
+                            "Error",
+                            tint = Color.Red,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(
+                            onClick = {
+                                restaurantViewModel.loadFeaturedRestaurants("BURGERS", featured = true)
+                                restaurantViewModel.loadRecommendedRestaurants("BURGERS", recommended = true)
+                            }
+                        ) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                            },
+                            onItemClick = { id ->
+                               // navController?.navigate("restaurant_details/$id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun CholeBhatureCategoryPage() {
+fun CholeBhatureCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load featured restaurants from API
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CHOLE_BHATURE")
+        restaurantViewModel.loadFeaturedRestaurants("CHOLE_BHATURE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CHOLE_BHATURE", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -3620,9 +3415,20 @@ fun CholeBhatureCategoryPage() {
                     type = FilterType.SORT_DROPDOWN,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
+                FilterChip(
+                    id = "extra_butter",
+                    text = "Extra Butter",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
             ),
-            rows = 1
+            rows = 2
         )
+
         FilterButtonFood(
             filterConfig = choleBhatureFilters,
             onFilterClick = { filter ->
@@ -3634,88 +3440,9 @@ fun CholeBhatureCategoryPage() {
                 // Handle sort logic
             }
         )
-        val completeCholeBhatureFoodItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.sitaram_chole_bhature,
-                title = "Special Chole Bhature",
-                price = "120",
-                restaurantName = "Sitaram Diwan Chand",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Paharganj, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.bille_di_hatti_chole_bhature,
-                title = "Classic Chole Bhature",
-                price = "90",
-                restaurantName = "Bille Di Hatti",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kamla Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.chache_di_hatti_chole_bhature,
-                title = "Punjabi Chole Bhature",
-                price = "110",
-                restaurantName = "Chache Di Hatti",
-                rating = "4.5",
-                deliveryTime = "15-18 mins",
-                distance = "1.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Shakti Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.nathu_chole_bhature,
-                title = "Deluxe Chole Bhature",
-                price = "150",
-                restaurantName = "Nathu's Sweets",
-                rating = "4.4",
-                deliveryTime = "25-30 mins",
-                distance = "3.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Bengali Market, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.bengali_sweet_chole_bhature,
-                title = "Masala Chole Bhature",
-                price = "100",
-                restaurantName = "Bengali Sweet House",
-                rating = "4.3",
-                deliveryTime = "20-25 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chandni Chowk, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.premium_chole_bhature,
-                title = "Royal Chole Bhature",
-                price = "180",
-                restaurantName = "Premium Chole Corner",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "4.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "South Extension, Delhi"
-            )
-        )
 
         Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -3723,20 +3450,34 @@ fun CholeBhatureCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
+        // ==================== RECOMMENDED RESTAURANTS FROM API ====================
+        FoodItemsListWithHeadingDynamic(
             heading = null,
             subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = completeCholeBhatureFoodItems,
+            foodItems = recommendedRestaurants.map { restaurant ->
+                FoodItemDoubleFDynamic(
+                    id = restaurant.id,
+                    imageUrl = restaurant.imageUrl,
+                    title = restaurant.title,
+                    price = restaurant.priceAvg,
+                    restaurantName = restaurant.restaurantName,
+                    rating = restaurant.rating,
+                    deliveryTime = restaurant.deliveryTime,
+                    distance = restaurant.distance,
+                    discount = restaurant.discountAvg,
+                    discountAmount = restaurant.discountAmountAvg,
+                    address = restaurant.address?.city ?: restaurant.outlet,
+                    isWishlisted = restaurant.isWishlisted
+                )
+            },
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
+                //navController?.navigate("restaurant_details/${foodItem.id}")
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
@@ -3748,20 +3489,20 @@ fun CholeBhatureCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-
         Spacer(modifier = Modifier.height(15.dp))
+
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
+
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -3769,290 +3510,134 @@ fun CholeBhatureCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val sampleCholeBhatureItems = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.chole_bhature_classic,
-                title = "Classic Chole Bhature",
-                price = "120",
-                restaurantName = "Sitaram Diwan Chand",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Paharganj, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.chole_bhature_premium,
-                title = "Premium Chole Bhature",
-                price = "150",
-                restaurantName = "Bille Di Hatti",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kamla Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.chole_bhature_punjabi,
-                title = "Punjabi Chole Bhature",
-                price = "110",
-                restaurantName = "Chache Di Hatti",
-                rating = "4.5",
-                deliveryTime = "15-18 mins",
-                distance = "1.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Shakti Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.chole_bhature_deluxe,
-                title = "Deluxe Chole Bhature",
-                price = "180",
-                restaurantName = "Nathu's Sweets",
-                rating = "4.4",
-                deliveryTime = "25-30 mins",
-                distance = "3.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Bengali Market, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.chole_bhature_masala,
-                title = "Masala Chole Bhature",
-                price = "100",
-                restaurantName = "Bengali Sweet House",
-                rating = "4.3",
-                deliveryTime = "20-25 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chandni Chowk, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.chole_bhature_royal,
-                title = "Royal Chole Bhature",
-                price = "200",
-                restaurantName = "Premium Chole Corner",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "4.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "South Extension, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.chole_bhature_spicy,
-                title = "Spicy Chole Bhature",
-                price = "95",
-                restaurantName = "Spicy Chole Point",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "1.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Laxmi Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.chole_bhature_butter,
-                title = "Butter Chole Bhature",
-                price = "140",
-                restaurantName = "Butter Chole House",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.8 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.chole_bhature_amritsari,
-                title = "Amritsari Chole Bhature",
-                price = "130",
-                restaurantName = "Amritsari Kulcha Hut",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "3.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Paschim Vihar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.chole_bhature_combo,
-                title = "Chole Bhature Combo",
-                price = "160",
-                restaurantName = "Combo Chole Center",
-                rating = "4.5",
-                deliveryTime = "18-22 mins",
-                distance = "2.3 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Karol Bagh, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.chole_bhature_family,
-                title = "Family Pack Chole Bhature",
-                price = "220",
-                restaurantName = "Family Chole House",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "4.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Rohini, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.chole_bhature_extra,
-                title = "Extra Bhature Chole",
-                price = "135",
-                restaurantName = "Extra Bhature Point",
-                rating = "4.3",
-                deliveryTime = "20-25 mins",
-                distance = "2.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Dwarka, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.chole_bhature_special,
-                title = "Special Chole Bhature",
-                price = "125",
-                restaurantName = "Special Chole Corner",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Patel Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.chole_bhature_tandoori,
-                title = "Tandoori Bhature Chole",
-                price = "145",
-                restaurantName = "Tandoori Bhature Co.",
-                rating = "4.5",
-                deliveryTime = "25-30 mins",
-                distance = "3.1 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Janakpuri, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.chole_bhature_cheese,
-                title = "Cheese Chole Bhature",
-                price = "170",
-                restaurantName = "Cheese Chole Specialists",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "4.3 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Vasant Kunj, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.chole_bhature_egg,
-                title = "Egg Chole Bhature",
-                price = "155",
-                restaurantName = "Egg Chole Experts",
-                rating = "4.4",
-                deliveryTime = "20-25 mins",
-                distance = "2.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mayur Vihar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.chole_bhature_paneer,
-                title = "Paneer Chole Bhature",
-                price = "165",
-                restaurantName = "Paneer Chole Center",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "3.4 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Nehru Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.chole_bhature_express,
-                title = "Express Chole Bhature",
-                price = "90",
-                restaurantName = "Express Chole Spot",
-                rating = "4.2",
-                deliveryTime = "10-15 mins",
-                distance = "1.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Shahdara, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                    imageRes = R.drawable.chole_bhature_gourmet,
-                title = "Gourmet Chole Bhature",
-                price = "190",
-                restaurantName = "Gourmet Chole Masters",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "4.8 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Greater Kailash, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.chole_bhature_mega,
-                title = "Mega Chole Bhature",
-                price = "240",
-                restaurantName = "Mega Chole House",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "3.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            )
-        )
-        Column {
-            sampleCholeBhatureItems.forEach { restaurantItem ->
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            Icons.Default.Error,
+                            "Error",
+                            tint = Color.Red,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(
+                            onClick = {
+                                restaurantViewModel.loadFeaturedRestaurants("CHOLE_BHATURE", featured = true)
+                                restaurantViewModel.loadRecommendedRestaurants("CHOLE_BHATURE", recommended = true)
+                            }
+                        ) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                            },
+                            onItemClick = { id ->
+                                //navController?.navigate("restaurant_details/$id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
-
 @Composable
-fun SaladCategoryPage() {
+fun SaladCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SALAD category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SALAD")
+        restaurantViewModel.loadFeaturedRestaurants("SALAD", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SALAD", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -4108,6 +3693,7 @@ fun SaladCategoryPage() {
             ),
             rows = 1
         )
+
         FilterButtonFood(
             filterConfig = saladFilters,
             onFilterClick = { filter ->
@@ -4119,88 +3705,9 @@ fun SaladCategoryPage() {
                 // Handle sort logic
             }
         )
-        val completeSaladFoodItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.greek_salad,
-                title = "Classic Greek Salad",
-                price = "320",
-                restaurantName = "Mediterranean Delight",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.caesar_salad,
-                title = "Chicken Caesar Salad",
-                price = "280",
-                restaurantName = "Fresh Greens Cafe",
-                rating = "4.6",
-                deliveryTime = "12-15 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.quinoa_salad,
-                title = "Protein Quinoa Bowl",
-                price = "350",
-                restaurantName = "Health Hub",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "2.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Greater Kailash, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.fruit_salad,
-                title = "Tropical Fruit Salad",
-                price = "240",
-                restaurantName = "Nature's Basket",
-                rating = "4.5",
-                deliveryTime = "10-15 mins",
-                distance = "1.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.veg_salad,
-                title = "Garden Fresh Salad",
-                price = "190",
-                restaurantName = "Green Leaf Restaurant",
-                rating = "4.4",
-                deliveryTime = "15-18 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.premium_salad,
-                title = "Premium Avocado Salad",
-                price = "420",
-                restaurantName = "Organic Kitchen",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "3.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Vasant Kunj, Delhi"
-            )
-        )
 
         Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -4208,20 +3715,34 @@ fun SaladCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
+        // ==================== RECOMMENDED RESTAURANTS FROM API ====================
+        FoodItemsListWithHeadingDynamic(
             heading = null,
             subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = completeSaladFoodItems,
+            foodItems = recommendedRestaurants.map { restaurant ->
+                FoodItemDoubleFDynamic(
+                    id = restaurant.id,
+                    imageUrl = restaurant.imageUrl,
+                    title = restaurant.title,
+                    price = restaurant.priceAvg,
+                    restaurantName = restaurant.restaurantName,
+                    rating = restaurant.rating,
+                    deliveryTime = restaurant.deliveryTime,
+                    distance = restaurant.distance,
+                    discount = restaurant.discountAvg,
+                    discountAmount = restaurant.discountAmountAvg,
+                    address = restaurant.address?.city ?: restaurant.outlet,
+                    isWishlisted = restaurant.isWishlisted
+                )
+            },
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
+                // navController?.navigate("restaurant_details/${foodItem.id}")
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
@@ -4233,20 +3754,20 @@ fun SaladCategoryPage() {
             headingBottomPadding = 0.dp
         )
 
-
         Spacer(modifier = Modifier.height(15.dp))
+
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
+
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -4254,283 +3775,113 @@ fun SaladCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val sampleSaladItems = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.salad_greek,
-                title = "Greek Salad",
-                price = "180",
-                restaurantName = "Mediterranean Delight",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.salad_caesar,
-                title = "Classic Caesar Salad",
-                price = "220",
-                restaurantName = "Italian Bistro",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.salad_quinoa,
-                title = "Quinoa Power Salad",
-                price = "250",
-                restaurantName = "Health Hub",
-                rating = "4.8",
-                deliveryTime = "18-22 mins",
-                distance = "1.8 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Vasant Vihar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.salad_fruit,
-                title = "Fresh Fruit Salad",
-                price = "160",
-                restaurantName = "Fruit Paradise",
-                rating = "4.5",
-                deliveryTime = "10-15 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Green Park, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.salad_chicken,
-                title = "Grilled Chicken Salad",
-                price = "280",
-                restaurantName = "Protein House",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "2.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Defence Colony, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.salad_avocado,
-                title = "Avocado Spinach Salad",
-                price = "240",
-                restaurantName = "Green Garden",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.1 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Greater Kailash, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.salad_thai,
-                title = "Thai Green Papaya Salad",
-                price = "190",
-                restaurantName = "Asian Flavors",
-                rating = "4.4",
-                deliveryTime = "22-27 mins",
-                distance = "3.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.salad_tuna,
-                title = "Tuna Nicoise Salad",
-                price = "320",
-                restaurantName = "Seafood Specialists",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "3.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Nehru Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.salad_cobb,
-                title = "Cobb Salad",
-                price = "270",
-                restaurantName = "American Diner",
-                rating = "4.5",
-                deliveryTime = "25-30 mins",
-                distance = "2.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.salad_waldorf,
-                title = "Waldorf Salad",
-                price = "210",
-                restaurantName = "Classic Cuisine",
-                rating = "4.3",
-                deliveryTime = "20-25 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Karol Bagh, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.salad_caprese,
-                title = "Caprese Salad",
-                price = "230",
-                restaurantName = "Italian Express",
-                rating = "4.7",
-                deliveryTime = "18-23 mins",
-                distance = "1.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Chanakyapuri, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.salad_mexican,
-                title = "Mexican Fiesta Salad",
-                price = "200",
-                restaurantName = "Mexican Grill",
-                rating = "4.6",
-                deliveryTime = "22-28 mins",
-                distance = "3.1 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Dwarka, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.salad_kale,
-                title = "Kale Caesar Salad",
-                price = "260",
-                restaurantName = "Superfood Cafe",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "2.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lodhi Road, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.salad_beetroot,
-                title = "Beetroot & Feta Salad",
-                price = "195",
-                restaurantName = "Healthy Bites",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "1.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Malviya Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.salad_pasta,
-                title = "Pasta Salad",
-                price = "180",
-                restaurantName = "Italian Corner",
-                rating = "4.3",
-                deliveryTime = "20-25 mins",
-                distance = "2.3 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.salad_mediterranean,
-                title = "Mediterranean Bowl",
-                price = "290",
-                restaurantName = "Bowl Company",
-                rating = "4.7",
-                deliveryTime = "28-33 mins",
-                distance = "3.8 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "South Extension, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.salad_sprouts,
-                title = "Sprout & Veggie Salad",
-                price = "170",
-                restaurantName = "Sprout Heaven",
-                rating = "4.5",
-                deliveryTime = "12-17 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lajpat Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.salad_egg,
-                title = "Egg & Bacon Salad",
-                price = "240",
-                restaurantName = "Breakfast Club",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Rohini, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.salad_asian,
-                title = "Asian Chicken Salad",
-                price = "270",
-                restaurantName = "Pan Asian",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "3.3 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Janakpuri, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.salad_detox,
-                title = "Detox Green Salad",
-                price = "220",
-                restaurantName = "Detox Kitchen",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "2.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Kailash Colony, Delhi"
-            )
-        )
-        Column {
-            sampleSaladItems.forEach { restaurantItem ->
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            Icons.Default.Error,
+                            "Error",
+                            tint = Color.Red,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(
+                            onClick = {
+                                restaurantViewModel.loadFeaturedRestaurants("SALAD", featured = true)
+                                restaurantViewModel.loadRecommendedRestaurants("SALAD", recommended = true)
+                            }
+                        ) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                            },
+                            onItemClick = { id ->
+                                // navController?.navigate("restaurant_details/$id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

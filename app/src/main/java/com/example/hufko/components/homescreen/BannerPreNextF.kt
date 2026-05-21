@@ -638,53 +638,6 @@ fun BannerPreNextFWithSectionBackground(
     }
 }
 
-// Example usage with different gradient options:
-@Composable
-fun ExampleUsagePreNextF() {
-    val foodItems = listOf(
-        FoodItemBannerPreNextFOld(
-            id = 1,
-            imageRes = R.drawable.sitaram_chole_bhature,
-            title = "Special Chole Bhature",
-            price = "120",
-            restaurantName = "Sitaram Diwan Chand",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            calories = "450",
-            protein = "15",
-            isHighProtein = true,
-            discount = "20%"
-        )
-    )
-
-    // Usage 1: Gradient applied to section background
-    BannerPreNextF(
-        foodItems = foodItems,
-        onItemClick = {},
-        backgroundColor1 = Color(0xFF6A1B9A).copy(alpha = 0.3f), // Light Purple
-        backgroundColor2 = Color(0xFF4A148C).copy(alpha = 0.8f) // Dark Purple
-    )
-
-    // Usage 2: Blue gradient section
-    BannerPreNextF(
-        foodItems = foodItems,
-        onItemClick = {},
-        backgroundColor1 = Color(0xFF1976D2).copy(alpha = 0.3f), // Light Blue
-        backgroundColor2 = Color(0xFF0D47A1).copy(alpha = 0.8f) // Dark Blue
-    )
-
-    // Usage 3: Custom gradient colors for section
-    BannerPreNextF(
-        foodItems = foodItems,
-        onItemClick = {},
-        gradientColors = listOf(
-            Color(0xFFFF9800).copy(alpha = 0.2f), // Light Orange
-            Color(0xFFFF9800).copy(alpha = 0.4f), // Medium Orange
-            Color(0xFFF57C00).copy(alpha = 0.6f), // Orange
-            Color(0xFFE65100).copy(alpha = 0.8f)  // Dark Orange
-        )
-    )
-}
 
 
 

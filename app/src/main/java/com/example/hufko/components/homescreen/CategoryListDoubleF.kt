@@ -493,7 +493,7 @@ fun FoodItemCardDynamic(
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 240.dp,
     imageHeight: Dp = 120.dp,
-    defaultImageRes: Int = R.drawable.restaurant_1 // Default image if none provided
+    defaultImageRes: Int = R.drawable.ic_placeholder_image // Default image if none provided
 ) {
     Column(
         modifier = modifier
@@ -514,9 +514,9 @@ fun FoodItemCardDynamic(
             AsyncImage(
                 model = getFullImageUrl(foodItem.imageUrl), // Use the helper function
                 contentDescription = foodItem.title ?: "Food item",
-                contentScale = ContentScale.Crop,
-                placeholder = painterResource(defaultImageRes),
-                error = painterResource(defaultImageRes),
+                contentScale = ContentScale.FillBounds,
+//                placeholder = painterResource(defaultImageRes),
+//                error = painterResource(defaultImageRes),
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))

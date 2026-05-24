@@ -5425,7 +5425,22 @@ fun BathCategoryPage(
 }
 
 @Composable
-fun BondaCategoryPage() {
+fun BondaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for BONDA category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BONDA")
+        restaurantViewModel.loadFeaturedRestaurants("BONDA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BONDA", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -5522,86 +5537,6 @@ fun BondaCategoryPage() {
             }
         )
 
-        val completeBondaItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.aloo_bonda,
-                title = "Aloo Bonda with Coconut Chutney",
-                price = "80",
-                restaurantName = "South Indian Delights",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Green Park, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.mysore_bonda,
-                title = "Mysore Bonda with Sambar",
-                price = "95",
-                restaurantName = "Karnataka Kitchen",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "2.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Karol Bagh, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.onion_bonda,
-                title = "Crispy Onion Bonda with Chutney",
-                price = "85",
-                restaurantName = "Udupi Sagar",
-                rating = "4.5",
-                deliveryTime = "18-22 mins",
-                distance = "1.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Lajpat Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.mixed_veg_bonda,
-                title = "Mixed Vegetable Bonda Platter",
-                price = "110",
-                restaurantName = "Vegetarian Hub",
-                rating = "4.4",
-                deliveryTime = "20-25 mins",
-                distance = "2.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Malviya Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.paneer_bonda,
-                title = "Paneer Bonda with Tomato Chutney",
-                price = "120",
-                restaurantName = "Chennai Express",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "2.8 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.cheese_bonda,
-                title = "Cheese Stuffed Bonda Combo",
-                price = "130",
-                restaurantName = "Fusion Foods",
-                rating = "4.3",
-                deliveryTime = "22-28 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dwarka, Delhi"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
@@ -5610,20 +5545,34 @@ fun BondaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
+        // ==================== RECOMMENDED RESTAURANTS FROM API ====================
+        FoodItemsListWithHeadingDynamic(
             heading = null,
             subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = completeBondaItems,
+            foodItems = recommendedRestaurants.map { restaurant ->
+                FoodItemDoubleFDynamic(
+                    id = restaurant.id,
+                    imageUrl = restaurant.imageUrl,
+                    title = restaurant.title,
+                    price = restaurant.priceAvg,
+                    restaurantName = restaurant.restaurantName,
+                    rating = restaurant.rating,
+                    deliveryTime = restaurant.deliveryTime,
+                    distance = restaurant.distance,
+                    discount = restaurant.discountAvg,
+                    discountAmount = restaurant.discountAmountAvg,
+                    address = restaurant.address?.city ?: restaurant.outlet,
+                    isWishlisted = restaurant.isWishlisted
+                )
+            },
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
+                // navController?.navigate("restaurant_details/${foodItem.id}")
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
@@ -5641,11 +5590,10 @@ fun BondaCategoryPage() {
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -5655,283 +5603,117 @@ fun BondaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val sampleBondaItems = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.bonda_masala,
-                title = "Masala Bonda",
-                price = "60",
-                restaurantName = "Udupi Cafe",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.bonda_onion,
-                title = "Onion Bonda",
-                price = "65",
-                restaurantName = "Chennai Spices",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.bonda_alu,
-                title = "Alu Bonda",
-                price = "55",
-                restaurantName = "Tamil Nadu Mess",
-                rating = "4.3",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Coimbatore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.bonda_egg,
-                title = "Egg Bonda",
-                price = "75",
-                restaurantName = "Kerala Bhavan",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Kochi"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.bonda_vegetable,
-                title = "Mixed Vegetable Bonda",
-                price = "70",
-                restaurantName = "Udupi Cafe",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.bonda_chicken,
-                title = "Chicken Bonda",
-                price = "85",
-                restaurantName = "Andhra Spice",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.bonda_paneer,
-                title = "Paneer Bonda",
-                price = "80",
-                restaurantName = "Udupi Cafe",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.bonda_mushroom,
-                title = "Mushroom Bonda",
-                price = "75",
-                restaurantName = "Chennai Spices",
-                rating = "4.4",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.bonda_spicy,
-                title = "Spicy Mirchi Bonda",
-                price = "50",
-                restaurantName = "Andhra Spice",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.bonda_combo,
-                title = "Bonda Combo (4 pieces + chutney)",
-                price = "100",
-                restaurantName = "Tamil Nadu Mess",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Coimbatore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.bonda_sweet,
-                title = "Sweet Bonda (Mysore Bonda)",
-                price = "55",
-                restaurantName = "Udupi Cafe",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.bonda_mutton,
-                title = "Mutton Bonda",
-                price = "95",
-                restaurantName = "Andhra Spice",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.bonda_cheese,
-                title = "Cheese Bonda",
-                price = "85",
-                restaurantName = "Chennai Spices",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.bonda_family_pack,
-                title = "Family Bonda Pack (12 pieces)",
-                price = "200",
-                restaurantName = "Tamil Nadu Mess",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Coimbatore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.bonda_fish,
-                title = "Fish Bonda",
-                price = "90",
-                restaurantName = "Kerala Bhavan",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Kochi"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.bonda_corn,
-                title = "Corn Bonda",
-                price = "65",
-                restaurantName = "Udupi Cafe",
-                rating = "4.3",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.bonda_schezwan,
-                title = "Schezwan Bonda",
-                price = "70",
-                restaurantName = "Chennai Spices",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.bonda_prawn,
-                title = "Prawn Bonda",
-                price = "100",
-                restaurantName = "Kerala Bhavan",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kochi"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.bonda_medu,
-                title = "Medu Bonda",
-                price = "60",
-                restaurantName = "Tamil Nadu Mess",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Coimbatore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.bonda_combo_special,
-                title = "Special Bonda Platter (Mixed varieties)",
-                price = "150",
-                restaurantName = "Andhra Spice",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            )
-        )
-        Column {
-            sampleBondaItems.forEach { restaurantItem ->
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            Icons.Default.Error,
+                            "Error",
+                            tint = Color.Red,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(
+                            onClick = {
+                                restaurantViewModel.loadFeaturedRestaurants("BONDA", featured = true)
+                                restaurantViewModel.loadRecommendedRestaurants("BONDA", recommended = true)
+                            }
+                        ) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // Toggle wishlist in ViewModel
+                                // restaurantViewModel.toggleWishlist(id)
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // Show bottom sheet dialog with options
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // navController?.navigate("restaurant_details/$id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

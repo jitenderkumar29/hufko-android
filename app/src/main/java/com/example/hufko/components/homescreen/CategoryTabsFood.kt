@@ -453,10 +453,10 @@ fun CategoryTabsFood(
                 CategoryPage.IceCream -> IceCreamCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Appam -> AppamCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Bath -> BathCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Bonda -> BondaCategoryPage()
-                CategoryPage.Cutlet -> CutletCategoryPage()
-                CategoryPage.Dessert -> DessertCategoryPage()
-                CategoryPage.Dhokla -> DhoklaCategoryPage()
+                CategoryPage.Bonda -> BondaCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Cutlet -> CutletCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Dessert -> DessertCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Dhokla -> DhoklaCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Dosa -> DosaCategoryPage()
                 CategoryPage.Dholda -> DholdaCategoryPage()
                 CategoryPage.GulabJamun -> GulabJamunCategoryPage()
@@ -5720,7 +5720,22 @@ fun BondaCategoryPage(
 }
 
 @Composable
-fun CutletCategoryPage() {
+fun CutletCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CUTLET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CUTLET")
+        restaurantViewModel.loadFeaturedRestaurants("CUTLET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CUTLET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -5819,13 +5834,13 @@ fun CutletCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
             ),
-            rows = 2  // Single row for minimal look
+            rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = cutletFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - apply filters to API calls
             },
             onSortClick = {
                 println("Sort clicked")
@@ -5833,86 +5848,6 @@ fun CutletCategoryPage() {
             }
         )
 
-        val completeCutletItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.vegetable_cutlet,
-                title = "Crispy Vegetable Cutlet with Sauce",
-                price = "80",
-                restaurantName = "Classic Bites",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Green Park, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.chicken_cutlet,
-                title = "Spicy Chicken Cutlet Platter",
-                price = "150",
-                restaurantName = "Chicken Specials",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "2.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Karol Bagh, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.fish_cutlet,
-                title = "Fish Cutlet with Lemon Mayo",
-                price = "160",
-                restaurantName = "Sea Delights",
-                rating = "4.5",
-                deliveryTime = "18-22 mins",
-                distance = "1.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Lajpat Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.potato_cutlet,
-                title = "Potato Cutlet with Chutney",
-                price = "70",
-                restaurantName = "Simple Eats",
-                rating = "4.4",
-                deliveryTime = "12-15 mins",
-                distance = "0.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Malviya Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.gravy_cutlet,
-                title = "Cutlet with Gravy",
-                price = "180",
-                restaurantName = "Premium Grill",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "2.8 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.cheese_cutlet,
-                title = "Cheese Stuffed Cutlet Combo",
-                price = "130",
-                restaurantName = "Fusion Kitchen",
-                rating = "4.3",
-                deliveryTime = "22-28 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dwarka, Delhi"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
@@ -5921,20 +5856,34 @@ fun CutletCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
+        // ==================== RECOMMENDED RESTAURANTS FROM API ====================
+        FoodItemsListWithHeadingDynamic(
             heading = null,
             subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = completeCutletItems,
+            foodItems = recommendedRestaurants.map { restaurant ->
+                FoodItemDoubleFDynamic(
+                    id = restaurant.id,
+                    imageUrl = restaurant.imageUrl,
+                    title = restaurant.title,
+                    price = restaurant.priceAvg,
+                    restaurantName = restaurant.restaurantName,
+                    rating = restaurant.rating,
+                    deliveryTime = restaurant.deliveryTime,
+                    distance = restaurant.distance,
+                    discount = restaurant.discountAvg,
+                    discountAmount = restaurant.discountAmountAvg,
+                    address = restaurant.address?.city ?: restaurant.outlet,
+                    isWishlisted = restaurant.isWishlisted
+                )
+            },
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
+                // navController?.navigate("restaurant_details/${foodItem.id}")
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
@@ -5952,11 +5901,10 @@ fun CutletCategoryPage() {
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -5966,290 +5914,139 @@ fun CutletCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val sampleCutletItems = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.cutlet_vegetable,
-                title = "Vegetable Cutlet",
-                price = "60",
-                restaurantName = "Classic Bites",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.cutlet_chicken,
-                title = "Chicken Cutlet",
-                price = "85",
-                restaurantName = "Chicken Specials",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.cutlet_fish,
-                title = "Fish Cutlet",
-                price = "95",
-                restaurantName = "Sea Delights",
-                rating = "4.3",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Coimbatore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.cutlet_potato,
-                title = "Potato Cutlet",
-                price = "55",
-                restaurantName = "Simple Eats",
-                rating = "4.6",
-                deliveryTime = "12-18 mins",
-                distance = "0.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Kochi"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.cutlet_corn,
-                title = "Corn Cutlet",
-                price = "70",
-                restaurantName = "Corn Specials",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.cutlet_gravy,
-                title = "Gravy Cutlet",
-                price = "110",
-                restaurantName = "Premium Grill",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.cutlet_paneer,
-                title = "Paneer Cutlet",
-                price = "80",
-                restaurantName = "Paneer House",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.cutlet_mushroom,
-                title = "Mushroom Cutlet",
-                price = "75",
-                restaurantName = "Mushroom Magic",
-                rating = "4.4",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.cutlet_spicy,
-                title = "Spicy Cutlet",
-                price = "65",
-                restaurantName = "Spice Hub",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.cutlet_combo,
-                title = "Cutlet Combo (4 pieces + sauce)",
-                price = "120",
-                restaurantName = "Combo Meals",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Coimbatore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.cutlet_sweet,
-                title = "Sweet Potato Cutlet",
-                price = "65",
-                restaurantName = "Healthy Bites",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.cutlet_mutton,
-                title = "Mutton Cutlet",
-                price = "120",
-                restaurantName = "Mutton Specials",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.cutlet_cheese,
-                title = "Cheese Stuffed Cutlet",
-                price = "85",
-                restaurantName = "Cheese Lovers",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.cutlet_family_pack,
-                title = "Family Cutlet Pack (12 pieces)",
-                price = "250",
-                restaurantName = "Family Meals",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Coimbatore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.cutlet_prawn,
-                title = "Prawn Cutlet",
-                price = "105",
-                restaurantName = "Sea Food Hub",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Kochi"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.cutlet_breaded,
-                title = "Breaded Cutlet",
-                price = "75",
-                restaurantName = "Crispy Bites",
-                rating = "4.3",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.cutlet_schezwan,
-                title = "Schezwan Cutlet",
-                price = "80",
-                restaurantName = "Chinese Fusion",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.cutlet_egg,
-                title = "Egg Cutlet",
-                price = "70",
-                restaurantName = "Egg Specials",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kochi"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.cutlet_air_fried,
-                title = "Air Fried Cutlet",
-                price = "85",
-                restaurantName = "Healthy Kitchen",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "1.0 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Coimbatore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.cutlet_combo_special,
-                title = "Special Cutlet Platter (Mixed varieties)",
-                price = "180",
-                restaurantName = "Fusion Restaurant",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            )
-        )
-        Column {
-            sampleCutletItems.forEach { restaurantItem ->
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            Icons.Default.Error,
+                            "Error",
+                            tint = Color.Red,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(
+                            onClick = {
+                                restaurantViewModel.loadFeaturedRestaurants("CUTLET", featured = true)
+                                restaurantViewModel.loadRecommendedRestaurants("CUTLET", recommended = true)
+                            }
+                        ) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // Toggle wishlist in ViewModel
+                                // restaurantViewModel.toggleWishlist(id)
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // Show bottom sheet dialog with options
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // navController?.navigate("restaurant_details/$id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun DessertCategoryPage() {
+fun DessertCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for DESSERT category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: DESSERT")
+        restaurantViewModel.loadFeaturedRestaurants("DESSERT", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("DESSERT", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -6376,13 +6173,12 @@ fun DessertCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
             ),
-            rows = 2  // Maintains minimal look
+            rows = 2
         )
         FilterButtonFood(
             filterConfig = dessertFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
             },
             onSortClick = {
                 println("Sort clicked")
@@ -6390,86 +6186,6 @@ fun DessertCategoryPage() {
             }
         )
 
-        val completeDessertItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.dessert_chocolate_cake,
-                title = "Chocolate Lava Cake with Ice Cream",
-                price = "250",
-                restaurantName = "Sweet Heaven",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Green Park, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.dessert_ice_cream,
-                title = "Vegan Coconut Ice Cream Sundae",
-                price = "180",
-                restaurantName = "Nature's Treat",
-                rating = "4.6",
-                deliveryTime = "8-12 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malviya Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.dessert_pastry,
-                title = "Gluten-Free Blueberry Pastry",
-                price = "140",
-                restaurantName = "Healthy Bakes",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Dwarka, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.dessert_chocolate,
-                title = "Belgian Chocolate Fondue Platter",
-                price = "320",
-                restaurantName = "Chocolate Haven",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "2.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.dessert_pudding,
-                title = "Warm Bread Pudding with Custard",
-                price = "160",
-                restaurantName = "Comfort Desserts",
-                rating = "4.4",
-                deliveryTime = "12-18 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Lajpat Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.dessert_cheesecake,
-                title = "Eggless New York Cheesecake",
-                price = "280",
-                restaurantName = "Premium Patisserie",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "2.5 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Karol Bagh, Delhi"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
@@ -6478,20 +6194,34 @@ fun DessertCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
+        // ==================== RECOMMENDED RESTAURANTS FROM API ====================
+        FoodItemsListWithHeadingDynamic(
             heading = null,
             subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = completeDessertItems,
+            foodItems = recommendedRestaurants.map { restaurant ->
+                FoodItemDoubleFDynamic(
+                    id = restaurant.id,
+                    imageUrl = restaurant.imageUrl,
+                    title = restaurant.title,
+                    price = restaurant.priceAvg,
+                    restaurantName = restaurant.restaurantName,
+                    rating = restaurant.rating,
+                    deliveryTime = restaurant.deliveryTime,
+                    distance = restaurant.distance,
+                    discount = restaurant.discountAvg,
+                    discountAmount = restaurant.discountAmountAvg,
+                    address = restaurant.address?.city ?: restaurant.outlet,
+                    isWishlisted = restaurant.isWishlisted
+                )
+            },
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
+                // navController?.navigate("restaurant_details/${foodItem.id}")
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
@@ -6509,11 +6239,10 @@ fun DessertCategoryPage() {
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -6523,290 +6252,139 @@ fun DessertCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val sampleDessertItems = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.dessert_chocolate_lava_cake,
-                title = "Chocolate Lava Cake",
-                price = "180",
-                restaurantName = "Sweet Heaven",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.dessert_new_york_cheesecake,
-                title = "New York Cheesecake",
-                price = "220",
-                restaurantName = "Cheese Delights",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.dessert_gulab_jamun,
-                title = "Gulab Jamun (2 pieces)",
-                price = "90",
-                restaurantName = "Indian Mithai House",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.dessert_tiramisu,
-                title = "Classic Tiramisu",
-                price = "250",
-                restaurantName = "Italian Bistro",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.dessert_ice_cream_sundae,
-                title = "Chocolate Sundae",
-                price = "150",
-                restaurantName = "Ice Cream World",
-                rating = "4.4",
-                deliveryTime = "12-18 mins",
-                distance = "0.7 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.dessert_rasmalai,
-                title = "Fresh Rasmalai",
-                price = "120",
-                restaurantName = "Royal Sweets",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Kolkata"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.dessert_brownie,
-                title = "Walnut Brownie with Ice Cream",
-                price = "190",
-                restaurantName = "Brownie Factory",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.dessert_creme_brulee,
-                title = "Vanilla Crème Brûlée",
-                price = "280",
-                restaurantName = "French Patisserie",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Pune"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.dessert_jalebi,
-                title = "Hot Jalebi with Rabri",
-                price = "110",
-                restaurantName = "Street Food Hub",
-                rating = "4.3",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jaipur"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.dessert_mousse,
-                title = "Dark Chocolate Mousse",
-                price = "200",
-                restaurantName = "Chocolate Studio",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.dessert_fruit_tart,
-                title = "Mixed Fruit Tart",
-                price = "170",
-                restaurantName = "Fresh Bakes",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.dessert_kulfi,
-                title = "Malai Kulfi (2 pieces)",
-                price = "95",
-                restaurantName = "Traditional Kulfi",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Lucknow"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.dessert_pancakes,
-                title = "Berry Pancakes with Maple Syrup",
-                price = "210",
-                restaurantName = "Breakfast Cafe",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Chennai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.dessert_rasgulla,
-                title = "Bengali Rasgulla (4 pieces)",
-                price = "130",
-                restaurantName = "Sweet Bengal",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kolkata"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.dessert_profiteroles,
-                title = "Chocolate Profiteroles",
-                price = "240",
-                restaurantName = "French Bakery",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.dessert_halwa,
-                title = "Gajar Ka Halwa",
-                price = "140",
-                restaurantName = "North Indian Kitchen",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.dessert_macarons,
-                title = "Assorted Macarons (6 pieces)",
-                price = "320",
-                restaurantName = "Parisian Cafe",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goa"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.dessert_shrikhand,
-                title = "Kesar Shrikhand",
-                price = "125",
-                restaurantName = "Gujarati Thali",
-                rating = "4.5",
-                deliveryTime = "18-22 mins",
-                distance = "1.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.dessert_waffles,
-                title = "Belgian Waffles with Fruits",
-                price = "190",
-                restaurantName = "Waffle House",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Bengaluru"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.dessert_combo,
-                title = "Dessert Platter (Assorted)",
-                price = "350",
-                restaurantName = "Grand Sweets",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mumbai"
-            )
-        )
-        Column {
-            sampleDessertItems.forEach { restaurantItem ->
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            Icons.Default.Error,
+                            "Error",
+                            tint = Color.Red,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(
+                            onClick = {
+                                restaurantViewModel.loadFeaturedRestaurants("DESSERT", featured = true)
+                                restaurantViewModel.loadRecommendedRestaurants("DESSERT", recommended = true)
+                            }
+                        ) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // Toggle wishlist in ViewModel
+                                // restaurantViewModel.toggleWishlist(id)
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // Show bottom sheet dialog with options
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // navController?.navigate("restaurant_details/$id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun DhoklaCategoryPage() {
+fun DhoklaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for DHOKLA category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: DHOKLA")
+        restaurantViewModel.loadFeaturedRestaurants("DHOKLA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("DHOKLA", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -6932,13 +6510,13 @@ fun DhoklaCategoryPage() {
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
             ),
-            rows = 2  // Maintains minimal look
+            rows = 2
         )
         FilterButtonFood(
             filterConfig = dhoklaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - apply filters to API calls
             },
             onSortClick = {
                 println("Sort clicked")
@@ -6946,86 +6524,6 @@ fun DhoklaCategoryPage() {
             }
         )
 
-        val completeDhoklaItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.dhokla_khaman,
-                title = "Khaman Dhokla with Green Chutney",
-                price = "120",
-                restaurantName = "Gujarati Rasoi",
-                rating = "4.7",
-                deliveryTime = "12-15 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.dhokla_khatta,
-                title = "Khatta Dhokla with Tamarind Chutney",
-                price = "110",
-                restaurantName = "Spice Street",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "1.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Janakpuri, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.dhokla_rasawala,
-                title = "Rasawala Dhokla in Tangy Curry",
-                price = "150",
-                restaurantName = "Curry Point",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.0 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.dhokla_sandwich,
-                title = "Sandwich Dhokla with Chutney Layers",
-                price = "130",
-                restaurantName = "Innovative Bites",
-                rating = "4.4",
-                deliveryTime = "10-15 mins",
-                distance = "1.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Rohini, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.dhokla_steamed,
-                title = "Steamed Instant Dhokla with Sev",
-                price = "100",
-                restaurantName = "Quick Snacks",
-                rating = "4.3",
-                deliveryTime = "8-12 mins",
-                distance = "0.7 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Vikas Puri, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.dhokla_jain,
-                title = "Jain Style Dhokla (No Onion Garlic)",
-                price = "140",
-                restaurantName = "Pure Veg Corner",
-                rating = "4.8",
-                deliveryTime = "18-22 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Shalimar Bagh, Delhi"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
@@ -7034,18 +6532,34 @@ fun DhoklaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
+        // ==================== RECOMMENDED RESTAURANTS FROM API ====================
+        FoodItemsListWithHeadingDynamic(
             heading = null,
             subtitle = null,
-            foodItems = completeDhoklaItems,
+            foodItems = recommendedRestaurants.map { restaurant ->
+                FoodItemDoubleFDynamic(
+                    id = restaurant.id,
+                    imageUrl = restaurant.imageUrl,
+                    title = restaurant.title,
+                    price = restaurant.priceAvg,
+                    restaurantName = restaurant.restaurantName,
+                    rating = restaurant.rating,
+                    deliveryTime = restaurant.deliveryTime,
+                    distance = restaurant.distance,
+                    discount = restaurant.discountAvg,
+                    discountAmount = restaurant.discountAmountAvg,
+                    address = restaurant.address?.city ?: restaurant.outlet,
+                    isWishlisted = restaurant.isWishlisted
+                )
+            },
             onItemClick = { foodItem ->
                 println("Food item clicked: ${foodItem.title}")
+                // navController?.navigate("restaurant_details/${foodItem.id}")
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.White,
@@ -7063,11 +6577,10 @@ fun DhoklaCategoryPage() {
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -7077,283 +6590,117 @@ fun DhoklaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val sampleDhoklaItems = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.dhokla_khaman_diet, // You'll need to add this image
-                title = "Khaman Dhokla",
-                price = "80",
-                restaurantName = "Gujarati Rasoi",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Gujarat Bhavan, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.dhokla_khatta_diet, // You'll need to add this image
-                title = "Khatta Dhokla",
-                price = "75",
-                restaurantName = "Spice of Gujarat",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Vastrapur, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.dhokla_rasawala_diet, // You'll need to add this image
-                title = "Rasawala Dhokla",
-                price = "95",
-                restaurantName = "Gujarati Delights",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "2.5 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Maninagar, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.dhokla_sandwich_diet, // You'll need to add this image
-                title = "Sandwich Dhokla",
-                price = "110",
-                restaurantName = "Modern Gujarati",
-                rating = "4.4",
-                deliveryTime = "18-22 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Prahlad Nagar, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.dhokla_steamed_diet, // You'll need to add this image
-                title = "Steamed White Dhokla",
-                price = "65",
-                restaurantName = "Healthy Snacks",
-                rating = "4.3",
-                deliveryTime = "12-16 mins",
-                distance = "0.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Navrangpura, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.dhokla_buttermilk, // You'll need to add this image
-                title = "Buttermilk Dhokla",
-                price = "85",
-                restaurantName = "Traditional Taste",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Satellite, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.dhokla_spicy, // You'll need to add this image
-                title = "Spicy Masala Dhokla",
-                price = "90",
-                restaurantName = "Spicy Corner",
-                rating = "4.5",
-                deliveryTime = "22-27 mins",
-                distance = "2.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bodakdev, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.dhokla_cheese, // You'll need to add this image
-                title = "Cheese Dhokla",
-                price = "120",
-                restaurantName = "Fusion Foods",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "3.0 km",
-                discount = "35%",
-                discountAmount = "₹20",
-                address = "SG Highway, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.dhokla_jain_diet, // You'll need to add this image
-                title = "Jain Dhokla (No Onion Garlic)",
-                price = "85",
-                restaurantName = "Jain Special",
-                rating = "4.7",
-                deliveryTime = "18-23 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thaltej, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.dhokla_paneer, // You'll need to add this image
-                title = "Paneer Dhokla",
-                price = "130",
-                restaurantName = "Royal Gujarati",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "3.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Vijay Cross Roads, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.dhokla_family_pack, // You'll need to add this image
-                title = "Dhokla Family Pack",
-                price = "180",
-                restaurantName = "Family Special",
-                rating = "4.6",
-                deliveryTime = "28-33 mins",
-                distance = "2.3 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Naranpura, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.dhokla_instant, // You'll need to add this image
-                title = "Instant Mix Dhokla",
-                price = "70",
-                restaurantName = "Quick Bites",
-                rating = "4.2",
-                deliveryTime = "10-15 mins",
-                distance = "0.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Memnagar, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.dhokla_green, // You'll need to add this image
-                title = "Green Chutney Dhokla",
-                price = "95",
-                restaurantName = "Green Kitchen",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Gurukul, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.dhokla_sev_tameta, // You'll need to add this image
-                title = "Sev Tameta Dhokla",
-                price = "100",
-                restaurantName = "Sev Special",
-                rating = "4.4",
-                deliveryTime = "22-28 mins",
-                distance = "2.6 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Sola, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.dhokla_crispy, // You'll need to add this image
-                title = "Crispy Fried Dhokla",
-                price = "110",
-                restaurantName = "Crispy Corner",
-                rating = "4.3",
-                deliveryTime = "25-30 mins",
-                distance = "3.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Ranip, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.dhokla_health_mix, // You'll need to add this image
-                title = "Health Mix Dhokla",
-                price = "85",
-                restaurantName = "Health Hub",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.9 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Shilaj, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.dhokla_combo_meal, // You'll need to add this image
-                title = "Dhokla Combo Meal",
-                price = "150",
-                restaurantName = "Combo House",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Iscon Circle, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.dhokla_tamarind, // You'll need to add this image
-                title = "Tamarind Dhokla",
-                price = "90",
-                restaurantName = "Tamarind Twist",
-                rating = "4.5",
-                deliveryTime = "18-23 mins",
-                distance = "1.4 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Vasna, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.dhokla_sweet, // You'll need to add this image
-                title = "Sweet Dhokla",
-                price = "75",
-                restaurantName = "Sweet Spot",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Navjeevan Press, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.dhokla_special_thali, // You'll need to add this image
-                title = "Dhokla Special Thali",
-                price = "200",
-                restaurantName = "Thali House",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "3.8 km",
-                discount = "40%",
-                discountAmount = "₹20",
-                address = "Science City, Ahmedabad"
-            )
-        )
-         Column {
-             sampleDhoklaItems.forEach { restaurantItem ->
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            Icons.Default.Error,
+                            "Error",
+                            tint = Color.Red,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(
+                            onClick = {
+                                restaurantViewModel.loadFeaturedRestaurants("DHOKLA", featured = true)
+                                restaurantViewModel.loadRecommendedRestaurants("DHOKLA", recommended = true)
+                            }
+                        ) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // Toggle wishlist in ViewModel
+                                // restaurantViewModel.toggleWishlist(id)
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // Show bottom sheet dialog with options
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // navController?.navigate("restaurant_details/$id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

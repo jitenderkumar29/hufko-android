@@ -466,9 +466,9 @@ fun CategoryTabsFood(
                 CategoryPage.Chicken -> ChickenCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.VegMeal -> VegMealCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.NorthIndian -> NorthIndianCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Paneer -> PaneerCategoryPage()
-                CategoryPage.FriedRice -> FriedRiceCategoryPage()
-                CategoryPage.Noodles -> NoodlesCategoryPage()
+                CategoryPage.Paneer -> PaneerCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.FriedRice -> FriedRiceCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Noodles -> NoodlesCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Paratha -> ParathaCategoryPage()
                 CategoryPage.Shawarma -> ShawarmaCategoryPage()
                 CategoryPage.SouthIndian -> SouthIndianCategoryPage()
@@ -10390,10 +10390,24 @@ fun NorthIndianCategoryPage(
 }
 
 @Composable
-fun PaneerCategoryPage() {
+fun PaneerCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for PANEER category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PANEER")
+        restaurantViewModel.loadFeaturedRestaurants("PANEER", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PANEER", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -10520,7 +10534,7 @@ fun PaneerCategoryPage() {
             filterConfig = paneerFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls
             },
             onSortClick = {
                 println("Sort clicked")
@@ -10528,86 +10542,6 @@ fun PaneerCategoryPage() {
             }
         )
 
-        val paneerFoodItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.paneer_butter_masala_2,
-                title = "Paneer Butter Masala",
-                price = "320",
-                restaurantName = "Paneer Palace",
-                rating = "4.8",
-                deliveryTime = "25-35 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi NCR",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.palak_paneer_2,
-                title = "Palak Paneer",
-                price = "280",
-                restaurantName = "Green Garden",
-                rating = "4.7",
-                deliveryTime = "20-30 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Punjab",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.paneer_tikka,
-                title = "Paneer Tikka",
-                price = "290",
-                restaurantName = "Tandoor Special",
-                rating = "4.6",
-                deliveryTime = "30-40 mins",
-                distance = "2.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Amritsar, Punjab",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.kadhai_paneer,
-                title = "Kadhai Paneer",
-                price = "310",
-                restaurantName = "North Indian Kitchen",
-                rating = "4.8",
-                deliveryTime = "30-40 mins",
-                distance = "2.6 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Delhi NCR",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.matar_paneer_2,
-                title = "Matar Paneer",
-                price = "270",
-                restaurantName = "Paneer Special",
-                rating = "4.5",
-                deliveryTime = "18-28 mins",
-                distance = "1.1 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Mumbai, Maharashtra",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.paneer_kofta,
-                title = "Paneer Kofta Curry",
-                price = "340",
-                restaurantName = "Mughlai Darbar",
-                rating = "4.7",
-                deliveryTime = "35-45 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lucknow, Uttar Pradesh",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
@@ -10616,28 +10550,103 @@ fun PaneerCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = paneerFoodItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        // ==================== RECOMMENDED PANEER ITEMS FROM API ====================
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Paneer dishes...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PANEER", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Paneer dishes found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
         Text(
@@ -10645,11 +10654,10 @@ fun PaneerCategoryPage() {
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -10659,292 +10667,123 @@ fun PaneerCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val paneerFoodItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.north_paneer_tikka_masala_2,
-                title = "Paneer Tikka Masala",
-                price = "320",
-                restaurantName = "Kesar Da Dhaba",
-                rating = "4.7",
-                deliveryTime = "20-30 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Amritsar, Punjab",
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.north_palak_paneer_2,
-                title = "Palak Paneer",
-                price = "280",
-                restaurantName = "Bikanervala",
-                rating = "4.5",
-                deliveryTime = "20-30 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.north_kadhai_paneer_2,
-                title = "Kadhai Paneer",
-                price = "320",
-                restaurantName = "Pind Balluchi",
-                rating = "4.7",
-                deliveryTime = "30-40 mins",
-                distance = "2.8 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Gurgaon, Haryana",
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.north_paneer_butter_masala_2,
-                title = "Paneer Butter Masala",
-                price = "310",
-                restaurantName = "Paneer Mahal",
-                rating = "4.7",
-                deliveryTime = "25-35 mins",
-                distance = "2.0 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Delhi NCR",
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.north_matar_paneer_2,
-                title = "Matar Paneer Special",
-                price = "270",
-                restaurantName = "Baba Chicken Corner",
-                rating = "4.5",
-                deliveryTime = "18-28 mins",
-                distance = "1.3 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Chandigarh, Punjab",
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.north_paneer_tikka,
-                title = "Paneer Tikka",
-                price = "290",
-                restaurantName = "Tandoori Hub",
-                rating = "4.6",
-                deliveryTime = "15-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chandigarh",
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.north_shahi_paneer,
-                title = "Shahi Paneer",
-                price = "340",
-                restaurantName = "Royal Kitchen",
-                rating = "4.8",
-                deliveryTime = "25-35 mins",
-                distance = "2.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Delhi",
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.north_paneer_makhani,
-                title = "Paneer Makhani",
-                price = "330",
-                restaurantName = "Dilli Da Dhaba",
-                rating = "4.7",
-                deliveryTime = "20-30 mins",
-                distance = "1.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "New Delhi",
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.north_paneer_handi,
-                title = "Paneer Handi",
-                price = "350",
-                restaurantName = "Clay Pot",
-                rating = "4.6",
-                deliveryTime = "30-40 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Gurgaon",
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.north_paneer_kofta,
-                title = "Paneer Kofta",
-                price = "310",
-                restaurantName = "Mughlai Zaika",
-                rating = "4.8",
-                deliveryTime = "25-35 mins",
-                distance = "2.2 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Old Delhi",
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.north_paneer_do_pyaza,
-                title = "Paneer Do Pyaza",
-                price = "300",
-                restaurantName = "Spice Route",
-                rating = "4.5",
-                deliveryTime = "20-30 mins",
-                distance = "1.6 km",
-                discount = "22%",
-                discountAmount = "₹20",
-                address = "Noida",
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.north_paneer_jalfrezi,
-                title = "Paneer Jalfrezi",
-                price = "280",
-                restaurantName = "Chinese Wok",
-                rating = "4.4",
-                deliveryTime = "15-25 mins",
-                distance = "1.4 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Delhi NCR",
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.north_paneer_chilli,
-                title = "Chilli Paneer",
-                price = "260",
-                restaurantName = "Indo Chinese",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.8 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Delhi",
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.north_paneer_65,
-                title = "Paneer 65",
-                price = "240",
-                restaurantName = "Spicy Hub",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chennai Style, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.north_paneer_tikka_roll,
-                title = "Paneer Tikka Roll",
-                price = "180",
-                restaurantName = "Rolls King",
-                rating = "4.7",
-                deliveryTime = "10-15 mins",
-                distance = "0.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Delhi Street Food",
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.north_paneer_bhurji,
-                title = "Paneer Bhurji",
-                price = "220",
-                restaurantName = "Breakfast Special",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Pune Style, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.north_paneer_pizza,
-                title = "Paneer Tikka Pizza",
-                price = "390",
-                restaurantName = "Pizza Palace",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Italian Fusion, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.north_paneer_biryani,
-                title = "Paneer Biryani",
-                price = "320",
-                restaurantName = "Veg Biryani House",
-                rating = "4.7",
-                deliveryTime = "30-40 mins",
-                distance = "2.4 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Hyderabad Style, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.north_paneer_paratha,
-                title = "Paneer Paratha",
-                price = "150",
-                restaurantName = "Paratha Point",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Street Food Corner",
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.north_paneer_sandwich,
-                title = "Paneer Grilled Sandwich",
-                price = "190",
-                restaurantName = "Sandwich World",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Cafe Delight",
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED PANEER RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Paneer restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PANEER", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Paneer restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun FriedRiceCategoryPage() {
+fun FriedRiceCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for FRIED_RICE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: FRIED_RICE")
+        restaurantViewModel.loadFeaturedRestaurants("FRIED_RICE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("FRIED_RICE", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -11074,7 +10913,7 @@ fun FriedRiceCategoryPage() {
             filterConfig = friedRiceFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls
             },
             onSortClick = {
                 println("Sort clicked")
@@ -11082,86 +10921,6 @@ fun FriedRiceCategoryPage() {
             }
         )
 
-        val friedRiceItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.veg_fried_rice,
-                title = "Veg Fried Rice",
-                price = "180",
-                restaurantName = "Chinese Wok",
-                rating = "4.5",
-                deliveryTime = "20-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi NCR",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.egg_fried_rice,
-                title = "Egg Fried Rice",
-                price = "210",
-                restaurantName = "Dragon House",
-                rating = "4.7",
-                deliveryTime = "25-35 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kolkata, West Bengal",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.chicken_fried_rice,
-                title = "Chicken Fried Rice",
-                price = "250",
-                restaurantName = "Golden Dragon",
-                rating = "4.8",
-                deliveryTime = "30-40 mins",
-                distance = "2.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Mumbai, Maharashtra",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.schezwan_fried_rice,
-                title = "Schezwan Fried Rice",
-                price = "220",
-                restaurantName = "Spicy Chinese",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "1.9 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Bengaluru, Karnataka",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.prawn_fried_rice_2,
-                title = "Prawn Fried Rice",
-                price = "280",
-                restaurantName = "Coastal Chinese",
-                rating = "4.7",
-                deliveryTime = "35-45 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chennai, Tamil Nadu",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.paneer_fried_rice,
-                title = "Paneer Fried Rice",
-                price = "230",
-                restaurantName = "Veggie Chinese",
-                rating = "4.5",
-                deliveryTime = "20-30 mins",
-                distance = "1.6 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Ahmedabad, Gujarat",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
@@ -11170,28 +10929,103 @@ fun FriedRiceCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = friedRiceItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        // ==================== RECOMMENDED FRIED RICE ITEMS FROM API ====================
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Fried Rice dishes...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("FRIED_RICE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Fried Rice dishes found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
         Text(
@@ -11199,11 +11033,10 @@ fun FriedRiceCategoryPage() {
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -11213,292 +11046,123 @@ fun FriedRiceCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val friedRiceItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.north_veg_fried_rice,
-                title = "Veg Fried Rice",
-                price = "180",
-                restaurantName = "Chinese Wok",
-                rating = "4.5",
-                deliveryTime = "20-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi NCR",
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.north_egg_fried_rice,
-                title = "Egg Fried Rice",
-                price = "210",
-                restaurantName = "Dragon House",
-                rating = "4.7",
-                deliveryTime = "25-35 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kolkata, West Bengal",
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.north_chicken_fried_rice,
-                title = "Chicken Fried Rice",
-                price = "250",
-                restaurantName = "Golden Dragon",
-                rating = "4.8",
-                deliveryTime = "30-40 mins",
-                distance = "2.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Mumbai, Maharashtra",
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.north_schezwan_fried_rice,
-                title = "Schezwan Fried Rice",
-                price = "220",
-                restaurantName = "Spicy Chinese",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "1.9 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Bengaluru, Karnataka",
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.north_prawn_fried_rice,
-                title = "Prawn Fried Rice",
-                price = "280",
-                restaurantName = "Coastal Chinese",
-                rating = "4.7",
-                deliveryTime = "35-45 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chennai, Tamil Nadu",
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.north_paneer_fried_rice,
-                title = "Paneer Fried Rice",
-                price = "230",
-                restaurantName = "Veggie Chinese",
-                rating = "4.5",
-                deliveryTime = "20-30 mins",
-                distance = "1.6 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Ahmedabad, Gujarat",
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.north_mushroom_fried_rice,
-                title = "Mushroom Fried Rice",
-                price = "200",
-                restaurantName = "Mushroom Special",
-                rating = "4.4",
-                deliveryTime = "20-30 mins",
-                distance = "1.7 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Pune, Maharashtra",
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.north_mixed_fried_rice,
-                title = "Mixed Fried Rice",
-                price = "270",
-                restaurantName = "Chinese Delight",
-                rating = "4.7",
-                deliveryTime = "30-40 mins",
-                distance = "2.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Hyderabad, Telangana",
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.north_american_fried_rice,
-                title = "American Fried Rice",
-                price = "290",
-                restaurantName = "Fusion Kitchen",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goa",
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.north_thai_fried_rice,
-                title = "Thai Fried Rice",
-                price = "260",
-                restaurantName = "Thai Corner",
-                rating = "4.8",
-                deliveryTime = "30-40 mins",
-                distance = "2.4 km",
-                discount = "22%",
-                discountAmount = "₹20",
-                address = "Kerala",
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.north_garlic_fried_rice,
-                title = "Garlic Fried Rice",
-                price = "190",
-                restaurantName = "Garlic Lovers",
-                rating = "4.5",
-                deliveryTime = "15-25 mins",
-                distance = "1.4 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Delhi",
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.north_jeera_fried_rice,
-                title = "Jeera Fried Rice",
-                price = "170",
-                restaurantName = "Indian Chinese",
-                rating = "4.3",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jaipur, Rajasthan",
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.north_singapore_fried_rice,
-                title = "Singapore Fried Rice",
-                price = "240",
-                restaurantName = "Singapore Kitchen",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "1.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Singapore Town, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.nourth_yangzhou_fried_rice,
-                title = "Yangzhou Fried Rice",
-                price = "310",
-                restaurantName = "Authentic Chinese",
-                rating = "4.7",
-                deliveryTime = "35-45 mins",
-                distance = "2.6 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Chinatown, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.north_kimchi_fried_rice,
-                title = "Kimchi Fried Rice",
-                price = "270",
-                restaurantName = "Korean Fusion",
-                rating = "4.5",
-                deliveryTime = "30-40 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Korean Street, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.north_brown_rice_fried,
-                title = "Brown Rice Fried Rice",
-                price = "220",
-                restaurantName = "Healthy Bites",
-                rating = "4.4",
-                deliveryTime = "25-35 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Health Hub, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.nourth_sizzling_fried_rice,
-                title = "Sizzling Fried Rice",
-                price = "300",
-                restaurantName = "Sizzler House",
-                rating = "4.7",
-                deliveryTime = "30-40 mins",
-                distance = "2.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Specialty Restaurant",
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.north_malaysian_fried_rice,
-                title = "Malaysian Fried Rice",
-                price = "260",
-                restaurantName = "Malaysian Delight",
-                rating = "4.6",
-                deliveryTime = "30-40 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malaysian Street, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.north_hakka_fried_rice,
-                title = "Hakka Fried Rice",
-                price = "230",
-                restaurantName = "Hakka Kitchen",
-                rating = "4.8",
-                deliveryTime = "20-30 mins",
-                distance = "1.7 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Hakka Street, Delhi",
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.nourth_special_fried_rice,
-                title = "Chef's Special Fried Rice",
-                price = "350",
-                restaurantName = "Fine Dining Chinese",
-                rating = "4.9",
-                deliveryTime = "40-50 mins",
-                distance = "3.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Luxury Restaurant, Delhi",
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED FRIED RICE RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Fried Rice restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("FRIED_RICE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Fried Rice restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun NoodlesCategoryPage() {
+fun NoodlesCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for NOODLES category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: NOODLES")
+        restaurantViewModel.loadFeaturedRestaurants("NOODLES", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("NOODLES", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -11639,97 +11303,18 @@ fun NoodlesCategoryPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = noodlesFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls
             },
             onSortClick = {
                 println("Sort clicked")
                 // Handle sort logic
             }
         )
-        val noodleItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ramen_noodles,
-                title = "Chicken Ramen",
-                price = "320",
-                restaurantName = "Tokyo Ramen House",
-                rating = "4.8",
-                deliveryTime = "25-35 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Delhi NCR",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.pad_thai_noodles,
-                title = "Pad Thai Noodles",
-                price = "280",
-                restaurantName = "Bangkok Street",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kolkata, West Bengal",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.chowmein,
-                title = "Veg Chow Mein",
-                price = "190",
-                restaurantName = "Chinese Wok",
-                rating = "4.5",
-                deliveryTime = "15-25 mins",
-                distance = "0.8 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Mumbai, Maharashtra",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.udon_noodles,
-                title = "Veg Udon Noodles",
-                price = "350",
-                restaurantName = "Sakura Japanese",
-                rating = "4.7",
-                deliveryTime = "30-40 mins",
-                distance = "2.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bengaluru, Karnataka",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.hakka_noodles_2,
-                title = "Schezwan Hakka Noodles",
-                price = "220",
-                restaurantName = "Spicy Chinese",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.3 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Chennai, Tamil Nadu",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.instant_noodles,
-                title = "Korean Spicy Ramyeon",
-                price = "250",
-                restaurantName = "Seoul Kitchen",
-                rating = "4.9",
-                deliveryTime = "25-35 mins",
-                distance = "1.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Hyderabad, Telangana",
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
@@ -11738,28 +11323,103 @@ fun NoodlesCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = noodleItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        // ==================== RECOMMENDED NOODLES ITEMS FROM API ====================
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Noodles dishes...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("NOODLES", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Noodles dishes found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
         Text(
@@ -11767,11 +11427,10 @@ fun NoodlesCategoryPage() {
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -11781,282 +11440,99 @@ fun NoodlesCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val noodlesItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.north_veg_hakka_noodles,
-                title = "Veg Hakka Noodles",
-                price = "160",
-                restaurantName = "Chinese Wok",
-                rating = "4.5",
-                deliveryTime = "15-25 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi NCR"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.north_chicken_noodles,
-                title = "Chicken Noodles",
-                price = "220",
-                restaurantName = "Dragon House",
-                rating = "4.7",
-                deliveryTime = "20-30 mins",
-                distance = "1.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kolkata, West Bengal"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.north_schezwan_noodles,
-                title = "Schezwan Noodles",
-                price = "190",
-                restaurantName = "Spicy Chinese",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.7 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Mumbai, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.north_egg_noodles,
-                title = "Egg Noodles",
-                price = "180",
-                restaurantName = "Golden Dragon",
-                rating = "4.5",
-                deliveryTime = "15-25 mins",
-                distance = "1.4 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Bengaluru, Karnataka"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.north_paneer_noodles,
-                title = "Paneer Noodles",
-                price = "210",
-                restaurantName = "Veggie Chinese",
-                rating = "4.6",
-                deliveryTime = "15-25 mins",
-                distance = "1.5 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Chennai, Tamil Nadu"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.north_mushroom_noodles,
-                title = "Mushroom Noodles",
-                price = "190",
-                restaurantName = "Mushroom Special",
-                rating = "4.4",
-                deliveryTime = "15-25 mins",
-                distance = "1.6 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Ahmedabad, Gujarat"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.north_prawn_noodles,
-                title = "Prawn Noodles",
-                price = "260",
-                restaurantName = "Coastal Chinese",
-                rating = "4.7",
-                deliveryTime = "25-35 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Pune, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.north_mixed_noodles,
-                title = "Mixed Noodles",
-                price = "240",
-                restaurantName = "Chinese Delight",
-                rating = "4.7",
-                deliveryTime = "20-30 mins",
-                distance = "1.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Hyderabad, Telangana"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.north_american_chop_suey,
-                title = "American Chop Suey",
-                price = "280",
-                restaurantName = "Fusion Kitchen",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goa"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.north_thai_noodles,
-                title = "Thai Noodles",
-                price = "250",
-                restaurantName = "Thai Corner",
-                rating = "4.8",
-                deliveryTime = "25-35 mins",
-                distance = "2.2 km",
-                discount = "22%",
-                discountAmount = "₹20",
-                address = "Kerala"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.north_garlic_noodles,
-                title = "Garlic Noodles",
-                price = "170",
-                restaurantName = "Garlic Lovers",
-                rating = "4.5",
-                deliveryTime = "10-20 mins",
-                distance = "1.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.north_jeera_noodles,
-                title = "Jeera Noodles",
-                price = "150",
-                restaurantName = "Indian Chinese",
-                rating = "4.3",
-                deliveryTime = "10-15 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jaipur, Rajasthan"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.north_singapore_noodles,
-                title = "Singapore Noodles",
-                price = "230",
-                restaurantName = "Singapore Kitchen",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.7 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Singapore Town, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.north_chow_mein,
-                title = "Chow Mein",
-                price = "200",
-                restaurantName = "Authentic Chinese",
-                rating = "4.7",
-                deliveryTime = "20-30 mins",
-                distance = "2.0 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Chinatown, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.north_korean_noodles,
-                title = "Korean Noodles",
-                price = "240",
-                restaurantName = "Korean Fusion",
-                rating = "4.5",
-                deliveryTime = "25-35 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Korean Street, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.north_wheat_noodles,
-                title = "Whole Wheat Noodles",
-                price = "180",
-                restaurantName = "Healthy Bites",
-                rating = "4.4",
-                deliveryTime = "20-30 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Health Hub, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.north_sizzling_noodles,
-                title = "Sizzling Noodles",
-                price = "290",
-                restaurantName = "Sizzler House",
-                rating = "4.7",
-                deliveryTime = "25-35 mins",
-                distance = "1.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Specialty Restaurant"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.north_malaysian_noodles,
-                title = "Malaysian Noodles",
-                price = "240",
-                restaurantName = "Malaysian Delight",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malaysian Street, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.north_ramen_noodles,
-                title = "Japanese Ramen",
-                price = "320",
-                restaurantName = "Tokyo Kitchen",
-                rating = "4.8",
-                deliveryTime = "30-40 mins",
-                distance = "2.4 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Japanese Corner, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.north_special_noodles,
-                title = "Chef's Special Noodles",
-                price = "340",
-                restaurantName = "Fine Dining Chinese",
-                rating = "4.9",
-                deliveryTime = "35-45 mins",
-                distance = "2.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Luxury Restaurant, Delhi"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED NOODLES RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Noodles restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("NOODLES", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Noodles restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

@@ -474,7 +474,7 @@ fun CategoryTabsFood(
                 CategoryPage.SouthIndian -> SouthIndianCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.AlooTikki -> AlooTikkiCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Pasta -> PastaCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Pastry -> PastryCategoryPage()
+                CategoryPage.Pastry -> PastryCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.PavBhaji -> PavBhajiCategoryPage()
                 CategoryPage.Sandwich -> SandwichCategoryPage()
                 CategoryPage.Shake -> ShakeCategoryPage()
@@ -13819,10 +13819,24 @@ fun PastaCategoryPage(
 }
 
 @Composable
-fun PastryCategoryPage() {
+fun PastryCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for PASTRY category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PASTRY")
+        restaurantViewModel.loadFeaturedRestaurants("PASTRY", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PASTRY", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -13937,7 +13951,6 @@ fun PastryCategoryPage() {
                 ),
 
                 // DIETARY (with icons for common dietary types)
-
                 FilterChip(
                     id = "vegan",
                     text = "Vegan",
@@ -13990,7 +14003,6 @@ fun PastryCategoryPage() {
                 ),
 
                 // TEMPERATURE (with icons)
-
                 FilterChip(
                     id = "room_temp",
                     text = "Room Temp",
@@ -14028,7 +14040,7 @@ fun PastryCategoryPage() {
             filterConfig = pastryFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls
             },
             onSortClick = {
                 println("Sort clicked")
@@ -14036,86 +14048,6 @@ fun PastryCategoryPage() {
             }
         )
 
-        val pastryItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.pastry_croissant,
-                title = "Butter Croissant",
-                price = "120",
-                restaurantName = "French Bakery",
-                rating = "4.8",
-                deliveryTime = "15-25 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.pastry_chocolate_danish,
-                title = "Chocolate Danish",
-                price = "180",
-                restaurantName = "Copenhagen Bakery",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.pastry_chocolate_eclair,
-                title = "Chocolate Éclair",
-                price = "150",
-                restaurantName = "Parisian Patisserie",
-                rating = "4.9",
-                deliveryTime = "25-35 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.pastry_fruit_tart,
-                title = "Mixed Fruit Tart",
-                price = "220",
-                restaurantName = "Sweet Delights",
-                rating = "4.5",
-                deliveryTime = "30-40 mins",
-                distance = "2.0 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Cyber City, Gurgaon"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.pastry_blueberry_muffin,
-                title = "Blueberry Muffin",
-                price = "90",
-                restaurantName = "Morning Bites",
-                rating = "4.7",
-                deliveryTime = "15-25 mins",
-                distance = "0.9 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.pastry_almond_puff,
-                title = "Almond Puff Pastry",
-                price = "160",
-                restaurantName = "Viennese Cafe",
-                rating = "4.8",
-                deliveryTime = "20-30 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Park Street, Kolkata"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Recommended for you",
@@ -14124,28 +14056,103 @@ fun PastryCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = pastryItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        // ==================== RECOMMENDED PASTRY ITEMS FROM API ====================
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Pastry dishes...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PASTRY", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Pastry dishes found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
         Text(
@@ -14153,11 +14160,10 @@ fun PastryCategoryPage() {
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color =  MaterialTheme.customColors.black
+                color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -14167,286 +14173,104 @@ fun PastryCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val pastryItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.pastry_1,
-                title = "Butter Croissant",
-                price = "120",
-                restaurantName = "French Bakery",
-                rating = "4.8",
-                deliveryTime = "15-25 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.pastry_2,
-                title = "Chocolate Danish",
-                price = "180",
-                restaurantName = "Copenhagen Bakery",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.pastry_3,
-                title = "Chocolate Éclair",
-                price = "150",
-                restaurantName = "Parisian Patisserie",
-                rating = "4.9",
-                deliveryTime = "25-35 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.pastry_4,
-                title = "Mixed Fruit Tart",
-                price = "220",
-                restaurantName = "Sweet Delights",
-                rating = "4.5",
-                deliveryTime = "30-40 mins",
-                distance = "2.0 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Cyber City, Gurgaon"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.pastry_5,
-                title = "Blueberry Muffin",
-                price = "90",
-                restaurantName = "Morning Bites",
-                rating = "4.7",
-                deliveryTime = "15-25 mins",
-                distance = "0.9 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.pastry_6,
-                title = "Almond Puff Pastry",
-                price = "160",
-                restaurantName = "Viennese Cafe",
-                rating = "4.8",
-                deliveryTime = "20-30 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Park Street, Kolkata"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.pastry_7,
-                title = "Apple Turnover",
-                price = "140",
-                restaurantName = "Bakery Junction",
-                rating = "4.4",
-                deliveryTime = "25-35 mins",
-                distance = "1.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Baner Road, Pune"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.pastry_8,
-                title = "Cinnamon Roll",
-                price = "130",
-                restaurantName = "Cinnamon Square",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "MG Road, Ahmedabad"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.pastry_9,
-                title = "Pain au Chocolat",
-                price = "170",
-                restaurantName = "French Corner",
-                rating = "4.9",
-                deliveryTime = "20-30 mins",
-                distance = "1.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Banjara Hills, Hyderabad"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.pastry_10,
-                title = "Cheese Danish",
-                price = "190",
-                restaurantName = "Cheese Heaven",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.pastry_11,
-                title = "Strawberry Tart",
-                price = "250",
-                restaurantName = "Berrylicious",
-                rating = "4.8",
-                deliveryTime = "30-40 mins",
-                distance = "2.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.pastry_12,
-                title = "Almond Croissant",
-                price = "140",
-                restaurantName = "Le Croissant",
-                rating = "4.7",
-                deliveryTime = "15-25 mins",
-                distance = "0.9 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Sector 29, Gurgaon"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.pastry_13,
-                title = "Raspberry Danish",
-                price = "200",
-                restaurantName = "Berry Blossoms",
-                rating = "4.5",
-                deliveryTime = "20-30 mins",
-                distance = "1.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Salt Lake, Kolkata"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.pastry_14,
-                title = "Chocolate Mousse Cake",
-                price = "280",
-                restaurantName = "The Chocolate Room",
-                rating = "4.9",
-                deliveryTime = "35-45 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Civil Lines, Jaipur"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.pastry_15,
-                title = "Cream Horn",
-                price = "110",
-                restaurantName = "Bakery Express",
-                rating = "4.3",
-                deliveryTime = "15-25 mins",
-                distance = "0.6 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Sadar Bazaar, Nagpur"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.pastry_16,
-                title = "Palmier Cookies",
-                price = "95",
-                restaurantName = "Cookie Jar",
-                rating = "4.6",
-                deliveryTime = "10-20 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Camp Area, Pune"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.pastry_17,
-                title = "Tiramisu",
-                price = "320",
-                restaurantName = "Italian Delights",
-                rating = "4.8",
-                deliveryTime = "30-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ballygunge, Kolkata"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.pastry_18,
-                title = "Red Velvet Cupcake",
-                price = "85",
-                restaurantName = "Cupcake World",
-                rating = "4.7",
-                deliveryTime = "15-25 mins",
-                distance = "0.8 km",
-                discount = "22%",
-                discountAmount = "₹20",
-                address = "Sector 17, Chandigarh"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.pastry_19,
-                title = "Mille-Feuille",
-                price = "240",
-                restaurantName = "French Patisserie",
-                rating = "4.9",
-                deliveryTime = "25-35 mins",
-                distance = "1.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Viman Nagar, Pune"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.pastry_20,
-                title = "Opera Cake",
-                price = "350",
-                restaurantName = "Le Cordon Bleu",
-                rating = "4.9",
-                deliveryTime = "40-50 mins",
-                distance = "2.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Lodhi Road, Delhi"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        // ==================== FEATURED PASTRY RESTAURANTS FROM API ====================
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Pastry restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PASTRY", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Pastry restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
+
 @Composable
 fun PavBhajiCategoryPage() {
     Column(

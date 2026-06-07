@@ -496,7 +496,7 @@ fun CategoryTabsFood(
                 CategoryPage.NonVegMeal -> NonVegMealCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.BreadPakoda -> BreadPakodaCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Coffee -> CoffeeCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.PooriBhaji -> PooriBhajiCategoryPage()
+                CategoryPage.PooriBhaji -> PooriBhajiCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Pulao -> PulaoCategoryPage()
                 CategoryPage.ChurChurNaan -> ChurChurNaanCategoryPage()
                 CategoryPage.Kebabs -> KebabsCategoryPage()
@@ -23952,10 +23952,24 @@ fun CoffeeCategoryPage(
 }
 
 @Composable
-fun PooriBhajiCategoryPage() {
+fun PooriBhajiCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for Poori Bhaji category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: POORI_BHAJI")
+        restaurantViewModel.loadFeaturedRestaurants("POORI_BHAJI", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("POORI_BHAJI", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -24139,99 +24153,23 @@ fun PooriBhajiCategoryPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+
+        FilterButtonFood(
             filterConfig = pooriBhajiFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val pooriBhajiItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.poori_bhaji_items_1,
-                title = "Classic Aloo Poori Bhaji",
-                price = "160",
-                restaurantName = "Mumbai Tiffin House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.4 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.poori_bhaji_items_2,
-                title = "Spicy Batata Puri Thali",
-                price = "220",
-                restaurantName = "Gujarati Rasoi",
-                rating = "4.9",
-                deliveryTime = "18-22 mins",
-                distance = "0.6 km",
-                discount = "40%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.poori_bhaji_items_3,
-                title = "South Indian Masala Puri",
-                price = "140",
-                restaurantName = "Madrasi Mess",
-                rating = "4.7",
-                deliveryTime = "12-16 mins",
-                distance = "0.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.poori_bhaji_items_4,
-                title = "Maharaja Poori Bhaji Combo",
-                price = "280",
-                restaurantName = "Royal Punjab Dhaba",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.poori_bhaji_items_5,
-                title = "Jain Aloo Puri (No Onion Garlic)",
-                price = "180",
-                restaurantName = "Sattvik Kitchen",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹18",
-                address = "Basavanagudi, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.poori_bhaji_items_6,
-                title = "Street-Style Mumbai Puri Bhaji",
-                price = "120",
-                restaurantName = "Bombay Street Food",
-                rating = "4.5",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            )
-        )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED POORI BHAJI ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -24239,30 +24177,107 @@ fun PooriBhajiCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = pooriBhajiItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended poori bhaji...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("POORI_BHAJI", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended poori bhaji found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED POORI BHAJI RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -24270,7 +24285,6 @@ fun PooriBhajiCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -24282,282 +24296,101 @@ fun PooriBhajiCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val pooriBhajiRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.poori_bhaji_1,
-                title = "Classic Aloo Poori Bhaji",
-                price = "160",
-                restaurantName = "Mumbai Tiffin House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.poori_bhaji_2,
-                title = "Spicy Batata Puri Thali",
-                price = "220",
-                restaurantName = "Gujarati Rasoi",
-                rating = "4.9",
-                deliveryTime = "18-22 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.poori_bhaji_3,
-                title = "South Indian Masala Puri",
-                price = "140",
-                restaurantName = "Madrasi Mess",
-                rating = "4.7",
-                deliveryTime = "12-16 mins",
-                distance = "0.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.poori_bhaji_4,
-                title = "Maharaja Poori Bhaji Combo",
-                price = "280",
-                restaurantName = "Royal Punjab Dhaba",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.poori_bhaji_5,
-                title = "Jain Aloo Puri (No Onion Garlic)",
-                price = "180",
-                restaurantName = "Sattvik Kitchen",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.poori_bhaji_6,
-                title = "Street-Style Mumbai Puri Bhaji",
-                price = "120",
-                restaurantName = "Bombay Street Food",
-                rating = "4.5",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.poori_bhaji_7,
-                title = "Udupi Style Poori Saagu",
-                price = "150",
-                restaurantName = "Udupi Krishna Bhavan",
-                rating = "4.6",
-                deliveryTime = "14-19 mins",
-                distance = "0.8 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.poori_bhaji_8,
-                title = "Bengali Luchi Aloor Dom",
-                price = "190",
-                restaurantName = "Kolkata Kitchen",
-                rating = "4.7",
-                deliveryTime = "22-27 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bellandur, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.poori_bhaji_9,
-                title = "Masala Puri with Chole",
-                price = "200",
-                restaurantName = "North Indian Dhaba",
-                rating = "4.4",
-                deliveryTime = "16-21 mins",
-                distance = "0.6 km",
-                discount = "40%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.poori_bhaji_10,
-                title = "Mini Poori Platter (24 pcs)",
-                price = "320",
-                restaurantName = "Party Special Caterers",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.poori_bhaji_11,
-                title = "Cheese Poori Bhaji",
-                price = "240",
-                restaurantName = "Fusion Kitchen",
-                rating = "4.5",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.poori_bhaji_12,
-                title = "Poori Bhaji Family Pack",
-                price = "450",
-                restaurantName = "Home Style Kitchen",
-                rating = "4.7",
-                deliveryTime = "19-24 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sarjapur Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.poori_bhaji_13,
-                title = "Stuffed Poori (Paneer/Aloo)",
-                price = "220",
-                restaurantName = "Specialty Restaurant",
-                rating = "4.6",
-                deliveryTime = "28-33 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.poori_bhaji_14,
-                title = "Poori Bhaji Breakfast Combo",
-                price = "180",
-                restaurantName = "Morning Delight Cafe",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malleshwaram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.poori_bhaji_15,
-                title = "Spicy Andhra Poori Koora",
-                price = "170",
-                restaurantName = "Andhra Spice House",
-                rating = "4.9",
-                deliveryTime = "23-28 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Brigade Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.poori_bhaji_16,
-                title = "Maharashtrian Puran Poli Bhaji",
-                price = "210",
-                restaurantName = "Pune Kitchen",
-                rating = "4.5",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "KR Puram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.poori_bhaji_17,
-                title = "Low Oil Healthy Poori Bhaji",
-                price = "190",
-                restaurantName = "Fit Food Kitchen",
-                rating = "4.6",
-                deliveryTime = "17-22 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.poori_bhaji_18,
-                title = "Festival Special Poori Bhaji",
-                price = "280",
-                restaurantName = "Festival Foods",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Electronic City, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.poori_bhaji_19,
-                title = "Goan Style Poori Bhaji",
-                price = "230",
-                restaurantName = "Goan Coastal Kitchen",
-                rating = "4.7",
-                deliveryTime = "26-31 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Yelahanka, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.poori_bhaji_20,
-                title = "Premium Ghee Poori Bhaji",
-                price = "350",
-                restaurantName = "Premium Kitchen",
-                rating = "4.8",
-                deliveryTime = "24-29 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured poori bhaji restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("POORI_BHAJI", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Update wishlist status in ViewModel
+                              },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured poori bhaji restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

@@ -504,10 +504,10 @@ fun CategoryTabsFood(
                 CategoryPage.Rasmalai -> RasmalaiCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Mutton -> MuttonCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Fish -> FishCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Pakoda -> PakodaCategoryPage()
-                CategoryPage.Halwa -> HalwaCategoryPage()
-                CategoryPage.ChopSuey -> ChopSueyCategoryPage()
-                CategoryPage.Korma -> KormaCategoryPage()
+                CategoryPage.Pakoda -> PakodaCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Halwa -> HalwaCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.ChopSuey -> ChopSueyCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Korma -> KormaCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Namkeen -> NamkeenCategoryPage()
                 CategoryPage.Mushrooms -> MushroomsCategoryPage()
                 CategoryPage.Keema -> KeemaCategoryPage()
@@ -27583,17 +27583,30 @@ fun FishCategoryPage(
 }
 
 @Composable
-fun PakodaCategoryPage() {
+fun PakodaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for Pakoda category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PAKODA")
+        restaurantViewModel.loadFeaturedRestaurants("PAKODA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PAKODA", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
         val pakodaFilters = FilterConfig(
             filters = listOf(
-                // Main filter dropdown
                 FilterChip(
                     id = "filters",
                     text = "Filters",
@@ -27601,8 +27614,6 @@ fun PakodaCategoryPage() {
                     icon = R.drawable.ic_filter,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
-
-                // PAKODA TYPE (with icons for classic variants)
                 FilterChip(
                     id = "onion_pakoda",
                     text = "Onion Pakoda",
@@ -27640,8 +27651,6 @@ fun PakodaCategoryPage() {
                     text = "Corn Pakoda",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // CUISINE STYLE (with icon for North Indian)
                 FilterChip(
                     id = "north_indian",
                     text = "North Indian",
@@ -27668,8 +27677,6 @@ fun PakodaCategoryPage() {
                     text = "Bengali",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // BATTER TYPE (with icon for besan)
                 FilterChip(
                     id = "besan_batter",
                     text = "Besan Batter",
@@ -27696,8 +27703,6 @@ fun PakodaCategoryPage() {
                     text = "Gluten Free",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // SPICE LEVEL (with icon for medium spicy)
                 FilterChip(
                     id = "mild",
                     text = "Mild",
@@ -27719,8 +27724,6 @@ fun PakodaCategoryPage() {
                     text = "Extra Spicy",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // SERVING STYLE (with icon for combo)
                 FilterChip(
                     id = "single_serve",
                     text = "Single Serve",
@@ -27741,8 +27744,6 @@ fun PakodaCategoryPage() {
                     text = "Mini Pakoda",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // ACCOMPANIMENTS (with icon for chutney)
                 FilterChip(
                     id = "with_sauce",
                     text = "With Sauce",
@@ -27758,8 +27759,6 @@ fun PakodaCategoryPage() {
                     text = "With Coffee",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // COOKING STYLE (with icon for deep fried)
                 FilterChip(
                     id = "deep_fried",
                     text = "Deep Fried",
@@ -27781,8 +27780,6 @@ fun PakodaCategoryPage() {
                     text = "Baked",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // SPECIAL VARIATIONS (with icon for cheese)
                 FilterChip(
                     id = "herb_infused",
                     text = "Herb Infused",
@@ -27803,8 +27800,6 @@ fun PakodaCategoryPage() {
                     text = "Schezwan",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // FRESHNESS (with icon for freshly made)
                 FilterChip(
                     id = "pre_made",
                     text = "Pre-made",
@@ -27815,8 +27810,6 @@ fun PakodaCategoryPage() {
                     text = "Ready to Fry",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // DIETARY (with icon for vegetarian)
                 FilterChip(
                     id = "vegan",
                     text = "Vegan",
@@ -27832,8 +27825,6 @@ fun PakodaCategoryPage() {
                     text = "No Onion Garlic",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // PRICE RANGE (with icon for budget)
                 FilterChip(
                     id = "premium",
                     text = "Premium (₹100-200)",
@@ -27844,8 +27835,6 @@ fun PakodaCategoryPage() {
                     text = "Luxury (₹200+)",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // Sort dropdown
                 FilterChip(
                     id = "sort",
                     text = "Sort",
@@ -27855,99 +27844,22 @@ fun PakodaCategoryPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = pakodaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val pakodaItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.pakoda_item_1,
-                title = "Crispy Onion Pakoda",
-                price = "80",
-                restaurantName = "Mumbai Street Food",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.pakoda_item_2,
-                title = "Spicy Potato Pakoda",
-                price = "90",
-                restaurantName = "South Indian Snacks",
-                rating = "4.7",
-                deliveryTime = "12-17 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.pakoda_item_3,
-                title = "Palak Pakoda with Chutney",
-                price = "110",
-                restaurantName = "Healthy Bites Cafe",
-                rating = "4.6",
-                deliveryTime = "18-23 mins",
-                distance = "1.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.pakoda_item_4,
-                title = "Mirchi Bajji Platter",
-                price = "120",
-                restaurantName = "Andhra Spice Corner",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.pakoda_item_5,
-                title = "Paneer Pakoda Combo",
-                price = "150",
-                restaurantName = "North Indian Delights",
-                rating = "4.8",
-                deliveryTime = "22-27 mins",
-                distance = "1.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.pakoda_item_6,
-                title = "Mixed Pakoda Family Pack",
-                price = "200",
-                restaurantName = "Family Snack House",
-                rating = "4.5",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED PAKODA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -27955,30 +27867,101 @@ fun PakodaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = pakodaItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended pakoda items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PAKODA", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended pakoda items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED PAKODA RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -27986,7 +27969,6 @@ fun PakodaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -27998,299 +27980,124 @@ fun PakodaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val pakodaRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.pakoda_1,
-                title = "Crispy Onion Pakoda",
-                price = "80",
-                restaurantName = "Mumbai Street Food",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.pakoda_2,
-                title = "Spicy Potato Pakoda",
-                price = "90",
-                restaurantName = "South Indian Snacks",
-                rating = "4.7",
-                deliveryTime = "12-17 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.pakoda_3,
-                title = "Palak Pakoda with Chutney",
-                price = "110",
-                restaurantName = "Healthy Bites Cafe",
-                rating = "4.6",
-                deliveryTime = "18-23 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.pakoda_4,
-                title = "Mirchi Bajji Platter",
-                price = "120",
-                restaurantName = "Andhra Spice Corner",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.pakoda_5,
-                title = "Paneer Pakoda Combo",
-                price = "150",
-                restaurantName = "North Indian Delights",
-                rating = "4.8",
-                deliveryTime = "22-27 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.pakoda_6,
-                title = "Mixed Pakoda Family Pack",
-                price = "200",
-                restaurantName = "Family Snack House",
-                rating = "4.5",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.pakoda_7,
-                title = "Bread Pakoda with Sauce",
-                price = "70",
-                restaurantName = "Chai Sutta Bar",
-                rating = "4.4",
-                deliveryTime = "10-15 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.pakoda_8,
-                title = "Corn Cheese Pakoda",
-                price = "130",
-                restaurantName = "Fusion Street Food",
-                rating = "4.7",
-                deliveryTime = "16-21 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.pakoda_9,
-                title = "Gobi Manchurian Pakoda",
-                price = "140",
-                restaurantName = "Indo-Chinese Hub",
-                rating = "4.6",
-                deliveryTime = "19-24 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Electronic City, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.pakoda_10,
-                title = "Air Fried Pakoda Platter",
-                price = "160",
-                restaurantName = "Healthy Munchies",
-                rating = "4.8",
-                deliveryTime = "24-29 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sarjapur Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.pakoda_11,
-                title = "Mushroom Pakoda Basket",
-                price = "125",
-                restaurantName = "Vegetarian Treats",
-                rating = "4.5",
-                deliveryTime = "21-26 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.pakoda_12,
-                title = "Royal Mixed Pakoda Tray",
-                price = "250",
-                restaurantName = "Premium Snack Bar",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.pakoda_13,
-                title = "Moong Dal Pakoda",
-                price = "95",
-                restaurantName = "Traditional Kitchen",
-                rating = "4.6",
-                deliveryTime = "17-22 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malleshwaram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.pakoda_14,
-                title = "Baby Corn Pakoda",
-                price = "135",
-                restaurantName = "Crispy Corn Cafe",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.pakoda_15,
-                title = "Chicken Pakoda Platter",
-                price = "180",
-                restaurantName = "Non-Veg Specials",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.pakoda_16,
-                title = "Egg Pakoda Combo",
-                price = "110",
-                restaurantName = "Egg Lovers Corner",
-                rating = "4.5",
-                deliveryTime = "19-24 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bellandur, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.pakoda_17,
-                title = "Raw Banana Pakoda",
-                price = "100",
-                restaurantName = "Kerala Snack House",
-                rating = "4.6",
-                deliveryTime = "22-27 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.pakoda_18,
-                title = "Peri Peri Pakoda",
-                price = "145",
-                restaurantName = "Spice Fusion Cafe",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "KR Puram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.pakoda_19,
-                title = "Cheese Garlic Pakoda",
-                price = "155",
-                restaurantName = "Cheese Delights",
-                rating = "4.8",
-                deliveryTime = "23-28 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Yelahanka, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.pakoda_20,
-                title = "Monsoon Special Pakoda Platter",
-                price = "300",
-                restaurantName = "Seasonal Treats",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Brigade Road, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured pakoda restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PAKODA", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Update wishlist status in ViewModel
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured pakoda restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun HalwaCategoryPage() {
+fun HalwaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for Halwa category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: HALWA")
+        restaurantViewModel.loadFeaturedRestaurants("HALWA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("HALWA", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
-        // Filter Button
         val halwaFilters = FilterConfig(
             filters = listOf(
-                // Main filter dropdown
                 FilterChip(
                     id = "filters",
                     text = "Filters",
@@ -28298,7 +28105,6 @@ fun HalwaCategoryPage() {
                     icon = R.drawable.ic_filter,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
-                // HALWA TYPES (with icons for popular/classic variants)
                 FilterChip(
                     id = "gajar_halwa",
                     text = "Gajar Halwa",
@@ -28342,8 +28148,6 @@ fun HalwaCategoryPage() {
                     text = "Kaddu Halwa",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // REGIONAL STYLES (with icon for North Indian)
                 FilterChip(
                     id = "punjabi_style",
                     text = "Punjabi Style",
@@ -28370,8 +28174,6 @@ fun HalwaCategoryPage() {
                     text = "Gujarati",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // SWEETNESS LEVEL (with icon for medium sweet)
                 FilterChip(
                     id = "less_sweet",
                     text = "Less Sweet",
@@ -28388,8 +28190,6 @@ fun HalwaCategoryPage() {
                     text = "Extra Sweet",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // GHEE LEVEL (with icon for loaded ghee)
                 FilterChip(
                     id = "less_ghee",
                     text = "Less Ghee",
@@ -28400,8 +28200,6 @@ fun HalwaCategoryPage() {
                     text = "Moderate Ghee",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // DRY FRUITS (with icon for nuts loaded)
                 FilterChip(
                     id = "without_dry_fruits",
                     text = "Without Dry Fruits",
@@ -28412,8 +28210,6 @@ fun HalwaCategoryPage() {
                     text = "Extra Nuts",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // SERVING TEMPERATURE (with icon for hot serving)
                 FilterChip(
                     id = "warm",
                     text = "Warm",
@@ -28429,8 +28225,6 @@ fun HalwaCategoryPage() {
                     text = "Chilled",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // PACKAGING (with icon for premium)
                 FilterChip(
                     id = "freshly_made",
                     text = "Freshly Made",
@@ -28446,8 +28240,6 @@ fun HalwaCategoryPage() {
                     text = "Homemade Style",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // ACCOMPANIMENTS (with icon for poori)
                 FilterChip(
                     id = "with_paratha",
                     text = "With Paratha",
@@ -28463,8 +28255,6 @@ fun HalwaCategoryPage() {
                     text = "With Ice Cream",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // FESTIVAL SPECIAL (with icon for diwali)
                 FilterChip(
                     id = "eid_special",
                     text = "Eid Special",
@@ -28480,8 +28270,6 @@ fun HalwaCategoryPage() {
                     text = "Wedding Special",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // DIETARY (with icon for vegetarian)
                 FilterChip(
                     id = "vegan_option",
                     text = "Vegan Option",
@@ -28497,8 +28285,6 @@ fun HalwaCategoryPage() {
                     text = "Jain Friendly",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // PRICE RANGE (with icon for premium)
                 FilterChip(
                     id = "budget",
                     text = "Budget (₹50-150)",
@@ -28509,8 +28295,6 @@ fun HalwaCategoryPage() {
                     text = "Luxury (₹300+)",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // Sort dropdown
                 FilterChip(
                     id = "sort",
                     text = "Sort",
@@ -28520,99 +28304,22 @@ fun HalwaCategoryPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = halwaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val halwaItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.halwa_item_1,
-                title = "Gajar Halwa Special",
-                price = "180",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.halwa_item_2,
-                title = "Premium Badam Halwa",
-                price = "280",
-                restaurantName = "Royal Sweets",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.halwa_item_3,
-                title = "Moong Dal Halwa with Dry Fruits",
-                price = "220",
-                restaurantName = "Rajasthani Flavors",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.halwa_item_4,
-                title = "Sooji Halwa with Poori Combo",
-                price = "150",
-                restaurantName = "South Indian Delights",
-                rating = "4.6",
-                deliveryTime = "18-23 mins",
-                distance = "0.8 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.halwa_item_5,
-                title = "Diwali Special Ghee Halwa",
-                price = "320",
-                restaurantName = "Festive Sweets",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.halwa_item_6,
-                title = "Sugar Free Atta Halwa",
-                price = "190",
-                restaurantName = "Healthy Desserts",
-                rating = "4.5",
-                deliveryTime = "22-27 mins",
-                distance = "1.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED HALWA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -28620,30 +28327,101 @@ fun HalwaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = halwaItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended halwa items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("HALWA", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended halwa items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED HALWA RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -28651,7 +28429,6 @@ fun HalwaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -28663,299 +28440,124 @@ fun HalwaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val halwaRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.halwa_1,
-                title = "Gajar Halwa Special",
-                price = "180",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.halwa_2,
-                title = "Premium Badam Halwa",
-                price = "280",
-                restaurantName = "Royal Sweets",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.halwa_3,
-                title = "Moong Dal Halwa with Dry Fruits",
-                price = "220",
-                restaurantName = "Rajasthani Flavors",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.halwa_4,
-                title = "Sooji Halwa with Poori Combo",
-                price = "150",
-                restaurantName = "South Indian Delights",
-                rating = "4.6",
-                deliveryTime = "18-23 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.halwa_5,
-                title = "Diwali Special Ghee Halwa",
-                price = "320",
-                restaurantName = "Festive Sweets",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.halwa_6,
-                title = "Sugar Free Atta Halwa",
-                price = "190",
-                restaurantName = "Healthy Desserts",
-                rating = "4.5",
-                deliveryTime = "22-27 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.halwa_7,
-                title = "Kaddu Halwa Traditional",
-                price = "160",
-                restaurantName = "North Indian Kitchen",
-                rating = "4.4",
-                deliveryTime = "25-30 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.halwa_8,
-                title = "Pista Halwa Deluxe",
-                price = "350",
-                restaurantName = "Premium Nuts Cafe",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.halwa_9,
-                title = "Lauki Halwa Healthy",
-                price = "170",
-                restaurantName = "Weight Watchers",
-                rating = "4.3",
-                deliveryTime = "28-33 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Electronic City, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.halwa_10,
-                title = "Kesar Badam Pista Halwa",
-                price = "380",
-                restaurantName = "Royal Mithai House",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sarjapur Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.halwa_11,
-                title = "Dudhi Halwa with Nuts",
-                price = "165",
-                restaurantName = "Gujarati Kitchen",
-                rating = "4.6",
-                deliveryTime = "24-29 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.halwa_12,
-                title = "Royal Dry Fruit Halwa",
-                price = "420",
-                restaurantName = "Luxury Desserts",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.halwa_13,
-                title = "Chana Dal Halwa",
-                price = "200",
-                restaurantName = "Bengali Sweets",
-                rating = "4.7",
-                deliveryTime = "26-31 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malleshwaram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.halwa_14,
-                title = "Apple Halwa Healthy",
-                price = "210",
-                restaurantName = "Fruit Dessert Cafe",
-                rating = "4.5",
-                deliveryTime = "22-27 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.halwa_15,
-                title = "Coconut Halwa South Style",
-                price = "185",
-                restaurantName = "Kerala Sweet House",
-                rating = "4.6",
-                deliveryTime = "32-37 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.halwa_16,
-                title = "Makhana Halwa Diet",
-                price = "230",
-                restaurantName = "Healthy Living Cafe",
-                rating = "4.4",
-                deliveryTime = "29-34 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bellandur, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.halwa_17,
-                title = "Dates Halwa Natural",
-                price = "195",
-                restaurantName = "Organic Sweets",
-                rating = "4.7",
-                deliveryTime = "27-32 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.halwa_18,
-                title = "Mango Halwa Seasonal",
-                price = "240",
-                restaurantName = "Seasonal Fruits",
-                rating = "4.8",
-                deliveryTime = "31-36 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "KR Puram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.halwa_19,
-                title = "Sabudana Halwa Fasting",
-                price = "175",
-                restaurantName = "Fasting Food Corner",
-                rating = "4.5",
-                deliveryTime = "23-28 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Yelahanka, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.halwa_20,
-                title = "Royal Wedding Halwa Platter",
-                price = "550",
-                restaurantName = "Wedding Caterers",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "3.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Brigade Road, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured halwa restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("HALWA", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Update wishlist status in ViewModel
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured halwa restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun ChopSueyCategoryPage() {
+fun ChopSueyCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for Chop Suey category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CHOP_SUEY")
+        restaurantViewModel.loadFeaturedRestaurants("CHOP_SUEY", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CHOP_SUEY", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
-        // Filter Button
         val chopSueyFilters = FilterConfig(
             filters = listOf(
-                // Main filter dropdown
                 FilterChip(
                     id = "filters",
                     text = "Filters",
@@ -28963,8 +28565,6 @@ fun ChopSueyCategoryPage() {
                     icon = R.drawable.ic_filter,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
-
-                // CHOP SUEY VARIETIES (with icons for popular types)
                 FilterChip(
                     id = "american_chinese",
                     text = "American Chinese",
@@ -29010,8 +28610,6 @@ fun ChopSueyCategoryPage() {
                     text = "Pork",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // COOKING STYLE (with icon for crispy)
                 FilterChip(
                     id = "soft_noodles",
                     text = "Soft Noodles",
@@ -29022,8 +28620,6 @@ fun ChopSueyCategoryPage() {
                     text = "Rice Based",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // SAUCE TYPE (with icon for classic sauce)
                 FilterChip(
                     id = "white_sauce",
                     text = "White Sauce",
@@ -29044,8 +28640,6 @@ fun ChopSueyCategoryPage() {
                     text = "Sweet & Sour",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // VEGETABLE MIX (with icon for classic mix)
                 FilterChip(
                     id = "extra_bamboo",
                     text = "Extra Bamboo Shoots",
@@ -29061,16 +28655,9 @@ fun ChopSueyCategoryPage() {
                     text = "Bean Sprouts",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // SPICE LEVEL (with icon for medium)
                 FilterChip(
                     id = "mild",
                     text = "Mild",
-                    type = FilterType.TEXT_ONLY
-                ),
-                FilterChip(
-                    id = "spicy",
-                    text = "Spicy",
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
@@ -29078,8 +28665,6 @@ fun ChopSueyCategoryPage() {
                     text = "Extra Spicy",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // SERVING STYLE (with icon for family style)
                 FilterChip(
                     id = "individual",
                     text = "Individual Portion",
@@ -29090,8 +28675,6 @@ fun ChopSueyCategoryPage() {
                     text = "Lunch Special",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // NOODLE TYPE (with icon for egg noodles)
                 FilterChip(
                     id = "rice_noodles",
                     text = "Rice Noodles",
@@ -29102,8 +28685,6 @@ fun ChopSueyCategoryPage() {
                     text = "Udon Noodles",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // DIETARY (with icon for vegetarian)
                 FilterChip(
                     id = "vegan",
                     text = "Vegan",
@@ -29119,15 +28700,11 @@ fun ChopSueyCategoryPage() {
                     text = "No MSG",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // PREPARATION TIME (with icon for quick)
                 FilterChip(
                     id = "made_to_order",
                     text = "Made to Order",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // RESTAURANT TYPE (with icon for authentic)
                 FilterChip(
                     id = "fusion",
                     text = "Fusion",
@@ -29138,8 +28715,6 @@ fun ChopSueyCategoryPage() {
                     text = "Street Food Style",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // Sort dropdown
                 FilterChip(
                     id = "sort",
                     text = "Sort",
@@ -29149,99 +28724,22 @@ fun ChopSueyCategoryPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+
+        FilterButtonFood(
             filterConfig = chopSueyFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val chopSueyItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.chop_suey_item_1,
-                title = "Classic American Chop Suey",
-                price = "220",
-                restaurantName = "American-Chinese Bistro",
-                rating = "4.8",
-                deliveryTime = "18-22 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.chop_suey_item_2,
-                title = "Filipino Style Chop Suey",
-                price = "260",
-                restaurantName = "Manila Flavors",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.chop_suey_item_3,
-                title = "Vegetable Chop Suey with Crispy Noodles",
-                price = "190",
-                restaurantName = "Veggie Delight",
-                rating = "4.6",
-                deliveryTime = "15-18 mins",
-                distance = "0.7 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.chop_suey_item_4,
-                title = "Chicken Chop Suey with Brown Sauce",
-                price = "280",
-                restaurantName = "Oriental Express",
-                rating = "4.9",
-                deliveryTime = "22-27 mins",
-                distance = "1.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.chop_suey_item_5,
-                title = "Shrimp Chop Suey with Oyster Sauce",
-                price = "320",
-                restaurantName = "Seafood Palace",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.chop_suey_item_6,
-                title = "Spicy Beef Chop Suey",
-                price = "300",
-                restaurantName = "Asian Grill",
-                rating = "4.7",
-                deliveryTime = "20-24 mins",
-                distance = "1.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED CHOP SUEY ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -29249,30 +28747,101 @@ fun ChopSueyCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = chopSueyItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended chop suey items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CHOP_SUEY", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended chop suey items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED CHOP SUEY RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -29280,7 +28849,6 @@ fun ChopSueyCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -29292,292 +28860,119 @@ fun ChopSueyCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val chopSueyRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.chop_suey_1,
-                title = "Classic American Chop Suey",
-                price = "220",
-                restaurantName = "American-Chinese Bistro",
-                rating = "4.8",
-                deliveryTime = "18-22 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.chop_suey_2,
-                title = "Filipino Style Chop Suey",
-                price = "260",
-                restaurantName = "Manila Flavors",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.chop_suey_3,
-                title = "Vegetable Chop Suey with Crispy Noodles",
-                price = "190",
-                restaurantName = "Veggie Delight",
-                rating = "4.6",
-                deliveryTime = "15-18 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.chop_suey_4,
-                title = "Chicken Chop Suey with Brown Sauce",
-                price = "280",
-                restaurantName = "Oriental Express",
-                rating = "4.9",
-                deliveryTime = "22-27 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.chop_suey_5,
-                title = "Shrimp Chop Suey with Oyster Sauce",
-                price = "320",
-                restaurantName = "Seafood Palace",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.chop_suey_6,
-                title = "Spicy Beef Chop Suey",
-                price = "300",
-                restaurantName = "Asian Grill",
-                rating = "4.7",
-                deliveryTime = "20-24 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.chop_suey_7,
-                title = "Pork Chop Suey Cantonese Style",
-                price = "290",
-                restaurantName = "Cantonese Kitchen",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.chop_suey_8,
-                title = "Singapore Style Chop Suey",
-                price = "340",
-                restaurantName = "Singapore Flavors",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.chop_suey_9,
-                title = "Mushroom Chop Suey Vegan",
-                price = "210",
-                restaurantName = "Vegan Asian",
-                rating = "4.5",
-                deliveryTime = "18-23 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Electronic City, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.chop_suey_10,
-                title = "Luxury Seafood Chop Suey Mix",
-                price = "450",
-                restaurantName = "Ocean Delight",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sarjapur Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.chop_suey_11,
-                title = "Tofu Chop Suey Healthy",
-                price = "230",
-                restaurantName = "Healthy Asian",
-                rating = "4.4",
-                deliveryTime = "20-25 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.chop_suey_12,
-                title = "Crispy Noodle Chicken Chop Suey",
-                price = "270",
-                restaurantName = "Crispy Kitchen",
-                rating = "4.7",
-                deliveryTime = "22-27 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.chop_suey_13,
-                title = "Indonesian Style Chop Suey",
-                price = "250",
-                restaurantName = "Indonesian Taste",
-                rating = "4.6",
-                deliveryTime = "26-31 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malleshwaram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.chop_suey_14,
-                title = "Sweet & Sour Pork Chop Suey",
-                price = "310",
-                restaurantName = "Sweet Sour House",
-                rating = "4.7",
-                deliveryTime = "24-29 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.chop_suey_15,
-                title = "Thai Inspired Chop Suey",
-                price = "330",
-                restaurantName = "Thai Fusion",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.chop_suey_16,
-                title = "Family Platter Chop Suey",
-                price = "580",
-                restaurantName = "Family Asian",
-                rating = "4.9",
-                deliveryTime = "32-37 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bellandur, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.chop_suey_17,
-                title = "Spicy Szechuan Chop Suey",
-                price = "290",
-                restaurantName = "Szechuan Palace",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.chop_suey_18,
-                title = "Lunch Special Chop Suey Combo",
-                price = "350",
-                restaurantName = "Lunch Express",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "KR Puram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.chop_suey_19,
-                title = "Vegetable & Tofu Chop Suey Mix",
-                price = "240",
-                restaurantName = "Mix Veg Asian",
-                rating = "4.6",
-                deliveryTime = "21-26 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Yelahanka, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.chop_suey_20,
-                title = "Premium Mixed Meat Chop Suey",
-                price = "420",
-                restaurantName = "Meat Lovers Asian",
-                rating = "4.9",
-                deliveryTime = "28-33 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Brigade Road, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured chop suey restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CHOP_SUEY", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Update wishlist status in ViewModel
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured chop suey restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun KormaCategoryPage() {
+fun KormaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for Korma category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: KORMA")
+        restaurantViewModel.loadFeaturedRestaurants("KORMA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("KORMA", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -29702,6 +29097,11 @@ fun KormaCategoryPage() {
                     text = "Kadhai Style",
                     type = FilterType.TEXT_ONLY
                 ),
+                FilterChip(
+                    id = "slow_cooked",
+                    text = "Slow Cooked",
+                    type = FilterType.TEXT_ONLY
+                ),
 
                 // SPECIAL INGREDIENTS (with icon for saffron)
                 FilterChip(
@@ -29719,6 +29119,11 @@ fun KormaCategoryPage() {
                     text = "Rose Water",
                     type = FilterType.TEXT_ONLY
                 ),
+                FilterChip(
+                    id = "kewra",
+                    text = "Kewra Water",
+                    type = FilterType.TEXT_ONLY
+                ),
 
                 // DIETARY (with icon for vegetarian)
                 FilterChip(
@@ -29734,6 +29139,11 @@ fun KormaCategoryPage() {
                 FilterChip(
                     id = "dairy_free",
                     text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
                     type = FilterType.TEXT_ONLY
                 ),
 
@@ -29756,6 +29166,16 @@ fun KormaCategoryPage() {
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
+                    id = "family_pack",
+                    text = "Family Pack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "party_tray",
+                    text = "Party Tray",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
                     id = "thali",
                     text = "Part of Thali",
                     type = FilterType.TEXT_ONLY
@@ -29772,6 +29192,28 @@ fun KormaCategoryPage() {
                     text = "With Roti",
                     type = FilterType.TEXT_ONLY
                 ),
+                FilterChip(
+                    id = "with_paratha",
+                    text = "With Paratha",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGE
+                FilterChip(
+                    id = "budget",
+                    text = "Budget (₹200-300)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "premium",
+                    text = "Premium (₹300-450)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "luxury",
+                    text = "Luxury (₹450+)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
                 // Sort dropdown
                 FilterChip(
@@ -29783,99 +29225,22 @@ fun KormaCategoryPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = kormaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val kormaItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.korma_item_1,
-                title = "Royal Mughlai Chicken Korma",
-                price = "380",
-                restaurantName = "Mughal Darbar",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.korma_item_2,
-                title = "Navratan Vegetable Korma",
-                price = "290",
-                restaurantName = "Pure Veg Paradise",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "0.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.korma_item_3,
-                title = "Awadhi Lamb Korma with Saffron",
-                price = "450",
-                restaurantName = "Lucknowi Kitchen",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "2.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.korma_item_4,
-                title = "Paneer Korma with Cashew Cream",
-                price = "320",
-                restaurantName = "Punjabi Rasoi",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.korma_item_5,
-                title = "Kashmiri Rogan Josh Korma",
-                price = "420",
-                restaurantName = "Kashmir Flavours",
-                rating = "4.9",
-                deliveryTime = "28-33 mins",
-                distance = "1.9 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.korma_item_6,
-                title = "Hyderabadi Goat Korma",
-                price = "480",
-                restaurantName = "Nawabi Restaurant",
-                rating = "4.8",
-                deliveryTime = "32-38 mins",
-                distance = "2.4 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED KORMA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -29883,30 +29248,101 @@ fun KormaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = kormaItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended korma items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("KORMA", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended korma items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED KORMA RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -29914,7 +29350,6 @@ fun KormaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -29926,282 +29361,95 @@ fun KormaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val kormaRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.korma_1,
-                title = "Royal Mughlai Chicken Korma",
-                price = "380",
-                restaurantName = "Mughal Darbar",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.korma_2,
-                title = "Navratan Vegetable Korma",
-                price = "290",
-                restaurantName = "Pure Veg Paradise",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.korma_3,
-                title = "Awadhi Lamb Korma with Saffron",
-                price = "450",
-                restaurantName = "Lucknowi Kitchen",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.korma_4,
-                title = "Paneer Korma with Cashew Cream",
-                price = "320",
-                restaurantName = "Punjabi Rasoi",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.korma_5,
-                title = "Kashmiri Rogan Josh Korma",
-                price = "420",
-                restaurantName = "Kashmir Flavours",
-                rating = "4.9",
-                deliveryTime = "28-33 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.korma_6,
-                title = "Hyderabadi Goat Korma",
-                price = "480",
-                restaurantName = "Nawabi Restaurant",
-                rating = "4.8",
-                deliveryTime = "32-38 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.korma_7,
-                title = "Malabar Fish Korma",
-                price = "360",
-                restaurantName = "Coastal Delights",
-                rating = "4.7",
-                deliveryTime = "26-31 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.korma_8,
-                title = "Egg Korma Masala",
-                price = "260",
-                restaurantName = "Egg Specialists",
-                rating = "4.5",
-                deliveryTime = "18-23 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.korma_9,
-                title = "Vegan Cashew Korma",
-                price = "280",
-                restaurantName = "Vegan Darbar",
-                rating = "4.6",
-                deliveryTime = "22-27 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Electronic City, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.korma_10,
-                title = "Premium Mixed Korma Platter",
-                price = "520",
-                restaurantName = "Royal Feast",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sarjapur Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.korma_11,
-                title = "Mushroom & Peas Korma",
-                price = "240",
-                restaurantName = "Mushroom Magic",
-                rating = "4.4",
-                deliveryTime = "19-24 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.korma_12,
-                title = "Butter Chicken Korma Style",
-                price = "340",
-                restaurantName = "Butter Chicken Co.",
-                rating = "4.8",
-                deliveryTime = "24-29 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.korma_13,
-                title = "Bengali Prawn Korma",
-                price = "410",
-                restaurantName = "Bengali Kitchen",
-                rating = "4.7",
-                deliveryTime = "27-32 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malleshwaram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.korma_14,
-                title = "Sweet Paneer Korma",
-                price = "310",
-                restaurantName = "Sweet Savories",
-                rating = "4.6",
-                deliveryTime = "21-26 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.korma_15,
-                title = "Thai Inspired Coconut Korma",
-                price = "330",
-                restaurantName = "Thai-Indian Fusion",
-                rating = "4.7",
-                deliveryTime = "29-34 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.korma_16,
-                title = "Family Korma Feast",
-                price = "620",
-                restaurantName = "Family Darbar",
-                rating = "4.9",
-                deliveryTime = "33-38 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bellandur, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.korma_17,
-                title = "Spicy Andhra Chicken Korma",
-                price = "370",
-                restaurantName = "Andhra Spice",
-                rating = "4.8",
-                deliveryTime = "26-31 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.korma_18,
-                title = "Lunch Special Korma Thali",
-                price = "390",
-                restaurantName = "Lunch Darbar",
-                rating = "4.6",
-                deliveryTime = "16-21 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "KR Puram, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.korma_19,
-                title = "Mixed Vegetable Korma",
-                price = "270",
-                restaurantName = "Veggie Korma House",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Yelahanka, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.korma_20,
-                title = "Premium Lamb & Chicken Korma Combo",
-                price = "580",
-                restaurantName = "Meat Darbar",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Brigade Road, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured korma restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("KORMA", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Update wishlist status in ViewModel
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured korma restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

@@ -515,9 +515,9 @@ fun CategoryTabsFood(
                 CategoryPage.Rasgulla -> RasgullaCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.ButterChicken -> ButterChickenCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.RajKachori -> RajKachoriCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Chaat -> ChaatCategoryPage()
-                CategoryPage.Uttapam -> UttapamCategoryPage()
-                CategoryPage.Doughnut -> DoughnutCategoryPage()
+                CategoryPage.Chaat -> ChaatCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Uttapam -> UttapamCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Doughnut -> DoughnutCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Juice -> JuiceCategoryPage()
                 CategoryPage.Lassi -> LassiCategoryPage()
                 CategoryPage.MalaiKofta -> MalaiKoftaCategoryPage()
@@ -32405,7 +32405,22 @@ fun RajKachoriCategoryPage(
 }
 
 @Composable
-fun ChaatCategoryPage() {
+fun ChaatCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CHAAT category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CHAAT")
+        restaurantViewModel.loadFeaturedRestaurants("CHAAT", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CHAAT", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32504,8 +32519,6 @@ fun ChaatCategoryPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // SERVING SIZE (with icons)
-
                 // PREPARATION STYLE
                 FilterChip(
                     id = "freshly_made",
@@ -32529,8 +32542,6 @@ fun ChaatCategoryPage() {
                     text = "No Onion/Garlic",
                     type = FilterType.TEXT_ONLY
                 ),
-
-                // VENDOR TYPE (with icons)
 
                 // PRICE RANGE
                 FilterChip(
@@ -32563,95 +32574,17 @@ fun ChaatCategoryPage() {
             filterConfig = chaatFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val chaatItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.chaat_item_1,
-                title = "Mumbai Style Pani Puri",
-                price = "80",
-                restaurantName = "Mumbai Chaat Corner",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.chaat_item_2,
-                title = "Delhi Style Aloo Tikki Chaat",
-                price = "120",
-                restaurantName = "Delhi Chaat House",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.chaat_item_3,
-                title = "Special Bhel Puri Combo",
-                price = "150",
-                restaurantName = "Chaat Street Mumbai",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.chaat_item_4,
-                title = "Dahi Puri with Extra Curd",
-                price = "100",
-                restaurantName = "Curd Special Chaat",
-                rating = "4.6",
-                deliveryTime = "6-10 mins",
-                distance = "0.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.chaat_item_5,
-                title = "Family Pack Chaat Platter",
-                price = "350",
-                restaurantName = "Chaat Family Hub",
-                rating = "4.8",
-                deliveryTime = "18-22 mins",
-                distance = "1.2 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.chaat_item_6,
-                title = "Premium Kolkata Style Papdi Chaat",
-                price = "140",
-                restaurantName = "Kolkata Chaat Palace",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED CHAAT ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -32659,30 +32592,101 @@ fun ChaatCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = chaatItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended chaat items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CHAAT", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended chaat items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED CHAAT RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -32690,7 +32694,6 @@ fun ChaatCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -32702,289 +32705,116 @@ fun ChaatCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val chaatRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.chaat_1,
-                title = "Mumbai Street Style Pani Puri",
-                price = "80",
-                restaurantName = "Mumbai Chaat Corner",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.chaat_2,
-                title = "Delhi Special Aloo Tikki Chaat",
-                price = "120",
-                restaurantName = "Delhi Chaat House",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.chaat_3,
-                title = "Crispy Bhel Puri with Extra Sev",
-                price = "100",
-                restaurantName = "Chaat Street Mumbai",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.chaat_4,
-                title = "Creamy Dahi Puri with Sweet Curd",
-                price = "90",
-                restaurantName = "Curd Special Chaat",
-                rating = "4.6",
-                deliveryTime = "6-10 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.chaat_5,
-                title = "Papdi Chaat with Chickpeas",
-                price = "110",
-                restaurantName = "Chaat Family Hub",
-                rating = "4.8",
-                deliveryTime = "14-18 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.chaat_6,
-                title = "Sev Puri with Tangy Chutneys",
-                price = "95",
-                restaurantName = "Sev Special Chaat",
-                rating = "4.7",
-                deliveryTime = "11-16 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.chaat_7,
-                title = "Samosa Chaat with Green Chutney",
-                price = "130",
-                restaurantName = "Samosa Chaat House",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.chaat_8,
-                title = "Kolkata Style Papdi Chaat",
-                price = "115",
-                restaurantName = "Kolkata Chaat Palace",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.chaat_9,
-                title = "Combo Platter - Mixed Chaat",
-                price = "250",
-                restaurantName = "Chaat Combo Hub",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.chaat_10,
-                title = "Family Pack Chaat Special",
-                price = "350",
-                restaurantName = "Family Chaat Corner",
-                rating = "4.7",
-                deliveryTime = "22-28 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.chaat_11,
-                title = "Mild Spice Chaat for Kids",
-                price = "85",
-                restaurantName = "Kid Friendly Chaat",
-                rating = "4.5",
-                deliveryTime = "9-14 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sadashivanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.chaat_12,
-                title = "Extra Spicy Chaat Platter",
-                price = "140",
-                restaurantName = "Spicy Chaat House",
-                rating = "4.8",
-                deliveryTime = "16-21 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.chaat_13,
-                title = "Street Cart Style Pani Puri",
-                price = "75",
-                restaurantName = "Street Chaat Wala",
-                rating = "4.6",
-                deliveryTime = "7-11 mins",
-                distance = "0.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.chaat_14,
-                title = "Restaurant Style Fine Chaat",
-                price = "180",
-                restaurantName = "Fine Dining Chaat",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.chaat_15,
-                title = "Healthy Sprout Chaat",
-                price = "125",
-                restaurantName = "Healthy Chaat Corner",
-                rating = "4.7",
-                deliveryTime = "19-24 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajajinagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.chaat_16,
-                title = "Mini Chaat Tasting Platter",
-                price = "160",
-                restaurantName = "Mini Bites Cafe",
-                rating = "4.6",
-                deliveryTime = "13-18 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.chaat_17,
-                title = "Jumbo Size Bhel Puri",
-                price = "180",
-                restaurantName = "Big Chaat Restaurant",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.chaat_18,
-                title = "Party Pack Chaat Selection",
-                price = "550",
-                restaurantName = "Party Chaat Specials",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.chaat_19,
-                title = "Office Lunch Chaat Box",
-                price = "150",
-                restaurantName = "Office Chaat Hub",
-                rating = "4.7",
-                deliveryTime = "12-17 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.chaat_20,
-                title = "Ultimate Chaat Festival Platter",
-                price = "450",
-                restaurantName = "Gourmet Chaat House",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured chaat restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CHAAT", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured chaat restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun UttapamCategoryPage() {
+fun UttapamCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for UTTAPAM category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: UTTAPAM")
+        restaurantViewModel.loadFeaturedRestaurants("UTTAPAM", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("UTTAPAM", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33139,99 +32969,21 @@ fun UttapamCategoryPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = uttapamFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val uttapamItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.uttapam_item_1,
-                title = "Onion Uttapam with Coconut Chutney",
-                price = "120",
-                restaurantName = "South Indian Delight",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.uttapam_item_2,
-                title = "Mixed Vegetable Uttapam",
-                price = "140",
-                restaurantName = "Udupi Sagar",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.uttapam_item_3,
-                title = "Cheese Uttapam Combo",
-                price = "180",
-                restaurantName = "Cheese Corner",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.uttapam_item_4,
-                title = "Plain Uttapam with Sambar",
-                price = "90",
-                restaurantName = "Traditional Tiffins",
-                rating = "4.6",
-                deliveryTime = "6-10 mins",
-                distance = "0.4 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.uttapam_item_5,
-                title = "Family Uttapam Platter",
-                price = "350",
-                restaurantName = "Uttapam House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.uttapam_item_6,
-                title = "Premium Tomato Uttapam",
-                price = "160",
-                restaurantName = "Premium South Indian",
-                rating = "4.9",
-                deliveryTime = "12-16 mins",
-                distance = "0.9 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED UTTAPAM ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -33239,30 +32991,101 @@ fun UttapamCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = uttapamItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended uttapam items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("UTTAPAM", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended uttapam items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED UTTAPAM RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -33270,7 +33093,6 @@ fun UttapamCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -33282,289 +33104,116 @@ fun UttapamCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val uttapamRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.uttapam_1,
-                title = "Classic Onion Uttapam with Sambar",
-                price = "110",
-                restaurantName = "South Indian Delight",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.uttapam_2,
-                title = "Mixed Vegetable Uttapam Special",
-                price = "130",
-                restaurantName = "Udupi Sagar",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.uttapam_3,
-                title = "Cheese Melt Uttapam",
-                price = "160",
-                restaurantName = "Cheese Corner",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.uttapam_4,
-                title = "Plain Uttapam with Coconut Chutney",
-                price = "85",
-                restaurantName = "Traditional Tiffins",
-                rating = "4.6",
-                deliveryTime = "6-10 mins",
-                distance = "0.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.uttapam_5,
-                title = "Tomato Onion Uttapam Combo",
-                price = "125",
-                restaurantName = "Uttapam House",
-                rating = "4.8",
-                deliveryTime = "14-19 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.uttapam_6,
-                title = "Paneer Uttapam with Green Chutney",
-                price = "150",
-                restaurantName = "Premium South Indian",
-                rating = "4.9",
-                deliveryTime = "11-16 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.uttapam_7,
-                title = "Capsicum Corn Uttapam Special",
-                price = "140",
-                restaurantName = "Healthy Uttapam Corner",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.uttapam_8,
-                title = "Masala Uttapam with Potato",
-                price = "120",
-                restaurantName = "Masala Uttapam House",
-                rating = "4.7",
-                deliveryTime = "18-23 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.uttapam_9,
-                title = "Uttapam Family Platter",
-                price = "280",
-                restaurantName = "Uttapam Combo Hub",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.uttapam_10,
-                title = "Mini Uttapam Sampler Platter",
-                price = "200",
-                restaurantName = "Mini Uttapam Cafe",
-                rating = "4.7",
-                deliveryTime = "22-28 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.uttapam_11,
-                title = "Kid's Uttapam with Less Spice",
-                price = "95",
-                restaurantName = "Kid Friendly Tiffins",
-                rating = "4.5",
-                deliveryTime = "9-14 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sadashivanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.uttapam_12,
-                title = "Spicy Chili Uttapam Special",
-                price = "135",
-                restaurantName = "Spicy Uttapam House",
-                rating = "4.8",
-                deliveryTime = "16-21 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.uttapam_13,
-                title = "Traditional Dosa Hut Uttapam",
-                price = "90",
-                restaurantName = "Dosa Hut Classic",
-                rating = "4.6",
-                deliveryTime = "7-11 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.uttapam_14,
-                title = "Gourmet Uttapam with Truffle Oil",
-                price = "220",
-                restaurantName = "Gourmet South Indian",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.uttapam_15,
-                title = "Spinach Corn Uttapam Healthy",
-                price = "145",
-                restaurantName = "Healthy Uttapam Corner",
-                rating = "4.7",
-                deliveryTime = "19-24 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajajinagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.uttapam_16,
-                title = "Mini Rava Uttapam Crispy",
-                price = "110",
-                restaurantName = "Rava Uttapam Special",
-                rating = "4.6",
-                deliveryTime = "13-18 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.uttapam_17,
-                title = "Jumbo Family Uttapam",
-                price = "300",
-                restaurantName = "Big Uttapam Restaurant",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.uttapam_18,
-                title = "Party Uttapam Platter",
-                price = "500",
-                restaurantName = "Party Uttapam Specials",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.uttapam_19,
-                title = "Office Lunch Uttapam Box",
-                price = "170",
-                restaurantName = "Office Tiffin Hub",
-                rating = "4.7",
-                deliveryTime = "12-17 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.uttapam_20,
-                title = "Ultimate Uttapam Festival Platter",
-                price = "420",
-                restaurantName = "Uttapam Festival House",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured uttapam restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("UTTAPAM", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured uttapam restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun DoughnutCategoryPage() {
+fun DoughnutCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for DOUGHNUT category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: DOUGHNUT")
+        restaurantViewModel.loadFeaturedRestaurants("DOUGHNUT", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("DOUGHNUT", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33745,95 +33394,17 @@ fun DoughnutCategoryPage() {
             filterConfig = doughnutFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val doughnutItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.doughnut_item_1,
-                title = "Classic Glazed Doughnut",
-                price = "80",
-                restaurantName = "Glazed Delights",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.doughnut_item_2,
-                title = "Chocolate Sprinkles Doughnut",
-                price = "100",
-                restaurantName = "Chocolate Heaven",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.doughnut_item_3,
-                title = "Strawberry Jelly Filled Doughnut",
-                price = "120",
-                restaurantName = "Berry Sweet Cafe",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.doughnut_item_4,
-                title = "Boston Cream Doughnut",
-                price = "110",
-                restaurantName = "Creamy Delights",
-                rating = "4.6",
-                deliveryTime = "6-10 mins",
-                distance = "0.3 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.doughnut_item_5,
-                title = "Assorted Doughnut Box (6 pcs)",
-                price = "350",
-                restaurantName = "Doughnut Box Cafe",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.doughnut_item_6,
-                title = "Premium Matcha Glazed Doughnut",
-                price = "150",
-                restaurantName = "Premium Doughnut Shop",
-                rating = "4.9",
-                deliveryTime = "12-16 mins",
-                distance = "0.9 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED DOUGHNUT ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -33841,30 +33412,101 @@ fun DoughnutCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = doughnutItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended doughnut items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("DOUGHNUT", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended doughnut items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED DOUGHNUT RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -33872,7 +33514,6 @@ fun DoughnutCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -33884,289 +33525,102 @@ fun DoughnutCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val doughnutRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.doughnut_1,
-                title = "Classic Glazed Ring Doughnut",
-                price = "80",
-                restaurantName = "Glazed Delights",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.doughnut_2,
-                title = "Chocolate Frosted Doughnut",
-                price = "100",
-                restaurantName = "Chocolate Heaven",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.doughnut_3,
-                title = "Strawberry Jelly Filled Doughnut",
-                price = "120",
-                restaurantName = "Berry Sweet Cafe",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.doughnut_4,
-                title = "Boston Cream Doughnut Special",
-                price = "110",
-                restaurantName = "Creamy Delights",
-                rating = "4.6",
-                deliveryTime = "6-10 mins",
-                distance = "0.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.doughnut_5,
-                title = "Rainbow Sprinkles Doughnut",
-                price = "95",
-                restaurantName = "Colorful Doughnuts",
-                rating = "4.8",
-                deliveryTime = "14-19 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.doughnut_6,
-                title = "Premium Matcha Glazed Doughnut",
-                price = "150",
-                restaurantName = "Premium Doughnut Shop",
-                rating = "4.9",
-                deliveryTime = "11-16 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.doughnut_7,
-                title = "Cinnamon Sugar Doughnut Bites",
-                price = "130",
-                restaurantName = "Cinnamon Spice Cafe",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.doughnut_8,
-                title = "Red Velvet Cream Cheese Doughnut",
-                price = "140",
-                restaurantName = "Velvet Doughnut House",
-                rating = "4.7",
-                deliveryTime = "18-23 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.doughnut_9,
-                title = "Assorted Doughnut Box (6 pieces)",
-                price = "300",
-                restaurantName = "Doughnut Box Cafe",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.doughnut_10,
-                title = "Doughnut Hole Sampler Pack",
-                price = "180",
-                restaurantName = "Mini Bites Cafe",
-                rating = "4.7",
-                deliveryTime = "22-28 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.doughnut_11,
-                title = "Kid's Sprinkle Doughnut Pack",
-                price = "90",
-                restaurantName = "Kid Friendly Bakery",
-                rating = "4.5",
-                deliveryTime = "9-14 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sadashivanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.doughnut_12,
-                title = "Double Chocolate Doughnut",
-                price = "125",
-                restaurantName = "Chocoholic's Paradise",
-                rating = "4.8",
-                deliveryTime = "16-21 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.doughnut_13,
-                title = "Traditional Old-Fashioned Doughnut",
-                price = "85",
-                restaurantName = "Classic Bakery",
-                rating = "4.6",
-                deliveryTime = "7-11 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.doughnut_14,
-                title = "Gourmet Salted Caramel Doughnut",
-                price = "160",
-                restaurantName = "Gourmet Bakery",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.doughnut_15,
-                title = "Healthy Baked Doughnut",
-                price = "135",
-                restaurantName = "Healthy Bakery Corner",
-                rating = "4.7",
-                deliveryTime = "19-24 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajajinagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.doughnut_16,
-                title = "Coffee Glazed Doughnut",
-                price = "115",
-                restaurantName = "Coffee Doughnut Cafe",
-                rating = "4.6",
-                deliveryTime = "13-18 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.doughnut_17,
-                title = "Jumbo Party Doughnut Cake",
-                price = "450",
-                restaurantName = "Party Doughnut Shop",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.doughnut_18,
-                title = "Birthday Doughnut Platter",
-                price = "550",
-                restaurantName = "Celebration Bakery",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.doughnut_19,
-                title = "Office Meeting Doughnut Box",
-                price = "250",
-                restaurantName = "Office Treats Bakery",
-                rating = "4.7",
-                deliveryTime = "12-17 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.doughnut_20,
-                title = "Ultimate Doughnut Festival Pack",
-                price = "400",
-                restaurantName = "Festival Doughnut House",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured doughnut restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("DOUGHNUT", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_launcher_foreground),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured doughnut restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun JuiceCategoryPage() {
+fun JuiceCategoryPage() {qs
     Column(
         modifier = Modifier
             .fillMaxSize()

@@ -519,9 +519,9 @@ fun CategoryTabsFood(
                 CategoryPage.Uttapam -> UttapamCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Doughnut -> DoughnutCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Juice -> JuiceCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Lassi -> LassiCategoryPage()
-                CategoryPage.MalaiKofta -> MalaiKoftaCategoryPage()
-                CategoryPage.DahiBalle -> DahiBalleCategoryPage()
+                CategoryPage.Lassi -> LassiCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.MalaiKofta -> MalaiKoftaCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.DahiBalle -> DahiBalleCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Rajma -> RajmaCategoryPage()
                 CategoryPage.ChickenHandi -> ChickenHandiCategoryPage()
                 CategoryPage.Cupcake -> CupcakeCategoryPage()
@@ -34077,7 +34077,22 @@ fun JuiceCategoryPage(
 }
 
 @Composable
-fun LassiCategoryPage() {
+fun LassiCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for LASSI category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: LASSI")
+        restaurantViewModel.loadFeaturedRestaurants("LASSI", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("LASSI", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34337,95 +34352,17 @@ fun LassiCategoryPage() {
             filterConfig = lassiFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val lassiItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.lassi_item_1,
-                title = "Classic Sweet Lassi",
-                price = "80",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.7",
-                deliveryTime = "10-15 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.lassi_item_2,
-                title = "Mango Lassi",
-                price = "120",
-                restaurantName = "Mango Delights",
-                rating = "4.8",
-                deliveryTime = "12-18 mins",
-                distance = "0.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.lassi_item_3,
-                title = "Rose Flavored Lassi",
-                price = "100",
-                restaurantName = "Royal Lassi House",
-                rating = "4.6",
-                deliveryTime = "8-12 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.lassi_item_4,
-                title = "Kesar Pista Lassi",
-                price = "150",
-                restaurantName = "Premium Lassi Corner",
-                rating = "4.9",
-                deliveryTime = "14-20 mins",
-                distance = "0.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.lassi_item_5,
-                title = "Family Pack Lassi (1.5L)",
-                price = "220",
-                restaurantName = "Family Lassi Center",
-                rating = "4.7",
-                deliveryTime = "16-22 mins",
-                distance = "1.1 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.lassi_item_6,
-                title = "Salted Lassi (Chaas)",
-                price = "70",
-                restaurantName = "Traditional Dhaba",
-                rating = "4.8",
-                deliveryTime = "9-14 mins",
-                distance = "0.6 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED LASSI ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -34433,30 +34370,101 @@ fun LassiCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = lassiItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended lassi items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("LASSI", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_lassi_sweet),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended lassi items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED LASSI RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -34464,7 +34472,6 @@ fun LassiCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -34476,289 +34483,117 @@ fun LassiCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val lassiRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.lassi_1,
-                title = "Classic Sweet Lassi",
-                price = "80",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.lassi_2,
-                title = "Mango Lassi Special",
-                price = "120",
-                restaurantName = "Mango Delights",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.lassi_3,
-                title = "Rose Flavored Lassi",
-                price = "100",
-                restaurantName = "Royal Lassi House",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.lassi_4,
-                title = "Kesar Pista Lassi",
-                price = "150",
-                restaurantName = "Premium Lassi Corner",
-                rating = "4.6",
-                deliveryTime = "6-10 mins",
-                distance = "0.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.lassi_5,
-                title = "Banana Honey Lassi",
-                price = "110",
-                restaurantName = "Fruit Lassi Hub",
-                rating = "4.8",
-                deliveryTime = "14-19 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.lassi_6,
-                title = "Salted Lassi (Chaas)",
-                price = "70",
-                restaurantName = "Traditional Dhaba",
-                rating = "4.9",
-                deliveryTime = "11-16 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.lassi_7,
-                title = "Strawberry Cream Lassi",
-                price = "130",
-                restaurantName = "Berry Lassi Cafe",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.lassi_8,
-                title = "Cardamom Elaichi Lassi",
-                price = "90",
-                restaurantName = "Spice Lassi Corner",
-                rating = "4.7",
-                deliveryTime = "18-23 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.lassi_9,
-                title = "Family Pack Lassi (1.5L)",
-                price = "220",
-                restaurantName = "Family Lassi Center",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.lassi_10,
-                title = "Dry Fruit Lassi",
-                price = "180",
-                restaurantName = "Nutty Lassi House",
-                rating = "4.7",
-                deliveryTime = "22-28 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.lassi_11,
-                title = "Kids Special Lassi",
-                price = "85",
-                restaurantName = "Kid Friendly Lassi Shop",
-                rating = "4.5",
-                deliveryTime = "9-14 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sadashivanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.lassi_12,
-                title = "Sugar Free Lassi",
-                price = "95",
-                restaurantName = "Healthy Lassi Bar",
-                rating = "4.8",
-                deliveryTime = "16-21 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.lassi_13,
-                title = "Traditional Matka Lassi",
-                price = "140",
-                restaurantName = "Matka Lassi House",
-                rating = "4.6",
-                deliveryTime = "7-11 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.lassi_14,
-                title = "Gourmet Saffron Lassi",
-                price = "200",
-                restaurantName = "Gourmet Lassi Shop",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.lassi_15,
-                title = "Butterscotch Lassi",
-                price = "160",
-                restaurantName = "Fusion Lassi Cafe",
-                rating = "4.7",
-                deliveryTime = "19-24 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajajinagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.lassi_16,
-                title = "Rose & Kesar Lassi Combo",
-                price = "170",
-                restaurantName = "Royal Combo Lassi",
-                rating = "4.6",
-                deliveryTime = "13-18 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.lassi_17,
-                title = "Jumbo Party Lassi Jar",
-                price = "350",
-                restaurantName = "Party Lassi Shop",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.lassi_18,
-                title = "Wedding Special Lassi Platter",
-                price = "450",
-                restaurantName = "Celebration Lassi House",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.lassi_19,
-                title = "Office Meeting Lassi Pack",
-                price = "300",
-                restaurantName = "Corporate Lassi Center",
-                rating = "4.7",
-                deliveryTime = "12-17 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.lassi_20,
-                title = "Ultimate Lassi Festival Combo",
-                price = "400",
-                restaurantName = "Festival Lassi House",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured lassi restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("LASSI", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_lassi_sweet),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured lassi restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun MalaiKoftaCategoryPage() {
+fun MalaiKoftaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for MALAI_KOFTA category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: MALAI_KOFTA")
+        restaurantViewModel.loadFeaturedRestaurants("MALAI_KOFTA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("MALAI_KOFTA", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34931,95 +34766,17 @@ fun MalaiKoftaCategoryPage() {
             filterConfig = malaiKoftaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val malaiKoftaItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.malai_kofta_item_1,
-                title = "Classic Malai Kofta",
-                price = "240",
-                restaurantName = "Punjabi Rasoi",
-                rating = "4.8",
-                deliveryTime = "18-25 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.malai_kofta_item_2,
-                title = "Paneer Malai Kofta",
-                price = "280",
-                restaurantName = "Dum Pukht",
-                rating = "4.9",
-                deliveryTime = "20-30 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.malai_kofta_item_3,
-                title = "Khoya Stuffed Malai Kofta",
-                price = "320",
-                restaurantName = "Royal Kitchen",
-                rating = "4.7",
-                deliveryTime = "15-22 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.malai_kofta_item_4,
-                title = "Cashew Malai Kofta",
-                price = "350",
-                restaurantName = "Nawabi Delights",
-                rating = "4.8",
-                deliveryTime = "22-28 mins",
-                distance = "1.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.malai_kofta_item_5,
-                title = "Family Pack Malai Kofta (4 pcs)",
-                price = "420",
-                restaurantName = "Family Feast",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "1.5 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.malai_kofta_item_6,
-                title = "Tandoori Malai Kofta",
-                price = "300",
-                restaurantName = "Tandoor Magic",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "0.7 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED MALAI KOFTA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -35027,30 +34784,101 @@ fun MalaiKoftaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = malaiKoftaItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended malai kofta items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("MALAI_KOFTA", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_paneer_kofta),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended malai kofta items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED MALAI KOFTA RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -35058,7 +34886,6 @@ fun MalaiKoftaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -35070,289 +34897,117 @@ fun MalaiKoftaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val malaiKoftaRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.malai_kofta_1,
-                title = "Classic Malai Kofta",
-                price = "240",
-                restaurantName = "Punjabi Rasoi",
-                rating = "4.8",
-                deliveryTime = "18-25 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.malai_kofta_2,
-                title = "Paneer Malai Kofta",
-                price = "280",
-                restaurantName = "Dum Pukht",
-                rating = "4.9",
-                deliveryTime = "20-30 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.malai_kofta_3,
-                title = "Khoya Stuffed Malai Kofta",
-                price = "320",
-                restaurantName = "Royal Kitchen",
-                rating = "4.7",
-                deliveryTime = "15-22 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.malai_kofta_4,
-                title = "Cashew Malai Kofta",
-                price = "350",
-                restaurantName = "Nawabi Delights",
-                rating = "4.8",
-                deliveryTime = "22-28 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.malai_kofta_5,
-                title = "Family Pack Malai Kofta (4 pcs)",
-                price = "420",
-                restaurantName = "Family Feast",
-                rating = "4.6",
-                deliveryTime = "25-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.malai_kofta_6,
-                title = "Tandoori Malai Kofta",
-                price = "300",
-                restaurantName = "Tandoor Magic",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.malai_kofta_7,
-                title = "Butter Malai Kofta",
-                price = "380",
-                restaurantName = "Butter Kitchen",
-                rating = "4.8",
-                deliveryTime = "18-23 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bannerghatta Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.malai_kofta_8,
-                title = "Nawabi Malai Kofta",
-                price = "450",
-                restaurantName = "Royal Nawab",
-                rating = "4.9",
-                deliveryTime = "28-35 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BTM Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.malai_kofta_9,
-                title = "Spicy Malai Kofta",
-                price = "270",
-                restaurantName = "Spice Garden",
-                rating = "4.6",
-                deliveryTime = "16-21 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Basavanagudi, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.malai_kofta_10,
-                title = "Dry Fruit Malai Kofta",
-                price = "420",
-                restaurantName = "Nutty Delights",
-                rating = "4.7",
-                deliveryTime = "24-30 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Richmond Town, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.malai_kofta_11,
-                title = "Matar Malai Kofta",
-                price = "290",
-                restaurantName = "Green Garden",
-                rating = "4.5",
-                deliveryTime = "14-19 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sadashivanagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.malai_kofta_12,
-                title = "Mughlai Malai Kofta",
-                price = "480",
-                restaurantName = "Mughlai Kitchen",
-                rating = "4.8",
-                deliveryTime = "26-32 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lavelle Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.malai_kofta_13,
-                title = "Kid-Friendly Malai Kofta",
-                price = "260",
-                restaurantName = "Kid's Corner",
-                rating = "4.6",
-                deliveryTime = "12-17 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marathahalli, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.malai_kofta_14,
-                title = "Saffron Malai Kofta",
-                price = "520",
-                restaurantName = "Saffron Dreams",
-                rating = "4.9",
-                deliveryTime = "30-38 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hebbal, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.malai_kofta_15,
-                title = "Party Malai Kofta Platter",
-                price = "550",
-                restaurantName = "Party Special",
-                rating = "4.7",
-                deliveryTime = "32-40 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajajinagar, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.malai_kofta_16,
-                title = "Combo Malai Kofta Meal",
-                price = "380",
-                restaurantName = "Combo King",
-                rating = "4.6",
-                deliveryTime = "20-26 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "HSR Layout, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.malai_kofta_17,
-                title = "Jumbo Malai Kofta Bucket",
-                price = "680",
-                restaurantName = "Jumbo Feast",
-                rating = "4.8",
-                deliveryTime = "35-42 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.malai_kofta_18,
-                title = "Wedding Malai Kofta Special",
-                price = "850",
-                restaurantName = "Wedding Caterers",
-                rating = "4.9",
-                deliveryTime = "40-50 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.malai_kofta_19,
-                title = "Corporate Malai Kofta Pack",
-                price = "720",
-                restaurantName = "Corporate Kitchen",
-                rating = "4.7",
-                deliveryTime = "25-32 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.malai_kofta_20,
-                title = "Festival Malai Kofta Thali",
-                price = "620",
-                restaurantName = "Festival Specials",
-                rating = "4.9",
-                deliveryTime = "28-35 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured malai kofta restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("MALAI_KOFTA", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_paneer_kofta),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured malai kofta restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun DahiBalleCategoryPage() {
+fun DahiBalleCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for DAHI_BALLE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: DAHI_BALLE")
+        restaurantViewModel.loadFeaturedRestaurants("DAHI_BALLE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("DAHI_BALLE", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -35574,95 +35229,17 @@ fun DahiBalleCategoryPage() {
             filterConfig = dahiBalleFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val dahiBalleItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.dahi_bhalle_item_1,
-                title = "Classic Dahi Bhalle",
-                price = "120",
-                restaurantName = "Delhi Chaat Corner",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chandni Chowk, Delhi",
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.dahi_bhalle_item_2,
-                title = "Papdi Dahi Bhalle",
-                price = "150",
-                restaurantName = "Punjabi Chaat House",
-                rating = "4.8",
-                deliveryTime = "18-25 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Karol Bagh, Delhi",
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.dahi_bhalle_item_3,
-                title = "Moong Dal Dahi Bhalle",
-                price = "140",
-                restaurantName = "Gujarati Swad",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "0.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Rajkot, Gujarat",
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.dahi_bhalle_item_4,
-                title = "Special Dahi Bhalle with Pomegranate",
-                price = "180",
-                restaurantName = "Royal Chaat Palace",
-                rating = "4.9",
-                deliveryTime = "25-35 mins",
-                distance = "1.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Lucknow, Uttar Pradesh",
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.dahi_bhalle_item_5,
-                title = "Family Pack Dahi Bhalle (8 pcs)",
-                price = "280",
-                restaurantName = "Family Chaat Hub",
-                rating = "4.5",
-                deliveryTime = "30-40 mins",
-                distance = "1.5 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Mumbai, Maharashtra",
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.dahi_bhalle_item_6,
-                title = "Sweet Dahi Bhalle",
-                price = "160",
-                restaurantName = "Mathura Sweets",
-                rating = "4.7",
-                deliveryTime = "22-28 mins",
-                distance = "0.9 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Mathura, Uttar Pradesh",
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED DAHI BALLE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -35670,30 +35247,101 @@ fun DahiBalleCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = dahiBalleItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended dahi balle items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("DAHI_BALLE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_traditional),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended dahi balle items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED DAHI BALLE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -35701,7 +35349,6 @@ fun DahiBalleCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -35713,282 +35360,95 @@ fun DahiBalleCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val dahiBalleRestaurantsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.dahi_bhalle_1,
-                title = "Classic Dahi Bhalle",
-                price = "120",
-                restaurantName = "Delhi Chaat Corner",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chandni Chowk, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.dahi_bhalle_2,
-                title = "Papdi Dahi Bhalle",
-                price = "150",
-                restaurantName = "Punjabi Chaat House",
-                rating = "4.8",
-                deliveryTime = "18-25 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Karol Bagh, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.dahi_bhalle_3,
-                title = "Moong Dal Dahi Bhalle",
-                price = "140",
-                restaurantName = "Gujarati Swad",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajkot, Gujarat"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.dahi_bhalle_4,
-                title = "Pomegranate Dahi Bhalle",
-                price = "180",
-                restaurantName = "Royal Chaat Palace",
-                rating = "4.9",
-                deliveryTime = "25-35 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lucknow, Uttar Pradesh"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.dahi_bhalle_5,
-                title = "Family Pack Dahi Bhalle (8 pcs)",
-                price = "280",
-                restaurantName = "Family Chaat Hub",
-                rating = "4.5",
-                deliveryTime = "30-40 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mumbai, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.dahi_bhalle_6,
-                title = "Sweet Dahi Bhalle",
-                price = "160",
-                restaurantName = "Mathura Sweets",
-                rating = "4.7",
-                deliveryTime = "22-28 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mathura, Uttar Pradesh"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.dahi_bhalle_7,
-                title = "Boondi Dahi Bhalle",
-                price = "135",
-                restaurantName = "Rajasthani Chaat",
-                rating = "4.6",
-                deliveryTime = "16-22 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jaipur, Rajasthan"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.dahi_bhalle_8,
-                title = "Nawabi Dahi Bhalle",
-                price = "220",
-                restaurantName = "Royal Nawab",
-                rating = "4.8",
-                deliveryTime = "28-35 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Hyderabad, Telangana"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.dahi_bhalle_9,
-                title = "Spicy Dahi Bhalle",
-                price = "145",
-                restaurantName = "Spice Garden",
-                rating = "4.5",
-                deliveryTime = "14-20 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kolkata, West Bengal"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.dahi_bhalle_10,
-                title = "Sev Dahi Bhalle",
-                price = "155",
-                restaurantName = "Mumbai Street Food",
-                rating = "4.7",
-                deliveryTime = "19-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.dahi_bhalle_11,
-                title = "Low Fat Dahi Bhalle",
-                price = "130",
-                restaurantName = "Healthy Bites",
-                rating = "4.4",
-                deliveryTime = "21-27 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Pune, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.dahi_bhalle_12,
-                title = "Lucknowi Dahi Bhalle",
-                price = "195",
-                restaurantName = "Awadhi Delights",
-                rating = "4.8",
-                deliveryTime = "26-32 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lucknow, Uttar Pradesh"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.dahi_bhalle_13,
-                title = "Kid-Friendly Dahi Bhalle",
-                price = "125",
-                restaurantName = "Kid's Corner",
-                rating = "4.6",
-                deliveryTime = "12-18 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chennai, Tamil Nadu"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.dahi_bhalle_14,
-                title = "Saffron Dahi Bhalle",
-                price = "250",
-                restaurantName = "Saffron Dreams",
-                rating = "4.9",
-                deliveryTime = "30-38 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Amritsar, Punjab"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.dahi_bhalle_15,
-                title = "Party Dahi Bhalle Platter",
-                price = "350",
-                restaurantName = "Party Special",
-                rating = "4.7",
-                deliveryTime = "32-40 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ahmedabad, Gujarat"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.dahi_bhalle_16,
-                title = "Combo Dahi Bhalle Meal",
-                price = "280",
-                restaurantName = "Combo King",
-                rating = "4.6",
-                deliveryTime = "20-26 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bangalore, Karnataka"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.dahi_bhalle_17,
-                title = "Jumbo Dahi Bhalle Bucket",
-                price = "480",
-                restaurantName = "Jumbo Feast",
-                rating = "4.8",
-                deliveryTime = "35-42 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi NCR"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.dahi_bhalle_18,
-                title = "Wedding Dahi Bhalle Special",
-                price = "650",
-                restaurantName = "Wedding Caterers",
-                rating = "4.9",
-                deliveryTime = "40-50 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Udaipur, Rajasthan"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.dahi_bhalle_19,
-                title = "Corporate Dahi Bhalle Pack",
-                price = "520",
-                restaurantName = "Corporate Kitchen",
-                rating = "4.7",
-                deliveryTime = "25-32 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Gurgaon, Haryana"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.dahi_bhalle_20,
-                title = "Festival Dahi Bhalle Thali",
-                price = "320",
-                restaurantName = "Festival Specials",
-                rating = "4.9",
-                deliveryTime = "28-35 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Varanasi, Uttar Pradesh"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured dahi balle restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("DAHI_BALLE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_traditional),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured dahi balle restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

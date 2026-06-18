@@ -725,9 +725,9 @@ sealed class CategoryPage(
     )
 
     object ChickenCha : CategoryPage(
-        title = "Chicken Cha",
+        title = "Chicken Chap",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/chicken_cha_food.png",
-        category = "CHICKEN_CHA",
+        category = "CHICKEN_CHAP",
         priority = 90,
         isActive = true
     )

@@ -531,9 +531,9 @@ fun CategoryTabsFood(
                 CategoryPage.ChickenCha -> ChickenChapCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.PaneerKulche -> PaneerKulcheCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Chaach -> ChaachCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.VegLollipop -> VegLollipopCategoryPage()
-                CategoryPage.Sub -> SubCategoryPage()
-                CategoryPage.Pancake -> PancakeCategoryPage()
+                CategoryPage.VegLollipop -> VegLollipopCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Sub -> SubCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Pancake -> PancakeCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Nihari -> NihariCategoryPage()
                 CategoryPage.Tacos -> TacosCategoryPage()
                 CategoryPage.Thepla -> TheplaCategoryPage()
@@ -39304,10 +39304,24 @@ fun ChaachCategoryPage(
 }
 
 @Composable
-fun VegLollipopCategoryPage() {
+fun VegLollipopCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for VEG_LOLLIPOP category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: VEG_LOLLIPOP")
+        restaurantViewModel.loadFeaturedRestaurants("VEG_LOLLIPOP", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("VEG_LOLLIPOP", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -39475,95 +39489,17 @@ fun VegLollipopCategoryPage() {
             filterConfig = vegLollipopFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val vegLollipopItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.veg_lollipop_1,
-                title = "Crispy Soya Lollipop",
-                price = "180",
-                restaurantName = "Sizzling Veggies",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.veg_lollipop_2,
-                title = "Cheese Stuffed Paneer Lollipop",
-                price = "220",
-                restaurantName = "Paneer Special",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.veg_lollipop_3,
-                title = "Spicy Corn Flakes Lollipop",
-                price = "160",
-                restaurantName = "Street Snacks Hub",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ghatkopar, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.veg_lollipop_4,
-                title = "Schezwan Veg Lollipop (12 pcs)",
-                price = "280",
-                restaurantName = "Chinese Wok",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.veg_lollipop_5,
-                title = "Air Fried Healthy Lollipop",
-                price = "200",
-                restaurantName = "Fit Kitchen",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.veg_lollipop_6,
-                title = "Mixed Veg Lollipop Platter",
-                price = "320",
-                restaurantName = "Veg Feast",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Sion, Mumbai"
-            )
-        )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED VEG LOLLIPOP ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -39571,30 +39507,101 @@ fun VegLollipopCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = vegLollipopItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Veg Lollipop items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("VEG_LOLLIPOP", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_soya_lollipop),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Veg Lollipop items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED VEG LOLLIPOP RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -39602,7 +39609,6 @@ fun VegLollipopCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -39614,292 +39620,119 @@ fun VegLollipopCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val vegLollipopItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.veg_lollipop_items_1,
-                title = "Crispy Soya Lollipop",
-                price = "180",
-                restaurantName = "Sizzling Veggies",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.veg_lollipop_items_2,
-                title = "Cheese Stuffed Paneer Lollipop",
-                price = "220",
-                restaurantName = "Paneer Special",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.veg_lollipop_items_3,
-                title = "Spicy Corn Flakes Lollipop",
-                price = "160",
-                restaurantName = "Street Snacks Hub",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ghatkopar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.veg_lollipop_items_4,
-                title = "Schezwan Veg Lollipop (12 pcs)",
-                price = "280",
-                restaurantName = "Chinese Wok",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.veg_lollipop_items_5,
-                title = "Air Fried Healthy Lollipop",
-                price = "200",
-                restaurantName = "Fit Kitchen",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.veg_lollipop_items_6,
-                title = "Mixed Veg Lollipop Platter",
-                price = "320",
-                restaurantName = "Veg Feast",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sion, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.veg_lollipop_items_7,
-                title = "Tandoori Potato Lollipop",
-                price = "150",
-                restaurantName = "Tandoor Magic",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.veg_lollipop_items_8,
-                title = "Bread Crumb Crispy Lollipop",
-                price = "170",
-                restaurantName = "Crispy Corner",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.veg_lollipop_items_9,
-                title = "Family Pack (24 pcs)",
-                price = "450",
-                restaurantName = "Family Kitchen",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.veg_lollipop_items_10,
-                title = "Premium Veg Lollipop",
-                price = "250",
-                restaurantName = "Fine Veg Dining",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.veg_lollipop_items_11,
-                title = "Hot & Spicy Lollipop",
-                price = "190",
-                restaurantName = "Spice Nation",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.veg_lollipop_items_12,
-                title = "Mild Creamy Lollipop",
-                price = "210",
-                restaurantName = "Cream & Crunch",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kandivali, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.veg_lollipop_items_13,
-                title = "Beetroot & Sweet Potato Lollipop",
-                price = "230",
-                restaurantName = "Healthy Bites",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.veg_lollipop_items_14,
-                title = "Thai Style Veg Lollipop",
-                price = "270",
-                restaurantName = "Asian Fusion",
-                rating = "4.7",
-                deliveryTime = "32-37 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.veg_lollipop_items_15,
-                title = "Italian Herb Crusted Lollipop",
-                price = "290",
-                restaurantName = "Italian Kitchen",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chembur, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.veg_lollipop_items_16,
-                title = "Kid-Friendly Lollipop Pack",
-                price = "340",
-                restaurantName = "Kids Kitchen",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thane, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.veg_lollipop_items_17,
-                title = "Party Platter (36 pcs)",
-                price = "680",
-                restaurantName = "Party Specials",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Panvel, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.veg_lollipop_items_18,
-                title = "Corporate Office Pack (50 pcs)",
-                price = "950",
-                restaurantName = "Corporate Catering",
-                rating = "4.8",
-                deliveryTime = "50-55 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.veg_lollipop_items_19,
-                title = "Wedding Catering Platter",
-                price = "2,500",
-                restaurantName = "Wedding Caterers",
-                rating = "4.9",
-                deliveryTime = "55-60 mins",
-                distance = "3.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Navi Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.veg_lollipop_items_20,
-                title = "Gourmet Truffle Lollipop",
-                price = "380",
-                restaurantName = "Luxury Kitchen",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Alibaug, Maharashtra"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Veg Lollipop restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("VEG_LOLLIPOP", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_soya_lollipop),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Veg Lollipop restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun SubCategoryPage() {
+fun SubCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SUB category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SUB")
+        restaurantViewModel.loadFeaturedRestaurants("SUB", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SUB", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -40107,95 +39940,17 @@ fun SubCategoryPage() {
             filterConfig = subSandwichFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val subSandwichItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.sub_sandwich_1,
-                title = "Classic Italian Chicken Sub",
-                price = "320",
-                restaurantName = "Sub Heaven",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.sub_sandwich_2,
-                title = "Paneer Tikka Sub with Extra Cheese",
-                price = "280",
-                restaurantName = "Veggie Delight",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.sub_sandwich_3,
-                title = "Spicy Chicken Tikka Footlong",
-                price = "350",
-                restaurantName = "Tikka Masters",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.sub_sandwich_4,
-                title = "Mediterranean Veggie Sub",
-                price = "260",
-                restaurantName = "Global Bites",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.sub_sandwich_5,
-                title = "Roasted Chicken & Avocado",
-                price = "380",
-                restaurantName = "Healthy Subs",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.6 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Ghatkopar, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.sub_sandwich_6,
-                title = "Ultimate Triple Cheese Sub",
-                price = "300",
-                restaurantName = "Cheese Factory",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Sion, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED SUB SANDWICH ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -40203,30 +39958,101 @@ fun SubCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = subSandwichItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Sub Sandwich items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SUB", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_italian_bread),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Sub Sandwich items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED SUB SANDWICH RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -40234,7 +40060,6 @@ fun SubCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -40246,292 +40071,119 @@ fun SubCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val subSandwichItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.sub_sandwich_items_1,
-                title = "Classic Italian Chicken Sub",
-                price = "320",
-                restaurantName = "Sub Heaven",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.sub_sandwich_items_2,
-                title = "Paneer Tikka Sub with Extra Cheese",
-                price = "280",
-                restaurantName = "Veggie Delight",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.sub_sandwich_items_3,
-                title = "Spicy Chicken Tikka Footlong",
-                price = "350",
-                restaurantName = "Tikka Masters",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.sub_sandwich_items_4,
-                title = "Mediterranean Veggie Sub",
-                price = "260",
-                restaurantName = "Global Bites",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.sub_sandwich_items_5,
-                title = "Roasted Chicken & Avocado",
-                price = "380",
-                restaurantName = "Healthy Subs",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ghatkopar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.sub_sandwich_items_6,
-                title = "Ultimate Triple Cheese Sub",
-                price = "300",
-                restaurantName = "Cheese Factory",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sion, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.sub_sandwich_items_7,
-                title = "Turkey & Cranberry Sub",
-                price = "330",
-                restaurantName = "Thanksgiving Kitchen",
-                rating = "4.7",
-                deliveryTime = "28-33 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.sub_sandwich_items_8,
-                title = "BBQ Pulled Chicken Sub",
-                price = "340",
-                restaurantName = "BBQ Masters",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.sub_sandwich_items_9,
-                title = "Family Combo Pack (3 Subs)",
-                price = "850",
-                restaurantName = "Family Kitchen",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.sub_sandwich_items_10,
-                title = "Premium Steak Sandwich",
-                price = "420",
-                restaurantName = "Steak House",
-                rating = "4.9",
-                deliveryTime = "32-37 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.sub_sandwich_items_11,
-                title = "Spicy Mexican Sub",
-                price = "290",
-                restaurantName = "Mexican Fiesta",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.sub_sandwich_items_12,
-                title = "Creamy Mushroom & Swiss Sub",
-                price = "310",
-                restaurantName = "Mushroom Magic",
-                rating = "4.6",
-                deliveryTime = "22-27 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kandivali, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.sub_sandwich_items_13,
-                title = "Tuna Mayo Sub",
-                price = "270",
-                restaurantName = "Seafood Specials",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.sub_sandwich_items_14,
-                title = "Vegan Falafel Sub",
-                price = "240",
-                restaurantName = "Vegan Delights",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.sub_sandwich_items_sub_15,
-                title = "Italian Club Sandwich",
-                price = "360",
-                restaurantName = "Italian Kitchen",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chembur, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.sub_sandwich_items_16,
-                title = "Kids Mini Sub Pack",
-                price = "280",
-                restaurantName = "Kids Kitchen",
-                rating = "4.7",
-                deliveryTime = "18-23 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thane, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.sub_sandwich_items_17,
-                title = "Office Party Platter (10 Subs)",
-                price = "2,200",
-                restaurantName = "Corporate Catering",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.sub_sandwich_items_18,
-                title = "Gluten-Free Veg Sub",
-                price = "300",
-                restaurantName = "Gluten-Free Kitchen",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Panvel, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.sub_sandwich_items_19,
-                title = "Wedding Catering Sub Platter",
-                price = "3,500",
-                restaurantName = "Wedding Caterers",
-                rating = "4.9",
-                deliveryTime = "55-60 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Navi Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.sub_sandwich_items_20,
-                title = "Gourmet Truffle Chicken Sub",
-                price = "450",
-                restaurantName = "Luxury Kitchen",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Alibaug, Maharashtra"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Sub Sandwich restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SUB", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_italian_bread),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Sub Sandwich restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun PancakeCategoryPage() {
+fun PancakeCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for PANCAKE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PANCAKE")
+        restaurantViewModel.loadFeaturedRestaurants("PANCAKE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PANCAKE", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -40723,99 +40375,21 @@ fun PancakeCategoryPage() {
             ),
             rows = 2
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = pancakeFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val pancakeItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.pancake_1,
-                title = "Classic Buttermilk Pancake Stack",
-                price = "220",
-                restaurantName = "Pancake House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.pancake_2,
-                title = "Chocolate Chip Pancakes",
-                price = "250",
-                restaurantName = "Sweet Tooth Cafe",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.pancake_3,
-                title = "Blueberry Pancake with Maple Syrup",
-                price = "280",
-                restaurantName = "Berry Delight",
-                rating = "4.9",
-                deliveryTime = "18-23 mins",
-                distance = "0.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.pancake_4,
-                title = "Protein Pancake with Fruits",
-                price = "300",
-                restaurantName = "Fit Kitchen",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.pancake_5,
-                title = "Red Velvet Pancake Stack",
-                price = "320",
-                restaurantName = "Dessert Paradise",
-                rating = "4.8",
-                deliveryTime = "22-27 mins",
-                distance = "0.9 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Sion, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.pancake_6,
-                title = "Banana Nut Pancakes with Honey",
-                price = "270",
-                restaurantName = "Nature's Kitchen",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Ghatkopar, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED PANCAKE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -40823,30 +40397,101 @@ fun PancakeCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = pancakeItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Pancake items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PANCAKE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_pancake),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Pancake items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED PANCAKE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -40854,7 +40499,6 @@ fun PancakeCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -40866,282 +40510,95 @@ fun PancakeCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val pancakeItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.pancake_items_1,
-                title = "Classic Buttermilk Pancake Stack",
-                price = "220",
-                restaurantName = "Pancake House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.pancake_items_2,
-                title = "Chocolate Chip Pancakes",
-                price = "250",
-                restaurantName = "Sweet Tooth Cafe",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.pancake_items_3,
-                title = "Blueberry Pancake with Maple Syrup",
-                price = "280",
-                restaurantName = "Berry Delight",
-                rating = "4.9",
-                deliveryTime = "18-23 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.pancake_items_4,
-                title = "Protein Pancake with Fruits",
-                price = "300",
-                restaurantName = "Fit Kitchen",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.pancake_items_5,
-                title = "Red Velvet Pancake Stack",
-                price = "320",
-                restaurantName = "Dessert Paradise",
-                rating = "4.8",
-                deliveryTime = "22-27 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sion, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.pancake_items_6,
-                title = "Banana Nut Pancakes with Honey",
-                price = "270",
-                restaurantName = "Nature's Kitchen",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ghatkopar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.pancake_items_7,
-                title = "Apple Cinnamon Pancakes",
-                price = "260",
-                restaurantName = "Autumn Kitchen",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.pancake_items_8,
-                title = "Nutella Stuffed Pancakes",
-                price = "340",
-                restaurantName = "Chocolate Heaven",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.pancake_items_9,
-                title = "Family Pancake Breakfast",
-                price = "650",
-                restaurantName = "Family Kitchen",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.pancake_items_10,
-                title = "Lemon Ricotta Pancakes",
-                price = "310",
-                restaurantName = "Italian Cafe",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.pancake_items_11,
-                title = "Vegan Pancakes with Berries",
-                price = "230",
-                restaurantName = "Vegan Delights",
-                rating = "4.7",
-                deliveryTime = "22-27 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.pancake_items_12,
-                title = "Gluten-Free Pancake Stack",
-                price = "290",
-                restaurantName = "Healthy Bites",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kandivali, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.pancake_items_13,
-                title = "Coconut & Pineapple Pancakes",
-                price = "280",
-                restaurantName = "Tropical Treats",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.pancake_items_14,
-                title = "Biscoff Pancakes with Cream",
-                price = "350",
-                restaurantName = "Dessert Cafe",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.pancake_items_15,
-                title = "Strawberry Cheesecake Pancakes",
-                price = "330",
-                restaurantName = "Cheesecake Factory",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chembur, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.pancake_items_16,
-                title = "Kids Animal Shape Pancakes",
-                price = "210",
-                restaurantName = "Kids Cafe",
-                rating = "4.7",
-                deliveryTime = "18-23 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thane, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.pancake_items_17,
-                title = "Brunch Pancake Platter",
-                price = "780",
-                restaurantName = "Brunch Specials",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Panvel, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.pancake_items_18,
-                title = "Matcha Green Tea Pancakes",
-                price = "310",
-                restaurantName = "Asian Fusion",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.pancake_items_19,
-                title = "Birthday Party Pancake Pack",
-                price = "1,200",
-                restaurantName = "Party Specials",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Navi Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.pancake_items_20,
-                title = "Gold Leaf Pancakes with Caviar",
-                price = "1,500",
-                restaurantName = "Luxury Brunch",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Alibaug, Maharashtra"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Pancake restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PANCAKE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_pancake),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Pancake restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

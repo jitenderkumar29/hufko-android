@@ -534,9 +534,9 @@ fun CategoryTabsFood(
                 CategoryPage.VegLollipop -> VegLollipopCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Sub -> SubCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Pancake -> PancakeCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Nihari -> NihariCategoryPage()
-                CategoryPage.Tacos -> TacosCategoryPage()
-                CategoryPage.Thepla -> TheplaCategoryPage()
+                CategoryPage.Nihari -> NihariCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Tacos -> TacosCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Thepla -> TheplaCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Fafda -> FafdaCategoryPage()
                 CategoryPage.Chocolate -> ChocolateCategoryPage()
                 CategoryPage.CurdRice -> CurdRiceCategoryPage()
@@ -40605,10 +40605,24 @@ fun PancakeCategoryPage(
 }
 
 @Composable
-fun NihariCategoryPage() {
+fun NihariCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for NIHARI category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: NIHARI")
+        restaurantViewModel.loadFeaturedRestaurants("NIHARI", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("NIHARI", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -40824,95 +40838,17 @@ fun NihariCategoryPage() {
             filterConfig = nihariFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val nihariItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.nihari_1,
-                title = "Royal Beef Nihari",
-                price = "350",
-                restaurantName = "Karachi Nihari House",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mohammed Ali Road, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.nihari_2,
-                title = "Mughlai Mutton Nihari",
-                price = "420",
-                restaurantName = "Al-Noor Restaurant",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bhendi Bazaar, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.nihari_3,
-                title = "Chicken Nihari with Bone Marrow",
-                price = "380",
-                restaurantName = "Delhi Darbar",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kurla, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.nihari_4,
-                title = "Extra Spicy Goat Nihari",
-                price = "450",
-                restaurantName = "Bohri Kitchen",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Byculla, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.nihari_5,
-                title = "Traditional Beef Nihari with Khamiri Roti",
-                price = "320",
-                restaurantName = "Bade Miyan",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.nihari_6,
-                title = "Vegetable Nihari Special",
-                price = "280",
-                restaurantName = "Pure Veg Nihari Corner",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Sion, Mumbai"
-            )
-        )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED NIHARI ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -40920,30 +40856,101 @@ fun NihariCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = nihariItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Nihari items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("NIHARI", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_veg_nihari),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Nihari items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED NIHARI RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -40951,7 +40958,6 @@ fun NihariCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -40963,292 +40969,119 @@ fun NihariCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val nihariItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.nihari_items_1,
-                title = "Royal Beef Nihari",
-                price = "350",
-                restaurantName = "Karachi Nihari House",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mohammed Ali Road, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.nihari_items_2,
-                title = "Mughlai Mutton Nihari",
-                price = "420",
-                restaurantName = "Al-Noor Restaurant",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bhendi Bazaar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.nihari_items_3,
-                title = "Chicken Nihari with Bone Marrow",
-                price = "380",
-                restaurantName = "Delhi Darbar",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kurla, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.nihari_items_4,
-                title = "Extra Spicy Goat Nihari",
-                price = "450",
-                restaurantName = "Bohri Kitchen",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Byculla, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.nihari_items_5,
-                title = "Traditional Beef Nihari",
-                price = "320",
-                restaurantName = "Bade Miyan",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.nihari_items_6,
-                title = "Vegetable Nihari Special",
-                price = "280",
-                restaurantName = "Pure Veg Nihari Corner",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Sion, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.nihari_items_7,
-                title = "Family Nihari Combo",
-                price = "850",
-                restaurantName = "Nihari Family Restaurant",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.nihari_items_8,
-                title = "Lamb Shank Nihari",
-                price = "520",
-                restaurantName = "Royal Mughal",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kemps Corner, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.nihari_items_9,
-                title = "Awadhi Nihari Handi",
-                price = "480",
-                restaurantName = "Lucknowi Kitchen",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Marine Lines, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.nihari_items_10,
-                title = "Nalli Nihari Special",
-                price = "550",
-                restaurantName = "Nalli House",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "3.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Nagpada, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.nihari_items_11,
-                title = "Dum Nihari with Sheermal",
-                price = "380",
-                restaurantName = "Hyderabadi Kitchen",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.nihari_items_12,
-                title = "Egg Nihari Breakfast Special",
-                price = "240",
-                restaurantName = "Morning Delights",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ghatkopar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.nihari_items_13,
-                title = "Shahi Nihari with Khamiri Roti",
-                price = "410",
-                restaurantName = "Shahi Dastarkhwan",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mahim, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.nihari_items_14,
-                title = "Butter Chicken Nihari Fusion",
-                price = "430",
-                restaurantName = "Fusion Kitchen",
-                rating = "4.7",
-                deliveryTime = "28-33 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.nihari_items_15,
-                title = "Party Nihari Pack",
-                price = "1,200",
-                restaurantName = "Party Specials",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.nihari_items_16,
-                title = "Nihari Biryani Combo",
-                price = "650",
-                restaurantName = "Combo Kitchen",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.nihari_items_17,
-                title = "Kolkata Style Nihari",
-                price = "370",
-                restaurantName = "Kolkata Kitchen",
-                rating = "4.6",
-                deliveryTime = "30-35 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.nihari_items_18,
-                title = "Healthy Nihari - Low Oil",
-                price = "290",
-                restaurantName = "Healthy Kitchen",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.nihari_items_19,
-                title = "Wedding Style Nihari",
-                price = "1,500",
-                restaurantName = "Wedding Caterers",
-                rating = "4.9",
-                deliveryTime = "60-70 mins",
-                distance = "3.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thane, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.nihari_items_20,
-                title = "Gold Leaf Nihari",
-                price = "2,000",
-                restaurantName = "Luxury Dining",
-                rating = "4.9",
-                deliveryTime = "50-55 mins",
-                distance = "4.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Nihari restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("NIHARI", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_veg_nihari),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Nihari restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun TacosCategoryPage() {
+fun TacosCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for TACOS category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: TACOS")
+        restaurantViewModel.loadFeaturedRestaurants("TACOS", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("TACOS", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -41451,95 +41284,17 @@ fun TacosCategoryPage() {
             filterConfig = tacosFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val tacoItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.taco_1,
-                title = "Carne Asada Street Tacos",
-                price = "280",
-                restaurantName = "Taco Maria",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.taco_2,
-                title = "Al Pastor with Pineapple",
-                price = "260",
-                restaurantName = "El Taco Loco",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.taco_3,
-                title = "Baja Fish Tacos",
-                price = "320",
-                restaurantName = "Taco del Mar",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.taco_4,
-                title = "Spicy Chicken Tinga Tacos",
-                price = "240",
-                restaurantName = "Los Tacos Hermanos",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Khar, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.taco_5,
-                title = "Vegetarian Alambre Tacos",
-                price = "220",
-                restaurantName = "Green Tacos",
-                rating = "4.5",
-                deliveryTime = "18-22 mins",
-                distance = "1.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.taco_6,
-                title = "Breakfast Tacos with Chorizo",
-                price = "200",
-                restaurantName = "Desayuno Tacos",
-                rating = "4.4",
-                deliveryTime = "12-15 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED TACO ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -41547,30 +41302,101 @@ fun TacosCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = tacoItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Taco items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("TACOS", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_veg_taco),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Taco items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED TACO RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -41578,7 +41404,6 @@ fun TacosCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -41590,292 +41415,119 @@ fun TacosCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val tacoItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.taco_items_1,
-                title = "Carne Asada Street Tacos",
-                price = "280",
-                restaurantName = "Taco Maria",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.taco_items_2,
-                title = "Al Pastor with Pineapple",
-                price = "260",
-                restaurantName = "El Taco Loco",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.taco_items_3,
-                title = "Baja Fish Tacos",
-                price = "320",
-                restaurantName = "Taco del Mar",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.taco_items_4,
-                title = "Spicy Chicken Tinga Tacos",
-                price = "240",
-                restaurantName = "Los Tacos Hermanos",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Khar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.taco_items_5,
-                title = "Vegetarian Alambre Tacos",
-                price = "220",
-                restaurantName = "Green Tacos",
-                rating = "4.5",
-                deliveryTime = "18-22 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.taco_items_6,
-                title = "Breakfast Tacos with Chorizo",
-                price = "200",
-                restaurantName = "Desayuno Tacos",
-                rating = "4.4",
-                deliveryTime = "12-15 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.taco_items_7,
-                title = "Carnitas Street Tacos",
-                price = "270",
-                restaurantName = "Taco Truck",
-                rating = "4.7",
-                deliveryTime = "22-27 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.taco_items_8,
-                title = "Shrimp Diablo Tacos",
-                price = "350",
-                restaurantName = "Mariscos El Rey",
-                rating = "4.8",
-                deliveryTime = "28-33 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.taco_items_9,
-                title = "Barbacoa Beef Tacos",
-                price = "310",
-                restaurantName = "Barbacoa Kings",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Byculla, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.taco_items_10,
-                title = "Lengua (Beef Tongue) Tacos",
-                price = "330",
-                restaurantName = "Authentic Mexican",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kemps Corner, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.taco_items_11,
-                title = "Vegan Jackfruit Tacos",
-                price = "230",
-                restaurantName = "Vegan Taco Bar",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mahim, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.taco_items_12,
-                title = "Taco Sampler Platter",
-                price = "650",
-                restaurantName = "Taco Fiesta",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ghatkopar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.taco_items_13,
-                title = "Birria Tacos with Consomme",
-                price = "380",
-                restaurantName = "Birria Queen",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.taco_items_14,
-                title = "Fish Taco Tuesday Special",
-                price = "290",
-                restaurantName = "Tuesday Tacos",
-                rating = "4.7",
-                deliveryTime = "22-27 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.taco_items_15,
-                title = "Lamb Barbacoa Tacos",
-                price = "410",
-                restaurantName = "Lamb Lovers",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.taco_items_16,
-                title = "Loaded Nacho Tacos",
-                price = "340",
-                restaurantName = "Nacho Taco",
-                rating = "4.6",
-                deliveryTime = "18-23 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.taco_items_17,
-                title = "Korean BBQ Fusion Tacos",
-                price = "370",
-                restaurantName = "Fusion Street",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.taco_items_18,
-                title = "Breakfast Burrito Taco Hybrid",
-                price = "250",
-                restaurantName = "Breakfast Club",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.taco_items_19,
-                title = "Party Taco Bar Package",
-                price = "1,200",
-                restaurantName = "Party Tacos",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thane, Maharashtra"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.taco_items_20,
-                title = "Gold Leaf Wagyu Tacos",
-                price = "1,800",
-                restaurantName = "Luxury Tacos",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "3.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Taco restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("TACOS", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_veg_taco),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Taco restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun TheplaCategoryPage() {
+fun TheplaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for THEPLA category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: THEPLA")
+        restaurantViewModel.loadFeaturedRestaurants("THEPLA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("THEPLA", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -42110,95 +41762,17 @@ fun TheplaCategoryPage() {
             filterConfig = theplaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
             }
         )
 
-        val theplaItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.thepla_1,
-                title = "Fresh Methi Thepla",
-                price = "120",
-                restaurantName = "Gujarati Kitchen",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.thepla_2,
-                title = "Muli Thepla Combo",
-                price = "150",
-                restaurantName = "Saurashtra Snacks",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Malad East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.thepla_3,
-                title = "Garlic Thepla Family Pack",
-                price = "180",
-                restaurantName = "Rajwadi Thali",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.thepla_4,
-                title = "Palak Thepla with Chunda",
-                price = "140",
-                restaurantName = "Healthy Bites",
-                rating = "4.6",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.thepla_5,
-                title = "Mixed Vegetable Thepla",
-                price = "160",
-                restaurantName = "Veggie Delight",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "2.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kandivali East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.thepla_6,
-                title = "Jowar Thepla Diet Pack",
-                price = "200",
-                restaurantName = "Gluten Free Hub",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "3.0 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED THEPLA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -42206,30 +41780,101 @@ fun TheplaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = theplaItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Thepla items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("THEPLA", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg,
+                            discountAmount = restaurant.discountAmountAvg,
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_methi_thepla),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Thepla items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED THEPLA RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -42237,7 +41882,6 @@ fun TheplaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -42249,282 +41893,95 @@ fun TheplaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val theplaItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.thepla_items_1,
-                title = "Fresh Methi Thepla",
-                price = "120",
-                restaurantName = "Gujarati Kitchen",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.thepla_items_2,
-                title = "Muli Thepla Combo",
-                price = "150",
-                restaurantName = "Saurashtra Snacks",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.thepla_items_3,
-                title = "Garlic Thepla Family Pack",
-                price = "180",
-                restaurantName = "Rajwadi Thali",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.thepla_items_4,
-                title = "Palak Thepla with Chunda",
-                price = "140",
-                restaurantName = "Healthy Bites",
-                rating = "4.6",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.thepla_items_5,
-                title = "Mixed Vegetable Thepla",
-                price = "160",
-                restaurantName = "Veggie Delight",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kandivali East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.thepla_items_6,
-                title = "Jowar Thepla Diet Pack",
-                price = "200",
-                restaurantName = "Gluten Free Hub",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "3.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.thepla_items_7,
-                title = "Bajra Thepla Winter Special",
-                price = "170",
-                restaurantName = "Winter Warmers",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goregaon West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.thepla_items_8,
-                title = "Pudina Thepla Refresh Pack",
-                price = "130",
-                restaurantName = "Fresh Mint Kitchen",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dahisar East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.thepla_items_9,
-                title = "Lasaniya Thepla (Garlic Chilli)",
-                price = "145",
-                restaurantName = "Spicy Gujarat",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mira Road, Thane"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.thepla_items_10,
-                title = "Beetroot Thepla Healthy Choice",
-                price = "155",
-                restaurantName = "Colorful Kitchen",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vasai West, Palghar"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.thepla_items_11,
-                title = "Thepla Travel Pack (30 pcs)",
-                price = "350",
-                restaurantName = "Travel Foods",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bhayandar East, Thane"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.thepla_items_12,
-                title = "Gobi Thepla Cauliflower Special",
-                price = "135",
-                restaurantName = "Winter Vegetables",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Nallasopara West, Palghar"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.thepla_items_13,
-                title = "Moong Dal Thepla Protein Rich",
-                price = "165",
-                restaurantName = "Protein Kitchen",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Virar West, Palghar"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.thepla_items_14,
-                title = "Ajwain Thepla Digestion Aid",
-                price = "125",
-                restaurantName = "Digestive Foods",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ulhasnagar, Thane"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.thepla_items_15,
-                title = "Dabeli Thepla Fusion",
-                price = "140",
-                restaurantName = "Fusion Snacks",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kalyan West, Thane"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.thepla_items_16,
-                title = "Thepla Thali Complete Meal",
-                price = "220",
-                restaurantName = "Gujarati Thali House",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dombivli East, Thane"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.thepla_items_17,
-                title = "Sugar-Free Diabetic Thepla",
-                price = "190",
-                restaurantName = "Diabetic Kitchen",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Badlapur East, Thane"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.thepla_items_18,
-                title = "Oil-Free Thepla Diet Special",
-                price = "175",
-                restaurantName = "Diet Kitchen",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ambernath East, Thane"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.thepla_items_19,
-                title = "Party Thepla Pack (50 pcs)",
-                price = "600",
-                restaurantName = "Party Caterers",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "3.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Navi Mumbai, Panvel"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.thepla_items_20,
-                title = "Gold Leaf Thepla Luxury",
-                price = "500",
-                restaurantName = "Luxury Gujarati",
-                rating = "4.9",
-                deliveryTime = "50-55 mins",
-                distance = "4.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "South Mumbai, Colaba"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Thepla restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("THEPLA", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_methi_thepla),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Thepla restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

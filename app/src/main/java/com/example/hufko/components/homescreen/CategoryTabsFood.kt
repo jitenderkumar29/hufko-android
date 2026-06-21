@@ -41988,10 +41988,24 @@ fun TheplaCategoryPage(
 }
 
 @Composable
-fun FafdaCategoryPage() {
+fun FafdaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for FAFDA category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: FAFDA")
+        restaurantViewModel.loadFeaturedRestaurants("FAFDA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("FAFDA", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -42174,95 +42188,20 @@ fun FafdaCategoryPage() {
             filterConfig = fafdaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
+
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-        val fafdaItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.fafda_1,
-                title = "Classic Gujarati Fafda",
-                price = "80",
-                restaurantName = "Ahmedabad Farsan",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.fafda_2,
-                title = "Spicy Masala Fafda",
-                price = "90",
-                restaurantName = "Surati Farsan House",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Malad East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.fafda_3,
-                title = "Fafda-Jalebi Combo",
-                price = "120",
-                restaurantName = "Rajwadi Farsan",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.fafda_4,
-                title = "Crispy Garlic Fafda",
-                price = "95",
-                restaurantName = "Gujju Tadka",
-                rating = "4.6",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.fafda_5,
-                title = "Family Pack Fafda",
-                price = "180",
-                restaurantName = "Saurashtra Snacks",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "2.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Kandivali East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.fafda_6,
-                title = "Premium Thin Fafda",
-                price = "110",
-                restaurantName = "Farsan Express",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "3.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED FAFDA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -42270,30 +42209,101 @@ fun FafdaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = fafdaItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Fafda items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("FAFDA", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_plain_fafda),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Fafda items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED FAFDA RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -42301,7 +42311,6 @@ fun FafdaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -42313,282 +42322,95 @@ fun FafdaCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val fafdaItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.fafda_items_1,
-                title = "Classic Gujarati Fafda",
-                price = "80",
-                restaurantName = "Ahmedabad Farsan",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.fafda_items_2,
-                title = "Spicy Masala Fafda",
-                price = "90",
-                restaurantName = "Surati Farsan House",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.fafda_items_3,
-                title = "Fafda-Jalebi Festival Combo",
-                price = "120",
-                restaurantName = "Rajwadi Farsan",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.fafda_items_4,
-                title = "Crispy Garlic Fafda",
-                price = "95",
-                restaurantName = "Gujju Tadka",
-                rating = "4.6",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.fafda_items_5,
-                title = "Family Pack Fafda (25 pcs)",
-                price = "180",
-                restaurantName = "Saurashtra Snacks",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kandivali East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.fafda_items_6,
-                title = "Premium Thin Fafda",
-                price = "110",
-                restaurantName = "Farsan Express",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "3.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.fafda_items_7,
-                title = "Jeera Fafda Cumin Special",
-                price = "85",
-                restaurantName = "Cumin Kitchen",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goregaon West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.fafda_items_8,
-                title = "Chatpata Fafda Street Style",
-                price = "75",
-                restaurantName = "Street Food Corner",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dahisar East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.fafda_items_9,
-                title = "Ajwain Fafda Digestion Aid",
-                price = "88",
-                restaurantName = "Healthy Farsan",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mira Road, Thane"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.fafda_items_10,
-                title = "Fafda with Papaya Chutney",
-                price = "100",
-                restaurantName = "Traditional Gujarati",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vasai West, Palghar"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.fafda_items_11,
-                title = "Oil-Free Diet Fafda",
-                price = "95",
-                restaurantName = "Diet Farsan",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bhayandar East, Thane"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.fafda_items_12,
-                title = "Fafda with Sambharo",
-                price = "105",
-                restaurantName = "Kathiawadi Special",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Nallasopara West, Palghar"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.fafda_items_13,
-                title = "Fafda with Kadhi Combo",
-                price = "130",
-                restaurantName = "Gujarati Combo House",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Virar West, Palghar"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.fafda_items_14,
-                title = "Besan Fafda Gram Flour Special",
-                price = "82",
-                restaurantName = "Gram Flour Kitchen",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ulhasnagar, Thane"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.fafda_items_15,
-                title = "Party Fafda Pack (50 pcs)",
-                price = "350",
-                restaurantName = "Party Farsan",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kalyan West, Thane"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.fafda_items_16,
-                title = "Fafda Thali Complete Meal",
-                price = "150",
-                restaurantName = "Gujarati Thali House",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dombivli East, Thane"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.fafda_items_17,
-                title = "Low-Salt Fafda Healthy",
-                price = "87",
-                restaurantName = "Healthy Heart Kitchen",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Badlapur East, Thane"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.fafda_items_18,
-                title = "Fafda with Green Chutney",
-                price = "92",
-                restaurantName = "Chutney Special",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ambernath East, Thane"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.fafda_items_19,
-                title = "Fafda with Curd Combo",
-                price = "115",
-                restaurantName = "Cool Combo House",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "3.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Navi Mumbai, Panvel"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.fafda_items_20,
-                title = "Premium Gold Fafda Luxury",
-                price = "250",
-                restaurantName = "Luxury Gujarati Farsan",
-                rating = "4.9",
-                deliveryTime = "50-55 mins",
-                distance = "4.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "South Mumbai, Colaba"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Fafda restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("FAFDA", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_plain_fafda),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Fafda restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

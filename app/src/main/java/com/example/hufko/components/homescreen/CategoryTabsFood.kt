@@ -542,9 +542,9 @@ fun CategoryTabsFood(
                 CategoryPage.CurdRice -> CurdRiceCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Pudding -> PuddingCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Croissant -> CroissantCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Khandvi -> KhandviCategoryPage()
-                CategoryPage.Gajak -> GajakCategoryPage()
-                CategoryPage.SambarRice -> SambarRiceCategoryPage()
+                CategoryPage.Khandvi -> KhandviCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Gajak -> GajakCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.SambarRice -> SambarRiceCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Tart -> TartCategoryPage()
                 CategoryPage.Tiramisu -> TiramisuCategoryPage()
                 CategoryPage.Pie -> PieCategoryPage()
@@ -44106,7 +44106,22 @@ fun CroissantCategoryPage(
 }
 
 @Composable
-fun KhandviCategoryPage() {
+fun KhandviCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for KHANDVI category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: KHANDVI")
+        restaurantViewModel.loadFeaturedRestaurants("KHANDVI", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("KHANDVI", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -44245,95 +44260,19 @@ fun KhandviCategoryPage() {
             filterConfig = khandviFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-        val khandviItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.khandvi_1,
-                title = "Traditional Gujarati Khandvi",
-                price = "₹80",
-                restaurantName = "Shreeji Snacks",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Ghatkopar East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.khandvi_2,
-                title = "Sesame Seed Khandvi",
-                price = "₹90",
-                restaurantName = "Maharashtra Bhandar",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.khandvi_3,
-                title = "Coconut Coriander Khandvi",
-                price = "₹95",
-                restaurantName = "Kokan Spice",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Vile Parle East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.khandvi_4,
-                title = "Spicy Mustard Khandvi",
-                price = "₹85",
-                restaurantName = "Gujarat Bhavan",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.khandvi_5,
-                title = "Paneer Stuffed Khandvi",
-                price = "₹110",
-                restaurantName = "Veg Fusion Cafe",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.khandvi_6,
-                title = "Garlic Curry Leaf Khandvi",
-                price = "₹100",
-                restaurantName = "South Indian Tiffin",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Matunga, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED KHANDVI ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -44341,30 +44280,101 @@ fun KhandviCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = khandviItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Khandvi items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("KHANDVI", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_plain_khandvi),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Khandvi items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED KHANDVI RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -44372,7 +44382,6 @@ fun KhandviCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -44384,289 +44393,117 @@ fun KhandviCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val khandviItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.khandvi_items_1,
-                title = "Traditional Gujarati Khandvi",
-                price = "₹70",
-                restaurantName = "Shreeji Farsan Mart",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ghatkopar East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.khandvi_items_2,
-                title = "Sesame Til Khandvi",
-                price = "₹80",
-                restaurantName = "Maharashtra Mishthan Bhandar",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.khandvi_items_3,
-                title = "Coconut Coriander Khandvi",
-                price = "₹85",
-                restaurantName = "Kokan Swad",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.khandvi_items_4,
-                title = "Spicy Mustard Seed Khandvi",
-                price = "₹75",
-                restaurantName = "Gujarat Aahar",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.khandvi_items_5,
-                title = "Paneer Stuffed Khandvi Rolls",
-                price = "₹100",
-                restaurantName = "Veg Fusion House",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.khandvi_items_6,
-                title = "Garlic Curry Leaf Khandvi",
-                price = "₹90",
-                restaurantName = "South Indian Tiffin Room",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Matunga, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.khandvi_items_7,
-                title = "Low Oil Khandvi",
-                price = "₹80",
-                restaurantName = "Healthy Snacks Corner",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mulund West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.khandvi_items_8,
-                title = "Ginger Chilli Khandvi",
-                price = "₹85",
-                restaurantName = "Spice Route Cafe",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.khandvi_items_9,
-                title = "Methi Khandvi",
-                price = "₹90",
-                restaurantName = "Gujarati Kitchen",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kandivali West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.khandvi_items_10,
-                title = "Festival Special Khandvi Platter",
-                price = "₹200",
-                restaurantName = "Festival Farsan",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.khandvi_items_11,
-                title = "Chocolate Khandvi (Fusion)",
-                price = "₹110",
-                restaurantName = "Fusion Farsan Lab",
-                rating = "4.4",
-                deliveryTime = "25-30 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.khandvi_items_12,
-                title = "Curry Leaf Peanut Khandvi",
-                price = "₹95",
-                restaurantName = "Flavours of Gujarat",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.khandvi_items_13,
-                title = "Asafoetida (Hing) Khandvi",
-                price = "₹75",
-                restaurantName = "Digestive Delights",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kings Circle, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.khandvi_items_14,
-                title = "Jain Khandvi (No Onion-Garlic)",
-                price = "₹85",
-                restaurantName = "Jain Bhojanalaya",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.khandvi_items_15,
-                title = "Party Khandvi Catering Tray",
-                price = "₹350",
-                restaurantName = "Event Farsan Special",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "3.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thane West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.khandvi_items_16,
-                title = "Ghee Roasted Khandvi",
-                price = "₹100",
-                restaurantName = "Desi Ghee Kitchen",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bhayandar East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.khandvi_items_17,
-                title = "Microgreens Khandvi",
-                price = "₹105",
-                restaurantName = "Organic Bites",
-                rating = "4.6",
-                deliveryTime = "35-40 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Palava City, Thane"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.khandvi_items_18,
-                title = "Khandvi Chaat",
-                price = "₹95",
-                restaurantName = "Chaat Gali",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lokhandwala, Andheri West"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.khandvi_items_19,
-                title = "Ragi (Nachni) Khandvi",
-                price = "₹100",
-                restaurantName = "Millet Magic",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kharghar, Navi Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.khandvi_items_20,
-                title = "Premium Assorted Khandvi Box",
-                price = "₹280",
-                restaurantName = "Gourmet Gujarati",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Fort, South Mumbai"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Khandvi restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("KHANDVI", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_plain_khandvi),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Khandvi restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun GajakCategoryPage() {
+fun GajakCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for GAJAK category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: GAJAK")
+        restaurantViewModel.loadFeaturedRestaurants("GAJAK", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("GAJAK", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -44816,95 +44653,19 @@ fun GajakCategoryPage() {
             filterConfig = gajakFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-        val gajakItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.gajak_1,
-                title = "Traditional Til Gajak",
-                price = "₹120",
-                restaurantName = "Morena Sweet House",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.gajak_2,
-                title = "Peanut Gajak (Mungfali)",
-                price = "₹110",
-                restaurantName = "Desi Mithai Bhandar",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Dadar East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.gajak_3,
-                title = "Khobari Coconut Gajak",
-                price = "₹140",
-                restaurantName = "Kokan Mithaiwala",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Ghatkopar West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.gajak_4,
-                title = "Pista Badam Deluxe Gajak",
-                price = "₹220",
-                restaurantName = "Premium Mithai House",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.gajak_5,
-                title = "Elaichi Cardamom Gajak",
-                price = "₹130",
-                restaurantName = "Gwalior Sweets",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Mulund West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.gajak_6,
-                title = "Sugar-Free Date Gajak",
-                price = "₹150",
-                restaurantName = "Healthy Mithai Corner",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Matunga, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED GAJAK ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -44912,30 +44673,101 @@ fun GajakCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = gajakItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Gajak items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("GAJAK", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_til_gajak),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Gajak items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED GAJAK RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -44943,7 +44775,6 @@ fun GajakCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -44955,289 +44786,117 @@ fun GajakCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val gajakItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.gajak_items_1,
-                title = "Traditional Rajasthani Gajak",
-                price = "₹120",
-                restaurantName = "Bikaner Sweets & Snacks",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.gajak_items_2,
-                title = "Mathura Peda Gajak",
-                price = "₹150",
-                restaurantName = "Agrawal Sweets",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.gajak_items_3,
-                title = "Gond Katira Gajak (Winter Special)",
-                price = "₹180",
-                restaurantName = "Winter Delights",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.gajak_items_4,
-                title = "Peanut & Sesame Gajak",
-                price = "₹110",
-                restaurantName = "Nutty Chef",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "0.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.gajak_items_5,
-                title = "Sugar-Free Gajak",
-                price = "₹140",
-                restaurantName = "Healthy Alternatives",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Matunga, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.gajak_items_6,
-                title = "Dry Fruit Deluxe Gajak",
-                price = "₹250",
-                restaurantName = "Premium Mithai",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.gajak_items_7,
-                title = "Coconut Gajak",
-                price = "₹130",
-                restaurantName = "Coastal Flavours",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.gajak_items_8,
-                title = "Spicy Masala Gajak",
-                price = "₹125",
-                restaurantName = "Chai Time Special",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ghatkopar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.gajak_items_9,
-                title = "Mango Gajak (Seasonal)",
-                price = "₹160",
-                restaurantName = "Seasonal Tastes",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.gajak_items_10,
-                title = "Chocolate Coated Gajak",
-                price = "₹190",
-                restaurantName = "Fusion Mithai",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.gajak_items_11,
-                title = "Multiseed Gajak",
-                price = "₹145",
-                restaurantName = "Seed Story",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kurla West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.gajak_items_12,
-                title = "Jaggery & Ginger Gajak",
-                price = "₹135",
-                restaurantName = "Traditional Roots",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.gajak_items_13,
-                title = "Pista Badam Gajak Roll",
-                price = "₹220",
-                restaurantName = "Royal Sweets",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.gajak_items_14,
-                title = "Saffron Cardamom Gajak",
-                price = "₹200",
-                restaurantName = "Kesar Mithai",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chembur, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.gajak_items_15,
-                title = "Ragi (Nachni) Gajak",
-                price = "₹140",
-                restaurantName = "Millet Magic",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kharghar, Navi Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.gajak_items_16,
-                title = "Gulkand Gajak",
-                price = "₹175",
-                restaurantName = "Rose Petal",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.gajak_items_17,
-                title = "Low-Jaggery Gajak",
-                price = "₹130",
-                restaurantName = "Light Bites",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mulund West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.gajak_items_18,
-                title = "Coffee Walnut Gajak",
-                price = "₹185",
-                restaurantName = "Cafe Mithai",
-                rating = "4.6",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.gajak_items_19,
-                title = "Assorted Mini Gajak Gift Pack",
-                price = "₹320",
-                restaurantName = "Gift Mithai House",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thane West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.gajak_items_20,
-                title = "Makhana (Fox Nut) Gajak",
-                price = "₹210",
-                restaurantName = "Healthy Cravings",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Navi Mumbai, Vashi"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Gajak restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("GAJAK", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_til_gajak),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Gajak restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun SambarRiceCategoryPage() {
+fun SambarRiceCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SAMBAR_RICE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SAMBAR_RICE")
+        restaurantViewModel.loadFeaturedRestaurants("SAMBAR_RICE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SAMBAR_RICE", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45441,95 +45100,19 @@ fun SambarRiceCategoryPage() {
             filterConfig = sambarRiceFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-        val sambarRiceItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.sambar_rice_1,
-                title = "Traditional Tamil Nadu Sambar Rice",
-                price = "₹150",
-                restaurantName = "Madras Tiffin Room",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Matunga, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.sambar_rice_2,
-                title = "Arachuvitta Sambar Rice",
-                price = "₹180",
-                restaurantName = "Iyengar's Kitchen",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.sambar_rice_3,
-                title = "Kerala Style Sambar Rice",
-                price = "₹165",
-                restaurantName = "Malabar Tiffins",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Chembur, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.sambar_rice_4,
-                title = "Chettinad Kara Sambar Rice",
-                price = "₹190",
-                restaurantName = "Chettinad Aduppu",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "T Nagar, Chennai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.sambar_rice_5,
-                title = "Drumstick & Brinjal Sambar Rice",
-                price = "₹170",
-                restaurantName = "Sambar Special",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.sambar_rice_6,
-                title = "Jain Sambar Rice (No Onion-Garlic)",
-                price = "₹160",
-                restaurantName = "Jain Bhojanalaya",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            )
-        )
-         Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED SAMBAR RICE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -45537,30 +45120,101 @@ fun SambarRiceCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = sambarRiceItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Sambar Rice items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SAMBAR_RICE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_traditional_sambar),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Sambar Rice items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED SAMBAR RICE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -45568,7 +45222,6 @@ fun SambarRiceCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -45580,282 +45233,95 @@ fun SambarRiceCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val sambarRiceItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.sambar_rice_items_1,
-                title = "Traditional Tamil Nadu Sambar Rice",
-                price = "₹150",
-                restaurantName = "Madras Tiffin Room",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Matunga, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.sambar_rice_items_2,
-                title = "Arachuvitta Sambar Rice",
-                price = "₹180",
-                restaurantName = "Iyengar's Kitchen",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.sambar_rice_items_3,
-                title = "Kerala Style Sambar Rice",
-                price = "₹165",
-                restaurantName = "Malabar Tiffins",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Chembur, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.sambar_rice_items_4,
-                title = "Chettinad Kara Sambar Rice",
-                price = "₹190",
-                restaurantName = "Chettinad Aduppu",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "T Nagar, Chennai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.sambar_rice_items_5,
-                title = "Drumstick & Brinjal Sambar Rice",
-                price = "₹170",
-                restaurantName = "Sambar Special",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.sambar_rice_items_6,
-                title = "Jain Sambar Rice",
-                price = "₹160",
-                restaurantName = "Jain Bhojanalaya",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Borivali West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.sambar_rice_items_7,
-                title = "Pumpkin Sambar Rice",
-                price = "₹155",
-                restaurantName = "Kerala Cafe",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.sambar_rice_items_8,
-                title = "Mullangi (Radish) Sambar Rice",
-                price = "₹145",
-                restaurantName = "Tamil Nadu Mess",
-                rating = "4.6",
-                deliveryTime = "30-35 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mulund East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.sambar_rice_items_9,
-                title = "Onion-Tomato Sambar Rice",
-                price = "₹140",
-                restaurantName = "Udupi Grand",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.sambar_rice_items_10,
-                title = "Mysore Style Sambar Rice",
-                price = "₹175",
-                restaurantName = "Mysore Cafe",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.sambar_rice_items_11,
-                title = "Brown Rice Sambar",
-                price = "₹185",
-                restaurantName = "Healthy Kitchen",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.sambar_rice_items_12,
-                title = "Ghee Roasted Sambar Rice",
-                price = "₹200",
-                restaurantName = "Desi Ghee Dhaba",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Khar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.sambar_rice_items_13,
-                title = "Palakkad Iyer Sambar Rice",
-                price = "₹170",
-                restaurantName = "Palakkad Adukkala",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Thane West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.sambar_rice_items_14,
-                title = "Vegan Sambar Rice",
-                price = "₹155",
-                restaurantName = "Green Bowl",
-                rating = "4.6",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Kandivali West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.sambar_rice_items_15,
-                title = "Ladyfinger (Bhindi) Sambar Rice",
-                price = "₹160",
-                restaurantName = "South Indian Tiffins",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goregaon East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.sambar_rice_items_16,
-                title = "Sambar Rice with Papad & Vadam",
-                price = "₹190",
-                restaurantName = "Full Meal Special",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.sambar_rice_items_17,
-                title = "Basmati Sambar Rice",
-                price = "₹195",
-                restaurantName = "Royal Indian Kitchen",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.sambar_rice_items_18,
-                title = "Sambar Rice Combo with Curd Rice",
-                price = "₹220",
-                restaurantName = "Meals & More",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.sambar_rice_items_19,
-                title = "Festival Special Sadhya Sambar Rice",
-                price = "₹210",
-                restaurantName = "Sadhya Express",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Fort, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.sambar_rice_items_20,
-                title = "Extra Dal & Drumstick Sambar Rice",
-                price = "₹185",
-                restaurantName = "Sambar Dhamaka",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar East, Mumbai"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Sambar Rice restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SAMBAR_RICE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_traditional_sambar),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Sambar Rice restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

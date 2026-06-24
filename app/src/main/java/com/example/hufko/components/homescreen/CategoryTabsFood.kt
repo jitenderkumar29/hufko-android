@@ -545,10 +545,10 @@ fun CategoryTabsFood(
                 CategoryPage.Khandvi -> KhandviCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Gajak -> GajakCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.SambarRice -> SambarRiceCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Tart -> TartCategoryPage()
-                CategoryPage.Tiramisu -> TiramisuCategoryPage()
-                CategoryPage.Pie -> PieCategoryPage()
-                CategoryPage.Custard -> CustardCategoryPage()
+                CategoryPage.Tart -> TartCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Tiramisu -> TiramisuCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Pie -> PieCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Custard -> CustardCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.SevPoori -> SevPooriCategoryPage()
                 CategoryPage.Mousse -> MousseCategoryPage()
                 CategoryPage.DalKachori -> DalKachoriCategoryPage()
@@ -45328,7 +45328,22 @@ fun SambarRiceCategoryPage(
 }
 
 @Composable
-fun TartCategoryPage() {
+fun TartCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for TART category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: TART")
+        restaurantViewModel.loadFeaturedRestaurants("TART", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("TART", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45536,99 +45551,23 @@ fun TartCategoryPage() {
             ),
             rows = 3
         )
-         FilterButtonFood(
+        FilterButtonFood(
             filterConfig = tartFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-        val tartItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.tart_1,
-                title = "Classic French Fruit Tart",
-                price = "₹320",
-                restaurantName = "Le Desserterie",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.tart_2,
-                title = "Salted Caramel Chocolate Tart",
-                price = "₹380",
-                restaurantName = "Cocoa Patisserie",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "2.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.tart_3,
-                title = "Zesty Lemon Meringue Tart",
-                price = "₹290",
-                restaurantName = "Citrus & Spice",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.tart_4,
-                title = "Mixed Berry Custard Tart",
-                price = "₹350",
-                restaurantName = "Berrylicious",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "1.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.tart_5,
-                title = "Caramelized Apple & Cinnamon Tart",
-                price = "₹310",
-                restaurantName = "The Tartist",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.tart_6,
-                title = "Belgian Chocolate & Hazelnut Tart",
-                price = "₹420",
-                restaurantName = "Nutmeg & Chocolate",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "2.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED TART ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -45636,30 +45575,101 @@ fun TartCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = tartItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Tarts...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("TART", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_shortcrust),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Tarts found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED TART RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -45667,7 +45677,6 @@ fun TartCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -45679,289 +45688,117 @@ fun TartCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val tartItemsList = listOf(
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.tart_items_1,
-                title = "Classic French Fruit Tart",
-                price = "₹320",
-                restaurantName = "Le Desserterie",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.tart_items_2,
-                title = "Salted Caramel Chocolate Tart",
-                price = "₹380",
-                restaurantName = "Cocoa Patisserie",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.tart_items_3,
-                title = "Zesty Lemon Meringue Tart",
-                price = "₹290",
-                restaurantName = "Citrus & Spice",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.tart_items_4,
-                title = "Mixed Berry Custard Tart",
-                price = "₹350",
-                restaurantName = "Berrylicious",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.tart_items_5,
-                title = "Caramelized Apple & Cinnamon Tart",
-                price = "₹310",
-                restaurantName = "The Tartist",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.tart_items_6,
-                title = "Belgian Chocolate & Hazelnut Tart",
-                price = "₹420",
-                restaurantName = "Nutmeg & Chocolate",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "2.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.tart_items_7,
-                title = "Key Lime Pie Tart",
-                price = "₹300",
-                restaurantName = "Tropical Tarts",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Khar, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.tart_items_8,
-                title = "Pecan Maple Tart",
-                price = "₹360",
-                restaurantName = "American Desserts Co.",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.tart_items_9,
-                title = "Passion Fruit & Coconut Tart",
-                price = "₹340",
-                restaurantName = "Tropical Patisserie",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.tart_items_10,
-                title = "Savory Mushroom & Thyme Tart",
-                price = "₹280",
-                restaurantName = "Le Bistro",
-                rating = "4.6",
-                deliveryTime = "30-35 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.tart_items_11,
-                title = "Gluten-Free Almond & Berry Tart",
-                price = "₹390",
-                restaurantName = "Pure Bakes",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.tart_items_12,
-                title = "Tiramisu Tart",
-                price = "₹350",
-                restaurantName = "Italian Dolce",
-                rating = "4.7",
-                deliveryTime = "40-45 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Prabhadevi, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.tart_items_13,
-                title = "Vegan Dark Chocolate & Raspberry Tart",
-                price = "₹370",
-                restaurantName = "Plant Based Patisserie",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.tart_items_14,
-                title = "Banoffee Tart",
-                price = "₹310",
-                restaurantName = "The Dessert Room",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.tart_items_15,
-                title = "Roasted Tomato & Goat Cheese Tart",
-                price = "₹290",
-                restaurantName = "Savory Slice",
-                rating = "4.6",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goregaon East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.tart_items_16,
-                title = "Pistachio & Rose Water Tart",
-                price = "₹400",
-                restaurantName = "Persian Delights",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Fort, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.tart_items_17,
-                title = "Eggless Dutch Apple Tart",
-                price = "₹295",
-                restaurantName = "Eggless Wonder",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Mulund West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.tart_items_18,
-                title = "Quiche Lorraine",
-                price = "₹280",
-                restaurantName = "French Baker",
-                rating = "4.6",
-                deliveryTime = "30-35 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Ballard Estate, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.tart_items_19,
-                title = "Mini Tart Assortment (6 pcs)",
-                price = "₹450",
-                restaurantName = "Petite Fours",
-                rating = "4.9",
-                deliveryTime = "50-55 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.tart_items_20,
-                title = "Matcha & White Chocolate Tart",
-                price = "₹380",
-                restaurantName = "Tokyo Patisserie",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Tart restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("TART", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_shortcrust),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Tart restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun TiramisuCategoryPage() {
+fun TiramisuCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for TIRAMISU category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: TIRAMISU")
+        restaurantViewModel.loadFeaturedRestaurants("TIRAMISU", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("TIRAMISU", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45985,7 +45822,7 @@ fun TiramisuCategoryPage() {
                     id = "ladyfingers",
                     text = "Ladyfingers (Savoiardi)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_ladyfingers_tiramisu  // or create this icon
+                    icon = R.drawable.ic_ladyfingers_tiramisu
                 ),
                 FilterChip(
                     id = "sponge_cake",
@@ -46171,95 +46008,19 @@ fun TiramisuCategoryPage() {
             filterConfig = tiramisuFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-        val tiramisuItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.tiramisu_1,  // Create/use appropriate drawable
-                title = "tiramisu_",
-                price = "₹380",
-                restaurantName = "Dolce Vita",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.tiramisu_2,
-                title = "Chocolate Hazelnut Tiramisu",
-                price = "₹450",
-                restaurantName = "Nutella House",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.tiramisu_3,
-                title = "Strawberry Tiramisu",
-                price = "₹420",
-                restaurantName = "Berry & Bean",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Khar West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.tiramisu_4,
-                title = "Matcha Tiramisu",
-                price = "₹440",
-                restaurantName = "Tokyo Patisserie",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.tiramisu_5,
-                title = "Salted Caramel Tiramisu",
-                price = "₹430",
-                restaurantName = "Caramel & Co",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.tiramisu_6,
-                title = "Vegan Tiramisu",
-                price = "₹410",
-                restaurantName = "Green Cravings",
-                rating = "4.7",
-                deliveryTime = "40-45 mins",
-                distance = "2.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED TIRAMISU ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -46267,30 +46028,101 @@ fun TiramisuCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = tiramisuItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Tiramisus...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("TIRAMISU", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_ladyfingers_tiramisu),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Tiramisus found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED TIRAMISU RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -46298,7 +46130,6 @@ fun TiramisuCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -46310,300 +46141,117 @@ fun TiramisuCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val tiramisuItemsList = listOf(
-            // CLASSIC VARIATIONS (1-5)
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.tiramisu_items_1,
-                title = "Classic Italian Tiramisu",
-                price = "₹380",
-                restaurantName = "Dolce Vita",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.tiramisu_items_2,
-                title = "Marsala Wine Tiramisu",
-                price = "₹420",
-                restaurantName = "Sicilian Kitchen",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.tiramisu_items_3,
-                title = "Dark Rum Tiramisu",
-                price = "₹440",
-                restaurantName = "Spiced Italian",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Khar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.tiramisu_items_4,
-                title = "Alcohol-Free Tiramisu",
-                price = "₹360",
-                restaurantName = "Family Recipe",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.tiramisu_items_5,
-                title = "Artisanal Single Origin Tiramisu",
-                price = "₹520",
-                restaurantName = "Caffè Speciale",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Tiramisu restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-            // CHOCOLATE VARIATIONS (6-8)
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.tiramisu_items_6,
-                title = "Double Chocolate Tiramisu",
-                price = "₹450",
-                restaurantName = "Chocolateria",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.tiramisu_items_7,
-                title = "Gianduja Hazelnut Tiramisu",
-                price = "₹480",
-                restaurantName = "Piedmont Patisserie",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.tiramisu_items_8,
-                title = "White Chocolate & Raspberry Tiramisu",
-                price = "₹460",
-                restaurantName = "Ruby Patisserie",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("TIRAMISU", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-            // FRUIT VARIATIONS (9-12)
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.tiramisu_items_9,
-                title = "Strawberry Tiramisu",
-                price = "₹430",
-                restaurantName = "Berrylicious",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.tiramisu_items_10,
-                title = "Bronte Pistachio Tiramisu",
-                price = "₹520",
-                restaurantName = "Sicilian Delights",
-                rating = "4.9",
-                deliveryTime = "45-50 mins",
-                distance = "2.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.tiramisu_items_11,
-                title = "Ceremonial Matcha Tiramisu",
-                price = "₹490",
-                restaurantName = "Tokyo Patisserie",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.tiramisu_items_12,
-                title = "Alphonso Mango Tiramisu",
-                price = "₹470",
-                restaurantName = "Mango House",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle West, Mumbai"
-            ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-            // CARAMEL & NUT VARIATIONS (13-15)
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.tiramisu_items_13,
-                title = "Salted Caramel Tiramisu",
-                price = "₹440",
-                restaurantName = "Caramel & Co",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goregaon West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.tiramisu_items_14,
-                title = "Pecan Praline Tiramisu",
-                price = "₹460",
-                restaurantName = "Southern Comfort",
-                rating = "4.7",
-                deliveryTime = "45-50 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.tiramisu_items_15,
-                title = "Amaretto Almond Tiramisu",
-                price = "₹450",
-                restaurantName = "Italian Spirit",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Prabhadevi, Mumbai"
-            ),
-
-            // DIETARY & SPECIALTY (16-18)
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.tiramisu_items_16,
-                title = "Vegan Tiramisu",
-                price = "₹410",
-                restaurantName = "Plant Based Italian",
-                rating = "4.8",
-                deliveryTime = "45-50 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.tiramisu_items_17,
-                title = "Gluten-Free Tiramisu",
-                price = "₹430",
-                restaurantName = "Free From",
-                rating = "4.7",
-                deliveryTime = "40-45 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.tiramisu_items_18,
-                title = "Keto Tiramisu",
-                price = "₹490",
-                restaurantName = "Keto Kitchen",
-                rating = "4.7",
-                deliveryTime = "45-50 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-
-            // PORTION VARIATIONS (19-20)
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.tiramisu_items_19,
-                title = "Mini Tiramisu Cups (Set of 6)",
-                price = "₹590",
-                restaurantName = "Petite Dolce",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Fort, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.tiramisu_items_20,
-                title = "Party Size Tiramisu (12 servings)",
-                price = "₹1,290",
-                restaurantName = "Celebration Cakes",
-                rating = "4.9",
-                deliveryTime = "55-60 mins",
-                distance = "3.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_ladyfingers_tiramisu),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Tiramisu restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun PieCategoryPage() {
+fun PieCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for PIE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PIE")
+        restaurantViewModel.loadFeaturedRestaurants("PIE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PIE", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -46627,13 +46275,13 @@ fun PieCategoryPage() {
                     id = "traditional_crust",
                     text = "Traditional Pie Crust",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_traditional_crust_pie  // classic pie crust look
+                    icon = R.drawable.ic_traditional_crust_pie
                 ),
                 FilterChip(
                     id = "graham_cracker",
                     text = "Graham Cracker Crust",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_graham_crust_pie  // crumb crust texture
+                    icon = R.drawable.ic_graham_crust_pie
                 ),
                 FilterChip(
                     id = "shortbread",
@@ -46656,19 +46304,19 @@ fun PieCategoryPage() {
                     id = "apple_pie",
                     text = "Apple Pie",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_apple_pie  // apple icon or slice
+                    icon = R.drawable.ic_apple_pie
                 ),
                 FilterChip(
                     id = "pumpkin_pie",
                     text = "Pumpkin Pie",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pumpkin_pie  // pumpkin icon
+                    icon = R.drawable.ic_pumpkin_pie
                 ),
                 FilterChip(
                     id = "pecan_pie",
                     text = "Pecan Pie",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pecan_pie  // pecan nut icon
+                    icon = R.drawable.ic_pecan_pie
                 ),
                 FilterChip(
                     id = "lemeringue",
@@ -46820,95 +46468,19 @@ fun PieCategoryPage() {
             filterConfig = pieFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-        val pieItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.pie_1,  // Classic apple pie
-                title = "Classic Apple Pie",
-                price = "₹420",
-                restaurantName = "Pie & Co.",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.pie_2,  // Pumpkin pie
-                title = "Spiced Pumpkin Pie",
-                price = "₹450",
-                restaurantName = "Autumn Bakes",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.pie_3,  // Pecan pie
-                title = "Southern Pecan Pie",
-                price = "₹480",
-                restaurantName = "Southern Comfort",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.8 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Khar West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.pie_4,  // Key lime pie
-                title = "Key Lime Pie",
-                price = "₹410",
-                restaurantName = "Tropical Treats",
-                rating = "4.7",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.pie_5,  // Chocolate cream pie
-                title = "Triple Chocolate Cream Pie",
-                price = "₹440",
-                restaurantName = "Chocolate Room",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.pie_6,  // Mixed berry pie
-                title = "Summer Berry Pie",
-                price = "₹430",
-                restaurantName = "Berrylicious",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED PIE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -46916,30 +46488,101 @@ fun PieCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = pieItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Pies...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PIE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_apple_pie),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Pies found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED PIE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -46947,7 +46590,6 @@ fun PieCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -46959,300 +46601,117 @@ fun PieCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val pieItemsList = listOf(
-            // CLASSIC VARIATIONS (1-5)
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.pie_items_1,
-                title = "Classic Apple Pie",
-                price = "₹420",
-                restaurantName = "Pie & Co.",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.pie_items_2,
-                title = "Traditional Pumpkin Pie",
-                price = "₹450",
-                restaurantName = "Autumn Bakes",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.pie_items_3,
-                title = "Southern Pecan Pie",
-                price = "₹480",
-                restaurantName = "Southern Comfort",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Khar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.pie_items_4,
-                title = "Key Lime Pie",
-                price = "₹410",
-                restaurantName = "Tropical Treats",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.pie_items_5,
-                title = "Cherry Pie",
-                price = "₹440",
-                restaurantName = "Cherry Lane",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Pie restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-            // CREAM PIES (6-8)
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.pie_items_6,
-                title = "Banana Cream Pie",
-                price = "₹430",
-                restaurantName = "Cream & Sugar",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.pie_items_7,
-                title = "Coconut Cream Pie",
-                price = "₹440",
-                restaurantName = "Island Bakes",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.pie_items_8,
-                title = "Chocolate Cream Pie",
-                price = "₹450",
-                restaurantName = "Chocolate Room",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PIE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-            // FRUIT VARIATIONS (9-12)
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.pie_items_9,
-                title = "Blueberry Pie",
-                price = "₹440",
-                restaurantName = "Berrylicious",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.pie_items_10,
-                title = "Peach Pie",
-                price = "₹450",
-                restaurantName = "Georgia Peach",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.pie_items_11,
-                title = "Strawberry Rhubarb Pie",
-                price = "₹460",
-                restaurantName = "Farmhouse Pies",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.pie_items_12,
-                title = "Mixed Berry Pie",
-                price = "₹470",
-                restaurantName = "Berry Basket",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle West, Mumbai"
-            ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-            // NUT & CARAMEL VARIATIONS (13-15)
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.pie_items_13,
-                title = "Pecan Bourbon Pie",
-                price = "₹490",
-                restaurantName = "Bourbon House",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goregaon West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.pie_items_14,
-                title = "Maple Walnut Pie",
-                price = "₹470",
-                restaurantName = "Maple House",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.pie_items_15,
-                title = "Salted Caramel Apple Pie",
-                price = "₹460",
-                restaurantName = "Caramel Kitchen",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Prabhadevi, Mumbai"
-            ),
-
-            // CITRUS & MERINGUE (16-18)
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.pie_items_16,
-                title = "Lemon Meringue Pie",
-                price = "₹420",
-                restaurantName = "Citrus Dreams",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.pie_items_17,
-                title = "Chocolate Meringue Pie",
-                price = "₹450",
-                restaurantName = "Meringue & Co",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.pie_items_18,
-                title = "Orange Creamsicle Pie",
-                price = "₹430",
-                restaurantName = "Citrus & Cream",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-
-            // SPECIALTY PIES (19-20)
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.pie_items_19,
-                title = "Mini Pie Sampler (Set of 6)",
-                price = "₹650",
-                restaurantName = "Petite Pies",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Fort, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.pie_items_20,
-                title = "Party Size Apple Pie (12 servings)",
-                price = "₹1,150",
-                restaurantName = "Celebration Pies",
-                rating = "4.9",
-                deliveryTime = "50-55 mins",
-                distance = "3.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_apple_pie),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Pie restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun CustardCategoryPage() {
+fun CustardCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CUSTARD category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CUSTARD")
+        restaurantViewModel.loadFeaturedRestaurants("CUSTARD", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CUSTARD", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -47276,19 +46735,19 @@ fun CustardCategoryPage() {
                     id = "classic_custard",
                     text = "Classic Egg Custard",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_classic_custard  // custard cup or ramekin
+                    icon = R.drawable.ic_classic_custard
                 ),
                 FilterChip(
                     id = "baked_custard",
                     text = "Baked Custard",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_baked_custard  // oven-safe dish
+                    icon = R.drawable.ic_baked_custard
                 ),
                 FilterChip(
                     id = "stirred_custard",
                     text = "Stirred Custard (Crème Anglaise)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_stirred_custard  // whisk in pot
+                    icon = R.drawable.ic_stirred_custard
                 ),
                 FilterChip(
                     id = "steamed_custard",
@@ -47311,13 +46770,13 @@ fun CustardCategoryPage() {
                     id = "creme_brulee",
                     text = "Crème Brûlée",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_creme_brulee  // ramekin with caramelized top
+                    icon = R.drawable.ic_creme_brulee
                 ),
                 FilterChip(
                     id = "creme_caramel",
                     text = "Crème Caramel (Flan)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_creme_caramel  // flan with caramel
+                    icon = R.drawable.ic_creme_caramel
                 ),
                 FilterChip(
                     id = "flan",
@@ -47490,95 +46949,19 @@ fun CustardCategoryPage() {
             filterConfig = custardFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-            val custardItems = listOf(
-        FoodItemDoubleF(
-            id = 1,
-            imageRes = R.drawable.custard_1,  // Classic Crème Brûlée
-            title = "Classic Crème Brûlée",
-            price = "₹320",
-            restaurantName = "La Douceur",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "1.2 km",
-            discount = "15%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        FoodItemDoubleF(
-            id = 2,
-            imageRes = R.drawable.custard_2,  // Spanish Flan
-            title = "Spanish Caramel Flan",
-            price = "₹280",
-            restaurantName = "Tapas & Sweets",
-            rating = "4.8",
-            deliveryTime = "30-35 mins",
-            distance = "1.8 km",
-            discount = "10%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        FoodItemDoubleF(
-            id = 3,
-            imageRes = R.drawable.custard_3,  // Panna Cotta
-            title = "Vanilla Bean Panna Cotta",
-            price = "₹290",
-            restaurantName = "Italian Delights",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "1.5 km",
-            discount = "12%",
-            discountAmount = "₹20",
-            address = "Khar West, Mumbai"
-        ),
-        FoodItemDoubleF(
-            id = 4,
-            imageRes = R.drawable.custard_4,  // Chocolate Pot de Crème
-            title = "French Chocolate Pot de Crème",
-            price = "₹350",
-            restaurantName = "Le Chocolatier",
-            rating = "4.9",
-            deliveryTime = "30-35 mins",
-            distance = "2.0 km",
-            discount = "10%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        FoodItemDoubleF(
-            id = 5,
-            imageRes = R.drawable.custard_5,  // Mango Custard
-            title = "Alphonso Mango Custard",
-            price = "₹310",
-            restaurantName = "Mango House",
-            rating = "4.8",
-            deliveryTime = "25-30 mins",
-            distance = "1.4 km",
-            discount = "15%",
-            discountAmount = "₹20",
-            address = "Lower Parel, Mumbai"
-        ),
-        FoodItemDoubleF(
-            id = 6,
-            imageRes = R.drawable.custard_6,  // Butterscotch Custard
-            title = "Salted Butterscotch Custard",
-            price = "₹300",
-            restaurantName = "Butter & Sugar",
-            rating = "4.8",
-            deliveryTime = "30-35 mins",
-            distance = "1.6 km",
-            discount = "12%",
-            discountAmount = "₹20",
-            address = "Worli, Mumbai"
-        )
-    )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED CUSTARD ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -47586,30 +46969,101 @@ fun CustardCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = custardItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Custards...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CUSTARD", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_custard),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Custards found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED CUSTARD RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -47617,7 +47071,6 @@ fun CustardCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -47629,293 +47082,95 @@ fun CustardCategoryPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-        val custardPieItemsList = listOf(
-            // CLASSIC CUSTARD PIES (1-5)
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.custard_items_1,
-                title = "Classic Vanilla Custard Pie",
-                price = "₹390",
-                restaurantName = "Custard House",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.custard_items_2,
-                title = "Old-Fashioned Baked Custard",
-                price = "₹370",
-                restaurantName = "Grandma's Kitchen",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.custard_items_3,
-                title = "Caramel Custard Flan",
-                price = "₹420",
-                restaurantName = "Flan Fantasy",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Khar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.custard_items_4,
-                title = "Coconut Custard Pie",
-                price = "₹410",
-                restaurantName = "Island Delights",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Dadar West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.custard_items_5,
-                title = "Butterscotch Custard Pie",
-                price = "₹440",
-                restaurantName = "Butter & Sugar",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Custard restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-            // FRUIT INFUSED CUSTARDS (6-9)
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.custard_items_6,
-                title = "Mango Custard Pie",
-                price = "₹430",
-                restaurantName = "Mango Mania",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.custard_items_7,
-                title = "Banana Custard Pie",
-                price = "₹400",
-                restaurantName = "Banana Stand",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.custard_items_8,
-                title = "Strawberry Custard Pie",
-                price = "₹440",
-                restaurantName = "Strawberry Fields",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "1.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Powai, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.custard_items_9,
-                title = "Lemon Custard Pie",
-                price = "₹410",
-                restaurantName = "Citrus Kitchen",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz West, Mumbai"
-            ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CUSTARD", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-            // SPICED & SEASONAL CUSTARDS (10-12)
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.custard_items_10,
-                title = "Pumpkin Spice Custard Pie",
-                price = "₹450",
-                restaurantName = "Autumn Spice",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Worli, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.custard_items_11,
-                title = "Cardamom Rose Custard Pie",
-                price = "₹460",
-                restaurantName = "Spice & Rose",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "BKC, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.custard_items_12,
-                title = "Saffron Pistachio Custard Pie",
-                price = "₹480",
-                restaurantName = "Royal Treats",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "2.1 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Vile Parle West, Mumbai"
-            ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-            // CHOCOLATE CUSTARD VARIATIONS (13-15)
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.custard_items_13,
-                title = "Dark Chocolate Custard Pie",
-                price = "₹450",
-                restaurantName = "Cocoa House",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Goregaon West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.custard_items_14,
-                title = "Milk Chocolate Hazelnut Custard",
-                price = "₹470",
-                restaurantName = "Nutty Chocolate",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Malad West, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.custard_items_15,
-                title = "White Chocolate Raspberry Custard",
-                price = "₹490",
-                restaurantName = "White Magic",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Prabhadevi, Mumbai"
-            ),
-
-            // INTERNATIONAL CUSTARD PIES (16-18)
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.custard_items_16,
-                title = "Portuguese Pastel de Nata Style",
-                price = "₹420",
-                restaurantName = "Lisbon Bakes",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Colaba, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.custard_items_17,
-                title = "French Vanilla Custard Tart",
-                price = "₹460",
-                restaurantName = "Patisserie Paris",
-                rating = "4.8",
-                deliveryTime = "40-45 mins",
-                distance = "2.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Santacruz East, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.custard_items_18,
-                title = "Brazilian Pudim de Leite",
-                price = "₹430",
-                restaurantName = "Rio Sweets",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.9 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Andheri East, Mumbai"
-            ),
-
-            // MODERN & SPECIALTY CUSTARDS (19-20)
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.custard_items_19,
-                title = "Matcha Green Tea Custard Pie",
-                price = "₹480",
-                restaurantName = "Zen Desserts",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "1.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Fort, Mumbai"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.custard_items_20,
-                title = "Salted Caramel Custard Sampler (Set of 4)",
-                price = "₹620",
-                restaurantName = "Custard Collective",
-                rating = "4.9",
-                deliveryTime = "40-45 mins",
-                distance = "1.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Lower Parel, Mumbai"
-            )
-        ).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_custard),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Custard restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

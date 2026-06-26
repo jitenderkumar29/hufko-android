@@ -552,10 +552,10 @@ fun CategoryTabsFood(
                 CategoryPage.SevPoori -> SevPooriCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Mousse -> MousseCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.DalKachori -> DalKachoriCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Jalebi -> JalebiCategoryPage()
-                CategoryPage.PyaajKachori -> PyaajKachoriCategoryPage()
-                CategoryPage.RajmaRice -> RajmaRiceCategoryPage()
-                CategoryPage.Upma -> UpmaCategoryPage()
+                CategoryPage.Jalebi -> JalebiCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.PyaajKachori -> PyaajKachoriCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.RajmaRice -> RajmaRiceCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Upma -> UpmaCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Manchurian -> ManchurianCategoryPage()
                 CategoryPage.PaneerPakoda -> PaneerPakodaCategoryPage()
                 CategoryPage.Cheesecake -> CheesecakeCategoryPage()
@@ -48467,284 +48467,224 @@ fun DalKachoriCategoryPage(
 }
 
 @Composable
-fun JalebiCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+fun JalebiCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for JALEBI category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: JALEBI")
+        restaurantViewModel.loadFeaturedRestaurants("JALEBI", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("JALEBI", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val jalebiFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val jalebiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // MAIN JALEBI TYPES (with icons showing visual differences)
-        FilterChip(
-            id = "traditional_jalebi",
-            text = "Traditional Jalebi",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_traditional_jalebi  // orange/yellow spiral coils
-        ),
-        FilterChip(
-            id = "imarti_jalebi",
-            text = "Imarti / Jhangora Jalebi",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_imarti  // reddish-brown, more intricate spirals
-        ),
-        FilterChip(
-            id = "mini_jalebi",
-            text = "Mini Jalebis (Kadhai Jalebi)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_mini_jalebi  // small bite-sized spirals
-        ),
+                // MAIN JALEBI TYPES (with icons showing visual differences)
+                FilterChip(
+                    id = "traditional_jalebi",
+                    text = "Traditional Jalebi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_traditional_jalebi
+                ),
+                FilterChip(
+                    id = "imarti_jalebi",
+                    text = "Imarti / Jhangora Jalebi",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_imarti
+                ),
+                FilterChip(
+                    id = "mini_jalebi",
+                    text = "Mini Jalebis (Kadhai Jalebi)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mini_jalebi
+                ),
 
-        // REGIONAL VARIETIES (icons for distinctive ones)
-        FilterChip(
-            id = "punjabi_jalebi",
-            text = "Punjabi Style",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_punjabi_jalebi  // thicker, more syrup
-        ),
-        FilterChip(
-            id = "south_indian_jalebi",
-            text = "South Indian (Jilebi)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "kolkata_jalebi",
-            text = "Kolkata Style",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "delhi_jalebi",
-            text = "Delhi Style (Old Delhi)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // REGIONAL VARIETIES
+                FilterChip(
+                    id = "punjabi_jalebi",
+                    text = "Punjabi Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_punjabi_jalebi
+                ),
+                FilterChip(
+                    id = "south_indian_jalebi",
+                    text = "South Indian (Jilebi)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kolkata_jalebi",
+                    text = "Kolkata Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "delhi_jalebi",
+                    text = "Delhi Style (Old Delhi)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TEXTURE VARIATIONS (with icons)
-        FilterChip(
-            id = "crispy_jalebi",
-            text = "Extra Crispy",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_crispy_jalebi  // shattered/broken jalebi piece
-        ),
-        FilterChip(
-            id = "soft_jalebi",
-            text = "Soft & Juicy",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "crunchy_jalebi",
-            text = "Crunchy Outside, Soft Inside",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TEXTURE VARIATIONS
+                FilterChip(
+                    id = "crispy_jalebi",
+                    text = "Extra Crispy",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_crispy_jalebi
+                ),
+                FilterChip(
+                    id = "soft_jalebi",
+                    text = "Soft & Juicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crunchy_jalebi",
+                    text = "Crunchy Outside, Soft Inside",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SYRUP TYPES (with icons)
-        FilterChip(
-            id = "thick_syrup",
-            text = "Thick Syrup (Thick Chashni)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cardamom_syrup",
-            text = "Cardamom Infused",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SYRUP TYPES
+                FilterChip(
+                    id = "thick_syrup",
+                    text = "Thick Syrup (Thick Chashni)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cardamom_syrup",
+                    text = "Cardamom Infused",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SHAPE VARIATIONS (with icons)
-        FilterChip(
-            id = "twisted_jalebi",
-            text = "Twisted Shape",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "circle_jalebi",
-            text = "Perfect Circle",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pretzel_jalebi",
-            text = "Pretzel Style",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SHAPE VARIATIONS
+                FilterChip(
+                    id = "twisted_jalebi",
+                    text = "Twisted Shape",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "circle_jalebi",
+                    text = "Perfect Circle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pretzel_jalebi",
+                    text = "Pretzel Style",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIZE OPTIONS
-        FilterChip(
-            id = "medium_jalebi",
-            text = "Medium Size",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "bite_size",
-            text = "Bite Size",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SIZE OPTIONS
+                FilterChip(
+                    id = "medium_jalebi",
+                    text = "Medium Size",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bite_size",
+                    text = "Bite Size",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SERVING STYLES (with icons)
-        FilterChip(
-            id = "room_temp_jalebi",
-            text = "Room Temperature",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "jalebi_with_curd",
-            text = "With Fresh Curd",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "jalebi_with_milk",
-            text = "With Hot Milk",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SERVING STYLES
+                FilterChip(
+                    id = "room_temp_jalebi",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalebi_with_curd",
+                    text = "With Fresh Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalebi_with_milk",
+                    text = "With Hot Milk",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPECIALTY VARIATIONS
-        FilterChip(
-            id = "maida_jalebi",
-            text = "Maida Based",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "orange_jalebi",
-            text = "Orange Colored",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "natural_color_jalebi",
-            text = "Natural Color (Kesar/Kumkuma)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPECIALTY VARIATIONS
+                FilterChip(
+                    id = "maida_jalebi",
+                    text = "Maida Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "orange_jalebi",
+                    text = "Orange Colored",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "natural_color_jalebi",
+                    text = "Natural Color (Kesar/Kumkuma)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // FESTIVAL SPECIALS (with icons)
-        FilterChip(
-            id = "ramadan_jalebi",
-            text = "Ramadan Special",
-            type = FilterType.TEXT_ONLY
-        ),
+                // FESTIVAL SPECIALS
+                FilterChip(
+                    id = "ramadan_jalebi",
+                    text = "Ramadan Special",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS/GARNISH (with icons)
-        FilterChip(
-            id = "almond_jalebi",
-            text = "Almond Topped",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS/GARNISH
+                FilterChip(
+                    id = "almond_jalebi",
+                    text = "Almond Topped",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS
-        FilterChip(
-            id = "oil_jalebi",
-            text = "Made in Oil",
-            type = FilterType.TEXT_ONLY
-        ),
+                // DIETARY OPTIONS
+                FilterChip(
+                    id = "oil_jalebi",
+                    text = "Made in Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = jalebiFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-val jalebiItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.jalebi_1,  // Traditional Orange Jalebis
-        title = "Traditional Crispy Jalebi",
-        price = "₹100/kg",
-        restaurantName = "Shree Bikaner Mishthan Bhandar",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Bapu Bazar, Jaipur"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.jalebi_2,  // Imarti (reddish-brown)
-        title = "Imarti (Jhangora Jalebi)",
-        price = "₹120/kg",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "C Scheme, Jaipur"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.jalebi_3,  // Jalebi with Rabri
-        title = "Jalebi with Rabri (Malai)",
-        price = "₹180/plate",
-        restaurantName = "Jodhpur Sweets",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Sardarpura, Jodhpur"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.jalebi_4,  // Mini Jalebis
-        title = "Mini Kadhai Jalebi (12 pcs)",
-        price = "₹90/plate",
-        restaurantName = "Chaat Galli",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "0.9 km",
-        discount = "25%",
-        discountAmount = "₹20",
-        address = "Vaishali Nagar, Jaipur"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.jalebi_5,  // Kesar Jalebi
-        title = "Kesar (Saffron) Special Jalebi",
-        price = "₹150/kg",
-        restaurantName = "Traditional Tastes",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "2.1 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Malviya Nagar, Jaipur"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.jalebi_6,  // Jalebi Chaat
-        title = "Jalebi Chaat (Innovative)",
-        price = "₹140/plate",
-        restaurantName = "Spice Route",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "18%",
-        discountAmount = "₹20",
-        address = "Mansarovar, Jaipur"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED JALEBI ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -48752,30 +48692,101 @@ val jalebiItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = jalebiItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Jalebis...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("JALEBI", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_traditional_jalebi),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Jalebis found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED JALEBI RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -48783,7 +48794,6 @@ val jalebiItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -48795,529 +48805,271 @@ val jalebiItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-    val jalebiItemsList = listOf(
-    // CLASSIC JALEBI VARIETIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.jalebi_items_1,
-        title = "Traditional Crispy Jalebi",
-        price = "₹100/kg",
-        restaurantName = "Shree Bikaner Mishthan Bhandar",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Bapu Bazar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.jalebi_items_2,
-        title = "Imarti (Jhangora Jalebi)",
-        price = "₹120/kg",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "C Scheme, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.jalebi_items_3,
-        title = "Mini Kadhai Jalebi (12 pcs)",
-        price = "₹90/plate",
-        restaurantName = "Chaat Galli",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "0.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vaishali Nagar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.jalebi_items_4,
-        title = "Kesar (Saffron) Special Jalebi",
-        price = "₹150/kg",
-        restaurantName = "Traditional Tastes",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "2.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Malviya Nagar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.jalebi_items_5,
-        title = "Jalebi with Rabri (Malai)",
-        price = "₹180/plate",
-        restaurantName = "Jodhpur Sweets",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Sardarpura, Jodhpur"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Jalebi restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // REGIONAL JALEBI VARIETIES (6-9)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.jalebi_items_6,
-        title = "Punjabi Style Jalebi",
-        price = "₹110/kg",
-        restaurantName = "Amritsari Sweets",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Amritsar, Punjab"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.jalebi_items_7,
-        title = "Kolkata Jalebi (Bengali Style)",
-        price = "₹130/kg",
-        restaurantName = "Bengali Sweets",
-        rating = "4.7",
-        deliveryTime = "25-30 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Salt Lake, Kolkata"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.jalebi_items_8,
-        title = "South Indian Jilebi",
-        price = "₹100/kg",
-        restaurantName = "Madras Sweets",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "T Nagar, Chennai"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.jalebi_items_9,
-        title = "Delhi Old City Jalebi",
-        price = "₹140/kg",
-        restaurantName = "Chandni Chowk Sweets",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("JALEBI", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // FUSION & INNOVATIVE JALEBI (10-12)
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.jalebi_items_10,
-        title = "Jalebi Chaat (Innovative)",
-        price = "₹140/plate",
-        restaurantName = "Spice Route",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Mansarovar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.jalebi_items_11,
-        title = "Jalebi Ice Cream Sundae",
-        price = "₹220/plate",
-        restaurantName = "Dessert Factory",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "20%F",
-        discountAmount = "₹20",
-        address = "C Scheme, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.jalebi_items_12,
-        title = "Jalebi Falooda",
-        price = "₹180/glass",
-        restaurantName = "Royal Falooda",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "MI Road, Jaipur"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // PREMIUM & SPECIALTY JALEBI (13-15)
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.jalebi_items_13,
-        title = "Dry Fruit Jalebi",
-        price = "₹250/kg",
-        restaurantName = "Royal Rajasthan",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Civil Lines, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.jalebi_items_14,
-        title = "Rose Flavored Jalebi",
-        price = "₹160/kg",
-        restaurantName = "Gulab Sweets",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vaishali Nagar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.jalebi_items_15,
-        title = "Cardamom Infused Jalebi",
-        price = "₹140/kg",
-        restaurantName = "Traditional Tastes",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Malviya Nagar, Jaipur"
-    ),
-
-    // SIZE & TEXTURE VARIATIONS (16-18)
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.jalebi_items_16,
-        title = "Extra Crispy Jalebi",
-        price = "₹120/kg",
-        restaurantName = "Crispy Corner",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Tonk Road, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.jalebi_items_17,
-        title = "Soft & Juicy Jalebi",
-        price = "₹130/kg",
-        restaurantName = "Juicy Junction",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Pratap Nagar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.jalebi_items_18,
-        title = "Jumbo Size Jalebi (Single)",
-        price = "₹80/piece",
-        restaurantName = "Giant Sweets",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Raja Park, Jaipur"
-    ),
-
-    // FESTIVAL SPECIAL & GIFT BOXES (19-20)
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.jalebi_items_19,
-        title = "Diwali Special Jalebi Box",
-        price = "₹350/kg",
-        restaurantName = "Festival Sweets",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Ajmer Road, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.jalebi_items_20,
-        title = "Assorted Jalebi Gift Pack",
-        price = "₹400/box",
-        restaurantName = "Rajasthan Delights",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Civil Lines, Jaipur"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_traditional_jalebi),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Jalebi restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun PyaajKachoriCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+fun PyaajKachoriCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for PYAAJ_KACHORI category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PYAAJ_KACHORI")
+        restaurantViewModel.loadFeaturedRestaurants("PYAAJ_KACHORI", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PYAAJ_KACHORI", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val pyaajKachoriFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val pyaajKachoriFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // MAIN KACHORI TYPES (with icons showing visual differences)
-        FilterChip(
-            id = "pyaaj_kachori_classic",
-            text = "Classic Pyaaj Kachori",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_kachori_classic  // golden brown round kachori
-        ),
-        FilterChip(
-            id = "pyaaj_kachori_mathura",
-            text = "Mathura Style",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_kachori_mathura  // slightly flattened, spicier
-        ),
-        FilterChip(
-            id = "pyaaj_kachori_jodhpuri",
-            text = "Jodhpuri Style",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_kachori_jodhpur  // larger, extra crispy
-        ),
-        FilterChip(
-            id = "pyaaj_kachori_kolkata",
-            text = "Kolkata Style",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_kacholi_kolkata  // smaller, darker
-        ),
+                // MAIN KACHORI TYPES (with icons showing visual differences)
+                FilterChip(
+                    id = "pyaaj_kachori_classic",
+                    text = "Classic Pyaaj Kachori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kachori_classic
+                ),
+                FilterChip(
+                    id = "pyaaj_kachori_mathura",
+                    text = "Mathura Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kachori_mathura
+                ),
+                FilterChip(
+                    id = "pyaaj_kachori_jodhpuri",
+                    text = "Jodhpuri Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kachori_jodhpur
+                ),
+                FilterChip(
+                    id = "pyaaj_kachori_kolkata",
+                    text = "Kolkata Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kacholi_kolkata
+                ),
 
-        // REGIONAL VARIETIES (icons for distinctive ones)
-        FilterChip(
-            id = "pyaaj_kachori_rajasthani",
-            text = "Rajasthani Special",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_kachori_rajasthani  // with imli chutney drizzle
-        ),
-        FilterChip(
-            id = "pyaaj_kachori_mumbai",
-            text = "Mumbai Style",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pyaaj_kachori_indore",
-            text = "Indori Style",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pyaaj_kachori_banarasi",
-            text = "Banarasi Style",
-            type = FilterType.TEXT_ONLY
-        ),
+                // REGIONAL VARIETIES
+                FilterChip(
+                    id = "pyaaj_kachori_rajasthani",
+                    text = "Rajasthani Special",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_kachori_rajasthani
+                ),
+                FilterChip(
+                    id = "pyaaj_kachori_mumbai",
+                    text = "Mumbai Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pyaaj_kachori_indore",
+                    text = "Indori Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pyaaj_kachori_banarasi",
+                    text = "Banarasi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // STUFFING/FILLING VARIATIONS (with icons)
-        FilterChip(
-            id = "medium_spice_kachori",
-            text = "Medium Spice",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mild_kachori",
-            text = "Mild (Khatta-Meetha)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // STUFFING/FILLING VARIATIONS
+                FilterChip(
+                    id = "medium_spice_kachori",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mild_kachori",
+                    text = "Mild (Khatta-Meetha)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TEXTURE VARIATIONS (with icons)
-        FilterChip(
-            id = "soft_kachori",
-            text = "Soft Inside",
-            type = FilterType.TEXT_ONLY
-        ),
-        // SERVING STYLES (with icons)
-        FilterChip(
-            id = "kachori_with_tea",
-            text = "Evening Tea Special",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TEXTURE VARIATIONS
+                FilterChip(
+                    id = "soft_kachori",
+                    text = "Soft Inside",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // SERVING STYLES
+                FilterChip(
+                    id = "kachori_with_tea",
+                    text = "Evening Tea Special",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // FLOUR/DOUGH VARIATIONS
-        FilterChip(
-            id = "maida_kachori",
-            text = "Maida Dough",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "wheat_kachori",
-            text = "Whole Wheat (Atta)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mix_flour_kachori",
-            text = "Mixed Flour",
-            type = FilterType.TEXT_ONLY
-        ),
+                // FLOUR/DOUGH VARIATIONS
+                FilterChip(
+                    id = "maida_kachori",
+                    text = "Maida Dough",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "wheat_kachori",
+                    text = "Whole Wheat (Atta)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mix_flour_kachori",
+                    text = "Mixed Flour",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPECIALTY VARIATIONS
-        FilterChip(
-            id = "pyaaj_meethi_kachori",
-            text = "Meethi Pyaaj Kachori",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pyaaj_moong_kachori",
-            text = "With Moong Dal",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPECIALTY VARIATIONS
+                FilterChip(
+                    id = "pyaaj_meethi_kachori",
+                    text = "Meethi Pyaaj Kachori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pyaaj_moong_kachori",
+                    text = "With Moong Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS
-        FilterChip(
-            id = "oil_fried_kachori",
-            text = "Fried in Oil",
-            type = FilterType.TEXT_ONLY
-        ),
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // DIETARY OPTIONS
+                FilterChip(
+                    id = "oil_fried_kachori",
+                    text = "Fried in Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = pyaajKachoriFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-val pyaajKachoriItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.pyaaj_kachori_1,  // Classic Rajasthani Pyaaj Kachori
-        title = "Classic Pyaaj Kachori",
-        price = "₹25/piece",
-        restaurantName = "Shree Bikaner Mishthan Bhandar",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Bapu Bazar, Jaipur"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.pyaaj_kachori_2,  // Dahi Kachori with onions
-        title = "Dahi Pyaaj Kachori",
-        price = "₹60/plate (2 pcs)",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "C Scheme, Jaipur"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.pyaaj_kachori_3,  // Extra spicy version
-        title = "Teekhi Pyaaj Kachori (Extra Spicy)",
-        price = "₹28/piece",
-        restaurantName = "Jodhpur Sweets",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Sardarpura, Jodhpur"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.pyaaj_kachori_4,  // Mini Pyaaj Kachoris
-        title = "Mini Pyaaj Kachori (6 pcs)",
-        price = "₹40/plate",
-        restaurantName = "Chaat Galli",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "0.9 km",
-        discount = "25%",
-        discountAmount = "₹20",
-        address = "Vaishali Nagar, Jaipur"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.pyaaj_kachori_5,  // Pyaaj Kachori with aloo sabzi
-        title = "Pyaaj Kachori with Aloo Sabzi",
-        price = "₹65/plate",
-        restaurantName = "Traditional Tastes",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "2.1 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Malviya Nagar, Jaipur"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.pyaaj_kachori_6,  // Mathura style
-        title = "Mathura Special Pyaaj Kachori",
-        price = "₹30/piece",
-        restaurantName = "Spice Route",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "18%",
-        discountAmount = "₹20",
-        address = "Mansarovar, Jaipur"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED PYAAJ KACHORI ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -49325,30 +49077,101 @@ val pyaajKachoriItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = pyaajKachoriItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Pyaaj Kachoris...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PYAAJ_KACHORI", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_kachori_classic),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Pyaaj Kachoris found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED PYAAJ KACHORI RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -49356,7 +49179,6 @@ val pyaajKachoriItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -49368,545 +49190,287 @@ val pyaajKachoriItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-    val pyaajKachoriItemsList = listOf(
-    // CLASSIC PYAAJ KACHORI VARIETIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.pyaaj_kachori_items_1,
-        title = "Classic Pyaaj Kachori",
-        price = "₹25/piece",
-        restaurantName = "Shree Bikaner Mishthan Bhandar",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Bapu Bazar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.pyaaj_kachori_items_2,
-        title = "Teekhi Pyaaj Kachori (Extra Spicy)",
-        price = "₹28/piece",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "C Scheme, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.pyaaj_kachori_items_3,
-        title = "Mini Pyaaj Kachori (6 pcs)",
-        price = "₹40/plate",
-        restaurantName = "Chaat Galli",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "0.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vaishali Nagar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.pyaaj_kachori_items_4,
-        title = "Pyaaj Kachori with Aloo Sabzi",
-        price = "₹65/plate",
-        restaurantName = "Traditional Tastes",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "2.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Malviya Nagar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.pyaaj_kachori_items_5,
-        title = "Dahi Pyaaj Kachori (2 pcs)",
-        price = "₹60/plate",
-        restaurantName = "Jodhpur Sweets",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Sardarpura, Jodhpur"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Pyaaj Kachori restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // REGIONAL PYAAJ KACHORI VARIETIES (6-9)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.pyaaj_kachori_items_6,
-        title = "Mathura Special Pyaaj Kachori",
-        price = "₹30/piece",
-        restaurantName = "Mathura Sweets",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Mathura, UP"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.pyaaj_kachori_items_7,
-        title = "Jodhpuri Pyaaj Kachori",
-        price = "₹32/piece",
-        restaurantName = "Jodhpur Bawarchi",
-        rating = "4.7",
-        deliveryTime = "25-30 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Jodhpur, Rajasthan"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.pyaaj_kachori_items_8,
-        title = "Indori Pyaaj Kachori",
-        price = "₹28/piece",
-        restaurantName = "Indore Chaat House",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Indore, MP"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.pyaaj_kachori_items_9,
-        title = "Banarasi Pyaaj Kachori",
-        price = "₹35/piece",
-        restaurantName = "Kashi Chat Bhandar",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Varanasi, UP"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PYAAJ_KACHORI", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // PYAAJ KACHORI WITH CHUTNEYS (10-12)
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.pyaaj_kachori_items_10,
-        title = "Pyaaj Kachori with Imli Chutney",
-        price = "₹30/piece",
-        restaurantName = "Spice Route",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Mansarovar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.pyaaj_kachori_items_11,
-        title = "Pyaaj Kachori with Pudina Chutney",
-        price = "₹30/piece",
-        restaurantName = "Fresh Tastes",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "C Scheme, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.pyaaj_kachori_items_12,
-        title = "Pyaaj Kachori with Both Chutneys",
-        price = "₹70/plate",
-        restaurantName = "Royal Chaat",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "MI Road, Jaipur"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // STUFFING VARIATIONS (13-15)
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.pyaaj_kachori_items_13,
-        title = "Extra Onion Pyaaj Kachori",
-        price = "₹35/piece",
-        restaurantName = "Royal Rajasthan",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Civil Lines, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.pyaaj_kachori_items_14,
-        title = "Pyaaj-Moong Dal Kachori",
-        price = "₹32/piece",
-        restaurantName = "Gulab Sweets",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vaishali Nagar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.pyaaj_kachori_items_15,
-        title = "Pyaaj-Masala Kachori",
-        price = "₹30/piece",
-        restaurantName = "Traditional Tastes",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Malviya Nagar, Jaipur"
-    ),
-
-    // TEXTURE VARIATIONS (16-18)
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.pyaaj_kachori_items_16,
-        title = "Laccha Pyaaj Kachori (Flaky)",
-        price = "₹30/piece",
-        restaurantName = "Crispy Corner",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Tonk Road, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.pyaaj_kachori_items_17,
-        title = "Extra Crispy Pyaaj Kachori",
-        price = "₹28/piece",
-        restaurantName = "Crispy Junction",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Pratap Nagar, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.pyaaj_kachori_items_18,
-        title = "Jumbo Size Pyaaj Kachori",
-        price = "₹50/piece",
-        restaurantName = "Giant Sweets",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Raja Park, Jaipur"
-    ),
-
-    // FLOUR VARIATIONS & FUSION (19-20)
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.pyaaj_kachori_items_19,
-        title = "Atta (Wheat) Pyaaj Kachori",
-        price = "₹30/piece",
-        restaurantName = "Healthy Bites",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Ajmer Road, Jaipur"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.pyaaj_kachori_items_20,
-        title = "Assorted Pyaaj Kachori Gift Pack",
-        price = "₹350/box (12 pcs)",
-        restaurantName = "Rajasthan Delights",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Civil Lines, Jaipur"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_kachori_classic),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Pyaaj Kachori restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun RajmaRiceCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+fun RajmaRiceCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for RAJMA_RICE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: RAJMA_RICE")
+        restaurantViewModel.loadFeaturedRestaurants("RAJMA_RICE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("RAJMA_RICE", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val rajmaRiceFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val rajmaRiceFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // MAIN RAJMA TYPES (with icons showing visual differences)
-        FilterChip(
-            id = "rajma_kashmiri",
-            text = "Kashmiri Rajma",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_rajma_kashmiri  // light red gravy, whole spices
-        ),
-        FilterChip(
-            id = "rajma_punjabi",
-            text = "Punjabi Rajma",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_rajma_punjabi  // thick, dark red gravy
-        ),
-        FilterChip(
-            id = "rajma_chawal",
-            text = "Rajma Chawal (Combo)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_rajma_chawal  // rajma served with rice
-        ),
-        FilterChip(
-            id = "rajma_dry",
-            text = "Dry Rajma (No Gravy)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_rajma_dry  // dry kidney beans
-        ),
+                // MAIN RAJMA TYPES (with icons showing visual differences)
+                FilterChip(
+                    id = "rajma_kashmiri",
+                    text = "Kashmiri Rajma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rajma_kashmiri
+                ),
+                FilterChip(
+                    id = "rajma_punjabi",
+                    text = "Punjabi Rajma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rajma_punjabi
+                ),
+                FilterChip(
+                    id = "rajma_chawal",
+                    text = "Rajma Chawal (Combo)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rajma_chawal
+                ),
+                FilterChip(
+                    id = "rajma_dry",
+                    text = "Dry Rajma (No Gravy)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rajma_dry
+                ),
 
-        // REGIONAL VARIETIES (icons for distinctive ones)
-        FilterChip(
-            id = "rajma_himachali",
-            text = "Himachali Rajma",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_rajma_himachali  // with curd based gravy
-        ),
-        FilterChip(
-            id = "rajma_delhi",
-            text = "Delhi Style",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "rajma_banarasi",
-            text = "Banarasi Style",
-            type = FilterType.TEXT_ONLY
-        ),
+                // REGIONAL VARIETIES
+                FilterChip(
+                    id = "rajma_himachali",
+                    text = "Himachali Rajma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rajma_himachali
+                ),
+                FilterChip(
+                    id = "rajma_delhi",
+                    text = "Delhi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rajma_banarasi",
+                    text = "Banarasi Style",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // RICE VARIETIES (with icons)
-        FilterChip(
-            id = "steamed_rice",
-            text = "Plain Steamed Rice",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "brown_rice",
-            text = "Brown Rice",
-            type = FilterType.TEXT_ONLY
-        ),
+                // RICE VARIETIES
+                FilterChip(
+                    id = "steamed_rice",
+                    text = "Plain Steamed Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_rice",
+                    text = "Brown Rice",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPICE LEVELS (with icons)
-        FilterChip(
-            id = "medium_spice_rajma",
-            text = "Medium Spice",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mild_rajma",
-            text = "Mild (Less Masala)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPICE LEVELS
+                FilterChip(
+                    id = "medium_spice_rajma",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mild_rajma",
+                    text = "Mild (Less Masala)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TEXTURE VARIATIONS (with icons)
-        FilterChip(
-            id = "mashed_rajma",
-            text = "Partially Mashed",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TEXTURE VARIATIONS
+                FilterChip(
+                    id = "mashed_rajma",
+                    text = "Partially Mashed",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // BEAN VARIETIES (with icons)
-        FilterChip(
-            id = "mixed_beans",
-            text = "Mixed Beans",
-            type = FilterType.TEXT_ONLY
-        ),
+                // BEAN VARIETIES
+                FilterChip(
+                    id = "mixed_beans",
+                    text = "Mixed Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // ACCOMPANIMENTS (with icons)
-        FilterChip(
-            id = "rajma_with_salad",
-            text = "With Green Salad",
-            type = FilterType.TEXT_ONLY
-        ),
+                // ACCOMPANIMENTS
+                FilterChip(
+                    id = "rajma_with_salad",
+                    text = "With Green Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // COOKING METHOD (with icons)
-        FilterChip(
-            id = "pressure_cooker",
-            text = "Pressure Cooker Style",
-            type = FilterType.TEXT_ONLY
-        ),
+                // COOKING METHOD
+                FilterChip(
+                    id = "pressure_cooker",
+                    text = "Pressure Cooker Style",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPECIALTY VARIATIONS
-        FilterChip(
-            id = "rajma_masala",
-            text = "Extra Masala",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPECIALTY VARIATIONS
+                FilterChip(
+                    id = "rajma_masala",
+                    text = "Extra Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS
-        FilterChip(
-            id = "oil_rajma",
-            text = "Made in Oil",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "low_oil_rajma",
-            text = "Low Oil",
-            type = FilterType.TEXT_ONLY
-        ),
-        // QUANTITY OPTIONS
-        FilterChip(
-            id = "full_plate",
-            text = "Full Plate",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "half_plate",
-            text = "Half Plate",
-            type = FilterType.TEXT_ONLY
-        ),
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // DIETARY OPTIONS
+                FilterChip(
+                    id = "oil_rajma",
+                    text = "Made in Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_oil_rajma",
+                    text = "Low Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // QUANTITY OPTIONS
+                FilterChip(
+                    id = "full_plate",
+                    text = "Full Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "half_plate",
+                    text = "Half Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = rajmaRiceFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Apply filter to API calls
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-val rajmaRiceItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.rajma_rice_1,  // Classic Punjabi Rajma Rice
-        title = "Punjabi Rajma Rice (Full Plate)",
-        price = "₹180/plate",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Model Town, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.rajma_rice_2,  // Kashmiri Rajma
-        title = "Kashmiri Rajma Chawal",
-        price = "₹220/plate",
-        restaurantName = "Kashmir Darbar",
-        rating = "4.8",
-        deliveryTime = "30-35 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.rajma_rice_3,  // Rajma Rice Thali
-        title = "Rajma Rice Thali (Complete Meal)",
-        price = "₹280/thali",
-        restaurantName = "Bikaner Bhavan",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.rajma_rice_4,  // Dry Rajma with Jeera Rice
-        title = "Dry Rajma with Jeera Rice",
-        price = "₹160/plate",
-        restaurantName = "Spice Kitchen",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "0.9 km",
-        discount = "25%",
-        discountAmount = "₹20",
-        address = "Green Park, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.rajma_rice_5,  // Himachali Rajma
-        title = "Himachali Rajma Madra",
-        price = "₹240/plate",
-        restaurantName = "Hill Tastes",
-        rating = "4.8",
-        deliveryTime = "30-35 mins",
-        distance = "2.1 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.rajma_rice_6,  // Butter Rajma with Brown Rice
-        title = "Butter Rajma with Brown Rice",
-        price = "₹260/plate",
-        restaurantName = "Healthy Tastes",
-        rating = "4.6",
-        deliveryTime = "25-30 mins",
-        distance = "1.4 km",
-        discount = "18%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED RAJMA RICE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -49914,29 +49478,101 @@ val rajmaRiceItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = rajmaRiceItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
-           Spacer(modifier = Modifier.height(15.dp))
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Rajma Rice...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("RAJMA_RICE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_rajma_punjabi),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Rajma Rice found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED RAJMA RICE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -49944,7 +49580,6 @@ val rajmaRiceItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -49956,622 +49591,364 @@ val rajmaRiceItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-    val rajmaRiceItemsList = listOf(
-    // CLASSIC RAJMA RICE VARIETIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.rajma_rice_items_1,
-        title = "Classic Rajma Rice",
-        price = "₹120/plate",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.rajma_rice_items_2,
-        title = "Butter Rajma Rice",
-        price = "₹150/plate",
-        restaurantName = "Amritsari Bhavan",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Sector 17, Chandigarh"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.rajma_rice_items_3,
-        title = "Kashmiri Rajma Rice",
-        price = "₹180/plate",
-        restaurantName = "Kashmir Darbar",
-        rating = "4.7",
-        deliveryTime = "35-40 mins",
-        distance = "2.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Srinagar, J&K"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.rajma_rice_items_4,
-        title = "Rajma Rice with Chur Chur Naan",
-        price = "₹220/plate",
-        restaurantName = "Tandoori Nights",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "South Extension, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.rajma_rice_items_5,
-        title = "Mini Rajma Rice Bowl",
-        price = "₹90/bowl",
-        restaurantName = "Quick Bites",
-        rating = "4.5",
-        deliveryTime = "15-20 mins",
-        distance = "0.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Rajma Rice restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // REGIONAL VARIETIES (6-9)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.rajma_rice_items_6,
-        title = "Himachali Rajma Rice",
-        price = "₹160/plate",
-        restaurantName = "Hill Station Cafe",
-        rating = "4.8",
-        deliveryTime = "30-35 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Shimla, HP"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.rajma_rice_items_7,
-        title = "Garhwali Rajma Rice",
-        price = "₹140/plate",
-        restaurantName = "Uttarakhand Bhojnalaya",
-        rating = "4.7",
-        deliveryTime = "30-35 mins",
-        distance = "2.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Dehradun, UK"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.rajma_rice_items_8,
-        title = "Maharashtrian Rajma Rice",
-        price = "₹130/plate",
-        restaurantName = "Kolhapur Bhavan",
-        rating = "4.6",
-        deliveryTime = "25-30 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Pune, Maharashtra"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.rajma_rice_items_9,
-        title = "Bengali Rajma Rice",
-        price = "₹125/plate",
-        restaurantName = "Kolkata Cafe",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Salt Lake, Kolkata"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("RAJMA_RICE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // ACCOMPANIMENTS VARIATIONS (10-12)
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.rajma_rice_items_10,
-        title = "Rajma Rice with Pickle & Papad",
-        price = "₹160/plate",
-        restaurantName = "Traditional Tadka",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Model Town, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.rajma_rice_items_11,
-        title = "Rajma Rice with Raita",
-        price = "₹170/plate",
-        restaurantName = "Dairy Fresh",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.rajma_rice_items_12,
-        title = "Rajma Rice with Salad",
-        price = "₹140/plate",
-        restaurantName = "Green Bowl",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "GK II, Delhi"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // STYLE VARIATIONS (13-15)
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.rajma_rice_items_13,
-        title = "Khatti Meethi Rajma Rice",
-        price = "₹150/plate",
-        restaurantName = "Sweet & Sour",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Janakpuri, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.rajma_rice_items_14,
-        title = "Garlic Tadka Rajma Rice",
-        price = "₹145/plate",
-        restaurantName = "Garlic House",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Patel Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.rajma_rice_items_15,
-        title = "Smoked Rajma Rice",
-        price = "₹200/plate",
-        restaurantName = "Smokehouse Grill",
-        rating = "4.9",
-        deliveryTime = "35-40 mins",
-        distance = "2.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Cyber City, Gurgaon"
-    ),
-
-    // RICE VARIATIONS (16-18)
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.rajma_rice_items_16,
-        title = "Brown Rice Rajma",
-        price = "₹180/plate",
-        restaurantName = "Healthy Kitchen",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Green Park, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.rajma_rice_items_17,
-        title = "Jeera Rice Rajma",
-        price = "₹155/plate",
-        restaurantName = "Spice Hub",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.rajma_rice_items_18,
-        title = "Basmati Rajma Rice",
-        price = "₹165/plate",
-        restaurantName = "Royal Kitchen",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vasant Vihar, Delhi"
-    ),
-
-    // FUSION & SPECIALS (19-20)
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.rajma_rice_items_19,
-        title = "Rajma Rice Bowl with Cheese",
-        price = "₹190/plate",
-        restaurantName = "Fusion Kitchen",
-        rating = "4.6",
-        deliveryTime = "25-30 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.rajma_rice_items_20,
-        title = "Rajma Rice Thali (Unlimited)",
-        price = "₹280/thali",
-        restaurantName = "Bharat Bhojnalaya",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_rajma_punjabi),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Rajma Rice restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun UpmaCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+fun UpmaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for UPMA category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: UPMA")
+        restaurantViewModel.loadFeaturedRestaurants("UPMA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("UPMA", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val upmaFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val upmaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // BASE VARIETIES (with icons showing visual differences)
-        FilterChip(
-            id = "rava_upma",
-            text = "Rava Upma (Classic)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_rava_upma  // fine semolina, light color
-        ),
-        FilterChip(
-            id = "bombay_rava",
-            text = "Bombay Rava Upma",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_bombay_rava  // coarse semolina, grainy texture
-        ),
-        FilterChip(
-            id = "broken_wheat",
-            text = "Broken Wheat Upma (Godhumai)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_broken_wheat  // brownish, wheat grains
-        ),
-        FilterChip(
-            id = "vermicelli_upma",
-            text = "Vermicelli Upma (Semiya)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_vermicelli_upma  // thin noodles style
-        ),
+                // BASE VARIETIES (with icons showing visual differences)
+                FilterChip(
+                    id = "rava_upma",
+                    text = "Rava Upma (Classic)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rava_upma  // fine semolina, light color
+                ),
+                FilterChip(
+                    id = "bombay_rava",
+                    text = "Bombay Rava Upma",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_bombay_rava  // coarse semolina, grainy texture
+                ),
+                FilterChip(
+                    id = "broken_wheat",
+                    text = "Broken Wheat Upma (Godhumai)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_broken_wheat  // brownish, wheat grains
+                ),
+                FilterChip(
+                    id = "vermicelli_upma",
+                    text = "Vermicelli Upma (Semiya)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vermicelli_upma  // thin noodles style
+                ),
 
-        // GRAIN VARIETIES (with icons)
-        FilterChip(
-            id = "oats_upma",
-            text = "Oats Upma (Healthy)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_oats_upma  // rolled oats texture
-        ),
-        FilterChip(
-            id = "rice_rava",
-            text = "Rice Rava Upma (Akki Tari)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "ragi_upma",
-            text = "Ragi Upma (Finger Millet)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // GRAIN VARIETIES (with icons)
+                FilterChip(
+                    id = "oats_upma",
+                    text = "Oats Upma (Healthy)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_oats_upma  // rolled oats texture
+                ),
+                FilterChip(
+                    id = "rice_rava",
+                    text = "Rice Rava Upma (Akki Tari)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ragi_upma",
+                    text = "Ragi Upma (Finger Millet)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // REGIONAL STYLES (with icons for distinctive ones)
-        FilterChip(
-            id = "tamil_upma",
-            text = "Tamil Nadu Style",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "andhra_upma",
-            text = "Andhra Style (Spicy)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "kerala_upma",
-            text = "Kerala Style",
-            type = FilterType.TEXT_ONLY
-        ),
+                // REGIONAL STYLES (with icons for distinctive ones)
+                FilterChip(
+                    id = "tamil_upma",
+                    text = "Tamil Nadu Style",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "andhra_upma",
+                    text = "Andhra Style (Spicy)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kerala_upma",
+                    text = "Kerala Style",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // VEGETABLE ADDITIONS (with icons)
-        FilterChip(
-            id = "onion_upma",
-            text = "Onion Upma (Ulli)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "peas_upma",
-            text = "Peas Upma",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "tomato_upma",
-            text = "Tomato Upma",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cabbage_upma",
-            text = "Cabbage Upma",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "carrot_beans",
-            text = "Carrot & Beans Upma",
-            type = FilterType.TEXT_ONLY
-        ),
+                // VEGETABLE ADDITIONS (with icons)
+                FilterChip(
+                    id = "onion_upma",
+                    text = "Onion Upma (Ulli)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peas_upma",
+                    text = "Peas Upma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tomato_upma",
+                    text = "Tomato Upma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cabbage_upma",
+                    text = "Cabbage Upma",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrot_beans",
+                    text = "Carrot & Beans Upma",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TEMPERING VARIATIONS (with icons)
-        FilterChip(
-            id = "coconut_upma",
-            text = "With Grated Coconut",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "peanut_upma",
-            text = "With Roasted Peanuts",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cashew_upma",
-            text = "With Cashews",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "ginger_upma",
-            text = "Extra Ginger",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "green_chilli",
-            text = "Extra Green Chillies",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TEMPERING VARIATIONS (with icons)
+                FilterChip(
+                    id = "coconut_upma",
+                    text = "With Grated Coconut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanut_upma",
+                    text = "With Roasted Peanuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cashew_upma",
+                    text = "With Cashews",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger_upma",
+                    text = "Extra Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_chilli",
+                    text = "Extra Green Chillies",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPICE LEVELS (with icons)
-        FilterChip(
-            id = "medium_spice_upma",
-            text = "Medium Spice",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPICE LEVELS (with icons)
+                FilterChip(
+                    id = "medium_spice_upma",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TEXTURE VARIATIONS (with icons)
-        FilterChip(
-            id = "grainy_upma",
-            text = "Grainy & Dry",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "crispy_upma",
-            text = "Crispy (Roasted Rava)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TEXTURE VARIATIONS (with icons)
+                FilterChip(
+                    id = "grainy_upma",
+                    text = "Grainy & Dry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "crispy_upma",
+                    text = "Crispy (Roasted Rava)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // ACCOMPANIMENTS (with icons)
-        FilterChip(
-            id = "upma_with_sambar",
-            text = "With Sambar",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "upma_with_pickle",
-            text = "With Pickle",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "upma_with_curd",
-            text = "With Curd (Thayir)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // ACCOMPANIMENTS (with icons)
+                FilterChip(
+                    id = "upma_with_sambar",
+                    text = "With Sambar",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "upma_with_pickle",
+                    text = "With Pickle",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "upma_with_curd",
+                    text = "With Curd (Thayir)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS (with icons)
-        FilterChip(
-            id = "lemon_upma",
-            text = "Squeezed Lemon",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "coriander_upma",
-            text = "Fresh Coriander",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pomegranate",
-            text = "Pomegranate Seeds",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS (with icons)
+                FilterChip(
+                    id = "lemon_upma",
+                    text = "Squeezed Lemon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coriander_upma",
+                    text = "Fresh Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pomegranate",
+                    text = "Pomegranate Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS (with icons)
-        FilterChip(
-            id = "jain_upma",
-            text = "Jain (No Onion/Garlic)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "low_oil_upma",
-            text = "Low Oil",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "gluten_free_upma",
-            text = "Gluten Free",
-            type = FilterType.TEXT_ONLY
-        ),
+                // DIETARY OPTIONS (with icons)
+                FilterChip(
+                    id = "jain_upma",
+                    text = "Jain (No Onion/Garlic)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_oil_upma",
+                    text = "Low Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_upma",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // QUANTITY OPTIONS
-        FilterChip(
-            id = "full_plate_upma",
-            text = "Full Plate",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "half_plate_upma",
-            text = "Half Plate",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mini_upma",
-            text = "Mini Bowl (Kids)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // QUANTITY OPTIONS
+                FilterChip(
+                    id = "full_plate_upma",
+                    text = "Full Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "half_plate_upma",
+                    text = "Half Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_upma",
+                    text = "Mini Bowl (Kids)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2 // Increased rows to accommodate more filter options
-)
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2 // Increased rows to accommodate more filter options
+        )
+
         FilterButtonFood(
             filterConfig = upmaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Implement filter logic for UPMA category
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-val upmaItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.upma_1,  // Classic Rava Upma with tempering
-        title = "Classic Rava Upma (South Indian Style)",
-        price = "₹90/plate",
-        restaurantName = "Madras Cafe",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "T. Nagar, Chennai"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.upma_2,  // Vegetable Upma with carrots, peas, beans
-        title = "Mixed Vegetable Upma",
-        price = "₹120/plate",
-        restaurantName = "Udupi Garden",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Indiranagar, Bangalore"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.upma_3,  // Brownish colored, healthy option
-        title = "Broken Wheat Upma (Godhumai)",
-        price = "₹110/plate",
-        restaurantName = "Healthy Kitchen",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Jayanagar, Bangalore"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.upma_4,  // Vermicelli upma with nuts
-        title = "Semiya Upma (Vermicelli)",
-        price = "₹100/plate",
-        restaurantName = "Saravana Bhavan",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "0.9 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Mylapore, Chennai"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.upma_5,  // Yellow-orange Karnataka style upma
-        title = "Karnataka Style Khara Bath",
-        price = "₹95/plate",
-        restaurantName = "Kamat Hotel",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Malleshwaram, Bangalore"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.upma_6,  // Oats upma with vegetables
-        title = "Oats Upma (Healthy Breakfast)",
-        price = "₹130/plate",
-        restaurantName = "Fit Food Cafe",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Koramangala, Bangalore"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED UPMA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -50579,29 +49956,101 @@ val upmaItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = upmaItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
-           Spacer(modifier = Modifier.height(15.dp))
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Upma items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("UPMA", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_rava_upma),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Upma items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED UPMA RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -50609,7 +50058,6 @@ val upmaItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -50621,291 +50069,96 @@ val upmaItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-    val upmaItemsList = listOf(
-    // CLASSIC SOUTH INDIAN VARIETIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.upma_items_1,
-        title = "Classic Rava Upma",
-        price = "₹70/plate",
-        restaurantName = "Madras Cafe",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "0.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Mylapore, Chennai"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.upma_items_2,
-        title = "Vegetable Upma",
-        price = "₹90/plate",
-        restaurantName = "Udupi Garden",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Indiranagar, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.upma_items_3,
-        title = "Onion Upma",
-        price = "₹75/plate",
-        restaurantName = "Swati Snacks",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "T Nagar, Chennai"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.upma_items_4,
-        title = "Ghee Upma",
-        price = "₹95/plate",
-        restaurantName = "A2B - Adyar Ananda Bhavan",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Adyar, Chennai"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.upma_items_5,
-        title = "Mini Upma Bowl",
-        price = "₹50/bowl",
-        restaurantName = "Quick Snacks",
-        rating = "4.5",
-        deliveryTime = "10-15 mins",
-        distance = "0.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Koramangala, Bangalore"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Upma restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // REGIONAL VARIETIES (6-9)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.upma_items_6,
-        title = "Kerala Style Upma",
-        price = "₹85/plate",
-        restaurantName = "Kerala Kitchen",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Fort Kochi, Kerala"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.upma_items_7,
-        title = "Andhra Special Upma",
-        price = "₹80/plate",
-        restaurantName = "Andhra Mess",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Gachibowli, Hyderabad"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.upma_items_8,
-        title = "Karnataka Khara Upma",
-        price = "₹75/plate",
-        restaurantName = "Karnataka Bhavan",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Malleshwaram, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.upma_items_9,
-        title = "Chettinad Upma",
-        price = "₹95/plate",
-        restaurantName = "Chettinad Mess",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Chettinad, Tamil Nadu"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("UPMA", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // INGREDIENT VARIATIONS (10-13)
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.upma_items_10,
-        title = "Broken Wheat Upma",
-        price = "₹85/plate",
-        restaurantName = "Healthy Bites",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Jayanagar, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.upma_items_11,
-        title = "Vermicelli Upma (Semiya)",
-        price = "₹80/plate",
-        restaurantName = "Coastal Foods",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Mangalore, Karnataka"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.upma_items_12,
-        title = "Oats Upma",
-        price = "₹90/plate",
-        restaurantName = "Fit Food Cafe",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Whitefield, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.upma_items_13,
-        title = "Ragi Upma",
-        price = "₹95/plate",
-        restaurantName = "Millet Magic",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Electronic City, Bangalore"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                                // Call ViewModel method to toggle wishlist
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog (share, report, etc.)
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // ACCOMPANIMENTS VARIATIONS (14-16)
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.upma_items_14,
-        title = "Upma with Sambar",
-        price = "₹100/plate",
-        restaurantName = "Sambar Sadam",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Velachery, Chennai"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.upma_items_15,
-        title = "Upma with Coconut Chutney",
-        price = "₹85/plate",
-        restaurantName = "Coconut Grove",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "0.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Banashankari, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.upma_items_16,
-        title = "Upma with Poriyal",
-        price = "₹95/plate",
-        restaurantName = "Tamil Nadu Mess",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Tambaram, Chennai"
-    ),
-
-    // SPECIAL & FUSION VARIETIES (17-20)
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.upma_items_17,
-        title = "Masala Upma",
-        price = "₹90/plate",
-        restaurantName = "Spice Route",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "MG Road, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.upma_items_18,
-        title = "Curry Leaf Upma",
-        price = "₹85/plate",
-        restaurantName = "Heritage Foods",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Basavanagudi, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.upma_items_19,
-        title = "Peanut Upma",
-        price = "₹95/plate",
-        restaurantName = "Nutty Chef",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "HBR Layout, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.upma_items_20,
-        title = "Navratna Upma (9 Vegetables)",
-        price = "₹110/plate",
-        restaurantName = "Royal South",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Banjara Hills, Hyderabad"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_rava_upma),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Upma restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

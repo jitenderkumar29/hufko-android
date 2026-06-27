@@ -556,9 +556,9 @@ fun CategoryTabsFood(
                 CategoryPage.PyaajKachori -> PyaajKachoriCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.RajmaRice -> RajmaRiceCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Upma -> UpmaCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Manchurian -> ManchurianCategoryPage()
-                CategoryPage.PaneerPakoda -> PaneerPakodaCategoryPage()
-                CategoryPage.Cheesecake -> CheesecakeCategoryPage()
+                CategoryPage.Manchurian -> ManchurianCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.PaneerPakoda -> PaneerPakodaCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Cheesecake -> CheesecakeCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Brownie -> BrownieCategoryPage()
                 CategoryPage.Chaap -> ChaapCategoryPage()
                 CategoryPage.Dal -> DalCategoryPage()
@@ -50165,269 +50165,209 @@ fun UpmaCategoryPage(
 }
 
 @Composable
-fun ManchurianCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+fun ManchurianCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for MANCHURIAN category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: MANCHURIAN")
+        restaurantViewModel.loadFeaturedRestaurants("MANCHURIAN", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("MANCHURIAN", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val manchurianFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val manchurianFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // BASE TYPES (with icons showing visual differences)
-        FilterChip(
-            id = "gobi_manchurian",
-            text = "Gobi Manchurian (Cauliflower)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_gobi_manchurian  // cauliflower florets
-        ),
-        FilterChip(
-            id = "chicken_manchurian",
-            text = "Chicken Manchurian",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_chicken_manchurian  // chicken pieces
-        ),
-        FilterChip(
-            id = "paneer_manchurian",
-            text = "Paneer Manchurian",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_paneer_manchurian  // paneer cubes
-        ),
-        FilterChip(
-            id = "mushroom_manchurian",
-            text = "Mushroom Manchurian",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_mushroom_manchurian  // mushroom caps
-        ),
-        FilterChip(
-            id = "babycorn_manchurian",
-            text = "Babycorn Manchurian",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_babycorn_manchurian  // babycorn pieces
-        ),
+                // BASE TYPES (with icons showing visual differences)
+                FilterChip(
+                    id = "gobi_manchurian",
+                    text = "Gobi Manchurian (Cauliflower)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_gobi_manchurian
+                ),
+                FilterChip(
+                    id = "chicken_manchurian",
+                    text = "Chicken Manchurian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_manchurian
+                ),
+                FilterChip(
+                    id = "paneer_manchurian",
+                    text = "Paneer Manchurian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_paneer_manchurian
+                ),
+                FilterChip(
+                    id = "mushroom_manchurian",
+                    text = "Mushroom Manchurian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mushroom_manchurian
+                ),
+                FilterChip(
+                    id = "babycorn_manchurian",
+                    text = "Babycorn Manchurian",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_babycorn_manchurian
+                ),
 
-        // VEGETABLE VARIETIES (with icons for key ones)
-        FilterChip(
-            id = "capsicum_manchurian",
-            text = "Capsicum Manchurian",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "carrot_manchurian",
-            text = "Carrot Manchurian",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cabbage_manchurian",
-            text = "Cabbage Manchurian",
-            type = FilterType.TEXT_ONLY
-        ),
+                // VEGETABLE VARIETIES
+                FilterChip(
+                    id = "capsicum_manchurian",
+                    text = "Capsicum Manchurian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "carrot_manchurian",
+                    text = "Carrot Manchurian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cabbage_manchurian",
+                    text = "Cabbage Manchurian",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SAUCE STYLES (with icons)
-        FilterChip(
-            id = "semi_dry_manchurian",
-            text = "Semi-Dry Manchurian",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SAUCE STYLES
+                FilterChip(
+                    id = "semi_dry_manchurian",
+                    text = "Semi-Dry Manchurian",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // FLAVOR VARIATIONS (with icons)
-        FilterChip(
-            id = "ginger_manchurian",
-            text = "Ginger Manchurian",
-            type = FilterType.TEXT_ONLY
-        ),
+                // FLAVOR VARIATIONS
+                FilterChip(
+                    id = "ginger_manchurian",
+                    text = "Ginger Manchurian",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPICE LEVELS (with icons)
-        FilterChip(
-            id = "mild_spice_manchurian",
-            text = "Mild Spice",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "medium_spice_manchurian",
-            text = "Medium Spice",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPICE LEVELS
+                FilterChip(
+                    id = "mild_spice_manchurian",
+                    text = "Mild Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice_manchurian",
+                    text = "Medium Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // PREPARATION STYLES
-        FilterChip(
-            id = "fried_manchurian",
-            text = "Deep Fried",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "air_fried_manchurian",
-            text = "Air Fried (Healthy)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // PREPARATION STYLES
+                FilterChip(
+                    id = "fried_manchurian",
+                    text = "Deep Fried",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "air_fried_manchurian",
+                    text = "Air Fried (Healthy)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // ACCOMPANIMENTS (with icons)
-        FilterChip(
-            id = "manchurian_combo",
-            text = "Combo (Rice + Noodles)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // ACCOMPANIMENTS
+                FilterChip(
+                    id = "manchurian_combo",
+                    text = "Combo (Rice + Noodles)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // ONION VARIATIONS
-        FilterChip(
-            id = "spring_onion_manchurian",
-            text = "With Spring Onions",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "fried_onion_manchurian",
-            text = "With Fried Onions",
-            type = FilterType.TEXT_ONLY
-        ),
+                // ONION VARIATIONS
+                FilterChip(
+                    id = "spring_onion_manchurian",
+                    text = "With Spring Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fried_onion_manchurian",
+                    text = "With Fried Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SAUCE PREFERENCES
-        FilterChip(
-            id = "red_sauce_manchurian",
-            text = "Red Sauce Base",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "white_sauce_manchurian",
-            text = "White Sauce Base",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SAUCE PREFERENCES
+                FilterChip(
+                    id = "red_sauce_manchurian",
+                    text = "Red Sauce Base",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "white_sauce_manchurian",
+                    text = "White Sauce Base",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPECIAL DIETS (with icons)
-        FilterChip(
-            id = "vegan_manchurian",
-            text = "Vegan",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "low_oil_manchurian",
-            text = "Low Oil",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPECIAL DIETS
+                FilterChip(
+                    id = "vegan_manchurian",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_oil_manchurian",
+                    text = "Low Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // QUANTITY OPTIONS
-        FilterChip(
-            id = "half_manchurian",
-            text = "Half Plate",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "full_manchurian",
-            text = "Full Plate",
-            type = FilterType.TEXT_ONLY
-        ),
+                // QUANTITY OPTIONS
+                FilterChip(
+                    id = "half_manchurian",
+                    text = "Half Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "full_manchurian",
+                    text = "Full Plate",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = manchurianFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Implement filter logic for MANCHURIAN category
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-val manchurianItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.manchurian_1,  // Classic Gobi Manchurian - dry, cauliflower florets coated in sauce
-        title = "Classic Gobi Manchurian (Dry)",
-        price = "₹140/plate",
-        restaurantName = "Chinese Wok",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.manchurian_2,  // Chicken Manchurian - gravy version with red sauce
-        title = "Chicken Manchurian (Gravy)",
-        price = "₹220/plate",
-        restaurantName = "Mainland China",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Salt Lake, Kolkata"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.manchurian_3,  // Paneer Manchurian - semi-dry with capsicum, onions
-        title = "Paneer Manchurian (Semi-Dry)",
-        price = "₹180/plate",
-        restaurantName = "Taste of China",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Koramangala, Bangalore"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.manchurian_4,  // Schezwan Gobi Manchurian - spicy red, schezwan sauce based
-        title = "Schezwan Gobi Manchurian (Spicy)",
-        price = "₹160/plate",
-        restaurantName = "Spicy Wok",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Banjara Hills, Hyderabad"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.manchurian_5,  // Mushroom Manchurian - with spring onions
-        title = "Mushroom Manchurian",
-        price = "₹170/plate",
-        restaurantName = "Shanghai Cafe",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Andheri West, Mumbai"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.manchurian_6,  // Mixed Veg Manchurian - assorted vegetables
-        title = "Mixed Vegetable Manchurian",
-        price = "₹150/plate",
-        restaurantName = "Hot Wok",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "MG Road, Pune"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED MANCHURIAN ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -50435,29 +50375,101 @@ val manchurianItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = manchurianItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
-           Spacer(modifier = Modifier.height(15.dp))
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Manchurian items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("MANCHURIAN", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_gobi_manchurian),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Manchurian items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED MANCHURIAN RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -50465,7 +50477,6 @@ val manchurianItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -50477,531 +50488,274 @@ val manchurianItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-    val manchurianItemsList = listOf(
-    // CLASSIC BASE VARIETIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.manchurian_items_1,
-        title = "Classic Gobi Manchurian",
-        price = "₹140/plate",
-        restaurantName = "Chinese Wok",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.manchurian_items_2,
-        title = "Chicken Manchurian",
-        price = "₹220/plate",
-        restaurantName = "Mainland China",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Salt Lake, Kolkata"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.manchurian_items_3,
-        title = "Paneer Manchurian",
-        price = "₹180/plate",
-        restaurantName = "Taste of China",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Koramangala, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.manchurian_items_4,
-        title = "Mushroom Manchurian",
-        price = "₹170/plate",
-        restaurantName = "Shanghai Cafe",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Andheri West, Mumbai"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.manchurian_items_5,
-        title = "Babycorn Manchurian",
-        price = "₹160/plate",
-        restaurantName = "Hong Kong Bistro",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Jubilee Hills, Hyderabad"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Manchurian restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // SAUCE STYLE VARIATIONS (6-9)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.manchurian_items_6,
-        title = "Dry Gobi Manchurian",
-        price = "₹150/plate",
-        restaurantName = "Dragon House",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "MG Road, Pune"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.manchurian_items_7,
-        title = "Gravy Chicken Manchurian",
-        price = "₹240/plate",
-        restaurantName = "Nanking Restaurant",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Park Street, Kolkata"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.manchurian_items_8,
-        title = "Semi-Dry Veg Manchurian",
-        price = "₹155/plate",
-        restaurantName = "Green Wok",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Indiranagar, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.manchurian_items_9,
-        title = "Schezwan Gobi Manchurian",
-        price = "₹165/plate",
-        restaurantName = "Spicy Wok",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Banjara Hills, Hyderabad"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("MANCHURIAN", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // VEGETABLE MIX VARIETIES (10-13)
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.manchurian_items_10,
-        title = "Mixed Vegetable Manchurian",
-        price = "₹150/plate",
-        restaurantName = "Hot Wok",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Shivaji Nagar, Pune"
-    ),
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.manchurian_items_11,
-        title = "Capsicum Manchurian",
-        price = "₹145/plate",
-        restaurantName = "Veg China Town",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Civil Lines, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.manchurian_items_12,
-        title = "Cabbage Manchurian",
-        price = "₹135/plate",
-        restaurantName = "Budget Bites",
-        rating = "4.5",
-        deliveryTime = "15-20 mins",
-        distance = "0.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.manchurian_items_13,
-        title = "Carrot Manchurian",
-        price = "₹140/plate",
-        restaurantName = "Healthy Chinese",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Jayanagar, Bangalore"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // FLAVOR VARIATIONS (14-17)
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.manchurian_items_14,
-        title = "Garlic Gobi Manchurian",
-        price = "₹155/plate",
-        restaurantName = "Garlic House",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Patel Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.manchurian_items_15,
-        title = "Ginger Chicken Manchurian",
-        price = "₹230/plate",
-        restaurantName = "Ginger Wok",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Koregaon Park, Pune"
-    ),
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.manchurian_items_16,
-        title = "Chilli Paneer Manchurian",
-        price = "₹190/plate",
-        restaurantName = "Chilli Junction",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.manchurian_items_17,
-        title = "Honey Chicken Manchurian",
-        price = "₹250/plate",
-        restaurantName = "Honey Bee Chinese",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Bandra West, Mumbai"
-    ),
-
-    // PREPARATION STYLE VARIATIONS (18-20)
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.manchurian_items_18,
-        title = "Tandoori Gobi Manchurian",
-        price = "₹175/plate",
-        restaurantName = "Tandoori Wok",
-        rating = "4.7",
-        deliveryTime = "25-30 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Civil Lines, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.manchurian_items_19,
-        title = "Air Fried Veg Manchurian",
-        price = "₹165/plate",
-        restaurantName = "Fit Food Chinese",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Whitefield, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.manchurian_items_20,
-        title = "Family Pack Manchurian Combo",
-        price = "₹450/family pack",
-        restaurantName = "Family Wok",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "2.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "GK II, Delhi"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_gobi_manchurian),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Manchurian restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun PaneerPakodaCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+fun PaneerPakodaCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for PANEER_PAKODA category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PANEER_PAKODA")
+        restaurantViewModel.loadFeaturedRestaurants("PANEER_PAKODA", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PANEER_PAKODA", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val paneerPakodaFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val paneerPakodaFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // BASE TYPES (with icons showing visual differences)
-        FilterChip(
-            id = "classic_paneer_pakoda",
-            text = "Classic Paneer Pakoda",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_classic_pakoda  // traditional pakoda shape
-        ),
-        FilterChip(
-            id = "stuffed_paneer_pakoda",
-            text = "Stuffed Paneer Pakoda",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_stuffed_pakoda  // pakoda with visible filling
-        ),
-        FilterChip(
-            id = "masala_paneer_pakoda",
-            text = "Masala Paneer Pakoda",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_masala_pakoda  // spiced version icon
-        ),
+                // BASE TYPES (with icons showing visual differences)
+                FilterChip(
+                    id = "classic_paneer_pakoda",
+                    text = "Classic Paneer Pakoda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_pakoda
+                ),
+                FilterChip(
+                    id = "stuffed_paneer_pakoda",
+                    text = "Stuffed Paneer Pakoda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_stuffed_pakoda
+                ),
+                FilterChip(
+                    id = "masala_paneer_pakoda",
+                    text = "Masala Paneer Pakoda",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_masala_pakoda
+                ),
 
-        // BATTER VARIETIES (with icons for key ones)
-        FilterChip(
-            id = "besan_pakoda",
-            text = "Besan (Gram Flour)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_besan_masala_pakoda  // gram flour icon
-        ),
-        FilterChip(
-            id = "rice_flour_pakoda",
-            text = "Rice Flour (Crispy)",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_rice_flour  // rice flour icon
-        ),
-        FilterChip(
-            id = "cornflour_pakoda",
-            text = "Cornflour Coating",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "semolina_pakoda",
-            text = "Semolina (Rava)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // BATTER VARIETIES (with icons for key ones)
+                FilterChip(
+                    id = "besan_pakoda",
+                    text = "Besan (Gram Flour)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_besan_masala_pakoda
+                ),
+                FilterChip(
+                    id = "rice_flour_pakoda",
+                    text = "Rice Flour (Crispy)",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_rice_flour
+                ),
+                FilterChip(
+                    id = "cornflour_pakoda",
+                    text = "Cornflour Coating",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "semolina_pakoda",
+                    text = "Semolina (Rava)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // STUFFING OPTIONS (with icons)
-        FilterChip(
-            id = "spinach_stuffed_pakoda",
-            text = "Spinach Stuffed",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mint_stuffed_pakoda",
-            text = "Mint Chutney Stuffed",
-            type = FilterType.TEXT_ONLY
-        ),
-        // ADDED FLAVORS (with icons)
-        FilterChip(
-            id = "ginger_garlic_pakoda",
-            text = "Ginger-Garlic Paste",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chaat_masala_pakoda",
-            text = "Chaat Masala Sprinkle",
-            type = FilterType.TEXT_ONLY
-        ),
+                // STUFFING OPTIONS
+                FilterChip(
+                    id = "spinach_stuffed_pakoda",
+                    text = "Spinach Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_stuffed_pakoda",
+                    text = "Mint Chutney Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // ADDED FLAVORS
+                FilterChip(
+                    id = "ginger_garlic_pakoda",
+                    text = "Ginger-Garlic Paste",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chaat_masala_pakoda",
+                    text = "Chaat Masala Sprinkle",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // PREPARATION STYLES (with icons)
-        FilterChip(
-            id = "shallow_fried_pakoda",
-            text = "Shallow Fried (Less Oil)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // PREPARATION STYLES
+                FilterChip(
+                    id = "shallow_fried_pakoda",
+                    text = "Shallow Fried (Less Oil)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // ACCOMPANIMENTS (with icons)
-        FilterChip(
-            id = "with_tomato_ketchup",
-            text = "Tomato Ketchup",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "with_yogurt_dip",
-            text = "Yogurt Dip",
-            type = FilterType.TEXT_ONLY
-        ),
+                // ACCOMPANIMENTS
+                FilterChip(
+                    id = "with_tomato_ketchup",
+                    text = "Tomato Ketchup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_yogurt_dip",
+                    text = "Yogurt Dip",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // ONION VARIATIONS
-        FilterChip(
-            id = "with_chopped_onions",
-            text = "Chopped Onions",
-            type = FilterType.TEXT_ONLY
-        ),
+                // ONION VARIATIONS
+                FilterChip(
+                    id = "with_chopped_onions",
+                    text = "Chopped Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // QUANTITY OPTIONS
-        FilterChip(
-            id = "half_plate_pakoda",
-            text = "Half Plate (6 pcs)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "full_plate_pakoda",
-            text = "Full Plate (12 pcs)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // QUANTITY OPTIONS
+                FilterChip(
+                    id = "half_plate_pakoda",
+                    text = "Half Plate (6 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "full_plate_pakoda",
+                    text = "Full Plate (12 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS (with icons)
+                // DIETARY OPTIONS
+                FilterChip(
+                    id = "low_oil_pakoda",
+                    text = "Low Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        FilterChip(
-            id = "low_oil_pakoda",
-            text = "Low Oil",
-            type = FilterType.TEXT_ONLY
-        ),
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
         FilterButtonFood(
             filterConfig = paneerPakodaFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Implement filter logic for PANEER_PAKODA category
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-val paneerPakodaItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.paneer_pakoda_1,  // Classic Besan Paneer Pakoda - golden brown, crispy besan coating
-        title = "Classic Besan Paneer Pakoda",
-        price = "₹120/plate (6 pcs)",
-        restaurantName = "Pakoda House",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.paneer_pakoda_2,  // Stuffed Chili Paneer Pakoda - green chili visible inside, crispy coating
-        title = "Stuffed Chili Paneer Pakoda",
-        price = "₹140/plate (6 pcs)",
-        restaurantName = "Spicy Fritters",
-        rating = "4.8",
-        deliveryTime = "18-22 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "CP, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.paneer_pakoda_3,  // Cheese Burst Paneer Pakoda - melted cheese oozing out
-        title = "Cheese Burst Paneer Pakoda",
-        price = "₹180/plate (6 pcs)",
-        restaurantName = "Cheese Lovers",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "South Extension, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.paneer_pakoda_4,  // Crispy Rice Flour Paneer Pakoda - extra crispy, light golden coating
-        title = "Crispy Rice Flour Paneer Pakoda",
-        price = "₹130/plate (6 pcs)",
-        restaurantName = "Crispy Corner",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.paneer_pakoda_5,  // Masala Paneer Pakoda - spiced coating with visible masala specs
-        title = "Masala Paneer Pakoda",
-        price = "₹135/plate (6 pcs)",
-        restaurantName = "Masala Magic",
-        rating = "4.8",
-        deliveryTime = "18-22 mins",
-        distance = "1.4 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.paneer_pakoda_6,  // Healthy Air Fried Paneer Pakoda - less oil, golden baked appearance
-        title = "Healthy Air Fried Paneer Pakoda",
-        price = "₹150/plate (6 pcs)",
-        restaurantName = "Healthy Bites",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.6 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Dwarka, Delhi"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED PANEER PAKODA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -51009,29 +50763,101 @@ val paneerPakodaItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = paneerPakodaItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
-           Spacer(modifier = Modifier.height(15.dp))
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Paneer Pakoda items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PANEER_PAKODA", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_pakoda),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Paneer Pakoda items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED PANEER PAKODA RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -51039,7 +50865,6 @@ val paneerPakodaItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -51051,541 +50876,285 @@ val paneerPakodaItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-   val paneerPakodaItemsList = listOf(
-    // CLASSIC BASE VARIETIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.paneer_pakoda_items_1,
-        title = "Classic Besan Paneer Pakoda",
-        price = "₹120/plate (6 pcs)",
-        restaurantName = "Pakoda House",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.paneer_pakoda_items_2,
-        title = "Stuffed Chili Paneer Pakoda",
-        price = "₹140/plate (6 pcs)",
-        restaurantName = "Spicy Fritters",
-        rating = "4.8",
-        deliveryTime = "18-22 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "CP, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.paneer_pakoda_items_3,
-        title = "Cheese Burst Paneer Pakoda",
-        price = "₹180/plate (6 pcs)",
-        restaurantName = "Cheese Lovers",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "South Extension, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.paneer_pakoda_items_4,
-        title = "Crispy Rice Flour Paneer Pakoda",
-        price = "₹130/plate (6 pcs)",
-        restaurantName = "Crispy Corner",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.paneer_pakoda_items_5,
-        title = "Masala Paneer Pakoda",
-        price = "₹135/plate (6 pcs)",
-        restaurantName = "Masala Magic",
-        rating = "4.8",
-        deliveryTime = "18-22 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Paneer Pakoda restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // BATTER VARIETIES (6-9)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.paneer_pakoda_items_6,
-        title = "Besan & Semolina Paneer Pakoda",
-        price = "₹140/plate (6 pcs)",
-        restaurantName = "Fusion Pakoda",
-        rating = "4.8",
-        deliveryTime = "18-22 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Jayanagar, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.paneer_pakoda_items_7,
-        title = "Cornflour Coated Paneer Pakoda",
-        price = "₹145/plate (6 pcs)",
-        restaurantName = "Crispy Wok",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Koregaon Park, Pune"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.paneer_pakoda_items_8,
-        title = "Rava (Semolina) Paneer Pakoda",
-        price = "₹135/plate (6 pcs)",
-        restaurantName = "South Indian Pakoda",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Mylapore, Chennai"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.paneer_pakoda_items_9,
-        title = "Gluten-Free Paneer Pakoda",
-        price = "₹160/plate (6 pcs)",
-        restaurantName = "Healthy Bites",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Indiranagar, Bangalore"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PANEER_PAKODA", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // STUFFING VARIATIONS (10-13)
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.paneer_pakoda_items_10,
-        title = "Green Chili Stuffed Paneer Pakoda",
-        price = "₹145/plate (6 pcs)",
-        restaurantName = "Spice Route",
-        rating = "4.9",
-        deliveryTime = "18-22 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Banjara Hills, Hyderabad"
-    ),
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.paneer_pakoda_items_11,
-        title = "Cheese & Jalapeño Stuffed Pakoda",
-        price = "₹190/plate (6 pcs)",
-        restaurantName = "Fusion Kitchen",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Bandra West, Mumbai"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.paneer_pakoda_items_12,
-        title = "Spinach & Corn Stuffed Pakoda",
-        price = "₹155/plate (6 pcs)",
-        restaurantName = "Green Wok",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Shivaji Nagar, Pune"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.paneer_pakoda_items_13,
-        title = "Mint & Coriander Stuffed Pakoda",
-        price = "₹150/plate (6 pcs)",
-        restaurantName = "Heritage Flavors",
-        rating = "4.8",
-        deliveryTime = "18-22 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Civil Lines, Delhi"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // FLAVOR VARIATIONS (14-17)
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.paneer_pakoda_items_14,
-        title = "Ajwani Paneer Pakoda",
-        price = "₹135/plate (6 pcs)",
-        restaurantName = "Flavors of India",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Sadar Bazaar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.paneer_pakoda_items_15,
-        title = "Ginger-Garlic Paneer Pakoda",
-        price = "₹140/plate (6 pcs)",
-        restaurantName = "Garlic House",
-        rating = "4.9",
-        deliveryTime = "18-22 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Patel Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.paneer_pakoda_items_16,
-        title = "Chaat Masala Paneer Pakoda",
-        price = "₹145/plate (6 pcs)",
-        restaurantName = "Street Food King",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.paneer_pakoda_items_17,
-        title = "Schezwan Paneer Pakoda",
-        price = "₹155/plate (6 pcs)",
-        restaurantName = "Spicy Wok",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Jubilee Hills, Hyderabad"
-    ),
-
-    // PREPARATION STYLE VARIATIONS (18-20)
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.paneer_pakoda_items_18,
-        title = "Deep Fried Paneer Pakoda",
-        price = "₹125/plate (6 pcs)",
-        restaurantName = "Traditional Pakoda",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.paneer_pakoda_items_19,
-        title = "Air Fried Healthy Paneer Pakoda",
-        price = "₹160/plate (6 pcs)",
-        restaurantName = "Fit Food",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Whitefield, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.paneer_pakoda_items_20,
-        title = "Family Feast Paneer Pakoda Platter",
-        price = "₹450/platter (24 pcs)",
-        restaurantName = "Pakoda Junction Family",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "GK II, Delhi"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_pakoda),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Paneer Pakoda restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun CheesecakeCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+fun CheesecakeCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CHEESECAKE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CHEESECAKE")
+        restaurantViewModel.loadFeaturedRestaurants("CHEESECAKE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CHEESECAKE", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val cheeseCakeFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val cheeseCakeFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // BASE/STYLE CATEGORIES (with icons showing visual differences)
-        FilterChip(
-            id = "new_york_cheesecake",
-            text = "New York Style",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_new_york_cheesecake  // classic tall, dense cheesecake
-        ),
-        FilterChip(
-            id = "japanese_cheesecake",
-            text = "Japanese Cotton",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_japanese_cheesecake  // fluffy, jiggly texture
-        ),
-        FilterChip(
-            id = "no_bake_cheesecake",
-            text = "No-Bake",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_no_bake_cheesecake  // chilled, set cheesecake
-        ),
-        FilterChip(
-            id = "vegan_cheesecake",
-            text = "Vegan",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_vegan_cheesecake  // plant-based ingredients
-        ),
+                // BASE/STYLE CATEGORIES (with icons showing visual differences)
+                FilterChip(
+                    id = "new_york_cheesecake",
+                    text = "New York Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_new_york_cheesecake
+                ),
+                FilterChip(
+                    id = "japanese_cheesecake",
+                    text = "Japanese Cotton",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_japanese_cheesecake
+                ),
+                FilterChip(
+                    id = "no_bake_cheesecake",
+                    text = "No-Bake",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_no_bake_cheesecake
+                ),
+                FilterChip(
+                    id = "vegan_cheesecake",
+                    text = "Vegan",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegan_cheesecake
+                ),
 
-        // CRUST TYPES (with icons for key ones)
-        FilterChip(
-            id = "graham_cracker_crust",
-            text = "Graham Cracker",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_graham_cracker_crust  // classic brown crust
-        ),
-        FilterChip(
-            id = "biscuit_crust",
-            text = "Biscuit Base",
-            type = FilterType.TEXT_ONLY
-        ),
+                // CRUST TYPES (with icons for key ones)
+                FilterChip(
+                    id = "graham_cracker_crust",
+                    text = "Graham Cracker",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_graham_cracker_crust
+                ),
+                FilterChip(
+                    id = "biscuit_crust",
+                    text = "Biscuit Base",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS & FLAVORS (with icons for popular ones)
-        FilterChip(
-            id = "lemon_cheesecake",
-            text = "Lemon",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "raspberry_cheesecake",
-            text = "Raspberry",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mango_cheesecake",
-            text = "Mango",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS & FLAVORS (with icons for popular ones)
+                FilterChip(
+                    id = "lemon_cheesecake",
+                    text = "Lemon",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raspberry_cheesecake",
+                    text = "Raspberry",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mango_cheesecake",
+                    text = "Mango",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPECIAL DIETARY (with icons)
-        FilterChip(
-            id = "eggless_cheesecake",
-            text = "Eggless",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPECIAL DIETARY (with icons)
+                FilterChip(
+                    id = "eggless_cheesecake",
+                    text = "Eggless",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIZE OPTIONS
-        FilterChip(
-            id = "mini_cheesecake",
-            text = "Mini (Individual)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "personal_cheesecake",
-            text = "Personal (4-inch)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "standard_cheesecake",
-            text = "Standard (6-inch)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "large_cheesecake",
-            text = "Large (8-inch)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "sheet_cheesecake",
-            text = "Sheet Cake",
-            type = FilterType.TEXT_ONLY
-        ),
-        // ADD-ONS & ACCOMPANIMENTS
-        FilterChip(
-            id = "with_whipped_cream",
-            text = "Whipped Cream",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "with_berry_compote",
-            text = "Berry Compote",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "with_chocolate_sauce",
-            text = "Chocolate Sauce",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "with_fresh_fruits",
-            text = "Fresh Fruits",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SIZE OPTIONS
+                FilterChip(
+                    id = "mini_cheesecake",
+                    text = "Mini (Individual)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "personal_cheesecake",
+                    text = "Personal (4-inch)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "standard_cheesecake",
+                    text = "Standard (6-inch)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_cheesecake",
+                    text = "Large (8-inch)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sheet_cheesecake",
+                    text = "Sheet Cake",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // ADD-ONS & ACCOMPANIMENTS
+                FilterChip(
+                    id = "with_whipped_cream",
+                    text = "Whipped Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_berry_compote",
+                    text = "Berry Compote",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_chocolate_sauce",
+                    text = "Chocolate Sauce",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_fresh_fruits",
+                    text = "Fresh Fruits",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TEMPERATURE PREFERENCE
-        FilterChip(
-            id = "chilled_cheesecake",
-            text = "Chilled",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "room_temp_cheesecake",
-            text = "Room Temperature",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TEMPERATURE PREFERENCE
+                FilterChip(
+                    id = "chilled_cheesecake",
+                    text = "Chilled",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "room_temp_cheesecake",
+                    text = "Room Temperature",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = cheeseCakeFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Implement filter logic for CHEESECAKE category
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-val cheeseCakeItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.cheesecake_1,  // Classic New York Style - tall, dense with smooth top and graham cracker crust
-        title = "Classic New York Cheesecake",
-        price = "₹250/slice | ₹1800/whole (6-inch)",
-        restaurantName = "The Cheesecake Factory",
-        rating = "4.9",
-        deliveryTime = "30-40 mins",
-        distance = "2.1 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.cheesecake_2,  // Japanese Cotton Cheesecake - fluffy, jiggly, golden brown top
-        title = "Japanese Cotton Cheesecake",
-        price = "₹220/slice | ₹1600/whole (6-inch)",
-        restaurantName = "Tokyo Bakes",
-        rating = "4.8",
-        deliveryTime = "25-35 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.cheesecake_3,  // Strawberry Swirl Cheesecake - pink swirls throughout, fresh strawberries on top
-        title = "Strawberry Swirl Cheesecake",
-        price = "₹280/slice | ₹2000/whole (6-inch)",
-        restaurantName = "Berry Bliss",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vasant Kunj, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.cheesecake_4,  // Oreo Cookie Crust Cheesecake - dark chocolate base, cookie chunks visible
-        title = "Oreo Overload Cheesecake",
-        price = "₹300/slice | ₹2200/whole (6-inch)",
-        restaurantName = "Cookie Dream",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.cheesecake_5,  // No-Bake Mango Cheesecake - bright yellow, chilled set, mango glaze top
-        title = "No-Bake Mango Cheesecake",
-        price = "₹260/slice | ₹1900/whole (6-inch)",
-        restaurantName = "Mango Mania",
-        rating = "4.7",
-        deliveryTime = "20-30 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Greater Kailash, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.cheesecake_6,  // Triple Chocolate Cheesecake - dark, milk, white chocolate layers
-        title = "Triple Chocolate Cheesecake",
-        price = "₹320/slice | ₹2400/whole (6-inch)",
-        restaurantName = "Chocolate Heaven",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.0 km",
-        discount = "18%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED CHEESECAKE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -51593,29 +51162,101 @@ val cheeseCakeItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = cheeseCakeItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
-           Spacer(modifier = Modifier.height(15.dp))
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Cheesecake items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CHEESECAKE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_new_york_cheesecake),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Cheesecake items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED CHEESECAKE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -51623,7 +51264,6 @@ val cheeseCakeItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -51635,292 +51275,95 @@ val cheeseCakeItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
-   val cheeseCakeItemsList = listOf(
-    // CLASSIC & INTERNATIONAL STYLES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.cheesecake_items_1,
-        title = "Classic New York Cheesecake",
-        price = "₹250/slice | ₹1800/whole",
-        restaurantName = "The Cheesecake Factory",
-        rating = "4.9",
-        deliveryTime = "30-40 mins",
-        distance = "2.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.cheesecake_items_2,
-        title = "Japanese Cotton Cheesecake",
-        price = "₹220/slice | ₹1600/whole",
-        restaurantName = "Tokyo Bakes",
-        rating = "4.8",
-        deliveryTime = "25-35 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.cheesecake_items_3,
-        title = "Italian Ricotta Cheesecake",
-        price = "₹280/slice | ₹2000/whole",
-        restaurantName = "Bella Italia",
-        rating = "4.7",
-        deliveryTime = "35-45 mins",
-        distance = "2.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vasant Kunj, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.cheesecake_items_4,
-        title = "German Käsekuchen",
-        price = "₹260/slice | ₹1900/whole",
-        restaurantName = "German Bakery",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.cheesecake_items_5,
-        title = "French Fromage Blanc Cheesecake",
-        price = "₹300/slice | ₹2200/whole",
-        restaurantName = "Le Délice",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
-    // FRUIT TOPPINGS & SWIRLS (6-10)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.cheesecake_items_6,
-        title = "Strawberry Swirl Cheesecake",
-        price = "₹280/slice | ₹2000/whole",
-        restaurantName = "Berry Bliss",
-        rating = "4.9",
-        deliveryTime = "30-40 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Greater Kailash, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.cheesecake_items_7,
-        title = "Blueberry Cheesecake",
-        price = "₹280/slice | ₹2000/whole",
-        restaurantName = "Blueberry Farms",
-        rating = "4.8",
-        deliveryTime = "25-35 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Indiranagar, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.cheesecake_items_8,
-        title = "Raspberry Rose Cheesecake",
-        price = "₹300/slice | ₹2200/whole",
-        restaurantName = "Floral Bakes",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Koregaon Park, Pune"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.cheesecake_items_9,
-        title = "Mango Passionfruit Cheesecake",
-        price = "₹290/slice | ₹2100/whole",
-        restaurantName = "Tropical Delights",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Bandra West, Mumbai"
-    ),
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.cheesecake_items_10,
-        title = "Mixed Berry Compote Cheesecake",
-        price = "₹310/slice | ₹2300/whole",
-        restaurantName = "Berrylicious",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Jubilee Hills, Hyderabad"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Cheesecake restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // CHOCOLATE & INDULGENT VARIETIES (11-14)
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.cheesecake_items_11,
-        title = "Triple Chocolate Cheesecake",
-        price = "₹320/slice | ₹2400/whole",
-        restaurantName = "Chocolate Heaven",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.cheesecake_items_12,
-        title = "Salted Caramel Cheesecake",
-        price = "₹300/slice | ₹2200/whole",
-        restaurantName = "Caramel House",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "South Extension, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.cheesecake_items_13,
-        title = "Oreo Cookie Crust Cheesecake",
-        price = "₹290/slice | ₹2100/whole",
-        restaurantName = "Cookie Dream",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.cheesecake_items_14,
-        title = "Nutella Swirl Cheesecake",
-        price = "₹330/slice | ₹2500/whole",
-        restaurantName = "Nutella House",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Banjara Hills, Hyderabad"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CHEESECAKE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // PREMIUM & SPECIALTY FLAVORS (15-17)
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.cheesecake_items_15,
-        title = "Matcha Green Tea Cheesecake",
-        price = "₹310/slice | ₹2300/whole",
-        restaurantName = "Matcha Magic",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Whitefield, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.cheesecake_items_16,
-        title = "Tiramisu Cheesecake",
-        price = "₹320/slice | ₹2400/whole",
-        restaurantName = "Italian Delight",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "CP, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.cheesecake_items_17,
-        title = "Lemon Blueberry Cheesecake",
-        price = "₹280/slice | ₹2000/whole",
-        restaurantName = "Citrus Bakes",
-        rating = "4.7",
-        deliveryTime = "25-35 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // DIETARY & HEALTH-CONSCIOUS OPTIONS (18-19)
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.cheesecake_items_18,
-        title = "Keto-Friendly Cheesecake",
-        price = "₹350/slice | ₹2600/whole",
-        restaurantName = "Keto Kitchen",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Dwarka, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.cheesecake_items_19,
-        title = "Vegan Cashew Cheesecake",
-        price = "₹340/slice | ₹2500/whole",
-        restaurantName = "Green Delights",
-        rating = "4.7",
-        deliveryTime = "35-45 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Koregaon Park, Pune"
-    ),
-
-    // FAMILY & CELEBRATION SIZE (20)
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.cheesecake_items_20,
-        title = "Celebration Cheesecake Platter",
-        price = "₹1200/platter (4 varieties, 16 slices)",
-        restaurantName = "Cake Celebration",
-        rating = "4.9",
-        deliveryTime = "45-50 mins",
-        distance = "2.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "GK II, Delhi"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_new_york_cheesecake),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Cheesecake restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

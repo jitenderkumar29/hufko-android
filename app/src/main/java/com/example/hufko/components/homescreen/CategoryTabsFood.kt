@@ -559,7 +559,7 @@ fun CategoryTabsFood(
                 CategoryPage.Manchurian -> ManchurianCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.PaneerPakoda -> PaneerPakodaCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Cheesecake -> CheesecakeCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Brownie -> BrownieCategoryPage()
+                CategoryPage.Brownie -> BrownieCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Chaap -> ChaapCategoryPage()
                 CategoryPage.Dal -> DalCategoryPage()
                 CategoryPage.Waffles -> WafflesCategoryPage()
@@ -51370,231 +51370,186 @@ fun CheesecakeCategoryPage(
 }
 
 @Composable
-fun BrownieCategoryPage() {
-Column(
-        modifier = Modifier
-            .fillMaxSize()
+fun BrownieCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for BROWNIE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BROWNIE")
+        restaurantViewModel.loadFeaturedRestaurants("BROWNIE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BROWNIE", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
+
         // Filter Button
-val brownieFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val brownieFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // BASE TEXTURE CATEGORIES (with icons showing visual differences)
-        FilterChip(
-            id = "fudgy_brownie",
-            text = "Fudgy Brownie",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_fudgy_brownie  // dense, moist, gooey interior
-        ),
-        FilterChip(
-            id = "cakey_brownie",
-            text = "Cakey Brownie",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_cakey_brownie  // fluffy, airy texture
-        ),
-        FilterChip(
-            id = "chewy_brownie",
-            text = "Chewy Brownie",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_chewy_brownie  // dense but chewy texture
-        ),
-        FilterChip(
-            id = "crusty_top_brownie",
-            text = "Crusty Top",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_crusty_top_brownie  // crackly, shiny crust
-        ),
+                // BASE TEXTURE CATEGORIES (with icons showing visual differences)
+                FilterChip(
+                    id = "fudgy_brownie",
+                    text = "Fudgy Brownie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_fudgy_brownie  // dense, moist, gooey interior
+                ),
+                FilterChip(
+                    id = "cakey_brownie",
+                    text = "Cakey Brownie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cakey_brownie  // fluffy, airy texture
+                ),
+                FilterChip(
+                    id = "chewy_brownie",
+                    text = "Chewy Brownie",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chewy_brownie  // dense but chewy texture
+                ),
+                FilterChip(
+                    id = "crusty_top_brownie",
+                    text = "Crusty Top",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_crusty_top_brownie  // crackly, shiny crust
+                ),
 
-        // CHOCOLATE TYPES (with icons for key ones)
-        FilterChip(
-            id = "dark_chocolate_brownie",
-            text = "Dark Chocolate",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_dark_chocolate_brownie  // rich dark chocolate piece
-        ),
-        // ADD-INS & MIX-INS (with icons for popular ones)
-        FilterChip(
-            id = "hazelnut_brownie",
-            text = "Hazelnuts",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chocolate_chip_brownie",
-            text = "Chocolate Chips",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "caramel_swirl_brownie",
-            text = "Caramel Swirl",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "peanut_butter_swirl_brownie",
-            text = "Peanut Butter Swirl",
-            type = FilterType.TEXT_ONLY
-        ),
+                // CHOCOLATE TYPES (with icons for key ones)
+                FilterChip(
+                    id = "dark_chocolate_brownie",
+                    text = "Dark Chocolate",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dark_chocolate_brownie  // rich dark chocolate piece
+                ),
+                // ADD-INS & MIX-INS (with icons for popular ones)
+                FilterChip(
+                    id = "hazelnut_brownie",
+                    text = "Hazelnuts",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_chip_brownie",
+                    text = "Chocolate Chips",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "caramel_swirl_brownie",
+                    text = "Caramel Swirl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "peanut_butter_swirl_brownie",
+                    text = "Peanut Butter Swirl",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // FLAVOR VARIATIONS (with icons for distinct ones)
-        FilterChip(
-            id = "orange_zest_brownie",
-            text = "Orange Zest",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "raspberry_brownie",
-            text = "Raspberry Swirl",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chili_chocolate_brownie",
-            text = "Chili Chocolate",
-            type = FilterType.TEXT_ONLY
-        ),
+                // FLAVOR VARIATIONS (with icons for distinct ones)
+                FilterChip(
+                    id = "orange_zest_brownie",
+                    text = "Orange Zest",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "raspberry_brownie",
+                    text = "Raspberry Swirl",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chili_chocolate_brownie",
+                    text = "Chili Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS & FROSTINGS (with icons)
-        FilterChip(
-            id = "powdered_sugar_brownie",
-            text = "Powdered Sugar Dusted",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "ice_cream_topped_brownie",
-            text = "With Ice Cream",
-            type = FilterType.TEXT_ONLY
-        ),
-        // SIZE OPTIONS
-        FilterChip(
-            id = "mini_brownie",
-            text = "Mini (Bite-sized)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "regular_brownie",
-            text = "Regular (2x2 inch)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "large_brownie",
-            text = "Large (4x4 inch)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "brownie_tray",
-            text = "Tray (9x9 inch)",
-            type = FilterType.TEXT_ONLY
-        ),
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // TOPPINGS & FROSTINGS (with icons)
+                FilterChip(
+                    id = "powdered_sugar_brownie",
+                    text = "Powdered Sugar Dusted",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ice_cream_topped_brownie",
+                    text = "With Ice Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // SIZE OPTIONS
+                FilterChip(
+                    id = "mini_brownie",
+                    text = "Mini (Bite-sized)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "regular_brownie",
+                    text = "Regular (2x2 inch)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_brownie",
+                    text = "Large (4x4 inch)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brownie_tray",
+                    text = "Tray (9x9 inch)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
+
         FilterButtonFood(
             filterConfig = brownieFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Apply filters to API calls based on selected filter
+                // TODO: Implement filter logic for BROWNIE category
+                when (filter.id) {
+                    "fudgy_brownie" -> {
+                        // Filter for fudgy brownies
+                        restaurantViewModel.loadRecommendedRestaurants("BROWNIE", recommended = true, filter = filter.id)
+                    }
+                    "cakey_brownie" -> {
+                        // Filter for cakey brownies
+                        restaurantViewModel.loadRecommendedRestaurants("BROWNIE", recommended = true, filter = filter.id)
+                    }
+                    // Add more filter cases as needed
+                    else -> {
+                        // Apply general filter
+                        restaurantViewModel.loadRecommendedRestaurants("BROWNIE", recommended = true, filter = filter.id)
+                    }
+                }
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Show sort options dialog
+                // TODO: Implement sort dialog
             }
         )
 
-val brownieItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.brownie_1,  // Classic Fudgy Brownie - dense, rich, crackly top with powdered sugar dusting
-        title = "Classic Fudgy Walnut Brownie",
-        price = "₹180/piece | ₹650/box (4 pcs)",
-        restaurantName = "Brownie House",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.8 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.brownie_2,  // Triple Chocolate Brownie - dark, milk, white chocolate chunks visible
-        title = "Triple Chocolate Chunk Brownie",
-        price = "₹220/piece | ₹800/box (4 pcs)",
-        restaurantName = "Chocolate Heaven",
-        rating = "4.8",
-        deliveryTime = "30-35 mins",
-        distance = "2.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.brownie_3,  // Salted Caramel Brownie - caramel swirls, sea salt sprinkle on top
-        title = "Salted Caramel Swirl Brownie",
-        price = "₹240/piece | ₹900/box (4 pcs)",
-        restaurantName = "Caramel Delight",
-        rating = "4.9",
-        deliveryTime = "30-35 mins",
-        distance = "2.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vasant Kunj, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.brownie_4,  // Peanut Butter Brownie - peanut butter swirls, chopped peanuts on top
-        title = "Peanut Butter Explosion Brownie",
-        price = "₹230/piece | ₹850/box (4 pcs)",
-        restaurantName = "Nutty Baker",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.brownie_5,  // Cheesecake Swirl Brownie - marbled with cream cheese
-        title = "Cheesecake Marble Brownie",
-        price = "₹250/piece | ₹950/box (4 pcs)",
-        restaurantName = "Swirl Factory",
-        rating = "4.7",
-        deliveryTime = "30-35 mins",
-        distance = "1.9 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Greater Kailash, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.brownie_6,  // Brownie Sundae - warm brownie with ice cream, chocolate sauce
-        title = "Ultimate Brownie Sundae",
-        price = "₹320/serving (with ice cream)",
-        restaurantName = "Dessert Paradise",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "18%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    )
-)
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED BROWNIE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -51602,30 +51557,101 @@ val brownieItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = brownieItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Brownie items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("BROWNIE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_fudgy_brownie),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Brownie items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED BROWNIE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -51633,7 +51659,6 @@ val brownieItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
@@ -51645,293 +51670,95 @@ val brownieItems = listOf(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Sample data based on the provided images
- val brownieItemsList = listOf(
-    // CLASSIC BROWNIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.brownie_items_1,
-        title = "Classic Fudge Brownie",
-        price = "₹120/pc | ₹650/dozen",
-        restaurantName = "Brownie Point",
-        rating = "4.8",
-        deliveryTime = "25-35 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.brownie_items_2,
-        title = "Belgian Chocolate Brownie",
-        price = "₹150/pc | ₹800/dozen",
-        restaurantName = "Choco Lair",
-        rating = "4.9",
-        deliveryTime = "30-40 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.brownie_items_3,
-        title = "Walnut Crunch Brownie",
-        price = "₹130/pc | ₹700/dozen",
-        restaurantName = "Nutty Bakes",
-        rating = "4.7",
-        deliveryTime = "20-30 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.brownie_items_4,
-        title = "Dairy Milk Brownie",
-        price = "₹140/pc | ₹750/dozen",
-        restaurantName = "Cadbury Cafe",
-        rating = "4.8",
-        deliveryTime = "25-35 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Vasant Kunj, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.brownie_items_5,
-        title = "Dark Chocolate Brownie",
-        price = "₹160/pc | ₹850/dozen",
-        restaurantName = "Dark Delights",
-        rating = "4.9",
-        deliveryTime = "30-40 mins",
-        distance = "2.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Brownie restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // NUTTY & CARAMEL BROWNIES (6-10)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.brownie_items_6,
-        title = "Salted Caramel Brownie",
-        price = "₹170/pc | ₹900/dozen",
-        restaurantName = "Caramel House",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "South Extension, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.brownie_items_7,
-        title = "Peanut Butter Swirl Brownie",
-        price = "₹160/pc | ₹850/dozen",
-        restaurantName = "PB & Co.",
-        rating = "4.9",
-        deliveryTime = "25-35 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Greater Kailash, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.brownie_items_8,
-        title = "Almond Brownie",
-        price = "₹150/pc | ₹800/dozen",
-        restaurantName = "Almond House",
-        rating = "4.7",
-        deliveryTime = "25-35 mins",
-        distance = "1.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.brownie_items_9,
-        title = "Hazelnut Praline Brownie",
-        price = "₹180/pc | ₹950/dozen",
-        restaurantName = "Nutella House",
-        rating = "4.9",
-        deliveryTime = "35-45 mins",
-        distance = "2.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Banjara Hills, Hyderabad"
-    ),
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.brownie_items_10,
-        title = "Macadamia Nut Brownie",
-        price = "₹190/pc | ₹1000/dozen",
-        restaurantName = "Premium Bakes",
-        rating = "4.8",
-        deliveryTime = "35-45 mins",
-        distance = "2.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Jubilee Hills, Hyderabad"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("BROWNIE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // FILLED & LAYERED BROWNIES (11-14)
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.brownie_items_11,
-        title = "Cheesecake Swirl Brownie",
-        price = "₹180/pc | ₹950/dozen",
-        restaurantName = "Swirl Cafe",
-        rating = "4.9",
-        deliveryTime = "30-40 mins",
-        distance = "1.8 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Indiranagar, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.brownie_items_12,
-        title = "Red Velvet Brownie",
-        price = "₹160/pc | ₹850/dozen",
-        restaurantName = "Red Velvet Bakery",
-        rating = "4.8",
-        deliveryTime = "25-35 mins",
-        distance = "1.5 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Whitefield, Bangalore"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.brownie_items_13,
-        title = "Mint Chocolate Brownie",
-        price = "₹150/pc | ₹800/dozen",
-        restaurantName = "Minty Fresh",
-        rating = "4.7",
-        deliveryTime = "25-35 mins",
-        distance = "1.7 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Koregaon Park, Pune"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.brownie_items_14,
-        title = "Coffee Brownie",
-        price = "₹140/pc | ₹750/dozen",
-        restaurantName = "Coffee & Cake",
-        rating = "4.8",
-        deliveryTime = "20-30 mins",
-        distance = "1.3 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Bandra West, Mumbai"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // FRUIT & SPECIALTY BROWNIES (15-17)
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.brownie_items_15,
-        title = "Orange Zest Brownie",
-        price = "₹150/pc | ₹800/dozen",
-        restaurantName = "Citrus Delights",
-        rating = "4.7",
-        deliveryTime = "25-35 mins",
-        distance = "1.6 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.brownie_items_16,
-        title = "Raspberry Brownie",
-        price = "₹170/pc | ₹900/dozen",
-        restaurantName = "Berry Bliss",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "1.9 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "GK II, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.brownie_items_17,
-        title = "Chili Chocolate Brownie",
-        price = "₹160/pc | ₹850/dozen",
-        restaurantName = "Spice & Sweet",
-        rating = "4.8",
-        deliveryTime = "30-40 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "CP, Delhi"
-    ),
-
-    // DIETARY OPTIONS (18-19)
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.brownie_items_18,
-        title = "Gluten-Free Brownie",
-        price = "₹190/pc | ₹1000/dozen",
-        restaurantName = "Gluten Free Kitchen",
-        rating = "4.8",
-        deliveryTime = "35-45 mins",
-        distance = "2.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Dwarka, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.brownie_items_19,
-        title = "Vegan Brownie",
-        price = "₹180/pc | ₹950/dozen",
-        restaurantName = "Green Delights",
-        rating = "4.7",
-        deliveryTime = "35-45 mins",
-        distance = "2.0 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Koregaon Park, Pune"
-    ),
-
-    // CELEBRATION PACK (20)
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.brownie_items_20,
-        title = "Brownie Gift Hamper",
-        price = "₹999/hamper (12 assorted)",
-        restaurantName = "Gift Bakes",
-        rating = "4.9",
-        deliveryTime = "40-50 mins",
-        distance = "2.4 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    )
-).forEach { restaurantItem ->
-            Column {
-                RestaurantItemListFull(
-                    restaurantItem = restaurantItem,
-                    onWishlistClick = { },
-                    onThreeDotClick = { },
-                    onItemClick = { }
-                )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_fudgy_brownie),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Brownie restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
             }
         }
     }

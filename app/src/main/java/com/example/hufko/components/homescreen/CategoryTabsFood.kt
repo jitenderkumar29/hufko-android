@@ -563,10 +563,10 @@ fun CategoryTabsFood(
                 CategoryPage.Chaap -> ChaapCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Dal -> DalCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Waffles -> WafflesCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.AlooKachori -> AlooKachoriCategoryPage()
-                CategoryPage.CholeKulche -> CholeKulcheCategoryPage()
-                CategoryPage.Fries -> FriesCategoryPage()
-                CategoryPage.ColdCoffee -> ColdCoffeeCategoryPage()
+                CategoryPage.AlooKachori -> AlooKachoriCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.CholeKulche -> CholeKulcheCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Fries -> FriesCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.ColdCoffee -> ColdCoffeeCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Soup -> SoupCategoryPage()
                 CategoryPage.Bhurji -> BhurjiCategoryPage()
                 CategoryPage.KhastaKachori -> KhastaKachoriCategoryPage()
@@ -53429,7 +53429,22 @@ fun AlooKachoriCategoryPage(
 }
 
 @Composable
-fun CholeKulcheCategoryPage() {
+fun CholeKulcheCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CHOLE_KULCHE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CHOLE_KULCHE")
+        restaurantViewModel.loadFeaturedRestaurants("CHOLE_KULCHE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CHOLE_KULCHE", recommended = true)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -53577,16 +53592,17 @@ fun CholeKulcheCategoryPage() {
             filterConfig = choleKulcheFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // TODO: Implement filter logic for CHOLE_KULCHE category
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // TODO: Implement sort dialog
             }
         )
 
         Spacer(modifier = Modifier.height(5.dp))
 
+        // ==================== RECOMMENDED CHOLE KULCHE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -53597,111 +53613,98 @@ fun CholeKulcheCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Recommended items section
-        val recommendedItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.chole_kulche_1,
-                title = "Amritsari Chole Kulche",
-                price = "₹120 (2 pcs)",
-                restaurantName = "Amritsari Kulcha Point",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.chole_kulche_2,
-                title = "Stuffed Aloo Kulcha",
-                price = "₹140 (2 pcs)",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.chole_kulche_3,
-                title = "Paneer Stuffed Kulcha",
-                price = "₹160 (2 pcs)",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.9",
-                deliveryTime = "20-30 mins",
-                distance = "1.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.chole_kulche_4,
-                title = "Lachha Kulcha",
-                price = "₹130 (2 pcs)",
-                restaurantName = "Bharat Dhaba",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Kamla Nagar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.chole_kulche_5,
-                title = "Butter Kulcha",
-                price = "₹110 (2 pcs)",
-                restaurantName = "Amritsari Kulcha Point",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.chole_kulche_6,
-                title = "Special Kulcha Thali",
-                price = "₹190 (thali)",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            )
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Chole Kulche items...", color = Color.Gray)
+                    }
+                }
+            }
 
-        // Horizontal scroll section for recommended items
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = recommendedItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CHOLE_KULCHE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_stuffed_kulcha),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Chole Kulche items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
 
+        // ==================== FEATURED CHOLE KULCHE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -53712,9 +53715,7 @@ fun CholeKulcheCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
-
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -53725,297 +53726,114 @@ fun CholeKulcheCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Complete list of all Chole Kulche items (1-20)
-        val choleKulcheItemsList = listOf(
-            // CLASSIC KULCHE VARIETIES (1-5)
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.chole_kulche_items_1,
-                title = "Amritsari Chole Kulche",
-                price = "₹120 (2 pcs)",
-                restaurantName = "Amritsari Kulcha Point",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.chole_kulche_items_2,
-                title = "Stuffed Aloo Kulcha",
-                price = "₹140 (2 pcs)",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.chole_kulche_items_3,
-                title = "Paneer Stuffed Kulcha",
-                price = "₹160 (2 pcs)",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.9",
-                deliveryTime = "20-30 mins",
-                distance = "1.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.chole_kulche_items_4,
-                title = "Lachha Kulcha",
-                price = "₹130 (2 pcs)",
-                restaurantName = "Bharat Dhaba",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Kamla Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.chole_kulche_items_5,
-                title = "Butter Kulcha",
-                price = "₹110 (2 pcs)",
-                restaurantName = "Amritsari Kulcha Point",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Chole Kulche restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-            // STUFFED KULCHA VARIETIES (6-10)
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.chole_kulche_items_6,
-                title = "Onion Stuffed Kulcha",
-                price = "₹135 (2 pcs)",
-                restaurantName = "Stuffed Kulcha House",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Lajpat Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.chole_kulche_items_7,
-                title = "Mix Stuffed Kulcha",
-                price = "₹155 (2 pcs)",
-                restaurantName = "Stuffed Kulcha House",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.9 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Lajpat Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.chole_kulche_items_8,
-                title = "Gobhi Stuffed Kulcha",
-                price = "₹140 (2 pcs)",
-                restaurantName = "Stuffed Kulcha House",
-                rating = "4.6",
-                deliveryTime = "20-30 mins",
-                distance = "1.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Lajpat Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.chole_kulche_items_9,
-                title = "Keema Stuffed Kulcha",
-                price = "₹190 (2 pcs)",
-                restaurantName = "Non-Veg Point",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Green Park, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.chole_kulche_items_10,
-                title = "Cheese Stuffed Kulcha",
-                price = "₹175 (2 pcs)",
-                restaurantName = "Fusion Dhaba",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CHOLE_KULCHE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-            // SPECIALTY KULCHE (11-14)
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.chole_kulche_items_11,
-                title = "Tandoori Kulcha",
-                price = "₹100 (2 pcs)",
-                restaurantName = "Bharat Dhaba",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Kamla Nagar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.chole_kulche_items_12,
-                title = "Garlic Kulcha",
-                price = "₹125 (2 pcs)",
-                restaurantName = "Amritsari Kulcha Point",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.chole_kulche_items_13,
-                title = "Methi Kulcha",
-                price = "₹130 (2 pcs)",
-                restaurantName = "Healthy Bites",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "2.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Dwarka, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.chole_kulche_items_14,
-                title = "Ajwaini Kulcha",
-                price = "₹120 (2 pcs)",
-                restaurantName = "Healthy Bites",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "2.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Dwarka, Delhi"
-            ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-            // CHOLE VARIATIONS (15-17)
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.chole_kulche_items_15,
-                title = "Dry Chole Kulche",
-                price = "₹125 (2 pcs)",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.chole_kulche_items_16,
-                title = "Gravy Chole Kulche",
-                price = "₹145 (2 pcs)",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.9",
-                deliveryTime = "20-30 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.chole_kulche_items_17,
-                title = "Spicy Chole Kulche",
-                price = "₹130 (2 pcs)",
-                restaurantName = "Bharat Dhaba",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.8 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Kamla Nagar, Delhi"
-            ),
-
-            // COMBO & THALI (18-20)
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.chole_kulche_items_18,
-                title = "Chole Kulche Combo",
-                price = "₹220 (combo)",
-                restaurantName = "Amritsari Kulcha Point",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.chole_kulche_items_19,
-                title = "Special Kulcha Thali",
-                price = "₹260 (thali)",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.9",
-                deliveryTime = "25-35 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.chole_kulche_items_20,
-                title = "Family Kulcha Pack",
-                price = "₹550 (family pack)",
-                restaurantName = "Amritsari Kulcha Point",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            )
-        )
-
-        // Display all restaurant items vertically
-        choleKulcheItemsList.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_stuffed_kulcha),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Chole Kulche restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
-
 @Composable
-fun FriesCategoryPage() {
+fun FriesCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for FRIES category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: FRIES")
+        restaurantViewModel.loadFeaturedRestaurants("FRIES", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("FRIES", recommended = true)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -54203,16 +54021,17 @@ fun FriesCategoryPage() {
             filterConfig = friesFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // TODO: Implement filter logic for FRIES category
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // TODO: Implement sort dialog
             }
         )
 
         Spacer(modifier = Modifier.height(5.dp))
 
+        // ==================== RECOMMENDED FRIES ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -54223,111 +54042,98 @@ fun FriesCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
-        val recommendedItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.fries_1,
-                title = "Classic Salted Fries",
-                price = "₹99 (regular)",
-                restaurantName = "Fries & Co.",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.fries_2,
-                title = "Peri Peri Fries",
-                price = "₹129 (regular)",
-                restaurantName = "Fries & Co.",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.fries_3,
-                title = "Cheesy Fries",
-                price = "₹159 (regular)",
-                restaurantName = "The Fries Shop",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.fries_4,
-                title = "Curly Fries",
-                price = "₹139 (regular)",
-                restaurantName = "The Fries Shop",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.fries_5,
-                title = "Loaded Fries",
-                price = "₹199 (regular)",
-                restaurantName = "Fries & Co.",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.fries_6,
-                title = "Sweet Potato Fries",
-                price = "₹149 (regular)",
-                restaurantName = "Healthy Bites",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            )
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Fries items...", color = Color.Gray)
+                    }
+                }
+            }
 
-        // Horizontal scroll section for recommended items
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = recommendedItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("FRIES", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_fries),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Fries items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
 
+        // ==================== FEATURED FRIES RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -54338,9 +54144,7 @@ fun FriesCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
-
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -54351,296 +54155,114 @@ fun FriesCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Complete list of all Fries items (1-20) using RestaurantItemFull for vertical list
-        val friesItemsList = listOf(
-            // CLASSIC FRIES VARIETIES (1-5)
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.fries_items_1,
-                title = "Classic Salted Fries",
-                price = "₹99 (regular)",
-                restaurantName = "Fries & Co.",
-                rating = "4.5",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.fries_items_2,
-                title = "Peri Peri Fries",
-                price = "₹129 (regular)",
-                restaurantName = "Fries & Co.",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.fries_items_3,
-                title = "Cheese Fries",
-                price = "₹149 (regular)",
-                restaurantName = "The Fry House",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.fries_items_4,
-                title = "Loaded Cheese Fries",
-                price = "₹199 (regular)",
-                restaurantName = "The Fry House",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.fries_items_5,
-                title = "Garlic Parmesan Fries",
-                price = "₹169 (regular)",
-                restaurantName = "Fries & Co.",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Fries restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-            // SPICY & SEASONED VARIETIES (6-10)
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.fries_items_6,
-                title = "Mexican Fries",
-                price = "₹189 (regular)",
-                restaurantName = "Mexican Kitchen",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.fries_items_7,
-                title = "BBQ Fries",
-                price = "₹139 (regular)",
-                restaurantName = "Fries & Co.",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.fries_items_8,
-                title = "Chilli Garlic Fries",
-                price = "₹149 (regular)",
-                restaurantName = "The Fry House",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.fries_items_9,
-                title = "Tandoori Fries",
-                price = "₹159 (regular)",
-                restaurantName = "Curry & Fries",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.fries_items_10,
-                title = "Masala Fries",
-                price = "₹119 (regular)",
-                restaurantName = "Curry & Fries",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Pitampura, Delhi"
-            ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("FRIES", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-            // GOURMET & PREMIUM VARIETIES (11-15)
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.fries_items_11,
-                title = "Truffle Fries",
-                price = "₹249 (regular)",
-                restaurantName = "Gourmet Bites",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Vasant Vihar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.fries_items_12,
-                title = "Rosemary & Sea Salt Fries",
-                price = "₹179 (regular)",
-                restaurantName = "Gourmet Bites",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "2.0 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Vasant Vihar, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.fries_items_13,
-                title = "Smoked Paprika Fries",
-                price = "₹149 (regular)",
-                restaurantName = "The Fry House",
-                rating = "4.6",
-                deliveryTime = "20-25 mins",
-                distance = "1.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.fries_items_14,
-                title = "Buffalo Wings Fries",
-                price = "₹209 (regular)",
-                restaurantName = "Wings & Fries",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Green Park, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.fries_items_15,
-                title = "Sweet Potato Fries",
-                price = "₹169 (regular)",
-                restaurantName = "Healthy Bites",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "2.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Dwarka, Delhi"
-            ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-            // LOADED & SPECIALTY FRIES (16-18)
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.fries_items_16,
-                title = "Pulled Pork Fries",
-                price = "₹299 (regular)",
-                restaurantName = "Wings & Fries",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "1.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Green Park, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.fries_items_17,
-                title = "Chili Cheese Fries",
-                price = "₹229 (regular)",
-                restaurantName = "Wings & Fries",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "1.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Green Park, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.fries_items_18,
-                title = "Poutine",
-                price = "₹219 (regular)",
-                restaurantName = "International Flavors",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "2.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Greater Kailash, Delhi"
-            ),
-
-            // COMBO & FAMILY PACKS (19-20)
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.fries_items_19,
-                title = "Fries Feast Combo",
-                price = "₹349 (combo)",
-                restaurantName = "Fries & Co.",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.fries_items_20,
-                title = "Party Fries Pack",
-                price = "₹649 (family pack)",
-                restaurantName = "The Fry House",
-                rating = "4.9",
-                deliveryTime = "35-40 mins",
-                distance = "1.3 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            )
-        )
-
-        // Display all restaurant items vertically
-        friesItemsList.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_fries),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Fries restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun ColdCoffeeCategoryPage() {
+fun ColdCoffeeCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for COLD_COFFEE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: COLD_COFFEE")
+        restaurantViewModel.loadFeaturedRestaurants("COLD_COFFEE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("COLD_COFFEE", recommended = true)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -54865,16 +54487,17 @@ fun ColdCoffeeCategoryPage() {
             filterConfig = coldCoffeeFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // TODO: Implement filter logic for COLD_COFFEE category
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // TODO: Implement sort dialog
             }
         )
 
         Spacer(modifier = Modifier.height(5.dp))
 
+        // ==================== RECOMMENDED COLD COFFEE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -54885,111 +54508,98 @@ fun ColdCoffeeCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
-        val recommendedItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.cold_coffee_1,
-                title = "Classic Cold Coffee",
-                price = "₹149 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.cold_coffee_2,
-                title = "Cold Brew",
-                price = "₹169 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.cold_coffee_3,
-                title = "Iced Latte",
-                price = "₹159 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.cold_coffee_4,
-                title = "Frappe",
-                price = "₹189 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.cold_coffee_5,
-                title = "Iced Mocha",
-                price = "₹179 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.cold_coffee_6,
-                title = "Iced Americano",
-                price = "₹139 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            )
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Cold Coffee items...", color = Color.Gray)
+                    }
+                }
+            }
 
-        // Horizontal scroll section for recommended items
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = recommendedItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("COLD_COFFEE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_coffee),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Cold Coffee items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
 
+        // ==================== FEATURED COLD COFFEE RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -55000,9 +54610,7 @@ fun ColdCoffeeCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
-
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -55013,290 +54621,93 @@ fun ColdCoffeeCategoryPage() {
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
-        val coldCoffeeItemsList = listOf(
-            // CLASSIC COLD COFFEE VARIETIES (1-5)
-            RestaurantItemFull(
-                id = 1,
-                imageRes = R.drawable.cold_coffee_items_1,
-                title = "Classic Cold Coffee",
-                price = "₹149 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 2,
-                imageRes = R.drawable.cold_coffee_items_2,
-                title = "Vanilla Cold Coffee",
-                price = "₹159 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 3,
-                imageRes = R.drawable.cold_coffee_items_3,
-                title = "Caramel Cold Coffee",
-                price = "₹169 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 4,
-                imageRes = R.drawable.cold_coffee_items_4,
-                title = "Hazelnut Cold Coffee",
-                price = "₹169 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 5,
-                imageRes = R.drawable.cold_coffee_items_5,
-                title = "French Vanilla Cold Coffee",
-                price = "₹179 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Cold Coffee restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-            // COLD BREW VARIETIES (6-10)
-            RestaurantItemFull(
-                id = 6,
-                imageRes = R.drawable.cold_coffee_items_6,
-                title = "Signature Cold Brew",
-                price = "₹169 (regular)",
-                restaurantName = "Roastery Coffee",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 7,
-                imageRes = R.drawable.cold_coffee_items_7,
-                title = "Nitro Cold Brew",
-                price = "₹199 (regular)",
-                restaurantName = "Roastery Coffee",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "1.8 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 8,
-                imageRes = R.drawable.cold_coffee_items_8,
-                title = "Vanilla Sweet Cream Cold Brew",
-                price = "₹189 (regular)",
-                restaurantName = "Roastery Coffee",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 9,
-                imageRes = R.drawable.cold_coffee_items_9,
-                title = "Honey Almond Cold Brew",
-                price = "₹179 (regular)",
-                restaurantName = "Roastery Coffee",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 10,
-                imageRes = R.drawable.cold_coffee_items_10,
-                title = "Cinnamon Cold Brew",
-                price = "₹169 (regular)",
-                restaurantName = "Roastery Coffee",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Hauz Khas, Delhi"
-            ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("COLD_COFFEE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-            // FRAPPÉ & BLENDED VARIETIES (11-15)
-            RestaurantItemFull(
-                id = 11,
-                imageRes = R.drawable.cold_coffee_items_11,
-                title = "Chocolate Frappé",
-                price = "₹199 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 12,
-                imageRes = R.drawable.cold_coffee_items_12,
-                title = "Caramel Frappé",
-                price = "₹199 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 13,
-                imageRes = R.drawable.cold_coffee_items_13,
-                title = "Mocha Frappé",
-                price = "₹209 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 14,
-                imageRes = R.drawable.cold_coffee_items_14,
-                title = "Java Chip Frappé",
-                price = "₹219 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 15,
-                imageRes = R.drawable.cold_coffee_items_15,
-                title = "White Mocha Frappé",
-                price = "₹209 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-            // ICED LATTE & ESPRESSO VARIETIES (16-18)
-            RestaurantItemFull(
-                id = 16,
-                imageRes = R.drawable.cold_coffee_items_16,
-                title = "Iced Latte",
-                price = "₹159 (regular)",
-                restaurantName = "Espresso Bar",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "1.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 17,
-                imageRes = R.drawable.cold_coffee_items_17,
-                title = "Iced Mocha",
-                price = "₹179 (regular)",
-                restaurantName = "Espresso Bar",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.3 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 18,
-                imageRes = R.drawable.cold_coffee_items_18,
-                title = "Iced Americano",
-                price = "₹139 (regular)",
-                restaurantName = "Espresso Bar",
-                rating = "4.6",
-                deliveryTime = "15-20 mins",
-                distance = "1.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Rajouri Garden, Delhi"
-            ),
-
-            // SPECIALTY & SEASONAL (19-20)
-            RestaurantItemFull(
-                id = 19,
-                imageRes = R.drawable.cold_coffee_items_19,
-                title = "Irish Cream Cold Coffee",
-                price = "₹189 (regular)",
-                restaurantName = "Brew House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            RestaurantItemFull(
-                id = 20,
-                imageRes = R.drawable.cold_coffee_items_20,
-                title = "Affogato Cold Coffee",
-                price = "₹199 (regular)",
-                restaurantName = "Coffee Culture",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Saket, Delhi"
-            )
-        )
-
-        // Display all restaurant items vertically
-        coldCoffeeItemsList.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_coffee),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Cold Coffee restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

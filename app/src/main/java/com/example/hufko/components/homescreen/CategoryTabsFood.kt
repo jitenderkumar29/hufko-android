@@ -423,7 +423,7 @@ fun CategoryTabsFood(
         ) {
             // Get the actual category based on currentSelectedIndex
             val actualCategory = allCategoryPages.getOrNull(currentSelectedIndex)
-            val restaurantViewModel: RestaurantViewModel = viewModel()  // ✅ This will work now
+            val restaurantViewModel: RestaurantViewModel = viewModel()
             // Show content based on the actual category
             when (actualCategory) {
                 CategoryPage.All -> AllCategoryPage(
@@ -567,10 +567,10 @@ fun CategoryTabsFood(
                 CategoryPage.CholeKulche -> CholeKulcheCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.Fries -> FriesCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.ColdCoffee -> ColdCoffeeCategoryPage(restaurantViewModel = restaurantViewModel)
-                CategoryPage.Soup -> SoupCategoryPage()
-                CategoryPage.Bhurji -> BhurjiCategoryPage()
-                CategoryPage.KhastaKachori -> KhastaKachoriCategoryPage()
-                CategoryPage.HotDog -> HotDogCategoryPage()
+                CategoryPage.Soup -> SoupCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Bhurji -> BhurjiCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.KhastaKachori -> KhastaKachoriCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.HotDog -> HotDogCategoryPage(restaurantViewModel = restaurantViewModel)
                 null -> {
                     // Show empty state for "See All" tab or invalid index
                     Box(
@@ -54713,306 +54713,321 @@ fun ColdCoffeeCategoryPage(
 }
 
 @Composable
-fun SoupCategoryPage() {
+fun SoupCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SOUP category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SOUP")
+        restaurantViewModel.loadFeaturedRestaurants("SOUP", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SOUP", recommended = true)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-val soupFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val soupFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // SOUP BASE TYPES (with bowl icons showing style)
-        FilterChip(
-            id = "vegetable_soup",
-            text = "Vegetable",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_vegetable_soup  // Bowl with vegetables icon
-        ),
-        FilterChip(
-            id = "chicken_soup",
-            text = "Chicken",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_chicken_soup  // Bowl with chicken leg icon
-        ),
-        FilterChip(
-            id = "veg_soup",
-            text = "Veg",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_veg_soup  // Bowl with beef icon
-        ),
-        FilterChip(
-            id = "seafood_soup",
-            text = "Seafood",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_seafood_soup  // Bowl with fish/shrimp icon
-        ),
-        FilterChip(
-            id = "tomato_soup",
-            text = "Tomato",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_tomato_soup  // Bowl with tomato icon
-        ),
-        // SOUP TEXTURES/STYLES (text only)
-        FilterChip(
-            id = "creamy_soup",
-            text = "Creamy",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chunky_soup",
-            text = "Chunky",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "broth_based",
-            text = "Broth Based",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pureed_soup",
-            text = "Puréed",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chowder",
-            text = "Chowder",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "bisque",
-            text = "Bisque",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SOUP BASE TYPES (with bowl icons showing style)
+                FilterChip(
+                    id = "vegetable_soup",
+                    text = "Vegetable",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_vegetable_soup  // Bowl with vegetables icon
+                ),
+                FilterChip(
+                    id = "chicken_soup",
+                    text = "Chicken",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicken_soup  // Bowl with chicken leg icon
+                ),
+                FilterChip(
+                    id = "veg_soup",
+                    text = "Veg",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_veg_soup  // Bowl with beef icon
+                ),
+                FilterChip(
+                    id = "seafood_soup",
+                    text = "Seafood",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_seafood_soup  // Bowl with fish/shrimp icon
+                ),
+                FilterChip(
+                    id = "tomato_soup",
+                    text = "Tomato",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_tomato_soup  // Bowl with tomato icon
+                ),
+                // SOUP TEXTURES/STYLES (text only)
+                FilterChip(
+                    id = "creamy_soup",
+                    text = "Creamy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chunky_soup",
+                    text = "Chunky",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "broth_based",
+                    text = "Broth Based",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pureed_soup",
+                    text = "Puréed",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chowder",
+                    text = "Chowder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bisque",
+                    text = "Bisque",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // PROTEIN ADD-INS (text only)
-        FilterChip(
-            id = "chicken_addin",
-            text = "Add Chicken",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "beef_addin",
-            text = "Add Beef",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "tofu_addin",
-            text = "Add Tofu",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "beans_addin",
-            text = "Add Beans",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "eggs_addin",
-            text = "Add Eggs",
-            type = FilterType.TEXT_ONLY
-        ),
+                // PROTEIN ADD-INS (text only)
+                FilterChip(
+                    id = "chicken_addin",
+                    text = "Add Chicken",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "beef_addin",
+                    text = "Add Beef",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_addin",
+                    text = "Add Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "beans_addin",
+                    text = "Add Beans",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "eggs_addin",
+                    text = "Add Eggs",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // VEGETABLE ADD-INS (text only)
-        FilterChip(
-            id = "carrots_veg",
-            text = "Carrots",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "celery_veg",
-            text = "Celery",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "onions_veg",
-            text = "Onions",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "potatoes_veg",
-            text = "Potatoes",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "spinach_veg",
-            text = "Spinach",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "corn_veg",
-            text = "Corn",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "broccoli_veg",
-            text = "Broccoli",
-            type = FilterType.TEXT_ONLY
-        ),
+                // VEGETABLE ADD-INS (text only)
+                FilterChip(
+                    id = "carrots_veg",
+                    text = "Carrots",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "celery_veg",
+                    text = "Celery",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onions_veg",
+                    text = "Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "potatoes_veg",
+                    text = "Potatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_veg",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "corn_veg",
+                    text = "Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "broccoli_veg",
+                    text = "Broccoli",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // HERBS & SPICES (text only)
-        FilterChip(
-            id = "parsley",
-            text = "Parsley",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cilantro",
-            text = "Cilantro",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "thyme",
-            text = "Thyme",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "rosemary",
-            text = "Rosemary",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "basil",
-            text = "Basil",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "garlic",
-            text = "Garlic",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "ginger",
-            text = "Ginger",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pepper",
-            text = "Black Pepper",
-            type = FilterType.TEXT_ONLY
-        ),
+                // HERBS & SPICES (text only)
+                FilterChip(
+                    id = "parsley",
+                    text = "Parsley",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cilantro",
+                    text = "Cilantro",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "thyme",
+                    text = "Thyme",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "rosemary",
+                    text = "Rosemary",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "basil",
+                    text = "Basil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic",
+                    text = "Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ginger",
+                    text = "Ginger",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pepper",
+                    text = "Black Pepper",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS & GARNISHES (text only)
-        FilterChip(
-            id = "croutons",
-            text = "Croutons",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cheese_topping",
-            text = "Cheese",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "sour_cream",
-            text = "Sour Cream",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "green_onions",
-            text = "Green Onions",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "fresh_herbs",
-            text = "Fresh Herbs",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "bacon_bits",
-            text = "Bacon Bits",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS & GARNISHES (text only)
+                FilterChip(
+                    id = "croutons",
+                    text = "Croutons",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese_topping",
+                    text = "Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sour_cream",
+                    text = "Sour Cream",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "green_onions",
+                    text = "Green Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_herbs",
+                    text = "Fresh Herbs",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bacon_bits",
+                    text = "Bacon Bits",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // BREAD SIDES (text only)
-        FilterChip(
-            id = "bread_side",
-            text = "Bread on Side",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "grilled_cheese",
-            text = "Grilled Cheese",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "bread_bowl",
-            text = "Bread Bowl",
-            type = FilterType.TEXT_ONLY
-        ),
+                // BREAD SIDES (text only)
+                FilterChip(
+                    id = "bread_side",
+                    text = "Bread on Side",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "grilled_cheese",
+                    text = "Grilled Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bread_bowl",
+                    text = "Bread Bowl",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIZE OPTIONS (text only)
-        FilterChip(
-            id = "cup_soup",
-            text = "Cup (8oz)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "bowl_soup",
-            text = "Bowl (12oz)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "large_bowl",
-            text = "Large (16oz)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SIZE OPTIONS (text only)
+                FilterChip(
+                    id = "cup_soup",
+                    text = "Cup (8oz)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "bowl_soup",
+                    text = "Bowl (12oz)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_bowl",
+                    text = "Large (16oz)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS (text only)
-        FilterChip(
-            id = "low_sodium",
-            text = "Low Sodium",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "low_fat_soup",
-            text = "Low Fat",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "gluten_free_soup",
-            text = "Gluten Free",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "dairy_free_soup",
-            text = "Dairy Free",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "vegan_soup",
-            text = "Vegan",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "vegetarian_soup",
-            text = "Vegetarian",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "keto_soup",
-            text = "Keto Friendly",
-            type = FilterType.TEXT_ONLY
-        ),
+                // DIETARY OPTIONS (text only)
+                FilterChip(
+                    id = "low_sodium",
+                    text = "Low Sodium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_fat_soup",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_soup",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dairy_free_soup",
+                    text = "Dairy Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegan_soup",
+                    text = "Vegan",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "vegetarian_soup",
+                    text = "Vegetarian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_soup",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
         FilterButtonFood(
             filterConfig = soupFilters,
             onFilterClick = { filter ->
@@ -55027,6 +55042,7 @@ val soupFilters = FilterConfig(
 
         Spacer(modifier = Modifier.height(5.dp))
 
+        // ==================== RECOMMENDED SOUP ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -55037,110 +55053,98 @@ val soupFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
-        val recommendedSoupItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.soup_1, // Creamy tomato soup in a bowl
-        title = "Creamy Tomato Soup",
-        price = "₹129 (cup) | ₹179 (bowl)",
-        restaurantName = "Soup & More",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.soup_2, // Classic chicken noodle soup
-        title = "Chicken Noodle Soup",
-        price = "₹149 (cup) | ₹199 (bowl)",
-        restaurantName = "Soup & More",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.soup_3, // Hot and sour soup
-        title = "Hot & Sour Soup",
-        price = "₹139 (cup) | ₹189 (bowl)",
-        restaurantName = "Wok & Roll",
-        rating = "4.6",
-        deliveryTime = "25-30 mins",
-        distance = "2.1 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.soup_4, // Minestrone soup
-        title = "Minestrone Soup",
-        price = "₹119 (cup) | ₹169 (bowl)",
-        restaurantName = "Italian Bistro",
-        rating = "4.5",
-        deliveryTime = "20-25 mins",
-        distance = "2.3 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.soup_5, // Cream of mushroom
-        title = "Cream of Mushroom",
-        price = "₹149 (cup) | ₹199 (bowl)",
-        restaurantName = "Soup & More",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.soup_6, // Lentil soup
-        title = "Lentil Soup",
-        price = "₹109 (cup) | ₹159 (bowl)",
-        restaurantName = "Healthy Bowls",
-        rating = "4.4",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    )
-)
-        // Horizontal scroll section for recommended items
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = recommendedSoupItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Soup items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SOUP", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_vegetable_soup),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Soup items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
 
+        // ==================== FEATURED SOUP RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -55151,9 +55155,7 @@ val soupFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
-
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -55164,545 +55166,364 @@ val soupFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
-           val soupItemsList = listOf(
-    // CLASSIC VEGETABLE SOUPS (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.soup_items_1, // Creamy tomato soup with basil
-        title = "Creamy Tomato Soup",
-        price = "₹119 (cup) | ₹169 (bowl)",
-        restaurantName = "Soup & More",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.soup_items_2, // Minestrone soup
-        title = "Classic Minestrone",
-        price = "₹129 (cup) | ₹179 (bowl)",
-        restaurantName = "Soup & More",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.soup_items_3, // Cream of mushroom
-        title = "Cream of Mushroom",
-        price = "₹139 (cup) | ₹189 (bowl)",
-        restaurantName = "Soup & More",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.soup_items_4, // Pumpkin soup
-        title = "Roasted Pumpkin Soup",
-        price = "₹149 (cup) | ₹199 (bowl)",
-        restaurantName = "Soup & More",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.soup_items_5, // Broccoli soup
-        title = "Broccoli & Almond Soup",
-        price = "₹139 (cup) | ₹189 (bowl)",
-        restaurantName = "Soup & More",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Soup restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // HEARTY CHICKEN SOUPS (6-10)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.soup_items_6, // Chicken noodle soup
-        title = "Classic Chicken Noodle",
-        price = "₹149 (cup) | ₹199 (bowl)",
-        restaurantName = "The Soup Kitchen",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.soup_items_7, // Creamy chicken soup
-        title = "Creamy Chicken & Corn",
-        price = "₹159 (cup) | ₹209 (bowl)",
-        restaurantName = "The Soup Kitchen",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.soup_items_8, // Lemon chicken soup
-        title = "Lemon Chicken Soup",
-        price = "₹149 (cup) | ₹199 (bowl)",
-        restaurantName = "The Soup Kitchen",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.soup_items_9, // Thai chicken soup
-        title = "Thai Coconut Chicken",
-        price = "₹169 (cup) | ₹219 (bowl)",
-        restaurantName = "The Soup Kitchen",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.soup_items_10, // Chicken tortilla soup
-        title = "Chicken Tortilla Soup",
-        price = "₹159 (cup) | ₹209 (bowl)",
-        restaurantName = "The Soup Kitchen",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SOUP", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // ASIAN INSPIRED SOUPS (11-15)
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.soup_items_11, // Hot & sour soup
-        title = "Hot & Sour Soup",
-        price = "₹139 (cup) | ₹189 (bowl)",
-        restaurantName = "Wok & Roll",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.soup_items_12, // Wonton soup
-        title = "Chicken Wonton Soup",
-        price = "₹149 (cup) | ₹199 (bowl)",
-        restaurantName = "Wok & Roll",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.soup_items_13, // Tom Yum soup
-        title = "Tom Yum Soup",
-        price = "₹169 (cup) | ₹219 (bowl)",
-        restaurantName = "Wok & Roll",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.soup_items_14, // Miso soup
-        title = "Traditional Miso Soup",
-        price = "₹119 (cup) | ₹169 (bowl)",
-        restaurantName = "Wok & Roll",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.soup_items_15, // Ramen
-        title = "Tonkotsu Ramen",
-        price = "₹189 (bowl)",
-        restaurantName = "Wok & Roll",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // HEARTY & SPECIALTY SOUPS (16-18)
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.soup_items_16, // Lentil soup
-        title = "Mediterranean Lentil Soup",
-        price = "₹129 (cup) | ₹179 (bowl)",
-        restaurantName = "Healthy Bowls",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.3 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.soup_items_17, // French onion soup
-        title = "French Onion Soup",
-        price = "₹159 (cup) | ₹209 (bowl)",
-        restaurantName = "Healthy Bowls",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.3 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.soup_items_18, // Gazpacho
-        title = "Chilled Gazpacho",
-        price = "₹139 (cup) | ₹189 (bowl)",
-        restaurantName = "Healthy Bowls",
-        rating = "4.6",
-        deliveryTime = "10-15 mins",
-        distance = "1.3 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-
-    // SEAFOOD & PREMIUM SOUPS (19-20)
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.soup_items_19, // Clam chowder
-        title = "New England Clam Chowder",
-        price = "₹179 (cup) | ₹239 (bowl)",
-        restaurantName = "Seafood House",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.soup_items_20, // Lobster bisque
-        title = "Lobster Bisque",
-        price = "₹199 (cup) | ₹279 (bowl)",
-        restaurantName = "Seafood House",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    )
-)
-        // Display all restaurant items vertically
-        soupItemsList.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_vegetable_soup),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Soup restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun BhurjiCategoryPage() {
+fun BhurjiCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for BHURJI category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BHURJI")
+        restaurantViewModel.loadFeaturedRestaurants("BHURJI", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BHURJI", recommended = true)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-val bhurjiFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val bhurjiFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // BHURJI BASE STYLES (with bowl/pan icons showing style)
-        FilterChip(
-            id = "classic_bhurji",
-            text = "Classic",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_classic_eggs  // Pan with classic scrambled eggs
-        ),
-        FilterChip(
-            id = "pav_bhurji",
-            text = "Pav Bhurji",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_pav_bhurji  // Bhurji with bread rolls
-        ),
-        FilterChip(
-            id = "butter_bhurji",
-            text = "Butter",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_butter_bhurji  // Butter pat icon
-        ),
-        FilterChip(
-            id = "masala_bhurji",
-            text = "Masala",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_masala_bhurji  // Spice blend icon
-        ),
-        FilterChip(
-            id = "cheese_bhurji",
-            text = "Cheese",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_cheese_bhurji  // Cheese wedge icon
-        ),
-        // EGG STYLES (text only)
-        FilterChip(
-            id = "soft_bhurji",
-            text = "Soft Scramble",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "brown_bhurji",
-            text = "Well-Browned",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "runny_bhurji",
-            text = "Runny",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "fluffy_bhurji",
-            text = "Fluffy",
-            type = FilterType.TEXT_ONLY
-        ),
+                // BHURJI BASE STYLES (with bowl/pan icons showing style)
+                FilterChip(
+                    id = "classic_bhurji",
+                    text = "Classic",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_eggs  // Pan with classic scrambled eggs
+                ),
+                FilterChip(
+                    id = "pav_bhurji",
+                    text = "Pav Bhurji",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_pav_bhurji  // Bhurji with bread rolls
+                ),
+                FilterChip(
+                    id = "butter_bhurji",
+                    text = "Butter",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_butter_bhurji  // Butter pat icon
+                ),
+                FilterChip(
+                    id = "masala_bhurji",
+                    text = "Masala",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_masala_bhurji  // Spice blend icon
+                ),
+                FilterChip(
+                    id = "cheese_bhurji",
+                    text = "Cheese",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_cheese_bhurji  // Cheese wedge icon
+                ),
+                // EGG STYLES (text only)
+                FilterChip(
+                    id = "soft_bhurji",
+                    text = "Soft Scramble",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "brown_bhurji",
+                    text = "Well-Browned",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "runny_bhurji",
+                    text = "Runny",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fluffy_bhurji",
+                    text = "Fluffy",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // VEGETABLE ADD-INS (with left icons for key veggies)
-        FilterChip(
-            id = "corn_addin",
-            text = "Corn",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mushrooms_addin",
-            text = "Mushrooms",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "spinach_addin",
-            text = "Spinach",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "potatoes_addin",
-            text = "Potatoes",
-            type = FilterType.TEXT_ONLY
-        ),
+                // VEGETABLE ADD-INS (with left icons for key veggies)
+                FilterChip(
+                    id = "corn_addin",
+                    text = "Corn",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mushrooms_addin",
+                    text = "Mushrooms",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "spinach_addin",
+                    text = "Spinach",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "potatoes_addin",
+                    text = "Potatoes",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // PROTEIN ADD-INS (with left icons for key proteins)
-        FilterChip(
-            id = "keema_addin",
-            text = "Add Keema",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "tofu_addin",
-            text = "Add Tofu",
-            type = FilterType.TEXT_ONLY
-        ),
+                // PROTEIN ADD-INS (with left icons for key proteins)
+                FilterChip(
+                    id = "keema_addin",
+                    text = "Add Keema",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "tofu_addin",
+                    text = "Add Tofu",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // HERBS & SPICES (with left icons for key spices)
-        FilterChip(
-            id = "turmeric",
-            text = "Turmeric",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cumin",
-            text = "Cumin",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "coriander_powder",
-            text = "Coriander Powder",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "garam_masala",
-            text = "Garam Masala",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "red_chilli",
-            text = "Red Chilli",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chaat_masala",
-            text = "Chaat Masala",
-            type = FilterType.TEXT_ONLY
-        ),
+                // HERBS & SPICES (with left icons for key spices)
+                FilterChip(
+                    id = "turmeric",
+                    text = "Turmeric",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cumin",
+                    text = "Cumin",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coriander_powder",
+                    text = "Coriander Powder",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garam_masala",
+                    text = "Garam Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "red_chilli",
+                    text = "Red Chilli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chaat_masala",
+                    text = "Chaat Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // FRESH HERBS (text only)
-        FilterChip(
-            id = "coriander_herb",
-            text = "Fresh Coriander",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "curry_leaves",
-            text = "Curry Leaves",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mint_leaves",
-            text = "Mint Leaves",
-            type = FilterType.TEXT_ONLY
-        ),
+                // FRESH HERBS (text only)
+                FilterChip(
+                    id = "coriander_herb",
+                    text = "Fresh Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "curry_leaves",
+                    text = "Curry Leaves",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mint_leaves",
+                    text = "Mint Leaves",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS & GARNISHES (with left icons for key toppings)
-        FilterChip(
-            id = "fried_onions",
-            text = "Fried Onions",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "fresh_coriander",
-            text = "Fresh Coriander",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chaat_topping",
-            text = "Chaat Masala",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "sev_topping",
-            text = "Sev",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS & GARNISHES (with left icons for key toppings)
+                FilterChip(
+                    id = "fried_onions",
+                    text = "Fried Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "fresh_coriander",
+                    text = "Fresh Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chaat_topping",
+                    text = "Chaat Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sev_topping",
+                    text = "Sev",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIDES & ACCOMPANIMENTS (with left icons)
-        FilterChip(
-            id = "salad_side",
-            text = "Onion Salad",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chutney_side",
-            text = "Green Chutney",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "ketchup_side",
-            text = "Tomato Ketchup",
-            type = FilterType.TEXT_ONLY
-        ),
-        // SIZE OPTIONS (text only)
-        FilterChip(
-            id = "regular_size",
-            text = "Regular (2 eggs)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "large_size",
-            text = "Large (3 eggs)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "extra_large",
-            text = "Extra Large (4 eggs)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "family_size",
-            text = "Family (6 eggs)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SIDES & ACCOMPANIMENTS (with left icons)
+                FilterChip(
+                    id = "salad_side",
+                    text = "Onion Salad",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chutney_side",
+                    text = "Green Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "ketchup_side",
+                    text = "Tomato Ketchup",
+                    type = FilterType.TEXT_ONLY
+                ),
+                // SIZE OPTIONS (text only)
+                FilterChip(
+                    id = "regular_size",
+                    text = "Regular (2 eggs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_size",
+                    text = "Large (3 eggs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_large",
+                    text = "Extra Large (4 eggs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_size",
+                    text = "Family (6 eggs)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY OPTIONS (text only)
-        FilterChip(
-            id = "egg_white_only",
-            text = "Egg White Only",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "low_oil",
-            text = "Low Oil",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "no_onion_no_garlic",
-            text = "No Onion/Garlic",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "gluten_free_bhurji",
-            text = "Gluten Free",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "low_spice",
-            text = "Low Spice",
-            type = FilterType.TEXT_ONLY
-        ),
+                // DIETARY OPTIONS (text only)
+                FilterChip(
+                    id = "egg_white_only",
+                    text = "Egg White Only",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_oil",
+                    text = "Low Oil",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_onion_no_garlic",
+                    text = "No Onion/Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_bhurji",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_spice",
+                    text = "Low Spice",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2
-)
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2
+        )
         FilterButtonFood(
             filterConfig = bhurjiFilters,
             onFilterClick = { filter ->
@@ -55717,6 +55538,7 @@ val bhurjiFilters = FilterConfig(
 
         Spacer(modifier = Modifier.height(5.dp))
 
+        // ==================== RECOMMENDED BHURJI ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -55727,109 +55549,98 @@ val bhurjiFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
-       val recommendedBhurjiItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.bhurji_1, // Classic egg bhurji with pav bread
-        title = "Classic Egg Bhurji",
-        price = "₹149 (Regular) | ₹199 (Large)",
-        restaurantName = "Bhurji Junction",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.bhurji_2, // Paneer bhurji with paratha
-        title = "Paneer Bhurji",
-        price = "₹179 (Regular) | ₹249 (Large)",
-        restaurantName = "Punjabi Dhaba",
-        rating = "4.7",
-        deliveryTime = "25-30 mins",
-        distance = "2.4 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.bhurji_3, // Masala bhurji with onions and spices
-        title = "Masala Bhurji",
-        price = "₹159 (Regular) | ₹219 (Large)",
-        restaurantName = "Spice Kitchen",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.bhurji_4, // Butter bhurji with brioche
-        title = "Butter Bhurji",
-        price = "₹169 (Regular) | ₹229 (Large)",
-        restaurantName = "Bhurji Junction",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "1.2 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.bhurji_5, // Cheese bhurji with melted cheese
-        title = "Cheese Bhurji",
-        price = "₹189 (Regular) | ₹259 (Large)",
-        restaurantName = "Cheese & Spice",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.bhurji_6, // Keema bhurji with minced meat
-        title = "Keema Bhurji",
-        price = "₹199 (Regular) | ₹279 (Large)",
-        restaurantName = "Mughlai House",
-        rating = "4.7",
-        deliveryTime = "25-30 mins",
-        distance = "2.6 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    )
-)
-        // Horizontal scroll section for recommended items
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = recommendedBhurjiItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Bhurji items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("BHURJI", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_eggs),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Bhurji items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED BHURJI RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -55840,9 +55651,7 @@ val bhurjiFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
-
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -55853,522 +55662,341 @@ val bhurjiFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
-           val bhurjiItemsList = listOf(
-    // CLASSIC EGG BHURJI VARIETIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.bhurji_items_1, // Classic egg bhurji with pav
-        title = "Classic Egg Bhurji",
-        price = "₹119 (Regular) | ₹169 (Large)",
-        restaurantName = "Bhurji Junction",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.bhurji_items_2, // Masala bhurji with spices
-        title = "Masala Bhurji",
-        price = "₹129 (Regular) | ₹179 (Large)",
-        restaurantName = "Bhurji Junction",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.bhurji_items_3, // Butter bhurji
-        title = "Butter Bhurji",
-        price = "₹139 (Regular) | ₹189 (Large)",
-        restaurantName = "Bhurji Junction",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.bhurji_items_4, // Cheese bhurji
-        title = "Cheese Bhurji",
-        price = "₹149 (Regular) | ₹199 (Large)",
-        restaurantName = "Bhurji Junction",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.bhurji_items_5, // Paneer bhurji
-        title = "Paneer Bhurji",
-        price = "₹159 (Regular) | ₹209 (Large)",
-        restaurantName = "Bhurji Junction",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Bhurji restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // VEGETABLE BHURJI VARIETIES (6-10)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.bhurji_items_6, // Onion tomato bhurji
-        title = "Onion Tomato Bhurji",
-        price = "₹129 (Regular) | ₹179 (Large)",
-        restaurantName = "Spice Kitchen",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.bhurji_items_7, // Capsicum bhurji
-        title = "Capsicum Bhurji",
-        price = "₹139 (Regular) | ₹189 (Large)",
-        restaurantName = "Spice Kitchen",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.bhurji_items_8, // Corn bhurji
-        title = "Sweet Corn Bhurji",
-        price = "₹149 (Regular) | ₹199 (Large)",
-        restaurantName = "Spice Kitchen",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.bhurji_items_9, // Mushroom bhurji
-        title = "Mushroom Bhurji",
-        price = "₹159 (Regular) | ₹209 (Large)",
-        restaurantName = "Spice Kitchen",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.bhurji_items_10, // Methi bhurji
-        title = "Methi (Fenugreek) Bhurji",
-        price = "₹149 (Regular) | ₹199 (Large)",
-        restaurantName = "Spice Kitchen",
-        rating = "4.6",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("BHURJI", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // NON-VEG BHURJI VARIETIES (11-15)
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.bhurji_items_11, // Keema bhurji
-        title = "Keema Bhurji",
-        price = "₹179 (Regular) | ₹239 (Large)",
-        restaurantName = "Mughlai House",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "2.2 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.bhurji_items_12, // Chicken bhurji
-        title = "Chicken Keema Bhurji",
-        price = "₹169 (Regular) | ₹229 (Large)",
-        restaurantName = "Mughlai House",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "2.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.bhurji_items_13, // Egg and chicken combo
-        title = "Chicken & Egg Bhurji",
-        price = "₹189 (Regular) | ₹249 (Large)",
-        restaurantName = "Mughlai House",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "2.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.bhurji_items_14, // Spicy keema bhurji
-        title = "Hyderabadi Keema Bhurji",
-        price = "₹189 (Regular) | ₹249 (Large)",
-        restaurantName = "Mughlai House",
-        rating = "4.9",
-        deliveryTime = "25-30 mins",
-        distance = "2.2 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.bhurji_items_15, // Egg bhurji with mince
-        title = "Mince & Egg Bhurji",
-        price = "₹179 (Regular) | ₹239 (Large)",
-        restaurantName = "Mughlai House",
-        rating = "4.8",
-        deliveryTime = "25-30 mins",
-        distance = "2.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // SPECIALTY & FUSION BHURJI (16-18)
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.bhurji_items_16, // Pav bhurji
-        title = "Bhurji Pav",
-        price = "₹149 (2 pav) | ₹199 (4 pav)",
-        restaurantName = "Street Food King",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.3 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.bhurji_items_17, // Cheese burst bhurji
-        title = "Cheese Burst Bhurji",
-        price = "₹169 (Regular) | ₹229 (Large)",
-        restaurantName = "Street Food King",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.3 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.bhurji_items_18, // Bhurji roll
-        title = "Bhurji Frankie (Roll)",
-        price = "₹99 (Single) | ₹179 (Double)",
-        restaurantName = "Street Food King",
-        rating = "4.7",
-        deliveryTime = "10-15 mins",
-        distance = "1.3 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-
-    // HEALTHY & DIETARY BHURJI (19-20)
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.bhurji_items_19, // Egg white bhurji
-        title = "Egg White Bhurji",
-        price = "₹149 (Regular) | ₹199 (Large)",
-        restaurantName = "Fit Food Express",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.bhurji_items_20, // Jain bhurji (no onion/garlic)
-        title = "Jain Bhurji",
-        price = "₹159 (Regular) | ₹209 (Large)",
-        restaurantName = "Jain Bhojanalay",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "2.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    )
-)
-        // Display all restaurant items vertically
-        bhurjiItemsList.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_eggs),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Bhurji restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun KhastaKachoriCategoryPage() {
+fun KhastaKachoriCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for KHASTA_KACHORI category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: KHASTA_KACHORI")
+        restaurantViewModel.loadFeaturedRestaurants("KHASTA_KACHORI", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("KHASTA_KACHORI", recommended = true)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-val kachoriFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val kachoriFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // KACHORI BASE STYLES (with icons for each style)
-        FilterChip(
-            id = "traditional_kachori",
-            text = "Traditional",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_traditional_kachori  // Round kachori icon
-        ),
-        FilterChip(
-            id = "pyaz_kachori",
-            text = "Pyaz Kachori",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_onion_khasta_kachori  // Onion-filled kachori
-        ),
-        FilterChip(
-            id = "dal_kachori",
-            text = "Dal Kachori",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_dal_khasta_kachori  // Lentil-filled kachori
-        ),
-        FilterChip(
-            id = "mini_kachori",
-            text = "Mini Kachori",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_mini_khasta_kachori  // Small bite-sized kachori
-        ),
-        FilterChip(
-            id = "khasta_breakfast",
-            text = "Breakfast Special",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_breakfast_khasta_kachori  // Kachori with breakfast vibe
-        ),
+                // KACHORI BASE STYLES (with icons for each style)
+                FilterChip(
+                    id = "traditional_kachori",
+                    text = "Traditional",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_traditional_kachori  // Round kachori icon
+                ),
+                FilterChip(
+                    id = "pyaz_kachori",
+                    text = "Pyaz Kachori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_onion_khasta_kachori  // Onion-filled kachori
+                ),
+                FilterChip(
+                    id = "dal_kachori",
+                    text = "Dal Kachori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_dal_khasta_kachori  // Lentil-filled kachori
+                ),
+                FilterChip(
+                    id = "mini_kachori",
+                    text = "Mini Kachori",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mini_khasta_kachori  // Small bite-sized kachori
+                ),
+                FilterChip(
+                    id = "khasta_breakfast",
+                    text = "Breakfast Special",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_breakfast_khasta_kachori  // Kachori with breakfast vibe
+                ),
 
-        // FILLING VARIETIES (text only)
-        FilterChip(
-            id = "moong_dal_filling",
-            text = "Moong Dal",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "urad_dal_filling",
-            text = "Urad Dal",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "masala_filling",
-            text = "Spiced Masala",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "paneer_filling",
-            text = "Paneer",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "aloo_filling",
-            text = "Aloo (Potato)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // FILLING VARIETIES (text only)
+                FilterChip(
+                    id = "moong_dal_filling",
+                    text = "Moong Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "urad_dal_filling",
+                    text = "Urad Dal",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "masala_filling",
+                    text = "Spiced Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paneer_filling",
+                    text = "Paneer",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "aloo_filling",
+                    text = "Aloo (Potato)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // ACCOMPANIMENTS (with icons for key sides)
-        FilterChip(
-            id = "sweet_chutney",
-            text = "Sweet Chutney",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "garlic_chutney",
-            text = "Garlic Chutney",
-            type = FilterType.TEXT_ONLY
-        ),
+                // ACCOMPANIMENTS (with icons for key sides)
+                FilterChip(
+                    id = "sweet_chutney",
+                    text = "Sweet Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "garlic_chutney",
+                    text = "Garlic Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS & GARNISHES (with icons for key toppings)
-        FilterChip(
-            id = "coriander_topping",
-            text = "Fresh Coriander",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pomegranate",
-            text = "Pomegranate Seeds",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chaat_masala",
-            text = "Chaat Masala",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS & GARNISHES (with icons for key toppings)
+                FilterChip(
+                    id = "coriander_topping",
+                    text = "Fresh Coriander",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pomegranate",
+                    text = "Pomegranate Seeds",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chaat_masala",
+                    text = "Chaat Masala",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // YOGURT & DAHI VARIETIES (with icons for key options)
-        FilterChip(
-            id = "hung_curd",
-            text = "Hung Curd",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "masala_dahi",
-            text = "Spiced Dahi",
-            type = FilterType.TEXT_ONLY
-        ),
+                // YOGURT & DAHI VARIETIES (with icons for key options)
+                FilterChip(
+                    id = "hung_curd",
+                    text = "Hung Curd",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "masala_dahi",
+                    text = "Spiced Dahi",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPICE LEVELS (text only)
-        FilterChip(
-            id = "mild_spice",
-            text = "Mild",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "medium_spice",
-            text = "Medium",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "hot_spice",
-            text = "Hot",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "extra_hot",
-            text = "Extra Hot",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPICE LEVELS (text only)
+                FilterChip(
+                    id = "mild_spice",
+                    text = "Mild",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "medium_spice",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "hot_spice",
+                    text = "Hot",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_hot",
+                    text = "Extra Hot",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIZE & PORTIONS (text only)
-        FilterChip(
-            id = "regular_serving",
-            text = "Regular (2 pcs)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "large_serving",
-            text = "Large (4 pcs)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "family_serving",
-            text = "Family (6 pcs)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "platter",
-            text = "Kachori Platter",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SIZE & PORTIONS (text only)
+                FilterChip(
+                    id = "regular_serving",
+                    text = "Regular (2 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "large_serving",
+                    text = "Large (4 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "family_serving",
+                    text = "Family (6 pcs)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "platter",
+                    text = "Kachori Platter",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // ADD-ONS (with icons for popular additions)
-        FilterChip(
-            id = "extra_chutney",
-            text = "Extra Chutney",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "extra_onion",
-            text = "Extra Onions",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "paneer_topping",
-            text = "Paneer Cubes",
-            type = FilterType.TEXT_ONLY
-        ),
+                // ADD-ONS (with icons for popular additions)
+                FilterChip(
+                    id = "extra_chutney",
+                    text = "Extra Chutney",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "extra_onion",
+                    text = "Extra Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "paneer_topping",
+                    text = "Paneer Cubes",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY PREFERENCES (text only)
-        FilterChip(
-            id = "baked_kachori",
-            text = "Baked (Low Oil)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "whole_wheat",
-            text = "Whole Wheat",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "gluten_free_kachori",
-            text = "Gluten Free",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "no_onion_no_garlic_kachori",
-            text = "No Onion/Garlic",
-            type = FilterType.TEXT_ONLY
-        ),
+                // DIETARY PREFERENCES (text only)
+                FilterChip(
+                    id = "baked_kachori",
+                    text = "Baked (Low Oil)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole_wheat",
+                    text = "Whole Wheat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_kachori",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "no_onion_no_garlic_kachori",
+                    text = "No Onion/Garlic",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SPECIALTY KACHORIS (text only)
-        FilterChip(
-            id = "mawa_kachori",
-            text = "Mawa Kachori",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "dry_fruit_kachori",
-            text = "Dry Fruit",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chocolate_kachori",
-            text = "Chocolate",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SPECIALTY KACHORIS (text only)
+                FilterChip(
+                    id = "mawa_kachori",
+                    text = "Mawa Kachori",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "dry_fruit_kachori",
+                    text = "Dry Fruit",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chocolate_kachori",
+                    text = "Chocolate",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2  // Adjust based on screen size needs
-)
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2  // Adjust based on screen size needs
+        )
         FilterButtonFood(
             filterConfig = kachoriFilters,
             onFilterClick = { filter ->
@@ -56383,6 +56011,7 @@ val kachoriFilters = FilterConfig(
 
         Spacer(modifier = Modifier.height(5.dp))
 
+        // ==================== RECOMMENDED KACHORI ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -56393,109 +56022,98 @@ val kachoriFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
-       val recommendedKachoriItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.khasta_kachori_1, // Traditional round khasta kachori with chutneys
-        title = "Traditional Khasta Kachori",
-        price = "₹89 (2 pcs) | ₹149 (4 pcs)",
-        restaurantName = "Kachori Wala",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.1 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.khasta_kachori_2, // Pyaz kachori with onion filling, served with chutney
-        title = "Pyaz Kachori",
-        price = "₹99 (2 pcs) | ₹169 (4 pcs)",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "2.3 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.khasta_kachori_3, // Dal kachori with moong dal filling
-        title = "Dal Kachori",
-        price = "₹79 (2 pcs) | ₹139 (4 pcs)",
-        restaurantName = "Sharma Snacks",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.6 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.khasta_kachori_4, // Kachori chaat with dahi, chutney and sev
-        title = "Kachori Chaat",
-        price = "₹129 (Regular) | ₹189 (Large)",
-        restaurantName = "Chaat Gali",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.4 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.khasta_kachori_5, // Mini kachori basket with assortment of chutneys
-        title = "Mini Kachori Basket",
-        price = "₹149 (6 pcs) | ₹249 (12 pcs)",
-        restaurantName = "Bikaner Sweets",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "2.1 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.khasta_kachori_6, // Mawa kachori - sweet version with dry fruits
-        title = "Mawa Kachori (Sweet)",
-        price = "₹109 (2 pcs) | ₹189 (4 pcs)",
-        restaurantName = "Jodhpur Sweets",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.9 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "South Extension, Delhi"
-    )
-)
-        // Horizontal scroll section for recommended items
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = recommendedKachoriItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Kachori items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("KHASTA_KACHORI", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_traditional_kachori),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Kachori items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED KACHORI RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -56506,9 +56124,7 @@ val kachoriFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
-
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -56519,500 +56135,319 @@ val kachoriFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
-           val kachoriItemsList = listOf(
-    // TRADITIONAL KACHORI VARIETIES (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.khasta_kachori_items_1, // Traditional khasta kachori with chutneys
-        title = "Traditional Khasta Kachori",
-        price = "₹79 (2 pcs) | ₹129 (4 pcs)",
-        restaurantName = "Kachori Wala",
-        rating = "4.9",
-        deliveryTime = "10-15 mins",
-        distance = "1.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.khasta_kachori_items_2, // Pyaz kachori with onion filling
-        title = "Pyaz Kachori",
-        price = "₹89 (2 pcs) | ₹149 (4 pcs)",
-        restaurantName = "Kachori Wala",
-        rating = "4.8",
-        deliveryTime = "10-15 mins",
-        distance = "1.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.khasta_kachori_items_3, // Dal kachori with moong dal filling
-        title = "Dal Kachori",
-        price = "₹69 (2 pcs) | ₹119 (4 pcs)",
-        restaurantName = "Kachori Wala",
-        rating = "4.7",
-        deliveryTime = "10-15 mins",
-        distance = "1.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.khasta_kachori_items_4, // Aloo kachori with potato filling
-        title = "Aloo Kachori",
-        price = "₹79 (2 pcs) | ₹129 (4 pcs)",
-        restaurantName = "Kachori Wala",
-        rating = "4.8",
-        deliveryTime = "10-15 mins",
-        distance = "1.1 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.khasta_kachori_items_5, // Mawa kachori sweet version
-        title = "Mawa Kachori (Sweet)",
-        price = "₹99 (2 pcs) | ₹169 (4 pcs)",
-        restaurantName = "Kachori Wala",
-        rating = "4.9",
-        deliveryTime = "10-15 mins",
-        distance = "1.1 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Chandni Chowk, Delhi"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Kachori restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // KACHORI CHAAT VARIETIES (6-10)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.khasta_kachori_items_6, // Dahi kachori with yogurt
-        title = "Dahi Kachori",
-        price = "₹99 (2 pcs) | ₹169 (4 pcs)",
-        restaurantName = "Chaat Gali",
-        rating = "4.9",
-        deliveryTime = "12-17 mins",
-        distance = "1.4 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.khasta_kachori_items_7, // Kachori chaat with chutneys
-        title = "Kachori Chaat",
-        price = "₹89 (Regular) | ₹149 (Large)",
-        restaurantName = "Chaat Gali",
-        rating = "4.8",
-        deliveryTime = "12-17 mins",
-        distance = "1.4 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.khasta_kachori_items_8, // Chole kachori with chickpea curry
-        title = "Chole Kachori",
-        price = "₹109 (Regular) | ₹179 (Large)",
-        restaurantName = "Chaat Gali",
-        rating = "4.9",
-        deliveryTime = "12-17 mins",
-        distance = "1.4 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.khasta_kachori_items_9, // Aloo kachori chaat
-        title = "Aloo Kachori Chaat",
-        price = "₹99 (Regular) | ₹169 (Large)",
-        restaurantName = "Chaat Gali",
-        rating = "4.8",
-        deliveryTime = "12-17 mins",
-        distance = "1.4 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.khasta_kachori_items_10, // Special chaat platter
-        title = "Kachori Chaat Platter",
-        price = "₹199 (Platter)",
-        restaurantName = "Chaat Gali",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.4 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("KHASTA_KACHORI", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // REGIONAL SPECIALTY KACHORIS (11-15)
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.khasta_kachori_items_11, // Rajasthani kachori
-        title = "Rajasthani Kachori",
-        price = "₹89 (2 pcs) | ₹149 (4 pcs)",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "2.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.khasta_kachori_items_12, // Jodhpuri kachori
-        title = "Jodhpuri Kachori",
-        price = "₹99 (2 pcs) | ₹169 (4 pcs)",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "2.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.khasta_kachori_items_13, // Bikaneri kachori
-        title = "Bikaneri Kachori",
-        price = "₹79 (2 pcs) | ₹139 (4 pcs)",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "2.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.khasta_kachori_items_14, // Indori kachori
-        title = "Indori Kachori",
-        price = "₹89 (2 pcs) | ₹149 (4 pcs)",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.7",
-        deliveryTime = "20-25 mins",
-        distance = "2.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.khasta_kachori_items_15, // Lucknowi kachori
-        title = "Lucknowi Kachori",
-        price = "₹109 (2 pcs) | ₹179 (4 pcs)",
-        restaurantName = "Rajasthan Bhavan",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "2.2 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // KACHORI COMBO & MEAL (16-18)
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.khasta_kachori_items_16, // Kachori with aloo sabzi
-        title = "Kachori Aloo Sabzi",
-        price = "₹129 (2 pcs + sabzi) | ₹199 (4 pcs + sabzi)",
-        restaurantName = "Sharma Snacks",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.6 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.khasta_kachori_items_17, // Kachori thali
-        title = "Kachori Thali",
-        price = "₹159 (Thali)",
-        restaurantName = "Sharma Snacks",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.6 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.khasta_kachori_items_18, // Mini kachori basket
-        title = "Mini Kachori Basket",
-        price = "₹149 (6 pcs) | ₹249 (12 pcs)",
-        restaurantName = "Sharma Snacks",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.6 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Lajpat Nagar, Delhi"
-    ),
-
-    // KACHORI DESSERT & FUSION (19-20)
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.khasta_kachori_items_19, // Dry fruit kachori
-        title = "Dry Fruit Kachori",
-        price = "₹149 (2 pcs) | ₹249 (4 pcs)",
-        restaurantName = "Bikaner Sweets",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "2.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.khasta_kachori_items_20, // Chocolate kachori fusion
-        title = "Chocolate Kachori",
-        price = "₹129 (2 pcs) | ₹219 (4 pcs)",
-        restaurantName = "Bikaner Sweets",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "2.1 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    )
-)
-        // Display all restaurant items vertically
-        kachoriItemsList.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_traditional_kachori),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Kachori restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun HotDogCategoryPage() {
+fun HotDogCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for HOT_DOG category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: HOT_DOG")
+        restaurantViewModel.loadFeaturedRestaurants("HOT_DOG", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("HOT_DOG", recommended = true)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
         // Filter Button
-val hotDogFilters = FilterConfig(
-    filters = listOf(
-        // Main filter dropdown
-        FilterChip(
-            id = "filters",
-            text = "Filters",
-            type = FilterType.FILTER_DROPDOWN,
-            icon = R.drawable.ic_filter,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
+        val hotDogFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
 
-        // HOT DOG BASE STYLES (with icons for each style)
-        FilterChip(
-            id = "classic_hotdog",
-            text = "Classic",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_classic_hotdog  // Classic hot dog with bun
-        ),
-        FilterChip(
-            id = "chicago_hotdog",
-            text = "Chicago Style",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_chicago_hotdog  // Hot dog with pickles and tomatoes
-        ),
-        FilterChip(
-            id = "newyork_hotdog",
-            text = "NY Style",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_ny_hotdog  // Hot dog with sauerkraut and onions
-        ),
-        FilterChip(
-            id = "mexican_hotdog",
-            text = "Mexican Style",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_mexican_hotdog  // Hot dog with jalapenos and salsa
-        ),
-        FilterChip(
-            id = "loaded_hotdog",
-            text = "Loaded",
-            type = FilterType.WITH_LEFT_ICON,
-            icon = R.drawable.ic_loaded_hotdog  // Fully loaded hot dog
-        ),
+                // HOT DOG BASE STYLES (with icons for each style)
+                FilterChip(
+                    id = "classic_hotdog",
+                    text = "Classic",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_classic_hotdog  // Classic hot dog with bun
+                ),
+                FilterChip(
+                    id = "chicago_hotdog",
+                    text = "Chicago Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_chicago_hotdog  // Hot dog with pickles and tomatoes
+                ),
+                FilterChip(
+                    id = "newyork_hotdog",
+                    text = "NY Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_ny_hotdog  // Hot dog with sauerkraut and onions
+                ),
+                FilterChip(
+                    id = "mexican_hotdog",
+                    text = "Mexican Style",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_mexican_hotdog  // Hot dog with jalapenos and salsa
+                ),
+                FilterChip(
+                    id = "loaded_hotdog",
+                    text = "Loaded",
+                    type = FilterType.WITH_LEFT_ICON,
+                    icon = R.drawable.ic_loaded_hotdog  // Fully loaded hot dog
+                ),
 
-        // SAUSAGE TYPES (with icons for key varieties)
-        FilterChip(
-            id = "spicy_sausage",
-            text = "Spicy",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "cheese_stuffed",
-            text = "Cheese Stuffed",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SAUSAGE TYPES (with icons for key varieties)
+                FilterChip(
+                    id = "spicy_sausage",
+                    text = "Spicy",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "cheese_stuffed",
+                    text = "Cheese Stuffed",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // BUN TYPES (with icons for key options)
-        FilterChip(
-            id = "sesame_bun",
-            text = "Sesame Bun",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "whole_wheat_bun",
-            text = "Whole Wheat",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "gluten_free_bun",
-            text = "Gluten Free",
-            type = FilterType.TEXT_ONLY
-        ),
+                // BUN TYPES (with icons for key options)
+                FilterChip(
+                    id = "sesame_bun",
+                    text = "Sesame Bun",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "whole_wheat_bun",
+                    text = "Whole Wheat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "gluten_free_bun",
+                    text = "Gluten Free",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // TOPPINGS (with icons for popular toppings)
-        FilterChip(
-            id = "relish",
-            text = "Relish",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "onions",
-            text = "Onions",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "pickles",
-            text = "Pickles",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "jalapenos",
-            text = "Jalapeños",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "sauerkraut",
-            text = "Sauerkraut",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "chilli",
-            text = "Chilli",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "coleslaw",
-            text = "Coleslaw",
-            type = FilterType.TEXT_ONLY
-        ),
+                // TOPPINGS (with icons for popular toppings)
+                FilterChip(
+                    id = "relish",
+                    text = "Relish",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "onions",
+                    text = "Onions",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "pickles",
+                    text = "Pickles",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jalapenos",
+                    text = "Jalapeños",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "sauerkraut",
+                    text = "Sauerkraut",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chilli",
+                    text = "Chilli",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "coleslaw",
+                    text = "Coleslaw",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // CHEESE VARIETIES (with icons for key types)
-        FilterChip(
-            id = "pepper_jack",
-            text = "Pepper Jack",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "swiss_cheese",
-            text = "Swiss",
-            type = FilterType.TEXT_ONLY
-        ),
+                // CHEESE VARIETIES (with icons for key types)
+                FilterChip(
+                    id = "pepper_jack",
+                    text = "Pepper Jack",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "swiss_cheese",
+                    text = "Swiss",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIZE OPTIONS (text only)
-        FilterChip(
-            id = "regular_hotdog",
-            text = "Regular (6\")",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "footlong",
-            text = "Footlong (12\")",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "jumbo",
-            text = "Jumbo",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mini_hotdog",
-            text = "Mini (Party Size)",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SIZE OPTIONS (text only)
+                FilterChip(
+                    id = "regular_hotdog",
+                    text = "Regular (6\")",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "footlong",
+                    text = "Footlong (12\")",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "jumbo",
+                    text = "Jumbo",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mini_hotdog",
+                    text = "Mini (Party Size)",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // SIDES & COMBOS (with icons for key sides)
-        FilterChip(
-            id = "potato_wedges",
-            text = "Potato Wedges",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "mac_cheese",
-            text = "Mac & Cheese",
-            type = FilterType.TEXT_ONLY
-        ),
+                // SIDES & COMBOS (with icons for key sides)
+                FilterChip(
+                    id = "potato_wedges",
+                    text = "Potato Wedges",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mac_cheese",
+                    text = "Mac & Cheese",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DRINKS (with icons for popular options)
-        FilterChip(
-            id = "lemonade",
-            text = "Lemonade",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "iced_tea",
-            text = "Iced Tea",
-            type = FilterType.TEXT_ONLY
-        ),
+                // DRINKS (with icons for popular options)
+                FilterChip(
+                    id = "lemonade",
+                    text = "Lemonade",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "iced_tea",
+                    text = "Iced Tea",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // DIETARY PREFERENCES (text only)
-        FilterChip(
-            id = "low_fat_hotdog",
-            text = "Low Fat",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "low_sodium",
-            text = "Low Sodium",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "keto_hotdog",
-            text = "Keto (No Bun)",
-            type = FilterType.TEXT_ONLY
-        ),
-        FilterChip(
-            id = "halal_hotdog",
-            text = "Halal",
-            type = FilterType.TEXT_ONLY
-        ),
+                // DIETARY PREFERENCES (text only)
+                FilterChip(
+                    id = "low_fat_hotdog",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "low_sodium",
+                    text = "Low Sodium",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto_hotdog",
+                    text = "Keto (No Bun)",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "halal_hotdog",
+                    text = "Halal",
+                    type = FilterType.TEXT_ONLY
+                ),
 
-        // Sort dropdown
-        FilterChip(
-            id = "sort",
-            text = "Sort",
-            type = FilterType.SORT_DROPDOWN,
-            rightIcon = R.drawable.outline_keyboard_arrow_down_24
-        ),
-    ),
-    rows = 2  // Adjust based on screen size needs
-)
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+            ),
+            rows = 2  // Adjust based on screen size needs
+        )
         FilterButtonFood(
             filterConfig = hotDogFilters,
             onFilterClick = { filter ->
@@ -57027,6 +56462,7 @@ val hotDogFilters = FilterConfig(
 
         Spacer(modifier = Modifier.height(5.dp))
 
+        // ==================== RECOMMENDED HOT DOG ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -57037,108 +56473,98 @@ val hotDogFilters = FilterConfig(
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Recommended items section (using FoodItemDoubleF for horizontal scroll)
-      val recommendedHotDogItems = listOf(
-    FoodItemDoubleF(
-        id = 1,
-        imageRes = R.drawable.hotdog_1, // Classic hot dog with ketchup and mustard
-        title = "Classic American Hot Dog",
-        price = "₹149 (Regular) | ₹199 (Footlong)",
-        restaurantName = "Dog House",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "20%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 2,
-        imageRes = R.drawable.hotdog_2, // Chicago style hot dog with toppings
-        title = "Chicago Style Hot Dog",
-        price = "₹179 (Regular) | ₹249 (Footlong)",
-        restaurantName = "Windy City Eats",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "2.3 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Karol Bagh, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 3,
-        imageRes = R.drawable.hotdog_3, // Loaded hot dog with cheese and bacon
-        title = "Loaded Cheese & Bacon Dog",
-        price = "₹199 (Regular) | ₹279 (Footlong)",
-        restaurantName = "The Dogfather",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 4,
-        imageRes = R.drawable.hotdog_4, // Mexican hot dog with jalapenos and salsa
-        title = "Mexican Fiesta Dog",
-        price = "₹169 (Regular) | ₹239 (Footlong)",
-        restaurantName = "El Perro Caliente",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Hauz Khas, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 5,
-        imageRes = R.drawable.hotdog_5, // Veggie hot dog with plant-based sausage
-        title = "Vegan Garden Dog",
-        price = "₹159 (Regular) | ₹219 (Footlong)",
-        restaurantName = "Green Bites",
-        rating = "4.6",
-        deliveryTime = "20-25 mins",
-        distance = "2.1 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Rajouri Garden, Delhi"
-    ),
-    FoodItemDoubleF(
-        id = 6,
-        imageRes = R.drawable.hotdog_6, // Hot dog combo with fries and drink
-        title = "Hot Dog Combo Meal",
-        price = "₹249 (Regular Meal) | ₹329 (Footlong Meal)",
-        restaurantName = "Dog House",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    )
-)
-        // Horizontal scroll section for recommended items
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = recommendedHotDogItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
-Spacer(modifier = Modifier.height(15.dp))
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Hot Dog items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("HOT_DOG", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_hotdog),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Hot Dog items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED HOT DOG RESTAURANTS FROM API ====================
         Text(
             text = "Restaurants delivering to you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -57149,9 +56575,7 @@ Spacer(modifier = Modifier.height(15.dp))
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(10.dp))
-
         Text(
             text = "Featured restaurants",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -57162,291 +56586,94 @@ Spacer(modifier = Modifier.height(15.dp))
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
         Spacer(modifier = Modifier.height(5.dp))
 
-        // Complete list of all Cold Coffee items (1-20) using RestaurantItemFull for vertical list
-         val hotDogItemsList = listOf(
-    // CLASSIC HOT DOGS (1-5)
-    RestaurantItemFull(
-        id = 1,
-        imageRes = R.drawable.hotdog_items_1, // Classic hot dog with ketchup and mustard
-        title = "Classic American Hot Dog",
-        price = "₹99 (Regular) | ₹149 (Jumbo)",
-        restaurantName = "Dog Haus",
-        rating = "4.8",
-        deliveryTime = "10-15 mins",
-        distance = "0.9 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 2,
-        imageRes = R.drawable.hotdog_items_2, // Cheese hot dog with melted cheese
-        title = "Cheese Blast Hot Dog",
-        price = "₹129 (Regular) | ₹179 (Jumbo)",
-        restaurantName = "Dog Haus",
-        rating = "4.9",
-        deliveryTime = "10-15 mins",
-        distance = "0.9 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 3,
-        imageRes = R.drawable.hotdog_items_3, // Chilli hot dog with beans and meat sauce
-        title = "Chilli Cheese Dog",
-        price = "₹149 (Regular) | ₹199 (Jumbo)",
-        restaurantName = "Dog Haus",
-        rating = "4.8",
-        deliveryTime = "12-17 mins",
-        distance = "0.9 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 4,
-        imageRes = R.drawable.hotdog_items_4, // Loaded hot dog with multiple toppings
-        title = "Loaded Texas Hot Dog",
-        price = "₹169 (Regular) | ₹249 (Jumbo)",
-        restaurantName = "Dog Haus",
-        rating = "4.7",
-        deliveryTime = "12-17 mins",
-        distance = "0.9 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 5,
-        imageRes = R.drawable.hotdog_items_5, // Spicy hot dog with jalapenos
-        title = "Jalapeno Fiesta Dog",
-        price = "₹139 (Regular) | ₹189 (Jumbo)",
-        restaurantName = "Dog Haus",
-        rating = "4.8",
-        deliveryTime = "10-15 mins",
-        distance = "0.9 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Connaught Place, Delhi"
-    ),
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Hot Dog restaurants...", color = Color.Gray)
+                    }
+                }
+            }
 
-    // INTERNATIONAL HOT DOG VARIETIES (6-10)
-    RestaurantItemFull(
-        id = 6,
-        imageRes = R.drawable.hotdog_items_6, // Mexican style hot dog with salsa
-        title = "Mexican Street Dog",
-        price = "₹149 (Regular) | ₹199 (Jumbo)",
-        restaurantName = "Global Bites",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 7,
-        imageRes = R.drawable.hotdog_items_7, // Chicago style with pickles and tomatoes
-        title = "Chicago Style Dog",
-        price = "₹159 (Regular) | ₹219 (Jumbo)",
-        restaurantName = "Global Bites",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 8,
-        imageRes = R.drawable.hotdog_items_8, // New York style with sauerkraut
-        title = "NYC Street Cart Dog",
-        price = "₹129 (Regular) | ₹179 (Jumbo)",
-        restaurantName = "Global Bites",
-        rating = "4.7",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 9,
-        imageRes = R.drawable.hotdog_items_9, // Korean inspired with kimchi
-        title = "Korean Kimchi Dog",
-        price = "₹169 (Regular) | ₹229 (Jumbo)",
-        restaurantName = "Global Bites",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 10,
-        imageRes = R.drawable.hotdog_items_10, // Japanese style with teriyaki
-        title = "Tokyo Teriyaki Dog",
-        price = "₹159 (Regular) | ₹219 (Jumbo)",
-        restaurantName = "Global Bites",
-        rating = "4.9",
-        deliveryTime = "18-23 mins",
-        distance = "1.5 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Saket, Delhi"
-    ),
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("HOT_DOG", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // PREMIUM & GOURMET HOT DOGS (11-15)
-    RestaurantItemFull(
-        id = 11,
-        imageRes = R.drawable.hotdog_items_11, // Truffle oil and mushroom hot dog
-        title = "Truffle Mushroom Dog",
-        price = "₹229 (Regular) | ₹299 (Jumbo)",
-        restaurantName = "Gourmet Grills",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "2.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Vasant Vihar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 12,
-        imageRes = R.drawable.hotdog_items_12, // BBQ pulled pork hot dog
-        title = "BBQ Pulled Pork Dog",
-        price = "₹219 (Regular) | ₹289 (Jumbo)",
-        restaurantName = "Gourmet Grills",
-        rating = "4.8",
-        deliveryTime = "20-25 mins",
-        distance = "2.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Vasant Vihar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 13,
-        imageRes = R.drawable.hotdog_items_13, // Bacon wrapped hot dog
-        title = "Bacon Wrapped Dog",
-        price = "₹199 (Regular) | ₹269 (Jumbo)",
-        restaurantName = "Gourmet Grills",
-        rating = "4.9",
-        deliveryTime = "20-25 mins",
-        distance = "2.5 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Vasant Vihar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 14,
-        imageRes = R.drawable.hotdog_items_14, // Lamb sausage hot dog
-        title = "Mediterranean Lamb Dog",
-        price = "₹239 (Regular) | ₹319 (Jumbo)",
-        restaurantName = "Gourmet Grills",
-        rating = "4.8",
-        deliveryTime = "22-27 mins",
-        distance = "2.5 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Vasant Vihar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 15,
-        imageRes = R.drawable.hotdog_items_15, // Surf and turf with shrimp
-        title = "Surf & Turf Dog",
-        price = "₹279 (Regular) | ₹359 (Jumbo)",
-        restaurantName = "Gourmet Grills",
-        rating = "4.7",
-        deliveryTime = "22-27 mins",
-        distance = "2.5 km",
-        discount = "15%",
-        discountAmount = "₹20",
-        address = "Vasant Vihar, Delhi"
-    ),
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
 
-    // DESI-INSPIRED HOT DOGS (16-18)
-    RestaurantItemFull(
-        id = 16,
-        imageRes = R.drawable.hotdog_items_16, // Butter chicken flavored hot dog
-        title = "Butter Chicken Dog",
-        price = "₹169 (Regular) | ₹229 (Jumbo)",
-        restaurantName = "Desi Franks",
-        rating = "4.9",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Kamla Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 17,
-        imageRes = R.drawable.hotdog_items_17, // Tandoori flavored hot dog
-        title = "Tandoori Masala Dog",
-        price = "₹149 (Regular) | ₹199 (Jumbo)",
-        restaurantName = "Desi Franks",
-        rating = "4.8",
-        deliveryTime = "15-20 mins",
-        distance = "1.8 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Kamla Nagar, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 18,
-        imageRes = R.drawable.hotdog_items_18, // Chatpata chutney hot dog
-        title = "Chutney Wala Dog",
-        price = "₹129 (Regular) | ₹179 (Jumbo)",
-        restaurantName = "Desi Franks",
-        rating = "4.9",
-        deliveryTime = "12-17 mins",
-        distance = "1.8 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Kamla Nagar, Delhi"
-    ),
-
-    // VEGETARIAN & FUSION HOT DOGS (19-20)
-    RestaurantItemFull(
-        id = 19,
-        imageRes = R.drawable.hotdog_items_19, // Veggie sausage hot dog
-        title = "Garden Veggie Dog",
-        price = "₹119 (Regular) | ₹169 (Jumbo)",
-        restaurantName = "Green Bites",
-        rating = "4.8",
-        deliveryTime = "10-15 mins",
-        distance = "1.2 km",
-        discount = "10%",
-        discountAmount = "₹20",
-        address = "Green Park, Delhi"
-    ),
-    RestaurantItemFull(
-        id = 20,
-        imageRes = R.drawable.hotdog_items_20, // Paneer tikka flavored hot dog
-        title = "Paneer Tikka Dog",
-        price = "₹139 (Regular) | ₹189 (Jumbo)",
-        restaurantName = "Green Bites",
-        rating = "4.9",
-        deliveryTime = "12-17 mins",
-        distance = "1.2 km",
-        discount = "12%",
-        discountAmount = "₹20",
-        address = "Green Park, Delhi"
-    )
-)
-        // Display all restaurant items vertically
-        hotDogItemsList.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_hotdog),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Hot Dog restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
-
     }
 }
 

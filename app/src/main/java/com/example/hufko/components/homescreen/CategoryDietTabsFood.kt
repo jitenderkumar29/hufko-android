@@ -44,14 +44,22 @@ import com.example.hufko.R
 import com.example.hufko.ui.theme.customColors
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.saveable.Saver
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hufko.api.services.config.NetworkConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import coil.compose.rememberAsyncImagePainter
+import com.example.hufko.api.services.viewmodels.RestaurantViewModel
 
 // Custom SetSaver for rememberSaveable
 //val SetSaver = Saver<Set<Int>, Set<Int>>(
@@ -72,294 +80,389 @@ sealed class DietCategoryPage(
     object Chicken : DietCategoryPage(
         title = "Chicken",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/chicken_food_diet.png",
-        category = "Chicken"
+        category = "CHICKEN_DIET",
+        priority = 1,
+        isActive = true
     )
 
     object Salad : DietCategoryPage(
         title = "Salad",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/salad_food_diet.png",
-        category = "Salad"
+        category = "SALAD_DIET",
+        priority = 2,
+        isActive = true
     )
 
     object Mutton : DietCategoryPage(
         title = "Mutton",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/mutton_food_diet.png",
-        category = "Mutton"
+        category = "MUTTON_DIET",
+        priority = 3,
+        isActive = true
     )
 
     object Kebabs : DietCategoryPage(
         title = "Kebabs",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/kebabs_food_diet.png",
-        category = "Kebabs"
+        category = "KEBABS_DIET",
+        priority = 4,
+        isActive = true
     )
 
     object HealthySnacks : DietCategoryPage(
         title = "Snacks",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/healthy_snacks_food_diet.png",
-        category = "Snacks"
+        category = "SNACKS_DIET",
+        priority = 5,
+        isActive = true
     )
 
     object LowCalorie : DietCategoryPage(
         title = "Low Calorie",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/low_calorie_food_diet.png",
-        category = "LowCalorie"
+        category = "LOW_CALORIE_DIET",
+        priority = 6,
+        isActive = true
     )
 
     object Vegan : DietCategoryPage(
         title = "Vegan",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/vegan_food_diet.png",
-        category = "Vegan"
+        category = "VEGAN_DIET",
+        priority = 7,
+        isActive = true
     )
 
     object ProteinRich : DietCategoryPage(
         title = "Protein Rich",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/protein_food_diet.png",
-        category = "ProteinRich"
+        category = "PROTEIN_RICH_DIET",
+        priority = 8,
+        isActive = true
     )
 
     // Categories from list (indices 8-22)
 
     object Dessert : DietCategoryPage(
-        "Dessert",
-        "${NetworkConfig.BASE_URL}/assets/banners/dessert_food.png",
-        "Dessert"
+        title = "Dessert",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/dessert_food.png",
+        category = "DESSERT_DIET",
+        priority = 9,
+        isActive = true
     )
 
     object VegMeal : DietCategoryPage(
-        "Veg Meal",
-        "${NetworkConfig.BASE_URL}/assets/banners/veg_meal_food.png",
-        "VegMeal"
+        title = "Veg Meal",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/veg_meal_food.png",
+        category = "VEG_MEAL_DIET",
+        priority = 10,
+        isActive = true
     )
 
     object Bowl : DietCategoryPage(
-        "Bowl",
-        "${NetworkConfig.BASE_URL}/assets/banners/bowl_food.png",
-        "Bowl"
+        title = "Bowl",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/bowl_food.png",
+        category = "BOWL_DIET",
+        priority = 11,
+        isActive = true
     )
 
     object Sweets : DietCategoryPage(
-        "Sweets",
-        "${NetworkConfig.BASE_URL}/assets/banners/sweets_food.png",
-        "Sweets"
+        title = "Sweets",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/sweets_food.png",
+        category = "SWEETS_DIET",
+        priority = 12,
+        isActive = true
     )
 
     object Khichdi : DietCategoryPage(
-        "Khichdi",
-        "${NetworkConfig.BASE_URL}/assets/banners/khichdi_food.png",
-        "Khichdi"
+        title = "Khichdi",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/khichdi_food.png",
+        category = "KHICHDI_DIET",
+        priority = 13,
+        isActive = true
     )
 
     object Sundae : DietCategoryPage(
-        "Sundae",
-        "${NetworkConfig.BASE_URL}/assets/banners/sundae_food.png",
-        "Sundae"
+        title = "Sundae",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/sundae_food.png",
+        category = "SUNDAE_DIET",
+        priority = 14,
+        isActive = true
     )
 
     object Juice : DietCategoryPage(
-        "Juice",
-        "${NetworkConfig.BASE_URL}/assets/banners/juice_food.png",
-        "Juice"
+        title = "Juice",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/juice_food.png",
+        category = "JUICE_DIET",
+        priority = 15,
+        isActive = true
     )
 
     object Lassi : DietCategoryPage(
-        "Lassi",
-        "${NetworkConfig.BASE_URL}/assets/banners/lassi_food.png",
-        "Lassi"
+        title = "Lassi",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/lassi_food.png",
+        category = "LASSI_DIET",
+        priority = 16,
+        isActive = true
     )
 
     object CurdRice : DietCategoryPage(
-        "Curd Rice",
-        "${NetworkConfig.BASE_URL}/assets/banners/curd_rice_food.png",
-        "CurdRice"
+        title = "Curd Rice",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/curd_rice_food.png",
+        category = "CURD_RICE_DIET",
+        priority = 17,
+        isActive = true
     )
 
     object Pudding : DietCategoryPage(
-        "Pudding",
-        "${NetworkConfig.BASE_URL}/assets/banners/pudding_food.png",
-        "Pudding"
+        title = "Pudding",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/pudding_food.png",
+        category = "PUDDING_DIET",
+        priority = 18,
+        isActive = true
     )
 
     object Custard : DietCategoryPage(
-        "Custard",
-        "${NetworkConfig.BASE_URL}/assets/banners/custard_food.png",
-        "Custard"
+        title = "Custard",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/custard_food.png",
+        category = "CUSTARD_DIET",
+        priority = 19,
+        isActive = true
     )
 
     object Soup : DietCategoryPage(
-        "Soup",
-        "${NetworkConfig.BASE_URL}/assets/banners/soup_food.png",
-        "Soup"
+        title = "Soup",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/soup_food.png",
+        category = "SOUP_DIET",
+        priority = 20,
+        isActive = true
     )
 
     object Brownie : DietCategoryPage(
-        "Brownie",
-        "${NetworkConfig.BASE_URL}/assets/banners/brownie_food.png",
-        "Brownie"
+        title = "Brownie",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/brownie_food.png",
+        category = "BROWNIE_DIET",
+        priority = 21,
+        isActive = true
     )
 
     object Waffles : DietCategoryPage(
-        "Waffles",
-        "${NetworkConfig.BASE_URL}/assets/banners/waffles_food.png",
-        "Waffles"
+        title = "Waffles",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/waffles_food.png",
+        category = "WAFFLES_DIET",
+        priority = 22,
+        isActive = true
     )
 
     object ColdCoffee : DietCategoryPage(
-        "Cold Coffee",
-        "${NetworkConfig.BASE_URL}/assets/banners/cold_coffee_food" +
-                ".png",
-        "ColdCoffee"
+        title = "Cold Coffee",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/cold_coffee_food.png",
+        category = "COLD_COFFEE_DIET",
+        priority = 23,
+        isActive = true
     )
 
     // Additional diet-specific items (indices 23-46)
 
     object GrilledChicken : DietCategoryPage(
-        "Grilled Chicken",
-        "${NetworkConfig.BASE_URL}/assets/banners/grilled_chicken.png",
-        "GrilledChicken"
+        title = "Grilled Chicken",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/grilled_chicken.png",
+        category = "GRILLED_CHICKEN_DIET",
+        priority = 24,
+        isActive = true
     )
 
     object SteamedFish : DietCategoryPage(
-        "Steamed Fish",
-        "${NetworkConfig.BASE_URL}/assets/banners/steamed_fish.png",
-        "SteamedFish"
+        title = "Steamed Fish",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/steamed_fish.png",
+        category = "STEAMED_FISH_DIET",
+        priority = 25,
+        isActive = true
     )
 
     object QuinoaBowl : DietCategoryPage(
-        "Quinoa Bowl",
-        "${NetworkConfig.BASE_URL}/assets/banners/quinoa_bowl.png",
-        "QuinoaBowl"
+        title = "Quinoa Bowl",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/quinoa_bowl.png",
+        category = "QUINOA_BOWL_DIET",
+        priority = 26,
+        isActive = true
     )
 
     object AvocadoToast : DietCategoryPage(
-        "Avocado Toast",
-        "${NetworkConfig.BASE_URL}/assets/banners/avocado_toast_food.png",
-        "AvocadoToast"
+        title = "Avocado Toast",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/avocado_toast_food.png",
+        category = "AVOCADO_TOAST_DIET",
+        priority = 27,
+        isActive = true
     )
 
     object GreenSmoothie : DietCategoryPage(
-        "Green Smoothie",
-        "${NetworkConfig.BASE_URL}/assets/banners/green_smoothie_food.png",
-        "GreenSmoothie"
+        title = "Green Smoothie",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/green_smoothie_food.png",
+        category = "GREEN_SMOOTHIE_DIET",
+        priority = 28,
+        isActive = true
     )
 
     object Oatmeal : DietCategoryPage(
-        "Oatmeal",
-        "${NetworkConfig.BASE_URL}/assets/banners/oatmeal_food.png",
-        "Oatmeal"
+        title = "Oatmeal",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/oatmeal_food.png",
+        category = "OATMEAL_DIET",
+        priority = 29,
+        isActive = true
     )
 
     object GreekYogurt : DietCategoryPage(
-        "Greek Yogurt",
-        "${NetworkConfig.BASE_URL}/assets/banners/greek_yogurt_food_diet.png",
-        "GreekYogurt"
+        title = "Greek Yogurt",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/greek_yogurt_food_diet.png",
+        category = "GREEK_YOGURT_DIET",
+        priority = 30,
+        isActive = true
     )
 
     object EggWhiteOmelette : DietCategoryPage(
-        "Egg White",
-        "${NetworkConfig.BASE_URL}/assets/banners/egg_white_omelette_food_diet.png",
-        "EggWhite"
+        title = "Egg White",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/egg_white_omelette_food_diet.png",
+        category = "EGG_WHITE_DIET",
+        priority = 31,
+        isActive = true
     )
 
     object TunaSalad : DietCategoryPage(
-        "Tuna Salad",
-        "${NetworkConfig.BASE_URL}/assets/banners/tuna_salad_food_diet.png",
-        "TunaSalad"
+        title = "Tuna Salad",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/tuna_salad_food_diet.png",
+        category = "TUNA_SALAD_DIET",
+        priority = 32,
+        isActive = true
     )
 
     object LentilSoup : DietCategoryPage(
-        "Lentil Soup",
-        "${NetworkConfig.BASE_URL}/assets/banners/lentil_soup_food_diet.png",
-        "LentilSoup"
+        title = "Lentil Soup",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/lentil_soup_food_diet.png",
+        category = "LENTIL_SOUP_DIET",
+        priority = 33,
+        isActive = true
     )
 
     object CottageCheese : DietCategoryPage(
-        "Cottage Cheese",
-        "${NetworkConfig.BASE_URL}/assets/banners/cottage_cheese_food_diet.png",
-        "CottageCheese"
+        title = "Cottage Cheese",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/cottage_cheese_food_diet.png",
+        category = "COTTAGE_CHEESE_DIET",
+        priority = 34,
+        isActive = true
     )
 
     object SproutsSalad : DietCategoryPage(
-        "Sprouts Salad",
-        "${NetworkConfig.BASE_URL}/assets/banners/sprouts_salad_food_diet.png",
-        "SproutsSalad"
+        title = "Sprouts Salad",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/sprouts_salad_food_diet.png",
+        category = "SPROUTS_SALAD_DIET",
+        priority = 35,
+        isActive = true
     )
 
     object BrownRiceBowl : DietCategoryPage(
-        "Brown Rice",
-        "${NetworkConfig.BASE_URL}/assets/banners/brown_rice_bowl_food_diet.png",
-        "BrownRice"
+        title = "Brown Rice",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/brown_rice_bowl_food_diet.png",
+        category = "BROWN_RICE_DIET",
+        priority = 36,
+        isActive = true
     )
 
     object SteamedVeggies : DietCategoryPage(
-        "Steamed Veg",
-        "${NetworkConfig.BASE_URL}/assets/banners/steamed_veggies_food_diet.png",
-        "SteamedVeg"
+        title = "Steamed Veg",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/steamed_veggies_food_diet.png",
+        category = "STEAMED_VEG_DIET",
+        priority = 37,
+        isActive = true
     )
 
     object FruitBowl : DietCategoryPage(
-        "Fruit Bowl",
-        "${NetworkConfig.BASE_URL}/assets/banners/fruit_bowl_food_diet.png",
-        "FruitBowl"
+        title = "Fruit Bowl",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/fruit_bowl_food_diet.png",
+        category = "FRUIT_BOWL_DIET",
+        priority = 38,
+        isActive = true
     )
 
     object DetoxWater : DietCategoryPage(
-        "Detox Water",
-        "${NetworkConfig.BASE_URL}/assets/banners/detox_water_food_diet.png",
-        "DetoxWater"
+        title = "Detox Water",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/detox_water_food_diet.png",
+        category = "DETOX_WATER_DIET",
+        priority = 39,
+        isActive = true
     )
 
     object HerbalTea : DietCategoryPage(
-        "Herbal Tea",
-        "${NetworkConfig.BASE_URL}/assets/banners/herbal_tea_food_diet.png",
-        "HerbalTea"
+        title = "Herbal Tea",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/herbal_tea_food_diet.png",
+        category = "HERBAL_TEA_DIET",
+        priority = 40,
+        isActive = true
     )
 
     object ProteinBar : DietCategoryPage(
-        "Protein Bar",
-        "${NetworkConfig.BASE_URL}/assets/banners/protein_bar_food_diet.png",
-        "ProteinBar"
+        title = "Protein Bar",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/protein_bar_food_diet.png",
+        category = "PROTEIN_BAR_DIET",
+        priority = 41,
+        isActive = true
     )
 
     object BoiledEggs : DietCategoryPage(
-        "Boiled Eggs",
-        "${NetworkConfig.BASE_URL}/assets/banners/boiled_eggs_food_diet.png",
-        "BoiledEggs"
+        title = "Boiled Eggs",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/boiled_eggs_food_diet.png",
+        category = "BOILED_EGGS_DIET",
+        priority = 42,
+        isActive = true
     )
 
     object HummusPlate : DietCategoryPage(
-        "Hummus Plate",
-        "${NetworkConfig.BASE_URL}/assets/banners/hummus_plate_food_diet.png",
-        "HummusPlate"
+        title = "Hummus Plate",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/hummus_plate_food_diet.png",
+        category = "HUMMUS_PLATE_DIET",
+        priority = 43,
+        isActive = true
     )
 
     object SushiRolls : DietCategoryPage(
-        "Sushi Rolls",
-        "${NetworkConfig.BASE_URL}/assets/banners/sushi_rolls_food_diet.png",
-        "SushiRolls"
+        title = "Sushi Rolls",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/sushi_rolls_food_diet.png",
+        category = "SUSHI_ROLLS_DIET",
+        priority = 44,
+        isActive = true
     )
 
     object TofuStirFry : DietCategoryPage(
-        "Tofu Stir Fry",
-        "${NetworkConfig.BASE_URL}/assets/banners/tofu_stir_fry_food_diet.png",
-        "TofuStirFry"
+        title = "Tofu Stir Fry",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/tofu_stir_fry_food_diet.png",
+        category = "TOFU_STIR_FRY_DIET",
+        priority = 45,
+        isActive = true
     )
 
     object ChiaPudding : DietCategoryPage(
-        "Chia Pudding",
-        "${NetworkConfig.BASE_URL}/assets/banners/chia_pudding_food_diet.png",
-        "ChiaPudding"
+        title = "Chia Pudding",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/chia_pudding_food_diet.png",
+        category = "CHIA_PUDDING_DIET",
+        priority = 46,
+        isActive = true
     )
 
     object MilletBowl : DietCategoryPage(
-        "Millet Bowl",
-        "${NetworkConfig.BASE_URL}/assets/banners/millet_bowl_food_diet.png",
-        "MilletBowl"
+        title = "Millet Bowl",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/millet_bowl_food_diet.png",
+        category = "MILLET_BOWL_DIET",
+        priority = 47,
+        isActive = true
     )
 
     object SeeAll : DietCategoryPage(
-        "See All",
-        "${NetworkConfig.BASE_URL}/assets/banners/see_all_food.png",
-        "SeeAll"
+        title = "See All",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/see_all_food.png",
+        category = "SeeAll",
+        priority = 48,
+        isActive = true
     )
 }
 
@@ -825,11 +928,11 @@ fun CategoryDietTabsFood(
         LaunchedEffect(currentCategory) {
             Log.d(TAG, "Rendering content for category: ${currentCategory?.title} at index $internalSelectedIndex")
         }
-
+        val restaurantViewModel: RestaurantViewModel = viewModel()
         when (currentCategory) {
-            DietCategoryPage.Chicken -> ChickenDietPage()
-            DietCategoryPage.Salad -> SaladDietPage()
-            DietCategoryPage.Mutton -> MuttonDietPage()
+            DietCategoryPage.Chicken -> ChickenDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.Salad -> SaladDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.Mutton -> MuttonDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Kebabs -> KebabsDietPage()
             DietCategoryPage.HealthySnacks -> HealthySnacksPage()
             DietCategoryPage.LowCalorie -> LowCaloriePage()
@@ -994,17 +1097,32 @@ fun MainScreenWithDietTabs(navController: NavHostController) {
 }
 
 // Category Page Composables for diet tabs
-
 @Composable
-fun ChickenDietPage() {
+fun ChickenDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CHICKEN_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CHICKEN_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("CHICKEN_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CHICKEN_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-//            .padding(0.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button
         val chickenDietFilters = FilterConfig(
             filters = listOf(
+                // Main filter dropdown
                 FilterChip(
                     id = "filters",
                     text = "Filters",
@@ -1012,6 +1130,8 @@ fun ChickenDietPage() {
                     icon = R.drawable.ic_filter,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
+
+                // CHICKEN STYLES (with icons)
                 FilterChip(
                     id = "grilled",
                     text = "Grilled Chicken",
@@ -1048,6 +1168,8 @@ fun ChickenDietPage() {
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_chicken_tandoori
                 ),
+
+                // PREPARATION STYLES
                 FilterChip(
                     id = "spicy",
                     text = "Spicy",
@@ -1059,10 +1181,29 @@ fun ChickenDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
+                    id = "with_bone",
+                    text = "With Bone",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGES
+                FilterChip(
                     id = "under_250",
                     text = "Under ₹250",
                     type = FilterType.TEXT_ONLY
                 ),
+                FilterChip(
+                    id = "under_500",
+                    text = "Under ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_1000",
+                    text = "Under ₹1000",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // DIETARY PREFERENCES
                 FilterChip(
                     id = "protein_rich",
                     text = "High Protein",
@@ -1074,6 +1215,45 @@ fun ChickenDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUISINE TYPES
+                FilterChip(
+                    id = "indian",
+                    text = "Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "chinese",
+                    text = "Chinese",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "continental",
+                    text = "Continental",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mexican",
+                    text = "Mexican",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mediterranean",
+                    text = "Mediterranean",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
                     id = "sort_by",
                     text = "Sort By",
                     type = FilterType.SORT_DROPDOWN,
@@ -1082,6 +1262,7 @@ fun ChickenDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = chickenDietFilters,
             onFilterClick = { filter ->
@@ -1093,88 +1274,10 @@ fun ChickenDietPage() {
                 // Handle sort logic
             }
         )
-        // Sample data with all fields
-        val chickenDietFoodItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_chicken_grilled_diet,
-                title = "Grilled Chicken",
-                price = "250",
-                restaurantName = "Chicken Kingdom",
-                rating = "4.5",
-                deliveryTime = "30-35 mins",
-                distance = "4.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_chicken_fried_diet,
-                title = "Crispy Fried Chicken",
-                price = "220",
-                restaurantName = "Chicken Express",
-                rating = "4.3",
-                deliveryTime = "25-30 mins",
-                distance = "3.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_chicken_curry_diet,
-                title = "Chicken Curry",
-                price = "280",
-                restaurantName = "Spice Hub",
-                rating = "4.4",
-                deliveryTime = "40-45 mins",
-                distance = "5.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_chicken_roast_diet,
-                title = "Roast Chicken",
-                price = "320",
-                restaurantName = "Royal Chicken",
-                rating = "4.6",
-                deliveryTime = "50-55 mins",
-                distance = "6.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_chicken_butter_diet,
-                title = "Butter Chicken",
-                price = "260",
-                restaurantName = "Dhaba Style",
-                rating = "4.7",
-                deliveryTime = "35-40 mins",
-                distance = "4.7 km",
-                discount = "40%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_chicken_tandoori_diet,
-                title = "Tandoori Chicken",
-                price = "240",
-                restaurantName = "Tandoor Special",
-                rating = "4.2",
-                deliveryTime = "30-35 mins",
-                distance = "3.9 km",
-                discount = "35%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED CHICKEN DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -1182,344 +1285,239 @@ fun ChickenDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = chickenDietFoodItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Chicken Diet items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(androidx.compose.material.icons.Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CHICKEN_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_chicken_grilled),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Chicken Diet items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED CHICKEN DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-
-    }
-//        FilterButtonFood()
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-    // Sample data based on the provided images
-    val chickenDietRestaurantItems = listOf(
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.restaurant_image_chicken_food_1,
-            title = "Grilled Chicken Platter",
-            price = "325",
-            restaurantName = "Chicken Kingdom",
-            rating = "4.5",
-            deliveryTime = "30-35 mins",
-            distance = "4.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Grill Street, Downtown"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.restaurant_image_chicken_food_2,
-            title = "Crispy Fried Chicken Bucket",
-            price = "450",
-            restaurantName = "Chicken Express",
-            rating = "4.3",
-            deliveryTime = "25-30 mins",
-            distance = "3.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fast Food Lane"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.restaurant_image_chicken_food_3,
-            title = "Chicken Butter Masala",
-            price = "280",
-            restaurantName = "Spice Hub",
-            rating = "4.4",
-            deliveryTime = "40-45 mins",
-            distance = "5.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Curry Corner"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.restaurant_image_chicken_food_4,
-            title = "Whole Roast Chicken",
-            price = "550",
-            restaurantName = "Royal Chicken",
-            rating = "4.6",
-            deliveryTime = "50-55 mins",
-            distance = "6.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Royal Feast Avenue"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.restaurant_image_chicken_food_5,
-            title = "Butter Chicken with Naan",
-            price = "320",
-            restaurantName = "Dhaba Style",
-            rating = "4.7",
-            deliveryTime = "35-40 mins",
-            distance = "4.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Highway Dhaba"
-        ),
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.restaurant_image_chicken_food_6,
-            title = "Tandoori Chicken Platter",
-            price = "380",
-            restaurantName = "Tandoor Special",
-            rating = "4.2",
-            deliveryTime = "30-35 mins",
-            distance = "3.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Tandoori Street"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.restaurant_image_chicken_food_7,
-            title = "Chilli Chicken Combo",
-            price = "290",
-            restaurantName = "Chinese Wok",
-            rating = "4.1",
-            deliveryTime = "20-25 mins",
-            distance = "2.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Chinatown Plaza"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.restaurant_image_chicken_food_8,
-            title = "Hyderabadi Chicken Biryani",
-            price = "260",
-            restaurantName = "Biryani House",
-            rating = "4.8",
-            deliveryTime = "35-40 mins",
-            distance = "4.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Biryani Street"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.restaurant_image_chicken_food_9,
-            title = "Chicken Shawarma Platter",
-            price = "220",
-            restaurantName = "Arabian Nights",
-            rating = "4.3",
-            deliveryTime = "25-30 mins",
-            distance = "3.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Middle Eastern Quarter"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.restaurant_image_chicken_food_10,
-            title = "Chicken 65 Special",
-            price = "240",
-            restaurantName = "Spicy Corner",
-            rating = "4.0",
-            deliveryTime = "30-35 mins",
-            distance = "4.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Spice Market"
-        ),
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.restaurant_image_chicken_food_11,
-            title = "Chicken Tikka Masala",
-            price = "310",
-            restaurantName = "Tikka Palace",
-            rating = "4.4",
-            deliveryTime = "40-45 mins",
-            distance = "5.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Royal Tikka Street"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.restaurant_image_chicken_food_12,
-            title = "Chicken Korma Deluxe",
-            price = "270",
-            restaurantName = "Mughlai Darbar",
-            rating = "4.6",
-            deliveryTime = "45-50 mins",
-            distance = "6.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mughlai Avenue"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.restaurant_image_chicken_food_13,
-            title = "Chicken Lollipop Basket",
-            price = "290",
-            restaurantName = "Starters Heaven",
-            rating = "4.2",
-            deliveryTime = "25-30 mins",
-            distance = "3.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Appetizer Lane"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.restaurant_image_chicken_food_14,
-            title = "Chicken Burger Combo",
-            price = "199",
-            restaurantName = "Burger King",
-            rating = "4.1",
-            deliveryTime = "20-25 mins",
-            distance = "2.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fast Food Court"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.restaurant_image_chicken_food_15,
-            title = "Chicken Wings Platter",
-            price = "350",
-            restaurantName = "Wings World",
-            rating = "4.3",
-            deliveryTime = "30-35 mins",
-            distance = "4.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wings Street"
-        ),
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.restaurant_image_chicken_food_16,
-            title = "Chicken Sandwich Meal",
-            price = "180",
-            restaurantName = "Subway Delights",
-            rating = "4.0",
-            deliveryTime = "15-20 mins",
-            distance = "1.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Quick Bite Center"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.restaurant_image_chicken_food_17,
-            title = "Chicken Teriyaki Bowl",
-            price = "320",
-            restaurantName = "Tokyo Kitchen",
-            rating = "4.5",
-            deliveryTime = "35-40 mins",
-            distance = "5.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Japanese Quarter"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.restaurant_image_chicken_food_18,
-            title = "Chicken Popcorn Bucket",
-            price = "210",
-            restaurantName = "Movie Munchies",
-            rating = "4.1",
-            deliveryTime = "25-30 mins",
-            distance = "3.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Entertainment District"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.restaurant_image_chicken_food_19,
-            title = "Chicken Pasta Alfredo",
-            price = "280",
-            restaurantName = "Italian Bistro",
-            rating = "4.4",
-            deliveryTime = "30-35 mins",
-            distance = "4.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Italian Street"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.restaurant_image_chicken_food_20,
-            title = "Chicken Salad Bowl",
-            price = "230",
-            restaurantName = "Healthy Bites",
-            rating = "4.2",
-            deliveryTime = "20-25 mins",
-            distance = "2.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Center"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
+        Spacer(modifier = Modifier.height(5.dp))
 
-    Column {
-        chickenDietRestaurantItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Chicken Diet restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CHICKEN_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_chicken_grilled),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Chicken Diet restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun SaladDietPage() {
+fun SaladDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SALAD_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SALAD_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("SALAD_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SALAD_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button
         val saladFilters = FilterConfig(
             filters = listOf(
+                // Main filter dropdown
                 FilterChip(
                     id = "filters",
                     text = "Filters",
@@ -1527,6 +1525,8 @@ fun SaladDietPage() {
                     icon = R.drawable.ic_filter,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
+
+                // SALAD TYPES (with icons)
                 FilterChip(
                     id = "greek_salad",
                     text = "Greek Salad",
@@ -1563,6 +1563,8 @@ fun SaladDietPage() {
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_salad_pasta
                 ),
+
+                // DIETARY PREFERENCES
                 FilterChip(
                     id = "vegetarian",
                     text = "Vegetarian",
@@ -1584,15 +1586,78 @@ fun SaladDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
+                    id = "protein_rich",
+                    text = "High Protein",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "keto",
+                    text = "Keto Friendly",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGES
+                FilterChip(
                     id = "under_200",
                     text = "Under ₹200",
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
+                    id = "under_300",
+                    text = "Under ₹300",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "under_500",
+                    text = "Under ₹500",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PREPARATION STYLES
+                FilterChip(
                     id = "fresh_made",
                     text = "Fresh Made",
                     type = FilterType.TEXT_ONLY
                 ),
+                FilterChip(
+                    id = "organic",
+                    text = "Organic",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "with_dressing",
+                    text = "With Dressing",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUISINE TYPES
+                FilterChip(
+                    id = "mediterranean",
+                    text = "Mediterranean",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "asian",
+                    text = "Asian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "italian",
+                    text = "Italian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "mexican",
+                    text = "Mexican",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "french",
+                    text = "French",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
                 FilterChip(
                     id = "sort_by",
                     text = "Sort By",
@@ -1602,6 +1667,7 @@ fun SaladDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = saladFilters,
             onFilterClick = { filter ->
@@ -1613,88 +1679,10 @@ fun SaladDietPage() {
                 // Handle sort logic
             }
         )
-        // Sample data with all fields
-        val saladDietFoodItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_salad_greek_diet,
-                title = "Greek Salad",
-                price = "180",
-                restaurantName = "Mediterranean Delight",
-                rating = "4.4",
-                deliveryTime = "20-25 mins",
-                distance = "3.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_salad_caesar_diet,
-                title = "Caesar Salad",
-                price = "220",
-                restaurantName = "Salad Bar",
-                rating = "4.3",
-                deliveryTime = "15-20 mins",
-                distance = "2.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_salad_fruit_diet,
-                title = "Fruit Salad",
-                price = "150",
-                restaurantName = "Fruit Paradise",
-                rating = "4.6",
-                deliveryTime = "10-15 mins",
-                distance = "1.5 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_salad_chicken_diet,
-                title = "Chicken Salad",
-                price = "240",
-                restaurantName = "Protein Hub",
-                rating = "4.5",
-                deliveryTime = "25-30 mins",
-                distance = "4.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_salad_quinoa_diet,
-                title = "Quinoa Salad",
-                price = "200",
-                restaurantName = "Healthy Bites",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "3.5 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_salad_pasta_diet,
-                title = "Pasta Salad",
-                price = "190",
-                restaurantName = "Italian Greens",
-                rating = "4.2",
-                deliveryTime = "25-30 mins",
-                distance = "3.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED SALAD DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -1702,342 +1690,239 @@ fun SaladDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = saladDietFoodItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Salad Diet items...", color = Color.Gray)
+                    }
+                }
+            }
 
-    }
-//
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-    // Sample data based on the provided images
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SALAD_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    val saladDietRestaurantItems = listOf(
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.restaurant_image_salad_food_1,
-            title = "Mediterranean Quinoa Bowl",
-            price = "285",
-            restaurantName = "Green Leaf Cafe",
-            rating = "4.6",
-            deliveryTime = "20-25 mins",
-            distance = "2.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Health Street, Downtown"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.restaurant_image_salad_food_2,
-            title = "Protein Power Salad",
-            price = "320",
-            restaurantName = "FitFuel Kitchen",
-            rating = "4.5",
-            deliveryTime = "25-30 mins",
-            distance = "3.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fitness Hub Lane"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.restaurant_image_salad_food_3,
-            title = "Caesar Salad with Grilled Chicken",
-            price = "250",
-            restaurantName = "Salad Bar Express",
-            rating = "4.4",
-            deliveryTime = "15-20 mins",
-            distance = "1.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Quick Bite Corner"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.restaurant_image_salad_food_4,
-            title = "Greek Salad Platter",
-            price = "220",
-            restaurantName = "Mediterranean Delight",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "2.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Olive Oil Avenue"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.restaurant_image_salad_food_5,
-            title = "Rainbow Veggie Bowl",
-            price = "195",
-            restaurantName = "Vegan Vibes",
-            rating = "4.8",
-            deliveryTime = "30-35 mins",
-            distance = "4.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Plant-Based District"
-        ),
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.restaurant_image_salad_food_6,
-            title = "Avocado & Chickpea Salad",
-            price = "240",
-            restaurantName = "Superfood Kitchen",
-            rating = "4.5",
-            deliveryTime = "25-30 mins",
-            distance = "3.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Nutrition Street"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.restaurant_image_salad_food_7,
-            title = "Thai Mango Salad",
-            price = "210",
-            restaurantName = "Asian Greens",
-            rating = "4.3",
-            deliveryTime = "30-35 mins",
-            distance = "4.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Asian Fusion Plaza"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.restaurant_image_salad_food_8,
-            title = "Kale & Quinoa Super Bowl",
-            price = "275",
-            restaurantName = "Clean Eats",
-            rating = "4.6",
-            deliveryTime = "20-25 mins",
-            distance = "2.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Center"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.restaurant_image_salad_food_9,
-            title = "Tuna Nicoise Salad",
-            price = "290",
-            restaurantName = "French Bistro",
-            rating = "4.4",
-            deliveryTime = "35-40 mins",
-            distance = "5.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "European Quarter"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.restaurant_image_salad_food_10,
-            title = "Roasted Veggie & Feta Bowl",
-            price = "230",
-            restaurantName = "Farm to Table",
-            rating = "4.7",
-            deliveryTime = "25-30 mins",
-            distance = "3.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Organic Market"
-        ),
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.restaurant_image_salad_food_11,
-            title = "Spinach & Berry Salad",
-            price = "205",
-            restaurantName = "Berry Fresh",
-            rating = "4.5",
-            deliveryTime = "20-25 mins",
-            distance = "2.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Berry Lane"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.restaurant_image_salad_food_12,
-            title = "Mexican Fiesta Bowl",
-            price = "245",
-            restaurantName = "Mexi-Greens",
-            rating = "4.3",
-            deliveryTime = "30-35 mins",
-            distance = "4.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mexican Street"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.restaurant_image_salad_food_13,
-            title = "Pomegranate & Walnut Salad",
-            price = "225",
-            restaurantName = "Nutrient Hub",
-            rating = "4.6",
-            deliveryTime = "25-30 mins",
-            distance = "3.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Health District"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.restaurant_image_salad_food_14,
-            title = "Detox Green Salad",
-            price = "180",
-            restaurantName = "Juice & Salad Bar",
-            rating = "4.2",
-            deliveryTime = "15-20 mins",
-            distance = "1.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Detox Center"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.restaurant_image_salad_food_15,
-            title = "Warm Lentil & Veggie Bowl",
-            price = "195",
-            restaurantName = "Comfort Greens",
-            rating = "4.4",
-            deliveryTime = "25-30 mins",
-            distance = "3.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Comfort Food Lane"
-        ),
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.restaurant_image_salad_food_16,
-            title = "Caprese Salad Platter",
-            price = "235",
-            restaurantName = "Italian Greens",
-            rating = "4.5",
-            deliveryTime = "20-25 mins",
-            distance = "2.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Italian Quarter"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.restaurant_image_salad_food_17,
-            title = "Asian Crunch Salad",
-            price = "215",
-            restaurantName = "Tokyo Greens",
-            rating = "4.4",
-            deliveryTime = "30-35 mins",
-            distance = "4.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Asian District"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.restaurant_image_salad_food_18,
-            title = "Beetroot & Goat Cheese Salad",
-            price = "255",
-            restaurantName = "Gourmet Greens",
-            rating = "4.7",
-            deliveryTime = "30-35 mins",
-            distance = "4.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gourmet Street"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.restaurant_image_salad_food_19,
-            title = "Southwest Chicken Salad",
-            price = "265",
-            restaurantName = "Grill & Greens",
-            rating = "4.5",
-            deliveryTime = "25-30 mins",
-            distance = "3.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Grill Avenue"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.restaurant_image_salad_food_20,
-            title = "Moroccan Couscous Salad",
-            price = "240",
-            restaurantName = "Spice & Greens",
-            rating = "4.3",
-            deliveryTime = "35-40 mins",
-            distance = "4.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Spice Market Lane"
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_salad_greek),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Salad Diet items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED SALAD DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        saladDietRestaurantItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Salad Diet restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SALAD_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_salad_greek),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Salad Diet restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
+
 @Composable
-fun MuttonDietPage() {
+fun MuttonDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for MUTTON_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: MUTTON_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("MUTTON_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("MUTTON_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button
         val muttonDietFilters = FilterConfig(
             filters = listOf(
+                // Main filter dropdown
                 FilterChip(
                     id = "filters",
                     text = "Filters",
@@ -2045,6 +1930,8 @@ fun MuttonDietPage() {
                     icon = R.drawable.ic_filter,
                     rightIcon = R.drawable.outline_keyboard_arrow_down_24
                 ),
+
+                // MUTTON DISH TYPES (with icons)
                 FilterChip(
                     id = "mutton_curry",
                     text = "Mutton Curry",
@@ -2075,6 +1962,8 @@ fun MuttonDietPage() {
                     type = FilterType.WITH_LEFT_ICON,
                     icon = R.drawable.ic_mutton_keema
                 ),
+
+                // SPICE LEVELS
                 FilterChip(
                     id = "spicy",
                     text = "Spicy",
@@ -2086,6 +1975,13 @@ fun MuttonDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
+                    id = "medium",
+                    text = "Medium",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUT TYPES
+                FilterChip(
                     id = "bone_in",
                     text = "Bone-In",
                     type = FilterType.TEXT_ONLY
@@ -2095,6 +1991,8 @@ fun MuttonDietPage() {
                     text = "Boneless",
                     type = FilterType.TEXT_ONLY
                 ),
+
+                // DIETARY PREFERENCES
                 FilterChip(
                     id = "high_protein",
                     text = "High Protein",
@@ -2106,6 +2004,13 @@ fun MuttonDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
+                    id = "low_fat",
+                    text = "Low Fat",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // PRICE RANGES
+                FilterChip(
                     id = "under_300",
                     text = "Under ₹300",
                     type = FilterType.TEXT_ONLY
@@ -2115,6 +2020,13 @@ fun MuttonDietPage() {
                     text = "Under ₹500",
                     type = FilterType.TEXT_ONLY
                 ),
+                FilterChip(
+                    id = "under_700",
+                    text = "Under ₹700",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // CUISINE TYPES
                 FilterChip(
                     id = "traditional",
                     text = "Traditional",
@@ -2126,6 +2038,28 @@ fun MuttonDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
+                    id = "indian",
+                    text = "Indian",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "kashmiri",
+                    text = "Kashmiri",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "punjabi",
+                    text = "Punjabi",
+                    type = FilterType.TEXT_ONLY
+                ),
+                FilterChip(
+                    id = "awadhi",
+                    text = "Awadhi",
+                    type = FilterType.TEXT_ONLY
+                ),
+
+                // Sort dropdown
+                FilterChip(
                     id = "sort_by",
                     text = "Sort By",
                     type = FilterType.SORT_DROPDOWN,
@@ -2134,6 +2068,7 @@ fun MuttonDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = muttonDietFilters,
             onFilterClick = { filter ->
@@ -2145,88 +2080,10 @@ fun MuttonDietPage() {
                 // Handle sort logic
             }
         )
-        // Sample data with all fields
-        val muttonFoodItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_mutton_biryani_diet,
-                title = "Mutton Biryani",
-                price = "450",
-                restaurantName = "Royal Mughlai",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "4.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_mutton_korma_diet,
-                title = "Mutton Korma",
-                price = "420",
-                restaurantName = "Darbar Kitchen",
-                rating = "4.6",
-                deliveryTime = "30-35 mins",
-                distance = "3.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_mutton_rogan_josh_diet,
-                title = "Mutton Rogan Josh",
-                price = "480",
-                restaurantName = "Kashmiri Delight",
-                rating = "4.7",
-                deliveryTime = "40-45 mins",
-                distance = "5.1 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_mutton_curry_diet,
-                title = "Mutton Curry",
-                price = "380",
-                restaurantName = "Spice Nation",
-                rating = "4.4",
-                deliveryTime = "25-30 mins",
-                distance = "2.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_mutton_kebabs_diet,
-                title = "Mutton Seekh Kebabs",
-                price = "350",
-                restaurantName = "Kebab Junction",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "2.3 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_mutton_handi_diet,
-                title = "Mutton Handi",
-                price = "550",
-                restaurantName = "Handi House",
-                rating = "4.8",
-                deliveryTime = "35-40 mins",
-                distance = "4.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED MUTTON DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -2234,330 +2091,209 @@ fun MuttonDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-//            heading = "Popular Dishes",
-//            subtitle = "Scroll to see more delicious options",
-            foodItems = muttonFoodItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Mutton Diet items...", color = Color.Gray)
+                    }
+                }
+            }
 
-    }
-//
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-    // Sample data based on the provided images
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("MUTTON_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    val muttonRestaurantItems = listOf(
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.restaurant_image_mutton_food_1,
-            title = "Royal Mughlai Mutton Biryani",
-            price = "450",
-            restaurantName = "Royal Mughlai",
-            rating = "4.8",
-            deliveryTime = "35-40 mins",
-            distance = "4.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mughlai Street, Old Delhi"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.restaurant_image_mutton_food_2,
-            title = "Darbar Kitchen Mutton Korma",
-            price = "420",
-            restaurantName = "Darbar Kitchen",
-            rating = "4.6",
-            deliveryTime = "30-35 mins",
-            distance = "3.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Royal Palace Road"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.restaurant_image_mutton_food_3,
-            title = "Kashmiri Rogan Josh",
-            price = "480",
-            restaurantName = "Kashmiri Delight",
-            rating = "4.7",
-            deliveryTime = "40-45 mins",
-            distance = "5.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Kashmiri Valley Lane"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.restaurant_image_mutton_food_4,
-            title = "Spice Nation Mutton Curry",
-            price = "380",
-            restaurantName = "Spice Nation",
-            rating = "4.4",
-            deliveryTime = "25-30 mins",
-            distance = "2.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Spice Market Area"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.restaurant_image_mutton_food_5,
-            title = "Kebab Junction Seekh Kebabs",
-            price = "350",
-            restaurantName = "Kebab Junction",
-            rating = "4.5",
-            deliveryTime = "20-25 mins",
-            distance = "2.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Kebab Street Corner"
-        ),
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.restaurant_image_mutton_food_6,
-            title = "Handi House Mutton Handi",
-            price = "550",
-            restaurantName = "Handi House",
-            rating = "4.8",
-            deliveryTime = "35-40 mins",
-            distance = "4.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Handi Special Area"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.restaurant_image_mutton_food_7,
-            title = "Keema Special Mutton Keema",
-            price = "320",
-            restaurantName = "Keema Special",
-            rating = "4.3",
-            deliveryTime = "25-30 mins",
-            distance = "3.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Keema Lane"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.restaurant_image_mutton_food_8,
-            title = "Kadai King Special Mutton",
-            price = "440",
-            restaurantName = "Kadai King",
-            rating = "4.6",
-            deliveryTime = "30-35 mins",
-            distance = "3.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Kadai Special Road"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.restaurant_image_mutton_food_9,
-            title = "Pulao Paradise Mutton Pulao",
-            price = "400",
-            restaurantName = "Pulao Paradise",
-            rating = "4.4",
-            deliveryTime = "30-35 mins",
-            distance = "4.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Pulao Street"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.restaurant_image_mutton_food_10,
-            title = "Punjabi Dhaba Mutton Saag",
-            price = "370",
-            restaurantName = "Punjabi Dhaba",
-            rating = "4.5",
-            deliveryTime = "25-30 mins",
-            distance = "2.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Highway Dhaba Road"
-        ),
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.restaurant_image_mutton_food_11,
-            title = "Kolhapuri Mutton Special",
-            price = "460",
-            restaurantName = "Maharashtrian Tadka",
-            rating = "4.7",
-            deliveryTime = "35-40 mins",
-            distance = "4.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Maharashtrian Food Street"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.restaurant_image_mutton_food_12,
-            title = "Afghani Mutton Delicacy",
-            price = "520",
-            restaurantName = "Afghan Kitchen",
-            rating = "4.8",
-            deliveryTime = "40-45 mins",
-            distance = "5.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Afghan Street"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.restaurant_image_mutton_food_13,
-            title = "Nihari House Special Mutton",
-            price = "490",
-            restaurantName = "Nihari House",
-            rating = "4.9",
-            deliveryTime = "45-50 mins",
-            distance = "5.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Nihari Street, Old Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.restaurant_image_mutton_food_14,
-            title = "Royal BBQ Mutton Raan",
-            price = "750",
-            restaurantName = "Royal BBQ",
-            rating = "4.8",
-            deliveryTime = "50-55 mins",
-            distance = "6.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "BBQ Grill Street"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.restaurant_image_mutton_food_15,
-            title = "Souper Bowl Mutton Soup",
-            price = "280",
-            restaurantName = "Souper Bowl",
-            rating = "4.3",
-            deliveryTime = "20-25 mins",
-            distance = "2.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Soup Corner Lane"
-        ),
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.restaurant_image_mutton_food_16,
-            title = "Paya Special Mutton Paya",
-            price = "390",
-            restaurantName = "Paya Special",
-            rating = "4.5",
-            deliveryTime = "40-45 mins",
-            distance = "4.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Paya Street"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.restaurant_image_mutton_food_17,
-            title = "Chop House Mutton Chops",
-            price = "410",
-            restaurantName = "Chop House",
-            rating = "4.6",
-            deliveryTime = "30-35 mins",
-            distance = "3.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Chop Grill Road"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.restaurant_image_mutton_food_18,
-            title = "Awadhi Kitchen Rezala",
-            price = "480",
-            restaurantName = "Awadhi Kitchen",
-            rating = "4.7",
-            deliveryTime = "35-40 mins",
-            distance = "4.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Awadhi Street, Lucknowi"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.restaurant_image_mutton_food_19,
-            title = "Pao Bhaji House Keema Pao",
-            price = "340",
-            restaurantName = "Pao Bhaji House",
-            rating = "4.4",
-            deliveryTime = "25-30 mins",
-            distance = "2.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Pao Bhaji Street"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.restaurant_image_mutton_food_20,
-            title = "Kebab Mahal Malai Mutton",
-            price = "430",
-            restaurantName = "Kebab Mahal",
-            rating = "4.6",
-            deliveryTime = "30-35 mins",
-            distance = "3.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Kebab Mahal Road"
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_mutton_curry),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Mutton Diet items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED MUTTON DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        muttonRestaurantItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Mutton Diet restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("MUTTON_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_mutton_curry),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Mutton Diet restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

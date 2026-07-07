@@ -940,7 +940,7 @@ fun CategoryDietTabsFood(
             DietCategoryPage.ProteinRich -> ProteinRichPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Dessert -> DessertPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.VegMeal -> VegMealPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.Bowl -> BowlPage()
+            DietCategoryPage.Bowl -> BowlPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Sweets -> SweetsPage()
             DietCategoryPage.Khichdi -> KhichdiPage()
             DietCategoryPage.Sundae -> SundaePage()
@@ -5095,13 +5095,28 @@ fun VegMealPage(
 }
 
 @Composable
-fun BowlPage() {
+fun BowlPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for BOWL_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BOWL_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("BOWL_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BOWL_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
 
+        // Filter Button - Same filters as before
         val bowlDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -5361,94 +5376,10 @@ fun BowlPage() {
                 // Handle sort logic
             }
         )
-        // Sample data with all fields
-        val bowlDietItems = listOf(
-            // 1. Protein Power Bowl
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_protein_power_bowl,
-                title = "Protein Power Bowl",
-                price = "399",
-                restaurantName = "Bowl Culture",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Fitness District, Delhi"
-            ),
-            // 2. Acai Berry Bowl
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_acai_berry_bowl,
-                title = "Acai Berry Bowl",
-                price = "449",
-                restaurantName = "Healthy Bowl Co",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "2.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Wellness Hub, Delhi"
-            ),
-            // 3. Quinoa Garden Bowl
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_quinoa_garden_bowl,
-                title = "Quinoa Garden Bowl",
-                price = "359",
-                restaurantName = "Green Theory",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Eco Square, Delhi"
-            ),
-            // 4. Mediterranean Bowl
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_mediterranean_bowl,
-                title = "Mediterranean Bowl",
-                price = "429",
-                restaurantName = "Olive Kitchen",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "2.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Mediterranean Plaza, Delhi"
-            ),
-            // 5. Hawaiian Poke Bowl
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_hawaiian_poke_bowl,
-                title = "Hawaiian Poke Bowl",
-                price = "499",
-                restaurantName = "Island Bowls",
-                rating = "4.9",
-                deliveryTime = "30-35 mins",
-                distance = "2.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Beachside Ave, Delhi"
-            ),
-            // 6. Buddha's Delight Bowl
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_buddha_bowl,
-                title = "Buddha's Delight Bowl",
-                price = "379",
-                restaurantName = "Zen Kitchen",
-                rating = "4.7",
-                deliveryTime = "25-30 mins",
-                distance = "1.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Peace Complex, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED BOWL DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -5456,327 +5387,209 @@ fun BowlPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = bowlDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
-        )
-    }
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Bowl Diet items...", color = Color.Gray)
+                    }
+                }
+            }
 
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("BOWL_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
 
-    // Sample data based on the provided images
-    val bowlDietItems = listOf(
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.bowl_diet_1,
-            title = "Classic Protein Power Bowl",
-            price = "349",
-            restaurantName = "Bowl Culture",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fitness District, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.bowl_diet_2,
-            title = "Acai Berry Bliss Bowl",
-            price = "429",
-            restaurantName = "Healthy Bowl Co",
-            rating = "4.8",
-            deliveryTime = "18-24 mins",
-            distance = "1.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Hub, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.bowl_diet_3,
-            title = "Quinoa Garden Harvest Bowl",
-            price = "359",
-            restaurantName = "Green Theory",
-            rating = "4.7",
-            deliveryTime = "22-28 mins",
-            distance = "1.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Eco Square, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.bowl_diet_4,
-            title = "Mediterranean Sunshine Bowl",
-            price = "399",
-            restaurantName = "Olive Kitchen",
-            rating = "4.8",
-            deliveryTime = "25-30 mins",
-            distance = "2.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mediterranean Plaza, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.bowl_diet_5,
-            title = "Hawaiian Poke Bowl",
-            price = "479",
-            restaurantName = "Island Bowls",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "2.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Beachside Ave, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.bowl_diet_6,
-            title = "Buddha's Delight Bowl",
-            price = "369",
-            restaurantName = "Zen Kitchen",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "1.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Peace Complex, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.bowl_diet_7,
-            title = "Berry Blast Smoothie Bowl",
-            price = "319",
-            restaurantName = "Morning Bowls",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Breakfast Street, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.bowl_diet_8,
-            title = "Thai Green Curry Bowl",
-            price = "409",
-            restaurantName = "Thai Spice",
-            rating = "4.7",
-            deliveryTime = "28-34 mins",
-            distance = "2.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Asian Food Hub, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.bowl_diet_9,
-            title = "Mexican Fiesta Bowl",
-            price = "379",
-            restaurantName = "Salsa Bowls",
-            rating = "4.6",
-            deliveryTime = "22-28 mins",
-            distance = "1.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Food Square, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.bowl_diet_10,
-            title = "Tofu Teriyaki Bowl",
-            price = "349",
-            restaurantName = "Asian Wok",
-            rating = "4.7",
-            deliveryTime = "20-26 mins",
-            distance = "1.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Teriyaki Lane, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.bowl_diet_11,
-            title = "Falafel Hummus Bowl",
-            price = "329",
-            restaurantName = "Middle East Eats",
-            rating = "4.8",
-            deliveryTime = "18-24 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mediterranean Market, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.bowl_diet_12,
-            title = "Mango Coconut Chia Bowl",
-            price = "289",
-            restaurantName = "Tropical Bowls",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fruit Bazaar, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.bowl_diet_13,
-            title = "Korean Bibimbap Bowl",
-            price = "419",
-            restaurantName = "Seoul Kitchen",
-            rating = "4.8",
-            deliveryTime = "25-30 mins",
-            distance = "2.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Korea Town, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.bowl_diet_14,
-            title = "Moroccan Spice Bowl",
-            price = "389",
-            restaurantName = "Marrakesh Flavors",
-            rating = "4.7",
-            deliveryTime = "24-30 mins",
-            distance = "2.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Spice Souk, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.bowl_diet_15,
-            title = "Greek Goddess Bowl",
-            price = "359",
-            restaurantName = "Athens Bowl Co",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "1.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Greek Plaza, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.bowl_diet_16,
-            title = "Rainbow Veggie Bowl",
-            price = "299",
-            restaurantName = "Colorful Eats",
-            rating = "4.6",
-            deliveryTime = "18-23 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Green Market, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.bowl_diet_17,
-            title = "Japanese Zen Bowl",
-            price = "439",
-            restaurantName = "Tokyo Bowl House",
-            rating = "4.9",
-            deliveryTime = "26-32 mins",
-            distance = "2.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Japantown, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.bowl_diet_18,
-            title = "California Sunrise Bowl",
-            price = "399",
-            restaurantName = "West Coast Bowls",
-            rating = "4.7",
-            deliveryTime = "22-28 mins",
-            distance = "1.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Beach Boulevard, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.bowl_diet_19,
-            title = "Indian Masala Bowl",
-            price = "309",
-            restaurantName = "Spice Route",
-            rating = "4.8",
-            deliveryTime = "18-24 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Masala Street, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.bowl_diet_20,
-            title = "Grand Superfood Bowl",
-            price = "499",
-            restaurantName = "Superfood Kitchen",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "2.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Avenue, Delhi"
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_protein_bowl),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Bowl Diet items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED BOWL DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        bowlDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Bowl Diet restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("BOWL_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_protein_bowl),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Bowl Diet restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

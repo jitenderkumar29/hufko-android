@@ -941,7 +941,7 @@ fun CategoryDietTabsFood(
             DietCategoryPage.Dessert -> DessertPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.VegMeal -> VegMealPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Bowl -> BowlPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.Sweets -> SweetsPage()
+            DietCategoryPage.Sweets -> SweetsPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Khichdi -> KhichdiPage()
             DietCategoryPage.Sundae -> SundaePage()
             DietCategoryPage.Juice -> JuicePage()
@@ -5595,13 +5595,28 @@ fun BowlPage(
 }
 
 @Composable
-fun SweetsPage() {
+fun SweetsPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SWEETS_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SWEETS_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("SWEETS_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SWEETS_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
 
+        // Filter Button - Same filters as before
         val sweetsDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -5931,88 +5946,10 @@ fun SweetsPage() {
                 // Handle sort logic
             }
         )
-        // Sample data with all fields
-        val sweetsDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_chocolate_cake,
-                title = "Chocolate Cake",
-                price = "299",
-                restaurantName = "Sweet Tooth Bakery",
-                rating = "4.8",
-                deliveryTime = "30-35 mins",
-                distance = "2.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Dessert Avenue, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_gulab_jamun_1,
-                title = "Gulab Jamun (4 pcs)",
-                price = "149",
-                restaurantName = "Mithai Wala",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "5%",
-                discountAmount = "₹20",
-                address = "Old Market, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_ice_cream_sundae,
-                title = "Ice Cream Sundae",
-                price = "199",
-                restaurantName = "Frozen Treats",
-                rating = "4.6",
-                deliveryTime = "25-30 mins",
-                distance = "1.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Cool Plaza, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_rasmalai_1,
-                title = "Rasmalai",
-                price = "249",
-                restaurantName = "Bengal Sweets",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "2.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Eastern Avenue, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_brownie,
-                title = "Chocolate Brownie",
-                price = "179",
-                restaurantName = "Bake House",
-                rating = "4.5",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Baker Street, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_jalebi_1,
-                title = "Crispy Jalebi",
-                price = "129",
-                restaurantName = "Street Sweets",
-                rating = "4.4",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "0%",
-                discountAmount = "₹20",
-                address = "Food Court, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED SWEETS DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -6020,328 +5957,209 @@ fun SweetsPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = sweetsDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Sweets Diet items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SWEETS_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_indian_sweets),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Sweets Diet items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED SWEETS DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-
-    val sweetsDietItems = listOf(
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.sweets_diet_1,
-            title = "Date & Nut Energy Balls",
-            price = "199",
-            restaurantName = "Sweet Greens",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Health Street, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.sweets_diet_2,
-            title = "Dark Chocolate Berry Cups",
-            price = "249",
-            restaurantName = "Pure Indulgence",
-            rating = "4.8",
-            deliveryTime = "18-24 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sweet Corner, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.sweets_diet_3,
-            title = "Chia Seed Pudding",
-            price = "179",
-            restaurantName = "Healthy Treats",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Ave, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.sweets_diet_4,
-            title = "Almond Butter Brownie",
-            price = "219",
-            restaurantName = "Guilt-Free Bakes",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bakery Lane, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.sweets_diet_5,
-            title = "Frozen Yogurt Berry Bowl",
-            price = "189",
-            restaurantName = "Yogurt World",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Dessert Hub, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.sweets_diet_6,
-            title = "Raw Vegan Cheesecake",
-            price = "299",
-            restaurantName = "Raw Earth",
-            rating = "4.9",
-            deliveryTime = "22-28 mins",
-            distance = "1.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Organic Market, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.sweets_diet_7,
-            title = "Coconut Ladoo (Sugar-Free)",
-            price = "149",
-            restaurantName = "Indian Roots",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old Delhi Street",
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.sweets_diet_8,
-            title = "Dark Chocolate Almond Bar",
-            price = "169",
-            restaurantName = "Choco Fit",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Chocolate Square, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.sweets_diet_9,
-            title = "Fruit Sorbet Cup",
-            price = "139",
-            restaurantName = "Frozen Bliss",
-            rating = "4.6",
-            deliveryTime = "10-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Market Street, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.sweets_diet_10,
-            title = "Peanut Butter Protein Cups",
-            price = "229",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "18-24 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fitness Hub, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.sweets_diet_11,
-            title = "Mango Sticky Rice (Light)",
-            price = "259",
-            restaurantName = "Thai Delight",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "1.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Asian Plaza, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.sweets_diet_12,
-            title = "Gluten-Free Banana Bread",
-            price = "189",
-            restaurantName = "Healthy Bakes",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bakery Street, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.sweets_diet_13,
-            title = "Matcha Green Tea Mousse",
-            price = "279",
-            restaurantName = "Zen Desserts",
-            rating = "4.9",
-            deliveryTime = "18-24 mins",
-            distance = "1.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Tea District, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.sweets_diet_14,
-            title = "Roasted Chickpea Sweets",
-            price = "129",
-            restaurantName = "Munch Healthy",
-            rating = "4.6",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Snack Corner, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.sweets_diet_15,
-            title = "Berry Compote with Granola",
-            price = "209",
-            restaurantName = "Morning Fresh",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Breakfast Blvd, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.sweets_diet_16,
-            title = "Kheer (Low-Fat Rice Pudding)",
-            price = "169",
-            restaurantName = "Desi Delights",
-            rating = "4.7",
-            deliveryTime = "18-24 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Spice Market, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.sweets_diet_17,
-            title = "Chocolate Avocado Mousse",
-            price = "239",
-            restaurantName = "Pure Indulgence",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Healthy Ave, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.sweets_diet_18,
-            title = "Fig & Honey Energy Bar",
-            price = "159",
-            restaurantName = "Nature's Basket",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Organic Lane, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.sweets_diet_19,
-            title = "Watermelon Granita",
-            price = "119",
-            restaurantName = "Summer Cool",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Beach Road, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.sweets_diet_20,
-            title = "Assorted Diet Dessert Box",
-            price = "449",
-            restaurantName = "Dessert Studio",
-            rating = "4.9",
-            deliveryTime = "22-28 mins",
-            distance = "2.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gourmet Street, Delhi"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        sweetsDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Sweets Diet restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SWEETS_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_indian_sweets),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Sweets Diet restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

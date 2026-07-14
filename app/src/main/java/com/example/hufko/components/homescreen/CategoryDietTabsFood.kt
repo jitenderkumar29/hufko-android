@@ -945,7 +945,7 @@ fun CategoryDietTabsFood(
             DietCategoryPage.Khichdi -> KhichdiPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Sundae -> SundaePage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Juice -> JuicePage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.Lassi -> LassiPage()
+            DietCategoryPage.Lassi -> LassiPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.CurdRice -> CurdRicePage()
             DietCategoryPage.Pudding -> PuddingPage()
             DietCategoryPage.Custard -> CustardPage()
@@ -7638,12 +7638,28 @@ fun JuicePage(
 }
 
 @Composable
-fun LassiPage() {
+fun LassiPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for LASSI_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: LASSI_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("LASSI_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("LASSI_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button - Same filters as before
         val lassiDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -7908,6 +7924,7 @@ fun LassiPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = lassiDietFilters,
             onFilterClick = { filter ->
@@ -7919,88 +7936,10 @@ fun LassiPage() {
                 // Handle sort logic
             }
         )
-        // Sample data with all fields
-        val lassiDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_sweet_lassi_2,  // Creamy white lassi in glass with malai topping
-                title = "Classic Sweet Lassi",
-                price = "89",
-                restaurantName = "Punjabi Dhaba",
-                rating = "4.9",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Old Market Road, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_mango_lassi_1,  // Yellow-orange mango lassi with mango pieces
-                title = "Royal Mango Lassi",
-                price = "129",
-                restaurantName = "Mango Grove",
-                rating = "4.9",
-                deliveryTime = "12-18 mins",
-                distance = "0.8 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Fruit Market, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_salted_lassi_1,  // White lassi with cumin and black salt
-                title = "Masala Salted Lassi",
-                price = "99",
-                restaurantName = "Haldiram's Corner",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Chowk Bazaar, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_dry_fruit_lassi_1,  // Thick lassi loaded with dry fruits
-                title = "Kaju Pista Delight",
-                price = "159",
-                restaurantName = "Royal Sweets",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Sweets Gallery, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_rose_lassi_1,  // Pink lassi with rose petals
-                title = "Gulabi Rose Lassi",
-                price = "119",
-                restaurantName = "Flavors of Awadh",
-                rating = "4.8",
-                deliveryTime = "12-17 mins",
-                distance = "0.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Old City, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_bhang_lassi,  // Greenish lassi with special herbs
-                title = "Special Bhang Lassi",
-                price = "199",
-                restaurantName = "Blue Lassi Cafe",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "1.5 km",
-                discount = "5%",
-                discountAmount = "₹20",
-                address = "River Side, Delhi",
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED LASSI DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -8008,336 +7947,209 @@ fun LassiPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = lassiDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Lassi items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("LASSI_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_sweet_lassi),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Lassi items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED LASSI DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val lassiDietItems = listOf(
-        // 1-5: CLASSIC & SWEET LASSI VARIETIES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.lassi_diet_1,
-            title = "Punjabi Sweet Lassi",
-            price = "89",
-            restaurantName = "Amritsari Dhaba",
-            rating = "4.9",
-            deliveryTime = "10-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old Market Road, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.lassi_diet_2,
-            title = "Malai Makkhan Lassi",
-            price = "119",
-            restaurantName = "Desi Tadka",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Village Square, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.lassi_diet_3,
-            title = "Kesar Elaichi Lassi",
-            price = "149",
-            restaurantName = "Royal Lassi House",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Palace Road, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.lassi_diet_4,
-            title = "Rose Gulabi Lassi",
-            price = "129",
-            restaurantName = "Flavors of Awadh",
-            rating = "4.8",
-            deliveryTime = "12-17 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old City, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.lassi_diet_5,
-            title = "Honey Almond Lassi",
-            price = "159",
-            restaurantName = "Pure Desi Ghee",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sweet Market, Delhi"
-        ),
-
-        // 6-10: FRUIT LASSI VARIETIES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.lassi_diet_6,
-            title = "Royal Mango Lassi",
-            price = "139",
-            restaurantName = "Mango Grove",
-            rating = "4.9",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fruit Market, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.lassi_diet_7,
-            title = "Strawberry Cream Lassi",
-            price = "149",
-            restaurantName = "Berry Blast",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Berry Gardens, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.lassi_diet_8,
-            title = "Banana Protein Lassi",
-            price = "129",
-            restaurantName = "Health Hub",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fitness Street, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.lassi_diet_9,
-            title = "Lychee Rose Lassi",
-            price = "159",
-            restaurantName = "Exotic Flavors",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gourmet Lane, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.lassi_diet_10,
-            title = "Sitaphal (Custard Apple) Lassi",
-            price = "169",
-            restaurantName = "Seasonal Specials",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fruit Bazaar, Delhi"
-        ),
-
-        // 11-15: SALTED & MASALA LASSI
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.lassi_diet_11,
-            title = "Masala Salted Lassi",
-            price = "99",
-            restaurantName = "Haldiram's Corner",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Chowk Bazaar, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.lassi_diet_12,
-            title = "Jeera Pudina Lassi",
-            price = "109",
-            restaurantName = "Fresh & Cool",
-            rating = "4.7",
-            deliveryTime = "8-12 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Herb Garden, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.lassi_diet_13,
-            title = "Black Salt Cumin Lassi",
-            price = "99",
-            restaurantName = "Street Food King",
-            rating = "4.8",
-            deliveryTime = "5-10 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Food Street, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.lassi_diet_14,
-            title = "Green Chilli Ginger Lassi",
-            price = "119",
-            restaurantName = "Spicy Desi",
-            rating = "4.6",
-            deliveryTime = "10-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Spice Market, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.lassi_diet_15,
-            title = "Roasted Cumin Lassi",
-            price = "109",
-            restaurantName = "Traditional Tastes",
-            rating = "4.7",
-            deliveryTime = "8-12 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old Delhi, Delhi"
-        ),
-
-        // 16-18: DRY FRUIT & RICH LASSI
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.lassi_diet_16,
-            title = "Kaju Pista Badam Lassi",
-            price = "189",
-            restaurantName = "Royal Sweets",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sweets Gallery, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.lassi_diet_17,
-            title = "Charoli Chironji Lassi",
-            price = "179",
-            restaurantName = "Heritage Foods",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Traditional Market, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.lassi_diet_18,
-            title = "Dates & Walnut Lassi",
-            price = "169",
-            restaurantName = "Healthy Indulgence",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Street, Delhi"
-        ),
-
-        // 19-20: SPECIALTY & FUSION LASSI
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.lassi_diet_19,
-            title = "Saffron Pista Lassi",
-            price = "199",
-            restaurantName = "Lucknowi Zaika",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Nawab Street, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.lassi_diet_20,
-            title = "Grand Lassi Platter",
-            price = "349",
-            restaurantName = "Lassi Mahal",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gourmet Street, Delhi",
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        lassiDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Lassi restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("LASSI_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_sweet_lassi),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Lassi restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

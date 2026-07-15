@@ -946,9 +946,9 @@ fun CategoryDietTabsFood(
             DietCategoryPage.Sundae -> SundaePage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Juice -> JuicePage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Lassi -> LassiPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.CurdRice -> CurdRicePage()
-            DietCategoryPage.Pudding -> PuddingPage()
-            DietCategoryPage.Custard -> CustardPage()
+            DietCategoryPage.CurdRice -> CurdRicePage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.Pudding -> PuddingPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.Custard -> CustardPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Soup -> SoupDietPage()
             DietCategoryPage.Brownie -> BrowniePage()
             DietCategoryPage.Waffles -> WafflesPage()
@@ -8155,12 +8155,28 @@ fun LassiPage(
 }
 
 @Composable
-fun CurdRicePage() {
+fun CurdRicePage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CURD_RICE_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CURD_RICE_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("CURD_RICE_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CURD_RICE_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button - Same filters as before
         val curdRiceDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -8177,31 +8193,31 @@ fun CurdRicePage() {
                     id = "south_indian_curd_rice",
                     text = "South Indian Curd Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_south_indian_curd_rice  // Traditional south indian bowl with curry leaves
+                    icon = R.drawable.ic_south_indian_curd_rice
                 ),
                 FilterChip(
                     id = "north_indian_dahi_chawal",
                     text = "North Indian Dahi Chawal",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_dahi_chawal  // North indian style with raita consistency
+                    icon = R.drawable.ic_dahi_chawal
                 ),
                 FilterChip(
                     id = "tempered_curd_rice",
                     text = "Tempered Curd Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_tempered_curd_rice  // Tadka/seasoning icon with mustard seeds
+                    icon = R.drawable.ic_tempered_curd_rice
                 ),
                 FilterChip(
                     id = "fruit_curd_rice",
                     text = "Fruit Curd Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_fruit_curd_rice  // Mixed fruits with yogurt
+                    icon = R.drawable.ic_fruit_curd_rice
                 ),
                 FilterChip(
                     id = "vegetable_curd_rice",
                     text = "Vegetable Curd Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_vegetable_curd_rice  // Mixed veggies with yogurt
+                    icon = R.drawable.ic_vegetable_curd_rice
                 ),
 
                 // 3. RICE VARIETIES (TEXT ONLY)
@@ -8551,6 +8567,7 @@ fun CurdRicePage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = curdRiceDietFilters,
             onFilterClick = { filter ->
@@ -8562,88 +8579,10 @@ fun CurdRicePage() {
                 // Handle sort logic
             }
         )
-        // Sample data with all fields
-        val curdRiceDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_south_indian_curd_rice_1,  // White curd rice in banana leaf with curry leaves tempering
-                title = "South Indian Curd Rice",
-                price = "99",
-                restaurantName = "Madras Cafe",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Triplicane, Chennai"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_tempered_curd_rice_1,  // Curd rice with mustard seeds, curry leaves, red chilli tempering on top
-                title = "Tempered Curd Rice",
-                price = "109",
-                restaurantName = "Saravana Bhavan",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "T. Nagar, Chennai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_fruit_curd_rice_1,  // Curd rice with pomegranate, grapes, apple pieces
-                title = "Fruit Curd Rice",
-                price = "129",
-                restaurantName = "Fruitful Bowl",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Fruit Market, Chennai"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_vegetable_curd_rice_1,  // Curd rice with carrot, cucumber, grated vegetables
-                title = "Vegetable Curd Rice",
-                price = "119",
-                restaurantName = "Green Kitchen",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Vegetable Market, Chennai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_dahi_chawal_1,  // North Indian style dahi chawal with raita consistency and boondi
-                title = "North Indian Dahi Chawal",
-                price = "109",
-                restaurantName = "Haldiram's",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Chandni Chowk, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_andhra_curd_rice_1,  // Spicier version with green chillies, ginger, and curry leaves
-                title = "Andhra Perugu Annam",
-                price = "119",
-                restaurantName = "Andhra Mess",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Andhra Colony, Chennai",
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED CURD RICE DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -8651,347 +8590,236 @@ fun CurdRicePage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = curdRiceDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Curd Rice items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CURD_RICE_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_south_indian_curd_rice),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Curd Rice items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED CURD RICE DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val curdRiceDietItems = listOf(
-        // 1-5: CLASSIC CURD RICE VARIETIES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.curd_rice_diet_1,
-            title = "Traditional South Indian Curd Rice",
-            price = "99",
-            restaurantName = "Madras Cafe",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Triplicane High Road, Chennai"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.curd_rice_diet_2,
-            title = "Kalyana Veetu Curd Rice",
-            price = "129",
-            restaurantName = "Kalyana Bhavan",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Marriage Road, Madurai"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.curd_rice_diet_3,
-            title = "Temple Style Curd Rice",
-            price = "89",
-            restaurantName = "Annapoorna Mess",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Temple Street, Trichy"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.curd_rice_diet_4,
-            title = "Grandmother's Recipe Curd Rice",
-            price = "119",
-            restaurantName = "Paati's Kitchen",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Residential Colony, Coimbatore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.curd_rice_diet_5,
-            title = "Simple Homestyle Curd Rice",
-            price = "79",
-            restaurantName = "Home Food Express",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gandhi Nagar, Bangalore"
-        ),
-
-        // 6-10: FLAVORED & TEMPERED CURD RICE
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.curd_rice_diet_6,
-            title = "Pomegranate Curd Rice",
-            price = "149",
-            restaurantName = "Fusion Foods",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fruit Market, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.curd_rice_diet_7,
-            title = "Mango Curd Rice",
-            price = "159",
-            restaurantName = "Seasonal Delights",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mango Garden, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.curd_rice_diet_8,
-            title = "Jeera Tadka Curd Rice",
-            price = "109",
-            restaurantName = "Spice Junction",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Spice Market, Chennai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.curd_rice_diet_9,
-            title = "Mustard & Curry Leaf Curd Rice",
-            price = "119",
-            restaurantName = "South Indian Tiffins",
-            rating = "4.8",
-            deliveryTime = "12-17 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mylapore, Chennai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.curd_rice_diet_10,
-            title = "Ginger & Green Chilli Curd Rice",
-            price = "129",
-            restaurantName = "Spicy Treat",
-            rating = "4.6",
-            deliveryTime = "12-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-
-        // 11-15: HEALTHY & DIET CURD RICE
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.curd_rice_diet_11,
-            title = "Brown Rice Curd Rice",
-            price = "149",
-            restaurantName = "Healthy Bites",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Colony, Pune"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.curd_rice_diet_12,
-            title = "Low Fat Greek Yogurt Rice",
-            price = "169",
-            restaurantName = "Fit Food Kitchen",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fitness Street, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.curd_rice_diet_13,
-            title = "Quinoa Curd Rice",
-            price = "189",
-            restaurantName = "Modern Healthy",
-            rating = "4.7",
-            deliveryTime = "18-22 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Health Hub, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.curd_rice_diet_14,
-            title = "Millet Curd Rice",
-            price = "159",
-            restaurantName = "Organic Valley",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Organic Market, Mysore"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.curd_rice_diet_15,
-            title = "Protein Rich Curd Rice with Nuts",
-            price = "199",
-            restaurantName = "Power Bowls",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sports Complex, Bangalore"
-        ),
-
-        // 16-18: DRY FRUIT & RICH CURD RICE
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.curd_rice_diet_16,
-            title = "Cashew & Raisin Curd Rice",
-            price = "179",
-            restaurantName = "Royal South Indian",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.curd_rice_diet_17,
-            title = "Badam Pista Curd Rice",
-            price = "189",
-            restaurantName = "Heritage Taste",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old City, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.curd_rice_diet_18,
-            title = "Dates & Walnut Curd Rice",
-            price = "199",
-            restaurantName = "Nutri Bowl",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Green Park, Delhi"
-        ),
-
-        // 19-20: SPECIALTY & COMBO CURD RICE
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.curd_rice_diet_19,
-            title = "Curd Rice with Papad & Pickle",
-            price = "149",
-            restaurantName = "Complete Meal",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Food Court, Chennai"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.curd_rice_diet_20,
-            title = "Grand Curd Rice Thali",
-            price = "299",
-            restaurantName = "Bharatiya Rasoi",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "2.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Thali Village, Bangalore"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        curdRiceDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Curd Rice restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CURD_RICE_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_south_indian_curd_rice),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Curd Rice restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun PuddingPage() {
+fun PuddingPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for PUDDING_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PUDDING_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("PUDDING_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PUDDING_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button - Same filters as before
         val puddingDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -9008,33 +8836,34 @@ fun PuddingPage() {
                     id = "rice_pudding_kheer",
                     text = "Rice Pudding (Kheer)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_rice_pudding_diet  // Traditional kheer bowl with rice grains
+                    icon = R.drawable.ic_rice_pudding_diet
                 ),
                 FilterChip(
                     id = "bread_pudding",
                     text = "Bread Pudding",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_bread_pudding_diet  // Bread cubes in custard
+                    icon = R.drawable.ic_bread_pudding_diet
                 ),
                 FilterChip(
                     id = "chocolate_pudding",
                     text = "Chocolate Pudding",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_chocolate_pudding_diet  // Chocolate dessert cup
+                    icon = R.drawable.ic_chocolate_pudding_diet
                 ),
                 FilterChip(
                     id = "caramel_pudding",
                     text = "Caramel Pudding (Flan)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_caramel_pudding_diet  // Caramel custard with sauce
+                    icon = R.drawable.ic_caramel_pudding_diet
                 ),
                 FilterChip(
                     id = "tapioca_pudding",
                     text = "Tapioca Pudding (Sabudana Kheer)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_tapioca_pudding_diet  // Sabudana pearls in milk
+                    icon = R.drawable.ic_tapioca_pudding_diet
                 ),
-                // 4. BASE INGREDIENTS (TEXT ONLY)
+
+                // 3. BASE INGREDIENTS (TEXT ONLY)
                 FilterChip(
                     id = "milk_pudding",
                     text = "Milk-Based",
@@ -9065,7 +8894,8 @@ fun PuddingPage() {
                     text = "Gelatin Set",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 6. INTERNATIONAL PUDDINGS (TEXT ONLY)
+
+                // 4. INTERNATIONAL PUDDINGS (TEXT ONLY)
                 FilterChip(
                     id = "english_pudding",
                     text = "English Pudding",
@@ -9092,7 +8922,7 @@ fun PuddingPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 7. FLAVOR PROFILES (TEXT ONLY)
+                // 5. FLAVOR PROFILES (TEXT ONLY)
                 FilterChip(
                     id = "vanilla_pudding",
                     text = "Vanilla",
@@ -9129,7 +8959,7 @@ fun PuddingPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 8. NUTS & DRY FRUITS (TEXT ONLY)
+                // 6. NUTS & DRY FRUITS (TEXT ONLY)
                 FilterChip(
                     id = "almond_pudding",
                     text = "Almonds (Badam)",
@@ -9155,7 +8985,8 @@ fun PuddingPage() {
                     text = "Raisins (Kishmish)",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 10. DIETARY PREFERENCES (TEXT ONLY)
+
+                // 7. DIETARY PREFERENCES (TEXT ONLY)
                 FilterChip(
                     id = "vegan_pudding",
                     text = "Vegan (Plant-Based)",
@@ -9187,7 +9018,7 @@ fun PuddingPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 11. OCCASION/PURPOSE (TEXT ONLY)
+                // 8. OCCASION/PURPOSE (TEXT ONLY)
                 FilterChip(
                     id = "festival_sweet",
                     text = "Festival Special",
@@ -9219,7 +9050,7 @@ fun PuddingPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 12. TEXTURE PREFERENCES (TEXT ONLY)
+                // 9. TEXTURE PREFERENCES (TEXT ONLY)
                 FilterChip(
                     id = "creamy_pudding",
                     text = "Creamy",
@@ -9261,7 +9092,7 @@ fun PuddingPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 13. TEMPERATURE (TEXT ONLY)
+                // 10. TEMPERATURE (TEXT ONLY)
                 FilterChip(
                     id = "hot_pudding",
                     text = "Hot/Served Warm",
@@ -9278,7 +9109,7 @@ fun PuddingPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 14. SERVING SIZE (TEXT ONLY)
+                // 11. SERVING SIZE (TEXT ONLY)
                 FilterChip(
                     id = "individual_pudding",
                     text = "Individual Cup",
@@ -9300,7 +9131,7 @@ fun PuddingPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 15. PRICE RANGE (TEXT ONLY)
+                // 12. PRICE RANGE (TEXT ONLY)
                 FilterChip(
                     id = "under_80_pudding",
                     text = "Under ₹80",
@@ -9322,7 +9153,7 @@ fun PuddingPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 16. SORT BY DROPDOWN
+                // 13. SORT BY DROPDOWN
                 FilterChip(
                     id = "sort_by",
                     text = "Sort By",
@@ -9332,6 +9163,7 @@ fun PuddingPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = puddingDietFilters,
             onFilterClick = { filter ->
@@ -9343,88 +9175,10 @@ fun PuddingPage() {
                 // Handle sort logic
             }
         )
-        // Sample data with all fields
-        val puddingDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_rice_kheer_1,  // Traditional rice kheer in clay pot with nuts and saffron
-                title = "Traditional Rice Kheer",
-                price = "89",
-                restaurantName = "Mishram Sweets",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Chandni Chowk, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_bread_pudding_1,  // Shahi tukda style bread pudding with nuts and rabri
-                title = "Shahi Bread Pudding",
-                price = "149",
-                restaurantName = "Royal Desserts",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_caramel_custard_1,  // Caramel flan with golden caramel sauce on top
-                title = "Caramel Custard",
-                price = "129",
-                restaurantName = "Flan House",
-                rating = "4.7",
-                deliveryTime = "10-15 mins",
-                distance = "0.8 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_seviyan_kheer_1,  // Vermicelli kheer with nuts and cardamom
-                title = "Seviyan Kheer",
-                price = "99",
-                restaurantName = "Lucknawi Zaika",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Old Lucknow, Lucknow"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_mango_pudding_1,  // Mango pudding with fresh mango pieces
-                title = "Mango Pudding",
-                price = "139",
-                restaurantName = "Mango Mania",
-                rating = "4.9",
-                deliveryTime = "12-18 mins",
-                distance = "0.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Fruit Market, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_chocolate_pudding_1,  // Rich chocolate pudding with chocolate shavings
-                title = "Belgian Chocolate Pudding",
-                price = "159",
-                restaurantName = "Chocolate Room",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED PUDDING DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -9432,347 +9186,236 @@ fun PuddingPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = puddingDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Pudding items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PUDDING_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_rice_pudding_diet),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Pudding items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED PUDDING DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val puddingDietItems = listOf(
-        // 1-5: CLASSIC INDIAN PUDDINGS (KHEER & PAYASAM)
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.pudding_diet_1,
-            title = "Traditional Rice Kheer",
-            price = "99",
-            restaurantName = "Mishram Sweets",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Chandni Chowk, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.pudding_diet_2,
-            title = "Semiya Payasam (Vermicelli Pudding)",
-            price = "109",
-            restaurantName = "Kerala Kitchen",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fort Kochi, Kerala"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.pudding_diet_3,
-            title = "Phirni (Clay Pot Rice Pudding)",
-            price = "119",
-            restaurantName = "Mughal Darbar",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old Delhi, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.pudding_diet_4,
-            title = "Paradha Payasam (South Indian Kheer)",
-            price = "129",
-            restaurantName = "Temple Bhavan",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Guruvayur, Kerala"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.pudding_diet_5,
-            title = "Doodh Pak (Slow-Cooked Rice Pudding)",
-            price = "139",
-            restaurantName = "Royal Thali",
-            rating = "4.9",
-            deliveryTime = "18-22 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Palace Road, Jaipur"
-        ),
-
-        // 6-10: BREAD & MILK PUDDINGS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.pudding_diet_6,
-            title = "Shahi Tukda (Bread Pudding)",
-            price = "149",
-            restaurantName = "Lucknawi Zaika",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Hazratganj, Lucknow"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.pudding_diet_7,
-            title = "Double Ka Meetha (Hyderabadi Bread Pudding)",
-            price = "159",
-            restaurantName = "Nizam's Kitchen",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old City, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.pudding_diet_8,
-            title = "Caramel Custard Pudding",
-            price = "129",
-            restaurantName = "Flan House",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.pudding_diet_9,
-            title = "Bread & Butter Pudding",
-            price = "139",
-            restaurantName = "Anglo Indian Cafe",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Park Street, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.pudding_diet_10,
-            title = "Malai Rabri Pudding",
-            price = "169",
-            restaurantName = "Sweets Corner",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-
-        // 11-15: FRUIT & FLAVORED PUDDINGS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.pudding_diet_11,
-            title = "Mango Phirni",
-            price = "159",
-            restaurantName = "Mango Mania",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fruit Market, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.pudding_diet_12,
-            title = "Strawberry Cream Pudding",
-            price = "169",
-            restaurantName = "Berry Bliss",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Berry Gardens, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.pudding_diet_13,
-            title = "Chikoo (Sapota) Pudding",
-            price = "149",
-            restaurantName = "Seasonal Delights",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Maharashtra Market, Pune"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.pudding_diet_14,
-            title = "Sitaphal (Custard Apple) Kheer",
-            price = "179",
-            restaurantName = "Exotic Flavors",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fruit Bazaar, Chennai"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.pudding_diet_15,
-            title = "Jackfruit Payasam",
-            price = "169",
-            restaurantName = "Coastal Kitchen",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "1.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Mangalore, Karnataka"
-        ),
-
-        // 16-18: NUTS & DRY FRUIT PUDDINGS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.pudding_diet_16,
-            title = "Badam (Almond) Kheer",
-            price = "189",
-            restaurantName = "Nut House",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.pudding_diet_17,
-            title = "Pista (Pistachio) Phirni",
-            price = "199",
-            restaurantName = "Royal Sweets",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.pudding_diet_18,
-            title = "Kaju (Cashew) & Kesari Pudding",
-            price = "209",
-            restaurantName = "Heritage Taste",
-            rating = "4.9",
-            deliveryTime = "18-22 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old City, Hyderabad"
-        ),
-
-        // 19-20: SPECIALTY & DIET PUDDINGS
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.pudding_diet_19,
-            title = "Sabudana (Tapioca) Kheer",
-            price = "129",
-            restaurantName = "Healthy Indulgence",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Street, Pune"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.pudding_diet_20,
-            title = "Sugar-Free Kesar Pudding",
-            price = "179",
-            restaurantName = "Diet Desserts",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fitness Street, Mumbai"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        puddingDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Pudding restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PUDDING_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_rice_pudding_diet),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Pudding restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun CustardPage() {
+fun CustardPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CUSTARD_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CUSTARD_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("CUSTARD_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CUSTARD_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button - Same filters as before
         val custardDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -10126,99 +9769,22 @@ fun CustardPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = custardDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val custardDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_custard_1,  // Classic vanilla custard in a dessert bowl with nutmeg sprinkle
-                title = "Classic Vanilla Custard",
-                price = "79",
-                restaurantName = "Dessert House",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_mixed_fruit_custard_1,  // Mixed fruit custard with apple, banana, pomegranate and grapes
-                title = "Mixed Fruit Custard",
-                price = "119",
-                restaurantName = "Fruit Bowl",
-                rating = "4.9",
-                deliveryTime = "12-18 mins",
-                distance = "0.8 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Fruit Market, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_caramel_custard_2,  // Caramel custard flan with golden caramel sauce and cream
-                title = "Caramel Custard Flan",
-                price = "129",
-                restaurantName = "Flan House",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_mango_custard_1,  // Mango custard with fresh mango slices and mint garnish
-                title = "Alphonso Mango Custard",
-                price = "139",
-                restaurantName = "Mango Mania",
-                rating = "4.9",
-                deliveryTime = "12-18 mins",
-                distance = "1.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_baked_custard_1,  // Baked custard with caramelized top and berry compote
-                title = "Baked Egg Custard",
-                price = "109",
-                restaurantName = "Bake House",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Park Street, Kolkata"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_strawberry_custard_1,  // Strawberry custard with fresh strawberry pieces
-                title = "Strawberry Cream Custard",
-                price = "129",
-                restaurantName = "Berry Bliss",
-                rating = "4.8",
-                deliveryTime = "12-18 mins",
-                distance = "1.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Berry Gardens, Bangalore"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED CUSTARD DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -10226,336 +9792,209 @@ fun CustardPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = custardDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Custard items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CUSTARD_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_custard_diet),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Custard items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED CUSTARD DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val custardDietItems = listOf(
-        // 1-5: CLASSIC CUSTARD VARIETIES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.custard_diet_1,
-            title = "Classic Vanilla Custard",
-            price = "79",
-            restaurantName = "Dessert House",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.custard_diet_2,
-            title = "Eggless Vanilla Custard",
-            price = "89",
-            restaurantName = "Pure Veg Sweets",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Marine Lines, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.custard_diet_3,
-            title = "Caramel Custard Flan",
-            price = "129",
-            restaurantName = "Flan House",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.custard_diet_4,
-            title = "Baked Egg Custard",
-            price = "109",
-            restaurantName = "Bake House",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Park Street, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.custard_diet_5,
-            title = "Steamed Custard Pudding",
-            price = "99",
-            restaurantName = "Steam Kitchen",
-            rating = "4.6",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-
-        // 6-10: FRUIT CUSTARDS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.custard_diet_6,
-            title = "Mixed Fruit Custard",
-            price = "119",
-            restaurantName = "Fruit Bowl",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Fruit Market, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.custard_diet_7,
-            title = "Alphonso Mango Custard",
-            price = "139",
-            restaurantName = "Mango Mania",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.custard_diet_8,
-            title = "Strawberry Cream Custard",
-            price = "129",
-            restaurantName = "Berry Bliss",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Berry Gardens, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.custard_diet_9,
-            title = "Banana Walnut Custard",
-            price = "109",
-            restaurantName = "Healthy Treats",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Wellness Street, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.custard_diet_10,
-            title = "Baked Apple Custard",
-            price = "119",
-            restaurantName = "Apple Orchard",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Shimla Hills, Delhi"
-        ),
-
-        // 11-15: FLAVORED CUSTARDS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.custard_diet_11,
-            title = "Rich Chocolate Custard",
-            price = "139",
-            restaurantName = "Chocolate Room",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.custard_diet_12,
-            title = "Butterscotch Crunch Custard",
-            price = "129",
-            restaurantName = "Sweet Tooth",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.custard_diet_13,
-            title = "Pista (Pistachio) Custard",
-            price = "149",
-            restaurantName = "Royal Sweets",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.custard_diet_14,
-            title = "Badam (Almond) Custard",
-            price = "149",
-            restaurantName = "Nut House",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.custard_diet_15,
-            title = "Kesar (Saffron) Custard",
-            price = "159",
-            restaurantName = "Royal Thali",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Palace Road, Jaipur"
-        ),
-
-        // 16-18: PREMIUM & SPECIALTY CUSTARDS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.custard_diet_16,
-            title = "Tiramisu Custard",
-            price = "169",
-            restaurantName = "Italian Delights",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.custard_diet_17,
-            title = "Coconut Cream Custard",
-            price = "139",
-            restaurantName = "Coastal Flavors",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Marine Drive, Kochi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.custard_diet_18,
-            title = "Coffee Walnut Custard",
-            price = "149",
-            restaurantName = "Cafe Dessert",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Brigade Road, Bangalore"
-        ),
-
-        // 19-20: LAYERED & TRIFLE CUSTARDS
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.custard_diet_19,
-            title = "Fruit Custard Trifle",
-            price = "159",
-            restaurantName = "Trifle House",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Park Street, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.custard_diet_20,
-            title = "Layered Berry Custard",
-            price = "169",
-            restaurantName = "Layered Desserts",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        custardDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Custard restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CUSTARD_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_custard_diet),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Custard restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

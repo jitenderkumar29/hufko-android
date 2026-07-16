@@ -949,10 +949,10 @@ fun CategoryDietTabsFood(
             DietCategoryPage.CurdRice -> CurdRicePage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Pudding -> PuddingPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Custard -> CustardPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.Soup -> SoupDietPage()
-            DietCategoryPage.Brownie -> BrowniePage()
-            DietCategoryPage.Waffles -> WafflesPage()
-            DietCategoryPage.ColdCoffee -> ColdCoffeePage()
+            DietCategoryPage.Soup -> SoupDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.Brownie -> BrowniePage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.Waffles -> WafflesPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.ColdCoffee -> ColdCoffeePage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.GrilledChicken -> GrilledChickenDietPage()
             DietCategoryPage.SteamedFish -> SteamedFishDietPage()
             DietCategoryPage.QuinoaBowl -> QuinoaBowlDietPage()
@@ -10000,12 +10000,28 @@ fun CustardPage(
 }
 
 @Composable
-fun SoupDietPage() {
+fun SoupDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SOUP_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SOUP_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("SOUP_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SOUP_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button - Same filters as before
         val soupDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -10330,99 +10346,22 @@ fun SoupDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = soupDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val soupDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_tomato_soup_1,  // Creamy tomato soup in a bowl with basil leaf and cream swirl
-                title = "Classic Tomato Soup",
-                price = "89",
-                restaurantName = "Soup Symphony",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_chicken_noodle_soup_1,  // Chicken noodle soup with vegetables in clear broth
-                title = "Hearty Chicken Noodle",
-                price = "149",
-                restaurantName = "Brother's Broth",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_cream_of_mushroom_1,  // Cream of mushroom soup with mushroom slices and herbs
-                title = "Cream of Mushroom",
-                price = "119",
-                restaurantName = "The Soup Spoon",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_thai_coconut_soup_1,  // Thai coconut soup (Tom Kha) with lemongrass and mushrooms
-                title = "Thai Coconut Soup",
-                price = "169",
-                restaurantName = "Thai Basil",
-                rating = "4.9",
-                deliveryTime = "18-25 mins",
-                distance = "1.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_mixed_vegetable_soup_1,  // Mixed vegetable soup with carrots, beans, corn in clear broth
-                title = "Garden Vegetable Soup",
-                price = "99",
-                restaurantName = "Green Bowl",
-                rating = "4.8",
-                deliveryTime = "10-15 mins",
-                distance = "0.6 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_lentil_soup_1,  // Hearty lentil soup (dal shorba) with Indian spices
-                title = "Masala Lentil Shorba",
-                price = "109",
-                restaurantName = "Spice Route",
-                rating = "4.8",
-                deliveryTime = "12-18 mins",
-                distance = "0.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Baner, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED SOUP DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -10430,347 +10369,236 @@ fun SoupDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = soupDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Soup items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SOUP_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_vegetable_soup_diet),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Soup items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED SOUP DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val soupDietItems = listOf(
-        // 1-5: CLASSIC & COMFORT SOUPS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.soup_diet_1,
-            title = "Classic Tomato Soup",
-            price = "89",
-            restaurantName = "Soup Symphony",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.soup_diet_2,
-            title = "Cream of Mushroom",
-            price = "119",
-            restaurantName = "The Soup Spoon",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.soup_diet_3,
-            title = "Sweet Corn Vegetable Soup",
-            price = "99",
-            restaurantName = "Wok & Roll",
-            rating = "4.6",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.soup_diet_4,
-            title = "Hot & Sour Soup",
-            price = "109",
-            restaurantName = "Dragon House",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Chinatown, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.soup_diet_5,
-            title = "Manchow Soup",
-            price = "99",
-            restaurantName = "Asian Wok",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-
-        // 6-10: PROTEIN-RICH SOUPS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.soup_diet_6,
-            title = "Hearty Chicken Noodle",
-            price = "149",
-            restaurantName = "Brother's Broth",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.soup_diet_7,
-            title = "Lemon Coriander Chicken",
-            price = "139",
-            restaurantName = "Spice Kitchen",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.soup_diet_8,
-            title = "Mutton Bone Broth",
-            price = "179",
-            restaurantName = "Heritage Taste",
-            rating = "4.9",
-            deliveryTime = "18-25 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Old City, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.soup_diet_9,
-            title = "Egg Drop Soup",
-            price = "89",
-            restaurantName = "Quick Bites",
-            rating = "4.6",
-            deliveryTime = "8-12 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Food Street, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.soup_diet_10,
-            title = "Chicken Clear Soup",
-            price = "119",
-            restaurantName = "Healthy Bowl",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Salt Lake, Kolkata"
-        ),
-
-        // 11-15: INTERNATIONAL & EXOTIC SOUPS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.soup_diet_11,
-            title = "Thai Coconut Soup (Tom Kha)",
-            price = "169",
-            restaurantName = "Thai Basil",
-            rating = "4.9",
-            deliveryTime = "18-25 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.soup_diet_12,
-            title = "Tom Yum Soup",
-            price = "159",
-            restaurantName = "Bangkok Street",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.soup_diet_13,
-            title = "French Onion Soup",
-            price = "149",
-            restaurantName = "Café de Paris",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.soup_diet_14,
-            title = "Minestrone Soup",
-            price = "129",
-            restaurantName = "Italian Garden",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.soup_diet_15,
-            title = "Broccoli Cheddar Soup",
-            price = "139",
-            restaurantName = "American Diner",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-
-        // 16-18: INDIAN STYLE & LENTIL SOUPS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.soup_diet_16,
-            title = "Masala Lentil Shorba",
-            price = "109",
-            restaurantName = "Spice Route",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.soup_diet_17,
-            title = "Tomato Dhaniya Shorba",
-            price = "99",
-            restaurantName = "Punjab Grill",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "CP, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.soup_diet_18,
-            title = "Palak Corn Soup",
-            price = "119",
-            restaurantName = "Green Kitchen",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Civil Lines, Jaipur"
-        ),
-
-        // 19-20: HEALTH & DIET SOUPS
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.soup_diet_19,
-            title = "Keto Chicken Soup",
-            price = "169",
-            restaurantName = "Fit Food Co.",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.soup_diet_20,
-            title = "Detox Green Soup",
-            price = "129",
-            restaurantName = "Healthy Soul",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        soupDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Soup restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SOUP_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_vegetable_soup_diet),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Soup restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun BrowniePage() {
+fun BrowniePage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for BROWNIE_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BROWNIE_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("BROWNIE_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BROWNIE_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button - Same filters as before
         val brownieDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -11103,99 +10931,22 @@ fun BrowniePage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = brownieDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val brownieDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_chocolate_brownie_1,  // Rich, fudgy chocolate brownie with cracked top, dusted with powdered sugar
-                title = "Classic Chocolate Fudge",
-                price = "79",
-                restaurantName = "Brownie House",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Church Street, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_walnut_brownie_1,  // Dark chocolate brownie loaded with crunchy walnut pieces, golden brown crust
-                title = "Crunchy Walnut Brownie",
-                price = "99",
-                restaurantName = "Nutty Baker",
-                rating = "4.8",
-                deliveryTime = "18-25 mins",
-                distance = "0.9 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_blondie_brownie_1,  // Golden vanilla blondie with white chocolate chips and a buttery sheen
-                title = "Caramel Blondie",
-                price = "89",
-                restaurantName = "Blondie's Cafe",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_cheesecake_brownie_1,  // Marbled brownie with creamy cheesecake swirl, creating beautiful patterns
-                title = "Cheesecake Swirl Brownie",
-                price = "129",
-                restaurantName = "The Dessert Story",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.1 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_salted_caramel_brownie_1,  // Rich chocolate brownie drizzled with salted caramel sauce and sea salt flakes
-                title = "Salted Caramel Brownie",
-                price = "119",
-                restaurantName = "Caramel Heaven",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_gluten_free_brownie_1,  // Decadent gluten-free brownie with almond flour texture, rich chocolate chunks visible
-                title = "Gluten-Free Chocolate Brownie",
-                price = "139",
-                restaurantName = "Healthy Bites",
-                rating = "4.8",
-                deliveryTime = "18-25 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Baner, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED BROWNIE DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -11203,347 +10954,236 @@ fun BrowniePage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = brownieDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Brownie items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("BROWNIE_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_chocolate),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Brownie items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED BROWNIE DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val brownieDietItems = listOf(
-        // 1-5: CLASSIC & FUDGY BROWNIES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.brownie_diet_1,
-            title = "Classic Chocolate Fudge Brownie",
-            price = "79",
-            restaurantName = "Brownie House",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Church Street, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.brownie_diet_2,
-            title = "Triple Chocolate Brownie",
-            price = "119",
-            restaurantName = "Chocolate Factory",
-            rating = "4.8",
-            deliveryTime = "18-25 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.brownie_diet_3,
-            title = "Dark Chocolate Sea Salt",
-            price = "99",
-            restaurantName = "Artisan Desserts",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.brownie_diet_4,
-            title = "Belgian Chocolate Brownie",
-            price = "139",
-            restaurantName = "Belgian Waffle Co.",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.brownie_diet_5,
-            title = "Molten Lava Brownie",
-            price = "149",
-            restaurantName = "Lava Cafe",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-
-        // 6-10: NUTTY & CRUNCHY BROWNIES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.brownie_diet_6,
-            title = "Crunchy Walnut Brownie",
-            price = "99",
-            restaurantName = "Nutty Baker",
-            rating = "4.8",
-            deliveryTime = "18-25 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.brownie_diet_7,
-            title = "Pecan Caramel Brownie",
-            price = "129",
-            restaurantName = "Caramel Heaven",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.brownie_diet_8,
-            title = "Almond Chocolate Brownie",
-            price = "109",
-            restaurantName = "Healthy Bites",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.brownie_diet_9,
-            title = "Hazelnut Crunch Brownie",
-            price = "119",
-            restaurantName = "Nutella House",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.brownie_diet_10,
-            title = "Macadamia White Chocolate",
-            price = "149",
-            restaurantName = "Gourmet Treats",
-            rating = "4.9",
-            deliveryTime = "18-25 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-
-        // 11-15: SPECIALTY & SWIRL BROWNIES
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.brownie_diet_11,
-            title = "Cheesecake Swirl Brownie",
-            price = "129",
-            restaurantName = "The Dessert Story",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.brownie_diet_12,
-            title = "Salted Caramel Brownie",
-            price = "119",
-            restaurantName = "Caramel Heaven",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.brownie_diet_13,
-            title = "Peanut Butter Swirl",
-            price = "129",
-            restaurantName = "Peanut Factory",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.brownie_diet_14,
-            title = "Mint Chocolate Brownie",
-            price = "109",
-            restaurantName = "Mint Leaf Cafe",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Salt Lake, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.brownie_diet_15,
-            title = "Coffee Walnut Brownie",
-            price = "99",
-            restaurantName = "Coffee House",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 16-18: DIETARY & HEALTH-CONSCIOUS BROWNIES
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.brownie_diet_16,
-            title = "Gluten-Free Chocolate Brownie",
-            price = "139",
-            restaurantName = "Healthy Bites",
-            rating = "4.8",
-            deliveryTime = "18-25 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.brownie_diet_17,
-            title = "Vegan Walnut Brownie",
-            price = "129",
-            restaurantName = "Green Soul",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.brownie_diet_18,
-            title = "Keto Almond Brownie",
-            price = "159",
-            restaurantName = "Keto Kitchen",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-
-        // 19-20: SEASONAL & PREMIUM BROWNIES
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.brownie_diet_19,
-            title = "Red Velvet Brownie",
-            price = "119",
-            restaurantName = "Velvet Bakery",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.brownie_diet_20,
-            title = "Tiramisu Brownie",
-            price = "149",
-            restaurantName = "Italian Delights",
-            rating = "4.9",
-            deliveryTime = "18-25 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        brownieDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Brownie restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("BROWNIE_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_chocolate),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Brownie restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun WafflesPage() {
+fun WafflesPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for WAFFLES_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: WAFFLES_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("WAFFLES_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("WAFFLES_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button - Same filters as before
         val waffleDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -11894,99 +11534,22 @@ fun WafflesPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = waffleDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val waffleDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_waffle_1,  // Golden brown Belgian waffle with perfect grid pattern, dusted with powdered sugar, served with maple syrup drizzle
-                title = "Classic Belgian Waffle",
-                price = "149",
-                restaurantName = "Waffle House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Brigade Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_liege_waffle_1,  // Caramelized Liège waffle with pearl sugar chunks, irregular golden-brown crust, slightly glossy appearance
-                title = "Authentic Liège Waffle",
-                price = "179",
-                restaurantName = "Belgian Waffle Co.",
-                rating = "4.9",
-                deliveryTime = "12-18 mins",
-                distance = "0.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_chocolate_waffle_1,  // Rich chocolate waffle with chocolate chips, drizzled with melted chocolate, topped with chocolate shavings
-                title = "Double Chocolate Waffle",
-                price = "199",
-                restaurantName = "Chocolate Factory",
-                rating = "4.9",
-                deliveryTime = "18-22 mins",
-                distance = "0.9 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_red_velvet_waffle_1,  // Vibrant red velvet waffle with cream cheese glaze drizzle, white chocolate chips, elegant presentation
-                title = "Red Velvet Cream Cheese Waffle",
-                price = "219",
-                restaurantName = "The Dessert Story",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_strawberry_waffle_1,  // Crispy waffle topped with fresh strawberry slices, strawberry sauce drizzle, whipped cream dollop, mint garnish
-                title = "Strawberry Delight Waffle",
-                price = "189",
-                restaurantName = "Berry Bliss",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_savory_waffle_1,  // Golden savory waffle topped with fried chicken strip, honey butter drizzle, sprinkling of herbs
-                title = "Chicken & Waffle",
-                price = "249",
-                restaurantName = "Savory Bites",
-                rating = "4.8",
-                deliveryTime = "18-25 mins",
-                distance = "1.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Baner, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED WAFFLES DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -11994,345 +11557,236 @@ fun WafflesPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = waffleDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Waffles items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("WAFFLES_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_waffle),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Waffles items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED WAFFLES DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val waffleDietItems = listOf(
-        // 1-5: CLASSIC & BELGIAN WAFFLES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.waffle_diet_1,
-            title = "Classic Belgian Waffle",
-            price = "149",
-            restaurantName = "Waffle House",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Brigade Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.waffle_diet_2,
-            title = "Authentic Liège Waffle",
-            price = "179",
-            restaurantName = "Belgian Waffle Co.",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.waffle_diet_3,
-            title = "Brussels Waffle",
-            price = "159",
-            restaurantName = "European Delights",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.waffle_diet_4,
-            title = "Buttermilk Waffle",
-            price = "139",
-            restaurantName = "Morning Cafe",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.waffle_diet_5,
-            title = "Yeasted Waffle",
-            price = "169",
-            restaurantName = "Artisan Bakery",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-
-        // 6-10: CHOCOLATE & SWEET WAFFLES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.waffle_diet_6,
-            title = "Double Chocolate Waffle",
-            price = "199",
-            restaurantName = "Chocolate Factory",
-            rating = "4.9",
-            deliveryTime = "18-25 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.waffle_diet_7,
-            title = "Nutella Banana Waffle",
-            price = "209",
-            restaurantName = "Nutella House",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.waffle_diet_8,
-            title = "Salted Caramel Waffle",
-            price = "189",
-            restaurantName = "Caramel Heaven",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.waffle_diet_9,
-            title = "White Chocolate Berry",
-            price = "199",
-            restaurantName = "Berry Bliss",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.waffle_diet_10,
-            title = "Red Velvet Waffle",
-            price = "219",
-            restaurantName = "Velvet Bakery",
-            rating = "4.9",
-            deliveryTime = "18-25 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-
-        // 11-15: FRUIT-TOPPED WAFFLES
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.waffle_diet_11,
-            title = "Mixed Berry Waffle",
-            price = "189",
-            restaurantName = "Berry Waffles",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.waffle_diet_12,
-            title = "Strawberry Delight",
-            price = "179",
-            restaurantName = "Strawberry Fields",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.waffle_diet_13,
-            title = "Banana Caramel Waffle",
-            price = "169",
-            restaurantName = "Caramel Heaven",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.waffle_diet_14,
-            title = "Apple Cinnamon Waffle",
-            price = "159",
-            restaurantName = "Cinnamon Cafe",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Salt Lake, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.waffle_diet_15,
-            title = "Peach Melba Waffle",
-            price = "199",
-            restaurantName = "Fruit Paradise",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 16-20: SAVORY & SPECIALTY WAFFLES
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.waffle_diet_16,
-            title = "Chicken & Waffle",
-            price = "249",
-            restaurantName = "Savory Bites",
-            rating = "4.9",
-            deliveryTime = "18-25 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.waffle_diet_17,
-            title = "Bacon Maple Waffle",
-            price = "229",
-            restaurantName = "Breakfast Club",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.waffle_diet_18,
-            title = "Cheese & Herb Waffle",
-            price = "179",
-            restaurantName = "Cheesy Bites",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.waffle_diet_19,
-            title = "Mediterranean Waffle",
-            price = "209",
-            restaurantName = "Olive Kitchen",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.waffle_diet_20,
-            title = "Waffle Ice Cream Sundae",
-            price = "239",
-            restaurantName = "Dessert Parlor",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        waffleDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Waffles restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("WAFFLES_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_waffle),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Waffles restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun ColdCoffeePage() {
+fun ColdCoffeePage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for COLD_COFFEE_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: COLD_COFFEE_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("COLD_COFFEE_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("COLD_COFFEE_DIET", recommended = true)
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
+        // Filter Button - Same filters as before
         val coldCoffeeDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -12735,100 +12189,22 @@ fun ColdCoffeePage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = coldCoffeeDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val coldCoffeeDietItems = listOf(
-            // 1-6: COLD COFFEE VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_iced_coffee_1,  // Tall glass of classic iced coffee with ice cubes, light brown color, topped with a splash of milk, served with a striped straw
-                title = "Classic Iced Coffee",
-                price = "99",
-                restaurantName = "Brew House",
-                rating = "4.7",
-                deliveryTime = "10-15 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Church Street, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_cold_brew_1,  // Dark, smooth cold brew served in a glass with large ice cube, garnished with coffee bean, rich dark brown color
-                title = "Smooth Cold Brew",
-                price = "129",
-                restaurantName = "Cold Brew Co.",
-                rating = "4.9",
-                deliveryTime = "12-18 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_frappe_1,  // Blended frozen coffee frappé with whipped cream topping, chocolate drizzle, caramel sauce streaks on glass
-                title = "Caramel Frappé",
-                price = "159",
-                restaurantName = "Frosty Brew",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_vietnamese_coffee_1,  // Vietnamese iced coffee with traditional phin filter on top, condensed milk layer at bottom, stirred caramel color
-                title = "Vietnamese Iced Coffee",
-                price = "139",
-                restaurantName = "Saigon Cafe",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "1.0 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_mocha_ice_1,  // Iced mocha with chocolate sauce swirls on glass, whipped cream topping, chocolate shavings, dark and light layers
-                title = "Chilled Mocha",
-                price = "149",
-                restaurantName = "Chocolate Cafe",
-                rating = "4.7",
-                deliveryTime = "12-18 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_nitro_cold_brew_1,  // Nitro cold brew cascading in glass with creamy foam head, served from tap, dark stout-like appearance
-                title = "Nitro Cold Brew",
-                price = "179",
-                restaurantName = "Nitro Lab",
-                rating = "4.9",
-                deliveryTime = "10-15 mins",
-                distance = "0.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Baner, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED COLD COFFEE DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -12836,334 +12212,209 @@ fun ColdCoffeePage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = coldCoffeeDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Cold Coffee items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("COLD_COFFEE_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_iced_coffee),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Cold Coffee items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED COLD COFFEE DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val coldCoffeeDietItems = listOf(
-        // 1-5: CLASSIC COLD COFFEE VARIETIES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.cold_coffee_diet_1,
-            title = "Classic Iced Coffee",
-            price = "119",
-            restaurantName = "Coffee House",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.cold_coffee_diet_2,
-            title = "Cold Brew Black",
-            price = "149",
-            restaurantName = "Brew Bros",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.cold_coffee_diet_3,
-            title = "Vanilla Iced Latte",
-            price = "159",
-            restaurantName = "Latte Lounge",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.cold_coffee_diet_4,
-            title = "Caramel Iced Coffee",
-            price = "169",
-            restaurantName = "Caramel Cafe",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Brigade Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.cold_coffee_diet_5,
-            title = "Hazelnut Cold Brew",
-            price = "179",
-            restaurantName = "Nutty Brew",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-
-        // 6-10: SPECIALTY COLD COFFEE
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.cold_coffee_diet_6,
-            title = "Nitro Cold Brew",
-            price = "199",
-            restaurantName = "Nitro Lab",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.cold_coffee_diet_7,
-            title = "Vietnamese Iced Coffee",
-            price = "189",
-            restaurantName = "Saigon Cafe",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.cold_coffee_diet_8,
-            title = "Thai Iced Coffee",
-            price = "179",
-            restaurantName = "Bangkok Street",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.cold_coffee_diet_9,
-            title = "Irish Cold Coffee",
-            price = "209",
-            restaurantName = "Pub & Brew",
-            rating = "4.8",
-            deliveryTime = "18-25 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.cold_coffee_diet_10,
-            title = "Mexican Spiced Cold Brew",
-            price = "189",
-            restaurantName = "Spice Route",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-
-        // 11-15: FROZEN & BLENDED COFFEE
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.cold_coffee_diet_11,
-            title = "Frappé Coffee",
-            price = "169",
-            restaurantName = "Frost Cafe",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Salt Lake, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.cold_coffee_diet_12,
-            title = "Mocha Frappuccino",
-            price = "199",
-            restaurantName = "Chocolate House",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.cold_coffee_diet_13,
-            title = "Caramel Frappé",
-            price = "189",
-            restaurantName = "Caramel Heaven",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.cold_coffee_diet_14,
-            title = "Java Chip Frappé",
-            price = "209",
-            restaurantName = "Coffee Club",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.cold_coffee_diet_15,
-            title = "Cookies & Cream Frappé",
-            price = "199",
-            restaurantName = "Dessert Cafe",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-
-        // 16-20: MILK-BASED & DESSERT COFFEE
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.cold_coffee_diet_16,
-            title = "Iced Latte (Oat Milk)",
-            price = "189",
-            restaurantName = "Plant Brew",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.cold_coffee_diet_17,
-            title = "Iced Almond Milk Latte",
-            price = "179",
-            restaurantName = "Nut Milk Cafe",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.cold_coffee_diet_18,
-            title = "Coconut Cold Brew",
-            price = "199",
-            restaurantName = "Tropical Brews",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.cold_coffee_diet_19,
-            title = "Cold Coffee with Ice Cream",
-            price = "229",
-            restaurantName = "Scoops & Brews",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.cold_coffee_diet_20,
-            title = "Protein Cold Coffee",
-            price = "209",
-            restaurantName = "Fit Fuel",
-            rating = "4.7",
-            deliveryTime = "12-18 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        coldCoffeeDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Cold Coffee restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("COLD_COFFEE_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_iced_coffee),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Cold Coffee restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

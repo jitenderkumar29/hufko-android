@@ -953,9 +953,9 @@ fun CategoryDietTabsFood(
             DietCategoryPage.Brownie -> BrowniePage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Waffles -> WafflesPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.ColdCoffee -> ColdCoffeePage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.GrilledChicken -> GrilledChickenDietPage()
-            DietCategoryPage.SteamedFish -> SteamedFishDietPage()
-            DietCategoryPage.QuinoaBowl -> QuinoaBowlDietPage()
+            DietCategoryPage.GrilledChicken -> GrilledChickenDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.SteamedFish -> SteamedFishDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.QuinoaBowl -> QuinoaBowlDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.AvocadoToast -> AvocadoToastDietPage()
             DietCategoryPage.GreenSmoothie -> GreenSmoothieDietPage()
             DietCategoryPage.Oatmeal -> OatmealDietPage()
@@ -12421,7 +12421,22 @@ fun ColdCoffeePage(
 
 // Additional diet-specific item pages
 @Composable
-fun GrilledChickenDietPage() {
+fun GrilledChickenDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for GRILLED_CHICKEN_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: GRILLED_CHICKEN_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("GRILLED_CHICKEN_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("GRILLED_CHICKEN_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -12443,31 +12458,31 @@ fun GrilledChickenDietPage() {
                     id = "grilled_breast",
                     text = "Grilled Breast",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_grilled_chicken_breast  // Juicy grilled chicken breast with grill marks
+                    icon = R.drawable.ic_grilled_chicken_breast
                 ),
                 FilterChip(
                     id = "grilled_thighs",
                     text = "Grilled Thighs",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_grilled_chicken_thigh  // Tender chicken thigh piece
+                    icon = R.drawable.ic_grilled_chicken_thigh
                 ),
                 FilterChip(
                     id = "chicken_tenders",
                     text = "Chicken Tenders",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_chicken_tenders  // Crispy grilled chicken strips
+                    icon = R.drawable.ic_chicken_tenders
                 ),
                 FilterChip(
                     id = "chicken_skewers",
                     text = "Chicken Skewers",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_chicken_skewers  // Chicken pieces on skewer with grill marks
+                    icon = R.drawable.ic_chicken_skewers
                 ),
                 FilterChip(
                     id = "spatchcock_chicken",
                     text = "Spatchcock",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_spatchcock_chicken  // Butterflied whole chicken
+                    icon = R.drawable.ic_spatchcock_chicken
                 ),
                 // 3. MARINADES & SEASONINGS (TEXT ONLY)
                 FilterChip(
@@ -12820,96 +12835,17 @@ fun GrilledChickenDietPage() {
             filterConfig = grilledChickenDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val grilledChickenDietItems = listOf(
-            // 1-6: GRILLED CHICKEN VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_grilled_chicken_breast_1,  // Juicy grilled chicken breast with perfect grill marks, seasoned with herbs and black pepper, served with a lemon wedge on the side, steam rising from the meat
-                title = "Herb Grilled Chicken Breast",
-                price = "199",
-                restaurantName = "Grill Master",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_grilled_chicken_thighs_1,  // Tender grilled chicken thighs with caramelized edges, glazed with BBQ sauce, garnished with fresh parsley, slightly charred for smoky flavor
-                title = "BBQ Glazed Chicken Thighs",
-                price = "219",
-                restaurantName = "Smoky Grill",
-                rating = "4.9",
-                deliveryTime = "18-22 mins",
-                distance = "0.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_chicken_skewers_1,  // Colorful chicken skewers with bell peppers, red onions, and cherry tomatoes, perfectly charred on the grill, served on a wooden platter with mint chutney
-                title = "Mediterranean Chicken Skewers",
-                price = "189",
-                restaurantName = "Kebab Studio",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_grilled_chicken_wings_1,  // Crispy grilled chicken wings with light char marks, tossed in peri-peri sauce, served with celery sticks and ranch dip on the side
-                title = "Peri-Peri Grilled Wings",
-                price = "179",
-                restaurantName = "Wingstop",
-                rating = "4.8",
-                deliveryTime = "12-18 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Church Street, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_lemon_herb_chicken_1,  // Lemon herb grilled chicken with rosemary sprigs, garlic cloves, and lemon slices, golden brown crispy skin, served on a cast iron skillet
-                title = "Lemon Rosemary Grilled Chicken",
-                price = "229",
-                restaurantName = "Heritage Grill",
-                rating = "4.9",
-                deliveryTime = "18-25 mins",
-                distance = "1.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_tandoori_chicken_1,  // Traditional tandoori chicken with vibrant red color, charred edges, served with onion rings, mint chutney, and lemon wedge on a sizzling platter
-                title = "Tandoori Grilled Chicken",
-                price = "249",
-                restaurantName = "Punjabi Grill",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED GRILLED CHICKEN DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -12917,340 +12853,230 @@ fun GrilledChickenDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = grilledChickenDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Grilled Chicken items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("GRILLED_CHICKEN_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_grilled_chicken_breast),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Grilled Chicken items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED GRILLED CHICKEN DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val grilledChickenDietItems = listOf(
-        // 1-5: CLASSIC GRILLED CHICKEN
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.grilled_chicken_diet_1,
-            title = "Classic Grilled Chicken Breast",
-            price = "249",
-            restaurantName = "Protein House",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.grilled_chicken_diet_2,
-            title = "Lemon Herb Grilled Chicken",
-            price = "269",
-            restaurantName = "Healthy Bites",
-            rating = "4.8",
-            deliveryTime = "22-28 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.grilled_chicken_diet_3,
-            title = "Peri Peri Grilled Chicken",
-            price = "279",
-            restaurantName = "Spice Grill",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.grilled_chicken_diet_4,
-            title = "Garlic Rosemary Chicken",
-            price = "259",
-            restaurantName = "Herb Kitchen",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Brigade Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.grilled_chicken_diet_5,
-            title = "Honey Mustard Grilled Chicken",
-            price = "289",
-            restaurantName = "Sweet & Savory",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-
-        // 6-10: GRILLED CHICKEN WITH VEGETABLES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.grilled_chicken_diet_6,
-            title = "Grilled Chicken with Steamed Veggies",
-            price = "299",
-            restaurantName = "Fresh & Fit",
-            rating = "4.9",
-            deliveryTime = "22-28 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.grilled_chicken_diet_7,
-            title = "Grilled Chicken Salad Bowl",
-            price = "279",
-            restaurantName = "Salad Story",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.grilled_chicken_diet_8,
-            title = "Mediterranean Grilled Chicken",
-            price = "309",
-            restaurantName = "Mediterraneo",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.grilled_chicken_diet_9,
-            title = "Grilled Chicken with Quinoa",
-            price = "319",
-            restaurantName = "Superfood Cafe",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.grilled_chicken_diet_10,
-            title = "Grilled Chicken with Brown Rice",
-            price = "289",
-            restaurantName = "Wholesome Kitchen",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-
-        // 11-15: INTERNATIONAL GRILLED CHICKEN STYLES
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.grilled_chicken_diet_11,
-            title = "Tandoori Grilled Chicken",
-            price = "269",
-            restaurantName = "Tandoori Nights",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Salt Lake, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.grilled_chicken_diet_12,
-            title = "Thai Basil Grilled Chicken",
-            price = "299",
-            restaurantName = "Thai Spice",
-            rating = "4.8",
-            deliveryTime = "22-28 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.grilled_chicken_diet_13,
-            title = "Moroccan Spiced Chicken",
-            price = "309",
-            restaurantName = "Marrakesh Cafe",
-            rating = "4.8",
-            deliveryTime = "25-30 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.grilled_chicken_diet_14,
-            title = "Teriyaki Grilled Chicken",
-            price = "289",
-            restaurantName = "Tokyo Grill",
-            rating = "4.8",
-            deliveryTime = "18-24 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.grilled_chicken_diet_15,
-            title = "Cajun Spiced Grilled Chicken",
-            price = "279",
-            restaurantName = "Louisiana Kitchen",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-
-        // 16-20: DIET-SPECIAL GRILLED CHICKEN
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.grilled_chicken_diet_16,
-            title = "Keto Grilled Chicken Bowl",
-            price = "329",
-            restaurantName = "Keto Kitchen",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.grilled_chicken_diet_17,
-            title = "Paleo Grilled Chicken",
-            price = "319",
-            restaurantName = "Paleo Plate",
-            rating = "4.8",
-            deliveryTime = "22-28 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.grilled_chicken_diet_18,
-            title = "High Protein Grilled Chicken",
-            price = "299",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "18-22 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.grilled_chicken_diet_19,
-            title = "Low Carb Grilled Chicken",
-            price = "289",
-            restaurantName = "Low Carb Life",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.grilled_chicken_diet_20,
-            title = "Grilled Chicken with Avocado",
-            price = "349",
-            restaurantName = "Avocado Factory",
-            rating = "4.9",
-            deliveryTime = "22-28 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        grilledChickenDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Grilled Chicken restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("GRILLED_CHICKEN_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_grilled_chicken_breast),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Grilled Chicken restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun SteamedFishDietPage() {
+fun SteamedFishDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for STEAMED_FISH_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: STEAMED_FISH_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("STEAMED_FISH_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("STEAMED_FISH_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -13272,31 +13098,31 @@ fun SteamedFishDietPage() {
                     id = "sea_bass",
                     text = "Sea Bass",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_sea_bass  // Whole sea bass fish illustration
+                    icon = R.drawable.ic_sea_bass
                 ),
                 FilterChip(
                     id = "salmon_fish",
                     text = "Salmon",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_salmon  // Salmon fish with characteristic pink color
+                    icon = R.drawable.ic_salmon
                 ),
                 FilterChip(
                     id = "tilapia",
                     text = "Tilapia",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_tilapia  // Tilapia fish shape
+                    icon = R.drawable.ic_tilapia
                 ),
                 FilterChip(
                     id = "pomfret",
                     text = "Pomfret",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_pomfret  // Silver pomfret fish
+                    icon = R.drawable.ic_pomfret
                 ),
                 FilterChip(
                     id = "cod_fish",
                     text = "Cod",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_cod  // Cod fish illustration
+                    icon = R.drawable.ic_cod
                 ),
                 // 3. FISH CUTS & PREPARATION (TEXT ONLY)
                 FilterChip(
@@ -13735,95 +13561,17 @@ fun SteamedFishDietPage() {
             filterConfig = steamedFishDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val steamedFishDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_steamed_sea_bass_1,
-                title = "Cantonese Steamed Sea Bass",
-                price = "349",
-                restaurantName = "Dragon Wok",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_steamed_salmon_1,
-                title = "Lemon Dill Steamed Salmon",
-                price = "399",
-                restaurantName = "Sea Catch",
-                rating = "4.9",
-                deliveryTime = "18-22 mins",
-                distance = "1.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_thai_steamed_fish_1,
-                title = "Thai Style Steamed Pomfret",
-                price = "329",
-                restaurantName = "Thai Spice",
-                rating = "4.8",
-                deliveryTime = "22-28 mins",
-                distance = "0.9 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_steamed_tilapia_1,
-                title = "Steamed Tilapia with Ginger",
-                price = "289",
-                restaurantName = "Healthy Bowl",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Brigade Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_banana_leaf_fish_1,
-                title = "Banana Leaf Steamed Fish",
-                price = "359",
-                restaurantName = "Malay Kitchen",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "1.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_steamed_cod_1,
-                title = "Miso Glazed Steamed Cod",
-                price = "449",
-                restaurantName = "Umami Japan",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "1.0 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED STEAMED FISH DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -13831,340 +13579,230 @@ fun SteamedFishDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = steamedFishDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Steamed Fish items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("STEAMED_FISH_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_sea_bass),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Steamed Fish items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED STEAMED FISH DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val steamedFishDietItems = listOf(
-        // 1-5: CLASSIC STEAMED FISH
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.steamed_fish_diet_1,
-            title = "Cantonese Steamed Sea Bass",
-            price = "349",
-            restaurantName = "Dragon Wok",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.steamed_fish_diet_2,
-            title = "Lemon Dill Steamed Salmon",
-            price = "399",
-            restaurantName = "Sea Catch",
-            rating = "4.9",
-            deliveryTime = "18-22 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.steamed_fish_diet_3,
-            title = "Thai Style Steamed Pomfret",
-            price = "329",
-            restaurantName = "Thai Spice",
-            rating = "4.8",
-            deliveryTime = "22-28 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.steamed_fish_diet_4,
-            title = "Steamed Tilapia with Ginger",
-            price = "289",
-            restaurantName = "Healthy Bowl",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Brigade Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.steamed_fish_diet_5,
-            title = "Banana Leaf Steamed Fish",
-            price = "359",
-            restaurantName = "Malay Kitchen",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-
-        // 6-10: STEAMED FISH WITH ASIAN STYLES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.steamed_fish_diet_6,
-            title = "Miso Glazed Steamed Cod",
-            price = "449",
-            restaurantName = "Umami Japan",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.steamed_fish_diet_7,
-            title = "Soy Ginger Steamed Snapper",
-            price = "379",
-            restaurantName = "Asian Wok",
-            rating = "4.8",
-            deliveryTime = "22-28 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.steamed_fish_diet_8,
-            title = "Sichuan Style Steamed Fish",
-            price = "339",
-            restaurantName = "Red Chilli",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.steamed_fish_diet_9,
-            title = "Steamed Fish with Black Bean Sauce",
-            price = "359",
-            restaurantName = "Canton House",
-            rating = "4.7",
-            deliveryTime = "22-28 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.steamed_fish_diet_10,
-            title = "Vietnamese Steamed Fish",
-            price = "369",
-            restaurantName = "Saigon Delight",
-            rating = "4.8",
-            deliveryTime = "25-30 mins",
-            distance = "1.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-
-        // 11-15: STEAMED FISH WITH HERBS & VEGETABLES
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.steamed_fish_diet_11,
-            title = "Steamed Fish with Asparagus",
-            price = "389",
-            restaurantName = "Green Leaf",
-            rating = "4.9",
-            deliveryTime = "18-24 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Salt Lake, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.steamed_fish_diet_12,
-            title = "Mediterranean Steamed Fish",
-            price = "409",
-            restaurantName = "Olive Grove",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.steamed_fish_diet_13,
-            title = "Steamed Fish with Bok Choy",
-            price = "329",
-            restaurantName = "Wok & Roll",
-            rating = "4.7",
-            deliveryTime = "18-22 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.steamed_fish_diet_14,
-            title = "Lemon Grass Steamed Fish",
-            price = "349",
-            restaurantName = "Thai Orchid",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.steamed_fish_diet_15,
-            title = "Steamed Fish with Fennel",
-            price = "379",
-            restaurantName = "Herb Garden",
-            rating = "4.9",
-            deliveryTime = "22-28 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-
-        // 16-20: DIET-SPECIAL STEAMED FISH
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.steamed_fish_diet_16,
-            title = "Keto Steamed Fish with Butter",
-            price = "419",
-            restaurantName = "Keto Kitchen",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.steamed_fish_diet_17,
-            title = "Paleo Steamed Fish",
-            price = "399",
-            restaurantName = "Paleo Plate",
-            rating = "4.8",
-            deliveryTime = "22-28 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.steamed_fish_diet_18,
-            title = "High Protein Steamed Fish",
-            price = "379",
-            restaurantName = "Protein Lab",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.steamed_fish_diet_19,
-            title = "Low Calorie Steamed Fish",
-            price = "339",
-            restaurantName = "Low Cal Life",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.steamed_fish_diet_20,
-            title = "Omega-3 Rich Steamed Salmon",
-            price = "459",
-            restaurantName = "Healthy Catch",
-            rating = "4.9",
-            deliveryTime = "22-28 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        steamedFishDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Steamed Fish restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("STEAMED_FISH_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_sea_bass),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Steamed Fish restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun QuinoaBowlDietPage() {
+fun QuinoaBowlDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for QUINOA_BOWL_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: QUINOA_BOWL_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("QUINOA_BOWL_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("QUINOA_BOWL_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -14186,31 +13824,31 @@ fun QuinoaBowlDietPage() {
                     id = "white_quinoa",
                     text = "White Quinoa",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_white_quinoa  // White quinoa grains illustration
+                    icon = R.drawable.ic_white_quinoa
                 ),
                 FilterChip(
                     id = "red_quinoa",
                     text = "Red Quinoa",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_red_quinoa  // Red quinoa grains with reddish hue
+                    icon = R.drawable.ic_red_quinoa
                 ),
                 FilterChip(
                     id = "black_quinoa",
                     text = "Black Quinoa",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_black_quinoa  // Black quinoa grains illustration
+                    icon = R.drawable.ic_black_quinoa
                 ),
                 FilterChip(
                     id = "tricolor_quinoa",
                     text = "Tricolor Quinoa",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_tricolor_quinoa  // Mix of white, red, black quinoa
+                    icon = R.drawable.ic_tricolor_quinoa
                 ),
                 FilterChip(
                     id = "quinoa_flakes",
                     text = "Quinoa Flakes",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_quinoa_flakes  // Flattened quinoa flakes
+                    icon = R.drawable.ic_quinoa_flakes
                 ),
 
                 // 3. BOWL BASE (TEXT ONLY)
@@ -14775,95 +14413,17 @@ fun QuinoaBowlDietPage() {
             filterConfig = quinoaBowlDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val quinoaBowlDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_mediterranean_quinoa_bowl_1,
-                title = "Mediterranean Quinoa Bowl",
-                price = "299",
-                restaurantName = "The Green Bowl",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_mexican_quinoa_bowl_1,
-                title = "Mexican Spicy Quinoa Bowl",
-                price = "329",
-                restaurantName = "Fiesta Fresh",
-                rating = "4.9",
-                deliveryTime = "18-22 mins",
-                distance = "1.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_thai_quinoa_bowl_1,
-                title = "Thai Peanut Quinoa Bowl",
-                price = "319",
-                restaurantName = "Thai Alive",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.9 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_teriyaki_quinoa_bowl_1,
-                title = "Teriyaki Tofu Quinoa Bowl",
-                price = "289",
-                restaurantName = "Healthy Asian",
-                rating = "4.7",
-                deliveryTime = "15-20 mins",
-                distance = "0.7 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_greek_quinoa_bowl_1,
-                title = "Greek Quinoa with Feta",
-                price = "339",
-                restaurantName = "Olympus Bowls",
-                rating = "4.9",
-                deliveryTime = "18-22 mins",
-                distance = "1.1 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_southwest_quinoa_bowl_1,
-                title = "Southwest Grilled Chicken Quinoa",
-                price = "359",
-                restaurantName = "Desi Roots",
-                rating = "4.8",
-                deliveryTime = "22-28 mins",
-                distance = "1.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED QUINOA BOWL DIET ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -14871,334 +14431,209 @@ fun QuinoaBowlDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = quinoaBowlDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Quinoa Bowl items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("QUINOA_BOWL_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_tricolor_quinoa),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Quinoa Bowl items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED QUINOA BOWL DIET RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val quinoaBowlDietItems = listOf(
-        // 1-5: CLASSIC QUINOA BOWLS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.quinoa_bowl_diet_1,
-            title = "Mediterranean Quinoa Bowl",
-            price = "299",
-            restaurantName = "The Green Bowl",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.quinoa_bowl_diet_2,
-            title = "Mexican Spicy Quinoa Bowl",
-            price = "329",
-            restaurantName = "Fiesta Fresh",
-            rating = "4.9",
-            deliveryTime = "18-22 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.quinoa_bowl_diet_3,
-            title = "Thai Peanut Quinoa Bowl",
-            price = "319",
-            restaurantName = "Thai Alive",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.quinoa_bowl_diet_4,
-            title = "Teriyaki Tofu Quinoa Bowl",
-            price = "289",
-            restaurantName = "Healthy Asian",
-            rating = "4.7",
-            deliveryTime = "15-20 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.quinoa_bowl_diet_5,
-            title = "Greek Quinoa with Feta",
-            price = "339",
-            restaurantName = "Olympus Bowls",
-            rating = "4.9",
-            deliveryTime = "18-22 mins",
-            distance = "1.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-
-        // 6-10: FUSION & INTERNATIONAL STYLES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.quinoa_bowl_diet_6,
-            title = "Hawaiian Poke Quinoa Bowl",
-            price = "379",
-            restaurantName = "Island Bowls",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.quinoa_bowl_diet_7,
-            title = "Moroccan Spiced Quinoa Bowl",
-            price = "309",
-            restaurantName = "Marrakesh Cafe",
-            rating = "4.8",
-            deliveryTime = "22-28 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Banjara Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.quinoa_bowl_diet_8,
-            title = "Japanese Miso Quinoa Bowl",
-            price = "349",
-            restaurantName = "Umami Bowl",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.quinoa_bowl_diet_9,
-            title = "Southwest Chipotle Quinoa",
-            price = "359",
-            restaurantName = "Desi Roots",
-            rating = "4.7",
-            deliveryTime = "22-28 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.quinoa_bowl_diet_10,
-            title = "Indian Masala Quinoa Bowl",
-            price = "299",
-            restaurantName = "Spice Roots",
-            rating = "4.8",
-            deliveryTime = "18-24 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-
-        // 11-15: PROTEIN-RICH BOWLS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.quinoa_bowl_diet_11,
-            title = "Grilled Chicken Quinoa Bowl",
-            price = "359",
-            restaurantName = "Protein House",
-            rating = "4.9",
-            deliveryTime = "18-24 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Salt Lake, Kolkata"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.quinoa_bowl_diet_12,
-            title = "Salmon Avocado Quinoa Bowl",
-            price = "429",
-            restaurantName = "Sea Green",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.quinoa_bowl_diet_13,
-            title = "Chickpea & Spinach Quinoa",
-            price = "279",
-            restaurantName = "Plant Power",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.quinoa_bowl_diet_14,
-            title = "Tandoori Paneer Quinoa Bowl",
-            price = "319",
-            restaurantName = "Punjabi Angithi",
-            rating = "4.8",
-            deliveryTime = "18-22 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.quinoa_bowl_diet_15,
-            title = "Edamame & Tofu Quinoa Bowl",
-            price = "309",
-            restaurantName = "Vegan Valley",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-
-        // 16-20: BREAKFAST & SPECIALTY BOWLS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.quinoa_bowl_diet_16,
-            title = "Breakfast Power Quinoa Bowl",
-            price = "249",
-            restaurantName = "Morning Fresh",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.quinoa_bowl_diet_17,
-            title = "Rainbow Veggie Quinoa Bowl",
-            price = "269",
-            restaurantName = "Pure Earth",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.quinoa_bowl_diet_18,
-            title = "Buddha's Quinoa Bliss Bowl",
-            price = "349",
-            restaurantName = "Zen Bowl",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.quinoa_bowl_diet_19,
-            title = "Detox Green Quinoa Bowl",
-            price = "289",
-            restaurantName = "Juice & Bowl",
-            rating = "4.7",
-            deliveryTime = "18-22 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.quinoa_bowl_diet_20,
-            title = "Superfood Berry Quinoa Bowl",
-            price = "329",
-            restaurantName = "Berry Fresh",
-            rating = "4.8",
-            deliveryTime = "16-20 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        quinoaBowlDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Quinoa Bowl restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("QUINOA_BOWL_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_tricolor_quinoa),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Quinoa Bowl restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

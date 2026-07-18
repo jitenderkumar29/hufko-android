@@ -956,10 +956,10 @@ fun CategoryDietTabsFood(
             DietCategoryPage.GrilledChicken -> GrilledChickenDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.SteamedFish -> SteamedFishDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.QuinoaBowl -> QuinoaBowlDietPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.AvocadoToast -> AvocadoToastDietPage()
-            DietCategoryPage.GreenSmoothie -> GreenSmoothieDietPage()
-            DietCategoryPage.Oatmeal -> OatmealDietPage()
-            DietCategoryPage.GreekYogurt -> GreekYogurtDietPage()
+            DietCategoryPage.AvocadoToast -> AvocadoToastDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.GreenSmoothie -> GreenSmoothieDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.Oatmeal -> OatmealDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.GreekYogurt -> GreekYogurtDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.EggWhiteOmelette -> EggWhiteOmeletteDietPage()
             DietCategoryPage.TunaSalad -> TunaSaladDietPage()
             DietCategoryPage.LentilSoup -> LentilSoupDietPage()
@@ -14639,7 +14639,22 @@ fun QuinoaBowlDietPage(
 }
 
 @Composable
-fun AvocadoToastDietPage() {
+fun AvocadoToastDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for AVOCADO_TOAST_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: AVOCADO_TOAST_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("AVOCADO_TOAST_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("AVOCADO_TOAST_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -14661,31 +14676,31 @@ fun AvocadoToastDietPage() {
                     id = "classic_avocado",
                     text = "Classic Avocado",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_classic_avocado  // Whole avocado illustration
+                    icon = R.drawable.ic_classic_avocado
                 ),
                 FilterChip(
                     id = "smashed_avocado",
                     text = "Smashed Avocado",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_smashed_avocado  // Mashed/smashed avocado
+                    icon = R.drawable.ic_smashed_avocado
                 ),
                 FilterChip(
                     id = "avocado_slices",
                     text = "Avocado Slices",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_avocado_slices  // Sliced avocado pieces
+                    icon = R.drawable.ic_avocado_slices
                 ),
                 FilterChip(
                     id = "guacamole_style",
                     text = "Guacamole Style",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_guacamole  // Guacamole with lime/cilantro
+                    icon = R.drawable.ic_guacamole
                 ),
                 FilterChip(
                     id = "avocado_spread",
                     text = "Avocado Spread",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_avocado_spread  // Smooth spread on toast
+                    icon = R.drawable.ic_avocado_spread
                 ),
                 // 4. TOPPINGS (TEXT ONLY)
                 FilterChip(
@@ -15082,95 +15097,17 @@ fun AvocadoToastDietPage() {
             filterConfig = avocadoToastDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val avocadoToastDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_avocado_toast_1,
-                title = "Classic Smashed Avocado Toast",
-                price = "249",
-                restaurantName = "Toast & Co.",
-                rating = "4.8",
-                deliveryTime = "12-15 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_poached_egg_avocado_toast_1,
-                title = "Avocado Toast with Poached Egg",
-                price = "299",
-                restaurantName = "The Breakfast Story",
-                rating = "4.9",
-                deliveryTime = "15-18 mins",
-                distance = "0.8 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_mediterranean_avocado_toast_1,
-                title = "Mediterranean Avocado Toast",
-                price = "289",
-                restaurantName = "Olive & Toast",
-                rating = "4.8",
-                deliveryTime = "14-17 mins",
-                distance = "0.6 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_smoked_salmon_avocado_toast_1,
-                title = "Smoked Salmon & Avocado Toast",
-                price = "379",
-                restaurantName = "Fresh Catch Cafe",
-                rating = "4.9",
-                deliveryTime = "16-20 mins",
-                distance = "1.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_mexican_avocado_toast_1,
-                title = "Mexican Spice Avocado Toast",
-                price = "269",
-                restaurantName = "Fiesta Fresh",
-                rating = "4.7",
-                deliveryTime = "13-16 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_sweet_potato_avocado_toast_1,
-                title = "Sweet Potato & Avocado Toast",
-                price = "259",
-                restaurantName = "Healthy Haven",
-                rating = "4.8",
-                deliveryTime = "15-18 mins",
-                distance = "0.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED AVOCADO TOAST ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -15178,340 +15115,230 @@ fun AvocadoToastDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
-            modifier = Modifier.fillMaxWidth().padding(start=12.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = avocadoToastDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Avocado Toast items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("AVOCADO_TOAST_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_avocado),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Avocado Toast items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED AVOCADO TOAST RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color =  MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start=12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val avocadoToastDietItems = listOf(
-        // 1-5: CLASSIC AVOCADO TOASTS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.avocado_toast_diet_1,
-            title = "Classic Smashed Avocado Toast",
-            price = "249",
-            restaurantName = "Toast & Co.",
-            rating = "4.8",
-            deliveryTime = "12-15 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.avocado_toast_diet_2,
-            title = "Avocado Toast with Poached Egg",
-            price = "299",
-            restaurantName = "The Breakfast Story",
-            rating = "4.9",
-            deliveryTime = "15-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.avocado_toast_diet_3,
-            title = "Everything Bagel Avocado Toast",
-            price = "269",
-            restaurantName = "Bagel Shop",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.avocado_toast_diet_4,
-            title = "Simple Avocado on Sourdough",
-            price = "219",
-            restaurantName = "Bread & Butter",
-            rating = "4.8",
-            deliveryTime = "10-12 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.avocado_toast_diet_5,
-            title = "Avocado Toast with Microgreens",
-            price = "279",
-            restaurantName = "Green Garden Cafe",
-            rating = "4.9",
-            deliveryTime = "12-16 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 6-10: PROTEIN-RICH AVOCADO TOASTS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.avocado_toast_diet_6,
-            title = "Smoked Salmon Avocado Toast",
-            price = "379",
-            restaurantName = "Fresh Catch Cafe",
-            rating = "4.9",
-            deliveryTime = "16-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.avocado_toast_diet_7,
-            title = "Avocado Toast with Fried Egg",
-            price = "289",
-            restaurantName = "Eggspectations",
-            rating = "4.8",
-            deliveryTime = "12-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.avocado_toast_diet_8,
-            title = "Bacon & Avocado Toast",
-            price = "329",
-            restaurantName = "Morning Glory",
-            rating = "4.8",
-            deliveryTime = "14-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.avocado_toast_diet_9,
-            title = "Turkey Avocado Toast",
-            price = "319",
-            restaurantName = "Protein Plus",
-            rating = "4.7",
-            deliveryTime = "15-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.avocado_toast_diet_10,
-            title = "Tofu Scramble Avocado Toast",
-            price = "279",
-            restaurantName = "Plant Power",
-            rating = "4.8",
-            deliveryTime = "13-17 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: INTERNATIONAL & FUSION STYLES
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.avocado_toast_diet_11,
-            title = "Mediterranean Avocado Toast",
-            price = "299",
-            restaurantName = "Olive & Toast",
-            rating = "4.9",
-            deliveryTime = "14-17 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.avocado_toast_diet_12,
-            title = "Mexican Spice Avocado Toast",
-            price = "269",
-            restaurantName = "Fiesta Fresh",
-            rating = "4.8",
-            deliveryTime = "13-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.avocado_toast_diet_13,
-            title = "Caprese Avocado Toast",
-            price = "289",
-            restaurantName = "Italian Bistro",
-            rating = "4.9",
-            deliveryTime = "15-19 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.avocado_toast_diet_14,
-            title = "Asian Sesame Avocado Toast",
-            price = "279",
-            restaurantName = "Umami Toast",
-            rating = "4.7",
-            deliveryTime = "16-20 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.avocado_toast_diet_15,
-            title = "Indian Masala Avocado Toast",
-            price = "259",
-            restaurantName = "Spice Roots",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 16-20: SWEET & SPECIALTY AVOCADO TOASTS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.avocado_toast_diet_16,
-            title = "Sweet Potato Avocado Toast",
-            price = "259",
-            restaurantName = "Healthy Haven",
-            rating = "4.8",
-            deliveryTime = "15-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.avocado_toast_diet_17,
-            title = "Berry & Avocado Toast",
-            price = "299",
-            restaurantName = "Berry Fresh",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.avocado_toast_diet_18,
-            title = "Fig & Honey Avocado Toast",
-            price = "329",
-            restaurantName = "Fig & Olive",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.avocado_toast_diet_19,
-            title = "Pomegranate Avocado Toast",
-            price = "289",
-            restaurantName = "Fresh Bowl",
-            rating = "4.7",
-            deliveryTime = "13-16 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.avocado_toast_diet_20,
-            title = "Rainbow Veggie Avocado Toast",
-            price = "279",
-            restaurantName = "Pure Earth",
-            rating = "4.8",
-            deliveryTime = "15-19 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        avocadoToastDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Avocado Toast restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("AVOCADO_TOAST_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_avocado),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Avocado Toast restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun GreenSmoothieDietPage() {
+fun GreenSmoothieDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for GREEN_SMOOTHIE_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: GREEN_SMOOTHIE_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("GREEN_SMOOTHIE_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("GREEN_SMOOTHIE_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -15533,31 +15360,31 @@ fun GreenSmoothieDietPage() {
                     id = "kale_base",
                     text = "Kale",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_kale  // Kale leaf illustration
+                    icon = R.drawable.ic_kale
                 ),
                 FilterChip(
                     id = "spinach_base",
                     text = "Spinach",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_spinach_green_smoothie  // Spinach leaf illustration
+                    icon = R.drawable.ic_spinach_green_smoothie
                 ),
                 FilterChip(
                     id = "collard_greens",
                     text = "Collard Greens",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_collard_greens_green_smoothie  // Collard greens leaf
+                    icon = R.drawable.ic_collard_greens_green_smoothie
                 ),
                 FilterChip(
                     id = "swiss_chard",
                     text = "Swiss Chard",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_swiss_chard_green_smoothie  // Swiss chard with colorful stems
+                    icon = R.drawable.ic_swiss_chard_green_smoothie
                 ),
                 FilterChip(
                     id = "romaine",
                     text = "Romaine",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_romaine_green_smoothie  // Romaine lettuce head
+                    icon = R.drawable.ic_romaine_green_smoothie
                 ),
                 // 4. LIQUID BASES (TEXT ONLY)
                 FilterChip(
@@ -15620,11 +15447,6 @@ fun GreenSmoothieDietPage() {
                 FilterChip(
                     id = "pea_protein",
                     text = "Pea Protein",
-                    type = FilterType.TEXT_ONLY
-                ),
-                FilterChip(
-                    id = "greek_yogurt",
-                    text = "Greek Yogurt",
                     type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
@@ -16009,95 +15831,17 @@ fun GreenSmoothieDietPage() {
             filterConfig = greenSmoothieDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val greenSmoothieDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_kale_power_smoothie_1,
-                title = "Kale Power Green Smoothie",
-                price = "199",
-                restaurantName = "Green Goddess Cafe",
-                rating = "4.9",
-                deliveryTime = "10-12 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_spinach_mango_smoothie_1,
-                title = "Spinach Mango Tango",
-                price = "179",
-                restaurantName = "The Smoothie Bar",
-                rating = "4.8",
-                deliveryTime = "12-15 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_detox_green_smoothie_1,
-                title = "Detox Green Cleanse",
-                price = "219",
-                restaurantName = "Pure Blend Co.",
-                rating = "4.9",
-                deliveryTime = "13-16 mins",
-                distance = "0.7 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_protein_green_smoothie_1,
-                title = "Protein Power Greens",
-                price = "249",
-                restaurantName = "Fit Fuel Kitchen",
-                rating = "4.7",
-                deliveryTime = "14-17 mins",
-                distance = "1.1 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_tropical_green_smoothie_1,
-                title = "Tropical Green Paradise",
-                price = "189",
-                restaurantName = "Island Greens",
-                rating = "4.8",
-                deliveryTime = "11-14 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_avocado_cucumber_smoothie_1,
-                title = "Avocado Cucumber Cooler",
-                price = "229",
-                restaurantName = "Fresh Pressed",
-                rating = "4.9",
-                deliveryTime = "12-15 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED GREEN SMOOTHIE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -16105,340 +15849,230 @@ fun GreenSmoothieDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = greenSmoothieDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Green Smoothie items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("GREEN_SMOOTHIE_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_kale),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Green Smoothie items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED GREEN SMOOTHIE RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val greenSmoothieDietItems = listOf(
-        // 1-5: CLASSIC GREEN SMOOTHIES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.green_smoothie_1,
-            title = "Classic Green Goddess Smoothie",
-            price = "169",
-            restaurantName = "Green Goddess Cafe",
-            rating = "4.8",
-            deliveryTime = "10-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.green_smoothie_2,
-            title = "Kale Spinach Power Blend",
-            price = "189",
-            restaurantName = "Daily Greens",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.green_smoothie_3,
-            title = "Simple Green Cleanse",
-            price = "149",
-            restaurantName = "Pure Blend Co.",
-            rating = "4.7",
-            deliveryTime = "8-12 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.green_smoothie_4,
-            title = "Cucumber Mint Refresher",
-            price = "159",
-            restaurantName = "Fresh Pressed",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.green_smoothie_5,
-            title = "Avocado Spinach Smoothie",
-            price = "199",
-            restaurantName = "Creamy Greens",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 6-10: TROPICAL GREEN SMOOTHIES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.green_smoothie_6,
-            title = "Mango Spinach Tango",
-            price = "189",
-            restaurantName = "Tropical Greens",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.green_smoothie_7,
-            title = "Pineapple Kale Blast",
-            price = "199",
-            restaurantName = "Island Sips",
-            rating = "4.8",
-            deliveryTime = "13-16 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.green_smoothie_8,
-            title = "Banana Coconut Green",
-            price = "179",
-            restaurantName = "Tropics Cafe",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.green_smoothie_9,
-            title = "Papaya Lime Green Smoothie",
-            price = "189",
-            restaurantName = "Sunshine Smoothies",
-            rating = "4.7",
-            deliveryTime = "12-16 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.green_smoothie_10,
-            title = "Passion Fruit Greens",
-            price = "209",
-            restaurantName = "Exotic Blends",
-            rating = "4.9",
-            deliveryTime = "14-17 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: PROTEIN & SUPERFOOD SMOOTHIES
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.green_smoothie_11,
-            title = "Protein Power Greens",
-            price = "249",
-            restaurantName = "Fit Fuel Kitchen",
-            rating = "4.9",
-            deliveryTime = "14-17 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.green_smoothie_12,
-            title = "Matcha Almond Protein Smoothie",
-            price = "239",
-            restaurantName = "Matcha Bar",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.green_smoothie_13,
-            title = "Spirulina Supergreen Blend",
-            price = "229",
-            restaurantName = "Superfood Studio",
-            rating = "4.7",
-            deliveryTime = "15-18 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.green_smoothie_14,
-            title = "Chia Seed Green Smoothie",
-            price = "199",
-            restaurantName = "Healthy Haven",
-            rating = "4.8",
-            deliveryTime = "12-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.green_smoothie_15,
-            title = "Hemp & Flax Green Smoothie",
-            price = "219",
-            restaurantName = "Nutri Blends",
-            rating = "4.8",
-            deliveryTime = "13-16 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 16-20: DETOX & WELLNESS SMOOTHIES
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.green_smoothie_16,
-            title = "Detox Green Cleanse",
-            price = "189",
-            restaurantName = "Detox Bar",
-            rating = "4.8",
-            deliveryTime = "11-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.green_smoothie_17,
-            title = "Ginger Turmeric Wellness Shot Smoothie",
-            price = "209",
-            restaurantName = "Wellness Cafe",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.green_smoothie_18,
-            title = "Apple Celery Detox",
-            price = "169",
-            restaurantName = "Fresh & Clean",
-            rating = "4.7",
-            deliveryTime = "10-13 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.green_smoothie_19,
-            title = "Wheatgrass Power Punch",
-            price = "229",
-            restaurantName = "The Wheatgrass Co.",
-            rating = "4.8",
-            deliveryTime = "13-17 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.green_smoothie_20,
-            title = "Rainbow Greens Smoothie Bowl",
-            price = "259",
-            restaurantName = "Bowl Superfoods",
-            rating = "4.9",
-            deliveryTime = "15-19 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        greenSmoothieDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Green Smoothie restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("GREEN_SMOOTHIE_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_kale),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Green Smoothie restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun OatmealDietPage() {
+fun OatmealDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for OATMEAL_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: OATMEAL_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("OATMEAL_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("OATMEAL_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -16460,33 +16094,32 @@ fun OatmealDietPage() {
                     id = "rolled_oats",
                     text = "Rolled Oats",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_rolled_oats  // Rolled oat flakes illustration
+                    icon = R.drawable.ic_rolled_oats
                 ),
                 FilterChip(
                     id = "steel_cut_oats",
                     text = "Steel Cut Oats",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_steel_cut_oats  // Whole oat groats/chopped
+                    icon = R.drawable.ic_steel_cut_oats
                 ),
                 FilterChip(
                     id = "instant_oats",
                     text = "Instant Oats",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_instant_oats  // Fine oat powder/flakes
+                    icon = R.drawable.ic_instant_oats
                 ),
                 FilterChip(
                     id = "scottish_oats",
                     text = "Scottish Oats",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_scottish_oats  // Stone-ground oats
+                    icon = R.drawable.ic_scottish_oats
                 ),
                 FilterChip(
                     id = "irish_oats",
                     text = "Irish Oatmeal",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_irish_oats  // Traditional Irish oats
+                    icon = R.drawable.ic_irish_oats
                 ),
-
 
                 // 4. LIQUID BASES (TEXT ONLY)
                 FilterChip(
@@ -16995,95 +16628,17 @@ fun OatmealDietPage() {
             filterConfig = oatmealDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val oatmealDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_oatmeal_1,
-                title = "Classic Rolled Oatmeal",
-                price = "129",
-                restaurantName = "Morning Bowl",
-                rating = "4.8",
-                deliveryTime = "8-10 mins",
-                distance = "0.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_berry_oatmeal_1,
-                title = "Mixed Berry Oatmeal",
-                price = "159",
-                restaurantName = "Berry Good Cafe",
-                rating = "4.9",
-                deliveryTime = "10-12 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_overnight_oats_1,
-                title = "Overnight Oats with Chia",
-                price = "149",
-                restaurantName = "Oats & Co.",
-                rating = "4.8",
-                deliveryTime = "5-8 mins",
-                distance = "0.3 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_apple_cinnamon_oatmeal_1,
-                title = "Apple Cinnamon Oatmeal",
-                price = "139",
-                restaurantName = "Spiced Oats",
-                rating = "4.7",
-                deliveryTime = "9-12 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_peanut_butter_oatmeal_1,
-                title = "Peanut Butter Banana Oats",
-                price = "179",
-                restaurantName = "Protein Oats",
-                rating = "4.9",
-                deliveryTime = "10-13 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_savory_oatmeal_1,
-                title = "Savory Masala Oatmeal",
-                price = "149",
-                restaurantName = "Desi Oats",
-                rating = "4.8",
-                deliveryTime = "11-14 mins",
-                distance = "0.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED OATMEAL ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -17091,345 +16646,236 @@ fun OatmealDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = oatmealDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Oatmeal items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("OATMEAL_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_rolled_oats),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Oatmeal items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED OATMEAL RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val oatmealDietItems = listOf(
-        // 1-5: CLASSIC OATMEALS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.oatmeal_1,
-            title = "Classic Rolled Oats with Berries",
-            price = "149",
-            restaurantName = "Morning Oats Cafe",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.oatmeal_2,
-            title = "Steel Cut Oats Breakfast Bowl",
-            price = "179",
-            restaurantName = "The Oat Kitchen",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.oatmeal_3,
-            title = "Simple Honey Oatmeal",
-            price = "129",
-            restaurantName = "Pure Breakfast",
-            rating = "4.7",
-            deliveryTime = "7-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.oatmeal_4,
-            title = "Brown Sugar & Cinnamon Oats",
-            price = "139",
-            restaurantName = "Cozy Bowls",
-            rating = "4.8",
-            deliveryTime = "9-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.oatmeal_5,
-            title = "Maple Syrup Oatmeal",
-            price = "159",
-            restaurantName = "Maple House",
-            rating = "4.8",
-            deliveryTime = "10-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 6-10: FRUIT OATMEALS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.oatmeal_6,
-            title = "Banana Walnut Oatmeal",
-            price = "189",
-            restaurantName = "Nutty Oats",
-            rating = "4.9",
-            deliveryTime = "11-14 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.oatmeal_7,
-            title = "Apple Cinnamon Oatmeal",
-            price = "169",
-            restaurantName = "Apple Crisp Cafe",
-            rating = "4.8",
-            deliveryTime = "10-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.oatmeal_8,
-            title = "Mixed Berry Oatmeal Bowl",
-            price = "199",
-            restaurantName = "Berrylicious",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Sector 29, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.oatmeal_9,
-            title = "Peach & Almond Oatmeal",
-            price = "189",
-            restaurantName = "Stone Fruit Kitchen",
-            rating = "4.7",
-            deliveryTime = "11-15 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.oatmeal_10,
-            title = "Mango Coconut Oatmeal",
-            price = "209",
-            restaurantName = "Tropical Mornings",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: PROTEIN & NUT OATMEALS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.oatmeal_11,
-            title = "Peanut Butter Protein Oats",
-            price = "229",
-            restaurantName = "Protein Kitchen",
-            rating = "4.9",
-            deliveryTime = "13-16 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.oatmeal_12,
-            title = "",
-            price = "219",
-            restaurantName = "Nut Butter Co.",
-            rating = "4.8",
-            deliveryTime = "12-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.oatmeal_13,
-            title = "Quinoa Oat Protein Blend",
-            price = "249",
-            restaurantName = "Supergrain Kitchen",
-            rating = "4.8",
-            deliveryTime = "14-17 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.oatmeal_14,
-            title = "Cashew & Date Oatmeal",
-            price = "209",
-            restaurantName = "Healthy Indulgence",
-            rating = "4.7",
-            deliveryTime = "11-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.oatmeal_15,
-            title = "Pecan Maple Oatmeal",
-            price = "239",
-            restaurantName = "Pecan House",
-            rating = "4.9",
-            deliveryTime = "13-16 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 16-20: OVERNIGHT OATS & SPECIALTY
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.oatmeal_16,
-            title = "Overnight Oats with Berries",
-            price = "179",
-            restaurantName = "Overnight Oats Co.",
-            rating = "4.8",
-            deliveryTime = "7-10 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.oatmeal_17,
-            title = "Chocolate Peanut Butter Overnight Oats",
-            price = "219",
-            restaurantName = "Chocolate Oats Cafe",
-            rating = "4.9",
-            deliveryTime = "8-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.oatmeal_18,
-            title = "Savory Masala Oatmeal",
-            price = "159",
-            restaurantName = "Spicy Oats Kitchen",
-            rating = "4.7",
-            deliveryTime = "9-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.oatmeal_19,
-            title = "Pumpkin Spice Oatmeal",
-            price = "189",
-            restaurantName = "Fall Flavors Cafe",
-            rating = "4.8",
-            deliveryTime = "10-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.oatmeal_20,
-            title = "Acai Oatmeal Bowl",
-            price = "269",
-            restaurantName = "Acai Soul",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        oatmealDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Oatmeal restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("OATMEAL_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_rolled_oats),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Oatmeal restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun GreekYogurtDietPage() {
+fun GreekYogurtDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for GREEK_YOGURT_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: GREEK_YOGURT_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("GREEK_YOGURT_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("GREEK_YOGURT_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val greekYogurtDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -17446,31 +16892,31 @@ fun GreekYogurtDietPage() {
                     id = "plain_greek",
                     text = "Plain Greek Yogurt",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_plain_yogurt  // Plain white yogurt bowl
+                    icon = R.drawable.ic_plain_yogurt
                 ),
                 FilterChip(
                     id = "vanilla_greek",
                     text = "Vanilla Greek Yogurt",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_vanilla_yogurt  // Yogurt with vanilla bean specks
+                    icon = R.drawable.ic_vanilla_yogurt
                 ),
                 FilterChip(
                     id = "honey_greek",
                     text = "Honey Greek Yogurt",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_honey_yogurt  // Yogurt with honey drizzle
+                    icon = R.drawable.ic_honey_yogurt
                 ),
                 FilterChip(
                     id = "strained_greek",
                     text = "Strained Greek Yogurt",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_strained_yogurt  // Extra thick yogurt
+                    icon = R.drawable.ic_strained_yogurt
                 ),
                 FilterChip(
                     id = "zero_fat_greek",
                     text = "0% Fat Greek Yogurt",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_zero_fat_yogurt  // Fat-free symbol with yogurt
+                    icon = R.drawable.ic_zero_fat_yogurt
                 ),
                 // 3. FRUIT TOPPINGS (TEXT ONLY)
                 FilterChip(
@@ -17744,99 +17190,22 @@ fun GreekYogurtDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = greekYogurtDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val greekYogurtDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_greek_yogurt_1,
-                title = "Classic Plain Greek Yogurt",
-                price = "149",
-                restaurantName = "Greek Delights",
-                rating = "4.8",
-                deliveryTime = "8-10 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_berry_greek_yogurt_1,
-                title = "Berry Blast Greek Yogurt",
-                price = "189",
-                restaurantName = "Berry Good Cafe",
-                rating = "4.9",
-                deliveryTime = "10-12 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_honey_walnut_greek_1,
-                title = "Honey & Walnut Greek Yogurt",
-                price = "199",
-                restaurantName = "Greek Delights",
-                rating = "4.9",
-                deliveryTime = "9-12 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_granola_parfait_1,
-                title = "Greek Yogurt Granola Parfait",
-                price = "179",
-                restaurantName = "Parfait House",
-                rating = "4.8",
-                deliveryTime = "8-11 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_mango_greek_yogurt_1,
-                title = "Mango & Pistachio Greek Yogurt",
-                price = "209",
-                restaurantName = "Tropical Greek",
-                rating = "4.8",
-                deliveryTime = "11-14 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_savory_greek_dip_1,
-                title = "Cucumber Dill Greek Yogurt Dip",
-                price = "159",
-                restaurantName = "Mediterranean Bites",
-                rating = "4.7",
-                deliveryTime = "7-10 mins",
-                distance = "0.4 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED GREEK YOGURT ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -17844,334 +17213,209 @@ fun GreekYogurtDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = greekYogurtDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Greek Yogurt items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("GREEK_YOGURT_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_plain_yogurt),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Greek Yogurt items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED GREEK YOGURT RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val greekYogurtDietItems = listOf(
-        // 1-5: CLASSIC GREEK YOGURT
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.greek_yogurt_1,
-            title = "Plain Greek Yogurt with Honey",
-            price = "159",
-            restaurantName = "Greek Delights",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.greek_yogurt_2,
-            title = "Greek Yogurt with Mixed Nuts",
-            price = "189",
-            restaurantName = "Healthy Bowl",
-            rating = "4.9",
-            deliveryTime = "10-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.greek_yogurt_3,
-            title = "Strained Greek Yogurt",
-            price = "149",
-            restaurantName = "Authentic Greek",
-            rating = "4.7",
-            deliveryTime = "7-10 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.greek_yogurt_4,
-            title = "Greek Yogurt with Maple Syrup",
-            price = "179",
-            restaurantName = "Maple Greek",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.greek_yogurt_5,
-            title = "Creamy Greek Yogurt Cup",
-            price = "139",
-            restaurantName = "Creamy Delight",
-            rating = "4.6",
-            deliveryTime = "6-9 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 6-10: FRUIT GREEK YOGURT
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.greek_yogurt_6,
-            title = "Berry Blast Greek Yogurt",
-            price = "199",
-            restaurantName = "Berry Farms",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.greek_yogurt_7,
-            title = "Strawberry Greek Yogurt Bowl",
-            price = "179",
-            restaurantName = "Strawberry Fields",
-            rating = "4.8",
-            deliveryTime = "10-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.greek_yogurt_8,
-            title = "Mango Greek Yogurt",
-            price = "189",
-            restaurantName = "Mango Mania",
-            rating = "4.7",
-            deliveryTime = "9-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.greek_yogurt_9,
-            title = "Mixed Fruit Greek Yogurt",
-            price = "209",
-            restaurantName = "Fusion Bowl",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.greek_yogurt_10,
-            title = "Peach & Honey Greek Yogurt",
-            price = "199",
-            restaurantName = "Peach Perfection",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: PROTEIN & GRANOLA GREEK YOGURT
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.greek_yogurt_11,
-            title = "Protein-Packed Greek Yogurt",
-            price = "229",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.greek_yogurt_12,
-            title = "Granola & Greek Yogurt Parfait",
-            price = "189",
-            restaurantName = "Crunchy Morning",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.greek_yogurt_13,
-            title = "Almond & Greek Yogurt Bowl",
-            price = "209",
-            restaurantName = "Nutty Delight",
-            rating = "4.7",
-            deliveryTime = "11-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.greek_yogurt_14,
-            title = "Chia Seeds Greek Yogurt",
-            price = "199",
-            restaurantName = "Superfood Kitchen",
-            rating = "4.8",
-            deliveryTime = "10-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.greek_yogurt_15,
-            title = "Walnut & Date Greek Yogurt",
-            price = "219",
-            restaurantName = "Healthy Indulgence",
-            rating = "4.9",
-            deliveryTime = "12-16 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: SPECIALTY GREEK YOGURT
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.greek_yogurt_16,
-            title = "Honey Lavender Greek Yogurt",
-            price = "229",
-            restaurantName = "Floral Tastes",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.greek_yogurt_17,
-            title = "Savory Greek Yogurt Bowl",
-            price = "179",
-            restaurantName = "Savory Spoon",
-            rating = "4.6",
-            deliveryTime = "9-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.greek_yogurt_18,
-            title = "Fig & Walnut Greek Yogurt",
-            price = "239",
-            restaurantName = "Mediterranean Flavors",
-            rating = "4.8",
-            deliveryTime = "13-17 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.greek_yogurt_19,
-            title = "Coconut & Greek Yogurt",
-            price = "199",
-            restaurantName = "Tropical Bowl",
-            rating = "4.7",
-            deliveryTime = "10-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.greek_yogurt_20,
-            title = "Dark Chocolate Greek Yogurt",
-            price = "249",
-            restaurantName = "Chocolate Heaven",
-            rating = "4.9",
-            deliveryTime = "15-19 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        greekYogurtDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Greek Yogurt restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("GREEK_YOGURT_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_plain_yogurt),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Greek Yogurt restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

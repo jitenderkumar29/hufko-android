@@ -960,9 +960,9 @@ fun CategoryDietTabsFood(
             DietCategoryPage.GreenSmoothie -> GreenSmoothieDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.Oatmeal -> OatmealDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.GreekYogurt -> GreekYogurtDietPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.EggWhiteOmelette -> EggWhiteOmeletteDietPage()
-            DietCategoryPage.TunaSalad -> TunaSaladDietPage()
-            DietCategoryPage.LentilSoup -> LentilSoupDietPage()
+            DietCategoryPage.EggWhiteOmelette -> EggWhiteOmeletteDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.TunaSalad -> TunaSaladDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.LentilSoup -> LentilSoupDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.CottageCheese -> CottageCheeseDietPage()
             DietCategoryPage.SproutsSalad -> SproutsSaladDietPage()
             DietCategoryPage.BrownRiceBowl -> BrownRiceBowlDietPage()
@@ -17421,12 +17421,28 @@ fun GreekYogurtDietPage(
 }
 
 @Composable
-fun EggWhiteOmeletteDietPage() {
+fun EggWhiteOmeletteDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for EGG_WHITE_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: EGG_WHITE_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("EGG_WHITE_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("EGG_WHITE_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val eggWhiteOmeletteDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -17443,31 +17459,31 @@ fun EggWhiteOmeletteDietPage() {
                     id = "plain_eggwhite",
                     text = "Plain Egg Whites",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_plain_eggwhite  // Simple egg white bowl
+                    icon = R.drawable.ic_plain_eggwhite
                 ),
                 FilterChip(
                     id = "fluffy_eggwhite",
                     text = "Fluffy Egg Whites",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_fluffy_eggwhite  // Whipped/fluffy texture
+                    icon = R.drawable.ic_fluffy_eggwhite
                 ),
                 FilterChip(
                     id = "southwest_eggwhite",
                     text = "Southwest Style",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_southwest  // Southwest theme/pepper icon
+                    icon = R.drawable.ic_southwest
                 ),
                 FilterChip(
                     id = "mediterranean_eggwhite",
                     text = "Mediterranean",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_mediterranean  // Olive branch/Med theme
+                    icon = R.drawable.ic_mediterranean
                 ),
                 FilterChip(
                     id = "spicy_eggwhite",
                     text = "Spicy Egg Whites",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_spicy_eggwhite  // Chili pepper icon
+                    icon = R.drawable.ic_spicy_eggwhite
                 ),
 
                 // 3. VEGETABLE MIX-INS (TEXT ONLY)
@@ -17563,26 +17579,26 @@ fun EggWhiteOmeletteDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 6. HERBS & SEASONINGS (WITH ICONS - FRESH HERBS)
+                // 6. HERBS & SEASONINGS (TEXT ONLY)
                 FilterChip(
                     id = "oregano_omelette",
                     text = "Oregano",
-                    type = FilterType.TEXT_ONLY  // TEXT ONLY
+                    type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
                     id = "thyme_omelette",
                     text = "Thyme",
-                    type = FilterType.TEXT_ONLY  // TEXT ONLY
+                    type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
                     id = "red_pepper_flakes",
                     text = "Red Pepper Flakes",
-                    type = FilterType.TEXT_ONLY  // TEXT ONLY
+                    type = FilterType.TEXT_ONLY
                 ),
                 FilterChip(
                     id = "black_pepper",
                     text = "Cracked Black Pepper",
-                    type = FilterType.TEXT_ONLY  // TEXT ONLY
+                    type = FilterType.TEXT_ONLY
                 ),
 
                 // 7. DIETARY PREFERENCES (TEXT ONLY)
@@ -17700,100 +17716,22 @@ fun EggWhiteOmeletteDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = eggWhiteOmeletteDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val eggWhiteOmeletteDietItems = listOf(
-            // 1-6: EGG WHITE OMELETTE VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_eggwhite_omelette_1,
-                title = "Classic Egg White Omelette",
-                price = "159",
-                restaurantName = "Morning Fresh Cafe",
-                rating = "4.8",
-                deliveryTime = "7-10 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_spinach_mushroom_eggwhite_1,
-                title = "Spinach & Mushroom Egg White Omelette",
-                price = "189",
-                restaurantName = "Healthy Breakfast Co.",
-                rating = "4.9",
-                deliveryTime = "9-12 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_southwest_eggwhite_omelette_1,
-                title = "Southwest Egg White Omelette",
-                price = "199",
-                restaurantName = "Sunrise Kitchen",
-                rating = "4.7",
-                deliveryTime = "10-13 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_mediterranean_eggwhite_1,
-                title = "Mediterranean Egg White Omelette",
-                price = "219",
-                restaurantName = "Mediterranean Delight",
-                rating = "4.9",
-                deliveryTime = "11-14 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_protein_eggwhite_omelette_1,
-                title = "High Protein Egg White Omelette",
-                price = "239",
-                restaurantName = "Protein House",
-                rating = "4.8",
-                deliveryTime = "12-15 mins",
-                distance = "0.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_masala_eggwhite_omelette_1,
-                title = "Indian Masala Egg White Omelette",
-                price = "179",
-                restaurantName = "Masala Eggs",
-                rating = "4.8",
-                deliveryTime = "8-11 mins",
-                distance = "0.4 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED EGG WHITE OMELETTE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -17801,345 +17739,236 @@ fun EggWhiteOmeletteDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = eggWhiteOmeletteDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Egg White Omelette items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("EGG_WHITE_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_plain_eggwhite),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Egg White Omelette items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED EGG WHITE OMELETTE RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val eggWhiteOmeletteDietItems = listOf(
-        // 1-5: CLASSIC EGG WHITE OMELETTES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.eggwhite_1,
-            title = "Classic Egg White Omelette",
-            price = "159",
-            restaurantName = "Morning Fresh Cafe",
-            rating = "4.8",
-            deliveryTime = "7-10 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.eggwhite_2,
-            title = "Plain Egg White Omelette",
-            price = "139",
-            restaurantName = "Eggsclusive",
-            rating = "4.7",
-            deliveryTime = "6-9 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.eggwhite_3,
-            title = "Fluffy Egg White Omelette",
-            price = "169",
-            restaurantName = "Fluffy Eggs",
-            rating = "4.9",
-            deliveryTime = "8-11 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.eggwhite_4,
-            title = "Simple Salt & Pepper Egg Whites",
-            price = "129",
-            restaurantName = "Simple Breakfast",
-            rating = "4.6",
-            deliveryTime = "5-8 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.eggwhite_5,
-            title = "Herbed Egg White Omelette",
-            price = "179",
-            restaurantName = "Herb Garden",
-            rating = "4.8",
-            deliveryTime = "9-12 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 6-10: VEGETABLE EGG WHITE OMELETTES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.eggwhite_6,
-            title = "Spinach & Mushroom Egg White Omelette",
-            price = "199",
-            restaurantName = "Green Kitchen",
-            rating = "4.9",
-            deliveryTime = "10-13 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.eggwhite_7,
-            title = "Bell Pepper & Onion Egg White Omelette",
-            price = "189",
-            restaurantName = "Colorful Eggs",
-            rating = "4.8",
-            deliveryTime = "9-12 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.eggwhite_8,
-            title = "Tomato & Basil Egg White Omelette",
-            price = "179",
-            restaurantName = "Italian Morning",
-            rating = "4.7",
-            deliveryTime = "8-11 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.eggwhite_9,
-            title = "Broccoli & Zucchini Egg White Omelette",
-            price = "209",
-            restaurantName = "Veggie Delight",
-            rating = "4.8",
-            deliveryTime = "11-14 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.eggwhite_10,
-            title = "Asparagus & Cherry Tomato Omelette",
-            price = "219",
-            restaurantName = "Garden Fresh",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: PROTEIN-RICH EGG WHITE OMELETTES
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.eggwhite_11,
-            title = "Grilled Chicken Egg White Omelette",
-            price = "249",
-            restaurantName = "Protein House",
-            rating = "4.9",
-            deliveryTime = "13-16 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.eggwhite_12,
-            title = "Turkey & Spinach Egg White Omelette",
-            price = "259",
-            restaurantName = "Lean Protein",
-            rating = "4.8",
-            deliveryTime = "14-17 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.eggwhite_13,
-            title = "Paneer & Peas Egg White Omelette",
-            price = "229",
-            restaurantName = "Indian Fusion",
-            rating = "4.8",
-            deliveryTime = "11-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.eggwhite_14,
-            title = "Tofu & Kale Egg White Omelette",
-            price = "219",
-            restaurantName = "Vegan Kitchen",
-            rating = "4.7",
-            deliveryTime = "10-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.eggwhite_15,
-            title = "Double Protein Egg White Omelette",
-            price = "279",
-            restaurantName = "Gym Fuel",
-            rating = "4.9",
-            deliveryTime = "15-18 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: CHEESE & SPECIALTY EGG WHITE OMELETTES
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.eggwhite_16,
-            title = "Feta & Spinach Egg White Omelette",
-            price = "209",
-            restaurantName = "Mediterranean Flavors",
-            rating = "4.8",
-            deliveryTime = "10-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.eggwhite_17,
-            title = "Mozzarella & Tomato Egg White Omelette",
-            price = "199",
-            restaurantName = "Italian Cafe",
-            rating = "4.7",
-            deliveryTime = "9-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.eggwhite_18,
-            title = "Southwest Egg White Omelette",
-            price = "229",
-            restaurantName = "Tex-Mex Kitchen",
-            rating = "4.9",
-            deliveryTime = "12-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.eggwhite_19,
-            title = "Masala Egg White Omelette",
-            price = "189",
-            restaurantName = "Spicy Eggs",
-            rating = "4.8",
-            deliveryTime = "8-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.eggwhite_20,
-            title = "Greek Style Egg White Omelette",
-            price = "219",
-            restaurantName = "Greek Eggs",
-            rating = "4.8",
-            deliveryTime = "11-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        eggWhiteOmeletteDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Egg White Omelette restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("EGG_WHITE_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_plain_eggwhite),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Egg White Omelette restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun TunaSaladDietPage() {
+fun TunaSaladDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for TUNA_SALAD_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: TUNA_SALAD_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("TUNA_SALAD_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("TUNA_SALAD_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val tunaSaladDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -18156,31 +17985,31 @@ fun TunaSaladDietPage() {
                     id = "classic_tuna",
                     text = "Classic Tuna",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_classic_tuna  // Classic tuna can/fish icon
+                    icon = R.drawable.ic_classic_tuna
                 ),
                 FilterChip(
                     id = "albacore_tuna",
                     text = "Albacore Tuna",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_albacore  // Premium/fish icon
+                    icon = R.drawable.ic_albacore
                 ),
                 FilterChip(
                     id = "skipjack_tuna",
                     text = "Skipjack Tuna",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_skipjack  // Light tuna/fish icon
+                    icon = R.drawable.ic_skipjack
                 ),
                 FilterChip(
                     id = "yellowfin_tuna",
                     text = "Yellowfin Tuna",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_yellowfin  // Yellowfin/fish icon
+                    icon = R.drawable.ic_yellowfin
                 ),
                 FilterChip(
                     id = "spicy_tuna",
                     text = "Spicy Tuna",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_spicy_tuna  // Chili + fish icon
+                    icon = R.drawable.ic_spicy_tuna
                 ),
                 // 3. FRESH VEGETABLE ADD-INS (TEXT ONLY)
                 FilterChip(
@@ -18500,100 +18329,22 @@ fun TunaSaladDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = tunaSaladDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val tunaSaladDietItems = listOf(
-            // 1-6: TUNA SALAD VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_tuna_salad_1,
-                title = "Classic Tuna Salad",
-                price = "249",
-                restaurantName = "Fresh Catch Deli",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_mediterranean_tuna_salad_1,
-                title = "Mediterranean Tuna Salad",
-                price = "289",
-                restaurantName = "Mediterranean Bites",
-                rating = "4.8",
-                deliveryTime = "10-14 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_avocado_tuna_salad_1,
-                title = "Avocado Tuna Salad",
-                price = "319",
-                restaurantName = "Healthy Bowl",
-                rating = "4.9",
-                deliveryTime = "9-13 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_spicy_tuna_salad_1,
-                title = "Spicy Sriracha Tuna Salad",
-                price = "269",
-                restaurantName = "Spice Route Cafe",
-                rating = "4.7",
-                deliveryTime = "11-15 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_protein_tuna_salad_1,
-                title = "High Protein Tuna Bowl",
-                price = "349",
-                restaurantName = "Protein Lab",
-                rating = "4.8",
-                deliveryTime = "12-16 mins",
-                distance = "0.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_greek_yogurt_tuna_salad_1,
-                title = "Greek Yogurt Tuna Salad",
-                price = "279",
-                restaurantName = "Fresh & Fit",
-                rating = "4.8",
-                deliveryTime = "9-12 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED TUNA SALAD ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -18601,345 +18352,236 @@ fun TunaSaladDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = tunaSaladDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Tuna Salad items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("TUNA_SALAD_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_tuna),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Tuna Salad items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED TUNA SALAD RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val tunaSaladDietItems = listOf(
-        // 1-5: CLASSIC TUNA SALADS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.tuna_1,
-            title = "Classic Tuna Salad",
-            price = "249",
-            restaurantName = "Fresh Catch Deli",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.tuna_2,
-            title = "Simple Lemon Tuna Salad",
-            price = "219",
-            restaurantName = "Coastal Kitchen",
-            rating = "4.7",
-            deliveryTime = "7-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.tuna_3,
-            title = "Albacore Tuna Salad",
-            price = "289",
-            restaurantName = "Premium Catch",
-            rating = "4.9",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.tuna_4,
-            title = "Light Mayo Tuna Salad",
-            price = "229",
-            restaurantName = "Healthy Choices",
-            rating = "4.6",
-            deliveryTime = "6-9 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.tuna_5,
-            title = "Herbed Tuna Salad",
-            price = "259",
-            restaurantName = "Herb Garden",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 6-10: VEGETABLE TUNA SALADS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.tuna_6,
-            title = "Mediterranean Tuna Salad",
-            price = "299",
-            restaurantName = "Mediterranean Delight",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.tuna_7,
-            title = "Cucumber & Red Onion Tuna Salad",
-            price = "269",
-            restaurantName = "Fresh & Crunchy",
-            rating = "4.8",
-            deliveryTime = "9-12 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.tuna_8,
-            title = "Tomato & Basil Tuna Salad",
-            price = "279",
-            restaurantName = "Italian Sea",
-            rating = "4.7",
-            deliveryTime = "8-11 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.tuna_9,
-            title = "Bell Pepper & Corn Tuna Salad",
-            price = "289",
-            restaurantName = "Colorful Bowls",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.tuna_10,
-            title = "Greek Style Tuna Salad",
-            price = "309",
-            restaurantName = "Greek Flavors",
-            rating = "4.9",
-            deliveryTime = "12-16 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: FRUIT & NUT TUNA SALADS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.tuna_11,
-            title = "Avocado Tuna Salad",
-            price = "329",
-            restaurantName = "Avocado House",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.tuna_12,
-            title = "Apple & Walnut Tuna Salad",
-            price = "299",
-            restaurantName = "Fusion Fresh",
-            rating = "4.8",
-            deliveryTime = "14-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.tuna_13,
-            title = "Cranberry & Pecan Tuna Salad",
-            price = "319",
-            restaurantName = "Harvest Bowl",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.tuna_14,
-            title = "Mango & Avocado Tuna Salad",
-            price = "339",
-            restaurantName = "Tropical Bowl",
-            rating = "4.7",
-            deliveryTime = "11-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.tuna_15,
-            title = "Grape & Almond Tuna Salad",
-            price = "299",
-            restaurantName = "Nutty Fresh",
-            rating = "4.9",
-            deliveryTime = "15-19 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: PROTEIN-RICH & SPECIALTY TUNA SALADS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.tuna_16,
-            title = "Quinoa Tuna Protein Bowl",
-            price = "349",
-            restaurantName = "Protein Lab",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.tuna_17,
-            title = "Chickpea & Tuna Salad",
-            price = "289",
-            restaurantName = "Power Meals",
-            rating = "4.7",
-            deliveryTime = "10-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.tuna_18,
-            title = "Spicy Sriracha Tuna Salad",
-            price = "279",
-            restaurantName = "Spice Route",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.tuna_19,
-            title = "Wasabi Ginger Tuna Salad",
-            price = "309",
-            restaurantName = "Asian Fusion",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.tuna_20,
-            title = "Greek Yogurt Tuna Salad",
-            price = "269",
-            restaurantName = "Creamy Delights",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        tunaSaladDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Tuna Salad restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("TUNA_SALAD_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_tuna),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Tuna Salad restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun LentilSoupDietPage() {
+fun LentilSoupDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for LENTIL_SOUP_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: LENTIL_SOUP_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("LENTIL_SOUP_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("LENTIL_SOUP_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val lentilSoupDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -18956,31 +18598,31 @@ fun LentilSoupDietPage() {
                     id = "brown_lentils",
                     text = "Brown Lentils",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_brown_lentils  // Brown lentil/legume icon
+                    icon = R.drawable.ic_brown_lentils
                 ),
                 FilterChip(
                     id = "red_lentils",
                     text = "Red Lentils",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_red_lentils  // Red lentil/split icon
+                    icon = R.drawable.ic_red_lentils
                 ),
                 FilterChip(
                     id = "green_lentils",
                     text = "Green Lentils",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_green_lentils  // French/whole lentil icon
+                    icon = R.drawable.ic_green_lentils
                 ),
                 FilterChip(
                     id = "black_lentils",
                     text = "Black Lentils",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_black_lentils  // Black beluga lentil icon
+                    icon = R.drawable.ic_black_lentils
                 ),
                 FilterChip(
                     id = "yellow_lentils",
                     text = "Yellow Lentils",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_yellow_lentils  // Toor dal/split pea icon
+                    icon = R.drawable.ic_yellow_lentils
                 ),
 
                 // 3. VEGETABLE ADD-INS (TEXT ONLY)
@@ -19235,100 +18877,22 @@ fun LentilSoupDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = lentilSoupDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val lentilSoupDietItems = listOf(
-            // 1-6: LENTIL SOUP VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_lentil_soup_1,
-                title = "Classic Brown Lentil Soup",
-                price = "189",
-                restaurantName = "The Soup Kitchen",
-                rating = "4.8",
-                deliveryTime = "10-14 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_mediterranean_lentil_soup_1,
-                title = "Mediterranean Red Lentil Soup",
-                price = "219",
-                restaurantName = "Mediterranean Delights",
-                rating = "4.7",
-                deliveryTime = "12-16 mins",
-                distance = "0.6 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_indian_lentil_soup_1,
-                title = "Indian Masoor Dal Soup",
-                price = "179",
-                restaurantName = "Spice Route Cafe",
-                rating = "4.9",
-                deliveryTime = "9-13 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_spicy_lentil_soup_1,
-                title = "Spicy Turkish Ezogelin Soup",
-                price = "239",
-                restaurantName = "Istanbul Grill",
-                rating = "4.8",
-                deliveryTime = "11-15 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_protein_lentil_soup_1,
-                title = "High Protein Lentil & Quinoa Soup",
-                price = "259",
-                restaurantName = "Protein Lab",
-                rating = "4.8",
-                deliveryTime = "13-17 mins",
-                distance = "0.7 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_creamy_lentil_soup_1,
-                title = "Creamy Coconut Lentil Soup",
-                price = "199",
-                restaurantName = "Healthy Bowl",
-                rating = "4.7",
-                deliveryTime = "10-14 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED LENTIL SOUP ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -19336,334 +18900,209 @@ fun LentilSoupDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = lentilSoupDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Lentil Soup items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("LENTIL_SOUP_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_brown_lentils),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Lentil Soup items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED LENTIL SOUP RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val lentilSoupDietItems = listOf(
-        // 1-5: CLASSIC LENTIL SOUPS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.lentil_1,
-            title = "Classic Brown Lentil Soup",
-            price = "149",
-            restaurantName = "The Soup Kitchen",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.lentil_2,
-            title = "Simple Red Lentil Soup",
-            price = "129",
-            restaurantName = "Coastal Kitchen",
-            rating = "4.7",
-            deliveryTime = "7-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.lentil_3,
-            title = "French Green Lentil Soup",
-            price = "169",
-            restaurantName = "Premium Catch",
-            rating = "4.9",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.lentil_4,
-            title = "Light Vegetable Lentil Soup",
-            price = "139",
-            restaurantName = "Healthy Choices",
-            rating = "4.6",
-            deliveryTime = "6-9 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.lentil_5,
-            title = "Herbed Lentil & Spinach Soup",
-            price = "159",
-            restaurantName = "Herb Garden",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 6-10: INTERNATIONAL LENTIL SOUPS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.lentil_6,
-            title = "Mediterranean Lemon Lentil Soup",
-            price = "189",
-            restaurantName = "Mediterranean Delight",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.lentil_7,
-            title = "Turkish Red Lentil Soup (Mercimek)",
-            price = "179",
-            restaurantName = "Istanbul Flavors",
-            rating = "4.8",
-            deliveryTime = "9-12 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.lentil_8,
-            title = "Moroccan Harira Lentil Soup",
-            price = "199",
-            restaurantName = "Moroccan Spice",
-            rating = "4.7",
-            deliveryTime = "8-11 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.lentil_9,
-            title = "Ethiopian Misir Wot Lentil Soup",
-            price = "189",
-            restaurantName = "African Kitchen",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.lentil_10,
-            title = "Greek Lentil Soup (Fakes)",
-            price = "179",
-            restaurantName = "Greek Flavors",
-            rating = "4.9",
-            deliveryTime = "12-16 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: INDIAN-STYLE LENTIL SOUPS (DAL)
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.lentil_11,
-            title = "Masoor Dal Tadka Soup",
-            price = "159",
-            restaurantName = "Punjab Dhaba",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.lentil_12,
-            title = "Moong Dal Shorba",
-            price = "149",
-            restaurantName = "Royal Indian",
-            rating = "4.8",
-            deliveryTime = "14-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.lentil_13,
-            title = "Toor Dal & Vegetable Soup",
-            price = "139",
-            restaurantName = "Harvest Bowl",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.lentil_14,
-            title = "Urad Dal Rasam",
-            price = "129",
-            restaurantName = "South Indian Cafe",
-            rating = "4.7",
-            deliveryTime = "11-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.lentil_15,
-            title = "Panchmel Dal Soup (5 Lentils)",
-            price = "189",
-            restaurantName = "Rajasthani Thali",
-            rating = "4.9",
-            deliveryTime = "15-19 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: PROTEIN-RICH & SPECIALTY LENTIL SOUPS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.lentil_16,
-            title = "Quinoa & Lentil Power Soup",
-            price = "219",
-            restaurantName = "Protein Lab",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.lentil_17,
-            title = "Lentil & Chickpea High-Protein Soup",
-            price = "199",
-            restaurantName = "Power Meals",
-            rating = "4.7",
-            deliveryTime = "10-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.lentil_18,
-            title = "Spicy Chipotle Lentil Soup",
-            price = "179",
-            restaurantName = "Spice Route",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.lentil_19,
-            title = "Thai Coconut Lentil Soup",
-            price = "209",
-            restaurantName = "Asian Fusion",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.lentil_20,
-            title = "Smoked Paprika & Lentil Soup",
-            price = "169",
-            restaurantName = "Creamy Delights",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        lentilSoupDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Lentil Soup restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("LENTIL_SOUP_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_brown_lentils),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Lentil Soup restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

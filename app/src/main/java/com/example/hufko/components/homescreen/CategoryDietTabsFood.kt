@@ -963,10 +963,10 @@ fun CategoryDietTabsFood(
             DietCategoryPage.EggWhiteOmelette -> EggWhiteOmeletteDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.TunaSalad -> TunaSaladDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.LentilSoup -> LentilSoupDietPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.CottageCheese -> CottageCheeseDietPage()
-            DietCategoryPage.SproutsSalad -> SproutsSaladDietPage()
-            DietCategoryPage.BrownRiceBowl -> BrownRiceBowlDietPage()
-            DietCategoryPage.SteamedVeggies -> SteamedVeggiesDietPage()
+            DietCategoryPage.CottageCheese -> CottageCheeseDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.SproutsSalad -> SproutsSaladDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.BrownRiceBowl -> BrownRiceBowlDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.SteamedVeggies -> SteamedVeggiesDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.FruitBowl -> FruitBowlDietPage()
             DietCategoryPage.DetoxWater -> DetoxWaterDietPage()
             DietCategoryPage.HerbalTea -> HerbalTeaDietPage()
@@ -19108,12 +19108,28 @@ fun LentilSoupDietPage(
 }
 
 @Composable
-fun CottageCheeseDietPage() {
+fun CottageCheeseDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for COTTAGE_CHEESE_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: COTTAGE_CHEESE_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("COTTAGE_CHEESE_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("COTTAGE_CHEESE_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val cottageCheeseDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -19130,31 +19146,31 @@ fun CottageCheeseDietPage() {
                     id = "low_fat_cottage",
                     text = "Low Fat (1-2%)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_low_fat_cottage  // Low-fat dairy icon
+                    icon = R.drawable.ic_low_fat_cottage
                 ),
                 FilterChip(
                     id = "regular_cottage",
                     text = "Regular (4%)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_regular_cottage  // Full-fat dairy icon
+                    icon = R.drawable.ic_regular_cottage
                 ),
                 FilterChip(
                     id = "creamed_cottage",
                     text = "Creamed Cottage Cheese",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_creamed_cottage  // Creamy/rich dairy icon
+                    icon = R.drawable.ic_creamed_cottage
                 ),
                 FilterChip(
                     id = "dry_curd_cottage",
                     text = "Dry Curd (Unsalted)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_dry_curd_cottage  // Dry cheese curd icon
+                    icon = R.drawable.ic_dry_curd_cottage
                 ),
                 FilterChip(
                     id = "whipped_cottage",
                     text = "Whipped Cottage Cheese",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_whipped_cottage  // Whipped/airy icon
+                    icon = R.drawable.ic_whipped_cottage
                 ),
 
                 // 3. FRUIT ADD-INS (TEXT ONLY)
@@ -19302,7 +19318,8 @@ fun CottageCheeseDietPage() {
                     text = "Onion Powder",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 7. PROTEIN ADDITIONS (TEXT ONLY)
+
+                // 6. PROTEIN ADDITIONS (TEXT ONLY)
                 FilterChip(
                     id = "hard_boiled_egg_cottage",
                     text = "Hard Boiled Egg",
@@ -19324,7 +19341,7 @@ fun CottageCheeseDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 8. SWEETENERS & FLAVORINGS (TEXT ONLY)
+                // 7. SWEETENERS & FLAVORINGS (TEXT ONLY)
                 FilterChip(
                     id = "honey_cottage",
                     text = "Honey",
@@ -19356,7 +19373,7 @@ fun CottageCheeseDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 9. DIETARY PREFERENCES (TEXT ONLY)
+                // 8. DIETARY PREFERENCES (TEXT ONLY)
                 FilterChip(
                     id = "low_fat_diet_cottage",
                     text = "Low Fat",
@@ -19393,7 +19410,7 @@ fun CottageCheeseDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 10. MEAL TYPE (TEXT ONLY)
+                // 9. MEAL TYPE (TEXT ONLY)
                 FilterChip(
                     id = "breakfast_cottage",
                     text = "Breakfast",
@@ -19420,7 +19437,7 @@ fun CottageCheeseDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 11. SERVING STYLE (TEXT ONLY)
+                // 10. SERVING STYLE (TEXT ONLY)
                 FilterChip(
                     id = "bowl_cottage",
                     text = "Cottage Cheese Bowl",
@@ -19447,7 +19464,7 @@ fun CottageCheeseDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 12. PRICE RANGE (TEXT ONLY)
+                // 11. PRICE RANGE (TEXT ONLY)
                 FilterChip(
                     id = "cottage_under_150",
                     text = "Under ₹150",
@@ -19469,7 +19486,7 @@ fun CottageCheeseDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 13. SORT BY DROPDOWN
+                // 12. SORT BY DROPDOWN
                 FilterChip(
                     id = "sort_by_cottage",
                     text = "Sort By",
@@ -19479,100 +19496,22 @@ fun CottageCheeseDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = cottageCheeseDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val cottageCheeseDietItems = listOf(
-            // 1-6: COTTAGE CHEESE VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_cottage_1,
-                title = "Classic Cottage Cheese Bowl",
-                price = "159",
-                restaurantName = "The Curd Bowl",
-                rating = "4.8",
-                deliveryTime = "8-12 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_fruit_cottage_1,
-                title = "Berry Bliss Cottage Cheese",
-                price = "189",
-                restaurantName = "Berry Fresh Cafe",
-                rating = "4.9",
-                deliveryTime = "10-14 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_savory_cottage_1,
-                title = "Garden Herb Cottage Cheese",
-                price = "169",
-                restaurantName = "Green Harvest",
-                rating = "4.7",
-                deliveryTime = "9-13 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_protein_cottage_1,
-                title = "High Protein Cottage Cheese Plate",
-                price = "229",
-                restaurantName = "Protein Lab",
-                rating = "4.8",
-                deliveryTime = "11-15 mins",
-                distance = "0.6 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_tropical_cottage_1,
-                title = "Tropical Mango Cottage Cheese",
-                price = "199",
-                restaurantName = "Tropical Bowl",
-                rating = "4.8",
-                deliveryTime = "9-12 mins",
-                distance = "0.4 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_avocado_cottage_1,
-                title = "Avocado & Cottage Cheese Toast",
-                price = "249",
-                restaurantName = "Toast & Co",
-                rating = "4.9",
-                deliveryTime = "12-16 mins",
-                distance = "0.7 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED COTTAGE CHEESE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -19580,344 +19519,236 @@ fun CottageCheeseDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = cottageCheeseDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Cottage Cheese items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("COTTAGE_CHEESE_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_low_fat_cottage),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Cottage Cheese items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED COTTAGE CHEESE RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val cottageCheeseDietItems = listOf(
-        // 1-5: CLASSIC COTTAGE CHEESE DISHES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.cottage_1,
-            title = "Classic Paneer Tikka",
-            price = "249",
-            restaurantName = "Tandoori Nights",
-            rating = "4.9",
-            deliveryTime = "12-16 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.cottage_2,
-            title = "Grilled Cottage Cheese Salad",
-            price = "199",
-            restaurantName = "Fresh & Fit",
-            rating = "4.7",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.cottage_3,
-            title = "Cottage Cheese Stir-Fry",
-            price = "189",
-            restaurantName = "Healthy Bowl",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.cottage_4,
-            title = "Herbed Paneer Skewers",
-            price = "229",
-            restaurantName = "Green Kitchen",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.cottage_5,
-            title = "Cottage Cheese & Spinach Salad",
-            price = "179",
-            restaurantName = "Leaf & Love",
-            rating = "4.7",
-            deliveryTime = "7-11 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 6-10: INTERNATIONAL COTTAGE CHEESE DISHES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.cottage_6,
-            title = "Mediterranean Feta-Style Cottage Cheese",
-            price = "259",
-            restaurantName = "Mediterranean Bowl",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.cottage_7,
-            title = "Greek Cottage Cheese Salad",
-            price = "219",
-            restaurantName = "Athens Delights",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.cottage_8,
-            title = "Italian Baked Cottage Cheese",
-            price = "279",
-            restaurantName = "Roma Kitchen",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.cottage_9,
-            title = "Mexican Cottage Cheese Bowl",
-            price = "239",
-            restaurantName = "Cantina Fresh",
-            rating = "4.7",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.cottage_10,
-            title = "French Herbed Fromage Blanc",
-            price = "289",
-            restaurantName = "Le Bistro",
-            rating = "4.9",
-            deliveryTime = "15-19 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: INDIAN-STYLE COTTAGE CHEESE (PANEER)
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.cottage_11,
-            title = "Palak Paneer (Low-Fat)",
-            price = "229",
-            restaurantName = "Punjab Dhaba",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "1.0 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.cottage_12,
-            title = "Matar Paneer (Diet Version)",
-            price = "209",
-            restaurantName = "Royal Indian",
-            rating = "4.8",
-            deliveryTime = "15-19 mins",
-            distance = "1.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.cottage_13,
-            title = "Paneer Bhurji (Low-Oil)",
-            price = "189",
-            restaurantName = "Harvest Bowl",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.cottage_14,
-            title = "Achari Paneer Tikka",
-            price = "249",
-            restaurantName = "Tandoori Zaika",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.cottage_15,
-            title = "Kadai Paneer (Light)",
-            price = "239",
-            restaurantName = "Spice Cottage",
-            rating = "4.8",
-            deliveryTime = "16-20 mins",
-            distance = "1.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: PROTEIN-RICH & SPECIALTY COTTAGE CHEESE
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.cottage_16,
-            title = "High-Protein Cottage Cheese Bowl",
-            price = "269",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "12-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.cottage_17,
-            title = "Cottage Cheese & Quinoa Power Bowl",
-            price = "289",
-            restaurantName = "Power Meals",
-            rating = "4.8",
-            deliveryTime = "11-15 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.cottage_18,
-            title = "Smoked Cottage Cheese Platter",
-            price = "299",
-            restaurantName = "Spice Route",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.cottage_19,
-            title = "Thai Green Curry with Cottage Cheese",
-            price = "259",
-            restaurantName = "Asian Fusion",
-            rating = "4.8",
-            deliveryTime = "10-14 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.cottage_20,
-            title = "Cottage Cheese & Broccoli Bake",
-            price = "249",
-            restaurantName = "Creamy Delights",
-            rating = "4.8",
-            deliveryTime = "13-17 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        cottageCheeseDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Cottage Cheese restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("COTTAGE_CHEESE_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_low_fat_cottage),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Cottage Cheese restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun SproutsSaladDietPage() {
+fun SproutsSaladDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SPROUTS_SALAD_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SPROUTS_SALAD_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("SPROUTS_SALAD_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SPROUTS_SALAD_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val sproutsSaladDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -19934,32 +19765,33 @@ fun SproutsSaladDietPage() {
                     id = "moong_sprouts",
                     text = "Moong Bean Sprouts",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_moong_sprouts  // Green moong dal icon
+                    icon = R.drawable.ic_moong_sprouts
                 ),
                 FilterChip(
                     id = "chickpea_sprouts",
                     text = "Chickpea Sprouts (Kabuli)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_chickpea_sprouts  // Chickpea/garbanzo icon
+                    icon = R.drawable.ic_chickpea_sprouts
                 ),
                 FilterChip(
                     id = "moth_bean_sprouts",
                     text = "Moth Bean Sprouts (Matki)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_moth_bean  // Small brown bean icon
+                    icon = R.drawable.ic_moth_bean
                 ),
                 FilterChip(
                     id = "lentil_sprouts",
                     text = "Lentil Sprouts (Masoor)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_lentil_sprouts  // Red/orange lentil icon
+                    icon = R.drawable.ic_lentil_sprouts
                 ),
                 FilterChip(
                     id = "fenugreek_sprouts",
                     text = "Fenugreek Sprouts (Methi)",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_fenugreek  // Fenugreek seed icon
+                    icon = R.drawable.ic_fenugreek
                 ),
+
                 // 3. VEGETABLE ADD-INS (TEXT ONLY - SUPPLEMENTARY)
                 FilterChip(
                     id = "onion_sprouts",
@@ -20181,7 +20013,8 @@ fun SproutsSaladDietPage() {
                     text = "Tamarind Chutney",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 10. DIETARY PREFERENCES (TEXT ONLY)
+
+                // 9. DIETARY PREFERENCES (TEXT ONLY)
                 FilterChip(
                     id = "low_calorie_sprouts",
                     text = "Low Calorie",
@@ -20217,7 +20050,8 @@ fun SproutsSaladDietPage() {
                     text = "No Oil",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 13. PRICE RANGE (TEXT ONLY)
+
+                // 10. PRICE RANGE (TEXT ONLY)
                 FilterChip(
                     id = "sprouts_under_80",
                     text = "Under ₹80",
@@ -20239,7 +20073,7 @@ fun SproutsSaladDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 14. SORT BY DROPDOWN
+                // 11. SORT BY DROPDOWN
                 FilterChip(
                     id = "sort_by_sprouts",
                     text = "Sort By",
@@ -20249,100 +20083,22 @@ fun SproutsSaladDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = sproutsSaladDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val sproutsSaladDietItems = listOf(
-            // 1-6: SPROUTS SALAD VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_sprouts_1,
-                title = "Classic Moong Sprouts Salad",
-                price = "89",
-                restaurantName = "Sprout House",
-                rating = "4.7",
-                deliveryTime = "5-9 mins",
-                distance = "0.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_chaat_sprouts_1,
-                title = "Chatpata Sprouts Chaat",
-                price = "99",
-                restaurantName = "Street Food Cafe",
-                rating = "4.9",
-                deliveryTime = "7-11 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_south_indian_sprouts_1,
-                title = "South Indian Sundal",
-                price = "79",
-                restaurantName = "Madras Kitchen",
-                rating = "4.8",
-                deliveryTime = "6-10 mins",
-                distance = "0.3 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jubilee Hills, Hyderabad"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_protein_sprouts_1,
-                title = "High-Protein Chickpea Sprouts",
-                price = "129",
-                restaurantName = "Protein Power",
-                rating = "4.8",
-                deliveryTime = "8-12 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_fruit_sprouts_1,
-                title = "Sprouts & Pomegranate Salad",
-                price = "119",
-                restaurantName = "Fresh Bowl",
-                rating = "4.7",
-                deliveryTime = "6-9 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_mexican_sprouts_1,
-                title = "Mexican Style Sprouts Bowl",
-                price = "149",
-                restaurantName = "Global Greens",
-                rating = "4.9",
-                deliveryTime = "9-13 mins",
-                distance = "0.6 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Connaught Place, Delhi"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED SPROUTS SALAD ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -20350,345 +20106,236 @@ fun SproutsSaladDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = sproutsSaladDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Sprouts Salad items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SPROUTS_SALAD_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_moong_sprouts),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Sprouts Salad items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED SPROUTS SALAD RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val sproutsSaladDietItems = listOf(
-        // 1-5: CLASSIC SPROUTS SALADS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.sprouts_1,
-            title = "Classic Moong Sprouts Salad",
-            price = "149",
-            restaurantName = "Fresh & Fit",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.sprouts_2,
-            title = "Mixed Sprouts Chaat",
-            price = "129",
-            restaurantName = "Healthy Bites",
-            rating = "4.7",
-            deliveryTime = "7-11 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.sprouts_3,
-            title = "Sprouts & Pomegranate Salad",
-            price = "169",
-            restaurantName = "Green Bowl",
-            rating = "4.9",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.sprouts_4,
-            title = "Lemon Tossed Sprouts",
-            price = "119",
-            restaurantName = "Fresh Press",
-            rating = "4.6",
-            deliveryTime = "6-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.sprouts_5,
-            title = "Sprouts & Vegetable Medley",
-            price = "159",
-            restaurantName = "Harvest Bowl",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: INTERNATIONAL SPROUTS SALADS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.sprouts_6,
-            title = "Thai Sprouts Salad with Peanut Dressing",
-            price = "189",
-            restaurantName = "Asian Greens",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.sprouts_7,
-            title = "Mediterranean Sprouts & Feta",
-            price = "209",
-            restaurantName = "Mediterranean Delight",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.sprouts_8,
-            title = "Mexican Sprouts Salsa Bowl",
-            price = "179",
-            restaurantName = "Cantina Fresh",
-            rating = "4.7",
-            deliveryTime = "10-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.sprouts_9,
-            title = "Japanese Sprouts with Sesame",
-            price = "199",
-            restaurantName = "Tokyo Bistro",
-            rating = "4.8",
-            deliveryTime = "13-17 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.sprouts_10,
-            title = "Middle Eastern Sprouts Tabbouleh",
-            price = "189",
-            restaurantName = "Falafel House",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: PROTEIN-RICH SPROUTS COMBOS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.sprouts_11,
-            title = "High-Protein Sprouts & Chickpea Salad",
-            price = "219",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "10-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.sprouts_12,
-            title = "Sprouts & Tofu Power Bowl",
-            price = "229",
-            restaurantName = "Power Meals",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.sprouts_13,
-            title = "Sprouts & Grilled Paneer Salad",
-            price = "249",
-            restaurantName = "Fusion Fresh",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.sprouts_14,
-            title = "Sprouts & Quinoa Protein Mix",
-            price = "239",
-            restaurantName = "Healthy Habits",
-            rating = "4.8",
-            deliveryTime = "11-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.sprouts_15,
-            title = "Sprouts & Edamame Salad",
-            price = "259",
-            restaurantName = "Green Protein",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: INDIAN-STYLE & SPECIALTY SPROUTS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.sprouts_16,
-            title = "Sprouts Chaat with Yogurt",
-            price = "139",
-            restaurantName = "Street Food Tales",
-            rating = "4.7",
-            deliveryTime = "7-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.sprouts_17,
-            title = "Punjabi Style Sprouts Salad",
-            price = "149",
-            restaurantName = "Punjab Dhaba",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.sprouts_18,
-            title = "South Indian Sprouts Sundal",
-            price = "119",
-            restaurantName = "Madras Cafe",
-            rating = "4.8",
-            deliveryTime = "6-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.sprouts_19,
-            title = "Sprouts & Mango Salad (Seasonal)",
-            price = "169",
-            restaurantName = "Seasonal Tastes",
-            rating = "4.9",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.sprouts_20,
-            title = "Warm Sprouts & Vegetable Salad",
-            price = "159",
-            restaurantName = "Comfort Bowl",
-            rating = "4.7",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        sproutsSaladDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Sprouts Salad restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SPROUTS_SALAD_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_moong_sprouts),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Sprouts Salad restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun BrownRiceBowlDietPage() {
+fun BrownRiceBowlDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for BROWN_RICE_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BROWN_RICE_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("BROWN_RICE_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BROWN_RICE_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val brownRiceBowlDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -20705,33 +20352,34 @@ fun BrownRiceBowlDietPage() {
                     id = "short_grain_brown",
                     text = "Short Grain Brown Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_short_grain_rice  // Short grain rice icon
+                    icon = R.drawable.ic_short_grain_rice
                 ),
                 FilterChip(
                     id = "long_grain_brown",
                     text = "Long Grain Brown Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_long_grain_rice  // Long grain rice icon
+                    icon = R.drawable.ic_long_grain_rice
                 ),
                 FilterChip(
                     id = "basmati_brown",
                     text = "Brown Basmati Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_basmati_rice_icon  // Basmati rice icon
+                    icon = R.drawable.ic_basmati_rice_icon
                 ),
                 FilterChip(
                     id = "jasmine_brown",
                     text = "Brown Jasmine Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_jasmine_rice  // Jasmine rice icon
+                    icon = R.drawable.ic_jasmine_rice
                 ),
                 FilterChip(
                     id = "red_rice_brown",
                     text = "Red Brown Rice",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_red_rice  // Red rice icon
+                    icon = R.drawable.ic_red_rice
                 ),
-                // 4. VEGETABLE ADD-INS (TEXT ONLY)
+
+                // 3. VEGETABLE ADD-INS (TEXT ONLY)
                 FilterChip(
                     id = "broccoli_brown",
                     text = "Broccoli",
@@ -20783,7 +20431,7 @@ fun BrownRiceBowlDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 5. PROTEIN OPTIONS (TEXT ONLY)
+                // 4. PROTEIN OPTIONS (TEXT ONLY)
                 FilterChip(
                     id = "grilled_chicken_brown",
                     text = "Grilled Chicken",
@@ -20824,7 +20472,8 @@ fun BrownRiceBowlDietPage() {
                     text = "Edamame",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 7. SAUCES & DRESSINGS (TEXT ONLY)
+
+                // 5. SAUCES & DRESSINGS (TEXT ONLY)
                 FilterChip(
                     id = "teriyaki_brown",
                     text = "Teriyaki Sauce",
@@ -20866,7 +20515,7 @@ fun BrownRiceBowlDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 8. INDIAN GRAVY STYLES (TEXT ONLY)
+                // 6. INDIAN GRAVY STYLES (TEXT ONLY)
                 FilterChip(
                     id = "kadai_brown",
                     text = "Kadai Gravy",
@@ -20888,7 +20537,7 @@ fun BrownRiceBowlDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 9. TOPPINGS & EXTRAS (TEXT ONLY)
+                // 7. TOPPINGS & EXTRAS (TEXT ONLY)
                 FilterChip(
                     id = "sesame_brown",
                     text = "Sesame Seeds",
@@ -20920,7 +20569,7 @@ fun BrownRiceBowlDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 10. DIETARY PREFERENCES (WITH ICONS - MAIN CATEGORY)
+                // 8. DIETARY PREFERENCES (TEXT ONLY)
                 FilterChip(
                     id = "gluten_free_brown",
                     text = "Gluten Free",
@@ -20932,7 +20581,7 @@ fun BrownRiceBowlDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 11. PRICE RANGE (TEXT ONLY)
+                // 9. PRICE RANGE (TEXT ONLY)
                 FilterChip(
                     id = "brown_under_200",
                     text = "Under ₹200",
@@ -20953,7 +20602,8 @@ fun BrownRiceBowlDietPage() {
                     text = "Above ₹400",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 13. SORT BY DROPDOWN
+
+                // 10. SORT BY DROPDOWN
                 FilterChip(
                     id = "sort_by_brown",
                     text = "Sort By",
@@ -20963,100 +20613,22 @@ fun BrownRiceBowlDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = brownRiceBowlDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val brownRiceBowlDietItems = listOf(
-            // 1-6: BROWN RICE BOWL VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_brown_rice_1,
-                title = "Classic Brown Rice Bowl",
-                price = "149",
-                restaurantName = "Rice Bowl Cafe",
-                rating = "4.8",
-                deliveryTime = "8-12 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_veggie_brown_rice_1,
-                title = "Garden Vegetable Brown Rice",
-                price = "139",
-                restaurantName = "Green Kitchen",
-                rating = "4.7",
-                deliveryTime = "7-11 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_paneer_brown_rice_1,
-                title = "Paneer Tikka Brown Rice Bowl",
-                price = "189",
-                restaurantName = "Tandoori Bites",
-                rating = "4.9",
-                deliveryTime = "9-13 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_chicken_brown_rice_1,
-                title = "Grilled Chicken Brown Rice",
-                price = "219",
-                restaurantName = "Protein House",
-                rating = "4.9",
-                deliveryTime = "10-14 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_mediterranean_brown_rice_1,
-                title = "Mediterranean Brown Rice Bowl",
-                price = "199",
-                restaurantName = "Olive Garden",
-                rating = "4.8",
-                deliveryTime = "8-12 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_mexican_brown_rice_1,
-                title = "Mexican Fiesta Brown Rice",
-                price = "179",
-                restaurantName = "Salsa Fresh",
-                rating = "4.7",
-                deliveryTime = "9-13 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED BROWN RICE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -21064,345 +20636,236 @@ fun BrownRiceBowlDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = brownRiceBowlDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Brown Rice items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("BROWN_RICE_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_short_grain_rice),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Brown Rice items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED BROWN RICE RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val brownRiceDietItems = listOf(
-        // 1-5: CLASSIC BROWN RICE BOWLS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.brown_rice_1,
-            title = "Classic Brown Rice with Vegetables",
-            price = "159",
-            restaurantName = "Fresh & Fit",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.brown_rice_2,
-            title = "Brown Rice & Chickpea Bowl",
-            price = "169",
-            restaurantName = "Healthy Bites",
-            rating = "4.7",
-            deliveryTime = "7-11 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.brown_rice_3,
-            title = "Brown Rice Pulao with Peas",
-            price = "149",
-            restaurantName = "Green Bowl",
-            rating = "4.9",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.brown_rice_4,
-            title = "Lemon Brown Rice with Nuts",
-            price = "139",
-            restaurantName = "Fresh Press",
-            rating = "4.6",
-            deliveryTime = "6-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.brown_rice_5,
-            title = "Brown Rice & Mixed Beans Bowl",
-            price = "179",
-            restaurantName = "Harvest Bowl",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: ASIAN-INSPIRED BROWN RICE
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.brown_rice_6,
-            title = "Thai Brown Rice Bowl with Tofu",
-            price = "199",
-            restaurantName = "Asian Greens",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.brown_rice_7,
-            title = "Brown Rice Sushi Bowl",
-            price = "219",
-            restaurantName = "Tokyo Bistro",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.brown_rice_8,
-            title = "Stir-Fried Brown Rice with Vegetables",
-            price = "179",
-            restaurantName = "Wok Express",
-            rating = "4.7",
-            deliveryTime = "10-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.brown_rice_9,
-            title = "Brown Rice Bibimbap Bowl",
-            price = "229",
-            restaurantName = "Korean Kitchen",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.brown_rice_10,
-            title = "Coconut Brown Rice with Vegetables",
-            price = "189",
-            restaurantName = "Tropical Bowl",
-            rating = "4.8",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: PROTEIN-RICH BROWN RICE BOWLS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.brown_rice_11,
-            title = "Brown Rice with Lentils & Vegetables",
-            price = "189",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "10-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.brown_rice_12,
-            title = "Brown Rice & Grilled Chicken Bowl",
-            price = "249",
-            restaurantName = "Power Meals",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.brown_rice_13,
-            title = "Brown Rice with Paneer & Peppers",
-            price = "219",
-            restaurantName = "Fusion Fresh",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.brown_rice_14,
-            title = "Brown Rice & Egg White Bowl",
-            price = "209",
-            restaurantName = "Healthy Habits",
-            rating = "4.8",
-            deliveryTime = "11-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.brown_rice_15,
-            title = "Brown Rice with Edamame & Corn",
-            price = "199",
-            restaurantName = "Green Protein",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: INDIAN-STYLE & SPECIALTY BROWN RICE
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.brown_rice_16,
-            title = "Brown Rice Vegetable Biryani",
-            price = "189",
-            restaurantName = "Biryani Bliss",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.brown_rice_17,
-            title = "Brown Rice Khichdi Bowl",
-            price = "149",
-            restaurantName = "Comfort Food",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.brown_rice_18,
-            title = "Curd Brown Rice with Vegetables",
-            price = "139",
-            restaurantName = "Madras Cafe",
-            rating = "4.7",
-            deliveryTime = "6-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.brown_rice_19,
-            title = "Brown Rice & Pumpkin Seeds Bowl",
-            price = "179",
-            restaurantName = "Seasonal Tastes",
-            rating = "4.9",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.brown_rice_20,
-            title = "Warm Brown Rice & Kale Bowl",
-            price = "169",
-            restaurantName = "Harvest Fresh",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        brownRiceDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Brown Rice restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("BROWN_RICE_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_short_grain_rice),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Brown Rice restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun SteamedVeggiesDietPage() {
+fun SteamedVeggiesDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for STEAMED_VEG_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: STEAMED_VEG_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("STEAMED_VEG_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("STEAMED_VEG_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val steamedVeggiesDietFilters = FilterConfig(
             filters = listOf(
                 // 1. Main Filters Dropdown
@@ -21419,31 +20882,31 @@ fun SteamedVeggiesDietPage() {
                     id = "root_veggies",
                     text = "Root Vegetables",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_root_vegetable  // Carrot/beetroot icon
+                    icon = R.drawable.ic_root_vegetable
                 ),
                 FilterChip(
                     id = "leafy_greens",
                     text = "Leafy Greens",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_leafy_greens  // Spinach/kale icon
+                    icon = R.drawable.ic_leafy_greens
                 ),
                 FilterChip(
                     id = "cruciferous",
                     text = "Cruciferous",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_broccoli  // Broccoli/cauliflower icon
+                    icon = R.drawable.ic_broccoli
                 ),
                 FilterChip(
                     id = "gourd_veggies",
                     text = "Gourds & Squash",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_squash  // Pumpkin/zucchini icon
+                    icon = R.drawable.ic_squash
                 ),
                 FilterChip(
                     id = "legumes_steamed",
                     text = "Fresh Legumes",
                     type = FilterType.WITH_LEFT_ICON,
-                    icon = R.drawable.ic_peas_pod  // Peas/beans icon
+                    icon = R.drawable.ic_peas_pod
                 ),
 
                 // 3. SPECIFIC ROOT VEGETABLES (TEXT ONLY)
@@ -21582,7 +21045,8 @@ fun SteamedVeggiesDietPage() {
                     text = "Onions",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 10. PROTEIN OPTIONS (TEXT ONLY - SUBSET OF PROTEIN)
+
+                // 9. PROTEIN OPTIONS (TEXT ONLY - SUBSET OF PROTEIN)
                 FilterChip(
                     id = "paneer_steamed",
                     text = "Steamed Paneer",
@@ -21613,7 +21077,8 @@ fun SteamedVeggiesDietPage() {
                     text = "Chickpeas",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 12. SEASONING OPTIONS (TEXT ONLY)
+
+                // 10. SEASONING OPTIONS (TEXT ONLY)
                 FilterChip(
                     id = "salt_pepper",
                     text = "Salt & Pepper",
@@ -21635,7 +21100,7 @@ fun SteamedVeggiesDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 13. DRESSING OPTIONS (TEXT ONLY)
+                // 11. DRESSING OPTIONS (TEXT ONLY)
                 FilterChip(
                     id = "olive_oil_steamed",
                     text = "Extra Virgin Olive Oil",
@@ -21652,7 +21117,7 @@ fun SteamedVeggiesDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 15. DIETARY OPTIONS (TEXT ONLY)
+                // 12. DIETARY OPTIONS (TEXT ONLY)
                 FilterChip(
                     id = "low_carb_steamed",
                     text = "Low Carb",
@@ -21678,7 +21143,8 @@ fun SteamedVeggiesDietPage() {
                     text = "Keto Friendly",
                     type = FilterType.TEXT_ONLY
                 ),
-                // 17. STYLE OPTIONS (TEXT ONLY)
+
+                // 13. STYLE OPTIONS (TEXT ONLY)
                 FilterChip(
                     id = "whole_steamed",
                     text = "Whole Vegetables",
@@ -21695,7 +21161,7 @@ fun SteamedVeggiesDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 18. PRICE RANGE (TEXT ONLY)
+                // 14. PRICE RANGE (TEXT ONLY)
                 FilterChip(
                     id = "steamed_under_100",
                     text = "Under ₹100",
@@ -21717,7 +21183,7 @@ fun SteamedVeggiesDietPage() {
                     type = FilterType.TEXT_ONLY
                 ),
 
-                // 19. SORT BY DROPDOWN
+                // 15. SORT BY DROPDOWN
                 FilterChip(
                     id = "sort_by_steamed",
                     text = "Sort By",
@@ -21727,100 +21193,22 @@ fun SteamedVeggiesDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = steamedVeggiesDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val steamedVeggiesDietItems = listOf(
-            // 1-6: STEAMED VEGGIES DIET VARIETIES
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_steamed_veggies_1,
-                title = "Classic Steamed Vegetable Platter",
-                price = "129",
-                restaurantName = "Pure Steam Kitchen",
-                rating = "4.8",
-                deliveryTime = "8-12 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_green_steamed_veggies_1,
-                title = "Green Steam Bowl - Broccoli & Spinach",
-                price = "149",
-                restaurantName = "Green Kitchen",
-                rating = "4.7",
-                deliveryTime = "7-11 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_root_steamed_veggies_1,
-                title = "Root Vegetable Steam Medley",
-                price = "139",
-                restaurantName = "Harvest Bowl",
-                rating = "4.9",
-                deliveryTime = "9-13 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_protein_steamed_veggies_1,
-                title = "Steamed Veggies with Paneer",
-                price = "189",
-                restaurantName = "Protein House",
-                rating = "4.9",
-                deliveryTime = "10-14 mins",
-                distance = "0.6 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_asian_steamed_veggies_1,
-                title = "Asian Style Steamed Vegetables",
-                price = "169",
-                restaurantName = "Asian Greens",
-                rating = "4.8",
-                deliveryTime = "8-12 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_special_steamed_veggies_1,
-                title = "Steamed Veggie Diet Combo with Hummus",
-                price = "179",
-                restaurantName = "Soulful Bowl",
-                rating = "4.8",
-                deliveryTime = "9-13 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED STEAMED VEGGIES ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -21828,334 +21216,209 @@ fun SteamedVeggiesDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = steamedVeggiesDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Steamed Veggies items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("STEAMED_VEG_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_root_vegetable),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Steamed Veggies items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED STEAMED VEGGIES RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val steamedVeggiesDietItems = listOf(
-        // 1-5: CLASSIC STEAMED VEGGIE PLATTERS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.steamed_veggies_1,
-            title = "Classic Mixed Steamed Vegetables",
-            price = "129",
-            restaurantName = "Fresh & Fit",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.steamed_veggies_2,
-            title = "Broccoli & Cauliflower Steam Bowl",
-            price = "139",
-            restaurantName = "Healthy Bites",
-            rating = "4.7",
-            deliveryTime = "7-11 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.steamed_veggies_3,
-            title = "Carrot, Beans & Peas Steam Medley",
-            price = "119",
-            restaurantName = "Green Bowl",
-            rating = "4.9",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.steamed_veggies_4,
-            title = "Steamed Spinach & Corn Delight",
-            price = "129",
-            restaurantName = "Fresh Press",
-            rating = "4.6",
-            deliveryTime = "6-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.steamed_veggies_5,
-            title = "Rainbow Steamed Vegetables",
-            price = "149",
-            restaurantName = "Harvest Bowl",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: ASIAN-INSPIRED STEAMED VEGGIES
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.steamed_veggies_6,
-            title = "Thai Steamed Veggies with Lemongrass",
-            price = "169",
-            restaurantName = "Asian Greens",
-            rating = "4.9",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.steamed_veggies_7,
-            title = "Japanese Steamed Vegetable Platter",
-            price = "179",
-            restaurantName = "Tokyo Bistro",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.steamed_veggies_8,
-            title = "Chinese Style Steamed Greens",
-            price = "149",
-            restaurantName = "Wok Express",
-            rating = "4.7",
-            deliveryTime = "10-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.steamed_veggies_9,
-            title = "Korean Steamed Vegetable Banchan",
-            price = "159",
-            restaurantName = "Korean Kitchen",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.steamed_veggies_10,
-            title = "Coconut Steam Vegetables",
-            price = "169",
-            restaurantName = "Tropical Bowl",
-            rating = "4.8",
-            deliveryTime = "11-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: PROTEIN-PACKED STEAMED VEGGIE BOWLS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.steamed_veggies_11,
-            title = "Steamed Veggies with Paneer",
-            price = "189",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "10-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.steamed_veggies_12,
-            title = "Steamed Broccoli with Grilled Chicken",
-            price = "219",
-            restaurantName = "Power Meals",
-            rating = "4.8",
-            deliveryTime = "12-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.steamed_veggies_13,
-            title = "Steamed Vegetables with Tofu",
-            price = "179",
-            restaurantName = "Fusion Fresh",
-            rating = "4.9",
-            deliveryTime = "13-17 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.steamed_veggies_14,
-            title = "Steamed Veggies & Boiled Eggs",
-            price = "169",
-            restaurantName = "Healthy Habits",
-            rating = "4.8",
-            deliveryTime = "11-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.steamed_veggies_15,
-            title = "Steamed Edamame & Vegetable Bowl",
-            price = "189",
-            restaurantName = "Green Protein",
-            rating = "4.9",
-            deliveryTime = "14-18 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: INDIAN-STYLE & SPECIALTY STEAMED VEGGIES
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.steamed_veggies_16,
-            title = "Steamed Vegetable Khichdi",
-            price = "149",
-            restaurantName = "Biryani Bliss",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.steamed_veggies_17,
-            title = "South Indian Steam Sundal Platter",
-            price = "129",
-            restaurantName = "Madras Cafe",
-            rating = "4.8",
-            deliveryTime = "8-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.steamed_veggies_18,
-            title = "Steamed Veggie Salad Bowl",
-            price = "139",
-            restaurantName = "Madras Cafe",
-            rating = "4.7",
-            deliveryTime = "6-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.steamed_veggies_19,
-            title = "Steamed Veggies with Hummus",
-            price = "169",
-            restaurantName = "Seasonal Tastes",
-            rating = "4.9",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.steamed_veggies_20,
-            title = "Warm Steamed Vegetable Medley",
-            price = "149",
-            restaurantName = "Harvest Fresh",
-            rating = "4.8",
-            deliveryTime = "9-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        steamedVeggiesDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Steamed Veggies restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("STEAMED_VEG_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_root_vegetable),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Steamed Veggies restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

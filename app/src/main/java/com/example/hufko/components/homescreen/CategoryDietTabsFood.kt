@@ -967,9 +967,9 @@ fun CategoryDietTabsFood(
             DietCategoryPage.SproutsSalad -> SproutsSaladDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.BrownRiceBowl -> BrownRiceBowlDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.SteamedVeggies -> SteamedVeggiesDietPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.FruitBowl -> FruitBowlDietPage()
-            DietCategoryPage.DetoxWater -> DetoxWaterDietPage()
-            DietCategoryPage.HerbalTea -> HerbalTeaDietPage()
+            DietCategoryPage.FruitBowl -> FruitBowlDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.DetoxWater -> DetoxWaterDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.HerbalTea -> HerbalTeaDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.ProteinBar -> ProteinBarDietPage()
             DietCategoryPage.BoiledEggs -> BoiledEggsDietPage()
             DietCategoryPage.HummusPlate -> HummusPlateDietPage()
@@ -21424,12 +21424,28 @@ fun SteamedVeggiesDietPage(
 }
 
 @Composable
-fun FruitBowlDietPage() {
+fun FruitBowlDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for FRUIT_BOWL_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: FRUIT_BOWL_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("FRUIT_BOWL_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("FRUIT_BOWL_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val fruitBowlDietFilters = FilterConfig(
             filters = listOf(
                 FilterChip(
@@ -21748,99 +21764,22 @@ fun FruitBowlDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = fruitBowlDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val fruitBowlDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_mixed_fruit_bowl_1,
-                title = "Seasonal Mixed Fruit Bowl",
-                price = "149",
-                restaurantName = "Fresh Fruits Co.",
-                rating = "4.9",
-                deliveryTime = "5-10 mins",
-                distance = "0.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_tropical_fruit_bowl_1,
-                title = "Tropical Fruit Delight - Mango, Pineapple",
-                price = "179",
-                restaurantName = "Tropica Bowl",
-                rating = "4.8",
-                deliveryTime = "6-11 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_berry_fruit_bowl_1,
-                title = "Berry Blast - Strawberry, Blueberry",
-                price = "199",
-                restaurantName = "Berry Farms",
-                rating = "4.9",
-                deliveryTime = "7-12 mins",
-                distance = "0.4 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_citrus_fruit_bowl_1,
-                title = "Citrus Energizer - Orange, Grapefruit",
-                price = "159",
-                restaurantName = "Citrus Point",
-                rating = "4.7",
-                deliveryTime = "5-9 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_exotic_fruit_bowl_1,
-                title = "Exotic Fruit Bowl - Kiwi, Dragon Fruit",
-                price = "229",
-                restaurantName = "Exotica Fresh",
-                rating = "4.9",
-                deliveryTime = "8-13 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_protein_fruit_bowl_1,
-                title = "High Protein Fruit Bowl with Nuts",
-                price = "189",
-                restaurantName = "Protein Fruits",
-                rating = "4.8",
-                deliveryTime = "6-11 mins",
-                distance = "0.4 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED FRUIT BOWL ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -21848,345 +21787,236 @@ fun FruitBowlDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = fruitBowlDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Fruit Bowl items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("FRUIT_BOWL_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_tropical),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Fruit Bowl items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED FRUIT BOWL RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val fruitBowlDietItems = listOf(
-        // 1-5: CLASSIC FRUIT BOWLS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.fruit_bowl_1,
-            title = "Seasonal Mixed Fruit Bowl",
-            price = "129",
-            restaurantName = "Fresh Fruits Co.",
-            rating = "4.9",
-            deliveryTime = "5-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.fruit_bowl_2,
-            title = "Classic Fruit Salad",
-            price = "119",
-            restaurantName = "Fruit Express",
-            rating = "4.8",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.fruit_bowl_3,
-            title = "Rainbow Fresh Fruit Platter",
-            price = "149",
-            restaurantName = "Harvest Bowl",
-            rating = "4.9",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.fruit_bowl_4,
-            title = "Morning Fruit Delight",
-            price = "109",
-            restaurantName = "Healthy Start",
-            rating = "4.7",
-            deliveryTime = "4-8 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.fruit_bowl_5,
-            title = "Mini Fruit Bowl Assorted",
-            price = "99",
-            restaurantName = "Fruit Basket",
-            rating = "4.8",
-            deliveryTime = "5-9 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: TROPICAL & CITRUS FRUIT BOWLS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.fruit_bowl_6,
-            title = "Tropical Fruit Blast - Mango, Pineapple",
-            price = "169",
-            restaurantName = "Tropica Bowl",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.fruit_bowl_7,
-            title = "Citrus Sunrise - Orange, Grapefruit",
-            price = "149",
-            restaurantName = "Citrus Point",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.fruit_bowl_8,
-            title = "Mango Magic Bowl",
-            price = "179",
-            restaurantName = "Mango Mania",
-            rating = "4.9",
-            deliveryTime = "9-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.fruit_bowl_9,
-            title = "Pineapple Paradise",
-            price = "159",
-            restaurantName = "Island Fresh",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.fruit_bowl_10,
-            title = "Orange & Grapefruit Energizer",
-            price = "139",
-            restaurantName = "Vitamin C Hub",
-            rating = "4.7",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: BERRY & EXOTIC FRUIT BOWLS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.fruit_bowl_11,
-            title = "Berry Blast - Strawberry, Blueberry",
-            price = "199",
-            restaurantName = "Berry Farms",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.fruit_bowl_12,
-            title = "Exotic Fruit Bowl - Kiwi, Dragon Fruit",
-            price = "229",
-            restaurantName = "Exotica Fresh",
-            rating = "4.9",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.fruit_bowl_13,
-            title = "Pomegranate & Berry Medley",
-            price = "189",
-            restaurantName = "Antioxidant Bowl",
-            rating = "4.8",
-            deliveryTime = "9-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.fruit_bowl_14,
-            title = "Kiwi & Strawberry Fresh Bowl",
-            price = "179",
-            restaurantName = "Green Fresh",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.fruit_bowl_15,
-            title = "Mixed Berries with Banana",
-            price = "169",
-            restaurantName = "Berry Bliss",
-            rating = "4.9",
-            deliveryTime = "7-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: MELON, STONE FRUIT & SPECIALTY BOWLS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.fruit_bowl_16,
-            title = "Melon Magic - Watermelon, Musk Melon",
-            price = "129",
-            restaurantName = "Melon House",
-            rating = "4.8",
-            deliveryTime = "5-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.fruit_bowl_17,
-            title = "Stone Fruit Delight - Peach, Plum",
-            price = "159",
-            restaurantName = "Stone Fruit Co.",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.fruit_bowl_18,
-            title = "Fruit Chaat - Spiced Fruit Mix",
-            price = "119",
-            restaurantName = "Street Style Fruits",
-            rating = "4.9",
-            deliveryTime = "4-8 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.fruit_bowl_19,
-            title = "Dry Fruit & Nut Energy Bowl",
-            price = "179",
-            restaurantName = "Dry Fruit Delight",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.fruit_bowl_20,
-            title = "Low Calorie Fruit Bowl",
-            price = "139",
-            restaurantName = "Diet Fresh",
-            rating = "4.8",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        fruitBowlDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Fruit Bowl restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("FRUIT_BOWL_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_tropical),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Fruit Bowl restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun DetoxWaterDietPage() {
+fun DetoxWaterDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for DETOX_WATER_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: DETOX_WATER_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("DETOX_WATER_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("DETOX_WATER_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val detoxWaterDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -22402,99 +22232,22 @@ fun DetoxWaterDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = detoxWaterDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val detoxWaterDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_cucumber_mint_detox_1,
-                title = "Cucumber Mint Infused Water",
-                price = "89",
-                restaurantName = "Detox Water Co.",
-                rating = "4.8",
-                deliveryTime = "4-8 mins",
-                distance = "0.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_lemon_ginger_detox_1,
-                title = "Lemon Ginger Detox Water",
-                price = "99",
-                restaurantName = "Wellness Sips",
-                rating = "4.9",
-                deliveryTime = "5-9 mins",
-                distance = "0.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_strawberry_basil_detox_1,
-                title = "Strawberry Basil Infusion",
-                price = "129",
-                restaurantName = "Berry Fresh Waters",
-                rating = "4.7",
-                deliveryTime = "6-10 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_citrus_detox_water_1,
-                title = "Citrus Burst - Orange & Grapefruit",
-                price = "119",
-                restaurantName = "Citrus Hydration",
-                rating = "4.8",
-                deliveryTime = "5-9 mins",
-                distance = "0.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_watermelon_rosemary_detox_1,
-                title = "Watermelon Rosemary Chill",
-                price = "139",
-                restaurantName = "Fruit Infusions",
-                rating = "4.9",
-                deliveryTime = "7-11 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_apple_cinnamon_detox_1,
-                title = "Apple Cinnamon Warm Detox",
-                price = "149",
-                restaurantName = "Spice & Wellness",
-                rating = "4.8",
-                deliveryTime = "6-10 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED DETOX WATER ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -22502,345 +22255,236 @@ fun DetoxWaterDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = detoxWaterDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Detox Water items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("DETOX_WATER_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_citrus_detox),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Detox Water items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED DETOX WATER RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val detoxWaterDietItems = listOf(
-        // 1-5: CITRUS DETOX WATERS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.detox_water_1,
-            title = "Lemon & Mint Classic Detox",
-            price = "89",
-            restaurantName = "Detox Water Co.",
-            rating = "4.8",
-            deliveryTime = "5-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.detox_water_2,
-            title = "Orange & Grapefruit Sunrise",
-            price = "99",
-            restaurantName = "Citrus Hydration",
-            rating = "4.9",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.detox_water_3,
-            title = "Lemon Ginger Metabolism Booster",
-            price = "109",
-            restaurantName = "Wellness Sips",
-            rating = "4.9",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.detox_water_4,
-            title = "Lime & Basil Fresh Infusion",
-            price = "89",
-            restaurantName = "Fresh Infusions",
-            rating = "4.7",
-            deliveryTime = "4-8 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.detox_water_5,
-            title = "Tangerine & Rosemary Blend",
-            price = "119",
-            restaurantName = "Herbal Waters",
-            rating = "4.8",
-            deliveryTime = "5-9 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: CUCUMBER & MELON DETOX WATERS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.detox_water_6,
-            title = "Cucumber Mint Cooler",
-            price = "79",
-            restaurantName = "Cool Infusions",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.detox_water_7,
-            title = "Watermelon & Basil Chill",
-            price = "99",
-            restaurantName = "Summer Sips",
-            rating = "4.9",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.detox_water_8,
-            title = "Cucumber Lemon & Mint Trio",
-            price = "109",
-            restaurantName = "Triple Infusion",
-            rating = "4.9",
-            deliveryTime = "9-14 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.detox_water_9,
-            title = "Honeydew & Mint Refresh",
-            price = "119",
-            restaurantName = "Melon Waters",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.detox_water_10,
-            title = "Cucumber Lime Electrolyte",
-            price = "89",
-            restaurantName = "Hydrate Me",
-            rating = "4.8",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: BERRY & FRUIT INFUSED DETOX WATERS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.detox_water_11,
-            title = "Strawberry & Basil Infusion",
-            price = "129",
-            restaurantName = "Berry Fresh Waters",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.detox_water_12,
-            title = "Mixed Berry Antioxidant Water",
-            price = "149",
-            restaurantName = "Berry Bliss",
-            rating = "4.9",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.detox_water_13,
-            title = "Pineapple & Ginger Zing",
-            price = "119",
-            restaurantName = "Tropical Infusions",
-            rating = "4.8",
-            deliveryTime = "9-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.detox_water_14,
-            title = "Apple & Cinnamon Warm Detox",
-            price = "139",
-            restaurantName = "Spice Waters",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.detox_water_15,
-            title = "Pear & Rosemary Infusion",
-            price = "129",
-            restaurantName = "Herbal Infusions",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: SPICE, HERBAL & SPECIALTY DETOX WATERS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.detox_water_16,
-            title = "Turmeric Ginger Immunity Shot",
-            price = "99",
-            restaurantName = "Golden Wellness",
-            rating = "4.9",
-            deliveryTime = "5-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.detox_water_17,
-            title = "Cucumber Jalapeño Spice Water",
-            price = "109",
-            restaurantName = "Spice Route",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.detox_water_18,
-            title = "Fennel & Mint Digestive Water",
-            price = "89",
-            restaurantName = "Ayurvedic Sips",
-            rating = "4.9",
-            deliveryTime = "4-8 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.detox_water_19,
-            title = "Lemon Cayenne Metabolism Boost",
-            price = "99",
-            restaurantName = "Fit Waters",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.detox_water_20,
-            title = "Detox Trio - Lemon, Cucumber, Mint",
-            price = "119",
-            restaurantName = "The Detox Kitchen",
-            rating = "4.9",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        detoxWaterDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Detox Water restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("DETOX_WATER_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_citrus_detox),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Detox Water restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun HerbalTeaDietPage() {
+fun HerbalTeaDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for HERBAL_TEA_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: HERBAL_TEA_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("HERBAL_TEA_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("HERBAL_TEA_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val herbalTeaDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -23068,99 +22712,22 @@ fun HerbalTeaDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = herbalTeaDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val herbalTeaDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_chamomile_lavender_tea_1,
-                title = "Chamomile Lavender Relaxing Tea",
-                price = "149",
-                restaurantName = "Tranquil Teas",
-                rating = "4.9",
-                deliveryTime = "6-10 mins",
-                distance = "0.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_tulsi_ginger_tea_1,
-                title = "Tulsi Ginger Immunity Tea",
-                price = "129",
-                restaurantName = "Ayurvedic Sips",
-                rating = "4.8",
-                deliveryTime = "5-9 mins",
-                distance = "0.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_peppermint_lemon_tea_1,
-                title = "Peppermint Lemon Digestive Tea",
-                price = "119",
-                restaurantName = "Fresh Mint Co.",
-                rating = "4.7",
-                deliveryTime = "4-8 mins",
-                distance = "0.1 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_hibiscus_rose_tea_1,
-                title = "Hibiscus Rose Antioxidant Blend",
-                price = "159",
-                restaurantName = "Floral Brew",
-                rating = "4.9",
-                deliveryTime = "7-11 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_turmeric_ginger_tea_1,
-                title = "Turmeric Ginger Golden Milk Tea",
-                price = "169",
-                restaurantName = "Golden Wellness",
-                rating = "4.8",
-                deliveryTime = "6-10 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_lemon_lemongrass_tea_1,
-                title = "Lemon Lemongrass Detox Tea",
-                price = "139",
-                restaurantName = "Citrus & Herb",
-                rating = "4.8",
-                deliveryTime = "5-9 mins",
-                distance = "0.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED HERBAL TEA ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -23168,334 +22735,209 @@ fun HerbalTeaDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = herbalTeaDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Herbal Tea items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("HERBAL_TEA_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_green_tea_herbal_tea),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Herbal Tea items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED HERBAL TEA RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val herbalTeaDietItems = listOf(
-        // 1-5: GREEN TEA VARIETIES
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.herbal_tea_1,
-            title = "Classic Green Tea - Zen",
-            price = "149",
-            restaurantName = "Tea Heaven",
-            rating = "4.9",
-            deliveryTime = "8-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.herbal_tea_2,
-            title = "Jasmine Green Tea Blossom",
-            price = "199",
-            restaurantName = "Floral Brews",
-            rating = "4.8",
-            deliveryTime = "10-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.herbal_tea_3,
-            title = "Moroccan Mint Green Tea",
-            price = "179",
-            restaurantName = "Mint & Leaves",
-            rating = "4.9",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.herbal_tea_4,
-            title = "Matcha Green Tea Powder",
-            price = "299",
-            restaurantName = "Japanese Tea House",
-            rating = "4.9",
-            deliveryTime = "12-18 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.herbal_tea_5,
-            title = "Honey Lemon Green Tea",
-            price = "159",
-            restaurantName = "Wellness Brew",
-            rating = "4.8",
-            deliveryTime = "6-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: HERBAL & TISANE TEAS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.herbal_tea_6,
-            title = "Chamomile Lavender Calm",
-            price = "189",
-            restaurantName = "Evening Serenity",
-            rating = "4.9",
-            deliveryTime = "9-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.herbal_tea_7,
-            title = "Peppermint Fresh Digest",
-            price = "169",
-            restaurantName = "Minty Fresh",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.herbal_tea_8,
-            title = "Rooibos Vanilla Cream",
-            price = "219",
-            restaurantName = "African Brews",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.herbal_tea_9,
-            title = "Hibiscus Berry Burst",
-            price = "179",
-            restaurantName = "Berry & Blossom",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.herbal_tea_10,
-            title = "Lemon Ginger Turmeric Boost",
-            price = "199",
-            restaurantName = "Immunity Plus",
-            rating = "4.9",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-
-        // 11-15: AYURVEDIC & MEDICINAL TEAS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.herbal_tea_11,
-            title = "Tulsi (Holy Basil) Tea",
-            price = "149",
-            restaurantName = "Ayurvedic Sips",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.herbal_tea_12,
-            title = "Ashwagandha Calm & Focus",
-            price = "249",
-            restaurantName = "Ancient Remedies",
-            rating = "4.9",
-            deliveryTime = "10-15 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.herbal_tea_13,
-            title = "Triphala Digestive Tea",
-            price = "189",
-            restaurantName = "Ayurveda House",
-            rating = "4.8",
-            deliveryTime = "9-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.herbal_tea_14,
-            title = "Cinnamon Cardamom Spice",
-            price = "209",
-            restaurantName = "Spice Route Teas",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.herbal_tea_15,
-            title = "Licorice Mint Soother",
-            price = "179",
-            restaurantName = "Herbal Harmony",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-
-        // 16-20: SPECIALTY & WELLNESS TEAS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.herbal_tea_16,
-            title = "Detox Dandelion Root Tea",
-            price = "169",
-            restaurantName = "Cleanse Brew",
-            rating = "4.9",
-            deliveryTime = "5-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Colaba, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.herbal_tea_17,
-            title = "Echinacea Elderberry Immune",
-            price = "229",
-            restaurantName = "Wellness Shield",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.herbal_tea_18,
-            title = "Nettle Leaf Iron Boost",
-            price = "159",
-            restaurantName = "Green Wellness",
-            rating = "4.9",
-            deliveryTime = "4-8 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.herbal_tea_19,
-            title = "Bedtime Chamomile Valerian",
-            price = "189",
-            restaurantName = "Sleep Well Teas",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.herbal_tea_20,
-            title = "Organic Matcha Latte Mix",
-            price = "349",
-            restaurantName = "Premium Brews",
-            rating = "4.9",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        herbalTeaDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Herbal Tea restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("HERBAL_TEA_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_green_tea_herbal_tea),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Herbal Tea restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

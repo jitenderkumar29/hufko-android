@@ -970,10 +970,10 @@ fun CategoryDietTabsFood(
             DietCategoryPage.FruitBowl -> FruitBowlDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.DetoxWater -> DetoxWaterDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.HerbalTea -> HerbalTeaDietPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.ProteinBar -> ProteinBarDietPage()
-            DietCategoryPage.BoiledEggs -> BoiledEggsDietPage()
-            DietCategoryPage.HummusPlate -> HummusPlateDietPage()
-            DietCategoryPage.SushiRolls -> SushiRollsDietPage()
+            DietCategoryPage.ProteinBar -> ProteinBarDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.BoiledEggs -> BoiledEggsDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.HummusPlate -> HummusPlateDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.SushiRolls -> SushiRollsDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.TofuStirFry -> TofuStirFryDietPage()
             DietCategoryPage.ChiaPudding -> ChiaPuddingDietPage()
             DietCategoryPage.MilletBowl -> MilletBowlDietPage()
@@ -22943,12 +22943,28 @@ fun HerbalTeaDietPage(
 }
 
 @Composable
-fun ProteinBarDietPage() {
+fun ProteinBarDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for PROTEIN_BAR_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: PROTEIN_BAR_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("PROTEIN_BAR_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("PROTEIN_BAR_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val proteinBarDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -23198,104 +23214,22 @@ fun ProteinBarDietPage() {
             ),
             rows = 2 // 3 rows for better visibility of protein bar filters
         )
+
         FilterButtonFood(
             filterConfig = proteinBarDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val proteinBarDietItems = listOf(
-            // 1: CHOCOLATE PROTEIN BARS
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_chocolate_peanut_butter_bar,
-                title = "Chocolate Peanut Butter Protein Bar",
-                price = "149",
-                restaurantName = "Muscle Fuel",
-                rating = "4.9",
-                deliveryTime = "8-12 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_dark_chocolate_almond_bar,
-                title = "Dark Chocolate Almond Crunch Bar",
-                price = "179",
-                restaurantName = "Protein Heaven",
-                rating = "4.8",
-                deliveryTime = "7-11 mins",
-                distance = "0.2 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
 
-            // 2: PLANT-BASED PROTEIN BARS
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_vegan_berry_blast_bar,
-                title = "Vegan Berry Blast Protein Bar",
-                price = "169",
-                restaurantName = "Plant Power",
-                rating = "4.7",
-                deliveryTime = "6-10 mins",
-                distance = "0.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_coconut_chocolate_bar,
-                title = "Coconut Chocolate Plant Bar",
-                price = "159",
-                restaurantName = "Green Protein",
-                rating = "4.8",
-                deliveryTime = "5-9 mins",
-                distance = "0.1 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            ),
-
-            // 3: HIGH-PROTEIN & SPECIALTY BARS
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_collagen_strawberry_bar,
-                title = "Collagen Strawberry Beauty Bar",
-                price = "199",
-                restaurantName = "Glow & Go",
-                rating = "4.9",
-                deliveryTime = "7-11 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Juhu, Mumbai"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_keto_almond_bar,
-                title = "Keto Almond Butter Protein Bar",
-                price = "189",
-                restaurantName = "Keto Kitchen",
-                rating = "4.8",
-                deliveryTime = "6-10 mins",
-                distance = "0.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koregaon Park, Pune"
-            )
-        )
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED PROTEIN BAR ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -23303,345 +23237,236 @@ fun ProteinBarDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = proteinBarDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Protein Bar items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("PROTEIN_BAR_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_whey_protein),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Protein Bar items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED PROTEIN BAR RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val proteinBarDietItems = listOf(
-        // 1-5: PROTEIN BARS - CHOCOLATE & DESSERT FLAVORS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.protein_bar_1,
-            title = "Double Chocolate Brownie Bar",
-            price = "249",
-            restaurantName = "FitFuel Kitchen",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.protein_bar_2,
-            title = "Peanut Butter Crunch Bar",
-            price = "229",
-            restaurantName = "Protein Pantry",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.protein_bar_3,
-            title = "Cookies & Cream Delight",
-            price = "259",
-            restaurantName = "Muscle Munchies",
-            rating = "4.9",
-            deliveryTime = "10-15 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.protein_bar_4,
-            title = "Salted Caramel Almond Bar",
-            price = "269",
-            restaurantName = "Healthy Indulgence",
-            rating = "4.9",
-            deliveryTime = "8-14 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.protein_bar_5,
-            title = "White Chocolate Raspberry",
-            price = "279",
-            restaurantName = "Gourmet Gains",
-            rating = "4.8",
-            deliveryTime = "14-19 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 6-10: PLANT-BASED & VEGAN PROTEIN BARS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.protein_bar_6,
-            title = "Vegan Dark Chocolate Almond",
-            price = "239",
-            restaurantName = "Plant Power",
-            rating = "4.9",
-            deliveryTime = "10-16 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.protein_bar_7,
-            title = "Pea Protein Blueberry Crunch",
-            price = "219",
-            restaurantName = "Green Protein Co",
-            rating = "4.8",
-            deliveryTime = "9-15 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri East, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.protein_bar_8,
-            title = "Salted Peanut Chocolate",
-            price = "229",
-            restaurantName = "Nutty Barista",
-            rating = "4.9",
-            deliveryTime = "12-17 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.protein_bar_9,
-            title = "Coconut Cashew Delight",
-            price = "249",
-            restaurantName = "Tropical Fit",
-            rating = "4.8",
-            deliveryTime = "8-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.protein_bar_10,
-            title = "Hemp Seed & Cacao Bar",
-            price = "289",
-            restaurantName = "Superfood Kitchen",
-            rating = "4.9",
-            deliveryTime = "11-16 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 11-15: HIGH PROTEIN & LOW CARB BARS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.protein_bar_11,
-            title = "Keto Almond Butter Cup",
-            price = "299",
-            restaurantName = "Keto Kingdom",
-            rating = "4.9",
-            deliveryTime = "10-15 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.protein_bar_12,
-            title = "Collagen Protein Bar - Vanilla",
-            price = "319",
-            restaurantName = "Beauty & Brawn",
-            rating = "4.8",
-            deliveryTime = "9-14 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Hinjawadi, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.protein_bar_13,
-            title = "30g Protein Monster Bar",
-            price = "349",
-            restaurantName = "Massive Gains",
-            rating = "4.9",
-            deliveryTime = "13-18 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.protein_bar_14,
-            title = "Low Sugar Cinnamon Roll",
-            price = "269",
-            restaurantName = "Sugar-Free Zone",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.protein_bar_15,
-            title = "Brownie Batter High Protein",
-            price = "279",
-            restaurantName = "Protein Bakery",
-            rating = "4.9",
-            deliveryTime = "10-16 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Banjara Hills, Hyderabad"
-        ),
-
-        // 16-20: ENERGY & PRE-WORKOUT BARS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.protein_bar_16,
-            title = "Coffee Espresso Protein Bar",
-            price = "239",
-            restaurantName = "Caffeine & Protein",
-            rating = "4.9",
-            deliveryTime = "7-12 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.protein_bar_17,
-            title = "Apple Cinnamon Oat Bar",
-            price = "199",
-            restaurantName = "Wholesome Bites",
-            rating = "4.8",
-            deliveryTime = "8-13 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.protein_bar_18,
-            title = "Matcha Green Tea Protein Bar",
-            price = "259",
-            restaurantName = "Matcha Mania",
-            rating = "4.9",
-            deliveryTime = "9-15 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.protein_bar_19,
-            title = "Berry Blast Energy Bar",
-            price = "219",
-            restaurantName = "Berry Active",
-            rating = "4.8",
-            deliveryTime = "6-11 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Golf Course Road, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.protein_bar_20,
-            title = "Peanut Butter & Jelly Bar",
-            price = "249",
-            restaurantName = "School Snacks",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Noida Sector 18, Noida"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        proteinBarDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Protein Bar restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("PROTEIN_BAR_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_whey_protein),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Protein Bar restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun BoiledEggsDietPage() {
+fun BoiledEggsDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for BOILED_EGGS_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BOILED_EGGS_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("BOILED_EGGS_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BOILED_EGGS_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val boiledEggsDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -23824,99 +23649,22 @@ fun BoiledEggsDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = boiledEggsDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val boiledEggsDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_single_boiled_egg,
-                title = "Classic Soft Boiled Egg (Runny Yolk)",
-                price = "25",
-                restaurantName = "Eggspress",
-                rating = "4.8",
-                deliveryTime = "5-10 mins",
-                distance = "0.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_double_boiled_eggs,
-                title = "Classic Medium Boiled Eggs (2 pcs)",
-                price = "45",
-                restaurantName = "Protein Pitstop",
-                rating = "4.9",
-                deliveryTime = "6-11 mins",
-                distance = "0.3 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_hard_boiled_eggs_peeled,
-                title = "Hard Boiled Eggs (2 pcs) - Pre-Peeled",
-                price = "49",
-                restaurantName = "Peel & Eat",
-                rating = "4.7",
-                deliveryTime = "4-8 mins",
-                distance = "0.1 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_dozen_boiled_eggs,
-                title = "Half Dozen Boiled Eggs (6 pcs)",
-                price = "129",
-                restaurantName = "Egg Cart",
-                rating = "4.9",
-                deliveryTime = "10-15 mins",
-                distance = "0.4 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_full_dozen_boiled_eggs,
-                title = "Full Dozen Boiled Eggs (12 pcs) - Family Pack",
-                price = "239",
-                restaurantName = "The Egg Factory",
-                rating = "4.8",
-                deliveryTime = "12-18 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_salt_pepper_eggs,
-                title = "Salt & Pepper Boiled Eggs (2 pcs)",
-                price = "55",
-                restaurantName = "Spice & Shell",
-                rating = "4.8",
-                deliveryTime = "5-9 mins",
-                distance = "0.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED BOILED EGGS ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -23924,345 +23672,236 @@ fun BoiledEggsDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = boiledEggsDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Boiled Eggs items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("BOILED_EGGS_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_soft_boiled_egg),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Boiled Eggs items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED BOILED EGGS RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val boiledEggsDietItems = listOf(
-        // 1-5: CLASSIC BOILED EGGS - PLAIN & SIMPLE
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.boiled_egg_1,
-            title = "Classic Soft Boiled Egg (Runny Yolk)",
-            price = "25",
-            restaurantName = "Eggspress",
-            rating = "4.8",
-            deliveryTime = "5-10 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.boiled_egg_2,
-            title = "Classic Medium Boiled Eggs (2 pcs)",
-            price = "45",
-            restaurantName = "Protein Pitstop",
-            rating = "4.9",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.boiled_egg_3,
-            title = "Hard Boiled Eggs (2 pcs) - Pre-Peeled",
-            price = "49",
-            restaurantName = "Peel & Eat",
-            rating = "4.7",
-            deliveryTime = "4-8 mins",
-            distance = "0.1 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.boiled_egg_4,
-            title = "Half Dozen Boiled Eggs (6 pcs)",
-            price = "129",
-            restaurantName = "Egg Cart",
-            rating = "4.9",
-            deliveryTime = "10-15 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.boiled_egg_5,
-            title = "Full Dozen Boiled Eggs (12 pcs) - Family Pack",
-            price = "239",
-            restaurantName = "The Egg Factory",
-            rating = "4.8",
-            deliveryTime = "12-18 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 6-10: SEASONED & FLAVORED BOILED EGGS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.boiled_egg_6,
-            title = "Salt & Pepper Boiled Eggs (2 pcs)",
-            price = "55",
-            restaurantName = "Spice & Shell",
-            rating = "4.8",
-            deliveryTime = "5-9 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.boiled_egg_7,
-            title = "Chaat Masala Boiled Eggs (2 pcs)",
-            price = "59",
-            restaurantName = "Indian Egg Co",
-            rating = "4.9",
-            deliveryTime = "6-10 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.boiled_egg_8,
-            title = "Chili & Lime Boiled Eggs (2 pcs)",
-            price = "59",
-            restaurantName = "Tangy Eggs",
-            rating = "4.8",
-            deliveryTime = "5-9 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.boiled_egg_9,
-            title = "Lemon Pepper & Herb Boiled Eggs (2 pcs)",
-            price = "65",
-            restaurantName = "Herb & Egg",
-            rating = "4.9",
-            deliveryTime = "6-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.boiled_egg_10,
-            title = "Cumin & Red Chili Boiled Eggs (2 pcs)",
-            price = "55",
-            restaurantName = "Masala Eggs",
-            rating = "4.8",
-            deliveryTime = "5-9 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 11-15: EGG VARIETIES & PREMIUM OPTIONS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.boiled_egg_11,
-            title = "Organic Brown Boiled Eggs (2 pcs)",
-            price = "79",
-            restaurantName = "Organic Farm Fresh",
-            rating = "4.9",
-            deliveryTime = "8-12 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.boiled_egg_12,
-            title = "Omega-3 Enriched Boiled Eggs (2 pcs)",
-            price = "89",
-            restaurantName = "Healthy Hen",
-            rating = "4.8",
-            deliveryTime = "7-11 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Hinjawadi, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.boiled_egg_13,
-            title = "Free Range Boiled Eggs (2 pcs)",
-            price = "85",
-            restaurantName = "Happy Hens",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.boiled_egg_14,
-            title = "Quail Boiled Eggs (6 pcs) - Gourmet",
-            price = "149",
-            restaurantName = "Gourmet Eggs",
-            rating = "4.9",
-            deliveryTime = "9-14 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.boiled_egg_15,
-            title = "Jumbo Size Boiled Eggs (2 pcs) - Extra Large",
-            price = "95",
-            restaurantName = "Big Egg Energy",
-            rating = "4.8",
-            deliveryTime = "6-10 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Banjara Hills, Hyderabad"
-        ),
-
-        // 16-20: EGG MEAL COMBOS & ACCOMPANIMENTS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.boiled_egg_16,
-            title = "Boiled Eggs with Brown Bread Toast (2 pcs)",
-            price = "99",
-            restaurantName = "Egg & Toast",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.boiled_egg_17,
-            title = "Boiled Eggs with Butter & Salt (2 pcs)",
-            price = "69",
-            restaurantName = "Butter Egg Co",
-            rating = "4.9",
-            deliveryTime = "5-9 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.boiled_egg_18,
-            title = "Boiled Eggs with Mayo Dip (2 pcs)",
-            price = "79",
-            restaurantName = "Dip & Egg",
-            rating = "4.8",
-            deliveryTime = "6-10 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.boiled_egg_19,
-            title = "Protein Pack: 4 Boiled Eggs + Seasoning",
-            price = "129",
-            restaurantName = "Gym Fuel",
-            rating = "4.9",
-            deliveryTime = "8-13 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Golf Course Road, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.boiled_egg_20,
-            title = "Breakfast Special: 2 Eggs + Bread + Butter",
-            price = "119",
-            restaurantName = "Morning Boost",
-            rating = "4.8",
-            deliveryTime = "7-12 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Noida Sector 18, Noida"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        boiledEggsDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Boiled Eggs restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("BOILED_EGGS_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_soft_boiled_egg),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Boiled Eggs restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun HummusPlateDietPage() {
+fun HummusPlateDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for HUMMUS_PLATE_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: HUMMUS_PLATE_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("HUMMUS_PLATE_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("HUMMUS_PLATE_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val hummusPlateDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -24440,99 +24079,22 @@ fun HummusPlateDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = hummusPlateDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val hummusPlateDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_hummus_plate,
-                title = "Classic Hummus Plate with Pita",
-                price = "189",
-                restaurantName = "Hummus House",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_hummus_falafel_bowl,
-                title = "Hummus & Falafel Bowl (3 Falafels)",
-                price = "249",
-                restaurantName = "Mediterranean Delight",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_hummus_veggie_platter,
-                title = "Hummus with Grilled Veggies Platter",
-                price = "279",
-                restaurantName = "Green Garden Cafe",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_hummus_pine_nuts,
-                title = "Premium Hummus with Pine Nuts",
-                price = "329",
-                restaurantName = "The Hummus Lab",
-                rating = "4.9",
-                deliveryTime = "12-18 mins",
-                distance = "0.2 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_hummus_pomegranate,
-                title = "Roasted Beetroot Hummus with Pomegranate",
-                price = "299",
-                restaurantName = "Colorful Eats",
-                rating = "4.8",
-                deliveryTime = "16-21 mins",
-                distance = "0.6 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_hummus_party_platter,
-                title = "Hummus Party Platter (4 Varieties)",
-                price = "549",
-                restaurantName = "Hummus Central",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "0.8 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED HUMMUS PLATE ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -24540,345 +24102,236 @@ fun HummusPlateDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = hummusPlateDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Hummus Plate items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("HUMMUS_PLATE_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_hummus),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Hummus Plate items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED HUMMUS PLATE RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val hummusPlateDietItems = listOf(
-        // 1-5: CLASSIC HUMMUS - PLAIN & SIMPLE
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.hummus_classic_1,
-            title = "Classic Hummus Plate with Pita Bread",
-            price = "189",
-            restaurantName = "Hummus House",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.hummus_classic_2,
-            title = "Traditional Hummus Bowl (300g)",
-            price = "219",
-            restaurantName = "Mediterranean Delight",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.hummus_classic_3,
-            title = "Small Hummus Dip (150g) - Side Portion",
-            price = "129",
-            restaurantName = "Dip & Sip",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.hummus_classic_4,
-            title = "Family Size Hummus Platter (500g)",
-            price = "399",
-            restaurantName = "Hummus Central",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.hummus_classic_5,
-            title = "Party Platter Hummus (1kg) with Pita",
-            price = "649",
-            restaurantName = "The Hummus Factory",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-
-        // 6-10: FLAVORED & SPECIALTY HUMMUS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.hummus_flavored_6,
-            title = "Roasted Red Pepper Hummus Plate",
-            price = "239",
-            restaurantName = "Flavor Fiesta",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.hummus_flavored_7,
-            title = "Garlic Lover's Hummus (Extra Tahini)",
-            price = "229",
-            restaurantName = "Garlic & Co",
-            rating = "4.9",
-            deliveryTime = "14-19 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.hummus_flavored_8,
-            title = "Spicy Jalapeño Hummus Bowl",
-            price = "249",
-            restaurantName = "Spice Route",
-            rating = "4.8",
-            deliveryTime = "16-21 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.hummus_flavored_9,
-            title = "Roasted Beetroot Hummus (Vibrant Pink)",
-            price = "259",
-            restaurantName = "Colorful Eats",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.hummus_flavored_10,
-            title = "Black Olive & Sun-Dried Tomato Hummus",
-            price = "269",
-            restaurantName = "Mediterranean Flavors",
-            rating = "4.8",
-            deliveryTime = "17-22 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 11-15: HUMMUS WITH TOPPINGS & PREMIUM OPTIONS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.hummus_topped_11,
-            title = "Hummus with Whole Chickpeas & Paprika",
-            price = "279",
-            restaurantName = "Topped Off",
-            rating = "4.9",
-            deliveryTime = "16-21 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.hummus_topped_12,
-            title = "Premium Hummus with Pine Nuts",
-            price = "329",
-            restaurantName = "Luxury Dip",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Hinjawadi, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.hummus_topped_13,
-            title = "Hummus with Pomegranate Seeds",
-            price = "299",
-            restaurantName = "Ruby Eats",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.hummus_topped_14,
-            title = "Hummus with Sautéed Mushrooms",
-            price = "289",
-            restaurantName = "Earth & Harvest",
-            rating = "4.8",
-            deliveryTime = "16-21 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.hummus_topped_15,
-            title = "Hummus with Lamb-Stuffed (Veg Option)",
-            price = "319",
-            restaurantName = "Fusion Kitchen",
-            rating = "4.9",
-            deliveryTime = "19-24 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Banjara Hills, Hyderabad"
-        ),
-
-        // 16-20: HUMMUS MEAL COMBOS & ACCOMPANIMENTS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.hummus_combo_16,
-            title = "Hummus with Falafel (3 pcs) & Pita",
-            price = "329",
-            restaurantName = "Falafel King",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.hummus_combo_17,
-            title = "Hummus with Grilled Veggies Platter",
-            price = "299",
-            restaurantName = "Garden Fresh",
-            rating = "4.8",
-            deliveryTime = "16-21 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.hummus_combo_18,
-            title = "Hummus with Fresh Veggie Sticks",
-            price = "259",
-            restaurantName = "Crunchy Bites",
-            rating = "4.8",
-            deliveryTime = "14-19 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.hummus_combo_19,
-            title = "Hummus Trio (3 Flavors) with Pita",
-            price = "449",
-            restaurantName = "Taste Trio",
-            rating = "4.9",
-            deliveryTime = "22-27 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Golf Course Road, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.hummus_combo_20,
-            title = "Mediterranean Feast: Hummus + 4 Dips",
-            price = "599",
-            restaurantName = "Med Feast",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Noida Sector 18, Noida"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        hummusPlateDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Hummus Plate restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("HUMMUS_PLATE_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_classic_hummus),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Hummus Plate restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun SushiRollsDietPage() {
+fun SushiRollsDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SUSHI_ROLLS_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: SUSHI_ROLLS_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("SUSHI_ROLLS_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SUSHI_ROLLS_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val sushiRollsDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -24950,11 +24403,6 @@ fun SushiRollsDietPage() {
                 FilterChip(
                     id = "spider_roll",
                     text = "Spider Roll",
-                    type = FilterType.TEXT_ONLY
-                ),
-                FilterChip(
-                    id = "rainbow_roll",
-                    text = "Rainbow Roll",
                     type = FilterType.TEXT_ONLY
                 ),
 
@@ -25097,99 +24545,22 @@ fun SushiRollsDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = sushiRollsDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val sushiRollsDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_california_roll,
-                title = "California Roll (8 pcs)",
-                price = "349",
-                restaurantName = "Sushi Master",
-                rating = "4.8",
-                deliveryTime = "25-30 mins",
-                distance = "0.4 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_spicy_tuna_roll,
-                title = "Spicy Tuna Roll with Avocado",
-                price = "429",
-                restaurantName = "Tokyo Bay",
-                rating = "4.9",
-                deliveryTime = "20-25 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_salmon_nigiri_set,
-                title = "Salmon Nigiri (5 pcs) with Wasabi",
-                price = "499",
-                restaurantName = "Sushi & Co.",
-                rating = "4.7",
-                deliveryTime = "18-22 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_rainbow_roll,
-                title = "Rainbow Roll (Assorted Fish)",
-                price = "589",
-                restaurantName = "Osaka Sushi Bar",
-                rating = "4.9",
-                deliveryTime = "22-28 mins",
-                distance = "0.6 km",
-                discount = "25%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_vegetarian_sushi_combo,
-                title = "Vegetarian Sushi Combo (12 pcs)",
-                price = "379",
-                restaurantName = "Green Sushi House",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.2 km",
-                discount = "30%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_sashimi_deluxe_platter,
-                title = "Deluxe Sashimi Platter (15 pcs)",
-                price = "899",
-                restaurantName = "Sakura Japanese Restaurant",
-                rating = "4.9",
-                deliveryTime = "25-30 mins",
-                distance = "0.8 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED SUSHI ROLLS ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -25197,334 +24568,209 @@ fun SushiRollsDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = sushiRollsDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Sushi Rolls items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SUSHI_ROLLS_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_maki_roll),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Sushi Rolls items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED SUSHI ROLLS RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val sushiRollsDietItems = listOf(
-        // 1-5: CLASSIC MAKI ROLLS - SIMPLE & TRADITIONAL
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.sushi_classic_1,
-            title = "Classic California Roll (8 pcs)",
-            price = "349",
-            restaurantName = "Sushi Master",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.sushi_classic_2,
-            title = "Tuna Maki Roll (6 pcs) with Soy Sauce",
-            price = "399",
-            restaurantName = "Tokyo Bay",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.sushi_classic_3,
-            title = "Salmon Avocado Roll (8 pcs)",
-            price = "429",
-            restaurantName = "Sushi & Co.",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.sushi_classic_4,
-            title = "Cucumber Maki (Kappa Roll) - 6 pcs",
-            price = "249",
-            restaurantName = "Green Sushi House",
-            rating = "4.7",
-            deliveryTime = "12-17 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.sushi_classic_5,
-            title = "Avocado Maki Roll (6 pcs) - Vegan",
-            price = "279",
-            restaurantName = "Plant Based Sushi",
-            rating = "4.8",
-            deliveryTime = "14-19 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: NIGIRI & SASHIMI - PURE & PREMIUM
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.sushi_nigiri_6,
-            title = "Salmon Nigiri (5 pcs) with Wasabi",
-            price = "499",
-            restaurantName = "Osaka Sushi Bar",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.sushi_nigiri_7,
-            title = "Tuna Nigiri (5 pcs) - Fresh Catch",
-            price = "549",
-            restaurantName = "Mumbai Fish Co.",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.sushi_nigiri_8,
-            title = "Eel Nigiri (Unagi) - 4 pcs",
-            price = "589",
-            restaurantName = "Sakura Japanese",
-            rating = "4.8",
-            deliveryTime = "22-27 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.sushi_nigiri_9,
-            title = "Assorted Sashimi Platter (12 pcs)",
-            price = "799",
-            restaurantName = "Sashimi House",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.sushi_nigiri_10,
-            title = "Salmon Sashimi (8 slices) - Premium Cut",
-            price = "649",
-            restaurantName = "Ocean Fresh",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 11-15: SPECIALTY ROLLS - SIGNATURE & FUSION
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.sushi_specialty_11,
-            title = "Rainbow Roll (Assorted Fish) - 8 pcs",
-            price = "629",
-            restaurantName = "Rainbow Sushi",
-            rating = "4.9",
-            deliveryTime = "22-27 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.sushi_specialty_12,
-            title = "Spicy Tuna Crunch Roll",
-            price = "549",
-            restaurantName = "Spice Fusion",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Hinjawadi, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.sushi_specialty_13,
-            title = "Dragon Roll (Eel & Avocado)",
-            price = "679",
-            restaurantName = "Dragon Sushi",
-            rating = "4.9",
-            deliveryTime = "24-29 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.sushi_specialty_14,
-            title = "Philadelphia Roll (Cream Cheese)",
-            price = "459",
-            restaurantName = "Creamy Rolls",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.sushi_specialty_15,
-            title = "Volcano Roll (Baked Seafood)",
-            price = "719",
-            restaurantName = "Volcano Kitchen",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Banjara Hills, Hyderabad"
-        ),
-
-        // 16-20: VEGETARIAN & COMBO PLATTERS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.sushi_veggie_16,
-            title = "Vegetarian Sushi Platter (16 pcs)",
-            price = "499",
-            restaurantName = "Veg Sushi House",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.sushi_veggie_17,
-            title = "Sweet Potato Tempura Roll",
-            price = "379",
-            restaurantName = "Tempura House",
-            rating = "4.8",
-            deliveryTime = "16-21 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.sushi_veggie_18,
-            title = "Avocado & Cucumber Brown Rice Roll",
-            price = "349",
-            restaurantName = "Healthy Sushi",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.sushi_veggie_19,
-            title = "Sushi Boat Combo (32 pcs) - 6 Varieties",
-            price = "1299",
-            restaurantName = "Sushi Boat",
-            rating = "4.9",
-            deliveryTime = "30-35 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Golf Course Road, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.sushi_veggie_20,
-            title = "Sushi Making Kit + Fresh Rolls (DIY)",
-            price = "899",
-            restaurantName = "Sushi DIY",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Noida Sector 18, Noida"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        sushiRollsDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Sushi Rolls restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SUSHI_ROLLS_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_maki_roll),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Sushi Rolls restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }

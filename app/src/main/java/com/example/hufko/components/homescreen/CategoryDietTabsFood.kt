@@ -974,9 +974,9 @@ fun CategoryDietTabsFood(
             DietCategoryPage.BoiledEggs -> BoiledEggsDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.HummusPlate -> HummusPlateDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.SushiRolls -> SushiRollsDietPage(restaurantViewModel = restaurantViewModel)
-            DietCategoryPage.TofuStirFry -> TofuStirFryDietPage()
-            DietCategoryPage.ChiaPudding -> ChiaPuddingDietPage()
-            DietCategoryPage.MilletBowl -> MilletBowlDietPage()
+            DietCategoryPage.TofuStirFry -> TofuStirFryDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.ChiaPudding -> ChiaPuddingDietPage(restaurantViewModel = restaurantViewModel)
+            DietCategoryPage.MilletBowl -> MilletBowlDietPage(restaurantViewModel = restaurantViewModel)
             DietCategoryPage.SeeAll -> {
                 // When "See All" is selected, show the grid view
                 Box(
@@ -24776,12 +24776,28 @@ fun SushiRollsDietPage(
 }
 
 @Composable
-fun TofuStirFryDietPage() {
+fun TofuStirFryDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for TOFU_STIR_FRY_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: TOFU_STIR_FRY_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("TOFU_STIR_FRY_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("TOFU_STIR_FRY_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val tofuStirFryDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -25047,99 +25063,22 @@ fun TofuStirFryDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = tofuStirFryDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val tofuStirFryDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_tofu_stir_fry,
-                title = "Classic Tofu Stir Fry with Vegetables",
-                price = "299",
-                restaurantName = "Green Wok",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_szechuan_tofu,
-                title = "Szechuan Tofu Stir Fry (Spicy)",
-                price = "329",
-                restaurantName = "Spice Garden",
-                rating = "4.9",
-                deliveryTime = "22-27 mins",
-                distance = "0.5 km",
-                discount = "20%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_ginger_garlic_tofu,
-                title = "Ginger Garlic Tofu with Broccoli",
-                price = "289",
-                restaurantName = "Wok & Roll",
-                rating = "4.7",
-                deliveryTime = "18-23 mins",
-                distance = "0.2 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_thai_basil_tofu,
-                title = "Thai Basil Tofu Stir Fry",
-                price = "349",
-                restaurantName = "Thai Basil",
-                rating = "4.8",
-                deliveryTime = "20-25 mins",
-                distance = "0.4 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_tofu_cashew_stir_fry,
-                title = "Tofu & Cashew Nut Stir Fry",
-                price = "379",
-                restaurantName = "Nutty Wok",
-                rating = "4.9",
-                deliveryTime = "15-20 mins",
-                distance = "0.3 km",
-                discount = "18%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_teriyaki_tofu_bowl,
-                title = "Teriyaki Tofu Bowl with Brown Rice",
-                price = "399",
-                restaurantName = "Healthy Bowl",
-                rating = "4.8",
-                deliveryTime = "18-22 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED TOFU STIR FRY ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -25147,346 +25086,236 @@ fun TofuStirFryDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = tofuStirFryDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Tofu Stir Fry items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("TOFU_STIR_FRY_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_firm_tofu),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Tofu Stir Fry items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED TOFU STIR FRY RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val tofuStirFryDietItems = listOf(
-        // 1-5: CLASSIC TOFU STIR FRY - SIMPLE & TRADITIONAL
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.tofu_classic_1,
-            title = "Classic Tofu Stir Fry with Vegetables",
-            price = "299",
-            restaurantName = "Green Bowl",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.tofu_classic_2,
-            title = "Sesame Tofu Stir Fry (High Protein)",
-            price = "329",
-            restaurantName = "Protein Kitchen",
-            rating = "4.9",
-            deliveryTime = "16-21 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.tofu_classic_3,
-            title = "Ginger Garlic Tofu with Bell Peppers",
-            price = "319",
-            restaurantName = "Wok & Roll",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.tofu_classic_4,
-            title = "Broccoli & Tofu Stir Fry (Low Calorie)",
-            price = "289",
-            restaurantName = "Fit Food Factory",
-            rating = "4.7",
-            deliveryTime = "14-19 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.tofu_classic_5,
-            title = "Mushroom Tofu Stir Fry with Baby Corn",
-            price = "339",
-            restaurantName = "Umami Kitchen",
-            rating = "4.8",
-            deliveryTime = "17-22 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: ASIAN INSPIRED TOFU STIR FRY
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.tofu_asian_6,
-            title = "Thai Basil Tofu Stir Fry with Cashews",
-            price = "359",
-            restaurantName = "Thai Essence",
-            rating = "4.9",
-            deliveryTime = "19-24 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.tofu_asian_7,
-            title = "Szechuan Tofu Stir Fry (Spicy)",
-            price = "349",
-            restaurantName = "Red Wok",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.tofu_asian_8,
-            title = "Teriyaki Tofu with Stir Fried Veggies",
-            price = "369",
-            restaurantName = "Sakura Japanese",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.tofu_asian_9,
-            title = "Kimchi Tofu Stir Fry (Korean Style)",
-            price = "379",
-            restaurantName = "Seoul Kitchen",
-            rating = "4.8",
-            deliveryTime = "22-27 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.tofu_asian_10,
-            title = "Black Pepper Tofu with Onions & Peppers",
-            price = "329",
-            restaurantName = "Pepper Wok",
-            rating = "4.7",
-            deliveryTime = "17-22 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 11-15: PROTEIN BOWLS & MEAL PREP
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.tofu_bowl_11,
-            title = "Tofu Power Bowl with Quinoa & Greens",
-            price = "419",
-            restaurantName = "The Bowl Company",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.tofu_bowl_12,
-            title = "High Protein Tofu Stir Fry (25g Protein)",
-            price = "389",
-            restaurantName = "Protein Chef",
-            rating = "4.9",
-            deliveryTime = "16-21 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Hinjawadi, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.tofu_bowl_13,
-            title = "Tofu & Brown Rice Stir Fry Meal Prep",
-            price = "399",
-            restaurantName = "Meal Prep India",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.tofu_bowl_14,
-            title = "Keto Tofu Stir Fry (Low Carb)",
-            price = "429",
-            restaurantName = "Keto Kitchen",
-            rating = "4.9",
-            deliveryTime = "19-24 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.tofu_bowl_15,
-            title = "Tofu & Edamame Stir Fry with Noodles",
-            price = "379",
-            restaurantName = "Noodle House",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Banjara Hills, Hyderabad"
-        ),
-
-        // 16-20: VEGAN & GLUTEN-FREE OPTIONS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.tofu_vegan_16,
-            title = "Vegan Tofu Stir Fry (No Onion No Garlic)",
-            price = "319",
-            restaurantName = "Pure Vegan",
-            rating = "4.9",
-            deliveryTime = "17-22 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.tofu_vegan_17,
-            title = "Gluten-Free Tofu with Zucchini Noodles",
-            price = "389",
-            restaurantName = "Gluten Free Kitchen",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.tofu_vegan_18,
-            title = "Rainbow Tofu Stir Fry (5 Color Veggies)",
-            price = "349",
-            restaurantName = "Rainbow Foods",
-            rating = "4.8",
-            deliveryTime = "16-21 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.tofu_vegan_19,
-            title = "Family Pack Tofu Stir Fry (4 servings)",
-            price = "899",
-            restaurantName = "Family Kitchen",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Golf Course Road, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.tofu_vegan_20,
-            title = "Tofu Stir Fry Meal Kit (DIY with Fresh Tofu)",
-            price = "449",
-            restaurantName = "Cook at Home",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Noida Sector 18, Noida"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        tofuStirFryDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Tofu Stir Fry restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("TOFU_STIR_FRY_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_firm_tofu),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Tofu Stir Fry restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun ChiaPuddingDietPage() {
+fun ChiaPuddingDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for CHIA_PUDDING_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: CHIA_PUDDING_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("CHIA_PUDDING_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("CHIA_PUDDING_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val chiaPuddingDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -25745,99 +25574,22 @@ fun ChiaPuddingDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = chiaPuddingDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val chiaPuddingDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_classic_chia_pudding,
-                title = "Classic Chia Pudding with Mixed Berries",
-                price = "189",
-                restaurantName = "Healthy Bowl",
-                rating = "4.8",
-                deliveryTime = "15-20 mins",
-                distance = "0.3 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_coconut_mango_chia,
-                title = "Coconut Mango Chia Pudding",
-                price = "219",
-                restaurantName = "Tropical Bliss",
-                rating = "4.9",
-                deliveryTime = "18-23 mins",
-                distance = "0.5 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_chocolate_chia_pudding,
-                title = "Dark Chocolate Chia Pudding",
-                price = "199",
-                restaurantName = "Dessert Kitchen",
-                rating = "4.7",
-                deliveryTime = "12-17 mins",
-                distance = "0.2 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_matcha_chia_pudding,
-                title = "Matcha Green Tea Chia Pudding",
-                price = "229",
-                restaurantName = "Matcha House",
-                rating = "4.8",
-                deliveryTime = "16-21 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_peanut_butter_banana_chia,
-                title = "Peanut Butter & Banana Chia Pudding",
-                price = "209",
-                restaurantName = "Nutty Kitchen",
-                rating = "4.9",
-                deliveryTime = "14-19 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_berry_almond_chia,
-                title = "Berry Almond Chia Pudding Parfait",
-                price = "239",
-                restaurantName = "Berry Bliss",
-                rating = "4.8",
-                deliveryTime = "17-22 mins",
-                distance = "0.5 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED CHIA PUDDING ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -25845,346 +25597,236 @@ fun ChiaPuddingDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = chiaPuddingDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Chia Pudding items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("CHIA_PUDDING_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_coconut_milk_chia),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Chia Pudding items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED CHIA PUDDING RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val chiaPuddingDietItems = listOf(
-        // 1-5: CLASSIC CHIA PUDDING - SIMPLE & TRADITIONAL
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.chia_classic_1,
-            title = "Classic Chia Pudding with Mixed Berries",
-            price = "189",
-            restaurantName = "Berry Bowl",
-            rating = "4.8",
-            deliveryTime = "12-17 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.chia_classic_2,
-            title = "Vanilla Bean Chia Pudding",
-            price = "169",
-            restaurantName = "Simply Chia",
-            rating = "4.7",
-            deliveryTime = "10-15 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.chia_classic_3,
-            title = "Honey Almond Chia Pudding",
-            price = "199",
-            restaurantName = "Honey Pot",
-            rating = "4.9",
-            deliveryTime = "13-18 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.chia_classic_4,
-            title = "Cinnamon Apple Chia Pudding",
-            price = "179",
-            restaurantName = "Spiced Kitchen",
-            rating = "4.8",
-            deliveryTime = "11-16 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.chia_classic_5,
-            title = "Maple Pecan Chia Pudding",
-            price = "219",
-            restaurantName = "Maple House",
-            rating = "4.9",
-            deliveryTime = "14-19 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: FRUIT BASED CHIA PUDDING
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.chia_fruit_6,
-            title = "Mango Coconut Chia Pudding",
-            price = "229",
-            restaurantName = "Tropical Bliss",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.chia_fruit_7,
-            title = "Mixed Berry Compote Chia Pudding",
-            price = "209",
-            restaurantName = "Berry Bliss",
-            rating = "4.9",
-            deliveryTime = "14-19 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.chia_fruit_8,
-            title = "Passion Fruit Chia Pudding",
-            price = "239",
-            restaurantName = "Passion Kitchen",
-            rating = "4.8",
-            deliveryTime = "16-21 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.chia_fruit_9,
-            title = "Strawberry & Banana Chia Pudding",
-            price = "199",
-            restaurantName = "Fruit Bowl",
-            rating = "4.8",
-            deliveryTime = "13-18 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.chia_fruit_10,
-            title = "Blueberry Lemon Chia Pudding",
-            price = "219",
-            restaurantName = "Citrus Chia",
-            rating = "4.7",
-            deliveryTime = "14-19 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 11-15: INDULGENT & FLAVORED CHIA PUDDING
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.chia_indulgent_11,
-            title = "Dark Chocolate Chia Pudding",
-            price = "219",
-            restaurantName = "Cocoa House",
-            rating = "4.9",
-            deliveryTime = "12-17 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.chia_indulgent_12,
-            title = "Matcha Green Tea Chia Pudding",
-            price = "249",
-            restaurantName = "Matcha Magic",
-            rating = "4.9",
-            deliveryTime = "14-19 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Hinjawadi, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.chia_indulgent_13,
-            title = "Chai Spice Chia Pudding",
-            price = "189",
-            restaurantName = "Chai House",
-            rating = "4.8",
-            deliveryTime = "11-16 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.chia_indulgent_14,
-            title = "Coffee Toffee Chia Pudding",
-            price = "229",
-            restaurantName = "Brew & Chia",
-            rating = "4.9",
-            deliveryTime = "13-18 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.chia_indulgent_15,
-            title = "Peanut Butter & Jelly Chia Pudding",
-            price = "239",
-            restaurantName = "PB&J Kitchen",
-            rating = "4.9",
-            deliveryTime = "15-20 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Banjara Hills, Hyderabad"
-        ),
-
-        // 16-20: PROTEIN & SPECIALTY CHIA PUDDING
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.chia_protein_16,
-            title = "High Protein Chia Pudding (20g Protein)",
-            price = "269",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "12-17 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.chia_protein_17,
-            title = "Vegan Chia Pudding with Coconut Cream",
-            price = "199",
-            restaurantName = "Pure Vegan",
-            rating = "4.8",
-            deliveryTime = "14-19 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.chia_protein_18,
-            title = "Keto Chia Pudding (Sugar Free)",
-            price = "259",
-            restaurantName = "Keto Kitchen",
-            rating = "4.9",
-            deliveryTime = "13-18 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.chia_protein_19,
-            title = "Breakfast Chia Pudding Jar (4 Pack)",
-            price = "699",
-            restaurantName = "Meal Prep Co.",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Golf Course Road, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.chia_protein_20,
-            title = "DIY Chia Pudding Kit (with 3 Flavors)",
-            price = "449",
-            restaurantName = "Chia Crafts",
-            rating = "4.7",
-            deliveryTime = "16-21 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Noida Sector 18, Noida"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        chiaPuddingDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Chia Pudding restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("CHIA_PUDDING_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_coconut_milk_chia),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Chia Pudding restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun MilletBowlDietPage() {
+fun MilletBowlDietPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for MILLET_BOWL_DIET category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: MILLET_BOWL_DIET")
+        restaurantViewModel.loadFeaturedRestaurants("MILLET_BOWL_DIET", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("MILLET_BOWL_DIET", recommended = true)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(10.dp))
+
         val milletBowlDietFilters = FilterConfig(
             filters = listOf(
                 // Main filter dropdown
@@ -26488,99 +26130,22 @@ fun MilletBowlDietPage() {
             ),
             rows = 2
         )
+
         FilterButtonFood(
             filterConfig = milletBowlDietFilters,
             onFilterClick = { filter ->
                 println("Filter clicked: ${filter.text}")
-                // Handle filter logic
+                // Handle filter logic - you can pass filter to ViewModel here
             },
             onSortClick = {
                 println("Sort clicked")
-                // Handle sort logic
+                // Handle sort logic - you can pass sort to ViewModel here
             }
         )
-        // Sample data with all fields
-        val milletBowlDietItems = listOf(
-            FoodItemDoubleF(
-                id = 1,
-                imageRes = R.drawable.ic_foxtail_millet_bowl,
-                title = "Foxtail Millet Bowl with Roasted Veggies",
-                price = "249",
-                restaurantName = "Millet Kitchen",
-                rating = "4.8",
-                deliveryTime = "18-23 mins",
-                distance = "0.3 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Koramangala, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 2,
-                imageRes = R.drawable.ic_ragi_bowl_south_indian,
-                title = "Ragi Bowl with Sambar & Coconut Chutney",
-                price = "219",
-                restaurantName = "South Indian Tiffins",
-                rating = "4.9",
-                deliveryTime = "16-21 mins",
-                distance = "0.5 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Indiranagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 3,
-                imageRes = R.drawable.ic_bajra_mediterranean_bowl,
-                title = "Bajra Mediterranean Bowl with Hummus",
-                price = "279",
-                restaurantName = "Fusion Bowls",
-                rating = "4.7",
-                deliveryTime = "20-25 mins",
-                distance = "0.4 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "Jayanagar, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 4,
-                imageRes = R.drawable.ic_jowar_protein_bowl,
-                title = "Jowar High-Protein Bowl with Paneer",
-                price = "299",
-                restaurantName = "Protein Kitchen",
-                rating = "4.9",
-                deliveryTime = "19-24 mins",
-                distance = "0.6 km",
-                discount = "12%",
-                discountAmount = "₹20",
-                address = "Whitefield, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 5,
-                imageRes = R.drawable.ic_barnyard_millet_vegan,
-                title = "Barnyard Millet Vegan Bowl with Tofu",
-                price = "259",
-                restaurantName = "Pure Vegan",
-                rating = "4.8",
-                deliveryTime = "17-22 mins",
-                distance = "0.3 km",
-                discount = "15%",
-                discountAmount = "₹20",
-                address = "MG Road, Bangalore"
-            ),
-            FoodItemDoubleF(
-                id = 6,
-                imageRes = R.drawable.ic_little_millet_breakfast,
-                title = "Little Millet Breakfast Bowl with Berries",
-                price = "229",
-                restaurantName = "Morning Bliss",
-                rating = "4.8",
-                deliveryTime = "14-19 mins",
-                distance = "0.4 km",
-                discount = "10%",
-                discountAmount = "₹20",
-                address = "Bandra West, Mumbai"
-            )
-        )
+
         Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED MILLET BOWL ITEMS FROM API ====================
         Text(
             text = "Recommended for you",
             style = MaterialTheme.typography.bodySmall.copy(
@@ -26588,338 +26153,213 @@ fun MilletBowlDietPage() {
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.customColors.black
             ),
-//            textAlign = TextAlign.Center,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        FoodItemsListWithHeading(
-            heading = null,
-            subtitle = null,
-            foodItems = milletBowlDietItems,
-            onItemClick = { foodItem ->
-                println("Food item clicked: ${foodItem.title}")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Color.White,
-            cardWidth = 150.dp,
-            cardHeight = 170.dp,
-            horizontalSpacing = 8.dp,
-            horizontalPadding = 12.dp,
-            verticalPadding = 0.dp,
-            headingBottomPadding = 0.dp
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Millet Bowl items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("MILLET_BOWL_DIET", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants.filter { it.recommended == true }.map { restaurant ->
+                        FoodItemDoubleFDynamic(
+                            id = restaurant.id,
+                            imageUrl = restaurant.imageUrl,
+                            title = restaurant.title,
+                            price = restaurant.priceAvg,
+                            restaurantName = restaurant.restaurantName,
+                            rating = restaurant.rating,
+                            deliveryTime = restaurant.deliveryTime,
+                            distance = restaurant.distance,
+                            discount = restaurant.discountAvg ?: "",
+                            discountAmount = restaurant.discountAmountAvg ?: "",
+                            address = restaurant.address?.city ?: restaurant.outlet,
+                            isWishlisted = restaurant.isWishlisted
+                        )
+                    },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_foxtail_millet),
+                            contentDescription = "No recommended items",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Millet Bowl items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED MILLET BOWL RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    }
-
-
-    Spacer(modifier = Modifier.height(15.dp))
-    Text(
-        text = "Restaurants delivering to you",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    Text(
-        text = "Featured restaurants",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.customColors.black
-        ),
-//            textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-
-    // Sample data based on the provided images
-    val milletBowlDietItems = listOf(
-        // 1-5: TRADITIONAL INDIAN MILLET BOWLS
-        RestaurantItemFull(
-            id = 1,
-            imageRes = R.drawable.millet_traditional_1,
-            title = "Ragi Bowl with Sambar & Vegetable Curry",
-            price = "229",
-            restaurantName = "South Indian Kitchen",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Indiranagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 2,
-            imageRes = R.drawable.millet_traditional_2,
-            title = "Bajra Khichdi Bowl with Ghee & Pickle",
-            price = "199",
-            restaurantName = "Desi Bowl",
-            rating = "4.9",
-            deliveryTime = "16-21 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koramangala, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 3,
-            imageRes = R.drawable.millet_traditional_3,
-            title = "Jowar Upma Bowl with Coconut Chutney",
-            price = "189",
-            restaurantName = "Healthy Tiffin",
-            rating = "4.8",
-            deliveryTime = "15-20 mins",
-            distance = "0.2 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jayanagar, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 4,
-            imageRes = R.drawable.millet_traditional_4,
-            title = "Foxtail Millet Pongal with Cashews",
-            price = "219",
-            restaurantName = "Millet House",
-            rating = "4.7",
-            deliveryTime = "17-22 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "MG Road, Bangalore"
-        ),
-        RestaurantItemFull(
-            id = 5,
-            imageRes = R.drawable.millet_traditional_5,
-            title = "Little Millet Lemon Rice Bowl",
-            price = "179",
-            restaurantName = "Zesty Bowl",
-            rating = "4.8",
-            deliveryTime = "14-19 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Whitefield, Bangalore"
-        ),
-
-        // 6-10: PROTEIN-RICH MILLET BOWLS
-        RestaurantItemFull(
-            id = 6,
-            imageRes = R.drawable.millet_protein_6,
-            title = "High Protein Millet Bowl with Paneer Tikka",
-            price = "329",
-            restaurantName = "Protein Kitchen",
-            rating = "4.9",
-            deliveryTime = "19-24 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Bandra West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 7,
-            imageRes = R.drawable.millet_protein_7,
-            title = "Soya Chunks & Millet Power Bowl",
-            price = "289",
-            restaurantName = "Protein Lab",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Juhu, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 8,
-            imageRes = R.drawable.millet_protein_8,
-            title = "Chickpea & Millet Buddha Bowl",
-            price = "269",
-            restaurantName = "Buddha Bowl Co.",
-            rating = "4.8",
-            deliveryTime = "20-25 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Andheri West, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 9,
-            imageRes = R.drawable.millet_protein_9,
-            title = "Lentil & Millet Dal Bowl with Salad",
-            price = "239",
-            restaurantName = "Dal Roti",
-            rating = "4.8",
-            deliveryTime = "17-22 mins",
-            distance = "0.8 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Powai, Mumbai"
-        ),
-        RestaurantItemFull(
-            id = 10,
-            imageRes = R.drawable.millet_protein_10,
-            title = "Tofu & Barnyard Millet Stir Fry Bowl",
-            price = "299",
-            restaurantName = "Vegan Valley",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Koregaon Park, Pune"
-        ),
-
-        // 11-15: FUSION & INTERNATIONAL MILLET BOWLS
-        RestaurantItemFull(
-            id = 11,
-            imageRes = R.drawable.millet_fusion_11,
-            title = "Mediterranean Millet Bowl with Hummus",
-            price = "309",
-            restaurantName = "Olive Kitchen",
-            rating = "4.9",
-            deliveryTime = "19-24 mins",
-            distance = "0.5 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Baner, Pune"
-        ),
-        RestaurantItemFull(
-            id = 12,
-            imageRes = R.drawable.millet_fusion_12,
-            title = "Mexican Millet Bowl with Beans & Salsa",
-            price = "289",
-            restaurantName = "Salsa Fresh",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Hinjawadi, Pune"
-        ),
-        RestaurantItemFull(
-            id = 13,
-            imageRes = R.drawable.millet_fusion_13,
-            title = "Thai Green Curry Millet Bowl",
-            price = "319",
-            restaurantName = "Thai Basil",
-            rating = "4.9",
-            deliveryTime = "20-25 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Gachibowli, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 14,
-            imageRes = R.drawable.millet_fusion_14,
-            title = "Japanese Millet Bowl with Teriyaki Veggies",
-            price = "299",
-            restaurantName = "Tokyo Wok",
-            rating = "4.8",
-            deliveryTime = "19-24 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Jubilee Hills, Hyderabad"
-        ),
-        RestaurantItemFull(
-            id = 15,
-            imageRes = R.drawable.millet_fusion_15,
-            title = "Moroccan Millet Bowl with Roasted Veggies",
-            price = "279",
-            restaurantName = "Spice Route",
-            rating = "4.8",
-            deliveryTime = "18-23 mins",
-            distance = "0.7 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Banjara Hills, Hyderabad"
-        ),
-
-        // 16-20: BREAKFAST & SPECIALTY MILLET BOWLS
-        RestaurantItemFull(
-            id = 16,
-            imageRes = R.drawable.millet_specialty_16,
-            title = "Morning Millet Breakfast Bowl with Fruits",
-            price = "219",
-            restaurantName = "Morning Bliss",
-            rating = "4.9",
-            deliveryTime = "14-19 mins",
-            distance = "0.4 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Connaught Place, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 17,
-            imageRes = R.drawable.millet_specialty_17,
-            title = "Keto Millet Bowl with Avocado & Nuts",
-            price = "349",
-            restaurantName = "Keto Kitchen",
-            rating = "4.9",
-            deliveryTime = "18-23 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Saket, Delhi"
-        ),
-        RestaurantItemFull(
-            id = 18,
-            imageRes = R.drawable.millet_specialty_18,
-            title = "Gluten-Free Millet Bowl with Roasted Veggies",
-            price = "259",
-            restaurantName = "Gluten Free Hub",
-            rating = "4.8",
-            deliveryTime = "16-21 mins",
-            distance = "0.3 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "DLF Cyber City, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 19,
-            imageRes = R.drawable.millet_specialty_19,
-            title = "Family Millet Bowl Feast (4 Servings)",
-            price = "799",
-            restaurantName = "Millet Family",
-            rating = "4.9",
-            deliveryTime = "25-30 mins",
-            distance = "0.9 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Golf Course Road, Gurgaon"
-        ),
-        RestaurantItemFull(
-            id = 20,
-            imageRes = R.drawable.millet_specialty_20,
-            title = "DIY Millet Bowl Kit (3 Grain Varieties)",
-            price = "449",
-            restaurantName = "Millet Crafts",
-            rating = "4.7",
-            deliveryTime = "20-25 mins",
-            distance = "0.6 km",
-            discount = "30%",
-            discountAmount = "₹20",
-            address = "Noida Sector 18, Noida"
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
         )
-    )
-    Column {
-        milletBowlDietItems.forEach { restaurantItem ->
-            RestaurantItemListFull(
-                restaurantItem = restaurantItem,
-                onWishlistClick = { },
-                onThreeDotClick = { },
-                onItemClick = { }
-            )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Millet Bowl restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("MILLET_BOWL_DIET", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants.filter { it.featured == true }.forEach { restaurant ->
+                        RestaurantItemListFullDynamic(
+                            restaurantItem = RestaurantItemFullDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                isWishlisted = restaurant.isWishlisted
+                            ),
+                            onWishlistClick = { id ->
+                                println("Wishlist clicked for featured restaurant: $id")
+                                // TODO: Toggle wishlist status
+                            },
+                            onThreeDotClick = { id ->
+                                println("Three dot clicked for featured restaurant: $id")
+                                // TODO: Show more options dialog
+                            },
+                            onItemClick = { id ->
+                                println("Featured restaurant clicked: $id")
+                                // TODO: Navigate to restaurant details
+                            }
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_foxtail_millet),
+                            contentDescription = "No featured restaurants",
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Millet Bowl restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
         }
     }
 }
+
 @Composable
 fun SeeAllPage() {
     Column(

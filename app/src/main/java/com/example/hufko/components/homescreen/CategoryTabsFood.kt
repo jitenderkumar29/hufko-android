@@ -243,6 +243,9 @@ fun CategoryTabsFood(
     CategoryPage.Bhurji,
     CategoryPage.KhastaKachori,
     CategoryPage.HotDog,
+    CategoryPage.Mocktail,
+    CategoryPage.Smoothie,
+    CategoryPage.Buttermilk
 ).filter { it.isActive }.sortedBy { it.priority }
 
     // Initial visible tabs (first 19 + recently selected + "See All")
@@ -571,6 +574,9 @@ fun CategoryTabsFood(
                 CategoryPage.Bhurji -> BhurjiCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.KhastaKachori -> KhastaKachoriCategoryPage(restaurantViewModel = restaurantViewModel)
                 CategoryPage.HotDog -> HotDogCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Mocktail  -> MocktailCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Smoothie  -> SmoothieCategoryPage(restaurantViewModel = restaurantViewModel)
+                CategoryPage.Buttermilk  -> ButtermilkCategoryPage(restaurantViewModel = restaurantViewModel)
                 null -> {
                     // Show empty state for "See All" tab or invalid index
                     Box(
@@ -56677,6 +56683,915 @@ fun HotDogCategoryPage(
     }
 }
 
+@Composable
+fun MocktailCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for MOCKTAIL category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: MOCKTAIL")
+        restaurantViewModel.loadFeaturedRestaurants("MOCKTAIL", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("MOCKTAIL", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val mocktailFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // MOCKTAIL TYPES
+                FilterChip(id = "classic_mojito", text = "Mojito", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "fruit_mocktail", text = "Fruit Mocktails", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "citrus_mocktail", text = "Citrus", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "berry_mocktail", text = "Berry", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "tropical_mocktail", text = "Tropical", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "sparkling_mocktail", text = "Sparkling", type = FilterType.TEXT_ONLY),
+
+                // FLAVOURS
+                FilterChip(id = "mango", text = "Mango", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "strawberry", text = "Strawberry", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "watermelon", text = "Watermelon", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "pineapple", text = "Pineapple", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "blueberry", text = "Blueberry", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "lemon", text = "Lemon", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "green_apple", text = "Green Apple", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "kiwi", text = "Kiwi", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "passion_fruit", text = "Passion Fruit", type = FilterType.TEXT_ONLY),
+
+                // SERVING STYLE
+                FilterChip(id = "with_mint", text = "With Mint", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "with_soda", text = "With Soda", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "crushed_ice", text = "Crushed Ice", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "lemonade_style", text = "Lemonade", type = FilterType.TEXT_ONLY),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = mocktailFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED Mocktail ITEMS FROM API ====================
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Mocktail items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("MOCKTAIL", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants
+                        .filter { restaurant ->
+                            restaurant.recommended == true &&
+                                    restaurant.category?.any { it.equals("MOCKTAIL", ignoreCase = true) } == true
+                        }
+                        .map { restaurant ->
+                            FoodItemDoubleFDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                isWishlisted = restaurant.isWishlisted
+                            )
+                        },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("🍹", fontSize = 48.sp)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Mocktail items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED Mocktail RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Mocktail restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("MOCKTAIL", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants
+                        .filter { restaurant ->
+                            restaurant.featured == true &&
+                                    restaurant.category?.any { it.equals("MOCKTAIL", ignoreCase = true) } == true
+                        }
+                        .forEach { restaurant ->
+                            RestaurantItemListFullDynamic(
+                                restaurantItem = RestaurantItemFullDynamic(
+                                    id = restaurant.id,
+                                    imageUrl = restaurant.imageUrl,
+                                    title = restaurant.title,
+                                    price = restaurant.priceAvg,
+                                    restaurantName = restaurant.restaurantName,
+                                    rating = restaurant.rating,
+                                    deliveryTime = restaurant.deliveryTime,
+                                    distance = restaurant.distance,
+                                    address = restaurant.address?.city ?: restaurant.outlet,
+                                    discount = restaurant.discountAvg ?: "",
+                                    discountAmount = restaurant.discountAmountAvg ?: "",
+                                    isWishlisted = restaurant.isWishlisted
+                                ),
+                                onWishlistClick = { id ->
+                                    println("Wishlist clicked for featured restaurant: $id")
+                                    // TODO: Toggle wishlist status
+                                },
+                                onThreeDotClick = { id ->
+                                    println("Three dot clicked for featured restaurant: $id")
+                                    // TODO: Show more options dialog
+                                },
+                                onItemClick = { id ->
+                                    println("Featured restaurant clicked: $id")
+                                    // TODO: Navigate to restaurant details
+                                }
+                            )
+                        }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("🍹", fontSize = 48.sp)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Mocktail restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun SmoothieCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for SMOOTHIE category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading featured and recommended restaurants from API for category: SMOOTHIE")
+        restaurantViewModel.loadFeaturedRestaurants("SMOOTHIE", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("SMOOTHIE", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val smoothieFilters = FilterConfig(
+            filters = listOf(
+                // Main filter dropdown
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // SMOOTHIE TYPES
+                FilterChip(id = "fruit_smoothie", text = "Fruit Smoothies", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "berry_smoothie", text = "Berry Smoothies", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "green_smoothie", text = "Green Smoothies", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "protein_smoothie", text = "Protein Smoothies", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "tropical_smoothie", text = "Tropical", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "breakfast_smoothie", text = "Breakfast", type = FilterType.TEXT_ONLY),
+
+                // FRUIT FLAVOURS
+                FilterChip(id = "banana", text = "Banana", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "mango", text = "Mango", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "strawberry", text = "Strawberry", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "blueberry", text = "Blueberry", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "pineapple", text = "Pineapple", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "watermelon", text = "Watermelon", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "papaya", text = "Papaya", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "kiwi", text = "Kiwi", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "avocado", text = "Avocado", type = FilterType.TEXT_ONLY),
+
+                // BASE & ADD-INS
+                FilterChip(id = "milk_base", text = "Milk Based", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "yogurt_base", text = "Yogurt Based", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "oat_milk", text = "Oat Milk", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "almond_milk", text = "Almond Milk", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "chia_seeds", text = "Chia Seeds", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "oats", text = "Oats", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "peanut_butter", text = "Peanut Butter", type = FilterType.TEXT_ONLY),
+
+                // DIETARY PREFERENCES
+                FilterChip(id = "high_protein", text = "High Protein", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "no_added_sugar", text = "No Added Sugar", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "vegan", text = "Vegan", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "low_fat", text = "Low Fat", type = FilterType.TEXT_ONLY),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = smoothieFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED Smoothie ITEMS FROM API ====================
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Smoothie items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("SMOOTHIE", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants
+                        .filter { restaurant ->
+                            restaurant.recommended == true &&
+                                    restaurant.category?.any { it.equals("SMOOTHIE", ignoreCase = true) } == true
+                        }
+                        .map { restaurant ->
+                            FoodItemDoubleFDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                isWishlisted = restaurant.isWishlisted
+                            )
+                        },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("🥤", fontSize = 48.sp)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Smoothie items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED Smoothie RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Smoothie restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("SMOOTHIE", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants
+                        .filter { restaurant ->
+                            restaurant.featured == true &&
+                                    restaurant.category?.any { it.equals("SMOOTHIE", ignoreCase = true) } == true
+                        }
+                        .forEach { restaurant ->
+                            RestaurantItemListFullDynamic(
+                                restaurantItem = RestaurantItemFullDynamic(
+                                    id = restaurant.id,
+                                    imageUrl = restaurant.imageUrl,
+                                    title = restaurant.title,
+                                    price = restaurant.priceAvg,
+                                    restaurantName = restaurant.restaurantName,
+                                    rating = restaurant.rating,
+                                    deliveryTime = restaurant.deliveryTime,
+                                    distance = restaurant.distance,
+                                    address = restaurant.address?.city ?: restaurant.outlet,
+                                    discount = restaurant.discountAvg ?: "",
+                                    discountAmount = restaurant.discountAmountAvg ?: "",
+                                    isWishlisted = restaurant.isWishlisted
+                                ),
+                                onWishlistClick = { id ->
+                                    println("Wishlist clicked for featured restaurant: $id")
+                                    // TODO: Toggle wishlist status
+                                },
+                                onThreeDotClick = { id ->
+                                    println("Three dot clicked for featured restaurant: $id")
+                                    // TODO: Show more options dialog
+                                },
+                                onItemClick = { id ->
+                                    println("Featured restaurant clicked: $id")
+                                    // TODO: Navigate to restaurant details
+                                }
+                            )
+                        }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("🥤", fontSize = 48.sp)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Smoothie restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun ButtermilkCategoryPage(
+    restaurantViewModel: RestaurantViewModel = viewModel()
+) {
+    // Collect restaurant state - using featured and recommended APIs
+    val featuredRestaurants by restaurantViewModel.featuredRestaurants.collectAsState()
+    val recommendedRestaurants by restaurantViewModel.recommendedRestaurants.collectAsState()
+    val isRestaurantsLoading by restaurantViewModel.isLoading.collectAsState()
+    val restaurantError by restaurantViewModel.error.collectAsState()
+
+    // Load restaurants from API for BUTTERMILK category
+    LaunchedEffect(Unit) {
+        println("🚀 Loading FEATURED restaurants from API for category: BUTTERMILK")
+        restaurantViewModel.loadFeaturedRestaurants("BUTTERMILK", featured = true)
+        restaurantViewModel.loadRecommendedRestaurants("BUTTERMILK", recommended = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // Filter Button
+        val buttermilkFilters = FilterConfig(
+            filters = listOf(
+                FilterChip(
+                    id = "filters",
+                    text = "Filters",
+                    type = FilterType.FILTER_DROPDOWN,
+                    icon = R.drawable.ic_filter,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                ),
+
+                // BUTTERMILK VARIETIES
+                FilterChip(id = "classic_chaas", text = "Classic Chaas", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "masala_buttermilk", text = "Masala", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "jeera_buttermilk", text = "Jeera", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "mint_buttermilk", text = "Mint", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "spiced_buttermilk", text = "Spiced", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "sweet_buttermilk", text = "Sweet Buttermilk", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "south_indian_moru", text = "Moru", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "neer_mor", text = "Neer Mor", type = FilterType.TEXT_ONLY),
+
+                // FLAVOURS & HERBS
+                FilterChip(id = "ginger", text = "Ginger", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "coriander", text = "Coriander", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "curry_leaves", text = "Curry Leaves", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "green_chilli", text = "Green Chilli", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "black_pepper", text = "Black Pepper", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "roasted_cumin", text = "Roasted Cumin", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "hing", text = "Hing", type = FilterType.TEXT_ONLY),
+
+                // SERVING STYLE
+                FilterChip(id = "chilled", text = "Chilled", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "low_spice", text = "Mild Spice", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "extra_spicy", text = "Extra Spicy", type = FilterType.TEXT_ONLY),
+
+                // DIETARY PREFERENCES
+                FilterChip(id = "low_fat", text = "Low Fat", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "no_added_sugar", text = "No Added Sugar", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "probiotic", text = "Probiotic", type = FilterType.TEXT_ONLY),
+                FilterChip(id = "high_protein", text = "High Protein", type = FilterType.TEXT_ONLY),
+
+                // Sort dropdown
+                FilterChip(
+                    id = "sort",
+                    text = "Sort",
+                    type = FilterType.SORT_DROPDOWN,
+                    rightIcon = R.drawable.outline_keyboard_arrow_down_24
+                )
+            ),
+            rows = 2
+        )
+        FilterButtonFood(
+            filterConfig = buttermilkFilters,
+            onFilterClick = { filter ->
+                println("Filter clicked: ${filter.text}")
+                // Handle filter logic
+            },
+            onSortClick = {
+                println("Sort clicked")
+                // Handle sort logic
+            }
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        // ==================== RECOMMENDED Buttermilk ITEMS FROM API ====================
+        Text(
+            text = "Recommended for you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        when {
+            isRestaurantsLoading && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading recommended Buttermilk items...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && recommendedRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadRecommendedRestaurants("BUTTERMILK", recommended = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            recommendedRestaurants.isNotEmpty() -> {
+                FoodItemsListWithHeadingDynamic(
+                    heading = null,
+                    subtitle = null,
+                    foodItems = recommendedRestaurants
+                        .filter { restaurant ->
+                            restaurant.recommended == true &&
+                                    restaurant.category?.any { it.equals("BUTTERMILK", ignoreCase = true) } == true
+                        }
+                        .map { restaurant ->
+                            FoodItemDoubleFDynamic(
+                                id = restaurant.id,
+                                imageUrl = restaurant.imageUrl,
+                                title = restaurant.title,
+                                price = restaurant.priceAvg,
+                                restaurantName = restaurant.restaurantName,
+                                rating = restaurant.rating,
+                                deliveryTime = restaurant.deliveryTime,
+                                distance = restaurant.distance,
+                                discount = restaurant.discountAvg ?: "",
+                                discountAmount = restaurant.discountAmountAvg ?: "",
+                                address = restaurant.address?.city ?: restaurant.outlet,
+                                isWishlisted = restaurant.isWishlisted
+                            )
+                        },
+                    onItemClick = { foodItem ->
+                        println("Food item clicked: ${foodItem.title}")
+                        // TODO: Navigate to food item details
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    backgroundColor = Color.White,
+                    cardWidth = 150.dp,
+                    cardHeight = 170.dp,
+                    horizontalSpacing = 8.dp,
+                    horizontalPadding = 12.dp,
+                    verticalPadding = 0.dp,
+                    headingBottomPadding = 0.dp
+                )
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("🥛", fontSize = 48.sp)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No recommended Buttermilk items found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // ==================== FEATURED Buttermilk RESTAURANTS FROM API ====================
+        Text(
+            text = "Restaurants delivering to you",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Featured restaurants",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.customColors.black
+            ),
+            maxLines = 1,
+            modifier = Modifier.fillMaxWidth().padding(start = 12.dp)
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        when {
+            isRestaurantsLoading && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Loading featured Buttermilk restaurants...", color = Color.Gray)
+                    }
+                }
+            }
+
+            restaurantError != null && featuredRestaurants.isEmpty() -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(Icons.Default.Error, "Error", tint = Color.Red, modifier = Modifier.size(48.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Error: $restaurantError", color = Color.Red)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            restaurantViewModel.loadFeaturedRestaurants("BUTTERMILK", featured = true)
+                        }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
+
+            featuredRestaurants.isNotEmpty() -> {
+                Column {
+                    featuredRestaurants
+                        .filter { restaurant ->
+                            restaurant.featured == true &&
+                                    restaurant.category?.any { it.equals("BUTTERMILK", ignoreCase = true) } == true
+                        }
+                        .forEach { restaurant ->
+                            RestaurantItemListFullDynamic(
+                                restaurantItem = RestaurantItemFullDynamic(
+                                    id = restaurant.id,
+                                    imageUrl = restaurant.imageUrl,
+                                    title = restaurant.title,
+                                    price = restaurant.priceAvg,
+                                    restaurantName = restaurant.restaurantName,
+                                    rating = restaurant.rating,
+                                    deliveryTime = restaurant.deliveryTime,
+                                    distance = restaurant.distance,
+                                    address = restaurant.address?.city ?: restaurant.outlet,
+                                    discount = restaurant.discountAvg ?: "",
+                                    discountAmount = restaurant.discountAmountAvg ?: "",
+                                    isWishlisted = restaurant.isWishlisted
+                                ),
+                                onWishlistClick = { id ->
+                                    println("Wishlist clicked for featured restaurant: $id")
+                                    // TODO: Toggle wishlist status
+                                },
+                                onThreeDotClick = { id ->
+                                    println("Three dot clicked for featured restaurant: $id")
+                                    // TODO: Show more options dialog
+                                },
+                                onItemClick = { id ->
+                                    println("Featured restaurant clicked: $id")
+                                    // TODO: Navigate to restaurant details
+                                }
+                            )
+                        }
+                }
+            }
+
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("🥛", fontSize = 48.sp)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("No featured Buttermilk restaurants found", fontSize = 16.sp, color = Color.Gray)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 // Generic Category Content Page with sample food items
 @Composable
 fun CategoryContentPage(categoryName: String) {
@@ -56853,6 +57768,9 @@ fun MainScreen(navController: NavHostController) {
                     CategoryPage.Bhurji -> 129
                     CategoryPage.KhastaKachori -> 130
                     CategoryPage.HotDog -> 131
+                    CategoryPage.Mocktail -> 132
+                    CategoryPage.Smoothie -> 133
+                    CategoryPage.Buttermilk -> 134
                     CategoryPage.SeeAll -> currentPage
                 }
             },

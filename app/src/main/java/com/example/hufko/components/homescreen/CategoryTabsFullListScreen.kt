@@ -485,6 +485,9 @@ fun getSeeAllCategoryPages(): List<CategoryPage> {
         CategoryPage.Soup,
         CategoryPage.Bhurji,
         CategoryPage.KhastaKachori,
-        CategoryPage.HotDog
+        CategoryPage.HotDog,
+        CategoryPage.Mocktail,
+        CategoryPage.Smoothie,
+        CategoryPage.Buttermilk
     ).filter { it.isActive && it.title != "See All" } // Exclude "See All" from the list to prevent recursion
 }

@@ -1068,6 +1068,30 @@ sealed class CategoryPage(
         isActive = true
     )
 
+    object Mocktail : CategoryPage(
+        title = "Mocktail",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/mocktail_food.png",
+        category = "MOCKTAIL",
+        priority = 133,
+        isActive = true
+    )
+
+    object Smoothie : CategoryPage(
+        title = "Smoothie",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/smoothie_food.png",
+        category = "SMOOTHIE",
+        priority = 134,
+        isActive = true
+    )
+
+    object Buttermilk : CategoryPage(
+        title = "Buttermilk",
+        iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/buttermilk_food.png",
+        category = "BUTTERMILK",
+        priority = 135,
+        isActive = true
+    )
+
     object SeeAll : CategoryPage(
         title = "See All",
         iconUrl = "${NetworkConfig.BASE_URL}/assets/banners/see_all_food.png",
